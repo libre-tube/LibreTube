@@ -18,7 +18,6 @@
     <string name="customInstance">අභිරුචිය පරිදි</string>
     <string name="region">කලාපය</string>
     <string name="importsuccess">දායක විය</string>
-    <string name="cannotDownload">මෙම ප්‍රවාහය බාගත කළ නොහැක.</string>
     <string name="downloadfailed">බාගත කිරීම අසමත් විය.</string>
     <string name="import_from_yt">දායකත්වයන් ආනයනය කරන්න</string>
     <string name="import_from_yt_summary">YouTube හෝ NewPipe වෙතින්</string>
@@ -75,7 +74,6 @@
     <string name="enabled">සක්‍රිය</string>
     <string name="disabled">අක්‍රිය</string>
     <string name="update_available">නිකුතු අංකය %1$s ඇත</string>
-    <string name="update_available_text">නව යාවත්කාලීන ලබා ගත හැක. GitHub නිකුතු පිටුව විවෘත කිරීමට ක්ලික් කරන්න.</string>
     <string name="appearance">පෙනුම</string>
     <string name="downloads">බාගත කිරීම්</string>
     <string name="update_summary">යාවත්කාලීන කිරීමට ඹබන්න</string>
@@ -83,7 +81,6 @@
     <string name="advanced">උසස්</string>
     <string name="player">වාදකය</string>
     <string name="appearance_summary">ඔබගේ අභිමතය පරිදි යෙදුම සකසන්න</string>
-    <string name="advanced_summary">බාගැනීම්, සහ යළි පිහිටුවන්න</string>
     <string name="live">සජීවි</string>
     <string name="shareTo">URL එක බෙදාගන්න</string>
     <string name="defaultIcon">පෙරනිමිය</string>
@@ -101,13 +98,11 @@
     <string name="instance_name">සේවාදායකයේ නම</string>
     <string name="instance_api_url">සේවාදායක API වෙත URL</string>
     <string name="addInstance">සේවාදායකයක් එකතු කරන්න</string>
-    <string name="clear_customInstances">එකතු කිරීම් මකන්න</string>
     <string name="version">අනුවාදය %1$s</string>
     <string name="related_streams">අදාළ අන්තර්ගත</string>
     <string name="gradientIcon">Glib ශ්‍රේණියේ වර්ණය</string>
     <string name="birdIcon">පියාඹන කුරුල්ලා</string>
     <string name="buffering_goal">පූර්ව ප්‍රෙව්ශය වෙමින්</string>
-    <string name="playerVideoFormat">වාදකය සඳහා වීඩියෝ ආකෘතිය</string>
     <string name="no_audio">ශ්‍රව්‍ය නැත</string>
     <string name="no_subtitle">උපසිරැසි නැත</string>
     <string name="audio">ශ්‍රව්‍ය</string>
@@ -125,7 +120,6 @@
     <string name="reset">පෙරනිමි ප්‍රත්‍යර්පණය කරන්න</string>
     <string name="deleteAccount">ගිණුම මකන්න</string>
     <string name="deleteAccount_summary">ඔබගේ Piped ගිණුම මකන්න</string>
-    <string name="account">ගිණුම</string>
     <string name="restore">ප්‍රත්‍යර්පණය කරන්න</string>
     <string name="watch_history">නැරඹුම් ඉතිහාසය</string>
     <string name="auth_instance">සත්‍යතාව තහවුරු කිරීමේ සේවාදායකය</string>
@@ -153,7 +147,6 @@
     <string name="watch_positions_title">මතක වාදන ස්ථාන</string>
     <string name="general_summary">භාෂාව සහ ප්‍රදේශය</string>
     <string name="caption_settings">සිරස්තල</string>
-    <string name="playerAudioFormat">වාදකය සඳහා ශ්‍රව්‍ය ආකෘතිය</string>
     <string name="playerAudioQuality">ශ්‍රව්‍ය ගුණත්වය</string>
     <string name="worst_quality">නරකම</string>
     <string name="notify_new_streams">නව ප්‍රවාහ සඳහා දැනුම්දීම් පෙන්වන්න</string>
@@ -182,7 +175,6 @@
     <string name="repeat_mode">නැවත ධාවනය කිරීම් ප්‍රකාරය</string>
     <string name="resize_mode_fit">සුදුසු</string>
     <string name="resize_mode_fill">පුරවන්න</string>
-    <string name="playingOnBackground">පසුබිමේ වාදනය වෙමින්…</string>
     <string name="repeat_mode_current">දැන්</string>
     <string name="backup_restore">උපස්ථ සහ ප්‍රත‍්‍යර්පණ කිරීම</string>
     <string name="backup">උපස්ථ කිරීම</string>
@@ -201,23 +193,17 @@
     <string name="backup_customInstances">වෙනත් සේවාදායකයක්</string>
     <string name="navigation_bar">මං සෙවුම් තීරුව</string>
     <string name="playback_pitch">ස්වරය</string>
-    <string name="filename">ගොනු නාමය</string>
-    <string name="invalid_filename">වලංගු නොවන ගොනු නාමයකි!</string>
     <string name="play_next">ඊළඟ වීඩියෝව වාදනය කරන්න</string>
     <string name="added_to_playlist">වාදන ලැයිස්තුවට එක් කරන ලදී</string>
     <string name="queue">පෝලිම</string>
     <string name="livestreams">සජීවී ප්‍රවාහ</string>
-    <string name="alternative_videos_layout">විකල්ප වීඩියෝ පිරිසැලසුම</string>
     <string name="defaultIconLight">පෙරනිමි එළිය</string>
-    <string name="confirm_unsubscribe">ඔබට %1$s ගෙ දායකත්වයෙන් ඉවත් වීමට අවශ්‍ය බව විශ්වාසද\?</string>
-    <string name="confirm_unsubscribing">දායකත්වයෙන් ඉවත් වීම තහවුරු කරන්න</string>
     <string name="time">කාලය</string>
     <string name="notification_time">දැනුම්දීමේ කාලය සීමා කරන්න</string>
     <string name="notification_time_summary">ප්‍රවාහ දැනුම්දීම් පෙන්වන කාල පරාසය සීමා කරන්න</string>
     <string name="navbar_order">පිළිවෙල</string>
     <string name="layout">පිරිසැලසුම</string>
     <string name="audio_track">ශ්‍රව්‍ය පථය</string>
-    <string name="hls_instead_of_dash">HLS භාවිතා කරන්න</string>
     <string name="auto_quality">ස්වයං</string>
     <string name="limit_to_runtime">ධාවන කාලයට සීමා කරන්න</string>
     <string name="trends">ප්‍රවණතා</string>
@@ -302,7 +288,6 @@
     <string name="portrait">සිරස්</string>
     <string name="always">සැමවිටම</string>
     <string name="unlimited">අසීමිත</string>
-    <string name="no_player_found">බාහිර වාදකයක් හමු නොවීය. කරුණාකර ඔබ එකක් පිහිටුවා ඇති බවට වග බලා ගන්න.</string>
     <string name="general">පොදු</string>
     <string name="search_history_summary">සෙවුම් මතක තබා ගන්න</string>
     <string name="captions">සිරස්තල</string>
@@ -323,11 +308,9 @@
     <string name="copied_to_clipboard">පසුරු පුවරුවට පිටපත් කර ඇත</string>
     <string name="renamePlaylist">වාදන ලැයිස්තුව නැවත නම් කරන්න</string>
     <string name="time_code">කාල කේතය (තත්පර)</string>
-    <string name="confirm_unsubscribing_summary">දායකත්වයෙන් ඉවත් වීමට පෙර තහවුරු කිරීමේ සංවාදයක් පෙන්වන්න</string>
     <string name="playlistCloned">වාදන ලැයිස්තුව ක්ලෝන කරන ලදී</string>
     <string name="end_time">අවසන් කාලය</string>
     <string name="start_time">ආරම්භක කාලය</string>
-    <string name="hls_instead_of_dash_summary">DASH වෙනුවට HLS භාවිතා කරන්න (මන්දගාමී වනු ඇත, නිර්දේශ නොකරයි)</string>
     <string name="bookmark">පොත් සලකුණ</string>
     <string name="local_playlists">දේශීය වාදන ලැයිස්තු</string>
     <string name="queue_insert_related_videos">අදාළ වීඩියෝ ඇතුළු කරන්න</string>
@@ -358,8 +341,6 @@
     <string name="mark_as_watched">නැරඹූ ලෙස ලකුණු කරන්න</string>
     <string name="unsupported_file_format">සහාය නොදක්වන ගොනු ආකෘතියකි: %1$s</string>
     <string name="codecs">කෝඩෙක්ස්</string>
-    <string name="custom_playback_speed">අභිරුචි වේගය</string>
-    <string name="custom_playback_speed_summary">සාමාන්‍ය වාදකයට වෙනස් වාදන වේගයක් භාවිතා කරන්න</string>
     <string name="normal_views">%1$s බැලීම්%2$s</string>
     <string name="autoplay_countdown_summary">මීළඟ වීඩියෝව ස්වයංක්‍රීයව වාදනය කිරීමට පෙර තත්පර 5 කවුන්ට් ඩවුන් එකක් පෙන්වන්න</string>
     <string name="video_id">වීඩියෝ ID</string>

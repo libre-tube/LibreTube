@@ -25,7 +25,6 @@
     <string name="logout">Tanca la sessió</string>
     <string name="already_logged_in">Sessió ja iniciada. Pots tancar la sessió del vostre compte.</string>
     <string name="register">Registra\'t</string>
-    <string name="cannotDownload">No es pot descarregar aquesta transmissió.</string>
     <string name="importsuccess">Subscrit</string>
     <string name="createPlaylist">Crear playlist</string>
     <string name="emptyPlaylistName">El nom de la playlist no pot estar en blanc</string>
@@ -46,9 +45,7 @@
     <string name="no_audio">Sense àudio</string>
     <string name="no_video">Cap vídeo</string>
     <string name="instance_frontend_url">URL a la interfície de la instància (opcional)</string>
-    <string name="playerVideoFormat">Format de vídeo per al reproductor</string>
     <string name="audio">Àudio</string>
-    <string name="advanced_summary">Descàrregues i restabliment</string>
     <string name="customInstance_summary">Afegeix…</string>
     <string name="related_streams_summary">Mostra reproduccions similars al costat del que mires</string>
     <string name="downloading">S\'està baixant…</string>
@@ -128,7 +125,6 @@
     <string name="disabled">Desactivat</string>
     <string name="playOnBackground">Reprodueix en segon plà</string>
     <string name="update_available">Actualització disponible</string>
-    <string name="update_available_text">Nova actualització disponible. Feu clic per obrir la pàgina de versions de GitHub.</string>
     <string name="appearance">Aparença</string>
     <string name="downloads">Descàrregues</string>
     <string name="shareTo">Comparteix l\'URL a</string>
@@ -148,7 +144,6 @@
     <string name="instance_summary">Canalització, inici de sessió i compte</string>
     <string name="instance_name">Nom de la instància</string>
     <string name="addInstance">Afegeix una instància</string>
-    <string name="clear_customInstances">S\'ha afegit clara</string>
     <string name="invalid_url">Introduïu un URL que funcioni</string>
     <string name="behavior">Comportament</string>
     <string name="subscriberAndVideoCounts">%1$s subscriptors • %2$d vídeos</string>
@@ -204,7 +199,6 @@
     <string name="selected">Seleccionada</string>
     <string name="copied">Copiat</string>
     <string name="stop">Atura</string>
-    <string name="account">Compte</string>
     <string name="system_caption_style">Estil de subtítols del sistema</string>
     <string name="most_recent">El més nou</string>
     <string name="maximum_image_cache">Mida màxima de la memòria cau d\'imatges</string>
@@ -238,7 +232,6 @@
     <string name="history_size">Mida màxima de l\'historial</string>
     <string name="irreversible">Estàs segur? Això no es pot desfer!</string>
     <string name="general">General</string>
-    <string name="playingOnBackground">Reproduint en segon pla…</string>
     <string name="repeat_mode_none">Cap</string>
     <string name="player_summary">Valors predeterminats i comportament</string>
     <string name="auth_instance_summary">Utilitzeu una instància diferent per a les sol·licituds autenticades</string>
@@ -261,8 +254,6 @@
     <string name="worst_quality">La pitjor</string>
     <string name="general_summary">Descàrregues i estalvi de dades</string>
     <string name="playerAudioQuality">Qualitat d\'àudio</string>
-    <string name="no_player_found">No s\'ha trobat cap reproductor extern. Assegureu-vos que en teniu un instal·lat.</string>
-    <string name="playerAudioFormat">Format d\'àudio per al reproductor</string>
     <string name="uploaderAndVideoCount">%1$s • %2$d vídeos</string>
     <string name="picture_in_picture">Imatge en imatge</string>
     <string name="deleteAccount">Esborrar compte</string>
@@ -296,13 +287,11 @@
     <string name="tooltip_sponsorblock">Alterna SponsorBlock</string>
     <string name="tooltip_options">Opcions</string>
     <string name="also_clear_watch_positions">Esborra també les posicions de visualització</string>
-    <string name="no_chapter">Sense capítol</string>
     <string name="mobile_data">Dades mòbils</string>
     <string name="push_channel_name">Treballador de notificacions</string>
     <string name="tooltip_filter">Filtra</string>
     <string name="delete_all">Se suprimiran totes les descàrregues.</string>
     <string name="new_videos_badge_summary">Mostra una insígnia amb la quantitat de vídeos nous si n\'hi ha</string>
-    <string name="invalid_filename">El nom del fitxer no és vàlid.</string>
     <string name="color">Color</string>
     <string name="notification_time_summary">Limita el lapse de temps en què es mostren les notificacions de transmissió</string>
     <string name="trending">El que és tendència ara</string>
@@ -322,8 +311,6 @@
     <string name="backup_customInstances">Instàncies personalitzades</string>
     <string name="defaultIconLight">Llum per defecte</string>
     <string name="livestreams">Transmissions en viu</string>
-    <string name="confirm_unsubscribe">Esteu segur que us voleu cancel·lar la subscripció a %1$s?</string>
-    <string name="confirm_unsubscribing">Confirma la cancel·lació de la subscripció</string>
     <string name="start_time">Hora d\'inici</string>
     <string name="layout">Disseny</string>
     <string name="unsupported_file_format">Format de fitxer no compatible: %1$s</string>
@@ -345,7 +332,6 @@
     <string name="device_info">Informació del dispositiu</string>
     <string name="renamePlaylist">Canvia el nom de la llista de reproducció</string>
     <string name="sb_custom_colors">Colors dels segments personalitzats</string>
-    <string name="alternative_videos_layout">Disseny dels vídeos alternatiu</string>
     <string name="playlistCloned">S\'ha clonat la llista de reproducció</string>
     <string name="end_time">Hora de finalització</string>
     <string name="navbar_order">Ordre</string>
@@ -364,7 +350,6 @@
     <string name="skip_silence">Salta el silenci</string>
     <string name="help">Ajuda</string>
     <string name="faq">PMF</string>
-    <string name="custom_playback_speed_summary">Utilitza una velocitat de reproducció diferent al reproductor normal</string>
     <string name="category">Categoria</string>
     <string name="stats_for_nerds">Estadístiques tècniques</string>
     <string name="video_id">ID del vídeo</string>
@@ -395,13 +380,11 @@
     <string name="screen_orientation">Orientació de la pantalla</string>
     <string name="resolution_limited">limitat</string>
     <string name="registration_disabled">Registre desactivat</string>
-    <string name="filename_too_long">El nom del fitxer és massa llarg.</string>
     <string name="tooltip_minimize">Minimitza</string>
     <string name="player_channel_description">Mostra una notificació durant la reproducció</string>
     <string name="tooltip_clear_queue">Esborra la cua</string>
     <string name="remove_bookmark">Elimina el marcador</string>
     <string name="playlist_description">Descripció de la llista de reproducció</string>
-    <string name="visible">Mostra a la barra de cerca</string>
     <string name="welcome">Us donem la benvinguda a LibreTube</string>
     <string name="comments_count">Comentaris (%1$s)</string>
     <string name="category_highlight_summary">Podria ser el títol anunciat, la miniatura o la part més interessant del vídeo. Pots saltar-hi fent clic sobre ell a la secció de capítols.</string>
@@ -414,8 +397,6 @@
     <string name="preferences">Preferències</string>
     <string name="time_code">Codi de temps (segons)</string>
     <string name="queue">Cua</string>
-    <string name="confirm_unsubscribing_summary">Mostra un quadre de diàleg de confirmació abans de cancel·lar la subscripció</string>
-    <string name="hls_instead_of_dash_summary">Utilitza HLS en lloc de DASH. Proveu d\'activar aquesta opció si la reproducció de vídeo no funciona.</string>
     <string name="queue_insert_related_videos">Insereix vídeos relacionats</string>
     <string name="autoplay_playlists">Reprodueix automàticament les llistes de reproducció</string>
     <string name="brightness">Brillantor</string>
@@ -432,10 +413,8 @@
     <string name="alternative_pip_controls_summary">Mostra només els controls d\'àudio i per saltar a Imatge sobre Imatge en lloc de retrocedir i avançar</string>
     <string name="audio_only_mode">Mode de només àudio</string>
     <string name="mark_as_watched">Marca com a vist</string>
-    <string name="custom_playback_speed">Velocitat personalitzada</string>
     <string name="autoplay_countdown_summary">Mostra un compte enrere de 5 segons abans de reproduir automàticament el vídeo següent</string>
     <string name="playing_next">Es reprodueix a continuació en %1$s</string>
-    <string name="proxy">Servidor intermediari</string>
     <string name="disable_proxy">Desactiva el servidor intermediari de Piped</string>
     <string name="disable_proxy_summary">Carrega els vídeos i imatges directament del servidor de YouTube. Habiliteu aquesta opció només si sempre utilitzeu una VPN</string>
     <string name="auto_fullscreen_shorts">Pantalla completa automàtica en vídeos curts (Shorts)</string>
@@ -448,8 +427,6 @@
     <string name="alphabetic_reversed">Alfabètic (invers)</string>
     <string name="choose_instance">Si us plau, trieu una instància primer.</string>
     <string name="change_playlist_description">Canvia la descripció de la llista de reproducció</string>
-    <string name="fallback_piped_proxy">Fes servir el servidor intermediari de Piped si falla</string>
-    <string name="fallback_piped_proxy_summary">Carrega els vídeos via el servidor intermediari si falla la connexió directe a YouTube per aquest vídeo concret (incrementa el temps de càrrega inicial). Si es desactiva, la música de YouTube probablement no es pugui reproduir degut a restriccions de YouTube</string>
     <string name="no_fullscreen_resolution">Resolució sense pantalla completa</string>
     <string name="same_as_fullscreen">La mateixa que a pantalla completa</string>
     <string name="playback_during_call_summary">Tingueu en compte que això també afecta l\'aplicació perquè no tingui el control de l\'àudio</string>
@@ -505,8 +482,6 @@
     <string name="navigation_bar">Barra de navegació</string>
     <string name="change_region">Sembla que les tendències no estan disponibles per a la regió actual. Si us plau, seleccioneu-ne una altra a la configuració.</string>
     <string name="playback_pitch">To</string>
-    <string name="filename">Nom del fitxer</string>
-    <string name="hls_instead_of_dash">Utilitza HLS</string>
     <string name="pinch_control">Controls del pinçament</string>
     <string name="automatic">Automàtic</string>
     <string name="invalid_color">El color introduït no és vàlid.</string>
@@ -536,7 +511,6 @@
     <string name="playback_pitch_semitone_error_input">El valor ha d\'estar entre -%1$.1f (mínim) i %1$.1f (màxim)</string>
     <string name="export_playlist">Exporta llista de reproducció</string>
     <string name="import_watch_history">Importa l\'historial de visualitzacions</string>
-    <string name="import_watch_history_desc">Tingueu en compte que no tot s\'importarà a causa de les dades d\'exportació limitades de YouTube.</string>
     <string name="never_show_again">No mostrar mai més això</string>
     <string name="update_information">Actualitza la informació</string>
     <string name="mode_of_operation">Mode de funcionament</string>

@@ -25,7 +25,6 @@
     <string name="customInstance">Propra</string>
     <string name="login_register">Ensaluti/registriĝi</string>
     <string name="importsuccess">Abonita</string>
-    <string name="cannotDownload">Ne eblas elŝuti tiun ĉi elsendfluon.</string>
     <string name="downloadfailed">Elŝutado malsukcesis.</string>
     <string name="import_from_yt">Importi abonojn</string>
     <string name="app_theme">Etoso</string>
@@ -111,7 +110,6 @@
     <string name="no_subtitles_available">Neniuj subtekstoj disponeblaj</string>
     <string name="change_region">Tendenco ŝajnas esti maldisponebla por la nuna regiono. Bonvolu elekti alian en la agordoj.</string>
     <string name="update_available">Versio %1$s disponeblas</string>
-    <string name="update_available_text">Nova ĝisdatigo disponeblas. Alklaku por malfermi la paĝon de eldonoj de GitHub.</string>
     <string name="no_comments_available">Ĉi tiu video ne havas komentojn.</string>
     <string name="failed_fetching_instances">Ne eblis akiri disponeblajn instancojn.</string>
     <string name="push_channel_description">Montras sciigon kiam novaj fluoj disponeblas.</string>

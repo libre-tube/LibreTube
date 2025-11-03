@@ -11,7 +11,6 @@
     <string name="loggedout">Kijelentkezve.</string>
     <string name="instances">Válasszon…</string>
     <string name="login_register">Bejelentkezés/regisztráció</string>
-    <string name="cannotDownload">Nem lehetséges ezt a közvetítést letölteni.</string>
     <string name="downloadfailed">Sikertelen letöltés.</string>
     <string name="import_from_yt">Feliratkozások importálása</string>
     <string name="server_error">Úgy tűnik, hogy probléma van a kiválasztott kiszolgálóval. Próbáljon meg egy másik példányt.</string>
@@ -104,7 +103,6 @@
     <string name="reset">Alapértelmezések visszaállítása</string>
     <string name="deleteAccount">Fiók törlése</string>
     <string name="deleteAccount_summary">A Piped-fiókjának törlése</string>
-    <string name="account">Fiók</string>
     <string name="restore">Visszaállítás</string>
     <string name="notifications">Értesítések</string>
     <string name="irreversible">Biztos benne? Ez a művelet nem vonható vissza!</string>
@@ -126,7 +124,6 @@
     <string name="general_summary">Letöltések és adatforgalom-csökkentés</string>
     <string name="worst_quality">Legrosszabb</string>
     <string name="default_subtitle_language">Feliratok nyelve</string>
-    <string name="playingOnBackground">Lejátszás a háttérben…</string>
     <string name="notify_new_streams">Értesítések megjelenítése az új közvetítésekről</string>
     <string name="notify_new_streams_summary">Értesítések megjelenítése az Ön által követett alkotók új közvetítéseiről</string>
     <string name="share_with_time">Megosztás időponttal</string>
@@ -134,7 +131,6 @@
     <string name="appearance">Megjelenés</string>
     <string name="category_filler">Időkitöltés/viccek</string>
     <string name="category_preview">Előnézet/visszatekintés</string>
-    <string name="update_available_text">Új frissítés érhető el. Kattintson a Github kiadások oldalának a megnyitásához.</string>
     <string name="watch_history">Megtekintési előzmények</string>
     <string name="skip_buttons">Kihagyás gombok</string>
     <string name="skip_buttons_summary">Gombok megjelenítése a következő vagy az előző videóra való ugráshoz</string>
@@ -154,7 +150,6 @@
     <string name="player">Lejátszó</string>
     <string name="appearance_summary">Szabja személyre az alkalmazást a kedve szerint</string>
     <string name="live">Élő</string>
-    <string name="advanced_summary">Letöltések és visszaállítás</string>
     <string name="legacyIcon">Elveszett örökség</string>
     <string name="shapedIcon">Hülye alakú</string>
     <string name="flameIcon">Repülő láng</string>
@@ -172,7 +167,6 @@
     <string name="instance_name">Példány neve</string>
     <string name="instance_api_url">Webcím a példány API-hoz</string>
     <string name="related_streams_summary">Mutasson hasonló közvetítéseket a jelenleg nézett mellett</string>
-    <string name="playerVideoFormat">Videóformátum a lejátszóhoz</string>
     <string name="instance_frontend_url">Webcím a példány előtétprogramjához (opcionális)</string>
     <string name="clonePlaylist">Lejátszási lista klónozása</string>
     <string name="auth_instance">Hitelesítési példány</string>
@@ -189,7 +183,6 @@
     <string name="history_empty">Nincsenek még előzmények.</string>
     <string name="autoRotatePlayer_summary">Teljes képernyős lejátszás, amikor az eszközt elforgatják</string>
     <string name="data_saver_mode_summary">Bélyegképek és egyéb képek kihagyása</string>
-    <string name="no_player_found">Nem található külső lejátszó. Győződjön meg arról, hogy telepített egyet.</string>
     <string name="no_search_result">Nincs eredmény.</string>
     <string name="export_subscriptions">Feliratkozások exportálása</string>
     <string name="history_size">Előzmények maximális mérete</string>
@@ -225,7 +218,6 @@
     <string name="player_summary">Alapértelmezett értékek és viselkedés</string>
     <string name="audio_video_summary">Minőség és formátum</string>
     <string name="caption_settings">Feliratok</string>
-    <string name="playerAudioFormat">Hangformátum a lejátszóhoz</string>
     <string name="playerAudioQuality">Hangminőség</string>
     <string name="update_available">Frissítés érhető el</string>
     <string name="app_icon">Ikon</string>
@@ -246,7 +238,6 @@
     <string name="misc">Vegyes</string>
     <string name="player_resize_mode">Átméretezés mód</string>
     <string name="addInstance">Példány hozzáadása</string>
-    <string name="clear_customInstances">Hozzáadott törlése</string>
     <string name="invalid_url">Adjon meg egy működő webcímet</string>
     <string name="auth_instances">Hitelesítési példány kiválasztása</string>
     <string name="history_summary">Megtekintési és keresési előzmények</string>
@@ -271,17 +262,11 @@
     <string name="playback_pitch">Hangmagasság</string>
     <string name="change_region">A felkapott kategória úgy tűnik, hogy nem elérhető a jelenlegi régió számára. Válasszon egy másikat a beállításokban.</string>
     <string name="added_to_playlist">Hozzáadva a lejátszási listához %1$s</string>
-    <string name="invalid_filename">Érvénytelen fájlnév!</string>
-    <string name="filename">Fájlnév</string>
     <string name="time_code">Időkód (másodperc)</string>
     <string name="queue">Várólista</string>
     <string name="livestreams">Élő közvetítések</string>
-    <string name="alternative_videos_layout">Alternatív videók elrendezés</string>
     <string name="defaultIconLight">Alapértelmezett világos</string>
     <string name="playlistCloned">Lejátszási lista klónozva</string>
-    <string name="confirm_unsubscribing">Leiratkozás megerősítése</string>
-    <string name="confirm_unsubscribe">Biztos, hogy le akar iratkozni a következőről: %1$s?</string>
-    <string name="confirm_unsubscribing_summary">Megerősítő párbeszédpanel megjelenítése leiratkozás előtt</string>
     <string name="play_all">Összes lejátszása</string>
     <string name="time">Idő</string>
     <string name="start_time">Kezdési idő</string>
@@ -291,9 +276,7 @@
     <string name="layout">Elrendezés</string>
     <string name="navbar_order">Sorrend</string>
     <string name="audio_track">Hangsáv</string>
-    <string name="hls_instead_of_dash">HLS használata</string>
     <string name="auto_quality">Automatikus</string>
-    <string name="hls_instead_of_dash_summary">HLS használata DASH helyett a közvetített médiatartalmakhoz. Ha a videolejátszás nem működik, próbálja meg bekapcsolni ezt az beállítást.</string>
     <string name="limit_to_runtime">Futás idejére való korlátozás</string>
     <string name="trending">Ami most felkapott</string>
     <string name="featured">Kiemelt</string>
@@ -356,8 +339,6 @@
     <string name="faq">GYIK</string>
     <string name="replies">Válaszok</string>
     <string name="mark_as_watched">Megjelölés megtekintettnek</string>
-    <string name="custom_playback_speed">Egyéni sebesség</string>
-    <string name="custom_playback_speed_summary">A normális lejátszótól való különböző sebesség használata</string>
     <string name="unsupported_file_format">Nem támogatott fájlformátum: %1$s</string>
     <string name="codecs">Videó kodekek</string>
     <string name="autoplay_countdown">Automatikus visszaszámlálás</string>
@@ -401,7 +382,6 @@
     <string name="home_tab_content">Kezdőlap tartalma</string>
     <string name="choose_instance">Először válasszon egy példányt!</string>
     <string name="welcome">Üdvözli a LibreTube</string>
-    <string name="visible">Megjelenítés a keresési sávban</string>
     <string name="stop">Leállítás</string>
     <string name="change_playlist_description">Lejátszási lista leírásának módosítása</string>
     <string name="playlist_description">Lejátszási lista leírása</string>
@@ -414,9 +394,7 @@
     <string name="category_highlight_summary">Lehet a meghirdetett cím, a bélyegkép vagy a videó legérdekesebb része. A fejezetek részben a rákoppintással ugorhat oda</string>
     <string name="choose_instance_long">Válasszon ki az alább felsoroltak közül egy Piped példányt. A Piped példány közvetítőként fog működni Ön és a YouTube között. Ezek a példányok különböző fizikai helyszíneken találhatók - ezeket az országzászló jelzi. A fizikailag közelebbi példányok valószínűleg gyorsabbak, mint a távolabbi példányok. A beállításokban bármikor megváltoztatható a használt példány.</string>
     <string name="off">Ki</string>
-    <string name="fallback_piped_proxy_summary">Videók betöltése proxy-n keresztül, ha a YouTube-hoz való közvetlen csatlakozás nem működik az aktuális videónál (növeli a kezdeti betöltési időt). Ha ki van kapcsolva, a YouTube zenei tartalma valószínűleg nem fog lejátszódni a YT korlátozások miatt</string>
     <string name="manual">Kézikönyv</string>
-    <string name="fallback_piped_proxy">Visszalépés a Piped proxyra</string>
     <string name="chapters_videoHighlight">Videókiemelés</string>
     <string name="automatic">Automatikus</string>
     <string name="show_search_suggestions">Keresési javaslatok megjelenítése</string>
@@ -437,7 +415,6 @@
     <string name="sort_by">Rendezés</string>
     <string name="visibility_public">Nyilvános</string>
     <string name="visibility">Láthatóság</string>
-    <string name="no_chapter">Nincs fejezet</string>
     <string name="screen_orientation">Képernyőtájolás</string>
     <string name="remove_watched_videos">Megnézett videók eltávolítása</string>
     <string name="player_channel_name">Lejátszási szolgáltatás</string>
@@ -467,10 +444,8 @@
     <string name="sb_create_segment">Szakasz létrehozása</string>
     <string name="segment_type">Szakasz típusa</string>
     <string name="sb_invalid_segment">Érvénytelen szakasz kezdet vagy vég</string>
-    <string name="proxy">Proxy</string>
     <string name="group_name_error_empty">Adjon meg egy nevet</string>
     <string name="group_name_error_exists">Válasszon egyedi nevet</string>
-    <string name="filename_too_long">A fájlnév túl hosszú!</string>
     <string name="contribute_to_sponsorblock">Hozzájárulás a SponsorBlock-hoz</string>
     <string name="sponsorblock_user_id">SponsorBlock felhasználói azonosító</string>
     <string name="donate">Adományozás</string>
@@ -535,7 +510,6 @@
     <string name="local_ryd">Youtube „Nem tetszik” számláló megjelenítése</string>
     <string name="local_ryd_summary">„Nem tetszik” információk közvetlen lekérése innen: https://returnyoutubedislikeapi.com</string>
     <string name="import_watch_history">Megtekintési előzmények importálása</string>
-    <string name="import_watch_history_desc">Vegye figyelembe, hogy a YouTube korlátozott exportadatai miatt nem lesz minden importálva.</string>
     <string name="audio_codecs">Hang kodekek</string>
     <string name="view_count">%1$s megtekintés</string>
     <string name="dialog_play_offline_body">Szeretné lejátszani a videót a letöltési mappából?</string>

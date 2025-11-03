@@ -23,7 +23,6 @@
     <string name="region">Lurraldea</string>
     <string name="login_register">Saioa hasi/erregistratu</string>
     <string name="importsuccess">Harpidetuta</string>
-    <string name="cannotDownload">Ezin da deskargatu eduki hau.</string>
     <string name="downloadfailed">Ezin izan da deskargatu.</string>
     <string name="import_from_yt">Inportatu harpidetzak</string>
     <string name="import_from_yt_summary">Youtube edo NewPipetik</string>
@@ -86,13 +85,11 @@
     <string name="disabled">Itzalita</string>
     <string name="playOnBackground">Erreproduzitu atzeko planoan</string>
     <string name="update_available">%1$s bertsioa eskuragarri dago</string>
-    <string name="update_available_text">Eguneraketa berria eskuragarri dago. Egin klik GitHub-eko deskarga orrialdera joateko.</string>
     <string name="category_outro">Amaierako txartelak eta kredituak</string>
     <string name="app_uptodate">Azken bertsioa da hau.</string>
     <string name="advanced">Aurreratua</string>
     <string name="player">Erreproduzitzailea</string>
     <string name="appearance_summary">Egokitu aplikazioa zure gustura</string>
-    <string name="advanced_summary">Deskargak eta berrezartzea</string>
     <string name="shareTo">Partekatu URLa honekin</string>
     <string name="gradientIcon">Glib gradientea</string>
     <string name="defaultIcon">Lehenetsia</string>
@@ -129,7 +126,6 @@
     <string name="invalid_url">Mesedez, sartu badabilen URL bat</string>
     <string name="instance_name">Instantziaren izena</string>
     <string name="addInstance">Gehitu instantzia</string>
-    <string name="clear_customInstances">Ezabatu gehituak</string>
     <string name="instance_summary">Piped, saio hasiera eta kontua</string>
     <string name="version">%1$s bertsioa</string>
     <string name="related_streams">Erlazionatutako edukia</string>
@@ -142,7 +138,6 @@
     <string name="category_filler_summary">Bideoaren eduki nagusia ulertzeko beharrezkoak ez diren betegarrirako edo umorerako soilik gehitutako eszenak dira</string>
     <string name="category_music_offtopic_summary">Musika-bideoetan bakarrik erabil daiteke. Nahaste ofizialetakoak ez diren bideo-zatiak estaliko ditu. Azkenean, bideoak Spotifyren edo beste edozein nahasketa bertsioren antzekoa izan behar du, edo hitz egitea edo beste entretenimendu batzuk murriztu behar ditu</string>
     <string name="buffering_goal">Aurrez kargatzea</string>
-    <string name="playerVideoFormat">Erreproduzitzailearen bideo formatua</string>
     <string name="player_autoplay">Erreprodukzio automatikoa</string>
     <string name="no_video">Bideorik gabe</string>
     <string name="no_audio">Audiorik gabe</string>
@@ -161,7 +156,6 @@
     <string name="clonePlaylist">Klonatu erreprodukzio zerrenda</string>
     <string name="deleteAccount">Ezabatu kontua</string>
     <string name="deleteAccount_summary">Ezabatu zure Piped kontua</string>
-    <string name="account">Kontua</string>
     <string name="restore">Berreskuratu</string>
     <string name="watch_history">Ikusitakoen historia</string>
     <string name="watch_positions">Gogoratu posizioa</string>
@@ -188,7 +182,6 @@
     <string name="autoRotatePlayer_summary">Aldatu pantaila osora gailua pizten denean</string>
     <string name="pure_theme">Gai purua</string>
     <string name="pure_theme_summary">Gai zuri/beltz purua</string>
-    <string name="no_player_found">Ez da kanpoko erreproduzitzailerik aurkitu. Mesedez, ziurtatu bat instalatuta duzula.</string>
     <string name="data_saver_mode">Datuak aurrezteko modua</string>
     <string name="data_saver_mode_summary">Ez kargatu miniaturarik, ez bestelako irudirik</string>
     <string name="search_history_summary">Gogoratu bilaketak</string>
@@ -201,11 +194,9 @@
     <string name="captions">Azpitituluak</string>
     <string name="worst_quality">Txarrena</string>
     <string name="default_subtitle_language">Azpitituluen hizkuntza</string>
-    <string name="playerAudioFormat">Erreproduzitzailearen audio formatua</string>
     <string name="playerAudioQuality">Audioaren kalitatea</string>
     <string name="general">Orokorra</string>
     <string name="general_summary">Hizkuntza eta eskualdea</string>
-    <string name="playingOnBackground">Atzeko planoan erreproduzitzen…</string>
     <string name="caption_settings">Azpitituluak</string>
     <string name="notify_new_streams">Eduki berrien jakinarazpenak</string>
     <string name="checking_frequency">Dena egiaztatzen…</string>
@@ -271,16 +262,10 @@
     <string name="change_region">Badirudi \'Joerak\' ez dagoela eskuragarri eskualde honetan. Mesedez, hautatu beste bat ezarpenetan.</string>
     <string name="queue">Ilara</string>
     <string name="added_to_playlist">Gehitu erreprodukzio zerrendara %1$s</string>
-    <string name="filename">Fitxategi izena</string>
-    <string name="invalid_filename">Fitxategi izen baliogabea!</string>
     <string name="livestreams">Zuzeneko transmisioak</string>
-    <string name="alternative_videos_layout">Bideo alternatiboen diseinua</string>
     <string name="defaultIconLight">Lehenetsitako argia</string>
     <string name="time_code">Denbora-kodea (segundoak)</string>
     <string name="playlistCloned">Erreprodukzio-zerrenda klonatu da</string>
-    <string name="confirm_unsubscribe">Ziur al zaude %1$s harpidetza kendu nahi duzula\?</string>
-    <string name="confirm_unsubscribing">Baieztatu harpidetza kentzea</string>
-    <string name="confirm_unsubscribing_summary">Erakutsi berrespen-koadroa harpidetza kendu aurretik</string>
     <string name="play_all">Erreproduzitu dena</string>
     <string name="start_time">Hasiera ordua</string>
     <string name="end_time">Bukaera ordua</string>
@@ -300,8 +285,6 @@
     <string name="playback_pitch">Tonua</string>
     <string name="audio_track">Audio pista</string>
     <string name="defaults">Lehenetsia</string>
-    <string name="hls_instead_of_dash">HLS erabili</string>
-    <string name="hls_instead_of_dash_summary">Erabili HLS DASH-en ordez (motelagoa izango da, ez da gomendatzen)</string>
     <string name="auto_quality">Automatikoa</string>
     <string name="limit_to_runtime">Exekuzio denborara mugatu</string>
     <string name="trends">Joerak</string>

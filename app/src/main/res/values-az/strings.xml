@@ -57,7 +57,6 @@
     <string name="category_intro">Fasilə/Giriş Animasiyası</string>
     <string name="login_register">Daxil ol/qeydiyyatdan keç</string>
     <string name="importsuccess">Abunə olundu</string>
-    <string name="cannotDownload">Bu yayımı yükləmək mümkün deyil.</string>
     <string name="downloadfailed">Yükləmə uğursuz oldu.</string>
     <string name="import_from_yt">Abunəlikləri idxal et</string>
     <string name="import_from_yt_summary">YouTube və ya NewPipe-dan</string>
@@ -103,7 +102,6 @@
     <string name="app_icon">Nişan</string>
     <string name="playOnBackground">Arxa planda oynat</string>
     <string name="update_available">Yeniləmə mövcuddur</string>
-    <string name="update_available_text">Yeni yeniləmə mövcuddur. GitHub buraxılışlar səhifəsin açmaq üçün kliklə.</string>
     <string name="appearance">Görünüş</string>
     <string name="downloads">Yüklənənlər</string>
     <string name="app_uptodate">Ən son versiya işlədilir.</string>
@@ -111,7 +109,6 @@
     <string name="advanced">Qabaqcıl</string>
     <string name="player">Oynadıcı</string>
     <string name="appearance_summary">Tətbiqi zövqünüzə görə uyğunlaşdırın</string>
-    <string name="advanced_summary">Yüklənənlər və sıfırlama</string>
     <string name="update_summary">Yeniləmə üçün yoxla</string>
     <string name="live">Canlı</string>
     <string name="shareTo">URL-ni Paylaş</string>
@@ -130,7 +127,6 @@
     <string name="customInstance_summary">Əlavə et…</string>
     <string name="instance_summary">Piped, giriş, hesab</string>
     <string name="empty_instance">Adı və API URL-ni doldur.</string>
-    <string name="clear_customInstances">Əlavə ediləni təmizlə</string>
     <string name="version">Versiya %1$s</string>
     <string name="related_streams">Əlaqəli məzmun</string>
     <string name="related_streams_summary">Nə izləyirsinizsə yan-yana oxşar yayımlar göstər</string>
@@ -140,7 +136,6 @@
     <string name="category_preview_summary">Əlavə məlumatsız gələcək məzmunu təfərrüatlandıran bölümlər üçün. Əgər bu, yalnız burada görünən bölümləri ehtiva edirsə, bu, çox güman ki, yanlış kateqoriyadır</string>
     <string name="category_filler_summary">Videonun əsas məzmunun başa düşmək tələb edilməyən, yalnız əlaqəsiz və ya yumor üçün əlavə edilmiş əlaqəsiz səhnələr üçün</string>
     <string name="category_music_offtopic_summary">Yalnız musiqi videolarında istifadə etmək üçün. Bu, rəsmi mikslərin bir hissəsi deyil, video hissələri əhatə etməlidir. Nəticədə, video Spotify və ya hər hansı digər miks versiyaya mümkün qədər bənzəməlidir və ya danışıq yaxud digər diqqəti yayındıran amilləri azaltmalıdır</string>
-    <string name="playerVideoFormat">Oynadıcı üçün video format</string>
     <string name="buffering_goal_summary">Bufer üçün maksimum video saniyə miqdarı</string>
     <string name="buffering_goal">Ön yükləmə</string>
     <string name="player_autoplay">Avtomatik oynatma</string>
@@ -159,7 +154,6 @@
     <string name="clonePlaylist">Oynatma siyahısın fərdiləşdir</string>
     <string name="reset">Standartları qaytar</string>
     <string name="reset_message">Bütün tənzimləmələr sıfırlansın və çıxılsın\?</string>
-    <string name="account">Hesab</string>
     <string name="restore">Bərpa Et</string>
     <string name="deleteAccount">Hesabı sil</string>
     <string name="deleteAccount_summary">Piped hesabınızı silin</string>
@@ -189,7 +183,6 @@
     <string name="autoRotatePlayer">Avtomatik tam ekran</string>
     <string name="pure_theme">Təmiz kolorit</string>
     <string name="pure_theme_summary">Təmiz ağ/qara kolorit</string>
-    <string name="no_player_found">Xarici oynadıcı tapılmadı. Zəhmət olmasa, birinin quraşdırıldığına əmin olun.</string>
     <string name="data_saver_mode">Məlumat qənaətçisi rejimi</string>
     <string name="autoRotatePlayer_summary">Cihaz döndərildikdə tam ekran oynatma</string>
     <string name="search_history_summary">Axtarışları saxla</string>
@@ -201,9 +194,7 @@
     <string name="watch_positions_title">Xatırlanan oynatma mövqeləri</string>
     <string name="general_summary">Yükləmələr və məlumata qənaət</string>
     <string name="general">Ümumi</string>
-    <string name="playingOnBackground">Arxa planda oynadılır…</string>
     <string name="caption_settings">Titrlər</string>
-    <string name="playerAudioFormat">Oynadıcı üçün səs formatı</string>
     <string name="playerAudioQuality">Səs keyfiyyəti</string>
     <string name="worst_quality">Ən pis</string>
     <string name="default_subtitle_language">Titr dili</string>
@@ -250,7 +241,6 @@
     <string name="copied_to_clipboard">Buferə köçürüldü</string>
     <string name="maximum_image_cache">Maksimum şəkil qalığı həcmi</string>
     <string name="open_copied">Aç</string>
-    <string name="legacy_subscriptions">Köhnə abunəliklər görünüşü</string>
     <string name="device_info">Cihaz Məlumatı</string>
     <string name="audio_video_summary">Keyfiyyət və format</string>
     <string name="new_videos_badge">Yeni videolar üçün göstərici</string>
@@ -271,18 +261,12 @@
     <string name="navigation_bar">Hərəkət çubuğu</string>
     <string name="change_region">Görünür, trendlər cari bölgə üçün əlçatan deyil. Xahiş olunur, tənzimləmələrdə başqasın seç.</string>
     <string name="playback_pitch">Ucalıq</string>
-    <string name="filename">Fayl adı</string>
-    <string name="invalid_filename">Yanlış fayl adı!</string>
     <string name="time_code">Vaxt kodu (saniyə)</string>
     <string name="added_to_playlist">%1$s oynatma siyahısına əlavə edildi</string>
     <string name="queue">Növbə</string>
     <string name="livestreams">Canlı yayımlar</string>
-    <string name="alternative_videos_layout">Alternativ video tərtibatı</string>
     <string name="defaultIconLight">Standart işıq</string>
     <string name="playlistCloned">Oynatma siyahısı fərdiləşdi</string>
-    <string name="confirm_unsubscribe">%1$s abunəliyin ləğv etmək istədiyinizə əminsiniz\?</string>
-    <string name="confirm_unsubscribing">Abunəlik ləğvin təsdiqlə</string>
-    <string name="confirm_unsubscribing_summary">Abunəliyi ləğv etməzdən əvvəl təsdiqləmə dialoqu göstər</string>
     <string name="play_all">Hamısın oynat</string>
     <string name="time">Vaxt</string>
     <string name="start_time">Başlanğıc vaxtı</string>
@@ -293,8 +277,6 @@
     <string name="layout">Tərtibat</string>
     <string name="audio_track">Səs axını</string>
     <string name="auto_quality">Avtomatik</string>
-    <string name="hls_instead_of_dash">HLS istifadə et</string>
-    <string name="hls_instead_of_dash_summary">Media yayımı üçün DASH əvəzinə HLS istifadə edin. Video oynatma işləmirsə, bu seçimi dəyişdirməyə cəhd edin.</string>
     <string name="limit_to_runtime">İşləmə vaxtı ilə məhdudlaşdır</string>
     <string name="trends">Trendlər</string>
     <string name="featured">Seçilən</string>
@@ -359,8 +341,6 @@
     <string name="codecs">Video kodlayıcılar</string>
     <string name="unsupported_file_format">Dəstəklənməyən fayl formatı: %1$s</string>
     <string name="mark_as_watched">Baxılmış kimi işarələ</string>
-    <string name="custom_playback_speed_summary">Adi oynadıcıdan fərqli oynatma sürəti istifadə et</string>
-    <string name="custom_playback_speed">Fərdi sürət</string>
     <string name="category">Kateqoriya</string>
     <string name="normal_views">%1$s baxış %2$s</string>
     <string name="playing_next">%1$s saniyə sonra növbəti oynadılır</string>
@@ -414,13 +394,10 @@
     <string name="invalid_color">Yanlış rəng dəyəri daxil edildi!</string>
     <string name="sb_custom_colors">Fərdi bölüm rəngləri</string>
     <string name="color">Rəng</string>
-    <string name="visible">Axtarış çubuğunda göstər</string>
     <string name="category_highlight">Video vurğulaması göstər</string>
     <string name="category_highlight_summary">Ya reklam olunan başlıq, miniatür və ya videonun ən maraqlı hissəsi ola bilər. Bölümlər bölməsində üzərinə toxunaraq buna keçə bilərsiniz</string>
     <string name="chapters_videoHighlight">Video Vurğulama</string>
     <string name="stop">Dayandır</string>
-    <string name="fallback_piped_proxy">Piped proksiyə qayıdış</string>
-    <string name="fallback_piped_proxy_summary">Birbaşa YouTube-a qoşulma cari video üçün işləmirsə, videoları proksidən yükləyir (ilkin yükləmə vaxtların artırır). Qeyri-aktiv edilibsə, YouTube musiqi məzmunu YT məhdudiyyətlərinə görə çox güman ki, oynadılmayacaq</string>
     <string name="audio_track_format">%1$s - %2$s</string>
     <string name="unknown_audio_track_type">Naməlum səs axını növü</string>
     <string name="original_or_main_audio_track">orijinal və ya əsas</string>
@@ -438,7 +415,6 @@
     <string name="sort_by">Çeşidlə</string>
     <string name="uploader_name">Yükləyicinin adı</string>
     <string name="duration_span">Müddət: %1$s</string>
-    <string name="no_chapter">Bölmə yoxdur</string>
     <string name="screen_orientation">Ekran istiqamətləndirmə</string>
     <string name="remove_watched_videos">Baxılan videoları təmizlə</string>
     <string name="player_channel_name">Oynadıcı Xidməti</string>
@@ -468,10 +444,8 @@
     <string name="sb_create_segment">Bölüm yarat</string>
     <string name="segment_type">Bölüm növü</string>
     <string name="sb_invalid_segment">Yanlış bölüm başlanğıcı və ya sonu</string>
-    <string name="proxy">Proksi</string>
     <string name="group_name_error_empty">Xahiş olunur, ad daxil et</string>
     <string name="group_name_error_exists">Xahiş olunur, nadir ad seç</string>
-    <string name="filename_too_long">Çox uzun fayl adı!</string>
     <string name="sponsorblock_user_id">SponsorBlock İstifadəçi ID</string>
     <string name="contribute_to_sponsorblock">SponsorBlock-a Töhfə Ver</string>
     <string name="no_fullscreen_resolution">Tam ekransız görüntü imkanı</string>
@@ -536,7 +510,6 @@
     <string name="local_ryd">Yerli Return Youtube Dislike çıxarıcı</string>
     <string name="local_ryd_summary">Bəyənməmə məlumatın birbaşa https://returnyoutubedislikeapi.com \'dan əldə et</string>
     <string name="import_watch_history">Baxış tarixçəsin idxal et</string>
-    <string name="import_watch_history_desc">Nəzərə alın ki, YouTube-un məhdud ixrac məlumatına görə hər şey idxal edilməyəcək.</string>
     <string name="audio_codecs">Səs kodlayıcılar</string>
     <string name="view_count">%1$s baxış</string>
     <string name="dialog_play_offline_title">Bu videonun yerli versiyası mövcuddur.</string>

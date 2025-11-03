@@ -50,7 +50,6 @@
     <string name="channels">チャンネル</string>
     <string name="already_logged_in">ログイン済みです。ログアウトできます。</string>
     <string name="login_register">ログイン/新規登録</string>
-    <string name="cannotDownload">この動画をダウンロードできませんでした。</string>
     <string name="app_theme">テーマ</string>
     <string name="server_error">選択したサーバーに問題があるようです。 別のインスタンスを試してください。</string>
     <string name="empty">ユーザー名とパスワードを入力してください。</string>
@@ -110,7 +109,6 @@
     <string name="birdIcon">小鳥</string>
     <string name="instance_name">インスタンス名</string>
     <string name="pauseOnScreenOff_summary">画面が消えた際に一時停止します</string>
-    <string name="account">アカウント</string>
     <string name="deleteAccount">アカウント削除</string>
     <string name="deleteAccount_summary">このPipedアカウントを削除します</string>
     <string name="restore">復元</string>
@@ -129,7 +127,6 @@
     <string name="category_music_offtopic">音楽: 音楽でない部分</string>
     <string name="category_preview">プレビュー/あらすじ</string>
     <string name="enabled">オン</string>
-    <string name="update_available_text">最新版があります。タップして GitHub のリリースページを開きます。</string>
     <string name="appearance">外観</string>
     <string name="app_uptodate">最新版を使用中です。</string>
     <string name="live">ライブ</string>
@@ -143,7 +140,6 @@
     <string name="instance_api_url">インスタンス API の URL</string>
     <string name="addInstance">インスタンスを追加</string>
     <string name="empty_instance">インスタンス名と API アドレスを入力してください。</string>
-    <string name="clear_customInstances">追加済みのインスタンスを削除</string>
     <string name="watch_history">再生履歴</string>
     <string name="watch_positions">位置を記憶</string>
     <string name="auth_instance">認証用インスタンス</string>
@@ -155,7 +151,6 @@
     <string name="category_music_offtopic_summary">ミュージックビデオ専用です。公式の音楽には含まれないシーン。ここがないと、その動画はSpotifyやその他のリミックス版になるべく近くなったり、話し声など邪魔なものが減ります</string>
     <string name="category_preview_summary">追加情報なく将来の内容を詳述する部分です。ここにしかないシーンが含まれていれば、分類を間違えている可能性が高いです</string>
     <string name="buffering_goal">事前読み込み</string>
-    <string name="playerVideoFormat">プレーヤーの動画形式</string>
     <string name="audio_video">音声と映像</string>
     <string name="fullscreen_orientation">全画面時の向き</string>
     <string name="aspect_ratio">動画の縦横比</string>
@@ -167,7 +162,6 @@
     <string name="advanced">高度な設定</string>
     <string name="player">プレーヤー</string>
     <string name="appearance_summary">アプリを自分好みに調整</string>
-    <string name="advanced_summary">ダウンロードおよび初期化</string>
     <string name="no_audio">音声なし</string>
     <string name="no_video">映像なし</string>
     <string name="audio">音声</string>
@@ -182,7 +176,6 @@
     <string name="autoRotatePlayer_summary">端末を回転させるとプレーヤーを全画面にします</string>
     <string name="pure_theme">ピュアテーマ</string>
     <string name="pure_theme_summary">ピュアホワイト/ピュアブラック</string>
-    <string name="no_player_found">外部プレーヤーが見つかりません。インストールしてください。</string>
     <string name="data_saver_mode">データ節約モード</string>
     <string name="search_history_summary">検索履歴を保存</string>
     <string name="watch_history_summary">視聴した動画の履歴を端末に保持</string>
@@ -200,16 +193,12 @@
     <string name="player_summary">標準設定と動作</string>
     <string name="seek_increment">進む</string>
     <string name="pauseOnScreenOff">自動で一時停止</string>
-    <string name="playingOnBackground">バックグラウンドで再生中…</string>
     <string name="clonePlaylist">再生リストを複製</string>
     <string name="downloading">ダウンロード中…</string>
     <string name="caption_settings">字幕</string>
-    <string name="playerAudioFormat">プレーヤーの音声形式</string>
     <string name="playerAudioQuality">音声の品質</string>
     <string name="worst_quality">最低</string>
     <string name="playlistCloned">再生リストを複製しました</string>
-    <string name="confirm_unsubscribe">%1$s の登録を解除しますか？</string>
-    <string name="confirm_unsubscribing_summary">登録を解除する前に確認します</string>
     <string name="new_videos_badge">新着動画数の表示</string>
     <string name="queue">キュー</string>
     <string name="time">時間</string>
@@ -230,7 +219,6 @@
     <string name="backup_customInstances">カスタムインスタンス</string>
     <string name="play_next">次の動画</string>
     <string name="new_videos_badge_summary">新着動画があれば数をバッジに表示します</string>
-    <string name="confirm_unsubscribing">登録解除の確認</string>
     <string name="play_all">すべて再生</string>
     <string name="notification_time_summary">配信の通知が表示される時間帯を限定します</string>
     <string name="notify_new_streams">新しい動画を通知する</string>
@@ -268,10 +256,7 @@
     <string name="no_search_result">結果がありません。</string>
     <string name="added_to_playlist">再生リスト %1$s に追加しました</string>
     <string name="skip_buttons">スキップボタン</string>
-    <string name="filename">ファイル名</string>
-    <string name="invalid_filename">無効なファイル名です！</string>
     <string name="livestreams">ライブ</string>
-    <string name="alternative_videos_layout">動画配置の変更</string>
     <string name="download_channel_name">ダウンロードサービス</string>
     <string name="push_channel_name">通知の実行</string>
     <string name="push_channel_description">新着動画があれば通知を表示します。</string>
@@ -319,8 +304,6 @@
     <string name="proceed">続ける</string>
     <string name="play_latest_videos">最新の動画を再生</string>
     <string name="audio_track">音声トラック</string>
-    <string name="hls_instead_of_dash_summary">メディアのストリーミングにDASHの代わりにHLSを使用。動画を再生できない際に切り替えてみてください。</string>
-    <string name="hls_instead_of_dash">HLSを使う</string>
     <string name="auto_quality">自動</string>
     <string name="limit_to_runtime">ランタイムの上限</string>
     <string name="trends">急上昇</string>
@@ -352,8 +335,6 @@
     <string name="audio_only_mode">音声のみモード</string>
     <string name="audio_only_mode_summary">LibreTube を音楽プレーヤーに変えます</string>
     <string name="mark_as_watched">視聴済みにする</string>
-    <string name="custom_playback_speed">速度を変更</string>
-    <string name="custom_playback_speed_summary">通常のプレーヤーとは異なる再生速度を使います</string>
     <string name="category">カテゴリー</string>
     <string name="codecs">映像コーデック</string>
     <string name="concurrent_downloads_limit_reached">同時ダウンロード数の上限に達しました。</string>
@@ -412,13 +393,10 @@
     <string name="color">色</string>
     <string name="sb_custom_colors_summary">該当シーンの部分の色を替える</string>
     <string name="invalid_color">この色の値は無効です！</string>
-    <string name="visible">シークバーに表示</string>
     <string name="category_highlight">動画のハイライトを表示</string>
     <string name="chapters_videoHighlight">動画のハイライト</string>
     <string name="category_highlight_summary">その動画の宣伝的な題、サムネイル、または最も興味を引く部分です。チャプター欄からタップするとそこに飛びます</string>
     <string name="stop">停止</string>
-    <string name="fallback_piped_proxy_summary">YouTubeに直接接続しても現在の動画が再生できない際に、プロキシ経由で動画を読み込みます（最初の読み込み時間は増加）。無効にすると、YTの制限によりYouTubeの音楽コンテンツが再生されないことがあります</string>
-    <string name="fallback_piped_proxy">失敗時に Piped プロキシに接続</string>
     <string name="unknown_or_no_audio">不明または音声なし</string>
     <string name="default_or_unknown_audio_track">標準または不明</string>
     <string name="original_or_main_audio_track">そのまま、または主音声</string>
@@ -435,7 +413,6 @@
     <string name="visibility_unlisted">限定公開</string>
     <string name="screen_orientation">画面の向き</string>
     <string name="remove_watched_videos">視聴済みの動画を除去</string>
-    <string name="no_chapter">チャプターなし</string>
     <string name="uploader_name">公開者の名前</string>
     <string name="sort_by">並び替え</string>
     <string name="duration_span">時間: %1$s</string>
@@ -461,7 +438,6 @@
     <string name="tooltip_clear_queue">再生キューを初期化</string>
     <string name="tooltip_dismiss">非表示</string>
     <string name="auto_generated">自動生成</string>
-    <string name="proxy">プロキシ</string>
     <string name="group_name_error_empty">名前を入力</string>
     <string name="group_name_error_exists">重複しない名前を使用してください</string>
     <string name="registration_disabled">登録機能なし</string>
@@ -469,7 +445,6 @@
     <string name="sb_create_segment">シーンを登録</string>
     <string name="segment_type">シーンの種類</string>
     <string name="sb_invalid_segment">シーンの開始または終了が無効です</string>
-    <string name="filename_too_long">ファイル名が長すぎます！</string>
     <string name="sponsorblock_user_id">SponsorBlock ユーザー名</string>
     <string name="contribute_to_sponsorblock">SponsorBlock に貢献</string>
     <string name="autoplay_playlists_summary">選択した自動再生の設定に関係なく、再生リストの次の動画を自動で再生</string>
@@ -534,7 +509,6 @@
     <string name="local_ryd_summary">以下から低評価を直接取得 https://returnyoutubedislikeapi.com</string>
     <string name="local_ryd">Return Youtube Dislikes 取得ツール</string>
     <string name="import_watch_history">視聴履歴をインポート</string>
-    <string name="import_watch_history_desc">YouTubeのデータは、エクスポートの制限のため、すべてをインポートできないこともあります。</string>
     <string name="audio_codecs">音声コーデック</string>
     <string name="view_count">%1$s回</string>
     <string name="dialog_play_offline_title">この動画は端末内にあります。</string>

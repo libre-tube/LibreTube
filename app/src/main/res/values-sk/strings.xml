@@ -15,7 +15,6 @@
     <string name="region">Región</string>
     <string name="login_register">Prihláste sa/zaregistrujte sa</string>
     <string name="importsuccess">Ste prihlásený k odberu</string>
-    <string name="cannotDownload">Tento stream sa nedá stiahnuť.</string>
     <string name="downloadfailed">Sťahovanie zlyhalo.</string>
     <string name="import_from_yt">Importovať odbery</string>
     <string name="import_from_yt_summary">Z YouTube alebo NewPipe</string>
@@ -119,15 +118,12 @@
     <string name="category_filler">Nepodstatné/Vtipy</string>
     <string name="category_preview_summary">Pre segmenty popisujúce budúci obsah bez ďalších informácií. Ak obsahuje klipy, ktoré sa objavujú len tu, je veľmi pravdepodobné, že ide o nesprávnu kategóriu</string>
     <string name="playOnBackground">Prehrať na pozadí</string>
-    <string name="update_available_text">K dispozícii je nová aktualizácia. Kliknutím otvoríte stránku vydaní GitHub.</string>
     <string name="playback_speed">Rýchlosť prehrávania</string>
-    <string name="advanced_summary">Sťahovanie a resetovanie</string>
     <string name="app_uptodate">Používate najnovšiu verziu.</string>
     <string name="appearance_summary">Prispôsobte si aplikáciu podľa svojich predstáv</string>
     <string name="update_summary">Skontrolovať dostupnosť aktualizácie</string>
     <string name="shareTo">Zdieľať adresu URL s</string>
     <string name="instance_api_url">URL k inštancii API</string>
-    <string name="clear_customInstances">Vymazať pridané</string>
     <string name="invalid_url">Zadajte funkčnú adresu URL</string>
     <string name="related_streams_summary">Zobrazí podobné streamy vedľa tých, ktoré sledujete</string>
     <string name="customInstance_summary">Pridať…</string>
@@ -148,7 +144,6 @@
     <string name="chapters">Kapitoly</string>
     <string name="deleteAccount">Odstrániť účet</string>
     <string name="deleteAccount_summary">Odstráni váš účet Piped</string>
-    <string name="account">Účet</string>
     <string name="restore">Obnoviť</string>
     <string name="notifications">Notifikácie</string>
     <string name="checking_frequency">Kontrola každý(ch)…</string>
@@ -200,7 +195,6 @@
     <string name="repeat_mode_none">Nič</string>
     <string name="repeat_mode_current">Aktuálne</string>
     <string name="auth_instance_summary">Použije inú inštanciu pre overené volania</string>
-    <string name="playerVideoFormat">Video formát pre prehrávač</string>
     <string name="no_audio">Bez zvuku</string>
     <string name="no_video">Bez videa</string>
     <string name="audio">Zvuk</string>
@@ -214,7 +208,6 @@
     <string name="autoRotatePlayer">Automaticky na celú obrazovku</string>
     <string name="autoRotatePlayer_summary">Prehrávanie na celú obrazovku po otočení zariadenia</string>
     <string name="pure_theme">Čistá téma</string>
-    <string name="no_player_found">Žiadny externý prehrávač nebol nájdený. Uistite sa, že ho máte nainštalovaný.</string>
     <string name="data_saver_mode">Režim šetrenia dát</string>
     <string name="data_saver_mode_summary">Vynechá miniatúry a iné obrázky</string>
     <string name="search_history_summary">Zapamätá si vyhľadávanie</string>
@@ -231,9 +224,7 @@
     <string name="behavior">Správanie</string>
     <string name="pauseOnScreenOff">Automatická pauza</string>
     <string name="pauseOnScreenOff_summary">Pozastaví prehrávanie, keď je obrazovka vypnutá</string>
-    <string name="playingOnBackground">Prehrávanie na pozadí…</string>
     <string name="clonePlaylist">Klonovať zoznam skladieb</string>
-    <string name="playerAudioFormat">Audio formát pre prehrávač</string>
     <string name="playerAudioQuality">Kvalita zvuku</string>
     <string name="replies">Odpovede</string>
     <string name="subscriberAndVideoCounts">%1$s odberateľov • %2$d videí</string>
@@ -244,7 +235,6 @@
     <string name="donate">Prispieť</string>
     <string name="music_artists">Umelci YT Music</string>
     <string name="uploaderAndVideoCount">%1$s • %2$d videí</string>
-    <string name="visible">Zobraziť v paneli vyhľadávania</string>
     <string name="mobile_data">Mobilné dáta</string>
     <string name="username_email">Používanie e-mailovej adresy ako používateľského mena sa neodporúča. Pokračovať aj tak?</string>
     <string name="download_channel_name">Služba sťahovania</string>
@@ -271,17 +261,14 @@
     <string name="tooltip_unlocked">Odomknutie prehrávača</string>
     <string name="tooltip_options">Možnosti</string>
     <string name="remove_bookmark">Odstrániť záložku</string>
-    <string name="confirm_unsubscribe">Určite chcete zrušiť odber %1$s?</string>
     <string name="remove_watched_videos">Odstrániť odsledované videá</string>
     <string name="pause">Pozastaviť</string>
     <string name="double_tap_seek">Hľadať dvojitým ťuknutím</string>
     <string name="backup_customInstances">Vlastné inštancie</string>
-    <string name="confirm_unsubscribing">Potvrdiť zrušenie odberu</string>
     <string name="navbar_order">Poradie</string>
     <string name="exportsuccess">Exportované.</string>
     <string name="proceed">Pokračovať</string>
     <string name="codecs">Video kodeky</string>
-    <string name="no_chapter">Neexistuje žiadna kapitola</string>
     <string name="hide_watched_from_feed">Skryť už sledované videá</string>
     <string name="add_to_group">Pridať do skupiny</string>
     <string name="player_channel_description">Zobrazí upozornenie pri prehrávaní</string>
@@ -300,7 +287,6 @@
     <string name="privacy_alert">Upozornenie o ochrane osobných údajov</string>
     <string name="captions_size">Veľkosť titulkov</string>
     <string name="faq">Často kladené otázky</string>
-    <string name="hls_instead_of_dash">Použiť HLS</string>
     <string name="auto_quality">Automaticky</string>
     <string name="resume">Pokračovať</string>
     <string name="unknown">Neznámy</string>
@@ -323,7 +309,6 @@
     <string name="bookmarks">Záložky</string>
     <string name="bookmark">Záložka</string>
     <string name="add_to_bookmarks">Pridať do záložiek</string>
-    <string name="custom_playback_speed_summary">Použije inú rýchlosť prehrávania ako pri bežnom prehrávači</string>
     <string name="stats_for_nerds">Štatistiky pre šprtov</string>
     <string name="screen_orientation">Orientácia obrazovky</string>
     <string name="download_completed">Sťahovanie dokončené</string>
@@ -337,11 +322,8 @@
     <string name="export_subscriptions">Exportovať odbery</string>
     <string name="resize_mode_fit">Prispôsobiť</string>
     <string name="resize_mode_fill">Vyplniť</string>
-    <string name="filename">Názov súboru</string>
-    <string name="invalid_filename">Neplatný názov súboru!</string>
     <string name="added_to_playlist">Pridané do zoznamu skladieb %1$s</string>
     <string name="queue">Poradie</string>
-    <string name="confirm_unsubscribing_summary">Zobrazí potvrdzujúci dialóg pred zrušením odberu</string>
     <string name="play_all">Prehrať všetko</string>
     <string name="start_time">Čas spustenia</string>
     <string name="end_time">Čas ukončenia</string>
@@ -352,13 +334,11 @@
     <string name="vote_for_segment">Hlasovať za segment</string>
     <string name="continue_watching">Pokračovať v sledovaní</string>
     <string name="contribute_to_sponsorblock">Prispejte do SponsorBlock</string>
-    <string name="filename_too_long">Názov súboru je príliš dlhý!</string>
     <string name="watched">Sledované</string>
     <string name="no_segments_found">Pre toto video zatiaľ nie sú žiadne segmenty.</string>
     <string name="unlimited_search_history">Neobmedzená história vyhľadávania</string>
     <string name="defaultIconLight">Predvolená svetlá</string>
     <string name="color">Farba</string>
-    <string name="alternative_videos_layout">Alternatívne usporiadanie videí</string>
     <string name="brightness">Jas</string>
     <string name="rewind">Pretočiť</string>
     <string name="auto_fullscreen_shorts">Automatické zobrazenie na celú obrazovku pri krátkych videách</string>
@@ -383,7 +363,6 @@
     <string name="rich_caption_rendering">Lepšie vykreslenie titulkov</string>
     <string name="channel_groups">Skupiny kanálov</string>
     <string name="choose_instance_long">Nižšie si vyberte inštanciu Piped, ktorú chcete použiť. Inštancia Piped bude fungovať ako sprostredkovateľ medzi vami a YouTube. Tieto inštancie sa nachádzajú na rôznych fyzických miestach - sú označené vlajkou (vlajkami) svojej krajiny. Inštancie, ktoré sú fyzicky bližšie k vám, sú pravdepodobne rýchlejšie ako inštancie, ktoré sú ďalej. Používanú inštanciu môžete kedykoľvek zmeniť v nastaveniach.</string>
-    <string name="fallback_piped_proxy_summary">Načíta videá cez proxy server, ak priame pripojenie k službe YouTube nefunguje pre aktuálne video (zvyšuje počiatočné časy načítania). Ak je vypnuté, hudobný obsah YouTube sa pravdepodobne nebude prehrávať kvôli obmedzeniam YT</string>
     <string name="double_tap_seek_summary">Ťuknutím dvakrát naľavo alebo napravo pretočíte pozíciu prehrávača dozadu alebo dopredu</string>
     <string name="alternative_pip_controls_summary">V PiP zobrazí iba zvuk a ovládače preskočenia namiesto prvkov pretočenia dopredu a dozadu</string>
     <string name="push_channel_description">Zobrazí upozornenie, keď sú k dispozícii nové streamy.</string>
@@ -398,7 +377,6 @@
     <string name="delete">Odstrániť zo stiahnutých súborov</string>
     <string name="skip_segment">Vynechať segment</string>
     <string name="layout">Usporiadanie</string>
-    <string name="hls_instead_of_dash_summary">Použije HLS namiesto DASH (pre streamovanie médií. Ak prehrávanie videa nefunguje, skúste túto možnosť prepnúť.</string>
     <string name="trends">Trendy</string>
     <string name="trending">Čo je teraz v trende</string>
     <string name="queue_insert_related_videos">Zverejniť súvisiace videá</string>
@@ -426,7 +404,6 @@
     <string name="audio_only_mode_summary">Premení LibreTube na prehrávač hudby</string>
     <string name="skip_silence">Vynechať ticho</string>
     <string name="help">Pomoc</string>
-    <string name="custom_playback_speed">Prispôsobená rýchlosť</string>
     <string name="category">Kategória</string>
     <string name="disable_proxy">Zakázať Piped proxy</string>
     <string name="theme_monochrome">Minimalisticky monochromatický</string>
@@ -447,7 +424,6 @@
     <string name="uploader_name">Meno autora</string>
     <string name="emptyPlaylistDescription">Popis zoznamu skladieb nemôže byť prázdny</string>
     <string name="automatic">Automaticky</string>
-    <string name="fallback_piped_proxy">Vrátiť sa k proxy Piped</string>
     <string name="dearrow_summary">Zobrazí presnejšie a menej senzačné názvy a miniatúry. Zvyšuje čas načítania</string>
     <string name="off">Zavrieť</string>
     <string name="manual">Ručne</string>
@@ -455,7 +431,6 @@
     <string name="stop">Zastaviť</string>
     <string name="sb_custom_colors">Používané farby segmentov</string>
     <string name="registration_disabled">Registrácia bola zakázaná</string>
-    <string name="proxy">Proxy</string>
     <string name="auto_generated">vytvorené automaticky</string>
     <string name="resolution_limited">obmedzené</string>
     <string name="group_name_error_exists">Vyberte názov, ktorý ešte nebol použitý</string>
@@ -536,7 +511,6 @@
     <string name="local_ryd_summary">Priamo načíta informácie o neoblíbených z https://returnyoutubedislikeapi.com</string>
     <string name="local_ryd">Lokálny extraktor Return YouTube Dislike</string>
     <string name="import_watch_history">Importovať históriu pozerania</string>
-    <string name="import_watch_history_desc">Vezmite na vedomie, že nie všetko bude importované kvôli obmedzeniu exportu údajov z YouTube.</string>
     <string name="audio_codecs">Audio kodeky</string>
     <string name="view_count">%1$s zobrazení</string>
     <string name="dialog_play_offline_title">Dostupná je lokálna verzia tohto videa.</string>

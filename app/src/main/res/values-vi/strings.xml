@@ -25,7 +25,6 @@
     <string name="import_from_yt">Phục hồi danh sách đăng ký</string>
     <string name="import_from_yt_summary">Từ YouTube hay NewPipe</string>
     <string name="app_theme">Chủ đề</string>
-    <string name="cannotDownload">Không thể tải xuống buổi phát sóng này.</string>
     <string name="unknown_error">Lỗi mạng.</string>
     <string name="error">Đã xảy ra lỗi.</string>
     <string name="empty">Bạn phải nhập tên đăng nhập và mật khẩu.</string>
@@ -81,7 +80,6 @@
     <string name="advanced">Nâng cao</string>
     <string name="player">Trình phát</string>
     <string name="appearance_summary">Tinh chỉnh ứng dụng theo ý thích của bạn</string>
-    <string name="advanced_summary">Tải xuống và đặt lại</string>
     <string name="live">Trực tiếp</string>
     <string name="defaultIcon">Mặc định</string>
     <string name="notgmail">Dành cho tài khoản Piped</string>
@@ -112,7 +110,6 @@
     <string name="enabled">Kích hoạt</string>
     <string name="disabled">Tắt</string>
     <string name="playOnBackground">Chơi trong nền</string>
-    <string name="update_available_text">Có bản cập nhật mới. Nhấp để mở trang phát hành GitHub.</string>
     <string name="addInstance">Thêm sever</string>
     <string name="version">Phiên bản %1$s</string>
     <string name="buffering_goal_summary">Số giây video được tải trước ở mức tối đa</string>
@@ -132,7 +129,6 @@
     <string name="gradientIcon">Gradient</string>
     <string name="flameIcon">Ngọn lửa bay</string>
     <string name="instance_api_url">URL tới API phiên bản</string>
-    <string name="clear_customInstances">Xóa instance tùy chỉnh</string>
     <string name="fireIcon">Ngọn lửa thời thượng</string>
     <string name="empty_instance">Điền tên và URL API.</string>
     <string name="related_streams_summary">Hiển thị các luồng tương tự cùng với nội dung bạn xem</string>
@@ -142,7 +138,6 @@
     <string name="birdIcon">Chim cách điệu</string>
     <string name="instance_name">Tên phiên bản</string>
     <string name="related_streams">Các nội dung liên quan</string>
-    <string name="playerVideoFormat">Định dạng video cho trình phát</string>
     <string name="reset">Khôi phục mặc định</string>
     <string name="reset_message">Đăng xuất bạn ra và đặt lại\?</string>
     <string name="no_audio">Không có âm thanh</string>
@@ -161,7 +156,6 @@
     <string name="clonePlaylist">Nhân bản danh sách phát</string>
     <string name="deleteAccount">Xóa tài khoản</string>
     <string name="deleteAccount_summary">Xóa tài khoản Piped của bạn</string>
-    <string name="account">Tài khoản</string>
     <string name="restore">Khôi phục</string>
     <string name="turnInternetOn">Vui lòng bật Wi-Fi hoặc dữ liệu di động để kết nối Internet.</string>
     <string name="open">Mở…</string>
@@ -194,7 +188,6 @@
     <string name="chapters">Phân đoạn</string>
     <string name="pure_theme">Theme thuần túy</string>
     <string name="pure_theme_summary">Theme trắng/đen thuần túy</string>
-    <string name="no_player_found">Không tìm thấy trình phát bên ngoài. Hãy chắc chắn rằng bạn đã cài đặt một cái.</string>
     <string name="data_saver_mode">Chế độ tiết kiệm dữ liệu</string>
     <string name="data_saver_mode_summary">Bỏ qua hình thu nhỏ và các hình ảnh khác</string>
     <string name="search_history_summary">Nhớ hoạt động tìm kiếm</string>
@@ -214,9 +207,7 @@
     <string name="captions">Phụ đề</string>
     <string name="none">Không</string>
     <string name="general">Tổng quan</string>
-    <string name="playingOnBackground">Đang phát trên nền…</string>
     <string name="caption_settings">Phụ đề</string>
-    <string name="playerAudioFormat">Tự động định dạng cho trình phát</string>
     <string name="playerAudioQuality">Chất lượng âm thanh</string>
     <string name="worst_quality">Dở nhất</string>
     <string name="new_videos_badge">Chỉ báo cho video mới</string>
@@ -269,12 +260,7 @@
     <string name="play_next">Tiếp theo</string>
     <string name="navigation_bar">Thanh điều hướng</string>
     <string name="change_region">Xu hướng dường như không khả dụng cho khu vực hiện tại. Vui lòng chọn một cái khác trong cài đặt.</string>
-    <string name="hls_instead_of_dash">Dùng HLS</string>
-    <string name="hls_instead_of_dash_summary">Dùng HLS thay cho DASH (chậm hơn, không khuyến khích)</string>
     <string name="playlistCloned">Danh sách phát đã được sao chép</string>
-    <string name="confirm_unsubscribe">Bạn thực sự muốn hủy đăng ký %1$s?</string>
-    <string name="confirm_unsubscribing">Xác nhận hủy đăng ký</string>
-    <string name="confirm_unsubscribing_summary">Hiện hộp thoại xác nhận trước khi hủy đăng ký</string>
     <string name="play_all">Phát tất cả</string>
     <string name="queue">Hàng đợi</string>
     <string name="time">Thời lượng</string>
@@ -287,11 +273,8 @@
     <string name="navbar_order">Thứ tự</string>
     <string name="layout">Bố cục</string>
     <string name="added_to_playlist">Đã thêm vào danh sách phát %1$s</string>
-    <string name="filename">Tên tệp</string>
-    <string name="invalid_filename">Tên tệp không hợp lệ!</string>
     <string name="audio_track">Bản âm thanh</string>
     <string name="livestreams">Trực tiếp</string>
-    <string name="alternative_videos_layout">Bố cục thay thế cho videos</string>
     <string name="defaultIconLight">Light mặc định</string>
     <string name="auto_quality">Tự động</string>
     <string name="limit_to_runtime">Giới hạn thực thi</string>
@@ -331,15 +314,12 @@
     <string name="double_tap_seek">Nhấn đúp để tua</string>
     <string name="double_tap_seek_summary">Nhấn hai lần vào bên trái hoặc bên phải để tua lại hoặc tua tới vị trí của trình phát</string>
     <string name="auto_fullscreen_shorts">Tự động toàn màn hình trên các video ngắn</string>
-    <string name="visible">Hiển thị trong thanh tua</string>
     <string name="show_search_suggestions">Hiển thị gợi ý tìm kiếm</string>
     <string name="chapters_videoHighlight">Video nổi bật</string>
     <string name="automatic">Tự động</string>
     <string name="play_automatically_summary">Bắt đầu phát video tự động khi chọn</string>
     <string name="invalid_color">Đã nhập giá trị màu không hợp lệ!</string>
     <string name="color">Màu sắc</string>
-    <string name="fallback_piped_proxy">Dự phòng cho proxy Piped</string>
-    <string name="fallback_piped_proxy_summary">Tải video qua proxy nếu kết nối trực tiếp với YouTube không hoạt động đối với video hiện tại (tăng thời gian tải ban đầu). Nếu bị tắt, nội dung âm nhạc trên YouTube có thể sẽ không phát do các hạn chế của YouTube</string>
     <string name="choose_instance_long">Vui lòng chọn một phiên bản Piped để sử dụng từ bên dưới. Phiên bản Piped sẽ đóng vai trò trung gian giữa bạn và YouTube. Các phiên bản này được đặt tại các vị trí thực tế khác nhau - được biểu thị bằng (các) cờ quốc gia của chúng. Các phiên bản gần bạn hơn về mặt vật lý có khả năng nhanh hơn các phiên bản không ở gần bạn. Bạn có thể thay đổi phiên bản bạn sử dụng trong phần thiết đặt bất kỳ lúc nào.</string>
     <string name="off">Tắt</string>
     <string name="fullscreen_gestures">Cử chỉ vào/thoát toàn màn hình</string>
@@ -347,8 +327,6 @@
     <string name="disable_proxy">Vô hiệu hóa proxy Piped</string>
     <string name="home_tab_content">Nội dung thẻ trang chủ</string>
     <string name="audio_only_mode_summary">Biến LibreTube thành một trình phát nhạc</string>
-    <string name="custom_playback_speed">Tốc độ tùy chỉnh</string>
-    <string name="custom_playback_speed_summary">Sử dụng tốc độ phát lại khác với tốc độ của trình phát bình thường</string>
     <string name="sb_custom_colors">Tùy chỉnh màu phân đoạn</string>
     <string name="app_backup">Sao lưu Ứng dụng</string>
     <string name="sleep_timer">Hẹn giờ ngủ</string>
@@ -440,13 +418,11 @@
     <string name="tooltip_locked">Khóa trình phát</string>
     <string name="remove_watched_videos">Xóa video đã xem</string>
     <string name="tooltip_play">Phát</string>
-    <string name="no_chapter">Không có chương</string>
     <string name="no_fullscreen_resolution">Không có độ phân giải toàn màn hình</string>
     <string name="uploader_name">Tên người tải lên</string>
     <string name="tooltip_filter">Lọc</string>
     <string name="codecs">Bộ giải mã video</string>
     <string name="tooltip_unlocked">Mở khóa trình phát</string>
-    <string name="filename_too_long">Tên tệp quá dài!</string>
     <string name="registration_disabled">Đăng ký bị vô hiệu hóa</string>
     <string name="tooltip_clear_queue">Xóa hàng đợi</string>
     <string name="faq">Câu hỏi thường gặp</string>
@@ -480,7 +456,6 @@
     <string name="remember_playback_speed">Ghi nhớ tốc độ phát lại</string>
     <string name="tooltip_sort">Xếp</string>
     <string name="tooltip_watch_position">Vị trí xem</string>
-    <string name="proxy">Proxy</string>
     <string name="vote_for_segment">Bình chọn cho phân đoạn</string>
     <string name="upvote">Lên</string>
     <string name="segment">Phân đoạn</string>

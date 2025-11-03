@@ -16,7 +16,6 @@
     <string name="username">Nome utente</string>
     <string name="password">Password</string>
     <string name="subscribe">Iscriviti</string>
-    <string name="cannotDownload">Impossibile scaricare questo video.</string>
     <string name="downloadfailed">Scaricamento fallito.</string>
     <string name="import_from_yt">Importa iscrizioni</string>
     <string name="app_theme">Tema dell\'app</string>
@@ -103,9 +102,7 @@
     <string name="app_icon">Icona</string>
     <string name="playOnBackground">Riproduci in sottofondo</string>
     <string name="downloads">Scaricati</string>
-    <string name="advanced_summary">Download e ripristino</string>
     <string name="update_available">Aggiornamento disponibile</string>
-    <string name="update_available_text">Nuovo aggiornamento disponibile. Clicca per aprire la pagina delle pubblicazioni su GitHub.</string>
     <string name="appearance">Aspetto</string>
     <string name="update_summary">Cerca aggiornamenti</string>
     <string name="app_uptodate">Versione più recente in esecuzione.</string>
@@ -125,7 +122,6 @@
     <string name="flameIcon">Fiamma volante</string>
     <string name="instance_name">Nome istanza</string>
     <string name="addInstance">Aggiungi istanza</string>
-    <string name="clear_customInstances">Cancella le aggiunte</string>
     <string name="empty_instance">Compila il nome e l\'URL dell\'API.</string>
     <string name="instance_summary">Piped, accesso e account</string>
     <string name="customInstance_summary">Aggiungi…</string>
@@ -142,7 +138,6 @@
     <string name="category_preview_summary">Per i segmenti che descrivono in dettaglio i contenuti futuri senza informazioni aggiuntive. Se include clip che appaiono solo qui, è molto probabile che questa sia la categoria sbagliata</string>
     <string name="buffering_goal">Precaricamento</string>
     <string name="buffering_goal_summary">La quantità massima di secondi che viene bufferizzata nei video</string>
-    <string name="playerVideoFormat">Formato video del lettore</string>
     <string name="player_autoplay">Riproduzione automatica</string>
     <string name="audio">Audio</string>
     <string name="no_audio">Senza audio</string>
@@ -162,7 +157,6 @@
     <string name="deleteAccount">Elimina l\'account</string>
     <string name="deleteAccount_summary">Elimina l\'account Piped</string>
     <string name="restore">Ripristina</string>
-    <string name="account">Account</string>
     <string name="watch_history">Cronologia delle visualizzazioni</string>
     <string name="watch_positions">Ricorda la posizione</string>
     <string name="auth_instance">Istanza di autenticazione</string>
@@ -189,7 +183,6 @@
     <string name="pure_theme">Tema puro</string>
     <string name="navLabelVisibility">Visibilità etichetta</string>
     <string name="pure_theme_summary">Tema bianco/nero puro</string>
-    <string name="no_player_found">Nessun lettore esterno trovato. Assicurati di averne uno installato.</string>
     <string name="search_history_summary">Ricorda le ricerche</string>
     <string name="watch_history_summary">Cronologia locale delle visualizzazioni</string>
     <string name="data_saver_mode_summary">Salta miniature ed altre immagini</string>
@@ -225,7 +218,6 @@
     <string name="resize_mode_fit">Adatta</string>
     <string name="backup_restore">Backup e ripristino</string>
     <string name="backup">Backup</string>
-    <string name="playingOnBackground">Riproduzione in sottofondo…</string>
     <string name="caption_settings">Sottotitoli</string>
     <string name="worst_quality">Peggiore</string>
     <string name="default_subtitle_language">Lingua dei sottotitoli</string>
@@ -245,7 +237,6 @@
     <string name="open_copied">Apri</string>
     <string name="reset_watch_positions">Ripristina</string>
     <string name="system_caption_style">Stile dei sottotitoli di sistema</string>
-    <string name="playerAudioFormat">Formato dell\'audio per il lettore</string>
     <string name="playerAudioQuality">Qualità audio</string>
     <string name="history_empty">Cronologia vuota.</string>
     <string name="repeat_mode_none">Disattivata</string>
@@ -270,19 +261,13 @@
     <string name="navigation_bar">Barra di navigazione</string>
     <string name="change_region">La Tendenza sembra non essere disponibile per la regione attuale. Selezionane un\'altra nelle impostazioni.</string>
     <string name="playback_pitch">Tono</string>
-    <string name="filename">Nome del file</string>
-    <string name="invalid_filename">Nome del file non valido!</string>
     <string name="added_to_playlist">Aggiunto alla playlist %1$s</string>
     <string name="queue">Coda</string>
     <string name="livestreams">Trasmissioni in diretta</string>
-    <string name="alternative_videos_layout">Layout alternativo per i video</string>
     <string name="defaultIconLight">Chiara predefinita</string>
     <string name="time_code">Codice temporale (secondi)</string>
     <string name="playlistCloned">Playlist clonata</string>
-    <string name="confirm_unsubscribe">Sei sicuro di voler annullare l\'iscrizione a %1$s\?</string>
-    <string name="confirm_unsubscribing">Conferma la disiscrizione</string>
     <string name="play_all">Riproduci tutti</string>
-    <string name="confirm_unsubscribing_summary">Mostra una finestra di conferma prima di annullare l\'iscrizione</string>
     <string name="start_time">Tempo iniziale</string>
     <string name="notification_time">Limita orari di notifica</string>
     <string name="time">Tempo</string>
@@ -298,8 +283,6 @@
     <string name="navbar_order">Ordine</string>
     <string name="layout">Disposizione</string>
     <string name="audio_track">Traccia audio</string>
-    <string name="hls_instead_of_dash">Usa HLS</string>
-    <string name="hls_instead_of_dash_summary">Usa HLS invece di DASH per lo streaming multimediale. Prova ad abilitare questa opzione se la riproduzione multimediale non funziona.</string>
     <string name="auto_quality">Automatica</string>
     <string name="limit_to_runtime">Limita al tempo di esecuzione</string>
     <string name="trends">Tendenze</string>
@@ -359,8 +342,6 @@
     <string name="mark_as_watched">Segna come visto</string>
     <string name="unsupported_file_format">Formato di file non supportato: %1$s</string>
     <string name="normal_views">%1$s visualizzazioni%2$s</string>
-    <string name="custom_playback_speed">Velocità personalizzata</string>
-    <string name="custom_playback_speed_summary">Usa una velocità di riproduzione diversa da quella del lettore normale</string>
     <string name="category">Categoria</string>
     <string name="playing_next">In riproduzione tra %1$s</string>
     <string name="video_id">ID video</string>
@@ -410,7 +391,6 @@
     <string name="manual">Manuale</string>
     <string name="automatic">Automatico</string>
     <string name="off">Disattiva</string>
-    <string name="visible">Mostra nella barra di ricerca</string>
     <string name="stop">Ferma</string>
     <string name="sb_custom_colors_summary">Alterna i segmenti di colore personalizzati per i segmenti di SponsorBlock</string>
     <string name="sb_custom_colors">Colori dei segmenti personalizzati</string>
@@ -419,8 +399,6 @@
     <string name="category_highlight_summary">Può essere il titolo pubblicizzato, la miniatura o la parte più interessante del video. Puoi passare ad esso toccandolo nella sezione dei capitoli</string>
     <string name="color">Colore</string>
     <string name="invalid_color">Valore del colore inserito non valido!</string>
-    <string name="fallback_piped_proxy_summary">Carica i video tramite il proxy se la connessione diretta a YouTube non funziona per il video corrente (aumenta i tempi di caricamento iniziale). Se disattivato, è probabile che i contenuti musicali di YouTube non vengano riprodotti a causa delle restrizioni di YT</string>
-    <string name="fallback_piped_proxy">Ripiega ad un proxy Piped</string>
     <string name="unknown_audio_language">Lingua audio sconosciuta</string>
     <string name="unknown_audio_track_type">Tipo di traccia audio sconosciuta</string>
     <string name="audio_track_format">%1$s - %2$s</string>
@@ -437,7 +415,6 @@
     <string name="visibility_unlisted">Non elencato</string>
     <string name="sort_by">Ordina per</string>
     <string name="uploader_name">Nome autore</string>
-    <string name="no_chapter">Nessun capitolo</string>
     <string name="duration_span">Durata: %1$s</string>
     <string name="screen_orientation">Orientamento dello schermo</string>
     <string name="remove_watched_videos">Rimuovi i video visti</string>
@@ -453,7 +430,6 @@
     <string name="tooltip_filter">Filtra</string>
     <string name="auto_generated">auto-generato</string>
     <string name="player_channel_name">Servizio del riproduttore</string>
-    <string name="proxy">Proxy</string>
     <string name="group_name_error_empty">Inserisci un nome</string>
     <string name="group_name_error_exists">Scegli un nome che non sia già in uso</string>
     <string name="registration_disabled">Registrazione disattivata</string>
@@ -472,7 +448,6 @@
     <string name="sb_create_segment">Crea segmento</string>
     <string name="segment_type">Tipo di segmento</string>
     <string name="contribute_to_sponsorblock">Contribuisci a SponsorBlock</string>
-    <string name="filename_too_long">Nome del file troppo lungo!</string>
     <string name="sponsorblock_user_id">ID utente SponsorBlock</string>
     <string name="donate">Dona</string>
     <string name="no_fullscreen_resolution">Nessuna risoluzione a schermo intero</string>
@@ -536,7 +511,6 @@
     <string name="local_ryd_summary">Recupera i \"non mi piace\" direttamente da https://returnyoutubedislikeapi.com</string>
     <string name="local_ryd">Estrattore Return Youtube Dislike in locale</string>
     <string name="import_watch_history">Importa cronologia di visualizzazione</string>
-    <string name="import_watch_history_desc">Nota che non tutto verrà importato a causa dei dati limitati esportati da YouTube.</string>
     <string name="audio_codecs">Codec audio</string>
     <string name="view_count">%1$s visualizzazioni</string>
     <string name="dialog_play_offline_title">Una versione locale di questo video e` disponibile.</string>

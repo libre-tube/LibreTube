@@ -20,7 +20,6 @@
     <string name="region">Regiune</string>
     <string name="login_register">Autentificare/Înregistrare</string>
     <string name="importsuccess">Abonat</string>
-    <string name="cannotDownload">Nu s-a putut descărca acest flux.</string>
     <string name="downloadfailed">Descărcare eșuată.</string>
     <string name="import_from_yt">Importați abonamente</string>
     <string name="import_from_yt_summary">Din YouTube sau NewPipe</string>
@@ -120,13 +119,10 @@
     <string name="instance_api_url">URL către instanța API</string>
     <string name="addInstance">Adăugare instanță</string>
     <string name="empty_instance">Completați numele și URL-ul API.</string>
-    <string name="clear_customInstances">Eliminare adăugate</string>
     <string name="related_streams_summary">Afișați fluxuri similare alături de ceea ce urmăriți</string>
     <string name="sponsorblock_notifications">Notificări</string>
     <string name="material_you">Material You</string>
-    <string name="update_available_text">O nouă actualizare este disponibilă. Faceți clic pentru a deschide pagina de lansări GitHub.</string>
     <string name="downloads">Descărcări</string>
-    <string name="advanced_summary">Descărcări și resetare</string>
     <string name="live">În direct</string>
     <string name="flameIcon">Flacără zburătoare</string>
     <string name="shapedIcon">În formă poznașă</string>
@@ -136,7 +132,6 @@
     <string name="related_streams">Conținut asociat</string>
     <string name="normal_views">%1$s vizualizări%2$s</string>
     <string name="chapters">Capitole</string>
-    <string name="no_player_found">Nu a fost găsit niciun player extern. Vă rugăm să vă asigurați că aveți unul instalat.</string>
     <string name="system_caption_style">Stilul de subtitrare a sistemului</string>
     <string name="search_history_summary">Rețineți căutările</string>
     <string name="watch_history_summary">Urmăriți videoclipurile vizionate la nivel local</string>
@@ -145,7 +140,6 @@
     <string name="captions">Subtitrări</string>
     <string name="none">Niciunul</string>
     <string name="caption_settings">Subtitrări</string>
-    <string name="playerAudioFormat">Format audio pentru player</string>
     <string name="playerAudioQuality">Calitate audio</string>
     <string name="general_summary">Limba și regiunea</string>
     <string name="notify_new_streams_summary">Afișează notificări pentru fluxuri noi de la creatorii pe care îi urmărești</string>
@@ -159,7 +153,6 @@
     <string name="open_copied">Deschideți</string>
     <string name="new_videos_badge_summary">Afișați o insignă cu cantitatea de videoclipuri noi, dacă există</string>
     <string name="skip_segment">Omiteți segmentul</string>
-    <string name="invalid_filename">Nume invalid!</string>
     <string name="network_all">Toate</string>
     <string name="translate">Traducere</string>
     <string name="pause">Întrerupeți</string>
@@ -187,7 +180,6 @@
     <string name="category_filler_summary">Pentru scenele tangențiale adăugate numai pentru umplere sau umor, nu este necesar pentru a înțelege conținutul principal al videoclipului</string>
     <string name="buffering_goal">Încărcare în avans</string>
     <string name="buffering_goal_summary">Numărul maxim de secunde de video care trebuie puse în buffer</string>
-    <string name="playerVideoFormat">Format video pentru player</string>
     <string name="no_audio">Fără audio</string>
     <string name="no_video">Fără video</string>
     <string name="no_subtitle">Fără subtitrări</string>
@@ -244,8 +236,6 @@
     <string name="backup_customInstances">Instanțe personalizate</string>
     <string name="play_next">Redați următorul</string>
     <string name="navigation_bar">Bară de navigare</string>
-    <string name="filename">Nume de fișier</string>
-    <string name="playingOnBackground">Se redă în fundal …</string>
     <string name="player_summary">Valori prestabilite și comportament</string>
     <string name="replies">Răspunsuri</string>
     <string name="category_music_offtopic_summary">Numai pentru utilizare în videoclipuri muzicale. Ar trebui să acopere părți ale videoclipului, care nu fac parte din mixajele oficiale. În cele din urmă, videoclipul ar trebui să semene cât mai mult cu Spotify sau cu orice altă versiune mixtă sau să reducă vorbirea sau alte distrageri</string>
@@ -254,7 +244,6 @@
     <string name="video">Video</string>
     <string name="unknown">Necunoscut</string>
     <string name="autoRotatePlayer_summary">Redare pe ecran complet când dispozitivul este întors</string>
-    <string name="account">Cont</string>
     <string name="auth_instance_summary">Utilizați o altă instanță pentru apelurile autentificate</string>
     <string name="autoRotatePlayer">Ecran complet automat</string>
     <string name="aspect_ratio">Raportul de aspect video</string>
@@ -300,8 +289,6 @@
     <string name="autoplay_countdown_summary">Afișați o numărătoare inversă de 5 secunde înainte de redarea automată a următorului videoclip</string>
     <string name="playing_next">Următorul video în %1$s</string>
     <string name="livestreams">Fluxuri live</string>
-    <string name="alternative_videos_layout">Aspect videoclipuri alternative</string>
-    <string name="confirm_unsubscribe">Sunteți sigur că doriți să vă dezabonați de la %1$s\?</string>
     <string name="time">Timp</string>
     <string name="navbar_order">Ordine</string>
     <string name="layout">Aspect</string>
@@ -310,14 +297,10 @@
     <string name="backup_restore_summary">Importați și exportați abonamente, liste de redare, …</string>
     <string name="time_code">Cod de timp (secunde)</string>
     <string name="added_to_playlist">Adăugat la playlist %1$s</string>
-    <string name="confirm_unsubscribing">Confirmați dezabonarea</string>
-    <string name="confirm_unsubscribing_summary">Afișați un dialog de confirmare înainte de a vă dezabona</string>
     <string name="start_time">Timpul de începere</string>
     <string name="end_time">Timpul de sfârșit</string>
     <string name="notification_time">Restricționați timpul de notificare</string>
     <string name="unsupported_file_format">Format de fișier nesuportat: %1$s</string>
-    <string name="hls_instead_of_dash">Utilizați HLS</string>
-    <string name="hls_instead_of_dash_summary">Utilizați HLS în loc de DASH (va fi mai lent, nu este recomandat)</string>
     <string name="auto_quality">Auto</string>
     <string name="limit_to_runtime">Limitare la timpul de execuție</string>
     <string name="trends">Tendințe</string>
@@ -342,8 +325,6 @@
     <string name="faq">Întrebări frecvente</string>
     <string name="mark_as_watched">Marcați ca urmărit</string>
     <string name="download_channel_description">Afișați o notificare la descărcarea conținutului media.</string>
-    <string name="custom_playback_speed">Viteză particularizată</string>
-    <string name="custom_playback_speed_summary">Utilizați o viteză de redare diferită de cea a player-ului normal</string>
     <string name="defaultIconLight">Luminată implicită</string>
     <string name="pinch_control_summary">Utilizați gestul de ciupire pentru a mări/micșora</string>
     <string name="comments_disabled">Comentariile sunt dezactivate de către autor.</string>
@@ -403,8 +384,6 @@
     <string name="welcome">Bun venit la LibreTube</string>
     <string name="choose_instance_long">Vă rugăm să alegeți o instanță Piped pe care să o utilizați de mai jos. Instanța Piped va acționa ca intermediar între dvs. și YouTube. Aceste instanțe sunt situate în diferite locații fizice - indicate de steagurile țării lor. Instanțele mai apropiate fizic de tine sunt probabil mai rapide decât cazurile care nu sunt. Puteți schimba oricând instanța pe care o utilizați în setări.</string>
     <string name="home_tab_content">Conținutul filei Acasă</string>
-    <string name="fallback_piped_proxy">Rezervă la proxy Piped</string>
-    <string name="fallback_piped_proxy_summary">Încărcați videoclipuri prin proxy dacă conectarea directă la YouTube nu funcționează pentru videoclipul curent (crește timpul inițial de încărcare). Dacă este dezactivat, conținutul muzical YouTube nu va fi redat probabil din cauza restricțiilor YT</string>
     <string name="off">Oprit</string>
     <string name="automatic">Automat</string>
     <string name="stop">Opreşte</string>
@@ -417,7 +396,6 @@
     <string name="invalid_color">A fost introdusă o valoare de culoare nevalidă!</string>
     <string name="color">Culoare</string>
     <string name="emptyPlaylistDescription">Descrierea playlistului nu poate fi goală</string>
-    <string name="visible">Afișați în bara de căutare</string>
     <string name="manual">Manual</string>
     <string name="playlist_description">Descrierea playlist-ului</string>
     <string name="show_search_suggestions">Afișați sugestii de căutare</string>
@@ -439,7 +417,6 @@
     <string name="visibility_unlisted">Nelistat</string>
     <string name="visibility">Vizibilitate</string>
     <string name="remove_watched_videos">Eliminați videoclipurile vizionate</string>
-    <string name="no_chapter">Fără capitol</string>
     <string name="uploader_name">Numele uploader-ului</string>
     <string name="registration_disabled">Înregistrare dezactivată</string>
     <string name="sort_by">Sortează după</string>
@@ -449,7 +426,6 @@
     <string name="donate">Donaţi</string>
     <string name="screen_orientation">Orientarea ecranului</string>
     <string name="duration_span">Durata: %1$s</string>
-    <string name="proxy">Proxy</string>
     <string name="tooltip_close">Închidere</string>
     <string name="tooltip_play">Redare</string>
     <string name="tooltip_filter">Filtru</string>
@@ -491,7 +467,6 @@
     <string name="undo">Anulează</string>
     <string name="segment">Segment</string>
     <string name="sponsorblock_user_id">SponsorBlock UserID</string>
-    <string name="filename_too_long">Numele fișierului e prea lung!</string>
     <string name="remember_playback_speed">Reține viteza de redare</string>
     <string name="successfully_removed_from_playlist">„%1$s” a fost eliminat cu succes din listă.</string>
     <string name="uptime">%.2f%% timp de funcționare</string>

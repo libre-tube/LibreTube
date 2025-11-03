@@ -20,7 +20,6 @@
     <string name="region">Регион</string>
     <string name="login_register">Пријава/регистрација</string>
     <string name="importsuccess">Пратите</string>
-    <string name="cannotDownload">Није могуће преузети овај стрим.</string>
     <string name="import_from_yt">Увези праћења</string>
     <string name="import_from_yt_summary">Из YouTube-а или NewPipe-а</string>
     <string name="app_theme">Тема</string>
@@ -85,7 +84,6 @@
     <string name="disabled">Искључено</string>
     <string name="playOnBackground">Пусти у позадини</string>
     <string name="update_available">Доступно је ажурирање</string>
-    <string name="update_available_text">Ново ажурирање доступно. Кликните да бисте отворили страницу GitHub издања.</string>
     <string name="appearance">Изглед</string>
     <string name="downloads">Преузимања</string>
     <string name="app_uptodate">Користите најновију верзију.</string>
@@ -101,14 +99,12 @@
     <string name="instance_api_url">URL адреса до API-ја инстанце</string>
     <string name="addInstance">Додај инстанцу</string>
     <string name="empty_instance">Унесите назив и URL адресу API-ја.</string>
-    <string name="clear_customInstances">Очисти додато</string>
     <string name="invalid_url">Унесите исправну URL адресу</string>
     <string name="version">Верзија %1$s</string>
     <string name="related_streams">Сродан садржај</string>
     <string name="related_streams_summary">Прикажите сродан садржај уз оно што гледате</string>
     <string name="buffering_goal">Предучитавање</string>
     <string name="buffering_goal_summary">Максимална количина секунди видео снимка у баферу</string>
-    <string name="playerVideoFormat">Формат видео снимка за плејер</string>
     <string name="no_audio">Нема звука</string>
     <string name="no_video">Нема видео снимка</string>
     <string name="audio">Аудио снимак</string>
@@ -148,7 +144,6 @@
     <string name="autoRotatePlayer_summary">Репродукција преко целог екрана, када се уређај окрене</string>
     <string name="pure_theme">Чиста тема</string>
     <string name="pure_theme_summary">Чиста бела/црна тема</string>
-    <string name="no_player_found">Није пронађен ниједан спољни плејер. Уверите се да имате један инсталиран.</string>
     <string name="data_saver_mode">Режим уштеде података</string>
     <string name="search_history_summary">Памћење претраге</string>
     <string name="watch_history_summary">Локално чувајте одгледане видео снимке</string>
@@ -182,7 +177,6 @@
     <string name="category_music_offtopic_summary">Само за употребу у музичким спотовима. Требало би да покрива делове видео снимка, а не део званичних миксева. На крају, видео снимак би требало да личи на Spotify снимке или било коју другу миксовану верзију што је ближе могуће или да смањи разговор или друга ометања</string>
     <string name="update_summary">Провери ажурирање</string>
     <string name="player">Плејер</string>
-    <string name="advanced_summary">Преузимања и ресетовање</string>
     <string name="live">Уживо</string>
     <string name="gradientIcon">Glib градијент</string>
     <string name="fireIcon">Модна ватра</string>
@@ -191,7 +185,6 @@
     <string name="defaultIcon">Подразумевано</string>
     <string name="torchIcon">Бакља у тренду</string>
     <string name="deleteAccount_summary">Избришите свој Piped налог</string>
-    <string name="account">Налог</string>
     <string name="downloading">Преузимање…</string>
     <string name="player_autoplay">Аутоплеј</string>
     <string name="reset_message">Ресетовати сва подешавања и одјавити се\?</string>
@@ -220,9 +213,7 @@
     <string name="network_all">Све</string>
     <string name="error_occurred">Грешка</string>
     <string name="copied">Копирано</string>
-    <string name="playingOnBackground">Пуштено у позадини…</string>
     <string name="caption_settings">Титлови</string>
-    <string name="playerAudioFormat">Формат аудио снимка за плејер</string>
     <string name="playerAudioQuality">Квалитет аудио снимка</string>
     <string name="worst_quality">Најгори</string>
     <string name="share_with_time">Дели са временским кодом</string>
@@ -266,8 +257,6 @@
     <string name="play_next">Пусти следеће</string>
     <string name="playback_pitch">Висина тона</string>
     <string name="change_region">Чини се да видео снимци у тренду нису доступни за тренутни регион. Изаберите други регион у подешавањима.</string>
-    <string name="filename">Назив фајла</string>
-    <string name="invalid_filename">Неважећи назив фајла!</string>
     <string name="download_channel_name">Услуга преузимања</string>
     <string name="download_channel_description">Приказује обавештења приликом преузимања медија.</string>
     <string name="renamePlaylist">Преименуј плејлисту</string>
@@ -276,9 +265,6 @@
     <string name="queue">Редослед</string>
     <string name="time_code">Временски кôд (секунде)</string>
     <string name="playlistCloned">Плејлиста је клонирана</string>
-    <string name="confirm_unsubscribe">Желите ли заиста да прекинете праћење %1$s\?</string>
-    <string name="confirm_unsubscribing_summary">Прикажите дијалог за потврду пре него што прекинете праћење</string>
-    <string name="confirm_unsubscribing">Потврди прекид праћења</string>
     <string name="play_all">Пусти све</string>
     <string name="time">Време</string>
     <string name="start_time">Почетно време</string>
@@ -289,10 +275,7 @@
     <string name="layout">Изглед</string>
     <string name="audio_track">Аудио трака</string>
     <string name="livestreams">Стримови уживо</string>
-    <string name="alternative_videos_layout">Алтернативни изглед видео снимка</string>
     <string name="defaultIconLight">Подразумевано светло</string>
-    <string name="hls_instead_of_dash">Користи HLS</string>
-    <string name="hls_instead_of_dash_summary">Коришћење HLS уместо DASH за стримовање медија. Покушајте да укључите ову опцију ако репродукција видео снимка не ради.</string>
     <string name="auto_quality">Аутоматски</string>
     <string name="limit_to_runtime">Ограничи на време рада</string>
     <string name="trends">Трендови</string>
@@ -362,8 +345,6 @@
     <string name="autoplay_countdown">Аутоматско одбројавање</string>
     <string name="stats_for_nerds">Статистика за зналце</string>
     <string name="video_id">ID видео снимка</string>
-    <string name="custom_playback_speed">Прилагођена брзина</string>
-    <string name="custom_playback_speed_summary">Користите другачију брзину репродукције него за нормалан плејер</string>
     <string name="category">Категорија</string>
     <string name="playing_next">Следеће се пушта за %1$s</string>
     <string name="autoplay_countdown_summary">Прикажите одбројавање 5с. пре аутоматског пуштања следећег видео снимка</string>
@@ -414,15 +395,12 @@
     <string name="dubbed_audio_track">синхронизовано</string>
     <string name="change_playlist_description">Промени опис плејлисте</string>
     <string name="alphabetic">Абецедно</string>
-    <string name="no_chapter">Нема поглавља</string>
     <string name="no_fullscreen_resolution">Без резолуције преко целог екрана</string>
     <string name="home_tab_content">Садржај почетне картице</string>
     <string name="uploader_name">Име отпремаоца</string>
     <string name="tooltip_filter">Филтер</string>
     <string name="off">Искључено</string>
     <string name="tooltip_unlocked">Откључај плејер</string>
-    <string name="filename_too_long">Назив фајла је предугачак!</string>
-    <string name="fallback_piped_proxy_summary">Учитавајте видео снимке преко проксија, ако директно повезивање са YouTube-ом не функционише за тренутни видео снимак (повећава иницијално време учитавања). Ако је онемогућено, YouTube музички садржај се вероватно неће пуштати због YT ограничења</string>
     <string name="mark_as_unwatched">Означи као неодгледано</string>
     <string name="import_subscriptions_from">Увоз праћења из</string>
     <string name="automatic">Аутоматски</string>
@@ -438,7 +416,6 @@
     <string name="visibility_public">Јавно</string>
     <string name="original_or_main_audio_track">оригинално или главно</string>
     <string name="tooltip_repeat">Понављање</string>
-    <string name="fallback_piped_proxy">Повратак на Piped прокси</string>
     <string name="audio_track_format">%1$s - %2$s</string>
     <string name="tooltip_fullscreen">Цео екран</string>
     <string name="go_to_video">Иди на видео снимак</string>
@@ -460,7 +437,6 @@
     <string name="choose_instance_long">Изаберите Piped инстанцу коју ћете користити. Piped инстанца ће деловати као посредник између вас и YouTube-а. Ове инстанце се налазе на различитим физичким локацијама – означене су заставом те земље. Инстанце које су вам физичке ближе вероватно су брже од инстанца које нису. Инстанцу коју користите можете променити у подешавањима у било ком тренутку.</string>
     <string name="group_name_error_empty">Унесите назив</string>
     <string name="tooltip_edit_groups">Измени групе</string>
-    <string name="visible">Прикажи у траци за премотавање</string>
     <string name="chapters_videoHighlight">Истакнути део видео снимка</string>
     <string name="creation_date_reversed">Датум прављења (обрнуто)</string>
     <string name="shorts_notifications">Обавештења за Shorts</string>
@@ -478,7 +454,6 @@
     <string name="descriptive_audio_track">описно</string>
     <string name="color">Боја</string>
     <string name="show_search_suggestions">Прикажи предлоге за претрагу</string>
-    <string name="proxy">Прокси</string>
     <string name="duration_reversed">Трајање (обрнуто)</string>
     <string name="autoplay_playlists_summary">Аутоматски пуштајте следећи видео снимак на плејлистама, без обзира на изабрано подешавање аутоматског пуштања</string>
     <string name="autoplay_playlists">Аутоматски пусти плејлисте</string>
@@ -536,7 +511,6 @@
     <string name="local_ryd">Локални издвајач Return YouTube Dislike</string>
     <string name="local_ryd_summary">Директно прикупљање информација о несвиђањима с https://returnyoutubedislikeapi.com</string>
     <string name="import_watch_history">Увоз историје гледања</string>
-    <string name="import_watch_history_desc">Имајте на уму да неће све бити увезено због YouTube-ових ограничених података за извоз.</string>
     <string name="audio_codecs">Аудио кодеци</string>
     <string name="view_count">%1$s прегледа</string>
     <string name="dialog_play_offline_title">Доступна је локална верзија овог видео снимка.</string>

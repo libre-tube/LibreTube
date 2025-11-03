@@ -20,7 +20,6 @@
     <string name="customInstance">Benutzerdefiniert</string>
     <string name="region">Region</string>
     <string name="importsuccess">Abonniert</string>
-    <string name="cannotDownload">Video kann nicht heruntergeladen werden.</string>
     <string name="downloadfailed">Herunterladen fehlgeschlagen.</string>
     <string name="app_theme">Design</string>
     <string name="server_error">Problem mit ausgewähltem Server. Versuche eine andere Instanz.</string>
@@ -103,8 +102,6 @@
     <string name="app_icon">App-Symbol</string>
     <string name="playOnBackground">Im Hintergrund abspielen</string>
     <string name="update_available">Update verfügbar</string>
-    <string name="update_available_text">Neue Aktualisierung verfügbar. Hier klicken, um die GitHub-Releases Seite zu öffnen.</string>
-    <string name="advanced_summary">Erweiterte Optionen und Werkseinstellungen</string>
     <string name="appearance">Design</string>
     <string name="downloads">Downloads</string>
     <string name="update_summary">Nach Update suchen</string>
@@ -120,7 +117,6 @@
     <string name="instance_api_url">URL der Instanz-API</string>
     <string name="addInstance">Instanz hinzufügen</string>
     <string name="empty_instance">Gib den Namen und die API-URL ein.</string>
-    <string name="clear_customInstances">Benutzerdefinierte Instanzen löschen</string>
     <string name="invalid_url">Bitte eine funktionierende URL angeben</string>
     <string name="instance_summary">Piped Instanz, Anmeldung und Konto</string>
     <string name="customInstance_summary">Hinzufügen…</string>
@@ -129,7 +125,6 @@
     <string name="buffering_goal">Vorausladen</string>
     <string name="buffering_goal_summary">Maximale Anzahl von Sekunden, die ein Video gepuffert werden soll</string>
     <string name="category_music_offtopic_summary">Nur zur Verwendung in Musikvideos. Es sollte Teile des Videos abdecken, die nicht Teil der offiziellen Abmischungen sind. Am Ende sollte das Video der offiziellen/originalen Version so nahe wie möglich kommen oder das Sprechen und andere Ablenkungen reduzieren. Dies sollte nur für Abschnitte von Musikvideos verwendet werden, die noch nicht von einer anderen Kategorie abgedeckt sind</string>
-    <string name="playerVideoFormat">Videoformat für Player</string>
     <string name="version">Version %1$s</string>
     <string name="category_preview_summary">Abschnitte, die zukünftig in diesem Video erscheinende Inhalte beschreiben ohne zusätzliche Informationen zu enthalten. Wenn sie Clips enthalten, die nur hier erscheinen, ist dies sehr wahrscheinlich die falsche Kategorie</string>
     <string name="player_autoplay">Automatische Wiedergabe (Autoplay)</string>
@@ -144,7 +139,6 @@
     <string name="reset_message">Alle Einstellungen zurücksetzen und abmelden\?</string>
     <string name="deleteAccount">Konto löschen</string>
     <string name="deleteAccount_summary">Dein Piped-Konto löschen</string>
-    <string name="account">Konto</string>
     <string name="restore">Wiederherstellen</string>
     <string name="quality">Qualität</string>
     <string name="behavior">Verhalten</string>
@@ -178,7 +172,6 @@
     <string name="autoRotatePlayer">Automatischer Vollbildmodus</string>
     <string name="never">Nie</string>
     <string name="autoRotatePlayer_summary">Vollbild-Modus des Players wird aktiviert, wenn das Gerät gedreht wird</string>
-    <string name="no_player_found">Kein externer Player gefunden. Bitte stelle sicher, dass du einen installiert hast.</string>
     <string name="fireIcon">Fancy Flammen</string>
     <string name="torchIcon">Fetzige Fackel</string>
     <string name="shapedIcon">Flauschige Form</string>
@@ -202,11 +195,9 @@
     <string name="seek_increment">Vorspul-Länge</string>
     <string name="watch_positions_title">Gespeicherte Wiedergabepositionen</string>
     <string name="gradientIcon">Verspielter Verlauf</string>
-    <string name="playingOnBackground">Abspielen im Hintergrund…</string>
     <string name="playerAudioQuality">Audio-Qualität</string>
     <string name="worst_quality">Schlechteste Qualität</string>
     <string name="system_caption_style">Untertitel-Stil des Systems nutzen</string>
-    <string name="playerAudioFormat">Audioformat für Player</string>
     <string name="no_search_result">Keine Ergebnisse.</string>
     <string name="copied_to_clipboard">In Zwischenablage kopiert</string>
     <string name="default_subtitle_language">Untertitelsprache</string>
@@ -253,7 +244,6 @@
     <string name="download_channel_description">Zeigt beim Herunterladen von Medien eine Benachrichtigung an.</string>
     <string name="push_channel_description">Zeigt eine Benachrichtigung an, wenn neue Videos verfügbar sind.</string>
     <string name="change_region">Trends scheinen in ihrem Land nicht verfügbar zu sein. Bitte ein unterstütztes Land in den Einstellungen auswählen.</string>
-    <string name="legacy_subscriptions">Altes Abo-Design</string>
     <string name="device_info">Geräteinformationen</string>
     <string name="network_wifi">Nur über WLAN</string>
     <string name="share_with_time">Mit Zeitstempel teilen</string>
@@ -271,13 +261,8 @@
     <string name="player_resize_mode">Skalierungsmodus</string>
     <string name="maximum_image_cache">Maximale Bild-Cache-Größe</string>
     <string name="renamePlaylist">Playlist umbenennen</string>
-    <string name="filename">Dateiname</string>
-    <string name="invalid_filename">Ungültiger Dateiname!</string>
     <string name="playlistCloned">Playlist dupliziert</string>
-    <string name="confirm_unsubscribing">Deabonnieren bestätigen</string>
     <string name="defaultIconLight">Standard hell</string>
-    <string name="confirm_unsubscribing_summary">Zeige einen Bestätigungsdialog vor dem Deabonnieren</string>
-    <string name="confirm_unsubscribe">Bist du sicher, dass du %1$s deabbonieren möchtest\?</string>
     <string name="local_playlists">Lokale Playlists</string>
     <string name="play_all">Alles abspielen</string>
     <string name="queue">Warteschlange</string>
@@ -291,9 +276,6 @@
     <string name="added_to_playlist">Zur Playlist %1$s hinzugefügt</string>
     <string name="audio_track">Tonspur</string>
     <string name="livestreams">Livestreams</string>
-    <string name="alternative_videos_layout">Alternatives Video-Layout</string>
-    <string name="hls_instead_of_dash">HLS verwenden</string>
-    <string name="hls_instead_of_dash_summary">HLS statt DASH zur Videoübertragung verwenden. Schalte diese Option um, falls die Videowiedergabe nicht funktioniert.</string>
     <string name="auto_quality">Automatisch</string>
     <string name="limit_to_runtime">Auf Laufzeit beschränken</string>
     <string name="time_code">Zeitstempel (Sekunden)</string>
@@ -359,9 +341,7 @@
     <string name="mark_as_watched">Als angesehen markieren</string>
     <string name="unsupported_file_format">Nicht unterstütztes Dateiformat: %1$s</string>
     <string name="codecs">Videocodecs</string>
-    <string name="custom_playback_speed">Benutzerdefinierte Geschwindigkeit</string>
     <string name="normal_views">%1$s Aufrufe%2$s</string>
-    <string name="custom_playback_speed_summary">Verwende eine andere Wiedergabegeschwindigkeit als für den normalen Player</string>
     <string name="category">Kategorie</string>
     <string name="autoplay_countdown">Autoplay-Countdown</string>
     <string name="playing_next">Nächstes Video in %1$s</string>
@@ -414,13 +394,10 @@
     <string name="sb_custom_colors">Abschnittsfarben</string>
     <string name="sb_custom_colors_summary">Abschnitte je nach SponsorBlock-Kategorie farblich markieren</string>
     <string name="color">Farbe</string>
-    <string name="visible">In Suchleiste anzeigen</string>
     <string name="chapters_videoHighlight">Video-Highlight</string>
     <string name="stop">Stopp</string>
     <string name="category_highlight">Video-Highlight anzeigen</string>
     <string name="category_highlight_summary">Kann entweder das im Titel oder Vorschaubild Beworbene oder der interessanteste Teil des Videos sein. Zu diesem Abschnitt springen, indem du ihn im Kapitelbereich antippst</string>
-    <string name="fallback_piped_proxy">Piped-Proxy als Fallback</string>
-    <string name="fallback_piped_proxy_summary">Videos über den Piped-Proxy laden, wenn das direkte Abrufen von YouTube für das aktuelle Video nicht funktioniert (erhöht die anfänglichen Ladezeiten). Wenn deaktiviert, werden YouTube-Musikinhalte aufgrund von YouTube-Einschränkungen wahrscheinlich nicht abgespielt</string>
     <string name="audio_track_format">%1$s - %2$s</string>
     <string name="unknown_audio_language">Unbekannte Audiosprache</string>
     <string name="unknown_audio_track_type">Unbekannter Audio-Track-Typ</string>
@@ -439,7 +416,6 @@
     <string name="duration_span">Dauer: %1$s</string>
     <string name="uploader_name">Name des Uploaders</string>
     <string name="screen_orientation">Bildschirmausrichtung</string>
-    <string name="no_chapter">Kein Kapitel</string>
     <string name="remove_watched_videos">Angesehene Videos entfernen</string>
     <string name="player_channel_name">Player-Service</string>
     <string name="player_channel_description">Benachrichtigung beim Abspielen anzeigen</string>
@@ -464,7 +440,6 @@
     <string name="resolution_limited">begrenzt</string>
     <string name="auto_generated">automatisch generiert</string>
     <string name="registration_disabled">Registrierung ist deaktiviert</string>
-    <string name="proxy">Proxy</string>
     <string name="group_name_error_empty">Bitte gib einen Namen ein</string>
     <string name="group_name_error_exists">Bitte wähle einen Namen aus, der nicht bereits exisitiert</string>
     <string name="automatic_once">Automatisch (einmalig)</string>
@@ -472,7 +447,6 @@
     <string name="sb_invalid_segment">Ungültiger Start/Ende des Abschnitts</string>
     <string name="segment_type">Abschnitts-Kategorie</string>
     <string name="contribute_to_sponsorblock">Zu SponsorBlock beitragen</string>
-    <string name="filename_too_long">Dateiname ist zu lang!</string>
     <string name="sponsorblock_user_id">SponsorBlock Anmelde-ID</string>
     <string name="donate">Spenden</string>
     <string name="music_artists">YT Music-Künstler:innen</string>
@@ -535,7 +509,6 @@
     <string name="local_stream_extraction_summary">Video-Wiedergabeinformationen direkt von YouTube abrufen, ohne Piped zu verwenden.</string>
     <string name="audio_codecs">Audiocodecs</string>
     <string name="import_watch_history">Wiedergabe-Verlauf importieren</string>
-    <string name="import_watch_history_desc">Bitte beachte, dass aufgrund der begrenzten aus YouTube exportieren Daten nicht alles importiert werden kann.</string>
     <string name="local_ryd_summary">Dislikes direkt von https://returnyoutubedislikeapi.com abfragen.</string>
     <string name="dialog_play_offline_title">Eine lokale Version des Videos ist nicht verfügbar.</string>
     <string name="dialog_play_offline_body">Möchtest du das Video aus dem Download-Ordner abspielen?</string>

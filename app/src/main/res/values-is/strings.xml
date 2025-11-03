@@ -42,7 +42,6 @@
     <string name="flameIcon">Fljúgandi eldur</string>
     <string name="birdIcon">Endurbirt tíst</string>
     <string name="addInstance">Bæta við tilviki</string>
-    <string name="clear_customInstances">Hreinsa viðbætt</string>
     <string name="invalid_url">Settu inn slóð sem virkar</string>
     <string name="instance_api_url">Slóð á API-kerfisviðmót tilviksins</string>
     <string name="download_completed">Niðurhali lokið</string>
@@ -55,7 +54,6 @@
     <string name="open">Opna…</string>
     <string name="search_history_summary">Muna leitir</string>
     <string name="history_summary">Áhorfs- og leitarferill</string>
-    <string name="no_player_found">Enginn utanaðkomandi spilari fannst. Gakktu úr skugga um að þú hafir sett einn slíkan upp.</string>
     <string name="data_saver_mode">Gagnasparnaðarhamur</string>
     <string name="watch_positions_title">Geymdir spilunarstaðir</string>
     <string name="captions">Skýringatextar</string>
@@ -67,12 +65,9 @@
     <string name="skip_segment">Sleppa bút</string>
     <string name="change_instance">Skipta um netþjónstilvik</string>
     <string name="playlistCloned">Spilunarlisti klónaður</string>
-    <string name="confirm_unsubscribe">Ertu viss um að þú viljir hætta áskrift að %1$s?</string>
     <string name="end_time">Lokatími</string>
     <string name="audio_track">Hljóðspor</string>
-    <string name="confirm_unsubscribing">Staðfesta uppsögn áskriftar</string>
     <string name="clear_bookmarks">Hreinsa bókamerki</string>
-    <string name="hls_instead_of_dash_summary">Nota HLS í stað DASH fyrir streymandi efni. Prófaðu að víxla þessu af/á ef afspilun myndskeiða virkar ekki.</string>
     <string name="autoplay_playlists">Spila spilunarlista sjálfkrafa</string>
     <string name="volume">Hljóðstyrkur</string>
     <string name="local_playlists">Spilunarlistar á tækinu</string>
@@ -115,7 +110,6 @@
     <string name="region">Hérað</string>
     <string name="login_register">Skrá inn / Nýskrá</string>
     <string name="importsuccess">Áskrifandi</string>
-    <string name="cannotDownload">Get ekki sótt þetta streymi.</string>
     <string name="downloadfailed">Niðurhal mistókst.</string>
     <string name="import_from_yt">Flytja inn áskriftir</string>
     <string name="import_from_yt_summary">Frá YouTube eða NewPipe</string>
@@ -134,7 +128,6 @@
     <string name="never">Aldrei</string>
     <string name="resize_mode_fit">Passa</string>
     <string name="copied_to_clipboard">Afritað á klemmuspjald</string>
-    <string name="filename">Skráarnafn</string>
     <string name="color">Litur</string>
     <string name="invalid_color">Ógilt litgildi sett inn!</string>
     <string name="livestreams">Bein streymi</string>
@@ -166,13 +159,11 @@
     <string name="download_channel_name">Niðurhalsþjónusta</string>
     <string name="push_channel_name">Tilkynningavakt</string>
     <string name="limit_to_runtime">Takmarka við keyrslutíma</string>
-    <string name="advanced_summary">Sótt gögn og endurstilling</string>
     <string name="category_selfpromo_summary">Ekki ósvipað \"kynningaraðila\" nema án greiðslu eða kynning á sjálfum sér. Þetta á einnig við um hluta um vörur, gjafir eða upplýsingar um hverja viðkomandi eigi í samstarfi við</string>
     <string name="category_filler_summary">Fyrir lauslega tengdar senur sem bætt er við til uppfyllingar eða með húmor sem ekki eru nauðsynlegar til að skilja meginefni myndskeiðsins</string>
     <string name="uptime">%.2f%% uppitími</string>
     <string name="best_quality">Best</string>
     <string name="no_subtitles_available">Engir skjátextar tiltækir</string>
-    <string name="alternative_videos_layout">Varaleið framsetningar myndskeiða</string>
     <string name="defaultIconLight">Sjálfgefið ljóst</string>
     <string name="time">Tími</string>
     <string name="notification_time">Takmarka tíma tilkynninga</string>
@@ -180,11 +171,8 @@
     <string name="faq">FAQ / Algengar spurningar</string>
     <string name="codecs">Kóðunarlyklar myndmerkis (codecs)</string>
     <string name="mark_as_watched">Merkja sem séð</string>
-    <string name="custom_playback_speed">Sérsniðinn hraði</string>
     <string name="forward">Spóla áfram</string>
     <string name="category">Flokkur</string>
-    <string name="custom_playback_speed_summary">Nota annan afspilunarhraða en fyrir venjulega afspilun</string>
-    <string name="proxy">Milliþjónn</string>
     <string name="channel_groups">Rásarhópar</string>
     <string name="play_automatically">Spila sjálfvirkt</string>
     <string name="auto_fullscreen_shorts">Sjálfvirk skjáfylli uppréttra myndskeiða</string>
@@ -237,7 +225,6 @@
     <string name="no_video">Ekkert myndmerki</string>
     <string name="no_subtitle">Enginn skjátexti</string>
     <string name="related_streams">Tengt efni</string>
-    <string name="playerVideoFormat">Snið myndmerkis fyrir spilara</string>
     <string name="gradientIcon">Glib-litstigull</string>
     <string name="audio">Hljóð</string>
     <string name="video">Myndskeið</string>
@@ -257,7 +244,6 @@
     <string name="yt_shorts">Símamyndir</string>
     <string name="most_views">Mest áhorf</string>
     <string name="show_stream_thumbnails">Birta smámyndir streyma</string>
-    <string name="hls_instead_of_dash">Nota HLS</string>
     <string name="featured">Úrvals</string>
     <string name="trending">Hvað er í umræðunni</string>
     <string name="queue_insert_related_videos">Setja inn svipuð myndbönd</string>
@@ -271,7 +257,6 @@
     <string name="title">Titill</string>
     <string name="automatic">Sjálfvirkt</string>
     <string name="remove_watched_videos">Fjarlægja áhorfð myndskeið</string>
-    <string name="fallback_piped_proxy">Varaleið um Piped-milliþjón</string>
     <string name="contribute_to_dearrow">Leggðu DeArrow lið</string>
     <string name="undo">Afturkalla</string>
     <string name="segment">Bútur</string>
@@ -284,7 +269,6 @@
     <string name="visibility_unlisted">Óskráður</string>
     <string name="thumbnail_time">Tími á smámynd</string>
     <string name="duration_span">Tímalengd: %1$s</string>
-    <string name="no_chapter">Enginn kafli</string>
     <string name="home_tab_content">Efni á forsíðuflipa</string>
     <string name="add_to_group">Bæta í hóp</string>
     <string name="start_sleep_timer">Ræsa niðurtalningu í svæfingu</string>
@@ -311,11 +295,9 @@
     <string name="pure_theme_summary">Hreint hvítt/svart þema</string>
     <string name="general">Almennt</string>
     <string name="general_summary">Niðurhal og gagnasparnaður</string>
-    <string name="playingOnBackground">Spila í bakgrunni…</string>
     <string name="caption_settings">Skýringartexti</string>
     <string name="worst_quality">Verst</string>
     <string name="notifications">Tilkynningar</string>
-    <string name="playerAudioFormat">Hljóðsnið fyrir spilara</string>
     <string name="most_recent">Nýjast</string>
     <string name="irreversible">Ertu viss? Það er ekki hægt að taka þetta aftur!</string>
     <string name="history_empty">Enginn ferill ennþá.</string>
@@ -341,10 +323,8 @@
     <string name="local_subscriptions">Staðværar áskriftir</string>
     <string name="time_code">Tímakóði (sekúndur)</string>
     <string name="added_to_playlist">Bætt á spilunarlistann %1$s</string>
-    <string name="invalid_filename">Ógilt skráarheiti!</string>
     <string name="suggest_change_instance">Hleðsla tekur lengri tíma en venjulega. Íhugaðu að skipta um netþjónstilvik</string>
     <string name="start_time">Upphafstími</string>
-    <string name="confirm_unsubscribing_summary">Birta staðfestingarglugga áður en áskrift er sagt upp</string>
     <string name="notification_time_summary">Takmarka tímasviðið þegar tilkynningar um streymi eru birtar</string>
     <string name="navbar_order">Röðun</string>
     <string name="layout">Framsetning</string>
@@ -359,7 +339,6 @@
     <string name="mark_as_unwatched">Merkja sem ekki búið að horfa á</string>
     <string name="off">Óvirkt</string>
     <string name="manual">Handvirkt</string>
-    <string name="visible">Sýna í leitarstiku</string>
     <string name="segment_submitted">Bútur sendur inn</string>
     <string name="vote_for_segment">Greiddu bútnum atkvæði</string>
     <string name="audio_language">Tungumál hljóðefnis</string>
@@ -384,12 +363,10 @@
     <string name="playOnBackground">Spila í bakgrunni</string>
     <string name="update_available">Uppfærsla er tiltæk</string>
     <string name="downloads">Sótt gögn</string>
-    <string name="update_available_text">Ný uppfærsla er tiltæk. Smelltu til að opna GitHub-síðu með upplýsingum um útgáfuna.</string>
     <string name="downloading">Sæki…</string>
     <string name="download_paused">Niðurhal í bið</string>
     <string name="reset">Endurheimta sjálfgefnar stillingar</string>
     <string name="pauseOnScreenOff">Sjálfvirkt í bið</string>
-    <string name="account">Notandaaðgangur</string>
     <string name="watch_history_summary">Geyma staðvært hvaða myndskeið er búið að horfa á</string>
     <string name="least_views">Minnst áhorf</string>
     <string name="required_network">Nauðsynleg tenging</string>
@@ -458,7 +435,6 @@
     <string name="audio_only_mode">Einungis hljóð</string>
     <string name="default_language">Sjálfgefið</string>
     <string name="segment_type">Gerð búts</string>
-    <string name="filename_too_long">Skráarheiti of langt!</string>
     <string name="watched">Búið að horfa</string>
     <string name="category_filler">Uppfylling/Brandarar</string>
     <string name="shareTo">Deila slóð til</string>
@@ -523,7 +499,6 @@
     <string name="rich_caption_rendering_summary">Myndgera skýringartexta í vefstíl fyrir ríkulegri og sérsníðanlega framsetningu</string>
     <string name="sb_custom_colors_summary">Víxlar sérsniðnum litahlutum af/á fyrir SponsorBlock-hluta</string>
     <string name="playback_during_call_summary">Athugaðu að þetta hefur þau áhrif á forritið að það meðhöndlar ekki lengur neina virkni á hljóði</string>
-    <string name="fallback_piped_proxy_summary">Sæktu myndskeið í gegnum milliþjóninn (proxy) ef ekki virkar að tengjast beint við YouTube fyrir þetta myndskeið (eykur hleðslutíma í upphafi). Ef þetta er óvirkt, mun tónlistarefni af YouTube líklega ekki spilast sökum hamla af hálfu YouTube</string>
     <string name="enqueueing_playlist_download">Set myndskeið í niðurhalsröð fyrir spilunarlistann %1$s</string>
     <string name="choose_instance_long">Veldu hér fyrir neðan það tilvik Piped sem ætti að nota. Piped-tilvikið mun virka sem milliþjónn milli þín og YouTube. Þessi tilvik eru staðsett á mismunandi stöðum í raunheimum, sem gefnir eru til kynna með landsfánum þeirra. Tilvik sem eru landfræðilega nær þér ættu almennt að vera hraðvirkari en tilvik sem eru fjær. Þú getur hvenær sem er skipt um tilvik í stillingunum þínum.</string>
     <string name="download_playlist_note">Veldu mestu hljóð- og myndgæði til að sækja. Skjátextar verða einungis sóttir ef þeir eru tiltækir.</string>
@@ -531,7 +506,6 @@
     <string name="screenshot">Skjámynd</string>
     <string name="pip">MíM</string>
     <string name="import_watch_history">Flytja inn áhorfsferil</string>
-    <string name="import_watch_history_desc">Athugaðu að ekki verður allt flutt inn vegna takmarkana á útflutningi YouTube-gagna.</string>
     <string name="audio_codecs">Kóðunarlyklar hljóðs</string>
     <string name="local_ryd">Staðvær skil á mislíkandi einkunn Youtube (dislikes)</string>
     <string name="local_ryd_summary">Sækja upplýsingar um misklíkandi einkunn (dislikes) beint frá https://returnyoutubedislikeapi.com</string>

@@ -35,7 +35,6 @@
     <string name="login">Přihlásit se</string>
     <string name="loggedout">Úspěšně odhlášen.</string>
     <string name="region">Oblast</string>
-    <string name="cannotDownload">Tento stream nelze stáhnout.</string>
     <string name="error">Něco se pokazilo.</string>
     <string name="login_register">Přihlásit/registrovat</string>
     <string name="defres">Rozlišení videa</string>
@@ -129,10 +128,8 @@
     <string name="shapedIcon">Hloupý tvar</string>
     <string name="instance_name">Název instance</string>
     <string name="addInstance">Přidat instanci</string>
-    <string name="clear_customInstances">Vymazat přidané</string>
     <string name="watch_history">Historie sledování</string>
     <string name="watch_positions">Pamatovat si pozici</string>
-    <string name="playerVideoFormat">Formát videa pro přehrávač</string>
     <string name="auth_instance">Autentifikační instance</string>
     <string name="auth_instance_summary">Použít jinou instanci pro autentifikační volání</string>
     <string name="auth_instances">Vyberte autent. instanci</string>
@@ -154,7 +151,6 @@
     <string name="landscape">Na šířku</string>
     <string name="portrait">Na výšku</string>
     <string name="update_available">Je dostupná aktualizace</string>
-    <string name="update_available_text">K dispozici je nová aktualizace. Klepnutím otevřete stránku s novinkami na GitHubu.</string>
     <string name="appearance">Vzhled</string>
     <string name="downloads">Stahování</string>
     <string name="advanced">Pokročilé</string>
@@ -166,7 +162,6 @@
     <string name="quality">Kvalita</string>
     <string name="captions">Titulky</string>
     <string name="general_summary">Stahování a úspora dat</string>
-    <string name="advanced_summary">Stahování a obnovení</string>
     <string name="restore">Obnovit</string>
     <string name="torchIcon">Módní pochodeň</string>
     <string name="behavior">Chování</string>
@@ -184,14 +179,12 @@
     <string name="watch_positions_title">Zapamatované pozice přehrávání</string>
     <string name="reset_watch_positions">Obnovit</string>
     <string name="general">Obecné</string>
-    <string name="account">Účet</string>
     <string name="never">Nikdy</string>
     <string name="selected">Vybrané</string>
     <string name="autoRotatePlayer">Automaticky na celou obrazovku</string>
     <string name="autoRotatePlayer_summary">Při otočení přepnout přehrávání na celou obrazovku</string>
     <string name="pure_theme">Čistý motiv</string>
     <string name="pure_theme_summary">Čistě bílý/černý motiv</string>
-    <string name="no_player_found">Nebyl nalezen žádný externí přehrávač. Ujistěte se, že máte nějaký nainstalovaný.</string>
     <string name="data_saver_mode">Režim úspory dat</string>
     <string name="data_saver_mode_summary">Přeskočit miniatury a další obrázky</string>
     <string name="search_history_summary">Pamatovat si vyhledávání</string>
@@ -201,9 +194,7 @@
     <string name="pauseOnScreenOff">Automatické pozastavení</string>
     <string name="pauseOnScreenOff_summary">Pozastavit přehrávání při vypnutí obrazovky</string>
     <string name="clonePlaylist">Duplikovat playlist</string>
-    <string name="playingOnBackground">Přehrávání na pozadí…</string>
     <string name="caption_settings">Titulky</string>
-    <string name="playerAudioFormat">Formát zvuku pro přehrávač</string>
     <string name="playerAudioQuality">Kvalita zvuku</string>
     <string name="worst_quality">Nejhorší</string>
     <string name="default_subtitle_language">Jazyk titulků</string>
@@ -270,19 +261,13 @@
     <string name="navigation_bar">Navigační lišta</string>
     <string name="change_region">Zdá se, že trendy nejsou pro aktuální oblast k dispozici. V nastavení prosím vyberte jinou.</string>
     <string name="playback_pitch">Výška</string>
-    <string name="invalid_filename">Nesprávný název souboru!</string>
-    <string name="filename">Název souboru</string>
     <string name="time_code">Časový kód (sekundy)</string>
     <string name="added_to_playlist">Přidáno do playlistu %1$s</string>
     <string name="queue">Fronta</string>
     <string name="livestreams">Živé přenosy</string>
-    <string name="alternative_videos_layout">Alternativní rozvržení videí</string>
     <string name="defaultIconLight">Výchozí světlá</string>
-    <string name="confirm_unsubscribing_summary">Zobrazit potvrzovací dialog před zrušením odběru</string>
-    <string name="confirm_unsubscribe">Opravdu chcete zrušit odběr %1$s\?</string>
     <string name="playlistCloned">Playlist duplikován</string>
     <string name="play_all">Přehrát vše</string>
-    <string name="confirm_unsubscribing">Potvrdit zrušení odběru</string>
     <string name="time">Čas</string>
     <string name="start_time">Počáteční čas</string>
     <string name="notification_time">Omezit čas upozornění</string>
@@ -292,8 +277,6 @@
     <string name="layout">Rozložení</string>
     <string name="audio_track">Zvuková stopa</string>
     <string name="auto_quality">Auto</string>
-    <string name="hls_instead_of_dash">Použít HLS</string>
-    <string name="hls_instead_of_dash_summary">Použít HLS místo DASH pro streamování médií. Pokud nefunguje přehrávání, zkuste přepnout tuto možnost.</string>
     <string name="limit_to_runtime">Omezení doby běhu</string>
     <string name="trends">Trendy</string>
     <string name="featured">Doporučené</string>
@@ -358,8 +341,6 @@
     <string name="codecs">Video kodeky</string>
     <string name="mark_as_watched">Označit jako zhlédnuté</string>
     <string name="unsupported_file_format">Nepodporovaný formát souboru: %1$s</string>
-    <string name="custom_playback_speed">Vlastní rychlost</string>
-    <string name="custom_playback_speed_summary">Použít jinou rychlost přehrávání než u běžného přehrávače</string>
     <string name="category">Kategorie</string>
     <string name="normal_views">%1$s zhlédnutí%2$s</string>
     <string name="autoplay_countdown">Odpočítávání automatického přehrávání</string>
@@ -413,14 +394,11 @@
     <string name="sb_custom_colors_summary">Přepne vlastní barvu segmentů pro segmenty SponsorBlock</string>
     <string name="sb_custom_colors">Vlastní barvy segmentů</string>
     <string name="color">Barva</string>
-    <string name="visible">Zobrazit v liště</string>
     <string name="invalid_color">Zadána neplatná hodnota barvy!</string>
     <string name="category_highlight">Zobrazit zvýraznění videa</string>
     <string name="stop">Zastavit</string>
     <string name="chapters_videoHighlight">Zvýraznění videa</string>
     <string name="category_highlight_summary">Může to být inzerovaný název, miniatura nebo nejzajímavější část videa. Můžete na ni přejít klepnutím v sekci kapitol</string>
-    <string name="fallback_piped_proxy">Fallback na proxy Piped</string>
-    <string name="fallback_piped_proxy_summary">Načítat videa přes proxy server, pokud přímé připojení k YouTube nefunguje pro aktuální video (zvyšuje počáteční dobu načítání). Pokud je vypnuto, hudební obsah YouTube se pravděpodobně nebude přehrávat kvůli omezením YT</string>
     <string name="continue_watching">Pokračovat ve sledování</string>
     <string name="dearrow">Povolit DeArrow</string>
     <string name="original_or_main_audio_track">původní nebo hlavní</string>
@@ -438,7 +416,6 @@
     <string name="duration_span">Délka: %1$s</string>
     <string name="sort_by">Řazení</string>
     <string name="uploader_name">Jméno autora</string>
-    <string name="no_chapter">Žádná kapitola</string>
     <string name="screen_orientation">Otočení obrazovky</string>
     <string name="remove_watched_videos">Odebrat zhlédnutá videa</string>
     <string name="player_channel_name">Služba přehrávače</string>
@@ -463,7 +440,6 @@
     <string name="tooltip_filter">Filtr</string>
     <string name="auto_generated">automaticky vygenerováno</string>
     <string name="resolution_limited">omezeno</string>
-    <string name="proxy">Proxy</string>
     <string name="group_name_error_empty">Zadejte nový název</string>
     <string name="group_name_error_exists">Zvolte prosím jméno, které je unikátní</string>
     <string name="registration_disabled">Registrace zakázány</string>
@@ -472,7 +448,6 @@
     <string name="segment_type">Typ segmentu</string>
     <string name="sb_invalid_segment">Neplatný začátek nebo konec segmentu</string>
     <string name="contribute_to_sponsorblock">Přispívat do služby SponsorBlock</string>
-    <string name="filename_too_long">Název souboru je příliš dlouhý!</string>
     <string name="sponsorblock_user_id">ID uživatele SponsorBlock</string>
     <string name="donate">Přispět</string>
     <string name="no_fullscreen_resolution">Rozlišení mimo celou obrazovku</string>
@@ -536,7 +511,6 @@
     <string name="local_ryd">Lokální extraktor Return YouTube Dislike</string>
     <string name="local_ryd_summary">Přímo načítat informace o palcích dolů z https://returnyoutubedislikeapi.com</string>
     <string name="import_watch_history">Importovat historii sledování</string>
-    <string name="import_watch_history_desc">Upozorňujeme, že nebude importováno vše z důvodu omezeného exportu dat z YouTube.</string>
     <string name="audio_codecs">Zvukové kodeky</string>
     <string name="view_count">%1$s zhlédnutí</string>
     <string name="dialog_play_offline_title">Je dostupná lokální verze tohoto videa.</string>

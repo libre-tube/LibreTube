@@ -22,7 +22,6 @@
     <string name="importsuccess">Suscrito</string>
     <string name="loggedout">Sesión cerrada.</string>
     <string name="region">Región</string>
-    <string name="cannotDownload">No se puede descargar esta transmisión.</string>
     <string name="downloadfailed">Descarga fallida.</string>
     <string name="import_from_yt">Importar suscripciones</string>
     <string name="app_theme">Tema</string>
@@ -102,7 +101,6 @@
     <string name="enabled">Activado</string>
     <string name="disabled">Desactivado</string>
     <string name="playOnBackground">Reproducir en segundo plano</string>
-    <string name="update_available_text">Nueva actualización disponible. Toca para ir a la página de descargas de GitHub.</string>
     <string name="update_available">Actualización disponible</string>
     <string name="appearance">Apariencia</string>
     <string name="shareTo">Enviar URL a</string>
@@ -116,12 +114,10 @@
     <string name="instance_name">Nombre de la instancia</string>
     <string name="instance_api_url">URL de la API de la instancia</string>
     <string name="empty_instance">Introduce el nombre y la URL de la API.</string>
-    <string name="clear_customInstances">Olvidar instancias añadidas</string>
     <string name="invalid_url">Por favor, introduce una URL que funcione</string>
     <string name="version">Versión %1$s</string>
     <string name="related_streams">Contenido relacionado</string>
     <string name="related_streams_summary">Mostrar transmisiones similares a lo que ves</string>
-    <string name="advanced_summary">Descargas y restablecimiento</string>
     <string name="legacyIcon">Antiguo</string>
     <string name="addInstance">Añadir instancia</string>
     <string name="gradientIcon">Difuminado</string>
@@ -141,7 +137,6 @@
     <string name="category_preview">Avance/Resumen</string>
     <string name="category_preview_summary">Para segmentos que detallan contenido futuro sin información adicional. Si incluye clips que solo aparecen aquí, es muy probable que ésta sea la categoría incorrecta</string>
     <string name="category_filler_summary">Escenas paralelas que se añaden en tono de humor o de relleno, que no son necesarias para entender el contenido principal del vídeo</string>
-    <string name="playerVideoFormat">Formato de vídeo para el reproductor</string>
     <string name="category_music_offtopic_summary">Sólo para su uso en vídeos musicales. Debe abarcar partes del vídeo que no formen parte de las mezclas oficiales. Al final, el vídeo debe parecerse lo más posible a la versión de Spotify o a cualquier otra versión mezclada, o reducir las conversaciones u otras distracciones</string>
     <string name="player_autoplay">Reproducción automática</string>
     <string name="no_video">Sin vídeo</string>
@@ -159,7 +154,6 @@
     <string name="clonePlaylist">Clonar lista</string>
     <string name="reset">Restaurar valores predeterminados</string>
     <string name="reset_message">¿Restablecer todos los ajustes y cerrar la sesión\?</string>
-    <string name="account">Cuenta</string>
     <string name="restore">Restaurar</string>
     <string name="deleteAccount_summary">Elimina tu cuenta Piped</string>
     <string name="deleteAccount">Eliminar cuenta</string>
@@ -190,7 +184,6 @@
     <string name="autoRotatePlayer_summary">Reproducir en pantalla completa cuando se gira el dispositivo</string>
     <string name="pure_theme">Tema puro</string>
     <string name="pure_theme_summary">Tema blanco/negro puro</string>
-    <string name="no_player_found">No se ha encontrado ningún reproductor externo. Por favor, asegúrate de que tienes uno instalado.</string>
     <string name="data_saver_mode">Modo de ahorro de datos</string>
     <string name="data_saver_mode_summary">Omitir las miniaturas y otras imágenes</string>
     <string name="watch_history_summary">Lleva el control de los vídeos vistos localmente</string>
@@ -208,7 +201,6 @@
     <string name="network_wifi">Solo con WiFi</string>
     <string name="translate">Traducción</string>
     <string name="no_search_result">Sin resultados.</string>
-    <string name="playingOnBackground">Reproduciendo en segundo plano…</string>
     <string name="caption_settings">Subtítulos</string>
     <string name="worst_quality">Peor</string>
     <string name="default_subtitle_language">Idioma de subtítulos</string>
@@ -221,7 +213,6 @@
     <string name="notify_new_streams_summary">Mostrar notificaciones de nuevas transmisiones de los creadores que sigues</string>
     <string name="general">General</string>
     <string name="general_summary">Descargas y ahorro de datos</string>
-    <string name="playerAudioFormat">Formato de audio para el reproductor</string>
     <string name="playerAudioQuality">Calidad de audio</string>
     <string name="resize_mode_zoom">Ampliar</string>
     <string name="repeat_mode">Modo de repetición</string>
@@ -270,17 +261,11 @@
     <string name="navigation_bar">Barra de navegación</string>
     <string name="change_region">Tendencias parece no estar disponible para la región actual. Selecciona otra en la configuración.</string>
     <string name="playback_pitch">Tono</string>
-    <string name="filename">Nombre del archivo</string>
-    <string name="invalid_filename">¡Nombre de archivo inválido!</string>
     <string name="time_code">Código de tiempo (segundos)</string>
     <string name="added_to_playlist">Añadido a la lista %1$s</string>
     <string name="queue">Cola</string>
     <string name="livestreams">Directos</string>
-    <string name="alternative_videos_layout">Compactar Tendencias y Suscripciones</string>
     <string name="defaultIconLight">Predeterminado claro</string>
-    <string name="confirm_unsubscribe">¿Seguro que quieres anular tu suscripción a %1$s\?</string>
-    <string name="confirm_unsubscribing">Confirmar desuscripción</string>
-    <string name="confirm_unsubscribing_summary">Mostrar un aviso para confirmar antes de anular la suscripción</string>
     <string name="playlistCloned">Lista clonada</string>
     <string name="play_all">Reproducir todo</string>
     <string name="time">Horario</string>
@@ -292,8 +277,6 @@
     <string name="layout">Diseño</string>
     <string name="audio_track">Pista de audio</string>
     <string name="auto_quality">Automática</string>
-    <string name="hls_instead_of_dash_summary">Use HLS en lugar de DASH para la transmisión multimedia. Pruebe a activar esta opción si la reproducción de video no funciona.</string>
-    <string name="hls_instead_of_dash">Usar HLS</string>
     <string name="limit_to_runtime">Limitar al tiempo de ejecución</string>
     <string name="trends">Tendencias</string>
     <string name="featured">Destacado</string>
@@ -358,8 +341,6 @@
     <string name="codecs">Códecs de vídeo</string>
     <string name="mark_as_watched">Marcar como visto</string>
     <string name="unsupported_file_format">Formato de archivo no compatible: %1$s</string>
-    <string name="custom_playback_speed">Velocidad personalizada</string>
-    <string name="custom_playback_speed_summary">Utilice una velocidad de reproducción diferente a la del reproductor normal</string>
     <string name="category">Categoría</string>
     <string name="normal_views">%1$s vistas%2$s</string>
     <string name="stats_for_nerds">Estadísticas para frikis</string>
@@ -411,7 +392,6 @@
     <string name="off">Deshabilitar</string>
     <string name="automatic">Automático</string>
     <string name="invalid_color">¡Se ha introducido un código de color inválido!</string>
-    <string name="visible">Señalador</string>
     <string name="sb_custom_colors_summary">Usar colores personalizados para los segmentos de SponsorBlock</string>
     <string name="sb_custom_colors">Segmentos con color personalizado</string>
     <string name="color">Color</string>
@@ -419,8 +399,6 @@
     <string name="category_highlight">Resaltar momentos destacados</string>
     <string name="chapters_videoHighlight">Momento Destacado</string>
     <string name="stop">Detener</string>
-    <string name="fallback_piped_proxy">Regresar al proxy de Piped</string>
-    <string name="fallback_piped_proxy_summary">Cargar vídeos a través del proxy si al conectar directamente a YouTube no funciona el video en curso (aumenta el tiempo de carga inicial). Si lo deshabilitas, el contenido de YT Music probablemente no se reproduzca debido a restricciones de YouTube</string>
     <string name="audio_track_format">%1$s - %2$s</string>
     <string name="unknown_or_no_audio">Desconocido/Sin audio</string>
     <string name="dubbed_audio_track">doblado</string>
@@ -438,7 +416,6 @@
     <string name="sort_by">Ordenar por</string>
     <string name="uploader_name">Nombre del canal</string>
     <string name="duration_span">Duración: %1$s</string>
-    <string name="no_chapter">Sin capítulos</string>
     <string name="screen_orientation">Orientación de pantalla</string>
     <string name="remove_watched_videos">Quitar videos ya vistos</string>
     <string name="player_channel_name">Servicios del Reproductor</string>
@@ -464,7 +441,6 @@
     <string name="resolution_limited">limitada</string>
     <string name="auto_generated">autogenerados</string>
     <string name="registration_disabled">Registro deshabilitado</string>
-    <string name="proxy">Proxy</string>
     <string name="group_name_error_empty">Por favor, introduce un nombre</string>
     <string name="group_name_error_exists">Por favor, elije un nombre que sea único</string>
     <string name="automatic_once">Automático una vez</string>
@@ -472,7 +448,6 @@
     <string name="segment_type">Tipo de segmento</string>
     <string name="sb_invalid_segment">Inicio o final de segmento inválido</string>
     <string name="contribute_to_sponsorblock">Contribuir con SponsorBlock</string>
-    <string name="filename_too_long">¡El nombre es demasiado largo!</string>
     <string name="sponsorblock_user_id">ID de usuario SponsorBlock</string>
     <string name="donate">Donar</string>
     <string name="music_artists">YT Music: Artistas</string>
@@ -536,7 +511,6 @@
     <string name="local_ryd_summary">Obtener directamente información de los \'no me gusta\' en https://returnyoutubedislikeapi.com</string>
     <string name="local_ryd">\'Return YouTube Dislike\' localmente</string>
     <string name="import_watch_history">Importa tu historial de reproducción</string>
-    <string name="import_watch_history_desc">Por favor, tenga en cuenta que no se importará todo debido a los datos de exportación limitados de YouTube.</string>
     <string name="audio_codecs">Códecs de audio</string>
     <string name="view_count">%1$s vistas</string>
     <string name="dialog_play_offline_body">¿Te gustaría reproducir el video de la carpeta de descarga?</string>

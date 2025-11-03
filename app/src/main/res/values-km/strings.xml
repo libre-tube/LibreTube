@@ -38,7 +38,6 @@
     <string name="server_error">វាហាក់ដូចជាមានបញ្ហាជាមួយសេវូបករណ៍ ដែលបានជ្រើស។ សាកល្បងឧទាហរណ៍ផ្សេងទៀត។</string>
     <string name="yes">បាទ/ចាស</string>
     <string name="username">អត្ថនាម</string>
-    <string name="cannotDownload">មិនអាចទាញយកស្ទ្រីមនេះទេ។</string>
     <string name="channels">ឆាណែល</string>
     <string name="deletePlaylist">លុបកម្រងវីដេអូ</string>
     <string name="changeLanguage">ភាសា</string>
@@ -50,7 +49,6 @@
     <string name="loggedIn">បានបញ្ជាប់ចូល។</string>
     <string name="retry">ព្យាយាមម្តងទៀត</string>
     <string name="playback_speed">ល្បឿនចាក់</string>
-    <string name="update_available_text">អាប់ដេតថ្មីអាចប្រើប្រាស់បាន។ ចុចដើម្បីបើកទំព័រចេញផ្សាយ GitHub ។</string>
     <string name="customization">ការកែតម្រូវ</string>
     <string name="instance">ឧបមា</string>
     <string name="areYouSure">លុបកម្រងវីដេអូឬ\?</string>
@@ -171,7 +169,6 @@
     <string name="copied">បានចម្លង</string>
     <string name="stop">បញ្ឈប់</string>
     <string name="related_streams">មាតិកាដែលពាក់ព័ន្ធ</string>
-    <string name="account">គណនី</string>
     <string name="system_caption_style">ស្តាយល៍អក្សររត់ប្រព័ន្ធ</string>
     <string name="category_preview">បុរេទិដ្ឋភាព/សង្ខេប</string>
     <string name="category_music_offtopic">តន្ត្រី៖ ផ្នែកមិនតន្ត្រី</string>
@@ -190,7 +187,6 @@
     <string name="no_subtitle">គ្មានអក្សររត់</string>
     <string name="concurrent_downloads_limit_reached">ការទាញយកស្របគ្នាអតិបរមាបានដល់ដែនកំណត់។</string>
     <string name="notify_new_streams_summary">បង្ហាញការជូនដំណឹង សម្រាប់ស្ទ្រីមថ្មីពីអ្នកបង្កើតដែលអ្នកតាម</string>
-    <string name="playerVideoFormat">ហ្វ័រម៉ាតវីដេអូសម្រាប់ការីចាក់</string>
     <string name="instance_name">ឈ្មោះឧបមា</string>
     <string name="share_with_time">ចែករំលែកជាមួយកូដម៉ោង</string>
     <string name="live">ផ្សាយផ្ទាល់</string>
@@ -209,7 +205,6 @@
     <string name="require_restart_message">រីស្តាតកម្មវិធី ដើម្បីប្រើការផ្លាស់ប្តូរថ្មីនេះ។</string>
     <string name="irreversible">តើអ្នកប្រាកដឬអត់\? នេះមិនអាចត្រឡប់វិញបានទេ!</string>
     <string name="general">ជាទូទៅ</string>
-    <string name="playingOnBackground">កំពុងចាក់នៅផ្ទៃខាងក្រោយ…</string>
     <string name="player_summary">បុរេជម្រើស និងឥរិយាបថ</string>
     <string name="auth_instance_summary">ប្រើតាមឧបមាផ្សេងសម្រាប់ហៅយថាភូតកម្ម។</string>
     <string name="require_restart">តម្រូវឱ្យរីស្តាតកម្មវិធី</string>
@@ -224,15 +219,11 @@
     <string name="never">មិនដែល</string>
     <string name="skip_buttons_summary">បង្ហាញប៊ូតុងដើម្បីរំលងទៅវីដេអូបន្ទាប់ ឬមុន</string>
     <string name="worst_quality">អាក្រក់បំផុត</string>
-    <string name="advanced_summary">ទាញយក និងកំណត់ឡើងវិញ</string>
     <string name="general_summary">ភាសា និងតំបន់</string>
     <string name="player">ការីចាក់</string>
     <string name="addInstance">បន្ថែមឧបមា</string>
-    <string name="clear_customInstances">ជម្រះការបន្ថែម</string>
     <string name="flameIcon">អណ្តាតភ្លើងហោះ</string>
     <string name="playerAudioQuality">គុណភាពអូឌីយោ</string>
-    <string name="no_player_found">រកមិនឃើញការីចាក់ខាងក្រៅទេ។ សូមប្រាកដថាអ្នកបានដំឡើងមួយ។</string>
-    <string name="playerAudioFormat">ហ្វ័រម៉ាតអូឌីយោ សម្រាប់ការីចាក់</string>
     <string name="seek_increment">ការបង្កើនស្វែងរក</string>
     <string name="audio">អូឌីយោ</string>
     <string name="deleteAccount">លុបគណនី</string>

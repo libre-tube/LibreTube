@@ -29,7 +29,6 @@
     <string name="region">Bölge</string>
     <string name="login_register">Giriş yap/kaydol</string>
     <string name="importsuccess">Abone olundu</string>
-    <string name="cannotDownload">Bu video indirilemiyor.</string>
     <string name="import_from_yt">Abonelikleri içe aktar</string>
     <string name="error">Bir şeyler ters gitti.</string>
     <string name="emptyList">Burada hiçbir şey yok.</string>
@@ -103,7 +102,6 @@
     <string name="app_icon">Simge</string>
     <string name="playOnBackground">Arka planda oynat</string>
     <string name="update_available">Güncelleme var</string>
-    <string name="update_available_text">Yeni versiyon mevcut. GitHub sürümler sayfasını açmak için tıklayın.</string>
     <string name="appearance">Görünüm</string>
     <string name="downloads">İndirilenler</string>
     <string name="update_summary">Güncellemeleri kontrol et</string>
@@ -112,7 +110,6 @@
     <string name="advanced">Gelişmiş</string>
     <string name="player">Oynatıcı</string>
     <string name="appearance_summary">Uygulamayı zevkinize göre ayarlayın</string>
-    <string name="advanced_summary">İndirmeler ve Sıfırlama</string>
     <string name="live">Canlı</string>
     <string name="shareTo">URL\'yi şuraya paylaş</string>
     <string name="defaultIcon">Varsayılan</string>
@@ -125,7 +122,6 @@
     <string name="flameIcon">Uçan alev</string>
     <string name="instance_summary">Piped, giriş ve hesap</string>
     <string name="addInstance">Oluşum Ekle</string>
-    <string name="clear_customInstances">Eklenenleri temizle</string>
     <string name="instance_api_url">Oluşum API\'sinin URL\'si</string>
     <string name="customInstance_summary">Ekle…</string>
     <string name="empty_instance">Adı ve API URL\'sini girin.</string>
@@ -142,7 +138,6 @@
     <string name="related_streams_summary">İzlediklerinizin yanında benzer videoları gösterir</string>
     <string name="buffering_goal">Ön yükleme</string>
     <string name="buffering_goal_summary">Maks. arabelleğe alınacak videonun saniye miktarı</string>
-    <string name="playerVideoFormat">Oynatıcı için video formatı</string>
     <string name="no_audio">Ses yok</string>
     <string name="no_video">Video yok</string>
     <string name="audio">Ses</string>
@@ -160,7 +155,6 @@
     <string name="reset">Varsayılanlara sıfırla</string>
     <string name="reset_message">Tüm ayarlar sıfırlansın ve oturum kapatılsın mı\?</string>
     <string name="deleteAccount_summary">Piped hesabınızı silin</string>
-    <string name="account">Hesap</string>
     <string name="restore">Eski haline getir</string>
     <string name="deleteAccount">Hesabı sil</string>
     <string name="watch_history">İzleme geçmişi</string>
@@ -193,7 +187,6 @@
     <string name="autoRotatePlayer_summary">Cihaz yan döndürüldüğünde tam ekran oynat</string>
     <string name="pure_theme">Saf tema</string>
     <string name="pure_theme_summary">Saf beyaz/siyah tema</string>
-    <string name="no_player_found">Harici oynatıcı bulunamadı. Lütfen, bir tane yüklediğinizden emin olun.</string>
     <string name="data_saver_mode">Veri tasarrufu modu</string>
     <string name="search_history_summary">Kaydedilen aramalar</string>
     <string name="watch_history_summary">İzlenen videoları yerel olarak takip edin</string>
@@ -201,9 +194,7 @@
     <string name="watch_positions_title">Kaydedilmiş oynatma konumları</string>
     <string name="general_summary">İndirmeler ve veri tasarrufu</string>
     <string name="general">Genel</string>
-    <string name="playingOnBackground">Arka planda oynatılıyor…</string>
     <string name="caption_settings">Altyazılar</string>
-    <string name="playerAudioFormat">Oynatıcı için ses formatı</string>
     <string name="playerAudioQuality">Ses kalitesi</string>
     <string name="worst_quality">En kötü</string>
     <string name="default_subtitle_language">Altyazı dili</string>
@@ -270,18 +261,12 @@
     <string name="navigation_bar">Gezinme çubuğu</string>
     <string name="change_region">Trendler mevcut bölge için kullanılamıyor gibi görünüyor. Lütfen ayarlarda başka bir tane seçin.</string>
     <string name="playback_pitch">Ses perdesi</string>
-    <string name="filename">Dosya adı</string>
-    <string name="invalid_filename">Geçersiz dosya adı!</string>
     <string name="time_code">Zaman kodu (saniye)</string>
     <string name="added_to_playlist">Oynatma listesine eklendi %1$s</string>
     <string name="queue">Sıra</string>
     <string name="livestreams">Canlı yayınlar</string>
-    <string name="alternative_videos_layout">Alternatif video düzeni</string>
     <string name="defaultIconLight">Varsayılan ışık</string>
     <string name="playlistCloned">Oynatma listesi kopyalandı</string>
-    <string name="confirm_unsubscribing">Abonelikten çıkmayı onayla</string>
-    <string name="confirm_unsubscribe">%1$s aboneliğinden çıkmak istediğinizden emin misiniz\?</string>
-    <string name="confirm_unsubscribing_summary">Abonelikten çıkmadan önce bir onay iletişim kutusu göster</string>
     <string name="play_all">Tümünü oynat</string>
     <string name="time">Zaman</string>
     <string name="start_time">Başlangıç zamanı</string>
@@ -292,8 +277,6 @@
     <string name="navbar_order">Sıra</string>
     <string name="audio_track">Ses parçası</string>
     <string name="auto_quality">Oto</string>
-    <string name="hls_instead_of_dash">HLS\'yi kullan</string>
-    <string name="hls_instead_of_dash_summary">Akış medyası için DASH yerine HLS kullanın. Video oynatma çalışmıyorsa bu seçeneği değiştirmeyi deneyin.</string>
     <string name="limit_to_runtime">Çalışma zamanı ile sınırla</string>
     <string name="trends">Trendler</string>
     <string name="featured">Öne Çıkanlar</string>
@@ -358,8 +341,6 @@
     <string name="codecs">Video kodekleri</string>
     <string name="mark_as_watched">İzlendi olarak işaretle</string>
     <string name="unsupported_file_format">Desteklenmeyen dosya biçimi: %1$s</string>
-    <string name="custom_playback_speed">Özel hız</string>
-    <string name="custom_playback_speed_summary">Normal oynatıcıdan farklı oynatma hızı kullan</string>
     <string name="category">Kategori</string>
     <string name="normal_views">%1$s görüntüleme%2$s</string>
     <string name="autoplay_countdown">Otomatik oynatma geri sayımı</string>
@@ -388,8 +369,6 @@
     <string name="unlimited_search_history">Sınırsız arama geçmişi</string>
     <string name="show_stream_thumbnails">Video küçük resimlerini göster</string>
     <string name="show_stream_thumbnails_summary">Yeni akış ön izlemelerini göster. Bunu etkinleştirmek ek veri tüketecektir</string>
-    <string name="fallback_piped_proxy_summary">YouTube\'a doğrudan bağlanmak mevcut video için çalışmıyorsa videoları proxy aracılığıyla (ilk yükleme sürelerini artırır) yükleyin. Devre dışı bırakılırsa YouTube Müzik içeriği, YT kısıtlamaları nedeniyle muhtemelen oynatılamayacaktır</string>
-    <string name="fallback_piped_proxy">Piped proxy\'e dönüş yap</string>
     <string name="welcome">Libretube\'ye Hoş Geldiniz</string>
     <string name="choose_instance">Lütfen önce bir isteyici seçin!</string>
     <string name="mark_as_unwatched">İzlenmedi olarak işaretle</string>
@@ -410,7 +389,6 @@
     <string name="creation_date_reversed">Oluşturulma tarihi (ters)</string>
     <string name="alphabetic_reversed">Alfabetik (ters)</string>
     <string name="off">Kapalı</string>
-    <string name="visible">İlerleme çubuğunda göster</string>
     <string name="playlist_description">Oynatma listesi açıklaması</string>
     <string name="emptyPlaylistDescription">Oynatma listesi açıklaması boş bırakılamaz</string>
     <string name="shorts_notifications">Kısa videolar için bildirimler</string>
@@ -422,7 +400,6 @@
     <string name="continue_watching">İzlemeye devam et</string>
     <string name="dearrow">DeArrow\'u etkinleştir</string>
     <string name="dearrow_summary">Clickbait\'i engellemek için daha doğru ve daha az etkileyici başlıklar ve küçük resimler gösterir. Yükleme sürelerini artırır</string>
-    <string name="no_chapter">Bölüm yok</string>
     <string name="sort_by">Şuna göre sırala</string>
     <string name="uploader_name">Yükleyici adı</string>
     <string name="duration_span">Süre: %1$s</string>
@@ -469,8 +446,6 @@
     <string name="chapters_videoHighlight">Video Vurgusu</string>
     <string name="tooltip_sort">Tür</string>
     <string name="tooltip_watch_position">İzleme konumu</string>
-    <string name="proxy">Proxy</string>
-    <string name="filename_too_long">Dosya adı çok uzun!</string>
     <string name="sponsorblock_user_id">SponsorBlock Kullanıcı Kimliği</string>
     <string name="contribute_to_sponsorblock">SponsorBlock\'a katkıda bulun</string>
     <string name="autoplay_playlists_summary">Seçilen otomatik oynatma ayarından bağımsız olarak oynatma listelerindeki bir sonraki videoyu otomatik olarak oynat</string>
@@ -534,7 +509,6 @@
     <string name="local_stream_extraction_summary">Piped kullanmadan YouTube\'dan doğrudan video oynatma bilgilerini alın.</string>
     <string name="local_ryd">YouTube Beğenmeme Özelliğini Yerel Olarak Geri Getir</string>
     <string name="local_ryd_summary">Beğenmeme bilgisini doğrudan https://returnyoutubedislikeapi.com adresinden alın</string>
-    <string name="import_watch_history_desc">YouTube\'un sınırlı dışa aktarım verileri nedeniyle her şeyin içe aktarılmayacağını lütfen unutmayın.</string>
     <string name="import_watch_history">İzleme geçmişini içe aktar</string>
     <string name="audio_codecs">Ses kodekleri</string>
     <string name="view_count">%1$s görüntüleme</string>

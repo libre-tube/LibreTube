@@ -9,7 +9,6 @@
     <string name="customInstance">Προσαρμομένος</string>
     <string name="region">Περιοχή</string>
     <string name="login_register">Είσοδος/εγγραφή</string>
-    <string name="cannotDownload">Αποτυχία λήψης αυτού του μέσου.</string>
     <string name="downloadfailed">Η λήψη απέτυχε.</string>
     <string name="import_from_yt">Εισαγωγή εγγραφών</string>
     <string name="import_from_yt_summary">Από το YouTube ή το NewPipe</string>
@@ -103,7 +102,6 @@
     <string name="disabled">Απενεργοποιημένο</string>
     <string name="playOnBackground">Αναπαραγωγή στο παρασκήνιο</string>
     <string name="update_available">Η έκδοση %1$s είναι διαθέσιμη</string>
-    <string name="update_available_text">Νέα ενημέρωση διαθέσιμη. Κάντε κλικ για να ανοίξετε τη σελίδα εκδόσεων του GitHub.</string>
     <string name="appearance">Εμφάνιση</string>
     <string name="downloads">Λήψεις</string>
     <string name="update_summary">Έλεγχος για ενημερώσεις</string>
@@ -112,7 +110,6 @@
     <string name="playback_speed">Tαχύτητα αναπαραγωγής</string>
     <string name="app_uptodate">Εκτελείται η τελευταία έκδοση.</string>
     <string name="advanced">Για προχωρημένους</string>
-    <string name="advanced_summary">Λήψεις και επαναφορά</string>
     <string name="shareTo">Μοιραστείτε τη διεύθυνση URL σε</string>
     <string name="live">Ζωντανά</string>
     <string name="torchIcon">Μοντέρνος πυρσός</string>
@@ -123,7 +120,6 @@
     <string name="defaultIcon">Προεπιλεγμένο</string>
     <string name="flameIcon">Ιπτάμενη φλόγα</string>
     <string name="birdIcon">Ενισχυμένο πουλί</string>
-    <string name="clear_customInstances">Εκκαθάριση προσθεμένων</string>
     <string name="customInstance_summary">Πρόσθεση…</string>
     <string name="instance_name">Όνομα διακομιστή</string>
     <string name="instance_summary">Piped, σύνδεση και λογαριασμός</string>
@@ -140,7 +136,6 @@
     <string name="category_filler">Εφαπτομενικό πληρωτικό υλικό/Αστεία</string>
     <string name="buffering_goal">Προφόρτωση</string>
     <string name="buffering_goal_summary">Μέγιστη ποσότητα δευτερολέπτων βίντεο για προφόρτωση</string>
-    <string name="playerVideoFormat">Μορφή βίντεο για τον αναπαραγωγέα</string>
     <string name="category_music_offtopic_summary">Μόνο για χρήση σε μουσικά βίντεο. Θα πρέπει να καλύπτει μέρη του βίντεο που δεν περιλαμβάνονται στις επίσημες μίξεις. Στο τέλος, το βίντεο θα πρέπει να μοιάζει όσο το δυνατόν περισσότερο με την έκδοση του Spotify ή οποιαδήποτε άλλη μίξη, ή να μειώνει τις ομιλίες ή άλλους περισπασμούς</string>
     <string name="category_preview_summary">Για τμήματα που περιγράφουν μελλοντικό περιεχόμενο χωρίς πρόσθετες πληροφορίες. Αν περιλαμβάνει κλιπ που εμφανίζονται μόνο εδώ, είναι πολύ πιθανό να είναι λάθος κατηγορία</string>
     <string name="no_audio">Χωρίς ήχο</string>
@@ -160,7 +155,6 @@
     <string name="pauseOnScreenOff_summary">Παύση της αναπαραγωγής όταν η οθόνη είναι απενεργοποιημένη</string>
     <string name="clonePlaylist">Κλωνοποίηση λίστας αναπαραγωγής</string>
     <string name="deleteAccount">Διαγραφή λογαριασμού</string>
-    <string name="account">Λογαριασμός</string>
     <string name="deleteAccount_summary">Διαγράψτε τον Piped λογαριασμό σας</string>
     <string name="restore">Επαναφορά</string>
     <string name="watch_history">Ιστορικό παρακολούθησης</string>
@@ -207,7 +201,6 @@
     <string name="network_metered">Μετρημένη</string>
     <string name="error_occurred">Σφάλμα</string>
     <string name="copied">Αντιγραμμένο</string>
-    <string name="playingOnBackground">Αναπαραγωγή στο παρασκήνιο…</string>
     <string name="open">Άνοιγμα…</string>
     <string name="caption_settings">Λεζάντες</string>
     <string name="worst_quality">Χειρότερη</string>
@@ -242,15 +235,12 @@
     <string name="require_restart_message">Επανεκκινήστε την εφαρμογή για να χρησιμοποιήσετε τις νέες αλλαγές.</string>
     <string name="autoRotatePlayer">Αυτόματη πλήρης οθόνη</string>
     <string name="autoRotatePlayer_summary">Αναπαραγωγή πλήρους οθόνης όταν η συσκευή γυρίζει</string>
-    <string name="no_player_found">Δεν βρέθηκε εξωτερικό πρόγραμμα αναπαραγωγής. Βεβαιωθείτε ότι έχετε εγκαταστήσει ένα.</string>
     <string name="search_history_summary">Αποθήκευση αναζητήσεων</string>
     <string name="watch_history_summary">Αποθήκευση των βίντεο που παρακολουθήσατε τοπικά</string>
     <string name="history_summary">Ιστορικό παρακολούθησης και αναζήτησης</string>
     <string name="pure_theme">Καθαρό θέμα</string>
     <string name="general">Γενικά</string>
-    <string name="playerAudioFormat">Μορφή ήχου για τον αναπαραγωγέα</string>
     <string name="playerAudioQuality">Ποιότητα ήχου</string>
-    <string name="confirm_unsubscribing">Επιβεβαιώστε την απεγγραφή</string>
     <string name="local_playlists">Τοπικές λίστες αναπαραγωγής</string>
     <string name="play_all">Αναπαραγωγή όλων</string>
     <string name="brightness">Φωτεινότητα</string>
@@ -266,20 +256,15 @@
     <string name="new_videos_badge_summary">Δείξε ένα σήμα με τον αριθμό των νέων βίντεο, εάν υπάρχουν κάποια</string>
     <string name="play_next">Παίξε το επόμενο</string>
     <string name="navigation_bar">Μπάρα πλοήγησης</string>
-    <string name="filename">Όνομα αρχείου</string>
-    <string name="invalid_filename">Άκυρο όνομα αρχείου!</string>
     <string name="playback_pitch">Τόνος</string>
     <string name="added_to_playlist">Προστέθηκε στη λίστα αναπαραγωγής %1$s</string>
     <string name="defaultIconLight">Προεπιλεγμένο φως</string>
-    <string name="confirm_unsubscribe">Είστε βέβαιοι ότι θέλετε να καταργήσετε την εγγραφή %1$s;</string>
-    <string name="confirm_unsubscribing_summary">Εμφάνιση διαλόγου επιβεβαίωσης πριν από την κατάργηση της εγγραφής</string>
     <string name="time">Χρόνος</string>
     <string name="start_time">Χρόνος έναρξης</string>
     <string name="end_time">Χρόνος λήξης</string>
     <string name="notification_time">Περιορισμός χρόνου ειδοποίησης</string>
     <string name="notification_time_summary">Περιορίστε το χρονικό διάστημα εντός του οποίου εμφανίζονται οι ειδοποιήσεις ροής</string>
     <string name="layout">Διάταξη</string>
-    <string name="hls_instead_of_dash_summary">Χρησιμοποιήστε HLS αντί για DASH (πιο αργό, δεν συνιστάται)</string>
     <string name="auto_quality">Αυτόματο</string>
     <string name="trending">Τι είναι σε τάση τώρα</string>
     <string name="defaults">Προεπιλογές</string>
@@ -334,8 +319,6 @@
     <string name="backup_customInstances">Προσαρμοσμένες περιπτώσεις</string>
     <string name="queue">Ουρά</string>
     <string name="livestreams">Ζωντανές Ροές</string>
-    <string name="alternative_videos_layout">Εναλλακτική διάταξη βίντεο</string>
-    <string name="hls_instead_of_dash">Χρησιμοποίησε HLS</string>
     <string name="replies">Απαντήσεις</string>
     <string name="audio_only_mode_summary">Μετατρέψτε το LibreTube σε πρόγραμμα αναπαραγωγής μουσικής</string>
     <string name="concurrent_downloads_limit_reached">Το μέγιστο όριο ταυτόχρονων λήψεων έχει συμπληρωθεί</string>
@@ -380,8 +363,6 @@
     </plurals>
     <string name="unsupported_file_format">Μη υποστηριζόμενη μορφή αρχείου: %1$s</string>
     <string name="pinch_control_summary">Χρησιμοποιήστε τη χειρονομία τσιμπήματος για μεγέθυνση/σμίκρυνση</string>
-    <string name="custom_playback_speed">Προσαρμοσμένη ταχύτητα</string>
-    <string name="custom_playback_speed_summary">Χρησιμοποιήστε διαφορετική ταχύτητα αναπαραγωγής από αυτήν της κανονικής συσκευής αναπαραγωγής</string>
     <string name="autoplay_countdown">Αντίστροφη μέτρηση αυτόματης αναπαραγωγής</string>
     <string name="playing_next">Αναπαραγωγή επόμενου σε %1$s</string>
     <string name="subscriberAndVideoCounts">%1$s συνδρομές•%2$dβίντεο</string>

@@ -26,7 +26,6 @@
     <string name="region">क्षेत्र</string>
     <string name="login_register">लग इन / दर्ता गर्नुहोस्</string>
     <string name="importsuccess">सदस्यता लिइयो</string>
-    <string name="cannotDownload">यो स्ट्रिम डाउनलोड गर्न सकिँदैन।</string>
     <string name="downloadfailed">डाउनलोड असफल भयो।</string>
     <string name="import_from_yt">सदस्यता आयात गर्नुहोस्</string>
     <string name="import_from_yt_summary">YouTube वा NewPipe बाट</string>
@@ -64,7 +63,6 @@
     <string name="disabled">बन्द</string>
     <string name="playOnBackground">पृष्ठभूमिमा प्ले गर्नुहोस्</string>
     <string name="update_available">संस्करण %1$s उपलब्ध छ</string>
-    <string name="update_available_text">नयाँ अपडेट उपलब्ध छ। GitHub रिलीज पृष्ठ खोल्न क्लिक गर्नुहोस्।</string>
     <string name="appearance">उपस्थिति</string>
     <string name="empty">तपाईंले प्रयोगकर्ता नाम र पासवर्ड प्रविष्ट गर्नुपर्छ।</string>
     <string name="server_error">...चयन गरिएको सर्भरमा समस्या भएको जस्तो देखिन्छ। अर्को उदाहरण प्रयास गर्नुहोस्।...</string>
@@ -124,7 +122,6 @@
     <string name="music_artists">YT संगीत कलाकारहरू</string>
     <string name="settings">सेटिङ</string>
     <string name="playlistCreated">प्लेलिस्ट सिर्जना गरियो।</string>
-    <string name="advanced_summary">डाउनलोड, र रिसेट</string>
     <string name="segment_skipped">छोडिएको खण्ड</string>
     <string name="player">Player</string>
     <string name="uploaderAndVideoCount">%1$s • %2$d भिडियोहरू</string>

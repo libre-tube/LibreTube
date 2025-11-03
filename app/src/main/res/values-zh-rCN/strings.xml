@@ -5,7 +5,6 @@
     <string name="download">下载</string>
     <string name="share">分享</string>
     <string name="username">用户名</string>
-    <string name="cannotDownload">我们无法下载这个视频。</string>
     <string name="startpage">首页</string>
     <string name="subscriptions">订阅内容</string>
     <string name="yes">是</string>
@@ -103,7 +102,6 @@
     <string name="app_icon">图标</string>
     <string name="playOnBackground">后台播放</string>
     <string name="update_available">更新可用</string>
-    <string name="update_available_text">有更新可用。点击打开 GitHub 发布页面。</string>
     <string name="update_summary">检查更新</string>
     <string name="category_preview">预览/回放</string>
     <string name="appearance">外观</string>
@@ -112,7 +110,6 @@
     <string name="advanced">高级</string>
     <string name="player">播放器</string>
     <string name="appearance_summary">根据您自己的喜好调整应用程序</string>
-    <string name="advanced_summary">下载及重置</string>
     <string name="app_uptodate">正在使用最新的版本。</string>
     <string name="live">直播</string>
     <string name="defaultIcon">默认</string>
@@ -126,7 +123,6 @@
     <string name="instance_api_url">实例 API 的 URL</string>
     <string name="addInstance">添加实例</string>
     <string name="empty_instance">需要填写名称与实例URL或链接才能保存。</string>
-    <string name="clear_customInstances">清除已添加</string>
     <string name="invalid_url">请输入有效的URL</string>
     <string name="related_streams">相关内容</string>
     <string name="related_streams_summary">在您观看的内容旁边显示相似的影音流</string>
@@ -135,7 +131,6 @@
     <string name="version">版本 %1$s</string>
     <string name="buffering_goal">预加载</string>
     <string name="buffering_goal_summary">缓冲视频的最长时间</string>
-    <string name="playerVideoFormat">播放器的视频格式</string>
     <string name="no_audio">没有音频</string>
     <string name="no_video">没有视频</string>
     <string name="legacyIcon">遗失的遗产</string>
@@ -160,7 +155,6 @@
     <string name="reset">恢复默认值</string>
     <string name="reset_message">重置所有设置并退出账户吗？</string>
     <string name="deleteAccount_summary">删除你的 Piped 账户</string>
-    <string name="account">账户</string>
     <string name="restore">恢复</string>
     <string name="deleteAccount">删除账户</string>
     <string name="watch_history">观看历史</string>
@@ -188,7 +182,6 @@
     <string name="autoRotatePlayer_summary">设备转动时自动切换到全屏播放</string>
     <string name="pure_theme">纯色主题</string>
     <string name="pure_theme_summary">纯白/黑主题</string>
-    <string name="no_player_found">未找到外部播放器。 请确保你安装了一个。</string>
     <string name="data_saver_mode">省流量模式</string>
     <string name="search_history_summary">记住搜索词</string>
     <string name="watch_history_summary">在本地追踪已观看的视频</string>
@@ -201,9 +194,7 @@
     <string name="data_saver_mode_summary">不加载缩略图和其他图像</string>
     <string name="general">常规</string>
     <string name="general_summary">下载和数据节省</string>
-    <string name="playingOnBackground">后台播放中…</string>
     <string name="caption_settings">字幕</string>
-    <string name="playerAudioFormat">播放器音频格式</string>
     <string name="playerAudioQuality">音频质量</string>
     <string name="worst_quality">最差</string>
     <string name="default_subtitle_language">字幕语言</string>
@@ -270,18 +261,12 @@
     <string name="navigation_bar">导航栏</string>
     <string name="change_region">“时下流行”似乎对当前地区不可用。请在设置中另选一个地区。</string>
     <string name="playback_pitch">音调</string>
-    <string name="filename">文件名</string>
-    <string name="invalid_filename">无效的文件名！</string>
     <string name="time_code">时间码（秒）</string>
     <string name="added_to_playlist">已添加到播放列表 %1$s</string>
     <string name="queue">队列</string>
     <string name="livestreams">直播</string>
-    <string name="alternative_videos_layout">备选视频布局</string>
     <string name="defaultIconLight">默认浅色</string>
     <string name="playlistCloned">已复制播放列表</string>
-    <string name="confirm_unsubscribing">确认取消订阅</string>
-    <string name="confirm_unsubscribing_summary">取消订阅前显示确认对话框</string>
-    <string name="confirm_unsubscribe">你确定要取消订阅 %1$s 吗？</string>
     <string name="play_all">播放全部</string>
     <string name="time">时间</string>
     <string name="start_time">开始时间</string>
@@ -291,8 +276,6 @@
     <string name="navbar_order">顺序</string>
     <string name="layout">布局</string>
     <string name="audio_track">音轨</string>
-    <string name="hls_instead_of_dash">使用 HLS</string>
-    <string name="hls_instead_of_dash_summary">流媒体使用 HLS 而不是 DASH。如无法播放在线视频，请尝试关闭该选项。</string>
     <string name="auto_quality">自动</string>
     <string name="limit_to_runtime">限制运行时间</string>
     <string name="trends">热门</string>
@@ -358,8 +341,6 @@
     <string name="codecs">视频编解码器</string>
     <string name="mark_as_watched">标记为已观看</string>
     <string name="unsupported_file_format">不支持的文件格式：%1$s</string>
-    <string name="custom_playback_speed">自定义速度</string>
-    <string name="custom_playback_speed_summary">使用不同于常规播放器的播放速度</string>
     <string name="category">类别</string>
     <string name="autoplay_countdown">自动播放倒计时</string>
     <string name="autoplay_countdown_summary">在自动播放下一个视频之前显示 5 秒倒计时</string>
@@ -412,13 +393,10 @@
     <string name="sb_custom_colors">自定义分段颜色</string>
     <string name="color">颜色</string>
     <string name="invalid_color">输入的颜色值无效！</string>
-    <string name="visible">显示在拖动条中</string>
     <string name="category_highlight_summary">可能是视频广告、缩略图或最有趣的部分。你可以在章节部分轻按它来跳到这部分</string>
     <string name="chapters_videoHighlight">精彩集锦</string>
     <string name="category_highlight">显示精彩集锦</string>
     <string name="stop">停止</string>
-    <string name="fallback_piped_proxy">退回到 Piped 代理</string>
-    <string name="fallback_piped_proxy_summary">如果直连 YouTube 对当前视频没用则通过代理加载视频（这会增加初始加载时间）。若禁用，由于 YouTube Music 限制，YT 内容可能不会播放</string>
     <string name="audio_track_format">%1$s - %2$s</string>
     <string name="unknown_audio_track_type">未知音轨类型</string>
     <string name="unknown_audio_language">未知音频语言</string>
@@ -433,7 +411,6 @@
     <string name="visibility">可见性</string>
     <string name="visibility_public">公开</string>
     <string name="visibility_unlisted">不公开</string>
-    <string name="no_chapter">无章节</string>
     <string name="sort_by">排序依据</string>
     <string name="uploader_name">上传方名称</string>
     <string name="duration_span">时长：%1$s</string>
@@ -462,7 +439,6 @@
     <string name="auto_generated">自动生成的</string>
     <string name="resolution_limited">受限</string>
     <string name="registration_disabled">禁止注册</string>
-    <string name="proxy">代理</string>
     <string name="group_name_error_empty">请输入名称</string>
     <string name="group_name_error_exists">请选择唯一名称</string>
     <string name="automatic_once">仅自动拦截一次</string>
@@ -470,7 +446,6 @@
     <string name="segment_type">分段类型</string>
     <string name="sb_invalid_segment">无效的分段开头或结尾</string>
     <string name="contribute_to_sponsorblock">给 SponsorBlock 出力</string>
-    <string name="filename_too_long">文件名过长！</string>
     <string name="sponsorblock_user_id">SponsorBlock UserID</string>
     <string name="donate">捐赠</string>
     <string name="music_artists">YT Music 艺人</string>
@@ -534,7 +509,6 @@
     <string name="local_ryd">本地 Return Youtube Dislikes 提取器</string>
     <string name="local_ryd_summary">直接从 https://returnyoutubedislikeapi.com 获取 disllike 信息</string>
     <string name="import_watch_history">导入观看历史</string>
-    <string name="import_watch_history_desc">注意，由于 YouTube 有限的导入数据不是所有历史都会被导入。</string>
     <string name="audio_codecs">音频编解码器</string>
     <string name="view_count">%1$s 次观看</string>
     <string name="dialog_play_offline_title">此视频有本地版本可用。</string>

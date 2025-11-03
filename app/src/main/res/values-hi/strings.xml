@@ -21,7 +21,6 @@
     <string name="customInstance">अलग इंस्टेंस जोड़ें</string>
     <string name="login_register">लॉग इन/रजिस्टर</string>
     <string name="importsuccess">सफलतापूर्वक सब्सक्राइब हो गया</string>
-    <string name="cannotDownload">इस स्ट्रीम को डाउनलोड नहीं कर सकते।</string>
     <string name="downloadfailed">डाउनलोड विफल।</string>
     <string name="import_from_yt">सब्सक्रिप्शनस आयात करें</string>
     <string name="app_theme">ऐप थीम</string>
@@ -65,9 +64,6 @@
     <string name="retry">फिर से कोशिश करें</string>
     <string name="comments">टिॅपणीयां</string>
     <string name="playlistCloned">प्लेलिस्ट क्लोन की गई</string>
-    <string name="confirm_unsubscribe">क्या आप वाकई %1$s को अनसब्सक्राईब करना चाहते हैं\?</string>
-    <string name="confirm_unsubscribing">अनसब्सक्राईब करने की पुष्टि करें</string>
-    <string name="confirm_unsubscribing_summary">अनसब्सक्राईब करने से पहले एक पुष्टिकरण संवाद दिखाएं</string>
     <string name="play_all">सभी चलाएं</string>
     <string name="category_interaction_summary">जब सामग्री के बीच में लाइक, सब्सक्राइब या फॉलो करने का एक छोटा सा रिमाइंडर आता है। यदि लंबा है या किसी विशिष्ट चीज के बारे में है, तो इसके बजाय यह स्वयं प्रचार होना चाहिए</string>
     <string name="enabled">आन</string>
@@ -168,7 +164,6 @@
     <string name="sponsorblock_notifications">सूचनाएं</string>
     <string name="app_icon">आइकन</string>
     <string name="playOnBackground">पृष्ठभूमि में चलाएं</string>
-    <string name="update_available_text">नई अपडेट उपलब्ध है। GitHub रिलीज़ पेज खोलने के लिए क्लिक करें।</string>
     <string name="appearance">दिखावट</string>
     <string name="shareTo">URL को साझा करें</string>
     <string name="legacyIcon">खोई हुई विरासत</string>
@@ -177,29 +172,23 @@
     <string name="torchIcon">ट्रेंडी मशाल</string>
     <string name="skip_buttons">स्किप बटन</string>
     <string name="skip_buttons_summary">अगले या पिछले वीडियो पर जाने के लिए बटन दिखाएं</string>
-    <string name="filename">फ़ाइल का नाम</string>
-    <string name="invalid_filename">अमान्य फ़ाइल नाम!</string>
     <string name="category_preview_summary">अतिरिक्त जानकारी के बिना भविष्य की सामग्री का विवरण देने वाले सेगमेंट के लिए। यदि इसमें क्लिप शामिल हैं जो केवल यहां दिखाई देती हैं, तो बहुत संभव है कि यह गलत श्रेणी हो</string>
     <string name="category_filler_summary">केवल फिलर या हास्य के लिए जोड़े गए स्पर्शरेखा दृश्यों के लिए वीडियो की मुख्य सामग्री को समझने की आवश्यकता नहीं है</string>
     <string name="update_available">अपडेट उपलब्ध है</string>
     <string name="audio_track">ऑडियो ट्रैक</string>
     <string name="downloads">डाउनलोडस</string>
     <string name="livestreams">लाइव स्ट्रीम</string>
-    <string name="alternative_videos_layout">वैकल्पिक वीडियो लेआउट</string>
     <string name="defaultIconLight">डिफ़ॉल्ट हलका</string>
     <string name="update_summary">अपडेट के लिये जांचें</string>
     <string name="playback_speed">प्लेबैक गति</string>
     <string name="advanced">विकसित</string>
     <string name="player">पलेयर</string>
     <string name="appearance_summary">अपनी पसंद के हिसाब से ऐप को एडजस्ट करें</string>
-    <string name="advanced_summary">डाउनलोडस और रीसेट</string>
     <string name="live">लाईव्ह</string>
     <string name="network_all">सभी</string>
     <string name="network_wifi">केवल वाई-फाई पर</string>
     <string name="translate">अनुवाद</string>
     <string name="no_search_result">कोई परिणाम नहीं।</string>
-    <string name="hls_instead_of_dash">एचएलएस का प्रयोग करें</string>
-    <string name="hls_instead_of_dash_summary">स्ट्रीमिंग मीडिया के लिए DASH की जगह HLS का उपयोग करें। यदि वीडियो नहीं चल रहा हो तो यह विकल्प बदलकर देखें।</string>
     <string name="auto_quality">ऑटो</string>
     <string name="limit_to_runtime">रनटाइम तक सीमित करें</string>
     <string name="trends">चलन में</string>
@@ -226,7 +215,6 @@
     <string name="buffering_goal">प्रीलोडिंग</string>
     <string name="buffering_goal_summary">बफ़र करने के लिए वीडियो की सेकंडस में उच्चतम मात्रा</string>
     <string name="instance_summary">पाइप्ड, लॉगिन और खाता</string>
-    <string name="clear_customInstances">जोड़े गये हटाएं</string>
     <string name="version">वर्शन %1$s</string>
     <string name="customInstance_summary">जोड़ें…</string>
     <string name="instance_name">इंस्टेंस का नाम</string>
@@ -235,13 +223,10 @@
     <string name="related_streams">संबंधित सामग्री</string>
     <string name="default_subtitle_language">उपशीर्षक भाषा</string>
     <string name="reset_message">सभी सेटिंग रीसेट करें और लॉग आउट करें\?</string>
-    <string name="account">खाता</string>
     <string name="autoRotatePlayer_summary">डिवाइस घूमाने पर फ़ुलस्क्रीन प्लेबैक</string>
     <string name="require_restart_message">नए परिवर्तनों का उपयोग करने के लिए ऐप को पुनरारंभ करें।</string>
-    <string name="no_player_found">कोई बाहरी प्लेयर नहीं मिला। कृपया सुनिश्चित करें कि आपके पास एक इन्स्टाल है।</string>
     <string name="defaults">डिफ़ॉल्टस</string>
     <string name="least_recent">सबसे पुराने</string>
-    <string name="playerVideoFormat">प्लेयर के लिए विडिओ फॉर्मेट</string>
     <string name="no_video">विडियो नहीं</string>
     <string name="audio">ऑडियो</string>
     <string name="no_audio">ऑडियो नहीं</string>
@@ -285,7 +270,6 @@
     <string name="captions">कैप्शनज</string>
     <string name="none">कोई भी नहीं</string>
     <string name="general_summary">भाषा और क्षेत्र</string>
-    <string name="playingOnBackground">बैकग्राउंड में चल रहा है…</string>
     <string name="caption_settings">कैप्शनज</string>
     <string name="notifications">सूचनाएं</string>
     <string name="notify_new_streams">नई स्ट्रीमों के लिए सूचनाएं दिखाएं</string>
@@ -306,7 +290,6 @@
     <string name="pure_theme_summary">शुद्ध सफेद / काला थीम</string>
     <string name="autoRotatePlayer">ऑटो-फुलस्क्रीन</string>
     <string name="general">सामान्य</string>
-    <string name="playerAudioFormat">प्लेयर के लिए ऑडियो फार्मेट</string>
     <string name="playerAudioQuality">ऑडियो गुणवत्ता</string>
     <string name="worst_quality">न्यूनतम</string>
     <string name="no_comments_available">इस वीडियो पे कोई टिप्पणी नहीं है।</string>
@@ -358,8 +341,6 @@
     <string name="unsupported_file_format">असमर्थित फाइल फॉर्मेट: %1$s</string>
     <string name="mark_as_watched">देखा गया चिह्नित करें</string>
     <string name="codecs">वीडियो कोडेक्स</string>
-    <string name="custom_playback_speed">कस्टम गति</string>
-    <string name="custom_playback_speed_summary">सामान्य प्लेयर की तुलना में एक अलग प्लेबैक गति का उपयोग करें</string>
     <string name="normal_views">%1$s ने देखा %2$s</string>
     <string name="autoplay_countdown">ऑटोप्ले की उलटी गिनती</string>
     <string name="autoplay_countdown_summary">अगले वीडियो को स्वतः चलाने से पहले 5 सेकंड उलटी गिनती दिखाएं</string>
@@ -410,9 +391,6 @@
     <string name="off">बंद</string>
     <string name="sb_custom_colors_summary">स्पांसर ब्लॉक सेगमेंट के लिए कस्टम रंग सेगमेंट टॉगल</string>
     <string name="sb_custom_colors">कस्टम सेगमेंट रंग</string>
-    <string name="visible">सीक बार में दिखाएँ</string>
-    <string name="fallback_piped_proxy">पाइप्ड प्रॉक्सी पर फॉलबैक</string>
-    <string name="fallback_piped_proxy_summary">प्रॉक्सी के माध्यम से वीडियो लोड करें यदि सीधे YouTube से कनेक्ट करना वर्तमान वीडियो के लिए काम नहीं करता है (प्रारंभिक लोडिंग समय बढ़ाता है)। यदि अक्षम किया जाता है, तो YT प्रतिबंधों के कारण YouTube संगीत सामग्री नहीं चलेगी</string>
     <string name="chapters_videoHighlight">वीडियो हाइलाइट</string>
     <string name="stop">रुको</string>
     <string name="color">रंग</string>
@@ -435,7 +413,6 @@
     <string name="visibility_unlisted">गैर-सूचीबद्ध</string>
     <string name="visibility_public">सार्वजनिक</string>
     <string name="remove_watched_videos">देखे गए वीडियो हटाएँ</string>
-    <string name="no_chapter">कोई अध्याय नहीं</string>
     <string name="sort_by">के अनुसार क्रमबद्ध करें</string>
     <string name="uploader_name">अपलोडर का नाम</string>
     <string name="player_channel_name">प्लेयर सेवा</string>
@@ -457,7 +434,6 @@
     <string name="tooltip_sponsorblock">स्पांसर-ब्लॉक टॉगल करें</string>
     <string name="tooltip_options">विकल्प</string>
     <string name="tooltip_minimize">छोटा करें</string>
-    <string name="proxy">प्रॉक्सी</string>
     <string name="auto_generated">स्व - उत्पन्न</string>
     <string name="registration_disabled">पंजीकरण अक्षम किया गया</string>
     <string name="tooltip_repeat">दोहराएं</string>
@@ -468,7 +444,6 @@
     <string name="tooltip_edit_groups">समूहों को संपादित करें</string>
     <string name="sb_create_segment">सेगमेंट बनाएं</string>
     <string name="sb_invalid_segment">अमान्य सेगमेंट आरंभ या समाप्ती</string>
-    <string name="filename_too_long">फ़ाइल नाम बहुत लंबा है!</string>
     <string name="sponsorblock_user_id">स्पांसर-ब्लॉक यूज़र आई डी</string>
     <string name="segment_type">सेगमेंट प्रकार</string>
     <string name="automatic_once">एक बार स्वचालित</string>
@@ -535,7 +510,6 @@
     <string name="local_ryd">Return Youtube Dislike की स्थानीय प्राप्ती</string>
     <string name="local_ryd_summary">https://returnyoutubedislikeapi.com से सीधे डिसलाईकस की जानकारी प्राप्त करें</string>
     <string name="import_watch_history">देखने का इतिहास आयात करें</string>
-    <string name="import_watch_history_desc">कृपया ध्यान दें कि YouTube के सीमित निर्यात डेटा के कारण सब कुछ आयात नहीं किया जाएगा।</string>
     <string name="audio_codecs">ऑडियो कोडेक्स</string>
     <string name="view_count">%1$s व्यूज़</string>
     <string name="category_exclusive_access">विशेष प्रवेश</string>

@@ -75,7 +75,6 @@
     <string name="version">Versija %1$s</string>
     <string name="related_streams">Susijęs turinys</string>
     <string name="buffering_goal">Išankstinis įkėlimas</string>
-    <string name="playerVideoFormat">Grotuvo vaizdo įrašų formatas</string>
     <string name="no_audio">Nėra garso</string>
     <string name="no_video">Nėra vaizdo</string>
     <string name="audio">Garsas</string>
@@ -87,7 +86,6 @@
     <string name="pauseOnScreenOff">Automatinis pristabdymas</string>
     <string name="pauseOnScreenOff_summary">Pristabdyti atkūrimą, kai ekranas išjungtas</string>
     <string name="reset">Atkurti numatytus nustatymus</string>
-    <string name="account">Paskyra</string>
     <string name="auth_instance">Autentifikavimo perdavimo šaltinis</string>
     <string name="github">GitHub</string>
     <string name="audio_video">Garsas ir vaizdas</string>
@@ -108,7 +106,6 @@
     <string name="reset_watch_positions">Atstatyti</string>
     <string name="system_caption_style">Sistemos subtitrų stilius</string>
     <string name="captions">Subtitrai</string>
-    <string name="playerAudioFormat">Grotuvo garso formatas</string>
     <string name="playerAudioQuality">Garso kokybė</string>
     <string name="worst_quality">Blogiausia</string>
     <string name="notify_new_streams">Pranešimai apie naujas transliacijas</string>
@@ -140,8 +137,6 @@
     <string name="preferences">Nuostatos</string>
     <string name="change_region">Atrodo, kad dabartiniame regione tendencijos yra neprieinamos. Nustatymuose pasirinkite kitą.</string>
     <string name="playback_pitch">Pikinė</string>
-    <string name="filename">Failo pavadinimas</string>
-    <string name="invalid_filename">Netinkamas failo pavadinimas!</string>
     <string name="time_code">Laiko kodas (sekundėmis)</string>
     <string name="added_to_playlist">Pridėti į grojaraštį %1$s</string>
     <string name="queue">Eilė</string>
@@ -154,7 +149,6 @@
     <string name="unsubscribe">Atšaukti prenumeratą</string>
     <string name="password">Slaptažodis</string>
     <string name="general">Bendrieji</string>
-    <string name="playingOnBackground">Leidžiama fone…</string>
     <string name="notifications">Pranešimai</string>
     <string name="network_wifi">Tik per Wi-Fi</string>
     <string name="history_empty">Istorijos dar nėra.</string>
@@ -176,7 +170,6 @@
     <string name="import_from_yt_summary">Iš YouTube arba NewPipe</string>
     <string name="app_theme">Tema</string>
     <string name="importsuccess">Užprenumeruota</string>
-    <string name="cannotDownload">Nepavyksta atsisiųsti šios transliacijos.</string>
     <string name="downloadfailed">Atsisiųsti nepavyko.</string>
     <string name="import_from_yt">Importuoti prenumeratas</string>
     <string name="createPlaylist">Sukurti grojaraštį</string>
@@ -211,7 +204,6 @@
     <string name="landscape">Gulsčias</string>
     <string name="general_summary">Kalba ir regionas</string>
     <string name="always">Visada</string>
-    <string name="no_player_found">Nerastas joks išorinis grotuvas. Įsitikinkite, kad turite jį įdiegtą.</string>
     <string name="notify_new_streams_summary">Pranešimai apie naują turinį iš kūrėjų, kuriuos stebite</string>
     <string name="checking_frequency">Tikrinama kas …</string>
     <string name="default_subtitle_language">Subtitrų kalba</string>
@@ -238,8 +230,6 @@
     <string name="material_you">Material You</string>
     <string name="sponsorblock_notifications">Pranešimai</string>
     <string name="downloads">Atsiuntimai</string>
-    <string name="update_available_text">Eiti į GitHub versijas, kad ją atsisiųstumėte\?</string>
-    <string name="advanced_summary">Atsisiuntimai ir nustatymas iš naujo</string>
     <string name="shareTo">Bendrinti URL su</string>
     <string name="legacyIcon">Prarastas palikimas</string>
     <string name="gradientIcon">Gilus gradientas</string>
@@ -248,7 +238,6 @@
     <string name="shapedIcon">Fiktyvi forma</string>
     <string name="flameIcon">Linguojanti liepsna</string>
     <string name="birdIcon">Pasipūtęs paukštis</string>
-    <string name="clear_customInstances">Ištrinti pridėtą</string>
     <string name="related_streams_summary">Rodyti panašias transliacijas šalia to, ką žiūrite</string>
     <string name="buffering_goal_summary">Didžiausias užkrauto vaizdo įrašo sekundžių skaičius atmintyje</string>
     <string name="player_summary">Numatyti nustatymai ir elgsena</string>
@@ -276,12 +265,8 @@
     <string name="color_purple">Viliojanti violetinė</string>
     <string name="aspect_ratio">Vaizdo įrašo rezoliucija</string>
     <string name="livestreams">Tiesioginės transliacijos</string>
-    <string name="alternative_videos_layout">Alternatyvus vaizdo įrašų išdėstymas</string>
     <string name="defaultIconLight">Numatyta šviesi</string>
     <string name="playlistCloned">Grojaraštis klonuotas</string>
-    <string name="confirm_unsubscribe">Ar tikrai norite atšaukti %1$s prenumeratą\?</string>
-    <string name="confirm_unsubscribing">Patvirtinkite prenumeratos atšaukimą</string>
-    <string name="confirm_unsubscribing_summary">Rodyti patvirtinimo dialogo langą prieš atšaukiant prenumeratą</string>
     <string name="play_all">Groti viską</string>
     <string name="start_time">Pradžios laikas</string>
     <string name="notification_time_summary">Laiko tarpas, kurį leidžiama rodyti pranešimus</string>
@@ -292,8 +277,6 @@
     <string name="layout">Išdėstymas</string>
     <string name="audio_track">Garso takelis</string>
     <string name="auto_quality">Automatinė</string>
-    <string name="hls_instead_of_dash">Naudoti HLS</string>
-    <string name="hls_instead_of_dash_summary">Vietoj DASH naudoti HLS (veiks lėčiau, nerekomenduojama)</string>
     <string name="limit_to_runtime">Veikimo laiko apribojimas</string>
     <string name="trends">Tendencijos</string>
     <string name="featured">Siūloma</string>

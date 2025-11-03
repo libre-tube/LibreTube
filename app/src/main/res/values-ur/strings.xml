@@ -28,7 +28,6 @@
     <string name="replies">جوابات</string>
     <string name="region">علاقہ</string>
     <string name="login_register">لاگ ان/رجسٹر</string>
-    <string name="cannotDownload">اس سلسلہ کو ڈاؤن لوڈ نہیں کیا جا سکتا۔</string>
     <string name="app_theme">تھیم</string>
     <string name="unknown_error">نیٹ ورک کی خرابی۔</string>
     <string name="error">کچھ غلط ہو گیا.</string>
@@ -103,7 +102,6 @@
     <string name="disabled">بند</string>
     <string name="playOnBackground">پس منظر میں چلائیں</string>
     <string name="update_available">ورژن %1$s دستیاب ہے</string>
-    <string name="update_available_text">اسے ڈاؤن لوڈ کرنے کے لیے GitHub پر ریلیز پر جائیں؟</string>
     <string name="appearance">ہئیت</string>
     <string name="resume">شروع کریں</string>
     <string name="player_autoplay">آٹو پلے</string>
@@ -150,7 +148,6 @@
     <string name="playback_speed">پلے بیک کی رفتار</string>
     <string name="advanced">اعلی درجے کی</string>
     <string name="player">پلیئر</string>
-    <string name="advanced_summary">ڈاؤن لوڈز، اور ری سیٹ کریں</string>
     <string name="live">لائیو</string>
     <string name="shareTo">اس کے ساتھ URL کا اشتراک کریں</string>
     <string name="defaultIcon">ڈیفالٹ</string>
@@ -167,12 +164,10 @@
     <string name="instance_name">انسٹنش کا نام</string>
     <string name="instance_api_url">انسٹنش API کی URL</string>
     <string name="addInstance">انسٹنش شامل کریں</string>
-    <string name="clear_customInstances">صاف شامل کیا گیا</string>
     <string name="version">ورژن %1$s</string>
     <string name="related_streams">متعلقہ مواد</string>
     <string name="related_streams_summary">آپ جو دیکھتے ہیں اس کے ساتھ ملتے جلتے سلسلے دکھائیں</string>
     <string name="buffering_goal">پہلے سے لوڈ</string>
-    <string name="playerVideoFormat">پلیئر کے لیے ویڈیو فارمیٹ</string>
     <string name="no_audio">کوئی آڈیو نہیں</string>
     <string name="no_video">کوئی ویڈیو نہیں</string>
     <string name="audio">آڈیو</string>
@@ -183,7 +178,6 @@
     <string name="concurrent_downloads_limit_reached">زیادہ سے زیادہ ہم آہنگی ڈاؤن لوڈ کی حد تک پہنچ گئی۔</string>
     <string name="unknown">نامعلوم</string>
     <string name="reset_message">تمام سیٹنگز ری سیٹ کریں اور لاگ آؤٹ کریں؟</string>
-    <string name="account">کھاتہ</string>
     <string name="deleteAccount_summary">اپنا پائپڈ کھاتہ ڈیلیٹ کریں</string>
     <string name="restore">بحال کریں</string>
     <string name="watch_history">دیکھے گیۓ سرگزشت</string>
@@ -211,9 +205,7 @@
     <string name="network_wifi">صرف Wi-Fi پر</string>
     <string name="translate">ترجمہ</string>
     <string name="no_search_result">کوئی نتیجہ نہیں۔</string>
-    <string name="playingOnBackground">پس منظر میں چل رہا ہے…</string>
     <string name="caption_settings">کیپشنز</string>
-    <string name="playerAudioFormat">پلیئر کے لیے آڈیو فارمیٹ</string>
     <string name="playerAudioQuality">آڈیو کوالٹی</string>
     <string name="most_recent">تازہ ترین</string>
     <string name="least_recent">قدیم ترین</string>
@@ -231,7 +223,6 @@
     <string name="autoRotatePlayer_summary">جب آلہ موڑ جاتا ہے تو پوری اسکرین پلے بیک</string>
     <string name="pure_theme">خالص تھیم</string>
     <string name="pure_theme_summary">خالص سفید/سیاہ تھیم</string>
-    <string name="no_player_found">کوئی بیرونی کھلاڑی نہیں ملا۔ براہ کرم یقینی بنائیں کہ آپ نے ایک انسٹال کیا ہے۔</string>
     <string name="data_saver_mode">ڈیٹا سیور موڈ</string>
     <string name="data_saver_mode_summary">تھمب نیلز اور دیگر تصاویر کو چھوڑ دیں</string>
     <string name="search_history_summary">تلاشیں یاد رکھیں</string>

@@ -34,7 +34,6 @@
     <string name="registered">यशस्वीरित्या नोंदणी केली! तुम्ही आता तुम्हाला हव्या असलेल्या चॅनेलची सदस्यता घेऊ शकता.</string>
     <string name="instances">निवड करा…</string>
     <string name="login_register">लॉगिन/नोंदणी करा</string>
-    <string name="cannotDownload">ही stream डाउनलोड करू शकत नाही.</string>
     <string name="server_error">निवडलेल्या सर्व्हरमध्ये समस्या असल्याचे दिसते. दुसरा instance वापरून पहा.</string>
     <string name="unknown_error">नेटवर्क त्रुटी.</string>
     <string name="empty">वापरकर्तानाव आणि पासवर्ड रिक्त असू शकत नाही.</string>
@@ -124,7 +123,6 @@
     <string name="advanced">अडवांस</string>
     <string name="player">प्लेअर</string>
     <string name="appearance_summary">आपल्या आवडीनुसार ॲप ॲडजेस्ट करा</string>
-    <string name="advanced_summary">डाउनलोड, आणि रिसेट</string>
     <string name="instance_summary">Piped, लॉगिन, व अकाउंट</string>
     <string name="customInstance_summary">ॲड…</string>
     <string name="instance_name">Instance चे नाव</string>
@@ -137,14 +135,12 @@
     <string name="reset_message">सर्व सेटिंग्ज रीसेट करून लॉग आउट करायचे\?</string>
     <string name="deleteAccount">खाते हटवा</string>
     <string name="deleteAccount_summary">तुमचे Piped खाते हटवा</string>
-    <string name="account">खाते</string>
     <string name="watch_history">वॉच इतिहास पहा</string>
     <string name="open">उघडा…</string>
     <string name="pure_theme">शुद्ध थीम</string>
     <string name="autoRotatePlayer_summary">डिव्हाइस फिरवल्यास पूर्णस्क्रीन प्लेबॅक</string>
     <string name="history_summary">पाहिलेल्या आणि शोध घेतलेल्या व्हिडिओजचा इतिहास</string>
     <string name="watch_positions_title">लक्षात ठेवलेल्या प्लेबॅक पोझिशन्स</string>
-    <string name="update_available_text">नवीन अपडेट उपलब्ध आहे. GitHub रिलिझ पेज उघडण्यासाठी क्लिक करा.</string>
     <string name="defaultIcon">डीफॉल्ट</string>
     <string name="uploaderAndVideoCount">%1$s • %2$d व्हिडिओस</string>
     <string name="sponsorblock_notifications">सूचना</string>
@@ -164,7 +160,6 @@
     <string name="birdIcon">वाढवलेला पक्षी</string>
     <string name="related_streams">संबंधित कंटेंट</string>
     <string name="buffering_goal">प्रीलोडिंग</string>
-    <string name="playerVideoFormat">प्लेअरसाठी व्हिडिओ स्वरूप</string>
     <string name="no_audio">ऑडिओ नाही</string>
     <string name="no_video">व्हिडिओ नाही</string>
     <string name="downloading">डाउनलोड करत आहे…</string>
@@ -185,9 +180,7 @@
     <string name="autoRotatePlayer">ऑटो-फुलस्क्रीन</string>
     <string name="pure_theme_summary">शुद्ध पांढरी/काळी थीम</string>
     <string name="general_summary">भाषा आणि प्रदेश</string>
-    <string name="playingOnBackground">पार्श्वभूमीत प्ले करत आहे…</string>
     <string name="caption_settings">मथळे</string>
-    <string name="playerAudioFormat">प्लेअरसाठी ऑडिओ स्वरूप</string>
     <string name="checking_frequency">प्रत्येक तपासत आहे…</string>
     <string name="most_views">सर्वाधिक जास्त पाहीलेला</string>
     <string name="subscriberAndVideoCounts">%1$s सब्सक्राइबर • %2$d व्हिडियोस</string>
@@ -196,7 +189,6 @@
     <string name="category_music_offtopic_summary">फक्त संगीत व्हिडिओमध्ये वापरण्यासाठी. यात व्हिडिओचे काही भाग समाविष्ट असले पाहिजेत, अधिकृत मिक्सचा भाग नसावा. सरतेशेवटी, व्हिडिओ Spotify किंवा इतर कोणत्याही मिश्रित आवृत्तीशी शक्य तितक्या जवळून सारखा असावा</string>
     <string name="app_uptodate">नवीन व्हर्जन वापरत आहात.</string>
     <string name="normal_views">%1$s व्ह्यूज%2$s</string>
-    <string name="clear_customInstances">ॲड केलेले साफ करा</string>
     <string name="invalid_url">कृपया कार्य करणारी URL प्रविष्ट करा</string>
     <string name="related_streams_summary">तुम्ही जे पाहता त्यासोबत समान व्हिडिओ दर्शवा</string>
     <string name="buffering_goal_summary">कमाल बफर करण्यासाठी व्हिडिओच्या सेकंदांची संख्या</string>
@@ -225,7 +217,6 @@
     <string name="aspect_ratio">व्हिडिओ आस्पेक्ट रेशो</string>
     <string name="auto_rotation">स्वयं-रोटेशन</string>
     <string name="landscape">लँडस्केप</string>
-    <string name="no_player_found">कोणताही बाहेरचा प्लेअर आढळला नाही. कृपया तुम्ही एक स्थापित केले असल्याची खात्री करा.</string>
     <string name="data_saver_mode_summary">लघुप्रतिमा आणि इतर प्रतिमा वगळा</string>
     <string name="search_history_summary">शोध लक्षात ठेवा</string>
     <string name="mark_as_watched">पाहिले म्हणून चिन्हांकित करा</string>
@@ -253,12 +244,9 @@
     <string name="app_backup">ॲप बॅकअप</string>
     <string name="username_email">शिफारस नसलेल्या ई-मेल पत्त्यासह पुढे जायचे?</string>
     <string name="proceed">पुढे जा</string>
-    <string name="confirm_unsubscribe">तुमची खात्री आहे की तुम्ही %1$s सदस्यत्व रद्द करू इच्छिता\?</string>
-    <string name="custom_playback_speed">सानुकूल गती</string>
     <string name="import_playlists">प्लेलिस्ट आयात करा</string>
     <string name="export_playlists">प्लेलिस्ट निर्यात करा</string>
     <string name="backup_restore_summary">आयात आणि निर्यात सदस्यता, प्लेलिस्ट, …</string>
-    <string name="custom_playback_speed_summary">सामान्य प्लेअरपेक्षा वेगळा प्लेबॅक वेग वापरा</string>
     <string name="auto_fullscreen_shorts">शॉर्ट्स व्हिडिओवर ऑटो फुलस्क्रीन</string>
     <string name="pinch_control">पिंच कंट्रोल</string>
     <string name="privacy_alert">गोपनीयता सूचना</string>
@@ -302,12 +290,8 @@
     <string name="skip_segment">विभाग वगळा</string>
     <string name="local_subscriptions">स्थानिक सदस्यता</string>
     <string name="change_region">सध्याच्या क्षेत्रासाठी ट्रेंडिंग अनुपलब्ध असल्याचे दिसते. कृपया सेटिंग्जमध्ये दुसरा निवडा.</string>
-    <string name="filename">फाईलचे नाव</string>
-    <string name="invalid_filename">अवैध फाइलनाव!</string>
     <string name="time_code">वेळ कोड (सेकंद)</string>
-    <string name="alternative_videos_layout">पर्यायी व्हिडिओ लेआउट</string>
     <string name="defaultIconLight">डीफॉल्ट प्रकाश</string>
-    <string name="confirm_unsubscribing">सदस्यत्व रद्द केल्याची पुष्टी करा</string>
     <string name="time">वेळ</string>
     <string name="start_time">सुरवातीची वेळ</string>
     <string name="notification_time">सूचना वेळ</string>
@@ -356,10 +340,7 @@
     <string name="resize_mode_fill">भरा</string>
     <string name="play_next">पुढील प्ले करा</string>
     <string name="playback_pitch">पिच</string>
-    <string name="confirm_unsubscribing_summary">सदस्यत्व रद्द करण्यापूर्वी एक पुष्टीकरण संवाद दर्शवा</string>
     <string name="auto_quality">ऑटो</string>
-    <string name="hls_instead_of_dash">HLS वापरा</string>
-    <string name="hls_instead_of_dash_summary">डॅशऐवजी एचएलएस वापरा (हळू असेल, शिफारस केलेली नाही)</string>
     <string name="defaults">डिफॉल्ट</string>
     <string name="no_comments_available">या व्हिडिओवर कोणत्याही टिप्पण्या नाहीत.</string>
     <string name="captions_size">मथळे आकार</string>

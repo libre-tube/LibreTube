@@ -52,7 +52,6 @@
     <string name="password">密碼</string>
     <string name="instances">揀 …</string>
     <string name="login_register">登入/註冊</string>
-    <string name="cannotDownload">下載唔到呢個直播.</string>
     <string name="server_error">Server 似乎有啲問題. 試下另一個\?</string>
     <string name="emptyList">呢度乜都冇.</string>
     <string name="empty">你已經打左帳號或者密碼.</string>
@@ -75,8 +74,6 @@
     <string name="startpage">主頁</string>
     <string name="library">拉把</string>
     <string name="autoRotatePlayer">自動 Fullscreen</string>
-    <string name="no_player_found">喺你部機偵測唔到其他播放器。
-\n請確定你係已經裝左。</string>
     <string name="pause">暫停</string>
     <string name="download_paused">暫停下載</string>
     <string name="audio">聲</string>
@@ -84,7 +81,6 @@
     <string name="never">永遠</string>
     <string name="playOnBackground">喺背景度播</string>
     <string name="update_available">版本 %1$s 已經有啦</string>
-    <string name="update_available_text">去 Github 下載新嘅 Releases？</string>
     <string name="appearance">主題</string>
     <string name="downloads">下載</string>
     <string name="update_summary">檢查更新</string>
@@ -92,7 +88,6 @@
     <string name="playback_speed">播放速度</string>
     <string name="advanced">進階</string>
     <string name="player">播放器</string>
-    <string name="advanced_summary">下載然後重置</string>
     <string name="shareTo">些牙個網址俾</string>
     <string name="defaultIcon">預設</string>
     <string name="instance_summary">Piped, 登入同訂閱</string>
@@ -115,7 +110,6 @@
     <string name="reset_message">重置所有原來嘅設定同登出？</string>
     <string name="deleteAccount">刪除帳號</string>
     <string name="deleteAccount_summary">刪咗你嘅 Piped 帳號</string>
-    <string name="account">帳號</string>
     <string name="restore">復原</string>
     <string name="watch_history">睇片記錄</string>
     <string name="watch_positions">記住上次睇到邊</string>
@@ -143,7 +137,6 @@
     <string name="queue">排序</string>
     <string name="livestreams">直播</string>
     <string name="playlistCloned">已經抄底左條 Playlist 去你嘅拉把</string>
-    <string name="confirm_unsubscribing">確定要 unsubscribe</string>
     <string name="play_all">播哂全部</string>
     <string name="time">時間</string>
     <string name="start_time">開始時間</string>
@@ -175,17 +168,14 @@
     <string name="copied">已經抄底咗</string>
     <string name="share_with_time">分享埋個時間點</string>
     <string name="export_subscriptions">匯出訂閱</string>
-    <string name="filename">file 名</string>
     <string name="time_code">時間點（秒）</string>
     <string name="added_to_playlist">加去 Playlist</string>
     <string name="network_all">全部</string>
     <string name="brightness">光度</string>
-    <string name="custom_playback_speed">自訂速度</string>
     <string name="segment_skipped">跳過嘅部分</string>
     <string name="category_segments">分段</string>
     <string name="wifi">Wi-Fi</string>
     <string name="mobile_data">電話 data</string>
-    <string name="confirm_unsubscribe">你真係要 unsubscribe %1$s\?</string>
     <string name="category">分類</string>
     <string name="download_channel_description">我 Down 緊野個陣就出個通知俾我.</string>
     <string name="codecs">Codecs</string>

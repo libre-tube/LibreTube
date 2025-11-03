@@ -41,7 +41,6 @@
     <string name="advanced">Has giňişleýin</string>
     <string name="player">Pleýer</string>
     <string name="appearance_summary">Programmany öz islegiňize görä sazlaň</string>
-    <string name="advanced_summary">Ýüklemeler, we deslapky</string>
     <string name="live">Göni ýaýlym</string>
     <string name="shareTo">URL-i paýlaşyň</string>
     <string name="defaultIcon">Deslapky</string>
@@ -55,7 +54,6 @@
     <string name="related_streams_summary">Görýän zatlaryňyz bilen baglanyşykly wideolary görkeziň</string>
     <string name="buffering_goal">Öňünden ýükleme</string>
     <string name="buffering_goal_summary">Öňünden ýüklemek üçin maks sekunt mukdary</string>
-    <string name="playerVideoFormat">Pleýer üçin wideo formaty</string>
     <string name="no_audio">Ses ýok</string>
     <string name="no_video">Wideo ýok</string>
     <string name="audio">Ses</string>
@@ -72,7 +70,6 @@
     <string name="reset">Deslapky ýagdaýy dikelt</string>
     <string name="deleteAccount">Hasaby poz</string>
     <string name="deleteAccount_summary">Piped hasabyňy poz</string>
-    <string name="account">Hasap</string>
     <string name="restore">Dikelt</string>
     <string name="watch_history">Belliklere serediň</string>
     <string name="watch_positions">Soňky ýeri ýatda sakla</string>
@@ -80,7 +77,6 @@
     <string name="audio_video">Ses we wideo</string>
     <string name="fullscreen_orientation">Doly ekran ugry</string>
     <string name="aspect_ratio">Wideonyň öleçeglerine görä</string>
-    <string name="cannotDownload">Bu wideony göçürip alyp bolmaýar.</string>
     <string name="importsuccess">Abuna ýazyldyňyz</string>
     <string name="downloadfailed">Ýükleme şowsuz boldy.</string>
     <string name="import_from_yt">Abuna ýazylyşlary getir</string>
@@ -176,7 +172,6 @@
     <string name="skip_buttons_summary">Indiki ýa-da öňki wideo geçmek üçin düwmeleri görkez</string>
     <string name="add_to_queue">Nobata goşuň</string>
     <string name="open_copied">Aç</string>
-    <string name="playerAudioFormat">Pleýer üçin ses formaty</string>
     <string name="notify_new_streams">Täze wideolar üçin bildirişler</string>
     <string name="most_views">Iň köp görülen</string>
     <string name="least_views">Iň az görülen</string>
@@ -201,6 +196,5 @@
     <string name="system_caption_style">Ulgam subtitr stili</string>
     <string name="captions">Subtitrler</string>
     <string name="none">Hiç hili</string>
-    <string name="playingOnBackground">Fonda dowam edýär…</string>
     <string name="caption_settings">Subtitrler</string>
 </resources>

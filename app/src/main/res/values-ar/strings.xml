@@ -20,7 +20,6 @@
     <string name="username">إسم المستخدم</string>
     <string name="register">تسجيل جديد</string>
     <string name="already_logged_in">لقد سجلت دخولك بالفعل، يمكنك تسجيل الخروج من حسابك.</string>
-    <string name="cannotDownload">لا يمكن تنزيل هذا البث.</string>
     <string name="region">المنطقة</string>
     <string name="importsuccess">مشترك</string>
     <string name="downloadfailed">فشل التنزيل.</string>
@@ -122,7 +121,6 @@
     <string name="instance_api_url">عنوان URL لنُسْخَة واجهة برمجة التطبيقات</string>
     <string name="addInstance">أضِف نُسْخَة</string>
     <string name="empty_instance">املأ الاسم وعنوان URL لواجهة برمجة التطبيقات.</string>
-    <string name="playerVideoFormat">تنسيق الفيديو لمشغل</string>
     <string name="category_music_offtopic_summary">فقط للاستخدام في مقاطع الفيديو الموسيقية. يجب أن تغطي أجزاء من الفيديو وليس جزءا من الخلطات الرسمية. في النهاية ، يجب أن يشبه الفيديو Spotify أو أي إصدار مختلط آخر قدر الإمكان ، أو يقلل من التحدث أو تشتيت الانتباه</string>
     <string name="buffering_goal">التحميل المسبق</string>
     <string name="buffering_goal_summary">الحد الأقصى لعدد ثواني الفيديو للتخزين المؤقت</string>
@@ -132,16 +130,13 @@
     <string name="gradientIcon">التدرج اللوني</string>
     <string name="instance_summary">Piped وتسجيل الدخول والحساب</string>
     <string name="instance_name">اسم النُسْخَة</string>
-    <string name="clear_customInstances">مسح المضاف</string>
     <string name="live">مباشر</string>
     <string name="player_autoplay">التشغيل التلقائي</string>
-    <string name="update_available_text">تحديث جديد متاح. انقر لفتح صفحة إصدارات GitHub.</string>
     <string name="appearance">المظهر</string>
     <string name="advanced">متقدم</string>
     <string name="player">المشغل</string>
     <string name="playback_speed">سرعة التشغيل</string>
     <string name="appearance_summary">اضبط التطبيق حسب رغبتك</string>
-    <string name="advanced_summary">التنزيلات وإعادة التعيين</string>
     <string name="customInstance_summary">أضِف…</string>
     <string name="shareTo">مشاركة الرابط إلى</string>
     <string name="no_audio">لا يوجد صوت</string>
@@ -160,7 +155,6 @@
     <string name="reset_message">إعادة تعيين جميع الإعدادات وتسجيل الخروج؟</string>
     <string name="clonePlaylist">نسخ قائمة التشغيل</string>
     <string name="deleteAccount">حذف الحساب</string>
-    <string name="account">الحساب</string>
     <string name="restore">استعادة</string>
     <string name="deleteAccount_summary">حذف حساب Piped الخاص بك</string>
     <string name="watch_history">سجل المشاهدة</string>
@@ -188,7 +182,6 @@
     <string name="autoRotatePlayer_summary">التشغيل بملء الشاشة عند تدوير الجهاز</string>
     <string name="pure_theme">نسق نقي</string>
     <string name="pure_theme_summary">نسق أبيض/أسود نقي</string>
-    <string name="no_player_found">لم يتم العثور على مشغل خارجي. يرجى التأكد من تثبيته.</string>
     <string name="data_saver_mode">وضع توفير البيانات</string>
     <string name="search_history_summary">تذكر عمليات البحث</string>
     <string name="watch_history_summary">تتبع مقاطع الفيديو التي تمت مشاهدتها محليا</string>
@@ -201,9 +194,7 @@
     <string name="history_summary">سجل المشاهدة والبحث</string>
     <string name="general">عام</string>
     <string name="general_summary">التنزيلات وحافظ البطرية</string>
-    <string name="playingOnBackground">قيد التشغيل في الخلفية…</string>
     <string name="caption_settings">التسميات التوضيحية</string>
-    <string name="playerAudioFormat">تنسيق الصوت للمشغل</string>
     <string name="playerAudioQuality">جودة الصوت</string>
     <string name="worst_quality">أسوأ</string>
     <string name="default_subtitle_language">لغة الترجمة</string>
@@ -270,18 +261,12 @@
     <string name="navigation_bar">شريط التنقل</string>
     <string name="change_region">المتصدرة يبدو أنها غير متاحة في المنطقة الحالية . الرجاء اختيار آخر في الإعداد .</string>
     <string name="playback_pitch">الحدة</string>
-    <string name="filename">اسم الملف</string>
-    <string name="invalid_filename">اسم الملف غير صالح!</string>
     <string name="time_code">رمز الوقت (بالثواني)</string>
     <string name="added_to_playlist">تمت الإضافة إلى قائمة التشغيل %1$s</string>
     <string name="queue">الانتظار</string>
     <string name="livestreams">البث المباشر</string>
     <string name="defaultIconLight">الافتراضي ابيض</string>
-    <string name="alternative_videos_layout">اتجاهات فيديو بديلة</string>
     <string name="playlistCloned">تم استنساخ قائمة التشغيل</string>
-    <string name="confirm_unsubscribe">هل أنت متأكد من أنك تريد إلغاء الاشتراك %1$s؟</string>
-    <string name="confirm_unsubscribing">تأكيد إلغاء الاشتراك</string>
-    <string name="confirm_unsubscribing_summary">إظهار مربع حوار تأكيد قبل إلغاء الاشتراك</string>
     <string name="play_all">تشغيل الكل</string>
     <string name="notification_time_summary">حدد الفترة الزمنية التي تظهر فيها إشعارات البث</string>
     <string name="time">الوقت</string>
@@ -291,8 +276,6 @@
     <string name="navbar_order">ترتيب</string>
     <string name="layout">التَخطِيط</string>
     <string name="audio_track">مسار صوتي</string>
-    <string name="hls_instead_of_dash">استخدام HLS</string>
-    <string name="hls_instead_of_dash_summary">إستعملْ HLS بدلاً مِنْ DASH لبث الوسائط. حاول تمكين هذا الخيار إن لم ينجح عرض الفيديو.</string>
     <string name="auto_quality">تلقائي</string>
     <string name="limit_to_runtime">الحد من وقت التشغيل</string>
     <string name="trends">المتصدرة</string>
@@ -358,8 +341,6 @@
     <string name="codecs">مرمازات الفيديو</string>
     <string name="unsupported_file_format">تنسيق الملف غير المدعوم: %1$s</string>
     <string name="mark_as_watched">علّمه كفيديو تمت مشاهدته</string>
-    <string name="custom_playback_speed">سرعة مخصصة</string>
-    <string name="custom_playback_speed_summary">استخدم سرعة تشغيل مختلفة عن سرعة المشغل العادي</string>
     <string name="category">الفئة</string>
     <string name="normal_views">%1$s مشاهدات %2$s</string>
     <string name="stats_for_nerds">احصائيات لتقنيين</string>
@@ -416,14 +397,11 @@
     <string name="sb_custom_colors_summary">تبديل شرائح الألوان المخصصة لشرائح كتلة الراعي</string>
     <string name="sb_custom_colors">ألوان شرائح مخصصة</string>
     <string name="invalid_color">تم إدخال قيمة لون غير صالحة!</string>
-    <string name="visible">أظهِر في شريط التمرير</string>
     <string name="color">اللون</string>
     <string name="category_highlight">إظهار تمييز الفيديو</string>
     <string name="category_highlight_summary">يمكن أن يكون العنوان المعلن عنه أو الصورة المصغرة أو الجزء الأكثر إثارة للاهتمام من الفيديو. يمكنك التخطي إليه من خلال النقر عليه في قسم الفصول</string>
     <string name="chapters_videoHighlight">ملخصات الفيديو</string>
     <string name="stop">إيقاف</string>
-    <string name="fallback_piped_proxy">الرجوع إلى الوكيل Piped</string>
-    <string name="fallback_piped_proxy_summary">قم بتحميل مقاطع الفيديو عبر الخادم الوكيل إذا كان الاتصال ب YouTube مباشرة لا يعمل مع الفيديو الحالي (يزيد من أوقات التحميل الأولية). إذا تم تعطيله ، فمن المحتمل ألا يتم تشغيل محتوى موسيقى YouTube بسبب قيود YT</string>
     <string name="unknown_audio_track_type">نوع مسار صوتي غير معروف</string>
     <string name="original_or_main_audio_track">أصلي أو رئيسي</string>
     <string name="dubbed_audio_track">مدبلجة</string>
@@ -441,7 +419,6 @@
     <string name="sort_by">ترتيب حسب</string>
     <string name="duration_span">المدة: %1$s</string>
     <string name="uploader_name">اسم رافع المحتوى</string>
-    <string name="no_chapter">لا يوجد فصل</string>
     <string name="screen_orientation">اتجاه الشاشة</string>
     <string name="remove_watched_videos">إزالة مقاطع الفيديو التي تمت مشاهدتها</string>
     <string name="player_channel_name">خدمة المشغل</string>
@@ -467,7 +444,6 @@
     <string name="resolution_limited">محدود</string>
     <string name="auto_generated">الإنشاء-التلقائي</string>
     <string name="registration_disabled">تم تعطيل التسجيل</string>
-    <string name="proxy">بروكسي</string>
     <string name="group_name_error_empty">رجاءً إدخلْ اسماً</string>
     <string name="group_name_error_exists">الرجاء اختيار اسم فريد</string>
     <string name="automatic_once">تلقائي مرة واحدة</string>
@@ -475,7 +451,6 @@
     <string name="segment_type">نوع المقطع</string>
     <string name="sb_invalid_segment">بداية المقطع أو نهايته غير صالحة</string>
     <string name="contribute_to_sponsorblock">المساهمة في حاجب الرعاة</string>
-    <string name="filename_too_long">اسم الملف طويل جدًا!</string>
     <string name="sponsorblock_user_id">معرف مستخدم حاجب الرعاة</string>
     <string name="donate">التبرع</string>
     <string name="music_artists">YT الموسيقى: الفنانين</string>
@@ -539,7 +514,6 @@
     <string name="local_ryd">مستخرج عدم الإعجاب للإرجاع المحلي على يوتيوب</string>
     <string name="local_ryd_summary">جلب معلومات عدم الإعجاب مباشرة من https://returnyoutubedislikeapi.com</string>
     <string name="import_watch_history">استيراد سجل المشاهدة</string>
-    <string name="import_watch_history_desc">يرجى ملاحظة أنه لن يتم استيراد كل شيء بسبب بيانات التصدير المحدودة على YouTube.</string>
     <string name="audio_codecs">مرمازات الصوت</string>
     <string name="view_count">مشاهدات %1$s</string>
     <string name="dialog_play_offline_title">تتوفر نسخة محلية من هذا الفيديو.</string>

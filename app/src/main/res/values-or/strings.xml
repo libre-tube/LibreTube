@@ -25,7 +25,6 @@
     <string name="login_register">ସଂଶ୍ଳିଷ୍ଟ/ପଞ୍ଜିକରଣ</string>
     <string name="registered">ପଞ୍ଜୀକୃତ । ଏବେ ଆପଣ ନୂଆ ଧାରାବାହିକ କୁ ଅନୁସରଣ କରିପାରିବେ ।</string>
     <string name="importsuccess">ସଦସ୍ୟତା ଅଛି</string>
-    <string name="cannotDownload">ଏହି ଷ୍ଟ୍ରିମ୍ ଟି ଡାଉନଲୋଡ୍ କରିହେବ ନାହିଁ।</string>
     <string name="downloadfailed">ଡାଉନଲୋଡ୍ ବିଫଳ ହେଲା ।</string>
     <string name="import_from_yt_summary">ୟୁ ଟିଉବ କିମ୍ବା ନିଉପାଇପ ରୁ</string>
     <string name="app_theme">ଥିମ୍</string>
@@ -72,7 +71,6 @@
     <string name="enabled">ଅନ୍</string>
     <string name="disabled">ବନ୍ଦ ଅଛି</string>
     <string name="playOnBackground">ପୃଷ୍ଠଭୂମି ରେ ପ୍ଲେ କରନ୍ତୁ</string>
-    <string name="update_available_text">ନୂତନ ଅଦ୍ୟତନ ଉପଲବ୍ଧ । GitHub ରିଲିଜ୍ ପୃଷ୍ଠା ଖୋଲିବାକୁ କ୍ଲିକ୍ କରନ୍ତୁ ।</string>
     <string name="appearance">ରୂପ</string>
     <string name="playlistCreated">ପ୍ଲେଲିଷ୍ଟ ଯୋଡାଗଲା ।</string>
     <string name="import_from_yt">ସଦସ୍ୟତା ଗୁଡ଼ିକୁ ଆମଦାନୀ କରନ୍ତୁ</string>
@@ -120,7 +118,6 @@
     <string name="app_uptodate">ସର୍ବଶେଷ ସଂସ୍କରଣ ଚାଲୁଅଛି ।</string>
     <string name="playback_speed">ପ୍ଲେବେକ୍ ବେଗ</string>
     <string name="advanced">ଵିକଶିତ</string>
-    <string name="advanced_summary">ଡାଉନଲୋଡ୍ ଆଉ ରିସେଟ୍</string>
     <string name="live">ସିଧା ପ୍ରସାରଣ</string>
     <string name="shareTo">URL ଅଂଶୀଦାର କରନ୍ତୁ</string>
     <string name="defaultIcon">ଡିଫଲ୍ଟ</string>
@@ -137,7 +134,6 @@
     <string name="version">ସଂସ୍କରଣ %1$s</string>
     <string name="related_streams_summary">ଆପଣ ଯାହା ଦେଖୁଛନ୍ତି ତାହା ସହିତ ସମାନ ଷ୍ଟ୍ରିମ୍ ଦେଖାନ୍ତୁ</string>
     <string name="buffering_goal">ପ୍ରିଲୋଡିଂ</string>
-    <string name="playerVideoFormat">ଚାଳକ ନିମନ୍ତେ ଵିଡ଼ିଓ ଫର୍ମାଟ୍</string>
     <string name="no_audio">ସ୍ୱର ନାହିଁ</string>
     <string name="no_video">ଭିଡିଓ ନାହିଁ</string>
     <string name="audio">ସ୍ୱର</string>
@@ -149,7 +145,6 @@
     <string name="pauseOnScreenOff">ସ୍ଵତଃ-ବିରାମ</string>
     <string name="clonePlaylist">କ୍ଲୋନ୍ ପ୍ଲେଲିଷ୍ଟ୍</string>
     <string name="deleteAccount">ଖାତା ବିଲୋପ କରନ୍ତୁ</string>
-    <string name="account">ଆକାଉଣ୍ଟ</string>
     <string name="restore">ପୁନରୁଦ୍ଧାର</string>
     <string name="watch_history">ଇତିହାସ ଦେଖନ୍ତୁ</string>
     <string name="watch_positions">ସ୍ଥିତି ମନେରଖ</string>
@@ -170,7 +165,6 @@
     <string name="system_caption_style">ସିଷ୍ଟମ୍ କ୍ୟାପସନ୍ ଶଇଳୀ</string>
     <string name="general">ସାଧାରଣ</string>
     <string name="general_summary">ଭାଷା ଓ ଜାଗା</string>
-    <string name="playingOnBackground">ପୃଷ୍ଠଭୂମିରେ ଖେଳିବା…</string>
     <string name="caption_settings">କ୍ୟାପସନ୍</string>
     <string name="default_subtitle_language">ସବ୍ଟାଇଟ୍ଲ ଭାଷା</string>
     <string name="notifications">ବିଜ୍ଞପ୍ତି ଗୁଡ଼ିକ</string>
@@ -193,7 +187,6 @@
     <string name="time_code">ଟାଇମ୍ କୋଡ୍ (ସେକେଣ୍ଡରେ)</string>
     <string name="queue">ଧାଡ଼ି</string>
     <string name="instance_summary">ପାଇପ୍, ଲଗଇନ୍, ଏବଂ ଆକାଉଣ୍ଟ୍</string>
-    <string name="clear_customInstances">ଯୋଡ଼ାଯାଇଥିବା ଗୁଡ଼ିକୁ ବିଲୋପ କରନ୍ତୁ</string>
     <string name="related_streams">ସମ୍ବନ୍ଧିତ ବିଷୟବସ୍ତୁ</string>
     <string name="pauseOnScreenOff_summary">ସ୍କ୍ରିନ୍ ବନ୍ଦ ହୋଇଗଲେ ପ୍ଲେ-ବକ୍ ବନ୍ଦ କରନ୍ତୁ</string>
     <string name="behavior">ବ୍ୟବହାର</string>
@@ -223,8 +216,6 @@
     <string name="reset_message">ସମସ୍ତ ସେଟିଂସମୂହ ପୁନ ରିସେଟ୍ କରନ୍ତୁ ଏବଂ ଲଗ୍ ଆଉଟ୍ କରନ୍ତୁ \?</string>
     <string name="deleteAccount_summary">ଆପଣଙ୍କର ପାଇପ୍ ଆକାଉଣ୍ଟ୍ ଡିଲିଟ୍ କରନ୍ତୁ</string>
     <string name="playback_pitch">ପିଚ୍</string>
-    <string name="filename">ଫାଇଲ୍ ର ନାମ</string>
-    <string name="invalid_filename">Invalid ନାମ!</string>
     <string name="auth_instances">ଏକ auth ଉଦାହରଣ ବାଛନ୍ତୁ</string>
     <string name="fullscreen_orientation">ଫୁଲ୍ ସ୍କ୍ରିନ୍ ଆରିଏଣ୍ଟେସନ୍</string>
     <string name="auto_rotation">ସ୍ଵତଃ-ଘୂର୍ଣ୍ଣନ</string>
@@ -238,14 +229,12 @@
     <string name="navLabelVisibility">ଲେବଲ୍ ଦୃଶ୍ୟମାନତା</string>
     <string name="autoRotatePlayer">ସ୍ୱତଃ-ପୂର୍ଣ୍ଣସ୍କ୍ରୀନ୍</string>
     <string name="search_history_summary">ସନ୍ଧାନଗୁଡିକ ମନେରଖ</string>
-    <string name="no_player_found">କୌଣସି ବହିଃ-ଚାଳକ ମିଳିଲା ନାହିଁ। ଦୟାକରି ନିଶ୍ଚିତ କରନ୍ତୁ ଯେ ଆପଣଙ୍କର ଗୋଟିଏ ଚାଳକ ଅଧିସ୍ଥାପିତ ହୋଇଅଛି।</string>
     <string name="data_saver_mode">ଡାଟା-ସେଭର୍ ସ୍ଥିତି</string>
     <string name="data_saver_mode_summary">ଥମ୍ବନେଲ ଏବଂ ଅନ୍ୟାନ୍ୟ ପ୍ରତିଛବିଗୁଡ଼ିକୁ ଏଡ଼ାଇଦିଅ</string>
     <string name="watch_positions_title">ପ୍ଲେବ୍ୟାକ୍ ସ୍ଥିତିକୁ ମନେରଖ</string>
     <string name="none">କିଛି ବି ନାହିଁ</string>
     <string name="history_summary">ଇତିହାସ ଦେଖନ୍ତୁ ଏବଂ ସନ୍ଧାନ କରନ୍ତୁ</string>
     <string name="captions">କ୍ୟାପସନ୍</string>
-    <string name="playerAudioFormat">ଚାଳକ ନିମନ୍ତେ ଅଡ଼ିଓ ଫର୍ମାଟ୍</string>
     <string name="worst_quality">ସବୁଠାରୁ ଖରାପ</string>
     <string name="notify_new_streams_summary">ଆପଣ ଅନୁସରଣ କରୁଥିବା ସୃଷ୍ଟିକର୍ତ୍ତାଙ୍କ ଠାରୁ ନୂତନ ଷ୍ଟ୍ରିମ୍ ପାଇଁ ବିଜ୍ଞପ୍ତି ପ୍ରଦର୍ଶନ କରନ୍ତୁ</string>
     <string name="least_recent">ପୁରୁଣା</string>
@@ -272,16 +261,12 @@
     <string name="backup_restore">ନକଲ ଓ ସଂରକ୍ଷଣ</string>
     <string name="subscriptions">ସଦସ୍ୟତା ଗୁଡ଼ିକ</string>
     <string name="livestreams">ସିଧପ୍ରସାରଣ ଷ୍ଟ୍ରୀମ ଗୁଡ଼ିକ</string>
-    <string name="alternative_videos_layout">ବିକଳ୍ପ ଭିଡିଓ ଲେଆଉଟ୍</string>
     <string name="defaultIconLight">ଡିଫଲ୍ଟ ଉଜ୍ଜଳ</string>
     <string name="download_channel_name">ଡାଉନଲୋଡ୍ ସେବା</string>
     <string name="download_channel_description">ମିଡିଆ ଡାଉନଲୋଡ୍ କରିବା ସମୟରେ ଏକ ବିଜ୍ଞପ୍ତି ଦେଖାଏ ।</string>
     <string name="push_channel_name">ବିଜ୍ଞପ୍ତି କର୍ମୀ</string>
     <string name="push_channel_description">ନୂତନ ଷ୍ଟ୍ରିମ୍ ଉପଲବ୍ଧ ହେଲେ ଏକ ବିଜ୍ଞପ୍ତି ଦେଖାଏ ।</string>
     <string name="playlistCloned">ପ୍ଲେଲିଷ୍ଟ କ୍ଲୋନ ହୋଇଛି</string>
-    <string name="confirm_unsubscribe">ଆପଣ %1$s ର ସଦସ୍ୟତା ରଦ୍ଦ କରିବାକୁ ଚାହୁଁଛନ୍ତି ବୋଲି ଆପଣ ନିଶ୍ଚିତ କି\?</string>
-    <string name="confirm_unsubscribing">ସଦସ୍ୟତା ରୁ ନିବୃତ୍ତ ହେବାକୁ ନିଶ୍ଚିତ କରନ୍ତୁ</string>
-    <string name="confirm_unsubscribing_summary">ସଦସ୍ୟତା ରଦ୍ଦ କରିବା ପୂର୍ବରୁ ଏକ ନିଶ୍ଚିତକରଣ ସଂଳାପ ଦେଖାନ୍ତୁ</string>
     <string name="play_all">ସମସ୍ତ ପ୍ଲେ କରନ୍ତୁ</string>
     <string name="end_time">ଶେଷ ସମୟ</string>
     <string name="notification_time">ବିଜ୍ଞପ୍ତି ସମୟ ସୀମିତ କରନ୍ତୁ</string>
@@ -291,8 +276,6 @@
     <string name="navbar_order">ସଜାନ୍ତୁ</string>
     <string name="layout">ଲେଆଉଟ୍</string>
     <string name="audio_track">ଅଡିଓ ଟ୍ରାକ୍</string>
-    <string name="hls_instead_of_dash">HLS ବ୍ୟବହାର କରନ୍ତୁ</string>
-    <string name="hls_instead_of_dash_summary">DASH ପରିବର୍ତ୍ତେ HLS ବ୍ୟବହାର କରନ୍ତୁ (ଧୀର ହେବ, ସୁପାରିଶ ହେବ ନାହିଁ)</string>
     <string name="auto_quality">ସ୍ଵତଃ</string>
     <string name="limit_to_runtime">ଚାଲିବା ସମୟ ପର୍ଯ୍ୟନ୍ତ ସୀମିତ କରନ୍ତୁ</string>
     <string name="trends">ଧାରା</string>
@@ -358,8 +341,6 @@
     <string name="codecs">କୋଡେକ୍ ଗୁଡିକ</string>
     <string name="mark_as_watched">ଦେଖାଯାଇଥିବା ପରି ଚିହ୍ନିତ କର</string>
     <string name="unsupported_file_format">ଅସମର୍ଥିତ ଫାଇଲ୍ ଫର୍ମାଟ୍: %1$s</string>
-    <string name="custom_playback_speed">କଷ୍ଟମ୍ ବେଗ</string>
-    <string name="custom_playback_speed_summary">ସାଧାରଣ ପ୍ଲେୟାର ଅପେକ୍ଷା ଏକ ଭିନ୍ନ ପ୍ଲେକ୍ ବେଗ ବ୍ୟବହାର କରନ୍ତୁ</string>
     <string name="category">ବର୍ଗ</string>
     <string name="normal_views">%1$s ଦର୍ଶନ%2$s</string>
     <string name="playing_next">%1$s ରେ ପରବର୍ତ୍ତୀ ଚାଲିବ</string>
@@ -415,11 +396,8 @@
     <string name="category_highlight">ଭିଡିଓ ହାଇଲାଇଟ୍ ଦେଖନ୍ତୁ</string>
     <string name="category_highlight_summary">ବିଜ୍ଞାପନର ଟାଇଟଲ୍, ଥମ୍ବନେଲ କିମ୍ବା ଭିଡିଓର ସବୁଠାରୁ ଆକର୍ଷଣୀୟ ଅଂଶ ହୋଇପାରେ । ଆପଣ ଏହାକୁ ଅଧ୍ୟାୟ ବିଭାଗରେ ଟ୍ୟାପ୍ କରି ଏହାକୁ ଛାଡି ପାରିବେ</string>
     <string name="invalid_color">ଅବୈଧ ରଙ୍ଗ ମୂଲ୍ୟ ପ୍ରବେଶ!</string>
-    <string name="visible">ସନ୍ଧାନ ବାର୍ ରେ ଦେଖାନ୍ତୁ</string>
     <string name="chapters_videoHighlight">ଭିଡିଓ ହାଇଲାଇଟ୍</string>
     <string name="stop">ବନ୍ଦ କର</string>
-    <string name="fallback_piped_proxy">ପାଇପ୍ ପ୍ରକ୍ସି କୁ ଫେରନ୍ତୁ</string>
-    <string name="fallback_piped_proxy_summary">ଯଦି YouTube କୁ ସିଧାସଳଖ ସଂଯୋଗ କରିବା ସମ୍ପ୍ରତି ଭିଡିଓ ପାଇଁ କାମ କରେ ନାହିଁ (ପ୍ରାରମ୍ଭିକ ଲୋଡିଂ ସମୟ ବୃଦ୍ଧି କରେ) ତେବେ ପ୍ରୋକ୍ସି ମାଧ୍ୟମରେ ଭିଡିଓ ଲୋଡ୍ କରନ୍ତୁ। ଯଦି ଅକ୍ଷମ ହୋଇଛି, YT ପ୍ରତିବନ୍ଧକ କାରଣରୁ YouTube ସଙ୍ଗୀତ ବିଷୟବସ୍ତୁ ସମ୍ଭବତଃ ଚାଳନ ହେବ ନାହିଁ</string>
     <string name="dearrow">DeArrow କୁ ସକ୍ରିୟ କରନ୍ତୁ</string>
     <string name="dearrow_summary">ଅଧିକ ସଠିକ ଏବଂ କମ୍ ସମ୍ବେଦନଶୀଳତା ବିଶିଷ୍ଟ ଶୀର୍ଷକ ଏବଂ ଅକ୍ଷରଗୁଡ଼ିକୁ ଦର୍ଶାନ୍ତୁ । ଲୋଡିଂ ସମୟ ବଢାଇଥାଏ</string>
     <string name="audio_track_format">%1$s ଠାରୁ %2$s</string>
@@ -434,7 +412,6 @@
     <string name="unknown_audio_language">ଅଜଣା ଧ୍ୱନି ଭାଷା</string>
     <string name="unknown_or_no_audio">ଅଜଣା କିମ୍ବା କୌଣସି ଧ୍ୱନି ନାହିଁ</string>
     <string name="visibility_unlisted">ତାଲିକାହୀନ</string>
-    <string name="no_chapter">କୌଣସି ଅଧ୍ୟାୟ ନାହିଁ</string>
     <string name="uploader_name">ଅପଲୋଡର ନାମ</string>
     <string name="sort_by">ସଜାଡ଼ନ୍ତୁ</string>
     <string name="duration_span">ଅବଧି: %1$s</string>
@@ -463,14 +440,12 @@
     <string name="registration_disabled">ପଞ୍ଜିକରଣ ନିଷ୍କ୍ରିୟ ହୋଇଛି</string>
     <string name="tooltip_sponsorblock">SponsorBlock କୁ ଟୋଗଲ କରନ୍ତୁ</string>
     <string name="tooltip_edit_groups">ସମୂହଗୁଡ଼ିକୁ ସମ୍ପାଦନ କରନ୍ତୁ</string>
-    <string name="proxy">ପ୍ରକ୍ସି</string>
     <string name="group_name_error_empty">ଦୟାକରି ଗୋଟିଏ ନାମ ଭରଣ କରନ୍ତୁ</string>
     <string name="group_name_error_exists">ଦୟାକରି ଗୋଟିଏ ନାମ ବାଛନ୍ତୁ ଯାହାକି ଅନନ୍ୟ ଅଟେ</string>
     <string name="automatic_once">ଥରେ ସ୍ୱୟଂଚାଳିତ</string>
     <string name="sb_create_segment">ସେଗମେଣ୍ଟ ନିର୍ମାଣ କରନ୍ତୁ</string>
     <string name="segment_type">ସେଗମେଣ୍ଟର ପ୍ରକାର</string>
     <string name="sb_invalid_segment">ଅବୈଧ ସେଗମେଣ୍ଟ ଆରମ୍ଭ କିମ୍ବା ସମାପ୍ତି</string>
-    <string name="filename_too_long">ଫାଇଲ୍ ନାମ ବହୁତ ଲମ୍ବା!</string>
     <string name="contribute_to_sponsorblock">SponsorBlock ରେ ଯୋଗଦାନ କରନ୍ତୁ</string>
     <string name="sponsorblock_user_id">ପ୍ରଯୋଜକ ବ୍ଲକ୍ ୟୁଜର୍ ID</string>
     <string name="no_fullscreen_resolution">ନୋ-ଫୁଲସ୍କ୍ରିନ ରିଜୋଲ୍ୟୁସନ</string>
