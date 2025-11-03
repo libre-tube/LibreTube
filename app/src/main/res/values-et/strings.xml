@@ -25,7 +25,6 @@
     <string name="region">Riik</string>
     <string name="login_register">Logi sisse või registreeru</string>
     <string name="importsuccess">Tellitud</string>
-    <string name="cannotDownload">Selle videovoo allalaadimine ei õnnestu.</string>
     <string name="import_from_yt">Impordi tellimused</string>
     <string name="import_from_yt_summary">Impordi YouTube\'ist või NewPipe\'ist</string>
     <string name="app_theme">Teema</string>
@@ -88,7 +87,6 @@
     <string name="license">Litsents</string>
     <string name="segment_skipped">Vahelejäetud segment</string>
     <string name="playOnBackground">Esita taustal</string>
-    <string name="update_available_text">Saadaval on rakenduse uus versioon. Klõpsi siin, et avada asjakohane leht GitHub\'is.</string>
     <string name="downloads">Allalaadimised</string>
     <string name="update_summary">Kontrolli rakenduse uuendusi</string>
     <string name="app_uptodate">Sul on kasutusel viimane versioon.</string>
@@ -141,7 +139,6 @@
     <string name="reset_message">Kas lähtestame kõik seadistused ja logime välja?</string>
     <string name="deleteAccount">Kustuta konto</string>
     <string name="deleteAccount_summary">Kustuta oma konto teenuses Piped</string>
-    <string name="account">Kasutajakonto</string>
     <string name="github">GitHub</string>
     <string name="audio_video">Heli ja video</string>
     <string name="video">Video</string>
@@ -156,14 +153,12 @@
     <string name="instance_api_url">Vaheserveri API aadress</string>
     <string name="addInstance">Lisa vaheserver</string>
     <string name="empty_instance">Sisesta nimi ja API aadress.</string>
-    <string name="clear_customInstances">Kustuta lisatu</string>
     <string name="invalid_url">Palun sisesta aadress, mis toimib</string>
     <string name="version">Versioon %1$s</string>
     <string name="albums">Albumid</string>
     <string name="category_interaction_summary">Lühike meeldetuletus video keskel tema meeldivaks märkimiseks või kanali tellimiseks. Kui meeldetuletus on pikem või midagi täpsemat, siis ta peaks olema märgitud enesereklaamiks</string>
     <string name="category_outro">Lõpukaadrid ja -tiitrid</string>
     <string name="category_outro_summary">Teave peale sisu lõppemist. Ei sisalda järeldusi, mis on sisu osa</string>
-    <string name="advanced_summary">Allalaadimised ja lähtestamine</string>
     <string name="gradientIcon">Pealiskaudne kallak</string>
     <string name="fireIcon">Moodne tuli</string>
     <string name="torchIcon">Trendikas tõrvik</string>
@@ -201,7 +196,6 @@
     <string name="local_subscriptions">Kohalikud tellimused</string>
     <string name="preferences">Eelistused</string>
     <string name="play_next">Esita järgmisena</string>
-    <string name="invalid_filename">Vigane failinimi!</string>
     <string name="auto">Automaatne</string>
     <string name="comments_disabled">Kommenteerimine on video üleslaadija poolt keelatud.</string>
     <string name="no_comments_available">Sellel videol pole veel kommentaare.</string>
@@ -215,7 +209,6 @@
     <string name="watch_positions_title">Meeldejäetud vaatamise järjed ajatemplina</string>
     <string name="watch_history_summary">Jäta vaadatud videod meelde kohalikus andmekogus</string>
     <string name="reset_watch_positions">Lähtesta</string>
-    <string name="playingOnBackground">Esitame taustal…</string>
     <string name="default_subtitle_language">Subtiitrite keel</string>
     <string name="notifications">Teavitused</string>
     <string name="worst_quality">Kõige kehvem</string>
@@ -234,7 +227,6 @@
     <string name="wifi">WiFi</string>
     <string name="mobile_data">Mobiilne andmeside</string>
     <string name="added_to_playlist">Lisasime esitusloendisse: %1$s</string>
-    <string name="confirm_unsubscribing">Kinnita tellimusest loobumine</string>
     <string name="time">Aeg</string>
     <string name="clear_bookmarks">Eemalda järjehoidjad</string>
     <string name="resume">Jätka</string>
@@ -250,9 +242,6 @@
     <string name="delete">Eemalda allalaadimiste seast</string>
     <string name="delete_all">Kustutame kõik allalaadimised!</string>
     <string name="skip_segment">Jäta segment vahele</string>
-    <string name="filename">Failinimi</string>
-    <string name="confirm_unsubscribe">Kas sa oled kindel et soovid lõpetada %1$s esitusloendi tellimuse?</string>
-    <string name="confirm_unsubscribing_summary">Tellimusest loobumisel küsi selleks lisakinnitust</string>
     <string name="unsupported_file_format">Failivormingu tugi puudub: %1$s</string>
     <string name="autoplay_playlists">Esita esitusloendid automaatselt</string>
     <string name="bookmarks">Järjehoidjad</string>
@@ -263,7 +252,6 @@
     <string name="history_summary">Otsingute ja vaatamiste ajalugu</string>
     <string name="play_all">Esita kõik</string>
     <string name="caption_settings">Subtiitrid</string>
-    <string name="playerAudioFormat">Meediaesitaja helivorming</string>
     <string name="playerAudioQuality">Helikvaliteet</string>
     <string name="auto_quality">Vali automaatselt</string>
     <string name="choose_instance_long">Palun vali järgnevast mõni Piped\'i vaheserver, mis vahendab liiklust sinu nutiseadme ja YouTube\'i vahel. Vaheserverid paiknevad eri riikides ning seda märgivad riikide lipud. Serverid, mis on sinu asukohale lähema ilmselt toimivad kiiremini ning neid võid alati seadistustest vahetada vastavalt vajadusele.</string>
@@ -288,7 +276,6 @@
     <string name="username_email">Me ei soovita, et kasutajanimeks on e-posti aadress. Kas oled kindel, et soovid jätkata?</string>
     <string name="buffering_goal">Ennetav laadimine</string>
     <string name="buffering_goal_summary">Pikim video ennetav puhverdus sekundites</string>
-    <string name="playerVideoFormat">Videovorming meediamängija jaoks</string>
     <string name="no_audio">Helita</string>
     <string name="no_video">Videota</string>
     <string name="choose_instance">Palun vali esmalt vaheserver!</string>
@@ -314,15 +301,12 @@
     <string name="navbar_order">Järjestamine</string>
     <string name="layout">Paigutus</string>
     <string name="audio_track">Heliriba</string>
-    <string name="hls_instead_of_dash">Kasuta HLS-vormingut</string>
     <string name="rich_caption_rendering">Vormindatud subtiitrid</string>
     <string name="rich_caption_rendering_summary">Näita tiitreid kasutades täiendavaid vormindus- ja sisuedastusvõimalusi</string>
     <string name="playback_pitch">Helivaljus</string>
     <string name="sb_custom_colors">Kohandatud segmentide värvid</string>
-    <string name="alternative_videos_layout">Alternatiivne videovaate paigutus</string>
     <string name="category_preview">Eelvaade/Sisukokkuvõte</string>
     <string name="category_highlight">Näita video esiletõstet</string>
-    <string name="no_player_found">Välis meediamängijat ei leidu. Palun kontrolli, et ta oleks nutiseadmesse paigaldatud.</string>
     <string name="chapters">Peatükid</string>
     <string name="network_all">Kõik</string>
     <string name="network_metered">Andmemahupõhine ühendus</string>
@@ -344,9 +328,7 @@
     <string name="playlistCloned">Esitusloendi koopia on tehtud</string>
     <string name="start_time">Algusaeg</string>
     <string name="end_time">Lõpuaeg</string>
-    <string name="no_chapter">Peatükki pole</string>
     <string name="category_music_offtopic_summary">Kasutamiseks vaid muusikavideotes. Siia alla kuuluvad video need lõigud, mis pole algupärase plaadiproduktsiooni osa. Lõpuks peaks video heliriba enam-vähem vastama sellele, nagu ta tegelikult plaadil leidub või Spotify\'st leitav on. Video alguses ja lõpus leiduvad jutulõigud ja muu ebaoluline peaks olema välja jäetud</string>
-    <string name="hls_instead_of_dash_summary">Kasuta DASHi asemel HLS-vormingut. Kui video taasesitus ei toimi, siis proovi, kas selle eelistuse muutmine aitab.</string>
     <string name="featured">Esiletõstetud</string>
     <string name="bookmark">Järjehoidja</string>
     <string name="defaults">Vaikimisi väärtused</string>
@@ -370,13 +352,11 @@
     <string name="faq">Korduma kippuvad küsimused</string>
     <string name="codecs">Videokoodekid</string>
     <string name="mark_as_watched">Märgi vaadatuks</string>
-    <string name="custom_playback_speed">Kohandatud kiirus</string>
     <string name="stats_for_nerds">Statistika it-huvilistele</string>
     <string name="video_id">Video tunnus</string>
     <string name="autoplay_countdown">Automaatse taasesituse pöördloendus</string>
     <string name="autoplay_countdown_summary">Enne järgmise video automaatset esitamist näita 5-sekundilist pöördloendust</string>
     <string name="playing_next">Järgmine video %1$s sekundi pärast</string>
-    <string name="proxy">Puhverserver</string>
     <string name="disable_proxy_summary">Laadi videod ja pildid otse YouTube\'i serveritest. Privaatsuskaalutlustel lülita see eelistus sisse siis, kui sul alati on VPN kasutusel</string>
     <string name="disable_proxy">Eemalda Piped\'i vaheserver kasutusest</string>
     <string name="auto_fullscreen_shorts">Esita lühivideod automaatselt täisekraanivaates</string>
@@ -403,7 +383,6 @@
     <string name="trends">Hetkel populaarne</string>
     <string name="queue_insert_related_videos">Lisa samateemalisi videoid</string>
     <string name="playlistUrl">Esitusloendi URL</string>
-    <string name="custom_playback_speed_summary">Kasuta tavalise taasesituse kiiruse asemel enda valitud kiirust</string>
     <string name="go_to_video">Mine video juurde</string>
     <string name="change_playlist_description">Muuda esitusloendi kirjeldust</string>
     <string name="duration">Kestus</string>
@@ -412,8 +391,6 @@
     <string name="off">Välja lülitatud</string>
     <string name="manual">Käsitsi</string>
     <string name="automatic">Automaatselt</string>
-    <string name="visible">Näita edasikerimisribal</string>
-    <string name="fallback_piped_proxy">Kasuta varuvariandina Piped\'i puhverserverit</string>
     <string name="automatic_once">Üks kord automaatselt</string>
     <string name="dearrow">Kasuta DeArrow teenust</string>
     <string name="dearrow_summary">Näita täpsemaid ja vähem sensatsioonimaigulisi pealkirju ja pisipilte. Sellega pikeneb video laadimise aeg</string>
@@ -465,7 +442,6 @@
     <string name="auto_generated">automaatselt loodud</string>
     <string name="resolution_limited">piiratud</string>
     <string name="sb_create_segment">Loo segment</string>
-    <string name="filename_too_long">Failinimi on liiga pikk!</string>
     <string name="remember_playback_speed">Jäta taasesituse kiirus meelde</string>
     <string name="gestures">Viiped</string>
     <string name="download_channel_name">Allalaadimisteenus</string>
@@ -521,7 +497,6 @@
     <string name="unknown_audio_language">Tundmatu keel heliribal</string>
     <string name="unknown_audio_track_type">Tundmatu heliriba tüüp</string>
     <string name="mark_as_unwatched">Märgi mittevaadatuks</string>
-    <string name="fallback_piped_proxy_summary">Kui antud video esitamine otse YouTube\'ist ei toimi, siis laadi ta läbi puhverserveri (sellega pikeneb ka laadimise aeg). Kui see valik on välja lülitatud, siis ilmselt YouTube\'i piirangute tõttu muusika esitamine ei toimi</string>
     <string name="segment_submitted">Segment on saadetud</string>
     <string name="download_playlist_note">Palun vali allalaaditava meedia suurim heli- ja videokvaliteet. Kui subtiitrid on saadaval, siis lisanduvad nad allalaaditud faili.</string>
     <string name="export_subscriptions_to">Vali rakendus, mille jaoks ekspordid tellimused</string>
@@ -535,7 +510,6 @@
     <string name="local_ryd">Kohalik Youtube\'i mittemeeldimiste ekstraktor</string>
     <string name="local_ryd_summary">Laadi Youtube\'i mittemeeldimiste teave teenusest https://returnyoutubedislikeapi.com</string>
     <string name="import_watch_history">Impordi vaatamiste ajalugu</string>
-    <string name="import_watch_history_desc">Kuna YouTube piirab eksporditavaid andmeid, siis palun arvesta, et kõike ei õnnestu importida.</string>
     <string name="audio_codecs">Audiokoodekid</string>
     <string name="view_count">%1$s vaatamist</string>
     <string name="dialog_play_offline_title">Sellest videost on olemas kohalikus seadmes asuv versioon.</string>

@@ -50,7 +50,6 @@
     <string name="logout">Log keluar</string>
     <string name="cancel">Batal</string>
     <string name="customInstance">Tersuai</string>
-    <string name="cannotDownload">Tidak dapat memuat-turun strim ini.</string>
     <string name="downloadfailed">Muat-turun gagal.</string>
     <string name="error">Ada sesuatu yang tidak kena.</string>
     <string name="empty">Anda perlu memasukkan nama pengguna dan kata laluan.</string>

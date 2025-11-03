@@ -131,8 +131,6 @@
     <string name="delete">Изтрий от изтеглени</string>
     <string name="audio_video_summary">Качество и формат</string>
     <string name="added_to_playlist">Добавено към плейлиста %1$s</string>
-    <string name="filename">Име на файл</string>
-    <string name="invalid_filename">Невалидно име на файла!</string>
     <string name="queue">Опашка</string>
     <string name="time">Време</string>
     <string name="play_all">Изпълни всички</string>
@@ -168,7 +166,6 @@
     <string name="birdIcon">Подсилена птица</string>
     <string name="appearance_summary">Настройте приложението според вашите предпочитания</string>
     <string name="no_subtitles_available">Няма налични субтитри</string>
-    <string name="hls_instead_of_dash_summary">Използвайте HLS вместо DASH за стрийминг на мултимедия. Опитайте да превключите тази опция, ако възпроизвеждането на видео не работи.</string>
     <string name="pure_theme_summary">Чисто бяла/черна тема</string>
     <string name="normal_views">%1$s изгледи%2$s</string>
     <string name="tooltip_close">Затвори</string>
@@ -178,7 +175,6 @@
     <string name="pure_theme">Чиста тема</string>
     <string name="trending">Набиращи популярност</string>
     <string name="end_time">Крайно време</string>
-    <string name="confirm_unsubscribing">Потвърдете отписването</string>
     <string name="unknown_or_no_audio">неизвестен или без звук</string>
     <string name="network_metered">Измерена</string>
     <string name="auto_generated">автоматично генерирани</string>
@@ -245,7 +241,6 @@
     <string name="torchIcon">Модерна факла</string>
     <string name="change_playlist_description">Промени описание на плейлиста</string>
     <string name="alphabetic">Азбучен</string>
-    <string name="no_chapter">Няма епизод</string>
     <string name="comments_disabled">Коментарите са деактивирани от качващия.</string>
     <string name="chapters">Епизоди</string>
     <string name="no_fullscreen_resolution">Без резолюция на цял екран</string>
@@ -264,12 +259,9 @@
     <string name="tooltip_unlocked">Отключи на плейъра</string>
     <string name="notification_time_summary">Ограничете периода от време, в който се показват известия за поток</string>
     <string name="category_outro">Крайни карти и кредити</string>
-    <string name="cannotDownload">Не може да изтегли този поток.</string>
     <string name="show_stream_thumbnails">Покажи миниатюри на потока</string>
-    <string name="filename_too_long">Името на файла е твърде дълго!</string>
     <string name="help">Помощ</string>
     <string name="double_tap_seek">Докосни двукратно за превъртане</string>
-    <string name="fallback_piped_proxy_summary">Зареди видеоклипове чрез прокси, ако директното свързване с YouTube не работи за текущия видеоклип (увеличава времето за първоначално зареждане). Ако е деактивирано, музикалното съдържание в YouTube вероятно няма да се възпроизвежда поради ограниченията на YT</string>
     <string name="instance_frontend_url">URL адрес към интерфейс на инстанция (по избор)</string>
     <string name="advanced">Разширени</string>
     <string name="deletePlaylist">Изтрий плейлист</string>
@@ -301,7 +293,6 @@
     <string name="faq">ЧЗВ</string>
     <string name="sort_by">Сортирай по</string>
     <string name="playback_speed">Скорост на възпроизвеждане</string>
-    <string name="account">Профил</string>
     <string name="player_channel_description">Покажи известие при изпълнение</string>
     <string name="system_caption_style">Системен стил на надписи</string>
     <string name="tooltip_scroll_to_top">Превърти нагоре</string>
@@ -310,7 +301,6 @@
     <string name="maximum_image_cache">Макс. размер на кеша за изображение</string>
     <string name="sponsorblock_user_id">SponsorBlock UserID</string>
     <string name="unlimited_search_history">Неограничена история на търсене</string>
-    <string name="update_available_text">Налична е нова актуализация. Щракнете, за да отворите страницата с версиите на GitHub.</string>
     <string name="captions_size">Размер на надписите</string>
     <string name="dearrow">Активирай DeArrow</string>
     <string name="export_subscriptions">Изнеси абонаменти</string>
@@ -330,7 +320,6 @@
     <string name="caption_settings">Надписи</string>
     <string name="import_playlists">Внеси плейлисти</string>
     <string name="tooltip_repeat">Повторение</string>
-    <string name="fallback_piped_proxy">Завръщане към Piped прокси</string>
     <string name="search_history_summary">Запомнете търсенията</string>
     <string name="auth_instances">Избери инстанция за удостоверяване</string>
     <string name="category_selfpromo_summary">Подобно на „спонсор“, с изключение на неплатено или самореклама. Това включва секции за стоки, дарения или информация за това с кого са си сътрудничили</string>
@@ -350,7 +339,6 @@
     <string name="tooltip_sponsorblock">Превключване на SponsorBlock</string>
     <string name="skip_segment">Пропусни сегмент</string>
     <string name="pinch_control_summary">Използвай жест за прищипване, за да увеличите/намалите мащаба</string>
-    <string name="playerVideoFormat">Видео формат за плейър</string>
     <string name="automatic_once">Автоматичен веднъж</string>
     <string name="instance_name">Име на инстанция</string>
     <string name="unsupported_file_format">Неподдържан файлов формат: %1$s</string>
@@ -379,10 +367,8 @@
     <string name="history_size">Максимален размер на история</string>
     <string name="shuffle">Разбъркано</string>
     <string name="player_channel_name">Услуга за плейъра</string>
-    <string name="confirm_unsubscribe">Сигурни ли сте, че искате да прекратите абонамента за %1$s\?</string>
     <string name="tooltip_dismiss">Отхвърляне</string>
     <string name="sb_custom_colors">Персонализирани цветове на сегмента</string>
-    <string name="playingOnBackground">Изпълнява се във фонов режим…</string>
     <string name="fullscreen_gestures">Влизане/излизане от жестове на цял екран</string>
     <string name="repeat_mode_none">Нито един</string>
     <string name="player_summary">По подразбиране и поведение</string>
@@ -419,9 +405,7 @@
     <string name="no_comments_available">Това видео няма коментари.</string>
     <string name="all_caught_up">Всичко е наваксано</string>
     <string name="empty">Трябва да въведете потребителско име и парола.</string>
-    <string name="confirm_unsubscribing_summary">Покажи диалогов прозорец за потвърждение преди отписване</string>
     <string name="playlistUrl">Плейлист URL</string>
-    <string name="visible">Покажи в лентата за търсене</string>
     <string name="time_code">Времеви код (секунди)</string>
     <string name="skip_buttons_summary">Покажи бутони за прескачане към следващия или предишен видеоклип</string>
     <string name="watch_positions_title">Запомнени позиции на възпроизвеждане</string>
@@ -429,7 +413,6 @@
     <string name="worst_quality">Лошо</string>
     <string name="chapters_videoHighlight">Видео акцент</string>
     <string name="username_email">Използването на имейл адрес като потребителско име не се препоръчва. Да продължа ли въпреки това?</string>
-    <string name="advanced_summary">Изтеглени, и нулиране</string>
     <string name="creation_date_reversed">Дата на създаване (обърнато)</string>
     <string name="shorts_notifications">Известия за кртки видеоклипове</string>
     <string name="category_filler_summary">За тангенциални сцени, добавени само за запълване или хумор, които не са необходими за разбиране на основното съдържание на видеоклипа</string>
@@ -438,24 +421,20 @@
     <string name="playback_during_call">Продължи възпроизвеждането по време на телефонно обаждане</string>
     <string name="screen_orientation">Ориентация на екрана</string>
     <string name="addInstance">Добави инстанция</string>
-    <string name="clear_customInstances">Изчисти добавени</string>
     <string name="autoplay_playlists">Списъци за автоматично пускане</string>
     <string name="export_playlists_to">Изнеси плейлисти в</string>
     <string name="duration_span">Продължителност: %1$s</string>
     <string name="category">Категории</string>
     <string name="flameIcon">Летящ пламък</string>
     <string name="play_automatically">Изпални автоматично</string>
-    <string name="no_player_found">Не е намерен външен плейър. Моля, уверете се, че имате инсталиран такъв.</string>
     <string name="audio_only_mode_summary">Превърнете LibreTube в музикален плейър</string>
     <string name="unknown_audio_language">Неизвестен аудио език</string>
-    <string name="custom_playback_speed_summary">Използвай скорост на възпроизвеждане, различна от тази за нормалния плейър</string>
     <string name="failed_fetching_instances">Не може да се извлекат налични инстанции.</string>
     <string name="same_as_fullscreen">Същото като цял екран</string>
     <string name="category_interaction">Напомняне за взаимодействие</string>
     <string name="invalid_color">Въведена е невалидна стойност на цвета!</string>
     <string name="push_channel_description">Показва известие, когато са налични нови потоци.</string>
     <string name="layout">Оформление</string>
-    <string name="playerAudioFormat">Аудио формат за плейър</string>
     <string name="color_red">Червен</string>
     <string name="stats_for_nerds">Статистика за маниаци</string>
     <string name="defaults">По подразбиране</string>
@@ -465,7 +444,6 @@
     <string name="download_channel_name">Услуга за изтегляне</string>
     <string name="uploaderAndVideoCount">%1$s • %2$d видеоклипове</string>
     <string name="tooltip_sort">Вид</string>
-    <string name="hls_instead_of_dash">Използвай HLS</string>
     <string name="duration">Продължителност</string>
     <string name="tooltip_watch_position">Позиция на гледане</string>
     <string name="descriptive_audio_track">нагледен</string>
@@ -479,12 +457,9 @@
     <string name="video_id">Видео ID</string>
     <string name="resize_mode_fit">Подходящ</string>
     <string name="audio_only_mode">Режим само аудио</string>
-    <string name="custom_playback_speed">Персонализирана скорост</string>
     <string name="pauseOnScreenOff_summary">Постави възпроизвеждането на пауза, когато екранът е изключен</string>
-    <string name="proxy">Прокси</string>
     <string name="watch_positions">Запомни позицията</string>
     <string name="duration_reversed">Продължителност (обърната)</string>
-    <string name="alternative_videos_layout">Алтернативно оформление на видеоклипове</string>
     <string name="new_videos_badge_summary">Покажи значка с количеството нови видеоклипове, ако има такива</string>
     <string name="backup_restore_summary">Внасяне и изнасяне на абонаменти, плейлисти,…</string>
     <string name="fireIcon">Моден огън</string>
@@ -535,7 +510,6 @@
     <string name="local_ryd_summary">Директно извличане на информация за нехаресвания от https://returnyoutubedislikeapi.com</string>
     <string name="local_ryd">Локално връщане на нехаресвания в Youtube</string>
     <string name="import_watch_history">Внеси история на гледане</string>
-    <string name="import_watch_history_desc">Моля, обърнете внимание, че не всички данни ще бъдат внесени поради ограничения обем на изнесените данни от YouTube.</string>
     <string name="audio_codecs">Аудио кодеци</string>
     <string name="view_count">%1$s гледания</string>
     <string name="dialog_play_offline_body">Искате ли да изпълните видеото от папката за изтегляне?</string>

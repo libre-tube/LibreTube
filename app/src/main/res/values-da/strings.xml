@@ -54,7 +54,6 @@
     <string name="app_icon">Ikon</string>
     <string name="playOnBackground">Afspil i baggrunden</string>
     <string name="update_available">Opdatering tilgængelig</string>
-    <string name="update_available_text">Ny opdatering tilgængelig. Klik for at åbne Github-udgivelsessiden.</string>
     <string name="appearance">Udseende</string>
     <string name="downloads">Downloads</string>
     <string name="license">Licens</string>
@@ -91,7 +90,6 @@
     <string name="registered">Tilmeldt. Du kan nu abonnere på kanaler.</string>
     <string name="importsuccess">Abonneret</string>
     <string name="customInstance">Brugerdefineret</string>
-    <string name="cannotDownload">Kan ikke hente denne stream.</string>
     <string name="import_from_yt">Importér abonnementer</string>
     <string name="import_from_yt_summary">Fra YouTube eller NewPipe</string>
     <string name="notgmail">Dette er til en Piped-konto</string>
@@ -111,7 +109,6 @@
     <string name="update_summary">Tjek for opdatering</string>
     <string name="app_uptodate">Kører den seneste version.</string>
     <string name="player">Afspiller</string>
-    <string name="advanced_summary">Downloads og nulstil</string>
     <string name="gradientIcon">Glidende gradient</string>
     <string name="legacyIcon">Tabt arv</string>
     <string name="color_yellow">Gallisk gul</string>
@@ -128,7 +125,6 @@
     <string name="instance_name">Instansnavn</string>
     <string name="instance_api_url">URL til instans-API</string>
     <string name="addInstance">Tilføj instans</string>
-    <string name="clear_customInstances">Ryd tilføjet</string>
     <string name="invalid_url">Indtast venligst en URL, der virker</string>
     <string name="related_streams">Relateret indhold</string>
     <string name="version">Version %1$s</string>
@@ -137,7 +133,6 @@
     <string name="category_filler">Fylde Indhold/Jokes</string>
     <string name="category_preview_summary">Til segmenter, der beskriver fremtidigt indhold uden yderligere information. Hvis det indeholder klip, der kun vises her, er det højst sandsynligt den forkerte kategori</string>
     <string name="buffering_goal">Forudindlæsning</string>
-    <string name="playerVideoFormat">Videoformat til afspiller</string>
     <string name="category_music_offtopic_summary">Kun til brug i musikvideoer. Skal dække dele af videoen, som ikke er en del af de officielle mix. I sidste ende skal videoen ligne Spotify-versionen eller enhver anden mixet version så meget som muligt, eller reducere snak eller andre distraktioner</string>
     <string name="category_music_offtopic">Musik: Sektioner uden musik</string>
     <string name="category_preview">Forhåndsvisning/Opsummering</string>
@@ -149,7 +144,6 @@
     <string name="reset_message">Nulstil alle indstillinger, og log ud?</string>
     <string name="deleteAccount_summary">Slet din Piped-konto</string>
     <string name="reset">Gendan standardindstillinger</string>
-    <string name="account">Konto</string>
     <string name="chapters">Kapitler</string>
     <string name="deleteAccount">Slet konto</string>
     <string name="restore">Gendan</string>
@@ -184,7 +178,6 @@
     <string name="autoRotatePlayer_summary">Afspilning i fuld skærm, når enheden vendes</string>
     <string name="pure_theme">Rent tema</string>
     <string name="pure_theme_summary">Rent sort/hvid tema</string>
-    <string name="no_player_found">Ingen ekstern afspiller fundet. Sørg venligst for, at du har en installeret.</string>
     <string name="data_saver_mode">Databesparende tilstand</string>
     <string name="data_saver_mode_summary">Spring over miniaturebilleder og andre billeder</string>
     <string name="search_history_summary">Husk søgninger</string>
@@ -201,10 +194,8 @@
     <string name="quality">Kvalitet</string>
     <string name="behavior">Adfærd</string>
     <string name="player_summary">Standarder og adfærd</string>
-    <string name="playingOnBackground">Afspiller i baggrunden…</string>
     <string name="clonePlaylist">Klon playliste</string>
     <string name="caption_settings">Undertekster</string>
-    <string name="playerAudioFormat">Lydformat til afspiller</string>
     <string name="playerAudioQuality">Lydkvalitet</string>
     <string name="worst_quality">Værst</string>
     <string name="history_empty">Ingen historik endnu.</string>
@@ -274,7 +265,6 @@
     <string name="watched">Set</string>
     <string name="sb_create_segment">Opret segment</string>
     <string name="tooltip_clear_queue">Ryd kø</string>
-    <string name="filename">Filnavn</string>
     <string name="change_instance">Ændr instans</string>
     <string name="change">Skift</string>
     <string name="download_channel_description">Viser en notifikation, når der downloades medier.</string>
@@ -283,7 +273,6 @@
     <string name="no_subtitle">Ingen undertekst</string>
     <string name="unknown">Ukendt</string>
     <string name="exportsuccess">Eksporteret.</string>
-    <string name="no_chapter">Ingen kapitler</string>
     <string name="add_to_group">Føj til gruppe</string>
     <string name="tooltip_repeat">Gentag</string>
     <string name="tooltip_reverse">Baglæns</string>
@@ -296,18 +285,14 @@
     <string name="delete_all">Alle downloads vil blive slettet!</string>
     <string name="new_videos_badge_summary">Vis et badge med antallet af nye videoer, hvis der er nogle</string>
     <string name="suggest_change_instance">Indlæsning tager længere tid end normalt. Overvej at ændre instans</string>
-    <string name="invalid_filename">Ugyldigt filnavn!</string>
     <string name="invalid_color">Ugyldig farveværdi indtastet!</string>
     <string name="livestreams">Livestreams</string>
-    <string name="alternative_videos_layout">Alternativt videolayout</string>
     <string name="defaultIconLight">Standard lys</string>
-    <string name="confirm_unsubscribing_summary">Vis en bekræftelsesdialog før afmelding af abonnement</string>
     <string name="time">Tid</string>
     <string name="start_time">Starttid</string>
     <string name="notification_time_summary">Begræns tidsperiode, hvor streamnotifikationer er vist</string>
     <string name="audio_track">Lydspor</string>
     <string name="unsupported_file_format">Ikke-understøttet filformat: %1$s</string>
-    <string name="hls_instead_of_dash_summary">Brug HLS i stedet for DASH til mediestreaming. Prøv at ændre denne indstilling, hvis videoafspilning ikke virker.</string>
     <string name="trends">Trends</string>
     <string name="queue_insert_related_videos">Indsæt relaterede videoer</string>
     <string name="autoplay_playlists">Auto-afspil playlister</string>
@@ -325,8 +310,6 @@
     <string name="color_violet">Alsidig violet</string>
     <string name="failed_fetching_instances">Kunne ikke hente tilgængelige instanser.</string>
     <string name="shuffle">Bland</string>
-    <string name="custom_playback_speed">TIlpasset hastighed</string>
-    <string name="custom_playback_speed_summary">Brug en anden afspilningshastighed end for den normale afspiller</string>
     <string name="category">Kategori</string>
     <string name="stats_for_nerds">Statistik for nørder</string>
     <string name="video_id">Video-ID</string>
@@ -339,7 +322,6 @@
     <string name="automatic">Automatisk</string>
     <string name="automatic_once">Automatisk én gang</string>
     <string name="double_tap_seek">Dobbelttryk for at springe</string>
-    <string name="fallback_piped_proxy">Fallback til Piped-proxy</string>
     <string name="dearrow">Aktivér DeArrow</string>
     <string name="dearrow_summary">Vis mere nøjagtige og mindre sensationelle titler og miniaturebilleder. Øger indlæsningstider</string>
     <string name="visibility">Synlighed</string>
@@ -373,7 +355,6 @@
     <string name="remove_bookmark">Fjern bogmærke</string>
     <string name="auto">Auto</string>
     <string name="downvote">Ned</string>
-    <string name="fallback_piped_proxy_summary">Indlæs videoer via proxyen, hvis direkte forbindelse til YouTube ikke fungerer for den aktuelle video (øger den indledende indlæsningstid). Hvis deaktiveret, vil YouTube-musikindhold sandsynligvis ikke blive afspillet på grund af YT-restriktioner</string>
     <string name="remember_playback_speed">Husk afspilningshastighed</string>
     <string name="show_stream_thumbnails">Vis miniaturebilleder af stream</string>
     <string name="new_videos_badge">Indikator for nye videoer</string>
@@ -417,7 +398,6 @@
     <string name="skip_silence">Spring stilhed over</string>
     <string name="mark_as_watched">Markér som set</string>
     <string name="playing_next">Afspiller næste i %1$s</string>
-    <string name="proxy">Proxy</string>
     <string name="disable_proxy_summary">Indlæs videoer og billeder direkte fra Youtubes servere. Aktivér kun denne indstilling, hvis du altid bruger en VPN</string>
     <string name="auto_fullscreen_shorts">Auto-fuldskærm for korte videoer</string>
     <string name="group_name">Gruppenavn</string>
@@ -428,7 +408,6 @@
     <string name="alphabetic_reversed">Alfabetisk (omvendt)</string>
     <string name="playlist_description">Playlistebeskrivelse</string>
     <string name="same_as_fullscreen">Samme som fuld skærm</string>
-    <string name="visible">Vis i afspillingsbar</string>
     <string name="playback_during_call">Fortsæt afspilning under telefonopkald</string>
     <string name="playback_during_call_summary">Bemærk, at dette også påvirker appen, så den ikke længere kan håndtere nogen form for lydfokus</string>
     <string name="undo">Fortryd</string>
@@ -442,7 +421,6 @@
     <string name="home_tab_content">Indhold i hjem-fane</string>
     <string name="sponsorblock_user_id">SponsorBlock BrugerID</string>
     <string name="successfully_removed_from_playlist">\"%1$s\" blev fjernet fra playlisten.</string>
-    <string name="filename_too_long">Filnavn for langt!</string>
     <string name="no_segments_found">Der er ingen segmenter for denne video endnu.</string>
     <string name="download_channel_name">Download Service</string>
     <string name="start_sleep_timer">Start søvntimer</string>
@@ -486,12 +464,10 @@
     <string name="playlistUrl">Playliste-URL</string>
     <string name="add_to_bookmarks">Føj til bogmærker</string>
     <string name="time_in_minutes">Tid i minutter</string>
-    <string name="confirm_unsubscribing">Bekræft afmelding</string>
     <string name="play_all">Afspil alle</string>
     <string name="navbar_order">Rækkefølge</string>
     <string name="layout">Layout</string>
     <string name="end_time">Sluttid</string>
-    <string name="hls_instead_of_dash">Brug HLS</string>
     <string name="auto_quality">Auto</string>
     <string name="limit_to_runtime">Begræns til køretid</string>
     <string name="featured">Fremhævet</string>
@@ -502,7 +478,6 @@
     <string name="show_stream_thumbnails_summary">Vis miniaturebillederne af nye streams. Aktivering af dette bruger ekstra data</string>
     <string name="no_fullscreen_resolution">Ikke-fuldskærmsopløsning</string>
     <string name="forward">Spol frem</string>
-    <string name="confirm_unsubscribe">Er du sikker på, at du vil afmelde %1$s?</string>
     <string name="double_tap_seek_summary">Tryk to gange til venstre eller højre for at spole tilbage eller frem i afspillerpositionen</string>
     <string name="choose_instance_long">Vælg venligst en Piped-instans, du vil bruge, nedenfor. Piped-instansen vil fungere som en mellemmand for dig og Youtube. Disse instanser er placeret i forskellige fysiske lokationer - indikeret af deres landeflag. Instanser, der er tættere på dig, er sandsynligvis hurtigere end instanser, der ikke er. Du kan til enhver tid ændre den instans, du bruger, i indstillingerne.</string>
     <string name="off">Fra</string>
@@ -531,7 +506,6 @@
     <string name="import_watch_history">Importér visningshistorik</string>
     <string name="screenshot">Skærmbillede</string>
     <string name="pip">BiB</string>
-    <string name="import_watch_history_desc">Bemærk, at ikke alt bliver importeret grundet YouTube\'s begrænsede eksportdata.</string>
     <string name="view_count">%1$s visninger</string>
     <string name="authentication">Godkendelse</string>
     <string name="never_show_again">Vis aldrig dette igen</string>

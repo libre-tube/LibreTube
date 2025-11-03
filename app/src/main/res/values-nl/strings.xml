@@ -19,7 +19,6 @@
     <string name="customInstance">Aangepast</string>
     <string name="region">Regio</string>
     <string name="login_register">Inloggen/registreren</string>
-    <string name="cannotDownload">Kan deze stream niet downloaden.</string>
     <string name="downloadfailed">Download mislukt.</string>
     <string name="import_from_yt">Abonnementen importeren</string>
     <string name="import_from_yt_summary">Van YouTube of NewPipe</string>
@@ -79,7 +78,6 @@
     <string name="enabled">Aan</string>
     <string name="disabled">Uit</string>
     <string name="update_available">Update beschikbaar</string>
-    <string name="update_available_text">Nieuwe versie beschikbaar. Druk om de GitHub-uitgaven­pagina te openen.</string>
     <string name="createPlaylist">Afspeel­lijst aan­maken</string>
     <string name="loggedIn">Ingelogd</string>
     <string name="emptyPlaylistName">De naam van de afspeel­lijst mag niet leeg zijn</string>
@@ -108,7 +106,6 @@
     <string name="reset_message">Alle instellingen resetten en uitloggen\?</string>
     <string name="downloads">Downloads</string>
     <string name="defaultIcon">Standaard</string>
-    <string name="advanced_summary">Downloads en resetten</string>
     <string name="shareTo">URL delen naar</string>
     <string name="legacyIcon">Verloren voormalig</string>
     <string name="gradientIcon">Glib gradiënt</string>
@@ -136,7 +133,6 @@
     <string name="instance_api_url">URL naar instantie-API</string>
     <string name="addInstance">Instantie Toevoegen</string>
     <string name="empty_instance">Vul de naam en de API-URL in.</string>
-    <string name="clear_customInstances">Toegevoegde instanties wissen</string>
     <string name="related_streams">Verwante inhoud</string>
     <string name="category_filler_summary">Voor bijkomstige scènes die alleen als opvulling of ter vermaak zijn toegevoegd en niet noodzakelijk zijn om de hoofdinhoud van de video te begrijpen</string>
     <string name="category_music_offtopic_summary">Alleen voor gebruik in muziekvideo\'s. Het moet betrekking hebben op delen van de video die geen deel uitmaken van de officiële mixen. Uiteindelijk moet de video zo goed mogelijk lijken op de Spotify- of andere gemixte versie, of minder praten of andere afleidingen bevatten</string>
@@ -144,7 +140,6 @@
     <string name="related_streams_summary">Laat vergelijkbare streams zien naast wat je kijkt</string>
     <string name="buffering_goal">Voorladen</string>
     <string name="buffering_goal_summary">Max. aantal seconden video om te bufferen</string>
-    <string name="playerVideoFormat">Videoformaat voor speler</string>
     <string name="no_audio">Geen audio</string>
     <string name="no_video">Geen video</string>
     <string name="audio">Audio</string>
@@ -171,7 +166,6 @@
     <string name="no_subtitle">Geen ondertiteling</string>
     <string name="landscape">Landschap</string>
     <string name="least_recent">Oudste</string>
-    <string name="account">Account</string>
     <string name="most_recent">Nieuwste</string>
     <string name="translate">Vertaling</string>
     <string name="error_occurred">Fout</string>
@@ -187,7 +181,6 @@
     <string name="open">Openen…</string>
     <string name="unlimited">Ongelimiteerd</string>
     <string name="network_all">Alles</string>
-    <string name="filename">Bestandsnaam</string>
     <string name="wifi">Wifi</string>
     <string name="auto">Automatisch</string>
     <string name="forward">Vooruit­spoelen</string>
@@ -279,17 +272,13 @@
     <string name="continue_watching">Verder­kijken</string>
     <string name="dearrow">DeArrow inschakelen</string>
     <string name="swipe_controls">Swipe-bediening</string>
-    <string name="no_chapter">Geen hoofdstuk</string>
     <string name="add_to_queue">Toevoegen aan wachtrij</string>
     <string name="background_mode">Achtergrond­modus</string>
     <string name="renamePlaylist">Afspeellijst hernoemen</string>
     <string name="sort_by">Sorteren op</string>
     <string name="duration_span">Duur: %1$s</string>
-    <string name="alternative_videos_layout">Alternative video-lay-out</string>
-    <string name="hls_instead_of_dash">HLS gebruiken</string>
     <string name="navigation_bar">Navigatiebalk</string>
     <string name="audio_video_summary">Kwaliteit en formaat</string>
-    <string name="custom_playback_speed">Aangepaste snelheid</string>
     <string name="general_summary">Downloads en gegevens­besparing</string>
     <string name="history_empty">Nog geen geschiedenis</string>
     <string name="no_search_result">Geen resultaten</string>
@@ -354,9 +343,7 @@
     <string name="tooltip_sponsorblock">SponsorBlock omschakelen</string>
     <string name="registration_disabled">Registratie uitgeschakeld</string>
     <string name="play_next">Volgende afspelen</string>
-    <string name="invalid_filename">Ongeldige bestandsnaam!</string>
     <string name="defaultIconLight">Standaard (licht)</string>
-    <string name="confirm_unsubscribing">Deabonneren bevestigen</string>
     <string name="playlistCloned">Afspeellijst gekloond</string>
     <string name="audio_track">Audiospoor</string>
     <string name="clear_bookmarks">Bladwijzers wissen</string>
@@ -389,7 +376,6 @@
     <string name="unsupported_file_format">Niet-ondersteund bestands­formaat: %1$s</string>
     <string name="mark_as_watched">Markeren als gezien</string>
     <string name="trending">Nu trending</string>
-    <string name="playingOnBackground">Afspelen op achtergrond…</string>
     <string name="no_comments_available">Deze video heeft geen opmerkingen.</string>
     <string name="backup_restore_summary">Importeer en exporteer abonnementen, afspeel­lĳsten, …</string>
     <string name="add_to_bookmarks">Toevoegen aan bladwijzers</string>
@@ -401,7 +387,6 @@
     <string name="added_to_playlist">Toegevoegd aan afspeellijst %1$s</string>
     <string name="pinch_control_summary">Gebruik knijpgebaren om in of uit te zoomen</string>
     <string name="hide_watched_from_feed">Bekeken video\'s verbergen</string>
-    <string name="playerAudioFormat">Audioformaat voor speler</string>
     <string name="change_region">Trending is niet beschikbaar voor de huidige regio. Selecteer een andere onder instellingen.</string>
     <string name="comments_disabled">Opmerkingen zijn uitgeschakeld door de uploader.</string>
     <string name="player_channel_description">Toont een melding tijdens het afspelen</string>
@@ -414,7 +399,6 @@
     <string name="show_stream_thumbnails_summary">Toon de miniaturen van nieuwe streams. Inschakelen gebruikt extra gegevens</string>
     <string name="take_a_break">Tijd om een pauze te nemen</string>
     <string name="new_videos_badge_summary">Toon een badge met het aantal nieuwe videos als deze er zijn</string>
-    <string name="confirm_unsubscribing_summary">Toont een bevestigings­dialoog voor het deabonneren</string>
     <string name="sb_custom_colors_summary">Schakelt aangepaste kleuren voor SponsorBlock-segmenten in</string>
     <string name="all_caught_up_summary">U heeft alle nieuwe video\'s gezien</string>
     <string name="all_caught_up">Helemaal bĳ</string>
@@ -429,17 +413,12 @@
     <string name="unknown_or_no_audio">onbekend of geen audio</string>
     <string name="auth_instance_summary">Gebruik een andere instantie voor geauthenticeerde verzoeken</string>
     <string name="auth_instances">Kies een authenticatie­instantie</string>
-    <string name="no_player_found">Geen externe speler gevonden, zorg ervoor dat u er één heeft geïnstalleerd.</string>
     <string name="show_stream_thumbnails">Stream-miniaturen</string>
     <string name="watch_history_summary">Houd bekeken video\'s lokaal bij</string>
     <string name="history_summary">Kijk- en zoek­geschiedenis</string>
     <string name="skip_buttons_summary">Toon knoppen om naar de volgende of vorige video te gaan</string>
-    <string name="confirm_unsubscribe">Weet u zeker dat u zich wilt deabonneren van %1$s\?</string>
     <string name="sb_custom_colors">Aangepaste segment­kleuren</string>
     <string name="invalid_color">Ongeldige kleur­waarde ingevoerd!</string>
-    <string name="visible">In zoekbalk tonen</string>
-    <string name="fallback_piped_proxy">Terugvallen op Piped-proxy</string>
-    <string name="proxy">Proxy</string>
     <string name="original_or_main_audio_track">origineel</string>
     <string name="unknown_audio_track_type">Onbekend audio­spoor­type</string>
     <string name="group_name_error_empty">Voer een naam in</string>
@@ -451,7 +430,6 @@
     <string name="creation_date_reversed">Aanmaak­datum (omgekeerd)</string>
     <string name="remove_watched_videos">Bekeken video\'s verwijderen</string>
     <string name="autoplay_countdown_summary">Een aftelling van 5 seconden tonen voordat de volgende video automatisch wordt afgespeeld</string>
-    <string name="fallback_piped_proxy_summary">Laadt video\'s via de proxy als rechtstreeks verbinden met YouTube niet werkt voor de huidige video (verhoogt de initiële laadtijd). Als deze optie is uitgeschakeld, wordt YouTube-muziek waarschijnlijk niet afgespeeld vanwege YT-beperkingen</string>
     <string name="dearrow_summary">Geef meer accurate en minder sensationele titels en miniaturen weer. Verhoogt de laadtijden</string>
     <string name="notification_time_summary">Beperk de tijdspanne waarin streammeldingen worden weergegeven</string>
     <string name="alternative_pip_controls_summary">Toon alleen audio en overslaan in PiP in plaats van vooruit- en terugspoelen</string>
@@ -459,10 +437,8 @@
     <string name="play_automatically_summary">Start het afspelen automatisch bij het selecteren van een video</string>
     <string name="emptyPlaylistDescription">De afspeellijstbeschrijving kan niet leeg zijn</string>
     <string name="swipe_controls_summary">Veeg tijdens volledig scherm om de helderheid en het volume aan te passen</string>
-    <string name="hls_instead_of_dash_summary">Gebruik HLS in plaats van DASH voor het streamen van media. Probeer deze optie om te schakelen als het afspelen van video\'s niet werkt.</string>
     <string name="double_tap_seek_summary">Tik twee keer links of rechts om de speler terug of vooruit te spoelen</string>
     <string name="username_email">Het gebruik van een e-mail­adres als gebruikers­naam wordt afgeraden. Toch doorgaan?</string>
-    <string name="custom_playback_speed_summary">Gebruik een andere afspeelsnelheid dan voor de normale speler</string>
     <string name="choose_instance_long">Kies hieronder een Piped-instantie die je wilt gebruiken. De Piped-instantie fungeert als tussenpersoon tussen jou en YouTube. Deze instanties bevinden zich op verschillende fysieke locaties - aangegeven door hun vlag(gen). Instanties die fysiek dichter bij jou in de buurt zijn, zijn waarschijnlijk sneller dan instanties die dat niet zijn. Je kunt de instantie die je gebruikt op elk moment wijzigen in de instellingen.</string>
     <string name="group_name_error_exists">Kies een naam die uniek is</string>
     <string name="push_channel_description">Toont een melding wanneer er nieuwe streams beschikbaar zijn.</string>
@@ -471,7 +447,6 @@
     <string name="segment_type">Segment­type</string>
     <string name="sb_invalid_segment">Ongeldig segment­begin of -einde</string>
     <string name="contribute_to_sponsorblock">Bijdragen aan SponsorBlock</string>
-    <string name="filename_too_long">Bestandsnaam te lang!</string>
     <string name="sponsorblock_user_id">SponsorBlock-gebruikers-ID</string>
     <string name="donate">Doneren</string>
     <string name="no_fullscreen_resolution">Resolutie in kleine speler</string>
@@ -541,7 +516,6 @@
     <string name="view_count">%1$s weergaven</string>
     <string name="createNewPlaylist">Nieuwe afspeel­lĳst aan­maken</string>
     <string name="playback_pitch_semitone_error_input">Waarde moet liggen tussen -%1$.1f (minimum) en %1$.1f (maximum)</string>
-    <string name="import_watch_history_desc">Houd er rekening mee dat niet alles wordt geïmporteerd vanwege de beperkte export­gegevens van YouTube.</string>
     <string name="never_show_again">Dit nooit meer tonen</string>
     <string name="update_information">Update-informatie</string>
     <string name="mode_of_operation">Werkings­wĳze</string>

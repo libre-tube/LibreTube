@@ -61,7 +61,6 @@
     <string name="appearance_summary">Justera programmet efter din smak</string>
     <string name="search_hint">Sök</string>
     <string name="customInstance">Anpassad</string>
-    <string name="cannotDownload">Det går inte att ladda ner denna sändningen.</string>
     <string name="downloadfailed">Nerladdning misslyckats.</string>
     <string name="import_from_yt">Importera prenumerationer</string>
     <string name="unknown_error">Nätverksfel.</string>
@@ -110,7 +109,6 @@
     <string name="category_outro_summary">Info som följer slutet på videon. Inte för slutsatser med info</string>
     <string name="color_purple">Ljuvlig Lila</string>
     <string name="sponsorblock_notifications">Notifikationer</string>
-    <string name="update_available_text">Ny uppdatering tillgänglig. Klicka här för att öppna GitHub-sidan för releaser.</string>
     <string name="appearance">Utseende</string>
     <string name="update_summary">Klicka för uppdatering</string>
     <string name="playback_speed">Uppspelningshastighet</string>
@@ -122,7 +120,6 @@
     <string name="addInstance">Lägg till instans</string>
     <string name="empty_instance">Fyll i namnet och URL till API.</string>
     <string name="instance_api_url">URL till instansens API</string>
-    <string name="clear_customInstances">Rensa tillagd</string>
     <string name="invalid_url">Vänligen fyll i en fungerande URL</string>
     <string name="related_streams_summary">Visa liknande sändningar tillsammans med det du tittar på</string>
     <string name="import_from_yt_summary">Från YouTube eller NewPipe</string>
@@ -131,7 +128,6 @@
     <string name="videoCount">%1$d videor</string>
     <string name="app_uptodate">Senaste versionen används.</string>
     <string name="related_streams">Relaterat innehåll</string>
-    <string name="advanced_summary">Nerladdningar och återställning</string>
     <string name="version">Version %1$s</string>
     <string name="customInstance_summary">Lägg till…</string>
     <string name="category_filler">Utfyllnadsstycke/Skämt</string>
@@ -142,7 +138,6 @@
     <string name="category_preview_summary">För segment som beskriver kommande videor utan ytterligare info. Om det inkluderar klipp som bara visas här, är det antagligen fel kategori</string>
     <string name="buffering_goal">Förladdning</string>
     <string name="buffering_goal_summary">Max. antal sekunder för videor att buffra</string>
-    <string name="playerVideoFormat">Videoformat for spelaren</string>
     <string name="github">GitHub</string>
     <string name="picture_in_picture">Bild-i-bild</string>
     <string name="behavior">Beteende</string>
@@ -202,7 +197,6 @@
     <string name="color_violet">Variabel violett</string>
     <string name="copied">Kopierat</string>
     <string name="stop">Stopp</string>
-    <string name="account">Konto</string>
     <string name="system_caption_style">Stil för systemets textning</string>
     <string name="most_recent">Senaste</string>
     <string name="notifications">Notifikationer</string>
@@ -235,7 +229,6 @@
     <string name="irreversible">Är du säker\? Det här kan inte ångras!</string>
     <string name="general">Allmänt</string>
     <string name="sb_custom_colors">Anpassade segmentfärger</string>
-    <string name="playingOnBackground">Spelar i bakgrunden…</string>
     <string name="player_summary">Förval och beteende</string>
     <string name="auth_instance_summary">Använd en annan instans för autentiserade anrop</string>
     <string name="require_restart">Omstart av appen krävs</string>
@@ -257,10 +250,8 @@
     <string name="worst_quality">Lägsta</string>
     <string name="general_summary">Nedladdningar och datasparare</string>
     <string name="playerAudioQuality">Ljudkvalitet</string>
-    <string name="no_player_found">Ingen extern spelare hittades. Kontrollera att du har en installerad.</string>
     <string name="invalid_color">Ogiltigt färgvärde ifyllt!</string>
     <string name="push_channel_description">Visar en notifikation när nya sändningar är tillgängliga.</string>
-    <string name="playerAudioFormat">Ljudformat för uppspelning</string>
     <string name="livestreams">Livesändningar</string>
     <string name="uploaderAndVideoCount">%1$s • %2$d videor</string>
     <string name="seek_increment">Sökstegring</string>
@@ -278,12 +269,10 @@
     <string name="disable_proxy">Inaktivera Piped-proxyn</string>
     <string name="player_resize_mode">Ändra storlek</string>
     <string name="renamePlaylist">Byt namn på spellistan</string>
-    <string name="hls_instead_of_dash_summary">Använd HLS istället för DASH för strömmande media. Försök att aktivera det här alternativet om videouppspelningen inte fungerar.</string>
     <string name="playlist_description">Beskrivning av spellista</string>
     <string name="copied_to_clipboard">Kopierad till urklipp</string>
     <string name="trending">Trendigt just nu</string>
     <string name="end_time">Sluttid</string>
-    <string name="confirm_unsubscribing">Bekräfta avslut av prenumeration</string>
     <string name="mobile_data">Mobildata</string>
     <string name="unknown_or_no_audio">okänt eller inget ljud</string>
     <string name="audio_video_summary">Kvalitet och format</string>
@@ -304,7 +293,6 @@
     <string name="volume">Volym</string>
     <string name="featured">Utvalda</string>
     <string name="remove_watched_videos">Ta bort sedda videor</string>
-    <string name="invalid_filename">Ogiltigt filnamn!</string>
     <string name="nothing_selected">Inget valt!</string>
     <string name="new_videos_badge">Indikator för nya videor</string>
     <string name="navigation_bar">Navigeringsfält</string>
@@ -324,12 +312,10 @@
     <string name="uploader_name">Uppladdarens namn</string>
     <string name="clear_bookmarks">Ta bort bokmärken</string>
     <string name="swipe_controls_summary">Svep för att justera ljusstyrkan och volymen i helskärmsläge</string>
-    <string name="filename">Filnamn</string>
     <string name="off">Av</string>
     <string name="codecs">Video kodekar</string>
     <string name="help">Hjälp</string>
     <string name="double_tap_seek">Dubbelklicka för att söka</string>
-    <string name="fallback_piped_proxy_summary">Ladda videor via proxyn om direktanslutning till YouTube inte fungerar för den aktuella videon (ökar den initiala laddningstiden). Om den är inaktiverad kommer musikinnehåll från YouTube sannolikt inte att spelas upp på grund av YT-begränsningar</string>
     <string name="mark_as_unwatched">Markera som osedd</string>
     <string name="import_subscriptions_from">Importera prenumerationer från</string>
     <string name="automatic">Automatisk</string>
@@ -361,7 +347,6 @@
     <string name="original_or_main_audio_track">original eller primärt</string>
     <string name="backup">Säkerhetskopiering</string>
     <string name="import_playlists">Importera spellistor</string>
-    <string name="fallback_piped_proxy">Använd Piped-proxy som reserv</string>
     <string name="export_playlists">Exportera spellistor</string>
     <string name="forward">Spola framåt</string>
     <string name="audio_track_format">%1$s - %2$s</string>
@@ -379,7 +364,6 @@
     <string name="disable_proxy_summary">Ladda videor och bilder direkt från YouTubes servrar. Aktivera bara detta alternativ om du alltid använder en VPN</string>
     <string name="playlistCloned">Spellistan klonad</string>
     <string name="shuffle">Blanda</string>
-    <string name="confirm_unsubscribe">Är du säker på att du vill avsluta prenumerationen på %1$s\?</string>
     <string name="fullscreen_gestures">Gester för helskärm på/av</string>
     <string name="repeat_mode_none">Ingen</string>
     <string name="proceed">Fortsätt</string>
@@ -400,9 +384,7 @@
     <string name="backup_customInstances">Anpassade instanser</string>
     <string name="no_comments_available">Videon har inga kommentarer.</string>
     <string name="all_caught_up">Du har kommit ikapp</string>
-    <string name="confirm_unsubscribing_summary">Visa en bekräftelseruta innan du avslutar prenumerationen</string>
     <string name="playlistUrl">Spellistans URL</string>
-    <string name="visible">Visa i scrollbaren</string>
     <string name="time_code">Tidskod (sekunder)</string>
     <string name="username_email">Att använda en e-postadress som användarnamn rekommenderas inte. Fortsätt ändå?</string>
     <string name="creation_date_reversed">Datum skapad (omvänt)</string>
@@ -416,7 +398,6 @@
     <string name="audio_only_mode_summary">Gör LibreTube till en musikspelare</string>
     <string name="unknown_audio_language">Okänt språk för ljudet</string>
     <string name="brightness">Ljusstyrka</string>
-    <string name="custom_playback_speed_summary">Använd en annan uppspelningshastighet än för den normala spelaren</string>
     <string name="failed_fetching_instances">Kunde inte hämta tillgängliga instanser.</string>
     <string name="same_as_fullscreen">Samma som fullskärm</string>
     <string name="layout">Utformning</string>
@@ -424,7 +405,6 @@
     <string name="defaults">Förvalda</string>
     <string name="alphabetic_reversed">Alfabetisk (omvänd)</string>
     <string name="time">Tid</string>
-    <string name="hls_instead_of_dash">Använd HLS</string>
     <string name="duration">Varaktighet</string>
     <string name="descriptive_audio_track">beskrivande</string>
     <string name="privacy_alert">Integritetsvarning</string>
@@ -435,15 +415,11 @@
     <string name="video_id">Video ID</string>
     <string name="resize_mode_fit">Anpassa</string>
     <string name="audio_only_mode">Endast ljud</string>
-    <string name="custom_playback_speed">Anpassad hastighet</string>
     <string name="play_all">Spela upp alla</string>
-    <string name="proxy">Proxyserver</string>
     <string name="duration_reversed">Varaktighet (omvänd)</string>
-    <string name="alternative_videos_layout">Alternativ layout för videor</string>
     <string name="new_videos_badge_summary">Visa en bricka med antalet nya videor om det finns några</string>
     <string name="backup_restore_summary">Importera och exportera prenumerationer, spellistor, …</string>
     <string name="repeat_mode">Upprepningsläge</string>
-    <string name="no_chapter">Inga kapitel</string>
     <string name="resolution_limited">begränsad</string>
     <string name="tooltip_close">Stäng</string>
     <string name="auto_generated">autogenererad</string>
@@ -456,7 +432,6 @@
     <string name="tooltip_play">Spela</string>
     <string name="tooltip_filter">Filter</string>
     <string name="tooltip_unlocked">Lås upp spelaren</string>
-    <string name="filename_too_long">Filnamnet är för långt!</string>
     <string name="registration_disabled">Registrering inaktiverad</string>
     <string name="tooltip_clear_queue">Töm kö</string>
     <string name="player_channel_description">Visar en notifikation vid uppspelning</string>
@@ -534,7 +509,6 @@
     <string name="dialog_play_offline_title">En lokal version av den här videon finns tillgänglig.</string>
     <string name="import_watch_history">Importera visningshistorik</string>
     <string name="dialog_play_offline_body">Vill du spela upp videon från nedladdningsmappen?</string>
-    <string name="import_watch_history_desc">Observera att allt inte importeras på grund av YouTubes begränsade exportdata.</string>
     <string name="local_ryd_summary">Hämta ogilla-information direkt från https://returnyoutubedislikeapi.com</string>
     <string name="audio_codecs">Ljud kodekar</string>
     <string name="never_show_again">Visa aldrig detta igen</string>

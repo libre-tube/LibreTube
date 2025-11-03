@@ -34,7 +34,6 @@
     <string name="createPlaylist">Opprett spilleliste</string>
     <string name="already_logged_in">Allerede innlogget. Du kan logge ut av kontoen din.</string>
     <string name="importsuccess">Abonnert</string>
-    <string name="cannotDownload">Kan ikke laste ned denne strømmen.</string>
     <string name="unknown_error">Nettverksfeil.</string>
     <string name="error">Noe gikk galt.</string>
     <string name="empty">Brukernavn og passord må fylles ut.</string>
@@ -99,7 +98,6 @@
     <string name="update_summary">Klikk for å sjekke at du har siste versjon.</string>
     <string name="app_uptodate">Kjører siste versjon.</string>
     <string name="appearance_summary">Tilpass programmet til din smak</string>
-    <string name="advanced_summary">Nedlastninger, og tilbakestilling</string>
     <string name="fireIcon">Fasjonabel flamme</string>
     <string name="torchIcon">Finskodd fakkel</string>
     <string name="shapedIcon">Formodentlig formet</string>
@@ -111,7 +109,6 @@
     <string name="category_interaction">Interaksjonspåminnelse</string>
     <string name="category_outro_summary">Info etter slutten av videoen. Ikke for oppsummeringer med info</string>
     <string name="playOnBackground">Spill i bakgrunnen</string>
-    <string name="update_available_text">Gå til utgivelser på GitHub for å laste ned\?</string>
     <string name="birdIcon">Framhevet fugl</string>
     <string name="category_selfpromo_summary">Ligner på «Sponsor», bortsett fra at det er ubetalt eller selv-promotering. Dette inkluderer segmenter om ting, donasjoner, eller info om samarbeidspartnere</string>
     <string name="category_sponsor_summary">Betalt promosjon, betalt videresending og direkte reklame. Ikke for selvpromotering eller sannferdig gratis nevning av tiltak, skapere, nettsider, eller produkter</string>
@@ -131,11 +128,9 @@
     <string name="invalid_url">Skriv inn en nettadresse som virker</string>
     <string name="empty_instance">Fyll inn navnet og API-nettadressen.</string>
     <string name="version">Versjon %1$s</string>
-    <string name="clear_customInstances">Tøm tillagte</string>
     <string name="related_streams">Relatert innhold</string>
     <string name="related_streams_summary">Vis lignende strømmer ved siden av</string>
     <string name="category_filler">Fyll-utledelser/vitser</string>
-    <string name="playerVideoFormat">Videoformat for avspiller</string>
     <string name="category_preview">Forhåndsvining/tilbakeblikk</string>
     <string name="category_music_offtopic">Musikk: Parti uten musikk</string>
     <string name="category_filler_summary">For avsporinger som kun er lagt til for å fylle tid, eller være morsomme, og ikke er nødvendige for å forstå videoens hovedinnhold</string>
@@ -161,7 +156,6 @@
     <string name="clonePlaylist">Dupliser spillelisten</string>
     <string name="deleteAccount">Slett konto</string>
     <string name="deleteAccount_summary">Slett din Piped-konto</string>
-    <string name="account">Konto</string>
     <string name="restore">Gjenopprett</string>
     <string name="watch_history">Visningshistorikk</string>
     <string name="watch_positions">Husk posisjon</string>
@@ -201,7 +195,6 @@
     <string name="network_wifi">Kun på Wi-Fi</string>
     <string name="required_network">Påkrevd tilkobling</string>
     <string name="network_all">Alle</string>
-    <string name="playerAudioFormat">Lydformat for avspiller</string>
     <string name="playerAudioQuality">Lydkvalitet</string>
     <string name="worst_quality">Verst</string>
     <string name="default_subtitle_language">Undertekstspråk</string>
@@ -215,7 +208,6 @@
     <string name="share_with_time">Del med starttid</string>
     <string name="selected">Valgte</string>
     <string name="autoRotatePlayer_summary">Fullskjerm når enheten ligger</string>
-    <string name="no_player_found">Installer et avspillerprogram først.</string>
     <string name="data_saver_mode_summary">Spar data ved å unngå bilder</string>
     <string name="watch_history_summary">Holde rede på sette videoer</string>
     <string name="history_summary">Visnings- og søkehistorikk</string>
@@ -223,7 +215,6 @@
     <string name="reset_watch_positions">Tilbakestill</string>
     <string name="system_caption_style">Systemundertekststil</string>
     <string name="captions">Undertekster</string>
-    <string name="playingOnBackground">Spiller i bakgrunnen …</string>
     <string name="caption_settings">Undertekster</string>
     <string name="navLabelVisibility">Etikettsynlighet</string>
     <string name="export_subscriptions">Eksporter abonnementer</string>
@@ -268,20 +259,14 @@
     <string name="push_channel_description">Viser en merknad når nye strømmer er tilgjengelige.</string>
     <string name="wifi">Wi-Fi</string>
     <string name="navigation_bar">Navigasjonsfelt</string>
-    <string name="filename">Filnavn</string>
     <string name="playback_pitch">Tonehøyde</string>
     <string name="change_region">På vei opp ser ut til å være utilgjengelig for nåværende region. Velg en annen i innstillingene.</string>
-    <string name="invalid_filename">Ugyldig filnavn</string>
     <string name="queue">Kø</string>
     <string name="added_to_playlist">Lagt til på spillelisten %1$s</string>
     <string name="time_code">Tidskode</string>
     <string name="playlistCloned">Spilleliste klonet</string>
-    <string name="confirm_unsubscribe">Opphev abonnement på %1$s\?</string>
-    <string name="confirm_unsubscribing_summary">Vis bekreftelsesdialog før opphevelse av abonnement</string>
     <string name="play_all">Spill alle</string>
-    <string name="confirm_unsubscribing">Bekreft opphevelse av abonnement</string>
     <string name="livestreams">Sanntidsstrømmer</string>
-    <string name="alternative_videos_layout">Alternativ tilpasning av videoer</string>
     <string name="defaultIconLight">Forvalgt lys</string>
     <string name="time">Tid</string>
     <string name="end_time">Slutt-tid</string>
@@ -290,8 +275,6 @@
     <string name="notification_time_summary">Tidsperiode merknadene kan vises</string>
     <string name="navbar_order">Rekkefølge</string>
     <string name="audio_track">Lydspor</string>
-    <string name="hls_instead_of_dash">Bruk HLS</string>
-    <string name="hls_instead_of_dash_summary">Bruk HLS istedenfor DASH (tregere og ikke anbefalt)</string>
     <string name="auto_quality">Automatisk</string>
     <string name="limit_to_runtime">Begrens til spilletid</string>
     <string name="trending">Hva er populært nå</string>
@@ -361,8 +344,6 @@
     <string name="stats_for_nerds">Statistikk for nerder</string>
     <string name="video_id">Video-ID</string>
     <string name="replies">Svar</string>
-    <string name="custom_playback_speed">Egendefinert hastighet</string>
-    <string name="custom_playback_speed_summary">Bruk avspillingshastighet forskjellig fra den for normal avspiller</string>
     <string name="category">Kategori</string>
     <string name="codecs">Kodek</string>
     <string name="autoplay_countdown_summary">Vis 5 sekunders nedtelling før autospilling av neste video</string>
@@ -406,7 +387,6 @@
     <string name="export_playlists_to">Eksporter spillelister til</string>
     <string name="unlimited_search_history">Ubegrenset søkehistorikk</string>
     <string name="show_search_suggestions">Vis søkeforslag</string>
-    <string name="fallback_piped_proxy">Fall tilbake til Piped-mellomtjener</string>
     <string name="stop">Stopp</string>
     <string name="sb_custom_colors_summary">Veksler egendefinerte fargesegmenter for SponsorBlock-segmenter</string>
     <string name="sb_custom_colors">Egendefinerte segmentfarger</string>
@@ -415,16 +395,13 @@
     <string name="automatic">Automatisk</string>
     <string name="chapters_videoHighlight">Videohøydepunkt</string>
     <string name="off">Av</string>
-    <string name="visible">Vis i blafringsfelt</string>
     <string name="manual">Manuell</string>
     <string name="category_highlight_summary">Kan enten være publisert navn, miniatyrbildet, eller den mest interessante delen av videoen. Du kan hoppe til det ved å trykke det i kapitteldelen</string>
     <string name="category_highlight">Vis videohøydepunkt</string>
-    <string name="fallback_piped_proxy_summary">Last inn videoer via mellomtjener hvis tilkobling til YouTube direkte ikke virker for nåværende video (noe som øker innlastingstiden). Ellers vil du antagelig ikke kunne spille YouTube musikk-innhold som følge av begrensninger</string>
     <string name="unknown_audio_language">Ukjent lydspråk</string>
     <string name="unknown_audio_track_type">Ukjent lydsporstype</string>
     <string name="original_or_main_audio_track">opprinnelig eller hovedspor</string>
     <string name="dubbed_audio_track">dubbet</string>
-    <string name="no_chapter">Ingen kapitler</string>
     <string name="descriptive_audio_track">deskriptiv</string>
     <string name="default_or_unknown_audio_track">forvalgt eller ukjent</string>
     <string name="unknown_or_no_audio">ukjent eller ingen lyd</string>
@@ -464,12 +441,10 @@
     <string name="resolution_limited">begrenset</string>
     <string name="automatic_once">Automatisk én gang</string>
     <string name="registration_disabled">Registrering avskrudd</string>
-    <string name="proxy">Mellomtjener</string>
     <string name="group_name_error_empty">Skriv inn et navn</string>
     <string name="group_name_error_exists">Velg et unikt navn</string>
     <string name="sb_create_segment">Opprett segment</string>
     <string name="sb_invalid_segment">Ugyldig segmentsstart eller -slutt</string>
-    <string name="filename_too_long">Filnavnet er for langt.</string>
     <string name="sponsorblock_user_id">SponsorBlock-bruker-ID</string>
     <string name="segment_type">Segmenttype</string>
     <string name="contribute_to_sponsorblock">Bidra til SponsorBlock</string>

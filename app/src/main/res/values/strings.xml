@@ -27,7 +27,6 @@
     <string name="region">Region</string>
     <string name="login_register">Log in/register</string>
     <string name="importsuccess">Subscribed</string>
-    <string name="cannotDownload">Can\'t download this stream.</string>
     <string name="downloadfailed">Download failed.</string>
     <string name="import_from_yt">Import subscriptions</string>
     <string name="import_from_yt_summary">From YouTube or NewPipe</string>
@@ -127,7 +126,6 @@
     <string name="youtube" translatable="false">YouTube</string>
     <string name="playOnBackground">Play in the background</string>
     <string name="update_available">Update available</string>
-    <string name="update_available_text">New update available. Click to open the GitHub releases page.</string>
     <string name="appearance">Appearance</string>
     <string name="downloads">Downloads</string>
     <string name="update_summary">Check for update</string>
@@ -136,7 +134,6 @@
     <string name="advanced">Advanced</string>
     <string name="player">Player</string>
     <string name="appearance_summary">Adjust the app to your liking</string>
-    <string name="advanced_summary">Downloads, and reset</string>
     <string name="live">Live</string>
     <string name="upcoming">Upcoming</string>
     <string name="shareTo">Share URL to</string>
@@ -155,7 +152,6 @@
     <string name="instance_api_url">URL to instance API</string>
     <string name="addInstance">Add Instance</string>
     <string name="empty_instance">Fill in the name and the API URL.</string>
-    <string name="clear_customInstances">Clear added</string>
     <string name="invalid_url">Please enter a URL that works</string>
     <string name="version">Version %1$s</string>
     <string name="show_updates">Check updates automatically</string>
@@ -163,7 +159,6 @@
     <string name="related_streams_summary">Show similar streams alongside what you watch</string>
     <string name="buffering_goal">Preloading</string>
     <string name="buffering_goal_summary">Max. amount of seconds of video to buffer</string>
-    <string name="playerVideoFormat">Video format for player</string>
     <string name="no_audio">No audio</string>
     <string name="no_video">No video</string>
     <string name="no_subtitle">No subtitle</string>
@@ -191,7 +186,6 @@
     <string name="reset_message">Reset all settings and log out?</string>
     <string name="deleteAccount">Delete account</string>
     <string name="deleteAccount_summary">Delete your Piped account</string>
-    <string name="account">Account</string>
     <string name="restore">Restore</string>
     <string name="watch_history">Watch history</string>
     <string name="watch_positions">Remember position</string>
@@ -218,7 +212,6 @@
     <string name="autoRotatePlayer_summary">Fullscreen playback when the device gets turned</string>
     <string name="pure_theme">Pure theme</string>
     <string name="pure_theme_summary">Pure white/black theme</string>
-    <string name="no_player_found">No external player found. Please make sure you have one installed.</string>
     <string name="data_saver_mode">Data-saver mode</string>
     <string name="data_saver_mode_summary">Skip thumbnails and other images</string>
     <string name="search_history_summary">Remember searches</string>
@@ -233,9 +226,7 @@
     <string name="none">None</string>
     <string name="general">General</string>
     <string name="general_summary">Downloads and data-saver</string>
-    <string name="playingOnBackground">Playing in the background…</string>
     <string name="caption_settings">Captions</string>
-    <string name="playerAudioFormat">Audio format for player</string>
     <string name="playerAudioQuality">Audio quality</string>
     <string name="worst_quality">Worst</string>
     <string name="best_quality">Best</string>
@@ -307,8 +298,6 @@
     <string name="suggest_change_instance">Loading is taking more than usual. Consider changing instance</string>
     <string name="playback_pitch">Pitch</string>
     <string name="playback_pitch_semitone_error_input">Value must be between -%1$.1f (minimum) and %1$.1f (maximum)</string>
-    <string name="filename">Filename</string>
-    <string name="invalid_filename">Invalid filename!</string>
     <string name="time_code">Time code (seconds)</string>
     <string name="added_to_playlist">Added to playlist %1$s</string>
     <string name="queue">Queue</string>
@@ -317,7 +306,6 @@
     <string name="color">Color</string>
     <string name="invalid_color">Invalid color value entered!</string>
     <string name="livestreams">Livestreams</string>
-    <string name="alternative_videos_layout">Alternative videos layout</string>
     <string name="defaultIconLight">Default light</string>
     <string name="playlistCloned">Playlist cloned</string>
     <string name="unsubscribe_snackbar_message">Successfully unsubscribed from %1$s</string>
@@ -331,8 +319,6 @@
     <string name="layout">Layout</string>
     <string name="audio_track">Audio track</string>
     <string name="unsupported_file_format">Unsupported file format: %1$s</string>
-    <string name="hls_instead_of_dash">Use HLS</string>
-    <string name="hls_instead_of_dash_summary">Use HLS instead of DASH for streaming media. Try toggling this option if video playback doesn\'t work.</string>
     <string name="auto_quality">Auto</string>
     <string name="limit_to_runtime">Limit to runtime</string>
     <string name="trends">Trends</string>
@@ -365,7 +351,6 @@
     <string name="export_playlists">Export playlists</string>
     <string name="export_playlist">Export playlist</string>
     <string name="import_watch_history">Import watch history</string>
-    <string name="import_watch_history_desc">Please note that not everything will be imported due to YouTube\'s limited export data.</string>
     <string name="app_backup">App backup</string>
     <string name="backup_restore_summary">Import and export subscriptions, playlists, …</string>
     <string name="exportsuccess">Exported.</string>
@@ -394,8 +379,6 @@
     <string name="codecs">Video codecs</string>
     <string name="audio_codecs">Audio codecs</string>
     <string name="mark_as_watched">Mark as watched</string>
-    <string name="custom_playback_speed">Custom speed</string>
-    <string name="custom_playback_speed_summary">Use a different playback speed than for the normal player</string>
     <string name="category">Category</string>
     <string name="stats_for_nerds">Stats for nerds</string>
     <string name="video_id">Video ID</string>
@@ -403,7 +386,6 @@
     <string name="autoplay_countdown">Autoplay countdown</string>
     <string name="autoplay_countdown_summary">Show a 5s countdown before auto-playing the next video</string>
     <string name="playing_next">Playing next in %1$s</string>
-    <string name="proxy">Proxy</string>
     <string name="disable_proxy">Disable Piped proxy</string>
     <string name="disable_proxy_summary">Load videos and images directly from YouTube\'s servers. Only enable the option if you always use a VPN</string>
     <string name="auto_fullscreen_shorts">Auto fullscreen on short videos</string>
@@ -434,9 +416,6 @@
     <string name="manual">Manual</string>
     <string name="automatic">Automatic</string>
     <string name="automatic_once">Automatic once</string>
-    <string name="visible">Show in seek bar</string>
-    <string name="fallback_piped_proxy">Fallback to Piped proxy</string>
-    <string name="fallback_piped_proxy_summary">Load videos via the proxy if connecting to YouTube directly doesn\'t work for the current video (increases the initial loading times). If disabled, YouTube music content likely won\'t play due to YT restrictions</string>
     <string name="dearrow">Enable DeArrow</string>
     <string name="dearrow_summary">Show more accurate and less sensationalist titles and thumbnails. Increases loading times</string>
     <string name="contribute_to_dearrow">Contribute to DeArrow</string>
@@ -484,7 +463,6 @@
     <string name="import_format_newpipe" translatable="false">NewPipe</string>
     <string name="import_format_freetube" translatable="false">FreeTube</string>
     <string name="import_format_youtube_csv" translatable="false">YouTube (CSV)</string>
-    <string name="import_format_youtube_json" translatable="false">YouTube (JSON)</string>
     <string name="import_format_list_of_urls">List of URLs or video IDs</string>
     <string name="home_tab_content">Home tab content</string>
     <string name="show_search_suggestions">Show search suggestions</string>
@@ -497,7 +475,6 @@
     <string name="default_or_unknown_audio_track">default or unknown</string>
     <string name="unknown_or_no_audio">unknown or no audio</string>
     <string name="continue_watching">Continue watching</string>
-    <string name="no_chapter">No chapter</string>
     <string name="screen_orientation">Screen orientation</string>
     <string name="auto_generated">auto-generated</string>
     <string name="resolution_limited">limited</string>
@@ -507,7 +484,6 @@
     <string name="sb_invalid_segment">Invalid segment start or end</string>
     <string name="contribute_to_sponsorblock">Contribute to SponsorBlock</string>
     <string name="sponsorblock_user_id">SponsorBlock UserID</string>
-    <string name="filename_too_long">Filename too long!</string>
     <string name="remember_playback_speed">Remember playback speed</string>
     <string name="successfully_removed_from_playlist">Successfully removed \"%1$s\" from the playlist.</string>
     <string name="watched">Watched</string>

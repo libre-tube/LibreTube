@@ -71,7 +71,6 @@
     <string name="disabled">বন্ধ</string>
     <string name="playOnBackground">ব্যাকগ্রাউন্ডে প্লে করুন</string>
     <string name="update_available">সংস্করণ %1$s এ আপডেট করা যাবে</string>
-    <string name="update_available_text">নতুন আপডেট এসেছে। গিটহাব রিলিজ পেইজ খুলতে চাপুন।</string>
     <string name="appearance">উপস্থাপনা</string>
     <string name="downloads">ডাউনলোডগুলো</string>
     <string name="app_uptodate">অ্যাপটি হালনাগাদ করা হয়েছে।</string>
@@ -88,13 +87,11 @@
     <string name="instance_name">ইনস্ট্যান্সের নাম</string>
     <string name="instance_api_url">ইনস্ট্যান্স এপিআই লিংক</string>
     <string name="addInstance">ইনস্ট্যান্স যোগ করুন</string>
-    <string name="clear_customInstances">কাস্টম ইনস্ট্যান্সগুলো মুছে ফেলুন</string>
     <string name="invalid_url">কাজ করে এমন একটি লিংক উল্লেখ করুন</string>
     <string name="version">সংস্করণ %1$s</string>
     <string name="related_streams">সম্পর্কিত কন্টেন্ট</string>
     <string name="birdIcon">শক্তিশালী পাখি</string>
     <string name="buffering_goal">প্রিলোডিং</string>
-    <string name="playerVideoFormat">প্লেয়ারের জন্য ভিডিও ফরম্যাট</string>
     <string name="buffering_goal_summary">ভিডিও বাফারিংয়ের জন্য সর্বোচ্চ সময় (সেকেন্ডে)</string>
     <string name="no_audio">কোনো অডিও নেই</string>
     <string name="no_video">কোনো ভিডিও নেই</string>
@@ -125,7 +122,6 @@
     <string name="category_intro_summary">মূল কন্টেন্টের বাইরে বিরতি। এটি যেকোনো স্বল্প বিরতি, স্থির চিত্র অথবা পুনরাবৃত্তিক এনিমেশনের জন্য প্রযোজ্য। এমন এনিমেশনের জন্য ব্যবহার করা অনুচিত যাতে প্রয়োজনীয় তথ্য বিদ্যমান</string>
     <string name="category_filler_summary">এমন স্পর্শকাতর দৃশ্য যা হাস্যরস উদ্দীপক কিন্তু ভিডিওর মূল কন্টেন্ট বোঝার জন্য অপ্রয়োজনীয়</string>
     <string name="sponsorblock_notifications">নোটিফিকেশনগুলো</string>
-    <string name="advanced_summary">ডাউনলোডগুলো এবং রিসেট</string>
     <string name="category_music_offtopic_summary">শুধুমাত্র মিউজিক ভিডিওর জন্য প্রযোজ্য। অফিসিয়াল মিক্সগুলোর অংশ এমন দৃশ্যগুলো এখানে অপ্রযোজ্য। স্পটিফাই বা অডিও ভার্সনের প্রতিফলন ঘটায় অথবা ন্যূনতম অপ্রয়োজনীয় অংশ থাকবে</string>
     <string name="category_preview_summary">ভিডিওর এই অংশে আসন্ন কন্টেন্ট অথবা একই সিরিজের অন্য ভিডিওতে পূর্বে আলোচনা করা হয়েছে এমন তথ্য এখানে থাকবে‌‌ যদি এখানে এমন তথ্য থাকে যা অন্য ভিডিও বা একই ভিডিওর অন্য কোথাও আলোচনা করা হয়নি, তবে ভিডিওর উক্ত অংশের জন্য ভুল ক্যাটাগরি নির্বাচন করা হয়েছে</string>
     <string name="player">প্লেয়ার</string>
@@ -154,7 +150,6 @@
     <string name="region">এলাকা</string>
     <string name="login_register">লগ ইন/নিবন্ধন</string>
     <string name="importsuccess">সাবস্ক্রাইব করা হয়েছে</string>
-    <string name="cannotDownload">এই স্ট্রিম ডাউনলোড করা সম্ভব হচ্ছে না।</string>
     <string name="downloadfailed">ডাউনলোড ব্যর্থ হয়েছে।</string>
     <string name="subscriptions">সাবস্ক্রিপশনগুলো</string>
     <string name="login">লগ ইন</string>
@@ -162,7 +157,6 @@
     <string name="deleteAccount">অ্যাকাউন্ট মুছে ফেলুন</string>
     <string name="deleteAccount_summary">পাইপড অ্যাকাউন্ট মুছে ফেলুন</string>
     <string name="restore">ফিরিয়ে আনুন</string>
-    <string name="account">অ্যাকাউন্ট</string>
     <string name="turnInternetOn">দয়া করেন ওয়াই-ফাই অথবা মোবাইল ডেটা অন করুন ইন্টারনেটের সাথে যুক্ত হতে।</string>
     <string name="open">খুলুন…</string>
     <string name="auth_instance_summary">অথেনটিকেশনের জন্য ভিন্ন ইন্সটেন্স ব্যবহার করুন</string>
@@ -186,7 +180,6 @@
     <string name="autoRotatePlayer">অটো-ফুলস্ক্রিন</string>
     <string name="pure_theme">পিওর থিম</string>
     <string name="pure_theme_summary">পিওর সাদা/কালো থিম</string>
-    <string name="no_player_found">কোনো এক্সটার্নাল প্লেয়ার পাওয়া গেলো না। দয়া করে নিশ্চিত হোন যে একটি অন্তত ইন্সটল করা আছে।</string>
     <string name="data_saver_mode">ডেটা-সেভার মোড</string>
     <string name="data_saver_mode_summary">থাম্বনেইল ও অনান্য ছবি লোড করবেন না</string>
     <string name="search_history_summary">সার্চগুলো মনে রাখুন</string>
@@ -237,8 +230,6 @@
     <string name="system_caption_style">সিস্টেমের ক্যাপশন স্টাইল</string>
     <string name="general">সাধারণ</string>
     <string name="caption_settings">ক্যাপশনগুলো</string>
-    <string name="playerAudioFormat">প্লেয়ারের জন্য অডিও ফর্ম্যাট</string>
-    <string name="playingOnBackground">ব্যাকগ্রাউন্ডে প্লে করা হচ্ছে…</string>
     <string name="worst_quality">নিকৃষ্ট</string>
     <string name="irreversible">আপনি নিশ্চিত\? আর পূর্বাবস্থায় ফেরত যেতে পারবেন না!</string>
     <string name="wifi">ওয়াই-ফাই</string>
@@ -271,18 +262,12 @@
     <string name="download_channel_name">ডাউনলোড সার্ভিস</string>
     <string name="change_region">বর্তমান এলাকায় ট্রেডিং অ্যাভেলেবল নেই। সেটিংসে গিয়ে অন্যটি বাছুন।</string>
     <string name="download_channel_description">ডাউনলোডের সময় নোটিফিকেশন দেখান।</string>
-    <string name="filename">ফাইলের নাম</string>
-    <string name="invalid_filename">ইনভ্যালিড ফাইলনেম!</string>
     <string name="time_code">সময় কোড (সেকেন্ড)</string>
     <string name="queue">কিউ</string>
     <string name="livestreams">লাইভস্ট্রিমগুলো</string>
-    <string name="alternative_videos_layout">বিকল্প ভিডিও লেয়াউট</string>
     <string name="defaultIconLight">ডিফল্ট লাইট</string>
-    <string name="confirm_unsubscribe">আপনি কি নিশ্চিতভাবে %1$s চ্যানেলটিকে আনসাবস্ক্রাইব করতে চান\?</string>
-    <string name="confirm_unsubscribing">আনসাবস্ক্রাইব নিশ্চিতকরণ</string>
     <string name="play_all">সবগুলোতে চালান</string>
     <string name="playlistCloned">প্লেলিস্ট ক্লোন করা হয়েছে</string>
-    <string name="confirm_unsubscribing_summary">আনসাবস্ক্রাইব করার আগে একটি ডায়লগ দেখান</string>
     <string name="time">সময়</string>
     <string name="start_time">শুরুর সময়</string>
     <string name="end_time">শেষ সময়</string>
@@ -290,8 +275,6 @@
     <string name="notification_time_summary">নোটিফিকেশনের জন্য অনুমোদিত সময়</string>
     <string name="layout">লেয়াউট</string>
     <string name="audio_track">অডিও ট্র্যাক</string>
-    <string name="hls_instead_of_dash">HLS ব্যাবহার করুন</string>
-    <string name="hls_instead_of_dash_summary">DASH এর বদলে HLS ব্যাবহার করুন (ধীরগতিসম্পন্ন হতে পারে, সুপারিশকৃত নয়)</string>
     <string name="auto_quality">স্বয়ংক্রিয়</string>
     <string name="limit_to_runtime">রানটাইম লিমিট</string>
     <string name="trends">জনপ্রিয়গুলো</string>

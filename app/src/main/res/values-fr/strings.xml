@@ -18,7 +18,6 @@
     <string name="instances">Choisir…</string>
     <string name="customInstance">Personnalisé</string>
     <string name="importsuccess">Abonné(e)</string>
-    <string name="cannotDownload">Impossible de télécharger ce flux.</string>
     <string name="downloadfailed">Téléchargement échoué.</string>
     <string name="registered">Inscription réussie ! Vous pouvez maintenant vous abonner à des chaînes.</string>
     <string name="app_theme">Thème</string>
@@ -102,9 +101,7 @@
     <string name="disabled">Désactivé</string>
     <string name="app_icon">Icône</string>
     <string name="playOnBackground">Lire en arrière-plan</string>
-    <string name="advanced_summary">Téléchargements et réinitialisation</string>
     <string name="update_available">Mise à jour disponible</string>
-    <string name="update_available_text">Nouvelle mise à jour disponible. Cliquez pour ouvrir la page des versions sur GitHub.</string>
     <string name="appearance">Apparence</string>
     <string name="downloads">Téléchargements</string>
     <string name="update_summary">Vérifier les mises à jour</string>
@@ -126,7 +123,6 @@
     <string name="instance_name">Nom de l’instance</string>
     <string name="flameIcon">Flamme volante</string>
     <string name="instance_api_url">URL de l’API de l’instance</string>
-    <string name="clear_customInstances">Effacer les ajouts</string>
     <string name="addInstance">Ajouter une instance</string>
     <string name="empty_instance">Complétez le nom et l’URL de l’API.</string>
     <string name="shapedIcon">Forme idiote</string>
@@ -141,7 +137,6 @@
     <string name="buffering_goal">Préchargement</string>
     <string name="buffering_goal_summary">Nombre maximal de secondes de vidéo à mettre en mémoire tampon</string>
     <string name="category_music_offtopic_summary">À utiliser uniquement dans les clips musicaux. Il doit couvrir les parties de la vidéo qui ne font pas partie des mixages officiels. Au final, la vidéo doit ressembler autant que possible à la version mixée de Spotify ou de toute autre version, ou réduire les conversations ou autres distractions.</string>
-    <string name="playerVideoFormat">Format vidéo pour le lecteur</string>
     <string name="category_preview_summary">Pour les segments détaillant le contenu futur sans informations supplémentaires. S\'il s\'agit de clips qui n\'apparaissent qu\'ici, il s\'agit très probablement de la mauvaise catégorie.</string>
     <string name="player_autoplay">Lecture automatique</string>
     <string name="no_audio">Pas d’audio</string>
@@ -161,7 +156,6 @@
     <string name="clonePlaylist">Cloner une liste de lecture</string>
     <string name="deleteAccount_summary">Supprimer votre compte Piped</string>
     <string name="deleteAccount">Supprimer le compte</string>
-    <string name="account">Compte</string>
     <string name="restore">Restaurer</string>
     <string name="watch_history">Historique de lecture</string>
     <string name="watch_positions">Mémoriser la position</string>
@@ -185,7 +179,6 @@
     <string name="autoRotatePlayer">Plein écran automatique</string>
     <string name="autoRotatePlayer_summary">Le mode plein écran du lecteur est activé lorsque l’appareil est tourné</string>
     <string name="pure_theme">Thème pur</string>
-    <string name="no_player_found">Aucun lecteur externe n’a été trouvé. Veuillez vous assurer que vous en avez installé un.</string>
     <string name="data_saver_mode">Mode économie de données</string>
     <string name="search_history_summary">Mémoriser les recherches</string>
     <string name="watch_history_summary">Garder la trace des vidéos regardées localement</string>
@@ -203,9 +196,7 @@
     <string name="general">Général</string>
     <string name="playerAudioQuality">Qualité audio</string>
     <string name="worst_quality">Plus mauvaise</string>
-    <string name="playingOnBackground">Lecture en arrière-plan…</string>
     <string name="caption_settings">Légendes</string>
-    <string name="playerAudioFormat">Format audio pour le lecteur</string>
     <string name="default_subtitle_language">Langue des sous-titres</string>
     <string name="notifications">Notifications</string>
     <string name="least_recent">Plus anciens</string>
@@ -270,18 +261,12 @@
     <string name="change_region">La section Tendances semble être indisponible pour la région actuelle. Veuillez en sélectionner une autre dans les paramètres.</string>
     <string name="push_channel_description">Affiche une notification lorsque de nouveaux flux sont disponibles.</string>
     <string name="playback_pitch">Hauteur</string>
-    <string name="filename">Nom de fichier</string>
-    <string name="invalid_filename">Nom de fichier invalide !</string>
     <string name="queue">File d’attente</string>
     <string name="added_to_playlist">Ajouté à la liste de lecture%1$s</string>
-    <string name="alternative_videos_layout">Mise en page alternative des vidéos</string>
     <string name="defaultIconLight">Par défaut clair</string>
     <string name="time_code">Horodatage (secondes)</string>
     <string name="livestreams">Diffusions en direct</string>
     <string name="playlistCloned">Liste de lecture dupliquée</string>
-    <string name="confirm_unsubscribe">Êtes-vous sûr(e) de vouloir vous désabonner de %1$s \?</string>
-    <string name="confirm_unsubscribing">Confirmer le désabonnement</string>
-    <string name="confirm_unsubscribing_summary">Afficher une boîte de dialogue de confirmation avant de se désabonner</string>
     <string name="play_all">Tout lire</string>
     <string name="time">Temps</string>
     <string name="start_time">Heure de début</string>
@@ -291,8 +276,6 @@
     <string name="navbar_order">Ordre</string>
     <string name="layout">Mise en page</string>
     <string name="audio_track">Piste audio</string>
-    <string name="hls_instead_of_dash">Utiliser HLS</string>
-    <string name="hls_instead_of_dash_summary">Utilisez HLS au lieu de DASH pour diffuser des médias. Essayez de l\'emporter si la lecture vidéo ne fonctionne pas.</string>
     <string name="auto_quality">Auto</string>
     <string name="limit_to_runtime">Limite d’exécution</string>
     <string name="featured">En vedette</string>
@@ -361,8 +344,6 @@
     <string name="playing_next">Prochaine lecture dans %1$s</string>
     <string name="stats_for_nerds">Statistiques pour les nerds</string>
     <string name="video_id">ID de vidéo</string>
-    <string name="custom_playback_speed">Vitesse personnalisée</string>
-    <string name="custom_playback_speed_summary">Utiliser une vitesse de lecture différente de celle du lecteur normal</string>
     <string name="mark_as_watched">Marquer comme vu</string>
     <string name="uploaderAndVideoCount">%1$s • %2$d vidéos</string>
     <string name="subscriberAndVideoCounts">%1$s abonnés • %2$d vidéos</string>
@@ -425,14 +406,11 @@
     <string name="tooltip_play">Lire</string>
     <string name="category_highlight">Afficher le moment fort de la vidéo</string>
     <string name="dubbed_audio_track">doublée</string>
-    <string name="no_chapter">Aucun chapitre</string>
     <string name="category_highlight_summary">Il peut s\'agir du titre annoncé, de la miniature ou de la partie la plus intéressante de la vidéo. Vous pouvez y accéder en appuyant dessus dans la section des chapitres.</string>
     <string name="uploader_name">Nom de l’Uploader</string>
     <string name="tooltip_filter">Filtre</string>
     <string name="off">Désactivé</string>
     <string name="tooltip_unlocked">Déverrouiller le lecteur</string>
-    <string name="filename_too_long">Nom de fichier trop long !</string>
-    <string name="fallback_piped_proxy_summary">Charge les vidéos via le proxy si la connexion directe à YouTube ne fonctionne pas pour la vidéo en cours (augmente les temps de chargement initiaux). Si cette option est désactivée, le contenu musical de YouTube ne sera probablement pas lu en raison des restrictions imposées par YouTube.</string>
     <string name="automatic">Automatique</string>
     <string name="registration_disabled">Inscription désactivée</string>
     <string name="tooltip_clear_queue">Effacer la file d’attente</string>
@@ -446,7 +424,6 @@
     <string name="visibility_public">Public</string>
     <string name="original_or_main_audio_track">original ou principal</string>
     <string name="tooltip_repeat">Répéter</string>
-    <string name="fallback_piped_proxy">Revenir au proxy Piped</string>
     <string name="audio_track_format">%1$s - %2$s</string>
     <string name="tooltip_fullscreen">Plein écran</string>
     <string name="tooltip_sponsorblock">Activer / désactiver SponsorBlock</string>
@@ -462,7 +439,6 @@
     <string name="unknown_audio_track_type">Type de piste audio inconnu</string>
     <string name="group_name_error_empty">Veuillez saisir un nom</string>
     <string name="tooltip_edit_groups">Modifier les groupes</string>
-    <string name="visible">Afficher dans la barre de recherche</string>
     <string name="chapters_videoHighlight">Moment fort de la vidéo</string>
     <string name="screen_orientation">Orientation de l’écran</string>
     <string name="duration_span">Durée: %1$s</string>
@@ -473,7 +449,6 @@
     <string name="descriptive_audio_track">descriptif</string>
     <string name="color">Couleur</string>
     <string name="show_search_suggestions">Afficher les suggestions de recherche</string>
-    <string name="proxy">Proxy</string>
     <string name="no_fullscreen_resolution">Résolution sans plein écran</string>
     <string name="playback_during_call_summary">Notez que cela affecte également l’application pour qu’elle ne gère plus aucun type de focus audio</string>
     <string name="donate">Faire un don</string>
@@ -536,7 +511,6 @@
     <string name="local_ryd">Extracteur Return Youtube Dislike local</string>
     <string name="local_ryd_summary">Récupérer les mentions « Je n’aime pas » de https://returnyoutubedislikeapi.com</string>
     <string name="import_watch_history">Importer l’historique des vidéos regardées</string>
-    <string name="import_watch_history_desc">Veuillez noter que tout ne sera pas importé en raison des données d’exportation limitées de YouTube.</string>
     <string name="audio_codecs">Codecs audio</string>
     <string name="view_count">%1$s vues</string>
     <string name="dialog_play_offline_title">Une version locale de cette vidéo est disponible.</string>

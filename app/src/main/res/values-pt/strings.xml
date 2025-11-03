@@ -16,7 +16,6 @@
     <string name="customInstance">Personalizada</string>
     <string name="region">Região</string>
     <string name="importsuccess">Subscrito</string>
-    <string name="cannotDownload">Não é possível descarregar a emissão.</string>
     <string name="downloadfailed">Falha ao descarregar.</string>
     <string name="app_theme">Tema</string>
     <string name="server_error">Parece que existe um problema com o servidor selecionado. Tente outra instância.</string>
@@ -91,7 +90,6 @@
     <string name="category_outro">Ecrã final e créditos</string>
     <string name="color_accent">Destaque</string>
     <string name="color_red">Vermelho</string>
-    <string name="update_available_text">Está disponível uma atualização. Toque para abrir a página no GitHub.</string>
     <string name="app_icon">Ícone</string>
     <string name="playOnBackground">Reproduzir em segundo plano</string>
     <string name="shareTo">Partilhar URL</string>
@@ -125,7 +123,6 @@
     <string name="playback_speed">Velocidade de reprodução</string>
     <string name="player">Reprodutor</string>
     <string name="appearance_summary">Ajuste a aplicação ao seu gosto</string>
-    <string name="advanced_summary">Descargas e reposição</string>
     <string name="live">Em direto</string>
     <string name="open">Abrir…</string>
     <string name="reset_message">Repor todas as definições e terminar sessão\?</string>
@@ -137,9 +134,7 @@
     <string name="deleteAccount_summary">Eliminar a conta Piped</string>
     <string name="chapters">Capítulos</string>
     <string name="deleteAccount">Eliminar conta</string>
-    <string name="account">Conta</string>
     <string name="restore">Restaurar</string>
-    <string name="clear_customInstances">Remover adicionadas</string>
     <string name="related_streams_summary">Mostrar conteúdo semelhante ao dos vídeos visualizados</string>
     <string name="related_streams">Conteúdo relacionado</string>
     <string name="watch_history">Histórico de visualizações</string>
@@ -150,7 +145,6 @@
     <string name="github">GitHub</string>
     <string name="buffering_goal">Pré-carregamento</string>
     <string name="buffering_goal_summary">Número máximo de segundos para colocar em memória</string>
-    <string name="playerVideoFormat">Formato padrão dos vídeos</string>
     <string name="audio_video">Áudio e vídeo</string>
     <string name="fullscreen_orientation">Orientação em ecrã completo</string>
     <string name="aspect_ratio">Proporção dos vídeos</string>
@@ -202,7 +196,6 @@
     <string name="network_wifi">Apenas Wi-Fi</string>
     <string name="no_search_result">Não há resultados.</string>
     <string name="copied">Copiado</string>
-    <string name="no_player_found">Reprodutor externo não encontrado. Certifique-se de que tem um instalado.</string>
     <string name="data_saver_mode">Poupança de dados</string>
     <string name="data_saver_mode_summary">Ignorar miniaturas e outras imagens</string>
     <string name="search_history_summary">Memorizar pesquisas</string>
@@ -215,9 +208,7 @@
     <string name="none">Nada</string>
     <string name="general">Geral</string>
     <string name="general_summary">Descargas e poupança de dados</string>
-    <string name="playingOnBackground">Reprodução em segundo plano…</string>
     <string name="caption_settings">Legendas</string>
-    <string name="playerAudioFormat">Formato padrão do áudio</string>
     <string name="playerAudioQuality">Qualidade de som</string>
     <string name="worst_quality">Pior</string>
     <string name="share_with_time">Partilhar com posição temporal</string>
@@ -269,21 +260,15 @@
     <string name="playback_pitch">Passo</string>
     <string name="added_to_playlist">Adicionado à lista de reprodução %1$s</string>
     <string name="category_filler">Tangente/Piadas</string>
-    <string name="filename">Nome do ficheiro</string>
-    <string name="invalid_filename">Nome de ficheiro inválido!</string>
     <string name="category_preview_summary">Segmentos que detalham o conteúdo futuro sem informações adicionais. Se incluir clipes que aparecem apenas aqui, é muito provável que esta seja a categoria errada</string>
     <string name="livestreams">Emissões em direto</string>
-    <string name="alternative_videos_layout">Esquema alternativo de vídeos</string>
     <string name="defaultIconLight">Claro</string>
     <string name="time_code">Código de tempo (segundos)</string>
     <string name="category_filler_summary">Para cenas tangenciais adicionadas apenas para preencher ou humor não necessário para compreender o conteúdo do vídeo</string>
     <string name="category_music_offtopic_summary">Apenas para utilização em vídeos musicais. Deve abranger partes do vídeo que não façam parte das misturas oficiais. No final, o vídeo deve-se assemelhar ao Spotify ou a qualquer outra versão mista o mais próximo possível ou reduzir a conversa e outras distrações</string>
     <string name="playlistCloned">Lista de reprodução clonada</string>
-    <string name="confirm_unsubscribing">Confirmação</string>
     <string name="local_playlists">Listas de reprodução locais</string>
     <string name="play_all">Reproduzir tudo</string>
-    <string name="confirm_unsubscribe">Tem a certeza de que deseja cancelar a subscrição %1$s\?</string>
-    <string name="confirm_unsubscribing_summary">Mostrar diálogo de confirmação antes de cancelar uma subscrição</string>
     <string name="time">Tempo</string>
     <string name="start_time">Início</string>
     <string name="end_time">Fim</string>
@@ -292,8 +277,6 @@
     <string name="navbar_order">Ordem</string>
     <string name="layout">Esquema</string>
     <string name="audio_track">Faixa de áudio</string>
-    <string name="hls_instead_of_dash">Usar HLS</string>
-    <string name="hls_instead_of_dash_summary">Utilizar HLS em vez de DASH. Ative esta opção se a reprodução não estiver a funcionar.</string>
     <string name="auto_quality">Automático</string>
     <string name="limit_to_runtime">Limite de tempo para execução</string>
     <string name="trends">Tendências</string>
@@ -358,8 +341,6 @@
     <string name="codecs">Codificadores de vídeo</string>
     <string name="mark_as_watched">Marcar como visto</string>
     <string name="unsupported_file_format">Formato não suportado: %1$s</string>
-    <string name="custom_playback_speed">Velocidade personalizada</string>
-    <string name="custom_playback_speed_summary">Utilizar velocidade de reprodução personalizada</string>
     <string name="normal_views">%1$s visualizações %2$s</string>
     <string name="category">Categoria</string>
     <string name="playing_next">A reproduzir seguinte dentro de %1$s</string>
@@ -412,15 +393,12 @@
     <string name="automatic">Automático</string>
     <string name="invalid_color">Indicou um código de cor inválido!</string>
     <string name="color">Cor</string>
-    <string name="visible">Mostrar na barra de progresso</string>
     <string name="stop">Parar</string>
     <string name="sb_custom_colors">Cores personalizadas</string>
     <string name="chapters_videoHighlight">Vídeo em destaque</string>
     <string name="category_highlight">Mostrar destaque dos vídeos</string>
     <string name="category_highlight_summary">Pode ser o título anunciado, a miniatura ou a parte mais interessante do vídeo. Pode ir para essa parte tocando-lhe na secção de capítulos</string>
     <string name="sb_custom_colors_summary">Alternar segmentos de cores personalizadas para segmentos SponsorBlock</string>
-    <string name="fallback_piped_proxy">Usar Piped proxy como recurso</string>
-    <string name="fallback_piped_proxy_summary">Carregar vídeos através do proxy se a ligação ao YouTube não funcionar para o vídeo atual (aumenta o tempo de carregamento inicial). Se inativa, é provável que o conteúdo musical não seja reproduzido devido às restrições do YouTube.</string>
     <string name="continue_watching">Continuar a ver</string>
     <string name="audio_track_format">%1$s - %2$s</string>
     <string name="unknown_audio_language">Idioma de áudio desconhecido</string>
@@ -436,7 +414,6 @@
     <string name="visibility_public">Público</string>
     <string name="visibility_unlisted">Não listado</string>
     <string name="screen_orientation">Orientação do ecrã</string>
-    <string name="no_chapter">Sem capítulo</string>
     <string name="sort_by">Ordenar por</string>
     <string name="uploader_name">Nome de quem carrega</string>
     <string name="duration_span">Duração: %1$s</string>
@@ -468,10 +445,8 @@
     <string name="tooltip_create_playlist">Criar lista de reprodução</string>
     <string name="tooltip_scroll_to_top">Deslocar para o topo</string>
     <string name="registration_disabled">Registo desativado</string>
-    <string name="proxy">Proxy</string>
     <string name="group_name_error_empty">Por favor, introduza um nome</string>
     <string name="group_name_error_exists">Escolha um nome que seja único</string>
-    <string name="filename_too_long">Nome demasiado comprido!</string>
     <string name="sponsorblock_user_id">ID de utilizador SponsorBlock</string>
     <string name="contribute_to_sponsorblock">Contribuir para SponsorBlock</string>
     <string name="donate">Doar</string>
@@ -536,7 +511,6 @@
     <string name="local_ryd">Extrator local \"Return Youtube Dislike\"</string>
     <string name="local_ryd_summary">Obter diretamente informações de desagrado em https://returnyoutubedislikeapi.com</string>
     <string name="import_watch_history">Importar histórico de visualizações</string>
-    <string name="import_watch_history_desc">Tenha em atenção de que nem tudo será importado devido a algumas limitações na exportação de dados através do YouTube.</string>
     <string name="view_count">%1$s visualizações</string>
     <string name="audio_codecs">Codificadores de áudio</string>
     <string name="dialog_play_offline_title">Está disponível uma versão local do vídeo.</string>

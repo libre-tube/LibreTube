@@ -5,7 +5,6 @@
     <string name="importsuccess">Abonēts</string>
     <string name="server_error">Ar atlasīto serveri ir problēma. Pamēģiniet citu instanci.</string>
     <string name="password">Parole</string>
-    <string name="cannotDownload">Nevar lejupielādēt.</string>
     <string name="import_from_yt_summary">No YouTube vai NewPipe</string>
     <string name="unknown_error">Tīkla kļūda.</string>
     <string name="downloadfailed">Lejupielāde neizdevās.</string>
@@ -112,7 +111,6 @@
     <string name="birdIcon">Putna</string>
     <string name="legacyIcon">Vecā</string>
     <string name="update_available">Pieejams atjauninājums</string>
-    <string name="update_available_text">Ir pieejams jauns atjauninājums. Noklikšķiniet, lai atvērtu GitHub laidienu lapu.</string>
     <string name="appearance">Izskats</string>
     <string name="downloads">Lejupielādes</string>
     <string name="update_summary">Pārbaudīt, vai ir pieejams atjauninājums</string>
@@ -120,12 +118,10 @@
     <string name="advanced">Tehniski</string>
     <string name="player">Atskaņotājs</string>
     <string name="appearance_summary">Pielāgojiet aplikāciju tā, kā jūs to vēlaties</string>
-    <string name="advanced_summary">Lejupielādes un atiestatīšana</string>
     <string name="playback_speed">Atskaņošanas ātrums</string>
     <string name="live">Tiešraide</string>
     <string name="customInstance_summary">Pievienot…</string>
     <string name="empty_instance">Ierakstiet nosaukumu un API URL.</string>
-    <string name="clear_customInstances">Noņemt pievienotās</string>
     <string name="invalid_url">Lūdzu ievadiet derīgu URL</string>
     <string name="category_filler_summary">Šeit ietilpst brīži, kuros veidotājs novēršas no video tēmas vai kuros ir iekļauti joki, kas nav svarīgi, lai saprastu video galveno saturu</string>
     <string name="category_filler">Novēršanās no tēmas/joki</string>
@@ -141,7 +137,6 @@
     <string name="related_streams_summary">Rādīt līdzīgu saturu blakus tam, ko jūs skatāties</string>
     <string name="buffering_goal">Iepriekš ielādēt</string>
     <string name="buffering_goal_summary">Maksimālais ilgums sekundēs, cik tālu video tiek iepriekš ielādēts</string>
-    <string name="playerVideoFormat">Atskaņotāja video formāts</string>
     <string name="category_music_offtopic_summary">Tikai mūzikas videoklipiem. Šeit ietilpst brīži, kas nav daļas no oficiālās dziesmas. Beigu beigās videoklipam vajadzētu līdzināties oficiālajai dziesmas versijai (piemēram, Spotify versijai), cik vien tuvu iespējams</string>
     <string name="player_autoplay">Automātiski atskaņot</string>
     <string name="reset">Atjaunot noklusējumu</string>
@@ -162,7 +157,6 @@
     <string name="deleteAccount">Izdzēst kontu</string>
     <string name="deleteAccount_summary">Izdzēst Piped kontu</string>
     <string name="restore">Atjaunot</string>
-    <string name="account">Konts</string>
     <string name="watch_history">Skatīšanās vēsture</string>
     <string name="turnInternetOn">Lūdzu, ieslēdziet Wi-Fi vai mobilos datus, lai savienotos ar internetu.</string>
     <string name="open">Atvērt…</string>
@@ -185,7 +179,6 @@
     <string name="never">Nekad</string>
     <string name="autoRotatePlayer_summary">Automātiski atskaņot pilnekrāna režīmā, kad pagriež ierīci</string>
     <string name="pure_theme_summary">Tīri melnbalts motīvs</string>
-    <string name="no_player_found">Ārējais atskaņotājs netika atrasts. Lūdzu, pārliecinieties, ka jums tas ir ieinstalēts.</string>
     <string name="data_saver_mode_summary">Izlaist sīktēlu un citu attēlu lejupielādi, lai ietaupītu datus</string>
     <string name="watch_history_summary">Uzglabāt skatīšanās vēsturi ierīcē</string>
     <string name="search_history_summary">Atcerēties meklēšanas vēsturi</string>
@@ -201,11 +194,9 @@
     <string name="autoRotatePlayer">Automātiski pāriet pilnekrāna režīmā</string>
     <string name="pure_theme">Tīrais motīvs</string>
     <string name="system_caption_style">Sistēmas subtitru dizains</string>
-    <string name="playingOnBackground">Atskaņo fonā…</string>
     <string name="caption_settings">Subtitri</string>
     <string name="playerAudioQuality">Audio kvalitāte</string>
     <string name="worst_quality">Sliktākā</string>
-    <string name="playerAudioFormat">Atskaņotāja audio formāts</string>
     <string name="default_subtitle_language">Subtitru valoda</string>
     <string name="notifications">Notifikācijas</string>
     <string name="notify_new_streams">Rādīt jauna satura notifikācijas</string>
@@ -265,8 +256,6 @@
     <string name="backup_customInstances">Pašizveidotas instances</string>
     <string name="playback_pitch">Augstums</string>
     <string name="change_region">Izskatās, ka tendences nav pieejamas jūsu reģionā. Lūdzu, izvēlieties citu iestatījumos.</string>
-    <string name="filename">Datnes nosaukums</string>
-    <string name="invalid_filename">Nederīgs datnes nosaukums!</string>
     <string name="play_next">Atskaņot nākamo</string>
     <string name="no_subtitle">Bez subtitriem</string>
     <string name="download_paused">Lejupielāde iepauzēta</string>
@@ -305,11 +294,7 @@
     <string name="playlistUrl">Atskaņošanas saraksta saite</string>
     <string name="shuffle">Jaukta secība</string>
     <string name="mark_as_watched">Atzīmēt kā noskatītu</string>
-    <string name="custom_playback_speed">Pielāgots atskaņošanas ātrums</string>
-    <string name="custom_playback_speed_summary">Izmantot citu atskaņošanas ātrumu nekā parastajam atskaņotājam</string>
     <string name="download_channel_name">Lejuipielāžu serviss</string>
-    <string name="alternative_videos_layout">Alternatīvs video izklājums</string>
-    <string name="hls_instead_of_dash_summary">Multimediju straumēšanai izmantot HLS, nevis DASH. Ja video atskaņošana nedarbojas, mēģiniet ieslēgt vai izslēgt šo iestatījumu.</string>
     <string name="push_channel_name">Paziņojumu strādnieks</string>
     <string name="time">Laiks</string>
     <string name="start_time">Sākuma laiks</string>
@@ -318,11 +303,7 @@
     <string name="navbar_order">Secība</string>
     <string name="layout">Izklājums</string>
     <string name="unsupported_file_format">Neatbalstīts datnes formāts: %1$s</string>
-    <string name="hls_instead_of_dash">Izmantot HLS</string>
     <string name="auto_quality">Automātiski</string>
-    <string name="confirm_unsubscribe">Vai esiet pārliecināts, ka vēlaties atrakstīties no %1$s?</string>
-    <string name="confirm_unsubscribing">Apstiprināt atrakstīšanos</string>
-    <string name="confirm_unsubscribing_summary">Parādīt apstiprināšanas logu pirms atrakstīšanās</string>
     <string name="play_all">Atskaņot visus</string>
     <string name="notification_time">Ierobežot notifikāciju laiku</string>
     <string name="limit_to_runtime">Ierobežot atskaņošanas laiku</string>
@@ -418,7 +399,6 @@
     <string name="music_artists">YT Music Izpildītāji</string>
     <string name="sponsorblock_user_id">SponsorBlock lietotāja ID</string>
     <string name="import_format_list_of_urls">URL vai video ID saraksts</string>
-    <string name="filename_too_long">Datnes nosaukums ir pārāk garš!</string>
     <string name="import_watch_history">Ievietot skatīšanās vēsturi</string>
     <string name="duration_span">Ilgums: %1$s</string>
     <string name="show_updates">Automātiski pārbaudīt atjauninājumus</string>
@@ -447,7 +427,6 @@
     <string name="registration_disabled">Reģistrācija atspējota</string>
     <string name="contribute_to_sponsorblock">Dot savu ieguldījumu SponsorBlock</string>
     <string name="export_playlist">Izgūt atskaņošanas sarakstu</string>
-    <string name="proxy">Starpniekserveris</string>
     <string name="category_exclusive_access">Ekskluzīva piekļuve</string>
     <string name="playback_during_call">Nepārtraukt atskaņošanu telefona zvana laikā</string>
     <string name="visibility_public">Publisks</string>
@@ -467,9 +446,7 @@
     <string name="unknown_audio_track_type">Nezināms audio celiņa tips</string>
     <string name="local_ryd_summary">Iegūt nepatīk informāciju tieši no https://returnyoutubedislikeapi.com</string>
     <string name="audio_language">Audio valoda</string>
-    <string name="visible">Rādīt tīšanas joslā</string>
     <string name="repeat_mode_all">Atkārtot visus</string>
-    <string name="import_watch_history_desc">Lūdzu, ņemiet vērā, ka pilnīgi viss netiks ievietots, jo YouTube ierobežo izgūto datu informāciju.</string>
     <string name="dearrow_summary">Rāda daudz precīzākus un mazāk sensacionālus virsrakstus un sīktēlus. Palielina ielādes laiku</string>
     <string name="download_playlist_note">Lūdzu, atlasiet maksimālo audio/video lejupielādes kvalitāti. Subtitri tiks lejupielādēti tikai tad, ja tie ir pieejami.</string>
     <string name="dubbed_audio_track">ieskaņotais</string>

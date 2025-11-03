@@ -27,7 +27,6 @@
     <string name="region">অঞ্চল</string>
     <string name="login_register">প্ৰৱেশ/নাৰ্জন</string>
     <string name="importsuccess">চাবস্ক্ৰাইব কৰি�ছে</string>
-    <string name="cannotDownload">এই ষ্ট্ৰীম ডাউনলোড কৰিব নোৱাৰি।</string>
     <string name="downloadfailed">ডাউনলোড বিফল।</string>
     <string name="import_from_yt">চাবস্ক্ৰিপচন আমদানি কৰক</string>
     <string name="import_from_yt_summary">ইউটিউব বা নিউপাইপৰ পৰা</string>
@@ -122,7 +121,6 @@
     <string name="disabled">নিষ্ক্ৰিয়</string>
     <string name="playOnBackground">পটভূমিত চলাওক</string>
     <string name="update_available">আপডেট উপলব্ধ</string>
-    <string name="update_available_text">নতুন আপডেট উপলব্ধ। GitHub ৰিলিজ পেজ খোলাৰ বাবে ক্লিক কৰক।</string>
     <string name="appearance">ৰূপ</string>
     <string name="downloads">ডাউনলোডসমুহ</string>
     <string name="update_summary">আপডেট পৰীক্ষা</string>
@@ -131,7 +129,6 @@
     <string name="advanced">উচ্চতৰ</string>
     <string name="player">প্লেয়াৰ</string>
     <string name="appearance_summary">এপটো আপোনাৰ পছন্দ অনুসৰি সালসলনি কৰক</string>
-    <string name="advanced_summary">ডাউনলোড আৰু ৰিছেট</string>
     <string name="live">লাইভ</string>
     <string name="upcoming">আগন্তুক</string>
     <string name="shareTo">URL ভাগ-বতৰা কৰক</string>
@@ -150,7 +147,6 @@
     <string name="instance_api_url">ইনষ্টেন্স APIৰ URL</string>
     <string name="addInstance">ইনষ্টেন্স যোগ কৰক</string>
     <string name="empty_instance">নাম আৰু API URL পূৰণ কৰক।</string>
-    <string name="clear_customInstances">যোগ কৰা পৰিষ্কাৰ কৰক</string>
     <string name="invalid_url">বৈধ URL দিয়ক</string>
     <string name="version">সংস্কৰণ %1$s</string>
     <string name="show_updates">আপডেট স্বয়ংক্ৰিয়ভাৱে পৰীক্ষা কৰক</string>
@@ -158,7 +154,6 @@
     <string name="related_streams_summary">আপুনি চোৱাৰ লগত সামঞ্জস্যপূৰ্ণ ষ্ট্ৰীম দেখুৱাওক</string>
     <string name="buffering_goal">প্ৰিলোডিং</string>
     <string name="buffering_goal_summary">ভিডিঅ’ৰ সৰ্বাধিক ছেকেণ্ড বাফাৰ কৰিব</string>
-    <string name="playerVideoFormat">প্লেয়াৰৰ ভিডিঅ’ ফৰ্মেট</string>
     <string name="no_audio">কোনো অডিঅ’ নাই</string>
     <string name="no_video">কোনো ভিডিঅ’ নাই</string>
     <string name="no_subtitle">কোনো উপশিৰোনাম নাই</string>
@@ -186,7 +181,6 @@
     <string name="reset_message">সকলো ছেটিং ৰিছেট আৰু প্ৰস্থান কৰিবনে?</string>
     <string name="deleteAccount">একাউণ্ট মচক</string>
     <string name="deleteAccount_summary">আপোনাৰ পাইপড একাউণ্ট মচক</string>
-    <string name="account">একাউণ্ট</string>
     <string name="restore">পুনঃস্থাপন</string>
     <string name="watch_history">চোৱাৰ ইতিহাস</string>
     <string name="watch_positions">অৱস্থান মনত ৰাখক</string>
@@ -213,7 +207,6 @@
     <string name="autoRotatePlayer_summary">ডিভাইচ ঘূৰালে পূৰ্ণপৰ্দাত প্লেবেক</string>
     <string name="pure_theme">পিউৰ থীম</string>
     <string name="pure_theme_summary">পিউৰ বগা/ক’লা থীম</string>
-    <string name="no_player_found">কোনো বাহ্যিক প্লেয়াৰ পোৱা নগ’ল। এটা ইনষ্টল কৰা আছে নেকি নিশ্চিত কৰক।</string>
     <string name="data_saver_mode">ডেটা-ছেভাৰ মোড</string>
     <string name="data_saver_mode_summary">থাম্বনেইল আৰু অন্য চিত্ৰ এৰাই চলক</string>
     <string name="search_history_summary">সন্ধান মনত ৰাখক</string>
@@ -228,9 +221,7 @@
     <string name="none">কোনো নাই</string>
     <string name="general">সাধাৰণ</string>
     <string name="general_summary">ভাষা আৰু অঞ্চল</string>
-    <string name="playingOnBackground">পটভূমিত চলি আছে…</string>
     <string name="caption_settings">কেপচন</string>
-    <string name="playerAudioFormat">প্লেয়াৰৰ অডিঅ’ ফৰ্মেট</string>
     <string name="playerAudioQuality">অডিঅ’ গুণমান</string>
     <string name="worst_quality">নিম্নতম</string>
     <string name="best_quality">উত্তম</string>
@@ -281,7 +272,6 @@
     <string name="maximum_image_cache">সৰ্বাধিক চিত্ৰ কেশ্বৰ আকাৰ</string>
     <string name="copied_to_clipboard">ক্লিপব’ৰ্ডত কপি কৰা হৈছে</string>
     <string name="open_copied">খোলক</string>
-    <string name="legacy_subscriptions">লিগেচি চাবস্ক্ৰিপচন দৰ্শন</string>
     <string name="device_info">ডিভাইচৰ তথ্য</string>
     <string name="audio_video_summary">গুণমান আৰু ফৰ্মেট</string>
     <string name="delete">ডাউনলোডৰ পৰা মচক</string>
@@ -302,8 +292,6 @@
     <string name="suggest_change_instance">ল’ডিং স্বাভাৱিকতকৈ বেছি সময় লৈছে। ইনষ্টেন্স সলনি কৰাৰ কথা ভাৱক</string>
     <string name="playback_pitch">পিচ</string>
     <string name="playback_pitch_semitone_error_input">মান -%1$.1f (ন্যূনতম) আৰু %1$.1f (সৰ্বাধিক)ৰ মাজত হ’ব লাগিব</string>
-    <string name="filename">ফাইলৰ নাম</string>
-    <string name="invalid_filename">অবৈধ ফাইলৰ নাম!</string>
     <string name="time_code">টাইম ক’ড (ছেকেণ্ড)</string>
     <string name="added_to_playlist">প্লেলিষ্ট %1$sত যোগ কৰা হৈছে</string>
     <string name="queue">কিউ</string>
@@ -312,12 +300,8 @@
     <string name="color">ৰং</string>
     <string name="invalid_color">অবৈধ ৰংৰ মান দিয়া হৈছে!</string>
     <string name="livestreams">লাইভষ্ট্ৰীম</string>
-    <string name="alternative_videos_layout">বিকল্প ভিডিঅ’ লেআউট</string>
     <string name="defaultIconLight">মূল পোহৰ</string>
     <string name="playlistCloned">প্লেলিষ্ট ক্ল’ন কৰা হৈছে</string>
-    <string name="confirm_unsubscribe">%1$sৰ পৰা চাবস্ক্ৰিপচন ৰদ কৰিবনে?</string>
-    <string name="confirm_unsubscribing">চাবস্ক্ৰিপচন ৰদৰ নিশ্চিতকৰণ</string>
-    <string name="confirm_unsubscribing_summary">চাবস্ক্ৰিপচন ৰদৰ আগতে নিশ্চিতকৰণ ডায়লগ দেখুৱাওক</string>
     <string name="play_all">সকলো চলাওক</string>
     <string name="time">সময়</string>
     <string name="start_time">আৰম্ভৰ সময়</string>
@@ -328,8 +312,6 @@
     <string name="layout">লেআউট</string>
     <string name="audio_track">অডিঅ’ ট্ৰেক</string>
     <string name="unsupported_file_format">অসমৰ্থিত ফাইল ফৰ্মেট: %1$s</string>
-    <string name="hls_instead_of_dash">HLS ব্যৱহাৰ কৰক</string>
-    <string name="hls_instead_of_dash_summary">ষ্ট্ৰীমিং মিডিয়াৰ বাবে DASHৰ সলনি HLS ব্যৱহাৰ কৰক। ভিডিঅ’ প্লেবেক কাম নকৰিলে এই বিকল্প ট’গল কৰক।</string>
     <string name="auto_quality">স্বয়ং</string>
     <string name="limit_to_runtime">ৰানটাইমলৈ সীমিত</string>
     <string name="trends">ট্ৰেণ্ড</string>
@@ -362,7 +344,6 @@
     <string name="export_playlists">প্লেলিষ্টসমুহ এক্সপ’ৰ্ট কৰক</string>
     <string name="export_playlist">প্লেলিষ্ট এক্সপ’ৰ্ট কৰক</string>
     <string name="import_watch_history">চোৱাৰ ইতিহাস আমদানি কৰক</string>
-    <string name="import_watch_history_desc">মন কৰক যে ইউটিউবৰ সীমিত এক্সপ’ৰ্ট ডেটাৰ বাবে সকলো আমদানি নহ’ব।</string>
     <string name="app_backup">এপ বেকআপ</string>
     <string name="backup_restore_summary">চাবস্ক্ৰিপচন, প্লেলিষ্ট আমদানি আৰু এক্সপ’ৰ্ট কৰক…</string>
     <string name="exportsuccess">এক্সপ’ৰ্ট কৰা হৈছে।</string>
@@ -391,8 +372,6 @@
     <string name="codecs">ভিডিঅ’ ক’ডেক</string>
     <string name="audio_codecs">অডিঅ’ ক’ডেক</string>
     <string name="mark_as_watched">চোৱা বুলি চিহ্নিত কৰক</string>
-    <string name="custom_playback_speed">কাষ্টম প্লেবেক গতি</string>
-    <string name="custom_playback_speed_summary">সাধাৰণ প্লেয়াৰৰ বাবে বেলেগ প্লেবেক গতি ব্যৱহাৰ কৰক</string>
     <string name="category">শ্ৰেণী</string>
     <string name="stats_for_nerds">নাৰ্ডৰ বাবে পৰিসংখ্যা</string>
     <string name="video_id">ভিডিঅ’ আইডি</string>
@@ -400,7 +379,6 @@
     <string name="autoplay_countdown">স্বয়ংক্ৰিয় চালনাৰ কাউণ্টডাউন</string>
     <string name="autoplay_countdown_summary">পৰৱৰ্তী ভিডিঅ’ স্বয়ংক্ৰিয়ভাৱে চলোৱাৰ আগতে ৫ ছেকেণ্ডৰ কাউণ্টডাউন দেখুৱাওক</string>
     <string name="playing_next">পৰৱৰ্তী %1$sত চলি আছে</string>
-    <string name="proxy">প্ৰক্সি</string>
     <string name="disable_proxy">পাইপড প্ৰক্সি নিষ্ক্ৰিয় কৰক</string>
     <string name="disable_proxy_summary">ইউটিউবৰ ছাৰ্ভাৰৰ পৰা প্ৰত্যক্ষভাৱে ভিডিঅ’ আৰু চিত্ৰ ল’ড কৰক। কেৱল VPN ব্যৱহাৰ কৰিলে এই বিকল্প চালু কৰক</string>
     <string name="auto_fullscreen_shorts">শ্বৰ্ট ভিডিঅ’ত স্বয়ংক্ৰিয় পূৰ্ণপৰ্দা</string>
@@ -431,9 +409,6 @@
     <string name="manual">হস্তচালিত</string>
     <string name="automatic">স্বয়ংক্ৰিয়</string>
     <string name="automatic_once">একবাৰ স্বয়ংক্ৰিয়</string>
-    <string name="visible">সন্ধান বাৰত দেখুৱাওক</string>
-    <string name="fallback_piped_proxy">পাইপড প্ৰক্সিলৈ ফলবেক</string>
-    <string name="fallback_piped_proxy_summary">ইউটিউবৰ সৈতে প্ৰত্যক্ষ সংযোগ কাম নকৰিলে প্ৰক্সিৰ জৰিয়তে ভিডিঅ’ ল’ড কৰক (প্ৰাৰম্ভিক ল’ডিং সময় বাঢ়ে)। নিষ্ক্ৰিয় কৰিলে ইউটিউবৰ সীমাবদ্ধতাৰ বাবে মিউজিক সামগ্ৰী চলিব নোৱাৰে</string>
     <string name="dearrow">ডিএৰো সক্ৰিয় কৰক</string>
     <string name="dearrow_summary">অধিক নিৰ্ভুল আৰু কম চাঞ্চল্যকৰ শিৰোনাম আৰু থাম্বনেইল দেখুৱাওক। ল’ডিং সময় বাঢ়ে</string>
     <string name="contribute_to_dearrow">ডিএৰোত অৰিহণা যোগাওক</string>
@@ -485,7 +460,6 @@
     <string name="default_or_unknown_audio_track">মূল বা অজ্ঞাত</string>
     <string name="unknown_or_no_audio">অজ্ঞাত বা কোনো অডিঅ’ নাই</string>
     <string name="continue_watching">চোৱা অব্যাহত ৰাখক</string>
-    <string name="no_chapter">কোনো অধ্যায় নাই</string>
     <string name="screen_orientation">পৰ্দাৰ অভিমুখীকৰণ</string>
     <string name="auto_generated">স্বয়ংক্ৰিয়ভাৱে সৃষ্ট</string>
     <string name="resolution_limited">সীমিত</string>
@@ -495,7 +469,6 @@
     <string name="sb_invalid_segment">অবৈধ খণ্ডৰ আৰম্ভ বা শেষ</string>
     <string name="contribute_to_sponsorblock">স্পনছৰব্লকত অৰিহণা যোগাওক</string>
     <string name="sponsorblock_user_id">স্পনছৰব্লক ব্যৱহাৰকাৰী আইডি</string>
-    <string name="filename_too_long">ফাইলৰ নাম বেছি দীঘল!</string>
     <string name="remember_playback_speed">প্লেবেক গতি মনত ৰাখক</string>
     <string name="successfully_removed_from_playlist">“%1$s” প্লেলিষ্টৰ পৰা সফলতাৰে আঁতৰোৱা হৈছে।</string>
     <string name="watched">চোৱা হৈছে</string>

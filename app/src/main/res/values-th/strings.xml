@@ -70,7 +70,6 @@
     <string name="areYouSure">ลบเพลลิสต์นี้มั้ย?</string>
     <string name="loggedout">ออกจากระบบแล้ว</string>
     <string name="instances">เลือก…</string>
-    <string name="cannotDownload">ไม่สามารถดาวโหลดสตรีมนี้ได้</string>
     <string name="empty">คุณต้องป้อนชื่อผู้ใช้และรหัสผ่าน</string>
     <string name="grid">คอลัมน์ตาราง (แนวตั้ง)</string>
     <string name="emptyList">ที่นี่ไม่มีอะไร</string>
@@ -96,7 +95,6 @@
     <string name="license">ลิขสิทธิ์</string>
     <string name="start_time">เวลาเริ่ม</string>
     <string name="app_icon">ไอคอน</string>
-    <string name="confirm_unsubscribing">ยืนยัน การยกเลิกสมัครสมาชิก</string>
     <string name="trends">เทรนด์</string>
     <string name="skip_buttons">ปุ่มข้าม</string>
     <string name="import_watch_history">นำเข้าประวัติการรับชม</string>

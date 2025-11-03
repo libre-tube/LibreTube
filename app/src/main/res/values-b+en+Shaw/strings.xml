@@ -4,7 +4,6 @@
     <string name="already_logged_in">𐑷𐑤𐑮𐑧𐑛𐑦 𐑤𐑪𐑜𐑛 𐑦𐑯. 𐑿 𐑥𐑱 𐑤𐑪𐑜 𐑬𐑑 𐑝 𐑘𐑹 𐑩𐑒𐑬𐑯𐑑.</string>
     <string name="instances">𐑗𐑵𐑟…</string>
     <string name="importsuccess">𐑕𐑩𐑚𐑕𐑒𐑮𐑲𐑚𐑛</string>
-    <string name="cannotDownload">𐑒𐑭𐑯\'𐑑 𐑛𐑬𐑯𐑤𐑴𐑛 𐑞𐑦𐑕 𐑕𐑑𐑮𐑰𐑥.</string>
     <string name="import_from_yt">𐑦𐑥𐑐𐑹𐑑 𐑕𐑩𐑚𐑕𐑒𐑮𐑦𐑐𐑖𐑩𐑯𐑟</string>
     <string name="app_theme">𐑔𐑰𐑥</string>
     <string name="server_error">𐑞𐑺 𐑕𐑰𐑥𐑟 𐑑 𐑚𐑰 𐑩 𐑐𐑮𐑪𐑚𐑤𐑩𐑥 𐑢𐑦𐑞 𐑞 𐑕𐑦𐑤𐑧𐑒𐑑𐑩𐑛 𐑕𐑻𐑝𐑼. 𐑑𐑮𐑲 𐑩𐑯𐑳𐑞𐑼 𐑦𐑯𐑕𐑑𐑩𐑯𐑕.</string>
@@ -109,7 +108,6 @@
     <string name="shapedIcon">𐑕𐑦𐑤𐑦 𐑖𐑱𐑐𐑑</string>
     <string name="instance_summary">·𐑐𐑲𐑐𐑑, 𐑤𐑪𐑜𐑦𐑯, 𐑯 𐑩𐑒𐑬𐑯𐑑</string>
     <string name="customInstance_summary">𐑨𐑛…</string>
-    <string name="clear_customInstances">𐑒𐑤𐑽 𐑨𐑛𐑩𐑛</string>
     <string name="invalid_url">𐑐𐑤𐑰𐑟 𐑧𐑯𐑑𐑼 𐑩 ⸰𐑿𐑮𐑤 𐑞𐑨𐑑 𐑢𐑻𐑒𐑕</string>
     <string name="show_updates">𐑗𐑧𐑒 𐑳𐑐𐑛𐑱𐑑𐑕 𐑷𐑑𐑩𐑥𐑨𐑑𐑦𐑒𐑤𐑦</string>
     <string name="related_streams_summary">𐑖𐑴 𐑕𐑦𐑥𐑦𐑤𐑼 𐑕𐑑𐑮𐑰𐑥𐑟 𐑩𐑤𐑪𐑙𐑕𐑲𐑛 𐑢𐑪𐑑 𐑿 𐑢𐑪𐑗</string>
@@ -127,7 +125,6 @@
     <string name="player_autoplay">𐑷𐑑𐑴𐑐𐑤𐑱</string>
     <string name="instance_frontend_url">⸰𐑿𐑮𐑤 𐑑 𐑦𐑯𐑕𐑑𐑩𐑯𐑕 𐑓𐑮𐑳𐑯𐑑𐑧𐑯𐑛</string>
     <string name="reset_message">¿𐑮𐑰𐑕𐑧𐑑 𐑷𐑤 𐑕𐑧𐑑𐑦𐑙𐑟 𐑯 𐑤𐑪𐑜 𐑬𐑑?</string>
-    <string name="account">𐑩𐑒𐑬𐑯𐑑</string>
     <string name="watch_history">𐑢𐑪𐑗 𐑣𐑦𐑕𐑑𐑼𐑦</string>
     <string name="watch_positions">𐑮𐑦𐑥𐑧𐑥𐑚𐑼 𐑐𐑩𐑟𐑦𐑖𐑩𐑯</string>
     <string name="auth_instance">𐑷𐑔𐑧𐑯𐑑𐑦𐑒𐑱𐑖𐑩𐑯 𐑦𐑯𐑕𐑑𐑩𐑯𐑕</string>
@@ -194,7 +191,6 @@
     <string name="navigation_bar">𐑯𐑨𐑝𐑦𐑜𐑱𐑖𐑩𐑯 𐑚𐑸</string>
     <string name="change_instance">𐑗𐑱𐑯𐑡 𐑦𐑯𐑕𐑑𐑩𐑯𐑕</string>
     <string name="suggest_change_instance">𐑤𐑴𐑛𐑦𐑙 𐑦𐑟 𐑑𐑱𐑒𐑦𐑙 𐑥𐑹 𐑞𐑨𐑯 𐑿𐑠𐑫𐑩𐑤. 𐑒𐑩𐑯𐑕𐑦𐑛𐑼 𐑗𐑱𐑯𐑡𐑦𐑙 𐑦𐑯𐑕𐑑𐑩𐑯𐑕</string>
-    <string name="filename">𐑓𐑲𐑤𐑯𐑱𐑥</string>
     <string name="added_to_playlist">𐑨𐑛𐑩𐑛 𐑑 𐑐𐑤𐑱𐑤𐑦𐑕𐑑 %1$s</string>
     <string name="queue">𐑒𐑿</string>
     <string name="sb_custom_colors_summary">𐑑𐑪𐑜𐑩𐑤𐑟 𐑒𐑳𐑕𐑑𐑩𐑥 𐑒𐑳𐑤𐑼 𐑕𐑧𐑜𐑥𐑩𐑯𐑑𐑕 𐑓 ·𐑕𐑐𐑪𐑯𐑕𐑼𐑚𐑤𐑪𐑒 𐑕𐑧𐑜𐑥𐑩𐑯𐑑𐑕</string>
@@ -202,7 +198,6 @@
     <string name="invalid_color">¡𐑦𐑯𐑝𐑨𐑤𐑦𐑛 𐑒𐑳𐑤𐑼 𐑝𐑨𐑤𐑿 𐑧𐑯𐑑𐑼𐑛!</string>
     <string name="defaultIconLight">𐑛𐑦𐑓𐑷𐑤𐑑 𐑤𐑲𐑑</string>
     <string name="playlistCloned">𐑐𐑤𐑱𐑤𐑦𐑕𐑑</string>
-    <string name="confirm_unsubscribe">¿𐑸 𐑿 𐑖𐑫𐑼 𐑿 𐑢𐑪𐑯𐑑 𐑑 𐑳𐑯𐑕𐑩𐑚𐑕𐑒𐑮𐑲𐑚 %1$s?</string>
     <string name="play_all">𐑐𐑤𐑱 𐑷𐑤</string>
     <string name="time">𐑑𐑲𐑥</string>
     <string name="start_time">𐑕𐑑𐑸𐑑 𐑑𐑲𐑥</string>
@@ -211,7 +206,6 @@
     <string name="layout">𐑤𐑱𐑬𐑑</string>
     <string name="audio_track">𐑷𐑛𐑦𐑴 𐑑𐑮𐑨𐑒</string>
     <string name="unsupported_file_format">𐑳𐑯𐑕𐑩𐑐𐑹𐑑𐑩𐑛 𐑓𐑲𐑤 𐑓𐑹𐑥𐑨𐑑: %1$s</string>
-    <string name="hls_instead_of_dash">𐑿𐑟 ⸰𐑣𐑤𐑕</string>
     <string name="auto_quality">𐑷𐑑𐑴</string>
     <string name="limit_to_runtime">𐑤𐑦𐑥𐑦𐑑 𐑑 𐑮𐑳𐑯𐑑𐑲𐑥</string>
     <string name="trends">𐑑𐑮𐑧𐑯𐑛𐑟</string>
@@ -248,13 +242,10 @@
     <string name="help">𐑣𐑧𐑤𐑐</string>
     <string name="faq">⸰𐑓𐑭𐑒</string>
     <string name="codecs">𐑝𐑦𐑛𐑦𐑴 𐑒𐑴𐑛𐑧𐑒𐑕</string>
-    <string name="custom_playback_speed">𐑒𐑳𐑕𐑑𐑩𐑥 𐑕𐑐𐑰𐑛</string>
-    <string name="custom_playback_speed_summary">𐑿𐑟 𐑩 𐑛𐑦𐑓𐑼𐑩𐑯𐑑 𐑐𐑤𐑱𐑚𐑨𐑒 𐑕𐑐𐑰𐑛 𐑞𐑨𐑯 𐑓 𐑞 𐑯𐑹𐑥𐑩𐑤 𐑐𐑤𐑱𐑼</string>
     <string name="stats_for_nerds">𐑕𐑑𐑨𐑑𐑕 𐑓 𐑯𐑻𐑛𐑟</string>
     <string name="video_id">𐑝𐑦𐑛𐑦𐑴 ⸰𐑲𐑛</string>
     <string name="copy_tooltip">𐑒𐑪𐑐𐑦</string>
     <string name="playing_next">𐑐𐑤𐑱𐑦𐑙 𐑯𐑧𐑒𐑕𐑑 𐑦𐑯 %1$s</string>
-    <string name="proxy">𐑐𐑮𐑪𐑒𐑕𐑦</string>
     <string name="disable_proxy">𐑛𐑦𐑕𐑱𐑚𐑩𐑤 ·𐑐𐑲𐑐𐑑 𐑐𐑮𐑪𐑒𐑕𐑦</string>
     <string name="channel_groups">𐑗𐑨𐑯𐑩𐑤 𐑜𐑮𐑵𐑐𐑕</string>
     <string name="new_group">𐑯𐑿</string>
@@ -291,11 +282,9 @@
     <string name="share">𐑖𐑺</string>
     <string name="download">𐑛𐑬𐑯𐑤𐑴𐑛</string>
     <string name="save">𐑕𐑱𐑝</string>
-    <string name="update_available_text">𐑯𐑿 𐑳𐑐𐑛𐑱𐑑 𐑩𐑝𐑱𐑤𐑩𐑚𐑩𐑤. 𐑒𐑤𐑦𐑒 𐑑 𐑴𐑐𐑩𐑯 𐑞 ·𐑜𐑦𐑑𐑣𐑳𐑚 𐑮𐑦𐑤𐑰𐑕𐑩𐑟 𐑐𐑱𐑡.</string>
     <string name="player">𐑐𐑤𐑱𐑼</string>
     <string name="playback_speed">𐑐𐑤𐑱𐑚𐑨𐑒 𐑕𐑐𐑰𐑛</string>
     <string name="advanced">𐑩𐑛𐑝𐑭𐑯𐑕𐑑</string>
-    <string name="advanced_summary">𐑛𐑬𐑯𐑤𐑴𐑛𐑟 𐑯 𐑮𐑰𐑕𐑧𐑑</string>
     <string name="fireIcon">𐑓𐑨𐑖𐑩𐑯𐑩𐑚𐑩𐑤 𐑓𐑲𐑼</string>
     <string name="flameIcon">𐑓𐑤𐑲𐑦𐑙 𐑓𐑤𐑱𐑥</string>
     <string name="birdIcon">𐑚𐑵𐑕𐑑𐑩𐑛 𐑚𐑻𐑛</string>
@@ -305,7 +294,6 @@
     <string name="empty_instance">𐑓𐑦𐑤 𐑦𐑯 𐑞 𐑯𐑱𐑥 𐑯 𐑞 ⸰𐑨𐑐𐑦 ⸰𐑿𐑮𐑤.</string>
     <string name="version">𐑝𐑻𐑠𐑩𐑯 %1$s</string>
     <string name="related_streams">𐑮𐑦𐑤𐑱𐑑𐑩𐑛 𐑒𐑩𐑯𐑑𐑧𐑯𐑑</string>
-    <string name="playerVideoFormat">𐑝𐑦𐑛𐑦𐑴 𐑓𐑹𐑥𐑨𐑑 𐑓 𐑐𐑤𐑱𐑼</string>
     <string name="behavior">𐑚𐑦𐑣𐑱𐑝𐑘𐑼</string>
     <string name="no_audio">𐑯𐑴 𐑷𐑛𐑦𐑴</string>
     <string name="downloading">𐑛𐑬𐑯𐑤𐑴𐑛𐑦𐑙…</string>
@@ -332,7 +320,6 @@
     <string name="autoRotatePlayer_summary">𐑓𐑫𐑤𐑕𐑒𐑮𐑰𐑯 𐑐𐑤𐑱𐑚𐑨𐑒 𐑢𐑧𐑯 𐑞 𐑛𐑦𐑝𐑲𐑕 𐑜𐑧𐑑𐑕 𐑑𐑻𐑯𐑛</string>
     <string name="pure_theme_summary">𐑐𐑘𐑫𐑼 𐑢𐑲𐑑/𐑚𐑤𐑨𐑒 𐑔𐑰𐑥</string>
     <string name="pure_theme">𐑐𐑘𐑫𐑼 𐑔𐑰𐑥</string>
-    <string name="no_player_found">𐑯𐑴 𐑦𐑒𐑕𐑑𐑻𐑯𐑩𐑤 𐑐𐑤𐑱𐑼 𐑓𐑬𐑯𐑛. 𐑐𐑤𐑰𐑟 𐑥𐑱𐑒 𐑖𐑫𐑼 𐑿 𐑣𐑨𐑝 𐑢𐑳𐑯 𐑦𐑯𐑕𐑑𐑷𐑤𐑛.</string>
     <string name="search_history_summary">𐑮𐑦𐑥𐑧𐑥𐑚𐑼 𐑕𐑻𐑗𐑩𐑟</string>
     <string name="watch_history_summary">𐑒𐑰𐑐 𐑑𐑮𐑨𐑒 𐑝 𐑢𐑪𐑗𐑑 𐑝𐑦𐑛𐑦𐑴𐑟 𐑤𐑴𐑒𐑩𐑤𐑦</string>
     <string name="watch_positions_title">𐑮𐑦𐑥𐑧𐑥𐑚𐑼𐑛 𐑐𐑤𐑱𐑚𐑨𐑒 𐑐𐑩𐑟𐑦𐑖𐑩𐑯𐑟</string>
@@ -340,8 +327,6 @@
     <string name="system_caption_style">𐑕𐑦𐑕𐑑𐑩𐑥 𐑒𐑨𐑐𐑖𐑩𐑯 𐑕𐑑𐑲𐑤</string>
     <string name="captions">𐑒𐑨𐑐𐑖𐑩𐑯𐑟</string>
     <string name="none">𐑯𐑳𐑯</string>
-    <string name="playingOnBackground">𐑐𐑤𐑱𐑦𐑙 𐑦𐑯 𐑞 𐑚𐑨𐑒𐑜𐑮𐑬𐑯𐑛…</string>
-    <string name="playerAudioFormat">𐑷𐑛𐑦𐑴 𐑓𐑹𐑥𐑨𐑑 𐑓 𐑐𐑤𐑱𐑼</string>
     <string name="playerAudioQuality">𐑷𐑛𐑦𐑴 𐑒𐑢𐑪𐑤𐑦𐑑𐑦</string>
     <string name="best_quality">𐑚𐑧𐑕𐑑</string>
     <string name="notify_new_streams_summary">𐑛𐑦𐑕𐑐𐑤𐑱 𐑯𐑴𐑑𐑦𐑓𐑦𐑒𐑱𐑖𐑩𐑯𐑟 𐑓 𐑯𐑿 𐑕𐑑𐑮𐑰𐑥𐑟 𐑓𐑮𐑪𐑥 𐑒𐑮𐑦𐑱𐑑𐑼𐑟 𐑿 𐑓𐑪𐑤𐑴</string>
@@ -390,7 +375,6 @@
     <string name="trending">𐑢𐑪𐑑\'𐑕 𐑑𐑮𐑧𐑯𐑛𐑦𐑙 𐑯𐑬</string>
     <string name="playback_pitch">𐑐𐑦𐑗</string>
     <string name="time_code">𐑑𐑲𐑥 𐑒𐑴𐑛 (𐑕𐑧𐑒𐑩𐑯𐑛𐑟)</string>
-    <string name="invalid_filename">¡𐑦𐑯𐑝𐑨𐑤𐑦𐑛 𐑓𐑲𐑤𐑯𐑱𐑥!</string>
     <string name="sb_custom_colors">𐑒𐑳𐑕𐑑𐑩𐑥 𐑕𐑧𐑜𐑥𐑩𐑯𐑑 𐑒𐑳𐑤𐑼𐑟</string>
     <string name="bookmarks">𐑚𐑫𐑒𐑥𐑸𐑒𐑕</string>
     <string name="queue_insert_related_videos">𐑦𐑯𐑕𐑻𐑑 𐑮𐑦𐑤𐑱𐑑𐑩𐑛 𐑝𐑦𐑛𐑦𐑴𐑟</string>
@@ -398,19 +382,14 @@
     <string name="local_playlists">𐑤𐑴𐑒𐑩𐑤 𐑐𐑤𐑱𐑤𐑦𐑕𐑑𐑕</string>
     <string name="swipe_controls">𐑕𐑢𐑲𐑐 𐑒𐑩𐑯𐑑𐑮𐑴𐑤𐑟</string>
     <string name="livestreams">𐑤𐑲𐑝𐑕𐑑𐑮𐑰𐑥𐑟</string>
-    <string name="alternative_videos_layout">𐑷𐑤𐑑𐑻𐑯𐑩𐑑𐑦𐑝 𐑝𐑦𐑛𐑦𐑴𐑟 𐑤𐑱𐑬𐑑</string>
-    <string name="confirm_unsubscribing">𐑒𐑩𐑯𐑓𐑻𐑥 𐑳𐑯𐑕𐑩𐑚𐑕𐑒𐑮𐑲𐑚𐑦𐑙</string>
-    <string name="confirm_unsubscribing_summary">𐑖𐑴 𐑩 𐑒𐑪𐑯𐑓𐑼𐑥𐑱𐑖𐑩𐑯 𐑛𐑲𐑩𐑤𐑪𐑜 𐑚𐑦𐑓𐑹 𐑳𐑯𐑕𐑩𐑚𐑕𐑒𐑮𐑲𐑚𐑦𐑙</string>
     <string name="navbar_order">𐑹𐑛𐑼</string>
     <string name="notification_time_summary">𐑤𐑦𐑥𐑦𐑑 𐑞 𐑑𐑲𐑥 𐑕𐑐𐑨𐑯 𐑦𐑯 𐑢𐑦𐑗 𐑕𐑑𐑮𐑰𐑥 𐑯𐑴𐑑𐑦𐑓𐑦𐑒𐑱𐑖𐑩𐑯𐑟 𐑸 𐑖𐑴𐑯</string>
     <string name="featured">𐑓𐑰𐑗𐑼𐑛</string>
-    <string name="hls_instead_of_dash_summary">𐑿𐑟 ⸰𐑣𐑤𐑕 𐑦𐑯𐑕𐑑𐑧𐑛 𐑝 ⸰𐑛𐑩𐑕𐑣 (𐑢𐑦𐑤 𐑚𐑰 𐑕𐑤𐑴𐑼, 𐑯𐑪𐑑 𐑮𐑧𐑒𐑩𐑥𐑧𐑯𐑛𐑩𐑛)</string>
     <string name="defaults">𐑛𐑦𐑓𐑷𐑤𐑑𐑕</string>
     <string name="pinch_control">𐑐𐑦𐑯𐑗 𐑒𐑩𐑯𐑑𐑮𐑴𐑤</string>
     <string name="no_comments_available">𐑞𐑦𐑕 𐑝𐑦𐑛𐑦𐑴 𐑣𐑨𐑟 𐑯𐑴 𐑒𐑪𐑥𐑧𐑯𐑑𐑕.</string>
     <string name="captions_size">𐑒𐑨𐑐𐑖𐑩𐑯𐑟 𐑕𐑲𐑟</string>
     <string name="theme_monochrome">𐑥𐑦𐑯𐑦𐑥𐑩𐑤𐑦𐑕𐑑𐑦𐑒 𐑥𐑪𐑯𐑩𐑒𐑮𐑴𐑥</string>
-    <string name="import_watch_history_desc">𐑐𐑤𐑰𐑟 𐑯𐑴𐑑 𐑞𐑨𐑑 𐑯𐑪𐑑 𐑧𐑝𐑮𐑦𐑔𐑦𐑙 𐑢𐑦𐑤 𐑚𐑰 𐑦𐑥𐑐𐑹𐑑𐑩𐑛 𐑛𐑿 𐑑 ·𐑿𐑑𐑿𐑚\'𐑟 𐑤𐑦𐑥𐑦𐑑𐑩𐑛 𐑦𐑒𐑕𐑐𐑹𐑑𐑩𐑛 𐑛𐑱𐑑𐑩.</string>
     <string name="double_tap_seek_summary">𐑑𐑨𐑐 𐑑𐑢𐑲𐑕 𐑨𐑑 𐑞 𐑤𐑧𐑓𐑑 𐑹 𐑮𐑲𐑑 𐑑 𐑮𐑰𐑢𐑲𐑯𐑛 𐑹 𐑓𐑹𐑢𐑼𐑛 𐑞 𐑐𐑤𐑱𐑼 𐑐𐑩𐑟𐑦𐑖𐑩𐑯</string>
     <string name="proceed">𐑐𐑮𐑩𐑕𐑰𐑛</string>
     <string name="play_latest_videos">𐑐𐑤𐑱 𐑤𐑱𐑑𐑩𐑕𐑑 𐑝𐑦𐑛𐑦𐑴𐑟</string>
@@ -435,8 +414,6 @@
     <string name="alphabetic_reversed">𐑨𐑤𐑓𐑩𐑚𐑧𐑑𐑦𐑒 (𐑮𐑦𐑝𐑻𐑕𐑑)</string>
     <string name="automatic_once">𐑷𐑑𐑩𐑥𐑨𐑑𐑦𐑒 𐑢𐑳𐑯𐑕</string>
     <string name="title">𐑑𐑲𐑑𐑩𐑤</string>
-    <string name="fallback_piped_proxy">𐑓𐑷𐑤𐑚𐑨𐑒 𐑑 ·𐑐𐑲𐑐𐑑 𐑐𐑮𐑪𐑒𐑕𐑦</string>
-    <string name="visible">𐑖𐑴 𐑦𐑯 𐑕𐑰𐑒 𐑚𐑸</string>
     <string name="dearrow_summary">𐑖𐑴 𐑥𐑹 𐑨𐑒𐑘𐑼𐑩𐑑 𐑯 𐑤𐑧𐑕 𐑕𐑦𐑯𐑕𐑱𐑖𐑩𐑯𐑩𐑤𐑦𐑕𐑑 𐑑𐑲𐑑𐑩𐑤𐑟 𐑯 𐑔𐑳𐑥𐑯𐑱𐑤𐑟. 𐑦𐑯𐑒𐑮𐑰𐑕𐑩𐑟 𐑤𐑴𐑛𐑦𐑙 𐑑𐑲𐑥𐑟</string>
     <string name="enqueue_playlist_description">𐑖𐑴𐑟 𐑩 𐑯𐑴𐑑𐑦𐑓𐑦𐑒𐑱𐑖𐑩𐑯 𐑢𐑧𐑯 𐑦𐑯𐑒𐑿𐑦𐑙 𐑝𐑦𐑛𐑦𐑴𐑟 𐑝 𐑩 𐑐𐑤𐑱𐑤𐑦𐑕𐑑 𐑑 𐑚𐑰 𐑛𐑬𐑯𐑤𐑴𐑛𐑩𐑛.</string>
     <string name="contribute_to_sponsorblock">𐑒𐑩𐑯𐑑𐑮𐑦𐑚𐑿𐑑 𐑑 ·𐑕𐑐𐑪𐑯𐑕𐑼𐑚𐑤𐑪𐑒</string>
@@ -463,7 +440,6 @@
     <string name="off">𐑪𐑓</string>
     <string name="manual">𐑥𐑨𐑯𐑘𐑫𐑩𐑤</string>
     <string name="automatic">𐑷𐑑𐑩𐑥𐑨𐑑𐑦𐑒</string>
-    <string name="fallback_piped_proxy_summary">𐑤𐑴𐑛 𐑝𐑦𐑛𐑦𐑴𐑟 𐑝𐑲𐑩 𐑞 𐑐𐑮𐑪𐑒𐑕𐑦 𐑦𐑓 𐑒𐑩𐑯𐑧𐑒𐑑𐑦𐑙 𐑑 ·𐑿𐑑𐑿𐑚 𐑛𐑦𐑮𐑧𐑒𐑑𐑤𐑦 𐑛𐑳𐑟𐑩𐑯\'𐑑 𐑢𐑻𐑒 𐑓 𐑞 𐑒𐑳𐑮𐑩𐑯𐑑 𐑝𐑦𐑛𐑦𐑴 (𐑦𐑯𐑒𐑮𐑰𐑕𐑩𐑟 𐑞 𐑦𐑯𐑦𐑖𐑩𐑤 𐑤𐑴𐑛𐑦𐑙 𐑑𐑲𐑥𐑟). 𐑦𐑓 𐑛𐑦𐑕𐑱𐑚𐑩𐑤𐑛, ·𐑿𐑑𐑿𐑚 𐑥𐑿𐑟𐑦𐑒 𐑒𐑩𐑯𐑑𐑧𐑯𐑑 𐑤𐑲𐑒𐑤𐑦 𐑢𐑴𐑯\'𐑑 𐑐𐑤𐑱 𐑛𐑿 𐑑 ⸰𐑿𐑑 𐑮𐑦𐑕𐑑𐑮𐑦𐑒𐑖𐑩𐑯𐑟</string>
     <string name="dearrow">𐑦𐑯𐑱𐑚𐑩𐑤 ·𐑛𐑰𐑨𐑮𐑴</string>
     <string name="contribute_to_dearrow">𐑒𐑩𐑯𐑑𐑮𐑦𐑚𐑿𐑑 𐑑 ·𐑛𐑰𐑨𐑮𐑴</string>
     <string name="visibility_unlisted">𐑳𐑯𐑤𐑦𐑕𐑑𐑩𐑛</string>
@@ -492,7 +468,6 @@
     <string name="default_or_unknown_audio_track">𐑛𐑦𐑓𐑷𐑤𐑑 𐑹 𐑳𐑯𐑯𐑴𐑯</string>
     <string name="unknown_or_no_audio">𐑳𐑯𐑯𐑴𐑯 𐑹 𐑯𐑴 𐑷𐑛𐑦𐑴</string>
     <string name="continue_watching">𐑒𐑩𐑯𐑑𐑦𐑯𐑿 𐑢𐑪𐑗𐑦𐑙</string>
-    <string name="no_chapter">𐑯𐑴 𐑗𐑨𐑐𐑑𐑼</string>
     <string name="screen_orientation">𐑕𐑒𐑮𐑰𐑯 𐑹𐑾𐑯𐑑𐑱𐑖𐑩𐑯</string>
     <string name="auto_generated">𐑷𐑑𐑴-𐑡𐑧𐑯𐑼𐑱𐑑𐑩𐑛</string>
     <string name="resolution_limited">𐑤𐑦𐑥𐑦𐑑𐑩𐑛</string>
@@ -500,7 +475,6 @@
     <string name="segment_type">𐑕𐑧𐑜𐑥𐑩𐑯𐑑 𐑑𐑲𐑐</string>
     <string name="sb_invalid_segment">𐑦𐑯𐑝𐑨𐑤𐑦𐑛 𐑕𐑧𐑜𐑥𐑩𐑯𐑑 𐑕𐑑𐑸𐑑 𐑹 𐑧𐑯𐑛</string>
     <string name="sponsorblock_user_id">·𐑕𐑐𐑪𐑯𐑕𐑼𐑚𐑤𐑪𐑒 ⸰𐑿𐑟𐑼𐑲𐑛</string>
-    <string name="filename_too_long">¡𐑓𐑲𐑤𐑯𐑱𐑥 𐑦𐑟 𐑑𐑵 𐑤𐑪𐑙!</string>
     <string name="remember_playback_speed">𐑮𐑦𐑥𐑧𐑥𐑚𐑼 𐑐𐑤𐑱𐑚𐑨𐑒 𐑕𐑐𐑰𐑛</string>
     <string name="successfully_removed_from_playlist">𐑕𐑩𐑒𐑕𐑧𐑕𐑓𐑩𐑤𐑦 𐑮𐑦𐑥𐑵𐑝𐑛 «%1$s» 𐑓𐑮𐑪𐑥 𐑞 𐑐𐑤𐑱𐑤𐑦𐑕𐑑.</string>
     <string name="watched">𐑢𐑪𐑗𐑑</string>

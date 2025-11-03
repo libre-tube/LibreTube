@@ -39,7 +39,6 @@
     <string name="location">இடம்</string>
     <string name="enabled">ஆன்</string>
     <string name="disabled">அணை</string>
-    <string name="update_available_text">புதிய புதுப்பிப்பு கிடைக்கிறது. அறிவிலிமையம் வெளியீடுகள் பக்கத்தைத் திறக்க சொடுக்கு செய்க.</string>
     <string name="appearance">தோற்றம்</string>
     <string name="appearance_summary">உங்கள் விருப்பப்படி பயன்பாட்டை சரிசெய்யவும்</string>
     <string name="normal_views">%1$s காட்சிகள்%2$s</string>
@@ -54,7 +53,6 @@
     <string name="shuffle">கலக்கு</string>
     <string name="category_preview">முன்னோட்டம்/மறுபரிசீலனை</string>
     <string name="deleteAccount_summary">உங்கள் குழாய் கணக்கை நீக்கவும்</string>
-    <string name="account">கணக்கு</string>
     <string name="never">ஒருபோதும்</string>
     <string name="autoRotatePlayer">ஆட்டோ-ஃபுல்ச்கிரீன்</string>
     <string name="none">எதுவுமில்லை</string>
@@ -69,7 +67,6 @@
     <string name="playback_pitch">குனிவு</string>
     <string name="swipe_controls_summary">முழுத்திரை பயன்முறையில் இருக்கும்போது பிரகாசத்தையும் அளவையும் சரிசெய்ய ச்வைப்</string>
     <string name="automatic_once">ஒரு முறை தானியங்கி</string>
-    <string name="visible">சீக் பட்டியில் காட்டு</string>
     <string name="change">மாற்றம்</string>
     <string name="dialog_play_offline_title">இந்த வீடியோவின் உள்ளக பதிப்பு கிடைக்கிறது.</string>
     <string name="local_feed_extraction">உள்ளக தீவன பிரித்தெடுத்தல்</string>
@@ -79,7 +76,6 @@
     <string name="emptyPlaylistDescription">பிளேலிச்ட் விளக்கம் காலியாக இருக்க முடியாது</string>
     <string name="already_logged_in">ஏற்கனவே உள்நுழைந்தது. நீங்கள் உங்கள் கணக்கிலிருந்து வெளியேறலாம்.</string>
     <string name="importsuccess">சந்தா</string>
-    <string name="cannotDownload">இந்த ச்ட்ரீமை பதிவிறக்கம் செய்ய முடியாது.</string>
     <string name="import_from_yt">சந்தாக்களை இறக்குமதி செய்யுங்கள்</string>
     <string name="error">ஏதோ தவறு நடந்தது.</string>
     <string name="empty">நீங்கள் ஒரு பயனர்பெயர் மற்றும் கடவுச்சொல்லை உள்ளிட வேண்டும்.</string>
@@ -121,7 +117,6 @@
     <string name="update_summary">புதுப்பிப்புக்கு சரிபார்க்கவும்</string>
     <string name="playback_speed">பின்னணி விரைவு</string>
     <string name="advanced">மேம்பட்ட</string>
-    <string name="advanced_summary">பதிவிறக்கங்கள், மீட்டமை</string>
     <string name="live">வாழ</string>
     <string name="upcoming">வரவிருக்கும்</string>
     <string name="shareTo">முகவரி ஐ பகிரவும்</string>
@@ -129,7 +124,6 @@
     <string name="customInstance_summary">சேர்க்கவும்…</string>
     <string name="instance_name">சான்று பெயர்</string>
     <string name="instance_api_url">உதாரணமாக பநிஇ க்கு முகவரி</string>
-    <string name="clear_customInstances">கூடுதல் சேர்க்கப்பட்டது</string>
     <string name="invalid_url">வேலை செய்யும் முகவரி ஐ உள்ளிடவும்</string>
     <string name="version">பதிப்பு %1$s</string>
     <string name="related_streams">தொடர்புடைய உள்ளடக்கம்</string>
@@ -182,10 +176,7 @@
     <string name="new_videos_badge_summary">சில இருந்தால் புதிய வீடியோக்களின் அளவைக் கொண்டு பேட்சைக் காட்டு</string>
     <string name="backup_customInstances">தனிப்பயன் நிகழ்வுகள்</string>
     <string name="navigation_bar">வழிசெலுத்தல் பட்டி</string>
-    <string name="filename">கோப்புப்பெயர்</string>
-    <string name="invalid_filename">தவறான கோப்பு பெயர்!</string>
     <string name="livestreams">லைவ்ச்ட்ரீம்கள்</string>
-    <string name="alternative_videos_layout">மாற்று வீடியோக்கள் தளவமைப்பு</string>
     <string name="defaultIconLight">இயல்புநிலை ஒளி</string>
     <string name="playlistCloned">பிளேலிச்ட் நகலி</string>
     <string name="play_all">அனைத்தையும் விளையாடுங்கள்</string>
@@ -212,14 +203,12 @@
     <string name="duration">காலம்</string>
     <string name="shorts_notifications">குறும்படங்களுக்கான அறிவிப்புகள்</string>
     <string name="choose_instance_long">கீழே இருந்து பயன்படுத்த ஒரு குழாய் நிகழ்வைத் தேர்வுசெய்க. குழாய் நிகழ்வு உங்களுக்கும் யூடியூப்பிற்கும் இடையில் இடைத்தரகராக செயல்படும். இந்த நிகழ்வுகள் வெவ்வேறு உடல் இடங்களில் அமைந்துள்ளன - அவற்றின் நாட்டின் கொடி (கள்) மூலம் குறிக்கப்படுகிறது. இல்லாத நிகழ்வுகளை விட உடல் ரீதியாக உங்களுக்கு நெருக்கமான நிகழ்வுகள் வேகமாக இருக்கும். எந்த நேரத்திலும் நீங்கள் அமைப்புகளில் பயன்படுத்தும் நிகழ்வை மாற்றலாம்.</string>
-    <string name="fallback_piped_proxy">குழாய் பதிக்கப்பட்ட ப்ராக்சிக்கு குறைவு</string>
     <string name="dearrow_summary">மிகவும் துல்லியமான மற்றும் குறைவான பரபரப்பான தலைப்புகள் மற்றும் சிறுபடங்களைக் காட்டுங்கள். ஏற்றுதல் நேரங்களை அதிகரிக்கிறது</string>
     <string name="contribute_to_dearrow">அன்புக்கு பங்களிப்பு செய்யுங்கள்</string>
     <string name="visibility_public">பொது</string>
     <string name="visibility_unlisted">பட்டியலிடப்படாதது</string>
     <string name="duration_span">காலம்: %1$s</string>
     <string name="download_playlist_note">பதிவிறக்க அதிகபட்ச ஆடியோ/வீடியோ தரத்தைத் தேர்ந்தெடுக்கவும். கிடைத்தால் மட்டுமே தலைப்புகள் பதிவிறக்கம் செய்யப்படும்.</string>
-    <string name="no_chapter">அத்தியாயம் இல்லை</string>
     <string name="successfully_removed_from_playlist">பிளேலிச்ட்டிலிருந்து \"%1$s\" ஐ வெற்றிகரமாக அகற்றியது.</string>
     <string name="disable_sleep_timer">தூக்க டைமரை முடக்கு</string>
     <string name="gestures">சைகைகள்</string>
@@ -258,11 +247,9 @@
     <string name="volume">தொகுதி</string>
     <string name="pinch_control_summary">/வெளியே பெரிதாக்க பிஞ்ச் சைகை பயன்படுத்தவும்</string>
     <string name="failed_fetching_instances">கிடைக்கக்கூடிய நிகழ்வுகளைப் பெற முடியவில்லை.</string>
-    <string name="custom_playback_speed_summary">சாதாரண பிளேயரை விட வேறு பின்னணி வேகத்தைப் பயன்படுத்தவும்</string>
     <string name="mark_as_unwatched">குறிக்கப்படாத எனக் குறிக்கவும்</string>
     <string name="change_playlist_description">பிளேலிச்ட் விளக்கத்தை மாற்றவும்</string>
     <string name="playlist_description">பிளேலிச்ட் விளக்கம்</string>
-    <string name="fallback_piped_proxy_summary">தற்போதைய வீடியோவுக்கு யூடியூப்போடு நேரடியாக வேலை செய்யாவிட்டால் (ஆரம்ப ஏற்றுதல் நேரங்களை அதிகரிக்கிறது) பதிலாள் வழியாக வீடியோக்களை ஏற்றவும். முடக்கப்பட்டால், YouTube இசை உள்ளடக்கம் YT கட்டுப்பாடுகள் காரணமாக இயங்காது</string>
     <string name="playback_during_call_summary">எந்தவொரு ஆடியோ கவனத்தையும் கையாளக்கூடாது என்பதற்கான பயன்பாட்டையும் இது பாதிக்கிறது என்பதை நினைவில் கொள்க</string>
     <string name="segment_submitted">பிரிவு சமர்ப்பிக்கப்பட்டது</string>
     <string name="enqueueing_playlist_download">பிளேலிச்ட்டை பதிவிறக்கம் செய்ய வீடியோக்களை enqueueing %1$s</string>
@@ -275,10 +262,8 @@
     <string name="tooltip_locked">பூட்டு பிளேயர்</string>
     <string name="best_quality">சிறந்த</string>
     <string name="notify_new_streams_summary">நீங்கள் பின்பற்றும் படைப்பாளர்களிடமிருந்து புதிய ச்ட்ரீம்களுக்கான அறிவிப்புகளைக் காண்பி</string>
-    <string name="confirm_unsubscribe">%1$s குழுவிலக நீங்கள் நிச்சயமாக விரும்புகிறீர்களா?</string>
     <string name="notification_time">அறிவிப்பு நேரத்தைக் கட்டுப்படுத்துங்கள்</string>
     <string name="audio_track">ஆடியோ டிராக்</string>
-    <string name="hls_instead_of_dash">HLS ஐப் பயன்படுத்தவும்</string>
     <string name="defaults">இயல்புநிலை</string>
     <string name="captions_size">தலைப்புகளின் அளவு</string>
     <string name="export_playlists">பிளேலிச்ட்கள் ஏற்றுமதி</string>
@@ -314,7 +299,6 @@
     <string name="open">திற…</string>
     <string name="chapters">பாடங்கள்</string>
     <string name="always">எப்போதும்</string>
-    <string name="playerAudioFormat">பிளேயருக்கான ஆடியோ வடிவம்</string>
     <string name="playerAudioQuality">ஆடியோ தகுதி</string>
     <string name="show_stream_thumbnails">ச்ட்ரீம் சிறுபடங்களைக் காட்டு</string>
     <string name="checking_frequency">ஒவ்வொன்றையும் சரிபார்க்கிறது…</string>
@@ -350,9 +334,7 @@
     <string name="require_restart">பயன்பாட்டு மறுதொடக்கம் தேவை</string>
     <string name="require_restart_message">புதிய மாற்றங்களைப் பயன்படுத்த பயன்பாட்டை மறுதொடக்கம் செய்யுங்கள்.</string>
     <string name="navLabelVisibility">சிட்டை தெரிவுநிலை</string>
-    <string name="no_player_found">வெளிப்புற பிளேயர் எதுவும் கிடைக்கவில்லை. நீங்கள் ஒன்றை நிறுவியுள்ளீர்கள் என்பதை உறுதிப்படுத்திக் கொள்ளுங்கள்.</string>
     <string name="data_saver_mode">தரவு-சேவர் பயன்முறை</string>
-    <string name="playingOnBackground">பின்னணியில் விளையாடுவது…</string>
     <string name="caption_settings">தலைப்புகள்</string>
     <string name="no_search_result">முடிவுகள் இல்லை.</string>
     <string name="copied_to_clipboard">இடைநிலைப்பலகைக்கு நகலெடுக்கப்பட்டது</string>
@@ -363,7 +345,6 @@
     <string name="preferences">விருப்பத்தேர்வுகள்</string>
     <string name="sb_custom_colors">தனிப்பயன் பிரிவு வண்ணங்கள்</string>
     <string name="invalid_color">தவறான வண்ண மதிப்பு நுழைந்தது!</string>
-    <string name="confirm_unsubscribing">குழுவிலகுவதை உறுதிப்படுத்தவும்</string>
     <string name="end_time">இறுதி நேரம்</string>
     <string name="double_tap_seek">தேட இரட்டை தட்டு</string>
     <string name="double_tap_seek_summary">பிளேயர் நிலையை முன்னாடி அல்லது அனுப்ப இடது அல்லது வலதுபுறத்தில் இரண்டு முறை தட்டவும்</string>
@@ -468,7 +449,6 @@
     <string name="deletePlaylist">பிளேலிச்ட்டை நீக்கு</string>
     <string name="donate">நன்கொடை</string>
     <string name="category_sponsor">ஒப்புரவாளர்</string>
-    <string name="confirm_unsubscribing_summary">குழுவிலகும் முன் உறுதிப்படுத்தல் உரையாடலைக் காட்டு</string>
     <string name="category_exclusive_access">பிரத்யேக அணுகல்</string>
     <string name="color_accent">உச்சரிப்புகள்</string>
     <string name="downloads">பதிவிறக்கங்கள்</string>
@@ -477,17 +457,14 @@
     <string name="no_fullscreen_resolution">முழு திரை தீர்மானம் இல்லை</string>
     <string name="playback_during_call">தொலைபேசி அழைப்பின் போது பிளேபேக்கைத் தொடரவும்</string>
     <string name="export_playlist">ஏற்றுமதி பிளேலிச்ட்</string>
-    <string name="import_watch_history_desc">யூடியூப்பின் வரையறுக்கப்பட்ட ஏற்றுமதி தரவு காரணமாக அனைத்தும் இறக்குமதி செய்யப்படாது என்பதை நினைவில் கொள்க.</string>
     <string name="proceed">தொடரவும்</string>
     <string name="play_latest_videos">அண்மைக் கால வீடியோக்களை இயக்கவும்</string>
     <string name="color_violet">பல்துறை வயலட்</string>
     <string name="playlistUrl">பிளேலிச்ட் முகவரி</string>
     <string name="audio_codecs">ஆடியோ கோடெக்குகள்</string>
     <string name="mark_as_watched">பார்த்தபடி குறி</string>
-    <string name="custom_playback_speed">தனிப்பயன் விரைவு</string>
     <string name="category">வகை</string>
     <string name="video_id">வீடியோ ஐடி</string>
-    <string name="proxy">பதிலாள்</string>
     <string name="enqueue_playlist_description">ஒரு பிளேலிச்ட்டின் வீடியோக்களை பதிவிறக்கம் செய்யும்போது அறிவிப்பைக் காட்டுகிறது.</string>
     <string name="import_format_list_of_urls">முகவரி கள் அல்லது வீடியோ ஐடிகளின் பட்டியல்</string>
     <string name="resolution_limited">வரையறுக்கப்பட்ட</string>
@@ -496,7 +473,6 @@
     <string name="segment_type">பிரிவு வகை</string>
     <string name="sb_invalid_segment">தவறான பிரிவு தொடக்க அல்லது முடிவு</string>
     <string name="contribute_to_sponsorblock">ஒப்புரவாளர் பிளாக் பங்களிப்பு</string>
-    <string name="filename_too_long">கோப்பு பெயர் மிக நீண்டது!</string>
     <string name="remember_playback_speed">பிளேபேக் வேகத்தை நினைவில் கொள்ளுங்கள்</string>
     <string name="no_segments_found">இந்த வீடியோவுக்கு இன்னும் பிரிவுகள் எதுவும் இல்லை.</string>
     <string name="external_download_provider">வெளிப்புற பதிவிறக்க வழங்குநர்</string>
@@ -519,7 +495,6 @@
     <string name="addInstance">உதாரணத்தை சேர்க்கவும்</string>
     <string name="empty_instance">பெயர் மற்றும் பநிஇ முகவரி ஐ நிரப்பவும்.</string>
     <string name="buffering_goal_summary">அதிகபட்சம். இடையகத்திற்கு வீடியோவின் விநாடிகளின் அளவு</string>
-    <string name="playerVideoFormat">பிளேயருக்கான வீடியோ வடிவம்</string>
     <string name="no_audio">ஆடியோ இல்லை</string>
     <string name="play_automatically">தானாக விளையாடுங்கள்</string>
     <string name="behavior_when_minimized">குறைக்கும்போது நடத்தை</string>
@@ -539,7 +514,6 @@
     <string name="picture_in_picture">படம்-படம்</string>
     <string name="player_resize_mode">மறுஅளவிடுதல் பயன்முறை</string>
     <string name="unsupported_file_format">ஆதரிக்கப்படாத கோப்பு வடிவம்: %1$s</string>
-    <string name="hls_instead_of_dash_summary">கோடுக்கு பதிலாக HLS ஐப் பயன்படுத்தவும். வீடியோ பிளேபேக் வேலை செய்யாவிட்டால் இந்த விருப்பத்தை மாற்ற முயற்சிக்கவும்.</string>
     <string name="trends">போக்குகள்</string>
     <string name="bookmarks">புக்மார்க்குகள்</string>
     <string name="bookmark">புத்தககுறி</string>

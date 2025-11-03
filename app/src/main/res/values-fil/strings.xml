@@ -15,7 +15,6 @@
     <string name="region">Rehiyon</string>
     <string name="login_register">Maglog-in/reghistro</string>
     <string name="importsuccess">Naka-subscribe</string>
-    <string name="cannotDownload">Hindi mai-download ang stream na ito.</string>
     <string name="downloadfailed">Nabigo ang pagdownload.</string>
     <string name="import_from_yt">Mag-angkat ng mga subscription</string>
     <string name="import_from_yt_summary">Mula sa Youtube o NewPipe</string>
@@ -85,7 +84,6 @@
     <string name="version">Bersyon %1$s</string>
     <string name="loggedIn">Naka-log in.</string>
     <string name="playback_speed">Bilis ng playback</string>
-    <string name="update_available_text">May available na bagong update. I-click para buksan ang GitHub releases page.</string>
     <string name="areYouSure">Burahin ang playlist\?</string>
     <string name="library">Library</string>
     <string name="license">Lisensya</string>

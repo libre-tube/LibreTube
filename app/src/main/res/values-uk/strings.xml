@@ -35,7 +35,6 @@
     <string name="region">Регіон</string>
     <string name="login_register">Увійти/зареєструватися</string>
     <string name="importsuccess">Імпортовано</string>
-    <string name="cannotDownload">Неможливо завантажити цю трансляцію.</string>
     <string name="import_from_yt">Імпортувати підписки</string>
     <string name="import_from_yt_summary">З YouTube або NewPipe</string>
     <string name="app_theme">Тема</string>
@@ -104,14 +103,12 @@
     <string name="disabled">Вимкнено</string>
     <string name="shareTo">Поділитися посиланням з</string>
     <string name="update_available">Доступне оновлення</string>
-    <string name="update_available_text">Доступне нове оновлення. Натисніть, щоб відкрити сторінку випусків на GitHub.</string>
     <string name="downloads">Завантаження</string>
     <string name="update_summary">Перевірити наявність оновлень</string>
     <string name="app_uptodate">Це остання версія.</string>
     <string name="playback_speed">Швидкість відтворення</string>
     <string name="player">Програвач</string>
     <string name="appearance_summary">Змініть застосунок, так, як вам до вподоби</string>
-    <string name="advanced_summary">Завантаження та скидання</string>
     <string name="live">Наживо</string>
     <string name="advanced">Розширені</string>
     <string name="defaultIcon">Звичайна</string>
@@ -149,7 +146,6 @@
     <string name="reset_message">Скинути всі налаштування та вийти з облікового запису?</string>
     <string name="deleteAccount">Видалити обліковий запис</string>
     <string name="deleteAccount_summary">Видалити ваш обліковий запис Piped</string>
-    <string name="account">Обліковий запис</string>
     <string name="restore">Відновити</string>
     <string name="require_restart_message">Перезапустіть застосунок, щоб застосувати нові зміни.</string>
     <string name="player_summary">Налаштування та поведінка програвача</string>
@@ -157,7 +153,6 @@
     <string name="pauseOnScreenOff_summary">Призупиняти відтворення, коли екран вимкнено</string>
     <string name="customInstance_summary">Додати…</string>
     <string name="addInstance">Додати сервер</string>
-    <string name="clear_customInstances">Очистити додане</string>
     <string name="watch_history">Історія переглядів</string>
     <string name="watch_positions">Пам\'ятати позицію</string>
     <string name="auth_instances">Обрати сервер автентифікації</string>
@@ -168,7 +163,6 @@
     <string name="landscape">Горизонтальна</string>
     <string name="portrait">Вертикальна</string>
     <string name="instance_name">Назва сервера</string>
-    <string name="playerVideoFormat">Формат відео для програвача</string>
     <string name="auth_instance">Сервер автентифікації</string>
     <string name="auth_instance_summary">Використовувати інший сервер для автентифікації</string>
     <string name="aspect_ratio">Співвідношення сторін відео</string>
@@ -196,7 +190,6 @@
     <string name="history_empty">Історія порожня.</string>
     <string name="backup_restore">Резервне копіювання та відновлення</string>
     <string name="data_saver_mode_summary">Пропускати обкладинки та інші зображення</string>
-    <string name="no_player_found">Зовнішній програвач не знайдено. Переконайтеся, що він встановлений.</string>
     <string name="playerAudioQuality">Якість аудіо</string>
     <string name="notify_new_streams">Показувати сповіщення про нові трансляції</string>
     <string name="notifications">Сповіщення</string>
@@ -243,7 +236,6 @@
     <string name="maximum_image_cache">Макс. розмір кешу зображень</string>
     <string name="data_saver_mode">Режим заощадження даних</string>
     <string name="search_history_summary">Пам\'ятати історію пошуку</string>
-    <string name="playerAudioFormat">Формат аудіо для програвача</string>
     <string name="checking_frequency">Перевірка кожні …</string>
     <string name="most_views">Найбільше переглядів</string>
     <string name="least_views">Найменше переглядів</string>
@@ -265,23 +257,16 @@
     <string name="general">Загальні</string>
     <string name="instance_frontend_url">Посилання до сервера (необов\'язково)</string>
     <string name="audio_video_summary">Якість і формат</string>
-    <string name="playingOnBackground">Відтворення у фоновому режимі…</string>
     <string name="caption_settings">Субтитри</string>
     <string name="worst_quality">Найнижча</string>
     <string name="renamePlaylist">Перейменувати добірку</string>
     <string name="mobile_data">Мобільні дані</string>
-    <string name="filename">Назва файлу</string>
-    <string name="invalid_filename">Неприпустима назва файлу!</string>
     <string name="time_code">Часовий код (секунд)</string>
     <string name="added_to_playlist">Додано в добірку %1$s</string>
     <string name="queue">Черга</string>
     <string name="livestreams">Трансляції наживо</string>
-    <string name="alternative_videos_layout">Альтернативні макети відео</string>
     <string name="defaultIconLight">Звичайна світла</string>
     <string name="playlistCloned">Добірку клоновано</string>
-    <string name="confirm_unsubscribe">Ви впевнені, що хочете відписатися від %1$s\?</string>
-    <string name="confirm_unsubscribing">Підтвердити відписку</string>
-    <string name="confirm_unsubscribing_summary">Показувати діалогове вікно підтвердження перед відпискою</string>
     <string name="play_all">Відтворити все</string>
     <string name="notification_time_summary">Обмежте проміжок часу, впродовж якого показуються сповіщення про трансляції</string>
     <string name="end_time">Час завершення</string>
@@ -291,8 +276,6 @@
     <string name="navbar_order">Порядок</string>
     <string name="layout">Вигляд</string>
     <string name="audio_track">Звукова доріжка</string>
-    <string name="hls_instead_of_dash">Використовувати HLS</string>
-    <string name="hls_instead_of_dash_summary">Використовувати HLS замість DASH для потокового мультимедіа. Спробуйте увімкнути цей параметр, якщо відтворення відео не працює.</string>
     <string name="auto_quality">Авто</string>
     <string name="limit_to_runtime">Обмеження часом роботи</string>
     <string name="featured">Популярні</string>
@@ -358,8 +341,6 @@
     <string name="codecs">Відеокодеки</string>
     <string name="mark_as_watched">Позначити переглянутим</string>
     <string name="unsupported_file_format">Непідтримуваний формат файлу: %1$s</string>
-    <string name="custom_playback_speed">Користувацька швидкість</string>
-    <string name="custom_playback_speed_summary">Використовувати іншу швидкість відтворення, ніж для звичайного програвача</string>
     <string name="category">Категорія</string>
     <string name="normal_views">%1$s переглядів%2$s</string>
     <string name="playing_next">Наступне відтворення за %1$s</string>
@@ -415,13 +396,10 @@
     <string name="color">Колір</string>
     <string name="sb_custom_colors_summary">Перемикає власні колірні сегменти для сегментів SponsorBlock</string>
     <string name="sb_custom_colors">Користувацькі кольори сегментів</string>
-    <string name="visible">Показати на панелі прокручування</string>
     <string name="category_highlight_summary">Це може бути рекламований заголовок, мініатюра або найцікавіша частина відео. Ви можете перейти до нього, натиснувши на нього в секції розділів</string>
     <string name="category_highlight">Показувати виділене у відео</string>
     <string name="chapters_videoHighlight">Виділене у відео</string>
     <string name="stop">Зупинити</string>
-    <string name="fallback_piped_proxy">Запасний варіант для Piped проксі-сервера</string>
-    <string name="fallback_piped_proxy_summary">Завантажувати відео через проксі, якщо пряме під\'єднання до YouTube не працює для поточного відео (збільшує початковий час завантаження). Якщо цю функцію вимкнено, музичний контент YouTube, ймовірно, не відтворюватиметься через обмеження YT</string>
     <string name="unknown_audio_language">Невідома мова звукової доріжки</string>
     <string name="original_or_main_audio_track">оригінальний або основний</string>
     <string name="dubbed_audio_track">дубльований</string>
@@ -436,7 +414,6 @@
     <string name="visibility">Видимість</string>
     <string name="visibility_public">Загальнодоступно</string>
     <string name="visibility_unlisted">Не показується</string>
-    <string name="no_chapter">Немає розділу</string>
     <string name="sort_by">Сортувати за</string>
     <string name="uploader_name">Назва завантажувача</string>
     <string name="duration_span">Тривалість: %1$s</string>
@@ -465,7 +442,6 @@
     <string name="auto_generated">автоматично згенеровано</string>
     <string name="resolution_limited">обмежено</string>
     <string name="registration_disabled">Реєстрація вимкнена</string>
-    <string name="proxy">Проксі</string>
     <string name="group_name_error_empty">Введіть назву</string>
     <string name="group_name_error_exists">Оберіть унікальну назву</string>
     <string name="automatic_once">Автоматично один раз</string>
@@ -473,7 +449,6 @@
     <string name="segment_type">Тип сегмента</string>
     <string name="sb_invalid_segment">Недійсний початок або кінець сегмента</string>
     <string name="contribute_to_sponsorblock">Зробити внесок до SponsorBlock</string>
-    <string name="filename_too_long">Назва файлу задовга!</string>
     <string name="sponsorblock_user_id">UserID у SponsorBlock</string>
     <string name="donate">Підтримати</string>
     <string name="music_artists">Виконавці YT Music</string>
@@ -538,7 +513,6 @@
     <string name="local_ryd">Локальний видобувач «Повернення дизлайків на Youtube»</string>
     <string name="local_ryd_summary">Безпосередньо отримайте інформацію про дизлайки на сайті https://returnyoutubedislikeapi.com</string>
     <string name="import_watch_history">Імпорт історії перегляду</string>
-    <string name="import_watch_history_desc">Зауважте, що не все буде імпортовано через обмеженість експортних даних YouTube.</string>
     <string name="audio_codecs">Аудіокодеки</string>
     <string name="view_count">Переглядів: %1$s</string>
     <string name="dialog_play_offline_title">Доступна локальна версія цього відео.</string>

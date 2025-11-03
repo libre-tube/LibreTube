@@ -12,7 +12,6 @@
     <string name="loggedout">Դուրս եկած։</string>
     <string name="instances">Ընտրել․․․</string>
     <string name="app_theme">Թեմա</string>
-    <string name="cannotDownload">Հնարավոր չէ ներբեռնել:</string>
     <string name="downloadfailed">Ներբեռնել չհաջողվեց:</string>
     <string name="import_from_yt">Ներմուծել բաժանորդագրություններ</string>
     <string name="import_from_yt_summary">YouTube-ից կամ NewPipe-ից</string>

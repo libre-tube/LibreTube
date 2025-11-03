@@ -68,11 +68,9 @@
     <string name="app_icon">ആപ്പ് ഐക്കൺ</string>
     <string name="enabled">പ്രവർത്തനക്ഷമമാക്കി</string>
     <string name="downloads">ഡൗൺലോഡുകൾ</string>
-    <string name="update_available_text">ഒരു പുതിയ അപ്ഡേറ്റ് ലഭ്യമാണ്. GitHub-ലെ അപ്‌ഡേറ്റ് പേജിലേക്ക് റീഡയറക്‌ടുചെയ്യുന്നതിന് ശരി ക്ലിക്കുചെയ്യുക.</string>
     <string name="playback_speed">ഡിഫോൾട്ട് പ്ലേബാക്ക് വേഗത</string>
     <string name="advanced">ഉയര്‍ന്ന</string>
     <string name="appearance_summary">നിങ്ങളുടെ ഇഷ്ടത്തിനനുസരിച്ച് പ്രയോഗം ക്രമീകരിക്കുക</string>
-    <string name="cannotDownload">ഈ സ്ട്രീം ഡൗൺലോഡ് ചെയ്യാൻ കഴിയില്ല.</string>
     <string name="downloadfailed">ഡൗൺലോഡ് പരാജയപ്പെട്ടു.</string>
     <string name="import_from_yt">സബ്സ്ക്രിപ്ഷനുകൾ ഇറക്കുമതി ചെയ്യുക</string>
     <string name="import_from_yt_summary">YouTube അല്ലെങ്കിൽ NewPipe-ൽ നിന്ന്</string>
@@ -108,7 +106,6 @@
     <string name="update_summary">പുതിയ ആപ്പ് അപ്‌ഡേറ്റ് ലഭ്യമാണോയെന്ന് പരിശോധിക്കാൻ ഇവിടെ ക്ലിക്ക് ചെയ്യുക</string>
     <string name="app_uptodate">ആപ്പ് അപ് ടു ഡേറ്റ്</string>
     <string name="player">കളിക്കാരൻ</string>
-    <string name="advanced_summary">ഡൗൺലോഡുകൾ, പുനഃസജ്ജമാക്കുക</string>
     <string name="shareTo">യുആർഎൽ പങ്കിടുക:</string>
     <string name="category_intro_summary">യഥാർത്ഥ ഉള്ളടക്കം ഇല്ലാത്ത ഒരു ഇടവേള. ഒരു ഇടവേള, സ്റ്റാറ്റിക് ഫ്രെയിം, ആവർത്തിക്കുന്ന ആനിമേഷൻ എന്നിവയായിരിക്കാം. വിവരങ്ങൾ അടങ്ങിയ പരിവർത്തനങ്ങൾക്ക് ഇത് ഉപയോഗിക്കരുത്</string>
     <string name="category_selfpromo_summary">പണമടയ്ക്കാത്തതോ സ്വയം പ്രമോഷനോ ഒഴികെയുള്ള \"സ്‌പോൺസർ\" എന്നതിന് സമാനമാണ്. സംഭാവനകൾ, അല്ലെങ്കിൽ അവർ ആരുമായി സഹകരിച്ചു എന്നതിനെക്കുറിച്ചുള്ള വിവരങ്ങൾ എന്നിവയെക്കുറിച്ചുള്ള വിഭാഗങ്ങൾ ഇതിൽ ഉൾപ്പെടുന്നു</string>
@@ -133,7 +130,6 @@
     <string name="version">പതിപ്പ് %1$s</string>
     <string name="privacy_alert">സ്വകാര്യതാ മുന്നറിയിപ്പ്</string>
     <string name="replies">മറുപടികൾ</string>
-    <string name="clear_customInstances">കൂട്ടിച്ചേർത്തത് നീക്കുക</string>
     <string name="related_streams_summary">നിങ്ങൾ കാണുന്നതിനൊപ്പം സമാന സ്ട്രീമുകളും കാണിക്കുക</string>
     <string name="quality">ഗുണമേന്മ</string>
     <string name="never">ഒരിക്കലും</string>
@@ -168,7 +164,6 @@
     <string name="proceed">തുടരുക</string>
     <string name="skip_silence">നിശബ്ദത ഒഴിവാക്കുക</string>
     <string name="forward">മുന്നോട്ട്</string>
-    <string name="custom_playback_speed">ഇഷ്ടാനുസൃത വേഗത</string>
     <string name="push_channel_name">അറിയിപ്പ് തൊഴിലാളി</string>
     <string name="no_comments_available">ഈ വീഡിയോയ്ക്ക് അഭിപ്രായങ്ങളൊന്നുമില്ല.</string>
     <string name="new_group">പുതിയത്</string>

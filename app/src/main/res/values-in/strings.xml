@@ -25,7 +25,6 @@
     <string name="customInstance">Kustom</string>
     <string name="region">Wilayah</string>
     <string name="login_register">Masuk/daftar</string>
-    <string name="cannotDownload">Tidak dapat mengunduh, ini adalah aliran.</string>
     <string name="playlistCreated">Daftar putar dibuat.</string>
     <string name="importsuccess">Berlangganan</string>
     <string name="grid">Kolom kisi (potret)</string>
@@ -119,14 +118,12 @@
     <string name="video">Video</string>
     <string name="watch_positions">Ingat posisi</string>
     <string name="auth_instances">Gunakan sebuah instansi otentikasi</string>
-    <string name="no_player_found">Tidak ada pemain eksternal. Pastikan Anda memiliki satu terinstal.</string>
     <string name="data_saver_mode_summary">Melewati gambar mini dan gambar lainnya</string>
     <string name="resize_mode_zoom">Perbesar</string>
     <string name="repeat_mode_none">Tidak diulang</string>
     <string name="checking_frequency">Memeriksa setiap…</string>
     <string name="repeat_mode_current">Saat ini</string>
     <string name="deleteAccount">Hapus akun</string>
-    <string name="account">Akun</string>
     <string name="restore">Pulihkan</string>
     <string name="notifications">Notifikasi</string>
     <string name="irreversible">Apakah Anda yakin\? Ini tidak dapat diurungkan!</string>
@@ -145,7 +142,6 @@
     <string name="error_occurred">Kesalahan</string>
     <string name="copied">Disalin</string>
     <string name="device_info">Info Perangkat</string>
-    <string name="clear_customInstances">Hapus yang telah ditambahkan</string>
     <string name="pauseOnScreenOff">Jeda secara otomatis</string>
     <string name="pauseOnScreenOff_summary">Jeda pemutaran ketika layar dimatikan</string>
     <string name="reset_message">Atur ulang semua pengaturan dan keluar\?</string>
@@ -153,7 +149,6 @@
     <string name="search_history_summary">Ingat penelusuran</string>
     <string name="watch_positions_title">Posisi pemainan diingat</string>
     <string name="reset_watch_positions">Atur ulang</string>
-    <string name="playingOnBackground">Memainkan di latar belakang…</string>
     <string name="caption_settings">Takarir</string>
     <string name="worst_quality">Terburuk</string>
     <string name="network_wifi">Hanya pada Wi-Fi</string>
@@ -166,7 +161,6 @@
     <string name="category_music_offtopic_summary">Hanya gunakan ini dalam musik video. Ini seharusnya bagian video yang bukan bagian dari mix resmi. Akhirnya, videonya seharusnya mirip dengan versi mix Spotify atau versi mix yang lain semirip mungkin, atau kurangi percakapan atau gangguan lainnya</string>
     <string name="category_preview">Tampilan/Rekap</string>
     <string name="update_available">Pembaruan tersedia</string>
-    <string name="update_available_text">Pembaruan baru tersedia. Klik untuk membuka laman rilis GitHub.</string>
     <string name="appearance">Tampilan</string>
     <string name="downloads">Unduhan</string>
     <string name="playback_speed">Kecepatan pemutaran</string>
@@ -187,7 +181,6 @@
     <string name="update_summary">Periksa untuk pembaruan</string>
     <string name="player">Pemain</string>
     <string name="appearance_summary">Atur aplikasi sesuai rasa Anda</string>
-    <string name="advanced_summary">Unduhan dan pengaturan ulang</string>
     <string name="backup_restore">Cadangkan dan pulihkan</string>
     <string name="backup">Cadangkan</string>
     <string name="fireIcon">Api modis</string>
@@ -198,7 +191,6 @@
     <string name="related_streams_summary">Tampilkan saluran yang terkait dengan apa yang Anda tonton</string>
     <string name="buffering_goal">Pramuat</string>
     <string name="buffering_goal_summary">Berapa detik maks. video untuk dimuat dahulu</string>
-    <string name="playerVideoFormat">Format video untuk pemain</string>
     <string name="no_audio">Tanpa audio</string>
     <string name="no_video">Tanpa video</string>
     <string name="instance_frontend_url">URL ke frontend instansi (opsional)</string>
@@ -253,7 +245,6 @@
     <string name="audio_video_summary">Kualitas dan format</string>
     <string name="downloading">Mengunduh…</string>
     <string name="delete">Hapus dari unduhan</string>
-    <string name="playerAudioFormat">Format audio untuk pemain</string>
     <string name="playerAudioQuality">Kualitas audio</string>
     <string name="renamePlaylist">Ubah nama daftar putar</string>
     <string name="mobile_data">Data seluler</string>
@@ -270,18 +261,12 @@
     <string name="navigation_bar">Bilah navigasi</string>
     <string name="change_region">Sedang Tren sepertinya tidak tersedia untuk wilayah saat ini. Pilih yang lain di pengaturan.</string>
     <string name="playback_pitch">Nada</string>
-    <string name="filename">Nama file</string>
-    <string name="invalid_filename">Nama file tidak absah!</string>
     <string name="time_code">Kode waktu (detik)</string>
     <string name="added_to_playlist">Ditambahkan ke daftar putar %1$s</string>
     <string name="queue">Antrean</string>
     <string name="livestreams">Siaran Langsung</string>
-    <string name="alternative_videos_layout">Tata letak video alternatif</string>
     <string name="defaultIconLight">Terang bawaan</string>
     <string name="playlistCloned">Daftar luter digandakan</string>
-    <string name="confirm_unsubscribing">Konfirmasi membatalkan langganan</string>
-    <string name="confirm_unsubscribing_summary">Tampilkan sebuah dialog konfirmasi sebelum membatalkan langganan</string>
-    <string name="confirm_unsubscribe">Apakah Anda yakin ingin membatalkan langganan ke %1$s\?</string>
     <string name="play_all">Mainkan semua</string>
     <string name="time">Waktu</string>
     <string name="start_time">Waktu mulai</string>
@@ -291,9 +276,7 @@
     <string name="navbar_order">Urutan</string>
     <string name="layout">Tata letak</string>
     <string name="audio_track">Trek audio</string>
-    <string name="hls_instead_of_dash">Gunakan HLS</string>
     <string name="auto_quality">Otomatis</string>
-    <string name="hls_instead_of_dash_summary">Gunakan HLS daripada DASH untuk memuat media. Coba mengubah opsi ini jika pemutaran video tidak bekerja.</string>
     <string name="limit_to_runtime">Batasi ke runtime</string>
     <string name="trends">Tren</string>
     <string name="featured">Unggulan</string>
@@ -358,8 +341,6 @@
     <string name="codecs">Kodek video</string>
     <string name="mark_as_watched">Tandai sebagai ditonton</string>
     <string name="unsupported_file_format">Format berkas tidak didukung: %1$s</string>
-    <string name="custom_playback_speed">Kecepatan kustom</string>
-    <string name="custom_playback_speed_summary">Gunakan kecepatan pemutaran yang berbeda daripada pemutar yang normal</string>
     <string name="normal_views">%1$s tampilan%2$s</string>
     <string name="category">Kategori</string>
     <string name="autoplay_countdown">Hitung mundur otomatis</string>
@@ -410,15 +391,12 @@
     <string name="automatic">Otomatis</string>
     <string name="sb_custom_colors_summary">Mengaktifkan segmen warna kustom untuk segmen pemblokiran sponsor</string>
     <string name="invalid_color">Nilai warna yang dimasukkan tidak valid!</string>
-    <string name="visible">Tampilkan dalam bilah seek</string>
     <string name="color">Warna</string>
     <string name="sb_custom_colors">Warna segmen kustom</string>
     <string name="category_highlight">Tampilkan sorotan video</string>
     <string name="category_highlight_summary">Dapat berupa judul yang ditampilkan, gambar kecil atau bagian video yang paling menarik. Anda dapat melompati ke bagiannya dengan mengetuk pada bagian bab</string>
     <string name="stop">Berhenti</string>
     <string name="chapters_videoHighlight">Sorotan Video</string>
-    <string name="fallback_piped_proxy">Proksi Piped sebagai cadangan</string>
-    <string name="fallback_piped_proxy_summary">Muat video melalui proksi jika menghubungkan ke YouTube secara langsung tidak berfungsi untuk video saat ini (meningkatkan waktu pemuatan awal). Jika dinonaktifkan, konten musik YouTube kemungkinan tidak akan diputar karena pembatasan YouTube</string>
     <string name="unknown_audio_track_type">Jenis trek audio tidak diketahui</string>
     <string name="audio_track_format">%1$s - %2$s</string>
     <string name="original_or_main_audio_track">asli atau utama</string>
@@ -435,7 +413,6 @@
     <string name="visibility_public">Publik</string>
     <string name="sort_by">Urutkan berdasarkan</string>
     <string name="uploader_name">Nama pengunggah</string>
-    <string name="no_chapter">Tidak ada bab</string>
     <string name="duration_span">Durasi: %1$s</string>
     <string name="screen_orientation">Orientasi layar</string>
     <string name="remove_watched_videos">Hapus video yang sudah ditonton</string>
@@ -460,7 +437,6 @@
     <string name="tooltip_filter">Saring</string>
     <string name="tooltip_edit_groups">Sunting kelompok</string>
     <string name="resolution_limited">terbatas</string>
-    <string name="proxy">Proksi</string>
     <string name="group_name_error_empty">Silakan masukkan nama</string>
     <string name="group_name_error_exists">Silakan pilih nama yang berbeda</string>
     <string name="auto_generated">dibuat secara otomatis</string>
@@ -469,7 +445,6 @@
     <string name="sb_create_segment">Buat segmen</string>
     <string name="segment_type">Jenis segmen</string>
     <string name="sb_invalid_segment">Awal atau akhir segmen tidak valid</string>
-    <string name="filename_too_long">Nama berkas terlalu panjang!</string>
     <string name="contribute_to_sponsorblock">Berkontribusi ke SponsorBlock</string>
     <string name="sponsorblock_user_id">ID pengguna SponsorBlock</string>
     <string name="donate">Donasi</string>
@@ -535,7 +510,6 @@
     <string name="local_stream_extraction">Ekstraksi aliran lokal</string>
     <string name="local_stream_extraction_summary">Dapatkan informasi pemutaran video secara langsung dari YouTube tanpa menggunakan Piped.</string>
     <string name="audio_codecs">Kodek audio</string>
-    <string name="import_watch_history_desc">Diingat bahwa tidak semuanya akan diimpor karena data pengeksporan YouTube yang terbatas.</string>
     <string name="view_count">%1$s tampilan</string>
     <string name="dialog_play_offline_title">Tersedia versi lokal video.</string>
     <string name="dialog_play_offline_body">Apakah Anda ingin memutar video dari folder unduhan?</string>

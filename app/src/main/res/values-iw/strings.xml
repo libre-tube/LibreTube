@@ -55,7 +55,6 @@
     <string name="app_icon">סמל</string>
     <string name="enabled">פעיל</string>
     <string name="playOnBackground">ניגון ברקע</string>
-    <string name="update_available_text">עדכון חדש זמין. יש לפתוח את עמוד הגרסאות ב־GitHub.</string>
     <string name="appearance">מראה</string>
     <string name="update_summary">איתור עדכונים</string>
     <string name="player">נגן</string>
@@ -65,7 +64,6 @@
     <string name="live">חי</string>
     <string name="startpage">בית</string>
     <string name="importsuccess">נרשמת</string>
-    <string name="cannotDownload">לא ניתן להוריד את התזרים הזה.</string>
     <string name="emptyList">אין כאן כלום.</string>
     <string name="systemLanguage">מערכת</string>
     <string name="subscriptions">מינויים</string>
@@ -106,7 +104,6 @@
     <string name="category_selfpromo">קידום לא בתשלום/עצמי</string>
     <string name="disabled">כבוי</string>
     <string name="downloads">הורדות</string>
-    <string name="advanced_summary">הורדות ואיפוס</string>
     <string name="app_uptodate">היישומון עדכני.</string>
     <string name="playback_speed">מהירות נגינה</string>
     <string name="advanced">מתקדם</string>
@@ -130,7 +127,6 @@
     <string name="version">גרסה %1$s</string>
     <string name="instance_api_url">כתובת ל־API של העותק</string>
     <string name="addInstance">הוספת עותק</string>
-    <string name="clear_customInstances">לפנות את אלו שנוספו</string>
     <string name="shapedIcon">צורה טיפשית</string>
     <string name="related_streams">תוכן קשור</string>
     <string name="related_streams_summary">הצגת תזרימים דומים לצד הסרטון שמתנגן</string>
@@ -142,7 +138,6 @@
     <string name="category_preview_summary">לקטעים המפרטים תוכן עתידי ללא מידע נוסף. אם הוא כולל קליפים שמופיעים רק כאן, סביר להניח שזו הקטגוריה הלא נכונה</string>
     <string name="buffering_goal">טעינה טרומית</string>
     <string name="buffering_goal_summary">כמות השניות המרבית של וידאו שייאגר לזיכרון</string>
-    <string name="playerVideoFormat">תצורת הסרטונים לנגן</string>
     <string name="no_video">ללא וידאו</string>
     <string name="no_audio">ללא שמע</string>
     <string name="audio">שמע</string>
@@ -159,7 +154,6 @@
     <string name="clonePlaylist">שכפול רשימת הנגינה</string>
     <string name="reset">שחזור ברירות מחדל</string>
     <string name="reset_message">לאפס את כל ההגדרות ולצאת\?</string>
-    <string name="account">חשבון</string>
     <string name="restore">שחזור</string>
     <string name="deleteAccount">מחיקת חשבון</string>
     <string name="deleteAccount_summary">מחיקת חשבון ה־Piped</string>
@@ -188,7 +182,6 @@
     <string name="autoRotatePlayer_summary">לנגן במסך מלא כאשר המכשיר נוטה</string>
     <string name="pure_theme">ערכת עיצוב טהורה</string>
     <string name="pure_theme_summary">ערכת עיצוב טהורה לבנה/שחורה</string>
-    <string name="no_player_found">לא נמצא נגן חיצוני. נא לוודא שמותקן אצלך אחד כזה.</string>
     <string name="data_saver_mode">מצב חיסכון בתעבורה</string>
     <string name="search_history_summary">שמירת החיפושים</string>
     <string name="watch_history_summary">לעקוב אחר סרטונים בהם צפית באופן מקומי</string>
@@ -201,9 +194,7 @@
     <string name="data_saver_mode_summary">לדלג על תמונות ממוזערות ותמונות אחרות</string>
     <string name="general">כללי</string>
     <string name="general_summary">הורדות וחסכון בתעבורה</string>
-    <string name="playingOnBackground">מתגנן ברקע…</string>
     <string name="caption_settings">כתוביות</string>
-    <string name="playerAudioFormat">תצורת שמע לנגן</string>
     <string name="playerAudioQuality">איכות שמע</string>
     <string name="worst_quality">הנחותה ביותר</string>
     <string name="default_subtitle_language">שפת הכתוביות</string>
@@ -270,18 +261,12 @@
     <string name="navigation_bar">סרגל ניווט</string>
     <string name="playback_pitch">גובה צליל</string>
     <string name="change_region">כנראה שהמובילים לא זמינים לאזור הנוכחי. נא לבחור באזור אחר בהגדרות.</string>
-    <string name="filename">שם קובץ</string>
-    <string name="invalid_filename">שם הקובץ שגוי!</string>
     <string name="time_code">קוד זמן (שניות)</string>
     <string name="added_to_playlist">נוסף לרשימת הנגינה %1$s</string>
     <string name="queue">תור</string>
     <string name="livestreams">שידורים חיים</string>
-    <string name="alternative_videos_layout">פריסת סרטונים חלופית</string>
     <string name="defaultIconLight">בהיר כברירת מחדל</string>
     <string name="playlistCloned">רשימת הנגינה שוכפלה</string>
-    <string name="confirm_unsubscribe">לבטל את המינוי על %1$s\?</string>
-    <string name="confirm_unsubscribing">אישור הסרת מינוי</string>
-    <string name="confirm_unsubscribing_summary">הצגת חלונית אישור בטרם הסרת ההרשמה</string>
     <string name="time">זמן</string>
     <string name="start_time">זמן התחלה</string>
     <string name="end_time">זמן סיום</string>
@@ -292,8 +277,6 @@
     <string name="layout">פריסה</string>
     <string name="audio_track">רצועת שמע</string>
     <string name="auto_quality">אוטומטי</string>
-    <string name="hls_instead_of_dash">להשתמש בתזרים</string>
-    <string name="hls_instead_of_dash_summary">להשתמש בתזרים (HLS) במקום ב־DASH להזרמת מדיה. אפשר לנסות להפוך את המצב של האפשרות הזאת אם נגינת הווידאו לא עובדת.</string>
     <string name="limit_to_runtime">הגבלה לזמן הריצה</string>
     <string name="trends">מגמות</string>
     <string name="featured">מובילים</string>
@@ -358,8 +341,6 @@
     <string name="codecs">מפענחי וידאו</string>
     <string name="mark_as_watched">סימון כנצפה</string>
     <string name="unsupported_file_format">סוג הקובץ לא נתמך: %1$s</string>
-    <string name="custom_playback_speed">מהירות מותאמת אישית</string>
-    <string name="custom_playback_speed_summary">להשתמש במהירות נגינה שונה מהנגן הרגיל</string>
     <string name="category">קטגוריה</string>
     <string name="normal_views">%1$s צפיות%2$s</string>
     <string name="video_id">מזהה סרטון</string>
@@ -410,7 +391,6 @@
     <string name="automatic">אוטומטי</string>
     <string name="off">כבוי</string>
     <string name="manual">ידני</string>
-    <string name="visible">הצגה בפס האיתור</string>
     <string name="invalid_color">ערך הצבע שנבחר שגוי!</string>
     <string name="color">צבע</string>
     <string name="sb_custom_colors">צבעי מקטעים מותאמים</string>
@@ -419,8 +399,6 @@
     <string name="category_highlight">הצגת הקטע הבולט בסרטון</string>
     <string name="category_highlight_summary">יכול להיות שזה הכותרת שפורסמה, התמונה הייצוגית או החלק המעניין ביותר של הסרטון. אפשר לדלג אליו בנגיעה בו בסעיף הפרקים</string>
     <string name="stop">עצירה</string>
-    <string name="fallback_piped_proxy">נסיגה למתווך של Piped</string>
-    <string name="fallback_piped_proxy_summary">לטעון סרטונים דרך המתווך אם התחברות ישירה ל־YouTube לא עובדת לסרטון הנוכחי (מגדיל את זמני הטעינה הראשונית). אם מושבת, תוכן המוזיקה של YouTube כנראה לא ינוגן עקב מגבלות של YT</string>
     <string name="audio_track_format">%1$s - %2$s</string>
     <string name="unknown_audio_language">שפת השמע לא מוכרת</string>
     <string name="unknown_audio_track_type">סוג רצועת השמע לא ידוע</string>
@@ -439,7 +417,6 @@
     <string name="duration_span">משך: %1$s</string>
     <string name="uploader_name">שם המעלה</string>
     <string name="screen_orientation">כיוון המסך</string>
-    <string name="no_chapter">אין פרק</string>
     <string name="remove_watched_videos">הסרת סרטונים שנצפו</string>
     <string name="player_channel_description">מציג התראה בזמן הנגינה</string>
     <string name="player_channel_name">שירות נגן</string>
@@ -464,14 +441,12 @@
     <string name="tooltip_play">נגינה</string>
     <string name="tooltip_filter">מסנן</string>
     <string name="registration_disabled">ההרשמה מושבתת</string>
-    <string name="proxy">מתווך</string>
     <string name="group_name_error_empty">נא למלא שם</string>
     <string name="group_name_error_exists">נא לבחור שם ייחודי</string>
     <string name="automatic_once">אוטומטית פעם אחת</string>
     <string name="segment_type">סוג מקטע</string>
     <string name="sb_create_segment">יצירת מקטע</string>
     <string name="sb_invalid_segment">התחלת או סיום המקטע שגוי</string>
-    <string name="filename_too_long">שם הקובץ ארוך מדי!</string>
     <string name="contribute_to_sponsorblock">תרומה ל־SponsorBlock</string>
     <string name="sponsorblock_user_id">מזהה משתמש לחסימת מפרסמים</string>
     <string name="donate">תרומה</string>
@@ -535,7 +510,6 @@
     <string name="local_stream_extraction">חילוץ תזרים מקומי</string>
     <string name="audio_codecs">מפענחי שמע</string>
     <string name="import_watch_history">ייבוא היסטוריית צפייה</string>
-    <string name="import_watch_history_desc">נא לשים לב שהייבוא יהיה חלקי עקב הנתונים המצומצמים שאפשר לייצא מ־YouTube.</string>
     <string name="dialog_play_offline_body">לנגן את הסרטון מתיקיית ההורדה?</string>
     <string name="local_feed_extraction">חילוץ ערוץ מקומי</string>
     <string name="local_feed_extraction_summary">משיכת הערוץ ישירות מ־YouTube. זה עלול להיות משמעותית איטי יותר.</string>

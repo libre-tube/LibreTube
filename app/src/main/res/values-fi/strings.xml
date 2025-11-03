@@ -31,7 +31,6 @@
     <string name="about">Tietoja</string>
     <string name="share">Jaa</string>
     <string name="customInstance">Mukautettu esiintymä</string>
-    <string name="cannotDownload">Ei voi ladata tätä videota.</string>
     <string name="unknown_error">Verkkovirhe.</string>
     <string name="import_from_yt">Tuo tilaukset YouTubesta</string>
     <string name="error">Jokin meni pieleen.</string>
@@ -83,7 +82,6 @@
     <string name="appearance">Ulkonäkö</string>
     <string name="downloads">Lataukset</string>
     <string name="app_uptodate">Ajetaan viimeisintä versiota.</string>
-    <string name="advanced_summary">Lataukset, historia</string>
     <string name="appearance_summary">Säädä sovelluksesta haluamasi näköinen</string>
     <string name="advanced">Edistynyt</string>
     <string name="live">Live</string>
@@ -97,7 +95,6 @@
     <string name="category_interaction">Vuorovaikutus muistutus (tykkäys ja tilaus)</string>
     <string name="reset_message">Nollataanko kaikki asetukset ja kirjaudutaan ulos\?</string>
     <string name="deleteAccount_summary">Poista sinun Piped-tili</string>
-    <string name="account">Tili</string>
     <string name="restore">Palauta</string>
     <string name="reset">Palauta oletukset</string>
     <string name="deleteAccount">Poista tili</string>
@@ -112,11 +109,9 @@
     <string name="color_accent">Aksentit</string>
     <string name="category_outro_summary">Tiedot lopun jälkeen. Ei johtopäätöksille, jotka sisältävät tietoa</string>
     <string name="material_you">Material You</string>
-    <string name="update_available_text">Uusi päivitys saatavilla. Klikkaa avataksesi Githubin julkaisusivun.</string>
     <string name="torchIcon">Trendikäs soihtu</string>
     <string name="fireIcon">Muodikas tuli</string>
     <string name="empty_instance">Täydennä nimi ja ohjelmointirajapinnan linkki.</string>
-    <string name="clear_customInstances">Tyhjennä mukautetut esiintymät</string>
     <string name="music_albums">YT Music Albumit</string>
     <string name="category_filler">Täytesisältö/Vitsit</string>
     <string name="category_music_offtopic">Musiikki: Ei musiikkiosio</string>
@@ -146,7 +141,6 @@
     <string name="related_streams">Asiaan liittyvä sisältö</string>
     <string name="related_streams_summary">Näytä samankaltaisia streameja katsomasi ohella</string>
     <string name="category_filler_summary">Epäolennaisille kohtauksille, jotka lisätty vain täytteeksi tai huumori, joka on tarpeetonta ymmärtääkseen videon pääsisällön</string>
-    <string name="playerVideoFormat">Video formaatti soittimelle</string>
     <string name="buffering_goal">Esikuormitus</string>
     <string name="buffering_goal_summary">Maksimi puskuroitavan videon sekuntimäärä</string>
     <string name="no_audio">Ei ääntä</string>
@@ -176,7 +170,6 @@
     <string name="captions">Tekstitykset</string>
     <string name="repeat_mode_current">Nykyinen</string>
     <string name="no_search_result">Ei tuloksia.</string>
-    <string name="alternative_videos_layout">Vaihtoehtoinen videoasettelu</string>
     <string name="faq">Usein kysytyt kysymykset</string>
     <string name="no_comments_available">Tällä videolla ei ole kommentteja.</string>
     <string name="pause">Tauko</string>
@@ -200,7 +193,6 @@
     <string name="yt_shorts">Shorts</string>
     <string name="copied_to_clipboard">Kopioitu leikepöydälle</string>
     <string name="unsupported_file_format">Tiedostomuotoa %1$s ei tueta</string>
-    <string name="hls_instead_of_dash">Käytä HLS</string>
     <string name="nothing_selected">Mitään ei ole valittu!</string>
     <string name="alternative_pip_controls">Vaihtoehtoiset kuva kuvassa kontrollit</string>
     <string name="added_to_playlist">Lisätty soittolistaan</string>
@@ -247,7 +239,6 @@
     <string name="double_tap_seek_summary">Napauta kahdesti vasemmalla tai oikealla kelataksesi toistimen paikkaa taaksepäin tai eteenpäin</string>
     <string name="all_caught_up">Olet kaikesta perillä</string>
     <string name="all_caught_up_summary">Olet nähnyt kaikki uudet videot</string>
-    <string name="custom_playback_speed">Mukauttu nopeus</string>
     <string name="uploaderAndVideoCount">%1$s • %2$d videota</string>
     <string name="subscriberAndVideoCounts">%1$s tilaajaa • %2$d videota</string>
     <string name="normal_views">%1$s katselukertaa%2$s</string>
@@ -270,7 +261,6 @@
     <string name="autoRotatePlayer_summary">Koko näytön toisto, kun laite käännetään</string>
     <string name="pure_theme">Puhdas teema</string>
     <string name="pure_theme_summary">Pelkkä valko/musta teema</string>
-    <string name="no_player_found">Ulkoista toistinta ei löytynyt. Varmista, että sinulla on sellainen asennettuna.</string>
     <string name="data_saver_mode">Tiedonsäästötila</string>
     <string name="data_saver_mode_summary">Sivuuta pikkukuvat ja muut kuvat</string>
     <string name="watch_history_summary">Pidä kirjaa katsotuista videoista paikallisesti</string>
@@ -279,9 +269,7 @@
     <string name="system_caption_style">Laitteen tekstitystyyli</string>
     <string name="none">Ei mitään</string>
     <string name="general_summary">Kieli ja alue</string>
-    <string name="playingOnBackground">Toistetaan taustalla…</string>
     <string name="caption_settings">Tekstitykset</string>
-    <string name="playerAudioFormat">Audioformaatti toistimelle</string>
     <string name="playerAudioQuality">Äänenlaatu</string>
     <string name="worst_quality">Huonoin</string>
     <string name="default_subtitle_language">Tekstityskieli</string>
@@ -313,15 +301,12 @@
     <string name="notify_new_streams">Ilmoitukset uusista streameista</string>
     <string name="play_next">Toista seuraavaksi</string>
     <string name="change_region">Trending ei näytä olevan saatavilla nykyisellä alueella. Valitse toinen asetuksista.</string>
-    <string name="filename">Tiedoston nimi</string>
-    <string name="invalid_filename">Virheellinen tiedoston nimi!</string>
     <string name="playback_pitch">Sävelkorkeus</string>
     <string name="queue">Jono</string>
     <string name="play_all">Toista kaikki</string>
     <string name="notification_time">Ilmoitusaika</string>
     <string name="navbar_order">Järjestys</string>
     <string name="audio_track">Ääniraita</string>
-    <string name="hls_instead_of_dash_summary">Käytä HLS:ää DASHin sijaan (on hitaampi, ei suositella)</string>
     <string name="auto_quality">Auto</string>
     <string name="limit_to_runtime">Rajoita suoritusaikaa</string>
     <string name="trends">Trendit</string>
@@ -353,7 +338,6 @@
     <string name="skip_silence">Ohita hiljaisuus</string>
     <string name="help">Apu</string>
     <string name="mark_as_watched">Merkitse katsotuksi</string>
-    <string name="custom_playback_speed_summary">Käytä eri toistonopeutta kuin tavallisessa toistimessa</string>
     <string name="autoplay_countdown">Automaattisen toiston lähtölaskenta</string>
     <string name="playing_next">Toistetaan seuraavaksi %1$s</string>
     <string name="download_channel_description">Näyttää ilmoituksen mediaa ladattaessa.</string>
@@ -362,9 +346,6 @@
     <string name="network_all">Kaikki</string>
     <string name="livestreams">Suorat lähetykset</string>
     <string name="defaultIconLight">Oletus vaalea</string>
-    <string name="confirm_unsubscribe">Oletko varma, että haluat peruuttaa %1$s tilauksen\?</string>
-    <string name="confirm_unsubscribing">Vahvista tilauksen peruuttaminen</string>
-    <string name="confirm_unsubscribing_summary">Näytä vahvistusikkuna ennen tilauksen peruuttamista</string>
     <string name="category">Kategoria</string>
     <string name="clear_bookmarks">Tyhjennä kirjanmerkit</string>
     <string name="codecs">Koodekit</string>

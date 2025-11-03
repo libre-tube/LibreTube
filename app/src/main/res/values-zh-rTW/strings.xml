@@ -26,7 +26,6 @@
     <string name="region">地區</string>
     <string name="login_register">登入/註冊</string>
     <string name="importsuccess">已訂閱</string>
-    <string name="cannotDownload">無法下載此串流檔案。</string>
     <string name="downloadfailed">下載失敗。</string>
     <string name="import_from_yt">匯入訂閱播放清單</string>
     <string name="import_from_yt_summary">從Youtube或NewPipe</string>
@@ -98,7 +97,6 @@
     <string name="update_summary">按這裡檢查更新</string>
     <string name="app_uptodate">現在是最新版本。</string>
     <string name="playback_speed">播放速度</string>
-    <string name="advanced_summary">下載和重設</string>
     <string name="live">直播</string>
     <string name="legacyIcon">舊版圖示</string>
     <string name="gradientIcon">Glib漸層</string>
@@ -113,7 +111,6 @@
     <string name="instance_api_url">執行個體API網址</string>
     <string name="addInstance">新增執行個體</string>
     <string name="empty_instance">請填寫名稱和API網址欄位。</string>
-    <string name="clear_customInstances">清除自訂執行個體</string>
     <string name="invalid_url">請填入有效的網址</string>
     <string name="version">版本%1$s</string>
     <string name="related_streams">相關內容</string>
@@ -138,14 +135,12 @@
     <string name="category_music_offtopic">音樂: 非音樂片段</string>
     <string name="category_music_offtopic_summary">此設定僅用於音樂影片，不包含官方合輯。影片最後應只顯示Spotify的類似版本，避免多餘談話或干擾</string>
     <string name="disabled">關閉</string>
-    <string name="update_available_text">有新的更新可用。 點選以打開 GitHub 發布頁面。</string>
     <string name="appearance_summary">自訂你喜愛的APP</string>
     <string name="advanced">進階</string>
     <string name="player">播放器</string>
     <string name="reset_message">是否重設所有設定並從執行個體登出？</string>
     <string name="deleteAccount">刪除帳號</string>
     <string name="deleteAccount_summary">刪除您於piped執行個體中的帳號</string>
-    <string name="playerVideoFormat">播放器所使用的影片格式</string>
     <string name="audio">音訊</string>
     <string name="video">視訊</string>
     <string name="downloading">下載中…</string>
@@ -154,7 +149,6 @@
     <string name="quality">畫質</string>
     <string name="behavior">行為</string>
     <string name="reset">恢復預設值</string>
-    <string name="account">帳號</string>
     <string name="restore">恢復</string>
     <string name="watch_history">觀看歷史</string>
     <string name="auth_instance">驗證用執行個體</string>
@@ -168,7 +162,6 @@
     <string name="clonePlaylist">複製播放清單</string>
     <string name="open">開啟…</string>
     <string name="playlistCloned">已複製播放清單</string>
-    <string name="confirm_unsubscribing">確認取消訂閱</string>
     <string name="default_subtitle_language">字幕語言</string>
     <string name="local_playlists">本機播放清單</string>
     <string name="color_violet">多彩紫</string>
@@ -225,7 +218,6 @@
     <string name="autoRotatePlayer">自動全螢幕</string>
     <string name="pure_theme">純粹主題</string>
     <string name="autoRotatePlayer_summary">裝置旋轉後自動全螢幕</string>
-    <string name="no_player_found">找不到外部播放器。請確認已安裝外部播放器。</string>
     <string name="data_saver_mode_summary">跳過縮圖和其他圖片</string>
     <string name="data_saver_mode">數據節省模式</string>
     <string name="search_history_summary">記住搜尋</string>
@@ -240,9 +232,7 @@
     <string name="delete">從下載刪除</string>
     <string name="new_videos_badge">新影片的指示器</string>
     <string name="backup_customInstances">自訂執行個體</string>
-    <string name="filename">檔案名稱</string>
     <string name="added_to_playlist">新增至播放清單 %1$s</string>
-    <string name="confirm_unsubscribe">您確定要取消訂閱 %1$s 嗎？</string>
     <string name="misc">雜項</string>
     <string name="player_resize_mode">重新調整大小模式</string>
     <string name="resize_mode_fit">適應</string>
@@ -251,17 +241,13 @@
     <string name="new_videos_badge_summary">如果有新影片，顯示數量徽章</string>
     <string name="hide_watched_from_feed">隱藏已觀看過的影片</string>
     <string name="download_channel_name">下載服務</string>
-    <string name="confirm_unsubscribing_summary">在取消訂閱前顯示確認對話框</string>
     <string name="livestreams">直播</string>
-    <string name="invalid_filename">檔案名稱無效！</string>
     <string name="playback_pitch">音高</string>
     <string name="pure_theme_summary">純粹白/黑主題</string>
     <string name="watch_positions_title">記住播放位置</string>
     <string name="reset_watch_positions">重設</string>
     <string name="none">無</string>
     <string name="system_caption_style">系統說明文字樣式</string>
-    <string name="playingOnBackground">在背景播放…</string>
-    <string name="playerAudioFormat">播放器的音訊格式</string>
     <string name="translate">翻譯</string>
     <string name="history_size">最大歷史紀錄</string>
     <string name="unlimited">無限</string>
@@ -314,7 +300,6 @@
     <string name="no_search_result">無結果。</string>
     <string name="error_occurred">錯誤</string>
     <string name="copied">已複製</string>
-    <string name="alternative_videos_layout">另一種影片版面</string>
     <string name="defaultIconLight">預設亮色</string>
     <string name="open_copied">開啟</string>
     <string name="general">一般</string>
@@ -330,8 +315,6 @@
     <string name="download_paused">下載暫停</string>
     <string name="navbar_order">排序</string>
     <string name="layout">版面</string>
-    <string name="hls_instead_of_dash">使用HLS</string>
-    <string name="hls_instead_of_dash_summary">使用 HLS 而非 DASH 來串流媒體。如果視訊播放無法正常運作，請嘗試切換此選項。</string>
     <string name="auto_quality">自動</string>
     <string name="trending">現正熱門</string>
     <string name="comments_disabled">上傳者停用了留言功能。</string>
@@ -359,8 +342,6 @@
     <string name="autoplay_countdown">自動播放倒計時</string>
     <string name="autoplay_countdown_summary">在自動播放下一個影片之前顯示 5 秒倒計時</string>
     <string name="playing_next">接下來在 %1$s 播放</string>
-    <string name="custom_playback_speed">自定義速度</string>
-    <string name="custom_playback_speed_summary">使用不同於傳統播放器的播放速度</string>
     <string name="unsupported_file_format">不支援的檔案格式：%1$s</string>
     <string name="category">類別</string>
     <string name="codecs">視訊編解碼器</string>
@@ -414,11 +395,8 @@
     <string name="invalid_color">輸入了無效色彩值！</string>
     <string name="chapters_videoHighlight">影片精彩片段</string>
     <string name="color">色彩</string>
-    <string name="visible">在進度列中顯示</string>
     <string name="category_highlight">顯示影片的精彩片段</string>
     <string name="category_highlight_summary">可以是廣告標題、縮圖或影片中最有趣的部分。您可以透過在章節部分點選它來跳到該處</string>
-    <string name="fallback_piped_proxy">汰退回 Piped 代理伺服器</string>
-    <string name="fallback_piped_proxy_summary">若目前影片直接連線到 YouTube 無法運作，則透過代理伺服器載入影片（增加初始載入時間）。若停用，YouTube 音樂內容可能會因 YouTube 限制而無法播放</string>
     <string name="continue_watching">繼續觀看</string>
     <string name="unknown_or_no_audio">未知或無音訊</string>
     <string name="original_or_main_audio_track">原始或主要</string>
@@ -434,7 +412,6 @@
     <string name="visibility_public">公開</string>
     <string name="visibility_unlisted">未列出</string>
     <string name="screen_orientation">螢幕方向</string>
-    <string name="no_chapter">無章節</string>
     <string name="sort_by">排序方式</string>
     <string name="uploader_name">上傳者名稱</string>
     <string name="duration_span">持續時間：%1$s</string>
@@ -461,7 +438,6 @@
     <string name="tooltip_watch_position">觀看位置</string>
     <string name="tooltip_repeat">重複</string>
     <string name="tooltip_reverse">反向</string>
-    <string name="proxy">代理伺服器</string>
     <string name="group_name_error_empty">請輸入名稱</string>
     <string name="group_name_error_exists">請選擇獨一無二的名稱</string>
     <string name="registration_disabled">已停用註冊</string>
@@ -469,7 +445,6 @@
     <string name="sb_create_segment">建立片段</string>
     <string name="segment_type">片段類型</string>
     <string name="sb_invalid_segment">無效的片段開始或結束</string>
-    <string name="filename_too_long">檔案名稱太長了！</string>
     <string name="sponsorblock_user_id">SponsorBlock 使用者 ID</string>
     <string name="contribute_to_sponsorblock">貢獻給 SponsorBlock</string>
     <string name="donate">捐款</string>
@@ -534,7 +509,6 @@
     <string name="local_ryd">本機回傳 YouTube 不喜歡擷取程式</string>
     <string name="local_ryd_summary">直接從 https://returnyoutubedislikeapi.com 取得不喜歡資訊</string>
     <string name="import_watch_history">匯入觀看歷史紀錄</string>
-    <string name="import_watch_history_desc">請注意，由於 YouTube 的匯出資料有限，並非所有內容都會匯入。</string>
     <string name="audio_codecs">音訊編解碼器</string>
     <string name="view_count">%1$s 次觀看</string>
     <string name="dialog_play_offline_title">此影片有本機版本。</string>

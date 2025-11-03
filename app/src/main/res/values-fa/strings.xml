@@ -26,7 +26,6 @@
     <string name="import_from_yt">وارد کردن اشتراک‌ها</string>
     <string name="registered">ثبت نام انجام شد. حالا می‌توانید کانالهای مورد نظر خودتان را دنبال کنید.</string>
     <string name="already_logged_in">وارد شده‌اید. ممکن است از حسابتان خارج شوید.</string>
-    <string name="cannotDownload">نمی‌توان این جریان را بارگرفت.</string>
     <string name="server_error">به نظر کارساز گزیده مشکلی دارد. نمونه‌ای دیگر را بیازمایید.</string>
     <string name="error">مشکلی پیش آمد.</string>
     <string name="notgmail">این برای حساب پایپد است</string>
@@ -116,7 +115,6 @@
     <string name="player_autoplay">پخش خودکار</string>
     <string name="instance_summary">پایپد، ورود و حساب</string>
     <string name="subscriberAndVideoCounts">%1$s مشترک • %2$d ویدیو</string>
-    <string name="advanced_summary">بارگیری‌ها و بازنشانی</string>
     <string name="version">نگارش %1$s</string>
     <string name="no_audio">بدون صدا</string>
     <string name="no_video">بدون ویدیو</string>
@@ -141,10 +139,8 @@
     <string name="notify_new_streams">نمایش آگاهی برای جریان‌های جدید</string>
     <string name="default_subtitle_language">زبان زیرنویس</string>
     <string name="skip_buttons">دکمه‌های پرش</string>
-    <string name="filename">نام پرونده</string>
     <string name="player_summary">پیش‌گزیده‌ها و رفتار</string>
     <string name="watch_history">سابقه تماشا</string>
-    <string name="account">حساب</string>
     <string name="deleteAccount">حذف حساب</string>
     <string name="restore">بازگردانی</string>
     <string name="auth_instance">نمونهٔ تأیید هویت</string>
@@ -173,14 +169,12 @@
     <string name="mobile_data">دادهٔ همراه</string>
     <string name="most_views">بیش‌ترین مشاهده‌ها</string>
     <string name="backup_customInstances">نمونه‌های سفارشی</string>
-    <string name="invalid_filename">نام پرونده نامعتبر!</string>
     <string name="livestreams">جریان‌های زنده</string>
     <string name="layout">چینش</string>
     <string name="bookmarks">نشانک‌ها</string>
     <string name="end_time">زمان پایان</string>
     <string name="audio_track">قطعهٔ صوتی</string>
     <string name="shuffle">بر زدن</string>
-    <string name="update_available_text">به‌روز رسانی جدیدی موجود است. برای گشودن صفحهٔ ارائه‌های گیت‌هاب بزنید.</string>
     <string name="new_group">جدید</string>
     <string name="resize_mode_fill">پر کردن</string>
     <string name="yt_shorts">کوتاه‌ها</string>
@@ -197,7 +191,6 @@
     <string name="flameIcon">پرواز آتش</string>
     <string name="birdIcon">پروندهٔ تقویت شده</string>
     <string name="addInstance">افزودن نمونه</string>
-    <string name="clear_customInstances">پاک‌سازی افزوده</string>
     <string name="buffering_goal">پیش‌بار کردن</string>
     <string name="unknown">ناشناخته</string>
     <string name="reset_message">بازنشانی تمامی تنظیمات و خروج؟</string>
@@ -228,7 +221,6 @@
     <string name="preferences">ترجیحات</string>
     <string name="queue">صف</string>
     <string name="navigation_bar">نوار ناوبری</string>
-    <string name="hls_instead_of_dash">استفاده از HLS</string>
     <string name="auto_quality">خودکار</string>
     <string name="trending">آن‌چه اکنون داغ است</string>
     <string name="bookmark">نشانک</string>
@@ -255,7 +247,6 @@
     <string name="auto">خودکار</string>
     <string name="category">دسته</string>
     <string name="defaultIconLight">روشن پیش‌گزیده</string>
-    <string name="confirm_unsubscribing">تأیید لغو اشتراک</string>
     <string name="material_you">متریال یو</string>
     <string name="reset">بازگردانی پیش‌گزیده‌ها</string>
     <string name="no_search_result">بدون نتیجه.</string>
@@ -269,7 +260,6 @@
     <string name="category_preview_summary">برای بخش‌هایی که محتوای پیش رو را بدون اطَلاعات اضفی شرح می‌دهند. اگر شامل کلیپ‌هاییست که تنها این‌جا ظاهر شده‌اند احتمالاً این‌جا دستهٔ اشتباهی است</string>
     <string name="deleteAccount_summary">حساب پایپد خود را حذف کنید</string>
     <string name="network_wifi">فقط در وای فای</string>
-    <string name="playingOnBackground">درحال پخش در پس‌زمینه…</string>
     <string name="download_paused">بارگیری متوقف شد</string>
     <string name="download_completed">بارگیری کامل شد</string>
     <string name="require_restart">راه‌اندازی مجدد برنامه نیاز است</string>
@@ -291,13 +281,10 @@
     <string name="change_region">به نظر می رسد پرطرفدار ها برای منطقه فعلی در دسترس نیست. لطفاً یکی دیگر را در تنظیمات انتخاب کنید.</string>
     <string name="pauseOnScreenOff_summary">مکث پخش هنگام خاموش بودن صفحه</string>
     <string name="skip_buttons_summary">نمایش دکمه ها برای پرش به ویدیو بعدی یا قبلی</string>
-    <string name="playerVideoFormat">قالب ویدیویی پخش‌کننده</string>
     <string name="instance_frontend_url">آدرس اینترنتی برای رابط جلویی نمونه (اختیاری)</string>
     <string name="seek_increment">پیشروی جویش</string>
     <string name="auth_instances">گزینش نمونه‌ای برای هویت‌سنجی</string>
     <string name="turnInternetOn">لطفاً وای‌فای یا دادهٔ همراه ر بارای وصل شدن به اینترنت روشن کنید.</string>
-    <string name="playerAudioFormat">قالب صوتی برای پخش‌کننده</string>
-    <string name="confirm_unsubscribing_summary">قبل از لغو اشتراک، یک گفتگوی تأیید را نشان دهید</string>
     <string name="history_empty">هنوز تاریخچه‌ای وجود ندارد.</string>
     <string name="picture_in_picture">تصویر-در-تصویر</string>
     <string name="notification_time_summary">محدود کردن بازه زمانی‌ای که آگاهی‌های جریان نشان داده می‌شوند</string>
@@ -327,7 +314,6 @@
     <string name="concurrent_downloads_limit_reached">رسیدن به بیشینهٔ بارگیری‌های هم‌زمان.</string>
     <string name="auth_instance_summary">استفاده از نمونه‌ای متفاوات برای فراخوانی‌های هویت‌سنجی</string>
     <string name="require_restart_message">آغاز دوبارهٔ کاره برای استفاده از تغییرات جدید.</string>
-    <string name="no_player_found">پخش‌کنندهٔ خارجی‌ای پیدا نشد. لطفا مطمئن شوید که نصبش کرده‌اید.</string>
     <string name="autoRotatePlayer_summary">پخش تمام‌صفحه هنگام چرخیدن افزاره</string>
     <string name="watch_positions_title">موقعیت های پخش را به خاطر آورید</string>
     <string name="system_caption_style">سبک نوشتهٔ سامانه</string>
@@ -337,8 +323,6 @@
     <string name="no_subtitles_available">زیرنویس موجود نیست</string>
     <string name="new_videos_badge_summary">در صورت وجود، نشانی با تعداد ویدیوهای جدید نشان دهید</string>
     <string name="time_code">کد زمان (ثانیه)</string>
-    <string name="alternative_videos_layout">طرح بندی ویدیوهای متداول</string>
-    <string name="confirm_unsubscribe">آیا مطمئنید که می خواهید اشتراک %1$s را لغو کنید؟</string>
     <string name="notification_time">محدود کردن زمان اطلاع رسانی</string>
     <string name="video_id">شناسه ویدیو</string>
     <string name="autoplay_countdown_summary">قبل از پخش خودکار ویدیوی بعدی، شمارش معکوس 5 ثانیه را نشان دهید</string>
@@ -355,7 +339,6 @@
     <string name="playlistUrl">نشانی سیاههٔ پخش</string>
     <string name="color_violet">بنفش چندمنظوره</string>
     <string name="remove_bookmark">برداشتن نشانک</string>
-    <string name="custom_playback_speed">سرعت سفارشی</string>
     <string name="pinch_control">واپایش نیشگونی</string>
     <string name="app_backup">پشتیبان کاره</string>
     <string name="fullscreen_gestures">حرکات ورود یا خروج تمام‌صفحه</string>
@@ -378,14 +361,12 @@
     <string name="all_caught_up_summary">همه ویدیوهای جدید را دیده اید</string>
     <string name="add_to_bookmarks">به نشانک ها اضافه کنید</string>
     <string name="mark_as_watched">علامت گذاری به عنوان دیده شده</string>
-    <string name="custom_playback_speed_summary">از سرعت پخش متفاوتی نسبت به پخش کننده معمولی استفاده کنید</string>
     <string name="comments_disabled">نظرات توسط آپلود کننده غیرفعال شده است.</string>
     <string name="swipe_controls_summary">کشیدن برای تنظیم روشنایی و صدا در حالت تمام‌صفحه</string>
     <string name="double_tap_seek">دو ضربه برای گشتن</string>
     <string name="pinch_control_summary">برای بزرگ‌نمایی/کوچک‌نمایی از ژست نیشگون استفاده کنید</string>
     <string name="play_latest_videos">پخش آخرین ویدیوها</string>
     <string name="alternative_pip_controls_summary">فقط نمایش صدا و به جای جلو و عقب، از کنترل‌ها در PiP استفاده کنید</string>
-    <string name="hls_instead_of_dash_summary">از HLS به جای DASH برای پخش رسانه‌ای استفاده کنید. در صورتی که پخش ویدیو کار نمی‌کند، این گزینه را تغییر دهید.</string>
     <string name="stats_for_nerds">آمار برای خوره‌ها</string>
     <string name="limit_to_runtime">محدود به زمان اجرا</string>
     <string name="home_tab_content">محتوای تب خانه</string>
@@ -414,7 +395,6 @@
     <string name="manual">دستی</string>
     <string name="automatic">خودکار</string>
     <string name="continue_watching">ادامه تماشا</string>
-    <string name="fallback_piped_proxy_summary">بار کردن ویدیوها با پیشکار در صورن کار نکردن اتّصال مستقیم به یوتوب برای ویدیوی جاری (زمان بار کردن نخستین را افزایش می دهد). اگر از کار بیفتد احتمالاً محتوای آهنگ‌های یوتوب به دلیل محدودیت‌های یوتوب پخش نخواهد شد</string>
     <string name="dearrow_summary">عنوان‌ها و بندانگشتی‌های دقیق‌تر و کم اغراق آمیز را نشان دهید. زمان بار کردن را افزایش می‌دهد</string>
     <string name="stop">توقف</string>
     <string name="sb_custom_colors_summary">بخش‌های رنگی سفارشی را برای بخش‌های SponsorBlock تغییر می‌دهد</string>
@@ -426,8 +406,6 @@
     <string name="change_playlist_description">تغییر توضیح فهرست پخش</string>
     <string name="playlist_description">توضیح فهرست پخش</string>
     <string name="emptyPlaylistDescription">توضیح فهرست پخش نمی‌تواند خالی باشد</string>
-    <string name="visible">نمایش در نوار جستجو</string>
-    <string name="fallback_piped_proxy">بازگشت به پیشکار پایپد</string>
     <string name="audio_track_format">%1$s - %2$s</string>
     <string name="unknown_audio_language">زبان صوتی ناشناخته</string>
     <string name="show_search_suggestions">نمایش پیشنهادات جستجو</string>
@@ -444,11 +422,9 @@
     <string name="tooltip_locked">قفل پخش‌کننده</string>
     <string name="remove_watched_videos">حذف ویدیوهای دیده شده</string>
     <string name="tooltip_play">پخش</string>
-    <string name="no_chapter">بدون فصل</string>
     <string name="uploader_name">نام بارگذار</string>
     <string name="tooltip_filter">پالایش</string>
     <string name="tooltip_unlocked">قفل‌گشایی پخش‌کننده</string>
-    <string name="filename_too_long">نام پرونده بیش از حد طولانی است!</string>
     <string name="registration_disabled">ثبت‌نام از کار افتاده</string>
     <string name="tooltip_clear_queue">پاک سازی صف</string>
     <string name="sort_by">چیدن بر اساس</string>
@@ -473,7 +449,6 @@
     <string name="duration_span">طول: %1$s</string>
     <string name="tooltip_sort">چیدن</string>
     <string name="tooltip_watch_position">موقعیت دیدن</string>
-    <string name="proxy">پیشکار</string>
     <string name="autoplay_playlists_summary">پخش‌خودکار ویدیوی بعدی در سیاههٔ پخش بدون توجّه به تنظیمات پخش خودکار گزیده</string>
     <string name="vote_for_segment">رأی برای بخش</string>
     <string name="upvote">بالا</string>
@@ -535,7 +510,6 @@
     <string name="local_ryd">برگردان محلی استخراج کننده نپسندیدن یوتیوب</string>
     <string name="local_ryd_summary">واکشی مستقیم اطّلاعات نپسندیدن از https://returnyoutubedislikeapi.com</string>
     <string name="import_watch_history">درون‌ریزی تاریخچهٔ تماشا</string>
-    <string name="import_watch_history_desc">به یاد داشته باشید که به خاطر داده‌های محدود برون‌ریزی یوتوب، همه‌چیز درون‌ریزی نخواهد شد.</string>
     <string name="audio_codecs">رمزینه‌های صوتی</string>
     <string name="view_count">%1$s مشاهده‌ها</string>
     <string name="upcoming">آینده</string>
