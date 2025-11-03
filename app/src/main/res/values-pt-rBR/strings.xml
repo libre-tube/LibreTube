@@ -543,4 +543,6 @@
     <string name="did_you_mean">Você quis dizer:</string>
     <string name="showing_results_for">Mostrando resultados para:</string>
     <string name="delete_playlist_include_vidoes">Também excluir todos os vídeos da playlist?</string>
+    <string name="category_hook_summary">Para trechos narrativos que chamam a atenção do espectador (muitas vezes como primeira cena) ao provocar ou descrever eventos que ocorrem mais tarde no mesmo vídeo ou em episódios futuros de uma série</string>
+    <string name="category_hook">Trechos/Saudações</string>
 </resources>
