@@ -69,11 +69,11 @@
     <string name="category_segments">Segmenty</string>
     <string name="category_sponsor">Sponzor</string>
     <string name="category_sponsor_summary">Placená propagace, placená doporučení a přímé reklamy. Nezahrnuje sebepropagaci nebo shout-outy uživatelů/tvůrců/webů/produktů, které se tvůrcovi líbí</string>
-    <string name="category_selfpromo">Neplacená/vlastní propagace</string>
+    <string name="category_selfpromo">Neplacená / vlastní propagace</string>
     <string name="category_selfpromo_summary">Podobné jako „sponzor“, ale pro neplacenou nebo vlastní propagaci. Zahrnuje sekce o zboží, darech nebo informace o tom, s kým spolupracují</string>
     <string name="category_interaction">Připomenutí interakce</string>
     <string name="category_interaction_summary">Krátká připomínka, abyste dali like, odběr nebo jste sledovali tvůrce uprostřed obsahu. Pokud je segment dlouhý nebo zahrnuje něco specifického, mělo by být místo toho zařazeno do vlastní propagace</string>
-    <string name="category_intro">Přestávka/Intro</string>
+    <string name="category_intro">Přestávka / úvodní animace</string>
     <string name="category_intro_summary">Interval bez skutečného obsahu. Může to být pauza, statický obrázek nebo opakující se animace. Nemělo by být použito pro přechody obsahující informace</string>
     <string name="category_outro">Koncové karty a titulky</string>
     <string name="category_outro_summary">Informace následující závěr. Není pro závěry s informacemi</string>
@@ -121,9 +121,9 @@
     <string name="instance_summary">Piped, přihlášení a účet</string>
     <string name="customInstance_summary">Přidat…</string>
     <string name="version">Verze %1$s</string>
-    <string name="category_filler">Výplň/vtipy</string>
+    <string name="category_filler">Výplň / vtipy</string>
     <string name="category_music_offtopic">Hudba: nehudební sekce</string>
-    <string name="category_preview">Náhled/shrnutí</string>
+    <string name="category_preview">Náhled / shrnutí</string>
     <string name="playback_speed">Rychlost přehrávání</string>
     <string name="shapedIcon">Hloupý tvar</string>
     <string name="instance_name">Název instance</string>
@@ -543,4 +543,6 @@
     <string name="did_you_mean">Mysleli jste:</string>
     <string name="showing_results_for">Zobrazování výsledků pro:</string>
     <string name="delete_playlist_include_vidoes">Odstranit také všechna videa z playlistu?</string>
+    <string name="category_hook">Zaujetí / pozdrav</string>
+    <string name="category_hook_summary">Pro komentovaná zaujetí, která upoutají pozornost diváka (většinou první scéna) nebo popisují události, které později nastanou ve stejném videu nebo budoucích epizodách v sérii</string>
 </resources>
