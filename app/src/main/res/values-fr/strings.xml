@@ -543,4 +543,6 @@
     <string name="did_you_mean">Vouliez-vous dire :</string>
     <string name="showing_results_for">Affichage des résultats pour :</string>
     <string name="delete_playlist_include_vidoes">Supprimer également toutes les vidéos de la playlist ?</string>
+    <string name="category_hook">Crochet/Salutations</string>
+    <string name="category_hook_summary">Pour les éléments narratifs qui captent l\'attention du spectateur (souvent dès la première scène) en suggérant ou en décrivant des événements qui se dérouleront plus tard dans la même vidéo ou dans des épisodes futurs d\'une série</string>
 </resources>
