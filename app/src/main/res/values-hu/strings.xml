@@ -543,5 +543,5 @@
     <string name="showing_results_for">Eredmények megjelenítése ehhez:</string>
     <string name="delete_playlist_include_vidoes">A lejátszási listából is törölje az összes videót?</string>
     <string name="category_hook">Bevezető/Üdvözlés</string>
-    <string name="category_hook_summary">Olyan bevezető, amely felkelti a néző figyelmét, például előreutalással a videó későbbi eseményeire vagy a sorozat következő részeire</string>
+    <string name="category_hook_summary">A néző figyelmét felkeltő narratív csalogatók (gyakran az első jelenetben), amelyek a videó későbbi részéből vagy a sorozat jövőbeli epizódjaiból származó eseményeket mutatnak be vagy írnak le</string>
 </resources>
