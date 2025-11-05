@@ -542,4 +542,6 @@
     <string name="did_you_mean">Bedoelde u:</string>
     <string name="showing_results_for">Resultaten getoond voor:</string>
     <string name="delete_playlist_include_vidoes">Ook alle video\'s uit de afspeel­lĳst verwĳderen?</string>
+    <string name="category_hook_summary">Voor verhaal­lĳnen die de aandacht van de kĳker trekken (vaak als eerste scène) door gebeurtenissen te onthullen of te beschrĳven die later in dezelfde video of toekomstige afleveringen in een serie voorkomen</string>
+    <string name="category_hook">Teaser</string>
 </resources>
