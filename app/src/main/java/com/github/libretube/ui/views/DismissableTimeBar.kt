@@ -19,7 +19,6 @@ open class DismissableTimeBar(
     context: Context,
     attributeSet: AttributeSet? = null
 ): DefaultTimeBar(context, attributeSet) {
-    private var shouldAddListener = false
     var exoPlayer: Player? = null
 
     private val listeners = mutableListOf<OnScrubListener>()
@@ -27,6 +26,7 @@ open class DismissableTimeBar(
     // Drag-only seeking state
     private var initialX: Float = 0f
     private var initialY: Float = 0f
+    private var shouldPlayerSeek: Boolean = true
     private var waitingForDrag: Boolean = false
     private var dragStarted: Boolean = false
     private val touchSlopPx: Int = ViewConfiguration.get(context).scaledTouchSlop
@@ -45,10 +45,7 @@ open class DismissableTimeBar(
                 listeners.forEach { it.onScrubStop(timeBar, position, canceled) }
 
                 if (canceled) return
-                // Ignore if gesture started too far above the bar (keep original behavior)
-                if (initialY <= MINIMUM_ACCEPTED_HEIGHT.dpToPx()) return
-
-                exoPlayer?.seekTo(position)
+                if (shouldPlayerSeek) exoPlayer?.seekTo(position)
             }
         })
     }
@@ -100,6 +97,10 @@ open class DismissableTimeBar(
                 if (dragStarted) {
                     waitingForDrag = false
                     dragStarted = false
+                    shouldPlayerSeek =
+                        event.y > TOUCH_SEEK_LIMIT_ABOVE.dpToPx() &&
+                                event.y < TOUCH_SEEK_LIMIT_BELOW.dpToPx()
+
                     return super.onTouchEvent(event)
                 }
 
@@ -150,6 +151,7 @@ open class DismissableTimeBar(
     }
 
     companion object {
-        private const val MINIMUM_ACCEPTED_HEIGHT = -70f
+        private const val TOUCH_SEEK_LIMIT_ABOVE = -70f
+        private const val TOUCH_SEEK_LIMIT_BELOW = 200f
     }
 }
