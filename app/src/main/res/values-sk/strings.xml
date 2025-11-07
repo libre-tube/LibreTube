@@ -534,7 +534,7 @@
     <string name="playback_pitch_semitone_error_input">Hodnota musí byť medzi -%1$.1f (minimum) a %1$.1f (maximum)</string>
     <string name="gaming">Hry</string>
     <string name="podcasts">Podcasty</string>
-    <string name="trailers">Upútavky</string>
+    <string name="trailers">Ukážky</string>
     <string name="music">Hudba</string>
     <string name="createNewPlaylist">Vytvoriť nový playlist</string>
     <string name="include_timestamp_in_filename">Zahrnúť časovú známku do názvu súboru</string>
@@ -543,4 +543,6 @@
     <string name="did_you_mean">Mysleli ste:</string>
     <string name="showing_results_for">Zobrazovanie výsledkov pre:</string>
     <string name="delete_playlist_include_vidoes">Odstrániť aj všetky videá z playlistu?</string>
+    <string name="category_hook">Upútavky</string>
+    <string name="category_hook_summary">Pre komentované upútavky, ktoré zaujmú diváka (často ako prvá scéna) tým, že naznačujú alebo opisujú udalosti z neskoršej časti toho istého videa alebo budúcich epizód v seriáli</string>
 </resources>

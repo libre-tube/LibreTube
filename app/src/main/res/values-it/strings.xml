@@ -543,4 +543,6 @@
     <string name="did_you_mean">Intendevi:</string>
     <string name="showing_results_for">Mostrando risultati per:</string>
     <string name="delete_playlist_include_vidoes">Eliminare anche tutti i video dalla playlist?</string>
+    <string name="category_hook_summary">Per \"ami\" narrativi che catturano l\'attenzione dello spettatore (spesso come prima scena) anticipando o descrivendo eventi successivi nello stesso video o episodi futuri in una serie</string>
+    <string name="category_hook">Ami/Saluti</string>
 </resources>

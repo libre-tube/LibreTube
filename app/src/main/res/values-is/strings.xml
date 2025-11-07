@@ -487,7 +487,7 @@
     <string name="torchIcon">Trendý kastari</string>
     <string name="system_caption_style">Skýringartextar í stíl kerfis</string>
     <string name="autoplay_playlists_summary">Spila næsta myndskeið í spilunarlistum sjálfvirkt án tillits til valinna stillinga á sjálfvirkri afspilun</string>
-    <string name="category_preview_summary">Fyrir hluta sem útlista væntanlegt efni en án viðbótarupplýsinga. Ef þetta inniheldur myndefni sem einungis birtist hé, þa er þetta væntanlega röng flokkun</string>
+    <string name="category_preview_summary">Fyrir hluta sem útlista væntanlegt efni en án viðbótarupplýsinga. Ef þetta inniheldur myndefni sem einungis birtist hér, þá er þetta væntanlega röng flokkun</string>
     <string name="change_region">Upplýsingar um tilhneigingu virðast ekki vera aðgengilegar á fyrirliggjandi svæði. Veldu eitthvað annað í stillingunum.</string>
     <string name="category_music_offtopic_summary">Eingöngu fyrir tónlistarmyndbönd. Þetta ætti að ná yfir þá hluta myndskeiðs sem ekki eru hlutar opinberra samsetninga. Á endanum ætti myndskeiðið að líkjast sem mest útgáfunni á Spotify eða einhverjum öðrum samsetningum, eða minnka tal eða annað afvegaleiðandi</string>
     <string name="category_highlight_summary">Gæti annað hvort verið auglýstur titill, smámyndin eða áhugaverðasti hluti myndskeiðsins. Þú getur hoppað yfir á þetta með því að pikka á kaflahlutann</string>
@@ -542,4 +542,6 @@
     <string name="delete_playlist_include_vidoes">Einnig eyða öllum myndskeiðum af spilunarlistanum?</string>
     <string name="did_you_mean">Meinaðir þú:</string>
     <string name="showing_results_for">Birti niðurstöður fyrir:</string>
+    <string name="category_hook">Krækja/Kynning</string>
+    <string name="category_hook_summary">Fyrir frásagnarlegar kynningar sem eiga að ná athygli áhorfenda (oftast sem fyrsta senan) með því að lýsa eða gefa í skyn atburði sem gerast síðar í sama myndskeiði eða næstu þáttum í þáttaröð</string>
 </resources>

@@ -542,4 +542,6 @@
     <string name="did_you_mean">Kas sa mõtlesid:</string>
     <string name="showing_results_for">Näitan tulemusi:</string>
     <string name="delete_playlist_include_vidoes">Kas kustutad esitusloendist ka videod?</string>
+    <string name="category_hook">Meelitused või tervitused</string>
+    <string name="category_hook_summary">Jutulõigud, mille eesmärk on kohe esimese asjana juhtida vaataja tähelepanu sellele, mis samas või sama sarja videotes hiljem juhtub</string>
 </resources>

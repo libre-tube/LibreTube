@@ -542,4 +542,6 @@
     <string name="did_you_mean">آیا منظورتان این بود:</string>
     <string name="showing_results_for">نمایش نتیجه‌ها برای:</string>
     <string name="delete_playlist_include_vidoes">همچنین حذف تمامی ویدیوها از سیاههٔ پخش؟</string>
+    <string name="category_hook">قلاب یا خوش‌آمد</string>
+    <string name="category_hook_summary">قلاب‌های روایی برای جلب توجّه بیننده (اغلب صحنهٔ نخست) با لو دادن رویدادهای بعدی همان ویدیو یا ویدیوهای بعدی مجموعه</string>
 </resources>
