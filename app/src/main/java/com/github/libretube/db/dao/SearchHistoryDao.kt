@@ -6,11 +6,15 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.github.libretube.db.obj.SearchHistoryItem
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface SearchHistoryDao {
     @Query("SELECT * FROM searchHistoryItem")
     suspend fun getAll(): List<SearchHistoryItem>
+
+    @Query("SELECT * FROM searchHistoryItem")
+    fun getAllFlow(): Flow<List<SearchHistoryItem>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(searchHistoryItem: SearchHistoryItem)
