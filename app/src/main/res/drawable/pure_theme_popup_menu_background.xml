@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copy of the default Material 3 implementation, but it uses a different background color instead
+     in order to fix the background on LibreTube's "pure" app color themes.
+
+     The default implementation uses ?colorSurface, which does not work for us because it is exactly
+     the same color as the background and thus lacks contrast.
+-->
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid android:color="?colorOnSurfaceInverse"/>
+
+    <corners
+        android:bottomLeftRadius="4dp"
+        android:bottomRightRadius="4dp"
+        android:topLeftRadius="4dp"
+        android:topRightRadius="4dp"/>
+
+    <padding
+        android:bottom="8dp"
+        android:top="8dp"/>
+
+</shape>

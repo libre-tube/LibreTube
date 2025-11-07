@@ -254,7 +254,7 @@
         <item name="android:colorBackground">@android:color/black</item>
         <item name="colorSurface">@android:color/black</item>
         <item name="colorSurfaceContainer">@android:color/black</item>
-        <item name="popupMenuBackground">?colorOnSurfaceInverse</item>
+        <item name="popupMenuBackground">@drawable/pure_theme_popup_menu_background</item>
 
     </style>
 
