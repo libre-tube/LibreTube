@@ -30,10 +30,10 @@ class CommentRepliesViewModel(
         .liveData
         .cachedIn(viewModelScope)
 
-    fun saveToClipboard(context: Context) {
+    fun saveToClipboard(context: Context, reply: Comment) {
         ClipboardHelper.save(
             context,
-            text = comment.commentText.orEmpty().parseAsHtml().toString(),
+            text = reply.commentText.orEmpty().parseAsHtml().toString(),
             notify = true
         )
     }
