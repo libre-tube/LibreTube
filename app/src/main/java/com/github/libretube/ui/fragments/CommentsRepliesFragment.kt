@@ -48,8 +48,8 @@ class CommentsRepliesFragment : Fragment(R.layout.fragment_comments) {
                     bundleOf(IntentData.url to it),
                 )
             },
-            saveToClipboard = {
-                viewModel.saveToClipboard(view.context)
+            saveToClipboard = { replyComment ->
+                viewModel.saveToClipboard(view.context, replyComment)
             },
             navigateToChannel = { comment ->
                 NavigationHelper.navigateChannel(view.context, comment.commentorUrl)
