@@ -19,7 +19,6 @@ import com.github.libretube.api.SubscriptionHelper
 import com.github.libretube.api.obj.Segment
 import com.github.libretube.api.obj.Streams
 import com.github.libretube.constants.IntentData
-import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.db.DatabaseHelper
 import com.github.libretube.enums.PlayerCommand
 import com.github.libretube.enums.SbSkipOptions
@@ -32,7 +31,6 @@ import com.github.libretube.extensions.updateParameters
 import com.github.libretube.helpers.PlayerHelper
 import com.github.libretube.helpers.PlayerHelper.getCurrentSegment
 import com.github.libretube.helpers.PlayerHelper.getSubtitleRoleFlags
-import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.helpers.ProxyHelper
 import com.github.libretube.parcelable.PlayerData
 import com.github.libretube.util.DeArrowUtil
@@ -40,6 +38,8 @@ import com.github.libretube.util.PlayingQueue
 import com.github.libretube.util.YoutubeHlsPlaylistParser
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.cancelAndJoin
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.encodeToString
@@ -69,6 +69,11 @@ open class OnlinePlayerService : AbstractPlayerService() {
     private var autoPlayCountdownEnabled = false
 
     private val scope = CoroutineScope(Dispatchers.IO)
+
+    /*
+    Current job that's loading a new video (the value is null if no video is loading at the moment).
+     */
+    private var fetchVideoInfoJob: Job? = null
 
     private val playerListener = object : Player.Listener {
         override fun onPlaybackStateChanged(playbackState: Int) {
@@ -128,36 +133,44 @@ open class OnlinePlayerService : AbstractPlayerService() {
         val timestampMs = startTimestampSeconds?.times(1000) ?: 0L
         startTimestampSeconds = null
 
-        streams = withContext(Dispatchers.IO) {
-            try {
-                MediaServiceRepository.instance.getStreams(videoId).let {
-                    DeArrowUtil.deArrowStreams(it, videoId)
+        // stop any previous task for loading video info
+        fetchVideoInfoJob?.cancelAndJoin()
+
+        // start loading the video info while keeping a reference to the job
+        // so that it can be canceled once a different video is loaded
+        fetchVideoInfoJob = scope.launch {
+            streams = withContext(Dispatchers.IO) {
+                try {
+                    MediaServiceRepository.instance.getStreams(videoId).let {
+                        DeArrowUtil.deArrowStreams(it, videoId)
+                    }
+                }  catch (e: Exception) {
+                    Log.e(TAG(), e.stackTraceToString())
+                    toastFromMainDispatcher(e.localizedMessage.orEmpty())
+                    return@withContext null
                 }
-            }  catch (e: Exception) {
-                Log.e(TAG(), e.stackTraceToString())
-                toastFromMainDispatcher(e.localizedMessage.orEmpty())
-                return@withContext null
+            } ?: return@launch
+
+            streams?.toStreamItem(videoId)?.let {
+                // save the current stream to the queue
+                PlayingQueue.updateCurrent(it)
+
+                if (!PlayingQueue.hasNext()) {
+                    PlayingQueue.updateQueue(it, playlistId, channelId, streams!!.relatedStreams)
+                }
+
+                // update feed item with newer information, e.g. more up-to-date views
+                SubscriptionHelper.submitFeedItemChange(it.toFeedItem())
             }
-        } ?: return
 
-        streams?.toStreamItem(videoId)?.let {
-            // save the current stream to the queue
-            PlayingQueue.updateCurrent(it)
-
-            if (!PlayingQueue.hasNext()) {
-                PlayingQueue.updateQueue(it, playlistId, channelId, streams!!.relatedStreams)
+            withContext(Dispatchers.Main) {
+                setStreamSource()
+                configurePlayer(timestampMs)
             }
-
-            // update feed item with newer information, e.g. more up-to-date views
-            SubscriptionHelper.submitFeedItemChange(
-                it.toFeedItem()
-            )
         }
 
-        withContext(Dispatchers.Main) {
-            setStreamSource()
-            configurePlayer(timestampMs)
-        }
+        fetchVideoInfoJob?.join()
+        fetchVideoInfoJob = null
     }
 
     private fun configurePlayer(seekToPositionMs: Long) {
