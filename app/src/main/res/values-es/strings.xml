@@ -540,4 +540,6 @@
     <string name="include_timestamp_in_filename">Incluir marca de tiempo en el archivo</string>
     <string name="unsubscribe_snackbar_message">Desuscripción exitosa de %1$s</string>
     <string name="screenshot_saved">Captura de pantalla guardada</string>
+    <string name="delete_playlist_include_vidoes">¿Borrar también todos los videos de la lista de reproducción?</string>
+    <string name="showing_results_for">Mostrando resultados para:</string>
 </resources>
