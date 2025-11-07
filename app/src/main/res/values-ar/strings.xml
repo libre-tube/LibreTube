@@ -75,7 +75,7 @@
     <string name="category_sponsor">راعي</string>
     <string name="music_playlists">قوائم تشغيل موسيقى يوتيوب</string>
     <string name="playlists">قوائم التشغيل</string>
-    <string name="sponsorblock">حاجب الرعاة</string>
+    <string name="sponsorblock">حاجب الاعلانات</string>
     <string name="sponsorblock_summary">يستخدم واجهة برمجة التطبيقات من https://sponsor.ajay.app/</string>
     <string name="segment_skipped">الجزء الذي تم تخطيه</string>
     <string name="category_interaction_summary">عندما يكون هناك تذكير قصير لإبداء الإعجاب أو الاشتراك أو المتابعة في منتصف الفيديو. إذا كان التذكير طويلاً أو متعلقاً بشيء محدد ، فيجب أن يكون ترويجاً ذاتياً</string>
@@ -87,13 +87,13 @@
     <string name="category_selfpromo_summary">على غرار \"الراعي\" باستثناء الترويج غير المدفوع أو الذاتي. يتضمن ذلك أقساما حول البضائع أو التبرعات أو معلومات حول من تعاونوا معه</string>
     <string name="category_interaction">تذكير التفاعل</string>
     <string name="license">الترخيص</string>
-    <string name="color_accent">اللون الثانوي</string>
+    <string name="color_accent">ألوان ديناميكية</string>
     <string name="color_red">أحمر</string>
     <string name="color_blue">أزرق</string>
     <string name="color_yellow">أصفر</string>
     <string name="color_green">أخضر</string>
-    <string name="color_purple">بنفسجي</string>
-    <string name="material_you">المواد أنت</string>
+    <string name="color_purple">وردي</string>
+    <string name="material_you">تطبيق ألوان النظام (Material You)</string>
     <string name="category_sponsor_summary">ترويج مدفوع و إحالات مدفوعة و إعلانات مباشرة. ليس للترويج الذاتي أو الترويج المجاني لأهداف أو منشئي محتوى أو مواقع ويب أو منتجات</string>
     <string name="category_outro">شارة النهاية / أسماء المساهمين في العمل</string>
     <string name="sponsorblock_notifications">الإشعارات</string>
@@ -193,7 +193,7 @@
     <string name="data_saver_mode_summary">تخطي الصور المصغرة والصور الأخرى</string>
     <string name="history_summary">سجل المشاهدة والبحث</string>
     <string name="general">عام</string>
-    <string name="general_summary">التنزيلات وحافظ البطرية</string>
+    <string name="general_summary">التنزيلات &amp; إعدادات متقدمة</string>
     <string name="caption_settings">التسميات التوضيحية</string>
     <string name="playerAudioQuality">جودة الصوت</string>
     <string name="worst_quality">أسوأ</string>
@@ -309,10 +309,10 @@
     <string name="username_email">لا ينصح باستخدام عنوان بريد إلكتروني كاسم مستخدم. هل تريد المتابعة على أي حال ؟</string>
     <string name="pinch_control">التحكم في ايماءة القرص</string>
     <string name="pinch_control_summary">استخدم إيماءة القرص للتكبير / التصغير</string>
-    <string name="theme_monochrome">أضيق الحدود أحادية اللون</string>
+    <string name="theme_monochrome">رمادي</string>
     <string name="play_latest_videos">تشغيل أحدث مقاطع الفيديو</string>
     <string name="nothing_selected">لا شيء محدد!</string>
-    <string name="color_violet">البنفسج</string>
+    <string name="color_violet">بنفسجي</string>
     <string name="failed_fetching_instances">تعذر جلب النُسَخ المتاحة.</string>
     <string name="hide_watched_from_feed">إخفاء مقاطع الفيديو التي تمت مشاهدتها</string>
     <string name="playlistUrl">عنوان URL لقائمة التشغيل</string>
@@ -322,8 +322,8 @@
     <string name="pause">إيقاف مؤقت</string>
     <string name="rewind">الترجيع</string>
     <string name="forward">التقديم</string>
-    <string name="alternative_pip_controls">ضوابط \"صورة داخل صورة\" البديلة</string>
-    <string name="alternative_pip_controls_summary">إظهار الصوت فقط وتخطي ضوابط \"صورة داخل صورة\" بدلاً من التقديم والترجيع</string>
+    <string name="alternative_pip_controls">ضوابط \"الفيديوهات العائمة\" البديلة</string>
+    <string name="alternative_pip_controls_summary">إظهار الصوت فقط وتخطي ضوابط \"الفيديوهات العائمة\" بدلاً من التقديم والترجيع</string>
     <string name="audio_only_mode">وضع الصوت فقط</string>
     <string name="audio_only_mode_summary">حول LibreTube إلى مشغل موسيقى</string>
     <string name="no_subtitle">لا توجد ترجمة</string>
@@ -425,7 +425,7 @@
     <string name="player_channel_description">يُظهر اشعار عند التشغيل</string>
     <string name="tooltip_locked">قفل المشغل</string>
     <string name="tooltip_unlocked">الغاء قفل المشغل</string>
-    <string name="tooltip_sponsorblock">تمكين حاجب الرعاة</string>
+    <string name="tooltip_sponsorblock">تمكين حاجب الاعلانات</string>
     <string name="tooltip_options">الخيارات</string>
     <string name="tooltip_minimize">تصغير</string>
     <string name="tooltip_fullscreen">شاشة الكاملة</string>
@@ -450,8 +450,8 @@
     <string name="sb_create_segment">إنشاء مقطع</string>
     <string name="segment_type">نوع المقطع</string>
     <string name="sb_invalid_segment">بداية المقطع أو نهايته غير صالحة</string>
-    <string name="contribute_to_sponsorblock">المساهمة في حاجب الرعاة</string>
-    <string name="sponsorblock_user_id">معرف مستخدم حاجب الرعاة</string>
+    <string name="contribute_to_sponsorblock">المساهمة في حاجب الاعلانات</string>
+    <string name="sponsorblock_user_id">كمعرف مستخدم حاجب الاعلانات</string>
     <string name="donate">التبرع</string>
     <string name="music_artists">YT الموسيقى: الفنانين</string>
     <string name="no_fullscreen_resolution">لا توجد دقة لملء الشاشة</string>
@@ -508,7 +508,7 @@
     <string name="external_download_provider">مزود التحميل الخارجي</string>
     <string name="external_download_provider_summary">أدخل اسم حزمة التطبيق الذي تريد استخدامه لتنزيل مقاطع الفيديو. اتركه فارغًا لاستخدام أداة التنزيل المدمجة في LibreTube.</string>
     <string name="screenshot">لقطة شاشة</string>
-    <string name="pip">صورة داخل صورة</string>
+    <string name="pip">فيديو عائم</string>
     <string name="local_stream_extraction_summary">جلب معلومات تشغيل الفيديو مباشرة من YouTube دون استخدام Piped.</string>
     <string name="local_stream_extraction">استخراج البث المحلي</string>
     <string name="local_ryd">مستخرج عدم الإعجاب للإرجاع المحلي على يوتيوب</string>
