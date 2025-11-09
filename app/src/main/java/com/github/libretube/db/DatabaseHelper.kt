@@ -105,13 +105,15 @@ object DatabaseHelper {
         return unfinished xor isVideoWatched(watchHistoryItem.videoId, watchHistoryItem.duration ?: 0)
     }
 
-    suspend fun filterByStatusAndWatchPosition(
+    suspend fun filterByStreamTypeAndWatchPosition(
         streams: List<StreamItem>,
-        hideWatched: Boolean
+        hideWatched: Boolean,
+        showUpcoming: Boolean
     ): List<StreamItem> {
         val streamItems = streams.filter {
-            val isVideo = !it.isShort && !it.isLive
+            if (!showUpcoming && it.isUpcoming) return@filter false
 
+            val isVideo = !it.isShort && !it.isLive
             return@filter when {
                 !ContentFilter.SHORTS.isEnabled && it.isShort -> false
                 !ContentFilter.VIDEOS.isEnabled && isVideo -> false

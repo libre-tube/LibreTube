@@ -17,7 +17,6 @@ import com.github.libretube.api.obj.StreamItem
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.constants.PreferenceKeys.HOME_TAB_CONTENT
 import com.github.libretube.databinding.FragmentHomeBinding
-import com.github.libretube.db.DatabaseHelper
 import com.github.libretube.db.obj.PlaylistBookmark
 import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.ui.activities.SettingsActivity
@@ -32,7 +31,6 @@ import com.google.android.material.carousel.CarouselSnapHelper
 import com.google.android.material.carousel.UncontainedCarouselStrategy
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
-import kotlinx.coroutines.runBlocking
 
 
 class HomeFragment : Fragment(R.layout.fragment_home) {
@@ -211,10 +209,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         if (streamItems == null) return
 
         makeVisible(binding.featuredRV, binding.featuredTV)
-        val hideWatched = PreferenceHelper.getBoolean(PreferenceKeys.HIDE_WATCHED_FROM_FEED, false)
-        val feedVideos = streamItems
-            .let { runBlocking { DatabaseHelper.filterByStatusAndWatchPosition(it, hideWatched) } }
-            .take(20)
+        val feedVideos = streamItems.take(20)
 
         feedAdapter.submitList(feedVideos)
     }

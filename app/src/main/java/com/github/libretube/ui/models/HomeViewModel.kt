@@ -11,11 +11,9 @@ import com.github.libretube.api.TrendingCategory
 import com.github.libretube.api.obj.Playlists
 import com.github.libretube.api.obj.StreamItem
 import com.github.libretube.constants.PreferenceKeys
-import com.github.libretube.constants.PreferenceKeys.HIDE_WATCHED_FROM_FEED
 import com.github.libretube.db.DatabaseHelper
 import com.github.libretube.db.DatabaseHolder
 import com.github.libretube.db.obj.PlaylistBookmark
-import com.github.libretube.enums.ContentFilter
 import com.github.libretube.extensions.runSafely
 import com.github.libretube.extensions.updateIfChanged
 import com.github.libretube.helpers.PlayerHelper
@@ -29,7 +27,8 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class HomeViewModel : ViewModel() {
-    private val hideWatched get() = PreferenceHelper.getBoolean(HIDE_WATCHED_FROM_FEED, false)
+    private val hideWatched get() = PreferenceHelper.getBoolean(PreferenceKeys.HIDE_WATCHED_FROM_FEED, false)
+    private val showUpcoming get() = PreferenceHelper.getBoolean(PreferenceKeys.SHOW_UPCOMING_IN_FEED, true)
 
     val trending: MutableLiveData<Pair<TrendingCategory, TrendsViewModel.TrendingStreams>> =
         MutableLiveData(null)
@@ -138,18 +137,7 @@ class HomeViewModel : ViewModel() {
         val feed = SubscriptionHelper.getFeed(forceRefresh = false)
         subscriptionsViewModel.videoFeed.postValue(feed)
 
-        return if (hideWatched) feed.filterWatched() else feed
-    }
-
-    private suspend fun List<StreamItem>.filterWatched(): List<StreamItem> {
-        val allowShorts = ContentFilter.SHORTS.isEnabled
-        val allowVideos = ContentFilter.VIDEOS.isEnabled
-        val allowAll = (!allowShorts && !allowVideos)
-
-        val filteredFeed = this.filter {
-            allowAll || (allowShorts && it.isShort) || (allowVideos && !it.isShort)
-        }
-        return DatabaseHelper.filterUnwatched(filteredFeed)
+        return DatabaseHelper.filterByStreamTypeAndWatchPosition(feed, hideWatched, showUpcoming)
     }
 
     companion object {

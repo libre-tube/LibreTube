@@ -214,7 +214,9 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment(R.layout.fragment_sub
     private suspend fun playByGroup(groupIndex: Int) {
         val streams = viewModel.videoFeed.value.orEmpty()
             .filterByGroup(groupIndex)
-            .let { DatabaseHelper.filterByStatusAndWatchPosition(it, hideWatched) }
+            .let {
+                DatabaseHelper.filterByStreamTypeAndWatchPosition(it, hideWatched, showUpcoming)
+            }
             .sortedBySelectedOrder()
 
         if (streams.isEmpty()) return
@@ -286,9 +288,8 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment(R.layout.fragment_sub
 
         val feed = videoFeed
             .filterByGroup(selectedFilterGroup)
-            .filter { showUpcoming || !it.isUpcoming }
             .let {
-                DatabaseHelper.filterByStatusAndWatchPosition(it, hideWatched)
+                DatabaseHelper.filterByStreamTypeAndWatchPosition(it, hideWatched, showUpcoming)
             }
 
         val sortedFeed = feed
