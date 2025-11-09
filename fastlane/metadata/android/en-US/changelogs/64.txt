@@ -1,0 +1,7 @@
+* fix: shared url not being retrieved properly
+* fix: sorting queue displays wrong current video
+* fix(TimeBar): listener not being properly removed causing them to accumulate
+* fix: copying reply text to clipboard copies comment text
+* fix: popup menu (three dots) background in pure theme
+* fix: ugly race-condition when starting to load two videos at the same time
+* fix: featured content section on home page doesn't respect all feed filters
