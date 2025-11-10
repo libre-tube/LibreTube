@@ -180,8 +180,8 @@
     <string name="never">أبداً</string>
     <string name="autoRotatePlayer">ملء الشاشة تلقائيا</string>
     <string name="autoRotatePlayer_summary">التشغيل بملء الشاشة عند تدوير الجهاز</string>
-    <string name="pure_theme">نسق نقي</string>
-    <string name="pure_theme_summary">نسق أبيض/أسود نقي</string>
+    <string name="pure_theme">أمولید ديناميكي</string>
+    <string name="pure_theme_summary">أسود نقي</string>
     <string name="data_saver_mode">وضع توفير البيانات</string>
     <string name="search_history_summary">تذكر عمليات البحث</string>
     <string name="watch_history_summary">تتبع مقاطع الفيديو التي تمت مشاهدتها محليا</string>
@@ -201,7 +201,7 @@
     <string name="notifications">الإشعارات</string>
     <string name="notify_new_streams">عرض إشعارات لأحداث البث الجديدة</string>
     <string name="notify_new_streams_summary">إشعارات حول المحتوى الجديد من منشئي المحتوى الذين تتابعهم</string>
-    <string name="checking_frequency">تحقق من كل…</string>
+    <string name="checking_frequency">تحقق من الإشعارات كل</string>
     <string name="irreversible">هل أنت متأكد؟ هذا لا يمكن التراجع عنه!</string>
     <string name="history_empty">لا يوجد سجل حتى الان.</string>
     <string name="most_recent">الأحدث</string>
