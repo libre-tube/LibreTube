@@ -3,6 +3,7 @@ package com.github.libretube.repo
 import android.util.Log
 import com.github.libretube.api.SubscriptionHelper
 import com.github.libretube.api.obj.StreamItem
+import com.github.libretube.api.obj.Subscription
 import com.github.libretube.api.toStreamItem
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.db.DatabaseHolder
@@ -95,10 +96,10 @@ class LocalFeedRepository : FeedRepository {
                 channelExtractionCount.set(0)
             }
 
-            val collectedFeedItems = channelIdChunk.parallelMap { channelId ->
+            val (channels, collectedFeedItems) = channelIdChunk.parallelMap { channelId ->
                 try {
                     getRelatedStreams(channelId, minimumDateMillis).also {
-                        if (it.isNotEmpty())
+                        if (it.second.isNotEmpty())
                             // increase counter if we had to fully fetch the channel
                             channelExtractionCount.incrementAndGet()
                     }
@@ -110,23 +111,26 @@ class LocalFeedRepository : FeedRepository {
                         onProgressUpdate(FeedProgress(totalExtractionCount.incrementAndGet(), channelIds.size))
                     }
                 }
-            }.filterNotNull().flatten().map(StreamItem::toFeedItem)
+            }.filterNotNull().unzip()
 
-            DatabaseHolder.Database.feedDao().insertAll(collectedFeedItems)
+            // update subscriptions channels in case they've changed (e.g. different avatar or name)
+            SubscriptionHelper.submitSubscriptionChannelInfosChanged(channels.filterNotNull())
+            DatabaseHolder.Database.feedDao()
+                .insertAll(collectedFeedItems.flatten().map(StreamItem::toFeedItem))
         }
     }
 
     private suspend fun getRelatedStreams(
         channelId: String,
         minimumDateMillis: Long
-    ): List<StreamItem> {
+    ): Pair<Subscription?, List<StreamItem>> {
         val channelUrl = "$YOUTUBE_FRONTEND_URL/channel/${channelId}"
         val feedInfo = FeedInfo.getInfo(channelUrl)
         val feedInfoItems = feedInfo.relatedItems.associateBy { it.url }
 
         val mostRecentChannelVideo = feedInfo.relatedItems.maxBy {
             it.uploadDate?.offsetDateTime()?.toInstant()?.toEpochMilli() ?: 0
-        } ?: return emptyList()
+        } ?: return Pair(null, emptyList())
 
         // check if the channel has at least one video whose upload time is newer than the maximum
         // feed ago and which is not yet stored in the database
@@ -135,9 +139,12 @@ class LocalFeedRepository : FeedRepository {
         val hasNewerUploads =
             mostRecentUploadTime > minimumDateMillis && !DatabaseHolder.Database.feedDao()
                 .contains(mostRecentChannelVideo.url.toID())
-        if (!hasNewerUploads) return emptyList()
+        if (!hasNewerUploads) return Pair(null, emptyList())
 
         val channelInfo = ChannelInfo.getInfo(channelUrl)
+        val channelAvatar = channelInfo.avatars.maxByOrNull { it.height }?.url
+        val subscription =
+            Subscription(channelId, channelInfo.name, channelAvatar, channelInfo.isVerified)
 
         val relevantInfoTabs = channelInfo.tabs.filter { tab ->
             relevantTabs.any { tab.contentFilters.contains(it) }
@@ -156,8 +163,7 @@ class LocalFeedRepository : FeedRepository {
                 )
             }
 
-        val channelAvatar = channelInfo.avatars.maxByOrNull { it.height }?.url
-        return related.map { item ->
+        val streamItems = related.map { item ->
             // avatar is not always included in these info items, thus must be taken from channel info response
             item.toStreamItem(
                 channelAvatar,
@@ -165,6 +171,7 @@ class LocalFeedRepository : FeedRepository {
                 feedInfoItems[item.url]
             )
         }.filter { it.uploaded > minimumDateMillis }
+        return Pair(subscription, streamItems)
     }
 
     companion object {

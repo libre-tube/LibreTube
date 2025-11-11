@@ -1,5 +1,6 @@
 package com.github.libretube.api
 
+import com.github.libretube.api.obj.Subscription
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.db.obj.SubscriptionsFeedItem
 import com.github.libretube.helpers.PreferenceHelper
@@ -57,4 +58,7 @@ object SubscriptionHelper {
 
     suspend fun submitFeedItemChange(feedItem: SubscriptionsFeedItem) =
         feedRepository.submitFeedItemChange(feedItem)
+
+    suspend fun submitSubscriptionChannelInfosChanged(subscriptions: List<Subscription>) =
+        subscriptionsRepository.submitSubscriptionChannelInfosChanged(subscriptions)
 }
