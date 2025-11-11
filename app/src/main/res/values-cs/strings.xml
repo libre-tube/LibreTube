@@ -545,4 +545,11 @@
     <string name="delete_playlist_include_vidoes">Odstranit také všechna videa z playlistu?</string>
     <string name="category_hook">Upoutávky</string>
     <string name="category_hook_summary">Pro komentované upoutávky, které zaujmou diváka (většinou první scéna) nebo popisují události, které později nastanou ve stejném videu nebo budoucích epizodách v sérii</string>
+    <string name="checking_frequency_15_minutes">15 minut</string>
+    <string name="checking_frequency_30_minutes">30 minut</string>
+    <string name="checking_frequency_60_minutes">60 minut</string>
+    <string name="checking_frequency_2_hours">2 hodiny</string>
+    <string name="checking_frequency_6_hours">6 hodin</string>
+    <string name="checking_frequency_12_hours">12 hodin</string>
+    <string name="checking_frequency_1_day">1 den</string>
 </resources>
