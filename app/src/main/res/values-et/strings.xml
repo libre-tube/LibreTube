@@ -544,4 +544,11 @@
     <string name="delete_playlist_include_vidoes">Kas kustutad esitusloendist ka videod?</string>
     <string name="category_hook">Meelitused või tervitused</string>
     <string name="category_hook_summary">Jutulõigud, mille eesmärk on kohe esimese asjana juhtida vaataja tähelepanu sellele, mis samas või sama sarja videotes hiljem juhtub</string>
+    <string name="checking_frequency_15_minutes">15 minutit</string>
+    <string name="checking_frequency_30_minutes">30 minutit</string>
+    <string name="checking_frequency_60_minutes">60 minutit</string>
+    <string name="checking_frequency_2_hours">2 tundi</string>
+    <string name="checking_frequency_6_hours">6 tundi</string>
+    <string name="checking_frequency_12_hours">12 tundi</string>
+    <string name="checking_frequency_1_day">1 päev</string>
 </resources>
