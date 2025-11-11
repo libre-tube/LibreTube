@@ -145,13 +145,13 @@
     </string-array>
 
     <string-array name="checkingFrequency">
-        <item>15 minutes</item>
-        <item>30 minutes</item>
-        <item>60 minutes</item>
-        <item>2 hours</item>
-        <item>6 hours</item>
-        <item>12 hours</item>
-        <item>1 day</item>
+        <item>@string/checking_frequency_15_minutes</item>
+        <item>@string/checking_frequency_30_minutes</item>
+        <item>@string/checking_frequency_60_minutes</item>
+        <item>@string/checking_frequency_2_hours</item>
+        <item>@string/checking_frequency_6_hours</item>
+        <item>@string/checking_frequency_12_hours</item>
+        <item>@string/checking_frequency_1_day</item>
     </string-array>
 
     <string-array name="checkingFrequencyValues">
