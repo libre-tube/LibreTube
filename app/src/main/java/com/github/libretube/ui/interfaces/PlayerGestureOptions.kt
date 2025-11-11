@@ -2,7 +2,7 @@ package com.github.libretube.ui.interfaces
 
 interface PlayerGestureOptions {
 
-    fun onSingleTap()
+    fun onSingleTap(areControlsLocked: Boolean)
 
     fun onDoubleTapCenterScreen()
 

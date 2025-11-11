@@ -75,12 +75,10 @@ import com.github.libretube.extensions.updateIfChanged
 import com.github.libretube.helpers.BackgroundHelper
 import com.github.libretube.helpers.DownloadHelper
 import com.github.libretube.helpers.ImageHelper
-import com.github.libretube.helpers.IntentHelper
 import com.github.libretube.helpers.NavBarHelper
 import com.github.libretube.helpers.NavigationHelper
 import com.github.libretube.helpers.PlayerHelper
 import com.github.libretube.helpers.PlayerHelper.getCurrentSegment
-import com.github.libretube.helpers.ProxyHelper
 import com.github.libretube.helpers.ThemeHelper
 import com.github.libretube.helpers.WindowHelper
 import com.github.libretube.obj.ShareData
@@ -630,6 +628,7 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
                 if (_binding == null) return
 
                 if (currentId == transitionStartId) {
+                    binding.player.isEnabled = true
                     commonPlayerViewModel.isMiniPlayerVisible.value = false
                     // re-enable captions
                     updateCurrentSubtitle(viewModel.currentSubtitle)
@@ -643,6 +642,8 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
                         if (anyChildFocused()) clearFocus()
                     }
                 } else if (currentId == transitionEndId) {
+                    // prevent player view from receiving touch events temporarily
+                    binding.player.isEnabled = false
                     commonPlayerViewModel.isMiniPlayerVisible.value = true
                     // disable captions temporarily
                     updateCurrentSubtitle(null)
@@ -660,12 +661,6 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
         })
 
         binding.playerMotionLayout
-            .addSwipeUpListener {
-                if (this::streams.isInitialized && PlayerHelper.fullscreenGesturesEnabled) {
-                    binding.player.hideController()
-                    setFullscreen()
-                }
-            }
             .addSwipeDownListener {
                 if (commonPlayerViewModel.isMiniPlayerVisible.value == true) {
                     closeMiniPlayer()
@@ -896,12 +891,13 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
     }
 
     /**
-     * Enable or disable fullscreen depending on the current state
+     * Enter/exit fullscreen or toggle it depending on the current state
      */
-    fun toggleFullscreen() {
+    fun toggleFullscreen(isFullscreen: Boolean? = null) {
         binding.player.hideController()
 
-        if (commonPlayerViewModel.isFullscreen.value == false) {
+        val enterFullscreen = isFullscreen?: (commonPlayerViewModel.isFullscreen.value == false)
+        if (enterFullscreen) {
             // go to fullscreen mode
             setFullscreen()
         } else {
