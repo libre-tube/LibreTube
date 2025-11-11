@@ -542,4 +542,11 @@
     <string name="did_you_mean">Bunu mu demek istediniz:</string>
     <string name="showing_results_for">Sonuçlar gösteriliyor:</string>
     <string name="delete_playlist_include_vidoes">Oynatma listesindeki tüm videolar da silinsin mi?</string>
+    <string name="checking_frequency_15_minutes">15 dakika</string>
+    <string name="checking_frequency_30_minutes">30 dakika</string>
+    <string name="checking_frequency_60_minutes">60 dakika</string>
+    <string name="checking_frequency_2_hours">2 saat</string>
+    <string name="checking_frequency_6_hours">6 saat</string>
+    <string name="checking_frequency_12_hours">12 saat</string>
+    <string name="checking_frequency_1_day">1 gün</string>
 </resources>
