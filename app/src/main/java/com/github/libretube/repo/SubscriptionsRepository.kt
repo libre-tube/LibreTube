@@ -9,4 +9,5 @@ interface SubscriptionsRepository {
     suspend fun importSubscriptions(newChannels: List<String>)
     suspend fun getSubscriptions(): List<Subscription>
     suspend fun getSubscriptionChannelIds(): List<String>
+    suspend fun submitSubscriptionChannelInfosChanged(subscriptions: List<Subscription>) {}
 }
