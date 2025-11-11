@@ -237,6 +237,13 @@
     <string name="show_stream_thumbnails">Show stream thumbnails</string>
     <string name="show_stream_thumbnails_summary">Show the thumbnails of new streams. Enabling this will consume additional data</string>
     <string name="checking_frequency">Checking every …</string>
+    <string name="checking_frequency_15_minutes">15 minutes</string>
+    <string name="checking_frequency_30_minutes">30 minutes</string>
+    <string name="checking_frequency_60_minutes">60 minutes</string>
+    <string name="checking_frequency_2_hours">2 hours</string>
+    <string name="checking_frequency_6_hours">6 hours</string>
+    <string name="checking_frequency_12_hours">12 hours</string>
+    <string name="checking_frequency_1_day">1 day</string>
     <string name="irreversible">Are you sure? This can\'t be undone!</string>
     <string name="history_empty">No history yet.</string>
     <string name="most_recent">Newest</string>
