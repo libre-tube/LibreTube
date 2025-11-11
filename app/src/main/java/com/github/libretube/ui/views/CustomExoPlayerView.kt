@@ -131,8 +131,9 @@ abstract class CustomExoPlayerView(
     private val supportFragmentManager
         get() = activity.supportFragmentManager
 
-    private fun toggleController() {
-        if (isControllerFullyVisible) hideController() else showController()
+    private fun toggleController(show: Boolean? = null) {
+        val isShow = show?: !isControllerFullyVisible
+        if (isShow) showController() else hideController()
     }
 
     fun initialize(chaptersViewModel: ChaptersViewModel) {
@@ -391,8 +392,6 @@ abstract class CustomExoPlayerView(
         super.showController()
     }
 
-    override fun onTouchEvent(event: MotionEvent) = false
-
     private fun initRewindAndForward() {
         val seekIncrementText = (PlayerHelper.seekIncrement / 1000).toString()
         listOf(
@@ -495,7 +494,7 @@ abstract class CustomExoPlayerView(
         )
 
         // disable tap and swipe gesture if the player is locked
-        playerGestureController.isEnabled = isLocked
+        playerGestureController.areControlsLocked = !isLocked
     }
 
     private fun rewind() {
@@ -768,7 +767,12 @@ abstract class CustomExoPlayerView(
         }
     }
 
-    override fun onSingleTap() {
+    override fun onSingleTap(areControlsLocked: Boolean) {
+        if (areControlsLocked) {
+            // keep showing the 'locked' icon
+            toggleController(true)
+            return
+        }
         toggleController()
     }
 
@@ -810,10 +814,14 @@ abstract class CustomExoPlayerView(
         if (!PlayerHelper.fullscreenGesturesEnabled) return
 
         if (isControllerFullyVisible) hideController()
-        if (distanceY >= 0) return
-
-        playerGestureController.isMoving = false
-        minimizeOrExitPlayer()
+        if (distanceY >= 0) { // swipe up
+            if (!isFullscreen()) {
+                togglePlayerFullscreen(true)
+                return
+            }
+        }
+        // swipe down
+        else minimizeOrExitPlayer()
     }
 
     override fun onSwipeEnd() {
@@ -898,16 +906,20 @@ abstract class CustomExoPlayerView(
             }
 
             KeyEvent.KEYCODE_F -> {
-                val fragmentManager =
-                    ContextHelper.unwrapActivity<MainActivity>(context).supportFragmentManager
-                fragmentManager.fragments.filterIsInstance<PlayerFragment>().firstOrNull()
-                    ?.toggleFullscreen()
+                togglePlayerFullscreen()
             }
 
             else -> return false
         }
 
         return true
+    }
+
+    fun togglePlayerFullscreen(isFullscreen: Boolean? = null){
+        val fragmentManager =
+            ContextHelper.unwrapActivity<MainActivity>(context).supportFragmentManager
+        fragmentManager.fragments.filterIsInstance<PlayerFragment>().firstOrNull()
+            ?.toggleFullscreen(isFullscreen)
     }
 
     override fun getViewMeasures(): Pair<Int, Int> {

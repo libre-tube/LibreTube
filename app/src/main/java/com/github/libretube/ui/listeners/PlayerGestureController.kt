@@ -10,33 +10,32 @@ import android.view.GestureDetector
 import android.view.MotionEvent
 import android.view.ScaleGestureDetector
 import android.view.View
+import android.view.ViewConfiguration
 import androidx.activity.viewModels
-import androidx.core.os.postDelayed
-import com.github.libretube.helpers.PlayerHelper
 import com.github.libretube.ui.base.BaseActivity
 import com.github.libretube.ui.interfaces.PlayerGestureOptions
 import com.github.libretube.ui.models.CommonPlayerViewModel
 import kotlin.math.abs
 
-class PlayerGestureController(activity: BaseActivity, private val listener: PlayerGestureOptions) :
-    View.OnTouchListener {
+class PlayerGestureController(
+    activity: BaseActivity, private val listener: PlayerGestureOptions
+) : View.OnTouchListener {
 
     private val orientation get() = Resources.getSystem().configuration.orientation
-    private val elapsedTime get() = SystemClock.elapsedRealtime()
 
     private val commonPlayerViewModel: CommonPlayerViewModel by activity.viewModels()
     private val handler = Handler(Looper.getMainLooper())
 
     private val gestureDetector: GestureDetector
     private val scaleGestureDetector: ScaleGestureDetector
+    private val doubleTapSlop = ViewConfiguration.get(activity).scaledDoubleTapSlop
 
     private var isFullscreen = false
-    var isMoving = false
-    var isEnabled = true
+    private var scaleGestureWasInProgress = false
+    private var isMoving = false
+    private var isReadyToDetectGesture = true
 
-    // Indicates last touch event was for click or other gesture, used to avoid single click
-    // by runnable when scroll or pinch gesture already completed.
-    var wasClick = true
+    var areControlsLocked = false
 
     init {
         gestureDetector = GestureDetector(activity, GestureListener(), handler)
@@ -50,32 +49,61 @@ class PlayerGestureController(activity: BaseActivity, private val listener: Play
 
     @SuppressLint("ClickableViewAccessibility")
     override fun onTouch(v: View, event: MotionEvent): Boolean {
-        if (event.action == MotionEvent.ACTION_UP && isMoving) {
-            isMoving = false
-            listener.onSwipeEnd()
+        when(event.action){
+            MotionEvent.ACTION_DOWN -> {
+                isReadyToDetectGesture = true
+                scaleGestureWasInProgress = false
+
+                // ignore touches to the top of the player when in landscape mode
+                val (_, height) = listener.getViewMeasures()
+                if (event.y < height * 0.1f && orientation == Configuration.ORIENTATION_LANDSCAPE) {
+                    isReadyToDetectGesture = false
+                    return false
+                }
+
+                // notify on tap down that the player controls are currently locked
+                if (areControlsLocked) listener.onSingleTap(true)
+            }
+
+            MotionEvent.ACTION_MOVE -> {
+                if (!scaleGestureWasInProgress && scaleGestureDetector.isInProgress) {
+                    scaleGestureWasInProgress = true
+
+                    // scale gesture is triggered, cancel any other ongoing gesture detections
+                    MotionEvent.obtain(
+                        SystemClock.uptimeMillis(),
+                        SystemClock.uptimeMillis(),
+                        MotionEvent.ACTION_CANCEL,
+                        event.x,
+                        event.y,
+                        event.metaState
+                    ).also { cancelEvent ->
+                        gestureDetector.onTouchEvent(cancelEvent)
+                        cancelEvent.recycle()
+                    }
+                }
+            }
+
+            MotionEvent.ACTION_CANCEL, MotionEvent.ACTION_UP -> {
+                isMoving = false
+                listener.onSwipeEnd()
+            }
         }
 
-        val (_, height) = listener.getViewMeasures()
-        // ignore touches to the top of the player when in landscape mode
-        if (event.y < height * 0.1 && orientation == Configuration.ORIENTATION_LANDSCAPE) return false
-
-        // Event can be already consumed by some view which may lead to NPE.
-        try {
+        if (isReadyToDetectGesture && !areControlsLocked) {
             scaleGestureDetector.onTouchEvent(event)
-            gestureDetector.onTouchEvent(event)
-        } catch (_: Exception) {
+            if (!scaleGestureWasInProgress) gestureDetector.onTouchEvent(event)
         }
 
-        // If video is playing in full-screen mode, then allow `onScroll` to consume
-        // event and return true.
-        return isFullscreen
+        // always consume this event to prevent it being passed further to the
+        // receiver's onTouchEvent()
+        return true
     }
 
     private inner class ScaleGestureListener : ScaleGestureDetector.OnScaleGestureListener {
         var scaleFactor = 1f
 
         override fun onScale(detector: ScaleGestureDetector): Boolean {
-            wasClick = false
             scaleFactor *= detector.scaleFactor
             return true
         }
@@ -94,41 +122,44 @@ class PlayerGestureController(activity: BaseActivity, private val listener: Play
     }
 
     private inner class GestureListener : GestureDetector.SimpleOnGestureListener() {
-        private var lastClick = 0L
-        private var lastDoubleClick = 0L
+        private var touchGestureDownX = 0f
+        private var touchGestureDownY = 0f
 
         override fun onDown(e: MotionEvent): Boolean {
-            // Initially assume this event is for click
-            wasClick = true
+            touchGestureDownX = e.x
+            touchGestureDownY = e.y
 
-            if (isMoving || scaleGestureDetector.isInProgress) return false
+            return true
+        }
 
-            if (!PlayerHelper.doubleTapToSeek) {
-                listener.onSingleTap()
-                return true
+        override fun onDoubleTapEvent(e: MotionEvent): Boolean {
+            when(e.action){
+                MotionEvent.ACTION_UP -> {
+                    if (
+                        abs(e.y - touchGestureDownY) > doubleTapSlop ||
+                        abs(e.x - touchGestureDownX) > doubleTapSlop
+                    ) {
+                        // not considered a double tap
+                        return false
+                    }
+
+                    val (width, _) = listener.getViewMeasures()
+                    val eventPositionPercentageX = e.x / width
+
+                    when {
+                        eventPositionPercentageX < 0.4 -> listener.onDoubleTapLeftScreen()
+                        eventPositionPercentageX > 0.6 -> listener.onDoubleTapRightScreen()
+                        else -> listener.onDoubleTapCenterScreen()
+                    }
+                }
             }
 
-            val (width, _) = listener.getViewMeasures()
-            if (isEnabled && isSecondClick()) {
-                handler.removeCallbacksAndMessages(SINGLE_TAP_TOKEN)
-                lastDoubleClick = elapsedTime
-                val eventPositionPercentageX = e.x / width
+            return true
+        }
 
-                when {
-                    eventPositionPercentageX < 0.4 -> listener.onDoubleTapLeftScreen()
-                    eventPositionPercentageX > 0.6 -> listener.onDoubleTapRightScreen()
-                    else -> listener.onDoubleTapCenterScreen()
-                }
-            } else {
-                if (recentDoubleClick()) return true
-                handler.removeCallbacksAndMessages(SINGLE_TAP_TOKEN)
-                handler.postDelayed(MAX_TIME_DIFF, SINGLE_TAP_TOKEN) {
-                    // If the last event was for scroll or pinch then avoid single tap call
-                    if (!wasClick || isSecondClick()) return@postDelayed
-                    listener.onSingleTap()
-                }
-                lastClick = elapsedTime
-            }
+        override fun onSingleTapConfirmed(e: MotionEvent): Boolean {
+            listener.onSingleTap(false)
+
             return true
         }
 
@@ -138,8 +169,6 @@ class PlayerGestureController(activity: BaseActivity, private val listener: Play
             distanceX: Float,
             distanceY: Float
         ): Boolean {
-            if (!isEnabled || scaleGestureDetector.isInProgress) return false
-
             val (width, height) = listener.getViewMeasures()
             val insideThreshHold = abs(e2.y - e1!!.y) <= MOVEMENT_THRESHOLD
             val insideBorder =
@@ -151,29 +180,18 @@ class PlayerGestureController(activity: BaseActivity, private val listener: Play
             }
 
             isMoving = true
-            wasClick = false
 
             when {
-                e1.x < width * 0.4 -> listener.onSwipeLeftScreen(distanceY)
-                e1.x > width * 0.6 -> listener.onSwipeRightScreen(distanceY)
+                e1.x < width * 0.4 -> if (isFullscreen) listener.onSwipeLeftScreen(distanceY)
+                e1.x > width * 0.6 -> if (isFullscreen) listener.onSwipeRightScreen(distanceY)
                 else -> listener.onSwipeCenterScreen(distanceY)
             }
+
             return true
-        }
-
-        private fun isSecondClick(): Boolean {
-            return elapsedTime - lastClick < MAX_TIME_DIFF
-        }
-
-        private fun recentDoubleClick(): Boolean {
-            return elapsedTime - lastDoubleClick < MAX_TIME_DIFF / 2
         }
     }
 
     companion object {
-        private const val SINGLE_TAP_TOKEN = "singleTap"
-
-        private const val MAX_TIME_DIFF = 400L
         private const val MOVEMENT_THRESHOLD = 30
         private const val BORDER_THRESHOLD = 90
     }
