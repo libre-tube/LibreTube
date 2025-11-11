@@ -544,4 +544,11 @@
     <string name="delete_playlist_include_vidoes">A lejátszási listából is törölje az összes videót?</string>
     <string name="category_hook">Bevezető/Üdvözlés</string>
     <string name="category_hook_summary">A néző figyelmét felkeltő narratív csalogatók (gyakran az első jelenetben), amelyek a videó későbbi részéből vagy a sorozat jövőbeli epizódjaiból származó eseményeket mutatnak be vagy írnak le</string>
+    <string name="checking_frequency_15_minutes">15 perc</string>
+    <string name="checking_frequency_30_minutes">30 perc</string>
+    <string name="checking_frequency_60_minutes">60 perc</string>
+    <string name="checking_frequency_2_hours">2 óra</string>
+    <string name="checking_frequency_6_hours">6 óra</string>
+    <string name="checking_frequency_12_hours">12 óra</string>
+    <string name="checking_frequency_1_day">1 nap</string>
 </resources>
