@@ -147,8 +147,8 @@ class PlayerGestureController(
                     val eventPositionPercentageX = e.x / width
 
                     when {
-                        eventPositionPercentageX < 0.4 -> listener.onDoubleTapLeftScreen()
-                        eventPositionPercentageX > 0.6 -> listener.onDoubleTapRightScreen()
+                        eventPositionPercentageX < 0.35 -> listener.onDoubleTapLeftScreen()
+                        eventPositionPercentageX > 0.65 -> listener.onDoubleTapRightScreen()
                         else -> listener.onDoubleTapCenterScreen()
                     }
                 }
@@ -182,8 +182,8 @@ class PlayerGestureController(
             isMoving = true
 
             when {
-                e1.x < width * 0.4 -> if (isFullscreen) listener.onSwipeLeftScreen(distanceY)
-                e1.x > width * 0.6 -> if (isFullscreen) listener.onSwipeRightScreen(distanceY)
+                e1.x < width * 0.35 -> if (isFullscreen) listener.onSwipeLeftScreen(distanceY)
+                e1.x > width * 0.65 -> if (isFullscreen) listener.onSwipeRightScreen(distanceY)
                 else -> listener.onSwipeCenterScreen(distanceY)
             }
 
