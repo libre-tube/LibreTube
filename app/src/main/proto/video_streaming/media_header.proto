@@ -8,7 +8,7 @@ message MediaHeader {
   optional uint32 header_id = 1;
   optional string video_id = 2;
   optional int32 itag = 3;
-  optional uint64 lmt = 4;
+  optional uint64 last_modified = 4;
   optional string xtags = 5;
   optional int64 start_range = 6;
   optional .misc.CompressionType compression_algorithm = 7;
