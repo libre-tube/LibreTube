@@ -18,11 +18,13 @@ import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.RequestBody.Companion.toRequestBody
+import video_streaming.BufferedRangeOuterClass.BufferedRange
 import video_streaming.ClientAbrStateOuterClass.ClientAbrState
 import video_streaming.FormatInitializationMetadataOuterClass.FormatInitializationMetadata
 import video_streaming.MediaHeaderOuterClass.MediaHeader
 import video_streaming.NextRequestPolicyOuterClass.NextRequestPolicy
 import video_streaming.PlaybackCookieOuterClass.PlaybackCookie
+import video_streaming.ReloadPlayerResponse.ReloadPlaybackContext
 import video_streaming.SabrContextSendingPolicyOuterClass.SabrContextSendingPolicy
 import video_streaming.SabrContextUpdateOuterClass.SabrContextUpdate
 import video_streaming.SabrContextUpdateOuterClass.SabrContextUpdate.SabrContextWritePolicy
@@ -77,6 +79,8 @@ private data class InitializedFormat(
     val id: FormatId,
     /** Segments that have been downloaded for this format. */
     val downloadedSegments: MutableMap<Long, Segment> = mutableMapOf(),
+    /** Segments that have been downloaded for this format. */
+    val bufferedSegments: MutableMap<Long, Segment> = mutableMapOf(),
     /** Sequence number of the last segment in the format. */
     val endSegmentNumber: Long,
     /** Sequence number for the last segment that has been successfully downloaded. */
@@ -101,6 +105,24 @@ private data class InitializedFormat(
         }
         return segments
     }
+
+    /** Returns a list of all downloaded segments for the format. */
+    fun buildBufferedRanges(): List<BufferedRange> = bufferedSegments.entries.sortedBy { it.key }
+        .fold(mutableListOf<MutableList<Pair<Long, Segment>>>()) { acc, (id, segment) ->
+            val previousId = acc.lastOrNull()?.lastOrNull()?.first
+            if (previousId == null || previousId + 1 != id) {
+                //we found a discontinuity, create a new partition
+                acc.add(mutableListOf());
+            }
+            acc.lastOrNull()!!.add(Pair(id, segment))
+            acc
+        }.map { partition ->
+            val duration = partition.sumOf { it.second.duration }
+            val (firstId, firstSegment) = partition.first()
+            BufferedRange.newBuilder().setFormatId(id).setStartTimeMs(firstSegment.header.startMs)
+                .setDurationMs(duration).setStartSegmentIndex(firstId.toInt())
+                .setEndSegmentIndex(partition.last().first.toInt()).build()
+        }
 
     /**
      * Whether the format has non-retrieved data.
@@ -310,6 +332,7 @@ object SabrClient {
             .addAllPreferredAudioFormatIds(listOf(audioFormat.formatId()))
             .addAllPreferredVideoFormatIds(videoFormat?.let { listOf(it.formatId()) } ?: emptyList())
             .addAllSelectedFormatIds(initializedFormats.map { it.value.id }.toList())
+            .addAllBufferedRanges(initializedFormats.values.flatMap { it.buildBufferedRanges() })
             .setStreamerContext(
                 StreamerContext.newBuilder().setPoToken(poToken?: ByteString.empty())
                     .setClientInfo(
