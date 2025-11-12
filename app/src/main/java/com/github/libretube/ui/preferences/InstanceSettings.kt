@@ -17,7 +17,6 @@ import com.github.libretube.api.obj.PipedInstance
 import com.github.libretube.constants.IntentData
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.databinding.SimpleOptionsRecyclerBinding
-import com.github.libretube.extensions.toastFromMainThread
 import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.ui.adapters.InstancesAdapter
 import com.github.libretube.ui.base.BasePreferenceFragment
@@ -47,17 +46,11 @@ class InstanceSettings : BasePreferenceFragment() {
         )!!
         val authInstance = findPreference<ListPreference>(PreferenceKeys.AUTH_INSTANCE)!!
         val instancePrefs = listOf(instancePref, authInstance)
-        val appContext = requireContext().applicationContext
 
         lifecycleScope.launch {
-            customInstancesModel.fetchCustomInstances {
-                appContext.toastFromMainThread(it.message.orEmpty())
-            }
-        }
-
-        lifecycleScope.launch {
-            customInstancesModel.instances.collect { updatedInstances ->
-                instances = updatedInstances
+            customInstancesModel.customInstances.collect { updatedInstances ->
+                instances =
+                    updatedInstances.map { PipedInstance(it.name, it.apiUrl) }.toMutableList()
                 // update the instances to also show custom ones
                 initInstancesPref(instancePrefs)
             }

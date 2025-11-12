@@ -7,14 +7,12 @@ import androidx.annotation.StringRes
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProvider.AndroidViewModelFactory.Companion.APPLICATION_KEY
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.createSavedStateHandle
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import com.github.libretube.R
-import com.github.libretube.api.InstanceRepository
 import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.api.obj.PipedInstance
 import com.github.libretube.constants.PreferenceKeys
@@ -25,27 +23,11 @@ import kotlinx.coroutines.launch
 import kotlinx.parcelize.Parcelize
 
 class WelcomeViewModel(
-    private val instanceRepository: InstanceRepository,
     private val savedStateHandle: SavedStateHandle,
 ) : ViewModel() {
 
     private val _uiState = savedStateHandle.getStateFlow(UI_STATE, UiState())
     val uiState = _uiState.asLiveData()
-
-    init {
-        viewModelScope.launch {
-            instanceRepository.getInstances()
-                .onSuccess { instances ->
-                    savedStateHandle[UI_STATE] = _uiState.value.copy(instances = instances)
-                }
-                .onFailure {
-                    savedStateHandle[UI_STATE] = _uiState.value.copy(
-                        instances = instanceRepository.getInstancesFallback(),
-                        error = R.string.failed_fetching_instances,
-                    )
-                }
-        }
-    }
 
     fun setFullLocalModeEnabled(enabled: Boolean) {
         savedStateHandle[UI_STATE] = _uiState.value.copy(fullLocalMode = enabled)
@@ -116,7 +98,6 @@ class WelcomeViewModel(
         val Factory: ViewModelProvider.Factory = viewModelFactory {
             initializer {
                 WelcomeViewModel(
-                    instanceRepository = InstanceRepository(),
                     savedStateHandle = createSavedStateHandle(),
                 )
             }
