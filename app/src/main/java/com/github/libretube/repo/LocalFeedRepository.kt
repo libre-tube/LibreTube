@@ -41,6 +41,10 @@ class LocalFeedRepository : FeedRepository {
         DatabaseHolder.Database.feedDao().update(feedItem)
     }
 
+    override suspend fun removeChannel(channelId: String) {
+        DatabaseHolder.Database.feedDao().delete(channelId)
+    }
+
     override suspend fun getFeed(
         forceRefresh: Boolean,
         onProgressUpdate: (FeedProgress) -> Unit
@@ -49,11 +53,6 @@ class LocalFeedRepository : FeedRepository {
         val minimumDateMillis = nowMillis - Duration.ofDays(MAX_FEED_AGE_DAYS).toMillis()
 
         val channelIds = SubscriptionHelper.getSubscriptionChannelIds()
-        // remove videos from channels that are no longer subscribed
-        DatabaseHolder.Database.feedDao().deleteAllExcept(
-            // TODO: the /channel/ prefix is allowed for compatibility reasons and will be removed in the future
-            channelIds + channelIds.map { id -> "/channel/${id}" }
-        )
 
         if (!forceRefresh) {
             val feed = DatabaseHolder.Database.feedDao().getAll()
