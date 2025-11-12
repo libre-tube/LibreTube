@@ -319,7 +319,7 @@
     <string name="system_caption_style">سبک نوشتهٔ سامانه</string>
     <string name="show_stream_thumbnails">نمایش بندانگشتی‌های جریان</string>
     <string name="download_channel_description">هنگام بارگیری رسانه یک اعلان نشان می دهد.</string>
-    <string name="show_stream_thumbnails_summary">نمایش بندانگشتی‌های جریان‌های جدید. به کار اندختنش موحب مصرف دادهٔ بیش‌تر خواهد شد</string>
+    <string name="show_stream_thumbnails_summary">نمایش بندانگشتی‌های جریان‌های جدید. به کار انداختنش دادهٔ بیش‌تری مصرف خواهد کرد</string>
     <string name="no_subtitles_available">زیرنویس موجود نیست</string>
     <string name="new_videos_badge_summary">در صورت وجود، نشانی با تعداد ویدیوهای جدید نشان دهید</string>
     <string name="time_code">کد زمان (ثانیه)</string>
@@ -544,4 +544,11 @@
     <string name="delete_playlist_include_vidoes">همچنین حذف تمامی ویدیوها از سیاههٔ پخش؟</string>
     <string name="category_hook">قلاب یا خوش‌آمد</string>
     <string name="category_hook_summary">قلاب‌های روایی برای جلب توجّه بیننده (اغلب صحنهٔ نخست) با لو دادن رویدادهای بعدی همان ویدیو یا ویدیوهای بعدی مجموعه</string>
+    <string name="checking_frequency_1_day">۱ روز</string>
+    <string name="checking_frequency_15_minutes">۱۵ دقیقه</string>
+    <string name="checking_frequency_30_minutes">۳۰ دقیقه</string>
+    <string name="checking_frequency_60_minutes">۶۰ دقیقه</string>
+    <string name="checking_frequency_2_hours">۲ ساعت</string>
+    <string name="checking_frequency_6_hours">۶ ساعت</string>
+    <string name="checking_frequency_12_hours">۱۲ ساعت</string>
 </resources>
