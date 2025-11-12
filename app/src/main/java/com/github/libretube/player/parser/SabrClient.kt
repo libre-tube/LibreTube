@@ -258,7 +258,6 @@ object SabrClient {
         val parser = UmpParser(data)
         while (true) {
             val part = parser.readPart() ?: break
-            Log.v(TAG, "media: Parsing ${part.type}")
             processPart(part)
         }
         assert(parser.data().isEmpty()) { "Parser has left-over data" }
@@ -516,7 +515,9 @@ object SabrClient {
                 throw Exception("SABR error: ${error.type}")
             }
 
-            else -> {}
+            else -> {
+                Log.w(TAG, "processPart: Unhandled UMP part ${part.type}")
+            }
         }
     }
 
