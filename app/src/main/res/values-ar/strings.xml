@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="instances">إختر…</string>
+    <string name="instances">إختر خادم Piped</string>
     <string name="customInstance">مخصص</string>
     <string name="registered">تم إنشاء حساب. تستطيع الآن الاشتراك بالقنوات.</string>
     <string name="search_hint">بحث</string>
@@ -351,7 +351,7 @@
     <string name="subscriberAndVideoCounts">مشتركون %1$s • فيديوهات %2$d</string>
     <string name="uploaderAndVideoCount">%1$s • %2$d مقاطع فيديو</string>
     <string name="disable_proxy">تعطيل وكيل Piped</string>
-    <string name="disable_proxy_summary">تجهيز الفيديو والصور بشكل مباشر من خوادم يوتيوب . تمكين هذا الخيار فقط إذا كنت تستخدم الشبكات الافتراضية الخاصة (VPN) بشكل دائم</string>
+    <string name="disable_proxy_summary">تحميل الفيديو والصور بشكل مباشر من خوادم يوتيوب قم بتمكين هذا الخيار فقط إذا كنت تستخدم الشبكات الافتراضية الخاصة (VPN) بشكل دائم</string>
     <string name="auto_fullscreen_shorts">ملء الشاشة تلقائيًا على مقاطع الفيديو القصيرة</string>
     <string name="new_group">جديد</string>
     <string name="group_name">أسم المجموعة</string>
@@ -509,9 +509,9 @@
     <string name="external_download_provider_summary">أدخل اسم حزمة التطبيق الذي تريد استخدامه لتنزيل مقاطع الفيديو. اتركه فارغًا لاستخدام أداة التنزيل المدمجة في LibreTube.</string>
     <string name="screenshot">لقطة شاشة</string>
     <string name="pip">فيديو عائم</string>
-    <string name="local_stream_extraction_summary">جلب معلومات تشغيل الفيديو مباشرة من YouTube دون استخدام Piped.</string>
+    <string name="local_stream_extraction_summary">جلب معلومات تشغيل الفيديو مباشرة من YouTube دون استخدام Piped</string>
     <string name="local_stream_extraction">استخراج البث المحلي</string>
-    <string name="local_ryd">مستخرج عدم الإعجاب للإرجاع المحلي على يوتيوب</string>
+    <string name="local_ryd">مستخرج بيانات عدم الإعجاب من يوتيوب باستخدام RYD</string>
     <string name="local_ryd_summary">جلب معلومات عدم الإعجاب مباشرة من https://returnyoutubedislikeapi.com</string>
     <string name="import_watch_history">استيراد سجل المشاهدة</string>
     <string name="audio_codecs">مرمازات الصوت</string>
@@ -525,14 +525,14 @@
     <string name="export_playlist">صدّر قائمة التشغيل</string>
     <string name="import_format_list_of_urls">قائمة عناوين URL أو معرّفات الفيديو</string>
     <string name="local_feed_extraction">استخراج موجز المحلية</string>
-    <string name="local_feed_extraction_summary">قم بجلب الخلاصة مباشرةً من YouTube. قد يكون هذا أبطأ بشكل ملحوظ.</string>
+    <string name="local_feed_extraction_summary">قم بجلب الخلاصة مباشرةً من YouTube قد يكون هذا أبطأ بشكل ملحوظ</string>
     <string name="update_information">تحديث المعلومات</string>
     <string name="never_show_again">لا تعرض هذا مجدداً</string>
     <string name="show_upcoming_videos">أظهِر الفيديوهات القادمة</string>
     <string name="full_local_mode">وضع الإتصال المحلي</string>
     <string name="authentication">المصادقة</string>
     <string name="mode_of_operation">طريقة التشغيل</string>
-    <string name="full_local_mode_desc">جلب كل شيء مباشرة من YouTube، دون استخدام Piped.</string>
+    <string name="full_local_mode_desc">جلب كل شيء مباشرة من YouTube دون استخدام Piped</string>
     <string name="updating_feed">تحديث التغذية …</string>
     <string name="playback_pitch_semitone_error_input">يجب أن تتراوح القيمة بين -%1$.1f (الحد الأدنى) و%1$.1f (الحد الأقصى)</string>
     <string name="gaming">لعب</string>
