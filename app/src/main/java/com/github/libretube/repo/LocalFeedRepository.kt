@@ -63,8 +63,7 @@ class LocalFeedRepository : FeedRepository {
             val lastRefreshMillis =
                 PreferenceHelper.getLong(PreferenceKeys.LAST_LOCAL_FEED_REFRESH_TIMESTAMP_MILLIS, 0)
             if (feed.isNotEmpty() && lastRefreshMillis > oneDayAgo) {
-                return DatabaseHolder.Database.feedDao().getAll()
-                    .map(SubscriptionsFeedItem::toStreamItem)
+                return feed.map(SubscriptionsFeedItem::toStreamItem)
             }
         }
 
