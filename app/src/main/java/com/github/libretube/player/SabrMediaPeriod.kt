@@ -25,7 +25,6 @@ import androidx.media3.exoplayer.trackselection.ExoTrackSelection
 import androidx.media3.exoplayer.upstream.Allocator
 import androidx.media3.exoplayer.upstream.CmcdConfiguration
 import androidx.media3.exoplayer.upstream.LoadErrorHandlingPolicy
-import com.github.libretube.api.poToken.PoTokenGenerator
 import com.github.libretube.player.manifest.AdaptationSet
 import com.github.libretube.player.manifest.Representation
 import com.github.libretube.player.manifest.SabrManifest
