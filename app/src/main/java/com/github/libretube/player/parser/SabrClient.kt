@@ -1,6 +1,5 @@
 package com.github.libretube.player.parser
 
-import android.util.Base64
 import android.util.Log
 import androidx.annotation.OptIn
 import androidx.media3.common.MimeTypes
@@ -13,7 +12,6 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
 import misc.Common.FormatId
-import misc.Common.XTags
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import okhttp3.Request
@@ -312,15 +310,14 @@ object SabrClient {
             backoffTime = null
         }
 
-        val xtags = XTags.parseFrom(Base64.decode(audioFormat.formatId()!!.xtags, Base64.URL_SAFE))
-        val isDrcAudio = xtags.xtagsList.any { tag -> tag.key == "drc" && tag.value == "1" }
+        val xtags = Xtags(audioFormat.formatId().xtags)
 
         val clientState = ClientAbrState.newBuilder()
             .setPlayerTimeMs(playerTime)
             .setEnabledTrackTypesBitfield(if (videoFormat == null) 1 else 0)
             .setPlaybackRate(1.0f)
             .setAudioTrackId(audioFormat.stream.audioTrackId ?: "")
-            .setDrcEnabled(audioFormat.stream.isDrc ?: false || isDrcAudio)
+            .setDrcEnabled(audioFormat.stream.isDrc ?: false || xtags.isDrcAudio())
             .setClientViewportIsFlexible(false)
             .setVisibility(1)
             .build()
