@@ -324,15 +324,15 @@ object SabrClient {
             .build()
 
         val playbackRequest = VideoPlaybackAbrRequest.newBuilder().setClientAbrState(clientState)
-            .addAllSelectedFormatIds(
-                initializedFormats.values.map { it.id }.toList()
-            ).setVideoPlaybackUstreamerConfig(ustreamerConfig)
+            .addAllSelectedFormatIds(initializedFormats.values.map { it.id }.toList())
+            .setVideoPlaybackUstreamerConfig(ustreamerConfig)
             .addAllPreferredAudioFormatIds(listOf(audioFormat.formatId()))
-            .addAllPreferredVideoFormatIds(videoFormat?.let { listOf(it.formatId()) } ?: emptyList())
+            .addAllPreferredVideoFormatIds(listOfNotNull(videoFormat?.formatId()))
             .addAllSelectedFormatIds(initializedFormats.map { it.value.id }.toList())
             .addAllBufferedRanges(initializedFormats.values.flatMap { it.buildBufferedRanges() })
             .setStreamerContext(
-                StreamerContext.newBuilder().setPoToken(poToken?: ByteString.empty())
+                StreamerContext.newBuilder()
+                    .setPoToken(poToken ?: ByteString.empty())
                     .setClientInfo(
                         StreamerContext.ClientInfo.newBuilder()
                             .setClientName(1)

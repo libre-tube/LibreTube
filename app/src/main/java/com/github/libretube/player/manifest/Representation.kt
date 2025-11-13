@@ -7,7 +7,7 @@ import misc.Common.FormatId
 
 /** A Sabr representation.  */
 @UnstableApi
-class Representation(
+data class Representation(
     /** The format of the representation.  */
     val format: Format,
     val itag: Int,
@@ -15,6 +15,7 @@ class Representation(
     val xtags: String? = null,
     val stream: PipedStream,
 ) {
-    fun formatId(): FormatId? =
-        FormatId.newBuilder().setItag(itag).setLastModified(lastModified).setXtags(xtags ?: "").build()
+    fun formatId(): FormatId =
+        FormatId.newBuilder().setItag(itag).setLastModified(lastModified).setXtags(xtags ?: "")
+            .build()
 }
