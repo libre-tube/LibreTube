@@ -318,6 +318,7 @@ object SabrClient {
             .setPlaybackRate(1.0f)
             .setAudioTrackId(audioFormat.stream.audioTrackId ?: "")
             .setDrcEnabled(audioFormat.stream.isDrc ?: false || xtags.isDrcAudio())
+            .setEnableVoiceBoost(xtags.isVoiceBoosted())
             .setClientViewportIsFlexible(false)
             .setVisibility(1)
             .build()

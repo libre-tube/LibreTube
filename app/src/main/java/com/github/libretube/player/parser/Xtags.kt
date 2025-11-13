@@ -15,4 +15,6 @@ class Xtags {
     }
 
     fun isDrcAudio() = enabledFeatures.contains("drc")
+
+    fun isVoiceBoosted() = enabledFeatures.contains("vb")
 }
