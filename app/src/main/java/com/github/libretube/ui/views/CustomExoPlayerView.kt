@@ -10,6 +10,7 @@ import android.os.Handler
 import android.os.Looper
 import android.text.format.DateUtils
 import android.util.AttributeSet
+import android.util.Log
 import android.view.KeyEvent
 import android.view.MotionEvent
 import android.view.Window
@@ -26,6 +27,7 @@ import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
 import androidx.core.view.marginStart
 import androidx.core.view.updateLayoutParams
+import androidx.fragment.app.findFragment
 import androidx.lifecycle.findViewTreeLifecycleOwner
 import androidx.media3.common.C
 import androidx.media3.common.Player
@@ -52,12 +54,10 @@ import com.github.libretube.extensions.togglePlayPauseState
 import com.github.libretube.extensions.updateIfChanged
 import com.github.libretube.helpers.AudioHelper
 import com.github.libretube.helpers.BrightnessHelper
-import com.github.libretube.helpers.ContextHelper
 import com.github.libretube.helpers.PlayerHelper
 import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.helpers.WindowHelper
 import com.github.libretube.obj.BottomSheetItem
-import com.github.libretube.ui.activities.MainActivity
 import com.github.libretube.ui.base.BaseActivity
 import com.github.libretube.ui.extensions.toggleSystemBars
 import com.github.libretube.ui.fragments.PlayerFragment
@@ -916,10 +916,11 @@ abstract class CustomExoPlayerView(
     }
 
     fun togglePlayerFullscreen(isFullscreen: Boolean? = null){
-        val fragmentManager =
-            ContextHelper.unwrapActivity<MainActivity>(context).supportFragmentManager
-        fragmentManager.fragments.filterIsInstance<PlayerFragment>().firstOrNull()
-            ?.toggleFullscreen(isFullscreen)
+        try {
+            findFragment<PlayerFragment>().toggleFullscreen(isFullscreen)
+        } catch (error: IllegalStateException) {
+            Log.e(this::class.simpleName, error.message.toString())
+        }
     }
 
     override fun getViewMeasures(): Pair<Int, Int> {
