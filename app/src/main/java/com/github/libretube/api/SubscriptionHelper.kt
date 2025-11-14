@@ -24,7 +24,7 @@ object SubscriptionHelper {
     private val localFeedExtraction
         get() = PreferenceHelper.getBoolean(
             PreferenceKeys.LOCAL_FEED_EXTRACTION,
-            false
+            true
         )
     private val token get() = PreferenceHelper.getToken()
     private val subscriptionsRepository: SubscriptionsRepository
