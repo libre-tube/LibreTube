@@ -177,11 +177,13 @@ class InstanceSettings : BasePreferenceFragment() {
         MaterialAlertDialogBuilder(requireContext())
             .setTitle(preference.title)
             .setView(binding.root)
+            .setNeutralButton(R.string.addInstance) { _, _ ->
+                CreateCustomInstanceDialog().show(childFragmentManager, null)
+            }
             .setPositiveButton(R.string.okay) { _, _ ->
                 preference.value = selectedInstance
                 resetForNewInstance()
             }
-            .setNegativeButton(R.string.cancel, null)
             .show()
     }
 
