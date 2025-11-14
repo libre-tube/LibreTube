@@ -1,7 +1,6 @@
 package com.github.libretube.ui.views
 
 import android.annotation.SuppressLint
-import android.app.Activity
 import android.content.Context
 import android.content.pm.ActivityInfo
 import android.content.res.Configuration
@@ -137,13 +136,13 @@ abstract class CustomExoPlayerView(
     }
 
     init {
-        this.playerGestureController = PlayerGestureController(context as BaseActivity, this)
+        playerGestureController = PlayerGestureController(activity, this)
+        brightnessHelper = BrightnessHelper(activity)
+        audioHelper = AudioHelper(context)
     }
 
     fun initialize(chaptersViewModel: ChaptersViewModel) {
         this.chaptersViewModel = chaptersViewModel
-        this.brightnessHelper = BrightnessHelper(context as Activity)
-        this.audioHelper = AudioHelper(context)
 
         initializeGestureProgress()
 
