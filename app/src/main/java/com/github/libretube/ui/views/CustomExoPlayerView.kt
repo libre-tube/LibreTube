@@ -136,14 +136,15 @@ abstract class CustomExoPlayerView(
         if (isShow) showController() else hideController()
     }
 
+    init {
+        this.playerGestureController = PlayerGestureController(context as BaseActivity, this)
+    }
+
     fun initialize(chaptersViewModel: ChaptersViewModel) {
         this.chaptersViewModel = chaptersViewModel
-        this.playerGestureController = PlayerGestureController(context as BaseActivity, this)
         this.brightnessHelper = BrightnessHelper(context as Activity)
         this.audioHelper = AudioHelper(context)
 
-        // Set touch listener for tap and swipe gestures.
-        setOnTouchListener(playerGestureController)
         initializeGestureProgress()
 
         initRewindAndForward()
@@ -881,6 +882,13 @@ abstract class CustomExoPlayerView(
             enqueueHideControllerTask()
         }
         return super.onInterceptTouchEvent(ev)
+    }
+
+    override fun onTouchEvent(event: MotionEvent?): Boolean {
+        if (event == null) return false
+        if (!useController) return false
+
+        return playerGestureController.onTouchEvent(event)
     }
 
     fun onKeyBoardAction(keyCode: Int): Boolean {

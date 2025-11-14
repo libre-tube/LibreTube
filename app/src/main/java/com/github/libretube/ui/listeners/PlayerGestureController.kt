@@ -1,6 +1,5 @@
 package com.github.libretube.ui.listeners
 
-import android.annotation.SuppressLint
 import android.content.res.Configuration
 import android.content.res.Resources
 import android.os.Handler
@@ -9,7 +8,6 @@ import android.os.SystemClock
 import android.view.GestureDetector
 import android.view.MotionEvent
 import android.view.ScaleGestureDetector
-import android.view.View
 import android.view.ViewConfiguration
 import androidx.activity.viewModels
 import com.github.libretube.ui.base.BaseActivity
@@ -17,9 +15,7 @@ import com.github.libretube.ui.interfaces.PlayerGestureOptions
 import com.github.libretube.ui.models.CommonPlayerViewModel
 import kotlin.math.abs
 
-class PlayerGestureController(
-    activity: BaseActivity, private val listener: PlayerGestureOptions
-) : View.OnTouchListener {
+class PlayerGestureController(activity: BaseActivity, private val listener: PlayerGestureOptions) {
 
     private val orientation get() = Resources.getSystem().configuration.orientation
 
@@ -33,7 +29,6 @@ class PlayerGestureController(
     private var isFullscreen = false
     private var scaleGestureWasInProgress = false
     private var isMoving = false
-    private var isReadyToDetectGesture = true
 
     var areControlsLocked = false
 
@@ -47,22 +42,25 @@ class PlayerGestureController(
         }
     }
 
-    @SuppressLint("ClickableViewAccessibility")
-    override fun onTouch(v: View, event: MotionEvent): Boolean {
+    fun onTouchEvent(event: MotionEvent): Boolean {
         when(event.action){
             MotionEvent.ACTION_DOWN -> {
-                isReadyToDetectGesture = true
                 scaleGestureWasInProgress = false
 
-                // ignore touches to the top of the player when in landscape mode
                 val (_, height) = listener.getViewMeasures()
                 if (event.y < height * 0.1f && orientation == Configuration.ORIENTATION_LANDSCAPE) {
-                    isReadyToDetectGesture = false
+                    // when in landscape mode, don't consume this event if touch down area is at the
+                    // top of the player
                     return false
                 }
 
-                // notify on tap down that the player controls are currently locked
-                if (areControlsLocked) listener.onSingleTap(true)
+                if (areControlsLocked) {
+                    // notify the listener that the player controls are currently locked
+                    listener.onSingleTap(true)
+
+                    // controls locked, no need to consume this event
+                    return false
+                }
             }
 
             MotionEvent.ACTION_MOVE -> {
@@ -90,13 +88,9 @@ class PlayerGestureController(
             }
         }
 
-        if (isReadyToDetectGesture && !areControlsLocked) {
-            scaleGestureDetector.onTouchEvent(event)
-            if (!scaleGestureWasInProgress) gestureDetector.onTouchEvent(event)
-        }
+        scaleGestureDetector.onTouchEvent(event)
+        if (!scaleGestureWasInProgress) gestureDetector.onTouchEvent(event)
 
-        // always consume this event to prevent it being passed further to the
-        // receiver's onTouchEvent()
         return true
     }
 
