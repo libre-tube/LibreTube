@@ -628,7 +628,6 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
                 if (_binding == null) return
 
                 if (currentId == transitionStartId) {
-                    binding.player.isEnabled = true
                     commonPlayerViewModel.isMiniPlayerVisible.value = false
                     // re-enable captions
                     updateCurrentSubtitle(viewModel.currentSubtitle)
@@ -642,8 +641,6 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
                         if (anyChildFocused()) clearFocus()
                     }
                 } else if (currentId == transitionEndId) {
-                    // prevent player view from receiving touch events temporarily
-                    binding.player.isEnabled = false
                     commonPlayerViewModel.isMiniPlayerVisible.value = true
                     // disable captions temporarily
                     updateCurrentSubtitle(null)
