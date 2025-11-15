@@ -130,9 +130,8 @@ abstract class CustomExoPlayerView(
     private val supportFragmentManager
         get() = activity.supportFragmentManager
 
-    private fun toggleController(show: Boolean? = null) {
-        val isShow = show?: !isControllerFullyVisible
-        if (isShow) showController() else hideController()
+    private fun toggleController(show: Boolean = !isControllerFullyVisible) {
+        if (show) showController() else hideController()
     }
 
     init {
@@ -922,7 +921,7 @@ abstract class CustomExoPlayerView(
         return true
     }
 
-    fun togglePlayerFullscreen(isFullscreen: Boolean? = null){
+    fun togglePlayerFullscreen(isFullscreen: Boolean = !isFullscreen()){
         try {
             findFragment<PlayerFragment>().toggleFullscreen(isFullscreen)
         } catch (error: IllegalStateException) {
