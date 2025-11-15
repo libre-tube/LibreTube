@@ -544,4 +544,11 @@
     <string name="delete_playlist_include_vidoes">Auch alle Videos aus der Playlist löschen?</string>
     <string name="category_hook_summary">Narrative Hooks, welche die Aufmerksamkeit der Zuschauenden auf sich ziehen (oft als erste Szene), indem sie Ereignisse aus späteren Teilen des Videos oder zukünftigen Episoden einer Serie andeuten oder beschreiben</string>
     <string name="category_hook">Hooks/Begrüßungen</string>
+    <string name="checking_frequency_15_minutes">15 Minuten</string>
+    <string name="checking_frequency_30_minutes">30 Minuten</string>
+    <string name="checking_frequency_60_minutes">60 Minuten</string>
+    <string name="checking_frequency_2_hours">2 Stunden</string>
+    <string name="checking_frequency_6_hours">6 Stunden</string>
+    <string name="checking_frequency_12_hours">12 Stunden</string>
+    <string name="checking_frequency_1_day">1 Tag</string>
 </resources>
