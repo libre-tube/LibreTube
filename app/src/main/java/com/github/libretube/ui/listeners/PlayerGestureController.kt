@@ -141,8 +141,14 @@ class PlayerGestureController(activity: BaseActivity, private val listener: Play
                     val eventPositionPercentageX = e.x / width
 
                     when {
-                        eventPositionPercentageX < 0.35 -> listener.onDoubleTapLeftScreen()
-                        eventPositionPercentageX > 0.65 -> listener.onDoubleTapRightScreen()
+                        eventPositionPercentageX < LEFT_AREA_VIEW_PERCENTAGE -> {
+                            listener.onDoubleTapLeftScreen()
+                        }
+
+                        eventPositionPercentageX > RIGHT_AREA_VIEW_PERCENTAGE -> {
+                            listener.onDoubleTapRightScreen()
+                        }
+
                         else -> listener.onDoubleTapCenterScreen()
                     }
                 }
@@ -176,8 +182,8 @@ class PlayerGestureController(activity: BaseActivity, private val listener: Play
             isMoving = true
 
             when {
-                e1.x < width * 0.35 -> if (isFullscreen) listener.onSwipeLeftScreen(distanceY)
-                e1.x > width * 0.65 -> if (isFullscreen) listener.onSwipeRightScreen(distanceY)
+                e1.x < width * LEFT_AREA_VIEW_PERCENTAGE -> if (isFullscreen) listener.onSwipeLeftScreen(distanceY)
+                e1.x > width * RIGHT_AREA_VIEW_PERCENTAGE -> if (isFullscreen) listener.onSwipeRightScreen(distanceY)
                 else -> listener.onSwipeCenterScreen(distanceY)
             }
 
@@ -188,5 +194,7 @@ class PlayerGestureController(activity: BaseActivity, private val listener: Play
     companion object {
         private const val MOVEMENT_THRESHOLD = 30
         private const val BORDER_THRESHOLD = 90
+        private const val LEFT_AREA_VIEW_PERCENTAGE = 0.35f
+        private const val RIGHT_AREA_VIEW_PERCENTAGE = 0.65f
     }
 }
