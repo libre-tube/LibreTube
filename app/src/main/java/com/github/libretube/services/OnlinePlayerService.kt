@@ -11,15 +11,24 @@ import androidx.media3.common.MediaItem.SubtitleConfiguration
 import androidx.media3.common.MimeTypes
 import androidx.media3.common.Player
 import androidx.media3.datasource.DefaultDataSource
+import androidx.media3.datasource.FileDataSource
 import androidx.media3.exoplayer.hls.HlsMediaSource
+import androidx.media3.exoplayer.source.MediaSource
+import androidx.media3.exoplayer.source.MergingMediaSource
+import androidx.media3.exoplayer.source.ProgressiveMediaSource
+import androidx.media3.exoplayer.source.SingleSampleMediaSource
 import com.github.libretube.R
 import com.github.libretube.api.JsonHelper
 import com.github.libretube.api.MediaServiceRepository
 import com.github.libretube.api.SubscriptionHelper
 import com.github.libretube.api.obj.Segment
 import com.github.libretube.api.obj.Streams
+import com.github.libretube.api.obj.StreamItem
 import com.github.libretube.constants.IntentData
 import com.github.libretube.db.DatabaseHelper
+import com.github.libretube.db.DatabaseHolder.Database
+import com.github.libretube.db.obj.DownloadWithItems
+import com.github.libretube.enums.FileType
 import com.github.libretube.enums.PlayerCommand
 import com.github.libretube.enums.SbSkipOptions
 import com.github.libretube.extensions.TAG
@@ -28,6 +37,9 @@ import com.github.libretube.extensions.setMetadata
 import com.github.libretube.extensions.toastFromMainDispatcher
 import com.github.libretube.extensions.toastFromMainThread
 import com.github.libretube.extensions.updateParameters
+import com.github.libretube.extensions.serializable
+import com.github.libretube.extensions.setMetadata
+import com.github.libretube.extensions.toAndroidUri
 import com.github.libretube.helpers.PlayerHelper
 import com.github.libretube.helpers.PlayerHelper.getCurrentSegment
 import com.github.libretube.helpers.PlayerHelper.getSubtitleRoleFlags
@@ -43,6 +55,7 @@ import kotlinx.coroutines.cancelAndJoin
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.encodeToString
+import kotlin.io.path.exists
 
 /**
  * Loads the selected videos audio in background mode with a notification area.
@@ -57,9 +70,19 @@ open class OnlinePlayerService : AbstractPlayerService() {
     private var startTimestampSeconds: Long? = null
 
     /**
-     * The response that gets when called the Api.
+     * The response that gets when called the Api. Only set for online playback
      */
     private var streams: Streams? = null
+    /**
+     * Data about the video. Common between online and offline playback
+     */
+    private var streamItem: StreamItem? = null
+    /**
+     * Information about the downloaded video. Only set for offline playback
+     */
+    private var downloadWithItems: DownloadWithItems? = null
+
+    private var isOnline: Boolean = true
 
     // SponsorBlock Segment data
     private var sponsorBlockAutoSkip = true
@@ -93,9 +116,8 @@ open class OnlinePlayerService : AbstractPlayerService() {
                     // while it did not yet start actually, but did buffer only so far
                     if (PlayerHelper.watchHistoryEnabled) {
                         scope.launch(Dispatchers.IO) {
-                            streams?.let { streams ->
-                                val watchHistoryItem =
-                                    streams.toStreamItem(videoId).toWatchHistoryItem(videoId)
+                            streamItem?.let {
+                                val watchHistoryItem = it.toWatchHistoryItem(videoId)
                                 DatabaseHelper.addToWatchHistory(watchHistoryItem)
                             }
                         }
@@ -112,6 +134,7 @@ open class OnlinePlayerService : AbstractPlayerService() {
             return
         }
         isAudioOnlyPlayer = args.getBoolean(IntentData.audioOnly)
+        isOnline = !args.getBoolean(IntentData.isPlayingOffline)
 
         // get the intent arguments
         videoId = playerData.videoId
@@ -139,24 +162,35 @@ open class OnlinePlayerService : AbstractPlayerService() {
         // start loading the video info while keeping a reference to the job
         // so that it can be canceled once a different video is loaded
         fetchVideoInfoJob = scope.launch {
-            streams = withContext(Dispatchers.IO) {
-                try {
-                    MediaServiceRepository.instance.getStreams(videoId).let {
-                        DeArrowUtil.deArrowStreams(it, videoId)
-                    }
-                }  catch (e: Exception) {
-                    Log.e(TAG(), e.stackTraceToString())
-                    toastFromMainDispatcher(e.localizedMessage.orEmpty())
-                    return@withContext null
+            if (!isOnline) {
+                downloadWithItems = Database.downloadDao().findById(videoId)
+                downloadWithItems?.download?.toStreamItem()?.let {
+                    streamItem = it;
                 }
-            } ?: return@launch
+            } else {
+                streams = withContext(Dispatchers.IO) {
+                    // If we don't have the video, use the retrieve the online stream
+                    try {
+                        MediaServiceRepository.instance.getStreams(videoId).let {
+                            DeArrowUtil.deArrowStreams(it, videoId)
+                        }
+                    }  catch (e: Exception) {
+                        Log.e(TAG(), e.stackTraceToString())
+                        toastFromMainDispatcher(e.localizedMessage.orEmpty())
+                        return@withContext null
+                    }
+                }
+                streams?.toStreamItem(videoId)?.let {
+                    streamItem = it;
+                }
+            }
 
-            streams?.toStreamItem(videoId)?.let {
+            streamItem?.let {
                 // save the current stream to the queue
                 PlayingQueue.updateCurrent(it)
 
                 if (!PlayingQueue.hasNext()) {
-                    PlayingQueue.updateQueue(it, playlistId, channelId, streams!!.relatedStreams)
+                    PlayingQueue.updateQueue(it, playlistId, channelId, streams?.relatedStreams ?: emptyList())
                 }
 
                 // update feed item with newer information, e.g. more up-to-date views
@@ -179,7 +213,7 @@ open class OnlinePlayerService : AbstractPlayerService() {
             exoPlayer?.seekTo(seekToPositionMs)
         } else if (watchPositionsEnabled) {
             DatabaseHelper.getWatchPositionBlocking(videoId)?.let {
-                if (!DatabaseHelper.isVideoWatched(it, streams?.duration)) exoPlayer?.seekTo(it)
+                if (!DatabaseHelper.isVideoWatched(it, streamItem?.duration)) exoPlayer?.seekTo(it)
             }
         }
 
@@ -276,6 +310,14 @@ open class OnlinePlayerService : AbstractPlayerService() {
      * Sets the [MediaItem] with the [streams] into the [exoPlayer]
      */
     private fun setStreamSource() {
+        if (!isOnline) {
+            // Check if we have a downloaded video
+            downloadWithItems?.let { items ->
+                setOfflineMediaItem(items)
+                return
+            }
+        }
+
         val streams = streams ?: return
 
         when {
@@ -314,6 +356,62 @@ open class OnlinePlayerService : AbstractPlayerService() {
                 toastFromMainThread(R.string.unknown_error)
                 return
             }
+        }
+    }
+
+    private fun setOfflineMediaItem(downloadWithItems: DownloadWithItems) {
+        val downloadFiles = downloadWithItems.downloadItems.filter { it.path.exists() }
+
+        val videoUri = downloadFiles.firstOrNull { it.type == FileType.VIDEO }?.path?.toAndroidUri()
+        val audioUri = downloadFiles.firstOrNull { it.type == FileType.AUDIO }?.path?.toAndroidUri()
+        val subtitleInfo = downloadFiles.firstOrNull { it.type == FileType.SUBTITLE }
+
+        val videoSource = videoUri?.let { videoUri ->
+            val videoItem = MediaItem.Builder()
+                .setUri(videoUri)
+                .setMetadata(downloadWithItems)
+                .build()
+
+            ProgressiveMediaSource.Factory(FileDataSource.Factory())
+                .createMediaSource(videoItem)
+        }
+
+        val audioSource = audioUri?.let { audioUri ->
+            val audioItem = MediaItem.Builder()
+                .setUri(audioUri)
+                .setMetadata(downloadWithItems)
+                .build()
+
+            ProgressiveMediaSource.Factory(FileDataSource.Factory())
+                .createMediaSource(audioItem)
+        }
+
+        val subtitleSource = subtitleInfo?.let { subtitleInfo ->
+            val subtitle = SubtitleConfiguration.Builder(subtitleInfo.path.toAndroidUri())
+                .setMimeType(MimeTypes.APPLICATION_TTML)
+                .setLanguage(subtitleInfo.language ?: "en")
+                .build()
+
+            SingleSampleMediaSource.Factory(FileDataSource.Factory())
+                .createMediaSource(subtitle, C.TIME_UNSET)
+        }
+
+        var mediaSource: MediaSource? = null
+        listOfNotNull(videoSource, audioSource, subtitleSource).forEach { source ->
+            mediaSource =
+                if (mediaSource == null) source else MergingMediaSource(mediaSource!!, source)
+        }
+
+        if (mediaSource == null || isAudioOnlyPlayer && audioSource == null) {
+            stopSelf()
+            return
+        }
+
+        exoPlayer?.setMediaSource(mediaSource!!)
+
+        trackSelector?.updateParameters {
+            setPreferredTextRoleFlags(C.ROLE_FLAG_CAPTION)
+            setPreferredTextLanguage(subtitleInfo?.language ?: "en")
         }
     }
 

@@ -20,7 +20,6 @@ import com.github.libretube.helpers.BackgroundHelper
 import com.github.libretube.helpers.DownloadHelper
 import com.github.libretube.helpers.ImageHelper
 import com.github.libretube.helpers.NavigationHelper
-import com.github.libretube.ui.activities.OfflinePlayerActivity
 import com.github.libretube.ui.adapters.callbacks.DiffUtilItemCallback
 import com.github.libretube.ui.base.BaseActivity
 import com.github.libretube.ui.extensions.setWatchProgressLength
@@ -112,9 +111,11 @@ class DownloadsAdapter(
 
             root.setOnClickListener {
                 if (downloadTab == DownloadTab.VIDEO) {
-                    val intent = Intent(root.context, OfflinePlayerActivity::class.java)
-                    intent.putExtra(IntentData.videoId, download.videoId)
-                    root.context.startActivity(intent)
+                    NavigationHelper.navigateVideo(
+                        context,
+                        download.videoId,
+                        requestOffline = true,
+                    )
                 } else {
                     BackgroundHelper.playOnBackgroundOffline(
                         root.context,

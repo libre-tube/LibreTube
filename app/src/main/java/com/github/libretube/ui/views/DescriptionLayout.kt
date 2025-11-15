@@ -13,6 +13,7 @@ import androidx.core.view.isVisible
 import com.github.libretube.R
 import com.github.libretube.api.obj.Segment
 import com.github.libretube.api.obj.Streams
+import com.github.libretube.api.obj.StreamItem
 import com.github.libretube.databinding.DescriptionLayoutBinding
 import com.github.libretube.enums.SbSkipOptions
 import com.github.libretube.extensions.formatShort
@@ -64,24 +65,24 @@ class DescriptionLayout(
     }
 
     @SuppressLint("SetTextI18n")
-    fun setStreams(streams: Streams) {
+    fun setStreams(streamItem: StreamItem) {
         this.streams = streams
 
-        val views = streams.views.formatShort()
-        val date = TextUtils.formatRelativeDate(streams.uploaded ?: -1L)
+        val views = streamItem.views.formatShort()
+        val date = TextUtils.formatRelativeDate(streamItem.uploaded)
         binding.run {
             playerViewsInfo.text = context.getString(R.string.normal_views, views, TextUtils.SEPARATOR + date)
 
-            textLike.text = streams.likes.formatShort()
-            textDislike.isVisible = streams.dislikes >= 0
-            textDislike.text = streams.dislikes.formatShort()
+            textLike.text = streamItem.likes.formatShort()
+            textDislike.isVisible = streamItem.dislikes != null && streamItem.dislikes >= 0
+            textDislike.text = streamItem.dislikes.formatShort()
 
-            playerTitle.text = streams.title
-            playerDescription.text = streams.description
+            playerTitle.text = streamItem.title
+            playerDescription.text = streamItem.description
 
-            metaInfo.isVisible = streams.metaInfo.isNotEmpty()
+            metaInfo.isVisible = streamItem.metaInfo.isNotEmpty()
             // generate a meta info text with clickable links using html
-            val metaInfoText = streams.metaInfo.joinToString("\n\n") { info ->
+            val metaInfoText = streamItem.metaInfo.joinToString("\n\n") { info ->
                 val text = info.description.takeIf { it.isNotBlank() } ?: info.title
                 val links = info.urls.mapIndexed { index, url ->
                     "<a href=\"$url\">${info.urlTexts.getOrNull(index).orEmpty()}</a>"
@@ -90,25 +91,25 @@ class DescriptionLayout(
             }
             metaInfo.text = metaInfoText.parseAsHtml()
 
-            val visibility = when (streams.visibility) {
+            val visibility = when (streamItem.visibility) {
                 "public" -> context?.getString(R.string.visibility_public)
                 "unlisted" -> context?.getString(R.string.visibility_unlisted)
                 // currently no other visibility could be returned, might change in the future however
-                else -> streams.visibility.replaceFirstChar {
+                else -> streamItem.visibility?.replaceFirstChar {
                     if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString()
                 }
             }.orEmpty()
             additionalVideoInfo.text =
-                "${context?.getString(R.string.category)}: ${streams.category}\n" +
-                "${context?.getString(R.string.license)}: ${streams.license}\n" +
+                "${context?.getString(R.string.category)}: ${streamItem.category}\n" +
+                "${context?.getString(R.string.license)}: ${streamItem.license}\n" +
                 "${context?.getString(R.string.visibility)}: $visibility"
 
-            if (streams.tags.isNotEmpty()) {
-                videoTagsAdapter.submitList(streams.tags)
+            if (streamItem.tags.isNotEmpty()) {
+                videoTagsAdapter.submitList(streamItem.tags)
             }
-            binding.tagsRecycler.isVisible = streams.tags.isNotEmpty()
+            binding.tagsRecycler.isVisible = streamItem.tags.isNotEmpty()
 
-            setupDescription(streams.description)
+            setupDescription(streamItem.description)
         }
     }
 

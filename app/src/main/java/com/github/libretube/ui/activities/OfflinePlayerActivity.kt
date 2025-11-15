@@ -22,19 +22,22 @@ import androidx.media3.ui.TimeBar
 import com.github.libretube.compat.PictureInPictureCompat
 import com.github.libretube.compat.PictureInPictureParamsCompat
 import com.github.libretube.constants.IntentData
-import com.github.libretube.databinding.ActivityOfflinePlayerBinding
+import com.github.libretube.databinding.FragmentPlayerBinding
 import com.github.libretube.databinding.ExoStyledPlayerControlViewBinding
 import com.github.libretube.db.DatabaseHolder.Database
 import com.github.libretube.db.obj.DownloadChapter
 import com.github.libretube.enums.FileType
 import com.github.libretube.enums.PlayerCommand
 import com.github.libretube.enums.PlayerEvent
+import com.github.libretube.extensions.parcelable
 import com.github.libretube.extensions.serializableExtra
 import com.github.libretube.helpers.BackgroundHelper
 import com.github.libretube.helpers.PlayerHelper
 import com.github.libretube.helpers.WindowHelper
+import com.github.libretube.parcelable.PlayerData
 import com.github.libretube.services.AbstractPlayerService
 import com.github.libretube.services.OfflinePlayerService
+import com.github.libretube.services.OnlinePlayerService
 import com.github.libretube.ui.base.BaseActivity
 import com.github.libretube.ui.fragments.DownloadTab
 import com.github.libretube.ui.interfaces.TimeFrameReceiver
@@ -50,7 +53,7 @@ import kotlin.io.path.exists
 
 @androidx.annotation.OptIn(androidx.media3.common.util.UnstableApi::class)
 class OfflinePlayerActivity : BaseActivity() {
-    private lateinit var binding: ActivityOfflinePlayerBinding
+    private lateinit var binding: FragmentPlayerBinding
     private lateinit var videoId: String
 
     private lateinit var playerController: MediaController
@@ -138,21 +141,24 @@ class OfflinePlayerActivity : BaseActivity() {
         }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        WindowHelper.toggleFullscreen(window, true)
+        // WindowHelper.toggleFullscreen(window, true)
 
         super.onCreate(savedInstanceState)
 
         videoId = intent?.getStringExtra(IntentData.videoId)!!
 
-        binding = ActivityOfflinePlayerBinding.inflate(layoutInflater)
+        binding = FragmentPlayerBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val arguments = bundleOf(
-            IntentData.downloadTab to DownloadTab.VIDEO,
-            IntentData.videoId to videoId,
-            IntentData.audioOnly to false
-        )
-        BackgroundHelper.startMediaService(this, OfflinePlayerService::class.java, arguments) {
+        var playerData = PlayerData(videoId);
+
+        // val arguments = bundleOf(
+        //     IntentData.downloadTab to DownloadTab.VIDEO,
+        //     IntentData.videoId to videoId,
+        //     IntentData.audioOnly to false
+        // )
+        var arguments = bundleOf(IntentData.playerData to playerData);
+        BackgroundHelper.startMediaService(this, OnlinePlayerService::class.java, arguments) {
             playerController = it
             playerController.addListener(playerListener)
             initializePlayerView()
@@ -186,7 +192,7 @@ class OfflinePlayerActivity : BaseActivity() {
         playerView.player = playerController
         playerBinding = binding.player.binding
 
-        playerBinding.fullscreen.isInvisible = true
+        // playerBinding.fullscreen.isInvisible = true
         playerBinding.closeImageButton.setOnClickListener {
             finish()
         }
@@ -217,7 +223,7 @@ class OfflinePlayerActivity : BaseActivity() {
 
         val chapters = downloadChapters.map(DownloadChapter::toChapterSegment)
         chaptersViewModel.chaptersLiveData.value = chapters
-        binding.player.setChapters(chapters)
+        // binding.player.setChapters(chapters)
 
         playerBinding.exoTitle.text = downloadInfo.title
         playerBinding.exoTitle.isVisible = true
@@ -229,12 +235,12 @@ class OfflinePlayerActivity : BaseActivity() {
     }
 
     override fun onResume() {
-        commonPlayerViewModel.isFullscreen.value = true
+        // commonPlayerViewModel.isFullscreen.value = true
         super.onResume()
     }
 
     override fun onPause() {
-        commonPlayerViewModel.isFullscreen.value = false
+        // commonPlayerViewModel.isFullscreen.value = false
         super.onPause()
 
         if (PlayerHelper.pauseOnQuit) {

@@ -57,6 +57,7 @@ object NavigationHelper {
         alreadyStarted: Boolean = false,
         forceVideo: Boolean = false,
         audioOnlyPlayerRequested: Boolean = false,
+        requestOffline: Boolean = false,
     ) {
         if (videoId == null) return
 
@@ -122,7 +123,8 @@ object NavigationHelper {
                 channelId,
                 keepQueue,
                 timestamp,
-                alreadyStarted
+                alreadyStarted,
+                requestOffline,
             )
         }
     }
@@ -164,7 +166,8 @@ object NavigationHelper {
         channelId: String? = null,
         keepQueue: Boolean = false,
         timestamp: Long = 0,
-        alreadyStarted: Boolean = false
+        alreadyStarted: Boolean = false,
+        requestOffline: Boolean = false,
     ) {
         val activity = ContextHelper.unwrapActivity<BaseActivity>(context)
 
@@ -172,7 +175,8 @@ object NavigationHelper {
             PlayerData(videoId, playlistId, channelId, keepQueue, timestamp)
         val bundle = bundleOf(
             IntentData.playerData to playerData,
-            IntentData.alreadyStarted to alreadyStarted
+            IntentData.alreadyStarted to alreadyStarted,
+            IntentData.isPlayingOffline to requestOffline,
         )
         activity.supportFragmentManager.commitNow {
             replace<PlayerFragment>(R.id.container, args = bundle)

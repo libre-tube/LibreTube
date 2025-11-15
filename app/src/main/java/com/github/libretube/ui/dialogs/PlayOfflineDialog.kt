@@ -31,10 +31,6 @@ class PlayOfflineDialog : DialogFragment() {
             .setTitle(R.string.dialog_play_offline_title)
             .setView(binding.root)
             .setPositiveButton(R.string.yes) { _, _ ->
-                val intent = Intent(requireContext(), OfflinePlayerActivity::class.java)
-                    .putExtra(IntentData.videoId, videoId)
-                requireContext().startActivity(intent)
-
                 setFragmentResult(
                     PLAY_OFFLINE_DIALOG_REQUEST_KEY,
                     bundleOf(IntentData.isPlayingOffline to true)

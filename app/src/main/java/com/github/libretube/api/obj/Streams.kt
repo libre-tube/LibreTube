@@ -4,6 +4,7 @@ import android.os.Parcelable
 import com.github.libretube.db.obj.DownloadItem
 import com.github.libretube.enums.FileType
 import com.github.libretube.extensions.toLocalDate
+import com.github.libretube.extensions.toLocalDateTime
 import com.github.libretube.json.SafeInstantSerializer
 import com.github.libretube.parcelable.DownloadData
 import kotlinx.datetime.Instant
@@ -87,12 +88,22 @@ data class Streams(
             uploaderName = uploader,
             uploaderUrl = uploaderUrl,
             uploaderAvatar = uploaderAvatar,
-            uploadedDate = uploadTimestamp?.toLocalDate()?.toString(),
+            uploadedDate = uploadTimestamp?.toLocalDateTime()?.date
+                ?.toString(),
             uploaded = uploaded ?: uploadTimestamp?.toEpochMilliseconds() ?: 0,
             duration = duration,
             views = views,
             uploaderVerified = uploaderVerified,
-            shortDescription = description
+            shortDescription = description,
+            uploaderSubscriberCount = uploaderSubscriberCount,
+            likes = likes,
+            dislikes = dislikes,
+            tags = tags,
+            metaInfo = metaInfo,
+            description = description,
+            license = license,
+            category = category,
+            visibility = visibility,
         )
     }
 

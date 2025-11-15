@@ -21,6 +21,7 @@ import android.view.SurfaceView
 import android.view.View
 import android.view.ViewGroup
 import android.view.ViewGroup.LayoutParams
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.BackEventCompat
 import androidx.activity.OnBackPressedCallback
@@ -56,11 +57,14 @@ import com.github.libretube.api.obj.ChapterSegment
 import com.github.libretube.api.obj.Segment
 import com.github.libretube.api.obj.Streams
 import com.github.libretube.api.obj.Subtitle
+import com.github.libretube.api.obj.StreamItem
 import com.github.libretube.compat.PictureInPictureCompat
 import com.github.libretube.compat.PictureInPictureParamsCompat
 import com.github.libretube.constants.IntentData
 import com.github.libretube.databinding.FragmentPlayerBinding
 import com.github.libretube.db.DatabaseHolder
+import com.github.libretube.db.obj.DownloadWithItems
+import com.github.libretube.db.obj.filterByTab
 import com.github.libretube.enums.PlayerCommand
 import com.github.libretube.enums.PlayerEvent
 import com.github.libretube.enums.SbSkipOptions
@@ -69,6 +73,7 @@ import com.github.libretube.extensions.anyChildFocused
 import com.github.libretube.extensions.formatShort
 import com.github.libretube.extensions.parcelable
 import com.github.libretube.extensions.serializableExtra
+import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.toID
 import com.github.libretube.extensions.togglePlayPauseState
 import com.github.libretube.extensions.updateIfChanged
@@ -109,6 +114,7 @@ import com.github.libretube.util.OnlineTimeFrameReceiver
 import com.github.libretube.util.PlayingQueue
 import com.github.libretube.util.TextUtils
 import com.github.libretube.util.TextUtils.toTimeInSeconds
+import com.github.libretube.util.OfflineTimeFrameReceiver
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -139,8 +145,13 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
     private var playlistId: String? = null
     private var channelId: String? = null
 
-    // data and objects stored for the player
-    private lateinit var streams: Streams
+    // Data and objects for an online video stored for the player
+    private var streams: Streams? = null
+    // Metadata about the video (used for both online or offline)
+    private lateinit var streamItem: StreamItem
+    // Data about an downloaded video
+    private var downloadedVideo: DownloadWithItems? = null
+
     val isShort: Boolean
         get() {
             if (PlayingQueue.getCurrent()?.isShort == true) return true
@@ -330,6 +341,13 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
             }
             maybeStreams?.let { streams ->
                 this@PlayerFragment.streams = streams
+                this@PlayerFragment.streamItem = streams.toStreamItem(this@PlayerFragment.videoId)
+                viewModel.segments.postValue(emptyList())
+                updatePlayerView()
+            }
+
+            downloadedVideo?.let {
+                this@PlayerFragment.streamItem = it.download.toStreamItem()
                 viewModel.segments.postValue(emptyList())
                 updatePlayerView()
             }
@@ -455,6 +473,9 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
         playlistId = playerData.playlistId
         channelId = playerData.channelId
 
+        // True if requested to play a downloaded video directly from the downloads feed
+        val isPlayingOffline = requireArguments().getBoolean(IntentData.isPlayingOffline)
+
         // remember if playback already started once and only restart playback if that's the first run
         val createNewSession = !requireArguments().getBoolean(IntentData.alreadyStarted)
         requireArguments().putBoolean(IntentData.alreadyStarted, true)
@@ -484,40 +505,44 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
                 }
         }
 
-        val localDownloadVersion = runBlocking(Dispatchers.IO) {
-            DatabaseHolder.Database.downloadDao().findById(videoId)
-        }
+         val localDownloadVersion = runBlocking(Dispatchers.IO) {
+             DatabaseHolder.Database.downloadDao().findById(videoId)
+         }
 
         if (localDownloadVersion != null && createNewSession) {
-            // the dialog must also be visible when in fullscreen, thus we need to use the activity's
-            // fragment manager and not the one from [PlayerFragment]
-            val fragmentManager = requireActivity().supportFragmentManager
+            if (!isPlayingOffline) {
+                // User requested online playback, but we have a downloaded copy
 
-            fragmentManager.setFragmentResultListener(
-                PlayOfflineDialog.PLAY_OFFLINE_DIALOG_REQUEST_KEY, viewLifecycleOwner
-            ) { _, bundle ->
-                if (bundle.getBoolean(IntentData.isPlayingOffline)) {
-                    // offline video playback started and thus the player fragment is no longer needed
-                    killPlayerFragment()
-                } else {
-                    attachToPlayerService(playerData, true)
+                // the dialog must also be visible when in fullscreen, thus we need to use the activity's
+                // fragment manager and not the one from [PlayerFragment]
+                val fragmentManager = requireActivity().supportFragmentManager
+    
+                fragmentManager.setFragmentResultListener(
+                    PlayOfflineDialog.PLAY_OFFLINE_DIALOG_REQUEST_KEY, viewLifecycleOwner
+                ) { _, bundle ->
+                    var isOffline = bundle.getBoolean(IntentData.isPlayingOffline)
+                    attachToPlayerService(playerData, true, if (isOffline) localDownloadVersion else null)
                 }
+    
+                val downloadInfo = DownloadHelper.extractDownloadInfoText(
+                    requireContext(),
+                    localDownloadVersion
+                ).toTypedArray()
+    
+                PlayOfflineDialog().apply {
+                    arguments = bundleOf(
+                        IntentData.videoId to videoId,
+                        IntentData.videoTitle to localDownloadVersion.download.title,
+                        IntentData.downloadInfo to downloadInfo
+                    )
+                }.show(fragmentManager, null)
+            } else {
+                // User explicitly requested offline playback
+                attachToPlayerService(playerData, true, localDownloadVersion)
             }
-
-            val downloadInfo = DownloadHelper.extractDownloadInfoText(
-                requireContext(),
-                localDownloadVersion
-            ).toTypedArray()
-
-            PlayOfflineDialog().apply {
-                arguments = bundleOf(
-                    IntentData.videoId to videoId,
-                    IntentData.videoTitle to localDownloadVersion.download.title,
-                    IntentData.downloadInfo to downloadInfo
-                )
-            }.show(fragmentManager, null)
         } else {
-            attachToPlayerService(playerData, createNewSession)
+            // No downloaded copy found; do online playback
+            attachToPlayerService(playerData, createNewSession, null)
         }
 
         val onBackPressedCallback = object : OnBackPressedCallback(true) {
@@ -556,13 +581,15 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
         toggleVideoInfoVisibility(false)
     }
 
-    private fun attachToPlayerService(playerData: PlayerData, startNewSession: Boolean) {
+    private fun attachToPlayerService(playerData: PlayerData, startNewSession: Boolean, offlineData: DownloadWithItems?) {
+        val isOffline = offlineData != null
         BackgroundHelper.startMediaService(
             requireContext(),
             OnlinePlayerService::class.java,
             if (startNewSession) bundleOf(
                 IntentData.playerData to playerData,
-                IntentData.audioOnly to false
+                IntentData.audioOnly to false,
+                IntentData.isPlayingOffline to isOffline,
             ) else Bundle.EMPTY,
         ) {
             if (_binding == null) {
@@ -578,21 +605,25 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
             playerController.addListener(playerListener)
             updatePlayPauseButton()
 
-            if (!startNewSession) {
+            if (!startNewSession || offlineData != null) {
                 // JSON-encode as work-around for https://github.com/androidx/media/issues/564
-                val streams: Streams? =
-                    playerController.mediaMetadata.extras?.getString(IntentData.streams)
-                        ?.let { json ->
-                            JsonHelper.json.decodeFromString(json)
-                        }
+                if (offlineData != null) {
+                    this.downloadedVideo = offlineData;
+                } else {
+                    val streams: Streams? =
+                        playerController.mediaMetadata.extras?.getString(IntentData.streams)
+                            ?.let { json ->
+                                JsonHelper.json.decodeFromString(json)
+                            }
+    
+                    // reload the streams data and playback, metadata apparently no longer exists
+                    if (streams == null) {
+                        playNextVideo(videoId)
+                        return@startMediaService
+                    }
 
-                // reload the streams data and playback, metadata apparently no longer exists
-                if (streams == null) {
-                    playNextVideo(videoId)
-                    return@startMediaService
+                    this.streams = streams
                 }
-
-                this.streams = streams
                 updatePlayerView()
             }
         }
@@ -706,12 +737,12 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
             }
 
         binding.commentsToggle.setOnClickListener {
-            if (!this::streams.isInitialized) return@setOnClickListener
+            if (!this::streamItem.isInitialized) return@setOnClickListener
             // set the max height to not cover the currently playing video
             updateMaxSheetHeight()
             commentsViewModel.videoIdLiveData.updateIfChanged(videoId)
             CommentsSheet()
-                .apply { arguments = bundleOf(IntentData.channelAvatar to streams.uploaderAvatar) }
+                .apply { arguments = bundleOf(IntentData.channelAvatar to streamItem.uploaderAvatar) }
                 .show(childFragmentManager)
         }
 
@@ -723,12 +754,12 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
 
         // share button
         binding.relPlayerShare.setOnClickListener {
-            if (!this::streams.isInitialized) return@setOnClickListener
+            if (!this::streamItem.isInitialized) return@setOnClickListener
             val bundle = bundleOf(
                 IntentData.id to videoId,
                 IntentData.shareObjectType to ShareObjectType.VIDEO,
                 IntentData.shareData to ShareData(
-                    currentVideo = streams.title,
+                    currentVideo = streamItem.title,
                     currentPosition = playerController.currentPosition / 1000
                 )
             )
@@ -761,10 +792,10 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
         )
 
         binding.relPlayerSave.setOnClickListener {
-            if (!::streams.isInitialized) return@setOnClickListener
+            if (!::streamItem.isInitialized) return@setOnClickListener
 
             AddToPlaylistDialog().apply {
-                arguments = bundleOf(IntentData.videoInfo to streams.toStreamItem(videoId))
+                arguments = bundleOf(IntentData.videoInfo to streamItem)
             }.show(childFragmentManager, AddToPlaylistDialog::class.java.name)
         }
 
@@ -777,13 +808,13 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
         }
 
         binding.relPlayerDownload.setOnClickListener {
-            if (!this::streams.isInitialized) return@setOnClickListener
+            if (!this::streamItem.isInitialized) return@setOnClickListener
 
             DownloadHelper.startDownloadDialog(requireContext(), childFragmentManager, videoId)
         }
 
         binding.relPlayerScreenshot.setOnClickListener {
-            if (!this::streams.isInitialized) return@setOnClickListener
+            if (!this::streamItem.isInitialized) return@setOnClickListener
             val surfaceView =
                 binding.player.videoSurfaceView as? SurfaceView ?: return@setOnClickListener
 
@@ -797,15 +828,15 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
                 screenshotBitmap = bmp
                 val currentPosition =
                     playerController.currentPosition.toFloat() / 1000
-                openScreenshotFile.launch("${streams.title}-${currentPosition}.png")
+                openScreenshotFile.launch("${streamItem.title}-${currentPosition}.png")
             }, handler)
         }
 
         binding.playerChannel.setOnClickListener {
-            if (!this::streams.isInitialized) return@setOnClickListener
+            if (!this::streamItem.isInitialized) return@setOnClickListener
 
             val activity = view?.context as MainActivity
-            NavigationHelper.navigateChannel(requireContext(), streams.uploaderUrl)
+            NavigationHelper.navigateChannel(requireContext(), streamItem.uploaderUrl)
             activity.binding.mainMotionLayout.transitionToEnd()
             binding.playerMotionLayout.transitionToEnd()
         }
@@ -843,12 +874,12 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
     }
 
     private fun updateFullscreenOrientation() {
-        if (PlayerHelper.autoFullscreenEnabled || !this::streams.isInitialized) return
+        if (PlayerHelper.autoFullscreenEnabled || !this::streamItem.isInitialized) return
 
-        val height = streams.videoStreams.firstOrNull()?.height
+        val height = streams?.videoStreams?.firstOrNull()?.height
             ?: playerController.videoSize.height
         val width =
-            streams.videoStreams.firstOrNull()?.width ?: playerController.videoSize.width
+            streams?.videoStreams?.firstOrNull()?.width ?: playerController.videoSize.width
 
         mainActivity.requestedOrientation = PlayerHelper.getOrientation(width, height)
     }
@@ -1116,7 +1147,7 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
         // set media source and resolution in the beginning
         updateResolution(commonPlayerViewModel.isFullscreen.value == true)
 
-        if (streams.category == Streams.CATEGORY_MUSIC) {
+        if (streams?.category == Streams.CATEGORY_MUSIC) {
             playerController.setPlaybackSpeed(1f)
         }
     }
@@ -1178,41 +1209,45 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
 
         viewModel.isOrientationChangeInProgress = false
 
-        binding.descriptionLayout.setStreams(streams)
+        binding.descriptionLayout.setStreams(streamItem)
 
         toggleVideoInfoVisibility(true)
 
         binding.apply {
-            ImageHelper.loadImage(streams.uploaderAvatar, binding.playerChannelImage, true)
-            playerChannelName.text = streams.uploader
-            titleTextView.text = streams.title
+            ImageHelper.loadImage(streamItem.uploaderAvatar, binding.playerChannelImage, true)
+            playerChannelName.text = streamItem.uploaderName
+            titleTextView.text = streamItem.title
             playerChannelSubCount.text = context?.getString(
                 R.string.subscribers,
-                streams.uploaderSubscriberCount.formatShort()
+                streamItem.uploaderSubscriberCount.formatShort()
             )
-            player.isLive = streams.isLive
-            relPlayerDownload.isVisible = !streams.isLive
+            player.isLive = streamItem.isLive
+            relPlayerDownload.isVisible = !streamItem.isLive
         }
-        playerControlsBinding.exoTitle.text = streams.title
+        playerControlsBinding.exoTitle.text = streamItem.title
 
         // init the chapters recyclerview
-        chaptersViewModel.chaptersLiveData.postValue(streams.chapters)
+        chaptersViewModel.chaptersLiveData.postValue(
+            downloadedVideo?.downloadChapters?.map { c -> c.toChapterSegment() }
+                // Fallback on online stream
+                ?: streams!!.chapters
+        )
 
         if (PlayerHelper.relatedStreamsEnabled) {
             val relatedLayoutManager = binding.relatedRecView.layoutManager as LinearLayoutManager
             binding.relatedRecView.adapter = VideoCardsAdapter(
                 columnWidthDp = if (relatedLayoutManager.orientation == LinearLayoutManager.HORIZONTAL) 250f else null
             ).also { adapter ->
-                adapter.submitList(streams.relatedStreams.filter { !it.title.isNullOrBlank() })
+                adapter.submitList(streams?.relatedStreams?.filter { !it.title.isNullOrBlank() } ?: emptyList())
             }
         }
 
         // update the subscribed state
         binding.playerSubscribe.setupSubscriptionButton(
-            streams.uploaderUrl.toID(),
-            streams.uploader,
-            streams.uploaderAvatar,
-            streams.uploaderVerified
+            streamItem.uploaderUrl?.toID(),
+            streamItem.uploaderName ?: "",
+            streamItem.uploaderAvatar,
+            streamItem.uploaderVerified ?: false,
         )
 
         // seekbar preview setup
@@ -1276,19 +1311,21 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
     }
 
     private suspend fun initializeHighlight(highlight: Segment) {
-        val frameReceiver = OnlineTimeFrameReceiver(requireContext(), streams.previewFrames)
-        val highlightStart = highlight.segmentStartAndEnd.first.toLong()
-        val frame = withContext(Dispatchers.IO) {
-            frameReceiver.getFrameAtTime(highlightStart * 1000)
+        streams?.let {
+            val frameReceiver = OnlineTimeFrameReceiver(requireContext(), it.previewFrames)
+            val highlightStart = highlight.segmentStartAndEnd.first.toLong()
+            val frame = withContext(Dispatchers.IO) {
+                frameReceiver.getFrameAtTime(highlightStart * 1000)
+            }
+            val highlightChapter = ChapterSegment(
+                title = getString(R.string.chapters_videoHighlight),
+                start = highlightStart,
+                highlightDrawable = frame?.toDrawable(requireContext().resources)
+            )
+            chaptersViewModel.chaptersLiveData.postValue(
+                chaptersViewModel.chapters.plus(highlightChapter).sortedBy { it.start }
+            )
         }
-        val highlightChapter = ChapterSegment(
-            title = getString(R.string.chapters_videoHighlight),
-            start = highlightStart,
-            highlightDrawable = frame?.toDrawable(requireContext().resources)
-        )
-        chaptersViewModel.chaptersLiveData.postValue(
-            chaptersViewModel.chapters.plus(highlightChapter).sortedBy { it.start }
-        )
     }
 
     /**
@@ -1353,12 +1390,12 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
     }
 
     override fun onCaptionsClicked() {
-        if (!this@PlayerFragment::streams.isInitialized || streams.subtitles.isEmpty()) {
+        if (!this@PlayerFragment::streamItem.isInitialized || streams?.subtitles?.isEmpty() == true) {
             Toast.makeText(context, R.string.no_subtitles_available, Toast.LENGTH_SHORT).show()
             return
         }
 
-        val subtitles = listOf(Subtitle(name = getString(R.string.none))).plus(streams.subtitles)
+        val subtitles = listOf(Subtitle(name = getString(R.string.none))).plus(streams!!.subtitles)
 
         BaseBottomSheet()
             .setSimpleItems(
@@ -1459,7 +1496,7 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
     }
 
     override fun onStatsClicked() {
-        if (!this::streams.isInitialized) return
+        if (!this::streamItem.isInitialized) return
 
         val videoStats = PlayerHelper.getVideoStats(playerController.currentTracks, videoId)
         StatsSheet()
@@ -1535,10 +1572,15 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
         }
 
     private fun createSeekbarPreviewListener(): SeekbarPreviewListener {
+        var tfr = streams?.let {
+            OnlineTimeFrameReceiver(requireContext(), it.previewFrames)
+        } ?: downloadedVideo?.let {
+            OfflineTimeFrameReceiver(requireContext(), it.downloadItems[0].path)
+        }
         return SeekbarPreviewListener(
-            OnlineTimeFrameReceiver(requireContext(), streams.previewFrames),
+            tfr!!,
             playerControlsBinding,
-            streams.duration * 1000
+            (streamItem.duration ?: 0) * 1000
         )
     }
 
