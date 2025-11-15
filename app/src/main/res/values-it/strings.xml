@@ -545,4 +545,11 @@
     <string name="delete_playlist_include_vidoes">Eliminare anche tutti i video dalla playlist?</string>
     <string name="category_hook_summary">Per \"ami\" narrativi che catturano l\'attenzione dello spettatore (spesso come prima scena) anticipando o descrivendo eventi successivi nello stesso video o episodi futuri in una serie</string>
     <string name="category_hook">Ami/Saluti</string>
+    <string name="checking_frequency_15_minutes">15 minuti</string>
+    <string name="checking_frequency_30_minutes">30 minuti</string>
+    <string name="checking_frequency_60_minutes">60 minuti</string>
+    <string name="checking_frequency_2_hours">2 ore</string>
+    <string name="checking_frequency_6_hours">6 ore</string>
+    <string name="checking_frequency_12_hours">12 ore</string>
+    <string name="checking_frequency_1_day">1 giorno</string>
 </resources>

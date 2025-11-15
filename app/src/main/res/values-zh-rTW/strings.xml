@@ -543,4 +543,11 @@
     <string name="showing_results_for">顯示結果：</string>
     <string name="category_hook">開場白</string>
     <string name="category_hook_summary">用於吸引觀眾注意力的開場白（通常作為開場場景），透過預告或描述影片後續情節或系列劇未來集數的事件來達成效果</string>
+    <string name="checking_frequency_15_minutes">15 分鐘</string>
+    <string name="checking_frequency_30_minutes">30 分鐘</string>
+    <string name="checking_frequency_60_minutes">60 分鐘</string>
+    <string name="checking_frequency_2_hours">2 小時</string>
+    <string name="checking_frequency_6_hours">6 小時</string>
+    <string name="checking_frequency_12_hours">12 小時</string>
+    <string name="checking_frequency_1_day">1 天</string>
 </resources>

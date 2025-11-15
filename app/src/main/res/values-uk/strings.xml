@@ -543,8 +543,15 @@
     <string name="unsubscribe_snackbar_message">Успішно відписано від %1$s</string>
     <string name="screenshot_saved">Знімок екрана збережно</string>
     <string name="category_hook">Зацікавлення / Привітання</string>
-    <string name="category_hook_summary">Для сюжетних гачків, які привертають увагу глядача (часто в першій сцені), інтригуючи або описуючи події з подальшої частини того ж відео або майбутніх епізодів серіалу</string>
+    <string name="category_hook_summary">Для зачинів, які привертають увагу глядача (часто в першій сцені), інтригуючи або описуючи події з подальшої частини того ж відео або майбутніх епізодів серіалу</string>
     <string name="delete_playlist_include_vidoes">Також видалити всі відео зі списку відтворення?</string>
     <string name="did_you_mean">Ви мали на увазі:</string>
     <string name="showing_results_for">Показано результати для:</string>
+    <string name="checking_frequency_15_minutes">15 хвилин</string>
+    <string name="checking_frequency_30_minutes">30 хвилин</string>
+    <string name="checking_frequency_60_minutes">60 хвилин</string>
+    <string name="checking_frequency_2_hours">2 години</string>
+    <string name="checking_frequency_6_hours">6 годин</string>
+    <string name="checking_frequency_12_hours">12 годин</string>
+    <string name="checking_frequency_1_day">1 день</string>
 </resources>
