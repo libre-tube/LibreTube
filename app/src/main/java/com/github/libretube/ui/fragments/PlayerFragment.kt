@@ -890,11 +890,12 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
     /**
      * Enter/exit fullscreen or toggle it depending on the current state
      */
-    fun toggleFullscreen(isFullscreen: Boolean? = null) {
+    fun toggleFullscreen(
+        isFullscreen: Boolean = commonPlayerViewModel.isFullscreen.value == false
+    ) {
         binding.player.hideController()
 
-        val enterFullscreen = isFullscreen?: (commonPlayerViewModel.isFullscreen.value == false)
-        if (enterFullscreen) {
+        if (isFullscreen) {
             // go to fullscreen mode
             setFullscreen()
         } else {
