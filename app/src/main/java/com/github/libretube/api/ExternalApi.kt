@@ -3,14 +3,11 @@ package com.github.libretube.api
 import com.github.libretube.api.obj.DeArrowBody
 import com.github.libretube.api.obj.DeArrowContent
 import com.github.libretube.api.obj.PipedConfig
-import com.github.libretube.api.obj.PipedInstance
 import com.github.libretube.api.obj.SegmentData
 import com.github.libretube.api.obj.SubmitSegmentResponse
 import com.github.libretube.api.obj.VoteInfo
 import com.github.libretube.obj.update.UpdateInfo
 import kotlinx.serialization.json.JsonElement
-import okhttp3.ResponseBody
-import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.Headers
@@ -24,17 +21,8 @@ private const val SB_API_URL = "https://sponsor.ajay.app"
 private const val RYD_API_URL = "https://returnyoutubedislikeapi.com"
 private const val GOOGLE_API_KEY = "AIzaSyDyT5W0Jh49F30Pqqtyfdf7pDLFKLJoAnw"
 const val USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.3"
-private const val PIPED_INSTANCES_URL = "https://piped-instances.kavin.rocks"
-private const val PIPED_INSTANCES_MARKDOWN_URL = "https://raw.githubusercontent.com/TeamPiped/documentation/refs/heads/main/content/docs/public-instances/index.md"
 
 interface ExternalApi {
-    // only for fetching servers list
-    @GET
-    suspend fun getInstances(@Url url: String = PIPED_INSTANCES_URL): List<PipedInstance>
-
-    @GET
-    suspend fun getInstancesMarkdown(@Url url: String = PIPED_INSTANCES_MARKDOWN_URL): Response<ResponseBody>
-
     @GET("config")
     suspend fun getInstanceConfig(@Url url: String): PipedConfig
 
