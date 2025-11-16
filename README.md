@@ -151,8 +151,7 @@ Contributions in any form are welcome!
 Differences to NewPipe
 </h2>
 
-With LibreTube, you have the choice to either send all requests directly to YouTube or proxy them via Piped for better privacy. Piped acts as a middleman server between you and YouTube in this case, which prevents YouTube from accessing personal information such as your IP address. 
-Additionally, using Piped allows you to sync your subscriptions between LibreTube and Piped, which can be used on desktop too.
+If you have your own private instance, you can proxy requests through Piped. Piped acts as a middleman server between you and YouTube in this case, which prevents YouTube from accessing personal information such as your IP address. Or we offer "Full local Mode" for fetching requests with "NewPipe Extractor". This still creates a certain layer of security. Extractor works by parsing the required website. This means that you are using the Internal API. (You don't need the Official API). Additionally, using Piped allows you to sync your subscriptions between LibreTube and Piped, which can be used on desktop too.
 
 While LibreTube only supports YouTube, NewPipe also allows the use of other platforms like SoundCloud, PeerTube, Bandcamp and media.ccc.de.<br>
 Both are great clients for watching YouTube videos. It depends on the individual's use case which one fits their needs better.
