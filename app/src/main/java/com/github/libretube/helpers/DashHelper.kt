@@ -41,11 +41,6 @@ object DashHelper {
         val adapSetInfos = ArrayList<AdapSetInfo>()
 
         for (stream in streams.videoStreams) {
-            // used to avoid including LBRY HLS inside the streams in the manifest
-            if (stream.format.orEmpty().contains("HLS")) {
-                continue
-            }
-
             // HDR is only supported by some new devices
             if (!supportsHdr && stream.quality.orEmpty().uppercase().contains("HDR")) {
                 continue
