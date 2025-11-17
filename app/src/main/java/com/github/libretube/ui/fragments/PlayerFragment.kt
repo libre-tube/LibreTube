@@ -151,6 +151,8 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
     private lateinit var streamItem: StreamItem
     // Data about an downloaded video
     private var downloadedVideo: DownloadWithItems? = null
+    // Whether we should be playing from the offline files
+    private var isOffline: Boolean = false
 
     val isShort: Boolean
         get() {
@@ -339,15 +341,15 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
             val maybeStreams: Streams? = mediaMetadata.extras?.getString(IntentData.streams)?.let {
                 JsonHelper.json.decodeFromString(it)
             }
-            maybeStreams?.let { streams ->
-                this@PlayerFragment.streams = streams
-                this@PlayerFragment.streamItem = streams.toStreamItem(this@PlayerFragment.videoId)
-                viewModel.segments.postValue(emptyList())
-                updatePlayerView()
-            }
 
             downloadedVideo?.let {
                 this@PlayerFragment.streamItem = it.download.toStreamItem()
+                viewModel.segments.postValue(emptyList())
+                updatePlayerView()
+            }
+            maybeStreams?.let { streams ->
+                this@PlayerFragment.streams = streams
+                this@PlayerFragment.streamItem = streams.toStreamItem(this@PlayerFragment.videoId)
                 viewModel.segments.postValue(emptyList())
                 updatePlayerView()
             }
@@ -473,7 +475,7 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
         playlistId = playerData.playlistId
         channelId = playerData.channelId
 
-        // True if requested to play a downloaded video directly from the downloads feed
+        // True if user explicitly wants to do offline playback (e.g. downloads feed)
         val isPlayingOffline = requireArguments().getBoolean(IntentData.isPlayingOffline)
 
         // remember if playback already started once and only restart playback if that's the first run
@@ -505,9 +507,9 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
                 }
         }
 
-         val localDownloadVersion = runBlocking(Dispatchers.IO) {
-             DatabaseHolder.Database.downloadDao().findById(videoId)
-         }
+        val localDownloadVersion = runBlocking(Dispatchers.IO) {
+            DatabaseHolder.Database.downloadDao().findById(videoId)
+        }
 
         if (localDownloadVersion != null && createNewSession) {
             if (!isPlayingOffline) {
@@ -520,7 +522,7 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
                 fragmentManager.setFragmentResultListener(
                     PlayOfflineDialog.PLAY_OFFLINE_DIALOG_REQUEST_KEY, viewLifecycleOwner
                 ) { _, bundle ->
-                    var isOffline = bundle.getBoolean(IntentData.isPlayingOffline)
+                    isOffline = bundle.getBoolean(IntentData.isPlayingOffline)
                     attachToPlayerService(playerData, true, if (isOffline) localDownloadVersion else null)
                 }
     
@@ -537,12 +539,13 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
                     )
                 }.show(fragmentManager, null)
             } else {
+                isOffline = isPlayingOffline;
                 // User explicitly requested offline playback
                 attachToPlayerService(playerData, true, localDownloadVersion)
             }
         } else {
-            // No downloaded copy found; do online playback
-            attachToPlayerService(playerData, createNewSession, null)
+            isOffline = isPlayingOffline;
+            attachToPlayerService(playerData, createNewSession, if (isPlayingOffline) localDownloadVersion else null)
         }
 
         val onBackPressedCallback = object : OnBackPressedCallback(true) {
@@ -605,11 +608,11 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
             playerController.addListener(playerListener)
             updatePlayPauseButton()
 
-            if (!startNewSession || offlineData != null) {
+            this.downloadedVideo = offlineData;
+
+            if (!startNewSession) {
                 // JSON-encode as work-around for https://github.com/androidx/media/issues/564
-                if (offlineData != null) {
-                    this.downloadedVideo = offlineData;
-                } else {
+                if (offlineData == null) {
                     val streams: Streams? =
                         playerController.mediaMetadata.extras?.getString(IntentData.streams)
                             ?.let { json ->
@@ -624,6 +627,7 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
 
                     this.streams = streams
                 }
+
                 updatePlayerView()
             }
         }
@@ -813,6 +817,10 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
             DownloadHelper.startDownloadDialog(requireContext(), childFragmentManager, videoId)
         }
 
+        if (isOffline) {
+            binding.relPlayerDownload.isGone = true
+        }
+
         binding.relPlayerScreenshot.setOnClickListener {
             if (!this::streamItem.isInitialized) return@setOnClickListener
             val surfaceView =
@@ -870,7 +878,7 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
         playerController.release()
         killPlayerFragment()
 
-        NavigationHelper.openAudioPlayerFragment(requireContext())
+        NavigationHelper.openAudioPlayerFragment(requireContext(), offlinePlayer=isOffline)
     }
 
     private fun updateFullscreenOrientation() {
@@ -1170,6 +1178,15 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
             ?.dismiss()
     }
 
+    /** Ensures that the stream item is set. Requires streams or downloadedVideo to be set */
+    private fun setStreamItem() {
+        if (isOffline) {
+            streamItem = downloadedVideo!!.download.toStreamItem()
+        } else {
+            streamItem = streams!!.toStreamItem(videoId)
+        }
+    }
+
     private fun toggleVideoInfoVisibility(show: Boolean){
         binding.descriptionLayout.collapseDescription()
         binding.descriptionLayout.isInvisible = !show
@@ -1183,6 +1200,9 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
         dismissCommentsSheet()
 
         setPlayerDefaults()
+
+        // Ensure we have our stream item set
+        setStreamItem()
 
         binding.player.apply {
             useController = false

@@ -82,16 +82,19 @@ object BackgroundHelper {
         // whether the service is started from the MainActivity or NoInternetActivity
         val noInternet = ContextHelper.tryUnwrapActivity<NoInternetActivity>(context) != null
 
+        val playerData = PlayerData(videoId!!)
+
         val arguments = bundleOf(
-            IntentData.videoId to videoId,
+            IntentData.playerData to playerData,
             IntentData.shuffle to shuffle,
             IntentData.downloadTab to downloadTab,
             IntentData.noInternet to noInternet,
-            IntentData.audioOnly to true
+            IntentData.audioOnly to true,
+            IntentData.isPlayingOffline to true,
         )
 
         stopBackgroundPlay(context)
-        startMediaService(context, OfflinePlayerService::class.java, arguments)
+        startMediaService(context, OnlinePlayerService::class.java, arguments)
     }
 
     @OptIn(UnstableApi::class)

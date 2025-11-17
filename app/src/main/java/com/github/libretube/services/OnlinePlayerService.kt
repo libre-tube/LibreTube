@@ -136,6 +136,8 @@ open class OnlinePlayerService : AbstractPlayerService() {
         isAudioOnlyPlayer = args.getBoolean(IntentData.audioOnly)
         isOnline = !args.getBoolean(IntentData.isPlayingOffline)
 
+        Log.d(TAG(), "isOnline = ${isOnline}")
+
         // get the intent arguments
         videoId = playerData.videoId
         playlistId = playerData.playlistId
@@ -314,6 +316,7 @@ open class OnlinePlayerService : AbstractPlayerService() {
             // Check if we have a downloaded video
             downloadWithItems?.let { items ->
                 setOfflineMediaItem(items)
+                exoPlayer?.prepare()
                 return
             }
         }
