@@ -281,9 +281,9 @@ abstract class CustomExoPlayerView(
 
             if (sheet.isVisible) {
                 sheet.dismiss()
-            } else {
-                sheet.show(activity.supportFragmentManager)
+                return@setOnClickListener
             }
+            sheet.show(activity.supportFragmentManager,isFullscreen())
         }
 
         supportFragmentManager.setFragmentResultListener(
