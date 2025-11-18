@@ -98,9 +98,8 @@ open class OfflinePlayerService : AbstractPlayerService() {
 
     override fun getIntentActivity(): Class<*> {
         return when {
-            !noInternetService && isAudioOnlyPlayer -> MainActivity::class.java
             noInternetService && isAudioOnlyPlayer -> NoInternetActivity::class.java
-            else -> OfflinePlayerActivity::class.java
+            else -> MainActivity::class.java
         }
     }
 

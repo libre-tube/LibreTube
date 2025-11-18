@@ -50,6 +50,7 @@ import com.github.libretube.ui.extensions.onSystemInsets
 import com.github.libretube.ui.fragments.AudioPlayerFragment
 import com.github.libretube.ui.fragments.DownloadsFragment
 import com.github.libretube.ui.fragments.PlayerFragment
+import com.github.libretube.ui.fragments.NoInternetFragment
 import com.github.libretube.ui.models.SearchViewModel
 import com.github.libretube.ui.models.SubscriptionsViewModel
 import com.github.libretube.ui.preferences.BackupRestoreSettings
@@ -97,26 +98,21 @@ class MainActivity : BaseActivity() {
         installSplashScreen()
         super.onCreate(savedInstanceState)
 
-        // show noInternet Activity if no internet available on app startup
-        if (!NetworkHelper.isNetworkAvailable(this)) {
-            val noInternetIntent = Intent(this, NoInternetActivity::class.java)
-            startActivity(noInternetIntent)
-            finish()
-            return
-        }
-
+        
         val isAppConfigured =
-            PreferenceHelper.getBoolean(PreferenceKeys.LOCAL_FEED_EXTRACTION, false) ||
-                    PreferenceHelper.getString(PreferenceKeys.FETCH_INSTANCE, "").isNotEmpty()
+        PreferenceHelper.getBoolean(PreferenceKeys.LOCAL_FEED_EXTRACTION, false) ||
+        PreferenceHelper.getString(PreferenceKeys.FETCH_INSTANCE, "").isNotEmpty()
         if (!isAppConfigured) {
             val welcomeIntent = Intent(this, WelcomeActivity::class.java)
             startActivity(welcomeIntent)
             finish()
             return
         }
-
+        
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        val isNetworkAvailable = NetworkHelper.isNetworkAvailable(this)
 
         // manually apply additional padding for edge-to-edge compatibility
         // see https://developer.android.com/develop/ui/views/layout/edge-to-edge
@@ -183,10 +179,14 @@ class MainActivity : BaseActivity() {
         binding.bottomNav.setupWithNavController(navController)
 
         // save start tab fragment id and apply navbar style
-        startFragmentId = try {
-            NavBarHelper.applyNavBarStyle(binding.bottomNav)
-        } catch (e: Exception) {
-            R.id.homeFragment
+        startFragmentId = if (isNetworkAvailable) {
+            try {
+                NavBarHelper.applyNavBarStyle(binding.bottomNav)
+            } catch (e: Exception) {
+                R.id.homeFragment
+            }
+        } else {
+            R.id.noInternetFragment
         }
 
         // set default tab as start fragment
