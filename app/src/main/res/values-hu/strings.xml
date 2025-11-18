@@ -551,4 +551,6 @@
     <string name="checking_frequency_6_hours">6 óra</string>
     <string name="checking_frequency_12_hours">12 óra</string>
     <string name="checking_frequency_1_day">1 nap</string>
+    <string name="backup_creation_success">A biztonsági mentés sikeresen befejeződött</string>
+    <string name="backup_creation_failed">A biztonsági mentés létrehozása sikertelen</string>
 </resources>
