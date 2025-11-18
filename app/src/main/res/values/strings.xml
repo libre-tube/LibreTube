@@ -279,6 +279,8 @@
     <string name="repeat_mode_all">Repeat all</string>
     <string name="backup_restore">Backup and restore</string>
     <string name="backup">Backup</string>
+    <string name="backup_creation_success">Backup completed successfully</string>
+    <string name="backup_creation_failed">Failed to create backup</string>
     <string name="picture_in_picture">Picture-in-Picture</string>
     <string name="pip">PiP</string>
     <string name="player_resize_mode">Resize mode</string>
