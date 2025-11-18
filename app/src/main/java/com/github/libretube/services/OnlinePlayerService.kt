@@ -169,22 +169,22 @@ open class OnlinePlayerService : AbstractPlayerService() {
                 downloadWithItems?.download?.toStreamItem()?.let {
                     streamItem = it;
                 }
-            } else {
-                streams = withContext(Dispatchers.IO) {
-                    // If we don't have the video, use the retrieve the online stream
-                    try {
-                        MediaServiceRepository.instance.getStreams(videoId).let {
-                            DeArrowUtil.deArrowStreams(it, videoId)
-                        }
-                    }  catch (e: Exception) {
-                        Log.e(TAG(), e.stackTraceToString())
-                        toastFromMainDispatcher(e.localizedMessage.orEmpty())
-                        return@withContext null
+            }
+            // Always test if we can retrieve the stream so we can grab video/channel info
+            streams = withContext(Dispatchers.IO) {
+                // If we don't have the video, use the retrieve the online stream
+                try {
+                    MediaServiceRepository.instance.getStreams(videoId).let {
+                        DeArrowUtil.deArrowStreams(it, videoId)
                     }
+                }  catch (e: Exception) {
+                    Log.e(TAG(), e.stackTraceToString())
+                    toastFromMainDispatcher(e.localizedMessage.orEmpty())
+                    return@withContext null
                 }
-                streams?.toStreamItem(videoId)?.let {
-                    streamItem = it;
-                }
+            }
+            streams?.toStreamItem(videoId)?.let {
+                streamItem = it;
             }
 
             streamItem?.let {
@@ -315,7 +315,7 @@ open class OnlinePlayerService : AbstractPlayerService() {
         if (!isOnline) {
             // Check if we have a downloaded video
             downloadWithItems?.let { items ->
-                setOfflineMediaItem(items)
+                setOfflineMediaItem(items, streams)
                 exoPlayer?.prepare()
                 return
             }
@@ -362,7 +362,7 @@ open class OnlinePlayerService : AbstractPlayerService() {
         }
     }
 
-    private fun setOfflineMediaItem(downloadWithItems: DownloadWithItems) {
+    private fun setOfflineMediaItem(downloadWithItems: DownloadWithItems, streams: Streams? = null) {
         val downloadFiles = downloadWithItems.downloadItems.filter { it.path.exists() }
 
         val videoUri = downloadFiles.firstOrNull { it.type == FileType.VIDEO }?.path?.toAndroidUri()
@@ -370,26 +370,33 @@ open class OnlinePlayerService : AbstractPlayerService() {
         val subtitleInfo = downloadFiles.firstOrNull { it.type == FileType.SUBTITLE }
 
         val videoSource = videoUri?.let { videoUri ->
-            val videoItem = MediaItem.Builder()
+            val videoItemBuilder = MediaItem.Builder()
                 .setUri(videoUri)
                 .setMetadata(downloadWithItems)
-                .build()
+            
+            streams?.let { videoItemBuilder.setMetadata(it, videoId) }
+            
+            val videoItem = videoItemBuilder.build()
 
             ProgressiveMediaSource.Factory(FileDataSource.Factory())
                 .createMediaSource(videoItem)
         }
 
         val audioSource = audioUri?.let { audioUri ->
-            val audioItem = MediaItem.Builder()
+            val audioItemBuilder = MediaItem.Builder()
                 .setUri(audioUri)
                 .setMetadata(downloadWithItems)
-                .build()
+            
+            streams?.let { audioItemBuilder.setMetadata(it, videoId) }
+            
+            val audioItem = audioItemBuilder.build()
+            
 
             ProgressiveMediaSource.Factory(FileDataSource.Factory())
                 .createMediaSource(audioItem)
         }
 
-        val subtitleSource = subtitleInfo?.let { subtitleInfo ->
+        val subtitleSource = if (subtitleInfo != null) {
             val subtitle = SubtitleConfiguration.Builder(subtitleInfo.path.toAndroidUri())
                 .setMimeType(MimeTypes.APPLICATION_TTML)
                 .setLanguage(subtitleInfo.language ?: "en")
@@ -397,7 +404,10 @@ open class OnlinePlayerService : AbstractPlayerService() {
 
             SingleSampleMediaSource.Factory(FileDataSource.Factory())
                 .createMediaSource(subtitle, C.TIME_UNSET)
-        }
+        } else if (streams != null){
+            // TODO: Fallback on online subtitles if none are available offline
+            null
+        } else null
 
         var mediaSource: MediaSource? = null
         listOfNotNull(videoSource, audioSource, subtitleSource).forEach { source ->

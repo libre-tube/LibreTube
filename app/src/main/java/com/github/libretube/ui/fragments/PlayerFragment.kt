@@ -612,7 +612,7 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
 
             if (!startNewSession) {
                 // JSON-encode as work-around for https://github.com/androidx/media/issues/564
-                if (offlineData == null) {
+                if (!isOffline) {
                     val streams: Streams? =
                         playerController.mediaMetadata.extras?.getString(IntentData.streams)
                             ?.let { json ->
@@ -815,10 +815,6 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
             if (!this::streamItem.isInitialized) return@setOnClickListener
 
             DownloadHelper.startDownloadDialog(requireContext(), childFragmentManager, videoId)
-        }
-
-        if (isOffline) {
-            binding.relPlayerDownload.isGone = true
         }
 
         binding.relPlayerScreenshot.setOnClickListener {
@@ -1180,11 +1176,9 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
 
     /** Ensures that the stream item is set. Requires streams or downloadedVideo to be set */
     private fun setStreamItem() {
-        if (isOffline) {
-            streamItem = downloadedVideo!!.download.toStreamItem()
-        } else {
-            streamItem = streams!!.toStreamItem(videoId)
-        }
+        downloadedVideo?.let { streamItem = it.download.toStreamItem() }
+        // Prefer streams version of the streamItem if we have it for up-to-date info
+        streams?.let { streamItem = it.toStreamItem(videoId) }
     }
 
     private fun toggleVideoInfoVisibility(show: Boolean){
@@ -1242,7 +1236,8 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
                 streamItem.uploaderSubscriberCount.formatShort()
             )
             player.isLive = streamItem.isLive
-            relPlayerDownload.isVisible = !streamItem.isLive
+            Log.d(TAG(), "isOffline = ${isOffline}")
+            relPlayerDownload.isVisible = !(streamItem.isLive || isOffline)
         }
         playerControlsBinding.exoTitle.text = streamItem.title
 
