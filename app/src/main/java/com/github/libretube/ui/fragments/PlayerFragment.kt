@@ -1236,7 +1236,6 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
                 streamItem.uploaderSubscriberCount.formatShort()
             )
             player.isLive = streamItem.isLive
-            Log.d(TAG(), "isOffline = ${isOffline}")
             relPlayerDownload.isVisible = !(streamItem.isLive || isOffline)
         }
         playerControlsBinding.exoTitle.text = streamItem.title

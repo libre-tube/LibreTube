@@ -28,6 +28,7 @@ import com.github.libretube.constants.IntentData
 import com.github.libretube.db.DatabaseHelper
 import com.github.libretube.db.DatabaseHolder.Database
 import com.github.libretube.db.obj.DownloadWithItems
+import com.github.libretube.db.obj.filterByTab
 import com.github.libretube.enums.FileType
 import com.github.libretube.enums.PlayerCommand
 import com.github.libretube.enums.SbSkipOptions
@@ -48,11 +49,13 @@ import com.github.libretube.parcelable.PlayerData
 import com.github.libretube.util.DeArrowUtil
 import com.github.libretube.util.PlayingQueue
 import com.github.libretube.util.YoutubeHlsPlaylistParser
+import com.github.libretube.ui.fragments.DownloadTab
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.cancelAndJoin
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.encodeToString
 import kotlin.io.path.exists
@@ -83,6 +86,12 @@ open class OnlinePlayerService : AbstractPlayerService() {
     private var downloadWithItems: DownloadWithItems? = null
 
     private var isOnline: Boolean = true
+
+    /** Shuffle offline audio tracks */
+    private var shuffle: Boolean = false
+    /** The download tab we came from */
+    private var downloadTab: DownloadTab? = null
+
 
     // SponsorBlock Segment data
     private var sponsorBlockAutoSkip = true
@@ -135,16 +144,27 @@ open class OnlinePlayerService : AbstractPlayerService() {
         }
         isAudioOnlyPlayer = args.getBoolean(IntentData.audioOnly)
         isOnline = !args.getBoolean(IntentData.isPlayingOffline)
-
-        Log.d(TAG(), "isOnline = ${isOnline}")
+        shuffle = args.getBoolean(IntentData.shuffle, false) && !isOnline
+        downloadTab = args.serializable(IntentData.downloadTab)
 
         // get the intent arguments
-        videoId = playerData.videoId
+        this.videoId = if (shuffle) {
+            PlayingQueue.clear()
+            runBlocking(Dispatchers.IO) {
+                Database.downloadDao().getAll().filterByTab(downloadTab!!).randomOrNull()
+            }?.download?.videoId
+        } else {
+            playerData.videoId
+        } ?: return
         playlistId = playerData.playlistId
         channelId = playerData.channelId
         startTimestampSeconds = playerData.timestamp
 
         if (!playerData.keepQueue) PlayingQueue.clear()
+
+        if (shuffle) {
+            fillQueue()
+        }
 
         exoPlayer?.addListener(playerListener)
         trackSelector?.updateParameters {
@@ -190,9 +210,11 @@ open class OnlinePlayerService : AbstractPlayerService() {
             streamItem?.let {
                 // save the current stream to the queue
                 PlayingQueue.updateCurrent(it)
-
-                if (!PlayingQueue.hasNext()) {
-                    PlayingQueue.updateQueue(it, playlistId, channelId, streams?.relatedStreams ?: emptyList())
+                // Let's not queue up online videos if we want to play offline
+                if (isOnline) {
+                    if (!PlayingQueue.hasNext()) {
+                        PlayingQueue.updateQueue(it, playlistId, channelId, streams?.relatedStreams ?: emptyList())
+                    }
                 }
 
                 // update feed item with newer information, e.g. more up-to-date views
@@ -360,6 +382,20 @@ open class OnlinePlayerService : AbstractPlayerService() {
                 return
             }
         }
+    }
+
+    /** Fills queue with offline tracks */
+    private suspend fun fillQueue() {
+        val downloads = withContext(Dispatchers.IO) {
+            Database.downloadDao().getAll()
+        }
+            .filterByTab(downloadTab!!)
+            .filter { it.download.videoId != videoId }
+            .toMutableList()
+
+        if (shuffle) downloads.shuffle()
+
+        PlayingQueue.add(*downloads.map { it.download.toStreamItem() }.toTypedArray())
     }
 
     private fun setOfflineMediaItem(downloadWithItems: DownloadWithItems, streams: Streams? = null) {

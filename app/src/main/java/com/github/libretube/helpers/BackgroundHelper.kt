@@ -50,7 +50,9 @@ object BackgroundHelper {
         startMediaService(
             context,
             OnlinePlayerService::class.java,
-            bundleOf(IntentData.playerData to playerData, IntentData.audioOnly to true)
+            bundleOf(
+                IntentData.playerData to playerData, IntentData.audioOnly to true
+            )
         )
     }
 
@@ -79,8 +81,12 @@ object BackgroundHelper {
         downloadTab: DownloadTab,
         shuffle: Boolean = false
     ) {
-        // whether the service is started from the MainActivity or NoInternetActivity
-        val noInternet = ContextHelper.tryUnwrapActivity<NoInternetActivity>(context) != null
+        // close the previous video player if open
+        val fragmentManager =
+            ContextHelper.unwrapActivity<MainActivity>(context).supportFragmentManager
+        fragmentManager.fragments.firstOrNull { it is PlayerFragment }?.let {
+            fragmentManager.commit { remove(it) }
+        }
 
         val playerData = PlayerData(videoId!!)
 
@@ -88,7 +94,6 @@ object BackgroundHelper {
             IntentData.playerData to playerData,
             IntentData.shuffle to shuffle,
             IntentData.downloadTab to downloadTab,
-            IntentData.noInternet to noInternet,
             IntentData.audioOnly to true,
             IntentData.isPlayingOffline to true,
         )
