@@ -550,4 +550,6 @@
     <string name="checking_frequency_6_hours">6 小时</string>
     <string name="checking_frequency_12_hours">12 小时</string>
     <string name="checking_frequency_1_day">1 天</string>
+    <string name="backup_creation_success">成功完成备份</string>
+    <string name="backup_creation_failed">创建备份失败</string>
 </resources>
