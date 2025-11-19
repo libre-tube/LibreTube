@@ -551,4 +551,6 @@
     <string name="checking_frequency_6_hours">6 uur</string>
     <string name="checking_frequency_12_hours">12 uur</string>
     <string name="checking_frequency_1_day">24 uur</string>
+    <string name="backup_creation_success">Back-up succesvol gemaakt</string>
+    <string name="backup_creation_failed">Back-up maken mislukt</string>
 </resources>
