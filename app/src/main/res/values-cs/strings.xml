@@ -552,4 +552,6 @@
     <string name="checking_frequency_6_hours">6 hodin</string>
     <string name="checking_frequency_12_hours">12 hodin</string>
     <string name="checking_frequency_1_day">1 den</string>
+    <string name="backup_creation_success">Záloha úspěšně dokončena</string>
+    <string name="backup_creation_failed">Nepodařilo se vytvořit zálohu</string>
 </resources>
