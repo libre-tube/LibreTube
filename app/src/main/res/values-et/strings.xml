@@ -551,4 +551,6 @@
     <string name="checking_frequency_6_hours">6 tundi</string>
     <string name="checking_frequency_12_hours">12 tundi</string>
     <string name="checking_frequency_1_day">1 päev</string>
+    <string name="backup_creation_success">Varundamine õnnestus</string>
+    <string name="backup_creation_failed">Varundamine ei õnnestunud</string>
 </resources>
