@@ -542,4 +542,16 @@
     <string name="did_you_mean">האם הכוונה הייתה:</string>
     <string name="showing_results_for">מוצגות תוצאות עבור:</string>
     <string name="screenshot_saved">צילום המסך נשמר</string>
+    <string name="backup_creation_failed">יצירת גיבוי נכשלה</string>
+    <string name="backup_creation_success">הגיבוי הושלם בהצלחה</string>
+    <string name="category_hook">מעוררי סקרנות/איחולים</string>
+    <string name="category_hook_summary">למעוררי סקרנות שמושכים את תשומת הלב של הצופים (בדרך כלל הסצנה הראשונה) על ידי פיתוח או תיאור אירועים שיקרו בהמשך באותו הסרטון או בפרקים הבאים בסדרה</string>
+    <string name="checking_frequency_15_minutes">15 דקות</string>
+    <string name="checking_frequency_30_minutes">30 דקות</string>
+    <string name="checking_frequency_60_minutes">60 דקות</string>
+    <string name="checking_frequency_2_hours">שעתיים</string>
+    <string name="checking_frequency_6_hours">6 שעות</string>
+    <string name="checking_frequency_12_hours">12 שעות</string>
+    <string name="checking_frequency_1_day">יום</string>
+    <string name="delete_playlist_include_vidoes">למחוק את כל הסרטונים מרשימת הנגינה?</string>
 </resources>
