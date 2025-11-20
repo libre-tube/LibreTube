@@ -551,4 +551,6 @@
     <string name="checking_frequency_6_hours">6 Stunden</string>
     <string name="checking_frequency_12_hours">12 Stunden</string>
     <string name="checking_frequency_1_day">1 Tag</string>
+    <string name="backup_creation_success">Backup erfolgreich erstellt</string>
+    <string name="backup_creation_failed">Backup fehlgeschlagen</string>
 </resources>
