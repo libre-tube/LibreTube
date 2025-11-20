@@ -551,4 +551,6 @@
     <string name="checking_frequency_6_hours">6 saat</string>
     <string name="checking_frequency_12_hours">12 saat</string>
     <string name="checking_frequency_1_day">1 gün</string>
+    <string name="backup_creation_success">Nüsxələmə uğurla tamamlandı</string>
+    <string name="backup_creation_failed">Nüsxə yaratmaq alınmadı</string>
 </resources>
