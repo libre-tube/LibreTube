@@ -150,7 +150,7 @@
     <string name="translate">Tłumaczenie</string>
     <string name="error_occurred">Błąd</string>
     <string name="copied">Skopiowano</string>
-    <string name="device_info">Informacje o urządzeniu</string>
+    <string name="device_info">Informacje o Urządzeniu</string>
     <string name="downloading">Pobieranie…</string>
     <string name="checking_frequency">Sprawdzaj co…</string>
     <string name="history_empty">Nie ma jeszcze historii.</string>
@@ -195,7 +195,7 @@
     <string name="system_caption_style">Styl napisów systemowych</string>
     <string name="captions">Napisy</string>
     <string name="general">Ogólne</string>
-    <string name="general_summary">Język i region</string>
+    <string name="general_summary">Pobieranie i zapisywanie danych</string>
     <string name="caption_settings">Ustawienia napisów</string>
     <string name="default_subtitle_language">Język napisów</string>
     <string name="most_recent">Najnowsze</string>
@@ -538,4 +538,21 @@
     <string name="gaming">Granie</string>
     <string name="podcasts">Podkasty</string>
     <string name="trailers">Zapowiedzi</string>
+    <string name="checking_frequency_15_minutes">15 minut</string>
+    <string name="checking_frequency_30_minutes">30 minut</string>
+    <string name="checking_frequency_60_minutes">60 minut</string>
+    <string name="checking_frequency_2_hours">2 godziny</string>
+    <string name="checking_frequency_6_hours">6 godzin</string>
+    <string name="checking_frequency_12_hours">12 godzin</string>
+    <string name="checking_frequency_1_day">1 dzień</string>
+    <string name="backup_creation_success">Pomyślnie utworzono kopie zapasową</string>
+    <string name="backup_creation_failed">Nie udało się utworzyć kopii zapasowej</string>
+    <string name="unsubscribe_snackbar_message">Pomyślnie odsubskrybowano %1$s</string>
+    <string name="screenshot_saved">Zapisano zrzut ekranu</string>
+    <string name="delete_playlist_include_vidoes">Czy usunąć też wszystkie filmy z playlisty?</string>
+    <string name="include_timestamp_in_filename">Dodaj czas do nazwy pliku</string>
+    <string name="did_you_mean">Czy miałeś na myśli:</string>
+    <string name="showing_results_for">Pokazuję rezultaty dla:</string>
+    <string name="category_hook">Narracja/Powitanie</string>
+    <string name="category_hook_summary">Za fragmenty narracyjne, które zwracają uwagę widza (często jako pierwsza scena), przez zapowiadanie lub opisywanie przyszłych wydarzeń z tego samego filmu lub przyszłych odcinków z serii</string>
 </resources>
