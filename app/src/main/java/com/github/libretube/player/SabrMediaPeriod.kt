@@ -247,10 +247,7 @@ class SabrMediaPeriod(
     ) {
         // Create newly selected primary and event streams.
         for (i in selections.indices) {
-            val selection = selections[i]
-            if (selection == null) {
-                continue
-            }
+            val selection = selections[i] ?: continue
             if (streams[i] == null) {
                 // Create new stream for selection.
                 streamResetFlags[i] = true
