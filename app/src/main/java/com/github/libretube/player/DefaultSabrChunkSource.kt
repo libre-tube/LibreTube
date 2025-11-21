@@ -411,7 +411,7 @@ class DefaultSabrChunkSource(
     }
 
     /** Holds information about a snapshot of a single [Representation].  */
-    class RepresentationHolder(
+    data class RepresentationHolder(
         val periodDurationUs: Long,
         val representation: Representation,
         val chunkExtractor: ChunkExtractor?,
