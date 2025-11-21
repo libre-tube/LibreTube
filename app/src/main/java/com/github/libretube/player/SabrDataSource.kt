@@ -22,14 +22,9 @@ class SabrDataSource() : BaseDataSource(true) {
     override fun open(dataSpec: DataSpec): Long {
         val format = dataSpec.customData as Common.FormatId?
         val segment = SabrClient.data(format!!.itag)
-        val totalSize = segment.sumOf { it.length() }
-        val buffer = ByteBuffer.allocate(totalSize)
-        segment.forEach { buffer.put(it.data()) }
-        // prepare for reading
-        buffer.flip()
-        data = buffer
+        data = ByteBuffer.wrap(segment.data())
+        return data!!.remaining().toLong()
 
-        return totalSize.toLong()
     }
 
     override fun getUri(): Uri? = data?.let { SabrClient.url.toUri() }
