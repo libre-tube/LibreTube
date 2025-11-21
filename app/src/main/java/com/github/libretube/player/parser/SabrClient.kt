@@ -124,7 +124,8 @@ private data class InitializedFormat(
     }
 
     /** Returns a list of all downloaded segments for the format. */
-    fun buildBufferedRanges(): List<BufferedRange> = bufferedSegments.entries.sortedBy { it.key }
+    fun buildBufferedRanges(): List<BufferedRange> =
+        bufferedSegments.entries.union(downloadedSegments.entries).sortedBy { it.key }
         .fold(mutableListOf<MutableList<Pair<Long, Segment>>>()) { acc, (id, segment) ->
             val previousId = acc.lastOrNull()?.lastOrNull()?.first
             if (previousId == null || previousId + 1 != id) {
