@@ -43,12 +43,17 @@ class PlaybackRequest(
     val playbackSpeed: Float,
     /* Sequence number of which segment is loaded */
     val segment: Long,
+    /* List of segments which are buffered for the format */
+    val segmentStartTimeMs: Long,
+    /* List of segments which are buffered for the format */
+    val bufferedSegments: List<Long>,
+
 ) {
     companion object {
         fun initRequest(
             format: FormatId, playerPosition: Long, playbackSpeed: Float,
         ): PlaybackRequest = PlaybackRequest(
-            format, playerPosition, playbackSpeed, 0
+            format, playerPosition, playbackSpeed, 0, 0, emptyList()
         )
     }
 }
@@ -248,6 +253,8 @@ object SabrClient {
             "getNextSegment: loading media data for $itag at position ${playbackRequest.playerPosition}"
         )
 
+        // synchronize buffered segments with the actually buffered segments from the player
+        initializedFormats[itag]?.bufferedSegments?.keys?.retainAll(playbackRequest.bufferedSegments)
 
         return runBlocking {
             // ensure that the data is only ever accessed by a single thread
