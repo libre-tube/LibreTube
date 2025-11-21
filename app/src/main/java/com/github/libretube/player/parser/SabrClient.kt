@@ -105,8 +105,10 @@ private data class InitializedFormat(
     val bufferedSegments: MutableMap<Long, Segment> = mutableMapOf(),
     /** Sequence number of the last segment in the format. */
     val endSegmentNumber: Long,
-    /** Sequence number for the last segment that has been successfully downloaded. */
-    var lastDownloadedSegment: Long = 0,
+    /** Initial segment containing metadata about the stream,
+     *  such as the position of the other segments.
+     **/
+    var initSegment: Segment? = null,
     /** Duration of the format in milliseconds. */
     val duration: Long,
 ) {
@@ -114,6 +116,7 @@ private data class InitializedFormat(
     fun getSegment(sequenceNumber: Long): Segment? {
         val segment = downloadedSegments.remove(sequenceNumber)
             ?: bufferedSegments[sequenceNumber]
+            ?: initSegment?.takeIf { it.sequenceNumber == sequenceNumber }
             ?: return null
         // mark retrieved segment as buffered
         bufferedSegments[sequenceNumber] = segment
@@ -422,6 +425,10 @@ object SabrClient {
 
                 val format = initializedFormats[segment.header.itag]!!
                 format.downloadedSegments[segment.sequenceNumber] = segment
+
+                if (segment.header.isInitSeg) {
+                    format.initSegment = segment
+                }
             }
 
             UMPPartId.NEXT_REQUEST_POLICY -> {
