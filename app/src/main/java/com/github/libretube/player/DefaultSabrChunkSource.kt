@@ -30,6 +30,7 @@ import androidx.media3.exoplayer.upstream.LoadErrorHandlingPolicy.LoadErrorInfo
 import androidx.media3.extractor.ChunkIndex
 import com.github.libretube.player.manifest.Representation
 import com.github.libretube.player.manifest.SabrManifest
+import com.github.libretube.player.parser.PlaybackRequest
 import com.github.libretube.player.parser.SabrClient
 
 /** A default [SabrChunkSource] implementation.  */
@@ -214,14 +215,20 @@ class DefaultSabrChunkSource(
         val representationHolder = representationHolders[trackSelection.selectedIndex]
 
         if (representationHolder.chunkExtractor != null) {
-            if (representationHolder.chunkExtractor.sampleFormats == null || representationHolder.chunkIndex == null) {
+                if (representationHolder.chunkIndex == null) {
+                // when we request a new format, it should start with a initialization chunk
                 val dataSpec = DataSpec.Builder()
-                        // must be non-null, but is unused
-                        .setUri(manifest.serverAbrStreamingUri)
-                        //TODO: pass along additional data
-                        .setCustomData(representationHolder.representation.formatId())
-                        .build()
-                // when we request a new format, it should start with a initialization chunk (at least I hope so)
+                    // must be non-null, but is unused
+                    .setUri(manifest.serverAbrStreamingUri)
+                    .setCustomData(
+                        PlaybackRequest.initRequest(
+                            representationHolder.representation.formatId(),
+                            Util.usToMs(playbackPositionUs),
+                            loadingInfo.playbackSpeed,
+                        )
+                    )
+                    .build()
+
                 out.chunk = InitializationChunk(
                     dataSource,
                     dataSpec,
@@ -263,11 +270,19 @@ class DefaultSabrChunkSource(
         }
 
         val seekTimeUs = if (queue.isEmpty()) loadPositionUs else C.TIME_UNSET
-        val dataSpec = DataSpec.Builder().setUri(manifest.serverAbrStreamingUri).setCustomData(
-            representationHolder.representation.formatId()
-        ).build()
-
         val startTimeUs = representationHolder.getSegmentStartTimeUs(segmentNum)
+
+
+        val dataSpec = DataSpec.Builder()
+            // must be non-null, but is unused
+            .setUri(manifest.serverAbrStreamingUri)
+            .setCustomData(PlaybackRequest(
+                representationHolder.representation.formatId(),
+                Util.usToMs(playbackPositionUs),
+                loadingInfo.playbackSpeed,
+                segmentNum,
+            ))
+            .build()
 
         out.chunk = ContainerMediaChunk(
             dataSource,
