@@ -273,6 +273,9 @@ class DefaultSabrChunkSource(
         val startTimeUs = representationHolder.getSegmentStartTimeUs(segmentNum)
 
 
+        // use the queue to build the buffered segments
+        // each queue media chunk corresponds to 1 segment
+        val bufferedSegments = queue.mapNotNull { (it.dataSpec.customData as PlaybackRequest?)?.segment }
         val dataSpec = DataSpec.Builder()
             // must be non-null, but is unused
             .setUri(manifest.serverAbrStreamingUri)
@@ -281,6 +284,8 @@ class DefaultSabrChunkSource(
                 Util.usToMs(playbackPositionUs),
                 loadingInfo.playbackSpeed,
                 segmentNum,
+                Util.usToMs(startTimeUs),
+                bufferedSegments,
             ))
             .build()
 
