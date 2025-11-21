@@ -227,8 +227,8 @@ open class OnlinePlayerService : AbstractPlayerService() {
 
         when {
             // SABR
-            //TODO: enable only experimentally/in DEBUG mode
-            streams.serverAbrStreamingUrl != null && streams.videoPlaybackUstreamerConfig != null -> {
+            // skip SABR for livestreams, as the player impl has no support for it
+            !streams.isLive && streams.serverAbrStreamingUrl != null && streams.videoPlaybackUstreamerConfig != null -> {
                 val sabrMediaSourceFactory = SabrMediaSource.Factory(
                     SabrManifest(videoId, streams)
                 )
