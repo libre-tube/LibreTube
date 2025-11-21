@@ -89,19 +89,10 @@ private data class InitializedFormat(
     var downloadedDuration: Long = 0,
 ) {
     /** Returns a list of all downloaded segments for the format. */
-    fun data(): List<Segment> {
-        val segments = mutableListOf<Segment>()
-        for (seq in lastDownloadedSegment..endSegmentNumber) {
-            val segment = downloadedSegments.remove(seq)
-            if (segment == null) {
-                Log.d("InitializedFormat", "data: Missing downloaded segment $seq for ${id.itag}")
-                // retry this segment next time
-                lastDownloadedSegment = seq
-                break
-            }
-            segments.add(segment)
-        }
-        return segments
+    fun data(): Segment {
+       val segment = downloadedSegments.remove(lastDownloadedSegment)!!
+       lastDownloadedSegment += 1
+       return segment
     }
 
     /** Returns a list of all downloaded segments for the format. */
