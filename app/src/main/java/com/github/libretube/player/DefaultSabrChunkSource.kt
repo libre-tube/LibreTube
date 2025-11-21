@@ -103,21 +103,20 @@ class DefaultSabrChunkSource(
         val representations =
             adaptationSetIndices.flatMap { manifest.adaptationSets[it].representations }
                 .filterNotNull().toList()
-        representationHolders =
-        (0..trackSelection.length() - 1).map {
+        representationHolders = (0..<trackSelection.length()).map {
             val representation = representations[trackSelection.getIndexInTrackGroup(it)]
-                RepresentationHolder(
-                    Util.msToUs(manifest.durationMs),
-                    representation,
-                    chunkExtractorFactory.createProgressiveMediaExtractor(
-                        trackType,
-                        representation.format,
-                        false,
-                        emptyList(),
-                        null,
-                        playerId
-                    ),
-                )
+            RepresentationHolder(
+                Util.msToUs(manifest.durationMs),
+                representation,
+                chunkExtractorFactory.createProgressiveMediaExtractor(
+                    trackType,
+                    representation.format,
+                    false,
+                    emptyList(),
+                    null,
+                    playerId
+                ),
+            )
         }.toMutableList()
     }
 
@@ -131,11 +130,11 @@ class DefaultSabrChunkSource(
                 }
                 val segmentNum = representationHolder.getSegmentNum(positionUs)
                 val firstSyncUs = representationHolder.getSegmentStartTimeUs(segmentNum)
-                val secondSyncUs = if (firstSyncUs < positionUs &&
-                    (segmentCount == RepresentationHolder.INDEX_UNBOUNDED || (segmentNum < segmentCount - 1))
-                )
-                    representationHolder.getSegmentStartTimeUs(segmentNum + 1)
-                else firstSyncUs
+                val secondSyncUs =
+                    if (firstSyncUs < positionUs && (segmentCount == RepresentationHolder.INDEX_UNBOUNDED || (segmentNum < segmentCount - 1))) representationHolder.getSegmentStartTimeUs(
+                        segmentNum + 1
+                    )
+                    else firstSyncUs
                 return seekParameters.resolveSeekPositionUs(positionUs, firstSyncUs, secondSyncUs)
             }
         }
