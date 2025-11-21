@@ -34,6 +34,25 @@ import video_streaming.StreamerContextOuterClass.StreamerContext.SabrContext
 import video_streaming.UmpPartId.UMPPartId
 import video_streaming.VideoPlaybackAbrRequestOuterClass.VideoPlaybackAbrRequest
 
+class PlaybackRequest(
+    /* Format for which new media data is being requested */
+    val format: FormatId,
+    /* Position of the player in milliseconds */
+    val playerPosition: Long,
+    /* Multiplier applied to the speed at which content is played. */
+    val playbackSpeed: Float,
+    /* Sequence number of which segment is loaded */
+    val segment: Long,
+) {
+    companion object {
+        fun initRequest(
+            format: FormatId, playerPosition: Long, playbackSpeed: Float,
+        ): PlaybackRequest = PlaybackRequest(
+            format, playerPosition, playbackSpeed, 0
+        )
+    }
+}
+
 /**
  * A segment of a media stream.
  *
@@ -85,14 +104,15 @@ private data class InitializedFormat(
     var lastDownloadedSegment: Long = 0,
     /** Duration of the format in milliseconds. */
     val duration: Long,
-    /** Duration of the length of downloaded segments in milliseconds. */
-    var downloadedDuration: Long = 0,
 ) {
     /** Returns a list of all downloaded segments for the format. */
-    fun data(): Segment {
-       val segment = downloadedSegments.remove(lastDownloadedSegment)!!
-       lastDownloadedSegment += 1
-       return segment
+    fun getSegment(sequenceNumber: Long): Segment? {
+        val segment = downloadedSegments.remove(sequenceNumber)
+            ?: bufferedSegments[sequenceNumber]
+            ?: return null
+        // mark retrieved segment as buffered
+        bufferedSegments[sequenceNumber] = segment
+        return segment
     }
 
     /** Returns a list of all downloaded segments for the format. */
@@ -116,8 +136,8 @@ private data class InitializedFormat(
     /**
      * Whether the format has non-retrieved data.
      */
-    fun hasFreshData(): Boolean =
-        downloadedSegments.containsKey(lastDownloadedSegment)
+    fun hasSegment(segmentNumber: Long): Boolean =
+        downloadedSegments.containsKey(segmentNumber)
 }
 
 /**
@@ -208,9 +228,6 @@ object SabrClient {
     /** Active SABR contexts that should be sent with requests. */
     private val activeSabrContexts = mutableSetOf<Int>()
 
-    /** Position of the player within the stream. */
-    private var playerTime: Long = 0
-
     @OptIn(UnstableApi::class)
     fun selectFormat(representation: Representation) {
         if (MimeTypes.isAudio(representation.format.containerMimeType)) {
@@ -220,24 +237,28 @@ object SabrClient {
         }
     }
 
-    fun data(itag: Int): List<Segment> {
+    fun getNextSegment(playbackRequest: PlaybackRequest): Segment? {
         if (fatalError != null) {
             throw Exception("SABR error: ${fatalError!!.type}")
         }
+        val itag = playbackRequest.format.itag
+
+        Log.d(
+            TAG,
+            "getNextSegment: loading media data for $itag at position ${playbackRequest.playerPosition}"
+        )
+
 
         return runBlocking {
             // ensure that the data is only ever accessed by a single thread
             withContext(dispatcher) {
                 var format = initializedFormats[itag]
-                if (format == null || !format.hasFreshData()) {
-                    // refetch new data
-                    if (media()) {
-                        // finished playback for these formats
-                        return@withContext emptyList()
-                    }
+                if (format == null || !format.hasSegment(playbackRequest.segment)) {
+                    // fetch new data
+                    media(playbackRequest)
                 }
                 format = format ?: initializedFormats[itag]
-                return@withContext format?.data() ?: emptyList()
+                return@withContext format?.getSegment(playbackRequest.segment)
             }
         }
     }
@@ -248,23 +269,9 @@ object SabrClient {
      *
      * The data is returned as a pair of lists: (audio segments, video segments).
      */
-    private suspend fun media(): Boolean {
-        // Check if we've downloaded all segments
-        val audioComplete = initializedFormats[audioFormat.itag]?.let {
-            playerTime >= it.duration
-        } ?: false
-
-        val videoComplete = videoFormat?.let { format ->
-            initializedFormats[format.itag]?.let { playerTime >= it.duration }
-        } ?: true
-
-        if (audioComplete && videoComplete) {
-            assert(partialSegments.isEmpty()) { "SabrClient has partial segments left" }
-            return true
-        }
-
+    private suspend fun media(playbackRequest: PlaybackRequest) {
         // update currently held UMP data
-        val data = fetchStreamData(audioFormat, videoFormat)
+        val data = fetchStreamData(playbackRequest, audioFormat, videoFormat)
 
         val parser = UmpParser(data)
         while (true) {
@@ -272,26 +279,13 @@ object SabrClient {
             processPart(part)
         }
         assert(parser.data().isEmpty()) { "Parser has left-over data" }
-
-        // update player time to the end of downloaded formats
-        val updatedPlayerTime = initializedFormats.values
-            .mapNotNull { format ->
-                val diff = format.downloadedDuration - playerTime
-                if (diff > 0) diff else null
-            }
-            .minOrNull()
-
-        if (updatedPlayerTime != null) {
-            Log.d(TAG, "media: Advancing player time by ${updatedPlayerTime}ms")
-            playerTime += updatedPlayerTime
-        }
-        return false
     }
 
     /**
      * Fetches streaming data from the URL.
      */
     private suspend fun fetchStreamData(
+        playbackRequest: PlaybackRequest,
         audioFormat: Representation,
         videoFormat: Representation?,
     ): ByteArray {
@@ -304,9 +298,9 @@ object SabrClient {
         val xtags = Xtags(audioFormat.formatId().xtags)
 
         val clientState = ClientAbrState.newBuilder()
-            .setPlayerTimeMs(playerTime)
+            .setPlayerTimeMs(playbackRequest.playerPosition)
             .setEnabledTrackTypesBitfield(if (videoFormat == null) 1 else 0)
-            .setPlaybackRate(1.0f)
+            .setPlaybackRate(playbackRequest.playbackSpeed)
             .setAudioTrackId(audioFormat.stream.audioTrackId ?: "")
             .setDrcEnabled(audioFormat.stream.isDrc ?: false || xtags.isDrcAudio())
             .setEnableVoiceBoost(xtags.isVoiceBoosted())
@@ -370,7 +364,7 @@ object SabrClient {
                 val headerId = header.headerId
                 val sequenceNumber = header.sequenceNumber
                 val duration = if (header.hasDurationMs()) header.durationMs else {
-                    ((header.timeRange.durationTicks.toDouble() / header.timeRange.timescale.toDouble()) * 1000.0).toLong()
+                    ((header.timeRange.durationTicks.toDouble() / header.timeRange.timescale.toDouble()) * 1000).toLong()
                 }
 
                 if (videoId != this.videoId) {
@@ -420,7 +414,6 @@ object SabrClient {
                 }
 
                 val format = initializedFormats[segment.header.itag]!!
-                format.downloadedDuration += segment.duration
                 format.downloadedSegments[segment.sequenceNumber] = segment
             }
 
