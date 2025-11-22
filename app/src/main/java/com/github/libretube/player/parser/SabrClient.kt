@@ -116,7 +116,6 @@ private data class InitializedFormat(
     /** Returns a list of all downloaded segments for the format. */
     fun getSegment(sequenceNumber: Long): Segment? {
         val segment = downloadedSegments.remove(sequenceNumber)
-            ?: bufferedSegments[sequenceNumber]
             ?: initSegment?.takeIf { it.sequenceNumber == sequenceNumber }
             ?: return null
         // mark retrieved segment as buffered
