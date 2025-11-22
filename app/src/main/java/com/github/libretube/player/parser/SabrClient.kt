@@ -6,6 +6,7 @@ import androidx.media3.common.MimeTypes
 import androidx.media3.common.util.UnstableApi
 import com.github.libretube.api.poToken.PoTokenGenerator
 import com.github.libretube.player.manifest.Representation
+import com.github.libretube.ui.dialogs.ShareDialog
 import com.google.protobuf.ByteString
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -209,6 +210,8 @@ object SabrClient {
                 .addHeader("Content-Type", CONTENT_TYPE)
                 .addHeader("Accept-Encoding", ENCODING)
                 .addHeader("Accept", ACCEPT)
+                .addHeader("Origin", ShareDialog.YOUTUBE_FRONTEND_URL)
+                .addHeader("Referer", "${ShareDialog.YOUTUBE_FRONTEND_URL}/")
                 .addHeader("User-Agent", USER_AGENT)
                 .build()
             chain.proceed(request)
