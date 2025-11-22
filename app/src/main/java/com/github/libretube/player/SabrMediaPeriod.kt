@@ -249,25 +249,20 @@ class SabrMediaPeriod(
         // Create newly selected primary and event streams.
         for (i in selections.indices) {
             val selection = selections[i] ?: continue
+            val trackGroupIndex = streamIndexToTrackGroupIndex[i]
+            val trackGroupInfo = trackGroupInfos[trackGroupIndex]
+            val representation =
+                manifest.adaptationSets[trackGroupInfo.adaptationSetIndices[0]].representations[selection.getIndexInTrackGroup(0)]
+            sabrClient.selectFormat(representation!!)
+
             if (streams[i] == null) {
                 // Create new stream for selection.
                 streamResetFlags[i] = true
-                val trackGroupIndex = streamIndexToTrackGroupIndex[i]
-                val trackGroupInfo = trackGroupInfos[trackGroupIndex]
                 streams[i] = buildSampleStream(trackGroupInfo, selection, positionUs)
-                val representation =
-                    manifest.adaptationSets[trackGroupInfo.adaptationSetIndices[0]].representations[selection.getIndexInTrackGroup(0)]
-                sabrClient.selectFormat(representation!!)
             } else if (streams[i] is ChunkSampleStream<*>) {
                 // Update selection in existing stream.
                 val stream = streams[i] as ChunkSampleStream<SabrChunkSource?>
                 stream.getChunkSource().updateTrackSelection(selection)
-
-                val trackGroupIndex = streamIndexToTrackGroupIndex[i]
-                val trackGroupInfo = trackGroupInfos[trackGroupIndex]
-                val representation =
-                    manifest.adaptationSets[trackGroupInfo.adaptationSetIndices[0]].representations[selection.getIndexInTrackGroup(0)]
-                sabrClient.selectFormat(representation!!)
             }
         }
     }
