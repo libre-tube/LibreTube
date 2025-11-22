@@ -102,7 +102,8 @@ fun StreamInfoItem.toStreamItem(
     return StreamItem(
         type = TYPE_STREAM,
         url = url.toID(),
-        title = name,
+        // if available prefer the RSS feed title, since it's untranslated
+        title = feedInfo?.name ?: name,
         uploaded = uploadDate?.offsetDateTime()?.toEpochSecond()?.times(1000) ?: -1,
         uploadedDate = textualUploadDate ?: uploadDate?.offsetDateTime()?.toLocalDateTime()
             ?.toLocalDate()
