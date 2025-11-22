@@ -55,6 +55,11 @@
             app:restoreState="true" />
     </fragment>
     <fragment
+        android:id="@+id/noInternetFragment"
+        android:name="com.github.libretube.ui.fragments.NoInternetFragment"
+        android:label="fragment_nointernet"
+        tools:layout="@layout/fragment_nointernet" />
+    <fragment
         android:id="@+id/trendsFragment"
         android:name="com.github.libretube.ui.fragments.TrendsFragment"
         android:label="fragment_trends"
