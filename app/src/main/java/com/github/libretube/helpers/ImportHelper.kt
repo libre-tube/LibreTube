@@ -328,9 +328,10 @@ object ImportHelper {
     }
 
     @OptIn(ExperimentalSerializationApi::class)
-    suspend fun importWatchHistory(context: Context, uri: Uri, importFormat: ImportFormat) {
+    fun importWatchHistory(context: Context, uris: List<Uri>, importFormat: ImportFormat) {
         val videos = when (importFormat) {
             ImportFormat.YOUTUBEJSON -> {
+                uris.flatMap { uri->
                 context.contentResolver.openInputStream(uri)?.use {
                     JsonHelper.json.decodeFromStream<List<YouTubeWatchHistoryFileItem>>(it)
                 }
@@ -350,6 +351,7 @@ object ImportHelper {
                             thumbnailUrl = "${YOUTUBE_IMG_URL}/vi/${videoId}/${IMPORT_THUMBNAIL_QUALITY}.jpg"
                         )
                     }
+                }
             }
 
             else -> emptyList()
