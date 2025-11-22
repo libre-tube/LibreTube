@@ -5,10 +5,14 @@ import android.net.Uri
 import android.util.Log
 import androidx.core.net.toUri
 import androidx.documentfile.provider.DocumentFile
+import androidx.work.OneTimeWorkRequestBuilder
+import androidx.work.WorkManager
+import androidx.work.workDataOf
 import com.github.libretube.R
 import com.github.libretube.api.JsonHelper
 import com.github.libretube.api.PlaylistsHelper
 import com.github.libretube.api.SubscriptionHelper
+import com.github.libretube.constants.WorkersData
 import com.github.libretube.db.DatabaseHelper
 import com.github.libretube.db.obj.WatchHistoryItem
 import com.github.libretube.enums.ImportFormat
@@ -26,6 +30,7 @@ import com.github.libretube.obj.PipedPlaylistFile
 import com.github.libretube.obj.YouTubeWatchHistoryFileItem
 import com.github.libretube.ui.dialogs.ShareDialog.Companion.YOUTUBE_FRONTEND_URL
 import com.github.libretube.util.TextUtils
+import com.github.libretube.workers.ImportCoroutineWorker
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.decodeFromStream
@@ -329,43 +334,13 @@ object ImportHelper {
 
     @OptIn(ExperimentalSerializationApi::class)
     fun importWatchHistory(context: Context, uris: List<Uri>, importFormat: ImportFormat) {
-        val videos = when (importFormat) {
-            ImportFormat.YOUTUBEJSON -> {
-                uris.flatMap { uri->
-                context.contentResolver.openInputStream(uri)?.use {
-                    JsonHelper.json.decodeFromStream<List<YouTubeWatchHistoryFileItem>>(it)
-                }
-                    .orEmpty()
-                    .filter { it.activityControls.isNotEmpty() && it.subtitles.isNotEmpty() && it.titleUrl.isNotEmpty() }
-                    .reversed()
-                    .map {
-                        val videoId = it.titleUrl.takeLast(VIDEO_ID_LENGTH)
+        val workRequest = OneTimeWorkRequestBuilder<ImportCoroutineWorker>()
+            .setInputData(workDataOf(WorkersData.FILES to uris, WorkersData.IMPORT_TYPE to ImportFormat.YOUTUBEJSON,
+                WorkersData.IMPORT_FORMAT to importFormat))
+            .build()
 
-                        WatchHistoryItem(
-                            videoId = videoId,
-                            title = it.title.replaceFirst("Watched ", ""),
-                            uploader = it.subtitles.firstOrNull()?.name,
-                            uploaderUrl = it.subtitles.firstOrNull()?.url?.let { url ->
-                                url.substring(url.length - 24)
-                            },
-                            thumbnailUrl = "${YOUTUBE_IMG_URL}/vi/${videoId}/${IMPORT_THUMBNAIL_QUALITY}.jpg"
-                        )
-                    }
-                }
-            }
-
-            else -> emptyList()
-        }
-
-        for (video in videos) {
-            DatabaseHelper.addToWatchHistory(video)
-        }
-
-        if (videos.isEmpty()) {
-            context.toastFromMainDispatcher(R.string.emptyList)
-        } else {
-            context.toastFromMainDispatcher(R.string.success)
-        }
+        // Enqueue the work
+        WorkManager.getInstance(context).enqueue(workRequest)
     }
 
     private fun extractYTPlaylistName(context: Context, uri: Uri): String? {
