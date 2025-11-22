@@ -34,6 +34,7 @@ import video_streaming.StreamerContextOuterClass.StreamerContext
 import video_streaming.StreamerContextOuterClass.StreamerContext.SabrContext
 import video_streaming.UmpPartId.UMPPartId
 import video_streaming.VideoPlaybackAbrRequestOuterClass.VideoPlaybackAbrRequest
+import java.time.Instant
 
 class PlaybackRequest(
     /* Format for which new media data is being requested */
@@ -239,6 +240,9 @@ object SabrClient {
     /** Active SABR contexts that should be sent with requests. */
     private val activeSabrContexts = mutableSetOf<Int>()
 
+    /** Timestamp when the last request was made  */
+    private var lastRequestMs: Long? = null
+
     @OptIn(UnstableApi::class)
     fun selectFormat(representation: Representation) {
         if (MimeTypes.isAudio(representation.format.containerMimeType)) {
@@ -313,6 +317,7 @@ object SabrClient {
             backoffTime = null
         }
 
+        val now = Instant.now().toEpochMilli()
         val xtags = Xtags(audioFormat.formatId().xtags)
 
         val clientState = ClientAbrState.newBuilder()
@@ -320,6 +325,7 @@ object SabrClient {
             .setPlayerTimeMs(playbackRequest.segmentStartTimeMs.minus(500).coerceAtLeast(0))
             .setEnabledTrackTypesBitfield(if (videoFormat == null) 1 else 0)
             .setPlaybackRate(playbackRequest.playbackSpeed)
+            .setElapsedWallTimeMs(lastRequestMs?.let { now -  it } ?: 0 )
             .setAudioTrackId(audioFormat.stream.audioTrackId ?: "")
             .setDrcEnabled(audioFormat.stream.isDrc ?: false || xtags.isDrcAudio())
             .setEnableVoiceBoost(xtags.isVoiceBoosted())
@@ -362,6 +368,7 @@ object SabrClient {
             )
             .build()
 
+        lastRequestMs = Instant.now().toEpochMilli()
         val response = client.newCall(request).execute()
         if (!response.isSuccessful) {
             throw Exception("HTTP request failed: ${response.code}")
