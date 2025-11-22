@@ -252,6 +252,11 @@ object SabrClient {
         }
         val itag = playbackRequest.format.itag
 
+        // the player should never request data past the end of the stream
+        assert(
+            playbackRequest.playerPosition < (initializedFormats[itag]?.duration ?: Long.MAX_VALUE)
+        ) { "Requested segment for finished format" }
+
         Log.d(
             TAG,
             "getNextSegment: loading media data for $itag at position ${playbackRequest.playerPosition}"
