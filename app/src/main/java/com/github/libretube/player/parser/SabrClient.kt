@@ -47,7 +47,6 @@ class PlaybackRequest(
     val segmentStartTimeMs: Long,
     /* List of segments which are buffered for the format */
     val bufferedSegments: List<Long>,
-
 ) {
     companion object {
         fun initRequest(
@@ -314,7 +313,8 @@ object SabrClient {
         val xtags = Xtags(audioFormat.formatId().xtags)
 
         val clientState = ClientAbrState.newBuilder()
-            .setPlayerTimeMs(playbackRequest.playerPosition)
+            // we pretend we're slightly in the previous (n-1) segment, so we get n-th segment, instead of the (n+1)-th one
+            .setPlayerTimeMs(playbackRequest.segmentStartTimeMs.minus(500).coerceAtLeast(0))
             .setEnabledTrackTypesBitfield(if (videoFormat == null) 1 else 0)
             .setPlaybackRate(playbackRequest.playbackSpeed)
             .setAudioTrackId(audioFormat.stream.audioTrackId ?: "")
