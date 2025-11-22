@@ -9,8 +9,6 @@ import com.github.libretube.R
 import com.github.libretube.api.JsonHelper
 import com.github.libretube.api.PlaylistsHelper
 import com.github.libretube.api.SubscriptionHelper
-import com.github.libretube.db.DatabaseHelper
-import com.github.libretube.db.DatabaseHolder
 import com.github.libretube.db.obj.WatchHistoryItem
 import com.github.libretube.enums.ImportFormat
 import com.github.libretube.extensions.TAG
@@ -28,7 +26,6 @@ import com.github.libretube.obj.YouTubeWatchHistoryFileItem
 import com.github.libretube.ui.dialogs.ShareDialog.Companion.YOUTUBE_FRONTEND_URL
 import com.github.libretube.util.TextUtils
 import kotlinx.serialization.ExperimentalSerializationApi
-import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.decodeFromStream
 import kotlinx.serialization.json.encodeToStream
 import java.util.stream.Collectors
@@ -37,6 +34,7 @@ object ImportHelper {
     private const val IMPORT_THUMBNAIL_QUALITY = "mqdefault"
     private const val VIDEO_ID_LENGTH = 11
     private const val YOUTUBE_IMG_URL = "https://img.youtube.com"
+
 
     // format: playlistName-videos.csv, where "videos" could also be i18ned to a different language
     private val csvPlaylistNameRegex = Regex("""(.*)-(\w+)\.csv""")
@@ -329,41 +327,40 @@ object ImportHelper {
     }
 
     @OptIn(ExperimentalSerializationApi::class)
-    suspend fun importWatchHistory(context: Context, uri: Uri, importFormat: ImportFormat) {
-        val videos = when (importFormat) {
-            ImportFormat.YOUTUBEJSON -> {
-                context.contentResolver.openInputStream(uri)?.use {
-                    JsonHelper.json.decodeFromStream<List<YouTubeWatchHistoryFileItem>>(it)
-                }
-                    .orEmpty()
-                    .filter { it.activityControls.isNotEmpty() && it.subtitles.isNotEmpty() && it.titleUrl.isNotEmpty() }
-                    .reversed()
-                    .map {
-                        val videoId = it.titleUrl.takeLast(VIDEO_ID_LENGTH)
-
-                        WatchHistoryItem(
-                            videoId = videoId,
-                            title = it.title.replaceFirst("Watched ", ""),
-                            uploader = it.subtitles.firstOrNull()?.name,
-                            uploaderUrl = it.subtitles.firstOrNull()?.url?.let { url ->
-                                url.substring(url.length - 24)
-                            },
-                            thumbnailUrl = "${YOUTUBE_IMG_URL}/vi/${videoId}/${IMPORT_THUMBNAIL_QUALITY}.jpg"
+    fun parseWatchHistory(
+        context: Context,
+        uris: List<Uri>,
+        importFormat: ImportFormat
+    ): List<WatchHistoryItem> {
+        return uris.flatMap { uri ->
+            when (importFormat) {
+                ImportFormat.YOUTUBEJSON -> {
+                    val parsed = context.contentResolver.openInputStream(uri)?.use { inputStream ->
+                        JsonHelper.json.decodeFromStream<List<YouTubeWatchHistoryFileItem>>(
+                            inputStream
                         )
                     }
+
+                    parsed.orEmpty()
+                        .filter { it.activityControls.isNotEmpty() && it.subtitles.isNotEmpty() && it.titleUrl.isNotEmpty() }
+                        .reversed()
+                        .map {
+                            val videoId = it.titleUrl.takeLast(VIDEO_ID_LENGTH)
+
+                            WatchHistoryItem(
+                                videoId = videoId,
+                                title = it.title.replaceFirst("Watched ", ""),
+                                uploader = it.subtitles.firstOrNull()?.name,
+                                uploaderUrl = it.subtitles.firstOrNull()?.url?.let { url ->
+                                    url.substring(url.length - 24)
+                                },
+                                thumbnailUrl = "${YOUTUBE_IMG_URL}/vi/${videoId}/${IMPORT_THUMBNAIL_QUALITY}.jpg"
+                            )
+                        }
+                }
+
+                else -> emptyList()
             }
-
-            else -> emptyList()
-        }
-
-        for (video in videos) {
-            DatabaseHolder.Database.watchHistoryDao().insert(video)
-        }
-
-        if (videos.isEmpty()) {
-            context.toastFromMainDispatcher(R.string.emptyList)
-        } else {
-            context.toastFromMainDispatcher(R.string.success)
         }
     }
 

@@ -22,6 +22,7 @@ import com.github.libretube.ui.dialogs.BackupDialog
 import com.github.libretube.ui.dialogs.BackupDialog.Companion.BACKUP_DIALOG_REQUEST_KEY
 import com.github.libretube.ui.dialogs.RequireRestartDialog
 import com.github.libretube.util.TextUtils
+import com.github.libretube.workers.ImportCoroutineWorker
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -95,15 +96,7 @@ class BackupRestoreSettings : BasePreferenceFragment() {
 
     private val getWatchHistoryFile =
         registerForActivityResult(ActivityResultContracts.OpenMultipleDocuments()) { files ->
-            for (file in files) {
-                CoroutineScope(Dispatchers.IO).launch {
-                    ImportHelper.importWatchHistory(
-                        requireContext().applicationContext,
-                        file,
-                        importFormat
-                    )
-                }
-            }
+            ImportCoroutineWorker.startImportWatchHistoryWorker(requireContext().applicationContext, files, importFormat)
         }
 
     private val createPlaylistsFile =
