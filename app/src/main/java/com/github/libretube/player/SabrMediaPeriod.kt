@@ -67,7 +67,8 @@ class SabrMediaPeriod(
     init {
         val result = buildTrackGroups(
             drmSessionManager,
-            chunkSourceFactory, manifest.adaptationSets
+            chunkSourceFactory,
+            manifest.adaptationSets
         )
         trackGroups = result.first
         trackGroupInfos = result.second as Array<TrackGroupInfo>
@@ -317,9 +318,8 @@ class SabrMediaPeriod(
             val groupedAdaptationSetIndices = getGroupedAdaptationSetIndices(adaptationSets)
 
             val primaryGroupCount = groupedAdaptationSetIndices.size
-            val totalGroupCount = primaryGroupCount
-            val trackGroups = arrayOfNulls<TrackGroup>(totalGroupCount)
-            val trackGroupInfos = arrayOfNulls<TrackGroupInfo>(totalGroupCount)
+            val trackGroups = arrayOfNulls<TrackGroup>(primaryGroupCount)
+            val trackGroupInfos = arrayOfNulls<TrackGroupInfo>(primaryGroupCount)
 
             buildPrimaryTrackGroupInfos(
                 drmSessionManager,
@@ -352,8 +352,7 @@ class SabrMediaPeriod(
         private fun getGroupedAdaptationSetIndices(adaptationSets: List<AdaptationSet>): Array<IntArray> =
             MutableList(adaptationSets.size) { mutableListOf(it) }.map { group ->
                 group.sorted().toIntArray()
-            }
-                .toTypedArray()
+            }.toTypedArray()
 
         private fun buildPrimaryTrackGroupInfos(
             drmSessionManager: DrmSessionManager,
