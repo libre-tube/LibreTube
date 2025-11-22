@@ -31,9 +31,7 @@ import com.github.libretube.player.manifest.SabrManifest
 import com.github.libretube.player.parser.SabrClient
 import com.github.libretube.player.parser.SabrClient.init
 import com.google.protobuf.ByteString
-import okhttp3.internal.immutableListOf
 import java.util.Arrays
-import kotlin.collections.toIntArray
 
 /** A Sabr [MediaPeriod].  */
 @UnstableApi
@@ -152,7 +150,7 @@ class SabrMediaPeriod(
         compositeSequenceableLoader =
             compositeSequenceableLoaderFactory.create(
                 sampleStreams.toList(),
-                sampleStreamList.map { immutableListOf(it!!.primaryTrackType) })
+                sampleStreamList.map { listOf(it.primaryTrackType) })
 
         if (canReportInitialDiscontinuity) {
             canReportInitialDiscontinuity = false
