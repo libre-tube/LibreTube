@@ -152,7 +152,7 @@ class SabrMediaPeriod(
         compositeSequenceableLoader =
             compositeSequenceableLoaderFactory.create(
                 sampleStreams.toList(),
-                sampleStreamList.map { immutableListOf(it!!.primaryTrackType) })
+                sampleStreamList.map { immutableListOf(it.primaryTrackType) })
 
         if (canReportInitialDiscontinuity) {
             canReportInitialDiscontinuity = false
