@@ -544,4 +544,13 @@
     <string name="showing_results_for">Birti niðurstöður fyrir:</string>
     <string name="category_hook">Krækja/Kynning</string>
     <string name="category_hook_summary">Fyrir frásagnarlegar kynningar sem eiga að ná athygli áhorfenda (oftast sem fyrsta senan) með því að lýsa eða gefa í skyn atburði sem gerast síðar í sama myndskeiði eða næstu þáttum í þáttaröð</string>
+    <string name="checking_frequency_15_minutes">15 mínútur</string>
+    <string name="checking_frequency_30_minutes">30 mínútur</string>
+    <string name="checking_frequency_60_minutes">60 mínútur</string>
+    <string name="checking_frequency_2_hours">2 klukkustundir</string>
+    <string name="checking_frequency_6_hours">6 klukkustundir</string>
+    <string name="checking_frequency_12_hours">12 klukkustundir</string>
+    <string name="checking_frequency_1_day">1 dagur</string>
+    <string name="backup_creation_success">Tókst að ljúka öryggisafritun</string>
+    <string name="backup_creation_failed">Mistókst að útbúa öryggisafrit</string>
 </resources>

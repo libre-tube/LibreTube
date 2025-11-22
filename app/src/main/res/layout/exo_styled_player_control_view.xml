@@ -195,6 +195,16 @@
                 android:scaleType="fitCenter"
                 app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Small" />
 
+            <com.google.android.material.progressindicator.LinearProgressIndicator
+                android:id="@+id/previewProgressIndicator"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="?shapeCornerSizeSmall"
+                android:layout_gravity="bottom"
+                android:indeterminate="true"
+                android:visibility="invisible"
+                app:trackThickness="2.5dp" />
+
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

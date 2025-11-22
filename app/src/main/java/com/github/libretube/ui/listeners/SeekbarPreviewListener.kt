@@ -4,6 +4,7 @@ import android.text.format.DateUtils
 import android.view.View
 import android.view.ViewGroup.MarginLayoutParams
 import androidx.core.view.isGone
+import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
 import androidx.core.view.updateLayoutParams
 import androidx.media3.common.util.UnstableApi
@@ -12,6 +13,8 @@ import com.github.libretube.databinding.ExoStyledPlayerControlViewBinding
 import com.github.libretube.ui.interfaces.TimeFrameReceiver
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import kotlin.math.absoluteValue
@@ -22,23 +25,17 @@ class SeekbarPreviewListener(
     private val playerBinding: ExoStyledPlayerControlViewBinding,
     private val duration: Long
 ) : TimeBar.OnScrubListener {
-    private var scrubInProgress = false
     private var lastPreviewPosition = Long.MAX_VALUE
+    private var prevProcessPreviewJob : Job? = null
 
     override fun onScrubStart(timeBar: TimeBar, position: Long) {
-        scrubInProgress = true
-
-        CoroutineScope(Dispatchers.IO).launch {
-            processPreview(position)
-        }
+        processPreview(position)
     }
 
     /**
      * Show a preview of the scrubber position
      */
     override fun onScrubMove(timeBar: TimeBar, position: Long) {
-        scrubInProgress = true
-
         playerBinding.seekbarPreviewPosition.text = DateUtils.formatElapsedTime(position / 1000)
 
         // minimum of five seconds of additional seeking in order to show a preview
@@ -47,16 +44,18 @@ class SeekbarPreviewListener(
             return
         }
 
-        CoroutineScope(Dispatchers.IO).launch {
-            processPreview(position)
-        }
+        playerBinding.previewProgressIndicator.isVisible = true
+        processPreview(position)
+        updatePreviewX(position)
     }
 
     /**
      * Hide the seekbar preview with a short delay
      */
     override fun onScrubStop(timeBar: TimeBar, position: Long, canceled: Boolean) {
-        scrubInProgress = false
+        prevProcessPreviewJob?.cancel()
+        prevProcessPreviewJob = null
+
         // animate the disappearance of the preview image
         playerBinding.seekbarPreview.animate()
             .alpha(0f)
@@ -73,16 +72,17 @@ class SeekbarPreviewListener(
     /**
      * Make a request to get the image frame and update its position
      */
-    private suspend fun processPreview(position: Long) {
-        lastPreviewPosition = position
+    private fun processPreview(position: Long) {
+        prevProcessPreviewJob?.cancel()
+        prevProcessPreviewJob = CoroutineScope(Dispatchers.IO).launch {
+            lastPreviewPosition = position
 
-        val frame = timeFrameReceiver.getFrameAtTime(position)
-        if (!scrubInProgress) return
-
-        withContext(Dispatchers.Main) {
-            playerBinding.seekbarPreviewImage.setImageBitmap(frame)
-            playerBinding.seekbarPreview.isVisible = true
-            updatePreviewX(position)
+            val frame = timeFrameReceiver.getFrameAtTime(position)
+            withContext(Dispatchers.Main) {
+                playerBinding.previewProgressIndicator.isInvisible = true
+                playerBinding.seekbarPreviewImage.setImageBitmap(frame)
+                playerBinding.seekbarPreview.isVisible = true
+            }
         }
     }
 

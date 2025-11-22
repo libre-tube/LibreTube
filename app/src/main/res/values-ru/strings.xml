@@ -546,4 +546,13 @@
     <string name="delete_playlist_include_vidoes">Также удалить все видео из плейлиста?</string>
     <string name="did_you_mean">Вы имели в виду:</string>
     <string name="showing_results_for">Показаны результаты по запросу:</string>
+    <string name="checking_frequency_15_minutes">15 минут</string>
+    <string name="checking_frequency_30_minutes">30 минут</string>
+    <string name="checking_frequency_60_minutes">60 минут</string>
+    <string name="checking_frequency_2_hours">2 часа</string>
+    <string name="checking_frequency_6_hours">6 часов</string>
+    <string name="checking_frequency_12_hours">12 часов</string>
+    <string name="checking_frequency_1_day">1 день</string>
+    <string name="backup_creation_success">Резервное копирование успешно завершено</string>
+    <string name="backup_creation_failed">Не удалось создать резервную копию</string>
 </resources>
