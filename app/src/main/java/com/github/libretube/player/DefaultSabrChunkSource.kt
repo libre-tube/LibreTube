@@ -61,7 +61,7 @@ class DefaultSabrChunkSource(
             transferListener: TransferListener?,
             playerId: PlayerId,
             cmcdConfiguration: CmcdConfiguration?,
-        ): SabrChunkSource? {
+        ): SabrChunkSource {
             val dataSource = dataSourceFactory.createDataSource()
             transferListener?.let { dataSource.addTransferListener(it) }
             return DefaultSabrChunkSource(
@@ -415,10 +415,7 @@ class DefaultSabrChunkSource(
             val dataSpec = DataSpec.Builder()
                 // must be non-null, but is unused
                 .setUri(SabrClient.url)
-                //TODO: pass along additional data
-                .setCustomData(representationHolder.representation.formatId())
                 .build()
-
             return dataSpec
         }
 
