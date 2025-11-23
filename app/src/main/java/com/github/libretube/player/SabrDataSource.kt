@@ -30,7 +30,7 @@ class SabrDataSource() : BaseDataSource(true) {
     }
 
     override fun getUri(): Uri? {
-        if (data == null || !data!!.hasRemaining()) {
+        if (data?.hasRemaining() != true) {
             // signal that this data source failed to be opened
             return null
         }
