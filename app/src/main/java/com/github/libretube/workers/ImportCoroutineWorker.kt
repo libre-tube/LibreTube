@@ -1,8 +1,11 @@
 package com.github.libretube.workers
 
 import android.content.Context
+import android.content.pm.ServiceInfo
 import android.net.Uri
+import android.os.Build
 import androidx.work.CoroutineWorker
+import androidx.work.ForegroundInfo
 import androidx.work.WorkerParameters
 import com.github.libretube.R
 import com.github.libretube.api.JsonHelper
@@ -80,5 +83,20 @@ class ImportCoroutineWorker(appContext: Context, workerParams: WorkerParameters)
             }
         }
     }
+
+
+    override suspend fun getForegroundInfo() = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+        ForegroundInfo(
+            id.hashCode(),
+            notificationFactory.create(lastPublishedState),
+            ServiceInfo.FOREGROUND_SERVICE_TYPE_DATA_SYNC,
+        )
+    } else {
+        ForegroundInfo(
+            id.hashCode(),
+            notificationFactory.create(lastPublishedState),
+        )
+    }
+
 
 }

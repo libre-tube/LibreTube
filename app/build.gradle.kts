@@ -4,6 +4,8 @@ plugins {
     id("kotlinx-serialization")
     id("kotlin-parcelize")
     id("androidx.navigation.safeargs.kotlin")
+    id("com.google.dagger.hilt.android") version "2.41" apply false
+
     alias(libs.plugins.baselineprofile)
     alias(libs.plugins.ksp)
 }
@@ -156,7 +158,7 @@ dependencies {
 
     /* AndroidX Paging */
     implementation(libs.androidx.paging)
-
+    implementation(libs.hilt.android)
     /* Testing */
     testImplementation(libs.junit)
 }

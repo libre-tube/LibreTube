@@ -3,6 +3,7 @@ appcompat = "1.7.1"
 core = "1.13.1"
 documentfile = "1.1.0"
 gradle = "8.6.1"
+hiltAndroid = "2.57.2"
 junit = "4.13.2"
 kotlin = "1.9.25"
 ksp = "1.9.25-1.0.20"
@@ -44,6 +45,7 @@ androidx-constraintlayout = { group = "androidx.constraintlayout", name = "const
 androidx-documentfile = { module = "androidx.documentfile:documentfile", version.ref = "documentfile" }
 androidx-fragment = { group = "androidx.fragment", name = "fragment-ktx", version.ref = "fragment" }
 gradle = { module = "com.android.tools.build:gradle", version.ref = "gradle" }
+hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hiltAndroid" }
 junit = { module = "junit:junit", version.ref = "junit" }
 kotlin-gradle-plugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
 kotlin-serialization = { module = "org.jetbrains.kotlin:kotlin-serialization", version.ref = "kotlin" }
