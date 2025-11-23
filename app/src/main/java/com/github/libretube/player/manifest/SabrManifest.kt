@@ -34,10 +34,6 @@ class SabrManifest(
      */
     val videoPlaybackUstreamerConfig: ByteArray,
     /**
-     * Proof or Origin token.
-     */
-    var poToken: ByteArray?,
-    /**
      * The duration of the presentation in milliseconds, or [C.TIME_UNSET] if not applicable.
      */
     val durationMs: Long,
@@ -51,7 +47,6 @@ class SabrManifest(
         videoId,
         streams.serverAbrStreamingUrl!!.toUri(),
         Base64.decode(streams.videoPlaybackUstreamerConfig!!, Base64.URL_SAFE),
-        null,
         streams.duration * 1000,
     ) {
         val videoAdaptionSets = streams.videoStreams.groupBy { it.mimeType }
