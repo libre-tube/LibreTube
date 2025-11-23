@@ -103,7 +103,7 @@ class SabrManifest(
             format,
             stream.itag!!,
             stream.lastModified!!,
-            null,
+            stream.xtags,
             stream
         )
     }

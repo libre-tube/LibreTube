@@ -71,6 +71,7 @@ private fun VideoStream.toPipedStream() = PipedStream(
     contentLength = itagItem?.contentLength ?: 0L,
     itag = itagItem?.id,
     lastModified = itagItem?.lastModified,
+    xtags = itagItem?.xtags,
 )
 
 private fun AudioStream.toPipedStream() = PipedStream(
@@ -92,7 +93,8 @@ private fun AudioStream.toPipedStream() = PipedStream(
     videoOnly = false,
     itag = itagItem?.id,
     lastModified = itagItem?.lastModified,
-    isDrc = itagItem?.isDrc
+    isDrc = itagItem?.isDrc,
+    xtags = itagItem?.xtags,
 )
 
 fun StreamInfoItem.toStreamItem(
