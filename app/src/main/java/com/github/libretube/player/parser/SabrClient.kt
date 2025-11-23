@@ -239,6 +239,9 @@ object SabrClient {
     /** Active SABR contexts that should be sent with requests. */
     private val activeSabrContexts = mutableSetOf<Int>()
 
+    /** Timestamp of the last seek */
+    var lastSeekMs: Long? = null
+
     /** Timestamp when the last request was made  */
     private var lastRequestMs: Long? = null
 
@@ -325,6 +328,7 @@ object SabrClient {
             .setEnabledTrackTypesBitfield(if (videoFormat == null) 1 else 0)
             .setPlaybackRate(playbackRequest.playbackSpeed)
             .setElapsedWallTimeMs(lastRequestMs?.let { now -  it } ?: 0 )
+            .setTimeSinceLastSeek(lastSeekMs?.let { now - it } ?: 0)
             .setAudioTrackId(audioFormat.stream.audioTrackId ?: "")
             .setDrcEnabled(audioFormat.stream.isDrc ?: false || xtags.isDrcAudio())
             .setEnableVoiceBoost(xtags.isVoiceBoosted())
