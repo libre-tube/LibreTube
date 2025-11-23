@@ -525,8 +525,10 @@ object SabrClient {
             }
 
             UMPPartId.RELOAD_PLAYER_RESPONSE -> {
-                val reloadPlaybackContext = ReloadPlaybackContext.parseFrom(part.data)
-                TODO("Handle request to reload the player")
+                // this is called if the streams are expired or a new configuration feature needs to be set
+                // in either case, we purposefully crash the player here, as the first one is a rare edge-case
+                // and the second one cannot be handled
+                throw Exception("Server requested player reload")
             }
 
             UMPPartId.STREAM_PROTECTION_STATUS -> {
