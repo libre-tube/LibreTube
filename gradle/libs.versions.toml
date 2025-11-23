@@ -3,6 +3,7 @@ appcompat = "1.7.1"
 core = "1.18.0"
 documentfile = "1.1.0"
 gradle = "9.2.1"
+hiltAndroid = "2.57.2"
 junit = "4.13.2"
 kotlin = "2.3.21"
 ksp = "2.3.5"
@@ -45,6 +46,8 @@ androidx-core-splashscreen = { group = "androidx.core", name = "core-splashscree
 androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
 androidx-documentfile = { module = "androidx.documentfile:documentfile", version.ref = "documentfile" }
 androidx-fragment = { group = "androidx.fragment", name = "fragment-ktx", version.ref = "fragment" }
+gradle = { module = "com.android.tools.build:gradle", version.ref = "gradle" }
+hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hiltAndroid" }
 junit = { module = "junit:junit", version.ref = "junit" }
 logging-interceptor = { module = "com.squareup.okhttp3:logging-interceptor", version.ref = "loggingInterceptor" }
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }

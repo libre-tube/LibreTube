@@ -1,12 +1,11 @@
 import java.util.Properties
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
-import com.google.protobuf.gradle.id
-
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.kotlin.parcelize)
     alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.androidx.navigation.safeargs)
+    id("com.google.dagger.hilt.android") version "2.41" apply false
     alias(libs.plugins.baselineprofile)
     alias(libs.plugins.ksp)
     alias(libs.plugins.google.protobuf)
@@ -183,7 +182,7 @@ dependencies {
 
     /* AndroidX Paging */
     implementation(libs.androidx.paging)
-
+    implementation(libs.hilt.android)
     /* Testing */
     testImplementation(libs.junit)
 }
