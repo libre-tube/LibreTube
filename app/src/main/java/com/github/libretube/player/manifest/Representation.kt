@@ -12,7 +12,7 @@ data class Representation(
     val format: Format,
     val itag: Int,
     val lastModified: Long,
-    val xtags: String? = null,
+    val xtags: String?,
     val stream: PipedStream,
 ) {
     fun formatId(): FormatId =
