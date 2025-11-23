@@ -187,8 +187,8 @@
     <string name="watch_history_summary">تتبع مقاطع الفيديو التي تمت مشاهدتها محليا</string>
     <string name="watch_positions_title">تذكر مواضع التشغيل</string>
     <string name="reset_watch_positions">اعادة تعيين</string>
-    <string name="system_caption_style">نمط التسمية التوضيحية للنظام</string>
-    <string name="captions">التسميات التوضيحيه</string>
+    <string name="system_caption_style">عرض التسميات التوضيحية</string>
+    <string name="captions">التسميات التوضيحية</string>
     <string name="none">لاشيء</string>
     <string name="data_saver_mode_summary">تخطي الصور المصغرة والصور الأخرى</string>
     <string name="history_summary">سجل المشاهدة والبحث</string>
@@ -199,7 +199,7 @@
     <string name="worst_quality">أسوأ</string>
     <string name="default_subtitle_language">لغة الترجمة</string>
     <string name="notifications">الإشعارات</string>
-    <string name="notify_new_streams">عرض إشعارات لأحداث البث الجديدة</string>
+    <string name="notify_new_streams">إشعارات المحتوى الجديد</string>
     <string name="notify_new_streams_summary">إشعارات حول المحتوى الجديد من منشئي المحتوى الذين تتابعهم</string>
     <string name="checking_frequency">تحقق من الإشعارات كل</string>
     <string name="irreversible">هل أنت متأكد؟ هذا لا يمكن التراجع عنه!</string>
@@ -322,8 +322,8 @@
     <string name="pause">إيقاف مؤقت</string>
     <string name="rewind">الترجيع</string>
     <string name="forward">التقديم</string>
-    <string name="alternative_pip_controls">ضوابط \"الفيديوهات العائمة\" البديلة</string>
-    <string name="alternative_pip_controls_summary">إظهار الصوت فقط وتخطي ضوابط \"الفيديوهات العائمة\" بدلاً من التقديم والترجيع</string>
+    <string name="alternative_pip_controls">ضوابط الفيديوهات العائمة</string>
+    <string name="alternative_pip_controls_summary">إظهار الصوت فقط وتخطي ضوابط الفيديوهات العائمة بدلاً من التقديم والترجيع</string>
     <string name="audio_only_mode">وضع الصوت فقط</string>
     <string name="audio_only_mode_summary">حول LibreTube إلى مشغل موسيقى</string>
     <string name="no_subtitle">لا توجد ترجمة</string>
@@ -352,13 +352,13 @@
     <string name="uploaderAndVideoCount">%1$s • %2$d مقاطع فيديو</string>
     <string name="disable_proxy">تعطيل وكيل Piped</string>
     <string name="disable_proxy_summary">تجهيز الفيديو والصورة بشكل مباشر من خوادم يوتيوب قم بتمكين هذا الخيار فقط إذا كنت تستخدم الشبكات الافتراضية الخاصة (VPN) بشكل دائم</string>
-    <string name="auto_fullscreen_shorts">ملء الشاشة تلقائيًا على مقاطع الفيديو القصيرة</string>
+    <string name="auto_fullscreen_shorts">ملء الشاشة لمقاطع القصيرة</string>
     <string name="new_group">جديد</string>
     <string name="group_name">أسم المجموعة</string>
     <string name="channel_groups">مجموعات القنوات</string>
     <string name="play_automatically">تشغيل تلقائيا</string>
     <string name="play_automatically_summary">بدء تشغيل الفيديو تلقائيا عند تحديده</string>
-    <string name="fullscreen_gestures">الدخول/الخروج من إيماءات ملء الشاشة</string>
+    <string name="fullscreen_gestures">إيماءات التحكم بملء الشاشة</string>
     <string name="go_to_video">الذهاب إلى الفيديو</string>
     <plurals name="channel_new_streams">
         <item quantity="zero">%d تدفق جديد</item>
@@ -369,7 +369,7 @@
         <item quantity="other">%d تدفقات جديدة</item>
     </plurals>
     <string name="show_stream_thumbnails">إظهار الصور المصغرة للبث</string>
-    <string name="show_stream_thumbnails_summary">يعرض صورة مصغرة من تيار جديد . تمكين هذه الميزة سوف تستهلك بيانات إضافية</string>
+    <string name="show_stream_thumbnails_summary">يعرض صورة مصغرة من تيار جديد تمكين هذه الميزة سوف تستهلك بيانات إضافية</string>
     <string name="unlimited_search_history">سجل بحث غير محدود</string>
     <string name="duration">المدة</string>
     <string name="duration_reversed">المدة (معكوسة)</string>
@@ -457,7 +457,7 @@
     <string name="no_fullscreen_resolution">لا توجد دقة لملء الشاشة</string>
     <string name="same_as_fullscreen">مطابق لإعداد الشاشة الكاملة</string>
     <string name="playback_during_call_summary">لاحظ أن هذا يؤثر أيضًا على التطبيق بحيث لا يتعامل مع أي نوع من التركيز الصوتي بعد الآن</string>
-    <string name="playback_during_call">متابعة التشغيل أثناء المكالمة الهاتفية</string>
+    <string name="playback_during_call">متابعة التشغيل أثناء المكالمة</string>
     <string name="autoplay_playlists_summary">تشغيل الفيديو التالي تلقائيًا في قوائم التشغيل بغض النظر عن إعداد التشغيل التلقائي المحدد</string>
     <string name="autoplay_playlists">شغّل قوائم التشغيل تلقائيًا</string>
     <string name="remember_playback_speed">تذكر سرعة التشغيل</string>
@@ -479,7 +479,7 @@
     <string name="add_to_group">إضافة إلى المجموعة</string>
     <string name="uptime">وقت تشغيل %.2f%%</string>
     <string name="grid_landscape">أعمدة الشبكة (أفقي)</string>
-    <string name="rich_caption_rendering">تقديم التسمية التوضيحية الغنية</string>
+    <string name="rich_caption_rendering">التسميات التوضيحية المتقدمة</string>
     <string name="rich_caption_rendering_summary">عرض التسميات التوضيحية على الويب للحصول على تجربة أكثر ثراءً وتخصيصًا</string>
     <string name="copy_tooltip">نسخ</string>
     <string name="change">غيّر</string>
@@ -489,7 +489,7 @@
     <string name="default_language">الافتراضي</string>
     <string name="download_playlist">نزّل قائمة التشغيل</string>
     <string name="download_playlist_note">الرجاء تحديد الحد الأقصى لجودة الصوت/الفيديو للتنزيل. سيتم تنزيل التسميات التوضيحية فقط إذا كانت متوفرة.</string>
-    <string name="enqueue_playlist_description">يعرض إشعارًا عند وضع مقاطع فيديو في قائمة التشغيل لتنزيلها.</string>
+    <string name="enqueue_playlist_description">يعرض إشعارًا عند وضع مقاطع فيديو في قائمة التشغيل لتنزيلها</string>
     <string name="enqueueing_playlist_download">وضع مقاطع الفيديو في قائمة الانتظار لتنزيل قائمة التشغيل %1$s</string>
     <string name="delete_all">سيتم حذف جميع التنزيلات!</string>
     <string name="also_clear_watch_positions">أيضًا امسح مواضع المشاهدة</string>
@@ -511,7 +511,7 @@
     <string name="pip">فيديو عائم</string>
     <string name="local_stream_extraction_summary">جلب معلومات تشغيل الفيديو مباشرة من YouTube دون استخدام Piped</string>
     <string name="local_stream_extraction">استخراج البث المحلي</string>
-    <string name="local_ryd">مستخرج بيانات عدم الإعجاب من يوتيوب باستخدام RYD</string>
+    <string name="local_ryd">مستخرج بيانات عدم الإعجاب</string>
     <string name="local_ryd_summary">جلب معلومات عدم الإعجاب مباشرة من https://returnyoutubedislikeapi.com</string>
     <string name="import_watch_history">استيراد سجل المشاهدة</string>
     <string name="audio_codecs">مرمازات الصوت</string>
