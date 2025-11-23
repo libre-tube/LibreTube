@@ -101,10 +101,7 @@ class SabrManifest(
     companion object {
         private fun buildRepresentation(stream: PipedStream, format: Format) = Representation(
             format,
-            stream.itag!!,
-            stream.lastModified!!,
-            stream.xtags,
-            stream
+            stream,
         )
     }
 }
