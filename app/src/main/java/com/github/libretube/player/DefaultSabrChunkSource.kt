@@ -32,6 +32,7 @@ import com.github.libretube.player.manifest.Representation
 import com.github.libretube.player.manifest.SabrManifest
 import com.github.libretube.player.parser.PlaybackRequest
 import com.github.libretube.player.parser.SabrClient
+import java.time.Instant
 
 /** A default [SabrChunkSource] implementation.  */
 @UnstableApi
@@ -122,6 +123,9 @@ class DefaultSabrChunkSource(
     }
 
     override fun getAdjustedSeekPositionUs(positionUs: Long, seekParameters: SeekParameters): Long {
+        // inform the server when we last sought to a new position
+        SabrClient.lastSeekMs = Instant.now().toEpochMilli()
+
         // Segments are aligned across representations, so any segment index will do.
         for (representationHolder in representationHolders) {
             if (representationHolder.chunkIndex != null) {
