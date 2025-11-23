@@ -10,12 +10,12 @@ import misc.Common.FormatId
 data class Representation(
     /** The format of the representation.  */
     val format: Format,
-    val itag: Int,
-    val lastModified: Long,
-    val xtags: String?,
+    /** Metadata about the stream.  */
     val stream: PipedStream,
 ) {
-    fun formatId(): FormatId =
-        FormatId.newBuilder().setItag(itag).setLastModified(lastModified).setXtags(xtags ?: "")
-            .build()
+    fun formatId(): FormatId = FormatId.newBuilder()
+        .setItag(stream.itag!!)
+        .setLastModified(stream.lastModified!!)
+        .setXtags(stream.xtags ?: "")
+        .build()
 }
