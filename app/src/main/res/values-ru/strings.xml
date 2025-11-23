@@ -521,7 +521,7 @@
     <string name="category_exclusive_access">Эксклюзивный доступ</string>
     <string name="crashlog">Журнал вылета</string>
     <string name="import_format_list_of_urls">Список ссылок или идентификаторов видео</string>
-    <string name="export_playlist">Экспорт списка воспроизведения</string>
+    <string name="export_playlist">Экспортировать плейлист</string>
     <string name="never_show_again">Больше не показывать</string>
     <string name="local_feed_extraction">Извлечение локального источника</string>
     <string name="local_feed_extraction_summary">Получать поток непосредственно с YouTube. Это может быть значительно медленнее.</string>
