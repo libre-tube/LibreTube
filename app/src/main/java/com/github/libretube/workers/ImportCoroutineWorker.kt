@@ -15,11 +15,20 @@ import com.github.libretube.db.obj.WatchHistoryItem
 import com.github.libretube.enums.ImportFormat
 import com.github.libretube.enums.ImportType
 import com.github.libretube.extensions.toastFromMainDispatcher
+import com.github.libretube.factory.NotificationFactory
 import com.github.libretube.obj.YouTubeWatchHistoryFileItem
+import com.github.libretube.util.YoutubeHlsPlaylistParser
+import dagger.assisted.AssistedInject
 import kotlinx.serialization.json.decodeFromStream
 
-class ImportCoroutineWorker(appContext: Context, workerParams: WorkerParameters) :
+class ImportCoroutineWorker @AssistedInject constructor(
+    appContext: Context,
+    workerParams: WorkerParameters,
+    notificationFactoryFactory: NotificationFactory.Factory
+) :
     CoroutineWorker(appContext, workerParams) {
+    private val notificationFactory = notificationFactoryFactory.create()
+
     private val IMPORT_THUMBNAIL_QUALITY = "mqdefault"
     private val VIDEO_ID_LENGTH = 11
     private val YOUTUBE_IMG_URL = "https://img.youtube.com"
@@ -88,13 +97,13 @@ class ImportCoroutineWorker(appContext: Context, workerParams: WorkerParameters)
     override suspend fun getForegroundInfo() = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
         ForegroundInfo(
             id.hashCode(),
-            notificationFactory.create(lastPublishedState),
+            notificationFactory.create(),
             ServiceInfo.FOREGROUND_SERVICE_TYPE_DATA_SYNC,
         )
     } else {
         ForegroundInfo(
             id.hashCode(),
-            notificationFactory.create(lastPublishedState),
+            notificationFactory.create(),
         )
     }
 

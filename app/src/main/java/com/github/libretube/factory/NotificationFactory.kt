@@ -12,40 +12,29 @@ import dagger.assisted.AssistedInject
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.sync.withLock
 import java.util.UUID
+import com.github.libretube.R
 
 private const val CHANNEL_ID_DEFAULT = "download"
 private const val CHANNEL_ID_SILENT = "download_bg"
 class NotificationFactory @AssistedInject constructor(
-    @ApplicationContext private val context: Context,
-    private val workManager: WorkManager,
-    @Assisted private val uuid: UUID,
-    @Assisted val isSilent: Boolean) {
+    @ApplicationContext private val context: Context) {
 
-    private val builder = NotificationCompat.Builder(context, if (isSilent) CHANNEL_ID_SILENT else CHANNEL_ID_DEFAULT)
+    private val builder = NotificationCompat.Builder(context,CHANNEL_ID_DEFAULT)
 
-    suspend fun create(state: DownloadState?): Notification {
-        if (state == null) {
-            builder.setContentTitle(context.getString(R.string.manga_downloading_))
-            builder.setContentText(context.getString(R.string.preparing_))
-        } else {
-            builder.setContentTitle(state.manga.title)
-            builder.setContentText(context.getString(R.string.manga_downloading_))
-        }
-        builder.setProgress(1, 0, true)
-        builder.setSmallIcon(android.R.drawable.stat_sys_download)
-        builder.setContentIntent(queueIntent)
-        builder.setStyle(null)
-        builder.setLargeIcon(if (state != null) getCover(state.manga)?.toBitmap() else null)
-        builder.clearActions()
-        builder.setSubText(null)
-        builder.setShowWhen(false)
+    suspend fun create(): Notification {
+        val builder = NotificationCompat.Builder(context, "progress_channel")
+            .setSmallIcon(R.drawable.ic_notification)
+            .setContentTitle("Downloading…")
+            .setContentText("Hello World")
+            .setOnlyAlertOnce(true)
+            .setOngoing(true)
         return builder.build()
+    }
+
+    @AssistedFactory
+    interface Factory {
+        fun create(): NotificationFactory
     }
 }
 
 
-@AssistedFactory
-interface Factory {
-
-    fun create(uuid: UUID, isSilent: Boolean): NotificationFactory
-}
