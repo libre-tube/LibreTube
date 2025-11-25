@@ -245,6 +245,22 @@ object SabrClient {
     /** Timestamp when the last request was made  */
     private var lastRequestMs: Long? = null
 
+    /**
+     * Timestamp when the user/player last selected a format.
+     *
+     * For us, all format selections are manual, as we do not let the server decide the format.
+     **/
+    var lastManualFormatSelectionMs: Long? = null
+
+    /**
+     * Timestamp when the user last made an action.
+     *
+     * This is likely the same as [lastManualFormatSelectionMs] for us,
+     * as we handle no other actions.
+     **/
+    var lastActionMs: Long? = null
+
+
     @OptIn(UnstableApi::class)
     fun selectFormat(representation: Representation) {
         if (MimeTypes.isAudio(representation.format.containerMimeType)) {
@@ -329,6 +345,8 @@ object SabrClient {
             .setPlaybackRate(playbackRequest.playbackSpeed)
             .setElapsedWallTimeMs(lastRequestMs?.let { now -  it } ?: 0 )
             .setTimeSinceLastSeek(lastSeekMs?.let { now - it } ?: 0)
+            .setTimeSinceLastManualFormatSelectionMs(lastManualFormatSelectionMs?.let { now - it } ?: 0)
+            .setTimeSinceLastActionMs(lastActionMs?.let { now - it } ?: 0)
             .setAudioTrackId(audioFormat.stream.audioTrackId ?: "")
             .setDrcEnabled(audioFormat.stream.isDrc ?: false || xtags.isDrcAudio())
             .setEnableVoiceBoost(xtags.isVoiceBoosted())
