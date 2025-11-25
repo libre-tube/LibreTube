@@ -32,6 +32,7 @@ import com.github.libretube.player.parser.SabrClient
 import com.github.libretube.player.parser.SabrClient.init
 import com.google.protobuf.ByteString
 import okhttp3.internal.immutableListOf
+import java.time.Instant
 import java.util.Arrays
 import kotlin.collections.toIntArray
 
@@ -139,6 +140,11 @@ class SabrMediaPeriod(
         selectNewStreams(
             selections, streams, streamResetFlags, positionUs, streamIndexToTrackGroupIndex
         )
+
+        // inform the server about when we changed the format
+        val now = Instant.now().toEpochMilli()
+        SabrClient.lastManualFormatSelectionMs = now
+        SabrClient.lastActionMs = now
 
         val sampleStreamList: MutableList<ChunkSampleStream<SabrChunkSource?>> = mutableListOf();
         for (sampleStream in streams) {
