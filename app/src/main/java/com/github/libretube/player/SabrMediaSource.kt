@@ -25,12 +25,14 @@ import androidx.media3.exoplayer.upstream.CmcdConfiguration
 import androidx.media3.exoplayer.upstream.DefaultLoadErrorHandlingPolicy
 import androidx.media3.exoplayer.upstream.LoadErrorHandlingPolicy
 import com.github.libretube.player.manifest.SabrManifest
+import com.github.libretube.player.parser.SabrClient
 
 /** A Sabr [MediaSource].  */
 @UnstableApi
 class SabrMediaSource(
     private var mediaItem: MediaItem,
     private val manifest: SabrManifest,
+    private val sabrClient: SabrClient,
     private val chunkSourceFactory: SabrChunkSource.Factory,
     private val compositeSequenceableLoaderFactory: CompositeSequenceableLoaderFactory,
     private val cmcdConfiguration: CmcdConfiguration?,
@@ -76,16 +78,14 @@ class SabrMediaSource(
          */
         override fun createMediaSource(mediaItem: MediaItem): SabrMediaSource {
             Assertions.checkNotNull<LocalConfiguration>(mediaItem.localConfiguration)
-            val cmcdConfiguration =
-                if (cmcdConfigurationFactory == null)
-                    null
-                else
-                    cmcdConfigurationFactory!!.createCmcdConfiguration(mediaItem)
+            val cmcdConfiguration = cmcdConfigurationFactory?.createCmcdConfiguration(mediaItem)
+            val sabrClient = SabrClient(manifest)
 
             return SabrMediaSource(
                 mediaItem,
                 manifest,
-                DefaultSabrChunkSource.Factory(SabrDataSource.Factory()),
+                sabrClient,
+                DefaultSabrChunkSource.Factory(SabrDataSource.Factory(sabrClient)),
                 compositeSequenceableLoaderFactory,
                 cmcdConfiguration,
                 drmSessionManagerProvider.get(mediaItem),
@@ -143,6 +143,7 @@ class SabrMediaSource(
         val mediaPeriod =
             SabrMediaPeriod(
                 manifest,
+                sabrClient,
                 periodIndex,
                 chunkSourceFactory,
                 mediaTransferListener,
