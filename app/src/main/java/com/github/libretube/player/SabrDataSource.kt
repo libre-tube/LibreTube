@@ -13,17 +13,21 @@ import java.io.IOException
 import java.nio.ByteBuffer
 
 @UnstableApi
-class SabrDataSource() : BaseDataSource(true) {
+class SabrDataSource(
+    private val sabrClient: SabrClient,
+) : BaseDataSource(true) {
     private var data: ByteBuffer? = null
 
-    class Factory() : DataSource.Factory {
-        override fun createDataSource(): DataSource = SabrDataSource()
+    class Factory(
+        private val sabrClient: SabrClient
+    ) : DataSource.Factory {
+        override fun createDataSource(): DataSource = SabrDataSource(sabrClient)
     }
 
     override fun open(dataSpec: DataSpec): Long {
         val playbackRequest = dataSpec.customData as PlaybackRequest?
 
-        val segment = runCatching { SabrClient.getNextSegment(playbackRequest!!) }
+        val segment = runCatching { sabrClient.getNextSegment(playbackRequest!!) }
             .getOrNull() ?: throw IOException()
         data = ByteBuffer.wrap(segment.data())
         return data!!.remaining().toLong()
@@ -34,7 +38,7 @@ class SabrDataSource() : BaseDataSource(true) {
             // signal that this data source failed to be opened
             return null
         }
-        return SabrClient.url.toUri()
+        return sabrClient.url.toUri()
     }
 
     override fun close() {

@@ -9,6 +9,7 @@ import androidx.media3.exoplayer.source.chunk.ChunkSource
 import androidx.media3.exoplayer.trackselection.ExoTrackSelection
 import androidx.media3.exoplayer.upstream.CmcdConfiguration
 import com.github.libretube.player.manifest.SabrManifest
+import com.github.libretube.player.parser.SabrClient
 
 /** A [ChunkSource] for Sabr streams.  */
 @UnstableApi
@@ -17,6 +18,7 @@ interface SabrChunkSource : ChunkSource {
     interface Factory {
         /**
          * @param manifest The initial manifest.
+         * @param sabrClient The client which handles the communication with the server.
          * @param adaptationSetIndices The indices of the corresponding adaptation sets in the period.
          * @param trackSelection The track selection.
          * @param trackType The [track type][androidx.media3.common.C.TrackType].
@@ -32,6 +34,7 @@ interface SabrChunkSource : ChunkSource {
          */
         fun createSabrChunkSource(
             manifest: SabrManifest,
+            sabrClient: SabrClient,
             adaptationSetIndices: IntArray,
             trackSelection: ExoTrackSelection,
             trackType: @TrackType Int,
