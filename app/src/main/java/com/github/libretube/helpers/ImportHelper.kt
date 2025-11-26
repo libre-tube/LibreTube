@@ -335,8 +335,8 @@ object ImportHelper {
     @OptIn(ExperimentalSerializationApi::class)
     fun importWatchHistory(context: Context, uris: List<Uri>, importFormat: ImportFormat) {
         val workRequest = OneTimeWorkRequestBuilder<ImportCoroutineWorker>()
-            .setInputData(workDataOf(WorkersData.FILES to uris, WorkersData.IMPORT_TYPE to ImportFormat.YOUTUBEJSON,
-                WorkersData.IMPORT_FORMAT to importFormat))
+            .setInputData(workDataOf(WorkersData.FILES to uris.map { it.toString() }.toTypedArray(), WorkersData.IMPORT_TYPE to ImportFormat.YOUTUBEJSON.value,
+                WorkersData.IMPORT_FORMAT to importFormat.value))
             .build()
 
         // Enqueue the work

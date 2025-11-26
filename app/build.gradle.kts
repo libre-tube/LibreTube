@@ -4,10 +4,9 @@ plugins {
     id("kotlinx-serialization")
     id("kotlin-parcelize")
     id("androidx.navigation.safeargs.kotlin")
-    id("com.google.dagger.hilt.android") version "2.41" apply false
-
     alias(libs.plugins.baselineprofile)
     alias(libs.plugins.ksp)
+    alias(libs.plugins.hiltPlugin)
 }
 
 android {
@@ -139,6 +138,15 @@ dependencies {
     implementation(libs.kotlinx.datetime)
     implementation(libs.converter.kotlinx.serialization)
 
+    // Source - https://stackoverflow.com/a/77838301
+// Posted by AI Shakil
+// Retrieved 2025-11-25, License - CC BY-SA 4.0
+
+    implementation (libs.hilt.android)
+    ksp(libs.dagger.compiler)
+    ksp(libs.hilt.compiler)
+  implementation ("androidx.hilt:hilt-work:1.0.0")
+  implementation ("androidx.work:work-runtime-ktx:2.8.1")
     /* NewPipe Extractor */
     implementation(libs.newpipeextractor)
 
@@ -158,7 +166,7 @@ dependencies {
 
     /* AndroidX Paging */
     implementation(libs.androidx.paging)
-    implementation(libs.hilt.android)
+
     /* Testing */
     testImplementation(libs.junit)
 }

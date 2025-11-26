@@ -388,6 +388,12 @@
             </intent-filter>
         </activity>
 
+        <provider
+            android:name="androidx.startup.InitializationProvider"
+            android:authorities="${applicationId}.androidx-startup"
+            android:exported="false">
+        </provider>
+
         <service
             android:name=".services.DownloadService"
             android:enabled="true"
@@ -423,6 +429,8 @@
             </intent-filter>
 
         </service>
+
+
 
         <service
             android:name=".services.OnClearFromRecentService"

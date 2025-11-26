@@ -30,6 +30,8 @@ plugins {
     alias(libs.plugins.jetbrainsKotlinAndroid) apply false
     alias(libs.plugins.baselineprofile) apply false
     alias(libs.plugins.androidApplication) apply false
+    alias(libs.plugins.ksp) apply false
+    alias(libs.plugins.hiltPlugin) apply false
 }
 
 tasks.register<Delete>("clean") {

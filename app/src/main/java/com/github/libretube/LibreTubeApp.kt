@@ -1,8 +1,11 @@
 package com.github.libretube
 
 import android.app.Application
+import android.util.Log
 import androidx.core.app.NotificationChannelCompat
 import androidx.core.app.NotificationManagerCompat
+import androidx.hilt.work.HiltWorkerFactory
+import androidx.work.Configuration
 import androidx.work.ExistingPeriodicWorkPolicy
 import com.github.libretube.helpers.ImageHelper
 import com.github.libretube.helpers.NewPipeExtractorInstance
@@ -11,10 +14,23 @@ import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.helpers.ProxyHelper
 import com.github.libretube.helpers.ShortcutHelper
 import com.github.libretube.util.ExceptionHandler
+import dagger.hilt.android.HiltAndroidApp
+import javax.inject.Inject
 
-class LibreTubeApp : Application() {
+@HiltAndroidApp
+class LibreTubeApp : Application(), Configuration.Provider {
+
+    @Inject
+    lateinit var workerFactory: HiltWorkerFactory
+
+    override val workManagerConfiguration: Configuration
+        get() = Configuration.Builder()
+            .setWorkerFactory(workerFactory)
+            .build()
+
     override fun onCreate() {
         super.onCreate()
+        Log.e("TEST", "App loaded, WorkerFactory = ${workerFactory::class.java.name}")
         instance = this
 
         /**
