@@ -3,6 +3,9 @@ package com.github.libretube.player.parser
 import android.util.Base64
 import misc.Common.XTags
 
+/**
+ * Extra tags about a format.
+ */
 class Xtags {
     private var enabledFeatures: List<String> = emptyList()
 
@@ -13,7 +16,13 @@ class Xtags {
         }
     }
 
+    /**
+     *  Whether the format uses [dynamic range compression](https://en.wikipedia.org/wiki/Dynamic_range_compression).
+     */
     fun isDrcAudio() = enabledFeatures.contains("drc")
 
+    /**
+     *  Whether the audio/voices are artificially boosted.
+     */
     fun isVoiceBoosted() = enabledFeatures.contains("vb")
 }
