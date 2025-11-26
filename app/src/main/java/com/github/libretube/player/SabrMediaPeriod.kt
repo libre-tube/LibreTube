@@ -29,7 +29,6 @@ import com.github.libretube.player.manifest.AdaptationSet
 import com.github.libretube.player.manifest.Representation
 import com.github.libretube.player.manifest.SabrManifest
 import com.github.libretube.player.parser.SabrClient
-import com.github.libretube.player.parser.SabrClient.init
 import com.google.protobuf.ByteString
 import java.time.Instant
 import java.util.Arrays
@@ -38,6 +37,7 @@ import java.util.Arrays
 @UnstableApi
 class SabrMediaPeriod(
     private val manifest: SabrManifest,
+    private val sabrClient: SabrClient,
     private val periodIndex: Int,
     private val chunkSourceFactory: SabrChunkSource.Factory,
     private val transferListener: TransferListener?,
@@ -53,11 +53,6 @@ class SabrMediaPeriod(
 ) : MediaPeriod, SequenceableLoader.Callback<ChunkSampleStream<SabrChunkSource>> {
     private val trackGroups: TrackGroupArray
     private val trackGroupInfos: Array<TrackGroupInfo>
-    private val sabrClient: SabrClient = init(
-        manifest.videoId,
-        manifest.serverAbrStreamingUri.toString(),
-        ByteString.copyFrom(manifest.videoPlaybackUstreamerConfig)
-    )
 
     private var callback: MediaPeriod.Callback? = null
     private var sampleStreams: Array<ChunkSampleStream<SabrChunkSource?>> = emptyArray()
@@ -141,8 +136,8 @@ class SabrMediaPeriod(
 
         // inform the server about when we changed the format
         val now = Instant.now().toEpochMilli()
-        SabrClient.lastManualFormatSelectionMs = now
-        SabrClient.lastActionMs = now
+        sabrClient.lastManualFormatSelectionMs = now
+        sabrClient.lastActionMs = now
 
         val sampleStreamList: MutableList<ChunkSampleStream<SabrChunkSource?>> = mutableListOf();
         for (sampleStream in streams) {
@@ -277,6 +272,7 @@ class SabrMediaPeriod(
         val chunkSource =
             chunkSourceFactory.createSabrChunkSource(
                 manifest,
+                sabrClient,
                 trackGroupInfo.adaptationSetIndices,
                 selection,
                 trackGroupInfo.trackType,

@@ -39,6 +39,7 @@ import java.time.Instant
 class DefaultSabrChunkSource(
     chunkExtractorFactory: ChunkExtractor.Factory,
     private val manifest: SabrManifest,
+    private val sabrClient: SabrClient,
     private val adaptationSetIndices: IntArray,
     private var trackSelection: ExoTrackSelection,
     private val trackType: @TrackType Int,
@@ -54,6 +55,7 @@ class DefaultSabrChunkSource(
 
         override fun createSabrChunkSource(
             manifest: SabrManifest,
+            sabrClient: SabrClient,
             adaptationSetIndices: IntArray,
             trackSelection: ExoTrackSelection,
             trackType: @TrackType Int,
@@ -67,6 +69,7 @@ class DefaultSabrChunkSource(
             return DefaultSabrChunkSource(
                 chunkExtractorFactory,
                 manifest,
+                sabrClient,
                 adaptationSetIndices,
                 trackSelection,
                 trackType,
@@ -124,7 +127,7 @@ class DefaultSabrChunkSource(
 
     override fun getAdjustedSeekPositionUs(positionUs: Long, seekParameters: SeekParameters): Long {
         // inform the server when we last sought to a new position
-        SabrClient.lastSeekMs = Instant.now().toEpochMilli()
+        sabrClient.lastSeekMs = Instant.now().toEpochMilli()
 
         // Segments are aligned across representations, so any segment index will do.
         for (representationHolder in representationHolders) {
@@ -414,7 +417,7 @@ class DefaultSabrChunkSource(
             checkInBounds()
             val dataSpec = DataSpec.Builder()
                 // must be non-null, but is unused
-                .setUri(SabrClient.url)
+                .setUri("sabr://unused")
                 .build()
             return dataSpec
         }
