@@ -20,6 +20,7 @@ import com.github.libretube.api.SubscriptionHelper
 import com.github.libretube.api.obj.Segment
 import com.github.libretube.api.obj.Streams
 import com.github.libretube.constants.IntentData
+import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.db.DatabaseHelper
 import com.github.libretube.enums.PlayerCommand
 import com.github.libretube.enums.SbSkipOptions
@@ -32,6 +33,7 @@ import com.github.libretube.extensions.updateParameters
 import com.github.libretube.helpers.PlayerHelper
 import com.github.libretube.helpers.PlayerHelper.getCurrentSegment
 import com.github.libretube.helpers.PlayerHelper.getSubtitleRoleFlags
+import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.helpers.ProxyHelper
 import com.github.libretube.parcelable.PlayerData
 import com.github.libretube.util.DeArrowUtil
@@ -283,9 +285,12 @@ open class OnlinePlayerService : AbstractPlayerService() {
 
         when {
             // SABR
-            // only enable when in DEBUG, as the implementation is still experimental
             // skip SABR for livestreams, as the player impl has no support for it
-            BuildConfig.DEBUG && !streams.isLive && streams.serverAbrStreamingUrl != null && streams.videoPlaybackUstreamerConfig != null -> {
+            // only manually, as the implementation is still experimental
+            PreferenceHelper.getBoolean(
+                PreferenceKeys.PREFER_SABR,
+                false
+            ) && !streams.isLive && streams.serverAbrStreamingUrl != null && streams.videoPlaybackUstreamerConfig != null -> {
                 val sabrMediaSourceFactory = SabrMediaSource.Factory(
                     SabrManifest(videoId, streams)
                 )
