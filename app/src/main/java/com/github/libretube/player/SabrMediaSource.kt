@@ -9,7 +9,6 @@ import androidx.media3.common.Timeline
 import androidx.media3.common.util.Assertions
 import androidx.media3.common.util.UnstableApi
 import androidx.media3.common.util.Util
-import androidx.media3.datasource.DataSource
 import androidx.media3.datasource.TransferListener
 import androidx.media3.exoplayer.drm.DefaultDrmSessionManagerProvider
 import androidx.media3.exoplayer.drm.DrmSessionManager
@@ -45,29 +44,24 @@ class SabrMediaSource(
     }
 
     /** Factory for [SabrMediaSource]s.  */
-    class Factory( private val manifest: SabrManifest) : MediaSource.Factory {
+    class Factory(private val manifest: SabrManifest) : MediaSource.Factory {
         private var cmcdConfigurationFactory: CmcdConfiguration.Factory? = null
         private var drmSessionManagerProvider: DrmSessionManagerProvider = DefaultDrmSessionManagerProvider()
         private val compositeSequenceableLoaderFactory= DefaultCompositeSequenceableLoaderFactory()
         private var loadErrorHandlingPolicy: LoadErrorHandlingPolicy = DefaultLoadErrorHandlingPolicy()
 
-        override fun setCmcdConfigurationFactory(cmcdConfigurationFactory: CmcdConfiguration.Factory): Factory {
-            this.cmcdConfigurationFactory =
-                Assertions.checkNotNull<CmcdConfiguration.Factory?>(cmcdConfigurationFactory)
-            return this
-        }
+        override fun setCmcdConfigurationFactory(cmcdConfigurationFactory: CmcdConfiguration.Factory): Factory =
+            this.apply {
+                this.cmcdConfigurationFactory =
+                    Assertions.checkNotNull<CmcdConfiguration.Factory?>(cmcdConfigurationFactory)
+            }
 
         override fun setDrmSessionManagerProvider(
             drmSessionManagerProvider: DrmSessionManagerProvider,
-        ): Factory {
-            this.drmSessionManagerProvider = drmSessionManagerProvider
-            return this
-        }
+        ): Factory = this.apply { this.drmSessionManagerProvider = drmSessionManagerProvider }
 
-        override fun setLoadErrorHandlingPolicy(loadErrorHandlingPolicy: LoadErrorHandlingPolicy): Factory {
-            this.loadErrorHandlingPolicy = loadErrorHandlingPolicy
-            return this
-        }
+        override fun setLoadErrorHandlingPolicy(loadErrorHandlingPolicy: LoadErrorHandlingPolicy): Factory =
+            this.apply { this.loadErrorHandlingPolicy = loadErrorHandlingPolicy }
 
         /**
          * Returns a new [SabrMediaSource] using the current parameters.
@@ -93,9 +87,7 @@ class SabrMediaSource(
             )
         }
 
-        override fun getSupportedTypes(): IntArray {
-            return intArrayOf(C.CONTENT_TYPE_OTHER)
-        }
+        override fun getSupportedTypes(): IntArray = intArrayOf(C.CONTENT_TYPE_OTHER)
     }
 
     private var mediaTransferListener: TransferListener? = null
