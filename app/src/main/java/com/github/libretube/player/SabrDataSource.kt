@@ -27,6 +27,8 @@ class SabrDataSource(
     override fun open(dataSpec: DataSpec): Long {
         val playbackRequest = dataSpec.customData as PlaybackRequest?
 
+        transferInitializing(dataSpec)
+        transferStarted(dataSpec)
         val segment = runCatching { sabrClient.getNextSegment(playbackRequest!!) }
             .getOrNull() ?: throw IOException()
         data = ByteBuffer.wrap(segment.data())
@@ -42,6 +44,7 @@ class SabrDataSource(
     }
 
     override fun close() {
+        transferEnded()
         data = null
     }
 
@@ -61,6 +64,10 @@ class SabrDataSource(
 
         val bytesToRead = minOf(length, data!!.remaining())
         data = data!!.get(buffer, offset, bytesToRead)
+
+        // this is not the actual amount of bytes transferred, since the SABR stream has some overhead,
+        // e.g. for format metadata
+        bytesTransferred(bytesToRead)
         return bytesToRead
     }
 }
