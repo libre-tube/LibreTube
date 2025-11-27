@@ -4,6 +4,8 @@ import android.util.Log
 import androidx.annotation.OptIn
 import androidx.media3.common.MimeTypes
 import androidx.media3.common.util.UnstableApi
+import androidx.media3.exoplayer.upstream.DefaultBandwidthMeter
+import com.github.libretube.LibreTubeApp
 import com.github.libretube.api.poToken.PoTokenGenerator
 import com.github.libretube.player.manifest.Representation
 import com.github.libretube.player.manifest.SabrManifest
@@ -24,7 +26,6 @@ import video_streaming.FormatInitializationMetadataOuterClass.FormatInitializati
 import video_streaming.MediaHeaderOuterClass.MediaHeader
 import video_streaming.NextRequestPolicyOuterClass.NextRequestPolicy
 import video_streaming.PlaybackCookieOuterClass.PlaybackCookie
-import video_streaming.ReloadPlayerResponse.ReloadPlaybackContext
 import video_streaming.SabrContextSendingPolicyOuterClass.SabrContextSendingPolicy
 import video_streaming.SabrContextUpdateOuterClass.SabrContextUpdate
 import video_streaming.SabrContextUpdateOuterClass.SabrContextUpdate.SabrContextWritePolicy
@@ -33,7 +34,6 @@ import video_streaming.SabrRedirectOuterClass.SabrRedirect
 import video_streaming.StreamProtectionStatusOuterClass.StreamProtectionStatus
 import video_streaming.StreamerContextOuterClass.StreamerContext
 import video_streaming.StreamerContextOuterClass.StreamerContext.SabrContext
-import video_streaming.UmpPartId
 import video_streaming.UmpPartId.UMPPartId
 import video_streaming.VideoPlaybackAbrRequestOuterClass.VideoPlaybackAbrRequest
 import java.time.Instant
@@ -260,6 +260,8 @@ class SabrClient private constructor(
     var lastActionMs: Long? = null
 
 
+    private val bandwidthEstimator = DefaultBandwidthMeter.getSingletonInstance(LibreTubeApp.instance)
+
     @OptIn(UnstableApi::class)
     fun selectFormat(representation: Representation) {
         if (MimeTypes.isAudio(representation.format.containerMimeType)) {
@@ -354,6 +356,7 @@ class SabrClient private constructor(
             .setDrcEnabled(audioFormat.stream.isDrc ?: false || xtags.isDrcAudio())
             .setEnableVoiceBoost(xtags.isVoiceBoosted())
             .setClientViewportIsFlexible(false)
+            .setBandwidthEstimate(bandwidthEstimator.bitrateEstimate)
             .setVisibility(1)
             .build()
 
