@@ -130,9 +130,9 @@ private data class InitializedFormat(
         bufferedSegments.entries.union(downloadedSegments.entries).sortedBy { it.key }
         .fold(mutableListOf<MutableList<Pair<Long, Segment>>>()) { acc, (id, segment) ->
             val previousId = acc.lastOrNull()?.lastOrNull()?.first
-            if (previousId == null || previousId + 1 != id) {
+            if (previousId?.plus(1) != id) {
                 //we found a discontinuity, create a new partition
-                acc.add(mutableListOf());
+                acc.add(mutableListOf())
             }
             acc.lastOrNull()!!.add(Pair(id, segment))
             acc
