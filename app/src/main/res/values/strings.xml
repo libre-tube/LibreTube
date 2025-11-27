@@ -579,4 +579,6 @@
     <string name="also_clear_watch_positions">Also clear watch positions</string>
     <string name="import_temp_playlist">Import temporary playlist?</string>
     <string name="import_temp_playlist_summary">Do you want to create a new playlist named \'%1$s\'? The playlist will contain %2$d videos.</string>
+    <string name="sabr_streaming">Use SABR for playback</string>
+    <string name="sabr_streaming_summary">Enable experimental support for playing SABR streams</string>
 </resources>
