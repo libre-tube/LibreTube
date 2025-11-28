@@ -19,6 +19,9 @@
 # prevents obfuscation in debug logs
 -dontobfuscate
 
+# optimise protobuf classes
+-shrinkunusedprotofields
+
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
@@ -116,7 +119,6 @@
 -keep class com.github.libretube.ui.preferences.** { *; }
 
 ## Rules for NewPipeExtractor
--keep class org.schabi.newpipe.extractor.services.youtube.protos.** { *; }
 -keep class org.schabi.newpipe.extractor.timeago.patterns.** { *; }
 -keep class org.mozilla.javascript.** { *; }
 -keep class org.mozilla.javascript.engine.** { *; }
