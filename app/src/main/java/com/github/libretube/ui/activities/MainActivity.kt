@@ -105,16 +105,6 @@ class MainActivity : BaseActivity() {
             return
         }
 
-        val isAppConfigured =
-            PreferenceHelper.getBoolean(PreferenceKeys.LOCAL_FEED_EXTRACTION, false) ||
-                    PreferenceHelper.getString(PreferenceKeys.FETCH_INSTANCE, "").isNotEmpty()
-        if (!isAppConfigured) {
-            val welcomeIntent = Intent(this, WelcomeActivity::class.java)
-            startActivity(welcomeIntent)
-            finish()
-            return
-        }
-
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 

@@ -36,11 +36,6 @@
         tools:targetApi="tiramisu">
 
         <activity
-            android:name=".ui.activities.WelcomeActivity"
-            android:label="@string/welcome"
-            android:screenOrientation="locked" />
-
-        <activity
             android:name=".ui.activities.NoInternetActivity"
             android:label="@string/noInternet"
             android:launchMode="singleTop"
