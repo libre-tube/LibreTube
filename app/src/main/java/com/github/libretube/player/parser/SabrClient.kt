@@ -185,6 +185,12 @@ class SabrClient private constructor(
         ByteString.copyFrom(manifest.videoPlaybackUstreamerConfig)
     )
 
+    init {
+        poTokenGenerator.getCachedWebClientPoToken()?.let {
+            poToken = ByteString.copyFrom(it.streamingDataPoToken!!.toByteArray())
+        }
+    }
+
     /**
      * Initialized formats.
      *
@@ -334,10 +340,6 @@ class SabrClient private constructor(
             Log.i(TAG, "fetchStreamData: Waiting for ${backoff}ms before making a request")
             delay(backoff.toLong())
             backoffTime = null
-        }
-
-        if (poToken == null) {
-            poToken = generatePoToken()
         }
 
         val now = Instant.now().toEpochMilli()
