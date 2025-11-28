@@ -13,11 +13,11 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.sync.withLock
 import java.util.UUID
 import com.github.libretube.R
+import javax.inject.Inject
 
 private const val CHANNEL_ID_DEFAULT = "download"
 private const val CHANNEL_ID_SILENT = "download_bg"
-class NotificationFactory @AssistedInject constructor(
-    @ApplicationContext private val context: Context) {
+class NotificationFactory @Inject constructor (private val context: Context) {
 
     private val builder = NotificationCompat.Builder(context,CHANNEL_ID_DEFAULT)
 
@@ -31,10 +31,6 @@ class NotificationFactory @AssistedInject constructor(
         return builder.build()
     }
 
-    @AssistedFactory
-    interface Factory {
-        fun create(): NotificationFactory
-    }
 }
 
 
