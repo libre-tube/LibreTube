@@ -3,8 +3,6 @@ appcompat = "1.7.1"
 core = "1.18.0"
 documentfile = "1.1.0"
 gradle = "9.2.1"
-hiltAndroid = "2.57.2"
-dagger = "2.57.1"
 junit = "4.13.2"
 kotlin = "2.3.21"
 ksp = "2.3.5"
@@ -40,10 +38,6 @@ protobuf = "4.33.5"
 protobufPlugin = "0.9.6"
 
 [libraries]
-dagger-compiler = { module = "com.google.dagger:dagger-compiler", version.ref = "hiltAndroid" }
-hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hiltAndroid" }
-hilt-compiler = { module = "com.google.dagger:hilt-compiler", version.ref = "hiltAndroid" }
-
 androidx-activity = { group = "androidx.activity", name = "activity-ktx", version.ref = "activity" }
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
 androidx-core = { group = "androidx.core", name = "core", version.ref = "core" }
@@ -51,7 +45,6 @@ androidx-core-splashscreen = { group = "androidx.core", name = "core-splashscree
 androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
 androidx-documentfile = { module = "androidx.documentfile:documentfile", version.ref = "documentfile" }
 androidx-fragment = { group = "androidx.fragment", name = "fragment-ktx", version.ref = "fragment" }
-gradle = { module = "com.android.tools.build:gradle", version.ref = "gradle" }
 junit = { module = "junit:junit", version.ref = "junit" }
 logging-interceptor = { module = "com.squareup.okhttp3:logging-interceptor", version.ref = "loggingInterceptor" }
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
@@ -100,5 +93,3 @@ kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", versi
 kotlin-parcelize = { id = "org.jetbrains.kotlin.plugin.parcelize" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 google-protobuf  = { id = "com.google.protobuf", version.ref = "protobufPlugin" }
-hiltPlugin = { id = "com.google.dagger.hilt.android", version.ref = "hiltAndroid" }
-

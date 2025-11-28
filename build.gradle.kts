@@ -4,8 +4,6 @@ plugins {
     alias(libs.plugins.androidApplication) apply false
     alias(libs.plugins.androidx.navigation.safeargs) apply false
     alias(libs.plugins.kotlin.serialization) apply false
-    alias(libs.plugins.ksp) apply false
-    alias(libs.plugins.hiltPlugin) apply false
 }
 
 tasks.register<Delete>("clean") {

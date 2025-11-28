@@ -1,11 +1,12 @@
 import java.util.Properties
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import com.google.protobuf.gradle.id
+
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.kotlin.parcelize)
     alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.androidx.navigation.safeargs)
-    id("com.google.dagger.hilt.android") version "2.41" apply false
     alias(libs.plugins.baselineprofile)
     alias(libs.plugins.ksp)
     alias(libs.plugins.google.protobuf)
@@ -163,15 +164,6 @@ dependencies {
     implementation(libs.google.protobuf.javalite)
     implementation(libs.google.protobuf.kotlin.lite)
 
-    // Source - https://stackoverflow.com/a/77838301
-// Posted by AI Shakil
-// Retrieved 2025-11-25, License - CC BY-SA 4.0
-
-    implementation (libs.hilt.android)
-    ksp(libs.dagger.compiler)
-    ksp(libs.hilt.compiler)
-  implementation ("androidx.hilt:hilt-work:1.0.0")
-  implementation ("androidx.work:work-runtime-ktx:2.8.1")
     /* NewPipe Extractor */
     implementation(libs.newpipeextractor)
 
