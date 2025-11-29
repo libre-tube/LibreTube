@@ -1,5 +1,7 @@
 package com.github.libretube.ui.interfaces
 
+import android.view.MotionEvent
+
 interface PlayerGestureOptions {
 
     fun onSingleTap(areControlsLocked: Boolean)
@@ -10,11 +12,11 @@ interface PlayerGestureOptions {
 
     fun onDoubleTapRightScreen()
 
-    fun onSwipeLeftScreen(distanceY: Float)
+    fun onSwipeLeftScreen(distanceY: Float, e2: MotionEvent)
 
-    fun onSwipeRightScreen(distanceY: Float)
+    fun onSwipeRightScreen(distanceY: Float, e2: MotionEvent)
 
-    fun onSwipeCenterScreen(distanceY: Float)
+    fun onSwipeCenterScreen(distanceY: Float, e2: MotionEvent)
 
     fun onSwipeEnd()
 
