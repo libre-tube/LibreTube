@@ -1,9 +1,14 @@
 package com.github.libretube
 
 import android.app.Application
+import android.util.Log
 import androidx.core.app.NotificationChannelCompat
 import androidx.core.app.NotificationManagerCompat
+import androidx.hilt.work.HiltWorkerFactory
+import androidx.work.Configuration
 import androidx.work.ExistingPeriodicWorkPolicy
+import androidx.work.WorkManager
+import com.github.libretube.factory.NotificationFactory
 import com.github.libretube.helpers.ImageHelper
 import com.github.libretube.helpers.NewPipeExtractorInstance
 import com.github.libretube.helpers.NotificationHelper
@@ -11,8 +16,25 @@ import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.helpers.ProxyHelper
 import com.github.libretube.helpers.ShortcutHelper
 import com.github.libretube.util.ExceptionHandler
+import dagger.hilt.android.HiltAndroidApp
+import javax.inject.Inject
+import javax.inject.Provider
 
-class LibreTubeApp : Application() {
+@HiltAndroidApp
+class LibreTubeApp : Application(),Configuration.Provider {
+
+    @Inject
+    lateinit var workManagerProvider: Provider<WorkManager>
+
+    @Inject
+    lateinit var workerFactory: HiltWorkerFactory
+
+    override val workManagerConfiguration: Configuration
+        get() = Configuration.Builder()
+            .setWorkerFactory(workerFactory)
+            .build()
+
+
     override fun onCreate() {
         super.onCreate()
         instance = this
@@ -65,6 +87,7 @@ class LibreTubeApp : Application() {
      * Initializes the required notification channels for the app.
      */
     private fun initializeNotificationChannels() {
+
         val downloadChannel = NotificationChannelCompat.Builder(
             PLAYLIST_DOWNLOAD_ENQUEUE_CHANNEL_NAME,
             NotificationManagerCompat.IMPORTANCE_LOW
@@ -94,13 +117,21 @@ class LibreTubeApp : Application() {
             .setDescription(getString(R.string.push_channel_description))
             .build()
 
+        val importChannel = NotificationChannelCompat.Builder(
+            IMPORT_CHANNEL_NAME,
+            NotificationManagerCompat.IMPORTANCE_DEFAULT
+        ).setName("Import Worker")
+            .setDescription("Shows a notification when importing")
+            .build()
+
         val notificationManager = NotificationManagerCompat.from(this)
         notificationManager.createNotificationChannelsCompat(
             listOf(
                 downloadChannel,
                 playlistDownloadEnqueueChannel,
                 pushChannel,
-                playerChannel
+                playerChannel,
+                importChannel
             )
         )
     }
@@ -112,5 +143,6 @@ class LibreTubeApp : Application() {
         const val PLAYLIST_DOWNLOAD_ENQUEUE_CHANNEL_NAME = "playlist_download_enqueue"
         const val PLAYER_CHANNEL_NAME = "player_mode"
         const val PUSH_CHANNEL_NAME = "notification_worker"
+        const val IMPORT_CHANNEL_NAME = "import_channel_worker"
     }
 }

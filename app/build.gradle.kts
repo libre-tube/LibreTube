@@ -6,6 +6,7 @@ plugins {
     id("androidx.navigation.safeargs.kotlin")
     alias(libs.plugins.baselineprofile)
     alias(libs.plugins.ksp)
+    alias(libs.plugins.hiltPlugin)
 }
 
 android {
@@ -109,7 +110,6 @@ dependencies {
     implementation(libs.androidx.navigation.ui)
     implementation(libs.androidx.preference)
     implementation(libs.androidx.documentfile)
-    implementation(libs.androidx.work.runtime)
     implementation(libs.androidx.collection)
     implementation(libs.androidx.media)
     implementation(libs.androidx.swiperefreshlayout)
@@ -136,6 +136,14 @@ dependencies {
     implementation(libs.kotlinx.serialization)
     implementation(libs.kotlinx.datetime)
     implementation(libs.converter.kotlinx.serialization)
+    implementation(libs.androidx.work.runtime)
+
+
+    //Dagger Hilt
+    implementation(libs.hilt.android)
+    implementation(libs.androidx.hilt.work)
+    ksp(libs.dagger.hilt.compiler)
+    ksp(libs.androidx.hilt.compiler)
 
     /* NewPipe Extractor */
     implementation(libs.newpipeextractor)
