@@ -129,6 +129,9 @@ object PreferenceHelper {
                 "download_folder",
             ).map { key -> remove(key) }
         },
+        PreferenceMigration(3, 4) {
+            listOf("video_codecs", "audio_codecs").map { remove(it) }
+        },
     )
 
     /**
