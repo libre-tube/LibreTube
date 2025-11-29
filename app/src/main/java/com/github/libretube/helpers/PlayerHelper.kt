@@ -158,6 +158,12 @@ object PlayerHelper {
             true
         )
 
+    val showShortsEnabled: Boolean
+        get() = PreferenceHelper.getBoolean(
+            PreferenceKeys.SHOW_SHORTS_STREAMS,
+            true
+        )
+
     val pausePlayerOnScreenOffEnabled: Boolean
         get() = PreferenceHelper.getBoolean(
             PreferenceKeys.PAUSE_ON_SCREEN_OFF,

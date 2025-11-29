@@ -4,6 +4,7 @@ import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.github.libretube.api.MediaServiceRepository
 import com.github.libretube.api.obj.ContentItem
+import com.github.libretube.helpers.PlayerHelper
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
@@ -27,7 +28,9 @@ class SearchPagingSource(
                         else onSearchSuggestion(it.suggestion to it.corrected)
                     }
             }
-
+            if(PlayerHelper.showShortsEnabled == false) {
+                result.items = result.items.filter { it.isShort != true }
+            }
             LoadResult.Page(result.items, null, result.nextpage)
         } catch (e: Exception) {
             LoadResult.Error(e)

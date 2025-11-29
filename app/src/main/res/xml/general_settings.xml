@@ -43,6 +43,13 @@
             app:key="related_streams_toggle"
             app:summary="@string/related_streams_summary"
             app:title="@string/related_streams" />
+        
+        <SwitchPreferenceCompat
+            android:defaultValue="true"
+            android:icon="@drawable/ic_show_shorts"
+            app:key="show_shorts_toggle"
+            app:summary="@string/show_shorts_summary"
+            app:title="@string/show_shorts" />
 
     </PreferenceCategory>
 
