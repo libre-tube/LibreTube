@@ -316,8 +316,6 @@ abstract class AbstractPlayerService : MediaLibraryService(), MediaLibrarySessio
         player.addListener(playerListener)
         this.exoPlayer = player
 
-        PlayerHelper.setPreferredCodecs(trackSelector)
-
         val forwardingPlayer = MediaSessionForwarder(player)
         mediaLibrarySession = MediaLibrarySession.Builder(this, forwardingPlayer, this)
             .setId(this.javaClass.name)

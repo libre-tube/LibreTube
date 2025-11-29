@@ -73,8 +73,6 @@ object PreferenceKeys {
     const val DOUBLE_TAP_TO_SEEK = "double_tap_seek"
     const val ALTERNATIVE_PIP_CONTROLS = "alternative_pip_controls"
     const val SKIP_SILENCE = "skip_silence"
-    const val ENABLED_VIDEO_CODECS = "video_codecs"
-    const val ENABLED_AUDIO_CODECS = "audio_codecs"
     const val AUTOPLAY_COUNTDOWN = "autoplay_countdown"
     const val AUTO_FULLSCREEN_SHORTS = "auto_fullscreen_shorts"
     const val PLAY_AUTOMATICALLY = "play_automatically"
