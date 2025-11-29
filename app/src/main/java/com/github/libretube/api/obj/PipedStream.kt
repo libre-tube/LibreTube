@@ -25,6 +25,7 @@ data class PipedStream(
     val width: Int? = null,
     val height: Int? = null,
     val fps: Int? = null,
+    val durationMs: Long? = null,
     val audioTrackName: String? = null,
     val audioTrackId: String? = null,
     val contentLength: Long = -1,
