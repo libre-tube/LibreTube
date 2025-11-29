@@ -66,13 +66,7 @@ class ImportCoroutineWorker @AssistedInject constructor(
 
 
     private suspend fun ImportWatchHistory(): Unit {
-        val importReceiver = ImportReceiver(ImportHandler.current())
-        ContextCompat.registerReceiver(
-            applicationContext,
-            importReceiver,
-            ImportReceiver.createIntentFilter(),
-            ContextCompat.RECEIVER_NOT_EXPORTED
-        )
+        registerReceiver()
 
         val fileUrisString = inputData.getStringArray(WorkersData.FILES)
         val importFormatString =
@@ -160,7 +154,7 @@ class ImportCoroutineWorker @AssistedInject constructor(
     }
 
     private suspend fun registerReceiver() {
-        val importReceiver = ImportReceiver(ImportHandler.current())
+        val importReceiver = ImportReceiver(id,ImportHandler.current())
         ContextCompat.registerReceiver(
             applicationContext,
             importReceiver,
