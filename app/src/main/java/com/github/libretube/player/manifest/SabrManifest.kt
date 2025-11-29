@@ -39,6 +39,7 @@ class SabrManifest(
     val durationMs: Long,
 ) : FilterableManifest<SabrManifest?> {
     var adaptationSets: List<AdaptationSet> = emptyList()
+        private set
 
     internal constructor(
         videoId: String,
