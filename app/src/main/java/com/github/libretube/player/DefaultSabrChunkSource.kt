@@ -111,7 +111,7 @@ class DefaultSabrChunkSource(
         representationHolders = (0..<trackSelection.length()).map {
             val representation = representations[trackSelection.getIndexInTrackGroup(it)]
             RepresentationHolder(
-                Util.msToUs(manifest.durationMs),
+                Util.msToUs(representation.stream.durationMs ?: manifest.durationMs),
                 representation,
                 chunkExtractorFactory.createProgressiveMediaExtractor(
                     trackType,
@@ -270,7 +270,7 @@ class DefaultSabrChunkSource(
         }
 
         //TODO: is this check needed?
-        if (representationHolder.getSegmentStartTimeUs(segmentNum) >= Util.msToUs(manifest.durationMs)) {
+        if (representationHolder.getSegmentStartTimeUs(segmentNum) >= representationHolder.periodDurationUs) {
           // The period duration clips the period to a position before the segment.
           out.endOfStream = true;
           return;
