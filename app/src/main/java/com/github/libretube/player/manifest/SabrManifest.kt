@@ -78,7 +78,7 @@ class SabrManifest(
                             .setSampleMimeType(MimeTypes.getAudioMediaMimeType(it.codec))
                             .setAverageBitrate(it.bitrate ?: -1)
                             .setChannelCount(2)
-                            .setLanguage(it.audioTrackId?.substring(0, 2)?: it.audioTrackLocale)
+                            .setLanguage(it.audioTrackId?.take(2)?: it.audioTrackLocale)
                             .setRoleFlags(
                                 when (it.audioTrackType?.lowercase()) {
                                     "descriptive" -> ROLE_FLAG_DESCRIBES_VIDEO
