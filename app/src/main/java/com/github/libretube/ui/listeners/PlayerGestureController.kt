@@ -193,9 +193,15 @@ class PlayerGestureController(activity: BaseActivity, private val listener: Play
             isMoving = true
 
             when {
-                e1.x < width * LEFT_AREA_VIEW_PERCENTAGE -> if (isFullscreen) listener.onSwipeLeftScreen(distanceY)
-                e1.x > width * RIGHT_AREA_VIEW_PERCENTAGE -> if (isFullscreen) listener.onSwipeRightScreen(distanceY)
-                else -> listener.onSwipeCenterScreen(distanceY)
+                e1.x < width * LEFT_AREA_VIEW_PERCENTAGE -> {
+                    if (isFullscreen) listener.onSwipeLeftScreen(distanceY, e2.y)
+                }
+
+                e1.x > width * RIGHT_AREA_VIEW_PERCENTAGE -> {
+                    if (isFullscreen) listener.onSwipeRightScreen(distanceY, e2.y)
+                }
+
+                else -> listener.onSwipeCenterScreen(distanceY, e2.y)
             }
 
             return true

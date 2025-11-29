@@ -10,11 +10,11 @@ interface PlayerGestureOptions {
 
     fun onDoubleTapRightScreen()
 
-    fun onSwipeLeftScreen(distanceY: Float)
+    fun onSwipeLeftScreen(distanceY: Float, positionY: Float)
 
-    fun onSwipeRightScreen(distanceY: Float)
+    fun onSwipeRightScreen(distanceY: Float, positionY: Float)
 
-    fun onSwipeCenterScreen(distanceY: Float)
+    fun onSwipeCenterScreen(distanceY: Float, positionY: Float)
 
     fun onSwipeEnd()
 
