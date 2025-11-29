@@ -10,14 +10,14 @@ import androidx.core.view.updateLayoutParams
 import androidx.media3.common.util.UnstableApi
 import androidx.media3.ui.TimeBar
 import com.github.libretube.databinding.ExoStyledPlayerControlViewBinding
+import com.github.libretube.extensions.dpToPx
 import com.github.libretube.ui.interfaces.TimeFrameReceiver
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import kotlin.math.absoluteValue
+import kotlin.math.abs
 
 @UnstableApi
 class SeekbarPreviewListener(
@@ -26,6 +26,7 @@ class SeekbarPreviewListener(
     private val duration: Long
 ) : TimeBar.OnScrubListener {
     private var lastPreviewPosition = Long.MAX_VALUE
+    private var lastPreviewPositionX = Float.MAX_VALUE
     private var prevProcessPreviewJob : Job? = null
 
     override fun onScrubStart(timeBar: TimeBar, position: Long) {
@@ -37,16 +38,20 @@ class SeekbarPreviewListener(
      */
     override fun onScrubMove(timeBar: TimeBar, position: Long) {
         playerBinding.seekbarPreviewPosition.text = DateUtils.formatElapsedTime(position / 1000)
+        updatePreviewX(position)
 
         // minimum of five seconds of additional seeking in order to show a preview
-        if ((lastPreviewPosition - position).absoluteValue < 5000) {
-            updatePreviewX(position)
+        if (abs(lastPreviewPosition - position) < 5000L) {
+            return
+        }
+
+        // minimum of distance in pixels of additional seeking in order to show a preview
+        if (abs(lastPreviewPositionX - getCenterOffset(position)) < MIN_SEEK_DISTANCE_PX) {
             return
         }
 
         playerBinding.previewProgressIndicator.isVisible = true
         processPreview(position)
-        updatePreviewX(position)
     }
 
     /**
@@ -76,6 +81,7 @@ class SeekbarPreviewListener(
         prevProcessPreviewJob?.cancel()
         prevProcessPreviewJob = CoroutineScope(Dispatchers.IO).launch {
             lastPreviewPosition = position
+            lastPreviewPositionX = getCenterOffset(position)
 
             val frame = timeFrameReceiver.getFrameAtTime(position)
             withContext(Dispatchers.Main) {
@@ -92,19 +98,29 @@ class SeekbarPreviewListener(
     private fun updatePreviewX(position: Long) {
         playerBinding.seekbarPreview.updateLayoutParams<MarginLayoutParams> {
             val parentWidth = (playerBinding.seekbarPreview.parent as View).width
-            // calculate the center-offset of the preview image view
-            val offset = parentWidth * (position.toFloat() / duration.toFloat()) -
-                playerBinding.seekbarPreview.width / 2
+            val offset = getCenterOffset(position)
             // normalize the offset to keep a minimum distance at left and right
             val maxPadding = parentWidth - MIN_PADDING - playerBinding.seekbarPreview.width
             marginStart = offset.toInt().coerceIn(MIN_PADDING, maxPadding)
         }
     }
 
+    /**
+     * Calculate the center-offset of the preview image view
+     */
+    private fun getCenterOffset(position: Long): Float =
+        playerBinding.seekbarPreview.parent.let { parent ->
+            val seekbarPreviewWidth = playerBinding.seekbarPreview.width
+            parent as View
+            parent.width * (position.toFloat() / duration.toFloat()) - seekbarPreviewWidth / 2
+        }
+
     companion object {
         /**
          * The minimum start and end padding for the seekbar preview
          */
         const val MIN_PADDING = 20
+
+        val MIN_SEEK_DISTANCE_PX = 8f.dpToPx()
     }
 }
