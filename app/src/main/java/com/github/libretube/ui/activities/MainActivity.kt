@@ -27,6 +27,7 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.onNavDestinationSelected
 import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.RecyclerView
+import androidx.work.WorkManager
 import com.github.libretube.BuildConfig
 import com.github.libretube.NavDirections
 import com.github.libretube.R
@@ -60,12 +61,17 @@ import com.github.libretube.ui.preferences.BackupRestoreSettings
 import com.github.libretube.ui.preferences.BackupRestoreSettings.Companion.FILETYPE_ANY
 import com.github.libretube.util.UpdateChecker
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
+import javax.inject.Inject
 
+
+@AndroidEntryPoint
 class MainActivity : AbstractPlayerHostActivity() {
-    private lateinit var binding: ActivityMainBinding
+    @Inject
+    private lateinit var importHelper: ImportHelper
 
     lateinit var navController: NavController
     private var startFragmentId = R.id.homeFragment
@@ -92,7 +98,7 @@ class MainActivity : AbstractPlayerHostActivity() {
         if (uri == null) return@registerForActivityResult
 
         lifecycleScope.launch(Dispatchers.IO) {
-            ImportHelper.exportPlaylists(
+            importHelper.exportPlaylists(
                 this@MainActivity,
                 uri,
                 playlistExportFormat,

@@ -134,7 +134,6 @@ dependencies {
     implementation(libs.androidx.navigation.ui)
     implementation(libs.androidx.preference)
     implementation(libs.androidx.documentfile)
-    implementation(libs.androidx.work.runtime)
     implementation(libs.androidx.collection)
     implementation(libs.androidx.media)
     implementation(libs.androidx.swiperefreshlayout)
@@ -163,6 +162,15 @@ dependencies {
     implementation(libs.converter.kotlinx.serialization)
     implementation(libs.google.protobuf.javalite)
     implementation(libs.google.protobuf.kotlin.lite)
+
+    implementation(libs.androidx.work.runtime)
+
+
+    //Dagger Hilt
+    implementation(libs.hilt.android)
+    implementation(libs.androidx.hilt.work)
+    ksp(libs.dagger.hilt.compiler)
+    ksp(libs.androidx.hilt.compiler)
 
     /* NewPipe Extractor */
     implementation(libs.newpipeextractor)
