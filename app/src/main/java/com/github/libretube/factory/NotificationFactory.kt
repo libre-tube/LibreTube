@@ -32,8 +32,8 @@ class NotificationFactory @AssistedInject constructor(
     private val mutex = Mutex()
 
     fun createNotification(uuid: UUID): Notification {
-        builder.setContentTitle("Storing")
-            .setContentText("Preparing")
+        builder.setContentTitle(context.getString(R.string.importing))
+            .setContentText(context.getString(R.string.preparing))
             .setOngoing(true)
             .setOnlyAlertOnce(true)
             .setSmallIcon(R.drawable.ic_launcher_lockscreen)
@@ -62,7 +62,7 @@ class NotificationFactory @AssistedInject constructor(
         NotificationCompat.Action(
             R.drawable.ic_action_pause,
             context.getString(R.string.pause),
-            ImportReceiver.createPausePendingIntent(context),
+            ImportReceiver.createPausePendingIntent(context,uuid),
         )
     }
 
@@ -70,7 +70,7 @@ class NotificationFactory @AssistedInject constructor(
         NotificationCompat.Action(
             R.drawable.ic_action_resume,
             context.getString(R.string.resume),
-            ImportReceiver.createResumePendingIntent(context),
+            ImportReceiver.createResumePendingIntent(context,uuid),
         )
     }
 
@@ -96,14 +96,6 @@ class NotificationFactory @AssistedInject constructor(
         }
     }
 
-    private fun createActionResume(): NotificationCompat.Action {
-        val pendingIntent = ImportReceiver.createResumePendingIntent(context)
-        return NotificationCompat.Action(
-            R.drawable.ic_action_resume,
-            context.getString(R.string.resume),
-            pendingIntent
-        )
-    }
 
 
     suspend fun updateState(
