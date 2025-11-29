@@ -4,41 +4,59 @@ import android.app.Notification
 import android.app.NotificationManager
 import android.content.Context
 import android.net.Uri
+import androidx.core.content.ContextCompat
+import androidx.hilt.work.HiltWorker
 import androidx.work.CoroutineWorker
 import androidx.work.ForegroundInfo
+import androidx.work.OneTimeWorkRequestBuilder
+import androidx.work.WorkManager
 import androidx.work.WorkerParameters
+import androidx.work.workDataOf
 import com.github.libretube.R
 import com.github.libretube.api.JsonHelper
 import com.github.libretube.constants.WorkersData
 import com.github.libretube.db.DatabaseHelper
 import com.github.libretube.db.obj.WatchHistoryItem
 import com.github.libretube.enums.ImportFormat
+import com.github.libretube.enums.ImportState
 import com.github.libretube.enums.ImportType
 import com.github.libretube.extensions.toastFromMainDispatcher
-import com.github.libretube.helpers.NotificationBuilder
+import com.github.libretube.factory.NotificationFactory
+import com.github.libretube.handler.ImportHandler
 import com.github.libretube.obj.YouTubeWatchHistoryFileItem
+import com.github.libretube.receivers.ImportReceiver
+import dagger.assisted.Assisted
+import dagger.assisted.AssistedInject
+import dagger.hilt.android.qualifiers.ApplicationContext
+import kotlinx.coroutines.withContext
 import kotlinx.serialization.json.decodeFromStream
+import java.util.UUID
+import javax.inject.Inject
 
-class ImportCoroutineWorker(
-    appContext: Context,
-    workerParams: WorkerParameters
+@HiltWorker
+class ImportCoroutineWorker @AssistedInject constructor(
+    @Assisted appContext: Context,
+    @Assisted workerParams: WorkerParameters,
+    notificationFactoryFactory: NotificationFactory.Factory
 ) : CoroutineWorker(appContext, workerParams) {
-    private val notificationFactory = NotificationBuilder.createBuilder(appContext)
+
+    private val notificationFactory = notificationFactoryFactory.create(id)
     private val notificationManager =
         appContext.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-    private val IMPORT_NOTIFICATION_ID = 1001
-
     private val IMPORT_THUMBNAIL_QUALITY = "mqdefault"
     private val VIDEO_ID_LENGTH = 11
     private val YOUTUBE_IMG_URL = "https://img.youtube.com"
     override suspend fun doWork(): Result {
         setForeground(getForegroundInfo())
+        val pausingHandle = ImportHandler()
         val importType = inputData.getString(WorkersData.IMPORT_TYPE)
             ?: ImportType.IMPORT_WATCH_HISTORY.toString()
         val importEnum: ImportType = enumValueOf<ImportType>(importType)
         when (importEnum) {
             ImportType.IMPORT_WATCH_HISTORY -> {
-                ImportWatchHistory()
+                withContext(pausingHandle) {
+                    ImportWatchHistory()
+                }
             }
 
             else -> Unit
@@ -48,6 +66,14 @@ class ImportCoroutineWorker(
 
 
     private suspend fun ImportWatchHistory(): Unit {
+        val importReceiver = ImportReceiver(ImportHandler.current())
+        ContextCompat.registerReceiver(
+            applicationContext,
+            importReceiver,
+            ImportReceiver.createIntentFilter(),
+            ContextCompat.RECEIVER_NOT_EXPORTED
+        )
+
         val fileUrisString = inputData.getStringArray(WorkersData.FILES)
         val importFormatString =
             inputData.getString(WorkersData.IMPORT_FORMAT) ?: ImportFormat.YOUTUBEJSON.toString()
@@ -82,14 +108,14 @@ class ImportCoroutineWorker(
             }
         }?.flatten().orEmpty()
 
-        var lastUpdateTime = 0L
-        val updateInterval = 500L
-
-        for ((index, video) in videos.withIndex()) {
-            DatabaseHelper.addToWatchHistory(video)
-            val now = System.currentTimeMillis()
-            if (now - lastUpdateTime >= updateInterval) {
-                publishState(index, videos.size)
+        registerReceiver()
+        var index = 0
+        while (index < videos.size) {
+            checkIfPausedOrCancelled(index, videos.size) {
+                if (it) {
+                    DatabaseHelper.addToWatchHistory(videos.get(index))
+                    index++
+                }
             }
         }
 
@@ -100,16 +126,66 @@ class ImportCoroutineWorker(
         }
     }
 
-    private fun publishState(currentState: Int = 0, finalState: Int = 0) {
-        val notification: Notification =
-            NotificationBuilder.instance.updateState(currentState, finalState)
-        notificationManager.notify(IMPORT_NOTIFICATION_ID, notification)
+
+    var lastUpdateTime = 0L
+    val updateInterval = 500L
+    private suspend fun checkIfPausedOrCancelled(
+        currentState: Int,
+        finalState: Int,
+        dispatch: suspend (Boolean) -> Unit
+    ) {
+        val importHandler = ImportHandler.current()
+        val now = System.currentTimeMillis()
+        if (importHandler.isPaused) {
+            dispatch(false)
+            notifyNotification(notificationFactory.updateState(currentState, finalState, ImportState.PAUSED))
+            importHandler.awaitResumed()
+        } else if (!importHandler.isPaused) {
+            dispatch(true)
+            if (now - lastUpdateTime >= updateInterval) {
+                notifyNotification(notificationFactory.updateState(currentState, finalState, ImportState.RESUME))
+                lastUpdateTime = now
+            }
+        }
+    }
+
+    private fun notifyNotification(notification: Notification) {
+        notificationManager.notify(id.hashCode(), notification)
     }
 
     override suspend fun getForegroundInfo(): ForegroundInfo {
         return ForegroundInfo(
-            IMPORT_NOTIFICATION_ID, NotificationBuilder.instance.createNotification()
+            id.hashCode(), notificationFactory.createNotification(id)
         )
     }
 
+    private suspend fun registerReceiver() {
+        val importReceiver = ImportReceiver(ImportHandler.current())
+        ContextCompat.registerReceiver(
+            applicationContext,
+            importReceiver,
+            ImportReceiver.createIntentFilter(),
+            ContextCompat.RECEIVER_NOT_EXPORTED
+        )
+    }
+
+    class Scheduler @Inject constructor(
+        @ApplicationContext private val context: Context,
+        private val workManager: WorkManager
+    ) {
+        fun importWatchHistory(uris: List<Uri>, importFormat: ImportFormat) {
+            val uuid = UUID.randomUUID()
+            val workRequest = OneTimeWorkRequestBuilder<ImportCoroutineWorker>()
+                .setId(uuid)
+                .setInputData(
+                    workDataOf(
+                        WorkersData.FILES to uris.map { it.toString() }.toTypedArray(),
+                        WorkersData.IMPORT_TYPE to ImportFormat.YOUTUBEJSON.value,
+                        WorkersData.IMPORT_FORMAT to importFormat.value
+                    )
+                )
+                .build()
+            workManager.enqueue(workRequest)
+        }
+    }
 }

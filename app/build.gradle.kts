@@ -110,7 +110,6 @@ dependencies {
     implementation(libs.androidx.navigation.ui)
     implementation(libs.androidx.preference)
     implementation(libs.androidx.documentfile)
-    implementation(libs.androidx.work.runtime)
     implementation(libs.androidx.collection)
     implementation(libs.androidx.media)
     implementation(libs.androidx.swiperefreshlayout)
@@ -137,16 +136,15 @@ dependencies {
     implementation(libs.kotlinx.serialization)
     implementation(libs.kotlinx.datetime)
     implementation(libs.converter.kotlinx.serialization)
+    implementation(libs.androidx.work.runtime)
 
-    // Source - https://stackoverflow.com/a/77838301
-// Posted by AI Shakil
-// Retrieved 2025-11-25, License - CC BY-SA 4.0
 
-    implementation (libs.hilt.android)
-    ksp(libs.dagger.compiler)
-    ksp(libs.hilt.compiler)
-  implementation ("androidx.hilt:hilt-work:1.0.0")
-  implementation ("androidx.work:work-runtime-ktx:2.8.1")
+    //Dagger Hilt
+    implementation(libs.hilt.android)
+    implementation(libs.androidx.hilt.work)
+    ksp(libs.dagger.hilt.compiler)
+    ksp(libs.androidx.hilt.compiler)
+
     /* NewPipe Extractor */
     implementation(libs.newpipeextractor)
 

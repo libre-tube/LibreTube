@@ -529,7 +529,8 @@
     <string name="include_timestamp_in_filename">Include timestamp in filename</string>
     <string name="did_you_mean">Did you mean:</string>
     <string name="showing_results_for">Showing results for:</string>
-
+    <string name="importing">Importing</string>
+    <string name="preparing">Preparing…</string>
     <!-- Notification channel strings -->
     <string name="download_channel_name">Download Service</string>
     <string name="download_channel_description">Shows a notification when downloading media.</string>
