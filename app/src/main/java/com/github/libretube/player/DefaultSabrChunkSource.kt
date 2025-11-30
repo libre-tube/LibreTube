@@ -138,10 +138,8 @@ class DefaultSabrChunkSource(
                 }
                 val segmentNum = representationHolder.getSegmentNum(positionUs)
                 val firstSyncUs = representationHolder.getSegmentStartTimeUs(segmentNum)
-                val secondSyncUs =
-                    if (firstSyncUs < positionUs && (segmentCount == RepresentationHolder.INDEX_UNBOUNDED || (segmentNum < segmentCount - 1))) representationHolder.getSegmentStartTimeUs(
-                        segmentNum + 1
-                    )
+                val secondSyncUs = if (firstSyncUs < positionUs && (segmentNum < segmentCount - 1))
+                        representationHolder.getSegmentStartTimeUs(segmentNum + 1)
                     else firstSyncUs
                 return seekParameters.resolveSeekPositionUs(positionUs, firstSyncUs, secondSyncUs)
             }
@@ -345,7 +343,7 @@ class DefaultSabrChunkSource(
             val representationHolder =
                 representationHolders[trackSelection.indexOf(chunk.trackFormat)]
             val segmentCount = representationHolder.segmentCount
-            if (segmentCount != RepresentationHolder.INDEX_UNBOUNDED && segmentCount != 0L) {
+            if (segmentCount != 0L) {
                 val lastAvailableSegmentNum = segmentCount - 1
                 if (chunk.nextChunkIndex > lastAvailableSegmentNum) {
                     missingLastSegment = true
@@ -453,9 +451,5 @@ class DefaultSabrChunkSource(
             chunkIndex!!.getChunkIndex(positionUs).toLong()
 
         fun getLastAvailableSegmentNum(): Long = chunkIndex!!.length.toLong() - 1
-
-        companion object {
-            const val INDEX_UNBOUNDED = -1L
-        }
     }
 }
