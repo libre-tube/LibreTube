@@ -1566,7 +1566,7 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
 
             viewModel.isOrientationChangeInProgress = true
 
-            // detatch player view from player to stop surface rendering
+            // detach player view from player to stop surface rendering
             binding.player.player = null
 
             if (::playerController.isInitialized) playerController.release()
@@ -1602,8 +1602,8 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
         binding.player.hideController()
     }
 
-    fun onKeyUp(keyCode: Int): Boolean {
-        return _binding?.player?.onKeyBoardAction(keyCode) ?: false
+    fun onKeyUp(keyCode: Int, event: KeyEvent?): Boolean {
+        return _binding?.player?.onKeyUp(keyCode, event) ?: false
     }
 
     override fun onDestroyView() {

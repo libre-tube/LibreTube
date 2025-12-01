@@ -168,6 +168,8 @@ abstract class CustomExoPlayerView(
         applyCaptionsStyle()
         initializeAdvancedOptions()
 
+        setupKeyboardFocus()
+
         // don't let the player view hide its controls automatically
         controllerShowTimeoutMs = -1
         // don't let the player view show its controls automatically
@@ -344,6 +346,15 @@ abstract class CustomExoPlayerView(
         if (newChapterName != binding.chapterName.text) {
             binding.chapterName.text = newChapterName
         }
+    }
+
+    /**
+     * focus the player view so that all keyboard events will be moved here
+     */
+    private fun setupKeyboardFocus() {
+        isFocusable = true
+        isFocusableInTouchMode = true
+        requestFocus()
     }
 
     fun toggleSystemBars(showBars: Boolean) {
@@ -961,7 +972,7 @@ abstract class CustomExoPlayerView(
         return playerGestureController.onTouchEvent(event)
     }
 
-    fun onKeyBoardAction(keyCode: Int): Boolean {
+    override fun onKeyUp(keyCode: Int, event: KeyEvent?): Boolean {
         when (keyCode) {
             KeyEvent.KEYCODE_SPACE, KeyEvent.KEYCODE_MEDIA_PLAY_PAUSE -> {
                 player?.togglePlayPauseState()
