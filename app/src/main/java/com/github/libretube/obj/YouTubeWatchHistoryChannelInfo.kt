@@ -4,6 +4,6 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class YouTubeWatchHistoryChannelInfo(
-    val name: String,
-    val url: String
+    val name: String? = null,
+    val url: String? = null
 )
