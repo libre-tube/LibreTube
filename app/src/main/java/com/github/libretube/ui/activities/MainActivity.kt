@@ -639,7 +639,7 @@ class MainActivity : BaseActivity() {
     }
 
     override fun onKeyUp(keyCode: Int, event: KeyEvent?): Boolean {
-        if (runOnPlayerFragment { onKeyUp(keyCode) }) {
+        if (runOnPlayerFragment { this@runOnPlayerFragment.onKeyUp(keyCode, event) }) {
             return true
         }
 
