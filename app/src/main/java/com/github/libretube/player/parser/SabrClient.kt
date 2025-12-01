@@ -148,7 +148,7 @@ private data class InitializedFormat(
      * Whether the format has non-retrieved data.
      */
     fun hasSegment(segmentNumber: Long): Boolean =
-        downloadedSegments.containsKey(segmentNumber)
+        downloadedSegments.containsKey(segmentNumber) || initSegment?.sequenceNumber == segmentNumber
 }
 
 /**
