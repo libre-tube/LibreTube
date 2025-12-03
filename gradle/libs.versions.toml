@@ -32,7 +32,7 @@ baselineprofile = "1.4.1"
 profileinstaller = "1.4.1"
 paging = "3.3.6"
 collection = "1.5.0"
-swiperefreshlayout = "1.1.0"
+swiperefreshlayout = "1.2.0"
 splashscreen = "1.2.0"
 
 [libraries]
