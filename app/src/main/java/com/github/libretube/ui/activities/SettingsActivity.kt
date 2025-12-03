@@ -9,7 +9,9 @@ import com.github.libretube.databinding.ActivitySettingsBinding
 import com.github.libretube.ui.base.BaseActivity
 import com.github.libretube.ui.preferences.InstanceSettings
 import com.github.libretube.ui.preferences.MainSettings
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class SettingsActivity : BaseActivity() {
     lateinit var binding: ActivitySettingsBinding
 
