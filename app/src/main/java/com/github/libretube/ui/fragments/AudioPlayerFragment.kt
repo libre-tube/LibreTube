@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.text.format.DateUtils
+import android.util.Log
 import android.view.View
 import androidx.activity.BackEventCompat
 import androidx.activity.OnBackPressedCallback
@@ -30,6 +31,7 @@ import com.github.libretube.api.obj.ChapterSegment
 import com.github.libretube.constants.IntentData
 import com.github.libretube.databinding.FragmentAudioPlayerBinding
 import com.github.libretube.enums.PlayerCommand
+import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.navigateVideo
 import com.github.libretube.extensions.normalize
 import com.github.libretube.extensions.seekBy
@@ -94,9 +96,15 @@ class AudioPlayerFragment : Fragment(R.layout.fragment_audio_player), AudioPlaye
 
         isOffline = requireArguments().getBoolean(IntentData.offlinePlayer)
 
+        Log.d(TAG(), "offline = ${isOffline}")
+
+
         BackgroundHelper.startMediaService(
             requireContext(),
-            if (isOffline) OfflinePlayerService::class.java else OnlinePlayerService::class.java,
+            OnlinePlayerService::class.java,
+            bundleOf(
+                IntentData.isPlayingOffline to isOffline,
+            )
         ) {
             if (_binding == null) {
                 it.sendCustomCommand(AbstractPlayerService.stopServiceCommand, Bundle.EMPTY)
@@ -105,6 +113,7 @@ class AudioPlayerFragment : Fragment(R.layout.fragment_audio_player), AudioPlaye
             }
 
             playerController = it
+            Log.d(TAG(), "playerController = ${playerController}")
             handleServiceConnection()
         }
     }
@@ -283,6 +292,7 @@ class AudioPlayerFragment : Fragment(R.layout.fragment_audio_player), AudioPlaye
             context = requireContext(),
             videoId = videoId,
             alreadyStarted = true,
+            requestOffline = isOffline,
         )
     }
 
@@ -351,7 +361,11 @@ class AudioPlayerFragment : Fragment(R.layout.fragment_audio_player), AudioPlaye
      * Load the information from a new stream into the UI
      */
     private fun updateStreamInfo(metadata: MediaMetadata) {
+        Log.d(TAG(), "binding = ${_binding}")
         val binding = _binding ?: return
+
+        Log.d(TAG(), "title = ${metadata.title}")
+
 
         binding.title.text = metadata.title
         binding.miniPlayerTitle.text = metadata.title
@@ -455,6 +469,8 @@ class AudioPlayerFragment : Fragment(R.layout.fragment_audio_player), AudioPlaye
             override fun onMediaMetadataChanged(mediaMetadata: MediaMetadata) {
                 super.onMediaMetadataChanged(mediaMetadata)
 
+                Log.d(TAG(), mediaMetadata.toString())
+
                 updateStreamInfo(mediaMetadata)
                 // JSON-encode as work-around for https://github.com/androidx/media/issues/564
                 val chapters: List<ChapterSegment>? =
@@ -464,13 +480,11 @@ class AudioPlayerFragment : Fragment(R.layout.fragment_audio_player), AudioPlaye
                 _binding?.openChapters?.isVisible = !chapters.isNullOrEmpty()
             }
         })
+        Log.d(TAG(), "mediaMetadata = ${playerController?.mediaMetadata}")
+
         playerController?.mediaMetadata?.let { updateStreamInfo(it) }
 
         initializeSeekBar()
-
-        if (isOffline) {
-            binding.openVideo.isGone = true
-        }
     }
 
     override fun onDestroyView() {
