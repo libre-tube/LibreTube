@@ -31,22 +31,18 @@ class SearchSuggestionsFragment : Fragment(R.layout.fragment_search_suggestions)
 
     private val historyAdapter = SearchHistoryAdapter(
         onRootClickListener = { historyQuery ->
-            runCatching {
-                (activity as MainActivity?)?.searchView
-            }.getOrNull()?.setQuery(historyQuery, true)
+            mainActivity.setQuery(historyQuery, true)
         },
         onArrowClickListener = { historyQuery ->
-            runCatching {
-                (activity as MainActivity?)?.searchView
-            }.getOrNull()?.setQuery(historyQuery, false)
+            mainActivity.setQuery(historyQuery, false)
         }
     )
     private val suggestionsAdapter = SearchSuggestionsAdapter(
         onRootClickListener = { suggestion ->
-            (activity as MainActivity?)?.searchView?.setQuery(suggestion, true)
+            mainActivity.setQuery(suggestion, true)
         },
         onArrowClickListener = { suggestion ->
-            (activity as MainActivity?)?.searchView?.setQuery(suggestion, false)
+            mainActivity.setQuery(suggestion, false)
         },
     )
 
@@ -89,8 +85,7 @@ class SearchSuggestionsFragment : Fragment(R.layout.fragment_search_suggestions)
         }
 
         setOnBackPressed {
-            if (mainActivity.searchView.anyChildFocused()) mainActivity.searchView.clearFocus()
-            else findNavController().popBackStack()
+            if (!mainActivity.clearSearchViewFocus()) findNavController().popBackStack()
         }
     }
 

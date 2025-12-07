@@ -117,7 +117,7 @@ class SearchResultFragment : DynamicLayoutManagerFragment(R.layout.fragment_sear
                 getString(R.string.showing_results_for)
             } else {
                 binding.searchSuggestionContainer.setOnClickListener {
-                    mainActivity.searchView.setQuery(suggestion, true)
+                    mainActivity.setQuery(suggestion, true)
                 }
                 getString(R.string.did_you_mean)
             }
