@@ -11,10 +11,10 @@ import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.setFragmentResult
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.libretube.R
-import com.github.libretube.ui.extensions.onSystemInsets
 import com.github.libretube.constants.IntentData
 import com.github.libretube.databinding.BottomSheetBinding
 import com.github.libretube.ui.adapters.ChaptersAdapter
+import com.github.libretube.ui.extensions.onSystemInsets
 import com.github.libretube.ui.models.ChaptersViewModel
 
 class ChaptersBottomSheet : ExpandablePlayerSheet(R.layout.bottom_sheet) {
@@ -74,7 +74,7 @@ class ChaptersBottomSheet : ExpandablePlayerSheet(R.layout.bottom_sheet) {
         binding.bottomSheetTitleLayout.isVisible = true
 
         chaptersViewModel.chaptersLiveData.observe(viewLifecycleOwner) {
-            adapter.chapters = it
+            adapter.chapters = it.orEmpty()
             adapter.notifyDataSetChanged()
         }
     }
