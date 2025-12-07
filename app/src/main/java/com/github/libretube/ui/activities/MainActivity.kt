@@ -36,6 +36,7 @@ import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.databinding.ActivityMainBinding
 import com.github.libretube.enums.ImportFormat
 import com.github.libretube.enums.TopLevelDestination
+import com.github.libretube.extensions.anyChildFocused
 import com.github.libretube.helpers.ImportHelper
 import com.github.libretube.helpers.IntentHelper
 import com.github.libretube.helpers.NavBarHelper
@@ -63,7 +64,8 @@ import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
 class MainActivity : BaseActivity() {
     lateinit var binding: ActivityMainBinding
     lateinit var navController: NavController
-    lateinit var searchView: SearchView
+
+    private lateinit var searchView: SearchView
     private lateinit var searchItem: MenuItem
 
     private var startFragmentId = R.id.homeFragment
@@ -407,6 +409,16 @@ class MainActivity : BaseActivity() {
     }
 
     /**
+     * @return whether the search view focus was cleared successfully
+     */
+    fun clearSearchViewFocus(): Boolean {
+        if (!this::searchView.isInitialized || !searchView.anyChildFocused()) return false
+
+        searchView.clearFocus()
+        return true
+    }
+
+    /**
      * Update the query text in the search bar without opening the search suggestions
      */
     fun setQuerySilent(query: String) {
@@ -415,6 +427,14 @@ class MainActivity : BaseActivity() {
         shouldOpenSuggestions = false
         searchView.setQuery(query, false)
         shouldOpenSuggestions = true
+    }
+
+    /**
+     * Update the query text in the search bar and load the search suggestions
+     * @param submit whether to immediately load the search results (not suggestions)
+     */
+    fun setQuery(query: String, submit: Boolean) {
+        if (::searchView.isInitialized) searchView.setQuery(query, submit)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
