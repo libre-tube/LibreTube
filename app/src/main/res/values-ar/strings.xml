@@ -84,7 +84,7 @@
     <string name="category_outro_summary">معلومات تلي عرض أسماء المساهمين في العمل. ليس للاستنتاجات التي تحتوي على المعلومات</string>
     <string name="category_segments">الاجزاء</string>
     <string name="category_selfpromo">الترويج غير المدفوع للغير أو الترويج الذاتي</string>
-    <string name="category_selfpromo_summary">على غرار \"الراعي\" باستثناء الترويج غير المدفوع أو الذاتي. يتضمن ذلك أقساما حول البضائع أو التبرعات أو معلومات حول من تعاونوا معه</string>
+    <string name="category_selfpromo_summary">على غرار \"الاعلانات الممولة\" باستثناء الترويج غير المدفوع أو الذاتي. يتضمن ذلك أقساما حول البضائع أو التبرعات أو معلومات حول من تعاونوا معه</string>
     <string name="category_interaction">تذكير التفاعل</string>
     <string name="license">الترخيص</string>
     <string name="color_accent">ألوان ديناميكية</string>
