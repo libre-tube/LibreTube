@@ -84,11 +84,12 @@ object NavigationHelper {
         }
         if (attachedToRunningPlayer) return
 
+        val audioOnlyMode = PreferenceHelper.getBoolean(PreferenceKeys.AUDIO_ONLY_MODE, false)
         val attachedToRunningAudioPlayer = activity.runOnAudioPlayerFragment {
             PlayingQueue.clearAfterCurrent()
             this.playNextVideo(videoId.toID())
 
-            if (!audioOnlyPlayerRequested) {
+            if (!audioOnlyPlayerRequested && !audioOnlyMode) {
                 // switch to video only player
                 this.switchToVideoMode(videoId.toID())
             } else {
@@ -100,7 +101,6 @@ object NavigationHelper {
         }
         if (attachedToRunningAudioPlayer) return
 
-        val audioOnlyMode = PreferenceHelper.getBoolean(PreferenceKeys.AUDIO_ONLY_MODE, false)
         if (audioOnlyPlayerRequested || (audioOnlyMode && !forceVideo)) {
             // in contrast to the video player, the audio player doesn't start a media service on
             // its own!
