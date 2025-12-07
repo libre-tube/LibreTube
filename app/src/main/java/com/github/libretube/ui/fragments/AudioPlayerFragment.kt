@@ -186,7 +186,8 @@ class AudioPlayerFragment : Fragment(R.layout.fragment_audio_player), AudioPlaye
         }
 
         binding.openVideo.setOnClickListener {
-            switchToVideoMode(PlayingQueue.getCurrent()?.url!!.toID())
+            val currentId = PlayingQueue.getCurrent()?.url?.toID()
+            switchToVideoMode(currentId ?: return@setOnClickListener)
         }
 
         childFragmentManager.setFragmentResultListener(
