@@ -82,8 +82,7 @@ import kotlinx.coroutines.launch
 abstract class CustomExoPlayerView(
     context: Context,
     attributeSet: AttributeSet? = null
-) : PlayerView(context, attributeSet), PlayerOptions, PlayerGestureOptions,
-    BottomSheetListener {
+) : PlayerView(context, attributeSet), PlayerOptions, PlayerGestureOptions{
     @Suppress("LeakingThis")
     val binding = ExoStyledPlayerControlViewBinding.bind(this)
     val backgroundBinding = CustomExoPlayerViewTemplateBinding.bind(this)
@@ -147,9 +146,7 @@ abstract class CustomExoPlayerView(
         audioHelper = AudioHelper(context)
     }
 
-    override fun onBottomSheetDismissed() {
-        chaptersBottomSheet?.dismiss()
-    }
+
     fun initialize(chaptersViewModel: ChaptersViewModel) {
         this.chaptersViewModel = chaptersViewModel
 
@@ -288,7 +285,7 @@ abstract class CustomExoPlayerView(
                 sheet.dismiss()
                 return@setOnClickListener
             }
-            sheet.show(activity.supportFragmentManager,isFullscreen())
+            sheet.show(activity.supportFragmentManager)
         }
 
         supportFragmentManager.setFragmentResultListener(

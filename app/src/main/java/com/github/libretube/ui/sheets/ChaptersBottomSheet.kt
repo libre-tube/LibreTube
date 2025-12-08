@@ -1,26 +1,21 @@
 package com.github.libretube.ui.sheets
 
 import android.annotation.SuppressLint
-import android.app.Dialog
 import android.os.Bundle
 import android.view.View
 import android.view.ViewTreeObserver
 import android.view.WindowManager
 import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
-import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.setFragmentResult
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.libretube.R
-import com.github.libretube.ui.extensions.onSystemInsets
 import com.github.libretube.constants.IntentData
 import com.github.libretube.databinding.BottomSheetBinding
 import com.github.libretube.ui.adapters.ChaptersAdapter
-import com.github.libretube.ui.interfaces.BottomSheetListener
+import com.github.libretube.ui.extensions.onSystemInsets
 import com.github.libretube.ui.models.ChaptersViewModel
-import com.google.android.material.bottomsheet.BottomSheetBehavior
-import com.google.android.material.bottomsheet.BottomSheetDialog
 
 class ChaptersBottomSheet : ExpandablePlayerSheet(R.layout.bottom_sheet) {
     private var _binding: BottomSheetBinding? = null
@@ -28,53 +23,17 @@ class ChaptersBottomSheet : ExpandablePlayerSheet(R.layout.bottom_sheet) {
 
     private val chaptersViewModel: ChaptersViewModel by activityViewModels()
     private var duration = 0L
-    private var isFullScreen = false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         duration = requireArguments().getLong(IntentData.duration, 0L)
     }
 
-    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        val dialog = super.onCreateDialog(savedInstanceState)
-        if (isFullScreen) {
-            dialog.setOnShowListener { dialogInterface ->
-                val bottomSheetDialog = dialogInterface as BottomSheetDialog
-                val bottomSheet =
-                    bottomSheetDialog.findViewById<View>(com.google.android.material.R.id.design_bottom_sheet)
 
-                bottomSheet?.let {
-                    val behavior = BottomSheetBehavior.from(it)
-
-                    behavior.addBottomSheetCallback(object :
-                        BottomSheetBehavior.BottomSheetCallback() {
-                        override fun onStateChanged(bottomSheet: View, newState: Int) {
-                            when (newState) {
-                                BottomSheetBehavior.STATE_HIDDEN -> {
-                                    dismissAllowingStateLoss()
-                                    (activity as? BottomSheetListener)?.onBottomSheetDismissed()
-                                }
-                            }
-                        }
-
-                        override fun onSlide(bottomSheet: View, slideOffset: Float) {
-                        }
-                    })
-                }
-            }
-        }
-        return dialog
-    }
-
-    fun show(fragmentManager: FragmentManager, isFullScreenPlayer: Boolean) {
-        isFullScreen = isFullScreenPlayer
-        super.show(fragmentManager, null)
-    }
 
     @SuppressLint("NotifyDataSetChanged")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         _binding = BottomSheetBinding.bind(view)
         super.onViewCreated(view, savedInstanceState)
-
         binding.optionsRecycler.layoutManager = LinearLayoutManager(context)
         val adapter =
             ChaptersAdapter(chaptersViewModel.chapters, duration) {
