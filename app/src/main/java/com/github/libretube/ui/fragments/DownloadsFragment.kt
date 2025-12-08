@@ -33,6 +33,7 @@ import com.github.libretube.db.DatabaseHolder.Database
 import com.github.libretube.db.obj.DownloadPlaylistWithDownload
 import com.github.libretube.db.obj.DownloadWithItems
 import com.github.libretube.db.obj.filterByTab
+import com.github.libretube.enums.SortEnum
 import com.github.libretube.extensions.ceilHalf
 import com.github.libretube.extensions.dpToPx
 import com.github.libretube.extensions.formatAsFileSize
@@ -129,7 +130,7 @@ class DownloadsFragmentPage : DynamicLayoutManagerFragment(R.layout.fragment_dow
     private var downloadPlaylistId: String? = null
 
     private var selectedSortType
-        get() = PreferenceHelper.getInt(PreferenceKeys.SELECTED_DOWNLOAD_SORT_TYPE, 0)
+        get() = PreferenceHelper.getInt(PreferenceKeys.SELECTED_DOWNLOAD_SORT_TYPE, SortEnum.OLDEST.ordinal)
         set(value) {
             PreferenceHelper.putInt(PreferenceKeys.SELECTED_DOWNLOAD_SORT_TYPE, value)
         }
@@ -274,8 +275,12 @@ class DownloadsFragmentPage : DynamicLayoutManagerFragment(R.layout.fragment_dow
 
     private fun submitDownloadList(items: List<DownloadWithItems>) {
         val sortedItems = when (selectedSortType) {
-            0 -> items
-            else -> items.reversed()
+            SortEnum.OLDEST.ordinal -> items
+            SortEnum.NEWEST.ordinal -> items.reversed()
+            SortEnum.ALPHABETICALLY.ordinal -> items.sortedBy { it.download.title }
+            SortEnum.DURATION.ordinal -> items.sortedBy { it.download.duration }
+            SortEnum.CHANNEL.ordinal -> items.sortedBy { it.download.uploader }
+            else -> items.sortedBy { it.downloadItems.sumOf { o -> o.downloadSize } }
         }
 
         adapter.submitList(sortedItems)
