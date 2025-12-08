@@ -58,6 +58,7 @@ import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.helpers.WindowHelper
 import com.github.libretube.obj.BottomSheetItem
 import com.github.libretube.ui.base.BaseActivity
+import com.github.libretube.ui.controllers.FullscreenGestureAnimationController
 import com.github.libretube.ui.extensions.toggleSystemBars
 import com.github.libretube.ui.fragments.PlayerFragment
 import com.github.libretube.ui.interfaces.PlayerGestureOptions
@@ -97,6 +98,7 @@ abstract class CustomExoPlayerView(
     private lateinit var audioHelper: AudioHelper
     private lateinit var chaptersViewModel: ChaptersViewModel
     private lateinit var seekBarListener: TimeBar.OnScrubListener
+    private lateinit var fullscreenGestureAnimationController: FullscreenGestureAnimationController
     private var chaptersBottomSheet: ChaptersBottomSheet? = null
     private var scrubbingTimeBar = false
 
@@ -143,6 +145,13 @@ abstract class CustomExoPlayerView(
         playerGestureController = PlayerGestureController(activity, this)
         brightnessHelper = BrightnessHelper(activity)
         audioHelper = AudioHelper(context)
+        fullscreenGestureAnimationController = FullscreenGestureAnimationController(
+            playerView = this,
+            onSwipeUpCompleted = {
+                if (!isFullscreen()) togglePlayerFullscreen(true)
+            },
+            onSwipeDownCompleted = ::minimizeOrExitPlayer
+        )
     }
 
     fun initialize(chaptersViewModel: ChaptersViewModel) {
@@ -794,9 +803,9 @@ abstract class CustomExoPlayerView(
         forward()
     }
 
-    override fun onSwipeLeftScreen(distanceY: Float) {
+    override fun onSwipeLeftScreen(distanceY: Float, positionY: Float) {
         if (!PlayerHelper.swipeGestureEnabled) {
-            if (PlayerHelper.fullscreenGesturesEnabled) onSwipeCenterScreen(distanceY)
+            if (PlayerHelper.fullscreenGesturesEnabled) onSwipeCenterScreen(distanceY, positionY)
             return
         }
 
@@ -804,9 +813,9 @@ abstract class CustomExoPlayerView(
         updateBrightness(distanceY)
     }
 
-    override fun onSwipeRightScreen(distanceY: Float) {
+    override fun onSwipeRightScreen(distanceY: Float, positionY: Float) {
         if (!PlayerHelper.swipeGestureEnabled) {
-            if (PlayerHelper.fullscreenGesturesEnabled) onSwipeCenterScreen(distanceY)
+            if (PlayerHelper.fullscreenGesturesEnabled) onSwipeCenterScreen(distanceY, positionY)
             return
         }
 
@@ -814,21 +823,13 @@ abstract class CustomExoPlayerView(
         updateVolume(distanceY)
     }
 
-    override fun onSwipeCenterScreen(distanceY: Float) {
+    override fun onSwipeCenterScreen(distanceY: Float, positionY: Float) {
         if (!PlayerHelper.fullscreenGesturesEnabled) return
-
-        if (isControllerFullyVisible) hideController()
-        if (distanceY >= 0) { // swipe up
-            if (!isFullscreen()) {
-                togglePlayerFullscreen(true)
-                return
-            }
-        }
-        // swipe down
-        else minimizeOrExitPlayer()
+        fullscreenGestureAnimationController.onSwipe(distanceY, positionY)
     }
 
     override fun onSwipeEnd() {
+        fullscreenGestureAnimationController.onSwipeEnd()
         gestureViewBinding.brightnessControlView.isGone = true
         gestureViewBinding.volumeControlView.isGone = true
     }

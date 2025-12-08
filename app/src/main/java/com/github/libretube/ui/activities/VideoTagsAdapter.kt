@@ -20,7 +20,7 @@ class VideoTagsAdapter : ListAdapter<String, VideoTagsViewHolder>(DiffUtilItemCa
             tagText.text = tag
             root.setOnClickListener {
                 val mainActivity = root.context as MainActivity
-                mainActivity.searchView.setQuery(tag, true)
+                mainActivity.setQuery(tag, true)
                 // minimizes the player fragment to the mini player
                 mainActivity.onBackPressedDispatcher.onBackPressed()
             }

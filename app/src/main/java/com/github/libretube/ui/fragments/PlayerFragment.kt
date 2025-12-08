@@ -638,9 +638,7 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
                     changeOrientationMode()
 
                     // clear search bar focus to avoid keyboard popups
-                    with(mainActivity.searchView) {
-                        if (anyChildFocused()) clearFocus()
-                    }
+                    mainActivity.clearSearchViewFocus()
                 } else if (currentId == transitionEndId) {
                     commonPlayerViewModel.isMiniPlayerVisible.value = true
                     // disable captions temporarily
