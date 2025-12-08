@@ -1,7 +1,6 @@
 package com.github.libretube.ui.views
 
 import android.annotation.SuppressLint
-import android.app.Activity
 import android.content.Context
 import android.content.pm.ActivityInfo
 import android.content.res.Configuration
@@ -10,6 +9,7 @@ import android.os.Handler
 import android.os.Looper
 import android.text.format.DateUtils
 import android.util.AttributeSet
+import android.util.Log
 import android.view.KeyEvent
 import android.view.MotionEvent
 import android.view.Window
@@ -26,6 +26,7 @@ import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
 import androidx.core.view.marginStart
 import androidx.core.view.updateLayoutParams
+import androidx.fragment.app.findFragment
 import androidx.lifecycle.findViewTreeLifecycleOwner
 import androidx.media3.common.C
 import androidx.media3.common.Player
@@ -52,12 +53,10 @@ import com.github.libretube.extensions.togglePlayPauseState
 import com.github.libretube.extensions.updateIfChanged
 import com.github.libretube.helpers.AudioHelper
 import com.github.libretube.helpers.BrightnessHelper
-import com.github.libretube.helpers.ContextHelper
 import com.github.libretube.helpers.PlayerHelper
 import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.helpers.WindowHelper
 import com.github.libretube.obj.BottomSheetItem
-import com.github.libretube.ui.activities.MainActivity
 import com.github.libretube.ui.base.BaseActivity
 import com.github.libretube.ui.extensions.toggleSystemBars
 import com.github.libretube.ui.fragments.PlayerFragment
@@ -72,6 +71,11 @@ import com.github.libretube.ui.sheets.PlaybackOptionsSheet
 import com.github.libretube.ui.sheets.PlayingQueueSheet
 import com.github.libretube.ui.sheets.SleepTimerSheet
 import com.github.libretube.util.PlayingQueue
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 @SuppressLint("ClickableViewAccessibility")
 @androidx.annotation.OptIn(androidx.media3.common.util.UnstableApi::class)
@@ -133,8 +137,14 @@ abstract class CustomExoPlayerView(
     private val supportFragmentManager
         get() = activity.supportFragmentManager
 
-    private fun toggleController() {
-        if (isControllerFullyVisible) hideController() else showController()
+    private fun toggleController(show: Boolean = !isControllerFullyVisible) {
+        if (show) showController() else hideController()
+    }
+
+    init {
+        playerGestureController = PlayerGestureController(activity, this)
+        brightnessHelper = BrightnessHelper(activity)
+        audioHelper = AudioHelper(context)
     }
 
     override fun onBottomSheetDismissed() {
@@ -142,12 +152,7 @@ abstract class CustomExoPlayerView(
     }
     fun initialize(chaptersViewModel: ChaptersViewModel) {
         this.chaptersViewModel = chaptersViewModel
-        this.playerGestureController = PlayerGestureController(context as BaseActivity, this)
-        this.brightnessHelper = BrightnessHelper(context as Activity)
-        this.audioHelper = AudioHelper(context)
 
-        // Set touch listener for tap and swipe gestures.
-        setOnTouchListener(playerGestureController)
         initializeGestureProgress()
 
         initRewindAndForward()
@@ -396,8 +401,6 @@ abstract class CustomExoPlayerView(
         super.showController()
     }
 
-    override fun onTouchEvent(event: MotionEvent) = false
-
     private fun initRewindAndForward() {
         val seekIncrementText = (PlayerHelper.seekIncrement / 1000).toString()
         listOf(
@@ -500,7 +503,7 @@ abstract class CustomExoPlayerView(
         )
 
         // disable tap and swipe gesture if the player is locked
-        playerGestureController.isEnabled = isLocked
+        playerGestureController.areControlsLocked = !isLocked
     }
 
     private fun rewind() {
@@ -773,7 +776,12 @@ abstract class CustomExoPlayerView(
         }
     }
 
-    override fun onSingleTap() {
+    override fun onSingleTap(areControlsLocked: Boolean) {
+        if (areControlsLocked) {
+            // keep showing the 'locked' icon
+            toggleController(true)
+            return
+        }
         toggleController()
     }
 
@@ -815,10 +823,14 @@ abstract class CustomExoPlayerView(
         if (!PlayerHelper.fullscreenGesturesEnabled) return
 
         if (isControllerFullyVisible) hideController()
-        if (distanceY >= 0) return
-
-        playerGestureController.isMoving = false
-        minimizeOrExitPlayer()
+        if (distanceY >= 0) { // swipe up
+            if (!isFullscreen()) {
+                togglePlayerFullscreen(true)
+                return
+            }
+        }
+        // swipe down
+        else minimizeOrExitPlayer()
     }
 
     override fun onSwipeEnd() {
@@ -840,6 +852,27 @@ abstract class CustomExoPlayerView(
         resizeMode = AspectRatioFrameLayout.RESIZE_MODE_FIT
 
         subtitleView?.setBottomPaddingFraction(SubtitleView.DEFAULT_BOTTOM_PADDING_FRACTION)
+    }
+
+    private var seekJob: Job? = null
+    override fun onLongPress() {
+        if (!PlayerHelper.swipeGestureEnabled) return
+
+        backgroundBinding.fastForwardView.isVisible = true
+        seekJob = CoroutineScope(Dispatchers.Main).launch {
+            while (true) {
+                player?.seekBy(PlayerHelper.FAST_FORWARD_INCREMENT)
+                delay(PlayerHelper.FORWARD_INCREMENT_DELAY)
+            }
+        }
+    }
+
+    override fun onLongPressEnd() {
+        if (!PlayerHelper.swipeGestureEnabled) return
+
+        backgroundBinding.fastForwardView.isGone = true
+        seekJob?.cancel()
+        seekJob = null
     }
 
     override fun onFullscreenChange(isFullscreen: Boolean) {
@@ -880,6 +913,13 @@ abstract class CustomExoPlayerView(
         return super.onInterceptTouchEvent(ev)
     }
 
+    override fun onTouchEvent(event: MotionEvent?): Boolean {
+        if (event == null) return false
+        if (!useController) return false
+
+        return playerGestureController.onTouchEvent(event)
+    }
+
     fun onKeyBoardAction(keyCode: Int): Boolean {
         when (keyCode) {
             KeyEvent.KEYCODE_SPACE, KeyEvent.KEYCODE_MEDIA_PLAY_PAUSE -> {
@@ -903,16 +943,21 @@ abstract class CustomExoPlayerView(
             }
 
             KeyEvent.KEYCODE_F -> {
-                val fragmentManager =
-                    ContextHelper.unwrapActivity<MainActivity>(context).supportFragmentManager
-                fragmentManager.fragments.filterIsInstance<PlayerFragment>().firstOrNull()
-                    ?.toggleFullscreen()
+                togglePlayerFullscreen()
             }
 
             else -> return false
         }
 
         return true
+    }
+
+    fun togglePlayerFullscreen(isFullscreen: Boolean = !isFullscreen()){
+        try {
+            findFragment<PlayerFragment>().toggleFullscreen(isFullscreen)
+        } catch (error: IllegalStateException) {
+            Log.e(this::class.simpleName, error.message.toString())
+        }
     }
 
     override fun getViewMeasures(): Pair<Int, Int> {

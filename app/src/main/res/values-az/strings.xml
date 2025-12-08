@@ -544,4 +544,11 @@
     <string name="delete_playlist_include_vidoes">Eləcə də bütün videolar pleylistdən silinsinmi?</string>
     <string name="category_hook">Giriş/Salamlar</string>
     <string name="category_hook_summary">Eyni video və ya seriyanın gələcək epizodlarında daha sonrakı hadisələri lağa qoymaqla və ya təsvir etməklə izləyicinin diqqətini çəkən (tez-tez ilk səhnə kimi) hekayə qoşmaları üçün</string>
+    <string name="checking_frequency_15_minutes">15 dəqiqə</string>
+    <string name="checking_frequency_30_minutes">30 dəqiqə</string>
+    <string name="checking_frequency_60_minutes">60 dəqiqə</string>
+    <string name="checking_frequency_2_hours">2 saat</string>
+    <string name="checking_frequency_6_hours">6 saat</string>
+    <string name="checking_frequency_12_hours">12 saat</string>
+    <string name="checking_frequency_1_day">1 gün</string>
 </resources>

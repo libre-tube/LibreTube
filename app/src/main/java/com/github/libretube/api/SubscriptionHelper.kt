@@ -1,5 +1,6 @@
 package com.github.libretube.api
 
+import com.github.libretube.api.obj.Subscription
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.db.obj.SubscriptionsFeedItem
 import com.github.libretube.helpers.PreferenceHelper
@@ -43,7 +44,11 @@ object SubscriptionHelper {
         channelId: String, name: String, uploaderAvatar: String?, verified: Boolean
     ) = subscriptionsRepository.subscribe(channelId, name, uploaderAvatar, verified)
 
-    suspend fun unsubscribe(channelId: String) = subscriptionsRepository.unsubscribe(channelId)
+    suspend fun unsubscribe(channelId: String) {
+        subscriptionsRepository.unsubscribe(channelId)
+        // remove videos from (local) feed
+        feedRepository.removeChannel(channelId)
+    }
     suspend fun isSubscribed(channelId: String) = subscriptionsRepository.isSubscribed(channelId)
     suspend fun importSubscriptions(newChannels: List<String>) =
         subscriptionsRepository.importSubscriptions(newChannels)
@@ -57,4 +62,7 @@ object SubscriptionHelper {
 
     suspend fun submitFeedItemChange(feedItem: SubscriptionsFeedItem) =
         feedRepository.submitFeedItemChange(feedItem)
+
+    suspend fun submitSubscriptionChannelInfosChanged(subscriptions: List<Subscription>) =
+        subscriptionsRepository.submitSubscriptionChannelInfosChanged(subscriptions)
 }

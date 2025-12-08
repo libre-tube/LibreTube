@@ -538,4 +538,11 @@
     <string name="include_timestamp_in_filename">ファイル名にタイムスタンプを含める</string>
     <string name="unsubscribe_snackbar_message">%1$sの登録を解除しました</string>
     <string name="screenshot_saved">スクリーンショットが保存されました</string>
+    <string name="checking_frequency_15_minutes">15分</string>
+    <string name="checking_frequency_30_minutes">30分</string>
+    <string name="checking_frequency_60_minutes">60分</string>
+    <string name="checking_frequency_2_hours">2時間</string>
+    <string name="checking_frequency_6_hours">6時間</string>
+    <string name="checking_frequency_12_hours">12時間</string>
+    <string name="checking_frequency_1_day">1日</string>
 </resources>

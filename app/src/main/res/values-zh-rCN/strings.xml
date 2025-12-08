@@ -543,4 +543,11 @@
     <string name="delete_playlist_include_vidoes">同样删除所有来自该播放列表的视频？</string>
     <string name="category_hook_summary">获取观众注意力的叙事噱头（通常是第一个镜头），对同一视频稍后部分或系列剧未来剧集中的事件进行预告或描述</string>
     <string name="category_hook">看点/问候</string>
+    <string name="checking_frequency_15_minutes">15 分钟</string>
+    <string name="checking_frequency_30_minutes">30 分钟</string>
+    <string name="checking_frequency_60_minutes">60 分钟</string>
+    <string name="checking_frequency_2_hours">2 小时</string>
+    <string name="checking_frequency_6_hours">6 小时</string>
+    <string name="checking_frequency_12_hours">12 小时</string>
+    <string name="checking_frequency_1_day">1 天</string>
 </resources>

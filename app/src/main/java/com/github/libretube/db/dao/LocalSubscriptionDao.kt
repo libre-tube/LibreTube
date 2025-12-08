@@ -4,6 +4,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import androidx.room.Update
 import com.github.libretube.db.obj.LocalSubscription
 
 @Dao
@@ -16,6 +17,9 @@ interface LocalSubscriptionDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAll(localSubscriptions: List<LocalSubscription>)
+
+    @Update
+    suspend fun updateAll(localSubscriptions: List<LocalSubscription>)
 
     @Query("DELETE FROM localSubscription WHERE channelId = :channelId")
     suspend fun deleteById(channelId: String)

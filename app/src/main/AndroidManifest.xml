@@ -382,18 +382,8 @@
                 <data android:scheme="https" />
                 <data android:pathPrefix="/" />
 
-                <data android:host="piped.adminforge.de" />
-                <data android:host="piped.astartes.nl" />
-                <data android:host="piped.coldforge.xyz" />
                 <data android:host="piped.drgns.space" />
-                <data android:host="piped.ducks.party" />
-                <data android:host="piped.lunar.icu" />
-                <data android:host="piped.ngn.tf" />
-                <data android:host="piped.projectsegfau.lt" />
-                <data android:host="piped.r4fo.com" />
-                <data android:host="piped.smnz.de" />
                 <data android:host="piped.syncpundit.io" />
-                <data android:host="piped.us.projectsegfau.lt" />
                 <data android:host="piped.video" />
             </intent-filter>
         </activity>

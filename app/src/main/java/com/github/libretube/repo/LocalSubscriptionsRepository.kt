@@ -92,4 +92,15 @@ class LocalSubscriptionsRepository : SubscriptionsRepository {
     override suspend fun getSubscriptionChannelIds(): List<String> {
         return Database.localSubscriptionDao().getAll().map { it.channelId }
     }
+
+    override suspend fun submitSubscriptionChannelInfosChanged(subscriptions: List<Subscription>) {
+        Database.localSubscriptionDao().updateAll(subscriptions.map {
+            LocalSubscription(
+                it.url,
+                it.name,
+                it.avatar,
+                it.verified
+            )
+        })
+    }
 }

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="instances">إختر…</string>
+    <string name="instances">إختر خادم Piped</string>
     <string name="customInstance">مخصص</string>
     <string name="registered">تم إنشاء حساب. تستطيع الآن الاشتراك بالقنوات.</string>
     <string name="search_hint">بحث</string>
@@ -61,7 +61,7 @@
     <string name="location">الموقع</string>
     <string name="website">موقع الإنترنت</string>
     <string name="videoCount">%1$d فيديوهات</string>
-    <string name="instance">النُسْخَة</string>
+    <string name="instance">خادم piped</string>
     <string name="customization">تخصيصات</string>
     <string name="history">السجل</string>
     <string name="channels">القنوات</string>
@@ -118,8 +118,8 @@
     <string name="category_music_offtopic">الموسيقى: قسم غير متعلق بالموسيقى</string>
     <string name="category_preview">معاينة / خلاصة</string>
     <string name="category_preview_summary">للأجزاء التي توضح بالتفصيل المحتوى المستقبلي بدون معلومات إضافية. إذا كانت تتضمن مقاطع تظهر هنا فقط ، فمن المحتمل جدًا أن تكون هذه الفئة الخطأ</string>
-    <string name="instance_api_url">عنوان URL لنُسْخَة واجهة برمجة التطبيقات</string>
-    <string name="addInstance">أضِف نُسْخَة</string>
+    <string name="instance_api_url">عنوان URL لخادم واجهة برمجة التطبيقات</string>
+    <string name="addInstance">إضافة خادم</string>
     <string name="empty_instance">املأ الاسم وعنوان URL لواجهة برمجة التطبيقات.</string>
     <string name="category_music_offtopic_summary">فقط للاستخدام في مقاطع الفيديو الموسيقية. يجب أن تغطي أجزاء من الفيديو وليس جزءا من الخلطات الرسمية. في النهاية ، يجب أن يشبه الفيديو Spotify أو أي إصدار مختلط آخر قدر الإمكان ، أو يقلل من التحدث أو تشتيت الانتباه</string>
     <string name="buffering_goal">التحميل المسبق</string>
@@ -128,8 +128,8 @@
     <string name="downloads">التنزيلات</string>
     <string name="legacyIcon">الإرث الضائع</string>
     <string name="gradientIcon">التدرج اللوني</string>
-    <string name="instance_summary">Piped وتسجيل الدخول والحساب</string>
-    <string name="instance_name">اسم النُسْخَة</string>
+    <string name="instance_summary">تسجيل الدخول باستخدام Piped</string>
+    <string name="instance_name">اسم الخادم</string>
     <string name="live">مباشر</string>
     <string name="player_autoplay">التشغيل التلقائي</string>
     <string name="appearance">المظهر</string>
@@ -137,7 +137,7 @@
     <string name="player">المشغل</string>
     <string name="playback_speed">سرعة التشغيل</string>
     <string name="appearance_summary">اضبط التطبيق حسب رغبتك</string>
-    <string name="customInstance_summary">أضِف…</string>
+    <string name="customInstance_summary">إضافة</string>
     <string name="shareTo">مشاركة الرابط إلى</string>
     <string name="no_audio">لا يوجد صوت</string>
     <string name="no_video">لا يوجد فيديو</string>
@@ -159,9 +159,9 @@
     <string name="deleteAccount_summary">حذف حساب Piped الخاص بك</string>
     <string name="watch_history">سجل المشاهدة</string>
     <string name="watch_positions">تذكر مكان التوقف</string>
-    <string name="auth_instance">استيثاق النُسْخَة</string>
-    <string name="auth_instance_summary">استخدم نُسْخَة مختلفة للمكالمات المُستوثق عليها</string>
-    <string name="auth_instances">اختر نُسْخَة الاستيثاق</string>
+    <string name="auth_instance">استيثاق الخادم</string>
+    <string name="auth_instance_summary">استخدم خادم مختلفة للمكالمات المُستوثق عليها</string>
+    <string name="auth_instances">اختر خادم الاستيثاق</string>
     <string name="github">جيت هب</string>
     <string name="audio_video">الصوت والفيديو</string>
     <string name="fullscreen_orientation">اتجاه ملء الشاشة</string>
@@ -351,7 +351,7 @@
     <string name="subscriberAndVideoCounts">مشتركون %1$s • فيديوهات %2$d</string>
     <string name="uploaderAndVideoCount">%1$s • %2$d مقاطع فيديو</string>
     <string name="disable_proxy">تعطيل وكيل Piped</string>
-    <string name="disable_proxy_summary">تجهيز الفيديو والصور بشكل مباشر من خوادم يوتيوب . تمكين هذا الخيار فقط إذا كنت تستخدم الشبكات الافتراضية الخاصة (VPN) بشكل دائم</string>
+    <string name="disable_proxy_summary">تجهيز الفيديو والصورة بشكل مباشر من خوادم يوتيوب قم بتمكين هذا الخيار فقط إذا كنت تستخدم الشبكات الافتراضية الخاصة (VPN) بشكل دائم</string>
     <string name="auto_fullscreen_shorts">ملء الشاشة تلقائيًا على مقاطع الفيديو القصيرة</string>
     <string name="new_group">جديد</string>
     <string name="group_name">أسم المجموعة</string>
@@ -386,7 +386,7 @@
     <string name="mark_as_unwatched">وضع علامة على أنه لم تتم مشاهدته</string>
     <string name="welcome">مرحبا بك في ليبري تيوب</string>
     <string name="choose_instance">يُرجى اختيار نُسْخَة أولاً!</string>
-    <string name="choose_instance_long">الرجاء اختيار نُسْخَة Piped لاستخدامه من أدناه. سيعمل نُسْخَة Piped كوسيط بينك وبين YouTube. توجد هذه نُسَخ في مواقع فعلية مختلفة - يشار إليها بعلم (أعلام) الدولة الخاصة بهم. من المحتمل أن تكون النُسَخ الأقرب إليك فعليًا أسرع من النُسَخ التي ليست كذلك. يمكنك تغيير النُسْخَة التي تستخدمها في الإعدادات في أي وقت.</string>
+    <string name="choose_instance_long">يرجى اختيار خادم Piped للاستخدامه من القائمة أدناه سيعمل هذا الخادم كوسيط بينك وبين YouTube تقع هذه الخوادم في مواقع جغرافية مختلفة موضّحة بعلم الدولة/الدول الخاصة بها عادةً ما تكون الخوادم الأقرب إلى موقعك الفعلي أسرع من الخوادم البعيدة يمكنك تغيير الخادم الذي تستخدمه في أي وقت من خلال الإعدادات</string>
     <string name="emptyPlaylistDescription">لا يمكن أن يكون وصف قائمة التشغيل فارغا</string>
     <string name="playlist_description">وصف قائمة التشغيل</string>
     <string name="change_playlist_description">تغيير وصف قائمة التشغيل</string>
@@ -411,7 +411,7 @@
     <string name="audio_track_format">%1$s - %2$s</string>
     <string name="unknown_audio_language">لغة صوت غير معروفة</string>
     <string name="continue_watching">مواصلة المشاهدة</string>
-    <string name="dearrow_summary">أظهِر عناوين وصورا مصغرة أكثر دقة وأقل إثارة. يزيد من أوقات التحميل</string>
+    <string name="dearrow_summary">أظهِر عناوين وصور مصغرة أكثر دقة وأقل إثارة. يزيد من أوقات التحميل</string>
     <string name="dearrow">تمكين DeArrow</string>
     <string name="visibility_public">عام</string>
     <string name="visibility">رؤية</string>
@@ -483,8 +483,8 @@
     <string name="rich_caption_rendering_summary">عرض التسميات التوضيحية على الويب للحصول على تجربة أكثر ثراءً وتخصيصًا</string>
     <string name="copy_tooltip">نسخ</string>
     <string name="change">غيّر</string>
-    <string name="change_instance">غيّر النُسْخَة</string>
-    <string name="suggest_change_instance">يستغرق التنزيل أكثر من المعتاد. يُرجى النظر في تغيير النُسْخَة</string>
+    <string name="change_instance">غير الخادم</string>
+    <string name="suggest_change_instance">يستغرق التنزيل أكثر من المعتاد. يُرجى النظر في تغيير الخادم</string>
     <string name="audio_language">اللغة الصوتية</string>
     <string name="default_language">الافتراضي</string>
     <string name="download_playlist">نزّل قائمة التشغيل</string>
@@ -509,9 +509,9 @@
     <string name="external_download_provider_summary">أدخل اسم حزمة التطبيق الذي تريد استخدامه لتنزيل مقاطع الفيديو. اتركه فارغًا لاستخدام أداة التنزيل المدمجة في LibreTube.</string>
     <string name="screenshot">لقطة شاشة</string>
     <string name="pip">فيديو عائم</string>
-    <string name="local_stream_extraction_summary">جلب معلومات تشغيل الفيديو مباشرة من YouTube دون استخدام Piped.</string>
+    <string name="local_stream_extraction_summary">جلب معلومات تشغيل الفيديو مباشرة من YouTube دون استخدام Piped</string>
     <string name="local_stream_extraction">استخراج البث المحلي</string>
-    <string name="local_ryd">مستخرج عدم الإعجاب للإرجاع المحلي على يوتيوب</string>
+    <string name="local_ryd">مستخرج بيانات عدم الإعجاب من يوتيوب باستخدام RYD</string>
     <string name="local_ryd_summary">جلب معلومات عدم الإعجاب مباشرة من https://returnyoutubedislikeapi.com</string>
     <string name="import_watch_history">استيراد سجل المشاهدة</string>
     <string name="audio_codecs">مرمازات الصوت</string>
@@ -525,14 +525,14 @@
     <string name="export_playlist">صدّر قائمة التشغيل</string>
     <string name="import_format_list_of_urls">قائمة عناوين URL أو معرّفات الفيديو</string>
     <string name="local_feed_extraction">استخراج موجز المحلية</string>
-    <string name="local_feed_extraction_summary">قم بجلب الخلاصة مباشرةً من YouTube. قد يكون هذا أبطأ بشكل ملحوظ.</string>
+    <string name="local_feed_extraction_summary">قم بجلب الخلاصة مباشرةً من YouTube قد يكون هذا أبطأ بشكل ملحوظ</string>
     <string name="update_information">تحديث المعلومات</string>
     <string name="never_show_again">لا تعرض هذا مجدداً</string>
     <string name="show_upcoming_videos">أظهِر الفيديوهات القادمة</string>
     <string name="full_local_mode">وضع الإتصال المحلي</string>
     <string name="authentication">المصادقة</string>
     <string name="mode_of_operation">طريقة التشغيل</string>
-    <string name="full_local_mode_desc">جلب كل شيء مباشرة من YouTube، دون استخدام Piped.</string>
+    <string name="full_local_mode_desc">جلب كل شيء مباشرة من YouTube دون استخدام Piped</string>
     <string name="updating_feed">تحديث التغذية …</string>
     <string name="playback_pitch_semitone_error_input">يجب أن تتراوح القيمة بين -%1$.1f (الحد الأدنى) و%1$.1f (الحد الأقصى)</string>
     <string name="gaming">لعب</string>
@@ -548,4 +548,11 @@
     <string name="delete_playlist_include_vidoes">هل تريد حذف جميع مقاطع الفيديو من قائمة التشغيل أيضًا؟</string>
     <string name="category_hook">خطّاف/تحيات</string>
     <string name="category_hook_summary">للحصول على خطافات سردية تجذب انتباه المشاهد (غالبًا كالمشهد الأول) عن طريق التشويق أو وصف أحداث من وقت لاحق في نفس الفيديو أو حلقات مستقبلية في سلسلة</string>
+    <string name="checking_frequency_15_minutes">15 دقيقة</string>
+    <string name="checking_frequency_30_minutes">30 دقيقة</string>
+    <string name="checking_frequency_60_minutes">60 دقيقة</string>
+    <string name="checking_frequency_2_hours">2 ساعتين</string>
+    <string name="checking_frequency_6_hours">6 ساعات</string>
+    <string name="checking_frequency_12_hours">12 ساعة</string>
+    <string name="checking_frequency_1_day">1 يوم</string>
 </resources>

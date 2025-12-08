@@ -75,12 +75,10 @@ import com.github.libretube.extensions.updateIfChanged
 import com.github.libretube.helpers.BackgroundHelper
 import com.github.libretube.helpers.DownloadHelper
 import com.github.libretube.helpers.ImageHelper
-import com.github.libretube.helpers.IntentHelper
 import com.github.libretube.helpers.NavBarHelper
 import com.github.libretube.helpers.NavigationHelper
 import com.github.libretube.helpers.PlayerHelper
 import com.github.libretube.helpers.PlayerHelper.getCurrentSegment
-import com.github.libretube.helpers.ProxyHelper
 import com.github.libretube.helpers.ThemeHelper
 import com.github.libretube.helpers.WindowHelper
 import com.github.libretube.obj.ShareData
@@ -128,6 +126,7 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
 
     private val playerControlsBinding get() = binding.player.binding
     private val playerBackgroundBinding get() = binding.player.backgroundBinding
+    private val fastForwardViewBinding get() = playerBackgroundBinding.fastForwardView.binding
 
     private val commonPlayerViewModel: CommonPlayerViewModel by activityViewModels()
     private val viewModel: PlayerViewModel by viewModels()
@@ -660,12 +659,6 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
         })
 
         binding.playerMotionLayout
-            .addSwipeUpListener {
-                if (this::streams.isInitialized && PlayerHelper.fullscreenGesturesEnabled) {
-                    binding.player.hideController()
-                    setFullscreen()
-                }
-            }
             .addSwipeDownListener {
                 if (commonPlayerViewModel.isMiniPlayerVisible.value == true) {
                     closeMiniPlayer()
@@ -896,12 +889,14 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
     }
 
     /**
-     * Enable or disable fullscreen depending on the current state
+     * Enter/exit fullscreen or toggle it depending on the current state
      */
-    fun toggleFullscreen() {
+    fun toggleFullscreen(
+        isFullscreen: Boolean = commonPlayerViewModel.isFullscreen.value == false
+    ) {
         binding.player.hideController()
 
-        if (commonPlayerViewModel.isFullscreen.value == false) {
+        if (isFullscreen) {
             // go to fullscreen mode
             setFullscreen()
         } else {
