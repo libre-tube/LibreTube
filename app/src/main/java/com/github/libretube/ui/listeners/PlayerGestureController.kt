@@ -192,6 +192,12 @@ class PlayerGestureController(activity: BaseActivity, private val listener: Play
 
             isMoving = true
 
+            if (!isFullscreen && distanceY > 0) {
+                // Allow swipe up on the entire area if the player is not currently in fullscreen
+                listener.onSwipeCenterScreen(distanceY, e2.y)
+                return true
+            }
+
             when {
                 e1.x < width * LEFT_AREA_VIEW_PERCENTAGE -> {
                     if (isFullscreen) listener.onSwipeLeftScreen(distanceY, e2.y)
