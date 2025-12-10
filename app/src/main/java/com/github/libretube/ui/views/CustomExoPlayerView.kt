@@ -147,6 +147,7 @@ abstract class CustomExoPlayerView(
         audioHelper = AudioHelper(context)
         fullscreenGestureAnimationController = FullscreenGestureAnimationController(
             playerView = this,
+            videoFrameView = backgroundBinding.exoContentFrame,
             onSwipeUpCompleted = {
                 if (!isFullscreen()) togglePlayerFullscreen(true)
             },
