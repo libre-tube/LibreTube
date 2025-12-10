@@ -121,7 +121,7 @@ private data class InitializedFormat(
             ?: initSegment?.takeIf { it.sequenceNumber == sequenceNumber }
             ?: return null
         // mark retrieved segment as buffered
-        bufferedSegments[sequenceNumber] = segment
+        bufferedSegments[sequenceNumber] = segment.copy(data = mutableListOf())
         return segment
     }
 
