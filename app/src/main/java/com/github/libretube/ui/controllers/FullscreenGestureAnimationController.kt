@@ -1,5 +1,6 @@
 package com.github.libretube.ui.controllers
 
+import android.view.View
 import android.view.animation.AccelerateDecelerateInterpolator
 import com.github.libretube.extensions.dpToPx
 import com.github.libretube.ui.views.CustomExoPlayerView
@@ -10,6 +11,7 @@ import com.github.libretube.ui.views.CustomExoPlayerView
  */
 class FullscreenGestureAnimationController(
     private val playerView: CustomExoPlayerView,
+    private val videoFrameView: View,
     private val onSwipeUpCompleted: () -> Unit,
     private val onSwipeDownCompleted: () -> Unit,
 ) {
@@ -36,8 +38,8 @@ class FullscreenGestureAnimationController(
             swipeStartY = positionY
             playerView.hideController()
             // Set pivot point to the bottom-center
-            playerView.pivotX = playerView.width / 2f
-            playerView.pivotY = playerView.height.toFloat()
+            videoFrameView.pivotX = videoFrameView.width / 2f
+            videoFrameView.pivotY = videoFrameView.height.toFloat()
         } else if (shouldHandleSwipe && !isSwipeCompleted) {
             when (swipeDirection) {
                 SwipeDirection.UP -> {
@@ -49,8 +51,8 @@ class FullscreenGestureAnimationController(
                     }
 
                     val scale = 1f + (swipeDistance * SCALE_FACTOR)
-                    playerView.scaleX = scale
-                    playerView.scaleY = scale
+                    videoFrameView.scaleX = scale
+                    videoFrameView.scaleY = scale
                 }
 
                 SwipeDirection.DOWN -> {
@@ -62,8 +64,8 @@ class FullscreenGestureAnimationController(
                     }
 
                     val scale = 1f - (swipeDistance * SCALE_FACTOR)
-                    playerView.scaleX = scale
-                    playerView.scaleY = scale
+                    videoFrameView.scaleX = scale
+                    videoFrameView.scaleY = scale
                 }
 
                 // Do nothing
@@ -76,15 +78,15 @@ class FullscreenGestureAnimationController(
         if (swipeDirection == SwipeDirection.NONE) return
 
         // Reset scale
-        if (shouldHandleSwipe) playerView.animate()
+        if (shouldHandleSwipe) videoFrameView.animate()
             .scaleX(1f)
             .scaleY(1f)
             .setInterpolator(AccelerateDecelerateInterpolator())
             .setDuration(150)
             .withEndAction {
                 // Reset pivot point back to the center
-                playerView.pivotY = playerView.height / 2f
-                playerView.pivotX = playerView.width / 2f
+                videoFrameView.pivotY = videoFrameView.height / 2f
+                videoFrameView.pivotX = videoFrameView.width / 2f
             }
             .start()
 
