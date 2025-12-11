@@ -133,7 +133,7 @@
     <string name="captions">Субтытры</string>
     <string name="none">Адсутнічае</string>
     <string name="general">Агульныя</string>
-    <string name="general_summary">Мова і рэгіён</string>
+    <string name="general_summary">Загрузкі і эканомія даных</string>
     <string name="caption_settings">Налады субтытраў</string>
     <string name="playerAudioQuality">Якасць гуку</string>
     <string name="worst_quality">Найгоршая</string>
@@ -236,7 +236,7 @@
     <string name="resize_mode_zoom">Набліжэнне</string>
     <string name="resize_mode_fit">Падганянне</string>
     <string name="repeat_mode_none">Адкл.</string>
-    <string name="repeat_mode_current">Ток</string>
+    <string name="repeat_mode_current">Бягучае</string>
     <string name="backup">Рэзервовае капіраванне</string>
     <string name="picture_in_picture">PiP</string>
     <string name="maximum_image_cache">Максімальны памер кэша малюнкаў</string>
@@ -465,7 +465,7 @@
     <string name="undo">Адмяніць</string>
     <string name="segment_submitted">Сегмент адпраўлены</string>
     <string name="downvote">Зняважыць</string>
-    <string name="repeat_mode_all">Паўтарыце ўсё</string>
+    <string name="repeat_mode_all">Паўтарыць ўсё</string>
     <string name="successfully_removed_from_playlist">«%1$s» быў выдалены з падборкі.</string>
     <string name="watched">Прагледжана</string>
     <string name="finished">Скончана</string>
@@ -538,4 +538,21 @@
     <string name="podcasts">Падкасты</string>
     <string name="trailers">Трэйлеры</string>
     <string name="music">Музыка</string>
+    <string name="category_hook">Застаўка/Вітанне</string>
+    <string name="category_hook_summary">Для заставак расказу, што захопліваюць увагу глядача (часцей, першыя сцэны) перадражнівая ці апісвая падзеі ў гэтым відэа ці будучых эпізодах</string>
+    <string name="checking_frequency_15_minutes">15 хвілін</string>
+    <string name="checking_frequency_30_minutes">30 хвілін</string>
+    <string name="checking_frequency_60_minutes">60 хвілін</string>
+    <string name="checking_frequency_2_hours">2 гадзіны</string>
+    <string name="checking_frequency_6_hours">6 гадзін</string>
+    <string name="checking_frequency_12_hours">12 гадзін</string>
+    <string name="checking_frequency_1_day">1 дзень</string>
+    <string name="backup_creation_success">Рэўервнае капіраванне паспяхова завершана</string>
+    <string name="backup_creation_failed">Не атрымалася стварыць рэзервовую копію</string>
+    <string name="unsubscribe_snackbar_message">Паспяхова адпісана ад %1$s</string>
+    <string name="screenshot_saved">Скрыншот захаваны</string>
+    <string name="delete_playlist_include_vidoes">Таксама выдаліць усе відэа з плэйлістоў?</string>
+    <string name="include_timestamp_in_filename">Уключаючы метку часу ў назве файла</string>
+    <string name="did_you_mean">Вы мелі на ўвазе:</string>
+    <string name="showing_results_for">Паказаць вынікі для:</string>
 </resources>
