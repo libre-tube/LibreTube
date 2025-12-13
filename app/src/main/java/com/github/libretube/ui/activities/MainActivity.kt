@@ -57,20 +57,15 @@ import com.github.libretube.ui.preferences.BackupRestoreSettings
 import com.github.libretube.ui.preferences.BackupRestoreSettings.Companion.FILETYPE_ANY
 import com.github.libretube.util.UpdateChecker
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
-import javax.inject.Inject
 
-@AndroidEntryPoint
 class MainActivity : BaseActivity() {
     lateinit var binding: ActivityMainBinding
     lateinit var navController: NavController
     lateinit var searchView: SearchView
     private lateinit var searchItem: MenuItem
-    @Inject
-    lateinit var importHelper: ImportHelper
 
     private var startFragmentId = R.id.homeFragment
 
@@ -90,7 +85,7 @@ class MainActivity : BaseActivity() {
         if (uri == null) return@registerForActivityResult
 
         lifecycleScope.launch(Dispatchers.IO) {
-            importHelper.exportPlaylists(
+            ImportHelper.exportPlaylists(
                 this@MainActivity,
                 uri,
                 playlistExportFormat,

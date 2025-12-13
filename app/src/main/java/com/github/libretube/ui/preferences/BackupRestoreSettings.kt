@@ -23,21 +23,16 @@ import com.github.libretube.ui.dialogs.BackupDialog.Companion.BACKUP_DIALOG_REQU
 import com.github.libretube.ui.dialogs.RequireRestartDialog
 import com.github.libretube.util.TextUtils
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.json.Json
-import javax.inject.Inject
 
-@AndroidEntryPoint
 class BackupRestoreSettings : BasePreferenceFragment() {
     private var backupFile = BackupFile()
     private var importFormat: ImportFormat = ImportFormat.NEWPIPE
 
-    @Inject
-    lateinit var importHelper: ImportHelper
 
     override val titleResourceId: Int = R.string.backup_restore
 
@@ -70,7 +65,7 @@ class BackupRestoreSettings : BasePreferenceFragment() {
     ) { uri ->
         if (uri == null) return@registerForActivityResult
         CoroutineScope(Dispatchers.IO).launch {
-            importHelper.importSubscriptions(requireContext().applicationContext, uri, importFormat)
+            ImportHelper.importSubscriptions(requireContext().applicationContext, uri, importFormat)
         }
     }
 
@@ -78,7 +73,7 @@ class BackupRestoreSettings : BasePreferenceFragment() {
         registerForActivityResult(CreateDocument(FILETYPE_ANY)) { uri ->
             if (uri == null) return@registerForActivityResult
             lifecycleScope.launch(Dispatchers.IO) {
-                importHelper.exportSubscriptions(
+                ImportHelper.exportSubscriptions(
                     requireContext().applicationContext,
                     uri,
                     importFormat
@@ -92,7 +87,7 @@ class BackupRestoreSettings : BasePreferenceFragment() {
         registerForActivityResult(ActivityResultContracts.OpenMultipleDocuments()) { files ->
             for (file in files) {
                 CoroutineScope(Dispatchers.IO).launch {
-                    importHelper.importPlaylists(
+                    ImportHelper.importPlaylists(
                         requireContext().applicationContext,
                         file,
                         importFormat
@@ -103,7 +98,8 @@ class BackupRestoreSettings : BasePreferenceFragment() {
 
     private val getWatchHistoryFile =
         registerForActivityResult(ActivityResultContracts.OpenMultipleDocuments()) { files ->
-            importHelper.importWatchHistory(
+            ImportHelper.importWatchHistory(
+                requireContext().applicationContext,
                 files,
                 importFormat
             )
@@ -113,7 +109,7 @@ class BackupRestoreSettings : BasePreferenceFragment() {
         registerForActivityResult(CreateDocument(FILETYPE_ANY)) { uri ->
             uri?.let {
                 lifecycleScope.launch(Dispatchers.IO) {
-                    importHelper.exportPlaylists(
+                    ImportHelper.exportPlaylists(
                         requireContext().applicationContext,
                         uri,
                         importFormat
