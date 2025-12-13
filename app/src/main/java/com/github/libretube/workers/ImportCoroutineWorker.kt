@@ -131,7 +131,7 @@ class ImportCoroutineWorker (
         } else if (!importHandler.isPaused) {
             dispatch(true)
             if (now - lastUpdateTime >= updateInterval) {
-                notifyNotification(notificationFactory.updateState(currentState, finalState, ImportState.RESUME))
+                notifyNotification(notificationFactory.updateState(currentState, finalState, ImportState.RUNNING))
                 lastUpdateTime = now
             }
         }
