@@ -93,12 +93,12 @@ abstract class CustomExoPlayerView(
     private val gestureViewBinding: PlayerGestureControlsViewBinding get() = backgroundBinding.playerGestureControlsView.binding
     private val doubleTapOverlayBinding: DoubleTapOverlayBinding get() = backgroundBinding.doubleTapOverlay.binding
 
-    private lateinit var playerGestureController: PlayerGestureController
-    private lateinit var brightnessHelper: BrightnessHelper
-    private lateinit var audioHelper: AudioHelper
+    private var playerGestureController: PlayerGestureController
+    private var brightnessHelper: BrightnessHelper
+    private var audioHelper: AudioHelper
     private lateinit var chaptersViewModel: ChaptersViewModel
     private lateinit var seekBarListener: TimeBar.OnScrubListener
-    private lateinit var fullscreenGestureAnimationController: FullscreenGestureAnimationController
+    private var fullscreenGestureAnimationController: FullscreenGestureAnimationController
     private var chaptersBottomSheet: ChaptersBottomSheet? = null
     private var scrubbingTimeBar = false
 
@@ -873,7 +873,7 @@ abstract class CustomExoPlayerView(
 
     override fun onFullscreenChange(isFullscreen: Boolean) {
         if (isFullscreen) {
-            if (PlayerHelper.swipeGestureEnabled && this::brightnessHelper.isInitialized) {
+            if (PlayerHelper.swipeGestureEnabled) {
                 brightnessHelper.restoreSavedBrightness()
             }
             subtitleView?.setFixedTextSize(
@@ -884,7 +884,7 @@ abstract class CustomExoPlayerView(
                 subtitleView?.setBottomPaddingFraction(SUBTITLE_BOTTOM_PADDING_FRACTION)
             }
         } else {
-            if (PlayerHelper.swipeGestureEnabled && this::brightnessHelper.isInitialized) {
+            if (PlayerHelper.swipeGestureEnabled) {
                 brightnessHelper.resetToSystemBrightness()
             }
             subtitleView?.setFixedTextSize(
