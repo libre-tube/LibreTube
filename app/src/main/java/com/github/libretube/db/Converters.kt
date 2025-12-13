@@ -19,7 +19,7 @@ object Converters {
     fun pathToString(path: Path?) = path?.toString()
 
     @TypeConverter
-    fun stringToPath(string: String?) = string?.let { Paths.get(it) }
+    fun stringToPath(string: String?) = string?.let { Path(it) }
 
     @TypeConverter
     fun stringListToJson(value: List<String>) = JsonHelper.json.encodeToString(value)
