@@ -86,16 +86,6 @@ android {
         jvmTarget = "17"
     }
 
-    // Comment this block if issues occur while generating the baseline profile
-    splits {
-        abi {
-            isEnable = true
-            reset()
-            include("armeabi-v7a", "arm64-v8a", "x86", "x86_64")
-            isUniversalApk = true
-        }
-    }
-
     packaging {
         jniLibs.excludes.add("lib/armeabi-v7a/*_neon.so")
     }
