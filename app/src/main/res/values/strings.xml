@@ -545,6 +545,8 @@
         <item quantity="other">%d new streams</item>
     </plurals>
     <string name="percentage_completed">%d completed</string>
+    <string name="import_channel_name">Import Worker</string>
+    <string name="import_channel_description">Shows a notification when importing</string>
     <!--Tooltips -->
     <string name="tooltip_repeat">Repeat</string>
     <string name="tooltip_reverse">Reverse</string>
