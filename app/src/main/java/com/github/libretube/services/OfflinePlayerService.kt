@@ -112,7 +112,7 @@ open class OfflinePlayerService : AbstractPlayerService() {
 
         val downloadWithItems = withContext(Dispatchers.IO) {
             Database.downloadDao().findById(videoId)
-        }!!
+        } ?: return
         this.downloadWithItems = downloadWithItems
 
         PlayingQueue.updateCurrent(downloadWithItems.download.toStreamItem())
