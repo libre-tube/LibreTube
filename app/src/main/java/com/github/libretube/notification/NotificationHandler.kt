@@ -57,7 +57,7 @@ class NotificationHandler (private  val uuid: UUID,private val context: Context)
     ): Notification {
         val percent =
             if (finalState == 0) 0 else ((currentState.toFloat() / finalState) * 100).toInt()
-        builder.setContentText("$percent% completed")
+        builder.setContentText(context.getString(R.string.percentage_completed,percent))
         builder.setProgress(finalState, currentState, false)
         builder.clearActions()
         when (importState) {

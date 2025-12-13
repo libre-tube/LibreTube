@@ -544,6 +544,7 @@
         <item quantity="one">%d new stream</item>
         <item quantity="other">%d new streams</item>
     </plurals>
+    <string name="percentage_completed">%d completed</string>
     <!--Tooltips -->
     <string name="tooltip_repeat">Repeat</string>
     <string name="tooltip_reverse">Reverse</string>
