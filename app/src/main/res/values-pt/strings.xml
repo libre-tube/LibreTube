@@ -538,4 +538,20 @@
     <string name="trailers">Trailers</string>
     <string name="music">Músicas</string>
     <string name="include_timestamp_in_filename">Incluir data e hora no nome do ficheiro</string>
+    <string name="category_hook">Trechos/Saudações</string>
+    <string name="category_hook_summary">Para trechos narrativos que chamam a atenção do espectador (muitas vezes como primeira cena) ao provocar ou descrever eventos que ocorrem mais tarde no mesmo vídeo ou em episódios futuros de uma série</string>
+    <string name="checking_frequency_15_minutes">15 minutos</string>
+    <string name="checking_frequency_30_minutes">30 minutos</string>
+    <string name="checking_frequency_60_minutes">60 minutos</string>
+    <string name="checking_frequency_2_hours">2 horas</string>
+    <string name="checking_frequency_6_hours">6 horas</string>
+    <string name="checking_frequency_12_hours">12 horas</string>
+    <string name="checking_frequency_1_day">1 dia</string>
+    <string name="backup_creation_success">Backup concluído com sucesso</string>
+    <string name="backup_creation_failed">Falha ao criar o backup</string>
+    <string name="unsubscribe_snackbar_message">Inscrição cancelada com sucesso em %1$s</string>
+    <string name="screenshot_saved">Captura de ecrã guardada</string>
+    <string name="delete_playlist_include_vidoes">Eliminar todos os vídeos da lista de reprodução?</string>
+    <string name="did_you_mean">Será que queria dizer:</string>
+    <string name="showing_results_for">A mostrar resultados para:</string>
 </resources>
