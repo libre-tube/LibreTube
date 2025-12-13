@@ -5,14 +5,10 @@ import android.net.Uri
 import android.util.Log
 import androidx.core.net.toUri
 import androidx.documentfile.provider.DocumentFile
-import androidx.work.OneTimeWorkRequestBuilder
-import androidx.work.WorkManager
-import androidx.work.workDataOf
 import com.github.libretube.R
 import com.github.libretube.api.JsonHelper
 import com.github.libretube.api.PlaylistsHelper
 import com.github.libretube.api.SubscriptionHelper
-import com.github.libretube.constants.WorkersData
 import com.github.libretube.enums.ImportFormat
 import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.toID
@@ -33,9 +29,8 @@ import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.decodeFromStream
 import kotlinx.serialization.json.encodeToStream
 import java.util.stream.Collectors
-import javax.inject.Inject
 
-class ImportHelper @Inject constructor(private val workManager: WorkManager, private val scheduler: ImportCoroutineWorker.Scheduler) {
+object ImportHelper {
     private val IMPORT_THUMBNAIL_QUALITY = "mqdefault"
     private val VIDEO_ID_LENGTH = 11
     private val YOUTUBE_IMG_URL = "https://img.youtube.com"
@@ -332,8 +327,8 @@ class ImportHelper @Inject constructor(private val workManager: WorkManager, pri
     }
 
     @OptIn(ExperimentalSerializationApi::class)
-    fun importWatchHistory( uris: List<Uri>, importFormat: ImportFormat) {
-        scheduler.importWatchHistory(uris,importFormat)
+    fun importWatchHistory( context: Context,uris: List<Uri>, importFormat: ImportFormat) {
+        ImportCoroutineWorker.importWatchHistory(context,uris,importFormat)
     }
 
     private fun extractYTPlaylistName(context: Context, uri: Uri): String? {

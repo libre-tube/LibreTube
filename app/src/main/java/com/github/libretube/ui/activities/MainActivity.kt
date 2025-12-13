@@ -62,14 +62,17 @@ import com.github.libretube.ui.preferences.BackupRestoreSettings.Companion.FILET
 import com.github.libretube.util.UpdateChecker
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import dagger.hilt.android.AndroidEntryPoint
+import jakarta.inject.Inject
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
-import javax.inject.Inject
+
 
 
 @AndroidEntryPoint
 class MainActivity : AbstractPlayerHostActivity() {
+    lateinit var binding: ActivityMainBinding
+
     @Inject
     private lateinit var importHelper: ImportHelper
 
@@ -98,7 +101,7 @@ class MainActivity : AbstractPlayerHostActivity() {
         if (uri == null) return@registerForActivityResult
 
         lifecycleScope.launch(Dispatchers.IO) {
-            importHelper.exportPlaylists(
+            ImportHelper.exportPlaylists(
                 this@MainActivity,
                 uri,
                 playlistExportFormat,

@@ -94,6 +94,7 @@ androidx-hilt-compiler = { module = "androidx.hilt:hilt-compiler", version.ref =
 androidx-hilt-work = { module = "androidx.hilt:hilt-work", version.ref = "hiltWorkerAndCompiler" }
 
 
+
 [plugins]
 androidTest = { id = "com.android.test", version.ref = "gradle" }
 baselineprofile = { id = "androidx.baselineprofile", version.ref = "baselineprofile" }
@@ -103,3 +104,4 @@ kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", versi
 kotlin-parcelize = { id = "org.jetbrains.kotlin.plugin.parcelize" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 google-protobuf  = { id = "com.google.protobuf", version.ref = "protobufPlugin" }
+

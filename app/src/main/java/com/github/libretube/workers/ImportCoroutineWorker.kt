@@ -5,7 +5,6 @@ import android.app.NotificationManager
 import android.content.Context
 import android.net.Uri
 import androidx.core.content.ContextCompat
-import androidx.hilt.work.HiltWorker
 import androidx.work.CoroutineWorker
 import androidx.work.ForegroundInfo
 import androidx.work.OneTimeWorkRequestBuilder
@@ -21,26 +20,21 @@ import com.github.libretube.enums.ImportFormat
 import com.github.libretube.enums.ImportState
 import com.github.libretube.enums.ImportType
 import com.github.libretube.extensions.toastFromMainDispatcher
-import com.github.libretube.factory.NotificationFactory
 import com.github.libretube.handler.ImportHandler
+import com.github.libretube.notification.NotificationHandler
+import com.github.libretube.notification.NotificationProvider
 import com.github.libretube.obj.YouTubeWatchHistoryFileItem
 import com.github.libretube.receivers.ImportReceiver
-import dagger.assisted.Assisted
-import dagger.assisted.AssistedInject
-import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.json.decodeFromStream
 import java.util.UUID
-import javax.inject.Inject
 
-@HiltWorker
-class ImportCoroutineWorker @AssistedInject constructor(
-    @Assisted appContext: Context,
-    @Assisted workerParams: WorkerParameters,
-    notificationFactoryFactory: NotificationFactory.Factory
+class ImportCoroutineWorker (
+    appContext: Context,
+    workerParams: WorkerParameters,
 ) : CoroutineWorker(appContext, workerParams) {
 
-    private val notificationFactory = notificationFactoryFactory.create(id)
+    private val notificationFactory: NotificationProvider = NotificationHandler(id,appContext);
     private val notificationManager =
         appContext.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
     private val IMPORT_THUMBNAIL_QUALITY = "mqdefault"
@@ -149,7 +143,7 @@ class ImportCoroutineWorker @AssistedInject constructor(
 
     override suspend fun getForegroundInfo(): ForegroundInfo {
         return ForegroundInfo(
-            id.hashCode(), notificationFactory.createNotification(id)
+            id.hashCode(), notificationFactory.createNotification()
         )
     }
 
@@ -163,11 +157,8 @@ class ImportCoroutineWorker @AssistedInject constructor(
         )
     }
 
-    class Scheduler @Inject constructor(
-        @ApplicationContext private val context: Context,
-        private val workManager: WorkManager
-    ) {
-        fun importWatchHistory(uris: List<Uri>, importFormat: ImportFormat) {
+    companion object {
+        fun importWatchHistory(context: Context,uris: List<Uri>, importFormat: ImportFormat) {
             val uuid = UUID.randomUUID()
             val workRequest = OneTimeWorkRequestBuilder<ImportCoroutineWorker>()
                 .setId(uuid)
@@ -179,7 +170,7 @@ class ImportCoroutineWorker @AssistedInject constructor(
                     )
                 )
                 .build()
-            workManager.enqueue(workRequest)
+           WorkManager.getInstance(context).enqueue(workRequest)
         }
     }
 }
