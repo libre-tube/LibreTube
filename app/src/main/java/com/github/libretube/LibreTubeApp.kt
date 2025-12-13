@@ -101,8 +101,8 @@ class LibreTubeApp : Application() {
         val importChannel = NotificationChannelCompat.Builder(
             IMPORT_CHANNEL_NAME,
             NotificationManagerCompat.IMPORTANCE_DEFAULT
-        ).setName("Import Worker")
-            .setDescription("Shows a notification when importing")
+        ).setName(getString(R.string.import_channel_name))
+            .setDescription(getString(R.string.import_channel_description))
             .build()
 
         val notificationManager = NotificationManagerCompat.from(this)
