@@ -142,8 +142,8 @@ abstract class CustomExoPlayerView(
     }
 
     init {
-        playerGestureController = PlayerGestureController(activity, this)
         brightnessHelper = BrightnessHelper(activity)
+        playerGestureController = PlayerGestureController(activity, this)
         audioHelper = AudioHelper(context)
         fullscreenGestureAnimationController = FullscreenGestureAnimationController(
             playerView = this,
