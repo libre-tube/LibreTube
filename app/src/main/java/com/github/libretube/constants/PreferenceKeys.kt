@@ -46,7 +46,6 @@ object PreferenceKeys {
     const val AUTO_FULLSCREEN = "auto_fullscreen"
     const val AUTOPLAY = "autoplay"
     const val RELATED_STREAMS = "related_streams_toggle"
-    const val REMEMBER_PLAYBACK_SPEED = "remember_playback_speed"
     const val PLAYBACK_SPEED = "playback_speed"
     const val FULLSCREEN_ORIENTATION = "fullscreen_orientation"
     const val PAUSE_ON_SCREEN_OFF = "pause_screen_off"
