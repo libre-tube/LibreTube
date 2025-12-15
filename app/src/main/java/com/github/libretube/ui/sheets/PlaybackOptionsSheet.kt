@@ -130,10 +130,8 @@ class PlaybackOptionsSheet(
         binding.semitoneEditText.setText((binding.pitch.value).round(2).toString())
         binding.pitchResetButton.isGone = binding.pitch.value == 0f
 
-        if (PreferenceHelper.getBoolean(PreferenceKeys.REMEMBER_PLAYBACK_SPEED, true)) {
-            val currentSpeed = player.playbackParameters.speed.toString()
-            PreferenceHelper.putString(PreferenceKeys.PLAYBACK_SPEED, currentSpeed)
-        }
+        val currentSpeed = player.playbackParameters.speed.toString()
+        PreferenceHelper.putString(PreferenceKeys.PLAYBACK_SPEED, currentSpeed)
     }
 
     private fun clearEditTextFocusAndHideKeyboard() {

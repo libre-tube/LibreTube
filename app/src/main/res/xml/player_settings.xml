@@ -141,29 +141,6 @@
 
     </PreferenceCategory>
 
-    <PreferenceCategory app:title="@string/defaults">
-
-        <SwitchPreferenceCompat
-            android:icon="@drawable/ic_headphones"
-            android:summaryOff="@string/disabled"
-            android:summaryOn="@string/enabled"
-            app:defaultValue="true"
-            app:disableDependentsState="true"
-            app:key="remember_playback_speed"
-            app:title="@string/remember_playback_speed" />
-
-        <com.github.libretube.ui.views.SliderPreference
-            android:dependency="remember_playback_speed"
-            android:icon="@drawable/ic_speed"
-            app:defValue="1.0"
-            app:key="playback_speed"
-            app:stepSize="0.05"
-            app:title="@string/playback_speed"
-            app:valueFrom="0.2"
-            app:valueTo="4.0" />
-
-    </PreferenceCategory>
-
     <PreferenceCategory app:title="@string/misc">
 
         <com.github.libretube.ui.preferences.EditNumberPreference
