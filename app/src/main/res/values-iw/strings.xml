@@ -20,7 +20,7 @@
     <string name="empty">עליך למלא שם משתמש וסיסמה.</string>
     <string name="notgmail">זה לחשבון Piped</string>
     <string name="grid">עמודות רשת (לאורך)</string>
-    <string name="createPlaylist">יצירת פלייליסט</string>
+    <string name="createPlaylist">יצירת רשימת נגינה</string>
     <string name="playlistName">שם הפלייליסט</string>
     <string name="emptyPlaylistName">שם הפלייליסט לא יכול להישאר ריק</string>
     <string name="addToPlaylist">הוספה לפלייליסט</string>
@@ -84,8 +84,8 @@
     <string name="already_logged_in">כבר נכנסת. אפשר גם לצאת מהחשבון שלך.</string>
     <string name="unknown_error">שגיאת רשת.</string>
     <string name="defres">רזולוציית סרטונים</string>
-    <string name="deletePlaylist">מחיקת פלייליסט</string>
-    <string name="areYouSure">למחוק את הפלייליסט?</string>
+    <string name="deletePlaylist">מחיקת רשימת נגינה</string>
+    <string name="areYouSure">למחוק את רשימת הנגינה?</string>
     <string name="playlistCreated">נוצר פלייליסט.</string>
     <string name="changeLanguage">שפה</string>
     <string name="darkTheme">כהה</string>
