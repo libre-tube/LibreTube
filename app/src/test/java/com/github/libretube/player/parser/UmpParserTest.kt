@@ -1,6 +1,5 @@
 package com.github.libretube.player.parser
 
-import androidx.annotation.VisibleForTesting
 import org.junit.Test
 import org.junit.Assert.*
 import video_streaming.UmpPartId
