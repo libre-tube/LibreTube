@@ -288,6 +288,10 @@ class SabrClient private constructor(
             withContext(dispatcher) {
                 var format = initializedFormats[itag]
                 if (format == null || !format.hasSegment(playbackRequest.segment)) {
+                    // remove segments that where downloaded, but never requested by the player
+                    // (e.g. due to seeking), to avoid keeping them around forever and thus leaking memory
+                    format?.downloadedSegments?.clear()
+
                     // fetch new data
                     media(playbackRequest)
                 }
