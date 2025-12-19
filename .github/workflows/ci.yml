@@ -19,7 +19,7 @@ jobs:
   debug-builds:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
       - uses: gradle/actions/wrapper-validation@v5
       - uses: actions/setup-python@v6
         with:
@@ -73,7 +73,7 @@ jobs:
           python ../uploader.py
       
       - name: Upload APK
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         with:
           name: app
           path: nightly/*.apk

@@ -205,7 +205,7 @@ class DownloadsFragmentPage : DynamicLayoutManagerFragment(R.layout.fragment_dow
         lifecycleScope.launch(Dispatchers.Main) {
             val playlistItems = downloadPlaylistId?.let { playlistId ->
                 val playlist = withContext(Dispatchers.IO) {
-                    Database.downloadDao().getDownloadPlaylistById(playlistId)!!
+                    Database.downloadDao().getDownloadPlaylistById(playlistId)
                 }
 
                 binding.playlistName.text = playlist.downloadPlaylist.title

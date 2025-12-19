@@ -1,3 +1,5 @@
+import java.util.Properties
+
 plugins {
     id("com.android.application")
     id("kotlin-android")
@@ -6,6 +8,21 @@ plugins {
     id("androidx.navigation.safeargs.kotlin")
     alias(libs.plugins.baselineprofile)
     alias(libs.plugins.ksp)
+}
+
+/*
+'keystore.properties' should look like the following:
+
+storeFile=my.keystore
+storePassword=my_store_password
+keyAlias=my_key_alias
+keyPassword=my_key_password
+ */
+
+val keystoreProperties = Properties()
+val keystoreFileExists = rootProject.file("keystore.properties").exists();
+if (keystoreFileExists) {
+    keystoreProperties.load(rootProject.file("keystore.properties").inputStream())
 }
 
 android {
@@ -30,10 +47,22 @@ android {
         enable = true
     }
 
+    signingConfigs {
+        if (keystoreFileExists) {
+            create("release") {
+                storeFile = keystoreProperties["storeFile"]?.let { file(it as String) }
+                storePassword = keystoreProperties["storePassword"] as String
+                keyAlias = keystoreProperties["keyAlias"] as String
+                keyPassword = keystoreProperties["keyPassword"] as String
+            }
+        }
+    }
+
     buildTypes {
         getByName("release") {
             isMinifyEnabled = true
             isShrinkResources = true
+            signingConfig = signingConfigs.findByName("release")?.takeIf { it.storeFile != null }
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"

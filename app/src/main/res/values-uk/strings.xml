@@ -554,4 +554,6 @@
     <string name="checking_frequency_6_hours">6 годин</string>
     <string name="checking_frequency_12_hours">12 годин</string>
     <string name="checking_frequency_1_day">1 день</string>
+    <string name="backup_creation_success">Резервне копіювання успішно завершено</string>
+    <string name="backup_creation_failed">Не вдалося створити резервну копію</string>
 </resources>

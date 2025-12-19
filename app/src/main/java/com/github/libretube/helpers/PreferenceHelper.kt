@@ -132,6 +132,9 @@ object PreferenceHelper {
         PreferenceMigration(3, 4) {
             listOf("video_codecs", "audio_codecs").map { remove(it) }
         },
+        PreferenceMigration(4, 5) {
+            remove("remember_playback_speed")
+        },
     )
 
     /**
