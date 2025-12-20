@@ -424,12 +424,10 @@ class NewPipeMediaServiceRepository : MediaServiceRepository {
 
     private suspend fun getLatestVideos(channelInfo: ChannelInfo): Pair<List<StreamItem>, String?> {
         val relatedTab = channelInfo.tabs.find { it.contentFilters.contains(ChannelTabs.VIDEOS) }
-        if (relatedTab != null) {
-            val relatedStreamsResp = getChannelTab(relatedTab.toTabDataString())
-            return relatedStreamsResp.content.map { it.toStreamItem() } to relatedStreamsResp.nextpage
-        }
+            ?: return emptyList<StreamItem>() to null
 
-        return emptyList<StreamItem>() to null
+        val relatedStreamsResp = getChannelTab(relatedTab.toTabDataString())
+        return relatedStreamsResp.content.map { it.toStreamItem() } to relatedStreamsResp.nextpage
     }
 
     override suspend fun getChannel(channelId: String): Channel {
