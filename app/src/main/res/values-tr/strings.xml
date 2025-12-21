@@ -551,4 +551,5 @@
     <string name="checking_frequency_1_day">1 gün</string>
     <string name="backup_creation_success">Yedekleme başarıyla tamamlandı</string>
     <string name="backup_creation_failed">Yedekleme oluşturulamadı</string>
+    <string name="category_hook">Giriş/Karşılama</string>
 </resources>
