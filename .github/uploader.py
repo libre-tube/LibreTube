@@ -1,4 +1,4 @@
-from os import system as run, listdir, remove
+from os import system as run, listdir, remove, popen
 from json import load
 import config_file
 import hashlib
@@ -6,7 +6,8 @@ import hashlib
 with open("../.github/commit.json") as f:
     data = load(f)
 
-message = f"Commit {data['sha'][0:7]}, signed off by: {data['commit']['author']['name']}"
+sha = data.get('sha', popen("git rev-parse --short HEAD").read())[0:7]
+message = f"Commit {sha}, signed off by: {data['commit']['author']['name']}"
 
 files, signed_files, unsigned_files = listdir(), [], []
 for file in files:
