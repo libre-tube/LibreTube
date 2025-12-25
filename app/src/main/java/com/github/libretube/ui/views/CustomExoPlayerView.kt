@@ -61,6 +61,7 @@ import com.github.libretube.ui.base.BaseActivity
 import com.github.libretube.ui.controllers.FullscreenGestureAnimationController
 import com.github.libretube.ui.extensions.toggleSystemBars
 import com.github.libretube.ui.fragments.PlayerFragment
+import com.github.libretube.ui.interfaces.BottomSheetListener
 import com.github.libretube.ui.interfaces.PlayerGestureOptions
 import com.github.libretube.ui.interfaces.PlayerOptions
 import com.github.libretube.ui.listeners.PlayerGestureController
@@ -82,7 +83,7 @@ import kotlinx.coroutines.launch
 abstract class CustomExoPlayerView(
     context: Context,
     attributeSet: AttributeSet? = null
-) : PlayerView(context, attributeSet), PlayerOptions, PlayerGestureOptions {
+) : PlayerView(context, attributeSet), PlayerOptions, PlayerGestureOptions{
     @Suppress("LeakingThis")
     val binding = ExoStyledPlayerControlViewBinding.bind(this)
     val backgroundBinding = CustomExoPlayerViewTemplateBinding.bind(this)
@@ -154,6 +155,7 @@ abstract class CustomExoPlayerView(
             onSwipeDownCompleted = ::minimizeOrExitPlayer
         )
     }
+
 
     fun initialize(chaptersViewModel: ChaptersViewModel) {
         this.chaptersViewModel = chaptersViewModel
@@ -291,9 +293,9 @@ abstract class CustomExoPlayerView(
 
             if (sheet.isVisible) {
                 sheet.dismiss()
-            } else {
-                sheet.show(activity.supportFragmentManager)
+                return@setOnClickListener
             }
+            sheet.show(activity.supportFragmentManager)
         }
 
         supportFragmentManager.setFragmentResultListener(
