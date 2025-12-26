@@ -437,6 +437,15 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
         _binding = FragmentPlayerBinding.bind(view)
         super.onViewCreated(view, savedInstanceState)
 
+        binding.player.apply {
+            isFocusable = true
+            isFocusableInTouchMode = true
+            requestFocus()
+            setOnKeyListener { _, keyCode, _ ->
+                onKeyUp(keyCode)
+            }
+        }
+
         // manually apply additional padding for edge-to-edge compatibility
         activity?.getSystemInsets()?.let { systemBars ->
             with (binding.root) {
