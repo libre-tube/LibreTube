@@ -183,6 +183,11 @@ abstract class AbstractPlayerService : MediaLibraryService(), MediaLibrarySessio
                 }
                 updateNotification()
             }
+
+            args.containsKey(PlayerCommand.SET_VOLUME.name) -> {
+                val volume = args.getFloat(PlayerCommand.SET_VOLUME.name)
+                setPlayerVolume(volume)
+            }
         }
     }
 
@@ -336,6 +341,15 @@ abstract class AbstractPlayerService : MediaLibraryService(), MediaLibrarySessio
         if (isTransitioning || !watchPositionsEnabled || !::videoId.isInitialized) return
 
         exoPlayer?.let { PlayerHelper.saveWatchPosition(it, videoId) }
+    }
+
+    /**
+     * Set the player volume (0.0 to 1.0)
+     */
+    fun setPlayerVolume(volume: Float) {
+        handler.post {
+            exoPlayer?.volume = volume.coerceIn(0f, 1f)
+        }
     }
 
     override fun onMediaButtonEvent(
