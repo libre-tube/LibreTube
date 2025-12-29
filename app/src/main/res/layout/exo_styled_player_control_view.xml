@@ -314,7 +314,7 @@
             android:layout_marginHorizontal="10dp"
             android:translationZ="10dp">
 
-            <com.github.libretube.ui.views.MarkableTimeBar
+            <com.github.libretube.ui.views.ChapterTimeBar
                 android:id="@+id/exo_progress"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
