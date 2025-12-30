@@ -72,6 +72,7 @@ import com.github.libretube.ui.sheets.PlayingQueueSheet
 import com.github.libretube.ui.sheets.SleepTimerSheet
 import com.github.libretube.ui.tools.SleepTimer
 import com.github.libretube.util.PlayingQueue
+import kotlin.math.ceil
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -476,10 +477,10 @@ abstract class CustomExoPlayerView(
         BottomSheetItem(
             context.getString(R.string.sleep_timer),
             R.drawable.ic_sleep,
-            getCurrent = {
+            {
                 if (SleepTimer.timeLeftMillis > 0) {
-                    val minutesLeft = kotlin.math.ceil(SleepTimer.timeLeftMillis / 60000.0).toInt()
-                    context.getString(R.string.minutes_left, minutesLeft)
+                    val minutesLeft = ceil(SleepTimer.timeLeftMillis.toDouble() / MILLIS_PER_MINUTE).toInt()
+                    context.resources.getQuantityString(R.plurals.minutes_left, minutesLeft, minutesLeft)
                 } else {
                     context.getString(R.string.disabled)
                 }
@@ -958,7 +959,7 @@ abstract class CustomExoPlayerView(
         return true
     }
 
-    fun togglePlayerFullscreen(isFullscreen: Boolean = !isFullscreen()){
+    fun togglePlayerFullscreen(isFullscreen: Boolean = !isFullscreen()) {
         try {
             findFragment<PlayerFragment>().toggleFullscreen(isFullscreen)
         } catch (error: IllegalStateException) {
@@ -1000,6 +1001,7 @@ abstract class CustomExoPlayerView(
         private const val SUBTITLE_BOTTOM_PADDING_FRACTION = 0.158f
         private const val ANIMATION_DURATION = 100L
         private const val AUTO_HIDE_CONTROLLER_DELAY = 2000L
+        private const val MILLIS_PER_MINUTE = 60000L
         private val LANDSCAPE_MARGIN_HORIZONTAL = 20f.dpToPx()
         private val LANDSCAPE_MARGIN_HORIZONTAL_NONE = 0f.dpToPx()
     }
