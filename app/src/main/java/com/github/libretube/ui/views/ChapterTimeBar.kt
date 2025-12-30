@@ -29,11 +29,11 @@ class ChapterTimeBar(
     private val progressBarHeight = 2f.dpToPx()
 
     override fun onDraw(canvas: Canvas) {
-        val checkpoint = canvas.saveLayer(null, null)
+        val saveCount = canvas.saveLayer(null, null)
         super.onDraw(canvas)
         drawChapters(canvas)
 
-        canvas.restoreToCount(checkpoint)
+        canvas.restoreToCount(saveCount)
     }
 
 
@@ -52,15 +52,17 @@ class ChapterTimeBar(
         length = width - horizontalOffset * 2
         val marginY = (height - progressBarHeight) / 2
 
+        val chapterBreakWidth = 4f.dpToPx()
+
         // skip the first chapter as it always starts at 0:00
         chapters.drop(1).forEach {
-            val startPosition = it.start.toLength() + horizontalOffset
+            val center = it.start.toLength() + horizontalOffset
 
             canvas.drawRect(
                 Rect(
-                    startPosition,
+                    center - (chapterBreakWidth / 2),
                     marginY,
-                    startPosition + 4f.dpToPx(),
+                    center + (chapterBreakWidth / 2),
                     marginY + progressBarHeight
                 ),
                 eraserPaint,
