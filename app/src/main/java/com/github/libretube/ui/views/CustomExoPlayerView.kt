@@ -479,7 +479,7 @@ abstract class CustomExoPlayerView(
             R.drawable.ic_sleep,
             {
                 if (SleepTimer.timeLeftMillis > 0) {
-                    val minutesLeft = ceil(SleepTimer.timeLeftMillis.toDouble() / MILLIS_PER_MINUTE).toInt()
+                    val minutesLeft = ceil(SleepTimer.timeLeftMillis.toDouble() / DateUtils.MINUTE_IN_MILLIS).toInt()
                     context.resources.getQuantityString(R.plurals.minutes_left, minutesLeft, minutesLeft)
                 } else {
                     context.getString(R.string.disabled)
@@ -1001,7 +1001,6 @@ abstract class CustomExoPlayerView(
         private const val SUBTITLE_BOTTOM_PADDING_FRACTION = 0.158f
         private const val ANIMATION_DURATION = 100L
         private const val AUTO_HIDE_CONTROLLER_DELAY = 2000L
-        private const val MILLIS_PER_MINUTE = 60000L
         private val LANDSCAPE_MARGIN_HORIZONTAL = 20f.dpToPx()
         private val LANDSCAPE_MARGIN_HORIZONTAL_NONE = 0f.dpToPx()
     }
