@@ -553,4 +553,8 @@
     <string name="checking_frequency_1_day">1 ден</string>
     <string name="backup_creation_success">Архивирането завърши успешно</string>
     <string name="backup_creation_failed">Неуспешно създаване на резервно копие</string>
+    <plurals name="minutes_left">
+        <item quantity="one">Остава %d минута</item>
+        <item quantity="other">Остават %d минути</item>
+    </plurals>
 </resources>
