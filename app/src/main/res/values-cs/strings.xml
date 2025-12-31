@@ -554,4 +554,10 @@
     <string name="checking_frequency_1_day">1 den</string>
     <string name="backup_creation_success">Záloha úspěšně dokončena</string>
     <string name="backup_creation_failed">Nepodařilo se vytvořit zálohu</string>
+    <plurals name="minutes_left">
+        <item quantity="one">Zbývá %d min</item>
+        <item quantity="few">Zbývají %d min</item>
+        <item quantity="many">Zbývá %d min</item>
+        <item quantity="other">Zbývá %d min</item>
+    </plurals>
 </resources>
