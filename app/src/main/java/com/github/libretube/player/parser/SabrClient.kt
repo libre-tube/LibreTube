@@ -318,6 +318,9 @@ class SabrClient private constructor(
             processPart(part)
         }
         assert(parser.data().isEmpty()) { "Parser has left-over data" }
+
+        // segments should be fully contained within a single response
+        assert(partialSegments.isEmpty()) { "Incomplete segment decoded" }
     }
 
     /**
