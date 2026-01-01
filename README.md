@@ -1,3 +1,13 @@
+# About this fork
+
+This is a fork of LibreTube in its early stages. I'm planning to support the following extra features:
+
+- [Remember playback speed on a per-channel basis
+](https://github.com/libre-tube/LibreTube/issues/8040)
+- more niche features / use-cases that got rejected upstream because of maintenance burden to come....
+
+# Original README
+
 <div align="center">
   <img src="assets/banners/gh-banner.png" width="auto" height="auto" alt="LibreTube">
 
