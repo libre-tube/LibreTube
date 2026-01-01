@@ -472,6 +472,7 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
 
         chaptersViewModel.chaptersLiveData.observe(viewLifecycleOwner) {
             binding.player.setCurrentChapterName()
+            playerControlsBinding.exoProgress.setChapters(it)
         }
 
         viewModel.segments.observe(viewLifecycleOwner) { segments ->

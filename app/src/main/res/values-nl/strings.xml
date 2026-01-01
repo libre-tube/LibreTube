@@ -553,4 +553,8 @@
     <string name="checking_frequency_1_day">24 uur</string>
     <string name="backup_creation_success">Back-up succesvol gemaakt</string>
     <string name="backup_creation_failed">Back-up maken mislukt</string>
+    <plurals name="minutes_left">
+        <item quantity="one">nog %d min.</item>
+        <item quantity="other">nog %d min.</item>
+    </plurals>
 </resources>

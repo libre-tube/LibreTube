@@ -201,7 +201,7 @@
     <string name="notifications">الإشعارات</string>
     <string name="notify_new_streams">إشعارات المحتوى الجديد</string>
     <string name="notify_new_streams_summary">إشعارات حول المحتوى الجديد من منشئي المحتوى الذين تتابعهم</string>
-    <string name="checking_frequency">تحقق من كل…</string>
+    <string name="checking_frequency">يتم الفحص كل …</string>
     <string name="irreversible">هل أنت متأكد؟ هذا لا يمكن التراجع عنه!</string>
     <string name="history_empty">لا يوجد سجل حتى الان.</string>
     <string name="most_recent">الأحدث</string>
@@ -557,4 +557,12 @@
     <string name="checking_frequency_1_day">1 يوم</string>
     <string name="backup_creation_success">تم النسخ الاحتياطي بنجاح</string>
     <string name="backup_creation_failed">فشل إنشاء النسخة الاحتياطية</string>
+    <plurals name="minutes_left">
+        <item quantity="zero">%d دقيقة متبقية</item>
+        <item quantity="one">%d دقيقة متبقية</item>
+        <item quantity="two">%d دقيقتان متبقيتان</item>
+        <item quantity="few">%d دقائق متبقية</item>
+        <item quantity="many">%d دقيقة متبقية</item>
+        <item quantity="other">%d دقيقة متبقية</item>
+    </plurals>
 </resources>
