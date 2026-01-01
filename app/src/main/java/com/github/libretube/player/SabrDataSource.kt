@@ -10,6 +10,7 @@ import androidx.media3.datasource.DataSpec
 import com.github.libretube.player.parser.CompositeBuffer
 import com.github.libretube.player.parser.PlaybackRequest
 import com.github.libretube.player.parser.SabrClient
+import kotlinx.coroutines.runBlocking
 import java.io.IOException
 
 @UnstableApi
@@ -29,7 +30,7 @@ class SabrDataSource(
 
         transferInitializing(dataSpec)
         transferStarted(dataSpec)
-        val segment = runCatching { sabrClient.getNextSegment(playbackRequest!!) }
+        val segment = runCatching { runBlocking { sabrClient.getNextSegment(playbackRequest!!) } }
             .getOrNull() ?: throw IOException()
         data = CompositeBuffer(segment.data)
         return data!!.remaining().toLong()

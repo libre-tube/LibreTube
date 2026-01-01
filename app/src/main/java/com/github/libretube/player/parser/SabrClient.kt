@@ -253,9 +253,16 @@ class SabrClient private constructor(
      **/
     var lastActionMs: Long? = null
 
-
     private val bandwidthEstimator = DefaultBandwidthMeter.getSingletonInstance(LibreTubeApp.instance)
 
+    /**
+     * Selects a format for playback.
+     *
+     * If a format of the same type is already selected, the selected format
+     * will be overwritten.
+     *
+     * The audio format must've been set before starting playback.
+     **/
     @OptIn(UnstableApi::class)
     fun selectFormat(representation: Representation) {
         if (MimeTypes.isAudio(representation.format.containerMimeType)) {
@@ -265,7 +272,12 @@ class SabrClient private constructor(
         }
     }
 
-    fun getNextSegment(playbackRequest: PlaybackRequest): Segment? {
+    /**
+     * Returns the segment specified by [PlaybackRequest.segment], if available.
+     *
+     * The caller is responsible for ensuring that the requested segment is a valid segment of the media stream.
+     */
+    suspend fun getNextSegment(playbackRequest: PlaybackRequest): Segment? {
         if (fatalError != null) {
             throw Exception("SABR error: ${fatalError!!.type}")
         }
@@ -276,51 +288,37 @@ class SabrClient private constructor(
             playbackRequest.playerPosition < (initializedFormats[itag]?.duration ?: Long.MAX_VALUE)
         ) { "Requested segment for finished format" }
 
+        // synchronize buffered segments with the actually buffered segments from the player
+        initializedFormats[itag]?.bufferedSegments?.keys?.retainAll(playbackRequest.bufferedSegments)
+
         Log.d(
             TAG,
             "getNextSegment: loading media data for $itag at position ${playbackRequest.playerPosition}"
         )
+        // ensure that the data is only ever accessed by a single thread
+        return withContext(dispatcher) {
+            val format = initializedFormats[itag]
 
-        // synchronize buffered segments with the actually buffered segments from the player
-        initializedFormats[itag]?.bufferedSegments?.keys?.retainAll(playbackRequest.bufferedSegments)
+            // we don't have the request format or segment yet, so request it from the server
+            if (format?.hasSegment(playbackRequest.segment) != true) {
+                // remove segments that where downloaded, but never requested by the player
+                // (e.g. due to seeking), to avoid keeping them around forever and thus leaking memory
+                format?.downloadedSegments?.clear()
 
-        return runBlocking {
-            // ensure that the data is only ever accessed by a single thread
-            withContext(dispatcher) {
-                var format = initializedFormats[itag]
-                if (format == null || !format.hasSegment(playbackRequest.segment)) {
-                    // remove segments that where downloaded, but never requested by the player
-                    // (e.g. due to seeking), to avoid keeping them around forever and thus leaking memory
-                    format?.downloadedSegments?.clear()
-
-                    // fetch new data
-                    media(playbackRequest)
+                val data = fetchStreamData(playbackRequest, audioFormat, videoFormat)
+                val parser = UmpParser(data)
+                while (true) {
+                    val part = parser.readPart() ?: break
+                    processPart(part)
                 }
-                format = format ?: initializedFormats[itag]
-                return@withContext format?.getSegment(playbackRequest.segment)
+                assert(parser.data().isEmpty()) { "Parser has left-over data" }
+
+                // segments should be fully contained within a single response
+                assert(partialSegments.isEmpty()) { "Incomplete segment decoded" }
             }
+
+            return@withContext initializedFormats[itag]?.getSegment(playbackRequest.segment)
         }
-    }
-
-
-    /**
-     * Extracts the raw media data from the stream.
-     *
-     * The data is returned as a pair of lists: (audio segments, video segments).
-     */
-    private suspend fun media(playbackRequest: PlaybackRequest) {
-        // update currently held UMP data
-        val data = fetchStreamData(playbackRequest, audioFormat, videoFormat)
-
-        val parser = UmpParser(data)
-        while (true) {
-            val part = parser.readPart() ?: break
-            processPart(part)
-        }
-        assert(parser.data().isEmpty()) { "Parser has left-over data" }
-
-        // segments should be fully contained within a single response
-        assert(partialSegments.isEmpty()) { "Incomplete segment decoded" }
     }
 
     /**
@@ -455,7 +453,7 @@ class SabrClient private constructor(
 
                 val segmentLength = segment.length()
                 if (segmentLength != segment.header.contentLength.toInt()) {
-                    Log.w(
+                    Log.e(
                         TAG,
                         "processPart: Content length mismatch for segment $headerId: expected ${segment.header.contentLength}, got $segmentLength"
                     )
