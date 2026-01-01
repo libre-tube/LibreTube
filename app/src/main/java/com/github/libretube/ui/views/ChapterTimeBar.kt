@@ -27,6 +27,14 @@ class ChapterTimeBar(
     private var length: Int = 0
 
     private val progressBarHeight = 2f.dpToPx()
+    private val chapterBreakWidth = 4f.dpToPx()
+    private val eraserPaint = Paint().apply {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            blendMode = BlendMode.CLEAR
+        } else {
+            xfermode = PorterDuffXfermode(PorterDuff.Mode.CLEAR)
+        }
+    }
 
     override fun onDraw(canvas: Canvas) {
         val saveCount = canvas.saveLayer(null, null)
@@ -40,19 +48,9 @@ class ChapterTimeBar(
     private fun drawChapters(canvas: Canvas) {
         if (exoPlayer == null) return
 
-        val eraserPaint = Paint().apply {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-                blendMode = BlendMode.CLEAR
-            } else {
-                xfermode = PorterDuffXfermode(PorterDuff.Mode.CLEAR)
-            }
-        }
-
         val horizontalOffset = (parent as View).marginLeft
         length = width - horizontalOffset * 2
         val marginY = (height - progressBarHeight) / 2
-
-        val chapterBreakWidth = 4f.dpToPx()
 
         // skip the first chapter as it always starts at 0:00
         chapters.drop(1).forEach {
