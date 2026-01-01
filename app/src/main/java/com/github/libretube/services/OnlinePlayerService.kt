@@ -9,6 +9,7 @@ import androidx.media3.common.C
 import androidx.media3.common.MediaItem
 import androidx.media3.common.MediaItem.SubtitleConfiguration
 import androidx.media3.common.MimeTypes
+import androidx.media3.common.PlaybackParameters
 import androidx.media3.common.Player
 import androidx.media3.datasource.DefaultDataSource
 import androidx.media3.exoplayer.hls.HlsMediaSource
@@ -27,6 +28,7 @@ import com.github.libretube.extensions.parcelable
 import com.github.libretube.extensions.setMetadata
 import com.github.libretube.extensions.toastFromMainDispatcher
 import com.github.libretube.extensions.toastFromMainThread
+import com.github.libretube.extensions.toID
 import com.github.libretube.extensions.updateParameters
 import com.github.libretube.helpers.PlayerHelper
 import com.github.libretube.helpers.PlayerHelper.getCurrentSegment
@@ -182,6 +184,11 @@ open class OnlinePlayerService : AbstractPlayerService() {
                 if (!DatabaseHelper.isVideoWatched(it, streams?.duration)) exoPlayer?.seekTo(it)
             }
         }
+
+        // apply playback speed (channel-specific or global based on settings)
+        val effectiveChannelId = channelId ?: streams?.uploaderUrl?.toID()
+        val playbackSpeed = PlayerHelper.getPlaybackSpeedForChannel(effectiveChannelId)
+        exoPlayer?.playbackParameters = PlaybackParameters(playbackSpeed, 1.0f)
 
         exoPlayer?.apply {
             playWhenReady = PlayerHelper.playAutomatically

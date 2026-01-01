@@ -50,6 +50,25 @@ class PlayerSettings : BasePreferenceFragment() {
         }
 
         alternativePipControls?.isVisible = pipAvailable
+
+        // make remember playback speed and remember per channel mutually exclusive
+        // TODO: kinda hacky way to implement this, change it to a combobox maybe
+        val rememberPlaybackSpeed = findPreference<SwitchPreferenceCompat>(PreferenceKeys.REMEMBER_PLAYBACK_SPEED)
+        val rememberChannelPlaybackSpeed = findPreference<SwitchPreferenceCompat>(PreferenceKeys.REMEMBER_CHANNEL_PLAYBACK_SPEED)
+
+        rememberPlaybackSpeed?.setOnPreferenceChangeListener { _, newValue ->
+            if (newValue == true) {
+                rememberChannelPlaybackSpeed?.isChecked = false
+            }
+            true
+        }
+
+        rememberChannelPlaybackSpeed?.setOnPreferenceChangeListener { _, newValue ->
+            if (newValue == true) {
+                rememberPlaybackSpeed?.isChecked = false
+            }
+            true
+        }
     }
 
     private fun setupSubtitlePref(preference: ListPreference) {

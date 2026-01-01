@@ -283,6 +283,54 @@ object PlayerHelper {
             "1"
         ).replace("F", "").toFloat()
 
+    val rememberPlaybackSpeed: Boolean
+        get() = PreferenceHelper.getBoolean(
+            PreferenceKeys.REMEMBER_PLAYBACK_SPEED,
+            true
+        )
+
+    val rememberChannelPlaybackSpeed: Boolean
+        get() = PreferenceHelper.getBoolean(
+            PreferenceKeys.REMEMBER_CHANNEL_PLAYBACK_SPEED,
+            false
+        )
+
+    /**
+     * Get playback speed for a specific channel, or fall back to default speed
+     * When per-channel is enabled: Priority: channel speed > default slider value
+     * When general remember is enabled: use the remembered global speed
+     */
+    fun getPlaybackSpeedForChannel(channelId: String?): Float {
+        if (rememberChannelPlaybackSpeed) {
+            if (channelId != null) {
+                val channelSpeedKey = "channel_speed_$channelId"
+                val channelSpeed = PreferenceHelper.getString(channelSpeedKey, "")
+                
+                if (channelSpeed.isNotEmpty()) {
+                    val speed = channelSpeed.replace("F", "").toFloatOrNull()
+                    if (speed != null) {
+                        return speed
+                    }
+                }
+            }
+            return defaultPlaybackSpeed
+        } else if (rememberPlaybackSpeed) {
+            return defaultPlaybackSpeed
+        }
+
+        return 1.0f
+    }
+
+    /**
+     * Save playback speed for a specific channel
+     */
+    fun saveChannelPlaybackSpeed(channelId: String?, speed: Float) {
+        if (channelId == null) return
+        
+        val channelSpeedKey = "channel_speed_$channelId"
+        PreferenceHelper.putString(channelSpeedKey, speed.toString())
+    }
+
     val autoInsertRelatedVideos: Boolean
         get() = PreferenceHelper.getBoolean(
             PreferenceKeys.QUEUE_AUTO_INSERT_RELATED,
@@ -518,12 +566,14 @@ object PlayerHelper {
 
     /**
      * Load playback parameters such as speed and skip silence
+     * @param channelId Optional channel ID to use channel-specific playback speed if enabled
      */
     @OptIn(androidx.media3.common.util.UnstableApi::class)
-    fun ExoPlayer.loadPlaybackParams(): ExoPlayer {
+    fun ExoPlayer.loadPlaybackParams(channelId: String? = null): ExoPlayer {
         skipSilenceEnabled = skipSilence
 
-        playbackParameters = PlaybackParameters(defaultPlaybackSpeed, 1.0f)
+        val speed = getPlaybackSpeedForChannel(channelId)
+        playbackParameters = PlaybackParameters(speed, 1.0f)
         return this
     }
 

@@ -15,9 +15,12 @@ import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.databinding.PlaybackBottomSheetBinding
 import com.github.libretube.enums.PlayerCommand
 import com.github.libretube.extensions.round
+import com.github.libretube.extensions.toID
+import com.github.libretube.helpers.PlayerHelper
 import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.services.AbstractPlayerService
 import com.github.libretube.ui.adapters.SliderLabelsAdapter
+import com.github.libretube.util.PlayingQueue
 import kotlin.math.absoluteValue
 import kotlin.math.log
 import kotlin.math.pow
@@ -131,7 +134,16 @@ class PlaybackOptionsSheet(
         binding.pitchResetButton.isGone = binding.pitch.value == 0f
 
         val currentSpeed = player.playbackParameters.speed.toString()
-        PreferenceHelper.putString(PreferenceKeys.PLAYBACK_SPEED, currentSpeed)
+        
+        if (PlayerHelper.rememberChannelPlaybackSpeed) {
+            val currentStream = PlayingQueue.getCurrent()
+            val channelId = currentStream?.uploaderUrl?.toID()
+            if (channelId != null) {
+                PlayerHelper.saveChannelPlaybackSpeed(channelId, currentSpeed.toFloat())
+            }
+        } else if (PlayerHelper.rememberPlaybackSpeed) {
+            PreferenceHelper.putString(PreferenceKeys.PLAYBACK_SPEED, currentSpeed)
+        }
     }
 
     private fun clearEditTextFocusAndHideKeyboard() {

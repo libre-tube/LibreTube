@@ -80,6 +80,8 @@ object PreferenceKeys {
     const val ALLOW_PLAYBACK_DURING_CALL = "playback_during_call"
     const val BEHAVIOR_WHEN_MINIMIZED = "behavior_when_minimized"
     const val REPEAT_MODE = "repeat_mode"
+    const val REMEMBER_PLAYBACK_SPEED = "remember_playback_speed"
+    const val REMEMBER_CHANNEL_PLAYBACK_SPEED = "remember_channel_playback_speed"
 
     // SponsorBlock
     const val SB_USER_ID = "sb_user_id"
