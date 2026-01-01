@@ -555,4 +555,10 @@
     <string name="checking_frequency_1_day">1 день</string>
     <string name="backup_creation_success">Резервное копирование успешно завершено</string>
     <string name="backup_creation_failed">Не удалось создать резервную копию</string>
+    <plurals name="minutes_left">
+        <item quantity="one">%d минута осталось</item>
+        <item quantity="few">%d минуты осталось</item>
+        <item quantity="many">%d минут осталось</item>
+        <item quantity="other">%d минут осталось</item>
+    </plurals>
 </resources>
