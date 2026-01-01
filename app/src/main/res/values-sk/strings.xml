@@ -554,4 +554,10 @@
     <string name="checking_frequency_12_hours">12 hodín</string>
     <string name="backup_creation_success">Záloha úspešne dokončená</string>
     <string name="backup_creation_failed">Vytvorenie zálohy zlyhalo</string>
+    <plurals name="minutes_left">
+        <item quantity="one">Zostáva %d minúta</item>
+        <item quantity="few">Zostávajú %d minúty</item>
+        <item quantity="many">Zostáva %d minút</item>
+        <item quantity="other">Zostáva %d minút</item>
+    </plurals>
 </resources>
