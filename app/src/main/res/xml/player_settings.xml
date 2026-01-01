@@ -143,6 +143,12 @@
             app:key="remember_channel_playback_speed"
             app:title="@string/remember_channel_playback_speed" />
 
+        <Preference
+            android:dependency="remember_channel_playback_speed"
+            android:icon="@drawable/ic_speed"
+            app:key="manage_channel_speeds"
+            app:title="@string/manage_channel_speeds" />
+
         <com.github.libretube.ui.views.SliderPreference
             android:dependency="remember_channel_playback_speed"
             android:icon="@drawable/ic_speed"

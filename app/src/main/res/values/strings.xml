@@ -497,6 +497,15 @@
     <string name="remember_playback_speed_summary">Remember the last playback speed used</string>
     <string name="remember_channel_playback_speed">Remember playback speed per channel</string>
     <string name="remember_channel_playback_speed_summary">Remember playback speed separately for each channel</string>
+    <string name="manage_channel_speeds">Manage channel speeds</string>
+    <string name="channel_speed_management">Channel Speed Management</string>
+    <string name="channel_speed_empty">No saved channel speeds</string>
+    <string name="delete_channel_speed">Delete channel speed</string>
+    <string name="delete_channel_speed_confirmation">Remove saved playback speed for \"%1$s\"?</string>
+    <string name="delete_channel_speed_button">Delete</string>
+    <string name="error_loading_channel_speeds">Error loading channel speeds</string>
+    <string name="decrease">Decrease</string>
+    <string name="increase">Increase</string>
     <string name="successfully_removed_from_playlist">Successfully removed \"%1$s\" from the playlist.</string>
     <string name="watched">Watched</string>
     <string name="no_segments_found">There are no segments for this video yet.</string>

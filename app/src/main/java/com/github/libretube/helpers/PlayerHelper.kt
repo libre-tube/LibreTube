@@ -331,6 +331,36 @@ object PlayerHelper {
         PreferenceHelper.putString(channelSpeedKey, speed.toString())
     }
 
+    /**
+     * Get all saved channel playback speeds
+     * @return Map of channelId to speed (Float)
+     */
+    fun getAllSavedChannelSpeeds(): Map<String, Float> {
+        val allPrefs = PreferenceHelper.settings.all
+        val channelSpeeds = mutableMapOf<String, Float>()
+        
+        for ((key, value) in allPrefs) {
+            if (key.startsWith("channel_speed_")) {
+                val channelId = key.removePrefix("channel_speed_")
+                val speedString = value.toString().replace("F", "")
+                val speed = speedString.toFloatOrNull()
+                if (speed != null) {
+                    channelSpeeds[channelId] = speed
+                }
+            }
+        }
+        
+        return channelSpeeds
+    }
+
+    /**
+     * Remove saved playback speed for a specific channel
+     */
+    fun removeChannelPlaybackSpeed(channelId: String) {
+        val channelSpeedKey = "channel_speed_$channelId"
+        PreferenceHelper.remove(channelSpeedKey)
+    }
+
     val autoInsertRelatedVideos: Boolean
         get() = PreferenceHelper.getBoolean(
             PreferenceKeys.QUEUE_AUTO_INSERT_RELATED,
