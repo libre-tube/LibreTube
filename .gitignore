@@ -31,3 +31,8 @@ google-services.json
 # Android Profiling
 *.hprof
 .DS_Store
+
+# My convenience scripts
+build.sh
+install.sh
+build-install.sh
