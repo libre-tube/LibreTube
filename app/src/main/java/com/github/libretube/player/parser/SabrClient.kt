@@ -95,8 +95,9 @@ private data class InitializedFormat(
     val bufferedSegments: MutableMap<Long, Segment> = mutableMapOf(),
     /** Sequence number of the last segment in the format. */
     val endSegmentNumber: Long,
-    /** Initial segment containing metadata about the stream,
-     *  such as the position of the other segments.
+    /**
+     * Initial segment containing metadata about the stream,
+     * such as the position of the other segments.
      **/
     var initSegment: Segment? = null,
     /** Duration of the format in milliseconds. */
@@ -105,8 +106,7 @@ private data class InitializedFormat(
     /** Returns a list of all downloaded segments for the format. */
     fun getSegment(sequenceNumber: Long): Segment? {
         val segment = downloadedSegments.remove(sequenceNumber)
-            ?: initSegment?.takeIf { it.sequenceNumber == sequenceNumber }
-            ?: return null
+            ?: initSegment?.takeIf { it.sequenceNumber == sequenceNumber } ?: return null
         // mark retrieved segment as buffered
         bufferedSegments[sequenceNumber] = segment.copy(data = mutableListOf())
         return segment
@@ -115,21 +115,22 @@ private data class InitializedFormat(
     /** Returns a list of all downloaded segments for the format. */
     fun buildBufferedRanges(): List<BufferedRange> =
         bufferedSegments.entries.union(downloadedSegments.entries).sortedBy { it.key }
-        .fold(mutableListOf<MutableList<Pair<Long, Segment>>>()) { acc, (id, segment) ->
-            val previousId = acc.lastOrNull()?.lastOrNull()?.first
-            if (previousId?.plus(1) != id) {
-                //we found a discontinuity, create a new partition
-                acc.add(mutableListOf())
+            .fold(mutableListOf<MutableList<Pair<Long, Segment>>>()) { acc, (id, segment) ->
+                val previousId = acc.lastOrNull()?.lastOrNull()?.first
+                if (previousId?.plus(1) != id) {
+                    //we found a discontinuity, create a new partition
+                    acc.add(mutableListOf())
+                }
+                acc.lastOrNull()!!.add(Pair(id, segment))
+                acc
+            }.map { partition ->
+                val duration = partition.sumOf { it.second.duration }
+                val (firstId, firstSegment) = partition.first()
+                BufferedRange.newBuilder().setFormatId(id)
+                    .setStartTimeMs(firstSegment.header.startMs)
+                    .setDurationMs(duration).setStartSegmentIndex(firstId.toInt())
+                    .setEndSegmentIndex(partition.last().first.toInt()).build()
             }
-            acc.lastOrNull()!!.add(Pair(id, segment))
-            acc
-        }.map { partition ->
-            val duration = partition.sumOf { it.second.duration }
-            val (firstId, firstSegment) = partition.first()
-            BufferedRange.newBuilder().setFormatId(id).setStartTimeMs(firstSegment.header.startMs)
-                .setDurationMs(duration).setStartSegmentIndex(firstId.toInt())
-                .setEndSegmentIndex(partition.last().first.toInt()).build()
-        }
 
     /**
      * Whether the format has non-retrieved data.
