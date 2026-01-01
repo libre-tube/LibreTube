@@ -11,10 +11,7 @@ import com.github.libretube.player.manifest.Representation
 import com.github.libretube.player.manifest.SabrManifest
 import com.github.libretube.ui.dialogs.ShareDialog
 import com.google.protobuf.ByteString
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.runBlocking
-import kotlinx.coroutines.withContext
 import misc.Common.FormatId
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
@@ -160,7 +157,6 @@ class SabrClient private constructor(
     private var poToken: ByteString? = null
 
     private var fatalError: SabrError? = null
-    private val dispatcher = Dispatchers.IO.limitedParallelism(1)
 
     /** Audio format video format */
     private lateinit var audioFormat: Representation
@@ -295,30 +291,27 @@ class SabrClient private constructor(
             TAG,
             "getNextSegment: loading media data for $itag at position ${playbackRequest.playerPosition}"
         )
-        // ensure that the data is only ever accessed by a single thread
-        return withContext(dispatcher) {
-            val format = initializedFormats[itag]
+        val format = initializedFormats[itag]
 
-            // we don't have the request format or segment yet, so request it from the server
-            if (format?.hasSegment(playbackRequest.segment) != true) {
-                // remove segments that where downloaded, but never requested by the player
-                // (e.g. due to seeking), to avoid keeping them around forever and thus leaking memory
-                format?.downloadedSegments?.clear()
+        // we don't have the request format or segment yet, so request it from the server
+        if (format?.hasSegment(playbackRequest.segment) != true) {
+            // remove segments that where downloaded, but never requested by the player
+            // (e.g. due to seeking), to avoid keeping them around forever and thus leaking memory
+            format?.downloadedSegments?.clear()
 
-                val data = fetchStreamData(playbackRequest, audioFormat, videoFormat)
-                val parser = UmpParser(data)
-                while (true) {
-                    val part = parser.readPart() ?: break
-                    processPart(part)
-                }
-                assert(parser.data().isEmpty()) { "Parser has left-over data" }
-
-                // segments should be fully contained within a single response
-                assert(partialSegments.isEmpty()) { "Incomplete segment decoded" }
+            val data = fetchStreamData(playbackRequest, audioFormat, videoFormat)
+            val parser = UmpParser(data)
+            while (true) {
+                val part = parser.readPart() ?: break
+                processPart(part)
             }
+            assert(parser.data().isEmpty()) { "Parser has left-over data" }
 
-            return@withContext initializedFormats[itag]?.getSegment(playbackRequest.segment)
+            // segments should be fully contained within a single response
+            assert(partialSegments.isEmpty()) { "Incomplete segment decoded" }
         }
+
+        return initializedFormats[itag]?.getSegment(playbackRequest.segment)
     }
 
     /**
