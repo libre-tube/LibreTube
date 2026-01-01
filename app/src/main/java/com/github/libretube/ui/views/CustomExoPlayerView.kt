@@ -70,7 +70,9 @@ import com.github.libretube.ui.sheets.ChaptersBottomSheet
 import com.github.libretube.ui.sheets.PlaybackOptionsSheet
 import com.github.libretube.ui.sheets.PlayingQueueSheet
 import com.github.libretube.ui.sheets.SleepTimerSheet
+import com.github.libretube.ui.tools.SleepTimer
 import com.github.libretube.util.PlayingQueue
+import kotlin.math.ceil
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -474,7 +476,15 @@ abstract class CustomExoPlayerView(
         },
         BottomSheetItem(
             context.getString(R.string.sleep_timer),
-            R.drawable.ic_sleep
+            R.drawable.ic_sleep,
+            {
+                if (SleepTimer.timeLeftMillis > 0) {
+                    val minutesLeft = ceil(SleepTimer.timeLeftMillis.toDouble() / DateUtils.MINUTE_IN_MILLIS).toInt()
+                    context.resources.getQuantityString(R.plurals.minutes_left, minutesLeft, minutesLeft)
+                } else {
+                    context.getString(R.string.disabled)
+                }
+            }
         ) {
             onSleepTimerClicked()
         }
@@ -949,7 +959,7 @@ abstract class CustomExoPlayerView(
         return true
     }
 
-    fun togglePlayerFullscreen(isFullscreen: Boolean = !isFullscreen()){
+    fun togglePlayerFullscreen(isFullscreen: Boolean = !isFullscreen()) {
         try {
             findFragment<PlayerFragment>().toggleFullscreen(isFullscreen)
         } catch (error: IllegalStateException) {
