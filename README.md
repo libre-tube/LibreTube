@@ -2,11 +2,12 @@
 
 This is a fork of LibreTube in its early stages. It currently supports the following extra features:
 
-- Remember playback speed on a per-channel basis, supports setting a default speed and overriding it for specific channels. Saving channel speeds is by default manually confirmed by 
+- Remember playback speed on a per-channel basis
+  - Supports setting a default speed and overriding it for specific channels. Saving channel speeds is by default manually confirmed by pressing a button in the playback speed sheet. It can be set to do it automatically on every change. There is also a screen to manage all your saved channel speeds.
 
-<img height="150" alt="image" src="assets/readme/per-channel-playback-speed-options.png">
-<br>
-<img height="150" alt="image" src="assets/readme/per-channel-playback-speed-save-manually.png">
+<img width="350" alt="image" src="assets/readme/channel-playback-speed-options.png">
+<img width="350" alt="image" src="assets/readme/channel-playback-speed-manager.png">
+<img width="350" alt="image" src="assets/readme/channel-playback-speed-save-manually.png">
 
 I'm planning to support more niche features / use-cases that got rejected upstream because of maintenance burden. If you have any ideas, please open an issue about it.
 
