@@ -1,0 +1,6 @@
+version: "1"
+rules:
+  - base: master
+    upstream: libre-tube:master
+    mergeMethod: merge
+    mergeUnstable: false
