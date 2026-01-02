@@ -553,4 +553,8 @@
     <string name="checking_frequency_1_day">1 gün</string>
     <string name="backup_creation_success">Nüsxələmə uğurla tamamlandı</string>
     <string name="backup_creation_failed">Nüsxə yaratmaq alınmadı</string>
+    <plurals name="minutes_left">
+        <item quantity="one">%d dəq qalıb</item>
+        <item quantity="other">%d dəq qalıb</item>
+    </plurals>
 </resources>
