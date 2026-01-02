@@ -1,6 +1,8 @@
 # About this fork
 
-This is a fork of LibreTube in its early stages. It currently supports the following extra features:
+This is a fork of LibreTube in its early stages. Therefore only builds via [GitHub Actions](https://github.com/D3SOX/LibreTube-Enhanced/actions/workflows/ci.yml) are available. If you don't have a GitHub account you can download them via [nightly.link](https://nightly.link/D3SOX/LibreTube-Enhanced/workflows/ci/master)
+
+It currently supports the following extra features:
 
 - Remember playback speed on a per-channel basis
   - Supports setting a default speed and overriding it for specific channels. Saving channel speeds is by default manually confirmed by pressing a button in the playback speed sheet. It can be set to do it automatically on every change. There is also a screen to manage all your saved channel speeds.
