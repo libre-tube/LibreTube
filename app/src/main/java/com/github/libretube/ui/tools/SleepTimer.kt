@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.os.Process
+import android.text.format.DateUtils
 import androidx.core.os.bundleOf
 import com.github.libretube.R
 import com.github.libretube.enums.PlayerCommand
@@ -17,119 +18,139 @@ import com.github.libretube.ui.base.BaseActivity
 import com.google.android.material.snackbar.Snackbar
 import java.util.Timer
 import kotlin.concurrent.scheduleAtFixedRate
-import kotlin.div
+import kotlin.math.pow
 
 object SleepTimer {
-    private var handler: Handler? = null
-    private const val REACTION_INTERVAL = 5L
-    private const val PLAYER_VOLUME_FADE_OUT_DURATION = 15L
-    private const val TIMER_DELAY = 1000L
-    private const val MILLIS_PER_SECOND = 1000L
-    private const val SECONDS_PER_MINUTE = 60
+    private const val TIMER_DELAY = 500L // 500ms for smoother fade out
+    private const val FADE_OUT_START_SECONDS = 10L
+    private const val SNACKBAR_START_SECONDS = 5L
+    private const val MAX_VOLUME = 1.0f
+    private const val CLOSE_DELAY = 500L // Pause before closing
 
-    @Volatile
-    private var timer: Timer? = null
-    private var snackBar: Snackbar? = null
     private var isOffline: Boolean = false
     var timeLeftMillis: Long = 0L
+        private set
+    private var timer: Timer? = null
+    private var snackBar: Snackbar? = null
+    private var activity: BaseActivity? = null
+    private val handler = Handler(Looper.getMainLooper())
 
     /**
-     * Kill the app after showing a warning after a certain amount of time
+     * Start the sleep timer that will close the app after the specified delay
      *
      * @param context This must not be the applicationContext, but an activity context!
      * @param delayInMinutes The delay in minutes before the timer ends
      * @param isOffline Whether the offline player is being used
      */
-    fun setup(context: Context, delayInMinutes: Long, isOffline: Boolean = false) {
+    fun start(context: Context, delayInMinutes: Long, isOffline: Boolean = false) {
         if (delayInMinutes == 0L) return
 
-        handler = Handler(Looper.getMainLooper())
+        // Stop any existing timer first
+        stop()
 
-        timeLeftMillis = delayInMinutes * SECONDS_PER_MINUTE * MILLIS_PER_SECOND
+        activity = ContextHelper.unwrapActivity(context)
+        timeLeftMillis = delayInMinutes * DateUtils.MINUTE_IN_MILLIS
         this.isOffline = isOffline
 
         timer = Timer()
         timer?.scheduleAtFixedRate(TIMER_DELAY, TIMER_DELAY) {
-            handleTimerUpdate(context)
+            onTimerTick()
         }
     }
-
 
     /**
-     * Disable the scheduled sleep timer
+     * Stop the sleep timer and restore volume to maximum
      */
-    fun disableSleepTimer() {
-        synchronized(this) {
-            handler?.removeCallbacksAndMessages(null)
-            handler = null
-            timer?.cancel()
-            timeLeftMillis = 0L
-        }
+    fun stop() {
+        setPlayerVolume(MAX_VOLUME)
+        cleanup()
     }
 
-    private fun handleTimerUpdate(context: Context) {
+
+    private fun onTimerTick() {
         timeLeftMillis -= TIMER_DELAY
+        val secondsLeft = timeLeftMillis / DateUtils.SECOND_IN_MILLIS
+        val fadeOutDuration = FADE_OUT_START_SECONDS * DateUtils.SECOND_IN_MILLIS
 
-        if (timeLeftMillis <= PLAYER_VOLUME_FADE_OUT_DURATION * MILLIS_PER_SECOND) {
-            val volume = timeLeftMillis.toFloat() / (PLAYER_VOLUME_FADE_OUT_DURATION * MILLIS_PER_SECOND)
-            setPlayerVolume(context, volume)
+        // Smooth exponential fade out during last 10 seconds
+        if (timeLeftMillis > 0 && timeLeftMillis <= fadeOutDuration) {
+            val progress = (timeLeftMillis / fadeOutDuration.toFloat()).coerceIn(0f, 1f)
+            val volume = progress.pow(2.0f) // Quadratic curve for natural fade
+            setPlayerVolume(volume)
         }
 
-        if (timeLeftMillis <= REACTION_INTERVAL * MILLIS_PER_SECOND) {
-            if (timeLeftMillis == REACTION_INTERVAL * MILLIS_PER_SECOND) {
-                showSnackBar(context)
-            }
+        // Update snackbar only on whole seconds to avoid excessive UI updates
+        val isWholeSecond = timeLeftMillis % DateUtils.SECOND_IN_MILLIS == 0L
+        if (secondsLeft in 1..SNACKBAR_START_SECONDS && isWholeSecond) {
+            handler.post { showOrUpdateSnackBar() }
+        }
 
-            updateSnackBarText(context)
-
-            if (timeLeftMillis == 0L) {
-                val activity = ContextHelper.unwrapActivity<BaseActivity>(context)
-                // kill the application
-                activity.finishAffinity()
-                activity.finish()
-                Process.killProcess(Process.myPid())
-            }
-
+        // Close app with a pause after fade out completes
+        if (timeLeftMillis <= 0) {
+            setPlayerVolume(0.0f) // Ensure complete silence
+            handler.postDelayed({
+                closeApp()
+            }, CLOSE_DELAY)
         }
     }
 
-    private fun showSnackBar(context: Context) {
-        handler?.post {
-            val activity = ContextHelper.unwrapActivity<BaseActivity>(context)
-            snackBar = Snackbar.make(
-                activity.window.decorView.rootView,
-                R.string.take_a_break,
-                Snackbar.LENGTH_INDEFINITE
-            )
-                .setAction(R.string.cancel) {
-                    setPlayerVolume(context, 1.0f)
-                    disableSleepTimer()
-                }
 
+    private fun showOrUpdateSnackBar() {
+        val act = activity?.takeIf { !it.isFinishing && !it.isDestroyed } ?: run {
+            stop()
+            return
+        }
+
+        val secondsLeft = timeLeftMillis / DateUtils.SECOND_IN_MILLIS
+        val message = "${act.getString(R.string.take_a_break)}: ${secondsLeft}"
+
+        if (snackBar?.isShownOrQueued == true) {
+            snackBar?.setText(message)
+        } else {
+            snackBar = Snackbar.make(
+                act.window.decorView.rootView,
+                message,
+                Snackbar.LENGTH_INDEFINITE
+            ).setAction(R.string.cancel) {
+                stop()
+            }
             snackBar?.show()
         }
     }
 
-    private fun updateSnackBarText(context: Context) {
-        handler?.post {
-            val secondsLeft = timeLeftMillis / MILLIS_PER_SECOND
-            val message = context.getString(R.string.take_a_break) + " " + secondsLeft
-            snackBar?.setText(message)
+    private fun closeApp() {
+        cleanup()
+        // kill the application
+        activity?.finishAffinity()
+        activity?.finish()
+        Process.killProcess(Process.myPid())
+    }
+
+    private fun cleanup() {
+        timer?.cancel()
+        timer = null
+
+        handler.removeCallbacksAndMessages(null)
+        handler.post {
+            snackBar?.dismiss()
+            snackBar = null
         }
+
+        activity = null
+        timeLeftMillis = 0L
     }
 
 
-    /**
-     * Set the volume of the currently active player service
-     */
-    private fun setPlayerVolume(context: Context, volume: Float) {
+    private fun setPlayerVolume(volume: Float) {
+        val act = activity ?: return
+
         val serviceClass = if (isOffline) {
             OfflinePlayerService::class.java
         } else {
             OnlinePlayerService::class.java
         }
 
-        BackgroundHelper.startMediaService(context, serviceClass, Bundle.EMPTY) { controller ->
+        BackgroundHelper.startMediaService(act, serviceClass, Bundle.EMPTY) { controller ->
             controller.sendCustomCommand(
                 AbstractPlayerService.runPlayerActionCommand,
                 bundleOf(PlayerCommand.SET_VOLUME.name to volume)
