@@ -143,6 +143,16 @@
             app:key="remember_channel_playback_speed"
             app:title="@string/remember_channel_playback_speed" />
 
+        <SwitchPreferenceCompat
+            android:dependency="remember_channel_playback_speed"
+            android:icon="@drawable/ic_speed"
+            android:summary="@string/channel_speed_manual_confirmation_summary"
+            android:summaryOff="@string/disabled"
+            android:summaryOn="@string/enabled"
+            app:defaultValue="true"
+            app:key="channel_speed_manual_confirmation"
+            app:title="@string/channel_speed_manual_confirmation" />
+
         <Preference
             android:dependency="remember_channel_playback_speed"
             android:icon="@drawable/ic_speed"

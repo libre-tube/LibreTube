@@ -5,8 +5,10 @@ import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
+import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.core.view.isGone
+import androidx.core.view.isVisible
 import androidx.media3.common.PlaybackParameters
 import androidx.media3.session.MediaController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -118,6 +120,12 @@ class PlaybackOptionsSheet(
             )
             PreferenceHelper.putBoolean(PreferenceKeys.SKIP_SILENCE, isChecked)
         }
+
+        // Setup save channel speed button
+        updateSaveButtonVisibility()
+        binding.saveChannelSpeedButton.setOnClickListener {
+            saveChannelSpeedManually()
+        }
     }
 
     override fun onDestroyView() {
@@ -135,7 +143,8 @@ class PlaybackOptionsSheet(
 
         val currentSpeed = player.playbackParameters.speed.toString()
         
-        if (PlayerHelper.rememberChannelPlaybackSpeed) {
+        // Only auto-save channel speed if manual confirmation is disabled
+        if (PlayerHelper.rememberChannelPlaybackSpeed && !PlayerHelper.channelSpeedManualConfirmation) {
             val currentStream = PlayingQueue.getCurrent()
             val channelId = currentStream?.uploaderUrl?.toID()
             if (channelId != null) {
@@ -183,6 +192,36 @@ class PlaybackOptionsSheet(
         currentSemitone =
             currentSemitone.coerceIn(-SEMITONES_IN_ONE_OCTAVE, SEMITONES_IN_ONE_OCTAVE)
         changePlaybackPitchInSemitone(currentSemitone)
+    }
+
+    private fun updateSaveButtonVisibility() {
+        val shouldShow = PlayerHelper.rememberChannelPlaybackSpeed &&
+                PlayerHelper.channelSpeedManualConfirmation &&
+                PlayingQueue.getCurrent()?.uploaderUrl?.toID() != null
+        binding.saveChannelSpeedButton.isVisible = shouldShow
+    }
+
+    private fun saveChannelSpeedManually() {
+        val currentStream = PlayingQueue.getCurrent()
+        val channelId = currentStream?.uploaderUrl?.toID()
+        
+        if (channelId == null) {
+            context?.let {
+                Toast.makeText(it, R.string.error_occurred, Toast.LENGTH_SHORT).show()
+            }
+            return
+        }
+        
+        val currentSpeed = player.playbackParameters.speed
+        PlayerHelper.saveChannelPlaybackSpeed(channelId, currentSpeed)
+        
+        context?.let {
+            Toast.makeText(
+                it,
+                getString(R.string.channel_speed_saved),
+                Toast.LENGTH_SHORT
+            ).show()
+        }
     }
 
     companion object {

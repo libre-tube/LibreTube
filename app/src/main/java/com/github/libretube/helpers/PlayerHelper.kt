@@ -295,6 +295,12 @@ object PlayerHelper {
             false
         )
 
+    val channelSpeedManualConfirmation: Boolean
+        get() = PreferenceHelper.getBoolean(
+            PreferenceKeys.CHANNEL_SPEED_MANUAL_CONFIRMATION,
+            true
+        )
+
     /**
      * Get playback speed for a specific channel, or fall back to default speed
      * When per-channel is enabled: Priority: channel speed > default slider value

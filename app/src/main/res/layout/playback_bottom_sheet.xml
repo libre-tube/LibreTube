@@ -66,6 +66,19 @@
                             android:layout_marginTop="5dp"
                             android:layout_marginHorizontal="10dp" />
 
+                        <com.google.android.material.button.MaterialButton
+                            style="@style/Widget.Material3.Button.OutlinedButton"
+                            android:id="@+id/save_channel_speed_button"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginStart="23dp"
+                            android:layout_marginEnd="23dp"
+                            android:visibility="gone"
+                            app:icon="@drawable/ic_save"
+                            app:iconGravity="textStart"
+                            android:text="@string/save_channel_speed" />
+
                     </LinearLayout>
 
                     <TextView

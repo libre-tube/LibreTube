@@ -504,6 +504,10 @@
     <string name="delete_channel_speed_confirmation">Remove saved playback speed for \"%1$s\"?</string>
     <string name="delete_channel_speed_button">Delete</string>
     <string name="error_loading_channel_speeds">Error loading channel speeds</string>
+    <string name="channel_speed_manual_confirmation">Require confirmation to save channel speed</string>
+    <string name="channel_speed_manual_confirmation_summary">Show a button to save playback speed for the current channel instead of auto-saving</string>
+    <string name="save_channel_speed">Save for this channel</string>
+    <string name="channel_speed_saved">Playback speed saved for this channel</string>
     <string name="decrease">Decrease</string>
     <string name="increase">Increase</string>
     <string name="successfully_removed_from_playlist">Successfully removed \"%1$s\" from the playlist.</string>

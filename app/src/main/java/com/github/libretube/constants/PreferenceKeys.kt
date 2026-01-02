@@ -82,6 +82,7 @@ object PreferenceKeys {
     const val REPEAT_MODE = "repeat_mode"
     const val REMEMBER_PLAYBACK_SPEED = "remember_playback_speed"
     const val REMEMBER_CHANNEL_PLAYBACK_SPEED = "remember_channel_playback_speed"
+    const val CHANNEL_SPEED_MANUAL_CONFIRMATION = "channel_speed_manual_confirmation"
 
     // SponsorBlock
     const val SB_USER_ID = "sb_user_id"
