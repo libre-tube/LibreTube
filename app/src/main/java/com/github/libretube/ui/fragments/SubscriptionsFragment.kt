@@ -163,7 +163,7 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment(R.layout.fragment_sub
                 super.onScrollStateChanged(recyclerView, newState)
                 viewModel.subFeedRecyclerViewState =
                     recyclerView.layoutManager?.onSaveInstanceState()?.takeIf {
-                        binding.subFeed.computeVerticalScrollOffset() != 0
+                        recyclerView.computeVerticalScrollOffset() != 0
                     }
             }
         })
