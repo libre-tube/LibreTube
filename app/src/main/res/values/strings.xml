@@ -508,6 +508,10 @@
     </plurals>
     <string name="time_in_minutes">Time in minutes</string>
     <string name="invalid_input">Invalid input</string>
+    <plurals name="sleep_timer_chip_minutes">
+        <item quantity="many">%d min</item>
+        <item quantity="other">%d min</item>
+    </plurals>
     <string name="add_to_group">Add to group</string>
     <string name="uptime">%.2f%% uptime</string>
     <string name="change">Change</string>
