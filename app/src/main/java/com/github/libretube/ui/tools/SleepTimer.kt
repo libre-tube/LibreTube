@@ -117,10 +117,8 @@ object SleepTimer {
             snackBar?.show()
         }
     }
-
+    
     private fun closeApp() {
-        cleanup()
-        // kill the application
         activity?.finishAffinity()
         activity?.finish()
         Process.killProcess(Process.myPid())
