@@ -24,6 +24,7 @@ class SleepTimerSheet : ExpandedBottomSheet(R.layout.sleep_timer_sheet) {
         _binding = SleepTimerSheetBinding.bind(view)
         super.onViewCreated(view, savedInstanceState)
 
+        setupQuickSelectChips()
         updateTimeLeftText()
 
         binding.startSleepTimer.setOnClickListener {
@@ -45,6 +46,30 @@ class SleepTimerSheet : ExpandedBottomSheet(R.layout.sleep_timer_sheet) {
         }
     }
 
+    /**
+     * Setup quick-select chips for common sleep timer durations.
+     * Using a map keeps durations and their chips together, making it easier to maintain.
+     */
+    private fun setupQuickSelectChips() {
+        val chipDurations = mapOf(
+            binding.chip10Min to 10,
+            binding.chip20Min to 20,
+            binding.chip30Min to 30,
+            binding.chip45Min to 45,
+            binding.chip60Min to 60
+        )
+
+        chipDurations.forEach { (chip, duration) ->
+            chip.text = resources.getQuantityString(R.plurals.sleep_timer_chip_minutes, duration, duration)
+            chip.setOnClickListener {
+                binding.timeInput.apply {
+                    setText(duration.toString())
+                    clearFocus()
+                }
+            }
+        }
+    }
+
     private fun updateTimeLeftText() {
         val binding = _binding ?: return
 
@@ -53,6 +78,7 @@ class SleepTimerSheet : ExpandedBottomSheet(R.layout.sleep_timer_sheet) {
         binding.timeLeft.isVisible = isTimerRunning
         binding.stopSleepTimer.isVisible = isTimerRunning
         binding.timeInputLayout.isGone = isTimerRunning
+        binding.quickSelectContainer.isGone = isTimerRunning
         binding.startSleepTimer.isGone = isTimerRunning
 
         if (!isTimerRunning) return
