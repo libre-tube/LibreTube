@@ -95,4 +95,25 @@
     <string name="category_interaction_summary">Apabila terdapat peringatan ringkas untuk memberi suka, melanggan atau mengikuti di pertengahan kandungan. Jika panjang atau mengenai sesuatu yang khusus, ia sepatutnya dikategorikan sebagai promosi kendiri</string>
     <string name="category_intro">Jeda/Animasi Intro</string>
     <string name="createNewPlaylist">Buat senarai baru</string>
+    <string name="playOnBackground">Mainkan di latar belakang</string>
+    <string name="update_available">Kemaskini tersedia</string>
+    <string name="appearance">Penampilan</string>
+    <string name="downloads">Muat turun</string>
+    <string name="update_summary">Periksa Kemaskini</string>
+    <string name="app_uptodate">Menjalankan versi terkini.</string>
+    <string name="playback_speed">Kelajuan main semula</string>
+    <string name="advanced">Lanjutan</string>
+    <string name="player">Pemain</string>
+    <string name="appearance_summary">Sesuaikan aplikasi mengikut citarasa anda</string>
+    <string name="live">Langsung</string>
+    <string name="upcoming">Akan datang</string>
+    <string name="shareTo">Kongsi URL ke</string>
+    <string name="normal_views">%1$spaparan%2$s</string>
+    <string name="defaultIcon">Lalai</string>
+    <string name="legacyIcon">Legasi hilang</string>
+    <string name="gradientIcon">Gradien glib</string>
+    <string name="fireIcon">Api Bergaya</string>
+    <string name="torchIcon">Obor trendy</string>
+    <string name="shapedIcon">Bentuk lucu</string>
+    <string name="flameIcon">Api terbang</string>
 </resources>
