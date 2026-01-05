@@ -537,4 +537,11 @@
     <string name="trailers">Trailers</string>
     <string name="music">Musik</string>
     <string name="include_timestamp_in_filename">Inkludera tidsstämpel i filnamn</string>
+    <string name="checking_frequency_15_minutes">15 minuter</string>
+    <string name="checking_frequency_30_minutes">30 minuter</string>
+    <string name="checking_frequency_60_minutes">60 minuter</string>
+    <string name="checking_frequency_2_hours">2 timmar</string>
+    <string name="checking_frequency_6_hours">6 timmar</string>
+    <string name="checking_frequency_12_hours">12 timmar</string>
+    <string name="checking_frequency_1_day">1 dygn</string>
 </resources>
