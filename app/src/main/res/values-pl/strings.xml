@@ -555,4 +555,10 @@
     <string name="showing_results_for">Pokazuję rezultaty dla:</string>
     <string name="category_hook">Narracja/Powitanie</string>
     <string name="category_hook_summary">Za fragmenty narracyjne, które zwracają uwagę widza (często jako pierwsza scena), przez zapowiadanie lub opisywanie przyszłych wydarzeń z tego samego filmu lub przyszłych odcinków z serii</string>
+    <plurals name="minutes_left">
+        <item quantity="one">Pozostała %d minuta</item>
+        <item quantity="few">Pozostały %d minuty</item>
+        <item quantity="many">Pozostało %d minut</item>
+        <item quantity="other">Pozostało %d minut</item>
+    </plurals>
 </resources>
