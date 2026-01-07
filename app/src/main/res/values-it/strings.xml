@@ -554,4 +554,9 @@
     <string name="checking_frequency_1_day">1 giorno</string>
     <string name="backup_creation_success">Backup completato correttamente</string>
     <string name="backup_creation_failed">Creazione del backup fallita</string>
+    <plurals name="minutes_left">
+        <item quantity="one">%d min rimasto</item>
+        <item quantity="many">%d min rimasti</item>
+        <item quantity="other">%d min rimasti</item>
+    </plurals>
 </resources>
