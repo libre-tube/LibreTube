@@ -638,6 +638,9 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
                     mainMotionLayout.progress = 0F
                     changeOrientationMode()
 
+                    // Fix #7989: Force video surface to resize after expanding from mini-player
+                    binding.player.requestLayout()
+
                     // clear search bar focus to avoid keyboard popups
                     mainActivity.clearSearchViewFocus()
                 } else if (currentId == transitionEndId) {
