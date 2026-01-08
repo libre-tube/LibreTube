@@ -112,7 +112,14 @@ open class OfflinePlayerService : AbstractPlayerService() {
 
         val downloadWithItems = withContext(Dispatchers.IO) {
             Database.downloadDao().findById(videoId)
-        } ?: return
+        }
+        // Fix #8024: Handle missing download gracefully instead of silent failure
+        if (downloadWithItems == null) {
+            withContext(Dispatchers.Main) {
+                stopSelf()
+            }
+            return
+        }
         this.downloadWithItems = downloadWithItems
 
         PlayingQueue.updateCurrent(downloadWithItems.download.toStreamItem())

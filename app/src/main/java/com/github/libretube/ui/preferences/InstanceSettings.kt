@@ -124,7 +124,13 @@ class InstanceSettings : BasePreferenceFragment() {
         findPreference<SwitchPreferenceCompat>(PreferenceKeys.FULL_LOCAL_MODE)?.setOnPreferenceChangeListener { _, newValue ->
             // when the full local mode gets enabled, the fetch instance is no longer used and replaced
             // fully by local extraction. thus, the user has to be logged out from the fetch instance
-            if (newValue == true && !authInstanceToggle.isChecked) logoutAndUpdateUI()
+            if (newValue == true) {
+                // Fix #8009: Auto-enable local feed extraction when full local mode is enabled
+                PreferenceHelper.putBoolean(PreferenceKeys.LOCAL_FEED_EXTRACTION, true)
+                findPreference<SwitchPreferenceCompat>(PreferenceKeys.LOCAL_FEED_EXTRACTION)?.isChecked = true
+                
+                if (!authInstanceToggle.isChecked) logoutAndUpdateUI()
+            }
             true
         }
     }

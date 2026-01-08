@@ -467,6 +467,11 @@ class AudioPlayerFragment : Fragment(R.layout.fragment_audio_player), AudioPlaye
         })
         playerController?.mediaMetadata?.let { updateStreamInfo(it) }
 
+        // Fix #8027: Check chapters visibility on initial connection (not just metadata change)
+        val chapters = playerController?.mediaMetadata?.extras?.getString(IntentData.chapters)
+            ?.let { JsonHelper.json.decodeFromString<List<ChapterSegment>>(it) }
+        _binding?.openChapters?.isVisible = !chapters.isNullOrEmpty()
+
         initializeSeekBar()
 
         if (isOffline) {
