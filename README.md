@@ -90,7 +90,7 @@ Features
 - [x] Watch/Search History
 - [x] SponsorBlock
 - [x] ReturnYouTubeDislike
-- [x] DeArrow
+- [x] [DeArrow](https://dearrow.ajay.app/) (crowdsourced thumbnails and titles)
 - [x] Downloads
 - [x] Background playback
 - [x] User Accounts via Piped (optional)
