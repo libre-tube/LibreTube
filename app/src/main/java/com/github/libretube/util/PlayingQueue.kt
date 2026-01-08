@@ -65,14 +65,16 @@ object PlayingQueue {
         for (stream in streamItem) {
             if ((skipExisting && contains(stream)) || stream.title.isNullOrBlank()) continue
 
-            queue.remove(stream)
+            // Use consistent video ID comparison for removal (not data class equals)
+            queue.removeAll { it.url?.toID() == stream.url?.toID() }
             queue.add(stream)
         }
     }
 
     fun addAsNext(streamItem: StreamItem) = synchronized(queue) {
-        if (currentStream == streamItem) return
-        if (queue.contains(streamItem)) queue.remove(streamItem)
+        if (currentStream?.url?.toID() == streamItem.url?.toID()) return
+        // Use consistent video ID comparison
+        queue.removeAll { it.url?.toID() == streamItem.url?.toID() }
         queue.add(currentIndex() + 1, streamItem)
     }
 
