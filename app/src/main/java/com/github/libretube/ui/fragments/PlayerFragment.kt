@@ -782,7 +782,8 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
         }
 
         binding.relPlayerScreenshot.setOnClickListener {
-            if (!this::streams.isInitialized) return@setOnClickListener
+            // Fix #7997: Check both streams and playerController are initialized
+            if (!this::streams.isInitialized || !this::playerController.isInitialized) return@setOnClickListener
             val surfaceView =
                 binding.player.videoSurfaceView as? SurfaceView ?: return@setOnClickListener
 
@@ -820,6 +821,9 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
     }
 
     fun switchToAudioMode() {
+        // Fix #8010: Check if playerController is initialized before switching modes
+        if (!this::playerController.isInitialized) return
+
         playerController.sendCustomCommand(
             AbstractPlayerService.runPlayerActionCommand,
             bundleOf(PlayerCommand.TOGGLE_AUDIO_ONLY_MODE.name to true)

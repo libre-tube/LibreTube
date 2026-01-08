@@ -307,6 +307,11 @@ abstract class AbstractPlayerService : MediaLibraryService(), MediaLibrarySessio
 
     @OptIn(UnstableApi::class)
     private fun createPlayerAndMediaSession() {
+        // Fix #8031: Release any existing session before creating a new one
+        // This prevents "Session ID must be unique" crash when service recreates quickly
+        mediaLibrarySession?.release()
+        mediaLibrarySession = null
+
         val trackSelector = DefaultTrackSelectorWithAudioQualitySupport(this)
         this.trackSelector = trackSelector
 
