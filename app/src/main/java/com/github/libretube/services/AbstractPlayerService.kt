@@ -307,6 +307,10 @@ abstract class AbstractPlayerService : MediaLibraryService(), MediaLibrarySessio
 
     @OptIn(UnstableApi::class)
     private fun createPlayerAndMediaSession() {
+        // Release existing session if it exists to prevent ID collision (fixes #8031)
+        mediaLibrarySession?.release()
+        mediaLibrarySession = null
+
         val trackSelector = DefaultTrackSelectorWithAudioQualitySupport(this)
         this.trackSelector = trackSelector
 

@@ -737,7 +737,8 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
         }
 
         binding.relPlayerBackground.setOnClickListener {
-            // start the background mode
+            // start the background mode (guard for #8010)
+            if (!::playerController.isInitialized) return@setOnClickListener
             switchToAudioMode()
         }
 
@@ -820,6 +821,9 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
     }
 
     fun switchToAudioMode() {
+        // Guard against uninitialized playerController (fixes #8010)
+        if (!::playerController.isInitialized) return
+
         playerController.sendCustomCommand(
             AbstractPlayerService.runPlayerActionCommand,
             bundleOf(PlayerCommand.TOGGLE_AUDIO_ONLY_MODE.name to true)
