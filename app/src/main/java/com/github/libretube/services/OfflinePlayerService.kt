@@ -202,12 +202,16 @@ open class OfflinePlayerService : AbstractPlayerService() {
             Database.downloadDao().getAll()
         }
             .filterByTab(downloadTab)
-            .filter { it.download.videoId != videoId }
             .toMutableList()
 
         if (shuffle) downloads.shuffle()
 
+        // Fix #8033: Add all downloads including current video to preserve playlist order
         PlayingQueue.add(*downloads.map { it.download.toStreamItem() }.toTypedArray())
+        // Set current stream without re-adding it (it's already in the queue at correct position)
+        downloads.find { it.download.videoId == videoId }?.let {
+            PlayingQueue.updateCurrent(it.download.toStreamItem())
+        }
     }
 
     private fun playNextVideo(videoId: String? = null) {
