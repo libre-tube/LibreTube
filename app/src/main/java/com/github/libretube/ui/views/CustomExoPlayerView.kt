@@ -849,9 +849,8 @@ abstract class CustomExoPlayerView(
         if (!PlayerHelper.pinchGestureEnabled) return
         resizeMode = AspectRatioFrameLayout.RESIZE_MODE_ZOOM
 
-        if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
-            subtitleView?.setBottomPaddingFraction(SUBTITLE_BOTTOM_PADDING_FRACTION)
-        }
+        // Fix #8043: Apply subtitle padding in all orientations, not just landscape
+        subtitleView?.setBottomPaddingFraction(SUBTITLE_BOTTOM_PADDING_FRACTION)
     }
 
     override fun onMinimize() {
