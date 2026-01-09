@@ -557,6 +557,6 @@
     <plurals name="minutes_left">
         <item quantity="one">%d minuto restante</item>
         <item quantity="many">%d minutos restantes</item>
-        <item quantity="other">minutos restantes</item>
+        <item quantity="other">%d minutos restantes</item>
     </plurals>
 </resources>
