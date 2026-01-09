@@ -78,7 +78,12 @@ class HomeViewModel : ViewModel() {
         val category = PreferenceHelper.getString(
             PreferenceKeys.TRENDING_CATEGORY,
             TrendingCategory.LIVE.name
-        ).let { TrendingCategory.valueOf(it) }
+        ).let { stored ->
+            val available = MediaServiceRepository.instance.getTrendingCategories()
+            available.firstOrNull { it.name == stored }
+                ?: available.firstOrNull()
+                ?: TrendingCategory.LIVE
+        }
 
         runSafely(
             onSuccess = { videos ->
