@@ -13,15 +13,14 @@ import androidx.navigation.fragment.findNavController
 import com.github.libretube.R
 import com.github.libretube.constants.IntentData
 import com.github.libretube.databinding.FragmentSearchSuggestionsBinding
-import com.github.libretube.extensions.anyChildFocused
+import com.github.libretube.db.DatabaseHolder
 import com.github.libretube.ui.activities.MainActivity
-import com.github.libretube.ui.adapters.SearchHistoryAdapter
 import com.github.libretube.ui.adapters.SearchSuggestionsAdapter
 import com.github.libretube.ui.extensions.setOnBackPressed
 import com.github.libretube.ui.models.SearchViewModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class SearchSuggestionsFragment : Fragment(R.layout.fragment_search_suggestions) {
     private var _binding: FragmentSearchSuggestionsBinding? = null
@@ -29,14 +28,6 @@ class SearchSuggestionsFragment : Fragment(R.layout.fragment_search_suggestions)
     private val viewModel: SearchViewModel by activityViewModels()
     private val mainActivity get() = activity as MainActivity
 
-    private val historyAdapter = SearchHistoryAdapter(
-        onRootClickListener = { historyQuery ->
-            mainActivity.setQuery(historyQuery, true)
-        },
-        onArrowClickListener = { historyQuery ->
-            mainActivity.setQuery(historyQuery, false)
-        }
-    )
     private val suggestionsAdapter = SearchSuggestionsAdapter(
         onRootClickListener = { suggestion ->
             mainActivity.setQuery(suggestion, true)
@@ -44,56 +35,52 @@ class SearchSuggestionsFragment : Fragment(R.layout.fragment_search_suggestions)
         onArrowClickListener = { suggestion ->
             mainActivity.setQuery(suggestion, false)
         },
+        onSearchHistoryItemDeleted = { historyItem ->
+            lifecycleScope.launch(Dispatchers.IO) {
+                DatabaseHolder.Database.searchHistoryDao().delete(historyItem)
+            }
+        }
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel.searchQuery.value = arguments?.getString(IntentData.query)
+        viewModel.setQuery(arguments?.getString(IntentData.query))
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         _binding = FragmentSearchSuggestionsBinding.bind(view)
         super.onViewCreated(view, savedInstanceState)
-
-        viewModel.searchQuery.observe(viewLifecycleOwner) {
-            val isEmpty = it.isNullOrEmpty()
-            binding.suggestionsRecycler.adapter = if (isEmpty) historyAdapter else suggestionsAdapter
-
-            toggleHistoryVisibility()
-        }
-
-        lifecycleScope.launch(Dispatchers.IO) {
-            repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.searchSuggestions.collect { suggestions ->
-                    withContext(Dispatchers.Main) {
-                        suggestionsAdapter.submitList(suggestions.reversed())
-                        toggleHistoryVisibility()
-                    }
-                }
-            }
-        }
-
-        lifecycleScope.launch(Dispatchers.IO) {
-            repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.searchHistory.collect { historyList ->
-                    withContext(Dispatchers.Main) {
-                        historyAdapter.submitList(historyList.map { it.query })
-                        toggleHistoryVisibility()
-                    }
-                }
-            }
-        }
+        binding.suggestionsRecycler.adapter = suggestionsAdapter
 
         setOnBackPressed {
             if (!mainActivity.clearSearchViewFocus()) findNavController().popBackStack()
         }
+
+        lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                launch {
+                    viewModel.searchSuggestions.collectLatest { result ->
+                        suggestionsAdapter.submitSearchSuggestions(
+                            result.historyList,
+                            result.suggestionList
+                        ) {
+                            binding.suggestionsRecycler.scrollToPosition(0)
+                        }
+                    }
+                }
+
+                launch {
+                    viewModel.shouldShowEmptyHistoryMessage.collectLatest {
+                        toggleEmptyHistoryMessageVisibility(it)
+                    }
+                }
+            }
+        }
     }
 
-    private fun toggleHistoryVisibility() {
-        val isEmpty = viewModel.searchQuery.value.isNullOrEmpty()
-        val showHistoryEmpty = isEmpty && historyAdapter.currentList.isEmpty()
-        binding.historyEmpty.isVisible = showHistoryEmpty
-        binding.suggestionsRecycler.isGone = showHistoryEmpty
+    private fun toggleEmptyHistoryMessageVisibility(show: Boolean) {
+        binding.historyEmpty.isVisible = show
+        binding.suggestionsRecycler.isGone = show
     }
 
     override fun onDestroy() {
