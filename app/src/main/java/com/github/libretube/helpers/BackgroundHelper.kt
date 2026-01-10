@@ -19,6 +19,8 @@ import com.github.libretube.ui.activities.MainActivity
 import com.github.libretube.ui.activities.NoInternetActivity
 import com.github.libretube.ui.fragments.DownloadTab
 import com.github.libretube.ui.fragments.PlayerFragment
+import com.github.libretube.util.PlayingQueue
+import com.github.libretube.util.PlayingQueueMode
 import com.google.common.util.concurrent.MoreExecutors
 
 /**
@@ -114,5 +116,45 @@ object BackgroundHelper {
             )
             onController(controller)
         }, MoreExecutors.directExecutor())
+    }
+
+    /**
+     * Get the service class of the currently active player based on the playing queue mode
+     */
+    fun getCurrentPlayerServiceClass(): Class<*> {
+        return if (PlayingQueue.queueMode == PlayingQueueMode.OFFLINE) {
+            OfflinePlayerService::class.java
+        } else {
+            OnlinePlayerService::class.java
+        }
+    }
+
+    /**
+     * Start a media service for the currently active player (online or offline)
+     * and pass the MediaController to the callback
+     */
+    fun startCurrentMediaService(
+        context: Context,
+        arguments: Bundle = Bundle.EMPTY,
+        onController: (MediaController) -> Unit = {}
+    ) {
+        startMediaService(context, getCurrentPlayerServiceClass(), arguments, onController)
+    }
+
+
+    /**
+     * Set the volume of the currently active player
+     *
+     * @param context the current context
+     * @param volume the volume level to set (0.0 to 1.0)
+     */
+    fun setVolume(context: Context, volume: Float) {
+        startCurrentMediaService(context, Bundle.EMPTY) { controller ->
+            try {
+                controller.volume = volume.coerceIn(0f, 1f)
+            } finally {
+                controller.release()
+            }
+        }
     }
 }
