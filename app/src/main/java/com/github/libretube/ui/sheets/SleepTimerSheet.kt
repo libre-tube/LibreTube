@@ -35,7 +35,6 @@ class SleepTimerSheet : ExpandedBottomSheet(R.layout.sleep_timer_sheet) {
             }
 
             SleepTimer.start(requireContext(), time)
-
             updateTimeLeftText()
         }
 
@@ -67,6 +66,9 @@ class SleepTimerSheet : ExpandedBottomSheet(R.layout.sleep_timer_sheet) {
                     binding.timeInput.apply {
                         setText(duration.toString())
                         clearFocus()
+
+                        SleepTimer.start(requireContext(), duration.toLong())
+                        updateTimeLeftText()
                     }
                 }
             }
