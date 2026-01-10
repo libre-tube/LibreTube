@@ -249,6 +249,8 @@
     <string name="most_recent">Newest</string>
     <string name="least_recent">Oldest</string>
     <string name="most_views">Most views</string>
+    <string name="sort_channel">Channel name</string>
+    <string name="sort_size">Size</string>
     <string name="least_views">Least views</string>
     <string name="required_network">Required connection</string>
     <string name="network_all">All</string>
