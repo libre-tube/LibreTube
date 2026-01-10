@@ -12,8 +12,7 @@ import androidx.core.view.isVisible
 import com.github.libretube.R
 import com.github.libretube.databinding.SleepTimerSheetBinding
 import com.github.libretube.ui.tools.SleepTimer
-import com.github.libretube.util.PlayingQueue
-import com.github.libretube.util.PlayingQueueMode
+import com.google.android.material.chip.Chip
 
 class SleepTimerSheet : ExpandedBottomSheet(R.layout.sleep_timer_sheet) {
     private var _binding: SleepTimerSheetBinding? = null
@@ -48,25 +47,31 @@ class SleepTimerSheet : ExpandedBottomSheet(R.layout.sleep_timer_sheet) {
 
     /**
      * Setup quick-select chips for common sleep timer durations.
-     * Using a map keeps durations and their chips together, making it easier to maintain.
      */
     private fun setupQuickSelectChips() {
-        val chipDurations = mapOf(
-            binding.chip10Min to 10,
-            binding.chip20Min to 20,
-            binding.chip30Min to 30,
-            binding.chip45Min to 45,
-            binding.chip60Min to 60
-        )
+        val chipDurations = listOf(10, 20, 30, 45, 60)
 
-        chipDurations.forEach { (chip, duration) ->
-            chip.text = resources.getQuantityString(R.plurals.sleep_timer_chip_minutes, duration, duration)
-            chip.setOnClickListener {
-                binding.timeInput.apply {
-                    setText(duration.toString())
-                    clearFocus()
+        chipDurations.forEach { duration ->
+            val chip = layoutInflater.inflate(
+                R.layout.assist_chip,
+                binding.quickSelectChips,
+                false
+            ) as Chip
+            chip.apply {
+                text = resources.getQuantityString(
+                    R.plurals.sleep_timer_chip_minutes,
+                    duration,
+                    duration
+                )
+                setOnClickListener {
+                    binding.timeInput.apply {
+                        setText(duration.toString())
+                        clearFocus()
+                    }
                 }
             }
+
+            binding.quickSelectChips.addView(chip)
         }
     }
 
