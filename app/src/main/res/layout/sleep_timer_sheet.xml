@@ -55,6 +55,23 @@
                     android:visibility="gone"
                     tools:text="20:10" />
 
+                <HorizontalScrollView
+                    android:id="@+id/quick_select_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="10dp"
+                    android:layout_marginTop="10dp"
+                    android:scrollbars="none">
+
+                    <com.google.android.material.chip.ChipGroup
+                        android:id="@+id/quick_select_chips"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:singleLine="true"
+                        app:singleSelection="false" />
+
+                </HorizontalScrollView>
+
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/time_input_layout"
                     android:layout_width="match_parent"
@@ -73,23 +90,6 @@
 
                 </com.google.android.material.textfield.TextInputLayout>
 
-                <!-- Quick select chips for common durations -->
-                <HorizontalScrollView
-                    android:id="@+id/quick_select_container"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="10dp"
-                    android:layout_marginBottom="10dp"
-                    android:scrollbars="none">
-
-                    <com.google.android.material.chip.ChipGroup
-                        android:id="@+id/quick_select_chips"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:singleLine="true"
-                        app:singleSelection="false" />
-
-                </HorizontalScrollView>
 
                 <FrameLayout
                     android:layout_width="match_parent"
