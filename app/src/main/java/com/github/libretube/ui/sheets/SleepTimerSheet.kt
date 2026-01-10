@@ -12,6 +12,8 @@ import androidx.core.view.isVisible
 import com.github.libretube.R
 import com.github.libretube.databinding.SleepTimerSheetBinding
 import com.github.libretube.ui.tools.SleepTimer
+import com.github.libretube.util.PlayingQueue
+import com.github.libretube.util.PlayingQueueMode
 
 class SleepTimerSheet : ExpandedBottomSheet(R.layout.sleep_timer_sheet) {
     private var _binding: SleepTimerSheetBinding? = null
@@ -31,13 +33,14 @@ class SleepTimerSheet : ExpandedBottomSheet(R.layout.sleep_timer_sheet) {
                 Toast.makeText(context, R.string.invalid_input, Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
-            SleepTimer.setup(requireContext(), time)
+
+            SleepTimer.start(requireContext(), time)
 
             updateTimeLeftText()
         }
 
         binding.stopSleepTimer.setOnClickListener {
-            SleepTimer.disableSleepTimer()
+            SleepTimer.stop(requireContext())
             updateTimeLeftText()
         }
     }
