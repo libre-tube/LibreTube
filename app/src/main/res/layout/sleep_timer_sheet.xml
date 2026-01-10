@@ -59,8 +59,9 @@
                     android:id="@+id/quick_select_container"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="10dp"
                     android:layout_marginTop="10dp"
+                    android:paddingHorizontal="10dp"
+                    android:clipToPadding="false"
                     android:scrollbars="none">
 
                     <com.google.android.material.chip.ChipGroup
