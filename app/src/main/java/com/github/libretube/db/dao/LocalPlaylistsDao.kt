@@ -36,4 +36,7 @@ interface LocalPlaylistsDao {
 
     @Query("DELETE FROM localPlaylistItem WHERE playlistId = :playlistId AND videoId = :videoId")
     suspend fun deletePlaylistItemsByVideoId(playlistId: String, videoId: String)
+
+    @Query("SELECT EXISTS(SELECT 1 FROM localPlaylistItem WHERE playlistId = :playlistId AND videoId = :videoId)")
+    suspend fun videoExistsInPlaylist(playlistId: String, videoId: String): Boolean
 }
