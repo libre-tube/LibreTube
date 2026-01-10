@@ -34,14 +34,13 @@ class SleepTimerSheet : ExpandedBottomSheet(R.layout.sleep_timer_sheet) {
                 return@setOnClickListener
             }
 
-            val isOffline = PlayingQueue.queueMode == PlayingQueueMode.OFFLINE
-            SleepTimer.start(requireContext(), time, isOffline)
+            SleepTimer.start(requireContext(), time)
 
             updateTimeLeftText()
         }
 
         binding.stopSleepTimer.setOnClickListener {
-            SleepTimer.stop()
+            SleepTimer.stop(requireContext())
             updateTimeLeftText()
         }
     }
