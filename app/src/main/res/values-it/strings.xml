@@ -559,4 +559,9 @@
         <item quantity="many">%d min rimasti</item>
         <item quantity="other">%d min rimasti</item>
     </plurals>
+    <plurals name="sleep_timer_chip_minutes">
+        <item quantity="one">%d min</item>
+        <item quantity="many">%d min</item>
+        <item quantity="other">%d min</item>
+    </plurals>
 </resources>
