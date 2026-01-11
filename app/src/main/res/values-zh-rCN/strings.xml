@@ -555,4 +555,7 @@
     <plurals name="minutes_left">
         <item quantity="other">剩余 %d 分钟</item>
     </plurals>
+    <plurals name="sleep_timer_chip_minutes">
+        <item quantity="other">%d 分钟</item>
+    </plurals>
 </resources>
