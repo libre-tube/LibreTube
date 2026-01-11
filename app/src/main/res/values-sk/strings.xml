@@ -560,4 +560,10 @@
         <item quantity="many">Zostáva %d minút</item>
         <item quantity="other">Zostáva %d minút</item>
     </plurals>
+    <plurals name="sleep_timer_chip_minutes">
+        <item quantity="one">%d minúta</item>
+        <item quantity="few">%d minúty</item>
+        <item quantity="many">%d minút</item>
+        <item quantity="other">%d minút</item>
+    </plurals>
 </resources>

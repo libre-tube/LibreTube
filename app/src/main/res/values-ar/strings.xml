@@ -565,4 +565,12 @@
         <item quantity="many">%d دقيقة متبقية</item>
         <item quantity="other">%d دقيقة متبقية</item>
     </plurals>
+    <plurals name="sleep_timer_chip_minutes">
+        <item quantity="zero">%d دقيقة</item>
+        <item quantity="one">%d دقيقة واحدة</item>
+        <item quantity="two">%d دقيقتان</item>
+        <item quantity="few">%d دقائق</item>
+        <item quantity="many">%d دقيقة</item>
+        <item quantity="other">%d دقيقة</item>
+    </plurals>
 </resources>
