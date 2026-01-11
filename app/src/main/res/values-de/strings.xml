@@ -557,4 +557,8 @@
         <item quantity="one">noch %d Minute</item>
         <item quantity="other">noch %d Minuten</item>
     </plurals>
+    <plurals name="sleep_timer_chip_minutes">
+        <item quantity="one"></item>
+        <item quantity="other">%d min</item>
+    </plurals>
 </resources>
