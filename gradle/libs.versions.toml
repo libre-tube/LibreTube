@@ -34,6 +34,8 @@ paging = "3.3.6"
 collection = "1.5.0"
 swiperefreshlayout = "1.2.0"
 splashscreen = "1.2.0"
+protobuf = "4.32.1"
+protobufPlugin = "0.9.5"
 
 [libraries]
 androidx-activity = { group = "androidx.activity", name = "activity-ktx", version.ref = "activity" }
@@ -82,6 +84,9 @@ androidx-profileinstaller = { group = "androidx.profileinstaller", name = "profi
 androidx-paging = { group = "androidx.paging", name = "paging-runtime-ktx", version.ref = "paging" }
 androidx-collection = { group = "androidx.collection", name = "collection", version.ref = "collection" }
 androidx-swiperefreshlayout = { group = "androidx.swiperefreshlayout", name = "swiperefreshlayout", version.ref = "swiperefreshlayout" }
+protobuf-protoc = { module = "com.google.protobuf:protoc", version.ref = "protobuf" }
+google-protobuf-javalite = { module = 'com.google.protobuf:protobuf-javalite', version.ref = 'protobuf' }
+google-protobuf-kotlin-lite = { module = 'com.google.protobuf:protobuf-kotlin-lite', version.ref = 'protobuf' }
 
 [plugins]
 androidTest = { id = "com.android.test", version.ref = "gradle" }
@@ -89,3 +94,4 @@ jetbrainsKotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "k
 baselineprofile = { id = "androidx.baselineprofile", version.ref = "baselineprofile" }
 androidApplication = { id = "com.android.application", version.ref = "gradle" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
+google-protobuf  = { id = "com.google.protobuf", version.ref = "protobufPlugin" }

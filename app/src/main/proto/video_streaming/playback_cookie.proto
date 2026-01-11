@@ -1,0 +1,11 @@
+syntax = "proto2";
+package video_streaming;
+
+import "misc/common.proto";
+
+message PlaybackCookie {
+  optional int32 resolution = 1; // Always 999999 when resolution is set manually, or if the auto selected one is the max available resolution.
+  optional int32 field2 = 2;
+  optional .misc.FormatId video_fmt = 7;
+  optional .misc.FormatId audio_fmt = 8;
+}
