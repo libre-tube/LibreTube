@@ -45,9 +45,14 @@ class LocalPlaylistsRepository: PlaylistRepository {
         for (video in videos) {
             val localPlaylistItem = video.toLocalPlaylistItem(playlistId)
 
-            val videoExists = DatabaseHolder.Database.localPlaylistsDao()
-                .videoExistsInPlaylist(playlistId, localPlaylistItem.videoId)
-            if (videoExists) continue
+            val existingVideo = DatabaseHolder.Database.localPlaylistsDao()
+                .getPlaylistVideo(playlistId, localPlaylistItem.videoId)
+            if (existingVideo != null) {
+                // update existing video metadata
+                localPlaylistItem.id = existingVideo.id
+                DatabaseHolder.Database.localPlaylistsDao().updatePlaylistVideo(localPlaylistItem)
+                continue
+            }
 
             // add the new video to the database
             DatabaseHolder.Database.localPlaylistsDao().addPlaylistVideo(localPlaylistItem)

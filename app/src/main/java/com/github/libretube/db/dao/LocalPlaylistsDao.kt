@@ -28,6 +28,9 @@ interface LocalPlaylistsDao {
     @Insert
     suspend fun addPlaylistVideo(playlistVideo: LocalPlaylistItem)
 
+    @Update
+    suspend fun updatePlaylistVideo(playlistVideo: LocalPlaylistItem)
+
     @Delete
     suspend fun removePlaylistVideo(playlistVideo: LocalPlaylistItem)
 
@@ -37,6 +40,7 @@ interface LocalPlaylistsDao {
     @Query("DELETE FROM localPlaylistItem WHERE playlistId = :playlistId AND videoId = :videoId")
     suspend fun deletePlaylistItemsByVideoId(playlistId: String, videoId: String)
 
-    @Query("SELECT EXISTS(SELECT 1 FROM localPlaylistItem WHERE playlistId = :playlistId AND videoId = :videoId)")
-    suspend fun videoExistsInPlaylist(playlistId: String, videoId: String): Boolean
+    @Query("SELECT * FROM localPlaylistItem WHERE playlistId = :playlistId AND videoId = :videoId LIMIT 1")
+    suspend fun getPlaylistVideo(playlistId: String, videoId: String): LocalPlaylistItem?
+
 }
