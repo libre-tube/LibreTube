@@ -44,9 +44,15 @@ class LocalPlaylistsRepository: PlaylistRepository {
 
         for (video in videos) {
             val localPlaylistItem = video.toLocalPlaylistItem(playlistId)
-            // avoid duplicated videos in a playlist
-            DatabaseHolder.Database.localPlaylistsDao()
-                .deletePlaylistItemsByVideoId(playlistId, localPlaylistItem.videoId)
+
+            val existingVideo = DatabaseHolder.Database.localPlaylistsDao()
+                .getPlaylistVideo(playlistId, localPlaylistItem.videoId)
+            if (existingVideo != null) {
+                // update existing video metadata
+                localPlaylistItem.id = existingVideo.id
+                DatabaseHolder.Database.localPlaylistsDao().updatePlaylistVideo(localPlaylistItem)
+                continue
+            }
 
             // add the new video to the database
             DatabaseHolder.Database.localPlaylistsDao().addPlaylistVideo(localPlaylistItem)
