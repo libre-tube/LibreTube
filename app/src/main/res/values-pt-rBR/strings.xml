@@ -16,7 +16,7 @@
     <string name="instances">Escolher…</string>
     <string name="customInstance">Personalizada</string>
     <string name="login_register">Fazer login/criar conta</string>
-    <string name="downloadfailed">Download falhou.</string>
+    <string name="downloadfailed">Falha no download.</string>
     <string name="import_from_yt">Importar inscrições</string>
     <string name="app_theme">Tema</string>
     <string name="server_error">Parece que existe um problema com o servidor selecionado. Tente outra instância.</string>
@@ -558,5 +558,10 @@
         <item quantity="one">%d minuto restante</item>
         <item quantity="many">%d minutos restantes</item>
         <item quantity="other">%d minutos restantes</item>
+    </plurals>
+    <plurals name="sleep_timer_chip_minutes">
+        <item quantity="one">%d minuto</item>
+        <item quantity="many">%d minutos</item>
+        <item quantity="other">%d minutos</item>
     </plurals>
 </resources>
