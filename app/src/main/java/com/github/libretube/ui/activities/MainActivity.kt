@@ -34,6 +34,8 @@ import com.github.libretube.compat.PictureInPictureCompat
 import com.github.libretube.constants.IntentData
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.databinding.ActivityMainBinding
+import com.github.libretube.db.DatabaseHelper
+import com.github.libretube.db.obj.SearchHistoryItem
 import com.github.libretube.enums.ImportFormat
 import com.github.libretube.enums.TopLevelDestination
 import com.github.libretube.extensions.anyChildFocused
@@ -300,6 +302,17 @@ class MainActivity : BaseActivity() {
         )
     }
 
+    private fun addSearchQueryToHistory(query: String) {
+        val searchHistoryEnabled =
+            PreferenceHelper.getBoolean(PreferenceKeys.SEARCH_HISTORY_TOGGLE, true)
+        if (searchHistoryEnabled && query.isNotEmpty()) {
+            lifecycleScope.launch(Dispatchers.IO) {
+                val newItem = SearchHistoryItem(query.trim())
+                DatabaseHelper.addToSearchHistory(newItem)
+            }
+        }
+    }
+
     override fun invalidateMenu() {
         // Don't invalidate menu when in search in progress
         // this is a workaround as there is bug in android code
@@ -336,6 +349,8 @@ class MainActivity : BaseActivity() {
                 }
 
                 navController.navigate(NavDirections.showSearchResults(query))
+
+                addSearchQueryToHistory(query)
 
                 return true
             }
