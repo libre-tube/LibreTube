@@ -561,4 +561,10 @@
         <item quantity="many">%d минут осталось</item>
         <item quantity="other">%d минут осталось</item>
     </plurals>
+    <plurals name="sleep_timer_chip_minutes">
+        <item quantity="one">%d минута</item>
+        <item quantity="few">%d минуты</item>
+        <item quantity="many">%d минут</item>
+        <item quantity="other">%d минут</item>
+    </plurals>
 </resources>
