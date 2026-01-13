@@ -557,4 +557,8 @@
         <item quantity="one">%d dəq qalıb</item>
         <item quantity="other">%d dəq qalıb</item>
     </plurals>
+    <plurals name="sleep_timer_chip_minutes">
+        <item quantity="one">%d dəq</item>
+        <item quantity="other">%d dəq</item>
+    </plurals>
 </resources>
