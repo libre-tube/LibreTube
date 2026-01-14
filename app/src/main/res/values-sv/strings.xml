@@ -544,4 +544,5 @@
     <string name="checking_frequency_6_hours">6 timmar</string>
     <string name="checking_frequency_12_hours">12 timmar</string>
     <string name="checking_frequency_1_day">1 dygn</string>
+    <string name="category_hook">Hook/Hälsningar</string>
 </resources>
