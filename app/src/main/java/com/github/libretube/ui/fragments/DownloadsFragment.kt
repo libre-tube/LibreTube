@@ -11,6 +11,7 @@ import android.os.IBinder
 import android.view.View
 import android.view.ViewGroup.MarginLayoutParams
 import androidx.activity.OnBackPressedCallback
+import androidx.annotation.StringRes
 import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import androidx.core.view.isGone
@@ -65,6 +66,15 @@ enum class DownloadTab {
     VIDEO,
     AUDIO,
     PLAYLIST
+}
+
+private enum class DownloadSortingOrder(@StringRes val stringId: Int) {
+    OLDEST(R.string.least_recent),
+    NEWEST(R.string.most_recent),
+    ALPHABETIC(R.string.alphabetic),
+    DURATION(R.string.duration),
+    CHANNEL(R.string.sort_channel),
+    SIZE(R.string.sort_size)
 }
 
 class DownloadsFragment : Fragment(R.layout.fragment_downloads) {
@@ -129,7 +139,10 @@ class DownloadsFragmentPage : DynamicLayoutManagerFragment(R.layout.fragment_dow
     private var downloadPlaylistId: String? = null
 
     private var selectedSortType
-        get() = PreferenceHelper.getInt(PreferenceKeys.SELECTED_DOWNLOAD_SORT_TYPE, 0)
+        get() = PreferenceHelper.getInt(
+            PreferenceKeys.SELECTED_DOWNLOAD_SORT_TYPE,
+            DownloadSortingOrder.OLDEST.ordinal
+        )
         set(value) {
             PreferenceHelper.putInt(PreferenceKeys.SELECTED_DOWNLOAD_SORT_TYPE, value)
         }
@@ -199,7 +212,7 @@ class DownloadsFragmentPage : DynamicLayoutManagerFragment(R.layout.fragment_dow
         }
         binding.downloadsRecView.adapter = adapter
 
-        val filterOptions = resources.getStringArray(R.array.downloadSortOptions)
+        val filterOptions = DownloadSortingOrder.entries.map { getString(it.stringId) }
         binding.sortType.text = filterOptions[selectedSortType]
 
         lifecycleScope.launch(Dispatchers.Main) {
@@ -274,8 +287,12 @@ class DownloadsFragmentPage : DynamicLayoutManagerFragment(R.layout.fragment_dow
 
     private fun submitDownloadList(items: List<DownloadWithItems>) {
         val sortedItems = when (selectedSortType) {
-            0 -> items
-            else -> items.reversed()
+            DownloadSortingOrder.OLDEST.ordinal -> items
+            DownloadSortingOrder.NEWEST.ordinal -> items.reversed()
+            DownloadSortingOrder.ALPHABETIC.ordinal -> items.sortedBy { it.download.title }
+            DownloadSortingOrder.DURATION.ordinal -> items.sortedBy { it.download.duration }
+            DownloadSortingOrder.CHANNEL.ordinal -> items.sortedBy { it.download.uploader }
+            else -> items.sortedBy { it.downloadItems.sumOf { o -> o.downloadSize } }
         }
 
         adapter.submitList(sortedItems)
@@ -392,6 +409,7 @@ class DownloadsFragmentPage : DynamicLayoutManagerFragment(R.layout.fragment_dow
         super.onDestroyView()
         _binding = null
     }
+
 }
 
 class PlaylistDownloadsFragmentPage : Fragment(R.layout.fragment_download_content) {
@@ -432,7 +450,7 @@ class PlaylistDownloadsFragmentPage : Fragment(R.layout.fragment_download_conten
         }
         binding.downloadsRecView.adapter = adapter
 
-        val filterOptions = resources.getStringArray(R.array.downloadSortOptions)
+        val filterOptions = DownloadSortingOrder.entries.map { getString(it.stringId) }
         binding.sortType.text = filterOptions[selectedSortType]
 
         lifecycleScope.launch(Dispatchers.Main) {
