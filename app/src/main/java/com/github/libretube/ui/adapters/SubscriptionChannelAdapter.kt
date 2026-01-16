@@ -20,6 +20,10 @@ import com.github.libretube.ui.viewholders.SubscriptionChannelViewHolder
 class SubscriptionChannelAdapter :
     ListAdapter<Subscription, SubscriptionChannelViewHolder>(DiffUtilItemCallback()) {
 
+    // Track recently unsubscribed channels to preserve their unsubscribed state when
+    // [onBindViewHolder] is re-called on these channels while scrolling the [RecyclerView]
+    private val recentlyUnsubscribedList = mutableListOf<String>()
+
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
@@ -51,14 +55,21 @@ class SubscriptionChannelAdapter :
                 true
             }
 
+            val channelId = subscription.url.toID()
+            val isRecentlyUnsubscribed = recentlyUnsubscribedList.any { it == channelId }
             subscriptionSubscribe.setupSubscriptionButton(
-                subscription.url.toID(),
+                channelId,
                 subscription.name,
                 subscription.avatar,
                 subscription.verified,
                 notificationBell,
-                true
-            )
+                !isRecentlyUnsubscribed
+            ) { isSubscribed ->
+                when (isSubscribed) {
+                    true -> if (isRecentlyUnsubscribed) recentlyUnsubscribedList.remove(channelId)
+                    false -> if (!isRecentlyUnsubscribed) recentlyUnsubscribedList.add(channelId)
+                }
+            }
         }
     }
 }
