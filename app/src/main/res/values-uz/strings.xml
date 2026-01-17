@@ -557,4 +557,8 @@
     <string name="also_clear_watch_positions">Shuningdek, ko‘rish joylarini ham o\'chirish</string>
     <string name="import_temp_playlist">Vaqtinchalik pleylistni import qilinsinmi?</string>
     <string name="import_temp_playlist_summary">‘%1$s’ nomli yangi pleylist yaratmoqchimisiz? Pleylist %2$d ta videodan iborat bo‘ladi.</string>
+    <plurals name="sleep_timer_chip_minutes">
+        <item quantity="one">%d daqiqa</item>
+        <item quantity="other">%d daqiqa</item>
+    </plurals>
 </resources>
