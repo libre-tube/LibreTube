@@ -18,7 +18,7 @@
         android:layout_weight="1"
         android:drawablePadding="15dp"
         android:textAlignment="viewStart"
-        app:drawableStartCompat="@drawable/ic_search"
+        tools:drawableStartCompat="@drawable/ic_search"
         tools:text="Suggestion item" />
 
     <ImageView

@@ -16,19 +16,14 @@ import androidx.paging.LoadState
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.R
-import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.databinding.FragmentSearchResultBinding
-import com.github.libretube.db.DatabaseHelper
-import com.github.libretube.db.obj.SearchHistoryItem
 import com.github.libretube.extensions.ceilHalf
-import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.ui.activities.MainActivity
 import com.github.libretube.ui.adapters.SearchResultsAdapter
 import com.github.libretube.ui.base.DynamicLayoutManagerFragment
 import com.github.libretube.ui.extensions.setOnBackPressed
 import com.github.libretube.ui.models.SearchResultViewModel
 import com.github.libretube.util.TextUtils.toTimeInSeconds
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
@@ -53,9 +48,6 @@ class SearchResultFragment : DynamicLayoutManagerFragment(R.layout.fragment_sear
         // fixes a bug that the search query will stay the old one when searching for multiple
         // different queries in a row and navigating to the previous ones through back presses
         mainActivity.setQuerySilent(args.query)
-
-        // add the query to the history
-        addToHistory(args.query)
 
         // filter options
         binding.filterChipGroup.setOnCheckedStateChangeListener { _, _ ->
@@ -126,16 +118,6 @@ class SearchResultFragment : DynamicLayoutManagerFragment(R.layout.fragment_sear
         setOnBackPressed {
             findNavController().popBackStack(R.id.searchFragment, true) ||
                     findNavController().popBackStack()
-        }
-    }
-
-    private fun addToHistory(query: String) {
-        val searchHistoryEnabled =
-            PreferenceHelper.getBoolean(PreferenceKeys.SEARCH_HISTORY_TOGGLE, true)
-        if (searchHistoryEnabled && query.isNotEmpty()) {
-            lifecycleScope.launch(Dispatchers.IO) {
-                DatabaseHelper.addToSearchHistory(SearchHistoryItem(query.trim()))
-            }
         }
     }
 
