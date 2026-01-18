@@ -21,8 +21,11 @@ interface SubscriptionsFeedDao {
     @Query("SELECT EXISTS (SELECT * FROM feedItem WHERE videoId = :videoId)")
     suspend fun contains(videoId: String): Boolean
 
-    @Query("DELETE FROM feedItem WHERE (uploaded < :olderThan AND uploaded != -1)")
-    suspend fun cleanUpOlderThan(olderThan: Long)
+    @Query("SELECT EXISTS (SELECT * FROM feedItem WHERE uploaderName = :uploaderName)")
+    suspend fun anyVideoExists(uploaderName: String): Boolean
+
+    @Query("DELETE FROM feedItem WHERE uploaded < :olderThan AND uploaded NOT IN ( SELECT uploaded FROM feedItem ORDER BY uploaded DESC LIMIT :minLimit)")
+    suspend fun cleanUpOlderThan(olderThan: Long, minLimit : Int)
 
     @Query("DELETE FROM feedItem WHERE uploaderUrl = :channelUrl")
     suspend fun delete(channelUrl: String)
