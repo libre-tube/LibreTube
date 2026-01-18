@@ -135,12 +135,12 @@
     <string name="category_selfpromo_summary">คล้ายกันกับ \"สปอนเซอร์\" แต่เป็นการโปรโมทโดยไม่มีการรับเงินสนับสนุนหรือเป็นการโปรเมทตนเอง ส่วนนี้จะประกอบไปด้วย สินค้า การบริจาคหรือข้อมูลเกี่ยวกับผู้ที่ร่วมมือกับพวกเขา</string>
     <string name="category_interaction">ฝากกดติดตาม</string>
     <string name="category_interaction_summary">ในกรณีที่มีการแจ้งสั้นๆ ว่าให้ฝากกด Like กด Subscribe หรือติดตาม ถ้ามีความยาวมากหรือแจ้งบ้างอย่างที่เจาะจง ควรจะเป็นการโปรโมทตนเองแทน</string>
-    <string name="category_intro">ช่วงหยุด/แอนิเมชั่น Intro</string>
-    <string name="category_intro_summary">ใช้ในช่วงที่วิดีโอไม่มีเนื้อหา อาจเป็นช่วงหยุด เฟรมภาพนิ่ง หรือแอนิเมชั่นลูป ไม่ควรใช้ในทรานซิชันที่มีข้อมูลหรือเนื้อหาอยู่ในนั้น</string>
+    <string name="category_intro">ช่วงขั้นพัก/แอนิเมชั่นอินโทร</string>
+    <string name="category_intro_summary">ใช้ในช่วงที่วิดีโอไม่มีเนื้อหา อาจเป็นช่วงหยุดขั้นพัก เฟรมภาพนิ่ง หรือแอนิเมชั่นลูป ไม่ควรใช้ในทรานซิชันที่มีข้อมูลหรือเนื้อหาอยู่ในนั้น</string>
     <string name="category_outro">End Cards และเครดิต</string>
     <string name="category_outro_summary">ข้อมูลที่ตามมาตอนท้ายของวิดีโอ ไม่รวมสรุปที่เป็นเนื้อหาหลักของวิดีโอ</string>
-    <string name="category_filler">ส่วนเสริม/มุข</string>
-    <string name="category_filler_summary">สำหรับส่วนที่เป็นมุขเพื่อเพิ่มเวลาหรือให้ตลกขบขัน เป็นส่วนที่ไม่จำเป็นที่จะต้องเข้าใจในเนื้อหาหลักของวิดีโอนั้น</string>
+    <string name="category_filler">ส่วนเสริมนอกเรื่อง/มุข</string>
+    <string name="category_filler_summary">สำหรับส่วนที่เป็นเนื้อหานอกเรื่องหรือมุขเพื่อเพิ่มเวลาหรือให้ตลกขบขัน เป็นส่วนที่ไม่จำเป็นที่จะต้องเข้าใจในเนื้อหาหลักของวิดีโอนั้น</string>
     <string name="category_music_offtopic">เพลง: ส่วนที่ไม่ใช่เพลง</string>
     <string name="category_music_offtopic_summary">ใช้ในวิดีโอเพลงเท่านั้น ควรจะครอบคลุมส่วนที่ไม่ได้ปรากฏอยู่ในตัวเพลงจริงๆ ท้ายที่สุด วิดีโอควรมีความยาวให้คล้ายกับเวอร์ชั่นที่อยู่ใน Spotify หรือเวอร์ชั่นอื่นๆ หรือลดเสียงสนทนาและสิ่งอื่นๆ ที่ไม่เกี่ยวข้องให้ได้มากที่สุด</string>
     <string name="category_preview_summary">สำหรับส่วนที่มีเนื้อหาสำหรับอนาคตโดยไม่มีข้อมูลเพิ่มเติม ถ้ารวมคลิปที่ปรากฏอยู่ในนี้เท่านั้น อาจเป็นไปได้ว่าอยู่ในผิดประเภท</string>
@@ -163,7 +163,7 @@
     <string name="playing_next">เล่นวิดีโอถัดไปใน %1$s</string>
     <string name="play_automatically">เล่นอัตโนมัติ</string>
     <string name="contribute_to_dearrow">ช่วยเหลือให้ DeArrow</string>
-    <string name="dearrow_summary">แสดงชื่อและภาพของวิดีโอให้แม่นยำมากยิ่งขึ้นและลดความน่าตื่นเต้นลง ระยะเวลาการโหลดจะเพิ่มขึ้น</string>
+    <string name="dearrow_summary">แสดงชื่อและภาพของวิดีโอให้ตรงกับเนื้อของวิดีโอมากยิ่งขึ้นและลดความน่าตื่นเต้นที่ไม่จำเป็นลง ระยะเวลาการโหลดจะเพิ่มขึ้น</string>
     <string name="live">ไลฟ์สด</string>
     <string name="github">GitHub</string>
     <string name="yt_shorts">Shorts</string>
@@ -253,7 +253,7 @@
     <string name="app_backup">สำรองแอป</string>
     <string name="backup_restore_summary">นำเข้าและส่งออกการติดตามช่อง เพลย์ลิสต์ ฯลฯ…</string>
     <string name="privacy_alert">คำเตือนความเป็นส่วนตัว</string>
-    <string name="username_email">ไม่แนะนำให้ใช้ที่อยู่อีเมลเป็นชื่อผู้ใช้ ดำเนินการต่อหรือไม่?</string>
+    <string name="username_email">ไม่แนะนำให้ใช้ที่อยู่อีเมลแทนเป็นชื่อผู้ใช้ ดำเนินการต่อหรือไม่?</string>
     <string name="color_violet">อเนกม่วง</string>
     <string name="rewind">กรอกลับ</string>
     <string name="forward">กรอข้าม</string>
@@ -545,4 +545,9 @@
     <string name="tooltip_options">การตั้งค่า</string>
     <string name="tooltip_minimize">ย่อลง</string>
     <string name="tooltip_fullscreen">เต็มหน้าจอ</string>
+    <string name="color_red">แดงหลับใหล</string>
+    <string name="color_blue">ฟ้าสุขสันต์</string>
+    <string name="color_yellow">เหลืองรื่นเริง</string>
+    <string name="color_green">เขียวเก๋</string>
+    <string name="color_purple">ม่วงน่าสนใจ</string>
 </resources>
