@@ -542,4 +542,26 @@
     <string name="screenshot_saved">Captura de pantalla guardada</string>
     <string name="delete_playlist_include_vidoes">¿Borrar también todos los videos de la lista de reproducción?</string>
     <string name="showing_results_for">Mostrando resultados para:</string>
+    <string name="category_hook">Enganche/Saludos</string>
+    <string name="category_hook_summary">Para ganchos narrativos que captan la atención del espectador (a menudo como la primera escena) al provocar o describir eventos posteriores en el mismo video o episodios futuros de una serie</string>
+    <string name="checking_frequency_15_minutes">15 minutos</string>
+    <string name="checking_frequency_30_minutes">30 minutos</string>
+    <string name="checking_frequency_60_minutes">60 minutos</string>
+    <string name="checking_frequency_2_hours">2 horas</string>
+    <string name="checking_frequency_6_hours">6 horas</string>
+    <string name="checking_frequency_12_hours">12 horas</string>
+    <string name="checking_frequency_1_day">1 día</string>
+    <string name="backup_creation_success">Respaldo completado exitosamente</string>
+    <string name="backup_creation_failed">Falló al crear el respaldo</string>
+    <plurals name="minutes_left">
+        <item quantity="one">%d minuto restante</item>
+        <item quantity="many">%d minutos restantes</item>
+        <item quantity="other">%d minutos restantes</item>
+    </plurals>
+    <plurals name="sleep_timer_chip_minutes">
+        <item quantity="one">%d minuto</item>
+        <item quantity="many">%d minutos</item>
+        <item quantity="other">%d minutos</item>
+    </plurals>
+    <string name="did_you_mean">No querrás decir:</string>
 </resources>
