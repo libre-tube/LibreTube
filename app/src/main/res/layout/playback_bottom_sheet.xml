@@ -75,7 +75,7 @@
                             android:layout_marginStart="23dp"
                             android:layout_marginEnd="23dp"
                             android:visibility="gone"
-                            app:icon="@drawable/ic_save"
+                            app:icon="@drawable/ic_done"
                             app:iconGravity="textStart"
                             android:text="@string/save_channel_speed" />
 
