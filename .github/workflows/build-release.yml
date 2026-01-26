@@ -26,7 +26,7 @@ jobs:
         run: ./gradlew assembleRelease --no-daemon
 
       - name: Sign APK
-        uses: ilharp/sign-android-release@v1
+        uses: ilharp/sign-android-release@v2
         id: sign
         with:
           signingKey: ${{ secrets.ANDROID_SIGNING_KEY }}
