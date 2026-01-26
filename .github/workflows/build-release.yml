@@ -46,6 +46,6 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           body: ${{ steps.changelog.outputs.changes }}
-          files: "app-release.apk"
+          files:  ${{ steps.sign.outputs.signedFile }}
           fail_on_unmatched_files: true
           make_latest: true
