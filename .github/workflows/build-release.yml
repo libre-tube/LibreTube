@@ -42,10 +42,24 @@ jobs:
           token: ${{ github.token }}
           tag: ${{ github.ref_name }}
 
+      # Create a summary based on the latest fastlane metadata changelog
+      - name: Create changelog summary
+        id: changelog-summary
+        run: |
+            {
+              summary_file=$(find fastlane/metadata/android/en-US/changelogs/ | sort -t '/' -k 6n | tail -n 1) # get name of latest changelog file
+              summary_quoted=$(cat "$summary_file" | xargs -d '\n' -I {} echo "> {}") # prefix each line with "> "
+              summary=$(echo -e "> [!NOTE]\n$summary_quoted") # format as GitHub markdown admonitions
+              echo "summary<<EOF"$'\n'"$summary"$'\n'EOF >> $GITHUB_OUTPUT # make available as actions output
+            }
+
       - name: Create release
         uses: softprops/action-gh-release@v2
         with:
-          body: ${{ steps.changelog.outputs.changes }}
-          files:  ${{ steps.sign.outputs.signedFile }}
+          body:
+            ${{ steps.changelog-summary.outputs.summary }}
+
+            ${{ steps.changelog.outputs.changes }}
+          files: ${{ steps.sign.outputs.signedFile }}
           fail_on_unmatched_files: true
           make_latest: true
