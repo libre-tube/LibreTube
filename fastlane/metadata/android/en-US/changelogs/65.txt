@@ -1,0 +1,9 @@
+* Fixed an error with playing videos
+* Removed split-abi-apks
+* Always remember playback speed
+* Fast forward video on long press
+* Improved sleeptimer with slow volume fade-out and quick-select buttons
+* Display video chapters in timebar
+* Include filtered search history in search suggestion
+* Prefer untranslated video title if available
+* Many more bug fixes and performance improvement
