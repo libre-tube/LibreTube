@@ -68,7 +68,12 @@ object PlayerHelper {
      *
      * Should be kept in sync with `fast_forward_view.xml`
      */
-    const val FAST_FORWARD_SPEED = 3f
+    const val FAST_FORWARD_SPEED_FACTOR = 2f
+
+    /**
+     * Maximum playback speed supported by ExoPlayer
+     */
+    const val MAXIMUM_PLAYBACK_SPEED = 4f
 
     /**
      * The maximum amount of time to wait until the video starts playing: 10 minutes

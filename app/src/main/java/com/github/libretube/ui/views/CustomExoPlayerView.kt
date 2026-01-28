@@ -888,9 +888,8 @@ abstract class CustomExoPlayerView(
         backgroundBinding.fastForwardView.isVisible = true
         val player = player ?: return
 
-        // manually set playback speed is already larger than fast forward speed,
-        // so using the fast forward action would actually slow down seeking
-        if (player.playbackParameters.speed >= PlayerHelper.FAST_FORWARD_SPEED) {
+        // using the fast forward action wouldn't change anything in this case
+        if (player.playbackParameters.speed >= PlayerHelper.MAXIMUM_PLAYBACK_SPEED) {
             return
         }
 
@@ -898,10 +897,11 @@ abstract class CustomExoPlayerView(
         // after the fast forward action is done
         rememberedPlaybackSpeed = player.playbackParameters.speed
 
-        player.playbackParameters = PlaybackParameters(
-            PlayerHelper.FAST_FORWARD_SPEED,
-            player.playbackParameters.pitch
+        val newSpeed = minOf(
+            player.playbackParameters.speed * PlayerHelper.FAST_FORWARD_SPEED_FACTOR,
+            PlayerHelper.MAXIMUM_PLAYBACK_SPEED
         )
+        player.playbackParameters = PlaybackParameters(newSpeed, player.playbackParameters.pitch)
     }
 
     override fun onLongPressEnd() {
