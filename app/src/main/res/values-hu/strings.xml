@@ -416,7 +416,7 @@
     <string name="visibility_public">Nyilvános</string>
     <string name="visibility">Láthatóság</string>
     <string name="screen_orientation">Képernyőtájolás</string>
-    <string name="remove_watched_videos">Megnézett videók eltávolítása</string>
+    <string name="remove_watched_videos">Megtekintett videók eltávolítása</string>
     <string name="player_channel_name">Lejátszási szolgáltatás</string>
     <string name="player_channel_description">Értesítést jelenít meg lejátszás közben</string>
     <string name="tooltip_repeat">Ismétlés</string>
