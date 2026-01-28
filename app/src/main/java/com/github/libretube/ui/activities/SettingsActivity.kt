@@ -15,9 +15,9 @@ class SettingsActivity : BaseActivity() {
         val binding = ActivitySettingsBinding.inflate(layoutInflater)
         val navController = binding.settings.getFragment<NavHostFragment>().navController
         setSupportActionBar(binding.toolbar)
-        binding.toolbar.setupWithNavController(navController)
-
         setContentView(binding.root)
+
+        binding.toolbar.setupWithNavController(navController)
 
         if (intent.extras?.getString(REDIRECT_KEY) == REDIRECT_TO_INTENT_SETTINGS) {
             navController.navigate(R.id.action_global_instanceSettings)
