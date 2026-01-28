@@ -53,6 +53,9 @@ jobs:
               echo "summary<<EOF"$'\n'"$summary"$'\n'EOF >> $GITHUB_OUTPUT # make available as actions output
             }
 
+      - name: Rename apk file
+        run: mv "${{ steps.sign.outputs.signedFile }}" "app-release.apk"
+
       - name: Create release
         uses: softprops/action-gh-release@v2
         with:
@@ -60,6 +63,6 @@ jobs:
             ${{ steps.changelog-summary.outputs.summary }}
 
             ${{ steps.changelog.outputs.changes }}
-          files: ${{ steps.sign.outputs.signedFile }}
+          files: "app-release.apk"
           fail_on_unmatched_files: true
           make_latest: true
