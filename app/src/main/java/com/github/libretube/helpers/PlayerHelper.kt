@@ -46,7 +46,6 @@ import com.github.libretube.enums.PlayerEvent
 import com.github.libretube.enums.SbSkipOptions
 import com.github.libretube.extensions.seekBy
 import com.github.libretube.extensions.togglePlayPauseState
-import com.github.libretube.extensions.updateParameters
 import com.github.libretube.obj.VideoStats
 import com.github.libretube.util.TextUtils
 import kotlinx.coroutines.CoroutineScope
@@ -63,8 +62,13 @@ object PlayerHelper {
     private const val ROLE_FLAG_AUTO_GEN_SUBTITLE = C.ROLE_FLAG_SUPPLEMENTARY
     private const val MINIMUM_BUFFER_DURATION = 1000 * 10 // exo default is 50s
     const val WATCH_POSITION_TIMER_DELAY_MS = 1000L
-    const val FAST_FORWARD_INCREMENT = 2000L
-    const val FORWARD_INCREMENT_DELAY = 500L
+
+    /**
+     * Playback speed while the fast forward action is active (triggered by a long press on the player)
+     *
+     * Should be kept in sync with `fast_forward_view.xml`
+     */
+    const val FAST_FORWARD_SPEED = 3f
 
     /**
      * The maximum amount of time to wait until the video starts playing: 10 minutes
