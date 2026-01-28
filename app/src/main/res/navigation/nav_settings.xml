@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_settings"
+    app:startDestination="@id/mainSettings">
+
+    <fragment
+        android:id="@+id/mainSettings"
+        android:name="com.github.libretube.ui.preferences.MainSettings"
+        android:label="@string/settings" />
+
+    <fragment
+        android:id="@+id/instanceSettings"
+        android:name="com.github.libretube.ui.preferences.InstanceSettings"
+        android:label="@string/instance" />
+
+    <fragment
+        android:id="@+id/generalSettings"
+        android:name="com.github.libretube.ui.preferences.GeneralSettings"
+        android:label="@string/general" />
+
+    <fragment
+        android:id="@+id/appearanceSettings"
+        android:name="com.github.libretube.ui.preferences.AppearanceSettings"
+        android:label="@string/appearance" />
+    <fragment
+        android:id="@+id/audioVideoSettings"
+        android:name="com.github.libretube.ui.preferences.AudioVideoSettings"
+        android:label="@string/audio_video" />
+    <fragment
+        android:id="@+id/backupRestoreSettings"
+        android:name="com.github.libretube.ui.preferences.BackupRestoreSettings"
+        android:label="@string/backup_restore" />
+    <fragment
+        android:id="@+id/historySettings"
+        android:name="com.github.libretube.ui.preferences.HistorySettings"
+        android:label="@string/history" />
+    <fragment
+        android:id="@+id/notificationSettings"
+        android:name="com.github.libretube.ui.preferences.NotificationSettings"
+        android:label="@string/notifications" />
+    <fragment
+        android:id="@+id/playerSettings"
+        android:name="com.github.libretube.ui.preferences.PlayerSettings"
+        android:label="@string/player" />
+    <fragment
+        android:id="@+id/sponsorBlockSettings"
+        android:name="com.github.libretube.ui.preferences.SponsorBlockSettings"
+        android:label="@string/sponsorblock" />
+
+    <action
+        android:id="@+id/action_global_generalSettings"
+        app:destination="@id/generalSettings"
+        app:enterAnim="@animator/nav_default_enter_anim"
+        app:exitAnim="@animator/nav_default_exit_anim"
+        app:popEnterAnim="@animator/nav_default_pop_enter_anim"
+        app:popExitAnim="@animator/nav_default_pop_exit_anim" />
+
+    <action
+        android:id="@+id/action_global_instanceSettings"
+        app:destination="@id/instanceSettings"
+        app:enterAnim="@animator/nav_default_enter_anim"
+        app:exitAnim="@animator/nav_default_exit_anim"
+        app:popEnterAnim="@animator/nav_default_pop_enter_anim"
+        app:popExitAnim="@animator/nav_default_pop_exit_anim" />
+
+    <action
+        android:id="@+id/action_global_appearanceSettings"
+        app:destination="@id/appearanceSettings"
+        app:enterAnim="@animator/nav_default_enter_anim"
+        app:exitAnim="@animator/nav_default_exit_anim"
+        app:popEnterAnim="@animator/nav_default_pop_enter_anim"
+        app:popExitAnim="@animator/nav_default_pop_exit_anim" />
+
+    <action
+        android:id="@+id/action_global_audioVideoSettings"
+        app:destination="@id/audioVideoSettings"
+        app:enterAnim="@animator/nav_default_enter_anim"
+        app:exitAnim="@animator/nav_default_exit_anim"
+        app:popEnterAnim="@animator/nav_default_pop_enter_anim"
+        app:popExitAnim="@animator/nav_default_pop_exit_anim" />
+
+    <action
+        android:id="@+id/action_global_backupRestoreSettings"
+        app:destination="@id/backupRestoreSettings"
+        app:enterAnim="@animator/nav_default_enter_anim"
+        app:exitAnim="@animator/nav_default_exit_anim"
+        app:popEnterAnim="@animator/nav_default_pop_enter_anim"
+        app:popExitAnim="@animator/nav_default_pop_exit_anim" />
+
+    <action
+        android:id="@+id/action_global_historySettings"
+        app:destination="@id/historySettings"
+        app:enterAnim="@animator/nav_default_enter_anim"
+        app:exitAnim="@animator/nav_default_exit_anim"
+        app:popEnterAnim="@animator/nav_default_pop_enter_anim"
+        app:popExitAnim="@animator/nav_default_pop_exit_anim" />
+
+    <action
+        android:id="@+id/action_global_notificationSettings"
+        app:destination="@id/notificationSettings"
+        app:enterAnim="@animator/nav_default_enter_anim"
+        app:exitAnim="@animator/nav_default_exit_anim"
+        app:popEnterAnim="@animator/nav_default_pop_enter_anim"
+        app:popExitAnim="@animator/nav_default_pop_exit_anim" />
+
+    <action
+        android:id="@+id/action_global_playerSettings"
+        app:destination="@id/playerSettings"
+        app:enterAnim="@animator/nav_default_enter_anim"
+        app:exitAnim="@animator/nav_default_exit_anim"
+        app:popEnterAnim="@animator/nav_default_pop_enter_anim"
+        app:popExitAnim="@animator/nav_default_pop_exit_anim" />
+
+    <action
+        android:id="@+id/action_global_sponsorBlockSettings"
+        app:destination="@id/sponsorBlockSettings"
+        app:enterAnim="@animator/nav_default_enter_anim"
+        app:exitAnim="@animator/nav_default_exit_anim"
+        app:popEnterAnim="@animator/nav_default_pop_enter_anim"
+        app:popExitAnim="@animator/nav_default_pop_exit_anim" />
+
+
+</navigation>
