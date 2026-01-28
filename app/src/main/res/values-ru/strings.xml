@@ -541,8 +541,8 @@
     <string name="unsubscribe_snackbar_message">Успешно отписано от %1$s</string>
     <string name="screenshot_saved">Снимок экрана сохранён</string>
     <string name="include_timestamp_in_filename">Добавлять время в название файла</string>
-    <string name="category_hook">Заставка/приветствие</string>
-    <string name="category_hook_summary">Для повествовательных вставок, которые привлекают внимание зрителя (часто в первой сцене), дразня или описывая события, происходящие позже в этом же видео или в будущих сериях</string>
+    <string name="category_hook">Затравка/приветствие</string>
+    <string name="category_hook_summary">Для интригующих моментов (обычно в начале видео), которые захватывают внимание зрителя, показывая отрывки или анонсируя события из дальнейшей части ролика или будущих серий</string>
     <string name="delete_playlist_include_vidoes">Также удалить все видео из плейлиста?</string>
     <string name="did_you_mean">Вы имели в виду:</string>
     <string name="showing_results_for">Показаны результаты по запросу:</string>
@@ -567,4 +567,6 @@
         <item quantity="many">%d минут</item>
         <item quantity="other">%d минут</item>
     </plurals>
+    <string name="sort_channel">Название канала</string>
+    <string name="sort_size">Размер</string>
 </resources>
