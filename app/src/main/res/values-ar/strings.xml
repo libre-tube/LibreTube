@@ -573,4 +573,6 @@
         <item quantity="many">%d دقيقة</item>
         <item quantity="other">%d دقيقة</item>
     </plurals>
+    <string name="sort_channel">اسم القناة</string>
+    <string name="sort_size">الحجم</string>
 </resources>
