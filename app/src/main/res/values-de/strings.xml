@@ -558,7 +558,9 @@
         <item quantity="other">noch %d Minuten</item>
     </plurals>
     <plurals name="sleep_timer_chip_minutes">
-        <item quantity="one"></item>
+        <item quantity="one"/>
         <item quantity="other">%d min</item>
     </plurals>
+    <string name="sort_channel">Kanalname</string>
+    <string name="sort_size">Größe</string>
 </resources>
