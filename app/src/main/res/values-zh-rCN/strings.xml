@@ -558,4 +558,6 @@
     <plurals name="sleep_timer_chip_minutes">
         <item quantity="other">%d 分钟</item>
     </plurals>
+    <string name="sort_channel">频道名</string>
+    <string name="sort_size">大小</string>
 </resources>
