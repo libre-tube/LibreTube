@@ -561,4 +561,6 @@
         <item quantity="one">%d min</item>
         <item quantity="other">%d min</item>
     </plurals>
+    <string name="sort_channel">Kanali nimi</string>
+    <string name="sort_size">Suurus</string>
 </resources>
