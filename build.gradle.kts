@@ -10,7 +10,7 @@ buildscript {
         classpath(libs.kotlin.gradle.plugin)
         classpath(libs.kotlin.serialization)
         classpath(libs.androidx.navigation.safeargs)
-
+        classpath("com.google.dagger:hilt-android-gradle-plugin:2.41")
         // NOTE: Do not place your application dependencies here, they belong
         // in the individual module build.gradle.kts files
     }
@@ -30,6 +30,7 @@ plugins {
     alias(libs.plugins.jetbrainsKotlinAndroid) apply false
     alias(libs.plugins.baselineprofile) apply false
     alias(libs.plugins.androidApplication) apply false
+    alias(libs.plugins.ksp) apply false
 }
 
 tasks.register<Delete>("clean") {
