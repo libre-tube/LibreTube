@@ -29,10 +29,10 @@ jobs:
         uses: ilharp/sign-android-release@v2
         id: sign
         with:
-          signingKey: ${{ secrets.ANDROID_SIGNING_KEY }}
-          keyAlias: ${{ secrets.ANDROID_KEY_ALIAS }}
-          keyStorePassword: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
-          keyPassword: ${{ secrets.ANDROID_KEY_PASSWORD }}
+          signingKey: ${{ secrets.ANDROID_RELEASE_SIGNING_KEY }}
+          keyAlias: ${{ secrets.ANDROID_RELEASE_KEY_ALIAS }}
+          keyStorePassword: ${{ secrets.ANDROID_RELEASE_KEYSTORE_PASSWORD }}
+          keyPassword: ${{ secrets.ANDROID_RELEASE_KEY_PASSWORD }}
           buildToolsVersion: 35.0.0
 
       - name: Create changelog
