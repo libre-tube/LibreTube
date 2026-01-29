@@ -561,4 +561,6 @@
         <item quantity="one">%d dəq</item>
         <item quantity="other">%d dəq</item>
     </plurals>
+    <string name="sort_channel">Kanal adı</string>
+    <string name="sort_size">Həcm</string>
 </resources>
