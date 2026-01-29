@@ -561,4 +561,6 @@
         <item quantity="one">%d perc</item>
         <item quantity="other">%d perc</item>
     </plurals>
+    <string name="sort_channel">Csatornanév</string>
+    <string name="sort_size">Méret</string>
 </resources>
