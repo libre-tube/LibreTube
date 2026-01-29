@@ -561,4 +561,6 @@
         <item quantity="one">%d mín</item>
         <item quantity="other">%d mín</item>
     </plurals>
+    <string name="sort_channel">Heiti rásar</string>
+    <string name="sort_size">Stærð</string>
 </resources>
