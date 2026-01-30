@@ -566,4 +566,6 @@
         <item quantity="many">%d minút</item>
         <item quantity="other">%d minút</item>
     </plurals>
+    <string name="sort_channel">Názov kanálu</string>
+    <string name="sort_size">Veľkosť</string>
 </resources>
