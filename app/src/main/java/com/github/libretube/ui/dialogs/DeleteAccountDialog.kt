@@ -49,23 +49,37 @@ class DeleteAccountDialog : DialogFragment() {
             }
     }
 
+    /**
+     * Deletes the user account from the Piped instance.
+     * @param password The user's password for verification
+     */
     private suspend fun deleteAccount(password: String) {
         val token = PreferenceHelper.getToken()
+        
+        if (token.isEmpty()) {
+            Toast.makeText(context, R.string.login_first, Toast.LENGTH_SHORT).show()
+            return
+        }
 
         try {
             withContext(Dispatchers.IO) {
                 RetrofitInstance.authApi.deleteAccount(token, DeleteUserRequest(password))
             }
-        } catch (e: Exception) {
-            Log.e(TAG(), e.toString())
-            Toast.makeText(context, R.string.unknown_error, Toast.LENGTH_SHORT).show()
-            return
-        }
-        Toast.makeText(context, R.string.success, Toast.LENGTH_SHORT).show()
+            
+            Toast.makeText(context, R.string.success, Toast.LENGTH_SHORT).show()
 
-        setFragmentResult(
-            InstanceSettings.INSTANCE_DIALOG_REQUEST_KEY,
-            bundleOf(IntentData.logoutTask to true)
-        )
+            setFragmentResult(
+                InstanceSettings.INSTANCE_DIALOG_REQUEST_KEY,
+                bundleOf(IntentData.logoutTask to true)
+            )
+        } catch (e: Exception) {
+            Log.e(TAG(), "Account deletion failed: ${e.message}", e)
+            val errorMessage = when {
+                e.message?.contains("401") == true -> R.string.invalid_password
+                e.message?.contains("403") == true -> R.string.unauthorized
+                else -> R.string.unknown_error
+            }
+            Toast.makeText(context, errorMessage, Toast.LENGTH_SHORT).show()
+        }
     }
 }
