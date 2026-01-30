@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Tablet-optimized player layout for 7-10 inch tablets (600dp+) -->
+<com.github.libretube.ui.views.SingleViewTouchableMotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/playerMotionLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layoutDescription="@xml/player_scene">
+
+    <ScrollView
+        android:id="@+id/player_scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="?android:colorBackground"
+        android:paddingHorizontal="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/main_container">
+
+        <LinearLayout
+            android:id="@+id/linLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <com.github.libretube.ui.views.DescriptionLayout
+                android:id="@+id/descriptionLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:animateLayoutChanges="true"
+                android:layout_marginTop="8dp" />
+
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingVertical="12dp"
+                android:scrollbars="none">
+
+                <LinearLayout
+                    android:id="@+id/optionsLL"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingHorizontal="4dp">
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/relPlayer_share"
+                        style="@style/PlayerActionsButton"
+                        android:text="@string/share"
+                        android:minWidth="120dp"
+                        app:icon="@drawable/ic_share" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/relPlayer_download"
+                        style="@style/PlayerActionsButton"
+                        android:text="@string/download"
+                        android:minWidth="120dp"
+                        app:icon="@drawable/ic_download" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/relPlayer_save"
+                        style="@style/PlayerActionsButton"
+                        android:text="@string/save"
+                        android:minWidth="120dp"
+                        app:icon="@drawable/ic_save" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/relPlayer_background"
+                        style="@style/PlayerActionsButton"
+                        android:text="@string/audio"
+                        android:minWidth="120dp"
+                        app:icon="@drawable/ic_headphones" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/relPlayer_pip"
+                        style="@style/PlayerActionsButton"
+                        android:text="@string/pip"
+                        android:minWidth="120dp"
+                        app:icon="@drawable/ic_open" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/relPlayer_screenshot"
+                        style="@style/PlayerActionsButton"
+                        android:text="@string/screenshot"
+                        android:minWidth="120dp"
+                        app:icon="@drawable/ic_copy" />
+                </LinearLayout>
+
+            </HorizontalScrollView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="12dp"
+                app:cardElevation="2dp"
+                app:cardCornerRadius="12dp">
+
+                <LinearLayout
+                    android:id="@+id/player_channel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/rounded_ripple"
+                    android:orientation="horizontal"
+                    android:padding="12dp">
+
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:id="@+id/player_channelImage"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:layout_gravity="center"
+                        android:layout_marginEnd="12dp"
+                        app:shapeAppearance="@style/CircleImageView" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start|center_vertical"
+                        android:layout_marginEnd="12dp"
+                        android:layout_weight="1"
+                        android:layoutDirection="locale"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/player_channelName"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:ellipsize="end"
+                            android:maxLines="1"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/player_channelSubCount"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:ellipsize="end"
+                            android:maxLines="1"
+                            android:textSize="13sp"
+                            tools:text="2.5M subscribers" />
+
+                    </LinearLayout>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/player_subscribe"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="@string/subscribe"
+                        android:textSize="14sp"
+                        android:minWidth="120dp" />
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/comments_toggle"
+                style="@style/PlayerActionsButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="24dp"
+                android:layout_marginVertical="12dp"
+                android:text="@string/comments"
+                android:textAlignment="viewStart"
+                android:textColor="?colorPrimary"
+                android:textSize="15sp"
+                app:drawableEndCompat="@drawable/ic_arrow_up_down"
+                app:drawableTint="?colorPrimary" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/related_rec_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="8dp" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/main_container"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="?attr/colorSurfaceContainerLow"
+        app:layout_constraintDimensionRatio="16:9"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.github.libretube.ui.views.OnlinePlayerView
+        android:id="@+id/player"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/black"
+        app:player_layout_id="@layout/custom_exo_player_view"
+        app:controller_layout_id="@layout/exo_styled_player_control_view"
+        app:layout_constraintBottom_toBottomOf="@id/main_container"
+        app:layout_constraintStart_toStartOf="@id/main_container"
+        app:layout_constraintTop_toTopOf="@id/main_container"
+        app:show_buffering="when_playing"
+        app:surface_type="surface_view" />
+
+    <ImageView
+        android:id="@+id/close_imageView"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:alpha="0"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:padding="12dp"
+        android:src="@drawable/ic_close"
+        android:tooltipText="@string/tooltip_close"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@id/main_container"
+        app:layout_constraintEnd_toEndOf="@id/main_container"
+        app:layout_constraintTop_toTopOf="@id/main_container" />
+
+    <ImageView
+        android:id="@+id/play_imageView"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:alpha="0"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:padding="12dp"
+        android:src="@drawable/ic_play"
+        android:tooltipText="@string/tooltip_play"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/close_imageView"
+        app:layout_constraintEnd_toStartOf="@+id/close_imageView"
+        app:layout_constraintTop_toTopOf="@+id/close_imageView" />
+
+    <TextView
+        android:id="@+id/title_textView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:alpha="0"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:paddingHorizontal="16dp"
+        android:paddingVertical="16dp"
+        android:textSize="16sp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/play_imageView"
+        app:layout_constraintEnd_toStartOf="@+id/play_imageView"
+        app:layout_constraintStart_toEndOf="@+id/player"
+        app:layout_constraintTop_toTopOf="@+id/play_imageView" />
+
+</com.github.libretube.ui.views.SingleViewTouchableMotionLayout>
