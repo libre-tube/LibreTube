@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Large tablet-specific dimensions for 10+ inch tablets (720dp+) -->
+<resources>
+    <!-- Grid layout optimizations for large tablets -->
+    <integer name="grid_items">3</integer>
+    <integer name="grid_items_landscape">6</integer>
+
+    <!-- Player layout optimizations -->
+    <item name="landscape_player_constraint_width_percentage" type="dimen" format="float">0.65</item>
+    
+    <!-- Button margins for better large tablet UX -->
+    <dimen name="normal_button_margin_bottom">6dp</dimen>
+    <dimen name="normal_button_margin_end">6dp</dimen>
+    <dimen name="fullscreen_button_margin_bottom">10dp</dimen>
+    <dimen name="fullscreen_button_margin_end">8dp</dimen>
+    
+    <!-- Spacing optimizations -->
+    <dimen name="tablet_content_padding">24dp</dimen>
+    <dimen name="tablet_card_elevation">6dp</dimen>
+    <dimen name="tablet_list_item_height">80dp</dimen>
+</resources>
