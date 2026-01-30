@@ -63,6 +63,12 @@ class LoginDialog : DialogFragment() {
             }
     }
 
+    /**
+     * Authenticates user with the Piped API.
+     * @param username The username or email
+     * @param password The user's password
+     * @param createNewAccount True if registering a new account, false for login
+     */
     private fun signIn(username: String, password: String, createNewAccount: Boolean = false) {
         val login = Login(username, password)
         lifecycleScope.launch(Dispatchers.IO) {
@@ -79,23 +85,30 @@ class LoginDialog : DialogFragment() {
                 context?.toastFromMainDispatcher(errorMessage)
                 return@launch
             } catch (e: Exception) {
-                Log.e(TAG(), e.toString())
+                Log.e(TAG(), "Authentication failed: ${e.message}", e)
                 context?.toastFromMainDispatcher(e.localizedMessage.orEmpty())
                 return@launch
             }
 
+            // Validate response
             if (response.error != null) {
                 context?.toastFromMainDispatcher(response.error)
                 return@launch
             }
-            if (response.token == null) return@launch
+            
+            val token = response.token
+            if (token.isNullOrEmpty()) {
+                context?.toastFromMainDispatcher(R.string.unknown_error)
+                return@launch
+            }
+
+            // Store credentials securely
+            PreferenceHelper.setToken(token)
+            PreferenceHelper.setUsername(login.username)
 
             context?.toastFromMainDispatcher(
                 if (createNewAccount) R.string.registered else R.string.loggedIn
             )
-
-            PreferenceHelper.setToken(response.token)
-            PreferenceHelper.setUsername(login.username)
 
             withContext(Dispatchers.Main) {
                 setFragmentResult(
