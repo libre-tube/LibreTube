@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.text.InputType
 import android.view.View
 import android.widget.Toast
+import androidx.core.view.updatePadding
 import androidx.preference.EditTextPreference
 import androidx.preference.ListPreference
 import androidx.preference.MultiSelectListPreference
@@ -11,7 +12,6 @@ import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import com.github.libretube.R
 import com.github.libretube.databinding.DialogTextPreferenceBinding
-import com.github.libretube.ui.activities.SettingsActivity
 import com.github.libretube.ui.extensions.onSystemInsets
 import com.github.libretube.ui.preferences.EditNumberPreference
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -20,31 +20,17 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
  * PreferenceFragmentCompat using the [MaterialAlertDialogBuilder] instead of the old dialog builder
  */
 abstract class BasePreferenceFragment : PreferenceFragmentCompat() {
-    abstract val titleResourceId: Int
-
-    private val settingsActivity get() = activity as? SettingsActivity
 
     /**
      * Whether any preference dialog is currently visible to the user.
      */
     var isDialogVisible = false
 
-    override fun onStart() {
-        super.onStart()
-
-        settingsActivity?.changeTopBarText(getString(titleResourceId))
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         // add bottom padding to the list, to ensure that the last item is not overlapped by the system bars
         listView.onSystemInsets { v, systemInsets ->
-            v.setPadding(
-                v.paddingLeft,
-                v.paddingTop,
-                v.paddingRight,
-                v.paddingBottom + systemInsets.bottom
-            )
+            v.updatePadding(bottom = v.paddingBottom + systemInsets.bottom)
         }
     }
 

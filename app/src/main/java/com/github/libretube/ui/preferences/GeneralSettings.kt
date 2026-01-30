@@ -20,7 +20,6 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import java.util.Locale
 
 class GeneralSettings : BasePreferenceFragment() {
-    override val titleResourceId: Int = R.string.general
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         setPreferencesFromResource(R.xml.general_settings, rootKey)

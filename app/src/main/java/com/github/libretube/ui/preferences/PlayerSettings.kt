@@ -15,7 +15,6 @@ import com.github.libretube.helpers.LocaleHelper
 import com.github.libretube.ui.base.BasePreferenceFragment
 
 class PlayerSettings : BasePreferenceFragment() {
-    override val titleResourceId: Int = R.string.player
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         setPreferencesFromResource(R.xml.player_settings, rootKey)
