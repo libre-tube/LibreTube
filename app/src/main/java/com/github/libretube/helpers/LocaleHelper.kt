@@ -1,6 +1,7 @@
 package com.github.libretube.helpers
 
 import android.content.Context
+import android.os.Build
 import android.telephony.TelephonyManager
 import androidx.core.content.getSystemService
 import androidx.core.os.ConfigurationCompat
@@ -16,6 +17,10 @@ object LocaleHelper {
             languageName == "sys" -> Locale.getDefault()
             else -> getLocaleFromAndroidCode(languageName)
         }
+    }
+
+    fun isPerAppLocaleSettingSupported(): Boolean {
+        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU
     }
 
     fun getLocaleFromAndroidCode(code: String): Locale {
