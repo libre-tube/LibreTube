@@ -1,6 +1,5 @@
 package com.github.libretube.api
 
-import com.github.libretube.BuildConfig
 import com.github.libretube.api.obj.DeArrowBody
 import com.github.libretube.api.obj.DeArrowContent
 import com.github.libretube.api.obj.PipedConfig
