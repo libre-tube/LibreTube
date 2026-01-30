@@ -2,6 +2,7 @@ package com.github.libretube.ui.activities
 
 import android.os.Bundle
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import com.github.libretube.R
 import com.github.libretube.databinding.ActivitySettingsBinding
@@ -17,7 +18,14 @@ class SettingsActivity : BaseActivity() {
         setSupportActionBar(binding.toolbar)
         setContentView(binding.root)
 
-        binding.toolbar.setupWithNavController(navController)
+        // ensure that the toolbar's back button is always visible
+        val appBarConfiguration = AppBarConfiguration.Builder()
+            .setFallbackOnNavigateUpListener {
+                finish()
+                true
+            }
+            .build()
+        binding.toolbar.setupWithNavController(navController, appBarConfiguration)
 
         if (intent.extras?.getString(REDIRECT_KEY) == REDIRECT_TO_INTENT_SETTINGS) {
             navController.navigate(R.id.action_global_instanceSettings)
