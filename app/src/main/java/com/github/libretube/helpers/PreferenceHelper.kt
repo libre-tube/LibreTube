@@ -216,18 +216,34 @@ object PreferenceHelper {
         settings.edit { clear() }
     }
 
+    /**
+     * Retrieves the authentication token.
+     * @return The stored token or empty string if not available
+     */
     fun getToken(): String {
-        return authSettings.getString(PreferenceKeys.TOKEN, "")!!
+        return authSettings.getString(PreferenceKeys.TOKEN, "").orEmpty()
     }
 
+    /**
+     * Stores the authentication token securely.
+     * @param newValue The token to store
+     */
     fun setToken(newValue: String) {
         authSettings.edit { putString(PreferenceKeys.TOKEN, newValue) }
     }
 
+    /**
+     * Retrieves the stored username.
+     * @return The stored username or empty string if not available
+     */
     fun getUsername(): String {
-        return authSettings.getString(PreferenceKeys.USERNAME, "")!!
+        return authSettings.getString(PreferenceKeys.USERNAME, "").orEmpty()
     }
 
+    /**
+     * Stores the username.
+     * @param newValue The username to store
+     */
     fun setUsername(newValue: String) {
         authSettings.edit { putString(PreferenceKeys.USERNAME, newValue) }
     }
