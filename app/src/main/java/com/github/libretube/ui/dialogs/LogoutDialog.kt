@@ -13,22 +13,38 @@ import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.ui.preferences.InstanceSettings
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
+/**
+ * Dialog for user logout confirmation.
+ * Displays the currently logged-in username and allows the user to logout.
+ */
 class LogoutDialog : DialogFragment() {
-    @SuppressLint("SetTextI18n")
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        val user = PreferenceHelper.getUsername()
+        val username = PreferenceHelper.getUsername()
+        val message = if (username.isNotEmpty()) {
+            getString(R.string.already_logged_in, username)
+        } else {
+            getString(R.string.already_logged_in)
+        }
 
         return MaterialAlertDialogBuilder(requireContext())
             .setTitle(R.string.logout)
-            .setMessage(getString(R.string.already_logged_in) + " ($user)")
+            .setMessage(message)
             .setPositiveButton(R.string.logout) { _, _ ->
-                Toast.makeText(context, R.string.loggedout, Toast.LENGTH_SHORT).show()
-
-                setFragmentResult(
-                    InstanceSettings.INSTANCE_DIALOG_REQUEST_KEY,
-                    bundleOf(IntentData.logoutTask to true)
-                )
+                performLogout()
             }
+            .setNegativeButton(R.string.cancel, null)
             .show()
+    }
+
+    /**
+     * Performs the logout operation and notifies the parent fragment.
+     */
+    private fun performLogout() {
+        Toast.makeText(context, R.string.loggedout, Toast.LENGTH_SHORT).show()
+
+        setFragmentResult(
+            InstanceSettings.INSTANCE_DIALOG_REQUEST_KEY,
+            bundleOf(IntentData.logoutTask to true)
+        )
     }
 }
