@@ -559,4 +559,11 @@
         <item quantity="many">%d minutos</item>
         <item quantity="other">%d minutos</item>
     </plurals>
+    <string name="sort_channel">Nome do canal</string>
+    <string name="sort_size">Tamanho</string>
+    <plurals name="sleep_timer_chip_minutes">
+        <item quantity="one">%d min</item>
+        <item quantity="many">%d min</item>
+        <item quantity="other">%d min</item>
+    </plurals>
 </resources>
