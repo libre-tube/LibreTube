@@ -57,7 +57,7 @@ class DeleteAccountDialog : DialogFragment() {
         val token = PreferenceHelper.getToken()
         
         if (token.isEmpty()) {
-            Toast.makeText(context, R.string.login_first, Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, R.string.login, Toast.LENGTH_SHORT).show()
             return
         }
 
@@ -74,12 +74,7 @@ class DeleteAccountDialog : DialogFragment() {
             )
         } catch (e: Exception) {
             Log.e(TAG(), "Account deletion failed: ${e.message}", e)
-            val errorMessage = when {
-                e.message?.contains("401") == true -> R.string.invalid_password
-                e.message?.contains("403") == true -> R.string.unauthorized
-                else -> R.string.unknown_error
-            }
-            Toast.makeText(context, errorMessage, Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, R.string.unknown_error, Toast.LENGTH_SHORT).show()
         }
     }
 }
