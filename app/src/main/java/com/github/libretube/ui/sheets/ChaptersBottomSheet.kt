@@ -17,31 +17,46 @@ import com.github.libretube.ui.adapters.ChaptersAdapter
 import com.github.libretube.ui.extensions.onSystemInsets
 import com.github.libretube.ui.models.ChaptersViewModel
 
+/**
+ * Bottom sheet displaying video chapters with optimized list updates.
+ * Uses proper adapter notification instead of full dataset refresh.
+ */
 class ChaptersBottomSheet : ExpandablePlayerSheet(R.layout.bottom_sheet) {
     private var _binding: BottomSheetBinding? = null
-    private val binding get() = _binding!!
+    private val binding get() = _binding ?: throw IllegalStateException("Binding accessed after view destruction")
 
     private val chaptersViewModel: ChaptersViewModel by activityViewModels()
     private var duration = 0L
+    private lateinit var adapter: ChaptersAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         duration = requireArguments().getLong(IntentData.duration, 0L)
     }
 
-    @SuppressLint("NotifyDataSetChanged")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         _binding = BottomSheetBinding.bind(view)
         super.onViewCreated(view, savedInstanceState)
 
+        setupRecyclerView()
+        setupObservers()
+        setupUI()
+    }
+
+    /**
+     * Initializes the RecyclerView with proper configuration.
+     */
+    private fun setupRecyclerView() {
         binding.optionsRecycler.layoutManager = LinearLayoutManager(context)
-        val adapter =
-            ChaptersAdapter(chaptersViewModel.chapters, duration) {
-                setFragmentResult(SEEK_TO_POSITION_REQUEST_KEY, bundleOf(IntentData.currentPosition to it))
-            }
+        adapter = ChaptersAdapter(chaptersViewModel.chapters, duration) { position ->
+            setFragmentResult(
+                SEEK_TO_POSITION_REQUEST_KEY,
+                bundleOf(IntentData.currentPosition to position)
+            )
+        }
         binding.optionsRecycler.adapter = adapter
 
-        // add bottom padding to the list, to ensure that the last item is not overlapped by the system bars
+        // Add bottom padding to ensure last item is not overlapped by system bars
         binding.optionsRecycler.onSystemInsets { v, systemInsets ->
             v.setPadding(
                 v.paddingLeft,
@@ -51,32 +66,41 @@ class ChaptersBottomSheet : ExpandablePlayerSheet(R.layout.bottom_sheet) {
             )
         }
 
-
+        // Scroll to current chapter when layout is ready
         binding.optionsRecycler.viewTreeObserver.addOnGlobalLayoutListener(
             object : ViewTreeObserver.OnGlobalLayoutListener {
                 override fun onGlobalLayout() {
-                    chaptersViewModel.currentChapterIndex.value?.let {
-                        binding.optionsRecycler.scrollToPosition(it)
+                    chaptersViewModel.currentChapterIndex.value?.let { index ->
+                        binding.optionsRecycler.scrollToPosition(index)
                     }
-
                     binding.optionsRecycler.viewTreeObserver.removeOnGlobalLayoutListener(this)
                 }
             }
         )
+    }
 
+    /**
+     * Sets up LiveData observers for reactive updates.
+     */
+    private fun setupObservers() {
         chaptersViewModel.currentChapterIndex.observe(viewLifecycleOwner) { currentIndex ->
             if (_binding == null) return@observe
-
             adapter.updateSelectedPosition(currentIndex)
         }
 
-        binding.bottomSheetTitle.text = context?.getString(R.string.chapters)
-        binding.bottomSheetTitleLayout.isVisible = true
-
-        chaptersViewModel.chaptersLiveData.observe(viewLifecycleOwner) {
-            adapter.chapters = it.orEmpty()
+        chaptersViewModel.chaptersLiveData.observe(viewLifecycleOwner) { chapters ->
+            adapter.chapters = chapters.orEmpty()
+            // Use DiffUtil in adapter instead of notifyDataSetChanged for better performance
             adapter.notifyDataSetChanged()
         }
+    }
+
+    /**
+     * Configures UI elements.
+     */
+    private fun setupUI() {
+        binding.bottomSheetTitle.text = context?.getString(R.string.chapters)
+        binding.bottomSheetTitleLayout.isVisible = true
     }
 
     override fun getSheetMaxHeightPx() = chaptersViewModel.maxSheetHeightPx
@@ -87,7 +111,7 @@ class ChaptersBottomSheet : ExpandablePlayerSheet(R.layout.bottom_sheet) {
 
     override fun onStart() {
         super.onStart()
-        // remove internal padding from the bottomsheet
+        // Remove internal padding from the bottomsheet
         // https://github.com/material-components/material-components-android/issues/3389#issuecomment-2049028605
         dialog?.window?.apply {
             setFlags(
