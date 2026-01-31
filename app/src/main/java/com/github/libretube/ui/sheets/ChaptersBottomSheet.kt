@@ -23,17 +23,17 @@ class ChaptersBottomSheet : ExpandablePlayerSheet(R.layout.bottom_sheet) {
 
     private val chaptersViewModel: ChaptersViewModel by activityViewModels()
     private var duration = 0L
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         duration = requireArguments().getLong(IntentData.duration, 0L)
     }
 
+
+
     @SuppressLint("NotifyDataSetChanged")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         _binding = BottomSheetBinding.bind(view)
         super.onViewCreated(view, savedInstanceState)
-
         binding.optionsRecycler.layoutManager = LinearLayoutManager(context)
         val adapter =
             ChaptersAdapter(chaptersViewModel.chapters, duration) {
