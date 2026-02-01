@@ -564,4 +564,6 @@
         <item quantity="many">%d minutos</item>
         <item quantity="other">%d minutos</item>
     </plurals>
+    <string name="sort_channel">Nome do canal</string>
+    <string name="sort_size">Tamanho</string>
 </resources>
