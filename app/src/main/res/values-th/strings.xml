@@ -550,4 +550,6 @@
     <string name="color_yellow">เหลืองรื่นเริง</string>
     <string name="color_green">เขียวเก๋</string>
     <string name="color_purple">ม่วงน่าสนใจ</string>
+    <string name="sort_channel">ชื่อช่อง</string>
+    <string name="sort_size">ขนาด</string>
 </resources>
