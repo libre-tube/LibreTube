@@ -98,9 +98,6 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment(R.layout.fragment_sub
         if (viewModel.videoFeed.value == null) {
             viewModel.fetchFeed(requireContext(), forceRefresh = false)
         }
-        if (viewModel.subscriptions.value == null) {
-            viewModel.fetchSubscriptions(requireContext())
-        }
 
         // only restore the previous state (i.e. scroll position) the first time the feed is shown
         // any other feed updates are caused by manual refreshing and thus should reset the scroll
@@ -131,7 +128,6 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment(R.layout.fragment_sub
         }
 
         binding.subRefresh.setOnRefreshListener {
-            viewModel.fetchSubscriptions(requireContext())
             viewModel.fetchFeed(requireContext(), forceRefresh = true)
         }
 
