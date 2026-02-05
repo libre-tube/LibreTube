@@ -270,7 +270,7 @@ class DownloadsFragmentPage : DynamicLayoutManagerFragment(R.layout.fragment_dow
         binding.shuffleAll.setOnClickListener {
             BackgroundHelper.playOnBackgroundOffline(
                 requireContext(),
-                null,
+                "", // I'm sorry
                 downloadTab ?: DownloadTab.VIDEO,
                 shuffle = true
             )
