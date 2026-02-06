@@ -252,15 +252,19 @@ class DownloadService : LifecycleService() {
 
         downloadQueue[item.id] = false
 
-        if (downloadFlow.firstOrNull { it.first == item.id }?.second == DownloadStatus.Stopped) {
-            downloadQueue.remove(item.id, false)
-        }
-
         // start the next download if there are any remaining ones enqueued
-        val nextDownload =
-            downloadFlow.firstOrNull { (_, status) -> status == DownloadStatus.Paused }
-        if (nextDownload != null) {
-            resume(nextDownload.first)
+        var nextDownloadId: Int? = null
+        for (id in downloadQueue.keyIterator()) {
+            if (downloadQueue[id]) continue
+
+            val dbItem = Database.downloadDao().findDownloadItemById(id)
+            if (dbItem != null && (dbItem.downloadSize <= 0L || dbItem.path.fileSize() < dbItem.downloadSize)) {
+                nextDownloadId = id
+                break
+            }
+        }
+        if (nextDownloadId != null) {
+            resume(nextDownloadId)
         } else {
             stopServiceIfDone()
         }
