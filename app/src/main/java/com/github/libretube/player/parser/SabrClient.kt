@@ -270,11 +270,20 @@ class SabrClient private constructor(
 
     @OptIn(UnstableApi::class)
     fun selectFormat(representation: Representation) {
+        var previousFormat: Representation? = null
         if (MimeTypes.isAudio(representation.format.containerMimeType)) {
+            if (::audioFormat.isInitialized) {
+                previousFormat = audioFormat
+            }
+
             audioFormat = representation
         } else if (MimeTypes.isVideo(representation.format.containerMimeType)) {
+            previousFormat = videoFormat
             videoFormat = representation
         }
+
+        // clear previous format to prevent advertising stale data to the server
+        previousFormat?.let { initializedFormats.remove(it.stream.itag) }
     }
 
     fun getNextSegment(playbackRequest: PlaybackRequest): Segment? {
