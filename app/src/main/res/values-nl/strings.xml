@@ -561,4 +561,6 @@
         <item quantity="one">%d min.</item>
         <item quantity="other">%d min.</item>
     </plurals>
+    <string name="sort_channel">Kanaal­naam</string>
+    <string name="sort_size">Grootte</string>
 </resources>

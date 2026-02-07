@@ -414,7 +414,7 @@
     <string name="visibility">Visibilidad</string>
     <string name="visibility_unlisted">No listado</string>
     <string name="sort_by">Ordenar por</string>
-    <string name="uploader_name">Nombre del canal</string>
+    <string name="uploader_name">Nombre de quien lo subió</string>
     <string name="duration_span">Duración: %1$s</string>
     <string name="screen_orientation">Orientación de pantalla</string>
     <string name="remove_watched_videos">Quitar videos ya vistos</string>
@@ -564,4 +564,6 @@
         <item quantity="other">%d minutos</item>
     </plurals>
     <string name="did_you_mean">No querrás decir:</string>
+    <string name="sort_channel">Nombre del canal</string>
+    <string name="sort_size">Tamaño</string>
 </resources>

@@ -233,8 +233,8 @@
     <string name="time_code">ไทม์โค้ด (วินาที)</string>
     <string name="added_to_playlist">เพิ่มลงในเพลย์ลิสต์ %1$s เรียบร้อยแล้ว</string>
     <string name="queue">คิว</string>
-    <string name="sb_custom_colors_summary">ใช้สีเซ็กเมนต์แบบกำหนดเองสำหรับเซ็กเมนต์ของ SponsorBlock</string>
-    <string name="sb_custom_colors">สีเซ็กเมนต์กำหนดเอง</string>
+    <string name="sb_custom_colors_summary">ใช้สีเซกเมนต์แบบกำหนดเองสำหรับเซกเมนต์ของ SponsorBlock</string>
+    <string name="sb_custom_colors">สีเซกเมนต์กำหนดเอง</string>
     <string name="color">สี</string>
     <string name="invalid_color">ค่าสีที่ใส่ไม่ถูกต้อง!</string>
     <string name="livestreams">ไลฟ์สตรีม</string>
@@ -550,4 +550,6 @@
     <string name="color_yellow">เหลืองรื่นเริง</string>
     <string name="color_green">เขียวเก๋</string>
     <string name="color_purple">ม่วงน่าสนใจ</string>
+    <string name="sort_channel">ชื่อช่อง</string>
+    <string name="sort_size">ขนาด</string>
 </resources>

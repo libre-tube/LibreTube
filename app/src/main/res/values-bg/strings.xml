@@ -561,4 +561,6 @@
         <item quantity="one">%d минута</item>
         <item quantity="other">%d минути</item>
     </plurals>
+    <string name="sort_channel">Име на канала</string>
+    <string name="sort_size">Размер</string>
 </resources>

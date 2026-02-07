@@ -554,4 +554,16 @@
     <string name="checking_frequency_12_hours">12 שעות</string>
     <string name="checking_frequency_1_day">יום</string>
     <string name="delete_playlist_include_vidoes">למחוק את כל הסרטונים מרשימת הנגינה?</string>
+    <string name="sort_size">גודל</string>
+    <string name="sort_channel">שם הערוץ</string>
+    <plurals name="minutes_left">
+        <item quantity="one">נותרה דקה</item>
+        <item quantity="two">נותרו שתי דקות</item>
+        <item quantity="other">נותרו %d דקות</item>
+    </plurals>
+    <plurals name="sleep_timer_chip_minutes">
+        <item quantity="one">דקה</item>
+        <item quantity="two">שתי דק׳</item>
+        <item quantity="other">%d דק׳</item>
+    </plurals>
 </resources>
