@@ -2,10 +2,12 @@ package com.github.libretube.db.obj
 
 import androidx.room.Entity
 import androidx.room.ForeignKey
+import androidx.room.Ignore
 import androidx.room.Index
 import androidx.room.PrimaryKey
 import com.github.libretube.enums.FileType
 import java.nio.file.Path
+import kotlin.io.path.fileSize
 
 @Entity(
     tableName = "downloadItem",
@@ -31,4 +33,7 @@ data class DownloadItem(
     var quality: String? = null,
     var language: String? = null,
     var downloadSize: Long = -1L
-)
+) {
+    @Ignore
+    val isFinished get() = runCatching { path.fileSize() }.getOrDefault(0L) < downloadSize
+}
