@@ -444,6 +444,8 @@ class DownloadService : LifecycleService() {
 
         lifecycleScope.launch(coroutineContext) {
             val file = Database.downloadDao().findDownloadItemById(id) ?: return@launch
+            // Ensure ID is tracked when manually resuming
+            DownloadHelper.addIncompleteDownload(id)
             downloadFile(file)
         }
     }
