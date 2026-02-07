@@ -58,6 +58,34 @@ object DownloadHelper {
         ).toFloat().toInt()
     }
 
+    fun addIncompleteDownload(id: Int) {
+        val currentIds = getIncompleteDownloadIds().toMutableSet()
+        if (currentIds.add(id)) {
+            saveIncompleteDownloadIds(currentIds)
+        }
+    }
+
+    fun removeIncompleteDownload(id: Int) {
+        val currentIds = getIncompleteDownloadIds().toMutableSet()
+        if (currentIds.remove(id)) {
+            saveIncompleteDownloadIds(currentIds)
+        }
+    }
+
+    fun getIncompleteDownloadIds(): Set<Int> {
+        val idsString = PreferenceHelper.getString(PreferenceKeys.INCOMPLETE_DOWNLOAD_IDS, "")
+        return if (idsString.isBlank()) {
+            emptySet()
+        } else {
+            idsString.split(",").mapNotNull { it.toIntOrNull() }.toSet()
+        }
+    }
+
+    private fun saveIncompleteDownloadIds(ids: Set<Int>) {
+        val idsString = ids.joinToString(",")
+        PreferenceHelper.putString(PreferenceKeys.INCOMPLETE_DOWNLOAD_IDS, idsString)
+    }
+
     fun startDownloadService(context: Context, downloadData: DownloadData? = null) {
         val intent = Intent(context, DownloadService::class.java)
             .putExtra(IntentData.downloadData, downloadData)
@@ -162,6 +190,7 @@ object DownloadHelper {
 
         items.forEach {
             it.path.deleteIfExists()
+            removeIncompleteDownload(it.id)
         }
         runCatching {
             download.thumbnailPath?.deleteIfExists()
