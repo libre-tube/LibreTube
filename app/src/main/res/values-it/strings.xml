@@ -564,4 +564,6 @@
         <item quantity="many">%d min</item>
         <item quantity="other">%d min</item>
     </plurals>
+    <string name="sort_channel">Nome canale</string>
+    <string name="sort_size">Dimensione</string>
 </resources>
