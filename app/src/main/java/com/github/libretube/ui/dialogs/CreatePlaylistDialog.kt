@@ -47,7 +47,10 @@ class CreatePlaylistDialog : DialogFragment() {
                     if (playlistId != null) {
                         setFragmentResult(
                             CREATE_PLAYLIST_DIALOG_REQUEST_KEY,
-                            bundleOf(IntentData.playlistTask to true)
+                            bundleOf(
+                                IntentData.playlistTask to true,
+                                IntentData.playlistId to playlistId
+                            ),
                         )
                     }
                     appContext?.toastFromMainDispatcher(
@@ -79,7 +82,10 @@ class CreatePlaylistDialog : DialogFragment() {
                     playlistId?.let {
                         setFragmentResult(
                             CREATE_PLAYLIST_DIALOG_REQUEST_KEY,
-                            bundleOf(IntentData.playlistTask to true)
+                            bundleOf(
+                                IntentData.playlistTask to true,
+                                IntentData.playlistId to playlistId
+                            )
                         )
                     }
                     dismiss()

@@ -19,7 +19,7 @@ import kotlinx.coroutines.launch
 import kotlinx.parcelize.Parcelize
 import kotlinx.parcelize.RawValue
 
-class PlaylistViewModel(
+class AddToPlaylistViewModel(
     val savedStateHandle: SavedStateHandle,
 ) : ViewModel() {
 
@@ -77,6 +77,10 @@ class PlaylistViewModel(
         savedStateHandle[UI_STATE] = _uiState.value.copy(saved = null)
     }
 
+    fun setLastSelectedPlaylistId(lastSelectedPlaylistId: String?) {
+        savedStateHandle[UI_STATE] = _uiState.value.copy(lastSelectedPlaylistId = lastSelectedPlaylistId)
+    }
+
     @Parcelize
     data class UiState(
         val lastSelectedPlaylistId: String? = null,
@@ -96,7 +100,7 @@ class PlaylistViewModel(
 
         val Factory = viewModelFactory {
             initializer {
-                PlaylistViewModel(
+                AddToPlaylistViewModel(
                     savedStateHandle = createSavedStateHandle(),
                 )
             }
