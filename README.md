@@ -88,12 +88,12 @@ Features
 - [x] User Playlists
 - [x] Playlist Bookmarks
 - [x] Watch/Search History
-- [x] SponsorBlock
-- [x] ReturnYouTubeDislike
-- [x] DeArrow
 - [x] Downloads
 - [x] Background playback
-- [x] User Accounts via Piped (optional)
+- [x] User Accounts via [Piped](https://github.com/TeamPiped/Piped) (optional)
+- [x] [SponsorBlock](https://sponsor.ajay.app/) - skip sponsored segments in videos
+- [x] [ReturnYouTubeDislike](https://www.returnyoutubedislike.com/) - provides video dislike statistics
+- [x] [DeArrow](https://dearrow.ajay.app/) - provides better titles and thumbnails
 
 <h2 align="left">
 <sub>
