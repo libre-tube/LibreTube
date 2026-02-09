@@ -48,6 +48,7 @@ open class OfflinePlayerService : AbstractPlayerService() {
     private var downloadWithItems: DownloadWithItems? = null
     private lateinit var downloadTab: DownloadTab
     private var shuffle: Boolean = false
+    private var playlistId: String? = null
 
     private val scope = CoroutineScope(Dispatchers.Main)
 
@@ -77,13 +78,18 @@ open class OfflinePlayerService : AbstractPlayerService() {
         shuffle = args.getBoolean(IntentData.shuffle, false)
         noInternetService = args.getBoolean(IntentData.noInternet, false)
         isAudioOnlyPlayer = args.getBoolean(IntentData.audioOnly, false)
+        playlistId = args.getString(IntentData.playlistId)
 
         PlayingQueue.clear()
 
         this.videoId = if (shuffle) {
             runBlocking(Dispatchers.IO) {
-                Database.downloadDao().getAll().filterByTab(downloadTab).randomOrNull()
-            }?.download?.videoId
+                if (downloadTab == DownloadTab.PLAYLIST) {
+                    Database.downloadDao().getDownloadPlaylistById(playlistId!!).downloadVideos.randomOrNull()
+                } else {
+                    Database.downloadDao().getAll().filterByTab(downloadTab).randomOrNull()?.download
+                }
+            }?.videoId
         } else {
             args.getString(IntentData.videoId)
         } ?: return
@@ -191,16 +197,24 @@ open class OfflinePlayerService : AbstractPlayerService() {
     }
 
     private suspend fun fillQueue() {
-        val downloads = withContext(Dispatchers.IO) {
-            Database.downloadDao().getAll()
+        if (downloadTab == DownloadTab.PLAYLIST) {
+            val videos = withContext(Dispatchers.IO) {
+                Database.downloadDao().getDownloadPlaylistById(playlistId!!)
+            }.downloadVideos
+
+            PlayingQueue.setStreams(videos.map { it.toStreamItem() })
+        } else {
+            val downloads = withContext(Dispatchers.IO) {
+                Database.downloadDao().getAll()
+            }
+                .filterByTab(downloadTab)
+                .filter { it.download.videoId != videoId }
+                .toMutableList()
+
+            if (shuffle) downloads.shuffle()
+
+            PlayingQueue.add(*downloads.map { it.download.toStreamItem() }.toTypedArray())
         }
-            .filterByTab(downloadTab)
-            .filter { it.download.videoId != videoId }
-            .toMutableList()
-
-        if (shuffle) downloads.shuffle()
-
-        PlayingQueue.add(*downloads.map { it.download.toStreamItem() }.toTypedArray())
     }
 
     private fun playNextVideo(videoId: String? = null) {

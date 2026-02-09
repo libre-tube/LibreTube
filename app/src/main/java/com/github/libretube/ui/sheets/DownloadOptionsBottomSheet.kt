@@ -25,6 +25,7 @@ class DownloadOptionsBottomSheet : BaseBottomSheet() {
         val streamItem = arguments?.parcelable<StreamItem>(IntentData.streamItem)!!
         val videoId = streamItem.url!!.toID()
         val downloadTab = arguments?.serializable<DownloadTab>(IntentData.downloadTab)!!
+        val playlistId = arguments?.getString(IntentData.playlistId)
 
         val options = mutableListOf(
             R.string.playOnBackground,
@@ -46,7 +47,7 @@ class DownloadOptionsBottomSheet : BaseBottomSheet() {
         setSimpleItems(options.map { getString(it) }) { which ->
             when (options[which]) {
                 R.string.playOnBackground -> {
-                    BackgroundHelper.playOnBackgroundOffline(requireContext(), videoId, downloadTab)
+                    BackgroundHelper.playOnBackgroundOffline(requireContext(), videoId, playlistId, downloadTab)
                 }
 
                 R.string.go_to_video -> {

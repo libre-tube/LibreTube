@@ -46,6 +46,7 @@ import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.obj.DownloadStatus
 import com.github.libretube.receivers.DownloadReceiver
 import com.github.libretube.services.DownloadService
+import com.github.libretube.ui.activities.OfflinePlayerActivity
 import com.github.libretube.ui.adapters.DownloadPlaylistAdapter
 import com.github.libretube.ui.adapters.DownloadsAdapter
 import com.github.libretube.ui.base.DynamicLayoutManagerFragment
@@ -118,7 +119,7 @@ class DownloadsFragmentAdapter(fragment: Fragment) : FragmentStateAdapter(fragme
         }
 
         return DownloadsFragmentPage().apply {
-            arguments = bundleOf(IntentData.currentPosition to DownloadTab.entries[position])
+            arguments = bundleOf(IntentData.downloadTab to DownloadTab.entries[position])
         }
     }
 }
@@ -135,7 +136,7 @@ class DownloadsFragmentPage : DynamicLayoutManagerFragment(R.layout.fragment_dow
     private val downloadReceiver = DownloadReceiver()
 
     // Either downloadTab or downloadPlaylistId are set, never both at the same time!
-    private var downloadTab: DownloadTab? = null
+    private lateinit var downloadTab: DownloadTab
     private var downloadPlaylistId: String? = null
 
     private var selectedSortType
@@ -171,11 +172,11 @@ class DownloadsFragmentPage : DynamicLayoutManagerFragment(R.layout.fragment_dow
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        this.downloadTab = requireArguments().serializable(IntentData.currentPosition)
+        this.downloadTab = requireArguments().serializable(IntentData.downloadTab)!!
         this.downloadPlaylistId = requireArguments().getString(IntentData.playlistId)
 
-        if (downloadPlaylistId == null && downloadTab == null)
-            throw IllegalArgumentException("either downloadTab or downloadPlaylistId must be set")
+        if (downloadTab == DownloadTab.PLAYLIST && downloadPlaylistId == null)
+            throw IllegalArgumentException("downloadTab unspecified or missing playlist id")
     }
 
     override fun setLayoutManagers(gridItems: Int) {
@@ -185,7 +186,7 @@ class DownloadsFragmentPage : DynamicLayoutManagerFragment(R.layout.fragment_dow
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         _binding = FragmentDownloadContentBinding.bind(view)
         super.onViewCreated(view, savedInstanceState)
-        adapter = DownloadsAdapter(requireContext(), downloadTab ?: DownloadTab.VIDEO) {
+        adapter = DownloadsAdapter(requireContext(), downloadTab, downloadPlaylistId) {
             var isDownloading = false
             val ids = it.downloadItems
                 .filter { item -> item.path.fileSize() < item.downloadSize }
@@ -229,7 +230,7 @@ class DownloadsFragmentPage : DynamicLayoutManagerFragment(R.layout.fragment_dow
             val downloads = withContext(Dispatchers.IO) {
                 Database.downloadDao().getAll()
             }.let { downloads ->
-                if (downloadTab != null) downloads.filterByTab(downloadTab!!)
+                if (downloadTab != DownloadTab.PLAYLIST) downloads.filterByTab(downloadTab)
                 else downloads.filter { playlistItems.orEmpty().contains(it.download.videoId) }
             }
 
@@ -268,14 +269,22 @@ class DownloadsFragmentPage : DynamicLayoutManagerFragment(R.layout.fragment_dow
         }
 
         binding.shuffleAll.setOnClickListener {
-            BackgroundHelper.playOnBackgroundOffline(
-                requireContext(),
-                null,
-                downloadTab ?: DownloadTab.VIDEO,
-                shuffle = true
-            )
+            if (downloadTab == DownloadTab.AUDIO) {
+                BackgroundHelper.playOnBackgroundOffline(
+                    requireContext(),
+                    videoId = null,
+                    playlistId = null,
+                    downloadTab,
+                    shuffle = true
+                )
 
-            NavigationHelper.openAudioPlayerFragment(requireContext(), offlinePlayer = true)
+                NavigationHelper.openAudioPlayerFragment(requireContext(), offlinePlayer = true)
+            } else {
+                val intent = Intent(context, OfflinePlayerActivity::class.java)
+                    .putExtra(IntentData.playlistId, downloadPlaylistId)
+                    .putExtra(IntentData.shuffle, true)
+                requireContext().startActivity(intent)
+            }
         }
 
         playerViewModel.isMiniPlayerVisible.observe(viewLifecycleOwner) { isMiniPlayerVisible ->
@@ -305,7 +314,7 @@ class DownloadsFragmentPage : DynamicLayoutManagerFragment(R.layout.fragment_dow
         binding.downloadsEmpty.isVisible = isEmpty
         binding.downloadsContainer.isGone = isEmpty
         binding.deleteAll.isGone = isEmpty
-        binding.shuffleAll.isGone = isEmpty || downloadTab != DownloadTab.AUDIO
+        binding.shuffleAll.isGone = isEmpty
     }
 
     private fun showDeleteAllDialog(context: Context, adapter: DownloadsAdapter) {
@@ -438,7 +447,10 @@ class PlaylistDownloadsFragmentPage : Fragment(R.layout.fragment_download_conten
             childFragmentManager.commit {
                 replace<DownloadsFragmentPage>(
                     binding.fragment.id,
-                    args = bundleOf(IntentData.playlistId to playlist.downloadPlaylist.playlistId)
+                    args = bundleOf(
+                        IntentData.downloadTab to DownloadTab.PLAYLIST,
+                        IntentData.playlistId to playlist.downloadPlaylist.playlistId
+                    )
                 )
             }
             backPressedCallback.isEnabled = true
