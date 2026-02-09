@@ -563,4 +563,5 @@
     </plurals>
     <string name="sort_channel">Csatornanév</string>
     <string name="sort_size">Méret</string>
+    <string name="show_updates_summary">Az alkalmazás minden indításakor automatikusan ellenőrzi a frissítéseket.</string>
 </resources>
