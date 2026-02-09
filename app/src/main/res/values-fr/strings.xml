@@ -566,4 +566,5 @@
     </plurals>
     <string name="sort_channel">Nom de la chaîne</string>
     <string name="sort_size">Taille</string>
+    <string name="show_updates_summary">Vérifier automatiquement les mises à jour à chaque démarrage de l\'application.</string>
 </resources>
