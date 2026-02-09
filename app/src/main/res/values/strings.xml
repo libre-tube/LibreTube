@@ -155,6 +155,7 @@
     <string name="invalid_url">Please enter a URL that works</string>
     <string name="version">Version %1$s</string>
     <string name="show_updates">Check updates automatically</string>
+    <string name="show_updates_summary">Check for updates automatically every time the app is started.</string>
     <string name="related_streams">Related content</string>
     <string name="related_streams_summary">Show similar streams alongside what you watch</string>
     <string name="buffering_goal">Preloading</string>
