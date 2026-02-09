@@ -13,7 +13,7 @@ import com.github.libretube.api.obj.StreamItem
 import com.github.libretube.constants.IntentData
 import com.github.libretube.databinding.DialogAddToPlaylistBinding
 import com.github.libretube.extensions.parcelable
-import com.github.libretube.ui.models.PlaylistViewModel
+import com.github.libretube.ui.models.AddToPlaylistViewModel
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 /**
@@ -23,7 +23,7 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 class AddToPlaylistDialog : DialogFragment() {
 
     private var videoInfo: StreamItem? = null
-    private val viewModel: PlaylistViewModel by activityViewModels { PlaylistViewModel.Factory }
+    private val viewModel: AddToPlaylistViewModel by activityViewModels { AddToPlaylistViewModel.Factory }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,6 +39,10 @@ class AddToPlaylistDialog : DialogFragment() {
         ) { _, resultBundle ->
             val addedToPlaylist = resultBundle.getBoolean(IntentData.playlistTask)
             if (addedToPlaylist) {
+                val playlistId = resultBundle.getString(IntentData.playlistId)
+                // automatically select newly created playlist
+                viewModel.setLastSelectedPlaylistId(playlistId)
+
                 viewModel.fetchPlaylists()
             }
         }
