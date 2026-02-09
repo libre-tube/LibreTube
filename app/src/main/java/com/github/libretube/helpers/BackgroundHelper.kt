@@ -78,6 +78,7 @@ object BackgroundHelper {
     fun playOnBackgroundOffline(
         context: Context,
         videoId: String?,
+        playlistId: String?,
         downloadTab: DownloadTab,
         shuffle: Boolean = false
     ) {
@@ -86,6 +87,7 @@ object BackgroundHelper {
 
         val arguments = bundleOf(
             IntentData.videoId to videoId,
+            IntentData.playlistId to playlistId,
             IntentData.shuffle to shuffle,
             IntentData.downloadTab to downloadTab,
             IntentData.noInternet to noInternet,

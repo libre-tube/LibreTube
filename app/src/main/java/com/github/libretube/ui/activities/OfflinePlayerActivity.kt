@@ -142,7 +142,9 @@ class OfflinePlayerActivity : BaseActivity() {
 
         super.onCreate(savedInstanceState)
 
-        videoId = intent?.getStringExtra(IntentData.videoId)!!
+        val videoId = intent?.getStringExtra(IntentData.videoId)
+        val playlistId = intent?.getStringExtra(IntentData.playlistId)
+        val shuffle = intent?.getBooleanExtra(IntentData.shuffle, false)
 
         binding = ActivityOfflinePlayerBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -150,6 +152,8 @@ class OfflinePlayerActivity : BaseActivity() {
         val arguments = bundleOf(
             IntentData.downloadTab to DownloadTab.VIDEO,
             IntentData.videoId to videoId,
+            IntentData.playlistId to playlistId,
+            IntentData.shuffle to shuffle,
             IntentData.audioOnly to false
         )
         BackgroundHelper.startMediaService(this, OfflinePlayerService::class.java, arguments) {
