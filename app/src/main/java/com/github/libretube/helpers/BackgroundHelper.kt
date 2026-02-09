@@ -17,6 +17,7 @@ import com.github.libretube.services.OfflinePlayerService
 import com.github.libretube.services.OnlinePlayerService
 import com.github.libretube.ui.activities.MainActivity
 import com.github.libretube.ui.activities.NoInternetActivity
+import com.github.libretube.ui.fragments.DownloadSortingOrder
 import com.github.libretube.ui.fragments.DownloadTab
 import com.github.libretube.ui.fragments.PlayerFragment
 import com.github.libretube.util.PlayingQueue
@@ -80,7 +81,8 @@ object BackgroundHelper {
         videoId: String?,
         playlistId: String?,
         downloadTab: DownloadTab,
-        shuffle: Boolean = false
+        shuffle: Boolean = false,
+        sortOrder: DownloadSortingOrder? = null,
     ) {
         // whether the service is started from the MainActivity or NoInternetActivity
         val noInternet = ContextHelper.tryUnwrapActivity<NoInternetActivity>(context) != null
@@ -91,7 +93,8 @@ object BackgroundHelper {
             IntentData.shuffle to shuffle,
             IntentData.downloadTab to downloadTab,
             IntentData.noInternet to noInternet,
-            IntentData.audioOnly to true
+            IntentData.audioOnly to true,
+            IntentData.sortOptions to sortOrder,
         )
 
         stopBackgroundPlay(context)

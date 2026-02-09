@@ -31,6 +31,7 @@ import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.databinding.FragmentDownloadContentBinding
 import com.github.libretube.databinding.FragmentDownloadsBinding
 import com.github.libretube.db.DatabaseHolder.Database
+import com.github.libretube.db.obj.Download
 import com.github.libretube.db.obj.DownloadPlaylistWithDownload
 import com.github.libretube.db.obj.DownloadWithItems
 import com.github.libretube.db.obj.filterByTab
@@ -69,7 +70,7 @@ enum class DownloadTab {
     PLAYLIST
 }
 
-private enum class DownloadSortingOrder(@StringRes val stringId: Int) {
+enum class DownloadSortingOrder(@StringRes val stringId: Int) {
     OLDEST(R.string.least_recent),
     NEWEST(R.string.most_recent),
     ALPHABETIC(R.string.alphabetic),
@@ -186,31 +187,38 @@ class DownloadsFragmentPage : DynamicLayoutManagerFragment(R.layout.fragment_dow
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         _binding = FragmentDownloadContentBinding.bind(view)
         super.onViewCreated(view, savedInstanceState)
-        adapter = DownloadsAdapter(requireContext(), downloadTab, downloadPlaylistId) {
-            var isDownloading = false
-            val ids = it.downloadItems
-                .filter { item -> item.path.fileSize() < item.downloadSize }
-                .map { item -> item.id }
 
-            if (!serviceConnection.isBound) {
-                DownloadHelper.startDownloadService(requireContext())
-                bindDownloadService(ids.toIntArray())
-                return@DownloadsAdapter true
-            }
+        adapter =
+            DownloadsAdapter(
+                requireContext(), downloadTab, downloadPlaylistId,
+                currentSortOrder = {
+                    DownloadSortingOrder.entries[selectedSortType]
+                }
+            ) {
+                var isDownloading = false
+                val ids = it.downloadItems
+                    .filter { item -> item.path.fileSize() < item.downloadSize }
+                    .map { item -> item.id }
 
-            binder?.getService()?.let { service ->
-                isDownloading = ids.any { id -> service.isDownloading(id) }
+                if (!serviceConnection.isBound) {
+                    DownloadHelper.startDownloadService(requireContext())
+                    bindDownloadService(ids.toIntArray())
+                    return@DownloadsAdapter true
+                }
 
-                ids.forEach { id ->
-                    if (isDownloading) {
-                        service.pause(id)
-                    } else {
-                        service.resume(id)
+                binder?.getService()?.let { service ->
+                    isDownloading = ids.any { id -> service.isDownloading(id) }
+
+                    ids.forEach { id ->
+                        if (isDownloading) {
+                            service.pause(id)
+                        } else {
+                            service.resume(id)
+                        }
                     }
                 }
+                return@DownloadsAdapter isDownloading.not()
             }
-            return@DownloadsAdapter isDownloading.not()
-        }
         binding.downloadsRecView.adapter = adapter
 
         val filterOptions = DownloadSortingOrder.entries.map { getString(it.stringId) }
@@ -295,14 +303,8 @@ class DownloadsFragmentPage : DynamicLayoutManagerFragment(R.layout.fragment_dow
     }
 
     private fun submitDownloadList(items: List<DownloadWithItems>) {
-        val sortedItems = when (selectedSortType) {
-            DownloadSortingOrder.OLDEST.ordinal -> items
-            DownloadSortingOrder.NEWEST.ordinal -> items.reversed()
-            DownloadSortingOrder.ALPHABETIC.ordinal -> items.sortedBy { it.download.title }
-            DownloadSortingOrder.DURATION.ordinal -> items.sortedBy { it.download.duration }
-            DownloadSortingOrder.CHANNEL.ordinal -> items.sortedBy { it.download.uploader }
-            else -> items.sortedBy { it.downloadItems.sumOf { o -> o.downloadSize } }
-        }
+        val sortOrder = DownloadSortingOrder.entries[selectedSortType]
+        val sortedItems = sortDownloadWithItemsList(items, sortOrder)
 
         adapter.submitList(sortedItems)
     }
@@ -419,6 +421,33 @@ class DownloadsFragmentPage : DynamicLayoutManagerFragment(R.layout.fragment_dow
         _binding = null
     }
 
+    companion object {
+        fun sortDownloadWithItemsList(
+            items: List<DownloadWithItems>,
+            selectedSortType: DownloadSortingOrder
+        ): List<DownloadWithItems> {
+            return when (selectedSortType) {
+                DownloadSortingOrder.OLDEST -> items
+                DownloadSortingOrder.NEWEST -> items.reversed()
+                DownloadSortingOrder.ALPHABETIC -> items.sortedBy { it.download.title }
+                DownloadSortingOrder.DURATION -> items.sortedBy { it.download.duration }
+                DownloadSortingOrder.CHANNEL -> items.sortedBy { it.download.uploader }
+                DownloadSortingOrder.SIZE -> items.sortedBy { it.downloadItems.sumOf { o -> o.downloadSize } }
+            }
+        }
+
+        // ugly HACK: should probably be refactored in the future
+        fun sortDownloadList(items: List<Download>, selectedSortType: DownloadSortingOrder): List<Download> {
+            return when (selectedSortType) {
+                DownloadSortingOrder.OLDEST -> items
+                DownloadSortingOrder.NEWEST -> items.reversed()
+                DownloadSortingOrder.ALPHABETIC -> items.sortedBy { it.title }
+                DownloadSortingOrder.DURATION -> items.sortedBy { it.duration }
+                DownloadSortingOrder.CHANNEL -> items.sortedBy { it.uploader }
+                DownloadSortingOrder.SIZE -> items
+            }
+        }
+    }
 }
 
 class PlaylistDownloadsFragmentPage : Fragment(R.layout.fragment_download_content) {

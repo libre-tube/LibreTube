@@ -24,6 +24,7 @@ import com.github.libretube.ui.activities.OfflinePlayerActivity
 import com.github.libretube.ui.adapters.callbacks.DiffUtilItemCallback
 import com.github.libretube.ui.base.BaseActivity
 import com.github.libretube.ui.extensions.setWatchProgressLength
+import com.github.libretube.ui.fragments.DownloadSortingOrder
 import com.github.libretube.ui.fragments.DownloadTab
 import com.github.libretube.ui.sheets.DownloadOptionsBottomSheet
 import com.github.libretube.ui.sheets.DownloadOptionsBottomSheet.Companion.DELETE_DOWNLOAD_REQUEST_KEY
@@ -42,6 +43,7 @@ class DownloadsAdapter(
     private val context: Context,
     private val downloadTab: DownloadTab,
     private val playlistId: String?,
+    private val currentSortOrder: () -> DownloadSortingOrder,
     private val toggleDownload: (DownloadWithItems) -> Boolean
 ) : ListAdapter<DownloadWithItems, DownloadsViewHolder>(DiffUtilItemCallback()) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DownloadsViewHolder {
@@ -116,6 +118,7 @@ class DownloadsAdapter(
                     DownloadTab.VIDEO -> {
                         val intent = Intent(root.context, OfflinePlayerActivity::class.java)
                             .putExtra(IntentData.videoId, download.videoId)
+                            .putExtra(IntentData.sortOptions, currentSortOrder())
                         root.context.startActivity(intent)
                     }
                     DownloadTab.AUDIO -> {
@@ -123,7 +126,8 @@ class DownloadsAdapter(
                             root.context,
                             download.videoId,
                             playlistId,
-                            downloadTab
+                            downloadTab,
+                            sortOrder = currentSortOrder()
                         )
                         NavigationHelper.openAudioPlayerFragment(root.context, offlinePlayer = true)
                     }
@@ -131,6 +135,7 @@ class DownloadsAdapter(
                         val intent = Intent(root.context, OfflinePlayerActivity::class.java)
                             .putExtra(IntentData.videoId, download.videoId)
                             .putExtra(IntentData.playlistId, playlistId)
+                            .putExtra(IntentData.sortOptions, currentSortOrder())
                         root.context.startActivity(intent)
                     }
                 }

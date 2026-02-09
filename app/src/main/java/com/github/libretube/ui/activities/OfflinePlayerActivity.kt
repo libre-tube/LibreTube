@@ -36,6 +36,7 @@ import com.github.libretube.helpers.WindowHelper
 import com.github.libretube.services.AbstractPlayerService
 import com.github.libretube.services.OfflinePlayerService
 import com.github.libretube.ui.base.BaseActivity
+import com.github.libretube.ui.fragments.DownloadSortingOrder
 import com.github.libretube.ui.fragments.DownloadTab
 import com.github.libretube.ui.interfaces.TimeFrameReceiver
 import com.github.libretube.ui.listeners.SeekbarPreviewListener
@@ -145,15 +146,18 @@ class OfflinePlayerActivity : BaseActivity() {
         val videoId = intent?.getStringExtra(IntentData.videoId)
         val playlistId = intent?.getStringExtra(IntentData.playlistId)
         val shuffle = intent?.getBooleanExtra(IntentData.shuffle, false)
+        val sortOrder = intent?.serializableExtra<DownloadSortingOrder>(IntentData.sortOptions)
 
         binding = ActivityOfflinePlayerBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        val downloadTab = if (playlistId == null) DownloadTab.VIDEO else DownloadTab.PLAYLIST
         val arguments = bundleOf(
-            IntentData.downloadTab to DownloadTab.VIDEO,
+            IntentData.downloadTab to downloadTab,
             IntentData.videoId to videoId,
             IntentData.playlistId to playlistId,
             IntentData.shuffle to shuffle,
+            IntentData.sortOptions to sortOrder,
             IntentData.audioOnly to false
         )
         BackgroundHelper.startMediaService(this, OfflinePlayerService::class.java, arguments) {
