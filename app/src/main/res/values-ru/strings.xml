@@ -569,4 +569,5 @@
     </plurals>
     <string name="sort_channel">Название канала</string>
     <string name="sort_size">Размер</string>
+    <string name="show_updates_summary">Автоматически проверять наличие обновлений при каждом запуске приложения.</string>
 </resources>
