@@ -575,4 +575,5 @@
     </plurals>
     <string name="sort_channel">اسم القناة</string>
     <string name="sort_size">الحجم</string>
+    <string name="show_updates_summary">تحقق من التحديثات تلقائيًا كل مرة تبدء التطبيق.</string>
 </resources>
