@@ -560,4 +560,5 @@
     </plurals>
     <string name="sort_channel">频道名</string>
     <string name="sort_size">大小</string>
+    <string name="show_updates_summary">应用每次启动时自动检查更新。</string>
 </resources>
