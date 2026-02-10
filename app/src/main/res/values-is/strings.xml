@@ -563,4 +563,5 @@
     </plurals>
     <string name="sort_channel">Heiti rásar</string>
     <string name="sort_size">Stærð</string>
+    <string name="show_updates_summary">Leitar sjálfkrafa að uppfærslum í hvert skipti sem forritið er ræst.</string>
 </resources>
