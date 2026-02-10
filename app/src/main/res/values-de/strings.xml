@@ -563,5 +563,5 @@
     </plurals>
     <string name="sort_channel">Kanalname</string>
     <string name="sort_size">Größe</string>
-    <string name="show_updates_summary">Bei jedem Start der App automatisch auf Aktualisierungen prüfen.</string>
+    <string name="show_updates_summary">Bei jedem Start der App automatisch auf Updates prüfen.</string>
 </resources>
