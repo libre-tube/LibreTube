@@ -563,4 +563,5 @@
     </plurals>
     <string name="sort_channel">Kanali nimi</string>
     <string name="sort_size">Suurus</string>
+    <string name="show_updates_summary">Igal rakenduse käivitamisel kontrolli automaatselt uuenduste olemasolu.</string>
 </resources>
