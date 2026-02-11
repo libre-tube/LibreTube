@@ -568,4 +568,5 @@
     </plurals>
     <string name="sort_channel">Názov kanálu</string>
     <string name="sort_size">Veľkosť</string>
+    <string name="show_updates_summary">Automaticky kontrolovať aktualizácie pri každom spustení aplikácie.</string>
 </resources>
