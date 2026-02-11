@@ -558,4 +558,7 @@
     <plurals name="sleep_timer_chip_minutes">
         <item quantity="other">%d 分鐘</item>
     </plurals>
+    <string name="show_updates_summary">每次啟動應用程式時自動檢查更新。</string>
+    <string name="sort_channel">頻道名稱</string>
+    <string name="sort_size">大小</string>
 </resources>
