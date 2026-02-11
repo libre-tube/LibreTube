@@ -563,4 +563,5 @@
         <item quantity="one">%d دقیقه</item>
         <item quantity="other">%d دقیقه</item>
     </plurals>
+    <string name="show_updates_summary">بررسی خودکار به‌روز رسانی‌ها در هر بار آغاز کاره.</string>
 </resources>
