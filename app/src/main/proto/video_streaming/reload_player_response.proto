@@ -1,0 +1,11 @@
+syntax = "proto2";
+
+package video_streaming;
+
+message ReloadPlaybackParams {
+  optional string token = 1;
+}
+
+message ReloadPlaybackContext {
+  optional ReloadPlaybackParams reload_playback_params = 1;
+}

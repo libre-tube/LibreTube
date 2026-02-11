@@ -1,0 +1,15 @@
+syntax = "proto2";
+package video_streaming;
+
+import "video_streaming/playback_cookie.proto";
+
+message NextRequestPolicy {
+  optional int32 target_audio_readahead_ms = 1;
+  optional int32 target_video_readahead_ms = 2;
+  optional int32 max_time_since_last_request_ms = 3;
+  optional int32 backoff_time_ms = 4;
+  optional int32 min_audio_readahead_ms = 5;
+  optional int32 min_video_readahead_ms = 6;
+  optional .video_streaming.PlaybackCookie playback_cookie = 7;
+  optional string video_id = 8;
+}
