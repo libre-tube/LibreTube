@@ -2,7 +2,7 @@
 <resources>
     <string name="search_hint">Hledat</string>
     <string name="subscribe">Odebírat</string>
-    <string name="unsubscribe">ODHLÁSIT ODBĚR</string>
+    <string name="unsubscribe">Odhlásit odběr</string>
     <string name="yes">Ano</string>
     <string name="username">Uživatelské jméno</string>
     <string name="share">Sdílet</string>
@@ -568,4 +568,5 @@
     </plurals>
     <string name="sort_channel">Název kanálu</string>
     <string name="sort_size">Velikost</string>
+    <string name="show_updates_summary">Automaticky kontrolovat aktualizace po každém spuštění aplikace.</string>
 </resources>
