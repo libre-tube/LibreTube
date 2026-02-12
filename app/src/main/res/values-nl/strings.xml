@@ -563,4 +563,5 @@
     </plurals>
     <string name="sort_channel">Kanaal­naam</string>
     <string name="sort_size">Grootte</string>
+    <string name="show_updates_summary">Controleer automatisch op updates elke keer dat de app wordt gestart.</string>
 </resources>
