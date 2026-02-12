@@ -563,4 +563,5 @@
     </plurals>
     <string name="sort_channel">Kanal adı</string>
     <string name="sort_size">Həcm</string>
+    <string name="show_updates_summary">Tətbiq açıldığı hər vaxt yeniləmələri birbaşa yoxla.</string>
 </resources>
