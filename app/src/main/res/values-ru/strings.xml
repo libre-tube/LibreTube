@@ -451,7 +451,7 @@
     <string name="sponsorblock_user_id">ID пользователя в SponsorBlock</string>
     <string name="contribute_to_sponsorblock">Внести свой вклад в SponsorBlock</string>
     <string name="donate">Поддержать</string>
-    <string name="music_artists">Исполнители YT Music</string>
+    <string name="music_artists">Исполнители из YT Music</string>
     <string name="no_fullscreen_resolution">Разрешение неполноэкранного режима</string>
     <string name="playback_during_call_summary">Приложение также будет игнорировать другие источники звука. Например, проигрывание музыки</string>
     <string name="playback_during_call">Не прерывать воспроизведение при вызове</string>
@@ -556,7 +556,7 @@
     <string name="backup_creation_success">Резервное копирование успешно завершено</string>
     <string name="backup_creation_failed">Не удалось создать резервную копию</string>
     <plurals name="minutes_left">
-        <item quantity="one">%d минута осталось</item>
+        <item quantity="one">%d минута осталась</item>
         <item quantity="few">%d минуты осталось</item>
         <item quantity="many">%d минут осталось</item>
         <item quantity="other">%d минут осталось</item>
