@@ -73,7 +73,7 @@ object PlayerHelper {
     /**
      * Maximum playback speed supported by ExoPlayer
      */
-    const val MAXIMUM_PLAYBACK_SPEED = 4f
+    const val MAXIMUM_PLAYBACK_SPEED = 8f
 
     /**
      * The maximum amount of time to wait until the video starts playing: 10 minutes
