@@ -31,9 +31,7 @@ import com.github.libretube.ui.dialogs.ShareDialog.Companion.YOUTUBE_FRONTEND_UR
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.withContext
-import kotlinx.datetime.toKotlinInstant
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.encodeToString
 import org.schabi.newpipe.extractor.InfoItem
 import org.schabi.newpipe.extractor.Page
 import org.schabi.newpipe.extractor.channel.ChannelInfo
@@ -54,6 +52,7 @@ import org.schabi.newpipe.extractor.stream.StreamInfo
 import org.schabi.newpipe.extractor.stream.StreamInfoItem
 import org.schabi.newpipe.extractor.stream.ContentAvailability
 import org.schabi.newpipe.extractor.stream.VideoStream
+import kotlin.time.toKotlinInstant
 
 
 private fun VideoStream.toPipedStream() = PipedStream(
