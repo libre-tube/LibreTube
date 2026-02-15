@@ -1,5 +1,6 @@
 package com.github.libretube.ui.views
 
+import android.animation.ObjectAnimator
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.pm.ActivityInfo
@@ -13,6 +14,7 @@ import android.util.Log
 import android.view.KeyEvent
 import android.view.MotionEvent
 import android.view.Window
+import android.view.animation.LinearInterpolator
 import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
@@ -105,6 +107,10 @@ abstract class CustomExoPlayerView(
      */
 
     private val runnableHandler = Handler(Looper.getMainLooper())
+    private var accumulatedForwardSeek = 0L
+    private var accumulatedRewindSeek = 0L
+    private var wasPlayingBeforeSeek = false
+    private var seekIconAnimator: ObjectAnimator? = null
     var isPlayerLocked: Boolean = false
     var isLive: Boolean = false
         set(value) {
@@ -528,93 +534,111 @@ abstract class CustomExoPlayerView(
         playerGestureController.areControlsLocked = !isLocked
     }
 
+    private fun updateSeekText(textView: TextView, seconds: Long) {
+        val text = seconds.toString()
+        textView.text = text
+        textView.textSize = when (text.length) {
+            in 1..2 -> 14f
+            3 -> 11f
+            else -> 9f
+        }
+    }
+
+    private fun pauseForSeeking() {
+        if (accumulatedRewindSeek == 0L && accumulatedForwardSeek == 0L) {
+            wasPlayingBeforeSeek = player?.playWhenReady == true
+            player?.pause()
+        }
+    }
+
     private fun rewind() {
-        player?.seekBy(-PlayerHelper.seekIncrement)
+        pauseForSeeking()
+        accumulatedRewindSeek += PlayerHelper.seekIncrement
 
-        // show the rewind button
         doubleTapOverlayBinding.apply {
-            animateSeeking(
-                rewindLayout.rewindBTN,
-                rewindLayout.rewindIV,
-                rewindLayout.rewindTV,
-                true
-            )
+            updateSeekText(rewindLayout.rewindTV, accumulatedRewindSeek / 1000)
 
-            // start callback to hide the button
+            animateSeekIcon(rewindLayout.rewindBTN, rewindLayout.rewindIV, true)
+
             runnableHandler.removeCallbacksAndMessages(HIDE_REWIND_BUTTON_TOKEN)
             runnableHandler.postDelayed(700, HIDE_REWIND_BUTTON_TOKEN) {
-                rewindLayout.rewindBTN.isGone = true
+                stopSeekIconAnimation(rewindLayout.rewindIV)
+                animateSeekText(rewindLayout.rewindTV, true) {
+                    rewindLayout.rewindBTN.isGone = true
+                    player?.seekBy(-accumulatedRewindSeek)
+                    accumulatedRewindSeek = 0L
+                    if (wasPlayingBeforeSeek) player?.play()
+                }
             }
         }
     }
 
     private fun forward() {
-        player?.seekBy(PlayerHelper.seekIncrement)
+        pauseForSeeking()
+        accumulatedForwardSeek += PlayerHelper.seekIncrement
 
-        // show the forward button
         doubleTapOverlayBinding.apply {
-            animateSeeking(
-                forwardLayout.forwardBTN,
-                forwardLayout.forwardIV,
-                forwardLayout.forwardTV,
-                false
-            )
+            updateSeekText(forwardLayout.forwardTV, accumulatedForwardSeek / 1000)
 
-            // start callback to hide the button
+            animateSeekIcon(forwardLayout.forwardBTN, forwardLayout.forwardIV, false)
+
             runnableHandler.removeCallbacksAndMessages(HIDE_FORWARD_BUTTON_TOKEN)
             runnableHandler.postDelayed(700, HIDE_FORWARD_BUTTON_TOKEN) {
-                forwardLayout.forwardBTN.isGone = true
+                stopSeekIconAnimation(forwardLayout.forwardIV)
+                animateSeekText(forwardLayout.forwardTV, false) {
+                    forwardLayout.forwardBTN.isGone = true
+                    player?.seekBy(accumulatedForwardSeek)
+                    accumulatedForwardSeek = 0L
+                    if (wasPlayingBeforeSeek) player?.play()
+                }
             }
         }
     }
 
-    private fun animateSeeking(
+    private fun animateSeekIcon(
         container: FrameLayout,
         imageView: ImageView,
-        textView: TextView,
         isRewind: Boolean
     ) {
         container.isVisible = true
-        // the direction of the action
+        if (seekIconAnimator?.target == imageView && seekIconAnimator?.isRunning == true) return
+
+        seekIconAnimator?.cancel()
+        val direction = if (isRewind) -1f else 1f
+        seekIconAnimator = ObjectAnimator.ofFloat(imageView, "rotation", 0f, direction * 360f).apply {
+            duration = 600
+            repeatCount = ObjectAnimator.INFINITE
+            interpolator = LinearInterpolator()
+            start()
+        }
+    }
+
+    private fun stopSeekIconAnimation(imageView: ImageView) {
+        seekIconAnimator?.cancel()
+        seekIconAnimator = null
+        imageView.rotation = 0f
+    }
+
+    private fun animateSeekText(
+        textView: TextView,
+        isRewind: Boolean,
+        onComplete: () -> Unit
+    ) {
         val direction = if (isRewind) -1 else 1
 
-        // clear previous animation
-        imageView.animate()
-            .rotation(0F)
-            .setDuration(0)
-            .start()
-
-        textView.animate()
-            .translationX(0f)
-            .setDuration(0)
-            .start()
-
-        // start the rotate animation of the drawable
-        imageView.animate()
-            .rotation(direction * 30F)
-            .setDuration(ANIMATION_DURATION)
-            .withEndAction {
-                // reset the animation when finished
-                imageView.animate()
-                    .rotation(0F)
-                    .setDuration(ANIMATION_DURATION)
-                    .start()
-            }
-            .start()
-
-        // animate the text view to move outside the image view
         textView.animate()
             .translationX(direction * 100f)
             .setDuration((ANIMATION_DURATION * 1.5).toLong())
             .withEndAction {
-                // move the text back into the button
                 runnableHandler.postDelayed(100) {
                     textView.animate()
                         .setDuration(ANIMATION_DURATION / 2)
                         .translationX(0f)
+                        .withEndAction { onComplete() }
                         .start()
                 }
             }
+            .start()
     }
 
     private fun initializeGestureProgress() {
