@@ -33,6 +33,9 @@ class BackupRestoreSettings : BasePreferenceFragment() {
     private var backupFile = BackupFile()
     private var importFormat: ImportFormat = ImportFormat.NEWPIPE
 
+
+    override val titleResourceId: Int = R.string.backup_restore
+
     // backup and restore database
     private val getBackupFile =
         registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
@@ -95,15 +98,11 @@ class BackupRestoreSettings : BasePreferenceFragment() {
 
     private val getWatchHistoryFile =
         registerForActivityResult(ActivityResultContracts.OpenMultipleDocuments()) { files ->
-            for (file in files) {
-                CoroutineScope(Dispatchers.IO).launch {
-                    ImportHelper.importWatchHistory(
-                        requireContext().applicationContext,
-                        file,
-                        importFormat
-                    )
-                }
-            }
+            ImportHelper.importWatchHistory(
+                requireContext().applicationContext,
+                files,
+                importFormat
+            )
         }
 
     private val createPlaylistsFile =

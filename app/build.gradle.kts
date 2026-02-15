@@ -159,6 +159,8 @@ dependencies {
     implementation(libs.kotlinx.serialization)
     implementation(libs.kotlinx.datetime)
     implementation(libs.converter.kotlinx.serialization)
+    implementation(libs.androidx.work.runtime)
+
 
     /* NewPipe Extractor */
     implementation(libs.newpipeextractor)
