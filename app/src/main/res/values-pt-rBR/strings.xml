@@ -449,7 +449,7 @@
     <string name="sb_invalid_segment">Início ou fim do segmento inválido</string>
     <string name="contribute_to_sponsorblock">Contribuir para SponsorBlock</string>
     <string name="sponsorblock_user_id">ID do usuário SponsorBlock</string>
-    <string name="donate">Fazer doação</string>
+    <string name="donate">Doações</string>
     <string name="autoplay_playlists_summary">Reproduzir automaticamente o próximo vídeo nas playlists, independentemente da configuração de reprodução automática selecionada</string>
     <string name="no_fullscreen_resolution">Resolução sem tela cheia</string>
     <string name="playback_during_call_summary">Observe que isso também afeta o aplicativo para não lidar mais com nenhum tipo de foco de áudio</string>
