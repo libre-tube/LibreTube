@@ -566,4 +566,5 @@
     <string name="did_you_mean">No querrás decir:</string>
     <string name="sort_channel">Nombre del canal</string>
     <string name="sort_size">Tamaño</string>
+    <string name="show_updates_summary">Compruebe las actualizaciones automáticamente cada vez que se inicie la aplicación.</string>
 </resources>
