@@ -33,7 +33,6 @@ import kotlinx.coroutines.launch
 import okhttp3.HttpUrl.Companion.toHttpUrl
 
 class InstanceSettings : BasePreferenceFragment() {
-    override val titleResourceId: Int = R.string.instance
     private val token get() = PreferenceHelper.getToken()
     private var instances = mutableListOf<PipedInstance>()
     private val customInstancesModel: InstancesModel by activityViewModels()

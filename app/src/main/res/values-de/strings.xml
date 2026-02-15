@@ -553,4 +553,15 @@
     <string name="checking_frequency_1_day">1 Tag</string>
     <string name="backup_creation_success">Backup erfolgreich erstellt</string>
     <string name="backup_creation_failed">Backup fehlgeschlagen</string>
+    <plurals name="minutes_left">
+        <item quantity="one">noch %d Minute</item>
+        <item quantity="other">noch %d Minuten</item>
+    </plurals>
+    <plurals name="sleep_timer_chip_minutes">
+        <item quantity="one"/>
+        <item quantity="other">%d min</item>
+    </plurals>
+    <string name="sort_channel">Kanalname</string>
+    <string name="sort_size">Größe</string>
+    <string name="show_updates_summary">Bei jedem Start der App automatisch auf Updates prüfen.</string>
 </resources>

@@ -128,6 +128,7 @@
 -dontwarn javax.script.**
 -keep class jdk.dynalink.** { *; }
 -dontwarn jdk.dynalink.**
+-dontwarn com.google.re2j.**
 
 # This is generated automatically by the Android Gradle plugin.
 -dontwarn java.beans.BeanDescriptor

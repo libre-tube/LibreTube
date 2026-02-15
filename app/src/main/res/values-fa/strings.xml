@@ -551,4 +551,17 @@
     <string name="checking_frequency_2_hours">۲ ساعت</string>
     <string name="checking_frequency_6_hours">۶ ساعت</string>
     <string name="checking_frequency_12_hours">۱۲ ساعت</string>
+    <plurals name="minutes_left">
+        <item quantity="one">%d دقیقه مانده</item>
+        <item quantity="other">%d دقیقه مانده</item>
+    </plurals>
+    <string name="backup_creation_success">پشتیبان با موفّقیت کامل شد</string>
+    <string name="backup_creation_failed">شکست در ایجاد پشتیبان</string>
+    <string name="sort_channel">نام کانال</string>
+    <string name="sort_size">اندازه</string>
+    <plurals name="sleep_timer_chip_minutes">
+        <item quantity="one">%d دقیقه</item>
+        <item quantity="other">%d دقیقه</item>
+    </plurals>
+    <string name="show_updates_summary">بررسی خودکار به‌روز رسانی‌ها در هر بار آغاز کاره.</string>
 </resources>

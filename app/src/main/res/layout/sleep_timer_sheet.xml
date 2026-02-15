@@ -55,6 +55,24 @@
                     android:visibility="gone"
                     tools:text="20:10" />
 
+                <HorizontalScrollView
+                    android:id="@+id/quick_select_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:paddingHorizontal="10dp"
+                    android:clipToPadding="false"
+                    android:scrollbars="none">
+
+                    <com.google.android.material.chip.ChipGroup
+                        android:id="@+id/quick_select_chips"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:singleLine="true"
+                        app:singleSelection="false" />
+
+                </HorizontalScrollView>
+
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/time_input_layout"
                     android:layout_width="match_parent"
@@ -84,6 +102,7 @@
                         style="@style/Widget.Material3.Button.TonalButton"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center"
                         android:text="@string/start_sleep_timer" />
 
                     <com.google.android.material.button.MaterialButton
@@ -91,6 +110,7 @@
                         style="@style/Widget.Material3.Button.TonalButton"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center"
                         android:text="@string/disable_sleep_timer"
                         android:visibility="gone" />
 

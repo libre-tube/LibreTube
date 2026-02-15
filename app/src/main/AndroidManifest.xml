@@ -33,6 +33,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/BaseTheme"
+        android:memtagMode="async"
         tools:targetApi="tiramisu">
 
         <activity

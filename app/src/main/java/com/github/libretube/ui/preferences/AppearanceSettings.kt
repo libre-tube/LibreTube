@@ -15,7 +15,6 @@ import com.github.libretube.ui.sheets.IconsBottomSheet
 import com.google.android.material.color.DynamicColors
 
 class AppearanceSettings : BasePreferenceFragment() {
-    override val titleResourceId: Int = R.string.appearance
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         setPreferencesFromResource(R.xml.appearance_settings, rootKey)
 

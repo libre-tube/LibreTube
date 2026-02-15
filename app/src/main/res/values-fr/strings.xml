@@ -554,4 +554,17 @@
     <string name="checking_frequency_1_day">1 jour</string>
     <string name="backup_creation_success">Sauvegarde terminée avec succès</string>
     <string name="backup_creation_failed">Échec de la création de la sauvegarde</string>
+    <plurals name="minutes_left">
+        <item quantity="one">%d min restante</item>
+        <item quantity="many">%d min restantes</item>
+        <item quantity="other">%d min restantes</item>
+    </plurals>
+    <plurals name="sleep_timer_chip_minutes">
+        <item quantity="one">%d min</item>
+        <item quantity="many">%d min</item>
+        <item quantity="other">%d min</item>
+    </plurals>
+    <string name="sort_channel">Nom de la chaîne</string>
+    <string name="sort_size">Taille</string>
+    <string name="show_updates_summary">Vérifier automatiquement les mises à jour à chaque démarrage de l\'application.</string>
 </resources>

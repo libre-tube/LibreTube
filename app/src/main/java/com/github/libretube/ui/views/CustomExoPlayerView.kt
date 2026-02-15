@@ -29,6 +29,7 @@ import androidx.core.view.updateLayoutParams
 import androidx.fragment.app.findFragment
 import androidx.lifecycle.findViewTreeLifecycleOwner
 import androidx.media3.common.C
+import androidx.media3.common.PlaybackParameters
 import androidx.media3.common.Player
 import androidx.media3.common.text.Cue
 import androidx.media3.session.MediaController
@@ -70,12 +71,9 @@ import com.github.libretube.ui.sheets.ChaptersBottomSheet
 import com.github.libretube.ui.sheets.PlaybackOptionsSheet
 import com.github.libretube.ui.sheets.PlayingQueueSheet
 import com.github.libretube.ui.sheets.SleepTimerSheet
+import com.github.libretube.ui.tools.SleepTimer
 import com.github.libretube.util.PlayingQueue
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
+import kotlin.math.ceil
 
 @SuppressLint("ClickableViewAccessibility")
 @androidx.annotation.OptIn(androidx.media3.common.util.UnstableApi::class)
@@ -137,6 +135,12 @@ abstract class CustomExoPlayerView(
     private val supportFragmentManager
         get() = activity.supportFragmentManager
 
+    /**
+     * Playback speed that has been set before the fast forward mode
+     * has been triggered by a long press.
+     */
+    private var rememberedPlaybackSpeed: Float? = null
+
     private fun toggleController(show: Boolean = !isControllerFullyVisible) {
         if (show) showController() else hideController()
     }
@@ -147,6 +151,7 @@ abstract class CustomExoPlayerView(
         audioHelper = AudioHelper(context)
         fullscreenGestureAnimationController = FullscreenGestureAnimationController(
             playerView = this,
+            videoFrameView = backgroundBinding.exoContentFrame,
             onSwipeUpCompleted = {
                 if (!isFullscreen()) togglePlayerFullscreen(true)
             },
@@ -473,7 +478,20 @@ abstract class CustomExoPlayerView(
         },
         BottomSheetItem(
             context.getString(R.string.sleep_timer),
-            R.drawable.ic_sleep
+            R.drawable.ic_sleep,
+            {
+                if (SleepTimer.timeLeftMillis > 0) {
+                    val minutesLeft =
+                        ceil(SleepTimer.timeLeftMillis.toDouble() / DateUtils.MINUTE_IN_MILLIS).toInt()
+                    context.resources.getQuantityString(
+                        R.plurals.minutes_left,
+                        minutesLeft,
+                        minutesLeft
+                    )
+                } else {
+                    context.getString(R.string.disabled)
+                }
+            }
         ) {
             onSleepTimerClicked()
         }
@@ -515,7 +533,12 @@ abstract class CustomExoPlayerView(
 
         // show the rewind button
         doubleTapOverlayBinding.apply {
-            animateSeeking(rewindLayout.rewindBTN, rewindLayout.rewindIV, rewindLayout.rewindTV, true)
+            animateSeeking(
+                rewindLayout.rewindBTN,
+                rewindLayout.rewindIV,
+                rewindLayout.rewindTV,
+                true
+            )
 
             // start callback to hide the button
             runnableHandler.removeCallbacksAndMessages(HIDE_REWIND_BUTTON_TOKEN)
@@ -530,7 +553,12 @@ abstract class CustomExoPlayerView(
 
         // show the forward button
         doubleTapOverlayBinding.apply {
-            animateSeeking(forwardLayout.forwardBTN, forwardLayout.forwardIV, forwardLayout.forwardTV, false)
+            animateSeeking(
+                forwardLayout.forwardBTN,
+                forwardLayout.forwardIV,
+                forwardLayout.forwardTV,
+                false
+            )
 
             // start callback to hide the button
             runnableHandler.removeCallbacksAndMessages(HIDE_FORWARD_BUTTON_TOKEN)
@@ -730,17 +758,21 @@ abstract class CustomExoPlayerView(
             }
         }
 
-        binding.fullscreen.layoutParams = (binding.fullscreen.layoutParams as MarginLayoutParams).apply {
-            if (isFullscreen()) {
-                // Add extra bottom margin in fullscreen mode
-                bottomMargin = resources.getDimensionPixelSize(R.dimen.fullscreen_button_margin_bottom)
-                marginEnd = resources.getDimensionPixelSize(R.dimen.fullscreen_button_margin_end)
-            } else {
-                // Reset to default margin
-                bottomMargin = resources.getDimensionPixelSize(R.dimen.normal_button_margin_bottom)
-                marginEnd = resources.getDimensionPixelSize(R.dimen.normal_button_margin_end)
+        binding.fullscreen.layoutParams =
+            (binding.fullscreen.layoutParams as MarginLayoutParams).apply {
+                if (isFullscreen()) {
+                    // Add extra bottom margin in fullscreen mode
+                    bottomMargin =
+                        resources.getDimensionPixelSize(R.dimen.fullscreen_button_margin_bottom)
+                    marginEnd =
+                        resources.getDimensionPixelSize(R.dimen.fullscreen_button_margin_end)
+                } else {
+                    // Reset to default margin
+                    bottomMargin =
+                        resources.getDimensionPixelSize(R.dimen.normal_button_margin_bottom)
+                    marginEnd = resources.getDimensionPixelSize(R.dimen.normal_button_margin_end)
+                }
             }
-        }
     }
 
     /**
@@ -850,25 +882,38 @@ abstract class CustomExoPlayerView(
         subtitleView?.setBottomPaddingFraction(SubtitleView.DEFAULT_BOTTOM_PADDING_FRACTION)
     }
 
-    private var seekJob: Job? = null
     override fun onLongPress() {
-        if (!PlayerHelper.swipeGestureEnabled) return
+        if (!PlayerHelper.doubleTapToSeek) return
 
         backgroundBinding.fastForwardView.isVisible = true
-        seekJob = CoroutineScope(Dispatchers.Main).launch {
-            while (true) {
-                player?.seekBy(PlayerHelper.FAST_FORWARD_INCREMENT)
-                delay(PlayerHelper.FORWARD_INCREMENT_DELAY)
-            }
+        val player = player ?: return
+
+        // using the fast forward action wouldn't change anything in this case
+        if (player.playbackParameters.speed >= PlayerHelper.MAXIMUM_PLAYBACK_SPEED) {
+            return
         }
+
+        // backup current playback speed in order to restore it
+        // after the fast forward action is done
+        rememberedPlaybackSpeed = player.playbackParameters.speed
+
+        val newSpeed = minOf(
+            player.playbackParameters.speed * PlayerHelper.FAST_FORWARD_SPEED_FACTOR,
+            PlayerHelper.MAXIMUM_PLAYBACK_SPEED
+        )
+        player.playbackParameters = PlaybackParameters(newSpeed, player.playbackParameters.pitch)
     }
 
     override fun onLongPressEnd() {
-        if (!PlayerHelper.swipeGestureEnabled) return
+        if (!PlayerHelper.doubleTapToSeek) return
 
         backgroundBinding.fastForwardView.isGone = true
-        seekJob?.cancel()
-        seekJob = null
+
+        val player = player ?: return
+        rememberedPlaybackSpeed?.let {
+            player.playbackParameters = PlaybackParameters(it, player.playbackParameters.pitch)
+        }
+        rememberedPlaybackSpeed = null
     }
 
     override fun onFullscreenChange(isFullscreen: Boolean) {
@@ -948,7 +993,7 @@ abstract class CustomExoPlayerView(
         return true
     }
 
-    fun togglePlayerFullscreen(isFullscreen: Boolean = !isFullscreen()){
+    fun togglePlayerFullscreen(isFullscreen: Boolean = !isFullscreen()) {
         try {
             findFragment<PlayerFragment>().toggleFullscreen(isFullscreen)
         } catch (error: IllegalStateException) {

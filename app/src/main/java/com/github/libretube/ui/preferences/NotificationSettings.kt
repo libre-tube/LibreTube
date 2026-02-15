@@ -10,7 +10,6 @@ import com.github.libretube.helpers.NotificationHelper
 import com.github.libretube.ui.base.BasePreferenceFragment
 
 class NotificationSettings : BasePreferenceFragment() {
-    override val titleResourceId: Int = R.string.notifications
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         setPreferencesFromResource(R.xml.notification_settings, rootKey)

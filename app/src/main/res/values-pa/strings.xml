@@ -195,7 +195,7 @@
     <string name="captions">ਕੈਪਸ਼ਨਾਂ</string>
     <string name="none">ਕੋਈ ਨਹੀਂ</string>
     <string name="general">ਜਨਰਲ</string>
-    <string name="general_summary">ਭਾਸ਼ਾ ਅਤੇ ਖੇਤਰ</string>
+    <string name="general_summary">ਡਾਊਨਲੋਡਸ ਅਤੇ ਡਾਟਾ-ਸੇਵਰ</string>
     <string name="caption_settings">ਕੈਪਸ਼ਨਾਂ</string>
     <string name="playerAudioQuality">ਆਡੀਓ ਕੁਆਲਿਟੀ</string>
     <string name="worst_quality">ਘਟੀਆ</string>
@@ -530,4 +530,6 @@
     <string name="updating_feed">ਫੀਡ ਅੱਪਡੇਟ ਕੀਤੀ ਜਾ ਰਹੀ ਹੈ…</string>
     <string name="import_format_list_of_urls">URL ਜਾਂ ਵੀਡੀਓ IDs ਦੀ ਸੂਚੀ</string>
     <string name="show_upcoming_videos">ਆਗਾਮੀ ਵੀਡੀਓ ਵਿਖਾਓ</string>
+    <string name="createNewPlaylist">ਨਵੀਂ ਪਲੇਲਿਸਟ ਬਣਾਓ</string>
+    <string name="category_hook">ਹੁੱਕ/ਸ਼ੁਭਕਾਮਨਾਵਾਂ</string>
 </resources>

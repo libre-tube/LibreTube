@@ -554,4 +554,16 @@
     <string name="delete_playlist_include_vidoes">Eliminar todos os vídeos da lista de reprodução?</string>
     <string name="did_you_mean">Será que queria dizer:</string>
     <string name="showing_results_for">A mostrar resultados para:</string>
+    <plurals name="minutes_left">
+        <item quantity="one">%d minuto</item>
+        <item quantity="many">%d minutos</item>
+        <item quantity="other">%d minutos</item>
+    </plurals>
+    <string name="sort_channel">Nome do canal</string>
+    <string name="sort_size">Tamanho</string>
+    <plurals name="sleep_timer_chip_minutes">
+        <item quantity="one">%d min</item>
+        <item quantity="many">%d min</item>
+        <item quantity="other">%d min</item>
+    </plurals>
 </resources>

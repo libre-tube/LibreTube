@@ -553,4 +553,15 @@
     <string name="checking_frequency_1_day">1 päev</string>
     <string name="backup_creation_success">Varundamine õnnestus</string>
     <string name="backup_creation_failed">Varundamine ei õnnestunud</string>
+    <plurals name="minutes_left">
+        <item quantity="one">jäänud %d minut</item>
+        <item quantity="other">jäänud %d minutit</item>
+    </plurals>
+    <plurals name="sleep_timer_chip_minutes">
+        <item quantity="one">%d min</item>
+        <item quantity="other">%d min</item>
+    </plurals>
+    <string name="sort_channel">Kanali nimi</string>
+    <string name="sort_size">Suurus</string>
+    <string name="show_updates_summary">Igal rakenduse käivitamisel kontrolli automaatselt uuenduste olemasolu.</string>
 </resources>

@@ -28,7 +28,9 @@ import com.github.libretube.helpers.PlayerHelper
 import com.github.libretube.ui.activities.MainActivity
 import com.github.libretube.ui.activities.NoInternetActivity
 import com.github.libretube.ui.activities.OfflinePlayerActivity
+import com.github.libretube.ui.fragments.DownloadSortingOrder
 import com.github.libretube.ui.fragments.DownloadTab
+import com.github.libretube.ui.fragments.DownloadsFragmentPage.Companion.sortDownloadList
 import com.github.libretube.util.PlayingQueue
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -48,6 +50,8 @@ open class OfflinePlayerService : AbstractPlayerService() {
     private var downloadWithItems: DownloadWithItems? = null
     private lateinit var downloadTab: DownloadTab
     private var shuffle: Boolean = false
+    private var playlistId: String? = null
+    private var downloadSortOrder: DownloadSortingOrder? = null
 
     private val scope = CoroutineScope(Dispatchers.Main)
 
@@ -77,13 +81,21 @@ open class OfflinePlayerService : AbstractPlayerService() {
         shuffle = args.getBoolean(IntentData.shuffle, false)
         noInternetService = args.getBoolean(IntentData.noInternet, false)
         isAudioOnlyPlayer = args.getBoolean(IntentData.audioOnly, false)
+        playlistId = args.getString(IntentData.playlistId)
+        downloadSortOrder = args.serializable(IntentData.sortOptions)
 
         PlayingQueue.clear()
 
         this.videoId = if (shuffle) {
             runBlocking(Dispatchers.IO) {
-                Database.downloadDao().getAll().filterByTab(downloadTab).randomOrNull()
-            }?.download?.videoId
+                if (downloadTab == DownloadTab.PLAYLIST) {
+                    Database.downloadDao()
+                        .getDownloadPlaylistById(playlistId!!).downloadVideos.randomOrNull()
+                } else {
+                    Database.downloadDao().getAll().filterByTab(downloadTab)
+                        .randomOrNull()?.download
+                }
+            }?.videoId
         } else {
             args.getString(IntentData.videoId)
         } ?: return
@@ -191,16 +203,28 @@ open class OfflinePlayerService : AbstractPlayerService() {
     }
 
     private suspend fun fillQueue() {
-        val downloads = withContext(Dispatchers.IO) {
-            Database.downloadDao().getAll()
+        if (downloadTab == DownloadTab.PLAYLIST) {
+            var videos = withContext(Dispatchers.IO) {
+                Database.downloadDao().getDownloadPlaylistById(playlistId!!)
+            }.downloadVideos
+
+            if (shuffle) videos = listOf(videos.first { it.videoId == videoId }) +
+                    videos.filter { it.videoId != videoId }.shuffled()
+            else if (downloadSortOrder != null) videos =
+                sortDownloadList(videos, downloadSortOrder!!)
+            PlayingQueue.setStreams(videos.map { it.toStreamItem() })
+        } else {
+            var downloads = withContext(Dispatchers.IO) {
+                Database.downloadDao().getAll()
+            }
+                .filterByTab(downloadTab)
+                .map { it.download }
+
+            if (shuffle) downloads = downloads.shuffled()
+            else if (downloadSortOrder != null) downloads = sortDownloadList(downloads, downloadSortOrder!!)
+
+            PlayingQueue.add(*downloads.map { it.toStreamItem() }.toTypedArray())
         }
-            .filterByTab(downloadTab)
-            .filter { it.download.videoId != videoId }
-            .toMutableList()
-
-        if (shuffle) downloads.shuffle()
-
-        PlayingQueue.add(*downloads.map { it.download.toStreamItem() }.toTypedArray())
     }
 
     private fun playNextVideo(videoId: String? = null) {

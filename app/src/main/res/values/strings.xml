@@ -155,6 +155,7 @@
     <string name="invalid_url">Please enter a URL that works</string>
     <string name="version">Version %1$s</string>
     <string name="show_updates">Check updates automatically</string>
+    <string name="show_updates_summary">Check for updates automatically every time the app is started.</string>
     <string name="related_streams">Related content</string>
     <string name="related_streams_summary">Show similar streams alongside what you watch</string>
     <string name="buffering_goal">Preloading</string>
@@ -249,6 +250,8 @@
     <string name="most_recent">Newest</string>
     <string name="least_recent">Oldest</string>
     <string name="most_views">Most views</string>
+    <string name="sort_channel">Channel name</string>
+    <string name="sort_size">Size</string>
     <string name="least_views">Least views</string>
     <string name="required_network">Required connection</string>
     <string name="network_all">All</string>
@@ -499,8 +502,19 @@
     <string name="no_segments_found">There are no segments for this video yet.</string>
     <string name="start_sleep_timer">Start sleep timer</string>
     <string name="disable_sleep_timer">Disable sleep timer</string>
+    <plurals name="minutes_left">
+        <item quantity="one">%d min left</item>
+        <item quantity="two">%d min left</item>
+        <item quantity="few">%d min left</item>
+        <item quantity="many">%d min left</item>
+        <item quantity="other">%d min left</item>
+    </plurals>
     <string name="time_in_minutes">Time in minutes</string>
     <string name="invalid_input">Invalid input</string>
+    <plurals name="sleep_timer_chip_minutes">
+        <item quantity="many">%d min</item>
+        <item quantity="other">%d min</item>
+    </plurals>
     <string name="add_to_group">Add to group</string>
     <string name="uptime">%.2f%% uptime</string>
     <string name="change">Change</string>

@@ -1,27 +1,31 @@
 package com.github.libretube.ui.preferences
 
-import android.os.Build
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.provider.Settings
 import androidx.core.app.ActivityCompat
 import androidx.preference.ListPreference
 import androidx.preference.Preference
+import com.github.libretube.BuildConfig
 import com.github.libretube.R
 import com.github.libretube.constants.PreferenceKeys
+import com.github.libretube.extensions.toastFromMainThread
 import com.github.libretube.helpers.ImageHelper
 import com.github.libretube.helpers.LocaleHelper
 import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.ui.base.BasePreferenceFragment
 import com.github.libretube.ui.dialogs.RequireRestartDialog
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import java.util.Locale
 
 class GeneralSettings : BasePreferenceFragment() {
-    override val titleResourceId: Int = R.string.general
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         setPreferencesFromResource(R.xml.general_settings, rootKey)
 
         val language = findPreference<ListPreference>("language")
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU) {
+        if (!LocaleHelper.isPerAppLocaleSettingSupported()) {
             language?.setOnPreferenceChangeListener { _, _ ->
                 RequireRestartDialog().show(
                     childFragmentManager,
@@ -42,8 +46,25 @@ class GeneralSettings : BasePreferenceFragment() {
             language?.entryValues = arrayOf("sys") + languages.map { it.first }
         } else {
             // on newer Android versions, the language is set through Android settings
-            // language is the only item in this category, so the whole category should be hidden
-            language?.parent?.isVisible = false
+
+            // set displayed current settings value (i.e. current app language)
+            val currentLocale = Locale.getDefault()
+            language?.entries = arrayOf(currentLocale.displayLanguage)
+            language?.entryValues = arrayOf(currentLocale.isO3Country)
+            language?.value = currentLocale.isO3Country
+
+            // open Android settings for per-app language preference for the app
+            language?.setOnPreferenceClickListener { _ ->
+                try {
+                    startActivity(
+                        Intent(Settings.ACTION_APP_LOCALE_SETTINGS)
+                            .setData(Uri.fromParts("package", BuildConfig.APPLICATION_ID, null))
+                    )
+                } catch (e: Exception) {
+                    context?.toastFromMainThread("Failed to open per-app language settings: ${e.message}")
+                }
+                true
+            }
         }
 
         val autoRotation = findPreference<ListPreference>(PreferenceKeys.ORIENTATION)
@@ -63,6 +84,12 @@ class GeneralSettings : BasePreferenceFragment() {
             showResetDialog()
             true
         }
+    }
+
+    override fun onDisplayPreferenceDialog(preference: Preference) {
+        if (preference.key == "language" && LocaleHelper.isPerAppLocaleSettingSupported()) return
+
+        super.onDisplayPreferenceDialog(preference)
     }
 
     private fun showResetDialog() {

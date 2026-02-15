@@ -552,4 +552,13 @@
     <string name="checking_frequency_1_day">1 天</string>
     <string name="backup_creation_success">備份成功</string>
     <string name="backup_creation_failed">建立備份失敗</string>
+    <plurals name="minutes_left">
+        <item quantity="other">剩 %d 分鐘</item>
+    </plurals>
+    <plurals name="sleep_timer_chip_minutes">
+        <item quantity="other">%d 分鐘</item>
+    </plurals>
+    <string name="show_updates_summary">每次啟動應用程式時自動檢查更新。</string>
+    <string name="sort_channel">頻道名稱</string>
+    <string name="sort_size">大小</string>
 </resources>

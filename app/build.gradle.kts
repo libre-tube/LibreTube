@@ -1,8 +1,8 @@
 import java.util.Properties
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
     id("com.android.application")
-    id("kotlin-android")
     id("kotlinx-serialization")
     id("kotlin-parcelize")
     id("androidx.navigation.safeargs.kotlin")
@@ -26,14 +26,14 @@ if (keystoreFileExists) {
 }
 
 android {
-    compileSdk = 35
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "com.github.libretube"
         minSdk = 26
-        targetSdk = 35
-        versionCode = 64
-        versionName = "0.29.1"
+        targetSdk = 36
+        versionCode = 65
+        versionName = "0.30.0"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         resValue("string", "app_name", "LibreTube")
     }
@@ -82,17 +82,10 @@ android {
         targetCompatibility = JavaVersion.VERSION_17
     }
 
-    kotlinOptions {
-        jvmTarget = "17"
-    }
-
-    // Comment this block if issues occur while generating the baseline profile
-    splits {
-        abi {
-            isEnable = true
-            reset()
-            include("armeabi-v7a", "arm64-v8a", "x86", "x86_64")
-            isUniversalApk = true
+    kotlin {
+        compilerOptions {
+            jvmTarget = JvmTarget.JVM_17
+            javaParameters = true
         }
     }
 
@@ -109,6 +102,7 @@ android {
 
     buildFeatures {
         buildConfig = true
+        resValues = true
     }
 
     dependenciesInfo {

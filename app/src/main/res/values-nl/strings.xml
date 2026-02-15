@@ -506,7 +506,7 @@
     <string name="screenshot">Scherm­afdruk</string>
     <string name="pip">PiP</string>
     <string name="local_stream_extraction">Stream lokaal uitlezen</string>
-    <string name="local_stream_extraction_summary">Haal recht­streeks video­weergave­informatie op van YouTube zonder gebruik te maken van Piped.</string>
+    <string name="local_stream_extraction_summary">Haal recht­streeks video­weergave­informatie op van YouTube, zonder gebruik te maken van Piped.</string>
     <string name="upcoming">Binnenkort</string>
     <string name="category_exclusive_access">Exclusieve toegang</string>
     <string name="export_playlist">Afspeel­lĳst exporteren</string>
@@ -526,7 +526,7 @@
     <string name="dialog_play_offline_body">Wilt u de video vanuit de download­map afspelen?</string>
     <string name="updating_feed">Feed bĳwerken…</string>
     <string name="full_local_mode">Volledige lokale modus</string>
-    <string name="full_local_mode_desc">Haal alles recht­streeks op van YouTube, zonder Piped te gebruiken.</string>
+    <string name="full_local_mode_desc">Haal alles recht­streeks op van YouTube, zonder gebruik te maken van Piped.</string>
     <string name="authentication">Authenticatie</string>
     <string name="local_feed_extraction">Lokale feed-extractie</string>
     <string name="show_upcoming_videos">Aan­komende video\'s tonen</string>
@@ -553,4 +553,15 @@
     <string name="checking_frequency_1_day">24 uur</string>
     <string name="backup_creation_success">Back-up succesvol gemaakt</string>
     <string name="backup_creation_failed">Back-up maken mislukt</string>
+    <plurals name="minutes_left">
+        <item quantity="one">nog %d min.</item>
+        <item quantity="other">nog %d min.</item>
+    </plurals>
+    <plurals name="sleep_timer_chip_minutes">
+        <item quantity="one">%d min.</item>
+        <item quantity="other">%d min.</item>
+    </plurals>
+    <string name="sort_channel">Kanaal­naam</string>
+    <string name="sort_size">Grootte</string>
+    <string name="show_updates_summary">Controleer automatisch op updates elke keer dat de app wordt gestart.</string>
 </resources>

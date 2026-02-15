@@ -556,4 +556,18 @@
     <string name="checking_frequency_1_day">1 день</string>
     <string name="backup_creation_success">Резервне копіювання успішно завершено</string>
     <string name="backup_creation_failed">Не вдалося створити резервну копію</string>
+    <string name="sort_channel">Назва каналу</string>
+    <string name="sort_size">Розмір</string>
+    <plurals name="minutes_left">
+        <item quantity="one">ще %d хвилина</item>
+        <item quantity="few">ще %d хвилини</item>
+        <item quantity="many">ще %d хвилин</item>
+        <item quantity="other">ще %d хвилин</item>
+    </plurals>
+    <plurals name="sleep_timer_chip_minutes">
+        <item quantity="one">%d хвилина</item>
+        <item quantity="few">%d хвилини</item>
+        <item quantity="many">%d хвилин</item>
+        <item quantity="other">%d хвилин</item>
+    </plurals>
 </resources>

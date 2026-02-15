@@ -553,4 +553,15 @@
     <string name="checking_frequency_1_day">1 dagur</string>
     <string name="backup_creation_success">Tókst að ljúka öryggisafritun</string>
     <string name="backup_creation_failed">Mistókst að útbúa öryggisafrit</string>
+    <plurals name="minutes_left">
+        <item quantity="one">%d mín eftir</item>
+        <item quantity="other">%d mín eftir</item>
+    </plurals>
+    <plurals name="sleep_timer_chip_minutes">
+        <item quantity="one">%d mín</item>
+        <item quantity="other">%d mín</item>
+    </plurals>
+    <string name="sort_channel">Heiti rásar</string>
+    <string name="sort_size">Stærð</string>
+    <string name="show_updates_summary">Leitar sjálfkrafa að uppfærslum í hvert skipti sem forritið er ræst.</string>
 </resources>

@@ -2,7 +2,7 @@
 <resources>
     <string name="search_hint">Hledat</string>
     <string name="subscribe">Odebírat</string>
-    <string name="unsubscribe">ODHLÁSIT ODBĚR</string>
+    <string name="unsubscribe">Odhlásit odběr</string>
     <string name="yes">Ano</string>
     <string name="username">Uživatelské jméno</string>
     <string name="share">Sdílet</string>
@@ -554,4 +554,19 @@
     <string name="checking_frequency_1_day">1 den</string>
     <string name="backup_creation_success">Záloha úspěšně dokončena</string>
     <string name="backup_creation_failed">Nepodařilo se vytvořit zálohu</string>
+    <plurals name="minutes_left">
+        <item quantity="one">Zbývá %d min</item>
+        <item quantity="few">Zbývají %d min</item>
+        <item quantity="many">Zbývá %d min</item>
+        <item quantity="other">Zbývá %d min</item>
+    </plurals>
+    <plurals name="sleep_timer_chip_minutes">
+        <item quantity="one">%d minuta</item>
+        <item quantity="few">%d minuty</item>
+        <item quantity="many">%d minut</item>
+        <item quantity="other">%d minut</item>
+    </plurals>
+    <string name="sort_channel">Název kanálu</string>
+    <string name="sort_size">Velikost</string>
+    <string name="show_updates_summary">Automaticky kontrolovat aktualizace po každém spuštění aplikace.</string>
 </resources>

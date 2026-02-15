@@ -18,7 +18,7 @@ import com.google.android.material.R
  * TimeBar that can be marked with SponsorBlock Segments
  */
 @UnstableApi
-class MarkableTimeBar(
+open class MarkableTimeBar(
     context: Context,
     attributeSet: AttributeSet? = null
 ) : DismissableTimeBar(context, attributeSet) {

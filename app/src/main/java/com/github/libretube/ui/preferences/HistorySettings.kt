@@ -12,7 +12,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class HistorySettings : BasePreferenceFragment() {
-    override val titleResourceId: Int = R.string.history
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         setPreferencesFromResource(R.xml.history_settings, rootKey)

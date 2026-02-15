@@ -1,53 +1,34 @@
 package com.github.libretube.ui.activities
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.commit
-import androidx.fragment.app.replace
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.setupWithNavController
 import com.github.libretube.R
 import com.github.libretube.databinding.ActivitySettingsBinding
 import com.github.libretube.ui.base.BaseActivity
-import com.github.libretube.ui.preferences.InstanceSettings
-import com.github.libretube.ui.preferences.MainSettings
 
 class SettingsActivity : BaseActivity() {
-    lateinit var binding: ActivitySettingsBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding = ActivitySettingsBinding.inflate(layoutInflater)
+        val binding = ActivitySettingsBinding.inflate(layoutInflater)
+        val navController = binding.settings.getFragment<NavHostFragment>().navController
+        setSupportActionBar(binding.toolbar)
         setContentView(binding.root)
 
-        binding.toolbar.setNavigationOnClickListener {
-            onBackPressedDispatcher.onBackPressed()
-        }
+        // ensure that the toolbar's back button is always visible
+        val appBarConfiguration = AppBarConfiguration.Builder()
+            .setFallbackOnNavigateUpListener {
+                finish()
+                true
+            }
+            .build()
+        binding.toolbar.setupWithNavController(navController, appBarConfiguration)
 
-        if (savedInstanceState == null) {
-            goToMainSettings()
-        }
-
-        handleRedirect()
-    }
-
-    fun goToMainSettings() {
-        redirectTo<MainSettings>()
-        changeTopBarText(getString(R.string.settings))
-    }
-
-    private fun handleRedirect() {
-        val redirectKey = intent.extras?.getString(REDIRECT_KEY)
-
-        if (redirectKey == REDIRECT_TO_INTENT_SETTINGS) redirectTo<InstanceSettings>()
-    }
-
-    fun changeTopBarText(text: String) {
-        if (this::binding.isInitialized) binding.toolbar.title = text
-    }
-
-    private inline fun <reified T : Fragment> redirectTo() {
-        supportFragmentManager.commit {
-            replace<T>(R.id.settings)
+        if (intent.extras?.getString(REDIRECT_KEY) == REDIRECT_TO_INTENT_SETTINGS) {
+            navController.navigate(R.id.action_global_instanceSettings)
         }
     }
 
