@@ -465,7 +465,15 @@ class AudioPlayerFragment : Fragment(R.layout.fragment_audio_player), AudioPlaye
                 _binding?.openChapters?.isVisible = !chapters.isNullOrEmpty()
             }
         })
-        playerController?.mediaMetadata?.let { updateStreamInfo(it) }
+        playerController?.mediaMetadata?.let { mediaMetadata ->
+            updateStreamInfo(mediaMetadata)
+            // Set initial chapter button visibility based on current metadata
+            val chapters: List<ChapterSegment>? =
+                mediaMetadata.extras?.getString(IntentData.chapters)?.let {
+                    JsonHelper.json.decodeFromString(it)
+                }
+            binding.openChapters.isVisible = !chapters.isNullOrEmpty()
+        }
 
         initializeSeekBar()
 

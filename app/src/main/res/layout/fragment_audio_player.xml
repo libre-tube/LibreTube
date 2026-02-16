@@ -263,6 +263,7 @@
                     android:id="@+id/open_chapters"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:visibility="gone"
                     app:icon="@drawable/ic_frame" />
 
                 <com.google.android.material.button.MaterialButton
