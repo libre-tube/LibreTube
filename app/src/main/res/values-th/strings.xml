@@ -552,4 +552,5 @@
     <string name="color_purple">ม่วงน่าสนใจ</string>
     <string name="sort_channel">ชื่อช่อง</string>
     <string name="sort_size">ขนาด</string>
+    <string name="show_updates_summary">ตรวจสอบการอัปเดตโดยอัตโนมัติทุกครั้งเมื่อแอปทำงาน</string>
 </resources>
