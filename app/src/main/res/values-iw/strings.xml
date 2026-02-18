@@ -566,4 +566,5 @@
         <item quantity="two">שתי דק׳</item>
         <item quantity="other">%d דק׳</item>
     </plurals>
+    <string name="show_updates_summary">לבדוק עדכונים אוטומטית עם כל הפעלה של היישומון.</string>
 </resources>
