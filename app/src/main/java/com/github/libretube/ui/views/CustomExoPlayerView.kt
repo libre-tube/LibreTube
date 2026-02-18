@@ -1020,6 +1020,11 @@ abstract class CustomExoPlayerView(
             keepScreenOn = player.isPlaying == true
             onPlayerEvent(player, events)
         }
+
+        if (events.contains(Player.EVENT_RENDERED_FIRST_FRAME)) {
+            // if the video is not starting automatically, show the controller
+            if (!PlayerHelper.playAutomatically) showControllerPermanently()
+        }
     }
 
     open fun minimizeOrExitPlayer() = Unit
