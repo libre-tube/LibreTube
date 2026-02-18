@@ -13,6 +13,7 @@ import androidx.activity.viewModels
 import com.github.libretube.ui.base.BaseActivity
 import com.github.libretube.ui.interfaces.PlayerGestureOptions
 import com.github.libretube.ui.models.CommonPlayerViewModel
+import java.time.Instant
 import kotlin.math.abs
 
 class PlayerGestureController(activity: BaseActivity, private val listener: PlayerGestureOptions) {
@@ -30,6 +31,7 @@ class PlayerGestureController(activity: BaseActivity, private val listener: Play
     private var scaleGestureWasInProgress = false
     private var isMoving = false
     var longPressInProgress = false
+    var lastDoublePressTime: Instant? = null
 
     var areControlsLocked = false
 
@@ -165,10 +167,29 @@ class PlayerGestureController(activity: BaseActivity, private val listener: Play
                 }
             }
 
+            lastDoublePressTime = Instant.now()
+
             return true
         }
 
         override fun onSingleTapConfirmed(e: MotionEvent): Boolean {
+            // if there has been a recent double click within the threshold, single clicks
+            // are being treated as a repetition of the double click
+            // e.g. this allows to continue seeking forward using single clicks after double-clicking once
+            lastDoublePressTime?.takeIf {
+                val millisElapsedSinceDoubleClick = Instant.now().toEpochMilli() - it.toEpochMilli()
+                millisElapsedSinceDoubleClick < DOUBLE_TAP_REPEAT_TIME_THRESHOLD_MILLIS
+            }?.let {
+                val upEvent = MotionEvent.obtain(e).apply {
+                    action = MotionEvent.ACTION_UP
+                }
+                onDoubleTapEvent(upEvent)
+                upEvent.recycle()
+
+                lastDoublePressTime = Instant.now()
+                return true
+            }
+
             listener.onSingleTap(false)
 
             return true
@@ -219,5 +240,10 @@ class PlayerGestureController(activity: BaseActivity, private val listener: Play
         private const val BORDER_THRESHOLD = 90
         private const val LEFT_AREA_VIEW_PERCENTAGE = 0.35f
         private const val RIGHT_AREA_VIEW_PERCENTAGE = 0.65f
+
+        /**
+         * After a double click was processed, the user may use single clicks to trigger another double click.
+         */
+        private const val DOUBLE_TAP_REPEAT_TIME_THRESHOLD_MILLIS = 700
     }
 }
