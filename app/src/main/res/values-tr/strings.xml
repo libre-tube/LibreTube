@@ -552,4 +552,16 @@
     <string name="backup_creation_success">Yedekleme başarıyla tamamlandı</string>
     <string name="backup_creation_failed">Yedekleme oluşturulamadı</string>
     <string name="category_hook">Giriş/Karşılama</string>
+    <string name="category_hook_summary">Videonun ilerleyen kısımlarından veya gelecek bölümlerden kesitler sunarak izleyiciyi yakalayan merak uyandırıcı girişler</string>
+    <string name="show_updates_summary">Uygulama her başlatıldığında güncellemeleri otomatik olarak denetle.</string>
+    <string name="sort_channel">Kanal adı</string>
+    <string name="sort_size">Boyut</string>
+    <plurals name="minutes_left">
+        <item quantity="one">%d dk kaldı</item>
+        <item quantity="other">%d dk kaldı</item>
+    </plurals>
+    <plurals name="sleep_timer_chip_minutes">
+        <item quantity="one">%d dk</item>
+        <item quantity="other">%d dk</item>
+    </plurals>
 </resources>
