@@ -18,7 +18,6 @@ import androidx.core.app.PendingIntentCompat
 import androidx.core.app.ServiceCompat
 import androidx.core.content.getSystemService
 import androidx.core.util.keyIterator
-import androidx.core.util.remove
 import androidx.core.util.set
 import androidx.core.util.valueIterator
 import androidx.lifecycle.LifecycleService
@@ -59,7 +58,6 @@ import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.asCoroutineDispatcher
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
-import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import okhttp3.OkHttpClient
@@ -252,18 +250,20 @@ class DownloadService : LifecycleService() {
 
         downloadQueue[item.id] = false
 
-        if (downloadFlow.firstOrNull { it.first == item.id }?.second == DownloadStatus.Stopped) {
-            downloadQueue.remove(item.id, false)
+        // start the next download if there are any remaining ones enqueued
+        for (id in downloadQueue.keyIterator()) {
+            if (downloadQueue[id]) continue
+
+            val dbItem = Database.downloadDao().findDownloadItemById(id)
+            if (dbItem != null && (dbItem.downloadSize <= 0L || dbItem.path.fileSize() < dbItem.downloadSize)) {
+                resume(id)
+                return
+            }
         }
 
-        // start the next download if there are any remaining ones enqueued
-        val nextDownload =
-            downloadFlow.firstOrNull { (_, status) -> status == DownloadStatus.Paused }
-        if (nextDownload != null) {
-            resume(nextDownload.first)
-        } else {
-            stopServiceIfDone()
-        }
+        // if no new download was enqueued (i.e. there's no paused/stopped download left),
+        // look if any downloads are still running, and if not, stop the service
+        stopServiceIfDone()
     }
 
     private suspend fun progressDownload(
