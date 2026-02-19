@@ -286,7 +286,7 @@ class OfflinePlayerActivity : BaseActivity() {
     }
 
     override fun onKeyUp(keyCode: Int, event: KeyEvent?): Boolean {
-        if (binding.player.onKeyBoardAction(keyCode)) {
+        if (binding.player.onKeyUp(keyCode, event)) {
             return true
         }
 
