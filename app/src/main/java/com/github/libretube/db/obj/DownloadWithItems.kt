@@ -16,7 +16,12 @@ data class DownloadWithItems(
         parentColumn = "videoId",
         entityColumn = "videoId"
     )
-    val downloadChapters: List<DownloadChapter> = emptyList()
+    val downloadChapters: List<DownloadChapter> = emptyList(),
+    @Relation(
+        parentColumn = "videoId",
+        entityColumn = "videoId"
+    )
+    val downloadSponsorBlockSegments: List<DownloadSponsorBlockSegment> = emptyList()
 )
 
 fun List<DownloadWithItems>.filterByTab(tab: DownloadTab) = filter { dl ->
