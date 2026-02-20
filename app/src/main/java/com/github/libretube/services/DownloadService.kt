@@ -44,6 +44,7 @@ import com.github.libretube.helpers.DownloadHelper
 import com.github.libretube.helpers.DownloadHelper.getNotificationId
 import com.github.libretube.helpers.ImageHelper
 import com.github.libretube.helpers.NetworkHelper
+import com.github.libretube.helpers.PlayerHelper
 import com.github.libretube.helpers.ProxyHelper
 import com.github.libretube.obj.DownloadStatus
 import com.github.libretube.parcelable.DownloadData
@@ -56,6 +57,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.asCoroutineDispatcher
+import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.launch
@@ -192,17 +194,52 @@ class DownloadService : LifecycleService() {
             Database.downloadDao().insertDownloadChapter(downloadChapter)
         }
 
-        try {
-            ImageHelper.downloadImage(
-                this@DownloadService,
-                ProxyHelper.rewriteUrlUsingProxyPreference(streams.thumbnailUrl),
-                thumbnailTargetPath
-            )
-        } catch (e: Exception) {
-            Log.e(
-                this@DownloadService::class.java.name,
-                "failed to download image ${streams.thumbnailUrl}"
-            )
+        // asynchronously load the remaining metadata
+        // this allows the main thread to already start the actual download items (i.e. video/audio)
+        // while the thumbnail and SponsorBlock segments are loaded in the background
+        coroutineScope {
+            launch(Dispatchers.IO) {
+                downloadExtraVideoMetadata(videoId, streams.thumbnailUrl, thumbnailTargetPath)
+            }
+        }
+    }
+
+    /**
+     * Download the thumbnail and SponsorBlock segments for the given [videoId].
+     */
+    private suspend fun downloadExtraVideoMetadata(
+        videoId: String,
+        thumbnailUrl: String,
+        thumbnailTargetPath: Path
+    ) {
+        coroutineScope {
+            launch {
+                val segmentData = try {
+                    val categories = PlayerHelper.getSponsorBlockCategories()
+                    MediaServiceRepository.instance.getSegments(videoId, categories.map { it.key })
+                } catch (e: Exception) {
+                    Log.e(TAG(), "failed to download SponsorBlock segments for $videoId")
+                    Log.e(TAG(), e.stackTraceToString())
+                    return@launch
+                }
+
+                Database.downloadDao().insertSponsorBlockSegments(
+                    segmentData.segments.map { it.toDownloadSegment(videoId) }
+                )
+            }
+
+            launch {
+                try {
+                    ImageHelper.downloadImage(
+                        this@DownloadService,
+                        ProxyHelper.rewriteUrlUsingProxyPreference(thumbnailUrl),
+                        thumbnailTargetPath
+                    )
+                } catch (e: Exception) {
+                    Log.e(TAG(), "failed to download image $thumbnailUrl")
+                    Log.e(TAG(), e.stackTraceToString())
+                }
+            }
         }
     }
 
