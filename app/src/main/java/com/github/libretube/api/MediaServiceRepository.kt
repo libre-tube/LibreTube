@@ -30,7 +30,7 @@ interface MediaServiceRepository {
     ): SegmentData? = RetrofitInstance.externalApi.getVideoLabels(
         // use hashed video id for privacy
         // https://wiki.sponsor.ajay.app/w/API_Docs/Draft#GET_/api/videoLabels/:sha256HashPrefix
-        videoId.sha256Sum().substring(0, 4),
+        videoId.sha256Sum().substring(0, 5),
     ).firstOrNull { it.videoID == videoId }
 
     suspend fun getDeArrowContent(videoIds: String): Map<String, DeArrowContent>
