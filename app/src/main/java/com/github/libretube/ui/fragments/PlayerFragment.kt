@@ -84,7 +84,7 @@ import com.github.libretube.parcelable.PlayerData
 import com.github.libretube.services.AbstractPlayerService
 import com.github.libretube.services.OfflinePlayerService
 import com.github.libretube.services.OnlinePlayerService
-import com.github.libretube.ui.activities.MainActivity
+import com.github.libretube.ui.activities.AbstractPlayerHostActivity
 import com.github.libretube.ui.activities.NoInternetActivity
 import com.github.libretube.ui.adapters.VideoCardsAdapter
 import com.github.libretube.ui.base.BaseActivity
@@ -116,6 +116,7 @@ import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
 import kotlin.io.path.exists
 import kotlin.math.abs
+import kotlin.math.absoluteValue
 
 
 @androidx.annotation.OptIn(androidx.media3.common.util.UnstableApi::class)
@@ -171,10 +172,10 @@ class PlayerFragment : Fragment(R.layout.fragment_player), CustomPlayerCallback 
     // check if pip is entered via the dedicated button
     private var isEnteringPiPMode = false
 
-    private val mainActivity get() = activity as MainActivity
+    private val baseActivity get() = activity as AbstractPlayerHostActivity
     private val windowInsetsControllerCompat
         get() = WindowCompat
-            .getInsetsController(mainActivity.window, mainActivity.window.decorView)
+            .getInsetsController(requireActivity().window, requireActivity().window.decorView)
 
     private val fullscreenDialog by lazy {
         object : Dialog(requireContext(), android.R.style.Theme_Black_NoTitleBar_Fullscreen) {
@@ -230,7 +231,7 @@ class PlayerFragment : Fragment(R.layout.fragment_player), CustomPlayerCallback 
     private val playerListener = object : Player.Listener {
         override fun onIsPlayingChanged(isPlaying: Boolean) {
             if (PlayerHelper.pipEnabled || PictureInPictureCompat.isInPictureInPictureMode(
-                    mainActivity
+                    baseActivity
                 )
             ) {
                 PictureInPictureCompat.setPictureInPictureParams(requireActivity(), pipParams)
@@ -516,8 +517,8 @@ class PlayerFragment : Fragment(R.layout.fragment_player), CustomPlayerCallback 
                 else {
                     binding.playerMotionLayout.setTransitionDuration(250)
                     binding.playerMotionLayout.transitionToEnd()
-                    mainActivity.binding.mainMotionLayout.transitionToEnd()
-                    mainActivity.requestOrientationChange()
+                    baseActivity.minimizePlayerContainerLayout()
+                    baseActivity.requestOrientationChange()
                 }
             }
 
@@ -605,9 +606,7 @@ class PlayerFragment : Fragment(R.layout.fragment_player), CustomPlayerCallback 
 
     @SuppressLint("ClickableViewAccessibility")
     private fun initializeTransitionLayout() {
-        mainActivity.binding.container.isVisible = true
-        val mainMotionLayout = mainActivity.binding.mainMotionLayout
-        mainMotionLayout.progress = 0F
+        baseActivity.setPlayerContainerProgress(0f)
 
         var transitionStartId = 0
         var transitionEndId = 0
@@ -621,9 +620,7 @@ class PlayerFragment : Fragment(R.layout.fragment_player), CustomPlayerCallback 
             ) {
                 if (_binding == null) return
 
-                if (NavBarHelper.hasTabs()) {
-                    mainMotionLayout.progress = abs(progress)
-                }
+                baseActivity.setPlayerContainerProgress(progress.absoluteValue)
                 disableController()
                 commonPlayerViewModel.setSheetExpand(false)
                 transitionEndId = endId
@@ -639,11 +636,11 @@ class PlayerFragment : Fragment(R.layout.fragment_player), CustomPlayerCallback 
                     binding.player.updateCurrentSubtitle(viewModel.currentCaptionId)
                     binding.player.useController = true
                     commonPlayerViewModel.setSheetExpand(true)
-                    mainMotionLayout.progress = 0F
+                    baseActivity.setPlayerContainerProgress(0f)
                     changeOrientationMode()
 
                     // clear search bar focus to avoid keyboard popups
-                    mainActivity.clearSearchViewFocus()
+                    baseActivity.clearSearchViewFocus()
                 } else if (currentId == transitionEndId) {
                     commonPlayerViewModel.isMiniPlayerVisible.value = true
                     // disable captions temporarily
@@ -651,10 +648,9 @@ class PlayerFragment : Fragment(R.layout.fragment_player), CustomPlayerCallback 
                     disableController()
                     commonPlayerViewModel.setSheetExpand(null)
                     playerBackgroundBinding.sbSkipBtn.isGone = true
-                    if (NavBarHelper.hasTabs()) {
-                        mainMotionLayout.progress = 1F
-                    }
-                    (activity as MainActivity).requestOrientationChange()
+
+                    baseActivity.setPlayerContainerProgress(1f)
+                    baseActivity.requestOrientationChange()
                 }
 
                 updateMaxSheetHeight()
@@ -801,17 +797,14 @@ class PlayerFragment : Fragment(R.layout.fragment_player), CustomPlayerCallback 
         binding.playerChannel.setOnClickListener {
             if (!this::streams.isInitialized) return@setOnClickListener
 
-            val activity = view?.context as MainActivity
             NavigationHelper.navigateChannel(requireContext(), streams.uploaderUrl)
-            activity.binding.mainMotionLayout.transitionToEnd()
-            binding.playerMotionLayout.transitionToEnd()
         }
 
         binding.descriptionLayout.handleLink = this::handleLink
     }
 
     private fun updateMaxSheetHeight() {
-        val systemBars = mainActivity.getSystemInsets() ?: return
+        val systemBars = baseActivity.getSystemInsets() ?: return
         val maxHeight = binding.root.height - (binding.player.height + systemBars.top)
         commonPlayerViewModel.maxSheetHeightPx = maxHeight
         chaptersViewModel.maxSheetHeightPx = maxHeight
@@ -847,7 +840,7 @@ class PlayerFragment : Fragment(R.layout.fragment_player), CustomPlayerCallback 
         val width =
             streams.videoStreams.firstOrNull()?.width ?: playerController.videoSize.width
 
-        mainActivity.requestedOrientation = PlayerHelper.getOrientation(width, height)
+        baseActivity.requestedOrientation = PlayerHelper.getOrientation(width, height)
     }
 
     private fun setFullscreen() {
@@ -871,7 +864,7 @@ class PlayerFragment : Fragment(R.layout.fragment_player), CustomPlayerCallback 
         commonPlayerViewModel.isFullscreen.value = false
 
         if (!PlayerHelper.autoFullscreenEnabled) {
-            mainActivity.requestedOrientation = mainActivity.screenOrientationPref
+            baseActivity.requestedOrientation = baseActivity.screenOrientationPref
         }
 
         openOrCloseFullscreenDialog(false)
@@ -1016,7 +1009,7 @@ class PlayerFragment : Fragment(R.layout.fragment_player), CustomPlayerCallback 
         }
 
         // restore the orientation that's used by the main activity
-        (context as MainActivity).requestOrientationChange()
+        baseActivity.requestOrientationChange()
 
         _binding = null
     }
@@ -1037,7 +1030,7 @@ class PlayerFragment : Fragment(R.layout.fragment_player), CustomPlayerCallback 
                 override fun onTransitionCompleted(motionLayout: MotionLayout?, currentId: Int) {
                     super.onTransitionCompleted(motionLayout, currentId)
 
-                    mainActivity.supportFragmentManager.commit {
+                    baseActivity.supportFragmentManager.commit {
                         remove(this@PlayerFragment)
                     }
                 }
@@ -1045,7 +1038,7 @@ class PlayerFragment : Fragment(R.layout.fragment_player), CustomPlayerCallback 
 
             unsetFullscreen()
         } else {
-            mainActivity.supportFragmentManager.commit {
+            baseActivity.supportFragmentManager.commit {
                 remove(this@PlayerFragment)
             }
         }
@@ -1201,6 +1194,8 @@ class PlayerFragment : Fragment(R.layout.fragment_player), CustomPlayerCallback 
                 streams.uploaderAvatar,
                 streams.uploaderVerified
             )
+        } else {
+            binding.playerSubscribe.isGone = true
         }
 
         // seekbar preview setup
@@ -1328,10 +1323,10 @@ class PlayerFragment : Fragment(R.layout.fragment_player), CustomPlayerCallback 
     private fun changeOrientationMode() {
         if (PlayerHelper.autoFullscreenEnabled) {
             // enable auto rotation
-            mainActivity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_SENSOR
+            baseActivity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_SENSOR
         } else {
             // go to portrait mode
-            mainActivity.requestedOrientation =
+            baseActivity.requestedOrientation =
                 (requireActivity() as BaseActivity).screenOrientationPref
         }
     }
@@ -1410,7 +1405,7 @@ class PlayerFragment : Fragment(R.layout.fragment_player), CustomPlayerCallback 
      * If true, the activity will be automatically restarted
      */
     private fun restartActivityIfNeeded() {
-        if (mainActivity.screenOrientationPref in lockedOrientations || viewModel.isOrientationChangeInProgress) return
+        if (baseActivity.screenOrientationPref in lockedOrientations || viewModel.isOrientationChangeInProgress) return
 
         val orientation = resources.configuration.orientation
         if (commonPlayerViewModel.isFullscreen.value != true && orientation != playerLayoutOrientation) {

@@ -16,6 +16,7 @@ import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.enums.PlaylistType
 import com.github.libretube.extensions.toID
 import com.github.libretube.parcelable.PlayerData
+import com.github.libretube.ui.activities.AbstractPlayerHostActivity
 import com.github.libretube.ui.activities.MainActivity
 import com.github.libretube.ui.activities.ZoomableImageActivity
 import com.github.libretube.ui.base.BaseActivity
@@ -23,22 +24,22 @@ import com.github.libretube.ui.fragments.AudioPlayerFragment
 import com.github.libretube.ui.fragments.DownloadSortingOrder
 import com.github.libretube.ui.fragments.DownloadTab
 import com.github.libretube.ui.fragments.PlayerFragment
-import com.github.libretube.ui.views.SingleViewTouchableMotionLayout
 import com.github.libretube.util.PlayingQueue
 
 object NavigationHelper {
     fun navigateChannel(context: Context, channelUrlOrId: String?) {
         if (channelUrlOrId == null) return
 
-        val activity = ContextHelper.unwrapActivity<MainActivity>(context)
+        // navigating to channels is only supported in the main activity, not in the no internet activity
+        val activity = ContextHelper.tryUnwrapActivity<MainActivity>(context) ?: return
         activity.navController.navigate(NavDirections.openChannel(channelUrlOrId.toID()))
         try {
             // minimize player if currently expanded
-            if (activity.binding.mainMotionLayout.progress == 0f) {
-                activity.binding.mainMotionLayout.transitionToEnd()
-                activity.findViewById<SingleViewTouchableMotionLayout>(R.id.playerMotionLayout)
-                    .transitionToEnd()
+            activity.runOnPlayerFragment {
+                binding.playerMotionLayout.transitionToEnd()
+                true
             }
+            activity.minimizePlayerContainerLayout()
         } catch (e: Exception) {
             e.printStackTrace()
         }
@@ -70,7 +71,7 @@ object NavigationHelper {
 
         // attempt to attach to the current media session first by using the corresponding
         // video/audio player instance
-        val activity = ContextHelper.unwrapActivity<MainActivity>(context)
+        val activity = ContextHelper.unwrapActivity<AbstractPlayerHostActivity>(context)
         val attachedToRunningPlayer = activity.runOnPlayerFragment {
             try {
                 PlayingQueue.clearAfterCurrent()
