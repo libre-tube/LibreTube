@@ -41,7 +41,6 @@ import androidx.media3.ui.PlayerView
 import androidx.media3.ui.SubtitleView
 import androidx.media3.ui.TimeBar
 import com.github.libretube.R
-import com.github.libretube.api.obj.Subtitle
 import com.github.libretube.constants.IntentData
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.databinding.CustomExoPlayerViewTemplateBinding
@@ -255,6 +254,19 @@ class CustomExoPlayerView(
             override fun onIsPlayingChanged(isPlaying: Boolean) {
                 super.onIsPlayingChanged(isPlaying)
                 keepScreenOn = isPlaying
+            }
+
+            override fun onPlaybackStateChanged(playbackState: Int) {
+                super.onPlaybackStateChanged(playbackState)
+
+                if (playbackState == Player.STATE_READY) {
+                    // set default caption language from preferences if caption language is available
+                    val captions = PlayerHelper.getCaptionTracks(player ?: return)
+                    val defaultLangCaption =
+                        captions.firstOrNull { it.language == PlayerHelper.defaultSubtitleCode }
+
+                    updateCurrentSubtitle(defaultLangCaption?.id)
+                }
             }
         })
 
@@ -961,7 +973,10 @@ class CustomExoPlayerView(
     override fun onCaptionsClicked() {
         val player = player ?: return
 
-        val captions = PlayerHelper.getCaptionTracks(player).associateWith {
+        val captions = PlayerHelper.getCaptionTracks(player)
+            // put normal tracks before auto-generated tracks
+            .sortedBy { it.roleFlags == PlayerHelper.ROLE_FLAG_AUTO_GEN_SUBTITLE }
+            .associateWith {
             val displayName = Locale.forLanguageTag(it.language.orEmpty()).getDisplayLanguage(Locale.getDefault())
 
             if (it.roleFlags == PlayerHelper.ROLE_FLAG_AUTO_GEN_SUBTITLE) {
@@ -979,19 +994,20 @@ class CustomExoPlayerView(
                     track == currentSubtitle
                 }?.value ?: context.getString(R.string.none)
             ) { index ->
-                val subtitle = captions.keys.toList().getOrNull(index - 1) ?: return@setSimpleItems
-                // TODO: updateCurrentSubtitle(subtitle)
-                // playerViewModel?.currentSubtitle = subtitle
+                val captionsFormat = captions.keys.toList().getOrNull(index - 1) ?: return@setSimpleItems
+
+                 updateCurrentSubtitle(captionsFormat.id)
+                 playerViewModel?.currentCaptionId = captionsFormat.id
             }
             .show(supportFragmentManager)
     }
 
-    fun updateCurrentSubtitle(subtitle: Subtitle?) {
+    fun updateCurrentSubtitle(trackId: String?) {
         val player = player as? MediaController ?: return
 
         player.sendCustomCommand(
             AbstractPlayerService.runPlayerActionCommand, bundleOf(
-                PlayerCommand.SET_SUBTITLE.name to subtitle
+                PlayerCommand.SET_CAPTION_TRACK.name to trackId
             )
         )
     }

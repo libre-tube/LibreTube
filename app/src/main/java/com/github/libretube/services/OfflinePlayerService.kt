@@ -125,6 +125,10 @@ open class OfflinePlayerService : AbstractPlayerService() {
         PlayingQueue.updateCurrent(downloadWithItems.download.toStreamItem())
 
         withContext(Dispatchers.Main) {
+            setSponsorBlockSegments(
+                downloadWithItems.downloadSponsorBlockSegments.map { it.toSegment() }
+            )
+
             setMediaItem(downloadWithItems)
             exoPlayer?.playWhenReady = PlayerHelper.playAutomatically
             exoPlayer?.prepare()
@@ -225,7 +229,7 @@ open class OfflinePlayerService : AbstractPlayerService() {
     private fun playNextVideo(videoId: String? = null) {
         if (PlayingQueue.repeatMode == Player.REPEAT_MODE_ONE) {
             exoPlayer?.seekTo(0)
-        } else if (PlayerHelper.isAutoPlayEnabled()) {
+        } else if (PlayerHelper.isAutoPlayEnabled() && shouldHandleAutoplay) {
             val nextId = videoId ?: PlayingQueue.getNext() ?: return
             navigateVideo(nextId)
         }

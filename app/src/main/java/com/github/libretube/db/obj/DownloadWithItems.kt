@@ -35,7 +35,8 @@ data class DownloadWithItems(
         uploaded = download.uploadDate?.toMillis(),
         duration = download.duration ?: 0,
         uploaderUrl = null,
-        uploaderVerified = false
+        uploaderVerified = false,
+        chapters = downloadChapters.map { it.toChapterSegment() }
     )
 }
 

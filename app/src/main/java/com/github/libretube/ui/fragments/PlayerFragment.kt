@@ -54,12 +54,12 @@ import com.github.libretube.api.JsonHelper
 import com.github.libretube.api.obj.ChapterSegment
 import com.github.libretube.api.obj.Segment
 import com.github.libretube.api.obj.Streams
-import com.github.libretube.api.obj.Subtitle
 import com.github.libretube.compat.PictureInPictureCompat
 import com.github.libretube.compat.PictureInPictureParamsCompat
 import com.github.libretube.constants.IntentData
 import com.github.libretube.databinding.FragmentPlayerBinding
 import com.github.libretube.db.DatabaseHolder
+import com.github.libretube.enums.FileType
 import com.github.libretube.enums.PlayerCommand
 import com.github.libretube.enums.PlayerEvent
 import com.github.libretube.enums.SbSkipOptions
@@ -96,12 +96,14 @@ import com.github.libretube.ui.extensions.getSystemInsets
 import com.github.libretube.ui.extensions.setOnBackPressed
 import com.github.libretube.ui.extensions.setupSubscriptionButton
 import com.github.libretube.ui.interfaces.CustomPlayerCallback
+import com.github.libretube.ui.interfaces.TimeFrameReceiver
 import com.github.libretube.ui.listeners.SeekbarPreviewListener
 import com.github.libretube.ui.models.ChaptersViewModel
 import com.github.libretube.ui.models.CommentsViewModel
 import com.github.libretube.ui.models.CommonPlayerViewModel
 import com.github.libretube.ui.models.PlayerViewModel
 import com.github.libretube.ui.sheets.CommentsSheet
+import com.github.libretube.util.OfflineTimeFrameReceiver
 import com.github.libretube.util.OnlineTimeFrameReceiver
 import com.github.libretube.util.PlayingQueue
 import com.github.libretube.util.TextUtils
@@ -112,6 +114,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
+import kotlin.io.path.exists
 import kotlin.math.abs
 
 
@@ -164,6 +167,7 @@ class PlayerFragment : Fragment(R.layout.fragment_player), CustomPlayerCallback 
 
     // Activity that's active during PiP, can be used for controlling its lifecycle.
     private var pipActivity: Activity? = null
+
     // check if pip is entered via the dedicated button
     private var isEnteringPiPMode = false
 
@@ -380,7 +384,7 @@ class PlayerFragment : Fragment(R.layout.fragment_player), CustomPlayerCallback 
                 return@registerForActivityResult
             }
 
-            CoroutineScope(Dispatchers.IO).launch{
+            CoroutineScope(Dispatchers.IO).launch {
                 context?.contentResolver?.openOutputStream(uri)?.use { outputStream ->
                     screenshotBitmap?.compress(Bitmap.CompressFormat.PNG, 100, outputStream)
                 }
@@ -423,7 +427,7 @@ class PlayerFragment : Fragment(R.layout.fragment_player), CustomPlayerCallback 
 
         // manually apply additional padding for edge-to-edge compatibility
         activity?.getSystemInsets()?.let { systemBars ->
-            with (binding.root) {
+            with(binding.root) {
                 setPadding(
                     paddingLeft,
                     paddingTop + systemBars.top,
@@ -632,7 +636,7 @@ class PlayerFragment : Fragment(R.layout.fragment_player), CustomPlayerCallback 
                 if (currentId == transitionStartId) {
                     commonPlayerViewModel.isMiniPlayerVisible.value = false
                     // re-enable captions
-                    binding.player.updateCurrentSubtitle(viewModel.currentSubtitle)
+                    binding.player.updateCurrentSubtitle(viewModel.currentCaptionId)
                     binding.player.useController = true
                     commonPlayerViewModel.setSheetExpand(true)
                     mainMotionLayout.progress = 0F
@@ -1109,7 +1113,7 @@ class PlayerFragment : Fragment(R.layout.fragment_player), CustomPlayerCallback 
         setAutoPlayCountdownEnabled(PlayerHelper.autoPlayCountdown)
 
         // set the default subtitle if available
-        binding.player.updateCurrentSubtitle(viewModel.currentSubtitle)
+        binding.player.updateCurrentSubtitle(viewModel.currentCaptionId)
 
         if (streams.category == Streams.CATEGORY_MUSIC) {
             playerController.setPlaybackSpeed(1f)
@@ -1134,7 +1138,7 @@ class PlayerFragment : Fragment(R.layout.fragment_player), CustomPlayerCallback 
             ?.dismiss()
     }
 
-    private fun toggleVideoInfoVisibility(show: Boolean){
+    private fun toggleVideoInfoVisibility(show: Boolean) {
         binding.descriptionLayout.collapseDescription()
         binding.descriptionLayout.isInvisible = !show
         binding.relatedRecView.isInvisible = !show
@@ -1209,8 +1213,17 @@ class PlayerFragment : Fragment(R.layout.fragment_player), CustomPlayerCallback 
         // seekbar preview setup
         playerControlsBinding.seekbarPreview.isGone = true
         seekBarPreviewListener?.let { playerControlsBinding.exoProgress.removeSeekBarListener(it) }
-        seekBarPreviewListener = createSeekbarPreviewListener().also {
-            playerControlsBinding.exoProgress.addSeekBarListener(it)
+
+        lifecycleScope.launch {
+            val timeFrameReceiver = getTimeFrameReceiver() ?: return@launch
+            val listener = SeekbarPreviewListener(
+                timeFrameReceiver,
+                playerControlsBinding,
+                streams.duration * 1000
+            )
+
+            seekBarPreviewListener = listener
+            playerControlsBinding.exoProgress.addSeekBarListener(listener)
         }
     }
 
@@ -1266,8 +1279,19 @@ class PlayerFragment : Fragment(R.layout.fragment_player), CustomPlayerCallback 
         binding.playImageView.setImageResource(playPauseAction)
     }
 
+    private suspend fun getTimeFrameReceiver(): TimeFrameReceiver? = withContext(Dispatchers.IO) {
+        return@withContext if (isOffline) {
+            val downloadItems = DatabaseHolder.Database.downloadDao().getDownloadById(videoId)?.downloadItems
+            downloadItems?.firstOrNull { it.path.exists() && it.type == FileType.VIDEO }?.path?.let {
+                OfflineTimeFrameReceiver(requireContext(), it)
+            }
+        } else {
+            OnlineTimeFrameReceiver(requireContext(), streams.previewFrames)
+        }
+    }
+
     private suspend fun initializeHighlight(highlight: Segment) {
-        val frameReceiver = OnlineTimeFrameReceiver(requireContext(), streams.previewFrames)
+        val frameReceiver = getTimeFrameReceiver() ?: return
         val highlightStart = highlight.segmentStartAndEnd.first.toLong()
         val frame = withContext(Dispatchers.IO) {
             frameReceiver.getFrameAtTime(highlightStart * 1000)
@@ -1298,7 +1322,6 @@ class PlayerFragment : Fragment(R.layout.fragment_player), CustomPlayerCallback 
     }
 
 
-
     override fun onPictureInPictureModeChanged(isInPictureInPictureMode: Boolean) {
         super.onPictureInPictureModeChanged(isInPictureInPictureMode)
         if (isInPictureInPictureMode) {
@@ -1319,7 +1342,7 @@ class PlayerFragment : Fragment(R.layout.fragment_player), CustomPlayerCallback 
                 closedVideo = true
             }
 
-            binding.player.updateCurrentSubtitle(viewModel.currentSubtitle)
+            binding.player.updateCurrentSubtitle(viewModel.currentCaptionId)
 
             // unset fullscreen if it's not been enabled before the start of PiP
             if (commonPlayerViewModel.isFullscreen.value != true) {
@@ -1355,14 +1378,6 @@ class PlayerFragment : Fragment(R.layout.fragment_player), CustomPlayerCallback 
                 }
                 .build()
         }
-
-    private fun createSeekbarPreviewListener(): SeekbarPreviewListener {
-        return SeekbarPreviewListener(
-            OnlineTimeFrameReceiver(requireContext(), streams.previewFrames),
-            playerControlsBinding,
-            streams.duration * 1000
-        )
-    }
 
     /**
      * Detect whether PiP is supported and enabled

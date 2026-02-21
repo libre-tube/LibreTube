@@ -25,6 +25,10 @@ interface DownloadDao {
 
     @Transaction
     @Query("SELECT * FROM download WHERE videoId = :videoId")
+    suspend fun getDownloadById(videoId: String): DownloadWithItems?
+
+    @Transaction
+    @Query("SELECT * FROM download WHERE videoId = :videoId")
     suspend fun findById(videoId: String): DownloadWithItems?
 
     @Query("SELECT EXISTS (SELECT * FROM download WHERE videoId = :videoId)")
