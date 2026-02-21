@@ -478,7 +478,7 @@ class PlayerFragment : Fragment(R.layout.fragment_player), CustomPlayerCallback 
             DatabaseHolder.Database.downloadDao().findById(videoId)
         }
 
-        if (localDownloadVersion != null && createNewSession) {
+        if (!isOffline && localDownloadVersion != null && createNewSession) {
             // the dialog must also be visible when in fullscreen, thus we need to use the activity's
             // fragment manager and not the one from [PlayerFragment]
             val fragmentManager = requireActivity().supportFragmentManager
@@ -718,12 +718,6 @@ class PlayerFragment : Fragment(R.layout.fragment_player), CustomPlayerCallback 
                 .show(childFragmentManager)
         }
 
-        // FullScreen button trigger
-        // hide fullscreen button if autorotation enabled
-        playerControlsBinding.fullscreen.setOnClickListener {
-            toggleFullscreen()
-        }
-
         // share button
         binding.relPlayerShare.setOnClickListener {
             if (!this::streams.isInitialized) return@setOnClickListener
@@ -784,7 +778,6 @@ class PlayerFragment : Fragment(R.layout.fragment_player), CustomPlayerCallback 
 
             DownloadHelper.startDownloadDialog(requireContext(), childFragmentManager, videoId)
         }
-        binding.relPlayerDownload.isVisible = !isOffline
 
         binding.relPlayerScreenshot.setOnClickListener {
             if (!this::streams.isInitialized) return@setOnClickListener
@@ -893,12 +886,11 @@ class PlayerFragment : Fragment(R.layout.fragment_player), CustomPlayerCallback 
     /**
      * Enter/exit fullscreen or toggle it depending on the current state
      */
-    fun toggleFullscreen(
-        isFullscreen: Boolean = commonPlayerViewModel.isFullscreen.value == false
-    ) {
+    override fun toggleFullscreen() {
         binding.player.hideController()
 
-        if (isFullscreen) {
+        val isFullscreen = commonPlayerViewModel.isFullscreen.value == true
+        if (!isFullscreen) {
             // go to fullscreen mode
             setFullscreen()
         } else {
@@ -1158,7 +1150,13 @@ class PlayerFragment : Fragment(R.layout.fragment_player), CustomPlayerCallback 
         }
 
         // initialize the player view actions
-        binding.player.initialize(chaptersViewModel, viewModel, viewLifecycleOwner, this)
+        binding.player.initialize(
+            chaptersViewModel,
+            commonPlayerViewModel,
+            viewModel,
+            viewLifecycleOwner,
+            this
+        )
 
         if (binding.playerMotionLayout.progress != 1.0f) {
             // show controllers when not in picture in picture mode
@@ -1184,20 +1182,15 @@ class PlayerFragment : Fragment(R.layout.fragment_player), CustomPlayerCallback 
                 streams.uploaderSubscriberCount.formatShort()
             )
             player.isLive = streams.isLive
-            relPlayerDownload.isVisible = !streams.isLive
+            relPlayerDownload.isVisible = !streams.isLive && !isOffline
         }
         playerControlsBinding.exoTitle.text = streams.title
 
         // init the chapters recyclerview
         chaptersViewModel.chaptersLiveData.postValue(streams.chapters)
 
-        if (PlayerHelper.relatedStreamsEnabled) {
-            val relatedLayoutManager = binding.relatedRecView.layoutManager as LinearLayoutManager
-            binding.relatedRecView.adapter = VideoCardsAdapter(
-                columnWidthDp = if (relatedLayoutManager.orientation == LinearLayoutManager.HORIZONTAL) 250f else null
-            ).also { adapter ->
-                adapter.submitList(streams.relatedStreams.filter { !it.title.isNullOrBlank() })
-            }
+        lifecycleScope.launch {
+            showRelatedStreams()
         }
 
         // update the subscribed state
@@ -1224,6 +1217,27 @@ class PlayerFragment : Fragment(R.layout.fragment_player), CustomPlayerCallback 
 
             seekBarPreviewListener = listener
             playerControlsBinding.exoProgress.addSeekBarListener(listener)
+        }
+    }
+
+    private suspend fun showRelatedStreams() {
+        if (!PlayerHelper.relatedStreamsEnabled) return
+
+        val relatedStreams = if (isOffline) {
+            withContext(Dispatchers.IO) {
+                DatabaseHolder.Database.downloadDao().getAll()
+                    .filter { it.download.videoId != videoId }
+                    .map { it.download.toStreamItem() }
+            }
+        } else {
+            streams.relatedStreams.filter { !it.title.isNullOrBlank() }
+        }
+
+        val relatedLayoutManager = binding.relatedRecView.layoutManager as LinearLayoutManager
+        binding.relatedRecView.adapter = VideoCardsAdapter(
+            columnWidthDp = if (relatedLayoutManager.orientation == LinearLayoutManager.HORIZONTAL) 250f else null
+        ).also { adapter ->
+            adapter.submitList(relatedStreams)
         }
     }
 
@@ -1281,7 +1295,8 @@ class PlayerFragment : Fragment(R.layout.fragment_player), CustomPlayerCallback 
 
     private suspend fun getTimeFrameReceiver(): TimeFrameReceiver? = withContext(Dispatchers.IO) {
         return@withContext if (isOffline) {
-            val downloadItems = DatabaseHolder.Database.downloadDao().getDownloadById(videoId)?.downloadItems
+            val downloadItems =
+                DatabaseHolder.Database.downloadDao().getDownloadById(videoId)?.downloadItems
             downloadItems?.firstOrNull { it.path.exists() && it.type == FileType.VIDEO }?.path?.let {
                 OfflineTimeFrameReceiver(requireContext(), it)
             }
@@ -1447,10 +1462,6 @@ class PlayerFragment : Fragment(R.layout.fragment_player), CustomPlayerCallback 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-    }
-
-    override fun exitFullscreen() {
-        unsetFullscreen()
     }
 
     override fun getVideoId(): String {

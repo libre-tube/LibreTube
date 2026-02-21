@@ -9,5 +9,4 @@ interface PlayerOptions {
     fun onQualityClicked()
     fun onAudioStreamClicked()
     fun onStatsClicked()
-    fun exitFullscreen()
 }

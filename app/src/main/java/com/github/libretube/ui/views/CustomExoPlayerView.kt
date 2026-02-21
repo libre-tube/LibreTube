@@ -192,15 +192,24 @@ class CustomExoPlayerView(
             playerView = this,
             videoFrameView = backgroundBinding.exoContentFrame,
             onSwipeUpCompleted = {
-                if (!isFullscreen()) togglePlayerFullscreen(true)
+                if (!isFullscreen()) playerCallback?.toggleFullscreen()
             },
-            onSwipeDownCompleted = ::minimizeOrExitPlayer
+            onSwipeDownCompleted = {
+                if (isFullscreen()) playerCallback?.toggleFullscreen()
+            }
         )
     }
 
-    fun initialize(chaptersViewModel: ChaptersViewModel, playerViewModel: PlayerViewModel, viewLifecycleOwner: LifecycleOwner, playerCallback: CustomPlayerCallback) {
+    fun initialize(
+        chaptersViewModel: ChaptersViewModel,
+        commonPlayerViewModel: CommonPlayerViewModel,
+        playerViewModel: PlayerViewModel,
+        viewLifecycleOwner: LifecycleOwner,
+        playerCallback: CustomPlayerCallback
+    ) {
         this.chaptersViewModel = chaptersViewModel
         this.playerViewModel = playerViewModel
+        this.commonPlayerViewModel = commonPlayerViewModel
         this.viewLifecycleOwner = viewLifecycleOwner
         this.playerCallback = playerCallback
 
@@ -217,6 +226,7 @@ class CustomExoPlayerView(
         // don't let the player view show its controls automatically
         controllerAutoShow = false
 
+        binding.fullscreen.setOnClickListener { playerCallback.toggleFullscreen() }
         // locking the player
         binding.lockPlayer.setOnClickListener {
             // change the locked/unlocked icon
@@ -372,6 +382,7 @@ class CustomExoPlayerView(
         updateMarginsByFullscreenMode()
 
         commonPlayerViewModel?.isFullscreen?.observe(viewLifecycleOwner) { isFullscreen ->
+            Log.e("is full", isFullscreen.toString())
             updateTopBarMargin()
 
             binding.fullscreen.isInvisible = PlayerHelper.autoFullscreenEnabled
@@ -977,14 +988,15 @@ class CustomExoPlayerView(
             // put normal tracks before auto-generated tracks
             .sortedBy { it.roleFlags == PlayerHelper.ROLE_FLAG_AUTO_GEN_SUBTITLE }
             .associateWith {
-            val displayName = Locale.forLanguageTag(it.language.orEmpty()).getDisplayLanguage(Locale.getDefault())
+                val displayName = Locale.forLanguageTag(it.language.orEmpty())
+                    .getDisplayLanguage(Locale.getDefault())
 
-            if (it.roleFlags == PlayerHelper.ROLE_FLAG_AUTO_GEN_SUBTITLE) {
-                "$displayName (${context.getString(R.string.auto_generated)})"
-            } else {
-                displayName
+                if (it.roleFlags == PlayerHelper.ROLE_FLAG_AUTO_GEN_SUBTITLE) {
+                    "$displayName (${context.getString(R.string.auto_generated)})"
+                } else {
+                    displayName
+                }
             }
-        }
 
         val currentSubtitle = PlayerHelper.getCurrentPlayedCaptionFormat(player)
         BaseBottomSheet()
@@ -994,10 +1006,11 @@ class CustomExoPlayerView(
                     track == currentSubtitle
                 }?.value ?: context.getString(R.string.none)
             ) { index ->
-                val captionsFormat = captions.keys.toList().getOrNull(index - 1) ?: return@setSimpleItems
+                val captionsFormat =
+                    captions.keys.toList().getOrNull(index - 1) ?: return@setSimpleItems
 
-                 updateCurrentSubtitle(captionsFormat.id)
-                 playerViewModel?.currentCaptionId = captionsFormat.id
+                updateCurrentSubtitle(captionsFormat.id)
+                playerViewModel?.currentCaptionId = captionsFormat.id
             }
             .show(supportFragmentManager)
     }
@@ -1070,11 +1083,12 @@ class CustomExoPlayerView(
     fun setPlayerResolution(resolution: Int, isSelectedByUser: Boolean = false) {
         val player = player as? MediaController ?: return
 
-        val transformedResolution = if (!isSelectedByUser && playerCallback?.isVideoShort() ?: false) {
-            ceil(resolution * 16.0 / 9.0).toInt()
-        } else {
-            resolution
-        }
+        val transformedResolution =
+            if (!isSelectedByUser && playerCallback?.isVideoShort() ?: false) {
+                ceil(resolution * 16.0 / 9.0).toInt()
+            } else {
+                resolution
+            }
 
         player.sendCustomCommand(
             AbstractPlayerService.runPlayerActionCommand, bundleOf(
@@ -1138,14 +1152,11 @@ class CustomExoPlayerView(
         baseBottomSheet.show(supportFragmentManager)
     }
 
-    override fun exitFullscreen() {
-        playerCallback?.exitFullscreen()
-    }
-
     override fun onStatsClicked() {
         val player = player ?: return
 
-        val videoStats = PlayerHelper.getVideoStats(player.currentTracks, playerCallback?.getVideoId().orEmpty())
+        val videoStats =
+            PlayerHelper.getVideoStats(player.currentTracks, playerCallback?.getVideoId().orEmpty())
         StatsSheet()
             .apply { arguments = bundleOf(IntentData.videoStats to videoStats) }
             .show(supportFragmentManager)
@@ -1414,21 +1425,13 @@ class CustomExoPlayerView(
             }
 
             KeyEvent.KEYCODE_F -> {
-                togglePlayerFullscreen()
+                playerCallback?.toggleFullscreen()
             }
 
             else -> return false
         }
 
         return true
-    }
-
-    fun togglePlayerFullscreen(isFullscreen: Boolean = !isFullscreen()) {
-        try {
-            findFragment<PlayerFragment>().toggleFullscreen(isFullscreen)
-        } catch (error: IllegalStateException) {
-            Log.e(this::class.simpleName, error.message.toString())
-        }
     }
 
     override fun getViewMeasures(): Pair<Int, Int> {
@@ -1456,10 +1459,6 @@ class CustomExoPlayerView(
         }
 
         updateDisplayedDuration()
-    }
-
-    fun minimizeOrExitPlayer() {
-        exitFullscreen()
     }
 
     fun getWindow(): Window = currentWindow ?: activity.window
