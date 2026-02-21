@@ -79,6 +79,23 @@
     </LinearLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/resume_all"
+        style="?attr/floatingActionButtonSmallSecondaryStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="8dp"
+        android:contentDescription="@string/resume"
+        android:src="@drawable/ic_download"
+        android:tooltipText="@string/resume"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@+id/delete_all"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:targetApi="o"
+        tools:visibility="visible" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/delete_all"
         style="?attr/floatingActionButtonSmallSecondaryStyle"
         android:layout_width="wrap_content"

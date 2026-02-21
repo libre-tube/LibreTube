@@ -119,6 +119,7 @@ object PreferenceKeys {
     const val SELECTED_SHARE_HOST = "selected_share_host"
     const val CLEAR_BOOKMARKS = "clear_bookmarks"
     const val MAX_CONCURRENT_DOWNLOADS = "max_parallel_downloads"
+    const val INCOMPLETE_DOWNLOAD_IDS = "incomplete_download_ids"
     const val EXTERNAL_DOWNLOAD_PROVIDER = "external_download_provider"
     const val DISABLE_VIDEO_IMAGE_PROXY = "disable_video_image_proxy"
     const val FULL_LOCAL_MODE = "full_local_mode"
