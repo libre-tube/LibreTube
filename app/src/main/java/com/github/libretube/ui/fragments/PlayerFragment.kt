@@ -117,6 +117,7 @@ import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
 import kotlin.math.abs
 import kotlin.math.ceil
+import kotlin.math.pow
 
 
 @androidx.annotation.OptIn(androidx.media3.common.util.UnstableApi::class)
@@ -533,7 +534,8 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
             }
 
             override fun handleOnBackProgressed(backEvent: BackEventCompat) {
-                binding.playerMotionLayout.progress = backEvent.progress
+                val smoothedProgress = MAX_PROGRESS * (1 - 2f.pow(-backEvent.progress / MAX_PROGRESS * 5f))
+                binding.playerMotionLayout.progress = smoothedProgress
             }
 
             override fun handleOnBackCancelled() {
@@ -1609,5 +1611,9 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    companion object {
+        private const val MAX_PROGRESS = 0.4f
     }
 }
