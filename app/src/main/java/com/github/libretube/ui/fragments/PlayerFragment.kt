@@ -21,7 +21,6 @@ import android.view.SurfaceView
 import android.view.View
 import android.view.ViewGroup
 import android.view.ViewGroup.LayoutParams
-import android.widget.Toast
 import androidx.activity.BackEventCompat
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.result.contract.ActivityResultContracts
@@ -65,7 +64,6 @@ import com.github.libretube.enums.PlayerCommand
 import com.github.libretube.enums.PlayerEvent
 import com.github.libretube.enums.SbSkipOptions
 import com.github.libretube.enums.ShareObjectType
-import com.github.libretube.extensions.anyChildFocused
 import com.github.libretube.extensions.formatShort
 import com.github.libretube.extensions.parcelable
 import com.github.libretube.extensions.serializableExtra
@@ -82,11 +80,12 @@ import com.github.libretube.helpers.PlayerHelper.getCurrentSegment
 import com.github.libretube.helpers.ThemeHelper
 import com.github.libretube.helpers.WindowHelper
 import com.github.libretube.obj.ShareData
-import com.github.libretube.obj.VideoResolution
 import com.github.libretube.parcelable.PlayerData
 import com.github.libretube.services.AbstractPlayerService
+import com.github.libretube.services.OfflinePlayerService
 import com.github.libretube.services.OnlinePlayerService
 import com.github.libretube.ui.activities.MainActivity
+import com.github.libretube.ui.activities.NoInternetActivity
 import com.github.libretube.ui.adapters.VideoCardsAdapter
 import com.github.libretube.ui.base.BaseActivity
 import com.github.libretube.ui.dialogs.AddToPlaylistDialog
@@ -96,15 +95,13 @@ import com.github.libretube.ui.extensions.animateDown
 import com.github.libretube.ui.extensions.getSystemInsets
 import com.github.libretube.ui.extensions.setOnBackPressed
 import com.github.libretube.ui.extensions.setupSubscriptionButton
-import com.github.libretube.ui.interfaces.OnlinePlayerOptions
+import com.github.libretube.ui.interfaces.CustomPlayerCallback
 import com.github.libretube.ui.listeners.SeekbarPreviewListener
 import com.github.libretube.ui.models.ChaptersViewModel
 import com.github.libretube.ui.models.CommentsViewModel
 import com.github.libretube.ui.models.CommonPlayerViewModel
 import com.github.libretube.ui.models.PlayerViewModel
-import com.github.libretube.ui.sheets.BaseBottomSheet
 import com.github.libretube.ui.sheets.CommentsSheet
-import com.github.libretube.ui.sheets.StatsSheet
 import com.github.libretube.util.OnlineTimeFrameReceiver
 import com.github.libretube.util.PlayingQueue
 import com.github.libretube.util.TextUtils
@@ -116,17 +113,15 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
 import kotlin.math.abs
-import kotlin.math.ceil
 
 
 @androidx.annotation.OptIn(androidx.media3.common.util.UnstableApi::class)
-class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
+class PlayerFragment : Fragment(R.layout.fragment_player), CustomPlayerCallback {
     private var _binding: FragmentPlayerBinding? = null
     val binding get() = _binding!!
 
     private val playerControlsBinding get() = binding.player.binding
     private val playerBackgroundBinding get() = binding.player.backgroundBinding
-    private val fastForwardViewBinding get() = playerBackgroundBinding.fastForwardView.binding
 
     private val commonPlayerViewModel: CommonPlayerViewModel by activityViewModels()
     private val viewModel: PlayerViewModel by viewModels()
@@ -138,6 +133,7 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
     private lateinit var videoId: String
     private var playlistId: String? = null
     private var channelId: String? = null
+    private var isOffline: Boolean = false
 
     // data and objects stored for the player
     private lateinit var streams: Streams
@@ -150,15 +146,6 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
                 ?: return false
             return currentVideoFormat.height > currentVideoFormat.width
         }
-
-    // if null, it's been set to automatic
-    private var fullscreenResolution: Int? = null
-
-    // the resolution to use when the video is not played in fullscreen
-    // if null, use same quality as fullscreen
-    private var noFullscreenResolution: Int? = null
-
-    private var selectedAudioLanguageAndRoleFlags: Pair<String?, @C.RoleFlags Int>? = null
 
     private val handler = Handler(Looper.getMainLooper())
 
@@ -428,9 +415,6 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
             IntentFilter(PlayerHelper.getIntentActionName(requireContext())),
             ContextCompat.RECEIVER_NOT_EXPORTED
         )
-
-        fullscreenResolution = PlayerHelper.getDefaultResolution(requireContext(), true)
-        noFullscreenResolution = PlayerHelper.getDefaultResolution(requireContext(), false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -452,6 +436,7 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
 
         val playerData = requireArguments().parcelable<PlayerData>(IntentData.playerData)!!
         videoId = playerData.videoId
+        isOffline = playerData.isOffline
         playlistId = playerData.playlistId
         channelId = playerData.channelId
 
@@ -558,13 +543,28 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
     }
 
     private fun attachToPlayerService(playerData: PlayerData, startNewSession: Boolean) {
-        BackgroundHelper.startMediaService(
-            requireContext(),
-            OnlinePlayerService::class.java,
-            if (startNewSession) bundleOf(
+        val (serviceClass, args) = if (playerData.isOffline) {
+            val isNoInternet = activity is NoInternetActivity
+
+            OfflinePlayerService::class.java to bundleOf(
+                IntentData.videoId to videoId,
+                IntentData.downloadTab to playerData.downloadTab,
+                IntentData.playlistId to playlistId,
+                IntentData.sortOptions to playerData.downloadSortingOrder,
+                IntentData.shuffle to playerData.shuffle,
+                IntentData.noInternet to isNoInternet
+            )
+        } else {
+            OnlinePlayerService::class.java to bundleOf(
                 IntentData.playerData to playerData,
                 IntentData.audioOnly to false
-            ) else Bundle.EMPTY,
+            )
+        }
+
+        BackgroundHelper.startMediaService(
+            requireContext(),
+            serviceClass,
+            if (startNewSession) args else Bundle.EMPTY,
         ) {
             if (_binding == null) {
                 playerController.sendCustomCommand(
@@ -632,7 +632,7 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
                 if (currentId == transitionStartId) {
                     commonPlayerViewModel.isMiniPlayerVisible.value = false
                     // re-enable captions
-                    updateCurrentSubtitle(viewModel.currentSubtitle)
+                    binding.player.updateCurrentSubtitle(viewModel.currentSubtitle)
                     binding.player.useController = true
                     commonPlayerViewModel.setSheetExpand(true)
                     mainMotionLayout.progress = 0F
@@ -643,7 +643,7 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
                 } else if (currentId == transitionEndId) {
                     commonPlayerViewModel.isMiniPlayerVisible.value = true
                     // disable captions temporarily
-                    updateCurrentSubtitle(null)
+                    binding.player.updateCurrentSubtitle(null)
                     disableController()
                     commonPlayerViewModel.setSheetExpand(null)
                     playerBackgroundBinding.sbSkipBtn.isGone = true
@@ -780,6 +780,7 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
 
             DownloadHelper.startDownloadDialog(requireContext(), childFragmentManager, videoId)
         }
+        binding.relPlayerDownload.isVisible = !isOffline
 
         binding.relPlayerScreenshot.setOnClickListener {
             if (!this::streams.isInitialized) return@setOnClickListener
@@ -838,7 +839,7 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
         playerController.release()
         killPlayerFragment()
 
-        NavigationHelper.openAudioPlayerFragment(requireContext())
+        NavigationHelper.openAudioPlayerFragment(requireContext(), offlinePlayer = isOffline)
     }
 
     private fun updateFullscreenOrientation() {
@@ -861,7 +862,6 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
 
         commonPlayerViewModel.setSheetExpand(null)
 
-        updateResolution(true)
         openOrCloseFullscreenDialog(true)
 
         binding.player.updateMarginsByFullscreenMode()
@@ -878,7 +878,6 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
         }
 
         openOrCloseFullscreenDialog(false)
-        updateResolution(false)
 
         binding.player.updateMarginsByFullscreenMode()
 
@@ -1110,10 +1109,7 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
         setAutoPlayCountdownEnabled(PlayerHelper.autoPlayCountdown)
 
         // set the default subtitle if available
-        updateCurrentSubtitle(viewModel.currentSubtitle)
-
-        // set media source and resolution in the beginning
-        updateResolution(commonPlayerViewModel.isFullscreen.value == true)
+        binding.player.updateCurrentSubtitle(viewModel.currentSubtitle)
 
         if (streams.category == Streams.CATEGORY_MUSIC) {
             playerController.setPlaybackSpeed(1f)
@@ -1158,13 +1154,7 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
         }
 
         // initialize the player view actions
-        binding.player.initialize(chaptersViewModel)
-        binding.player.initPlayerOptions(
-            viewModel,
-            commonPlayerViewModel,
-            viewLifecycleOwner,
-            this
-        )
+        binding.player.initialize(chaptersViewModel, viewModel, viewLifecycleOwner, this)
 
         if (binding.playerMotionLayout.progress != 1.0f) {
             // show controllers when not in picture in picture mode
@@ -1207,12 +1197,14 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
         }
 
         // update the subscribed state
-        binding.playerSubscribe.setupSubscriptionButton(
-            streams.uploaderUrl.toID(),
-            streams.uploader,
-            streams.uploaderAvatar,
-            streams.uploaderVerified
-        )
+        if (streams.uploaderUrl != null) {
+            binding.playerSubscribe.setupSubscriptionButton(
+                streams.uploaderUrl!!.toID(),
+                streams.uploader,
+                streams.uploaderAvatar,
+                streams.uploaderVerified
+            )
+        }
 
         // seekbar preview setup
         playerControlsBinding.seekbarPreview.isGone = true
@@ -1291,52 +1283,6 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
     }
 
     /**
-     * Get all available player resolutions
-     */
-    private fun getAvailableResolutions(): List<VideoResolution> {
-        val resolutions = playerController.currentTracks.groups.asSequence()
-            .flatMap { group ->
-                (0 until group.length).map {
-                    group.getTrackFormat(it).height
-                }
-            }
-            .filter { it > 0 }
-            .map { VideoResolution("${it}p", it) }
-            .toSortedSet(compareByDescending { it.resolution })
-
-        resolutions.add(VideoResolution(getString(R.string.auto_quality), Int.MAX_VALUE))
-        return resolutions.toList()
-    }
-
-    private fun setPlayerResolution(resolution: Int, isSelectedByUser: Boolean = false) {
-        if (!::playerController.isInitialized) return
-
-        val transformedResolution = if (!isSelectedByUser && isShort) {
-            ceil(resolution * 16.0 / 9.0).toInt()
-        } else {
-            resolution
-        }
-
-        playerController.sendCustomCommand(
-            AbstractPlayerService.runPlayerActionCommand, bundleOf(
-                PlayerCommand.SET_RESOLUTION.name to transformedResolution
-            )
-        )
-
-        binding.player.selectedResolution = resolution
-    }
-
-    private fun updateResolution(isFullscreen: Boolean) {
-        if (!isFullscreen && noFullscreenResolution != null) {
-            setPlayerResolution(noFullscreenResolution!!)
-        } else if (fullscreenResolution != null) {
-            setPlayerResolution(fullscreenResolution!!)
-        } else {
-            setPlayerResolution(Int.MAX_VALUE)
-        }
-    }
-
-    /**
      * Use the sensor mode if auto fullscreen is enabled
      */
     @SuppressLint("SourceLockedOrientationActivity")
@@ -1351,120 +1297,7 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
         }
     }
 
-    override fun onCaptionsClicked() {
-        if (!this@PlayerFragment::streams.isInitialized || streams.subtitles.isEmpty()) {
-            Toast.makeText(context, R.string.no_subtitles_available, Toast.LENGTH_SHORT).show()
-            return
-        }
 
-        val subtitles = listOf(Subtitle(name = getString(R.string.none))).plus(streams.subtitles)
-
-        BaseBottomSheet()
-            .setSimpleItems(
-                subtitles.map { it.getDisplayName(requireContext()) },
-                preselectedItem = subtitles.firstOrNull {
-                    val roleFlags = PlayerHelper.getSubtitleRoleFlags(it)
-                    val currentSubtitle =
-                        PlayerHelper.getCurrentPlayedCaptionFormat(playerController)
-                    it.code == currentSubtitle?.language && currentSubtitle?.roleFlags == roleFlags
-                }
-                    ?.getDisplayName(requireContext()) ?: getString(R.string.none)
-            ) { index ->
-                val subtitle = subtitles.getOrNull(index) ?: return@setSimpleItems
-                updateCurrentSubtitle(subtitle)
-                viewModel.currentSubtitle = subtitle
-            }
-            .show(childFragmentManager)
-    }
-
-    override fun onQualityClicked() {
-        // get the available resolutions
-        val resolutions = getAvailableResolutions()
-
-        // Dialog for quality selection
-        BaseBottomSheet()
-            .setSimpleItems(
-                resolutions.map(VideoResolution::name),
-                preselectedItem = resolutions.firstOrNull {
-                    it.resolution == binding.player.selectedResolution
-                }?.name ?: getString(R.string.auto_quality)
-            ) { which ->
-                val newResolution = resolutions[which].resolution
-                setPlayerResolution(newResolution, true)
-
-                // save the selected resolution to update on fullscreen change
-                if (noFullscreenResolution != null && commonPlayerViewModel.isFullscreen.value != true) {
-                    noFullscreenResolution = newResolution
-                } else {
-                    fullscreenResolution = newResolution
-                }
-            }
-            .show(childFragmentManager)
-    }
-
-    override fun onAudioStreamClicked() {
-        val context = requireContext()
-        val audioLanguagesAndRoleFlags = PlayerHelper.getAudioLanguagesAndRoleFlagsFromTrackGroups(
-            playerController.currentTracks.groups,
-            false
-        )
-        val audioLanguages = audioLanguagesAndRoleFlags.map {
-            PlayerHelper.getAudioTrackNameFromFormat(context, it)
-        }
-        val baseBottomSheet = BaseBottomSheet()
-
-        if (audioLanguagesAndRoleFlags.isEmpty() || (audioLanguagesAndRoleFlags.size == 1 &&
-                    audioLanguagesAndRoleFlags[0].first == null &&
-                    !PlayerHelper.haveAudioTrackRoleFlagSet(
-                        audioLanguagesAndRoleFlags[0].second
-                    ))
-        ) {
-            // Regardless of audio format or quality, if there is only one audio stream which has
-            // no language and no role flags, it should mean that there is only a single audio
-            // track which has no language or track type set in the video played
-            // Consider it as the default audio track (or unknown)
-            baseBottomSheet.setSimpleItems(
-                listOf(getString(R.string.default_or_unknown_audio_track)),
-                preselectedItem = getString(R.string.default_or_unknown_audio_track),
-                listener = null
-            )
-        } else {
-            baseBottomSheet.setSimpleItems(
-                audioLanguages,
-                preselectedItem = selectedAudioLanguageAndRoleFlags?.let {
-                    PlayerHelper.getAudioTrackNameFromFormat(context, it)
-                },
-            ) { index ->
-                val selectedAudioFormat = audioLanguagesAndRoleFlags[index]
-                playerController.sendCustomCommand(
-                    AbstractPlayerService.runPlayerActionCommand, bundleOf(
-                        PlayerCommand.SET_AUDIO_ROLE_FLAGS.name to selectedAudioFormat.second
-                    )
-                )
-                playerController.sendCustomCommand(
-                    AbstractPlayerService.runPlayerActionCommand, bundleOf(
-                        PlayerCommand.SET_AUDIO_LANGUAGE.name to selectedAudioFormat.first
-                    )
-                )
-                selectedAudioLanguageAndRoleFlags = selectedAudioFormat
-            }
-        }
-
-        baseBottomSheet.show(childFragmentManager)
-    }
-
-    override fun exitFullscreen() {
-        unsetFullscreen()
-    }
-
-    override fun onStatsClicked() {
-        if (!this::streams.isInitialized) return
-
-        val videoStats = PlayerHelper.getVideoStats(playerController.currentTracks, videoId)
-        StatsSheet()
-            .apply { arguments = bundleOf(IntentData.videoStats to videoStats) }
-            .show(childFragmentManager)
-    }
 
     override fun onPictureInPictureModeChanged(isInPictureInPictureMode: Boolean) {
         super.onPictureInPictureModeChanged(isInPictureInPictureMode)
@@ -1472,7 +1305,7 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
             // hide and disable exoPlayer controls
             disableController()
 
-            updateCurrentSubtitle(null)
+            binding.player.updateCurrentSubtitle(null)
 
             openOrCloseFullscreenDialog(true)
             pipActivity = activity
@@ -1486,23 +1319,13 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
                 closedVideo = true
             }
 
-            updateCurrentSubtitle(viewModel.currentSubtitle)
+            binding.player.updateCurrentSubtitle(viewModel.currentSubtitle)
 
             // unset fullscreen if it's not been enabled before the start of PiP
             if (commonPlayerViewModel.isFullscreen.value != true) {
                 openOrCloseFullscreenDialog(false)
             }
         }
-    }
-
-    private fun updateCurrentSubtitle(subtitle: Subtitle?) {
-        if (!::playerController.isInitialized) return
-
-        playerController.sendCustomCommand(
-            AbstractPlayerService.runPlayerActionCommand, bundleOf(
-                PlayerCommand.SET_SUBTITLE.name to subtitle
-            )
-        )
     }
 
     fun onUserLeaveHint() {
@@ -1609,5 +1432,17 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    override fun exitFullscreen() {
+        unsetFullscreen()
+    }
+
+    override fun getVideoId(): String {
+        return videoId
+    }
+
+    override fun isVideoShort(): Boolean {
+        return isShort
     }
 }

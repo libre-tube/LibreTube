@@ -170,7 +170,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.github.libretube.ui.views.OnlinePlayerView
+    <com.github.libretube.ui.views.CustomExoPlayerView
         android:id="@+id/player"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

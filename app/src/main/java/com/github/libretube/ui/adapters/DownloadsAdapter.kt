@@ -2,7 +2,6 @@ package com.github.libretube.ui.adapters
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.content.Intent
 import android.text.format.DateUtils
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -20,7 +19,6 @@ import com.github.libretube.helpers.BackgroundHelper
 import com.github.libretube.helpers.DownloadHelper
 import com.github.libretube.helpers.ImageHelper
 import com.github.libretube.helpers.NavigationHelper
-import com.github.libretube.ui.activities.OfflinePlayerActivity
 import com.github.libretube.ui.adapters.callbacks.DiffUtilItemCallback
 import com.github.libretube.ui.base.BaseActivity
 import com.github.libretube.ui.extensions.setWatchProgressLength
@@ -115,11 +113,15 @@ class DownloadsAdapter(
 
             root.setOnClickListener {
                 when (downloadTab) {
-                    DownloadTab.VIDEO -> {
-                        val intent = Intent(root.context, OfflinePlayerActivity::class.java)
-                            .putExtra(IntentData.videoId, download.videoId)
-                            .putExtra(IntentData.sortOptions, currentSortOrder())
-                        root.context.startActivity(intent)
+                    DownloadTab.VIDEO, DownloadTab.PLAYLIST-> {
+                        NavigationHelper.navigateVideo(
+                            root.context,
+                            videoId = download.videoId,
+                            playlistId = playlistId,
+                            downloadTab = downloadTab,
+                            downloadSortingOrder = currentSortOrder(),
+                            isOffline = true
+                        )
                     }
                     DownloadTab.AUDIO -> {
                         BackgroundHelper.playOnBackgroundOffline(
@@ -130,13 +132,6 @@ class DownloadsAdapter(
                             sortOrder = currentSortOrder()
                         )
                         NavigationHelper.openAudioPlayerFragment(root.context, offlinePlayer = true)
-                    }
-                    DownloadTab.PLAYLIST -> {
-                        val intent = Intent(root.context, OfflinePlayerActivity::class.java)
-                            .putExtra(IntentData.videoId, download.videoId)
-                            .putExtra(IntentData.playlistId, playlistId)
-                            .putExtra(IntentData.sortOptions, currentSortOrder())
-                        root.context.startActivity(intent)
                     }
                 }
             }
