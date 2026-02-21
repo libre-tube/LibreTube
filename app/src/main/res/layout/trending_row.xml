@@ -48,7 +48,7 @@
                     android:layout_height="wrap_content"
                     android:paddingHorizontal="6dp"
                     android:paddingVertical="2dp"
-                    android:src="@drawable/ic_block"
+                    android:src="@drawable/ic_paid_content"
                     android:layout_gravity="center"
                     app:tint="@color/duration_text_color"
                     tools:ignore="RtlSymmetry" />
