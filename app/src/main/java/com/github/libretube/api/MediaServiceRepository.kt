@@ -25,7 +25,7 @@ interface MediaServiceRepository {
         actionType: List<String>? = null
     ): SegmentData
 
-    suspend fun getDeArrowContent(videoIds: String): Map<String, DeArrowContent>
+    suspend fun getDeArrowContent(videoId: String): DeArrowContent?
     suspend fun getCommentsNextPage(videoId: String, nextPage: String): CommentsPage
     suspend fun getSearchResults(searchQuery: String, filter: String): SearchResult
     suspend fun getSearchResultsNextPage(

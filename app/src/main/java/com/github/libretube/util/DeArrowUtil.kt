@@ -18,9 +18,10 @@ object DeArrowUtil {
     }
 
 
-    private suspend fun fetchDeArrowContent(videoId: String): Map<String, DeArrowContent>? {
+    private suspend fun fetchDeArrowContent(videoId: String): DeArrowContent? {
         return try {
             MediaServiceRepository.instance.getDeArrowContent(videoId)
+                .also { memoryCache.put(videoId, CacheObject(it)) }
         } catch (e: Exception) {
             Log.e(this::class.java.name, "Failed to fetch DeArrow content: ${e.message}")
             null
@@ -33,13 +34,11 @@ object DeArrowUtil {
     suspend fun deArrowStreams(streams: Streams, vidId: String): Streams {
         if (!PreferenceHelper.getBoolean(PreferenceKeys.DEARROW, false)) return streams
 
-        val response = fetchDeArrowContent(vidId) ?: return streams
+        val data = fetchDeArrowContent(vidId) ?: return streams
+        val (newTitle, newThumbnail) = extractTitleAndThumbnail(data)
 
-        response[vidId]?.let { data ->
-            val (newTitle, newThumbnail) = extractTitleAndThumbnail(data)
-            if (newTitle != null) streams.title = newTitle
-            if (newThumbnail != null) streams.thumbnailUrl = newThumbnail
-        }
+        if (newTitle != null) streams.title = newTitle
+        if (newThumbnail != null) streams.thumbnailUrl = newThumbnail
 
         return streams
     }
@@ -50,11 +49,7 @@ object DeArrowUtil {
     suspend fun deArrowVideoId(videoId: String): Pair<String?, String?>? {
         if (!PreferenceHelper.getBoolean(PreferenceKeys.DEARROW, false)) return null
 
-        val response = fetchDeArrowContent(videoId) ?: return null
-        response[videoId]?.let { data ->
-            return extractTitleAndThumbnail(data)
-        }
-
-        return null
+        val data = fetchDeArrowContent(videoId) ?: return null
+        return extractTitleAndThumbnail(data)
     }
 }

@@ -47,8 +47,8 @@ open class PipedMediaServiceRepository : MediaServiceRepository {
         JsonHelper.json.encodeToString(actionType)
     )
 
-    override suspend fun getDeArrowContent(videoIds: String): Map<String, DeArrowContent> =
-        api.getDeArrowContent(videoIds)
+    override suspend fun getDeArrowContent(videoId: String): DeArrowContent? =
+        api.getDeArrowContent(videoId)[videoId]
 
     override suspend fun getCommentsNextPage(videoId: String, nextPage: String): CommentsPage =
         api.getCommentsNextPage(videoId, nextPage)

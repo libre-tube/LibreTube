@@ -360,18 +360,14 @@ class NewPipeMediaServiceRepository : MediaServiceRepository {
         videoId.sha256Sum().substring(0, 4), category, actionType
     ).first { it.videoID == videoId }
 
-    override suspend fun getDeArrowContent(videoIds: String): Map<String, DeArrowContent> =
-        videoIds.split(',').chunked(25).flatMap {
-            it.parallelMap { videoId ->
-                runCatching {
-                    RetrofitInstance.externalApi.getDeArrowContent(
-                        // use hashed video id for privacy
-                        // https://wiki.sponsor.ajay.app/w/API_Docs/DeArrow#GET_/api/branding/:sha256HashPrefix
-                        videoId.sha256Sum().substring(0, 4)
-                    )
-                }.getOrNull()
-            }
-        }.filterNotNull().reduce { acc, map -> acc + map }.mapValues { (videoId, value) ->
+    override suspend fun getDeArrowContent(videoId: String): DeArrowContent? =
+        runCatching {
+            RetrofitInstance.externalApi.getDeArrowContent(
+                // use hashed video id for privacy
+                // https://wiki.sponsor.ajay.app/w/API_Docs/DeArrow#GET_/api/branding/:sha256HashPrefix
+                videoId.sha256Sum().substring(0, 4)
+            )
+        }.getOrDefault(emptyMap())[videoId]?.let { value ->
             value.copy(
                 thumbnails = value.thumbnails.map { thumbnail ->
                     thumbnail.takeIf { it.original } ?: thumbnail.copy(
