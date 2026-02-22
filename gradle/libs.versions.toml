@@ -35,7 +35,10 @@ collection = "1.5.0"
 swiperefreshlayout = "1.2.0"
 splashscreen = "1.2.0"
 
+
 [libraries]
+
+
 androidx-activity = { group = "androidx.activity", name = "activity-ktx", version.ref = "activity" }
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
 androidx-core = { group = "androidx.core", name = "core", version.ref = "core" }
@@ -83,8 +86,12 @@ androidx-paging = { group = "androidx.paging", name = "paging-runtime-ktx", vers
 androidx-collection = { group = "androidx.collection", name = "collection", version.ref = "collection" }
 androidx-swiperefreshlayout = { group = "androidx.swiperefreshlayout", name = "swiperefreshlayout", version.ref = "swiperefreshlayout" }
 
+
+
 [plugins]
 androidTest = { id = "com.android.test", version.ref = "gradle" }
 baselineprofile = { id = "androidx.baselineprofile", version.ref = "baselineprofile" }
 androidApplication = { id = "com.android.application", version.ref = "gradle" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
+
+

@@ -27,6 +27,7 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.onNavDestinationSelected
 import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.RecyclerView
+import androidx.work.WorkManager
 import com.github.libretube.BuildConfig
 import com.github.libretube.NavDirections
 import com.github.libretube.R

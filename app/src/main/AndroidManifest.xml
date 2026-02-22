@@ -389,6 +389,7 @@
             </intent-filter>
         </activity>
 
+
         <service
             android:name=".services.DownloadService"
             android:enabled="true"
@@ -424,7 +425,6 @@
             </intent-filter>
 
         </service>
-
         <service
             android:name=".services.OnClearFromRecentService"
             android:enabled="true"

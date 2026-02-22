@@ -543,7 +543,8 @@
     <string name="include_timestamp_in_filename">Include timestamp in filename</string>
     <string name="did_you_mean">Did you mean:</string>
     <string name="showing_results_for">Showing results for:</string>
-
+    <string name="importing">Importing</string>
+    <string name="preparing">Preparing…</string>
     <!-- Notification channel strings -->
     <string name="download_channel_name">Download Service</string>
     <string name="download_channel_description">Shows a notification when downloading media.</string>
@@ -557,6 +558,9 @@
         <item quantity="one">%d new stream</item>
         <item quantity="other">%d new streams</item>
     </plurals>
+    <string name="percentage_completed">%d completed</string>
+    <string name="import_channel_name">Import Worker</string>
+    <string name="import_channel_description">Shows a notification when importing</string>
     <!--Tooltips -->
     <string name="tooltip_repeat">Repeat</string>
     <string name="tooltip_reverse">Reverse</string>
