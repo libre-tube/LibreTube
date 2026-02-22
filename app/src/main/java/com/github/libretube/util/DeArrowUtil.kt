@@ -12,9 +12,7 @@ private data class CacheObject(val value: DeArrowContent?);
 
 object DeArrowUtil {
     // we cannot use segment data directly, as LruCache expects non-null objects, but we also want to cache unlabeled videos
-    private val memoryCache = object : LruCache<String, CacheObject?>(256) {
-        override fun sizeOf(key: String, value: CacheObject?): Int = 1
-    }
+    private val memoryCache = LruCache<String, CacheObject?>(256)
 
     private fun extractTitleAndThumbnail(content: DeArrowContent): Pair<String?, String?> {
         val title = content.titles.firstOrNull { it.votes >= 0 || it.locked }?.title
