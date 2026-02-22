@@ -3,6 +3,7 @@ package com.github.libretube.db.obj
 import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
+import com.github.libretube.api.obj.Segment
 
 @Entity(
     tableName = "downloadSponsorBlockSegment",
@@ -28,4 +29,15 @@ data class DownloadSponsorBlockSegment(
     val endTime: Float,
     val videoDuration: Float,
     val votes: Int,
-)
+) {
+    fun toSegment(): Segment = Segment(
+        uuid = uuid,
+        segment = listOf(startTime, endTime),
+        actionType = actionType,
+        category = category,
+        description = description,
+        locked = locked,
+        videoDuration = videoDuration.toDouble(),
+        votes = votes
+    )
+}

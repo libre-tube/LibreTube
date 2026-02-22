@@ -16,27 +16,30 @@ import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.enums.PlaylistType
 import com.github.libretube.extensions.toID
 import com.github.libretube.parcelable.PlayerData
+import com.github.libretube.ui.activities.AbstractPlayerHostActivity
 import com.github.libretube.ui.activities.MainActivity
 import com.github.libretube.ui.activities.ZoomableImageActivity
 import com.github.libretube.ui.base.BaseActivity
 import com.github.libretube.ui.fragments.AudioPlayerFragment
+import com.github.libretube.ui.fragments.DownloadSortingOrder
+import com.github.libretube.ui.fragments.DownloadTab
 import com.github.libretube.ui.fragments.PlayerFragment
-import com.github.libretube.ui.views.SingleViewTouchableMotionLayout
 import com.github.libretube.util.PlayingQueue
 
 object NavigationHelper {
     fun navigateChannel(context: Context, channelUrlOrId: String?) {
         if (channelUrlOrId == null) return
 
-        val activity = ContextHelper.unwrapActivity<MainActivity>(context)
+        // navigating to channels is only supported in the main activity, not in the no internet activity
+        val activity = ContextHelper.tryUnwrapActivity<MainActivity>(context) ?: return
         activity.navController.navigate(NavDirections.openChannel(channelUrlOrId.toID()))
         try {
             // minimize player if currently expanded
-            if (activity.binding.mainMotionLayout.progress == 0f) {
-                activity.binding.mainMotionLayout.transitionToEnd()
-                activity.findViewById<SingleViewTouchableMotionLayout>(R.id.playerMotionLayout)
-                    .transitionToEnd()
+            activity.runOnPlayerFragment {
+                binding.playerMotionLayout.transitionToEnd()
+                true
             }
+            activity.minimizePlayerContainerLayout()
         } catch (e: Exception) {
             e.printStackTrace()
         }
@@ -57,12 +60,18 @@ object NavigationHelper {
         alreadyStarted: Boolean = false,
         forceVideo: Boolean = false,
         audioOnlyPlayerRequested: Boolean = false,
+        downloadTab: DownloadTab? = null,
+        downloadSortingOrder: DownloadSortingOrder? = null,
+        shuffle: Boolean = false,
+        isOffline: Boolean = false
     ) {
         if (videoId == null) return
+        // TODO: refactor all related methods to take [PlayerData] objects as arguments instead
+        // of all these overcomplex amount of arguments!
 
         // attempt to attach to the current media session first by using the corresponding
         // video/audio player instance
-        val activity = ContextHelper.unwrapActivity<MainActivity>(context)
+        val activity = ContextHelper.unwrapActivity<AbstractPlayerHostActivity>(context)
         val attachedToRunningPlayer = activity.runOnPlayerFragment {
             try {
                 PlayingQueue.clearAfterCurrent()
@@ -104,14 +113,25 @@ object NavigationHelper {
         if (audioOnlyPlayerRequested || (audioOnlyMode && !forceVideo)) {
             // in contrast to the video player, the audio player doesn't start a media service on
             // its own!
-            BackgroundHelper.playOnBackground(
-                context,
-                videoId.toID(),
-                timestamp,
-                playlistId,
-                channelId,
-                keepQueue
-            )
+            if (isOffline) {
+                BackgroundHelper.playOnBackground(
+                    context,
+                    videoId.toID(),
+                    timestamp,
+                    playlistId,
+                    channelId,
+                    keepQueue
+                )
+            } else {
+                BackgroundHelper.playOnBackgroundOffline(
+                    context,
+                    videoId.toID(),
+                    playlistId,
+                    downloadTab!!,
+                    shuffle,
+                    downloadSortingOrder
+                )
+            }
 
             openAudioPlayerFragment(context, minimizeByDefault = true)
         } else {
@@ -122,7 +142,11 @@ object NavigationHelper {
                 channelId,
                 keepQueue,
                 timestamp,
-                alreadyStarted
+                alreadyStarted,
+                shuffle,
+                isOffline,
+                downloadTab,
+                downloadSortingOrder
             )
         }
     }
@@ -164,15 +188,19 @@ object NavigationHelper {
         channelId: String? = null,
         keepQueue: Boolean = false,
         timestamp: Long = 0,
-        alreadyStarted: Boolean = false
+        alreadyStarted: Boolean = false,
+        shuffle: Boolean = false,
+        isOffline: Boolean = false,
+        downloadTab: DownloadTab? = null,
+        downloadSortingOrder: DownloadSortingOrder? = null,
     ) {
         val activity = ContextHelper.unwrapActivity<BaseActivity>(context)
 
         val playerData =
-            PlayerData(videoId, playlistId, channelId, keepQueue, timestamp)
+            PlayerData(videoId, playlistId, channelId, keepQueue, timestamp, shuffle, isOffline, downloadTab, downloadSortingOrder)
         val bundle = bundleOf(
             IntentData.playerData to playerData,
-            IntentData.alreadyStarted to alreadyStarted
+            IntentData.alreadyStarted to alreadyStarted,
         )
         activity.supportFragmentManager.commitNow {
             replace<PlayerFragment>(R.id.container, args = bundle)

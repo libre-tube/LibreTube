@@ -47,7 +47,6 @@ import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.obj.DownloadStatus
 import com.github.libretube.receivers.DownloadReceiver
 import com.github.libretube.services.DownloadService
-import com.github.libretube.ui.activities.OfflinePlayerActivity
 import com.github.libretube.ui.adapters.DownloadPlaylistAdapter
 import com.github.libretube.ui.adapters.DownloadsAdapter
 import com.github.libretube.ui.base.DynamicLayoutManagerFragment
@@ -288,10 +287,14 @@ class DownloadsFragmentPage : DynamicLayoutManagerFragment(R.layout.fragment_dow
 
                 NavigationHelper.openAudioPlayerFragment(requireContext(), offlinePlayer = true)
             } else {
-                val intent = Intent(context, OfflinePlayerActivity::class.java)
-                    .putExtra(IntentData.playlistId, downloadPlaylistId)
-                    .putExtra(IntentData.shuffle, true)
-                requireContext().startActivity(intent)
+                NavigationHelper.navigateVideo(
+                    requireContext(),
+                    videoId = null,
+                    playlistId = downloadPlaylistId,
+                    downloadTab = downloadTab,
+                    shuffle = true,
+                    isOffline = true
+                )
             }
         }
 

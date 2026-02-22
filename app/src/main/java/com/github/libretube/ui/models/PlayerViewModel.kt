@@ -4,7 +4,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.media3.common.util.UnstableApi
 import com.github.libretube.api.obj.Segment
-import com.github.libretube.api.obj.Subtitle
 import com.github.libretube.helpers.PlayerHelper
 
 @UnstableApi
@@ -13,7 +12,7 @@ class PlayerViewModel : ViewModel() {
     var segments = MutableLiveData<List<Segment>>()
     // this is only used to restore the subtitle after leaving PiP, the actual caption state
     // should always be read from the player's selected tracks!
-    var currentSubtitle = Subtitle(code = PlayerHelper.defaultSubtitleCode)
+    var currentCaptionId: String? = null
     var sponsorBlockConfig = PlayerHelper.getSponsorBlockCategories()
 
     /**
