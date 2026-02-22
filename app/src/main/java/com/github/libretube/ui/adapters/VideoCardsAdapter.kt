@@ -125,6 +125,8 @@ class VideoCardsAdapter(private val columnWidthDp: Float? = null) :
                 true
             }
 
+            // always hide the icon, to avoid issues where the icon is recycled and shown until the web requests succeeds
+            sponsorBadgeCard.isVisible = false
             CoroutineScope(Dispatchers.IO).launch {
                 DeArrowUtil.deArrowVideoId(videoId)?.let { (title, thumbnail) ->
                     withContext(Dispatchers.Main) {
