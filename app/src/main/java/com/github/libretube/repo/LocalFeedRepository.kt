@@ -66,7 +66,7 @@ class LocalFeedRepository : FeedRepository {
             }
         }
 
-        DatabaseHolder.Database.feedDao().cleanUpOlderThan(minimumDateMillis)
+        DatabaseHolder.Database.feedDao().cleanUpOlderThan(minimumDateMillis,MINIMUM_VIDEOS)
         refreshFeed(channelIds, minimumDateMillis, onProgressUpdate)
         PreferenceHelper.putLong(PreferenceKeys.LAST_LOCAL_FEED_REFRESH_TIMESTAMP_MILLIS, nowMillis)
 
@@ -137,39 +137,47 @@ class LocalFeedRepository : FeedRepository {
         val hasNewerUploads =
             mostRecentUploadTime > minimumDateMillis && !DatabaseHolder.Database.feedDao()
                 .contains(mostRecentChannelVideo.url.toID())
-        if (!hasNewerUploads) return Pair(null, emptyList())
 
         val channelInfo = ChannelInfo.getInfo(channelUrl)
         val channelAvatar = channelInfo.avatars.maxByOrNull { it.height }?.url
         val subscription =
             Subscription(channelId, channelInfo.name, channelAvatar, channelInfo.isVerified)
 
-        val relevantInfoTabs = channelInfo.tabs.filter { tab ->
-            relevantTabs.any { tab.contentFilters.contains(it) }
+        if(!DatabaseHolder.Database.feedDao().anyVideoExists(feedInfo.name) || hasNewerUploads){
+            val relevantInfoTabs = channelInfo.tabs.filter { tab ->
+                relevantTabs.any { tab.contentFilters.contains(it) }
+            }
+            val related = relevantInfoTabs.parallelMap { tab ->
+                runCatching {
+                    ChannelTabInfo.getInfo(NewPipeExtractorInstance.extractor, tab).relatedItems
+                }.getOrElse { emptyList() }
+            }.flatten().filterIsInstance<StreamInfoItem>()
+                .filter {
+                    it.contentAvailability in arrayOf(
+                        ContentAvailability.AVAILABLE,
+                        ContentAvailability.UPCOMING,
+                        ContentAvailability.UNKNOWN
+                    )
+                }
+            var streamItems = related.map { item ->
+                // avatar is not always included in these info items, thus must be taken from channel info response
+                item.toStreamItem(
+                    channelAvatar,
+                    // shorts fetched via the shorts tab don't have upload dates so we fall back to the feedInfo
+                    feedInfoItems[item.url]
+                )
+            }.filter { it.uploaded > minimumDateMillis }
+
+            if(streamItems.size < MINIMUM_VIDEOS){
+                streamItems = related.map { item->
+                    item.toStreamItem(channelAvatar,feedInfoItems[item.url])
+                }
+               streamItems = streamItems.sortedByDescending { it.uploaded }.take(MINIMUM_VIDEOS)
+            }
+            return Pair(subscription, streamItems)
         }
 
-        val related = relevantInfoTabs.parallelMap { tab ->
-            runCatching {
-                ChannelTabInfo.getInfo(NewPipeExtractorInstance.extractor, tab).relatedItems
-            }.getOrElse { emptyList() }
-        }.flatten().filterIsInstance<StreamInfoItem>()
-            .filter {
-                it.contentAvailability in arrayOf(
-                    ContentAvailability.AVAILABLE,
-                    ContentAvailability.UPCOMING,
-                    ContentAvailability.UNKNOWN
-                )
-            }
-
-        val streamItems = related.map { item ->
-            // avatar is not always included in these info items, thus must be taken from channel info response
-            item.toStreamItem(
-                channelAvatar,
-                // shorts fetched via the shorts tab don't have upload dates so we fall back to the feedInfo
-                feedInfoItems[item.url]
-            )
-        }.filter { it.uploaded > minimumDateMillis }
-        return Pair(subscription, streamItems)
+        return Pair(null, emptyList())
     }
 
     companion object {
@@ -194,5 +202,7 @@ class LocalFeedRepository : FeedRepository {
         val CHANNEL_BATCH_DELAY = (500L..1500L)
 
         private const val MAX_FEED_AGE_DAYS = 30L // 30 days
+
+        private const val MINIMUM_VIDEOS = 15
     }
 }
