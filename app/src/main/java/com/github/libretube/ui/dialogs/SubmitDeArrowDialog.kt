@@ -73,7 +73,7 @@ class SubmitDeArrowDialog: DialogFragment() {
         val data = try {
             withContext(Dispatchers.IO) {
                 MediaServiceRepository.instance.getDeArrowContent(videoId)
-            }.getOrElse(videoId) { return }
+            } ?: return
         } catch (e: Exception) {
             return
         }
