@@ -40,7 +40,7 @@ class WelcomeViewModel(
                 }
                 .onFailure {
                     savedStateHandle[UI_STATE] = _uiState.value.copy(
-                        instances = instanceRepository.getInstancesFallback(),
+                        instances = InstanceRepository.FALLBACK_INSTANCES,
                         error = R.string.failed_fetching_instances,
                     )
                 }
