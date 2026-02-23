@@ -8,11 +8,8 @@ import com.github.libretube.api.obj.Streams
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.helpers.PreferenceHelper
 
-private data class CacheObject(val value: DeArrowContent?);
-
 object DeArrowUtil {
-    // we cannot use segment data directly, as LruCache expects non-null objects, but we also want to cache unlabeled videos
-    private val memoryCache = LruCache<String, CacheObject?>(256)
+    private val cache = LruCache<String, DeArrowContent>(256)
 
     private fun extractTitleAndThumbnail(content: DeArrowContent): Pair<String?, String?> {
         val title = content.titles.firstOrNull { it.votes >= 0 || it.locked }?.title
@@ -26,11 +23,11 @@ object DeArrowUtil {
 
     private suspend fun fetchDeArrowContent(videoId: String): DeArrowContent? {
         // prefer cached response, if available
-        memoryCache.get(videoId)?.let { return it.value }
+        cache.get(videoId)?.let { return it }
 
         return try {
             MediaServiceRepository.instance.getDeArrowContent(videoId)
-                .also { memoryCache.put(videoId, CacheObject(it)) }
+                .also { cache.put(videoId, it) }
         } catch (e: Exception) {
             Log.e(this::class.java.name, "Failed to fetch DeArrow content: ${e.message}")
             null
