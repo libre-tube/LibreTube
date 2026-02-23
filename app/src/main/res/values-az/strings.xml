@@ -136,7 +136,7 @@
     <string name="category_preview_summary">Əlavə məlumatsız gələcək məzmunu təfərrüatlandıran bölümlər üçün. Əgər bu, yalnız burada görünən bölümləri ehtiva edirsə, bu, çox güman ki, yanlış kateqoriyadır</string>
     <string name="category_filler_summary">Videonun əsas məzmunun başa düşmək tələb edilməyən, yalnız əlaqəsiz və ya yumor üçün əlavə edilmiş əlaqəsiz səhnələr üçün</string>
     <string name="category_music_offtopic_summary">Yalnız musiqi videolarında istifadə etmək üçün. Bu, rəsmi mikslərin bir hissəsi deyil, video hissələri əhatə etməlidir. Nəticədə, video Spotify və ya hər hansı digər miks versiyaya mümkün qədər bənzəməlidir və ya danışıq yaxud digər diqqəti yayındıran amilləri azaltmalıdır</string>
-    <string name="buffering_goal_summary">Bufer üçün maksimum video saniyə miqdarı</string>
+    <string name="buffering_goal_summary">Bufer üçün maksimum video saniyə sayı</string>
     <string name="buffering_goal">Ön yükləmə</string>
     <string name="player_autoplay">Avtomatik oynatma</string>
     <string name="no_video">Video yoxdur</string>
