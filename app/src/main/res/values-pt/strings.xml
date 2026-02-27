@@ -232,7 +232,7 @@
     <string name="repeat_mode_current">Atual</string>
     <string name="backup_restore">Backup e restauro</string>
     <string name="backup">Backup</string>
-    <string name="picture_in_picture">Imagem em imagem (PIP)</string>
+    <string name="picture_in_picture">Imagem em imagem</string>
     <string name="maximum_image_cache">Máximo de imagens em cache</string>
     <string name="copied_to_clipboard">Copiado para a área de transferência</string>
     <string name="open_copied">Abrir</string>
@@ -562,8 +562,9 @@
     <string name="sort_channel">Nome do canal</string>
     <string name="sort_size">Tamanho</string>
     <plurals name="sleep_timer_chip_minutes">
-        <item quantity="one">%d min</item>
-        <item quantity="many">%d min</item>
-        <item quantity="other">%d min</item>
+        <item quantity="one">%d minuto</item>
+        <item quantity="many">%d minutos</item>
+        <item quantity="other">%d minutos</item>
     </plurals>
+    <string name="show_updates_summary">Cheque por atualizações automaticamente toda vez que o aplicativo é iniciado.</string>
 </resources>
