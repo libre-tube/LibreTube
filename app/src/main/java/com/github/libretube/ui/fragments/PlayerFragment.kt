@@ -137,11 +137,12 @@ class PlayerFragment : Fragment(R.layout.fragment_player), CustomPlayerCallback 
     private lateinit var videoId: String
     private var playlistId: String? = null
     private var channelId: String? = null
-    private var isOffline: Boolean = false
+    var isOffline: Boolean = false
+        private set
 
     // data and objects stored for the player
     private lateinit var streams: Streams
-    val isShort: Boolean
+    private val isShort: Boolean
         get() {
             if (PlayingQueue.getCurrent()?.isShort == true) return true
             if (!::playerController.isInitialized) return false
@@ -1106,6 +1107,9 @@ class PlayerFragment : Fragment(R.layout.fragment_player), CustomPlayerCallback 
 
     /**
      * Manually skip to another video.
+     *
+     * You many only call this if the video is of the same type as the type of the currently running
+     * video, i.e. either both are online or both are offline.
      */
     fun playNextVideo(nextId: String) {
         playerController.sendCustomCommand(

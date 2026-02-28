@@ -74,6 +74,8 @@ object NavigationHelper {
         val activity = ContextHelper.unwrapActivity<AbstractPlayerHostActivity>(context)
         val attachedToRunningPlayer = activity.runOnPlayerFragment {
             try {
+                if (this.isOffline != isOffline) return@runOnPlayerFragment false
+
                 PlayingQueue.clearAfterCurrent()
                 this.playNextVideo(videoId.toID())
 
@@ -95,6 +97,8 @@ object NavigationHelper {
 
         val audioOnlyMode = PreferenceHelper.getBoolean(PreferenceKeys.AUDIO_ONLY_MODE, false)
         val attachedToRunningAudioPlayer = activity.runOnAudioPlayerFragment {
+            if (this.isOffline != isOffline) return@runOnAudioPlayerFragment false
+
             PlayingQueue.clearAfterCurrent()
             this.playNextVideo(videoId.toID())
 

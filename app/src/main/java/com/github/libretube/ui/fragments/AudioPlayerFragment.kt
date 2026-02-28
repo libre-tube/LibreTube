@@ -82,7 +82,8 @@ class AudioPlayerFragment : Fragment(R.layout.fragment_audio_player), AudioPlaye
     private var handler = Handler(Looper.getMainLooper())
     private var isPaused = !PlayerHelper.playAutomatically
 
-    private var isOffline: Boolean = false
+    var isOffline: Boolean = false
+        private set
     private var playerController: MediaController? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
