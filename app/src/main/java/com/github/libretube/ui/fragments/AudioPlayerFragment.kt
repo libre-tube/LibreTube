@@ -14,6 +14,7 @@ import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.constraintlayout.motion.widget.TransitionAdapter
 import androidx.core.math.MathUtils.clamp
 import androidx.core.os.bundleOf
+import androidx.core.os.postDelayed
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
@@ -22,6 +23,7 @@ import androidx.fragment.app.commit
 import androidx.lifecycle.lifecycleScope
 import androidx.media3.common.MediaMetadata
 import androidx.media3.common.Player
+import androidx.media3.common.util.Log
 import androidx.media3.common.util.UnstableApi
 import androidx.media3.session.MediaController
 import com.github.libretube.R
@@ -112,7 +114,7 @@ class AudioPlayerFragment : Fragment(R.layout.fragment_audio_player), AudioPlaye
 
         // manually apply additional padding for edge-to-edge compatibility
         activity.getSystemInsets()?.let { systemBars ->
-            with (binding.audioPlayerMain) {
+            with(binding.audioPlayerMain) {
                 setPadding(
                     paddingLeft,
                     paddingTop + systemBars.top,
@@ -279,6 +281,7 @@ class AudioPlayerFragment : Fragment(R.layout.fragment_audio_player), AudioPlaye
         NavigationHelper.openVideoPlayerFragment(
             context = requireContext(),
             videoId = videoId,
+            isOffline = isOffline,
             alreadyStarted = true,
         )
     }

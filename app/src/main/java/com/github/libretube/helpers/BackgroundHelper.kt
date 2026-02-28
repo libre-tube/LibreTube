@@ -15,7 +15,7 @@ import com.github.libretube.parcelable.PlayerData
 import com.github.libretube.services.AbstractPlayerService
 import com.github.libretube.services.OfflinePlayerService
 import com.github.libretube.services.OnlinePlayerService
-import com.github.libretube.ui.activities.MainActivity
+import com.github.libretube.ui.activities.AbstractPlayerHostActivity
 import com.github.libretube.ui.activities.NoInternetActivity
 import com.github.libretube.ui.fragments.DownloadSortingOrder
 import com.github.libretube.ui.fragments.DownloadTab
@@ -42,7 +42,7 @@ object BackgroundHelper {
     ) {
         // close the previous video player if open
         val fragmentManager =
-            ContextHelper.unwrapActivity<MainActivity>(context).supportFragmentManager
+            ContextHelper.unwrapActivity<AbstractPlayerHostActivity>(context).supportFragmentManager
         fragmentManager.fragments.firstOrNull { it is PlayerFragment }?.let {
             fragmentManager.commit { remove(it) }
         }

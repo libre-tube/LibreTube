@@ -114,15 +114,6 @@ object NavigationHelper {
             // in contrast to the video player, the audio player doesn't start a media service on
             // its own!
             if (isOffline) {
-                BackgroundHelper.playOnBackground(
-                    context,
-                    videoId.toID(),
-                    timestamp,
-                    playlistId,
-                    channelId,
-                    keepQueue
-                )
-            } else {
                 BackgroundHelper.playOnBackgroundOffline(
                     context,
                     videoId.toID(),
@@ -131,9 +122,18 @@ object NavigationHelper {
                     shuffle,
                     downloadSortingOrder
                 )
+            } else {
+                BackgroundHelper.playOnBackground(
+                    context,
+                    videoId.toID(),
+                    timestamp,
+                    playlistId,
+                    channelId,
+                    keepQueue
+                )
             }
 
-            openAudioPlayerFragment(context, minimizeByDefault = true)
+            openAudioPlayerFragment(context, offlinePlayer = isOffline, minimizeByDefault = true)
         } else {
             openVideoPlayerFragment(
                 context,

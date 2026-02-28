@@ -45,6 +45,7 @@
             android:name=".ui.activities.NoInternetActivity"
             android:label="@string/noInternet"
             android:launchMode="singleTop"
+            android:configChanges="keyboard|keyboardHidden|screenSize|smallestScreenSize|screenLayout|orientation|uiMode"
             android:supportsPictureInPicture="true"
             android:screenOrientation="locked" />
 
