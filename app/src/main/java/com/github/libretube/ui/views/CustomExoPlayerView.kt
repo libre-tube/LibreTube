@@ -10,7 +10,6 @@ import android.os.Handler
 import android.os.Looper
 import android.text.format.DateUtils
 import android.util.AttributeSet
-import android.util.Log
 import android.view.KeyEvent
 import android.view.MotionEvent
 import android.view.Window
@@ -27,7 +26,6 @@ import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
 import androidx.core.view.marginStart
 import androidx.core.view.updateLayoutParams
-import androidx.fragment.app.findFragment
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.findViewTreeLifecycleOwner
 import androidx.media3.common.C
@@ -69,7 +67,6 @@ import com.github.libretube.ui.controllers.FullscreenGestureAnimationController
 import com.github.libretube.ui.dialogs.SubmitDeArrowDialog
 import com.github.libretube.ui.dialogs.SubmitSegmentDialog
 import com.github.libretube.ui.extensions.toggleSystemBars
-import com.github.libretube.ui.fragments.PlayerFragment
 import com.github.libretube.ui.interfaces.CustomPlayerCallback
 import com.github.libretube.ui.interfaces.PlayerGestureOptions
 import com.github.libretube.ui.interfaces.PlayerOptions
@@ -382,7 +379,6 @@ class CustomExoPlayerView(
         updateMarginsByFullscreenMode()
 
         commonPlayerViewModel?.isFullscreen?.observe(viewLifecycleOwner) { isFullscreen ->
-            Log.e("is full", isFullscreen.toString())
             updateTopBarMargin()
 
             binding.fullscreen.isInvisible = PlayerHelper.autoFullscreenEnabled

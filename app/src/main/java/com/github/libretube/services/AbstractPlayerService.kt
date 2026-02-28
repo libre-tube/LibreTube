@@ -15,7 +15,6 @@ import androidx.media3.common.ForwardingPlayer
 import androidx.media3.common.MediaMetadata
 import androidx.media3.common.PlaybackException
 import androidx.media3.common.Player
-import androidx.media3.common.util.Log
 import androidx.media3.common.util.UnstableApi
 import androidx.media3.exoplayer.ExoPlayer
 import androidx.media3.exoplayer.trackselection.DefaultTrackSelector
@@ -244,12 +243,12 @@ abstract class AbstractPlayerService : MediaLibraryService(), MediaLibrarySessio
             setExtras(bundleOf(IntentData.segments to segments))
         }
 
-        Log.e("segments", sponsorBlockSegments.toString())
         checkForSegments()
     }
 
     /**
-     * check for SponsorBlock segments
+     * Check for SponsorBlock segments. This method automatically schedules itself to repeat every
+     * 100ms using [handler], so it's not needed to schedule it manually.
      */
     private fun checkForSegments() {
         handler.postDelayed(this::checkForSegments, 100)

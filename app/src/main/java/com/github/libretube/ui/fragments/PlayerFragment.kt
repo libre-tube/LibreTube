@@ -487,12 +487,11 @@ class PlayerFragment : Fragment(R.layout.fragment_player), CustomPlayerCallback 
             fragmentManager.setFragmentResultListener(
                 PlayOfflineDialog.PLAY_OFFLINE_DIALOG_REQUEST_KEY, viewLifecycleOwner
             ) { _, bundle ->
-                if (bundle.getBoolean(IntentData.isPlayingOffline)) {
-                    // offline video playback started and thus the player fragment is no longer needed
-                    killPlayerFragment()
-                } else {
-                    attachToPlayerService(playerData, true)
-                }
+                isOffline = bundle.getBoolean(IntentData.isPlayingOffline)
+
+                // start a new playback session - the method will read `isOffline` and decide whether
+                // to play the downloaded video based on it, so it's enough to set `isOffline` here
+                attachToPlayerService(playerData, true)
             }
 
             val downloadInfo = DownloadHelper.extractDownloadInfoText(
@@ -548,12 +547,12 @@ class PlayerFragment : Fragment(R.layout.fragment_player), CustomPlayerCallback 
     }
 
     private fun attachToPlayerService(playerData: PlayerData, startNewSession: Boolean) {
-        val (serviceClass, args) = if (playerData.isOffline) {
+        val (serviceClass, args) = if (isOffline) {
             val isNoInternet = activity is NoInternetActivity
 
             OfflinePlayerService::class.java to bundleOf(
                 IntentData.videoId to videoId,
-                IntentData.downloadTab to playerData.downloadTab,
+                IntentData.downloadTab to (playerData.downloadTab ?: DownloadTab.VIDEO),
                 IntentData.playlistId to playlistId,
                 IntentData.sortOptions to playerData.downloadSortingOrder,
                 IntentData.shuffle to playerData.shuffle,
