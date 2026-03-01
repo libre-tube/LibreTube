@@ -74,6 +74,16 @@ object DatabaseHolder {
         }
     }
 
+    private val MIGRATION_22_23 = object : Migration(22, 23) {
+        override fun migrate(db: SupportSQLiteDatabase) {
+            db.execSQL("ALTER TABLE 'download' ADD COLUMN 'uploaderUrl' TEXT DEFAULT NULL")
+            db.execSQL("ALTER TABLE 'download' ADD COLUMN 'views' INTEGER NOT NULL DEFAULT 0")
+            db.execSQL("ALTER TABLE 'download' ADD COLUMN 'likes' INTEGER NOT NULL DEFAULT 0")
+            db.execSQL("ALTER TABLE 'download' ADD COLUMN 'dislikes' INTEGER NOT NULL DEFAULT 0")
+            db.execSQL("ALTER TABLE 'download' ADD COLUMN 'uploaderSubscriberCount' INTEGER NOT NULL DEFAULT 0")
+        }
+    }
+
     val Database by lazy {
         Room.databaseBuilder(LibreTubeApp.instance, AppDatabase::class.java, DATABASE_NAME)
             .addMigrations(
@@ -83,7 +93,8 @@ object DatabaseHolder {
                 MIGRATION_14_15,
                 MIGRATION_15_16,
                 MIGRATION_17_18,
-                MIGRATION_21_22
+                MIGRATION_21_22,
+                MIGRATION_22_23,
             )
             .build()
     }

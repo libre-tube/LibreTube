@@ -180,7 +180,12 @@ class DownloadService : LifecycleService() {
             streams.uploader,
             streams.duration,
             streams.uploadTimestamp?.toLocalDate(),
-            thumbnailTargetPath
+            thumbnailTargetPath,
+            streams.uploaderUrl,
+            streams.views,
+            streams.likes,
+            streams.dislikes,
+            streams.uploaderSubscriberCount,
         )
         Database.downloadDao().insertDownload(download)
 
