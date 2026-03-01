@@ -26,6 +26,7 @@ class BottomSheetAdapter(
         holder.binding.root.apply {
             val current = item.getCurrent()
             text = if (current != null) "${item.title} ($current)" else item.title
+            isSelected = item.isSelected
             setDrawables(start = item.drawable)
 
             setOnClickListener {
