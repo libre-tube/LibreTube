@@ -21,7 +21,6 @@ import com.github.libretube.ui.extensions.onSystemInsets
 open class BaseBottomSheet(@LayoutRes layoutResId: Int = R.layout.bottom_sheet) : ExpandedBottomSheet(layoutResId) {
 
     private var title: String? = null
-    private var preselectedItem: String? = null
     private lateinit var items: List<BottomSheetItem>
     private lateinit var listener: (index: Int) -> Unit
 
@@ -39,13 +38,6 @@ open class BaseBottomSheet(@LayoutRes layoutResId: Int = R.layout.bottom_sheet) 
             }
         }
 
-        // set the selected item
-        for (item in items) {
-            Log.e(item.title, preselectedItem.toString())
-        }
-        for (item in items.filter { it.title == preselectedItem }) {
-            item.title = "${item.title} ✓"
-        }
         binding.optionsRecycler.layoutManager = LinearLayoutManager(requireContext())
         binding.optionsRecycler.adapter = BottomSheetAdapter(items, listener)
 
@@ -83,8 +75,7 @@ open class BaseBottomSheet(@LayoutRes layoutResId: Int = R.layout.bottom_sheet) 
         preselectedItem: String? = null,
         listener: (suspend (index: Int) -> Unit)?
     ) = apply {
-        setItems(titles.map { BottomSheetItem(it) }, listener)
-        this.preselectedItem = preselectedItem
+        setItems(titles.map { BottomSheetItem(it, isSelected = it == preselectedItem) }, listener)
     }
 
     companion object {
