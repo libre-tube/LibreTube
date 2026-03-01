@@ -1,8 +1,9 @@
 package com.github.libretube.obj
 
 data class BottomSheetItem(
-    var title: String,
+    val title: String,
     val drawable: Int? = null,
     val getCurrent: () -> String? = { null },
-    val onClick: () -> Unit = {}
+    val isSelected: Boolean = false,
+    val onClick: () -> Unit = {},
 )
