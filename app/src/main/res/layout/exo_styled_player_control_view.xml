@@ -323,7 +323,8 @@
                 app:played_color="?attr/colorSecondary"
                 app:scrubber_color="?attr/colorSecondary"
                 app:scrubber_dragged_size="16dp"
-                app:scrubber_enabled_size="12dp" />
+                app:scrubber_enabled_size="12dp"
+                app:touch_target_height="35dp" />
 
         </LinearLayout>
 
