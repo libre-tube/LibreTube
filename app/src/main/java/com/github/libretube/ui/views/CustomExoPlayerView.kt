@@ -331,11 +331,6 @@ class CustomExoPlayerView(
             if (isLive) player?.let { it.seekTo(it.duration) }
         }
 
-        // forward touch events to the time bar for better accessibility
-        binding.progressBar.setOnTouchListener { _, motionEvent ->
-            binding.exoProgress.onTouchEvent(motionEvent)
-        }
-
         updateCurrentPosition()
 
         activity.supportFragmentManager.setFragmentResultListener(
@@ -1171,8 +1166,8 @@ class CustomExoPlayerView(
      */
     fun updateMarginsByFullscreenMode() {
         // add a larger bottom margin to the time bar in landscape mode
-        binding.progressBar.updateLayoutParams<MarginLayoutParams> {
-            bottomMargin = (if (isFullscreen()) 20f else 10f).dpToPx()
+        binding.exoProgress.updateLayoutParams<MarginLayoutParams> {
+            bottomMargin = (if (isFullscreen()) 20f else 0f).dpToPx()
         }
 
         updateTopBarMargin()
