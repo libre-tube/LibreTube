@@ -185,7 +185,6 @@ class DownloadService : LifecycleService() {
             streams.views,
             streams.likes,
             streams.dislikes,
-            streams.uploaderSubscriberCount,
         )
         Database.downloadDao().insertDownload(download)
 

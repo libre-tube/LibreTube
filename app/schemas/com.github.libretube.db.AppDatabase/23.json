@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 23,
-    "identityHash": "ea590a07f17285b1a823a430f64335ee",
+    "identityHash": "cb57390a6e9cf625630e58d426dc7f6a",
     "entities": [
       {
         "tableName": "watchHistoryItem",
@@ -323,7 +323,7 @@
       },
       {
         "tableName": "download",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`videoId` TEXT NOT NULL, `title` TEXT NOT NULL, `description` TEXT NOT NULL, `uploader` TEXT NOT NULL, `duration` INTEGER DEFAULT NULL, `uploadDate` TEXT, `thumbnailPath` TEXT, `uploaderUrl` TEXT, `views` INTEGER NOT NULL, `likes` INTEGER NOT NULL, `dislikes` INTEGER NOT NULL, `uploaderSubscriberCount` INTEGER NOT NULL, PRIMARY KEY(`videoId`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`videoId` TEXT NOT NULL, `title` TEXT NOT NULL, `description` TEXT NOT NULL, `uploader` TEXT NOT NULL, `duration` INTEGER DEFAULT NULL, `uploadDate` TEXT, `thumbnailPath` TEXT, `uploaderUrl` TEXT, `views` INTEGER NOT NULL, `likes` INTEGER NOT NULL, `dislikes` INTEGER NOT NULL, PRIMARY KEY(`videoId`))",
         "fields": [
           {
             "fieldPath": "videoId",
@@ -385,12 +385,6 @@
           {
             "fieldPath": "dislikes",
             "columnName": "dislikes",
-            "affinity": "INTEGER",
-            "notNull": true
-          },
-          {
-            "fieldPath": "uploaderSubscriberCount",
-            "columnName": "uploaderSubscriberCount",
             "affinity": "INTEGER",
             "notNull": true
           }
@@ -788,7 +782,7 @@
     ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'ea590a07f17285b1a823a430f64335ee')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'cb57390a6e9cf625630e58d426dc7f6a')"
     ]
   }
 }

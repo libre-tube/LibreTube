@@ -79,8 +79,7 @@ object DatabaseHolder {
             db.execSQL("ALTER TABLE 'download' ADD COLUMN 'uploaderUrl' TEXT DEFAULT NULL")
             db.execSQL("ALTER TABLE 'download' ADD COLUMN 'views' INTEGER NOT NULL DEFAULT 0")
             db.execSQL("ALTER TABLE 'download' ADD COLUMN 'likes' INTEGER NOT NULL DEFAULT 0")
-            db.execSQL("ALTER TABLE 'download' ADD COLUMN 'dislikes' INTEGER NOT NULL DEFAULT 0")
-            db.execSQL("ALTER TABLE 'download' ADD COLUMN 'uploaderSubscriberCount' INTEGER NOT NULL DEFAULT 0")
+            db.execSQL("ALTER TABLE 'download' ADD COLUMN 'dislikes' INTEGER NOT NULL DEFAULT -1")
         }
     }
 

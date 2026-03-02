@@ -22,8 +22,7 @@ data class Download(
     val uploaderUrl: String? = null,
     val views: Long = 0,
     val likes: Long = 0,
-    val dislikes: Long = 0,
-    val uploaderSubscriberCount: Long = 0,
+    val dislikes: Long = -1,
 ) {
     fun toStreamItem() = StreamItem(
         url = videoId,

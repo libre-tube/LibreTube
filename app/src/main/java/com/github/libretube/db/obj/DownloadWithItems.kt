@@ -40,7 +40,6 @@ data class DownloadWithItems(
         views = download.views,
         likes = download.likes,
         dislikes = download.dislikes,
-        uploaderSubscriberCount = download.uploaderSubscriberCount,
     )
 }
 
