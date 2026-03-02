@@ -185,25 +185,27 @@ class PlaylistDownloadEnqueueService : LifecycleService() {
             if (!DatabaseHolder.Database.downloadDao().exists(videoId)) {
                 val videoInfo = runCatching {
                     MediaServiceRepository.instance.getStreams(videoId)
-                }.getOrNull() ?: continue
+                }.getOrNull()
 
-                val videoStream = getStream(videoInfo.videoStreams, maxVideoQuality)
-                val audioStream = getStream(videoInfo.audioStreams, maxAudioQuality)
+                if (videoInfo != null) {
+                    val videoStream = getStream(videoInfo.videoStreams, maxVideoQuality)
+                    val audioStream = getStream(videoInfo.audioStreams, maxAudioQuality)
 
-                val downloadData = DownloadData(
-                    videoId = videoId,
-                    videoFormat = videoStream?.format,
-                    videoQuality = videoStream?.quality,
-                    audioFormat = audioStream?.format,
-                    audioQuality = audioStream?.quality,
-                    audioLanguage = audioLanguage.takeIf {
-                        videoInfo.audioStreams.any { it.audioTrackLocale == audioLanguage }
-                    },
-                    subtitleCode = captionLanguage.takeIf {
-                        videoInfo.subtitles.any { it.code == captionLanguage }
-                    }
-                )
-                DownloadHelper.startDownloadService(this, downloadData)
+                    val downloadData = DownloadData(
+                        videoId = videoId,
+                        videoFormat = videoStream?.format,
+                        videoQuality = videoStream?.quality,
+                        audioFormat = audioStream?.format,
+                        audioQuality = audioStream?.quality,
+                        audioLanguage = audioLanguage.takeIf {
+                            videoInfo.audioStreams.any { it.audioTrackLocale == audioLanguage }
+                        },
+                        subtitleCode = captionLanguage.takeIf {
+                            videoInfo.subtitles.any { it.code == captionLanguage }
+                        }
+                    )
+                    DownloadHelper.startDownloadService(this, downloadData)
+                }
             }
             // TODO: inform the user if an already downloaded video has been skipped
 
