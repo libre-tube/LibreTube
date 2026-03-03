@@ -570,4 +570,5 @@
         <item quantity="many">%d хвилин</item>
         <item quantity="other">%d хвилин</item>
     </plurals>
+    <string name="show_updates_summary">Автоматично перевіряти наявність оновлень під час кожного запуску застосунку.</string>
 </resources>
