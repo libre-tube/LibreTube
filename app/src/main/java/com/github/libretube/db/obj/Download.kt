@@ -18,7 +18,11 @@ data class Download(
     @ColumnInfo(defaultValue = "NULL")
     val duration: Long? = null,
     val uploadDate: LocalDate? = null,
-    val thumbnailPath: Path? = null
+    val thumbnailPath: Path? = null,
+    val uploaderUrl: String? = null,
+    val views: Long = 0,
+    val likes: Long = 0,
+    val dislikes: Long = -1,
 ) {
     fun toStreamItem() = StreamItem(
         url = videoId,
@@ -29,5 +33,7 @@ data class Download(
         uploaded = uploadDate?.toMillis() ?: 0L,
         uploadedDate = uploadDate?.toString(),
         uploaderName = uploader,
+        uploaderUrl = uploaderUrl,
+        views = views,
     )
 }

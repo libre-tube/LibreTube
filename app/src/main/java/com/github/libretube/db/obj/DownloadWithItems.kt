@@ -34,9 +34,12 @@ data class DownloadWithItems(
         uploader = download.uploader,
         uploaded = download.uploadDate?.toMillis(),
         duration = download.duration ?: 0,
-        uploaderUrl = null,
+        uploaderUrl = download.uploaderUrl,
         uploaderVerified = false,
-        chapters = downloadChapters.map { it.toChapterSegment() }
+        chapters = downloadChapters.map { it.toChapterSegment() },
+        views = download.views,
+        likes = download.likes,
+        dislikes = download.dislikes,
     )
 }
 
