@@ -73,7 +73,6 @@ import com.github.libretube.extensions.updateIfChanged
 import com.github.libretube.helpers.BackgroundHelper
 import com.github.libretube.helpers.DownloadHelper
 import com.github.libretube.helpers.ImageHelper
-import com.github.libretube.helpers.NavBarHelper
 import com.github.libretube.helpers.NavigationHelper
 import com.github.libretube.helpers.PlayerHelper
 import com.github.libretube.helpers.PlayerHelper.getCurrentSegment
@@ -115,7 +114,6 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
 import kotlin.io.path.exists
-import kotlin.math.abs
 import kotlin.math.absoluteValue
 
 
@@ -142,15 +140,6 @@ class PlayerFragment : Fragment(R.layout.fragment_player), CustomPlayerCallback 
 
     // data and objects stored for the player
     private lateinit var streams: Streams
-    private val isShort: Boolean
-        get() {
-            if (PlayingQueue.getCurrent()?.isShort == true) return true
-            if (!::playerController.isInitialized) return false
-
-            val currentVideoFormat = PlayerHelper.getCurrentVideoFormat(playerController)
-                ?: return false
-            return currentVideoFormat.height > currentVideoFormat.width
-        }
 
     private val handler = Handler(Looper.getMainLooper())
 
@@ -259,7 +248,6 @@ class PlayerFragment : Fragment(R.layout.fragment_player), CustomPlayerCallback 
             }
         }
 
-        var fullscreenOnShortsAlreadyDone = false
         override fun onPlaybackStateChanged(playbackState: Int) {
             // set the playback speed to one if having reached the end of a livestream
             if (playbackState == Player.STATE_BUFFERING && binding.player.isLive &&
@@ -301,15 +289,6 @@ class PlayerFragment : Fragment(R.layout.fragment_player), CustomPlayerCallback 
             } else {
                 bufferingTimeoutTask?.let { handler.removeCallbacks(it) }
             }
-
-            if (playbackState == Player.STATE_READY && binding.playerMotionLayout.progress == 0f) {
-                if (PlayerHelper.autoFullscreenShortsEnabled && isShort && !fullscreenOnShortsAlreadyDone) {
-                    setFullscreen()
-                    fullscreenOnShortsAlreadyDone = true
-                }
-            }
-
-            if (playbackState == Player.STATE_ENDED) fullscreenOnShortsAlreadyDone = false
 
             super.onPlaybackStateChanged(playbackState)
         }
@@ -835,12 +814,7 @@ class PlayerFragment : Fragment(R.layout.fragment_player), CustomPlayerCallback 
     private fun updateFullscreenOrientation() {
         if (PlayerHelper.autoFullscreenEnabled || !this::streams.isInitialized) return
 
-        val height = streams.videoStreams.firstOrNull()?.height
-            ?: playerController.videoSize.height
-        val width =
-            streams.videoStreams.firstOrNull()?.width ?: playerController.videoSize.width
-
-        baseActivity.requestedOrientation = PlayerHelper.getOrientation(width, height)
+        baseActivity.requestedOrientation = PlayerHelper.getFullscreenOrientation(streams.isShort)
     }
 
     private fun setFullscreen() {
@@ -1221,6 +1195,10 @@ class PlayerFragment : Fragment(R.layout.fragment_player), CustomPlayerCallback 
             seekBarPreviewListener = listener
             playerControlsBinding.exoProgress.addSeekBarListener(listener)
         }
+
+        if (binding.playerMotionLayout.progress == 0f && PlayerHelper.autoFullscreenShortsEnabled && streams.isShort) {
+            setFullscreen()
+        }
     }
 
     private suspend fun showRelatedStreams() {
@@ -1472,6 +1450,6 @@ class PlayerFragment : Fragment(R.layout.fragment_player), CustomPlayerCallback 
     }
 
     override fun isVideoShort(): Boolean {
-        return isShort
+        return streams.isShort
     }
 }
