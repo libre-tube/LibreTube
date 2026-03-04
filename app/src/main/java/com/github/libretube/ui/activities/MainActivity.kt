@@ -63,8 +63,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
 
-class MainActivity : BaseActivity() {
-    lateinit var binding: ActivityMainBinding
+class MainActivity : AbstractPlayerHostActivity() {
+    private lateinit var binding: ActivityMainBinding
     lateinit var navController: NavController
 
     private lateinit var searchView: SearchView
@@ -424,16 +424,6 @@ class MainActivity : BaseActivity() {
     }
 
     /**
-     * @return whether the search view focus was cleared successfully
-     */
-    fun clearSearchViewFocus(): Boolean {
-        if (!this::searchView.isInitialized || !searchView.anyChildFocused()) return false
-
-        searchView.clearFocus()
-        return true
-    }
-
-    /**
      * Update the query text in the search bar without opening the search suggestions
      */
     fun setQuerySilent(query: String) {
@@ -646,24 +636,6 @@ class MainActivity : BaseActivity() {
         return super.onKeyUp(keyCode, event)
     }
 
-    /**
-     * Attempt to run code on the player fragment if running
-     * Returns true if a running player fragment was found and the action got consumed, else false
-     */
-    fun runOnPlayerFragment(action: PlayerFragment.() -> Boolean): Boolean {
-        return supportFragmentManager.fragments.filterIsInstance<PlayerFragment>()
-            .firstOrNull()
-            ?.let(action)
-            ?: false
-    }
-
-    fun runOnAudioPlayerFragment(action: AudioPlayerFragment.() -> Boolean): Boolean {
-        return supportFragmentManager.fragments.filterIsInstance<AudioPlayerFragment>()
-            .firstOrNull()
-            ?.let(action)
-            ?: false
-    }
-
     fun startPlaylistExport(
         playlistId: String,
         playlistName: String,
@@ -703,5 +675,29 @@ class MainActivity : BaseActivity() {
                 )
             }
             .show()
+    }
+
+    override fun minimizePlayerContainerLayout() {
+        binding.mainMotionLayout.transitionToEnd()
+    }
+
+    override fun maximizePlayerContainerLayout() {
+        binding.mainMotionLayout.transitionToStart()
+    }
+
+    override fun setPlayerContainerProgress(progress: Float) {
+        if (!NavBarHelper.hasTabs()) return
+
+        binding.mainMotionLayout.progress = progress
+    }
+
+    /**
+     * @return whether the search view focus was cleared successfully
+     */
+    override fun clearSearchViewFocus(): Boolean {
+        if (!this::searchView.isInitialized || !searchView.anyChildFocused()) return false
+
+        searchView.clearFocus()
+        return true
     }
 }

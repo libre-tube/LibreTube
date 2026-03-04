@@ -59,7 +59,7 @@ object PlayerHelper {
     private const val ACTION_MEDIA_CONTROL = "media_control"
     const val CONTROL_TYPE = "control_type"
     const val SPONSOR_HIGHLIGHT_CATEGORY = "poi_highlight"
-    private const val ROLE_FLAG_AUTO_GEN_SUBTITLE = C.ROLE_FLAG_SUPPLEMENTARY
+    const val ROLE_FLAG_AUTO_GEN_SUBTITLE = C.ROLE_FLAG_SUPPLEMENTARY
     private const val MINIMUM_BUFFER_DURATION = 1000 * 10 // exo default is 50s
     const val WATCH_POSITION_TIMER_DELAY_MS = 1000L
 
@@ -607,6 +607,22 @@ object PlayerHelper {
             }
     }
 
+    private fun getTracksByType(player: Player, trackType: Int): List<Format> {
+        val formats = mutableListOf<Format>()
+
+        for (trackGroup in player.currentTracks.groups) {
+            if (trackGroup.type != trackType) continue
+
+            for (i in 0 until trackGroup.length) {
+                val track = trackGroup.getTrackFormat(i)
+                formats.add(track)
+            }
+        }
+        return formats
+    }
+
+    fun getCaptionTracks(player: Player) = getTracksByType(player, C.TRACK_TYPE_TEXT)
+
     private fun getCurrentFormatByTrackType(player: Player, trackType: Int): Format? {
         for (trackGroup in player.currentTracks.groups) {
             if (trackGroup.type != trackType) continue
@@ -810,7 +826,7 @@ object PlayerHelper {
         return roleFlags or acontRoleFlags
     }
 
-    @OptIn(androidx.media3.common.util.UnstableApi::class)
+    @OptIn(UnstableApi::class)
     fun getVideoStats(tracks: Tracks, videoId: String): VideoStats {
         val videoStats = VideoStats(videoId, "", "", "")
 

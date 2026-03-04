@@ -56,6 +56,24 @@ object DatabaseHolder {
         }
     }
 
+    private val MIGRATION_21_22 = object : Migration(21, 22) {
+        override fun migrate(db: SupportSQLiteDatabase) {
+            db.execSQL("CREATE TABLE 'downloadSponsorBlockSegment' (" +
+                    "uuid TEXT PRIMARY KEY NOT NULL, " +
+                    "videoId TEXT NOT NULL, " +
+                    "actionType TEXT NOT NULL, " +
+                    "category TEXT NOT NULL, " +
+                    "description TEXT, " +
+                    "locked INTEGER NOT NULL, " +
+                    "startTime REAL NOT NULL, " +
+                    "endTime REAL NOT NULL, " +
+                    "videoDuration REAL NOT NULL, " +
+                    "votes INTEGER NOT NULL, " +
+                    "CONSTRAINT parentDownload FOREIGN KEY (videoId) REFERENCES download (videoId) ON DELETE CASCADE" +
+                    ")")
+        }
+    }
+
     val Database by lazy {
         Room.databaseBuilder(LibreTubeApp.instance, AppDatabase::class.java, DATABASE_NAME)
             .addMigrations(
@@ -64,7 +82,8 @@ object DatabaseHolder {
                 MIGRATION_13_14,
                 MIGRATION_14_15,
                 MIGRATION_15_16,
-                MIGRATION_17_18
+                MIGRATION_17_18,
+                MIGRATION_21_22
             )
             .build()
     }

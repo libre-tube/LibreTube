@@ -14,6 +14,7 @@ import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.constraintlayout.motion.widget.TransitionAdapter
 import androidx.core.math.MathUtils.clamp
 import androidx.core.os.bundleOf
+import androidx.core.os.postDelayed
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
@@ -22,6 +23,7 @@ import androidx.fragment.app.commit
 import androidx.lifecycle.lifecycleScope
 import androidx.media3.common.MediaMetadata
 import androidx.media3.common.Player
+import androidx.media3.common.util.Log
 import androidx.media3.common.util.UnstableApi
 import androidx.media3.session.MediaController
 import com.github.libretube.R
@@ -40,15 +42,13 @@ import com.github.libretube.helpers.AudioHelper
 import com.github.libretube.helpers.BackgroundHelper
 import com.github.libretube.helpers.ClipboardHelper
 import com.github.libretube.helpers.ImageHelper
-import com.github.libretube.helpers.NavBarHelper
 import com.github.libretube.helpers.NavigationHelper
 import com.github.libretube.helpers.PlayerHelper
 import com.github.libretube.helpers.ThemeHelper
 import com.github.libretube.services.AbstractPlayerService
 import com.github.libretube.services.OfflinePlayerService
 import com.github.libretube.services.OnlinePlayerService
-import com.github.libretube.ui.activities.MainActivity
-import com.github.libretube.ui.base.BaseActivity
+import com.github.libretube.ui.activities.AbstractPlayerHostActivity
 import com.github.libretube.ui.extensions.getSystemInsets
 import com.github.libretube.ui.extensions.setOnBackPressed
 import com.github.libretube.ui.interfaces.AudioPlayerOptions
@@ -63,7 +63,7 @@ import com.github.libretube.ui.sheets.VideoOptionsBottomSheet
 import com.github.libretube.util.DataSaverMode
 import com.github.libretube.util.PlayingQueue
 import kotlinx.coroutines.launch
-import kotlin.math.abs
+import kotlin.math.absoluteValue
 
 @UnstableApi
 class AudioPlayerFragment : Fragment(R.layout.fragment_audio_player), AudioPlayerOptions {
@@ -71,9 +71,7 @@ class AudioPlayerFragment : Fragment(R.layout.fragment_audio_player), AudioPlaye
     val binding get() = _binding!!
 
     private lateinit var audioHelper: AudioHelper
-    private val activity get() = context as BaseActivity
-    private val mainActivity get() = activity as? MainActivity
-    private val mainActivityMotionLayout get() = mainActivity?.binding?.mainMotionLayout
+    private val activity get() = context as AbstractPlayerHostActivity
     private val viewModel: CommonPlayerViewModel by activityViewModels()
     private val chaptersModel: ChaptersViewModel by activityViewModels()
 
@@ -84,7 +82,8 @@ class AudioPlayerFragment : Fragment(R.layout.fragment_audio_player), AudioPlaye
     private var handler = Handler(Looper.getMainLooper())
     private var isPaused = !PlayerHelper.playAutomatically
 
-    private var isOffline: Boolean = false
+    var isOffline: Boolean = false
+        private set
     private var playerController: MediaController? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -116,7 +115,7 @@ class AudioPlayerFragment : Fragment(R.layout.fragment_audio_player), AudioPlaye
 
         // manually apply additional padding for edge-to-edge compatibility
         activity.getSystemInsets()?.let { systemBars ->
-            with (binding.audioPlayerMain) {
+            with(binding.audioPlayerMain) {
                 setPadding(
                     paddingLeft,
                     paddingTop + systemBars.top,
@@ -138,7 +137,7 @@ class AudioPlayerFragment : Fragment(R.layout.fragment_audio_player), AudioPlaye
         }
 
         binding.minimizePlayer.setOnClickListener {
-            mainActivityMotionLayout?.transitionToStart()
+            activity.minimizePlayerContainerLayout()
             binding.playerMotionLayout.transitionToEnd()
         }
 
@@ -245,8 +244,8 @@ class AudioPlayerFragment : Fragment(R.layout.fragment_audio_player), AudioPlaye
             override fun handleOnBackPressed() {
                 binding.audioPlayerContainer.isClickable = false
                 binding.playerMotionLayout.transitionToEnd()
-                mainActivityMotionLayout?.transitionToEnd()
-                mainActivity?.requestOrientationChange()
+                activity.minimizePlayerContainerLayout()
+                activity.requestOrientationChange()
             }
 
             override fun handleOnBackProgressed(backEvent: BackEventCompat) {
@@ -283,6 +282,7 @@ class AudioPlayerFragment : Fragment(R.layout.fragment_audio_player), AudioPlaye
         NavigationHelper.openVideoPlayerFragment(
             context = requireContext(),
             videoId = videoId,
+            isOffline = isOffline,
             alreadyStarted = true,
         )
     }
@@ -310,7 +310,7 @@ class AudioPlayerFragment : Fragment(R.layout.fragment_audio_player), AudioPlaye
 
     @SuppressLint("ClickableViewAccessibility")
     private fun initializeTransitionLayout() {
-        mainActivityMotionLayout?.progress = 0F
+        activity.setPlayerContainerProgress(0f)
 
         binding.playerMotionLayout.addTransitionListener(object : TransitionAdapter() {
             override fun onTransitionChange(
@@ -319,9 +319,7 @@ class AudioPlayerFragment : Fragment(R.layout.fragment_audio_player), AudioPlaye
                 endId: Int,
                 progress: Float
             ) {
-                if (NavBarHelper.hasTabs()) {
-                    mainActivityMotionLayout?.progress = abs(progress)
-                }
+                activity.setPlayerContainerProgress(progress.absoluteValue)
                 transitionEndId = endId
                 transitionStartId = startId
             }
@@ -329,12 +327,10 @@ class AudioPlayerFragment : Fragment(R.layout.fragment_audio_player), AudioPlaye
             override fun onTransitionCompleted(motionLayout: MotionLayout?, currentId: Int) {
                 if (currentId == transitionEndId) {
                     viewModel.isMiniPlayerVisible.value = true
-                    if (NavBarHelper.hasTabs()) {
-                        mainActivityMotionLayout?.progress = 1F
-                    }
+                    activity.minimizePlayerContainerLayout()
                 } else if (currentId == transitionStartId) {
                     viewModel.isMiniPlayerVisible.value = false
-                    mainActivityMotionLayout?.progress = 0F
+                    activity.maximizePlayerContainerLayout()
                 }
             }
         })
@@ -468,10 +464,6 @@ class AudioPlayerFragment : Fragment(R.layout.fragment_audio_player), AudioPlaye
         playerController?.mediaMetadata?.let { updateStreamInfo(it) }
 
         initializeSeekBar()
-
-        if (isOffline) {
-            binding.openVideo.isGone = true
-        }
     }
 
     override fun onDestroyView() {

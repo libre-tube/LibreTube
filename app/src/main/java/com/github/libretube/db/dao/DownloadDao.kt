@@ -14,6 +14,7 @@ import com.github.libretube.db.obj.DownloadPlaylist
 import com.github.libretube.db.obj.DownloadPlaylistVideosCrossRef
 import com.github.libretube.db.obj.DownloadPlaylistWithDownload
 import com.github.libretube.db.obj.DownloadPlaylistWithDownloadWithItems
+import com.github.libretube.db.obj.DownloadSponsorBlockSegment
 import com.github.libretube.db.obj.DownloadWithItems
 
 @Dao
@@ -21,6 +22,10 @@ interface DownloadDao {
     @Transaction
     @Query("SELECT * FROM download")
     suspend fun getAll(): List<DownloadWithItems>
+
+    @Transaction
+    @Query("SELECT * FROM download WHERE videoId = :videoId")
+    suspend fun getDownloadById(videoId: String): DownloadWithItems?
 
     @Transaction
     @Query("SELECT * FROM download WHERE videoId = :videoId")
@@ -88,4 +93,7 @@ interface DownloadDao {
 
     @Query("SELECT * FROM downloadplaylistvideoscrossref WHERE playlistId = :playlistId")
     suspend fun getVideoIdsFromPlaylist(playlistId: String): List<DownloadPlaylistVideosCrossRef>
+
+    @Insert
+    suspend fun insertSponsorBlockSegments(segments: List<DownloadSponsorBlockSegment>)
 }

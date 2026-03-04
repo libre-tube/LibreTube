@@ -202,7 +202,7 @@
             android:nestedScrollingEnabled="false" />
     </RelativeLayout>
 
-    <com.github.libretube.ui.views.OnlinePlayerView
+    <com.github.libretube.ui.views.CustomExoPlayerView
         android:id="@+id/player"
         android:layout_width="0dp"
         android:layout_height="0dp"

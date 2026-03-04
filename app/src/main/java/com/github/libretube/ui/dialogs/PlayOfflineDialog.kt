@@ -1,7 +1,6 @@
 package com.github.libretube.ui.dialogs
 
 import android.app.Dialog
-import android.content.Intent
 import android.os.Bundle
 import android.widget.ArrayAdapter
 import androidx.core.os.bundleOf
@@ -10,7 +9,6 @@ import androidx.fragment.app.setFragmentResult
 import com.github.libretube.R
 import com.github.libretube.constants.IntentData
 import com.github.libretube.databinding.DialogPlayOfflineBinding
-import com.github.libretube.ui.activities.OfflinePlayerActivity
 import com.github.libretube.util.TextUtils
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
@@ -31,10 +29,6 @@ class PlayOfflineDialog : DialogFragment() {
             .setTitle(R.string.dialog_play_offline_title)
             .setView(binding.root)
             .setPositiveButton(R.string.yes) { _, _ ->
-                val intent = Intent(requireContext(), OfflinePlayerActivity::class.java)
-                    .putExtra(IntentData.videoId, videoId)
-                requireContext().startActivity(intent)
-
                 setFragmentResult(
                     PLAY_OFFLINE_DIALOG_REQUEST_KEY,
                     bundleOf(IntentData.isPlayingOffline to true)

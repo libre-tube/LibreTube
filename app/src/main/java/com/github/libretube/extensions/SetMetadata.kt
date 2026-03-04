@@ -12,7 +12,6 @@ import com.github.libretube.api.obj.Streams
 import com.github.libretube.constants.IntentData
 import com.github.libretube.db.obj.DownloadChapter
 import com.github.libretube.db.obj.DownloadWithItems
-import kotlinx.serialization.encodeToString
 
 @OptIn(UnstableApi::class)
 fun MediaItem.Builder.setMetadata(streams: Streams, videoId: String) = apply {
@@ -32,7 +31,7 @@ fun MediaItem.Builder.setMetadata(streams: Streams, videoId: String) = apply {
             .setArtist(streams.uploader)
             .setDurationMs(streams.duration.times(1000))
             .setArtworkUri(streams.thumbnailUrl.toUri())
-            .setComposer(streams.uploaderUrl.toID())
+            .setComposer(streams.uploaderUrl.orEmpty().toID())
             .setExtras(extras)
             // send a unique timestamp to notify that the metadata changed, even if playing the same video twice
             .setTrackNumber(System.currentTimeMillis().mod(Int.MAX_VALUE))
@@ -44,11 +43,13 @@ fun MediaItem.Builder.setMetadata(streams: Streams, videoId: String) = apply {
 fun MediaItem.Builder.setMetadata(downloadWithItems: DownloadWithItems) = apply {
     val (download, _, downloadChapters) = downloadWithItems
     val chapters = downloadChapters.map(DownloadChapter::toChapterSegment)
+    val streams = downloadWithItems.toStreams()
 
     val extras = bundleOf(
         MediaMetadataCompat.METADATA_KEY_TITLE to download.title,
         MediaMetadataCompat.METADATA_KEY_ARTIST to download.uploader,
         IntentData.videoId to download.videoId,
+        IntentData.streams to JsonHelper.json.encodeToString(streams),
         IntentData.chapters to JsonHelper.json.encodeToString(chapters)
     )
     setMediaMetadata(

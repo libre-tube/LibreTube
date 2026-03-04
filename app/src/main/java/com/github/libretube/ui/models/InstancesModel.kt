@@ -28,9 +28,9 @@ class InstancesModel : ViewModel() {
     private val instancesRepo = InstanceRepository()
 
     suspend fun fetchCustomInstances(onIntermediateError: (Throwable) -> Unit) {
-        val instances =instancesRepo.getInstances()
+        val instances = instancesRepo.getInstances()
             .onFailure { onIntermediateError(it) }
-            .getOrElse { instancesRepo.getInstancesFallback() }
+            .getOrElse { InstanceRepository.FALLBACK_INSTANCES }
 
         publicInstances.emit(instances)
     }

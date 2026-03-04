@@ -2,7 +2,9 @@ package com.github.libretube.db.obj
 
 import androidx.room.Embedded
 import androidx.room.Relation
+import com.github.libretube.api.obj.Streams
 import com.github.libretube.enums.FileType
+import com.github.libretube.extensions.toMillis
 import com.github.libretube.ui.fragments.DownloadTab
 
 data class DownloadWithItems(
@@ -16,8 +18,27 @@ data class DownloadWithItems(
         parentColumn = "videoId",
         entityColumn = "videoId"
     )
-    val downloadChapters: List<DownloadChapter> = emptyList()
-)
+    val downloadChapters: List<DownloadChapter> = emptyList(),
+    @Relation(
+        parentColumn = "videoId",
+        entityColumn = "videoId"
+    )
+    val downloadSponsorBlockSegments: List<DownloadSponsorBlockSegment> = emptyList()
+) {
+    fun toStreams(): Streams = Streams(
+        title = download.title,
+        description = download.description,
+        uploaderAvatar = null,
+        thumbnailUrl = download.thumbnailPath?.toUri()?.toString().orEmpty(),
+        category = "",
+        uploader = download.uploader,
+        uploaded = download.uploadDate?.toMillis(),
+        duration = download.duration ?: 0,
+        uploaderUrl = null,
+        uploaderVerified = false,
+        chapters = downloadChapters.map { it.toChapterSegment() }
+    )
+}
 
 fun List<DownloadWithItems>.filterByTab(tab: DownloadTab) = filter { dl ->
     when (tab) {

@@ -23,16 +23,18 @@ import androidx.media3.session.MediaLibraryService.MediaLibrarySession
 import androidx.media3.session.MediaSession
 import androidx.media3.session.SessionCommand
 import androidx.media3.session.SessionResult
-import com.github.libretube.api.obj.Subtitle
+import com.github.libretube.R
+import com.github.libretube.api.JsonHelper
+import com.github.libretube.api.obj.Segment
 import com.github.libretube.constants.IntentData
 import com.github.libretube.enums.PlayerCommand
 import com.github.libretube.enums.PlayerEvent
-import com.github.libretube.extensions.parcelable
+import com.github.libretube.enums.SbSkipOptions
 import com.github.libretube.extensions.parcelableExtra
 import com.github.libretube.extensions.toastFromMainThread
 import com.github.libretube.extensions.updateParameters
 import com.github.libretube.helpers.PlayerHelper
-import com.github.libretube.helpers.PlayerHelper.getSubtitleRoleFlags
+import com.github.libretube.helpers.PlayerHelper.getCurrentSegment
 import com.github.libretube.ui.activities.MainActivity
 import com.github.libretube.util.DefaultTrackSelectorWithAudioQualitySupport
 import com.github.libretube.util.NowPlayingNotification
@@ -64,6 +66,18 @@ abstract class AbstractPlayerService : MediaLibraryService(), MediaLibrarySessio
         onTick = ::saveWatchPosition,
         delayMillis = PlayerHelper.WATCH_POSITION_TIMER_DELAY_MS
     )
+
+    // SponsorBlock Segment data
+    private var sponsorBlockAutoSkip = true
+    protected val sponsorBlockConfig = PlayerHelper.getSponsorBlockCategories()
+    private var sponsorBlockSegments = listOf<Segment>()
+
+    /**
+     * Whether the service should automatically play the next video after the current video finished.
+     *
+     * If set to `false`, the player UI views have to handle autoplay themselves.
+     */
+    protected var shouldHandleAutoplay = true
 
     private val playerListener = object : Player.Listener {
         override fun onIsPlayingChanged(isPlaying: Boolean) {
@@ -162,13 +176,15 @@ abstract class AbstractPlayerService : MediaLibraryService(), MediaLibrarySessio
                 }
             }
 
-            args.containsKey(PlayerCommand.SET_SUBTITLE.name) -> {
-                val subtitle: Subtitle? = args.parcelable(PlayerCommand.SET_SUBTITLE.name)
+            args.containsKey(PlayerCommand.SET_CAPTION_TRACK.name) -> {
+                val exoPlayer = exoPlayer ?: return
+
+                val captionId = args.getString(PlayerCommand.SET_CAPTION_TRACK.name) ?: return
+                val caption = PlayerHelper.getCaptionTracks(exoPlayer).firstOrNull { it.id == captionId }
 
                 trackSelector?.updateParameters {
-                    val roleFlags = getSubtitleRoleFlags(subtitle)
-                    setPreferredTextRoleFlags(roleFlags)
-                    setPreferredTextLanguage(subtitle?.code)
+                    caption?.roleFlags?.let { setPreferredTextRoleFlags(it) }
+                    setPreferredTextLanguage(caption?.language)
                 }
             }
 
@@ -183,6 +199,15 @@ abstract class AbstractPlayerService : MediaLibraryService(), MediaLibrarySessio
                 }
                 updateNotification()
             }
+
+            args.containsKey(PlayerCommand.SET_SB_AUTO_SKIP_ENABLED.name) -> {
+                sponsorBlockAutoSkip = args.getBoolean(PlayerCommand.SET_SB_AUTO_SKIP_ENABLED.name)
+            }
+
+            args.containsKey(PlayerCommand.SET_AUTOPLAY_COUNTDOWN_ENABLED.name) -> {
+                shouldHandleAutoplay =
+                    !args.getBoolean(PlayerCommand.SET_AUTOPLAY_COUNTDOWN_ENABLED.name)
+            }
         }
     }
 
@@ -193,6 +218,8 @@ abstract class AbstractPlayerService : MediaLibraryService(), MediaLibrarySessio
      */
     @CallSuper
     open fun navigateVideo(videoId: String) {
+        sponsorBlockSegments = emptyList()
+
         updatePlaylistMetadata {
             setExtras(bundleOf(IntentData.videoId to videoId))
         }
@@ -203,6 +230,39 @@ abstract class AbstractPlayerService : MediaLibraryService(), MediaLibrarySessio
 
         CoroutineScope(Dispatchers.IO).launch {
             startPlayback()
+        }
+    }
+
+    protected fun setSponsorBlockSegments(segments: List<Segment>) {
+        sponsorBlockSegments = segments
+        if (!PlayerHelper.sponsorBlockEnabled) return
+
+        updatePlaylistMetadata {
+            // JSON-encode as work-around for https://github.com/androidx/media/issues/564
+            val segments = JsonHelper.json.encodeToString(sponsorBlockSegments)
+            setExtras(bundleOf(IntentData.segments to segments))
+        }
+
+        checkForSegments()
+    }
+
+    /**
+     * Check for SponsorBlock segments. This method automatically schedules itself to repeat every
+     * 100ms using [handler], so it's not needed to schedule it manually.
+     */
+    private fun checkForSegments() {
+        handler.postDelayed(this::checkForSegments, 100)
+
+        val (currentSegment, sbSkipOption) = exoPlayer?.getCurrentSegment(
+            sponsorBlockSegments,
+            sponsorBlockConfig
+        ) ?: return
+
+        if (sbSkipOption in arrayOf(SbSkipOptions.AUTOMATIC, SbSkipOptions.AUTOMATIC_ONCE) && sponsorBlockAutoSkip) {
+            exoPlayer?.seekTo(currentSegment.segmentStartAndEnd.second.toLong() * 1000)
+            currentSegment.skipped = true
+
+            if (PlayerHelper.sponsorBlockNotifications) toastFromMainThread(R.string.segment_skipped)
         }
     }
 
@@ -435,12 +495,12 @@ abstract class AbstractPlayerService : MediaLibraryService(), MediaLibrarySessio
 
         override fun getAvailableCommands(): Player.Commands {
             return super.getAvailableCommands().buildUpon()
-                .addAll(Player.COMMAND_SEEK_TO_PREVIOUS, Player.COMMAND_SEEK_TO_NEXT)
+                .addAll(COMMAND_SEEK_TO_PREVIOUS, COMMAND_SEEK_TO_NEXT)
                 .build()
         }
 
         override fun isCommandAvailable(command: Int): Boolean {
-            if (command == Player.COMMAND_SEEK_TO_NEXT || command == Player.COMMAND_SEEK_TO_PREVIOUS) return true
+            if (command == COMMAND_SEEK_TO_NEXT || command == COMMAND_SEEK_TO_PREVIOUS) return true
 
             return super.isCommandAvailable(command)
         }

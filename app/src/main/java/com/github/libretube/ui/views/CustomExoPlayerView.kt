@@ -5,11 +5,11 @@ import android.content.Context
 import android.content.pm.ActivityInfo
 import android.content.res.Configuration
 import android.graphics.Color
+import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.text.format.DateUtils
 import android.util.AttributeSet
-import android.util.Log
 import android.view.KeyEvent
 import android.view.MotionEvent
 import android.view.Window
@@ -26,7 +26,7 @@ import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
 import androidx.core.view.marginStart
 import androidx.core.view.updateLayoutParams
-import androidx.fragment.app.findFragment
+import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.findViewTreeLifecycleOwner
 import androidx.media3.common.C
 import androidx.media3.common.PlaybackParameters
@@ -45,11 +45,13 @@ import com.github.libretube.databinding.CustomExoPlayerViewTemplateBinding
 import com.github.libretube.databinding.DoubleTapOverlayBinding
 import com.github.libretube.databinding.ExoStyledPlayerControlViewBinding
 import com.github.libretube.databinding.PlayerGestureControlsViewBinding
+import com.github.libretube.enums.PlayerCommand
 import com.github.libretube.extensions.dpToPx
 import com.github.libretube.extensions.navigateVideo
 import com.github.libretube.extensions.normalize
 import com.github.libretube.extensions.round
 import com.github.libretube.extensions.seekBy
+import com.github.libretube.extensions.toID
 import com.github.libretube.extensions.togglePlayPauseState
 import com.github.libretube.extensions.updateIfChanged
 import com.github.libretube.helpers.AudioHelper
@@ -58,26 +60,34 @@ import com.github.libretube.helpers.PlayerHelper
 import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.helpers.WindowHelper
 import com.github.libretube.obj.BottomSheetItem
+import com.github.libretube.obj.VideoResolution
+import com.github.libretube.services.AbstractPlayerService
 import com.github.libretube.ui.base.BaseActivity
 import com.github.libretube.ui.controllers.FullscreenGestureAnimationController
+import com.github.libretube.ui.dialogs.SubmitDeArrowDialog
+import com.github.libretube.ui.dialogs.SubmitSegmentDialog
 import com.github.libretube.ui.extensions.toggleSystemBars
-import com.github.libretube.ui.fragments.PlayerFragment
+import com.github.libretube.ui.interfaces.CustomPlayerCallback
 import com.github.libretube.ui.interfaces.PlayerGestureOptions
 import com.github.libretube.ui.interfaces.PlayerOptions
 import com.github.libretube.ui.listeners.PlayerGestureController
 import com.github.libretube.ui.models.ChaptersViewModel
+import com.github.libretube.ui.models.CommonPlayerViewModel
+import com.github.libretube.ui.models.PlayerViewModel
 import com.github.libretube.ui.sheets.BaseBottomSheet
 import com.github.libretube.ui.sheets.ChaptersBottomSheet
 import com.github.libretube.ui.sheets.PlaybackOptionsSheet
 import com.github.libretube.ui.sheets.PlayingQueueSheet
 import com.github.libretube.ui.sheets.SleepTimerSheet
+import com.github.libretube.ui.sheets.StatsSheet
 import com.github.libretube.ui.tools.SleepTimer
 import com.github.libretube.util.PlayingQueue
+import java.util.Locale
 import kotlin.math.ceil
 
 @SuppressLint("ClickableViewAccessibility")
 @androidx.annotation.OptIn(androidx.media3.common.util.UnstableApi::class)
-abstract class CustomExoPlayerView(
+class CustomExoPlayerView(
     context: Context,
     attributeSet: AttributeSet? = null
 ) : PlayerView(context, attributeSet), PlayerOptions, PlayerGestureOptions {
@@ -145,6 +155,32 @@ abstract class CustomExoPlayerView(
         if (show) showController() else hideController()
     }
 
+    private var playerViewModel: PlayerViewModel? = null
+    private var commonPlayerViewModel: CommonPlayerViewModel? = null
+    private var viewLifecycleOwner: LifecycleOwner? = null
+
+    private val handler = Handler(Looper.getMainLooper())
+
+    /**
+     * The window that needs to be addressed for showing and hiding the system bars
+     * If null, the activity's default/main window will be used
+     */
+    var currentWindow: Window? = null
+
+    var selectedResolution: Int? = null
+    var sponsorBlockAutoSkip = true
+
+    private var selectedAudioLanguageAndRoleFlags: Pair<String?, @C.RoleFlags Int>? = null
+    private var playerCallback: CustomPlayerCallback? = null
+
+
+    // if null, it's been set to automatic
+    private var fullscreenResolution: Int? = null
+
+    // the resolution to use when the video is not played in fullscreen
+    // if null, use same quality as fullscreen
+    private var noFullscreenResolution: Int? = null
+
     init {
         brightnessHelper = BrightnessHelper(activity)
         playerGestureController = PlayerGestureController(activity, this)
@@ -153,14 +189,26 @@ abstract class CustomExoPlayerView(
             playerView = this,
             videoFrameView = backgroundBinding.exoContentFrame,
             onSwipeUpCompleted = {
-                if (!isFullscreen()) togglePlayerFullscreen(true)
+                if (!isFullscreen()) playerCallback?.toggleFullscreen()
             },
-            onSwipeDownCompleted = ::minimizeOrExitPlayer
+            onSwipeDownCompleted = {
+                if (isFullscreen()) playerCallback?.toggleFullscreen()
+            }
         )
     }
 
-    fun initialize(chaptersViewModel: ChaptersViewModel) {
+    fun initialize(
+        chaptersViewModel: ChaptersViewModel,
+        commonPlayerViewModel: CommonPlayerViewModel,
+        playerViewModel: PlayerViewModel,
+        viewLifecycleOwner: LifecycleOwner,
+        playerCallback: CustomPlayerCallback
+    ) {
         this.chaptersViewModel = chaptersViewModel
+        this.playerViewModel = playerViewModel
+        this.commonPlayerViewModel = commonPlayerViewModel
+        this.viewLifecycleOwner = viewLifecycleOwner
+        this.playerCallback = playerCallback
 
         initializeGestureProgress()
 
@@ -175,6 +223,7 @@ abstract class CustomExoPlayerView(
         // don't let the player view show its controls automatically
         controllerAutoShow = false
 
+        binding.fullscreen.setOnClickListener { playerCallback.toggleFullscreen() }
         // locking the player
         binding.lockPlayer.setOnClickListener {
             // change the locked/unlocked icon
@@ -212,6 +261,19 @@ abstract class CustomExoPlayerView(
             override fun onIsPlayingChanged(isPlaying: Boolean) {
                 super.onIsPlayingChanged(isPlaying)
                 keepScreenOn = isPlaying
+            }
+
+            override fun onPlaybackStateChanged(playbackState: Int) {
+                super.onPlaybackStateChanged(playbackState)
+
+                if (playbackState == Player.STATE_READY) {
+                    // set default caption language from preferences if caption language is available
+                    val captions = PlayerHelper.getCaptionTracks(player ?: return)
+                    val defaultLangCaption =
+                        captions.firstOrNull { it.language == PlayerHelper.defaultSubtitleCode }
+
+                    updateCurrentSubtitle(defaultLangCaption?.id)
+                }
             }
         })
 
@@ -315,6 +377,100 @@ abstract class CustomExoPlayerView(
         }
 
         updateMarginsByFullscreenMode()
+
+        commonPlayerViewModel?.isFullscreen?.observe(viewLifecycleOwner) { isFullscreen ->
+            updateTopBarMargin()
+
+            binding.fullscreen.isInvisible = PlayerHelper.autoFullscreenEnabled
+            val fullscreenDrawable =
+                if (isFullscreen) R.drawable.ic_fullscreen_exit else R.drawable.ic_fullscreen
+            binding.fullscreen.setImageResource(fullscreenDrawable)
+
+            binding.exoTitle.isInvisible = !isFullscreen
+
+            updateResolution(isFullscreen)
+        }
+
+        val updateSbImageResource = {
+            binding.sbToggle.setImageResource(
+                if (sponsorBlockAutoSkip) R.drawable.ic_sb_enabled else R.drawable.ic_sb_disabled
+            )
+        }
+        updateSbImageResource()
+        binding.sbToggle.setOnClickListener {
+            sponsorBlockAutoSkip = !sponsorBlockAutoSkip
+            (player as? MediaController)?.sendCustomCommand(
+                AbstractPlayerService.runPlayerActionCommand, bundleOf(
+                    PlayerCommand.SET_SB_AUTO_SKIP_ENABLED.name to sponsorBlockAutoSkip
+                )
+            )
+            updateSbImageResource()
+        }
+
+        syncQueueButtons()
+
+        binding.sbSubmit.isVisible =
+            PreferenceHelper.getBoolean(PreferenceKeys.CONTRIBUTE_TO_SB, false)
+        binding.sbSubmit.setOnClickListener {
+            val submitSegmentDialog = SubmitSegmentDialog()
+            submitSegmentDialog.arguments = buildSbBundleArgs() ?: return@setOnClickListener
+            submitSegmentDialog.show((context as BaseActivity).supportFragmentManager, null)
+        }
+
+        binding.dearrowSubmit.isVisible =
+            PreferenceHelper.getBoolean(PreferenceKeys.CONTRIBUTE_TO_DEARROW, false)
+        binding.dearrowSubmit.setOnClickListener {
+            val submitDialog = SubmitDeArrowDialog()
+            submitDialog.arguments = buildSbBundleArgs() ?: return@setOnClickListener
+            submitDialog.show((context as BaseActivity).supportFragmentManager, null)
+        }
+
+        fullscreenResolution = PlayerHelper.getDefaultResolution(context, true)
+        noFullscreenResolution = PlayerHelper.getDefaultResolution(context, false)
+    }
+
+    private fun syncQueueButtons() {
+        if (!PlayerHelper.skipButtonsEnabled) return
+
+        // toggle the visibility of next and prev buttons based on queue and whether the player view is locked
+        binding.skipPrev.isInvisible = !PlayingQueue.hasPrev() || isPlayerLocked
+        binding.skipNext.isInvisible = !PlayingQueue.hasNext() || isPlayerLocked
+
+        handler.postDelayed(this::syncQueueButtons, 100)
+    }
+
+    /**
+     * Update the displayed duration of the video
+     */
+    private fun updateDisplayedDuration() {
+        if (isLive) return
+
+        val duration = player?.duration?.div(1000) ?: return
+        if (duration < 0) return
+
+        val durationWithoutSegments = duration - playerViewModel?.segments?.value.orEmpty().sumOf {
+            val (start, end) = it.segmentStartAndEnd
+            end.toDouble() - start.toDouble()
+        }.toLong()
+        val durationString = DateUtils.formatElapsedTime(duration)
+
+        binding.duration.text = if (durationWithoutSegments < duration) {
+            "$durationString (${DateUtils.formatElapsedTime(durationWithoutSegments)})"
+        } else {
+            durationString
+        }
+    }
+
+    private fun buildSbBundleArgs(): Bundle? {
+        val currentPosition = player?.currentPosition?.takeIf { it != C.TIME_UNSET } ?: 0
+        val duration = player?.duration?.takeIf { it != C.TIME_UNSET }
+        val videoId = PlayingQueue.getCurrent()?.url?.toID() ?: return null
+
+        return bundleOf(
+            IntentData.currentPosition to currentPosition,
+            IntentData.duration to duration,
+            IntentData.videoId to videoId
+        )
     }
 
     /**
@@ -368,8 +524,6 @@ abstract class CustomExoPlayerView(
         )
     }
 
-    open fun onPlayerEvent(player: Player, playerEvents: Player.Events) = Unit
-
     private fun updateDisplayedDurationType(showTimeLeft: Boolean? = null) {
         var shouldShowTimeLeft = showTimeLeft ?: PreferenceHelper
             .getBoolean(PreferenceKeys.SHOW_TIME_LEFT, false)
@@ -401,6 +555,10 @@ abstract class CustomExoPlayerView(
             .alpha(0f)
             .setDuration(500)
             .start()
+
+        if (isFullscreen()) {
+            toggleSystemBars(false)
+        }
     }
 
     override fun showController() {
@@ -413,6 +571,10 @@ abstract class CustomExoPlayerView(
             .alpha(1f)
             .setDuration(200)
             .start()
+
+        if (isFullscreen() && !isPlayerLocked) {
+            toggleSystemBars(true)
+        }
     }
 
     fun showControllerPermanently() {
@@ -452,7 +614,7 @@ abstract class CustomExoPlayerView(
         }
     }
 
-    open fun getOptionsMenuItems(): List<BottomSheetItem> = listOf(
+    fun getOptionsMenuItems(): List<BottomSheetItem> = listOf(
         BottomSheetItem(
             context.getString(R.string.repeat_mode),
             R.drawable.ic_repeat,
@@ -505,8 +667,92 @@ abstract class CustomExoPlayerView(
             }
         ) {
             onSleepTimerClicked()
+        },
+        BottomSheetItem(
+            context.getString(R.string.quality),
+            R.drawable.ic_hd,
+            this::getCurrentResolutionSummary
+        ) {
+            onQualityClicked()
+        },
+        BottomSheetItem(
+            context.getString(R.string.audio_track),
+            R.drawable.ic_audio,
+            this::getCurrentAudioTrackTitle
+        ) {
+            onAudioStreamClicked()
+        },
+        BottomSheetItem(
+            context.getString(R.string.captions),
+            R.drawable.ic_caption,
+            {
+                player?.let { PlayerHelper.getCurrentPlayedCaptionFormat(it)?.language }
+                    ?: context.getString(R.string.none)
+            }
+        ) {
+            onCaptionsClicked()
+        },
+        BottomSheetItem(
+            context.getString(R.string.stats_for_nerds),
+            R.drawable.ic_info
+        ) {
+            onStatsClicked()
         }
     )
+
+    @androidx.annotation.OptIn(androidx.media3.common.util.UnstableApi::class)
+    private fun getCurrentResolutionSummary(): String {
+        val currentQuality = player?.videoSize?.height ?: 0
+        var summary = "${currentQuality}p"
+        if (selectedResolution == null) {
+            summary += " - ${context.getString(R.string.auto)}"
+        } else if ((selectedResolution ?: 0) > currentQuality) {
+            summary += " - ${context.getString(R.string.resolution_limited)}"
+        }
+        return summary
+    }
+
+    private fun getCurrentAudioTrackTitle(): String {
+        if (player == null) {
+            return context.getString(R.string.unknown_or_no_audio)
+        }
+
+        // The player reference should be not changed between the null check
+        // and its access, so a non null assertion should be safe here
+        val selectedAudioLanguagesAndRoleFlags =
+            PlayerHelper.getAudioLanguagesAndRoleFlagsFromTrackGroups(
+                player!!.currentTracks.groups,
+                true
+            )
+
+        if (selectedAudioLanguagesAndRoleFlags.isEmpty()) {
+            return context.getString(R.string.unknown_or_no_audio)
+        }
+
+        // At most one audio track should be selected regardless of audio
+        // format or quality
+        val firstSelectedAudioFormat = selectedAudioLanguagesAndRoleFlags[0]
+
+        if (selectedAudioLanguagesAndRoleFlags.size == 1 &&
+            firstSelectedAudioFormat.first == null &&
+            !PlayerHelper.haveAudioTrackRoleFlagSet(
+                firstSelectedAudioFormat.second
+            )
+        ) {
+            // Regardless of audio format or quality, if there is only one
+            // audio stream which has no language and no role flags, it
+            // should mean that there is only a single audio track which
+            // has no language or track type set in the video played
+            // Consider it as the default audio track (or unknown)
+            return context.getString(R.string.default_or_unknown_audio_track)
+        }
+
+        return PlayerHelper.getAudioTrackNameFromFormat(
+            context,
+            firstSelectedAudioFormat
+        )
+    }
+
 
     // lock the player
     private fun lockPlayer(isLocked: Boolean) {
@@ -731,8 +977,188 @@ abstract class CustomExoPlayerView(
         SleepTimerSheet().show(supportFragmentManager)
     }
 
-    open fun isFullscreen() =
-        resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE
+    override fun onCaptionsClicked() {
+        val player = player ?: return
+
+        val captions = PlayerHelper.getCaptionTracks(player)
+            // put normal tracks before auto-generated tracks
+            .sortedBy { it.roleFlags == PlayerHelper.ROLE_FLAG_AUTO_GEN_SUBTITLE }
+            .associateWith {
+                val displayName = Locale.forLanguageTag(it.language.orEmpty())
+                    .getDisplayLanguage(Locale.getDefault())
+
+                if (it.roleFlags == PlayerHelper.ROLE_FLAG_AUTO_GEN_SUBTITLE) {
+                    "$displayName (${context.getString(R.string.auto_generated)})"
+                } else {
+                    displayName
+                }
+            }
+
+        val currentSubtitle = PlayerHelper.getCurrentPlayedCaptionFormat(player)
+        BaseBottomSheet()
+            .setSimpleItems(
+                listOf(context.getString(R.string.none)) + captions.values.toList(),
+                preselectedItem = captions.entries.firstOrNull { (track, _) ->
+                    track == currentSubtitle
+                }?.value ?: context.getString(R.string.none)
+            ) { index ->
+                val captionsFormat =
+                    captions.keys.toList().getOrNull(index - 1) ?: return@setSimpleItems
+
+                updateCurrentSubtitle(captionsFormat.id)
+                playerViewModel?.currentCaptionId = captionsFormat.id
+            }
+            .show(supportFragmentManager)
+    }
+
+    fun updateCurrentSubtitle(trackId: String?) {
+        val player = player as? MediaController ?: return
+
+        player.sendCustomCommand(
+            AbstractPlayerService.runPlayerActionCommand, bundleOf(
+                PlayerCommand.SET_CAPTION_TRACK.name to trackId
+            )
+        )
+    }
+
+    /**
+     * Get all available player resolutions
+     */
+    private fun getAvailableResolutions(): List<VideoResolution> {
+        val player = player ?: return emptyList()
+
+        val resolutions = player.currentTracks.groups.asSequence()
+            .flatMap { group ->
+                (0 until group.length).map {
+                    group.getTrackFormat(it).height
+                }
+            }
+            .filter { it > 0 }
+            .map { VideoResolution("${it}p", it) }
+            .toSortedSet(compareByDescending { it.resolution })
+
+        resolutions.add(VideoResolution(context.getString(R.string.auto_quality), Int.MAX_VALUE))
+        return resolutions.toList()
+    }
+
+    override fun onQualityClicked() {
+        // get the available resolutions
+        val resolutions = getAvailableResolutions()
+
+        // Dialog for quality selection
+        BaseBottomSheet()
+            .setSimpleItems(
+                resolutions.map(VideoResolution::name),
+                preselectedItem = resolutions.firstOrNull {
+                    it.resolution == selectedResolution
+                }?.name ?: context.getString(R.string.auto_quality)
+            ) { which ->
+                val newResolution = resolutions[which].resolution
+                setPlayerResolution(newResolution, true)
+
+                // save the selected resolution to update on fullscreen change
+                if (noFullscreenResolution != null && isFullscreen()) {
+                    noFullscreenResolution = newResolution
+                } else {
+                    fullscreenResolution = newResolution
+                }
+            }
+            .show(supportFragmentManager)
+    }
+
+    private fun updateResolution(isFullscreen: Boolean) {
+        if (!isFullscreen && noFullscreenResolution != null) {
+            setPlayerResolution(noFullscreenResolution!!)
+        } else if (fullscreenResolution != null) {
+            setPlayerResolution(fullscreenResolution!!)
+        } else {
+            setPlayerResolution(Int.MAX_VALUE)
+        }
+    }
+
+    fun setPlayerResolution(resolution: Int, isSelectedByUser: Boolean = false) {
+        val player = player as? MediaController ?: return
+
+        val transformedResolution =
+            if (!isSelectedByUser && playerCallback?.isVideoShort() ?: false) {
+                ceil(resolution * 16.0 / 9.0).toInt()
+            } else {
+                resolution
+            }
+
+        player.sendCustomCommand(
+            AbstractPlayerService.runPlayerActionCommand, bundleOf(
+                PlayerCommand.SET_RESOLUTION.name to transformedResolution
+            )
+        )
+
+        selectedResolution = resolution
+    }
+
+    override fun onAudioStreamClicked() {
+        val player = player as? MediaController ?: return
+        val context = context ?: return
+
+        val audioLanguagesAndRoleFlags = PlayerHelper.getAudioLanguagesAndRoleFlagsFromTrackGroups(
+            player.currentTracks.groups,
+            false
+        )
+        val audioLanguages = audioLanguagesAndRoleFlags.map {
+            PlayerHelper.getAudioTrackNameFromFormat(context, it)
+        }
+        val baseBottomSheet = BaseBottomSheet()
+
+        if (audioLanguagesAndRoleFlags.isEmpty() || (audioLanguagesAndRoleFlags.size == 1 &&
+                    audioLanguagesAndRoleFlags[0].first == null &&
+                    !PlayerHelper.haveAudioTrackRoleFlagSet(
+                        audioLanguagesAndRoleFlags[0].second
+                    ))
+        ) {
+            // Regardless of audio format or quality, if there is only one audio stream which has
+            // no language and no role flags, it should mean that there is only a single audio
+            // track which has no language or track type set in the video played
+            // Consider it as the default audio track (or unknown)
+            baseBottomSheet.setSimpleItems(
+                listOf(context.getString(R.string.default_or_unknown_audio_track)),
+                preselectedItem = context.getString(R.string.default_or_unknown_audio_track),
+                listener = null
+            )
+        } else {
+            baseBottomSheet.setSimpleItems(
+                audioLanguages,
+                preselectedItem = selectedAudioLanguageAndRoleFlags?.let {
+                    PlayerHelper.getAudioTrackNameFromFormat(context, it)
+                },
+            ) { index ->
+                val selectedAudioFormat = audioLanguagesAndRoleFlags[index]
+                player.sendCustomCommand(
+                    AbstractPlayerService.runPlayerActionCommand, bundleOf(
+                        PlayerCommand.SET_AUDIO_ROLE_FLAGS.name to selectedAudioFormat.second
+                    )
+                )
+                player.sendCustomCommand(
+                    AbstractPlayerService.runPlayerActionCommand, bundleOf(
+                        PlayerCommand.SET_AUDIO_LANGUAGE.name to selectedAudioFormat.first
+                    )
+                )
+                selectedAudioLanguageAndRoleFlags = selectedAudioFormat
+            }
+        }
+
+        baseBottomSheet.show(supportFragmentManager)
+    }
+
+    override fun onStatsClicked() {
+        val player = player ?: return
+
+        val videoStats =
+            PlayerHelper.getVideoStats(player.currentTracks, playerCallback?.getVideoId().orEmpty())
+        StatsSheet()
+            .apply { arguments = bundleOf(IntentData.videoStats to videoStats) }
+            .show(supportFragmentManager)
+    }
+
+    fun isFullscreen() = commonPlayerViewModel?.isFullscreen?.value ?: false
 
     override fun onConfigurationChanged(newConfig: Configuration?) {
         super.onConfigurationChanged(newConfig)
@@ -995,7 +1421,7 @@ abstract class CustomExoPlayerView(
             }
 
             KeyEvent.KEYCODE_F -> {
-                togglePlayerFullscreen()
+                playerCallback?.toggleFullscreen()
             }
 
             else -> return false
@@ -1004,19 +1430,11 @@ abstract class CustomExoPlayerView(
         return true
     }
 
-    fun togglePlayerFullscreen(isFullscreen: Boolean = !isFullscreen()) {
-        try {
-            findFragment<PlayerFragment>().toggleFullscreen(isFullscreen)
-        } catch (error: IllegalStateException) {
-            Log.e(this::class.simpleName, error.message.toString())
-        }
-    }
-
     override fun getViewMeasures(): Pair<Int, Int> {
         return width to height
     }
 
-    open fun onPlaybackEvents(player: Player, events: Player.Events) {
+    fun onPlaybackEvents(player: Player, events: Player.Events) {
         if (events.containsAny(
                 Player.EVENT_PLAYBACK_STATE_CHANGED,
                 Player.EVENT_IS_PLAYING_CHANGED,
@@ -1029,18 +1447,17 @@ abstract class CustomExoPlayerView(
 
             // keep screen on if the video is playing
             keepScreenOn = player.isPlaying == true
-            onPlayerEvent(player, events)
         }
 
         if (events.contains(Player.EVENT_RENDERED_FIRST_FRAME)) {
             // if the video is not starting automatically, show the controller
             if (!PlayerHelper.playAutomatically) showControllerPermanently()
         }
+
+        updateDisplayedDuration()
     }
 
-    open fun minimizeOrExitPlayer() = Unit
-
-    open fun getWindow(): Window = activity.window
+    fun getWindow(): Window = currentWindow ?: activity.window
 
     companion object {
         private const val HIDE_CONTROLLER_TOKEN = "hideController"

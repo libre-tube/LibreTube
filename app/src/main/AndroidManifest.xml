@@ -45,6 +45,8 @@
             android:name=".ui.activities.NoInternetActivity"
             android:label="@string/noInternet"
             android:launchMode="singleTop"
+            android:configChanges="keyboard|keyboardHidden|screenSize|smallestScreenSize|screenLayout|orientation|uiMode"
+            android:supportsPictureInPicture="true"
             android:screenOrientation="locked" />
 
         <activity
@@ -112,13 +114,6 @@
             </intent-filter>
 
         </activity>
-
-        <activity
-            android:name=".ui.activities.OfflinePlayerActivity"
-            android:configChanges="keyboard|keyboardHidden|screenSize|smallestScreenSize|screenLayout|orientation|uiMode"
-            android:launchMode="singleTop"
-            android:label="@string/player"
-            android:supportsPictureInPicture="true" />
 
         <activity
             android:name=".ui.activities.MainActivity"

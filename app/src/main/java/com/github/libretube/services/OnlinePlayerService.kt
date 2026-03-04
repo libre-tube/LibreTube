@@ -4,7 +4,6 @@ import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import androidx.core.net.toUri
-import androidx.core.os.bundleOf
 import androidx.media3.common.C
 import androidx.media3.common.MediaItem
 import androidx.media3.common.MediaItem.SubtitleConfiguration
@@ -13,15 +12,12 @@ import androidx.media3.common.Player
 import androidx.media3.datasource.DefaultDataSource
 import androidx.media3.exoplayer.hls.HlsMediaSource
 import com.github.libretube.R
-import com.github.libretube.api.JsonHelper
 import com.github.libretube.api.MediaServiceRepository
 import com.github.libretube.api.SubscriptionHelper
 import com.github.libretube.api.obj.Segment
 import com.github.libretube.api.obj.Streams
 import com.github.libretube.constants.IntentData
 import com.github.libretube.db.DatabaseHelper
-import com.github.libretube.enums.PlayerCommand
-import com.github.libretube.enums.SbSkipOptions
 import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.parcelable
 import com.github.libretube.extensions.setMetadata
@@ -29,7 +25,6 @@ import com.github.libretube.extensions.toastFromMainDispatcher
 import com.github.libretube.extensions.toastFromMainThread
 import com.github.libretube.extensions.updateParameters
 import com.github.libretube.helpers.PlayerHelper
-import com.github.libretube.helpers.PlayerHelper.getCurrentSegment
 import com.github.libretube.helpers.PlayerHelper.getSubtitleRoleFlags
 import com.github.libretube.helpers.ProxyHelper
 import com.github.libretube.parcelable.PlayerData
@@ -42,7 +37,6 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.cancelAndJoin
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import kotlinx.serialization.encodeToString
 
 /**
  * Loads the selected videos audio in background mode with a notification area.
@@ -60,13 +54,6 @@ open class OnlinePlayerService : AbstractPlayerService() {
      * The response that gets when called the Api.
      */
     private var streams: Streams? = null
-
-    // SponsorBlock Segment data
-    private var sponsorBlockAutoSkip = true
-    private var sponsorBlockSegments = listOf<Segment>()
-    private var sponsorBlockConfig = PlayerHelper.getSponsorBlockCategories()
-
-    private var autoPlayCountdownEnabled = false
 
     private val scope = CoroutineScope(Dispatchers.IO)
 
@@ -163,6 +150,11 @@ open class OnlinePlayerService : AbstractPlayerService() {
                 SubscriptionHelper.submitFeedItemChange(it.toFeedItem())
             }
 
+            launch {
+                val segments = getSponsorBlockSegments()
+                withContext(Dispatchers.Main) { setSponsorBlockSegments(segments) }
+            }
+
             withContext(Dispatchers.Main) {
                 setStreamSource()
                 configurePlayer(timestampMs)
@@ -187,8 +179,6 @@ open class OnlinePlayerService : AbstractPlayerService() {
             playWhenReady = PlayerHelper.playAutomatically
             prepare()
         }
-
-        if (PlayerHelper.sponsorBlockEnabled) fetchSponsorBlockSegments()
     }
 
     /**
@@ -201,7 +191,7 @@ open class OnlinePlayerService : AbstractPlayerService() {
                 return
             }
 
-            if (!PlayerHelper.isAutoPlayEnabled(playlistId != null) || autoPlayCountdownEnabled) return
+            if (!PlayerHelper.isAutoPlayEnabled(playlistId != null) || !shouldHandleAutoplay) return
         }
 
         val nextVideo = nextId ?: PlayingQueue.getNext() ?: return
@@ -210,64 +200,18 @@ open class OnlinePlayerService : AbstractPlayerService() {
         navigateVideo(nextVideo)
     }
 
-    /**
-     * fetch the segments for SponsorBlock
-     */
-    private fun fetchSponsorBlockSegments() = scope.launch(Dispatchers.IO) {
-        runCatching {
-            if (sponsorBlockConfig.isEmpty()) return@runCatching
-            sponsorBlockSegments = MediaServiceRepository.instance.getSegments(
+    private suspend fun getSponsorBlockSegments(): List<Segment> {
+        return runCatching {
+            MediaServiceRepository.instance.getSegments(
                 videoId,
                 sponsorBlockConfig.keys.toList(),
                 listOf("skip", "mute", "full", "poi", "chapter")
             ).segments
-
-            withContext(Dispatchers.Main) {
-                updatePlaylistMetadata {
-                    // JSON-encode as work-around for https://github.com/androidx/media/issues/564
-                    val segments = JsonHelper.json.encodeToString(sponsorBlockSegments)
-                    setExtras(bundleOf(IntentData.segments to segments))
-                }
-
-                checkForSegments()
-            }
-        }
-    }
-
-
-    /**
-     * check for SponsorBlock segments
-     */
-    private fun checkForSegments() {
-        handler.postDelayed(this::checkForSegments, 100)
-
-        val (currentSegment, sbSkipOption) = exoPlayer?.getCurrentSegment(
-            sponsorBlockSegments,
-            sponsorBlockConfig
-        ) ?: return
-
-        if (sbSkipOption in arrayOf(SbSkipOptions.AUTOMATIC, SbSkipOptions.AUTOMATIC_ONCE) && sponsorBlockAutoSkip) {
-            exoPlayer?.seekTo(currentSegment.segmentStartAndEnd.second.toLong() * 1000)
-            currentSegment.skipped = true
-
-            if (PlayerHelper.sponsorBlockNotifications) toastFromMainThread(R.string.segment_skipped)
-        }
-    }
-
-    override fun runPlayerCommand(args: Bundle) {
-        super.runPlayerCommand(args)
-
-        if (args.containsKey(PlayerCommand.SET_SB_AUTO_SKIP_ENABLED.name)) {
-            sponsorBlockAutoSkip = args.getBoolean(PlayerCommand.SET_SB_AUTO_SKIP_ENABLED.name)
-        } else if (args.containsKey(PlayerCommand.SET_AUTOPLAY_COUNTDOWN_ENABLED.name)) {
-            autoPlayCountdownEnabled =
-                args.getBoolean(PlayerCommand.SET_AUTOPLAY_COUNTDOWN_ENABLED.name)
-        }
+        }.getOrElse { emptyList() }
     }
 
     override fun navigateVideo(videoId: String) {
         this.streams = null
-        this.sponsorBlockSegments = emptyList()
 
         super.navigateVideo(videoId)
     }

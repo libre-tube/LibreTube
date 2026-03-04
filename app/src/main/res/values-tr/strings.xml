@@ -552,7 +552,7 @@
     <string name="backup_creation_success">Yedekleme başarıyla tamamlandı</string>
     <string name="backup_creation_failed">Yedekleme oluşturulamadı</string>
     <string name="category_hook">Giriş/Karşılama</string>
-    <string name="category_hook_summary">Videonun ilerleyen kısımlarından veya gelecek bölümlerden kesitler sunarak izleyiciyi yakalayan merak uyandırıcı girişler</string>
+    <string name="category_hook_summary">İzleyicinin dikkatini çeken görüntüler için (genellikle ilk sahne olarak), aynı videonun ilerleyen bölümlerinden veya bir dizinin sonraki bölümlerinden ipuçları vererek</string>
     <string name="show_updates_summary">Uygulama her başlatıldığında güncellemeleri otomatik olarak denetle.</string>
     <string name="sort_channel">Kanal adı</string>
     <string name="sort_size">Boyut</string>
