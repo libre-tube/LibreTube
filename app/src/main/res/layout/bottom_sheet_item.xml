@@ -11,5 +11,6 @@
     android:layout_marginHorizontal="4dp"
     android:layout_marginVertical="2dp"
     android:textSize="16sp"
+    android:textColor="@color/text_on_primary_or_default"
     tools:drawableStart="@drawable/ic_download"
     tools:text="Option" />
