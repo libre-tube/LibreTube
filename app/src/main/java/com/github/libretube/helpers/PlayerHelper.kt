@@ -125,7 +125,7 @@ object PlayerHelper {
         }
     }
 
-    fun getOrientation(videoWidth: Int, videoHeight: Int): Int {
+    fun getFullscreenOrientation(isVerticalVideo: Boolean): Int {
         val fullscreenOrientationPref = PreferenceHelper.getString(
             PreferenceKeys.FULLSCREEN_ORIENTATION,
             "ratio"
@@ -134,7 +134,7 @@ object PlayerHelper {
         return when (fullscreenOrientationPref) {
             "ratio" -> {
                 // probably a youtube shorts video
-                if (videoHeight > videoWidth) {
+                if (isVerticalVideo) {
                     ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT
                 } // a video with normal aspect ratio
                 else {

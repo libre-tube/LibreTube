@@ -13,7 +13,6 @@ import com.github.libretube.api.obj.StreamItem
 import com.github.libretube.api.obj.Streams
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.helpers.PreferenceHelper
-import kotlinx.serialization.encodeToString
 import retrofit2.HttpException
 
 open class PipedMediaServiceRepository : MediaServiceRepository {
@@ -24,7 +23,11 @@ open class PipedMediaServiceRepository : MediaServiceRepository {
 
     override suspend fun getStreams(videoId: String): Streams {
         return try {
-            api.getStreams(videoId)
+            api.getStreams(videoId).also {
+                it.isShort = it.videoStreams.firstOrNull()?.let { stream ->
+                    (stream.height ?: 0) > (stream.width ?: 0)
+                } ?: false
+            }
         } catch (e: HttpException) {
             val errorMessage = e.response()?.errorBody()?.string()?.runCatching {
                 JsonHelper.json.decodeFromString<Message>(this).message
