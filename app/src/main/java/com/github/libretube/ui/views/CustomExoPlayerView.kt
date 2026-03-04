@@ -115,13 +115,7 @@ class CustomExoPlayerView(
      */
 
     private val runnableHandler = Handler(Looper.getMainLooper())
-    var isPlayerLocked: Boolean = false
-    var isLive: Boolean = false
-        set(value) {
-            field = value
-            updateDisplayedDurationType()
-            updateCurrentPosition()
-        }
+    private var isPlayerLocked: Boolean = false
 
     private var resizeModePref: Int
         set(value) {
@@ -140,7 +134,7 @@ class CustomExoPlayerView(
         AspectRatioFrameLayout.RESIZE_MODE_FILL to R.string.resize_mode_fill
     )
 
-    val activity get() = context as BaseActivity
+    private val activity get() = context as BaseActivity
 
     private val supportFragmentManager
         get() = activity.supportFragmentManager
@@ -167,11 +161,12 @@ class CustomExoPlayerView(
      */
     var currentWindow: Window? = null
 
-    var selectedResolution: Int? = null
+    private var selectedResolution: Int? = null
     var sponsorBlockAutoSkip = true
+        private set
 
     private var selectedAudioLanguageAndRoleFlags: Pair<String?, @C.RoleFlags Int>? = null
-    private var playerCallback: CustomPlayerCallback? = null
+    private lateinit var playerCallback: CustomPlayerCallback
 
 
     // if null, it's been set to automatic
@@ -189,10 +184,10 @@ class CustomExoPlayerView(
             playerView = this,
             videoFrameView = backgroundBinding.exoContentFrame,
             onSwipeUpCompleted = {
-                if (!isFullscreen()) playerCallback?.toggleFullscreen()
+                if (!isFullscreen()) playerCallback.toggleFullscreen()
             },
             onSwipeDownCompleted = {
-                if (isFullscreen()) playerCallback?.toggleFullscreen()
+                if (isFullscreen()) playerCallback.toggleFullscreen()
             }
         )
     }
@@ -273,6 +268,9 @@ class CustomExoPlayerView(
                         captions.firstOrNull { it.language == PlayerHelper.defaultSubtitleCode }
 
                     updateCurrentSubtitle(defaultLangCaption?.id)
+
+                    // if the video is live, the remaining time is displayed instead of duration
+                    updateDisplayedDurationType()
                 }
             }
         })
@@ -328,7 +326,7 @@ class CustomExoPlayerView(
             updateDisplayedDurationType(false)
         }
         binding.position.setOnClickListener {
-            if (isLive) player?.let { it.seekTo(it.duration) }
+            if (playerCallback.isVideoLive()) player?.let { it.seekTo(it.duration) }
         }
 
         updateCurrentPosition()
@@ -373,7 +371,7 @@ class CustomExoPlayerView(
 
         updateMarginsByFullscreenMode()
 
-        commonPlayerViewModel?.isFullscreen?.observe(viewLifecycleOwner) { isFullscreen ->
+        commonPlayerViewModel.isFullscreen.observe(viewLifecycleOwner) { isFullscreen ->
             updateTopBarMargin()
 
             binding.fullscreen.isInvisible = PlayerHelper.autoFullscreenEnabled
@@ -438,7 +436,7 @@ class CustomExoPlayerView(
      * Update the displayed duration of the video
      */
     private fun updateDisplayedDuration() {
-        if (isLive) return
+        if (playerCallback.isVideoLive()) return
 
         val duration = player?.duration?.div(1000) ?: return
         if (duration < 0) return
@@ -523,7 +521,7 @@ class CustomExoPlayerView(
         var shouldShowTimeLeft = showTimeLeft ?: PreferenceHelper
             .getBoolean(PreferenceKeys.SHOW_TIME_LEFT, false)
         // always show the time left only if it's a livestream
-        if (isLive) shouldShowTimeLeft = true
+        if (playerCallback.isVideoLive()) shouldShowTimeLeft = true
         if (showTimeLeft != null) {
             // save whether to show time left or duration for next session
             PreferenceHelper.putBoolean(PreferenceKeys.SHOW_TIME_LEFT, shouldShowTimeLeft)
@@ -1075,7 +1073,7 @@ class CustomExoPlayerView(
         val player = player as? MediaController ?: return
 
         val transformedResolution =
-            if (!isSelectedByUser && playerCallback?.isVideoShort() ?: false) {
+            if (!isSelectedByUser && playerCallback.isVideoShort()) {
                 ceil(resolution * 16.0 / 9.0).toInt()
             } else {
                 resolution
@@ -1147,7 +1145,7 @@ class CustomExoPlayerView(
         val player = player ?: return
 
         val videoStats =
-            PlayerHelper.getVideoStats(player.currentTracks, playerCallback?.getVideoId().orEmpty())
+            PlayerHelper.getVideoStats(player.currentTracks, playerCallback.getVideoId())
         StatsSheet()
             .apply { arguments = bundleOf(IntentData.videoStats to videoStats) }
             .show(supportFragmentManager)
@@ -1229,7 +1227,7 @@ class CustomExoPlayerView(
         val timeLeft = duration - position
 
         binding.position.text =
-            if (isLive) context.getString(R.string.live) else DateUtils.formatElapsedTime(position)
+            if (playerCallback.isVideoLive()) context.getString(R.string.live) else DateUtils.formatElapsedTime(position)
         binding.timeLeft.text = "-${DateUtils.formatElapsedTime(timeLeft)}"
 
         runnableHandler.postDelayed(100, UPDATE_POSITION_TOKEN, this::updateCurrentPosition)
@@ -1416,7 +1414,7 @@ class CustomExoPlayerView(
             }
 
             KeyEvent.KEYCODE_F -> {
-                playerCallback?.toggleFullscreen()
+                playerCallback.toggleFullscreen()
             }
 
             else -> return false

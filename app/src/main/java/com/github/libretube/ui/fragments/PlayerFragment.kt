@@ -250,7 +250,7 @@ class PlayerFragment : Fragment(R.layout.fragment_player), CustomPlayerCallback 
 
         override fun onPlaybackStateChanged(playbackState: Int) {
             // set the playback speed to one if having reached the end of a livestream
-            if (playbackState == Player.STATE_BUFFERING && binding.player.isLive &&
+            if (playbackState == Player.STATE_BUFFERING && streams.isLive &&
                 playerController.duration - playerController.currentPosition < 700
             ) {
                 playerController.setPlaybackSpeed(1f)
@@ -1156,7 +1156,6 @@ class PlayerFragment : Fragment(R.layout.fragment_player), CustomPlayerCallback 
             )
             playerChannelSubCount.isVisible = streams.uploaderSubscriberCount >= 0
 
-            player.isLive = streams.isLive
             relPlayerDownload.isVisible = !streams.isLive && !isOffline
         }
         playerControlsBinding.exoTitle.text = streams.title
@@ -1451,5 +1450,9 @@ class PlayerFragment : Fragment(R.layout.fragment_player), CustomPlayerCallback 
 
     override fun isVideoShort(): Boolean {
         return streams.isShort
+    }
+
+    override fun isVideoLive(): Boolean {
+        return streams.isLive
     }
 }
