@@ -279,7 +279,6 @@ class DownloadService : LifecycleService() {
 
         val completed = totalRead >= item.downloadSize
         if (completed) {
-            DownloadHelper.removeIncompleteDownload(item.id)
             _downloadFlow.emit(item.id to DownloadStatus.Completed)
         } else {
             _downloadFlow.emit(item.id to DownloadStatus.Paused)
@@ -454,7 +453,6 @@ class DownloadService : LifecycleService() {
 
         lifecycleScope.launch(coroutineContext) {
             item.id = Database.downloadDao().insertDownloadItem(item).toInt()
-            DownloadHelper.addIncompleteDownload(item.id)
 
             if (mayStartNewDownload()) {
                 downloadFile(item)
@@ -481,8 +479,6 @@ class DownloadService : LifecycleService() {
 
         lifecycleScope.launch(coroutineContext) {
             val file = Database.downloadDao().findDownloadItemById(id) ?: return@launch
-            // Ensure ID is tracked when manually resuming
-            DownloadHelper.addIncompleteDownload(id)
             downloadFile(file)
         }
     }
@@ -505,31 +501,28 @@ class DownloadService : LifecycleService() {
      */
     private fun resumeAll() {
         lifecycleScope.launch(coroutineContext) {
-            // Get incomplete items directly using stored IDs
-            val incompleteIds = DownloadHelper.getIncompleteDownloadIds()
-            val incompleteItems = incompleteIds.mapNotNull { id ->
-                Database.downloadDao().findDownloadItemById(id)
+            val incompleteItems = withContext(Dispatchers.IO) {
+                Database.downloadDao().getAll()
+                    .flatMap { it.downloadItems }
+                    .filter { item ->
+                        runCatching { item.path.fileSize() }.getOrDefault(0L) < item.downloadSize
+                    }
             }
 
-            // 1. Ensure all incomplete items are in the queue (as waiting/false)
-            // This allows the "next download" logic in downloadFile to pick them up later.
             incompleteItems.forEach {
                 if (downloadQueue.indexOfKey(it.id) < 0) {
                     downloadQueue.put(it.id, false)
                 }
             }
 
-            // 2. Fill available slots
             val max = DownloadHelper.getMaxConcurrentDownloads()
-            val current = downloadQueue.valueIterator().asSequence().count { it } // Count running (true)
+            val current = downloadQueue.valueIterator().asSequence().count { it }
             val slotsToFill = max - current
 
             if (slotsToFill > 0) {
-                // Find candidates that are NOT currently running
                 val candidates = incompleteItems.filter { !downloadQueue[it.id] }
                     .take(slotsToFill)
 
-                // Launch them. We launch individually because downloadFile suspends.
                 candidates.forEach { item ->
                     launch {
                         downloadFile(item)
@@ -546,7 +539,6 @@ class DownloadService : LifecycleService() {
         downloadQueue[id] = false
         _downloadFlow.emit(id to DownloadStatus.Stopped)
 
-        DownloadHelper.removeIncompleteDownload(id)
         val item = Database.downloadDao().findDownloadItemById(id) ?: return@launch
         notificationManager.cancel(item.getNotificationId())
         Database.downloadDao().deleteDownloadItemById(id)
