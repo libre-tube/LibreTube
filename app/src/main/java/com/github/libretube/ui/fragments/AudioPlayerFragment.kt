@@ -14,7 +14,6 @@ import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.constraintlayout.motion.widget.TransitionAdapter
 import androidx.core.math.MathUtils.clamp
 import androidx.core.os.bundleOf
-import androidx.core.os.postDelayed
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
@@ -23,7 +22,6 @@ import androidx.fragment.app.commit
 import androidx.lifecycle.lifecycleScope
 import androidx.media3.common.MediaMetadata
 import androidx.media3.common.Player
-import androidx.media3.common.util.Log
 import androidx.media3.common.util.UnstableApi
 import androidx.media3.session.MediaController
 import com.github.libretube.R
@@ -196,13 +194,11 @@ class AudioPlayerFragment : Fragment(R.layout.fragment_audio_player), AudioPlaye
             playerController?.seekTo(bundle.getLong(IntentData.currentPosition))
         }
 
-        binding.openChapters.setOnClickListener {
-            // JSON-encode as work-around for https://github.com/androidx/media/issues/564
-            chaptersModel.chaptersLiveData.value =
-                playerController?.mediaMetadata?.extras?.getString(IntentData.chapters)?.let {
-                    JsonHelper.json.decodeFromString(it)
-                }
+        chaptersModel.chaptersLiveData.observe(viewLifecycleOwner) { chapters ->
+            _binding?.openChapters?.isVisible = !chapters.isNullOrEmpty()
+        }
 
+        binding.openChapters.setOnClickListener {
             ChaptersBottomSheet()
                 .apply {
                     arguments = bundleOf(
@@ -458,10 +454,15 @@ class AudioPlayerFragment : Fragment(R.layout.fragment_audio_player), AudioPlaye
                     mediaMetadata.extras?.getString(IntentData.chapters)?.let {
                         JsonHelper.json.decodeFromString(it)
                     }
-                _binding?.openChapters?.isVisible = !chapters.isNullOrEmpty()
+                chaptersModel.chaptersLiveData.value = chapters
             }
         })
         playerController?.mediaMetadata?.let { updateStreamInfo(it) }
+        // JSON-encode as work-around for https://github.com/androidx/media/issues/564
+        chaptersModel.chaptersLiveData.value =
+            playerController?.mediaMetadata?.extras?.getString(IntentData.chapters)?.let {
+                JsonHelper.json.decodeFromString(it)
+            }
 
         initializeSeekBar()
     }
