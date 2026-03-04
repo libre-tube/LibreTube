@@ -1171,12 +1171,17 @@ class PlayerFragment : Fragment(R.layout.fragment_player), CustomPlayerCallback 
 
         binding.apply {
             ImageHelper.loadImage(streams.uploaderAvatar, binding.playerChannelImage, true)
+            binding.playerChannelImage.isVisible = streams.uploaderAvatar != null
+
             playerChannelName.text = streams.uploader
             titleTextView.text = streams.title
+
             playerChannelSubCount.text = context?.getString(
                 R.string.subscribers,
                 streams.uploaderSubscriberCount.formatShort()
             )
+            playerChannelSubCount.isVisible = streams.uploaderSubscriberCount >= 0
+
             player.isLive = streams.isLive
             relPlayerDownload.isVisible = !streams.isLive && !isOffline
         }
