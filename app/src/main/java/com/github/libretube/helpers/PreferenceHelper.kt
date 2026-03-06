@@ -144,6 +144,9 @@ object PreferenceHelper {
             val speed = (currentSpeed * 4f).roundToInt() / 4f
             putString(PreferenceKeys.PLAYBACK_SPEED, speed.toString())
         },
+        PreferenceMigration(6, 7) {
+            remove("disable_video_image_proxy")
+        },
     )
 
     /**
