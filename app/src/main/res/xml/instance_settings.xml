@@ -38,14 +38,6 @@
             app:summary="@string/customInstance_summary"
             app:title="@string/customInstance" />
 
-        <SwitchPreferenceCompat
-            android:defaultValue="false"
-            android:icon="@drawable/ic_server"
-            android:dependency="full_local_mode"
-            android:summary="@string/disable_proxy_summary"
-            android:title="@string/disable_proxy"
-            app:key="disable_video_image_proxy" />
-
     </PreferenceCategory>
 
     <PreferenceCategory android:title="@string/authentication">
