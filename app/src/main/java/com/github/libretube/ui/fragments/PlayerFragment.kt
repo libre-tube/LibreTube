@@ -219,6 +219,18 @@ class PlayerFragment : Fragment(R.layout.fragment_player), CustomPlayerCallback 
     private var bufferingTimeoutTask: Runnable? = null
 
     private val playerListener = object : Player.Listener {
+        override fun onRenderedFirstFrame() {
+            super.onRenderedFirstFrame()
+            val oldProgress = binding.playerMotionLayout.progress
+            val delta = if (oldProgress > 0) { -0.01f } else { 0.01f }
+            handler.post {
+                binding.playerMotionLayout.progress = oldProgress + delta
+            }
+            handler.postDelayed(150) {
+                binding.playerMotionLayout.progress = oldProgress
+            }
+        }
+
         override fun onIsPlayingChanged(isPlaying: Boolean) {
             if (PlayerHelper.pipEnabled || PictureInPictureCompat.isInPictureInPictureMode(
                     baseActivity
