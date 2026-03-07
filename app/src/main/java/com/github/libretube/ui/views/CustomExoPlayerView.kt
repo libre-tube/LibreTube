@@ -420,6 +420,7 @@ class CustomExoPlayerView(
 
         fullscreenResolution = PlayerHelper.getDefaultResolution(context, true)
         noFullscreenResolution = PlayerHelper.getDefaultResolution(context, false)
+        updateResolution(commonPlayerViewModel.isFullscreen.value == true)
     }
 
     private fun syncQueueButtons() {
