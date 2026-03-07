@@ -68,7 +68,11 @@ private fun VideoStream.toPipedStream() = PipedStream(
     indexStart = indexStart,
     indexEnd = indexEnd,
     fps = fps,
-    contentLength = itagItem?.contentLength ?: 0L
+    durationMs = itagItem?.approxDurationMs,
+    contentLength = itagItem?.contentLength ?: 0L,
+    itag = itagItem?.id,
+    lastModified = itagItem?.lastModified,
+    xtags = itagItem?.xtags,
 )
 
 private fun AudioStream.toPipedStream() = PipedStream(
@@ -81,13 +85,18 @@ private fun AudioStream.toPipedStream() = PipedStream(
     initEnd = initEnd,
     indexStart = indexStart,
     indexEnd = indexEnd,
+    durationMs = itagItem?.approxDurationMs,
     contentLength = itagItem?.contentLength ?: 0L,
     codec = codec,
     audioTrackId = audioTrackId,
     audioTrackName = audioTrackName,
     audioTrackLocale = audioLocale?.toLanguageTag(),
     audioTrackType = audioTrackType?.name,
-    videoOnly = false
+    videoOnly = false,
+    itag = itagItem?.id,
+    lastModified = itagItem?.lastModified,
+    isDrc = itagItem?.isDrc,
+    xtags = itagItem?.xtags,
 )
 
 fun StreamInfoItem.toStreamItem(
@@ -326,8 +335,8 @@ class NewPipeMediaServiceRepository : MediaServiceRepository {
                 )
             },
             audioStreams = resp.audioStreams.map { it.toPipedStream() },
-            videoStreams = resp.videoOnlyStreams.map { it.toPipedStream().copy(videoOnly = true) } +
-                    resp.videoStreams.map { it.toPipedStream().copy(videoOnly = false) },
+            videoStreams = resp.videoOnlyStreams.map { it.toPipedStream().copy(videoOnly = true,) },
+                    //+ resp.videoStreams.map { it.toPipedStream().copy(videoOnly = false) },
             previewFrames = resp.previewFrames.map {
                 PreviewFrames(
                     it.urls,
@@ -350,7 +359,9 @@ class NewPipeMediaServiceRepository : MediaServiceRepository {
             },
             // currently, isShortFormContent always seems to return false
             isShort = resp.isShortFormContent || (resp.videoStreams + resp.videoOnlyStreams)
-                .firstOrNull()?.let { it.height > it.width } ?: false
+                .firstOrNull()?.let { it.height > it.width } ?: false,
+            serverAbrStreamingUrl = resp.serverAbrStreamingUrl,
+            videoPlaybackUstreamerConfig = resp.ustreamerConfig,
         )
     }
 
