@@ -8,6 +8,8 @@ import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.core.view.updateLayoutParams
 import androidx.recyclerview.widget.ListAdapter
+import com.github.libretube.api.MediaServiceRepository
+import com.github.libretube.api.SponsorBlockLabelHelper
 import com.github.libretube.api.obj.StreamItem
 import com.github.libretube.constants.IntentData
 import com.github.libretube.databinding.AllCaughtUpRowBinding
@@ -16,6 +18,7 @@ import com.github.libretube.extensions.dpToPx
 import com.github.libretube.extensions.toID
 import com.github.libretube.helpers.ImageHelper
 import com.github.libretube.helpers.NavigationHelper
+import com.github.libretube.helpers.PlayerHelper
 import com.github.libretube.ui.adapters.callbacks.DiffUtilItemCallback
 import com.github.libretube.ui.base.BaseActivity
 import com.github.libretube.ui.extensions.setFormattedDuration
@@ -124,7 +127,16 @@ class VideoCardsAdapter(private val columnWidthDp: Float? = null) :
                 true
             }
 
+            // always hide the icon, to avoid issues where the icon is recycled and shown until the web requests succeeds
+            sponsorBadgeCard.isVisible = false
             CoroutineScope(Dispatchers.IO).launch {
+                if (PlayerHelper.sponsorBlockEnabled) {
+                    val sponsor = SponsorBlockLabelHelper.getVideoLabels(videoId)
+                    withContext(Dispatchers.Main) {
+                        sponsorBadgeCard.isVisible = sponsor?.segments?.isNotEmpty() == true
+                    }
+                }
+
                 DeArrowUtil.deArrowVideoId(videoId)?.let { (title, thumbnail) ->
                     withContext(Dispatchers.Main) {
                         if (title != null) this@apply.textViewTitle.text = title
