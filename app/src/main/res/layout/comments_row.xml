@@ -40,7 +40,7 @@
                     android:ellipsize="end"
                     android:maxLines="1"
                     android:textAlignment="viewStart"
-                    android:textColor="?android:attr/textColorSecondary"
+                    android:textColor="@color/text_on_primary_or_default"
                     android:textSize="12sp"
                     tools:text="Octacat" />
 
