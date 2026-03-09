@@ -2,10 +2,10 @@ import java.util.Properties
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
-    id("com.android.application")
-    id("kotlinx-serialization")
-    id("kotlin-parcelize")
-    id("androidx.navigation.safeargs.kotlin")
+    alias(libs.plugins.androidApplication)
+    alias(libs.plugins.kotlin.parcelize)
+    alias(libs.plugins.kotlin.serialization)
+    alias(libs.plugins.androidx.navigation.safeargs)
     alias(libs.plugins.baselineprofile)
     alias(libs.plugins.ksp)
 }
