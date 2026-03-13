@@ -81,7 +81,7 @@
     <string name="video">Vaizdas</string>
     <string name="downloading">Atsiunčiama…</string>
     <string name="player_autoplay">Automatinis atkūrimas</string>
-    <string name="instance_frontend_url">URL į perdavimo šaltinio sąsają</string>
+    <string name="instance_frontend_url">Serverio sąsajos URL</string>
     <string name="quality">Kokybė</string>
     <string name="pauseOnScreenOff">Automatinis pristabdymas</string>
     <string name="pauseOnScreenOff_summary">Pristabdyti atkūrimą, kai ekranas išjungtas</string>
@@ -215,7 +215,7 @@
     <string name="videoCount">%1$d vaizdo įrašai</string>
     <string name="retry">Bandyti dar kartą</string>
     <string name="category_sponsor_summary">Apmokama reklama, apmokamos rekomendacijos ir tiesioginė reklama. Ne savireklama ar neapmokamas nuoširdus, kūrėjų, svetainių ir produktų reklamavimas</string>
-    <string name="category_interaction">Sąveikos priminimas (skatinimas pamėgti ir prenumeruoti)</string>
+    <string name="category_interaction">Sąveikos skatinimas (raginimas pamėgti ir prenumeruoti)</string>
     <string name="category_intro">Pertrauka / įžanginė animacija</string>
     <string name="category_outro">Pabaigos kortelės ir padėkos</string>
     <string name="category_outro_summary">Informacija po turinio pabaigos. Neskirta išvadoms su informacija</string>
@@ -254,7 +254,7 @@
     <string name="required_network">Būtinas ryšys</string>
     <string name="network_all">Visi</string>
     <string name="picture_in_picture">Vaizdas vaizde</string>
-    <string name="backup_customInstances">Pasirinktiniai perdavimo šaltiniai</string>
+    <string name="backup_customInstances">Pasirinktiniai serveriai</string>
     <string name="play_next">Paleisti sekantį</string>
     <string name="push_channel_name">Pranešimų agentas</string>
     <string name="category_selfpromo_summary">Panašus į „rėmimą“, išskyrus neapmokamą arba savęs reklamavimą. Tai apima skyrius apie prekes, aukas arba informaciją apie tai, su kuo kūrėjas bendradarbiavo</string>
