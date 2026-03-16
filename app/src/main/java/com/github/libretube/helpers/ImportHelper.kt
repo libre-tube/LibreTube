@@ -166,7 +166,7 @@ object ImportHelper {
                     context.contentResolver.openInputStream(uri)?.use { inputStream ->
                         val text = inputStream.bufferedReader().readText()
                         runCatching {
-                            text.lines().map { line ->
+                            text.lines().filter { it.isNotEmpty() }.map { line ->
                                 JsonHelper.json.decodeFromString<FreeTubeImportPlaylist>(line)
                             }
                         }.getOrNull() ?: runCatching {
