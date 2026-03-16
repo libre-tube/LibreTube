@@ -1,0 +1,7 @@
+syntax = "proto2";
+package video_streaming;
+
+message SabrError {
+  optional string type = 1;
+  optional int32 code = 2;
+}
