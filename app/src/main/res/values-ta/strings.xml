@@ -149,7 +149,7 @@
     <string name="rich_caption_rendering_summary">மிகவும் பணக்கார மற்றும் தனிப்பயனாக்கப்பட்ட அனுபவத்திற்கு வலை தலைப்புகளை வழங்கவும்</string>
     <string name="captions">தலைப்புகள்</string>
     <string name="general">பொது</string>
-    <string name="general_summary">மொழி, மற்றும் பகுதி</string>
+    <string name="general_summary">பதிவிறக்கங்கள் மற்றும் தரவு சேமிப்பான்</string>
     <string name="worst_quality">மோசமான</string>
     <string name="default_subtitle_language">வசன மொழி</string>
     <string name="notifications">அறிவிப்புகள்</string>
@@ -227,10 +227,10 @@
     <string name="import_watch_history">கண்காணிப்பு வரலாற்றை இறக்குமதி செய்யுங்கள்</string>
     <string name="audio_video">ஆடியோ மற்றும் வீடியோ</string>
     <string name="add_to_bookmarks">புக்மார்க்குகளில் சேர்க்கவும்</string>
-    <string name="alternative_pip_controls_summary">ஆடியோவை மட்டும் காண்பி, முன்னோக்கி மற்றும் முன்னாடி வைப்பதற்கு பதிலாக PIP இல் கட்டுப்பாடுகளைத் தவிர்க்கவும்</string>
+    <string name="alternative_pip_controls_summary">ஆடியோவை மட்டும் காண்பி, முன்னோக்கி மற்றும் முன்னாடி வைப்பதற்கு பதிலாக பிப் இல் கட்டுப்பாடுகளைத் தவிர்க்கவும்</string>
     <string name="add_to_queue">வரிசையில் சேர்க்கவும்</string>
     <string name="open_copied">திற</string>
-    <string name="device_info">கருவி செய்தி</string>
+    <string name="device_info">சாதனத் செய்தி</string>
     <string name="new_group">புதிய</string>
     <string name="group_name_error_empty">தயவுசெய்து ஒரு பெயரை உள்ளிடவும்</string>
     <string name="duration_reversed">காலம் (தலைகீழ்)</string>
@@ -479,7 +479,7 @@
     <string name="local_stream_extraction_summary">குழாய் பயன்படுத்தாமல் YouTube இலிருந்து வீடியோ பிளேபேக் தகவல்களை நேரடியாகப் பெறுங்கள்.</string>
     <plurals name="channel_new_streams">
         <item quantity="one">%d புதிய ச்ட்ரீம்</item>
-        <item quantity="other">%d புதிய நீரோடைகள்</item>
+        <item quantity="other">%d புதிய ச்ட்ரீம்கள்</item>
     </plurals>
     <string name="tooltip_reverse">தலைகீழ்</string>
     <string name="tooltip_watch_position">வாட்ச் நிலை</string>
@@ -536,4 +536,32 @@
     <string name="trailers">டிரெய்லர்கள்</string>
     <string name="music">இசை</string>
     <string name="playback_pitch_semitone_error_input">மதிப்பு -%1$.1f மற்றும் %1$.1f க்கு இடையில் இருக்க வேண்டும்</string>
+    <string name="category_hook">ஊக்/வாழ்த்துக்கள்</string>
+    <string name="category_hook_summary">ஒரு தொடரின் அதே வீடியோ அல்லது எதிர்கால எபிசோட்களில் நடக்கும் நிகழ்வுகளை கிண்டல் செய்வதன் மூலம் அல்லது விவரிப்பதன் மூலம் பார்வையாளரின் கவனத்தை (பெரும்பாலும் முதல் காட்சியாக) ஈர்க்கும் கதை கொக்கிகளுக்காக</string>
+    <string name="show_updates_summary">ஆப்ச் தொடங்கும் ஒவ்வொரு முறையும் தானாகவே புதுப்பிப்புகளைச் சரிபார்க்கவும்.</string>
+    <string name="checking_frequency_15_minutes">15 நிமிடங்கள்</string>
+    <string name="checking_frequency_30_minutes">30 நிமிடங்கள்</string>
+    <string name="checking_frequency_60_minutes">60 நிமிடங்கள்</string>
+    <string name="checking_frequency_2_hours">2 மணி நேரம்</string>
+    <string name="checking_frequency_6_hours">6 மணி நேரம்</string>
+    <string name="checking_frequency_12_hours">12 மணி நேரம்</string>
+    <string name="checking_frequency_1_day">1 நாள்</string>
+    <string name="sort_channel">சேனல் பெயர்</string>
+    <string name="sort_size">அளவு</string>
+    <string name="backup_creation_success">காப்புப்பிரதி வெற்றிகரமாக முடிந்தது</string>
+    <string name="backup_creation_failed">காப்புப்பிரதியை உருவாக்க முடியவில்லை</string>
+    <string name="unsubscribe_snackbar_message">%1$s இலிருந்து வெற்றிகரமாக குழுவிலகப்பட்டது</string>
+    <string name="screenshot_saved">திரைக்காட்சி சேமிக்கப்பட்டது</string>
+    <string name="delete_playlist_include_vidoes">பிளேலிச்ட்டில் இருந்து எல்லா வீடியோக்களையும் நீக்கவா?</string>
+    <plurals name="minutes_left">
+        <item quantity="one">%d மணித்துளி மீதமுள்ளது</item>
+        <item quantity="other">%d மணித்துளி மீதமுள்ளன</item>
+    </plurals>
+    <plurals name="sleep_timer_chip_minutes">
+        <item quantity="one">தூக்க_டைமர்_சிப்_நிமிடங்கள்</item>
+        <item quantity="other">%dmin</item>
+    </plurals>
+    <string name="include_timestamp_in_filename">கோப்பு பெயரில் நேர முத்திரையைச் சேர்க்கவும்</string>
+    <string name="did_you_mean">நீங்கள் கூறுவது:</string>
+    <string name="showing_results_for">இதற்கான முடிவுகளைக் காட்டுகிறது:</string>
 </resources>
