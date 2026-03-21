@@ -566,5 +566,5 @@
         <item quantity="many">%d minutos</item>
         <item quantity="other">%d minutos</item>
     </plurals>
-    <string name="show_updates_summary">Cheque por atualizações automaticamente toda vez que o aplicativo é iniciado.</string>
+    <string name="show_updates_summary">Procurar atualizações ao iniciar a aplicação</string>
 </resources>

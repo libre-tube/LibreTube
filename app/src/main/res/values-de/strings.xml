@@ -153,7 +153,7 @@
     <string name="auth_instance_summary">Verwende für authentifizierte Aufrufe (anmelden, Playlists speichern usw.) eine andere Instanz</string>
     <string name="auth_instances">Wähle eine Authentifizierungsinstanz</string>
     <string name="github">GitHub</string>
-    <string name="turnInternetOn">Bitte stelle eine Internetverbindung her, indem du WLAN oder mobile Daten aktivierst.</string>
+    <string name="turnInternetOn">Bitte schalte WLAN oder mobile Daten ein, um eine Verbindung zum Internet herzustellen.</string>
     <string name="open">Öffnen…</string>
     <string name="chapters">Kapitel</string>
     <string name="require_restart">Neustart der App erforderlich</string>
