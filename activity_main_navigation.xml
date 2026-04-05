@@ -1,0 +1,16 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/fragment_for_you"
+        android:title="Para Ti"
+        android:icon="@drawable/icon_for_you" />
+    <item
+        android:id="@+id/fragment_trending"
+        android:title="Tendencia"
+        android:icon="@drawable/icon_trending" />
+    <item
+        android:id="@+id/fragment_subscriptions"
+        android:title="Subscriptions" />
+    <item
+        android:id="@+id/fragment_library"
+        android:title="Library" />
+</menu>
