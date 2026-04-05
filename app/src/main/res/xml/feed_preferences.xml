@@ -1,0 +1,20 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <ListPreference
+        android:key="default_feed_type"
+        android:title="Default Feed Type"
+        android:defaultValue="for_you"
+        android:entries="@array/feed_types"
+        android:entryValues="@array/feed_type_values" />
+    <SwitchPreferenceCompat
+        android:key="for_you_enabled"
+        android:title="Enable For You"
+        android:defaultValue="true" />
+    <SwitchPreferenceCompat
+        android:key="trending_enabled"
+        android:title="Enable Trending"
+        android:defaultValue="false" />
+    <SwitchPreferenceCompat
+        android:key="recommendation_enabled"
+        android:title="Enable Recommendations"
+        android:defaultValue="true" />
+</PreferenceScreen>
