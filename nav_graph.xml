@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:startDestination="@id/fragment_for_you">
+
+    <fragment
+        android:id="@+id/fragment_for_you"
+        android:name="com.example.app.ForYouFragment"
+        android:label="For You" />
+
+    <fragment
+        android:id="@+id/trendingFragment"
+        android:name="com.example.app.TrendingFragment"
+        android:label="Trending" />
+
+    <!-- Maintain all existing destinations and actions -->
+</navigation>
