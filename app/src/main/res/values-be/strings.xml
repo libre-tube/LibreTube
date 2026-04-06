@@ -555,4 +555,19 @@
     <string name="include_timestamp_in_filename">Уключаючы метку часу ў назве файла</string>
     <string name="did_you_mean">Вы мелі на ўвазе:</string>
     <string name="showing_results_for">Паказаць вынікі для:</string>
+    <string name="show_updates_summary">Правяраць наяўнасць абнаўленняў кожны раз пры запуску праграмы.</string>
+    <string name="sort_channel">Назва канала</string>
+    <string name="sort_size">Памер</string>
+    <plurals name="minutes_left">
+        <item quantity="one">%d хвілін засталася</item>
+        <item quantity="few">%d хвіліны засталося</item>
+        <item quantity="many">%d хвілін засталося</item>
+        <item quantity="other">%d хвілін засталося</item>
+    </plurals>
+    <plurals name="sleep_timer_chip_minutes">
+        <item quantity="one">%d хвіліна</item>
+        <item quantity="few">%d хвіліны</item>
+        <item quantity="many">%d хвілін</item>
+        <item quantity="other">%d хвілін</item>
+    </plurals>
 </resources>
