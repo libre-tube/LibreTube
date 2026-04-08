@@ -406,6 +406,8 @@
     <string name="group_name">Group name</string>
     <string name="group_name_error_empty">Please enter a name</string>
     <string name="group_name_error_exists">Please choose a name that is unique</string>
+    <string name="ungrouped_channels">Ungrouped</string>
+    <string name="ungrouped_channels_with_count">Ungrouped (%1$d)</string>
     <string name="play_automatically">Play automatically</string>
     <string name="play_automatically_summary">Start playing video automatically when selecting</string>
     <string name="fullscreen_gestures">Enter/exit fullscreen gestures</string>
