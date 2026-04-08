@@ -113,7 +113,12 @@ class InstanceSettings : BasePreferenceFragment() {
             true
         }
 
-        findPreference<SwitchPreferenceCompat>(PreferenceKeys.FULL_LOCAL_MODE)?.setOnPreferenceChangeListener { _, newValue ->
+        val fullLocalMode = findPreference<SwitchPreferenceCompat>(PreferenceKeys.FULL_LOCAL_MODE)!!
+        val localReturnYouTubeDislike = findPreference<SwitchPreferenceCompat>(PreferenceKeys.LOCAL_RYD)!!
+        localReturnYouTubeDislike.isEnabled = fullLocalMode.isEnabled
+        fullLocalMode.setOnPreferenceChangeListener { _, newValue ->
+            localReturnYouTubeDislike.isEnabled = newValue == true
+
             // when the full local mode gets enabled, the fetch instance is no longer used and replaced
             // fully by local extraction. thus, the user has to be logged out from the fetch instance
             if (newValue == true && !authInstanceToggle.isChecked) logoutAndUpdateUI()
