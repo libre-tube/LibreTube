@@ -567,4 +567,8 @@
     <string name="sort_channel">Nome do canal</string>
     <string name="sort_size">Tamanho</string>
     <string name="show_updates_summary">Buscar por atualizações automaticamente sempre que o aplicativo for iniciado.</string>
+    <string name="ungrouped_channels">Não agrupados</string>
+    <string name="ungrouped_channels_with_count">Não agrupados (%1$d)</string>
+    <string name="long_press_fast_forward">Avanço rápido com um toque longo</string>
+    <string name="long_press_fast_forward_summary">Reproduzir vídeos em velocidade dupla enquanto tocar e pressionar a tela.</string>
 </resources>
