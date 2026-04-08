@@ -294,10 +294,10 @@
     <string name="swipe_controls_summary">اسحب لضبط السطوع ومستوى الصوت أثناء وجودك في وضع ملء الشاشة</string>
     <string name="no_comments_available">هذا الفيديو ليس له تعليقات.</string>
     <string name="comments_disabled">التعليقات معطلة من قبل القائم بالتحميل.</string>
-    <string name="double_tap_seek_summary">اضغط مرتين على اليسار أو اليمين لترجيع موضع المشغل أو إعادة تقديمه</string>
+    <string name="double_tap_seek_summary">انقر مرتين على اليسار أو اليمين لترجيع موضع المشغل أو إعادة تقديمه</string>
     <string name="all_caught_up">كل شيء تم عرضه</string>
     <string name="captions_size">حجم التسميات التوضيحية</string>
-    <string name="double_tap_seek">انقر نقرا مزدوجا للسعي</string>
+    <string name="double_tap_seek">انقر نقرًا مزدوجًا للسعي</string>
     <string name="all_caught_up_summary">لقد شاهدت جميع مقاطع الفيديو الجديدة</string>
     <string name="import_playlists">استيراد قوائم التشغيل</string>
     <string name="export_playlists">تصدير قوائم التشغيل</string>
@@ -578,4 +578,6 @@
     <string name="show_updates_summary">تحقق من التحديثات تلقائيًا كل مرة تبدء التطبيق.</string>
     <string name="ungrouped_channels">غير مُجمَّعة</string>
     <string name="ungrouped_channels_with_count">غير مُجمَّعة (%1$d)</string>
+    <string name="long_press_fast_forward">تقديم سريع عند الضغط مطولاً</string>
+    <string name="long_press_fast_forward_summary">شغّل الفيديو بضعف السرعة من خلال النقر مع الاستمرار على الشاشة.</string>
 </resources>
