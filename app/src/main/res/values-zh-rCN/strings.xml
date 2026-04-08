@@ -561,4 +561,8 @@
     <string name="sort_channel">频道名</string>
     <string name="sort_size">大小</string>
     <string name="show_updates_summary">应用每次启动时自动检查更新。</string>
+    <string name="ungrouped_channels">未分组</string>
+    <string name="ungrouped_channels_with_count">未分组的 (%1$d)</string>
+    <string name="long_press_fast_forward">长按快进</string>
+    <string name="long_press_fast_forward_summary">轻触并按住屏幕时以双倍速度播放视频。</string>
 </resources>
