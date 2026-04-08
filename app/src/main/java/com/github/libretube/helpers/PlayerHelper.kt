@@ -328,6 +328,12 @@ object PlayerHelper {
             true
         )
 
+    val longPressFastForward: Boolean
+        get() = PreferenceHelper.getBoolean(
+            PreferenceKeys.LONG_PRESS_FAST_FORWARD,
+            false
+        )
+
     private val alternativePiPControls: Boolean
         get() = PreferenceHelper.getBoolean(
             PreferenceKeys.ALTERNATIVE_PIP_CONTROLS,
