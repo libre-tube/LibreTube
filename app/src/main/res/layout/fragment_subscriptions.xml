@@ -137,6 +137,11 @@
                                         style="@style/ElevatedFilterChip"
                                         android:text="@string/all" />
 
+                                    <com.google.android.material.chip.Chip
+                                        android:id="@+id/chip_ungrouped"
+                                        style="@style/ElevatedFilterChip"
+                                        android:text="@string/ungrouped_channels" />
+
                                 </com.google.android.material.chip.ChipGroup>
 
                             </LinearLayout>

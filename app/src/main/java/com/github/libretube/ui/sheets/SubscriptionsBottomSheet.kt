@@ -31,7 +31,7 @@ class SubscriptionsBottomSheet : ExpandedBottomSheet(R.layout.sheet_subscription
     private val adapter = SubscriptionChannelAdapter()
 
     private val selectedChannelGroup
-        get() = PreferenceHelper.getInt(PreferenceKeys.SELECTED_CHANNEL_GROUP, 0)
+        get() = PreferenceHelper.getInt(PreferenceKeys.SELECTED_CHANNEL_GROUP, -1)
 
     private val searchInputText
         get() = binding.subscriptionsSearchInput.text.toString()
@@ -72,6 +72,14 @@ class SubscriptionsBottomSheet : ExpandedBottomSheet(R.layout.sheet_subscription
         }
     }
 
+    private fun getUngroupedChannels(): List<Subscription> {
+        val groups = channelGroupsModel.groups.value.orEmpty()
+
+        return viewModel.subscriptions.value.orEmpty().filter { subscription ->
+            groups.none { it.channels.contains(subscription.url) }
+        }
+    }
+
     private fun initHeaderLayout() {
         @SuppressLint("StringFormatInvalid")
         binding.allSubsBtn.text =
@@ -85,7 +93,21 @@ class SubscriptionsBottomSheet : ExpandedBottomSheet(R.layout.sheet_subscription
             showFilteredSubscriptions()
         }
 
-        channelGroupsModel.groups.value?.getOrNull(selectedChannelGroup - 1)?.let { channelGroup ->
+        // "ungrouped" category is hidden if the user doesn't use channel groups
+        if (!channelGroupsModel.groups.value.isNullOrEmpty()) {
+            binding.ungroupedSubsBtn.text = requireContext().getString(
+                R.string.ungrouped_channels_with_count,
+                viewModel.subscriptions.value?.size ?: 0
+            )
+            binding.ungroupedSubsBtn.setOnClickListener {
+                binding.groupEditBtn.isVisible = false
+
+                showFilteredSubscriptions()
+            }
+            binding.ungroupedSubsBtn.isVisible = getUngroupedChannels().isNotEmpty()
+        }
+
+        channelGroupsModel.groups.value?.getOrNull(selectedChannelGroup)?.let { channelGroup ->
             @SuppressLint("StringFormatInvalid")
             binding.allSubsBtn.text =
                 "%s (%d)".format(
@@ -123,17 +145,25 @@ class SubscriptionsBottomSheet : ExpandedBottomSheet(R.layout.sheet_subscription
         val loweredQuery = searchInputText.trim().lowercase()
 
         val shouldFilterByGroup = binding.groupSubsBtn.isChecked
+        val shouldFilterUngrouped = binding.ungroupedSubsBtn.isChecked
         val filteredSubscriptions = viewModel.subscriptions.value.orEmpty()
-            .filterByGroup(if (shouldFilterByGroup) selectedChannelGroup else 0)
+            .filterByGroup(
+                when {
+                    shouldFilterByGroup -> selectedChannelGroup
+                    shouldFilterUngrouped -> -2
+                    else -> -1 // all
+                }
+            )
             .filter { it.name.lowercase().contains(loweredQuery) }
 
         adapter.submitList(filteredSubscriptions)
     }
 
     private fun List<Subscription>.filterByGroup(groupIndex: Int): List<Subscription> {
-        if (groupIndex == 0) return this
+        if (groupIndex == -1) return this
+        if (groupIndex == -2) return getUngroupedChannels()
 
-        val group = channelGroupsModel.groups.value?.getOrNull(groupIndex - 1)
+        val group = channelGroupsModel.groups.value?.getOrNull(groupIndex)
             ?: return this
 
         return filter { group.channels.contains(it.url.toID()) }

@@ -65,6 +65,17 @@
                             tools:visibility="visible"
                             tools:text="Science (8)" />
 
+                        <com.google.android.material.button.MaterialButton
+                            style="?materialButtonTonalStyle"
+                            android:id="@+id/ungrouped_subs_btn"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:ellipsize="end"
+                            android:maxLines="1"
+                            android:visibility="gone"
+                            tools:visibility="visible"
+                            tools:text="Ungrouped (12)" />
+
                     </com.google.android.material.button.MaterialButtonToggleGroup>
 
                     <com.google.android.material.button.MaterialButton
