@@ -70,6 +70,7 @@ object PreferenceKeys {
     const val PLAYER_PINCH_CONTROL = "player_pinch_control"
     const val CAPTIONS_SIZE = "captions_size"
     const val DOUBLE_TAP_TO_SEEK = "double_tap_seek"
+    const val LONG_PRESS_FAST_FORWARD = "long_press_fast_forward"
     const val ALTERNATIVE_PIP_CONTROLS = "alternative_pip_controls"
     const val SKIP_SILENCE = "skip_silence"
     const val AUTOPLAY_COUNTDOWN = "autoplay_countdown"
