@@ -327,6 +327,7 @@
                 <data android:host="m.youtube.com" />
                 <data android:host="www.youtube.com" />
                 <data android:host="music.youtube.com" />
+                <data android:host="youtube-nocookie.com" />
                 <!-- video prefix -->
                 <data android:pathPrefix="/v/" />
                 <data android:pathPrefix="/embed/" />
