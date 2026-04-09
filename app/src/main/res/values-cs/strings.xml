@@ -569,4 +569,6 @@
     <string name="sort_channel">Název kanálu</string>
     <string name="sort_size">Velikost</string>
     <string name="show_updates_summary">Automaticky kontrolovat aktualizace po každém spuštění aplikace.</string>
+    <string name="ungrouped_channels">Neseskupené</string>
+    <string name="ungrouped_channels_with_count">Neseskupené (%1$d)</string>
 </resources>
