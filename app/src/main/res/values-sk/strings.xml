@@ -363,8 +363,8 @@
     <string name="rich_caption_rendering">Lepšie vykreslenie titulkov</string>
     <string name="channel_groups">Skupiny kanálov</string>
     <string name="choose_instance_long">Nižšie si vyberte inštanciu Piped, ktorú chcete použiť. Inštancia Piped bude fungovať ako sprostredkovateľ medzi vami a YouTube. Tieto inštancie sa nachádzajú na rôznych fyzických miestach - sú označené vlajkou (vlajkami) svojej krajiny. Inštancie, ktoré sú fyzicky bližšie k vám, sú pravdepodobne rýchlejšie ako inštancie, ktoré sú ďalej. Používanú inštanciu môžete kedykoľvek zmeniť v nastaveniach.</string>
-    <string name="double_tap_seek_summary">Ťuknutím dvakrát naľavo alebo napravo pretočíte pozíciu prehrávača dozadu alebo dopredu</string>
-    <string name="alternative_pip_controls_summary">V PiP zobrazí iba zvuk a ovládače preskočenia namiesto prvkov pretočenia dopredu a dozadu</string>
+    <string name="double_tap_seek_summary">Ťuknutím dvakrát naľavo alebo napravo posuniete pozíciu prehrávača dozadu alebo dopredu</string>
+    <string name="alternative_pip_controls_summary">V PiP zobrazí iba zvuk a ovládače preskočenia namiesto prvkov posunu dopredu a dozadu</string>
     <string name="push_channel_description">Zobrazí upozornenie, keď sú k dispozícii nové streamy.</string>
     <string name="copied_to_clipboard">Skopírované do schránky</string>
     <string name="open_copied">Otvoriť</string>
@@ -569,4 +569,8 @@
     <string name="sort_channel">Názov kanálu</string>
     <string name="sort_size">Veľkosť</string>
     <string name="show_updates_summary">Automaticky kontrolovať aktualizácie pri každom spustení aplikácie.</string>
+    <string name="ungrouped_channels">Nezoskupené</string>
+    <string name="ungrouped_channels_with_count">Nezoskupené (%1$d)</string>
+    <string name="long_press_fast_forward">Dlhé stlačenie rychlého posunu dopredu</string>
+    <string name="long_press_fast_forward_summary">Prehrávajte video dvojnásobnou rýchlosťou pri ťuknutí a podržaní obrazovky.</string>
 </resources>
