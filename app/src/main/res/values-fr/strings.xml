@@ -567,4 +567,8 @@
     <string name="sort_channel">Nom de la chaîne</string>
     <string name="sort_size">Taille</string>
     <string name="show_updates_summary">Vérifier automatiquement les mises à jour à chaque démarrage de l\'application.</string>
+    <string name="ungrouped_channels">Non groupé</string>
+    <string name="ungrouped_channels_with_count">Non groupé (%1$d)</string>
+    <string name="long_press_fast_forward">Avance rapide en appuyant longuement</string>
+    <string name="long_press_fast_forward_summary">Lisez la vidéo en vitesse double en appuyant longuement sur l\'écran.</string>
 </resources>
