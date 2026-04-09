@@ -571,4 +571,6 @@
     <string name="show_updates_summary">Automaticky kontrolovat aktualizace po každém spuštění aplikace.</string>
     <string name="ungrouped_channels">Neseskupené</string>
     <string name="ungrouped_channels_with_count">Neseskupené (%1$d)</string>
+    <string name="long_press_fast_forward">Rychlé přetočení vpřed při podržení</string>
+    <string name="long_press_fast_forward_summary">Přehrát video dvojnásobnou rychlostí při klepnutí a podržení prstu na obrazovce.</string>
 </resources>
