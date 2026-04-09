@@ -564,4 +564,8 @@
     <string name="sort_channel">Kanalname</string>
     <string name="sort_size">Größe</string>
     <string name="show_updates_summary">Bei jedem Start der App automatisch auf Updates prüfen.</string>
+    <string name="ungrouped_channels">Nicht gruppiert</string>
+    <string name="ungrouped_channels_with_count">Nicht gruppiert (%1$d)</string>
+    <string name="long_press_fast_forward">Gedrückt halten zum Vorspulen</string>
+    <string name="long_press_fast_forward_summary">Bildschirm gedrückt halten, um das Video in doppelter Geschwindigkeit abzuspielen.</string>
 </resources>
