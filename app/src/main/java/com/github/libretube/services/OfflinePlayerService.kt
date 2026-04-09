@@ -130,7 +130,9 @@ open class OfflinePlayerService : AbstractPlayerService() {
             )
 
             setMediaItem(downloadWithItems)
-            exoPlayer?.playWhenReady = PlayerHelper.playAutomatically
+
+            // automatically start playback when using the audio player
+            exoPlayer?.playWhenReady = PlayerHelper.playAutomatically || isAudioOnlyPlayer
             exoPlayer?.prepare()
 
             if (watchPositionsEnabled) {
