@@ -570,4 +570,8 @@
     <string name="sort_channel">Название канала</string>
     <string name="sort_size">Размер</string>
     <string name="show_updates_summary">Автоматически проверять наличие обновлений при каждом запуске приложения.</string>
+    <string name="ungrouped_channels">Без группы</string>
+    <string name="ungrouped_channels_with_count">Без группы (%1$d)</string>
+    <string name="long_press_fast_forward">Ускорение при долгом нажатии</string>
+    <string name="long_press_fast_forward_summary">Воспроизводить видео с удвоенной скоростью при долгом нажатии на экран.</string>
 </resources>
