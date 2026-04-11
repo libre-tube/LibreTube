@@ -564,4 +564,8 @@
         <item quantity="other">%d دقیقه</item>
     </plurals>
     <string name="show_updates_summary">بررسی خودکار به‌روز رسانی‌ها در هر بار آغاز کاره.</string>
+    <string name="ungrouped_channels">گروه نشده</string>
+    <string name="ungrouped_channels_with_count">گروه نشده (%1$d)</string>
+    <string name="long_press_fast_forward">پیشروی سریع با نگه داشتن طولانی</string>
+    <string name="long_press_fast_forward_summary">پخش ویدیو با سرعت دو برابر هنگام زدن و نگه داشتن صفحه.</string>
 </resources>
