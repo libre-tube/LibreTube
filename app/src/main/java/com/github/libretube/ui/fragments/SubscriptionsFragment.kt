@@ -36,6 +36,7 @@ import com.google.android.material.chip.Chip
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
+
 class SubscriptionsFragment : DynamicLayoutManagerFragment(R.layout.fragment_subscriptions) {
     private var _binding: FragmentSubscriptionsBinding? = null
     private val binding get() = _binding!!
@@ -125,7 +126,19 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment(R.layout.fragment_sub
 
         viewModel.feedProgress.observe(viewLifecycleOwner) { progress ->
             if (progress == null || progress.currentProgress == progress.total) {
-                binding.feedProgressContainer.isGone = true
+                // the automatic animation by setting animateLayoutChanges looks very buggy
+                // so we display a custom animation when the feed finished loading
+                // https://stackoverflow.com/questions/37704046/animatelayoutchanges-buggy-when-changing-visibility-to-gone
+                binding.feedProgressContainer.animate()
+                    .alpha(0.5f)
+                    .scaleY(0.5f)
+                    .withEndAction {
+                        binding.feedProgressContainer.isGone = true
+                        binding.feedProgressContainer.scaleY = 1f
+                        binding.feedProgressContainer.alpha = 1f
+                    }
+                    .setDuration(200)
+                    .start()
             } else {
                 binding.feedProgressContainer.isVisible = true
                 binding.feedProgressText.text = "${progress.currentProgress}/${progress.total}"
