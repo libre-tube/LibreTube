@@ -37,6 +37,7 @@ import com.github.libretube.databinding.ActivityMainBinding
 import com.github.libretube.db.DatabaseHelper
 import com.github.libretube.db.obj.SearchHistoryItem
 import com.github.libretube.enums.ImportFormat
+import com.github.libretube.enums.SearchType
 import com.github.libretube.enums.TopLevelDestination
 import com.github.libretube.extensions.anyChildFocused
 import com.github.libretube.helpers.ImportHelper
@@ -46,13 +47,12 @@ import com.github.libretube.helpers.NavigationHelper
 import com.github.libretube.helpers.NetworkHelper
 import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.helpers.ThemeHelper
-import com.github.libretube.ui.base.BaseActivity
 import com.github.libretube.ui.dialogs.ErrorDialog
 import com.github.libretube.ui.dialogs.ImportTempPlaylistDialog
 import com.github.libretube.ui.extensions.onSystemInsets
-import com.github.libretube.ui.fragments.AudioPlayerFragment
 import com.github.libretube.ui.fragments.DownloadsFragment
-import com.github.libretube.ui.fragments.PlayerFragment
+import com.github.libretube.ui.models.DownloadsViewModel
+import com.github.libretube.ui.models.PlaylistViewModel
 import com.github.libretube.ui.models.SearchViewModel
 import com.github.libretube.ui.models.SubscriptionsViewModel
 import com.github.libretube.ui.preferences.BackupRestoreSettings
@@ -65,18 +65,21 @@ import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
 
 class MainActivity : AbstractPlayerHostActivity() {
     private lateinit var binding: ActivityMainBinding
+
     lateinit var navController: NavController
-
-    private lateinit var searchView: SearchView
-    private lateinit var searchItem: MenuItem
-
     private var startFragmentId = R.id.homeFragment
 
-    private val searchViewModel: SearchViewModel by viewModels()
     private val subscriptionsViewModel: SubscriptionsViewModel by viewModels()
 
+    // search related stuff
+    private lateinit var searchView: SearchView
+    private lateinit var searchItem: MenuItem
     private var savedSearchQuery: String? = null
     private var shouldOpenSuggestions = true
+    private var currentSearchType: SearchType = SearchType.ONLINE
+    private val searchViewModel: SearchViewModel by viewModels()
+    private val downloadViewModel: DownloadsViewModel by viewModels()
+    private val playlistViewModel: PlaylistViewModel by viewModels()
 
     // registering for activity results is only possible, this here should have been part of
     // PlaylistOptionsBottomSheet instead if Android allowed us to
@@ -179,7 +182,7 @@ class MainActivity : AbstractPlayerHostActivity() {
         // save start tab fragment id and apply navbar style
         startFragmentId = try {
             NavBarHelper.applyNavBarStyle(binding.bottomNav)
-        } catch (e: Exception) {
+        } catch (_: Exception) {
             R.id.homeFragment
         }
 
@@ -322,9 +325,33 @@ class MainActivity : AbstractPlayerHostActivity() {
         this.searchItem = searchItem
         searchView = searchItem.actionView as SearchView
 
+        // automatically set a different search icon in the playlists
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            currentSearchType = when (destination.id) {
+                R.id.downloadsFragment -> SearchType.DOWNLOADS
+                R.id.playlistFragment -> SearchType.PLAYLIST
+                else -> SearchType.ONLINE
+            }
+            // clear query in unused page so that they're reset when visiting the page the next time
+            if (currentSearchType != SearchType.DOWNLOADS) downloadViewModel.setQuery(null)
+            if (currentSearchType != SearchType.PLAYLIST) playlistViewModel.setQuery(null)
+
+            val searchIconResource = when (currentSearchType) {
+                SearchType.DOWNLOADS -> R.drawable.ic_download_search
+                SearchType.PLAYLIST -> R.drawable.ic_playlist_search
+                SearchType.ONLINE -> R.drawable.ic_search
+            }
+
+            searchItem.setIcon(searchIconResource)
+        }
+
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {
                 searchView.clearFocus()
+
+                // playlist and download search don't do anything on submit
+                // as they search while typing
+                if (currentSearchType != SearchType.ONLINE) return true
 
                 // handle inserted YouTube-like URLs and directly open the referenced
                 // channel, playlist or video instead of showing search results
@@ -367,13 +394,23 @@ class MainActivity : AbstractPlayerHostActivity() {
                     return false
                 }
 
-                if (navController.currentDestination?.id != R.id.searchFragment) {
-                    navController.navigate(
-                        R.id.searchFragment,
-                        bundleOf(IntentData.query to newText)
-                    )
-                } else {
-                    searchViewModel.setQuery(newText)
+                when (currentSearchType) {
+                    SearchType.ONLINE -> {
+                        if (navController.currentDestination?.id != R.id.searchFragment) {
+                            navController.navigate(
+                                R.id.searchFragment,
+                                bundleOf(IntentData.query to newText)
+                            )
+                        } else {
+                            searchViewModel.setQuery(newText)
+                        }
+                    }
+                    SearchType.PLAYLIST -> {
+                        playlistViewModel.setQuery(newText)
+                    }
+                    SearchType.DOWNLOADS -> {
+                        downloadViewModel.setQuery(newText)
+                    }
                 }
 
                 return true
@@ -382,7 +419,7 @@ class MainActivity : AbstractPlayerHostActivity() {
 
         searchItem.setOnActionExpandListener(object : MenuItem.OnActionExpandListener {
             override fun onMenuItemActionExpand(item: MenuItem): Boolean {
-                if (navController.currentDestination?.id != R.id.searchResultFragment) {
+                if (currentSearchType == SearchType.ONLINE && navController.currentDestination?.id != R.id.searchResultFragment) {
                     searchViewModel.setQuery(null)
                     navController.navigate(R.id.openSearch)
                 }
