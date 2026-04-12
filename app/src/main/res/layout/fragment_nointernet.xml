@@ -4,15 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.google.android.material.button.MaterialButton
-        style="?materialIconButtonFilledTonalStyle"
-        android:id="@+id/noInternet_settingsImageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="end"
-        android:layout_margin="16dp"
-        app:icon="@drawable/ic_settings" />
-
     <LinearLayout
         android:id="@+id/middle"
         android:layout_width="wrap_content"
