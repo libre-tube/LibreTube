@@ -54,6 +54,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
+import org.schabi.newpipe.extractor.timeago.patterns.it
 
 class PlaylistFragment : DynamicLayoutManagerFragment(R.layout.fragment_playlist) {
     private var _binding: FragmentPlaylistBinding? = null
@@ -205,6 +206,10 @@ class PlaylistFragment : DynamicLayoutManagerFragment(R.layout.fragment_playlist
             }
 
             showPlaylistVideos()
+
+            playlistViewModel.searchQuery.observe(viewLifecycleOwner) {
+                showPlaylistVideos()
+            }
 
             // show playlist options
             binding.optionsMenu.setOnClickListener {
@@ -372,7 +377,13 @@ class PlaylistFragment : DynamicLayoutManagerFragment(R.layout.fragment_playlist
     }
 
     private fun showPlaylistVideos() {
-        val videos = getSortedVideos()
+        var videos = getSortedVideos()
+
+        val query = playlistViewModel.searchQuery.value
+        if (!query.isNullOrEmpty()) {
+            videos = videos.filter { it.item.title.orEmpty().contains(query, ignoreCase = true) }
+        }
+
         playlistAdapter?.submitList(videos)
 
         updatePlaylistDuration()
