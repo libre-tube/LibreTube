@@ -52,6 +52,7 @@ import com.github.libretube.ui.adapters.DownloadsAdapter
 import com.github.libretube.ui.base.DynamicLayoutManagerFragment
 import com.github.libretube.ui.extensions.setOnBackPressed
 import com.github.libretube.ui.models.CommonPlayerViewModel
+import com.github.libretube.ui.models.DownloadsViewModel
 import com.github.libretube.ui.sheets.BaseBottomSheet
 import com.github.libretube.ui.viewholders.DownloadsViewHolder
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -131,6 +132,7 @@ class DownloadsFragmentPage : DynamicLayoutManagerFragment(R.layout.fragment_dow
     private val binding get() = _binding!!
 
     private val playerViewModel: CommonPlayerViewModel by activityViewModels()
+    private val downloadsModel: DownloadsViewModel by activityViewModels()
 
     private var binder: DownloadService.LocalBinder? = null
     private val downloadReceiver = DownloadReceiver()
@@ -253,6 +255,10 @@ class DownloadsFragmentPage : DynamicLayoutManagerFragment(R.layout.fragment_dow
                 }.show(childFragmentManager)
             }
 
+            downloadsModel.searchQuery.observe(viewLifecycleOwner) {
+                submitDownloadList(downloads)
+            }
+
             binding.downloadsRecView.setOnDismissListener { position ->
                 adapter.showDeleteDialog(requireContext(), position)
                 // put the item back to the center, as it's currently out of the screen
@@ -263,6 +269,14 @@ class DownloadsFragmentPage : DynamicLayoutManagerFragment(R.layout.fragment_dow
                 object : RecyclerView.AdapterDataObserver() {
                     override fun onItemRangeRemoved(positionStart: Int, itemCount: Int) {
                         super.onItemRangeRemoved(positionStart, itemCount)
+                        toggleVisibilities()
+                    }
+
+                    override fun onItemRangeInserted(positionStart: Int, itemCount: Int) {
+                        super.onItemRangeInserted(positionStart, itemCount)
+                        // ensure that after searching with no results,
+                        // the nothing here placeholder is hidden again so that
+                        // results are visible for the queries made afterwards
                         toggleVisibilities()
                     }
                 }
@@ -307,7 +321,14 @@ class DownloadsFragmentPage : DynamicLayoutManagerFragment(R.layout.fragment_dow
 
     private fun submitDownloadList(items: List<DownloadWithItems>) {
         val sortOrder = DownloadSortingOrder.entries[selectedSortType]
-        val sortedItems = sortDownloadWithItemsList(items, sortOrder)
+        var sortedItems = sortDownloadWithItemsList(items, sortOrder)
+        val query = downloadsModel.searchQuery.value
+        if (!query.isNullOrEmpty()) {
+            sortedItems = sortedItems.filter {
+                it.download.title.contains(query, ignoreCase = true)
+                        || it.download.uploader.contains(query, ignoreCase = true)
+            }
+        }
 
         adapter.submitList(sortedItems)
     }
@@ -459,6 +480,7 @@ class PlaylistDownloadsFragmentPage : Fragment(R.layout.fragment_download_conten
         set(value) {
             PreferenceHelper.putInt(PreferenceKeys.SELECTED_DOWNLOAD_PLAYLIST_SORT_TYPE, value)
         }
+    private val downloadsModel: DownloadsViewModel by activityViewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val binding = FragmentDownloadContentBinding.bind(view)
@@ -503,9 +525,7 @@ class PlaylistDownloadsFragmentPage : Fragment(R.layout.fragment_download_conten
             }
 
             if (downloadPlaylists.isNotEmpty()) {
-                adapter.submitList(applySortOrder(downloadPlaylists))
-                binding.downloadsEmpty.isGone = true
-                binding.downloadsRecView.isVisible = true
+                submitPlaylists(adapter, downloadPlaylists)
 
                 binding.sortType.setOnClickListener {
                     BaseBottomSheet().setSimpleItems(filterOptions.toList()) { index ->
@@ -513,13 +533,45 @@ class PlaylistDownloadsFragmentPage : Fragment(R.layout.fragment_download_conten
                         selectedSortType = index
 
                         binding.sortType.text = filterOptions[index]
-                        adapter.submitList(applySortOrder(downloadPlaylists))
+                        submitPlaylists(adapter, downloadPlaylists)
                     }.show(childFragmentManager)
                 }
+
+                downloadsModel.searchQuery.observe(viewLifecycleOwner) {
+                    submitPlaylists(adapter, downloadPlaylists)
+                }
+
+                // the amount of visible items can change while searching, hence
+                // we have to make sure to only show the placeholder if there are currently no results
+                adapter.registerAdapterDataObserver(object : RecyclerView.AdapterDataObserver() {
+                    override fun onItemRangeRemoved(positionStart: Int, itemCount: Int) {
+                        super.onItemRangeRemoved(positionStart, itemCount)
+                        binding.downloadsEmpty.isVisible = adapter.itemCount == 0
+                        binding.downloadsRecView.isVisible = adapter.itemCount != 0
+                    }
+
+                    override fun onItemRangeInserted(positionStart: Int, itemCount: Int) {
+                        super.onItemRangeInserted(positionStart, itemCount)
+                        binding.downloadsEmpty.isVisible = adapter.itemCount == 0
+                        binding.downloadsRecView.isVisible = adapter.itemCount != 0
+                    }
+                })
             } else {
                 binding.sortType.isGone = true
             }
         }
+    }
+
+    private fun submitPlaylists(adapter: DownloadPlaylistAdapter, playlists: List<DownloadPlaylistWithDownload>) {
+        var sorted =  applySortOrder(playlists)
+        val query = downloadsModel.searchQuery.value
+        if (!query.isNullOrEmpty()) {
+            sorted = sorted.filter {
+                it.downloadPlaylist.title.contains(query, ignoreCase = true)
+            }
+        }
+
+        adapter.submitList(sorted)
     }
 
     fun applySortOrder(items: List<DownloadPlaylistWithDownload>): List<DownloadPlaylistWithDownload> {
