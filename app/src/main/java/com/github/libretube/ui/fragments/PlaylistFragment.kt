@@ -43,6 +43,7 @@ import com.github.libretube.ui.base.BaseActivity
 import com.github.libretube.ui.base.DynamicLayoutManagerFragment
 import com.github.libretube.ui.extensions.addOnBottomReachedListener
 import com.github.libretube.ui.models.CommonPlayerViewModel
+import com.github.libretube.ui.models.PlaylistViewModel
 import com.github.libretube.ui.sheets.BaseBottomSheet
 import com.github.libretube.ui.sheets.PlaylistOptionsBottomSheet
 import com.github.libretube.util.PlayingQueue
@@ -70,6 +71,7 @@ class PlaylistFragment : DynamicLayoutManagerFragment(R.layout.fragment_playlist
 
     // view models
     private val commonPlayerViewModel: CommonPlayerViewModel by activityViewModels()
+    private val playlistViewModel: PlaylistViewModel by activityViewModels()
     private var selectedSortOrder = PreferenceHelper.getInt(PreferenceKeys.PLAYLIST_SORT_ORDER, 0)
         set(value) {
             PreferenceHelper.putInt(PreferenceKeys.PLAYLIST_SORT_ORDER, value)
