@@ -11,6 +11,7 @@ import androidx.core.text.parseAsHtml
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import com.github.libretube.R
+import com.github.libretube.api.SponsorBlockLabelHelper
 import com.github.libretube.api.obj.Segment
 import com.github.libretube.api.obj.Streams
 import com.github.libretube.databinding.DescriptionLayoutBinding
@@ -52,16 +53,15 @@ class DescriptionLayout(
            return
         }
 
-        val segment = segments.filter { it.actionType == Segment.TYPE_FULL }.firstNotNullOfOrNull {
-            when (it.category) {
-                "sponsor" -> context.getString(R.string.category_sponsor)
-                "exclusive_access" -> context.getString(R.string.category_exclusive_access)
-                "selfpromo" -> context.getString(R.string.category_selfpromo)
-                else -> null
-            }
+        val category = segments.filter { it.actionType == Segment.TYPE_FULL }.firstNotNullOfOrNull { it.category }
+        binding.playerSponsorBadge.isVisible = category != null
+        binding.playerSponsorBadge.chipIcon = SponsorBlockLabelHelper.categoryIcon(category)?.let { context.getDrawable(it) }
+        binding.playerSponsorBadge.text = when (category) {
+            "sponsor" -> context.getString(R.string.category_sponsor)
+            "exclusive_access" -> context.getString(R.string.category_exclusive_access)
+            "selfpromo" -> context.getString(R.string.category_selfpromo)
+            else -> null
         }
-        binding.playerSponsorBadge.isVisible = segment != null
-        binding.playerSponsorBadge.text = segment
     }
 
     @SuppressLint("SetTextI18n")
