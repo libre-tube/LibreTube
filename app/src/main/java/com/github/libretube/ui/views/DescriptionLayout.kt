@@ -56,6 +56,7 @@ class DescriptionLayout(
             when (it.category) {
                 "sponsor" -> context.getString(R.string.category_sponsor)
                 "exclusive_access" -> context.getString(R.string.category_exclusive_access)
+                "selfpromo" -> context.getString(R.string.category_selfpromo)
                 else -> null
             }
         }
