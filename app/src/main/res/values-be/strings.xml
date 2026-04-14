@@ -570,4 +570,8 @@
         <item quantity="many">%d хвілін</item>
         <item quantity="other">%d хвілін</item>
     </plurals>
+    <string name="ungrouped_channels">Без групы</string>
+    <string name="ungrouped_channels_with_count">Без групы (%1$d)</string>
+    <string name="long_press_fast_forward">Паскарэнне пры доўгім націску</string>
+    <string name="long_press_fast_forward_summary">Прайграваць відэа на 2х пры націску і ўтрымліванні.</string>
 </resources>
