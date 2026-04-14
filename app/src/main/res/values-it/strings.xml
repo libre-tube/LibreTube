@@ -567,4 +567,8 @@
     <string name="sort_channel">Nome canale</string>
     <string name="sort_size">Dimensione</string>
     <string name="show_updates_summary">Controlla automaticamente gli aggiornamenti ogni volta che l\'app viene avviata.</string>
+    <string name="ungrouped_channels">Non raggruppati</string>
+    <string name="ungrouped_channels_with_count">Non raggruppati (%1$d)</string>
+    <string name="long_press_fast_forward">Avanzamento veloce su pressione lunga</string>
+    <string name="long_press_fast_forward_summary">Riproduci il video a velocità doppia mentre tengo premuto lo schermo.</string>
 </resources>
