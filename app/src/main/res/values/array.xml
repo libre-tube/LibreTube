@@ -361,5 +361,15 @@
         <item>pip</item>
         <item>pause</item>
         <item>none</item>
+    <string-array name="feed_types">
+        <item>@string/all</item>
+        <item>@string/subscriptions</item>
+        <item>@string/trending</item>
+    </string-array>
+
+    <string-array name="feed_type_values">
+        <item>all</item>
+        <item>subscriptions</item>
+        <item>trending</item>
     </string-array>
 </resources>
