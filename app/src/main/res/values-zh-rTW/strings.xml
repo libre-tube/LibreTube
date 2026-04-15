@@ -561,4 +561,8 @@
     <string name="show_updates_summary">每次啟動應用程式時自動檢查更新。</string>
     <string name="sort_channel">頻道名稱</string>
     <string name="sort_size">大小</string>
+    <string name="ungrouped_channels">未分組</string>
+    <string name="ungrouped_channels_with_count">未分組 (%1$d)</string>
+    <string name="long_press_fast_forward">長按快轉</string>
+    <string name="long_press_fast_forward_summary">輕觸並長按螢幕，即可以兩倍速播放影片。</string>
 </resources>
