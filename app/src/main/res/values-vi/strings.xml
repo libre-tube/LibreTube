@@ -28,7 +28,7 @@
     <string name="unknown_error">Lỗi mạng.</string>
     <string name="error">Đã xảy ra lỗi.</string>
     <string name="empty">Bạn phải nhập tên đăng nhập và mật khẩu.</string>
-    <string name="defres">Độ phân giải mặc định của Video</string>
+    <string name="defres">Độ phân giải mặc định của video</string>
     <string name="grid">Cột lưới (khổ dọc)</string>
     <string name="emptyList">Không có gì ở đây.</string>
     <string name="deletePlaylist">Xóa danh sách phát</string>
@@ -239,7 +239,7 @@
     <string name="auth_instance_summary">Dùng một máy chủ khác để xác minh người dùng</string>
     <string name="network_wifi">Chỉ trên Wi-Fi</string>
     <string name="copied">Đã sao chép</string>
-    <string name="export_subscriptions">Xuất đăng ký</string>
+    <string name="export_subscriptions">Xuất danh sách đăng ký</string>
     <string name="skip_buttons">Nút bỏ qua</string>
     <string name="skip_buttons_summary">Hiện nút để bỏ qua đến video tiếp hoặc trước đó</string>
     <string name="history_size">Dung lượng lịch sử tối đa</string>
@@ -370,7 +370,7 @@
     <string name="skip_silence">Bỏ qua khoảng lặng</string>
     <string name="help">Giúp đỡ</string>
     <string name="disable_proxy_summary">Tải video và hình ảnh trực tiếp từ máy chủ của YouTube. Chỉ bật tùy chọn này nếu bạn luôn sử dụng VPN</string>
-    <string name="video_id">ID của video</string>
+    <string name="video_id">Mã ID của video</string>
     <string name="shorts_notifications">Thông báo cho các video ngắn</string>
     <string name="creation_date">Ngày tạo</string>
     <string name="alphabetic">Theo chữ cái</string>
@@ -561,4 +561,8 @@
     <string name="showing_results_for">Hiện kết quả cho:</string>
     <string name="category_hook_summary">Cho các hình thức câu dẫn sự chú ý (thường là phần mở đầu) bằng cách cho biết trước hay miêu tả các sự kiện ở sau trong cùng một video hoặc các tập trong một chuỗi các tập</string>
     <string name="podcasts">Phát sóng</string>
+    <string name="ungrouped_channels">Không có nhóm</string>
+    <string name="ungrouped_channels_with_count">Không có nhóm (%1$d)</string>
+    <string name="long_press_fast_forward">Nhấn giữ để tua nhanh</string>
+    <string name="long_press_fast_forward_summary">Chạy video với gấp đôi tốc độ khi nhấn giữ màn hình.</string>
 </resources>
