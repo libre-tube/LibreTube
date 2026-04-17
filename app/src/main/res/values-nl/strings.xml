@@ -564,4 +564,8 @@
     <string name="sort_channel">Kanaal­naam</string>
     <string name="sort_size">Grootte</string>
     <string name="show_updates_summary">Controleer automatisch op updates elke keer dat de app wordt gestart.</string>
+    <string name="ungrouped_channels">Ongegroepeerd</string>
+    <string name="ungrouped_channels_with_count">Ongegroepeerd (%1$d)</string>
+    <string name="long_press_fast_forward">Snel vooruit­spoelen bij lang indrukken</string>
+    <string name="long_press_fast_forward_summary">Speel de video op dubbele snelheid af door het scherm ingedrukt te houden.</string>
 </resources>
