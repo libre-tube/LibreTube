@@ -529,11 +529,31 @@
     <string name="show_upcoming_videos">공개 예정 영상 표시</string>
     <string name="full_local_mode_desc">Piped를 통하지 않고 모든 정보를 YouTube로부터 직접 가져옵니다.</string>
     <string name="createNewPlaylist">새로운 재생목록 생성</string>
-    <string name="playback_pitch_semitone_error_input">"입력 값은 -%1$.1f (최소) 와(과)  %1$.1f (최대) 사이여야 합니다."</string>
-    <string name="unsubscribe_snackbar_message">%1$s을(를) 구독 해제했습니다.</string>
+    <string name="playback_pitch_semitone_error_input">입력 값은 -%1$.1f (최소) 와(과) %1$.1f (최대) 사이여야 합니다</string>
+    <string name="unsubscribe_snackbar_message">%1$s을(를) 구독 해제했습니다</string>
     <string name="screenshot_saved">스크린샷 저장됨</string>
     <string name="delete_playlist_include_vidoes">재생목록의 모든 영상을 삭제하시겠습니까?</string>
     <string name="podcasts">팟캐스트</string>
     <string name="music">음악</string>
     <string name="include_timestamp_in_filename">파일 이름에 타임스탬프 추가</string>
+    <string name="checking_frequency_15_minutes">15분</string>
+    <string name="checking_frequency_30_minutes">30분</string>
+    <string name="checking_frequency_60_minutes">60분</string>
+    <string name="checking_frequency_2_hours">2시간</string>
+    <string name="checking_frequency_6_hours">6시간</string>
+    <string name="checking_frequency_12_hours">12시간</string>
+    <string name="checking_frequency_1_day">1일</string>
+    <string name="sort_channel">채널명</string>
+    <string name="sort_size">크기</string>
+    <string name="backup_creation_success">백업 완료</string>
+    <string name="backup_creation_failed">백업 실패</string>
+    <plurals name="minutes_left">
+        <item quantity="other">%d 분 남음</item>
+    </plurals>
+    <plurals name="sleep_timer_chip_minutes">
+        <item quantity="other">%d 분</item>
+    </plurals>
+    <string name="showing_results_for">다음의 검색 결과:</string>
+    <string name="long_press_fast_forward">길게 눌러 배속 재생</string>
+    <string name="long_press_fast_forward_summary">화면을 누르는 동안 2배의 속도로 재생.</string>
 </resources>
