@@ -15,6 +15,7 @@ import androidx.media3.common.ForwardingPlayer
 import androidx.media3.common.MediaMetadata
 import androidx.media3.common.PlaybackException
 import androidx.media3.common.Player
+import androidx.media3.common.util.Log
 import androidx.media3.common.util.UnstableApi
 import androidx.media3.exoplayer.ExoPlayer
 import androidx.media3.exoplayer.trackselection.DefaultTrackSelector
@@ -30,6 +31,7 @@ import com.github.libretube.constants.IntentData
 import com.github.libretube.enums.PlayerCommand
 import com.github.libretube.enums.PlayerEvent
 import com.github.libretube.enums.SbSkipOptions
+import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.parcelableExtra
 import com.github.libretube.extensions.toastFromMainThread
 import com.github.libretube.extensions.updateParameters
@@ -377,9 +379,20 @@ abstract class AbstractPlayerService : MediaLibraryService(), MediaLibrarySessio
         this.exoPlayer = player
 
         val forwardingPlayer = MediaSessionForwarder(player)
-        mediaLibrarySession = MediaLibrarySession.Builder(this, forwardingPlayer, this)
-            .setId(this.javaClass.name)
-            .build()
+
+        // it's possible that this is called twice at the same time:
+        // if the user rotates the screen while the initial media library session is still in creation
+        // this results in a race condition which service is the first one to create a `MediaLibrarySession`
+        // the other one will just crash
+        try {
+            mediaLibrarySession = MediaLibrarySession.Builder(this, forwardingPlayer, this)
+                .setId(this.javaClass.name)
+                .build()
+        } catch (e: Exception) {
+            Log.e(TAG(), "failed to start media library session because it already exists")
+            e.printStackTrace()
+            onDestroy()
+        }
     }
 
     /**
