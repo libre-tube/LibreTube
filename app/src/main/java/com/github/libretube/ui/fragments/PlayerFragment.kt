@@ -15,6 +15,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.os.PowerManager
+import android.util.Log
 import android.view.KeyEvent
 import android.view.PixelCopy
 import android.view.SurfaceView
@@ -110,6 +111,7 @@ import com.github.libretube.util.TextUtils.toTimeInSeconds
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
@@ -449,10 +451,9 @@ class PlayerFragment : Fragment(R.layout.fragment_player), CustomPlayerCallback 
             binding.descriptionLayout.setSegments(segments)
             playerControlsBinding.exoProgress.setSegments(segments)
             playerControlsBinding.sbToggle.isVisible = segments.isNotEmpty()
-            segments.firstOrNull { it.category == PlayerHelper.SPONSOR_HIGHLIGHT_CATEGORY }
-                ?.let {
-                    lifecycleScope.launch(Dispatchers.IO) { initializeHighlight(it) }
-                }
+            getHighlight(segments)?.let {
+                lifecycleScope.launch(Dispatchers.IO) { initializeHighlight(it) }
+            }
         }
 
         val localDownloadVersion = runBlocking(Dispatchers.IO) {
@@ -1198,6 +1199,12 @@ class PlayerFragment : Fragment(R.layout.fragment_player), CustomPlayerCallback 
         if (binding.playerMotionLayout.progress == 0f && PlayerHelper.autoFullscreenShortsEnabled && streams.isShort) {
             setFullscreen()
         }
+
+        // it's possible that the highlight segment was loaded before the streams info finished loading
+        // in this case, we have to initialize the video highlight chapter once again
+        getHighlight(viewModel.segments.value.orEmpty())?.let {
+            lifecycleScope.launch(Dispatchers.IO) { initializeHighlight(it) }
+        }
     }
 
     private suspend fun showRelatedStreams() {
@@ -1281,12 +1288,19 @@ class PlayerFragment : Fragment(R.layout.fragment_player), CustomPlayerCallback 
                 OfflineTimeFrameReceiver(requireContext(), it)
             }
         } else {
+            if (!::streams.isInitialized) return@withContext null
+
             OnlineTimeFrameReceiver(requireContext(), streams.previewFrames)
         }
     }
 
+    private fun getHighlight(segments: List<Segment>): Segment? {
+        return segments.firstOrNull { it.category == PlayerHelper.SPONSOR_HIGHLIGHT_CATEGORY }
+    }
+
     private suspend fun initializeHighlight(highlight: Segment) {
         val frameReceiver = getTimeFrameReceiver() ?: return
+
         val highlightStart = highlight.segmentStartAndEnd.first.toLong()
         val frame = withContext(Dispatchers.IO) {
             frameReceiver.getFrameAtTime(highlightStart * 1000)
