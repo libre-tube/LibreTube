@@ -1,0 +1,11 @@
+NOTE: this release removes support for using public Piped instances, as there haven't been any working ones in a while - you may however still add your custom instance in the settings.
+NOTE: our versioning scheme changed to be more concise - I.e., we dropped the useless 0 in front of the version numbers, and directly jumped from 0.30.0 to this release, 31.0.
+
+Most noteworthy new features:
+- Big downloads player refactor: We now use the same player for downloads as for online streaming, so you can use much more features than with the old downloads player.
+- Add search functionality for playlists and downloads
+- Support for SponsorBlock's exclusive content and self promotion - in your feed, you can now see if a video is a fully sponsored video at first glance due to a marker on the video thumbnail
+- SponsorBlock support for downloads
+- And a lot more ...
+
+We have a zero-tolerance AI policy, so all the changes were done by real humans and took real efforts. So thank you everyone who contributed to this release, and enjoy the release everyone else!
