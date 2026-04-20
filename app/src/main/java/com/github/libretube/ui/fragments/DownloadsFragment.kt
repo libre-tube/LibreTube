@@ -40,7 +40,6 @@ import com.github.libretube.extensions.dpToPx
 import com.github.libretube.extensions.formatAsFileSize
 import com.github.libretube.extensions.serializable
 import com.github.libretube.extensions.setOnDismissListener
-import com.github.libretube.helpers.BackgroundHelper
 import com.github.libretube.helpers.DownloadHelper
 import com.github.libretube.helpers.NavigationHelper
 import com.github.libretube.helpers.PreferenceHelper
@@ -290,26 +289,15 @@ class DownloadsFragmentPage : DynamicLayoutManagerFragment(R.layout.fragment_dow
         }
 
         binding.shuffleAll.setOnClickListener {
-            if (downloadTab == DownloadTab.AUDIO) {
-                BackgroundHelper.playOnBackgroundOffline(
-                    requireContext(),
-                    videoId = null,
-                    playlistId = null,
-                    downloadTab,
-                    shuffle = true
-                )
-
-                NavigationHelper.openAudioPlayerFragment(requireContext(), offlinePlayer = true)
-            } else {
-                NavigationHelper.navigateVideo(
-                    requireContext(),
-                    videoId = null,
-                    playlistId = downloadPlaylistId,
-                    downloadTab = downloadTab,
-                    shuffle = true,
-                    isOffline = true
-                )
-            }
+            NavigationHelper.navigateVideo(
+                requireContext(),
+                videoId = null,
+                playlistId = downloadPlaylistId,
+                downloadTab = downloadTab,
+                shuffle = true,
+                isOffline = true,
+                audioOnlyPlayerRequested = downloadTab == DownloadTab.AUDIO
+            )
         }
 
         playerViewModel.isMiniPlayerVisible.observe(viewLifecycleOwner) { isMiniPlayerVisible ->
