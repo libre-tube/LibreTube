@@ -15,7 +15,6 @@ import com.github.libretube.databinding.VideoRowBinding
 import com.github.libretube.db.DatabaseHelper
 import com.github.libretube.db.obj.DownloadWithItems
 import com.github.libretube.extensions.formatAsFileSize
-import com.github.libretube.helpers.BackgroundHelper
 import com.github.libretube.helpers.DownloadHelper
 import com.github.libretube.helpers.ImageHelper
 import com.github.libretube.helpers.NavigationHelper
@@ -124,14 +123,15 @@ class DownloadsAdapter(
                         )
                     }
                     DownloadTab.AUDIO -> {
-                        BackgroundHelper.playOnBackgroundOffline(
+                        NavigationHelper.navigateVideo(
                             root.context,
-                            download.videoId,
-                            playlistId,
-                            downloadTab,
-                            sortOrder = currentSortOrder()
+                            videoId = download.videoId,
+                            playlistId = playlistId,
+                            downloadTab = downloadTab,
+                            downloadSortingOrder = currentSortOrder(),
+                            isOffline = true,
+                            audioOnlyPlayerRequested = true
                         )
-                        NavigationHelper.openAudioPlayerFragment(root.context, offlinePlayer = true)
                     }
                 }
             }

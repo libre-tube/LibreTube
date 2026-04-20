@@ -74,6 +74,8 @@ object NavigationHelper {
         val activity = ContextHelper.unwrapActivity<AbstractPlayerHostActivity>(context)
         val attachedToRunningPlayer = activity.runOnPlayerFragment {
             try {
+                // can only continue using player if in same mode (online/offline)
+                // otherwise, recreate the player
                 if (this.isOffline != isOffline) return@runOnPlayerFragment false
 
                 PlayingQueue.clearAfterCurrent()
@@ -97,6 +99,8 @@ object NavigationHelper {
 
         val audioOnlyMode = PreferenceHelper.getBoolean(PreferenceKeys.AUDIO_ONLY_MODE, false)
         val attachedToRunningAudioPlayer = activity.runOnAudioPlayerFragment {
+            // can only continue using player if in same mode (online/offline)
+            // otherwise, recreate the player
             if (this.isOffline != isOffline) return@runOnAudioPlayerFragment false
 
             PlayingQueue.clearAfterCurrent()
