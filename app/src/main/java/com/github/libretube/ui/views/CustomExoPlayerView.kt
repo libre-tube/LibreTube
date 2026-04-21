@@ -997,10 +997,10 @@ class CustomExoPlayerView(
                 }?.value ?: context.getString(R.string.none)
             ) { index ->
                 val captionsFormat =
-                    captions.keys.toList().getOrNull(index - 1) ?: return@setSimpleItems
+                    captions.keys.toList().getOrNull(index - 1)
 
-                updateCurrentSubtitle(captionsFormat.id)
-                playerViewModel?.currentCaptionId = captionsFormat.id
+                updateCurrentSubtitle(captionsFormat?.id)
+                playerViewModel?.currentCaptionId = captionsFormat?.id
             }
             .show(supportFragmentManager)
     }

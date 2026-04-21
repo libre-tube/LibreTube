@@ -181,12 +181,18 @@ abstract class AbstractPlayerService : MediaLibraryService(), MediaLibrarySessio
             args.containsKey(PlayerCommand.SET_CAPTION_TRACK.name) -> {
                 val exoPlayer = exoPlayer ?: return
 
-                val captionId = args.getString(PlayerCommand.SET_CAPTION_TRACK.name) ?: return
+                val captionId = args.getString(PlayerCommand.SET_CAPTION_TRACK.name)
                 val caption = PlayerHelper.getCaptionTracks(exoPlayer).firstOrNull { it.id == captionId }
 
                 trackSelector?.updateParameters {
-                    caption?.roleFlags?.let { setPreferredTextRoleFlags(it) }
-                    setPreferredTextLanguage(caption?.language)
+                    val enableCaptions = caption != null
+
+                    if (enableCaptions) {
+                        setPreferredTextRoleFlags(caption.roleFlags)
+                        setPreferredTextLanguage(caption.language)
+                    }
+
+                    setTrackTypeDisabled(C.TRACK_TYPE_TEXT, !enableCaptions)
                 }
             }
 
