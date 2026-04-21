@@ -15,7 +15,6 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.os.PowerManager
-import android.util.Log
 import android.view.KeyEvent
 import android.view.PixelCopy
 import android.view.SurfaceView
@@ -111,7 +110,6 @@ import com.github.libretube.util.TextUtils.toTimeInSeconds
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
@@ -523,6 +521,8 @@ class PlayerFragment : Fragment(R.layout.fragment_player), CustomPlayerCallback 
             // if the player is minimized, the fragment behind the player should handle the event
             onBackPressedCallback.isEnabled = isMiniPlayerVisible != true
         }
+
+        connectToPlayerView()
 
         toggleVideoInfoVisibility(false)
     }
@@ -1109,6 +1109,17 @@ class PlayerFragment : Fragment(R.layout.fragment_player), CustomPlayerCallback 
         playerBackgroundBinding.videoTransitionProgress.isVisible = !show
     }
 
+    private fun connectToPlayerView() {
+        // initialize the player view actions
+        binding.player.initialize(
+            chaptersViewModel,
+            commonPlayerViewModel,
+            viewModel,
+            viewLifecycleOwner,
+            this
+        )
+    }
+
     @SuppressLint("SetTextI18n")
     private fun updatePlayerView() {
         dismissCommentsSheet()
@@ -1119,15 +1130,6 @@ class PlayerFragment : Fragment(R.layout.fragment_player), CustomPlayerCallback 
             useController = false
             player = playerController
         }
-
-        // initialize the player view actions
-        binding.player.initialize(
-            chaptersViewModel,
-            commonPlayerViewModel,
-            viewModel,
-            viewLifecycleOwner,
-            this
-        )
 
         if (binding.playerMotionLayout.progress != 1.0f) {
             // show controllers when not in picture in picture mode
@@ -1463,10 +1465,10 @@ class PlayerFragment : Fragment(R.layout.fragment_player), CustomPlayerCallback 
     }
 
     override fun isVideoShort(): Boolean {
-        return streams.isShort
+        return ::streams.isInitialized && streams.isShort
     }
 
     override fun isVideoLive(): Boolean {
-        return streams.isLive
+        return ::streams.isInitialized && streams.isLive
     }
 }
