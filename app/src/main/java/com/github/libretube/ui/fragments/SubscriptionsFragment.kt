@@ -302,7 +302,7 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment(R.layout.fragment_sub
         if (groupIndex == -1) return this
         if (groupIndex == -2) return filterUngroupedStreamItems(this)
 
-        val group = channelGroupsModel.groups.value?.getOrNull(groupIndex - 1)
+        val group = channelGroupsModel.groups.value?.getOrNull(groupIndex)
         return filter {
             val channelId = it.uploaderUrl.orEmpty().toID()
             group?.channels?.contains(channelId) != false
