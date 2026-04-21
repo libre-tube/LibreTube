@@ -1,0 +1,10 @@
+This is a hotfix release for v31.0.
+
+Most noteworthy new features of v31.0:
+- Big downloads player refactor: We now use the same player for downloads as for online streaming, so you can use much more features than with the old downloads player.
+- Add search functionality for playlists and downloads
+- Support for SponsorBlock's exclusive content and self promotion - in your feed, you can now see if a video is a fully sponsored video at first glance due to a marker on the video thumbnail
+- SponsorBlock support for downloads
+- And a lot more ...
+
+Please see the changelog of the v31.0 release for more information.
