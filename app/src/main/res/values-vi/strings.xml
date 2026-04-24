@@ -493,7 +493,7 @@
     <string name="enqueue_playlist_description">Hiển thị thông báo khi xếp các video trong danh sách phát để tải xuống.</string>
     <string name="also_clear_watch_positions">Cũng xóa vị trí xem</string>
     <string name="show_updates">Kiểm tra cập nhật tự động</string>
-    <string name="albums">Tập ảnh</string>
+    <string name="albums">Bộ sưu tập</string>
     <string name="thumbnail_time">Thời điểm hình thu nhỏ</string>
     <string name="contribute_to_dearrow">Đóng góp cho DeArrow</string>
     <string name="title">Tiêu đề</string>
