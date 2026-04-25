@@ -82,7 +82,7 @@ class PipedUserDataRepository : UserDataRepository {
         ).playlistId
     }
 
-    override suspend fun removeFromPlaylist(playlistId: String, index: Int): Boolean {
+    override suspend fun removeFromPlaylist(playlistId: String, videoId: String, index: Int): Boolean {
         return RetrofitInstance.pipedAuthApi.removeFromPlaylist(
             EditPlaylistBody(playlistId = playlistId, index = index)
         ).isOk()
