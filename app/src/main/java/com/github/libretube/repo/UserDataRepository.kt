@@ -1,6 +1,8 @@
 package com.github.libretube.repo
 
 import android.util.Log
+import com.github.libretube.api.MediaServiceRepository
+import com.github.libretube.api.PlaylistsHelper.MAX_CONCURRENT_IMPORT_CALLS
 import com.github.libretube.api.obj.Playlist
 import com.github.libretube.api.obj.Playlists
 import com.github.libretube.api.obj.StreamItem
@@ -30,6 +32,18 @@ interface UserDataRepository {
     suspend fun getSubscriptions(): List<Subscription>
     suspend fun getSubscriptionChannelIds(): List<String>
     suspend fun submitSubscriptionChannelInfosChanged(subscriptions: List<Subscription>) {}
+
+    suspend fun getPlaylist(playlistId: String): Playlist
+    suspend fun getPlaylists(): List<Playlists>
+    suspend fun addToPlaylist(playlistId: String, vararg videos: StreamItem): Boolean
+    suspend fun renamePlaylist(playlistId: String, newName: String): Boolean
+    suspend fun changePlaylistDescription(playlistId: String, newDescription: String): Boolean
+    suspend fun removeFromPlaylist(playlistId: String, videoId: String, index: Int): Boolean
+    suspend fun createPlaylist(playlistName: String): String?
+    suspend fun deletePlaylist(playlistId: String): Boolean
+
+    // The following methods can be overriden to offload the work to the server, but in most cases
+    // the default implementation should work out just fine.
 
     suspend fun importSubscriptions(newChannels: List<String>) {
         val subscribedChannels = getSubscriptionChannelIds()
@@ -67,14 +81,39 @@ interface UserDataRepository {
         }
     }
 
-    suspend fun getPlaylist(playlistId: String): Playlist
-    suspend fun getPlaylists(): List<Playlists>
-    suspend fun addToPlaylist(playlistId: String, vararg videos: StreamItem): Boolean
-    suspend fun renamePlaylist(playlistId: String, newName: String): Boolean
-    suspend fun changePlaylistDescription(playlistId: String, newDescription: String): Boolean
-    suspend fun clonePlaylist(playlistId: String): String?
-    suspend fun removeFromPlaylist(playlistId: String, index: Int): Boolean
-    suspend fun importPlaylists(playlists: List<PipedImportPlaylist>)
-    suspend fun createPlaylist(playlistName: String): String?
-    suspend fun deletePlaylist(playlistId: String): Boolean
+    suspend fun clonePlaylist(playlistId: String): String? {
+        val playlist = MediaServiceRepository.instance.getPlaylist(playlistId)
+        val newPlaylist = createPlaylist(playlist.name ?: "Unknown name") ?: return null
+
+        addToPlaylist(newPlaylist, *playlist.relatedStreams.toTypedArray())
+
+        var nextPage = playlist.nextpage
+        while (nextPage != null) {
+            nextPage = runCatching {
+                MediaServiceRepository.instance.getPlaylistNextPage(playlistId, nextPage).apply {
+                    addToPlaylist(newPlaylist, *relatedStreams.toTypedArray())
+                }.nextpage
+            }.getOrNull()
+        }
+
+        return playlistId
+    }
+
+    suspend fun importPlaylists(playlists: List<PipedImportPlaylist>) {
+        for (playlist in playlists) {
+            val playlistId = createPlaylist(playlist.name!!) ?: throw Exception("failed to create playlist")
+
+            // if not logged in, all video information needs to become fetched manually
+            // Only do so with `MAX_CONCURRENT_IMPORT_CALLS` videos at once to prevent performance issues
+            for (videoIdList in playlist.videos.chunked(MAX_CONCURRENT_IMPORT_CALLS)) {
+                val streams = videoIdList.parallelMap {
+                    runCatching { MediaServiceRepository.instance.getStreams(it) }
+                        .getOrNull()
+                        ?.toStreamItem(it)
+                }.filterNotNull()
+
+                addToPlaylist(playlistId, *streams.toTypedArray())
+            }
+        }
+    }
 }
