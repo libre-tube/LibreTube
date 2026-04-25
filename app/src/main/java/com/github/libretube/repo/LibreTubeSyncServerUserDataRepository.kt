@@ -1,27 +1,56 @@
 package com.github.libretube.repo
 
+import coil3.network.HttpException
+import com.github.libretube.api.RetrofitInstance
+import com.github.libretube.api.ltsync.obj.Channel
+import com.github.libretube.api.ltsync.obj.DeleteUser
+import com.github.libretube.api.ltsync.obj.LoginUser
+import com.github.libretube.api.ltsync.obj.RegisterUser
 import com.github.libretube.api.obj.Playlist
 import com.github.libretube.api.obj.Playlists
 import com.github.libretube.api.obj.StreamItem
 import com.github.libretube.api.obj.Subscription
-import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.obj.PipedImportPlaylist
 
-class LibreTubeSyncServerUserDataRepository: UserDataRepository {
+class LibreTubeSyncServerUserDataRepository : UserDataRepository {
     override var requiresLogin: Boolean = true
 
-    private val token get() = PreferenceHelper.getToken()
+    private val api get() = RetrofitInstance.libretubeSyncServerApi
 
     override suspend fun login(username: String, password: String): String {
-        TODO("Not yet implemented")
+        try {
+            return api.loginAccount(
+                LoginUser(
+                    username,
+                    password
+                )
+            ).jwt
+        } catch (e: HttpException) {
+            throw Exception(e.response.body?.toString() ?: e.message)
+        }
     }
 
     override suspend fun register(username: String, password: String): String {
-        TODO("Not yet implemented")
+        try {
+            return api.registerAccount(
+                RegisterUser(
+                    username,
+                    password
+                )
+            ).jwt
+        } catch (e: HttpException) {
+            throw Exception(e.response.body?.toString() ?: e.message)
+        }
     }
 
     override suspend fun deleteAccount(password: String) {
-        TODO("Not yet implemented")
+        try {
+            api.deleteAccount(
+                DeleteUser(password)
+            )
+        } catch (e: HttpException) {
+            throw Exception(e.response.body?.toString() ?: e.message)
+        }
     }
 
     override suspend fun subscribe(
