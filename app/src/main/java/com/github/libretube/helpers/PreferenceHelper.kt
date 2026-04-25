@@ -147,6 +147,19 @@ object PreferenceHelper {
             remove("disable_video_image_proxy")
         },
         PreferenceMigration(7, 8) {
+            remove("local_stream_extraction")
+
+            val usesFullLocalMode = getBoolean("full_local_mode", true)
+            putString(PreferenceKeys.YOUTUBE_DATA_SOURCE, if (usesFullLocalMode) "local" else "piped")
+            remove("full_local_mode")
+
+            val usesPipedAuth = getBoolean("auth_instance_toggle", false)
+            if (usesPipedAuth) putString(PreferenceKeys.SYNC_SERVER_TYPE, "piped")
+            remove("auth_instance_toggle")
+
+            remove("local_feed_extraction") // local feed extraction is default now unless Piped is used
+        },
+        PreferenceMigration(7, 8) {
             remove("image_cache_size")
             remove("max_parallel_downloads")
         }
