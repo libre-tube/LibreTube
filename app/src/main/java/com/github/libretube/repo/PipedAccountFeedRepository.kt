@@ -11,6 +11,6 @@ class PipedAccountFeedRepository : FeedRepository {
     ): List<StreamItem> {
         val token = PreferenceHelper.getToken()
 
-        return RetrofitInstance.authApi.getFeed(token)
+        return RetrofitInstance.pipedAuthApi.getFeed(token)
     }
 }

@@ -59,27 +59,45 @@ class LibreTubeSyncServerUserDataRepository : UserDataRepository {
         uploaderAvatar: String?,
         verified: Boolean
     ) {
-        TODO("Not yet implemented")
+        api.subscribe(
+            Channel(
+                id = channelId,
+                name = name,
+                avatar = uploaderAvatar.orEmpty(),
+                verified = verified
+            )
+        )
     }
 
     override suspend fun unsubscribe(channelId: String) {
-        TODO("Not yet implemented")
+        api.unsubscribe(channelId)
     }
 
     override suspend fun isSubscribed(channelId: String): Boolean? {
-        TODO("Not yet implemented")
-    }
+        try {
+            // is subscribed if we can successfully load the subscription data
+            api.getSubscription(channelId)
+            return true
+        } catch (e: HttpException) {
+            if (e.response.code == 404) return false
+        }
 
-    override suspend fun importSubscriptions(newChannels: List<String>) {
-        TODO("Not yet implemented")
+        return null
     }
 
     override suspend fun getSubscriptions(): List<Subscription> {
-        TODO("Not yet implemented")
+        return api.getSubscriptions().map { channel ->
+            Subscription(
+                url = channel.id,
+                name = channel.name,
+                avatar = channel.avatar,
+                verified = channel.verified
+            )
+        }
     }
 
     override suspend fun getSubscriptionChannelIds(): List<String> {
-        TODO("Not yet implemented")
+        return getSubscriptions().map { it.url }
     }
 
     override suspend fun getPlaylist(playlistId: String): Playlist {
