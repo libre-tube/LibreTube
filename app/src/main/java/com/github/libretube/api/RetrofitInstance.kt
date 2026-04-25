@@ -13,20 +13,10 @@ import retrofit2.create
 object RetrofitInstance {
     const val PIPED_API_URL = "https://pipedapi.kavin.rocks"
 
-    val authUrl
-        get() = if (
-            PreferenceHelper.getBoolean(
-                PreferenceKeys.AUTH_INSTANCE_TOGGLE,
-                false
-            )
-        ) {
-           PreferenceHelper.getString(
-                PreferenceKeys.AUTH_INSTANCE,
-                PIPED_API_URL
-            )
-        } else {
-            PipedMediaServiceRepository.apiUrl
-        }
+    val authUrl get() = PreferenceHelper.getString(
+        PreferenceKeys.AUTH_INSTANCE,
+        PIPED_API_URL
+    )
 
     val apiLazyMgr = resettableManager()
     val kotlinxConverterFactory = JsonHelper.json
