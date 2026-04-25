@@ -4,87 +4,14 @@
 
     <PreferenceCategory app:title="@string/mode_of_operation">
 
-        <SwitchPreferenceCompat
-            android:icon="@drawable/ic_region"
-            android:defaultValue="false"
-            android:title="@string/full_local_mode"
-            android:key="full_local_mode"
-            android:disableDependentsState="true"
-            android:summary="@string/full_local_mode_desc" />
-
-        <SwitchPreferenceCompat
-            android:defaultValue="true"
-            android:icon="@drawable/ic_region"
-            android:dependency="full_local_mode"
-            android:summary="@string/local_stream_extraction_summary"
-            android:title="@string/local_stream_extraction"
-            app:key="local_stream_extraction" />
-
-    </PreferenceCategory>
-
-    <PreferenceCategory app:title="@string/instance">
-
         <ListPreference
-            android:icon="@drawable/ic_server"
-            app:defaultValue="https://pipedapi.kavin.rocks"
-            app:key="selectInstance"
-            android:dependency="full_local_mode"
-            app:title="@string/instances" />
-
-        <Preference
-            android:icon="@drawable/ic_add_instance"
-            app:key="customInstance"
-            android:dependency="full_local_mode"
-            app:summary="@string/customInstance_summary"
-            app:title="@string/customInstance" />
-
-    </PreferenceCategory>
-
-    <PreferenceCategory android:title="@string/authentication">
-
-        <SwitchPreferenceCompat
-            android:defaultValue="false"
             android:icon="@drawable/ic_region"
-            android:summary="@string/local_feed_extraction_summary"
-            android:title="@string/local_feed_extraction"
-            app:key="local_feed_extraction" />
-
-        <SwitchPreferenceCompat
-            android:defaultValue="false"
-            android:icon="@drawable/ic_auth"
-            app:key="auth_instance_toggle"
-            app:summary="@string/auth_instance_summary"
-            app:title="@string/auth_instance" />
-
-        <ListPreference
-            android:dependency="auth_instance_toggle"
-            android:icon="@drawable/ic_server"
-            app:defaultValue="https://pipedapi.kavin.rocks"
-            app:key="selectAuthInstance"
-            app:title="@string/auth_instances" />
-
-        <Preference
-            android:icon="@drawable/ic_login_filled"
-            android:summary="@string/notgmail"
-            app:key="login_register"
-            app:title="@string/login_register" />
-
-        <Preference
-            android:icon="@drawable/ic_login_filled"
-            android:summary="@string/notgmail"
-            app:isPreferenceVisible="false"
-            app:key="logout"
-            app:title="@string/logout" />
-
-        <Preference
-            android:icon="@drawable/ic_reset"
-            android:summary="@string/deleteAccount_summary"
-            app:key="delete_account"
-            app:title="@string/deleteAccount" />
-
-    </PreferenceCategory>
-
-    <PreferenceCategory app:title="@string/misc">
+            android:title="@string/load_data_from"
+            android:key="youtube_data_source"
+            app:defaultValue="local"
+            app:useSimpleSummaryProvider="true"
+            android:entryValues="@array/loadDataFromValue"
+            android:entries="@array/loadDataFrom" />
 
         <SwitchPreferenceCompat
             android:defaultValue="true"
@@ -92,6 +19,57 @@
             android:summary="@string/local_ryd_summary"
             android:title="@string/local_ryd"
             app:key="local_return_youtube_dislikes" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory app:title="@string/instance" app:key="instance_category">
+
+        <ListPreference
+            android:icon="@drawable/ic_server"
+            app:defaultValue="https://pipedapi.kavin.rocks"
+            app:key="selectInstance"
+            app:title="@string/instances" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/data_synchronization">
+        <ListPreference
+            android:icon="@drawable/ic_region"
+            android:title="@string/sync_server_type"
+            android:key="sync_server"
+            app:defaultValue="none"
+            app:useSimpleSummaryProvider="true"
+            android:entryValues="@array/syncProviderValue"
+            android:entries="@array/syncProvider" />
+
+        <ListPreference
+            android:icon="@drawable/ic_server"
+            app:defaultValue="https://pipedapi.kavin.rocks"
+            app:key="selectAuthInstance"
+            app:title="@string/auth_instances" />
+
+        <EditTextPreference
+            app:icon="@drawable/ic_server"
+            app:defaultValue="https://sync.libretube.dev"
+            app:key="libretube_sync_server_url"
+            app:title="@string/sync_server_url"
+            app:useSimpleSummaryProvider="true"/>
+
+        <Preference
+            android:icon="@drawable/ic_login_filled"
+            app:key="login_register"
+            app:title="@string/login_register" />
+
+        <Preference
+            android:icon="@drawable/ic_login_filled"
+            app:isPreferenceVisible="false"
+            app:key="logout"
+            app:title="@string/logout" />
+
+        <Preference
+            android:icon="@drawable/ic_reset"
+            app:key="delete_account"
+            app:title="@string/deleteAccount" />
 
     </PreferenceCategory>
 

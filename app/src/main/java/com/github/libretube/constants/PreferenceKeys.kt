@@ -34,10 +34,11 @@ object PreferenceKeys {
     const val SEARCH_SUGGESTIONS = "search_suggestions"
 
     // Instance
+    const val YOUTUBE_DATA_SOURCE = "youtube_data_source"
+    const val SYNC_SERVER_TYPE = "sync_server"
+    const val LIBRETUBE_SYNC_SERVER_URL = "libretube_sync_server_url"
     const val FETCH_INSTANCE = "selectInstance"
     const val AUTH_INSTANCE = "selectAuthInstance"
-    const val AUTH_INSTANCE_TOGGLE = "auth_instance_toggle"
-    const val CUSTOM_INSTANCE = "customInstance"
     const val LOGIN_REGISTER = "login_register"
     const val LOGOUT = "logout"
     const val DELETE_ACCOUNT = "delete_account"
@@ -105,7 +106,6 @@ object PreferenceKeys {
     const val SHOW_UPCOMING_IN_FEED = "show_upcoming_in_feed"
     const val SELECTED_FEED_FILTERS = "filter_feed"
     const val FEED_SORT_ORDER = "sort_oder_feed"
-    const val LOCAL_FEED_EXTRACTION = "local_feed_extraction"
     const val LAST_LOCAL_FEED_REFRESH_TIMESTAMP_MILLIS = "last_feed_refresh_timestamp_millis"
 
     // Advanced
@@ -121,9 +121,7 @@ object PreferenceKeys {
     const val CLEAR_BOOKMARKS = "clear_bookmarks"
     const val MAX_CONCURRENT_DOWNLOADS = "max_parallel_downloads"
     const val EXTERNAL_DOWNLOAD_PROVIDER = "external_download_provider"
-    const val FULL_LOCAL_MODE = "full_local_mode"
     const val LOCAL_RYD = "local_return_youtube_dislikes"
-    const val LOCAL_STREAM_EXTRACTION = "local_stream_extraction"
     const val INCLUDE_TIMESTAMP_IN_BACKUP_FILENAME = "include_timestamp_in_filename"
 
     // History

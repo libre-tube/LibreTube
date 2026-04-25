@@ -46,7 +46,6 @@ interface MediaServiceRepository {
         val instance: MediaServiceRepository
             get() = when {
                 PlayerHelper.fullLocalMode -> NewPipeMediaServiceRepository()
-                PlayerHelper.localStreamExtraction -> LocalStreamsExtractionPipedMediaServiceRepository()
                 else -> PipedMediaServiceRepository()
             }
     }

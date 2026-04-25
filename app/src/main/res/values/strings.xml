@@ -146,7 +146,7 @@
     <string name="shapedIcon">Silly shaped</string>
     <string name="flameIcon">Flying flame</string>
     <string name="birdIcon">Boosted bird</string>
-    <string name="instance_summary">Piped, login, and account</string>
+    <string name="instance_summary">Piped, data synchronization, and account</string>
     <string name="customInstance_summary">Add…</string>
     <string name="instance_name">Instance name</string>
     <string name="instance_api_url">URL to instance API</string>
@@ -467,6 +467,13 @@
     <string name="update_information">Update information</string>
     <string name="mode_of_operation">Mode of operation</string>
     <string name="delete_playlist_include_vidoes">Also delete all videos from the playlist?</string>
+    <string name="load_data_from">Load YouTube data from</string>
+    <string name="load_data_from_local">Directly from YouTube</string>
+    <string name="load_data_from_piped">via Piped (deprecated)</string>
+    <string name="libretube_sync_server">LibreTube sync server</string>
+    <string name="data_synchronization">Data synchronization</string>
+    <string name="sync_server_type">Sync user data (subscriptions, playlists) via</string>
+    <string name="sync_server_url">URL to LibreTube sync server</string>
 
     <!-- Backup & Restore Settings -->
     <string name="import_subscriptions_from">Import subscriptions from</string>

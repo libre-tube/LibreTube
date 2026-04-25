@@ -44,6 +44,7 @@ import com.github.libretube.db.DatabaseHolder
 import com.github.libretube.db.obj.WatchPosition
 import com.github.libretube.enums.PlayerEvent
 import com.github.libretube.enums.SbSkipOptions
+import com.github.libretube.enums.SyncServerType
 import com.github.libretube.extensions.seekBy
 import com.github.libretube.extensions.togglePlayPauseState
 import com.github.libretube.obj.VideoStats
@@ -353,16 +354,17 @@ object PlayerHelper {
         )
 
     val fullLocalMode: Boolean
-        get() = PreferenceHelper.getBoolean(
-            PreferenceKeys.FULL_LOCAL_MODE,
-            false
-        )
+        get() = PreferenceHelper.getString(
+            PreferenceKeys.YOUTUBE_DATA_SOURCE,
+            "local"
+        ) == "local"
 
-    val localStreamExtraction: Boolean
-        get() = PreferenceHelper.getBoolean(
-            PreferenceKeys.LOCAL_STREAM_EXTRACTION,
-            true
-        )
+    val syncServerType: SyncServerType
+        get() = when (PreferenceHelper.getString(PreferenceKeys.SYNC_SERVER_TYPE, "none")) {
+            "piped" -> SyncServerType.PIPED
+            "libretube" -> SyncServerType.LIBRETUBE
+            else -> SyncServerType.NONE
+        }
 
     val localRYD: Boolean
         get() = PreferenceHelper.getBoolean(
@@ -466,6 +468,7 @@ object PlayerHelper {
             listOf(rewindAction, playPauseAction, forwardAction)
         }
     }
+
     @OptIn(UnstableApi::class)
     private fun createRendererFactory(context: Context): DefaultRenderersFactory {
         val renderersFactory = object : DefaultRenderersFactory(context) {
@@ -483,6 +486,7 @@ object PlayerHelper {
         }
         return renderersFactory
     }
+
     /**
      * Create a basic player, that is used for all types of playback situations inside the app
      */
