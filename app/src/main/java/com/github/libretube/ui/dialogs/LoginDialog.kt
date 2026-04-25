@@ -3,7 +3,6 @@ package com.github.libretube.ui.dialogs
 import android.app.Dialog
 import android.content.DialogInterface
 import android.os.Bundle
-import android.util.Log
 import android.util.Patterns
 import android.widget.Toast
 import androidx.core.os.bundleOf
@@ -11,21 +10,16 @@ import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.setFragmentResult
 import androidx.lifecycle.lifecycleScope
 import com.github.libretube.R
-import com.github.libretube.api.JsonHelper
-import com.github.libretube.api.RetrofitInstance
-import com.github.libretube.api.obj.Login
-import com.github.libretube.api.obj.Token
 import com.github.libretube.constants.IntentData
 import com.github.libretube.databinding.DialogLoginBinding
-import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.toastFromMainDispatcher
 import com.github.libretube.helpers.PreferenceHelper
+import com.github.libretube.repo.UserDataRepositoryHelper
 import com.github.libretube.ui.preferences.InstanceSettings.Companion.INSTANCE_DIALOG_REQUEST_KEY
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import retrofit2.HttpException
 
 class LoginDialog : DialogFragment() {
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
@@ -64,38 +58,24 @@ class LoginDialog : DialogFragment() {
     }
 
     private fun signIn(username: String, password: String, createNewAccount: Boolean = false) {
-        val login = Login(username, password)
         lifecycleScope.launch(Dispatchers.IO) {
-            val response = try {
+            @Suppress("DEPRECATION") val token = try {
                 if (createNewAccount) {
-                    RetrofitInstance.authApi.register(login)
+                    UserDataRepositoryHelper.userDataRepository.register(username, password)
                 } else {
-                    RetrofitInstance.authApi.login(login)
+                    UserDataRepositoryHelper.userDataRepository.login(username, password)
                 }
-            } catch (e: HttpException) {
-                val errorMessage = e.response()?.errorBody()?.string()?.runCatching {
-                    JsonHelper.json.decodeFromString<Token>(this).error
-                }?.getOrNull() ?: context?.getString(R.string.server_error).orEmpty()
-                context?.toastFromMainDispatcher(errorMessage)
-                return@launch
             } catch (e: Exception) {
-                Log.e(TAG(), e.toString())
-                context?.toastFromMainDispatcher(e.localizedMessage.orEmpty())
+                context?.toastFromMainDispatcher(e.message.orEmpty())
                 return@launch
             }
-
-            if (response.error != null) {
-                context?.toastFromMainDispatcher(response.error)
-                return@launch
-            }
-            if (response.token == null) return@launch
 
             context?.toastFromMainDispatcher(
                 if (createNewAccount) R.string.registered else R.string.loggedIn
             )
 
-            PreferenceHelper.setToken(response.token)
-            PreferenceHelper.setUsername(login.username)
+            PreferenceHelper.setToken(token)
+            PreferenceHelper.setUsername(username)
 
             withContext(Dispatchers.Main) {
                 setFragmentResult(
