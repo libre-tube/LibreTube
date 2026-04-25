@@ -553,4 +553,8 @@
     <string name="sort_channel">ชื่อช่อง</string>
     <string name="sort_size">ขนาด</string>
     <string name="show_updates_summary">ตรวจสอบการอัปเดตโดยอัตโนมัติทุกครั้งเมื่อแอปทำงาน</string>
+    <string name="ungrouped_channels">ไม่ได้จัดกลุ่ม</string>
+    <string name="ungrouped_channels_with_count">ไม่ได้จัดกลุ่ม (%1$d)</string>
+    <string name="long_press_fast_forward">เร่งความเร็ววิดีโอเมื่อกดข้าง</string>
+    <string name="long_press_fast_forward_summary">เล่นวิดีโอด้วยความเร็วสองเท่าเมื่อแตะค้างหน้าจอ</string>
 </resources>
