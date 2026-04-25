@@ -571,4 +571,8 @@
         <item quantity="other">%d хвилин</item>
     </plurals>
     <string name="show_updates_summary">Автоматично перевіряти наявність оновлень під час кожного запуску застосунку.</string>
+    <string name="ungrouped_channels">Без групи</string>
+    <string name="ungrouped_channels_with_count">Без групи (%1$d)</string>
+    <string name="long_press_fast_forward">Перемотування вперед довгим натисканням</string>
+    <string name="long_press_fast_forward_summary">Відтворюйте відео з подвійною швидкістю, натиснувши та утримуючи екран.</string>
 </resources>
