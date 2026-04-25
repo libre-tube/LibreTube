@@ -8,9 +8,9 @@ import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.enums.PlaylistType
 import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.obj.PipedImportPlaylist
-import com.github.libretube.repo.LocalPlaylistsRepository
-import com.github.libretube.repo.PipedPlaylistRepository
-import com.github.libretube.repo.PlaylistRepository
+import com.github.libretube.repo.LocalUserDataRepository
+import com.github.libretube.repo.UserDataRepository
+import com.github.libretube.repo.UserDataRepositoryHelper
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
@@ -21,16 +21,11 @@ object PlaylistsHelper {
         "[\\da-fA-F]{8}-[\\da-fA-F]{4}-[\\da-fA-F]{4}-[\\da-fA-F]{4}-[\\da-fA-F]{12}".toRegex()
     const val MAX_CONCURRENT_IMPORT_CALLS = 5
 
-    private val token get() = PreferenceHelper.getToken()
-    val loggedIn: Boolean get() = token.isNotEmpty()
-    private val playlistsRepository: PlaylistRepository
-        get() = when {
-            loggedIn -> PipedPlaylistRepository()
-            else -> LocalPlaylistsRepository()
-        }
+    @Suppress("DEPRECATION")
+    private val userDataRepository: UserDataRepository get() = UserDataRepositoryHelper.userDataRepository
 
     suspend fun getPlaylists(): List<Playlists> = withContext(Dispatchers.IO) {
-        val playlists = playlistsRepository.getPlaylists()
+        val playlists = userDataRepository.getPlaylists()
         sortPlaylists(playlists)
     }
 
@@ -52,7 +47,7 @@ object PlaylistsHelper {
         // load locally stored playlists with the auth api
         return when (getPlaylistType(playlistId)) {
             PlaylistType.PUBLIC -> MediaServiceRepository.instance.getPlaylist(playlistId)
-            else -> playlistsRepository.getPlaylist(playlistId)
+            else -> userDataRepository.getPlaylist(playlistId)
         }
     }
 
@@ -65,32 +60,37 @@ object PlaylistsHelper {
     }
 
     suspend fun createPlaylist(playlistName: String) =
-        playlistsRepository.createPlaylist(playlistName)
+        userDataRepository.createPlaylist(playlistName)
 
     suspend fun addToPlaylist(playlistId: String, vararg videos: StreamItem) =
         withContext(Dispatchers.IO) {
-            playlistsRepository.addToPlaylist(playlistId, *videos)
+            userDataRepository.addToPlaylist(playlistId, *videos)
         }
 
     suspend fun renamePlaylist(playlistId: String, newName: String) =
-        playlistsRepository.renamePlaylist(playlistId, newName)
+        userDataRepository.renamePlaylist(playlistId, newName)
 
     suspend fun changePlaylistDescription(playlistId: String, newDescription: String) =
-        playlistsRepository.changePlaylistDescription(playlistId, newDescription)
+        userDataRepository.changePlaylistDescription(playlistId, newDescription)
 
     suspend fun removeFromPlaylist(playlistId: String, index: Int) =
-        playlistsRepository.removeFromPlaylist(playlistId, index)
+        userDataRepository.removeFromPlaylist(playlistId, index)
 
     suspend fun importPlaylists(playlists: List<PipedImportPlaylist>) =
-        playlistsRepository.importPlaylists(playlists)
+        userDataRepository.importPlaylists(playlists)
 
-    suspend fun clonePlaylist(playlistId: String) = playlistsRepository.clonePlaylist(playlistId)
-    suspend fun deletePlaylist(playlistId: String) = playlistsRepository.deletePlaylist(playlistId)
+    suspend fun clonePlaylist(playlistId: String) = userDataRepository.clonePlaylist(playlistId)
+    suspend fun deletePlaylist(playlistId: String) = userDataRepository.deletePlaylist(playlistId)
 
+    // TODO: getPrivatePlaylistType should not be needed, refactor so that the app only needs to
+    // distinguish between private and public playlists and accesses all private playlists the same
+    // way via the PlaylistsHelper
     fun getPrivatePlaylistType(): PlaylistType {
-        return if (loggedIn) PlaylistType.PRIVATE else PlaylistType.LOCAL
+        return if (userDataRepository is LocalUserDataRepository) PlaylistType.LOCAL else PlaylistType.PRIVATE
     }
 
+    // TODO: this method shouldn't be needed, instead the correct playlist type should be forwarded
+    // everywhere where it's needed. this way here is too error-prone, the regex might break easily
     fun getPlaylistType(playlistId: String): PlaylistType {
         return if (playlistId.isDigitsOnly()) {
             PlaylistType.LOCAL

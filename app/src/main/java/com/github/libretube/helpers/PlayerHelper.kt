@@ -44,7 +44,6 @@ import com.github.libretube.db.DatabaseHolder
 import com.github.libretube.db.obj.WatchPosition
 import com.github.libretube.enums.PlayerEvent
 import com.github.libretube.enums.SbSkipOptions
-import com.github.libretube.enums.SyncServerType
 import com.github.libretube.extensions.seekBy
 import com.github.libretube.extensions.togglePlayPauseState
 import com.github.libretube.obj.VideoStats
@@ -358,13 +357,6 @@ object PlayerHelper {
             PreferenceKeys.YOUTUBE_DATA_SOURCE,
             "local"
         ) == "local"
-
-    val syncServerType: SyncServerType
-        get() = when (PreferenceHelper.getString(PreferenceKeys.SYNC_SERVER_TYPE, "none")) {
-            "piped" -> SyncServerType.PIPED
-            "libretube" -> SyncServerType.LIBRETUBE
-            else -> SyncServerType.NONE
-        }
 
     val localRYD: Boolean
         get() = PreferenceHelper.getBoolean(

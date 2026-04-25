@@ -10,12 +10,10 @@ import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.setFragmentResult
 import androidx.lifecycle.lifecycleScope
 import com.github.libretube.R
-import com.github.libretube.api.RetrofitInstance
-import com.github.libretube.api.obj.DeleteUserRequest
 import com.github.libretube.constants.IntentData
 import com.github.libretube.databinding.DialogDeleteAccountBinding
 import com.github.libretube.extensions.TAG
-import com.github.libretube.helpers.PreferenceHelper
+import com.github.libretube.repo.UserDataRepositoryHelper
 import com.github.libretube.ui.preferences.InstanceSettings
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.Dispatchers
@@ -50,11 +48,10 @@ class DeleteAccountDialog : DialogFragment() {
     }
 
     private suspend fun deleteAccount(password: String) {
-        val token = PreferenceHelper.getToken()
-
         try {
             withContext(Dispatchers.IO) {
-                RetrofitInstance.authApi.deleteAccount(token, DeleteUserRequest(password))
+                @Suppress("DEPRECATION")
+                UserDataRepositoryHelper.userDataRepository.deleteAccount(password)
             }
         } catch (e: Exception) {
             Log.e(TAG(), e.toString())
