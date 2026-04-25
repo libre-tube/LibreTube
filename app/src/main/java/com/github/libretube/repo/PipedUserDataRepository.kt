@@ -16,7 +16,6 @@ import com.github.libretube.api.obj.Subscribe
 import com.github.libretube.api.obj.Subscription
 import com.github.libretube.api.obj.Token
 import com.github.libretube.extensions.toID
-import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.obj.PipedImportPlaylist
 import retrofit2.HttpException
 
@@ -24,7 +23,6 @@ class PipedUserDataRepository : UserDataRepository {
     override var requiresLogin: Boolean = true
 
     private fun Message.isOk() = this.message == "ok"
-    private val token get() = PreferenceHelper.getToken()
 
     override suspend fun register(username: String, password: String): String {
         return RetrofitInstance.pipedAuthApi.register(Login(username, password)).token!!
