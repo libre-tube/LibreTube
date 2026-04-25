@@ -27,12 +27,12 @@ class PipedUserDataRepository : UserDataRepository {
     private val token get() = PreferenceHelper.getToken()
 
     override suspend fun register(username: String, password: String): String {
-        return RetrofitInstance.authApi.register(Login(username, password)).token!!
+        return RetrofitInstance.pipedAuthApi.register(Login(username, password)).token!!
     }
 
     override suspend fun login(username: String, password: String): String {
         val token = try {
-            RetrofitInstance.authApi.login(Login(username, password))
+            RetrofitInstance.pipedAuthApi.login(Login(username, password))
         } catch (e: HttpException) {
             // properly forward the error message
             val errorMessage = e.response()?.errorBody()?.string()?.runCatching {
@@ -46,27 +46,27 @@ class PipedUserDataRepository : UserDataRepository {
     }
 
     override suspend fun deleteAccount(password: String) {
-        RetrofitInstance.authApi.deleteAccount(token, DeleteUserRequest(password))
+        RetrofitInstance.pipedAuthApi.deleteAccount(DeleteUserRequest(password))
     }
 
     override suspend fun getPlaylist(playlistId: String): Playlist {
-        return RetrofitInstance.authApi.getPlaylist(playlistId)
+        return RetrofitInstance.pipedAuthApi.getPlaylist(playlistId)
     }
 
     override suspend fun getPlaylists(): List<Playlists> {
-        return RetrofitInstance.authApi.getUserPlaylists(token)
+        return RetrofitInstance.pipedAuthApi.getUserPlaylists()
     }
 
     override suspend fun addToPlaylist(playlistId: String, vararg videos: StreamItem): Boolean {
         val playlist = EditPlaylistBody(playlistId, videoIds = videos.map { it.url!!.toID() })
 
-        return RetrofitInstance.authApi.addToPlaylist(token, playlist).isOk()
+        return RetrofitInstance.pipedAuthApi.addToPlaylist(playlist).isOk()
     }
 
     override suspend fun renamePlaylist(playlistId: String, newName: String): Boolean {
         val playlist = EditPlaylistBody(playlistId, newName = newName)
 
-        return RetrofitInstance.authApi.renamePlaylist(token, playlist).isOk()
+        return RetrofitInstance.pipedAuthApi.renamePlaylist( playlist).isOk()
     }
 
     override suspend fun changePlaylistDescription(
@@ -75,19 +75,17 @@ class PipedUserDataRepository : UserDataRepository {
     ): Boolean {
         val playlist = EditPlaylistBody(playlistId, description = newDescription)
 
-        return RetrofitInstance.authApi.changePlaylistDescription(token, playlist).isOk()
+        return RetrofitInstance.pipedAuthApi.changePlaylistDescription(playlist).isOk()
     }
 
     override suspend fun clonePlaylist(playlistId: String): String? {
-        return RetrofitInstance.authApi.clonePlaylist(
-            token,
+        return RetrofitInstance.pipedAuthApi.clonePlaylist(
             EditPlaylistBody(playlistId)
         ).playlistId
     }
 
     override suspend fun removeFromPlaylist(playlistId: String, index: Int): Boolean {
-        return RetrofitInstance.authApi.removeFromPlaylist(
-            PreferenceHelper.getToken(),
+        return RetrofitInstance.pipedAuthApi.removeFromPlaylist(
             EditPlaylistBody(playlistId = playlistId, index = index)
         ).isOk()
     }
@@ -101,16 +99,14 @@ class PipedUserDataRepository : UserDataRepository {
     }
 
     override suspend fun createPlaylist(playlistName: String): String? {
-        return RetrofitInstance.authApi.createPlaylist(
-            token,
+        return RetrofitInstance.pipedAuthApi.createPlaylist(
             Playlists(name = playlistName)
         ).playlistId
     }
 
     override suspend fun deletePlaylist(playlistId: String): Boolean {
         return runCatching {
-            RetrofitInstance.authApi.deletePlaylist(
-                PreferenceHelper.getToken(),
+            RetrofitInstance.pipedAuthApi.deletePlaylist(
                 EditPlaylistBody(playlistId)
             ).isOk()
         }.getOrDefault(false)
@@ -120,28 +116,28 @@ class PipedUserDataRepository : UserDataRepository {
         channelId: String, name: String, uploaderAvatar: String?, verified: Boolean
     ) {
         runCatching {
-            RetrofitInstance.authApi.subscribe(token, Subscribe(channelId))
+            RetrofitInstance.pipedAuthApi.subscribe(Subscribe(channelId))
         }
     }
 
     override suspend fun unsubscribe(channelId: String) {
         runCatching {
-            RetrofitInstance.authApi.unsubscribe(token, Subscribe(channelId))
+            RetrofitInstance.pipedAuthApi.unsubscribe(Subscribe(channelId))
         }
     }
 
     override suspend fun isSubscribed(channelId: String): Boolean? {
         return runCatching {
-            RetrofitInstance.authApi.isSubscribed(channelId, token)
+            RetrofitInstance.pipedAuthApi.isSubscribed(channelId)
         }.getOrNull()?.subscribed
     }
 
     override suspend fun importSubscriptions(newChannels: List<String>) {
-        RetrofitInstance.authApi.importSubscriptions(false, token, newChannels)
+        RetrofitInstance.pipedAuthApi.importSubscriptions(false, newChannels)
     }
 
     override suspend fun getSubscriptions(): List<Subscription> {
-        return RetrofitInstance.authApi.subscriptions(token)
+        return RetrofitInstance.pipedAuthApi.subscriptions()
     }
 
     override suspend fun getSubscriptionChannelIds(): List<String> {
