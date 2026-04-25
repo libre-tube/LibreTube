@@ -1,6 +1,7 @@
 package com.github.libretube.api
 
 import com.github.libretube.BuildConfig
+import com.github.libretube.api.ltsync.LibreTubeSyncServerApi
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.helpers.PreferenceHelper
 import okhttp3.MediaType.Companion.toMediaType
@@ -14,11 +15,18 @@ typealias HeadersAccessor = () -> Map<String, String>
 
 object RetrofitInstance {
     const val PIPED_API_URL = "https://pipedapi.kavin.rocks"
+    private const val LIBRETUBE_SYNC_SERVER_URL = "https://sync.libretube.dev"
 
     val pipedAuthUrl
         get() = PreferenceHelper.getString(
             PreferenceKeys.AUTH_INSTANCE,
             PIPED_API_URL
+        )
+
+    private val libretubeSyncServerUrl
+        get() = PreferenceHelper.getString(
+            PreferenceKeys.LIBRETUBE_SYNC_SERVER_URL,
+            LIBRETUBE_SYNC_SERVER_URL
         )
 
     val apiLazyMgr = resettableManager()
@@ -32,8 +40,9 @@ object RetrofitInstance {
         )
     }
 
-    val authApi by resettableLazy(apiLazyMgr) {
-        buildRetrofitInstance<PipedAuthApi>(authUrl)
+    val libretubeSyncServerApi by resettableLazy(apiLazyMgr) {
+        buildRetrofitInstance<LibreTubeSyncServerApi>(
+            libretubeSyncServerUrl,
             headersAccessor = { mapOf("Authorization" to PreferenceHelper.getToken()) }
         )
     }
@@ -74,7 +83,7 @@ object RetrofitInstance {
 
     inline fun <reified T : Any> buildRetrofitInstance(
         apiUrl: String,
-        headersAccessor: HeadersAccessor =  { mapOf() }
+        noinline headersAccessor: HeadersAccessor =  { mapOf() }
     ): T = Retrofit.Builder()
         .baseUrl(apiUrl)
         .client(buildClient(headersAccessor))
