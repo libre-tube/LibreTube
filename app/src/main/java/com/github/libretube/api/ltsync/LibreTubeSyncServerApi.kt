@@ -23,44 +23,44 @@ import retrofit2.http.Path
 interface LibreTubeSyncServerApi {
     // workaround for https://stackoverflow.com/questions/37942474/delete-method-is-not-supportingnon-body-http-method-cannot-contain-body-or-t
     @HTTP(method = "DELETE",  path ="account/delete", hasBody = true)
-    fun deleteAccount(@Body deleteUser: DeleteUser)
+    suspend fun deleteAccount(@Body deleteUser: DeleteUser)
 
     @POST("account/login")
-    fun loginAccount(@Body loginUser: LoginUser): LoginResponse
+    suspend fun loginAccount(@Body loginUser: LoginUser): LoginResponse
 
     @POST("account/register")
-    fun registerAccount(@Body registerUser: RegisterUser): LoginResponse
+    suspend fun registerAccount(@Body registerUser: RegisterUser): LoginResponse
 
     @DELETE("playlists/{playlist_id}")
-    fun deletePlaylist(@Path("playlist_id") playlistId: kotlin.String)
+    suspend fun deletePlaylist(@Path("playlist_id") playlistId: String)
 
     @GET("playlists/{playlist_id}")
-    fun getPlaylist(@Path("playlist_id") playlistId: kotlin.String):  PlaylistResponse
+    suspend fun getPlaylist(@Path("playlist_id") playlistId: String):  PlaylistResponse
 
     @GET("playlists/")
-    fun getPlaylists(): List<Playlist>
+    suspend fun getPlaylists(): List<Playlist>
 
     @POST("playlists/{playlist_id}/videos")
-    fun addToPlaylist(@Path("playlist_id") playlistId: String, @Body createVideo: CreateVideo)
+    suspend fun addToPlaylist(@Path("playlist_id") playlistId: String, @Body createVideo: List<CreateVideo>)
 
     @POST("playlists/")
-    fun createPlaylist(@Body createPlaylist: CreatePlaylist):  Playlist
+    suspend fun createPlaylist(@Body createPlaylist: CreatePlaylist):  Playlist
 
     @DELETE("playlists/{playlist_id}/videos/{video_id}")
-    fun removeFromPlaylist(@Path("playlist_id") playlistId: String, @Path("video_id") videoId: String)
+    suspend fun removeFromPlaylist(@Path("playlist_id") playlistId: String, @Path("video_id") videoId: String)
 
     @PATCH("playlists/{playlist_id}")
-    fun updatePlaylist(@Path("playlist_id") playlistId: kotlin.String, @Body createPlaylist: CreatePlaylist): Playlist
+    suspend fun updatePlaylist(@Path("playlist_id") playlistId: String, @Body createPlaylist: CreatePlaylist): Playlist
 
     @GET("subscriptions/")
-    fun getSubscriptions(): List<Channel>
+    suspend fun getSubscriptions(): List<Channel>
 
     @GET("subscriptions/{channel_id}")
-    fun getSubscription(@Path("channel_id") channelId: String): Channel
+    suspend fun getSubscription(@Path("channel_id") channelId: String): Channel
 
     @PUT("subscriptions/")
-    fun subscribe(@Body channel: Channel)
+    suspend fun subscribe(@Body channel: Channel)
 
     @DELETE("subscriptions/{channel_id}")
-    fun unsubscribe(@Path("channel_id") channelId: String)
+    suspend fun unsubscribe(@Path("channel_id") channelId: String)
 }

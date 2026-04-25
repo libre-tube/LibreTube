@@ -3,6 +3,8 @@ package com.github.libretube.repo
 import coil3.network.HttpException
 import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.api.ltsync.obj.Channel
+import com.github.libretube.api.ltsync.obj.CreatePlaylist
+import com.github.libretube.api.ltsync.obj.CreateVideo
 import com.github.libretube.api.ltsync.obj.DeleteUser
 import com.github.libretube.api.ltsync.obj.LoginUser
 import com.github.libretube.api.ltsync.obj.RegisterUser
@@ -10,7 +12,7 @@ import com.github.libretube.api.obj.Playlist
 import com.github.libretube.api.obj.Playlists
 import com.github.libretube.api.obj.StreamItem
 import com.github.libretube.api.obj.Subscription
-import com.github.libretube.obj.PipedImportPlaylist
+import com.github.libretube.extensions.toID
 
 class LibreTubeSyncServerUserDataRepository : UserDataRepository {
     override var requiresLogin: Boolean = true
@@ -100,55 +102,87 @@ class LibreTubeSyncServerUserDataRepository : UserDataRepository {
         return getSubscriptions().map { it.url }
     }
 
+
     override suspend fun getPlaylist(playlistId: String): Playlist {
-        TODO("Not yet implemented")
+        return api.getPlaylist(playlistId).toPipedPlaylist()
     }
 
     override suspend fun getPlaylists(): List<Playlists> {
-        TODO("Not yet implemented")
+        return api.getPlaylists().map { it.toPipedPlaylists() }
     }
+
+    private fun StreamItem.toCreateVideo(): CreateVideo = CreateVideo(
+        id = url!!.toID(),
+        title = title.orEmpty(),
+        thumbnailUrl = thumbnail.orEmpty(),
+        duration = duration?.toInt() ?: -1,
+        uploadDate = uploaded,
+        uploader = Channel(
+            id = uploaderUrl!!.toID(),
+            name = uploaderName.orEmpty(),
+            avatar = uploaderAvatar.orEmpty(),
+            verified = uploaderVerified == true
+        )
+    )
 
     override suspend fun addToPlaylist(
         playlistId: String,
         vararg videos: StreamItem
     ): Boolean {
-        TODO("Not yet implemented")
+        runCatching {
+            api.addToPlaylist(playlistId, videos.map { it.toCreateVideo() })
+        }.isSuccess
+
+        return true
     }
 
     override suspend fun renamePlaylist(
         playlistId: String,
         newName: String
     ): Boolean {
-        TODO("Not yet implemented")
+        val playlist = getPlaylist(playlistId).copy(name = newName)
+
+        return runCatching { updatePlaylist(playlistId, playlist) }.isSuccess
     }
 
     override suspend fun changePlaylistDescription(
         playlistId: String,
         newDescription: String
     ): Boolean {
-        TODO("Not yet implemented")
+        val playlist = getPlaylist(playlistId).copy(description = newDescription)
+
+        return runCatching { updatePlaylist(playlistId, playlist) }.isSuccess
     }
 
-    override suspend fun clonePlaylist(playlistId: String): String? {
-        TODO("Not yet implemented")
+    private fun Playlist.toCreatePlaylist(): CreatePlaylist = CreatePlaylist(
+        title = name.orEmpty(),
+        description = description.orEmpty(),
+        thumbnailUrl = thumbnailUrl
+    )
+
+    private suspend fun updatePlaylist(playlistId: String, playlist: Playlist) {
+        api.updatePlaylist(playlistId, playlist.toCreatePlaylist())
     }
 
     override suspend fun removeFromPlaylist(
         playlistId: String,
+        videoId: String,
         index: Int
     ): Boolean {
-        TODO("Not yet implemented")
+        return runCatching { api.removeFromPlaylist(playlistId, videoId) }.isSuccess
     }
 
-    override suspend fun importPlaylists(playlists: List<PipedImportPlaylist>) {
-        TODO("Not yet implemented")
-    }
-
-    override suspend fun createPlaylist(playlistName: String): String? {
-        TODO("Not yet implemented")
+    override suspend fun createPlaylist(playlistName: String): String {
+        return api.createPlaylist(
+            CreatePlaylist(
+                title = playlistName,
+                description = "",
+                thumbnailUrl = null
+            )
+        ).id
     }
 
     override suspend fun deletePlaylist(playlistId: String): Boolean {
-        TODO("Not yet implemented")
+        return runCatching { api.deletePlaylist(playlistId) }.isSuccess
     }
 }
