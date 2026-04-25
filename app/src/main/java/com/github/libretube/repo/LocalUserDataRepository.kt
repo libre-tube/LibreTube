@@ -1,8 +1,5 @@
 package com.github.libretube.repo
 
-import com.github.libretube.api.MediaServiceRepository
-import com.github.libretube.api.PlaylistsHelper
-import com.github.libretube.api.PlaylistsHelper.MAX_CONCURRENT_IMPORT_CALLS
 import com.github.libretube.api.obj.Playlist
 import com.github.libretube.api.obj.Playlists
 import com.github.libretube.api.obj.StreamItem
@@ -10,8 +7,6 @@ import com.github.libretube.api.obj.Subscription
 import com.github.libretube.db.DatabaseHolder.Database
 import com.github.libretube.db.obj.LocalPlaylist
 import com.github.libretube.db.obj.LocalSubscription
-import com.github.libretube.extensions.parallelMap
-import com.github.libretube.obj.PipedImportPlaylist
 
 class LocalUserDataRepository : UserDataRepository {
     override var requiresLogin: Boolean = false
@@ -92,25 +87,7 @@ class LocalUserDataRepository : UserDataRepository {
         return true
     }
 
-    override suspend fun clonePlaylist(playlistId: String): String {
-        val playlist = MediaServiceRepository.instance.getPlaylist(playlistId)
-        val newPlaylist = createPlaylist(playlist.name ?: "Unknown name")
-
-        PlaylistsHelper.addToPlaylist(newPlaylist, *playlist.relatedStreams.toTypedArray())
-
-        var nextPage = playlist.nextpage
-        while (nextPage != null) {
-            nextPage = runCatching {
-                MediaServiceRepository.instance.getPlaylistNextPage(playlistId, nextPage).apply {
-                    PlaylistsHelper.addToPlaylist(newPlaylist, *relatedStreams.toTypedArray())
-                }.nextpage
-            }.getOrNull()
-        }
-
-        return playlistId
-    }
-
-    override suspend fun removeFromPlaylist(playlistId: String, index: Int): Boolean {
+    override suspend fun removeFromPlaylist(playlistId: String, videoId: String, index: Int): Boolean {
         val transaction = Database.localPlaylistsDao().getAll()
             .first { it.playlist.id.toString() == playlistId }
         Database.localPlaylistsDao().removePlaylistVideo(
@@ -124,24 +101,6 @@ class LocalUserDataRepository : UserDataRepository {
         Database.localPlaylistsDao().updatePlaylist(transaction.playlist)
 
         return true
-    }
-
-    override suspend fun importPlaylists(playlists: List<PipedImportPlaylist>) {
-        for (playlist in playlists) {
-            val playlistId = createPlaylist(playlist.name!!)
-
-            // if not logged in, all video information needs to become fetched manually
-            // Only do so with `MAX_CONCURRENT_IMPORT_CALLS` videos at once to prevent performance issues
-            for (videoIdList in playlist.videos.chunked(MAX_CONCURRENT_IMPORT_CALLS)) {
-                val streams = videoIdList.parallelMap {
-                    runCatching { MediaServiceRepository.instance.getStreams(it) }
-                        .getOrNull()
-                        ?.toStreamItem(it)
-                }.filterNotNull()
-
-                PlaylistsHelper.addToPlaylist(playlistId, *streams.toTypedArray())
-            }
-        }
     }
 
     override suspend fun createPlaylist(playlistName: String): String {

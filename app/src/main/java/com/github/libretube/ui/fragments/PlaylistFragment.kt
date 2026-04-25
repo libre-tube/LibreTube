@@ -402,7 +402,7 @@ class PlaylistFragment : DynamicLayoutManagerFragment(R.layout.fragment_playlist
         // try to remove the video from the playlist and show an undo snackbar if successful
         lifecycleScope.launch(Dispatchers.IO) {
             try {
-                PlaylistsHelper.removeFromPlaylist(playlistId, originalPlaylistPosition)
+                PlaylistsHelper.removeFromPlaylist(playlistId, video.url!!.toID(), originalPlaylistPosition)
 
                 val shortTitle = TextUtils.limitTextToLength(video.title.orEmpty(), 50)
                 val snackBarText = getString(
