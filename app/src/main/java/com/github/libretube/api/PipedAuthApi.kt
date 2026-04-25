@@ -13,7 +13,6 @@ import com.github.libretube.api.obj.Subscription
 import com.github.libretube.api.obj.Token
 import retrofit2.http.Body
 import retrofit2.http.GET
-import retrofit2.http.Header
 import retrofit2.http.PATCH
 import retrofit2.http.POST
 import retrofit2.http.Path
@@ -29,7 +28,6 @@ interface PipedAuthApi {
 
     @POST("user/delete")
     suspend fun deleteAccount(
-        @Header("Authorization") token: String,
         @Body password: DeleteUserRequest
     )
 
@@ -45,11 +43,10 @@ interface PipedAuthApi {
     @GET("subscribed")
     suspend fun isSubscribed(
         @Query("channelId") channelId: String,
-        @Header("Authorization") token: String
     ): Subscribed
 
     @GET("subscriptions")
-    suspend fun subscriptions(@Header("Authorization") token: String): List<Subscription>
+    suspend fun subscriptions(): List<Subscription>
 
     @GET("subscriptions/unauthenticated")
     suspend fun unauthenticatedSubscriptions(
@@ -61,65 +58,55 @@ interface PipedAuthApi {
 
     @POST("subscribe")
     suspend fun subscribe(
-        @Header("Authorization") token: String,
         @Body subscribe: Subscribe
     ): Message
 
     @POST("unsubscribe")
     suspend fun unsubscribe(
-        @Header("Authorization") token: String,
         @Body subscribe: Subscribe
     ): Message
 
     @POST("import")
     suspend fun importSubscriptions(
         @Query("override") override: Boolean,
-        @Header("Authorization") token: String,
         @Body channels: List<String>
     ): Message
 
     @POST("import/playlist")
     suspend fun clonePlaylist(
-        @Header("Authorization") token: String,
         @Body editPlaylistBody: EditPlaylistBody
     ): EditPlaylistBody
 
     @GET("user/playlists")
-    suspend fun getUserPlaylists(@Header("Authorization") token: String): List<Playlists>
+    suspend fun getUserPlaylists(): List<Playlists>
 
     @POST("user/playlists/rename")
     suspend fun renamePlaylist(
-        @Header("Authorization") token: String,
         @Body editPlaylistBody: EditPlaylistBody
     ): Message
 
     @PATCH("user/playlists/description")
     suspend fun changePlaylistDescription(
-        @Header("Authorization") token: String,
         @Body editPlaylistBody: EditPlaylistBody
     ): Message
 
     @POST("user/playlists/delete")
     suspend fun deletePlaylist(
-        @Header("Authorization") token: String,
         @Body editPlaylistBody: EditPlaylistBody
     ): Message
 
     @POST("user/playlists/create")
     suspend fun createPlaylist(
-        @Header("Authorization") token: String,
         @Body name: Playlists
     ): EditPlaylistBody
 
     @POST("user/playlists/add")
     suspend fun addToPlaylist(
-        @Header("Authorization") token: String,
         @Body editPlaylistBody: EditPlaylistBody
     ): Message
 
     @POST("user/playlists/remove")
     suspend fun removeFromPlaylist(
-        @Header("Authorization") token: String,
         @Body editPlaylistBody: EditPlaylistBody
     ): Message
 
