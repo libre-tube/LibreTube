@@ -19,6 +19,8 @@ import com.github.libretube.api.obj.PipedInstance
 import com.github.libretube.constants.IntentData
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.databinding.SimpleOptionsRecyclerBinding
+
+import com.github.libretube.enums.SyncServerType
 import com.github.libretube.extensions.toastFromMainThread
 import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.ui.adapters.InstancesAdapter
@@ -28,6 +30,7 @@ import com.github.libretube.ui.dialogs.DeleteAccountDialog
 import com.github.libretube.ui.dialogs.LoginDialog
 import com.github.libretube.ui.dialogs.LogoutDialog
 import com.github.libretube.ui.models.InstancesModel
+import com.github.libretube.ui.views.ButtonGroupPreference
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.common.collect.ImmutableList
 import kotlinx.coroutines.launch
@@ -35,7 +38,6 @@ import okhttp3.HttpUrl.Companion.toHttpUrl
 import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
 
 class InstanceSettings : BasePreferenceFragment() {
-    private val token get() = PreferenceHelper.getToken()
     private var instances = mutableListOf<PipedInstance>()
     private val customInstancesModel: InstancesModel by activityViewModels()
 
@@ -94,7 +96,7 @@ class InstanceSettings : BasePreferenceFragment() {
             true
         }
 
-        val youTubeDataSource = findPreference<ListPreference>(PreferenceKeys.YOUTUBE_DATA_SOURCE)!!
+        val youTubeDataSource = findPreference<ButtonGroupPreference>(PreferenceKeys.YOUTUBE_DATA_SOURCE)!!
         val localReturnYouTubeDislike = findPreference<SwitchPreferenceCompat>(PreferenceKeys.LOCAL_RYD)!!
         val instanceCategory = findPreference<PreferenceCategory>("instance_category")!!
 
@@ -107,17 +109,18 @@ class InstanceSettings : BasePreferenceFragment() {
             true
         }
 
-        val syncServerType = findPreference<ListPreference>(PreferenceKeys.SYNC_SERVER_TYPE)!!
+        val syncServerType = findPreference<ButtonGroupPreference>(PreferenceKeys.SYNC_SERVER_TYPE)!!
         val libretubeSyncServerInstance = findPreference<EditTextPreference>(PreferenceKeys.LIBRETUBE_SYNC_SERVER_URL)!!
 
-        authInstance.isVisible = syncServerType.value == "piped"
-        libretubeSyncServerInstance.isVisible = syncServerType.value == "libretube"
-        toggleAuthAccountActionsUI(syncServerType.value != "none")
+        authInstance.isVisible = syncServerType.value == SyncServerType.PIPED.name.lowercase()
+        libretubeSyncServerInstance.isVisible = syncServerType.value == SyncServerType.LIBRETUBE.name.lowercase()
+        toggleAuthAccountActionsUI(syncServerType.value != SyncServerType.NONE.name.lowercase())
         syncServerType.setOnPreferenceChangeListener { _, newValue ->
-            authInstance.isVisible = newValue == "piped"
-            libretubeSyncServerInstance.isVisible = newValue == "libretube"
+            authInstance.isVisible = newValue == SyncServerType.PIPED.name.lowercase()
+            libretubeSyncServerInstance.isVisible = newValue == SyncServerType.LIBRETUBE.name.lowercase()
 
-            logoutAndUpdateUI(newValue != "none")
+            logoutAndUpdateUI(newValue != SyncServerType.NONE.name.lowercase())
+            RetrofitInstance.apiLazyMgr.reset()
             true
         }
 
