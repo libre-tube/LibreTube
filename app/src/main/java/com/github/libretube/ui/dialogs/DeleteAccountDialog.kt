@@ -26,6 +26,7 @@ class DeleteAccountDialog : DialogFragment() {
 
         return MaterialAlertDialogBuilder(requireContext())
             .setView(binding.root)
+            .setTitle(R.string.deleteAccount)
             .setPositiveButton(R.string.deleteAccount, null)
             .setNegativeButton(R.string.cancel, null)
             .show()
