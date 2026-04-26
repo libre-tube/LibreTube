@@ -1,6 +1,5 @@
 package com.github.libretube.repo
 
-import coil3.network.HttpException
 import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.api.ltsync.obj.Channel
 import com.github.libretube.api.ltsync.obj.CreatePlaylist
@@ -13,45 +12,48 @@ import com.github.libretube.api.obj.Playlists
 import com.github.libretube.api.obj.StreamItem
 import com.github.libretube.api.obj.Subscription
 import com.github.libretube.extensions.toID
+import retrofit2.HttpException
 
 class LibreTubeSyncServerUserDataRepository : UserDataRepository {
     override var requiresLogin: Boolean = true
 
     private val api get() = RetrofitInstance.libretubeSyncServerApi
 
-    override suspend fun login(username: String, password: String): String {
+    private suspend fun <T> tryHttpOrRaiseError(block: suspend () -> T): T {
         try {
-            return api.loginAccount(
+            return block()
+        } catch (e: HttpException) {
+            throw Exception(e.response()?.errorBody()?.string() ?: e.message)
+        }
+    }
+
+    override suspend fun login(username: String, password: String): String {
+        return tryHttpOrRaiseError {
+            api.loginAccount(
                 LoginUser(
                     username,
                     password
                 )
             ).jwt
-        } catch (e: HttpException) {
-            throw Exception(e.response.body?.toString() ?: e.message)
         }
     }
 
     override suspend fun register(username: String, password: String): String {
-        try {
-            return api.registerAccount(
+        return tryHttpOrRaiseError {
+            api.registerAccount(
                 RegisterUser(
                     username,
                     password
                 )
             ).jwt
-        } catch (e: HttpException) {
-            throw Exception(e.response.body?.toString() ?: e.message)
         }
     }
 
     override suspend fun deleteAccount(password: String) {
-        try {
+        tryHttpOrRaiseError {
             api.deleteAccount(
                 DeleteUser(password)
             )
-        } catch (e: HttpException) {
-            throw Exception(e.response.body?.toString() ?: e.message)
         }
     }
 
@@ -61,18 +63,20 @@ class LibreTubeSyncServerUserDataRepository : UserDataRepository {
         uploaderAvatar: String?,
         verified: Boolean
     ) {
-        api.subscribe(
-            Channel(
-                id = channelId,
-                name = name,
-                avatar = uploaderAvatar.orEmpty(),
-                verified = verified
+        tryHttpOrRaiseError {
+            api.subscribe(
+                Channel(
+                    id = channelId,
+                    name = name,
+                    avatar = uploaderAvatar.orEmpty(),
+                    verified = verified
+                )
             )
-        )
+        }
     }
 
     override suspend fun unsubscribe(channelId: String) {
-        api.unsubscribe(channelId)
+        tryHttpOrRaiseError { api.unsubscribe(channelId) }
     }
 
     override suspend fun isSubscribed(channelId: String): Boolean? {
@@ -81,14 +85,14 @@ class LibreTubeSyncServerUserDataRepository : UserDataRepository {
             api.getSubscription(channelId)
             return true
         } catch (e: HttpException) {
-            if (e.response.code == 404) return false
+            if (e.response()?.code() == 404) return false
         }
 
         return null
     }
 
     override suspend fun getSubscriptions(): List<Subscription> {
-        return api.getSubscriptions().map { channel ->
+        return tryHttpOrRaiseError { api.getSubscriptions() }.map { channel ->
             Subscription(
                 url = channel.id,
                 name = channel.name,
@@ -99,16 +103,16 @@ class LibreTubeSyncServerUserDataRepository : UserDataRepository {
     }
 
     override suspend fun getSubscriptionChannelIds(): List<String> {
-        return getSubscriptions().map { it.url }
+        return tryHttpOrRaiseError { api.getSubscriptions() }.map { it.id }
     }
 
 
     override suspend fun getPlaylist(playlistId: String): Playlist {
-        return api.getPlaylist(playlistId).toPipedPlaylist()
+        return tryHttpOrRaiseError { api.getPlaylist(playlistId).toPipedPlaylist() }
     }
 
     override suspend fun getPlaylists(): List<Playlists> {
-        return api.getPlaylists().map { it.toPipedPlaylists() }
+        return tryHttpOrRaiseError { api.getPlaylists().map { it.toPipedPlaylists() } }
     }
 
     private fun StreamItem.toCreateVideo(): CreateVideo = CreateVideo(
@@ -129,9 +133,9 @@ class LibreTubeSyncServerUserDataRepository : UserDataRepository {
         playlistId: String,
         vararg videos: StreamItem
     ): Boolean {
-        runCatching {
+        tryHttpOrRaiseError {
             api.addToPlaylist(playlistId, videos.map { it.toCreateVideo() })
-        }.isSuccess
+        }
 
         return true
     }
@@ -140,7 +144,7 @@ class LibreTubeSyncServerUserDataRepository : UserDataRepository {
         playlistId: String,
         newName: String
     ): Boolean {
-        val playlist = getPlaylist(playlistId).copy(name = newName)
+        val playlist = tryHttpOrRaiseError { getPlaylist(playlistId).copy(name = newName) }
 
         return runCatching { updatePlaylist(playlistId, playlist) }.isSuccess
     }
@@ -149,7 +153,8 @@ class LibreTubeSyncServerUserDataRepository : UserDataRepository {
         playlistId: String,
         newDescription: String
     ): Boolean {
-        val playlist = getPlaylist(playlistId).copy(description = newDescription)
+        val playlist =
+            tryHttpOrRaiseError { getPlaylist(playlistId).copy(description = newDescription) }
 
         return runCatching { updatePlaylist(playlistId, playlist) }.isSuccess
     }
@@ -161,7 +166,7 @@ class LibreTubeSyncServerUserDataRepository : UserDataRepository {
     )
 
     private suspend fun updatePlaylist(playlistId: String, playlist: Playlist) {
-        api.updatePlaylist(playlistId, playlist.toCreatePlaylist())
+        tryHttpOrRaiseError { api.updatePlaylist(playlistId, playlist.toCreatePlaylist()) }
     }
 
     override suspend fun removeFromPlaylist(
@@ -173,13 +178,15 @@ class LibreTubeSyncServerUserDataRepository : UserDataRepository {
     }
 
     override suspend fun createPlaylist(playlistName: String): String {
-        return api.createPlaylist(
-            CreatePlaylist(
-                title = playlistName,
-                description = "",
-                thumbnailUrl = null
-            )
-        ).id
+        return tryHttpOrRaiseError {
+            api.createPlaylist(
+                CreatePlaylist(
+                    title = playlistName,
+                    description = "",
+                    thumbnailUrl = null
+                )
+            ).id
+        }
     }
 
     override suspend fun deletePlaylist(playlistId: String): Boolean {
