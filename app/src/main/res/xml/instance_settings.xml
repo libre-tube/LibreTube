@@ -4,14 +4,13 @@
 
     <PreferenceCategory app:title="@string/mode_of_operation">
 
-        <ListPreference
+        <com.github.libretube.ui.views.ButtonGroupPreference
             android:icon="@drawable/ic_region"
             android:title="@string/load_data_from"
             android:key="youtube_data_source"
             app:defaultValue="local"
-            app:useSimpleSummaryProvider="true"
-            android:entryValues="@array/loadDataFromValue"
-            android:entries="@array/loadDataFrom" />
+            app:optionValues="@array/loadDataFromValue"
+            app:optionEntries="@array/loadDataFrom" />
 
         <SwitchPreferenceCompat
             android:defaultValue="true"
@@ -33,14 +32,13 @@
     </PreferenceCategory>
 
     <PreferenceCategory android:title="@string/data_synchronization">
-        <ListPreference
+        <com.github.libretube.ui.views.ButtonGroupPreference
             android:icon="@drawable/ic_region"
             android:title="@string/sync_server_type"
             android:key="sync_server"
             app:defaultValue="none"
-            app:useSimpleSummaryProvider="true"
-            android:entryValues="@array/syncProviderValue"
-            android:entries="@array/syncProvider" />
+            app:optionEntries="@array/syncProvider"
+            app:optionValues="@array/syncProviderValue" />
 
         <ListPreference
             android:icon="@drawable/ic_server"
