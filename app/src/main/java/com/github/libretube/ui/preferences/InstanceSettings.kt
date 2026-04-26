@@ -1,42 +1,31 @@
 package com.github.libretube.ui.preferences
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
+import androidx.core.os.bundleOf
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.lifecycleScope
 import androidx.preference.EditTextPreference
 import androidx.preference.ListPreference
 import androidx.preference.Preference
 import androidx.preference.PreferenceCategory
 import androidx.preference.SwitchPreferenceCompat
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.libretube.R
-import com.github.libretube.api.PipedMediaServiceRepository
 import com.github.libretube.api.RetrofitInstance
-import com.github.libretube.api.obj.PipedInstance
 import com.github.libretube.constants.IntentData
 import com.github.libretube.constants.PreferenceKeys
-import com.github.libretube.databinding.SimpleOptionsRecyclerBinding
 import com.github.libretube.extensions.toastFromMainThread
 import com.github.libretube.helpers.PreferenceHelper
-import com.github.libretube.ui.adapters.InstancesAdapter
 import com.github.libretube.ui.base.BasePreferenceFragment
-import com.github.libretube.ui.dialogs.CreateCustomInstanceDialog
 import com.github.libretube.ui.dialogs.DeleteAccountDialog
 import com.github.libretube.ui.dialogs.LoginDialog
 import com.github.libretube.ui.dialogs.LogoutDialog
+import com.github.libretube.ui.dialogs.SelectInstanceDialog
 import com.github.libretube.ui.models.InstancesModel
 import com.github.libretube.ui.views.ButtonGroupPreference
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import com.google.common.collect.ImmutableList
-import kotlinx.coroutines.launch
-import okhttp3.HttpUrl.Companion.toHttpUrl
 import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
 
 class InstanceSettings : BasePreferenceFragment() {
-    private var instances = mutableListOf<PipedInstance>()
     private val customInstancesModel: InstancesModel by activityViewModels()
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
@@ -44,15 +33,12 @@ class InstanceSettings : BasePreferenceFragment() {
 
         val instancePref = findPreference<ListPreference>(PreferenceKeys.FETCH_INSTANCE)!!
         val authInstance = findPreference<ListPreference>(PreferenceKeys.AUTH_INSTANCE)!!
-        val instancePrefs = listOf(instancePref, authInstance)
 
-        lifecycleScope.launch {
-            customInstancesModel.customInstances.collect { updatedInstances ->
-                instances =
-                    updatedInstances.map { PipedInstance(it.name, it.apiUrl) }.toMutableList()
-                // update the instances to also show custom ones
-                initInstancesPref(instancePrefs)
-            }
+        for (instancePref in arrayOf(instancePref, authInstance)) {
+            instancePref.summaryProvider =
+                Preference.SummaryProvider<ListPreference> { preference ->
+                    preference.value
+                }
         }
 
         authInstance.setOnPreferenceChangeListener { _, _ ->
@@ -133,33 +119,6 @@ class InstanceSettings : BasePreferenceFragment() {
         }
     }
 
-    private fun initInstancesPref(instancePrefs: List<ListPreference>) = runCatching {
-        // add the currently used instances to the list if they're currently down / not part
-        // of the public instances list
-        for (apiUrl in listOf(PipedMediaServiceRepository.apiUrl, RetrofitInstance.pipedAuthUrl)) {
-            if (instances.none { it.apiUrl == apiUrl }) {
-                val origin = apiUrl.toHttpUrl().host
-                instances.add(PipedInstance(origin, apiUrl, isCurrentlyDown = true))
-            }
-        }
-
-        instances.sortBy { it.name }
-
-        // If any preference dialog is visible in this fragment, it's one of the instance selection
-        // dialogs. In order to prevent UX issues, we don't update the instances list then.
-        if (isDialogVisible) return@runCatching
-
-        for (instancePref in instancePrefs) {
-            // add custom instances to the list preference
-            instancePref.entries = instances.map { it.name }.toTypedArray()
-            instancePref.entryValues = instances.map { it.apiUrl }.toTypedArray()
-            instancePref.summaryProvider =
-                Preference.SummaryProvider<ListPreference> { preference ->
-                    preference.entry
-                }
-        }
-    }
-
     override fun onDisplayPreferenceDialog(preference: Preference) {
         if (preference.key in arrayOf(
                 PreferenceKeys.FETCH_INSTANCE,
@@ -173,29 +132,24 @@ class InstanceSettings : BasePreferenceFragment() {
     }
 
     private fun showInstanceSelectionDialog(preference: ListPreference) {
-        var selectedInstance = preference.value
-        val selectedIndex = instances.indexOfFirst { it.apiUrl == selectedInstance }
-
-        val layoutInflater = LayoutInflater.from(context)
-        val binding = SimpleOptionsRecyclerBinding.inflate(layoutInflater)
-        binding.optionsRecycler.layoutManager = LinearLayoutManager(context)
-
-        val instances = ImmutableList.copyOf(this.instances)
-        binding.optionsRecycler.adapter = InstancesAdapter(selectedIndex) {
-            selectedInstance = instances[it].apiUrl
-        }.also { it.submitList(instances) }
-
-        MaterialAlertDialogBuilder(requireContext())
-            .setTitle(preference.title)
-            .setView(binding.root)
-            .setNeutralButton(R.string.addInstance) { _, _ ->
-                CreateCustomInstanceDialog().show(childFragmentManager, null)
+        SelectInstanceDialog()
+            .apply {
+                arguments = bundleOf(
+                    SelectInstanceDialog.SELECT_INSTANCE_TITLE_EXTRA to getString(R.string.auth_instance),
+                    SelectInstanceDialog.SELECT_INSTANCE_CURRENT_INSTANCE_API_URL_EXTRA to preference.value
+                )
             }
-            .setPositiveButton(R.string.okay) { _, _ ->
-                preference.value = selectedInstance
-                resetForNewInstance()
-            }
-            .show()
+            .show(childFragmentManager, null)
+        childFragmentManager.setFragmentResultListener(
+            SelectInstanceDialog.SELECT_INSTANCE_RESULT_KEY,
+            this
+        ) { _, bundle ->
+            val apiUrl =
+                bundle.getString(SelectInstanceDialog.SELECT_INSTANCE_CURRENT_INSTANCE_API_URL_EXTRA)
+            preference.value = apiUrl
+            resetForNewInstance()
+            childFragmentManager.clearFragmentResultListener(SelectInstanceDialog.SELECT_INSTANCE_RESULT_KEY)
+        }
     }
 
     private fun toggleAuthAccountActionsUI(hasAuthSupport: Boolean) {
