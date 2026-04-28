@@ -428,7 +428,7 @@ class NewPipeMediaServiceRepository : MediaServiceRepository {
     }
 
     override suspend fun getChannel(channelId: String): Channel {
-        val channelUrl = "$YOUTUBE_FRONTEND_URL/${channelId}"
+        val channelUrl = if (channelId.startsWith("UC") && channelId.length == 24) "$YOUTUBE_FRONTEND_URL/channel/$channelId" else "$YOUTUBE_FRONTEND_URL/$channelId"
         val channelInfo = ChannelInfo.getInfo(NewPipeExtractorInstance.extractor, channelUrl)
 
         val channel = channelInfo.toChannel()
@@ -475,7 +475,7 @@ class NewPipeMediaServiceRepository : MediaServiceRepository {
     }
 
     override suspend fun getChannelNextPage(channelId: String, nextPage: String): Channel {
-        val url = "$YOUTUBE_FRONTEND_URL/${channelId}/videos"
+        val url = if (channelId.startsWith("UC") && channelId.length == 24) "${YOUTUBE_FRONTEND_URL}/channel/${channelId}/videos" else "${YOUTUBE_FRONTEND_URL}/${channelId}/videos"
         val listLinkHandler = ListLinkHandler(url, url, channelId, listOf("videos"), "")
         val tab = getChannelTab(listLinkHandler.toTabDataString(), nextPage)
         return Channel(

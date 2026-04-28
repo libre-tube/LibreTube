@@ -14,16 +14,10 @@ fun String.toID(): String {
         .removePrefix(YOUTUBE_MUSIC_URL)
         .removePrefix(YOUTUBE_SHORT_URL)
         .replace("/watch?v=", "") // videos
+        .replace("/channel/", "") // channels
         .replace("/playlist?list=", "") // playlists
         // channel urls for different categories than the main one
         .removeSuffix("/shorts")
         .removeSuffix("/streams")
         .removeSuffix("/videos")
-        .removePrefix("/")
-        .let {
-            when {
-                it.startsWith("UC") && it.length == 24 -> "channel/$it"
-                else -> it
-            }
-        }
 }

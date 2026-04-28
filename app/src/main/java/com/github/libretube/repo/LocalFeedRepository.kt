@@ -122,7 +122,7 @@ class LocalFeedRepository : FeedRepository {
         channelId: String,
         minimumDateMillis: Long
     ): Pair<Subscription?, List<StreamItem>> {
-        val channelUrl = "$YOUTUBE_FRONTEND_URL/${channelId}"
+        val channelUrl = if (channelId.startsWith("UC") && channelId.length == 24) "$YOUTUBE_FRONTEND_URL/channel/$channelId" else "$YOUTUBE_FRONTEND_URL/$channelId"
         val feedInfo = FeedInfo.getInfo(channelUrl)
         val feedInfoItems = feedInfo.relatedItems.associateBy { it.url }
 
