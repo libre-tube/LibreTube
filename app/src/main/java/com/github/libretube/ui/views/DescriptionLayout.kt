@@ -56,12 +56,7 @@ class DescriptionLayout(
         val category = segments.filter { it.actionType == Segment.TYPE_FULL }.firstNotNullOfOrNull { it.category }
         binding.playerSponsorBadge.isVisible = category != null
         binding.playerSponsorBadge.chipIcon = SponsorBlockLabelHelper.categoryIcon(category)?.let { context.getDrawable(it) }
-        binding.playerSponsorBadge.text = when (category) {
-            "sponsor" -> context.getString(R.string.category_sponsor)
-            "exclusive_access" -> context.getString(R.string.category_exclusive_access)
-            "selfpromo" -> context.getString(R.string.category_selfpromo)
-            else -> null
-        }
+        binding.playerSponsorBadge.text = SponsorBlockLabelHelper.categoryLabel(category)?.let { context.getString(it) }
     }
 
     @SuppressLint("SetTextI18n")
