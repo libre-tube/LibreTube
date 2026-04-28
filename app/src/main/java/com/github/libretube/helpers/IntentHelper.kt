@@ -59,10 +59,12 @@ object IntentHelper {
     fun resolveType(intent: Intent, uri: Uri) = with(intent) {
         val lastSegment = uri.lastPathSegment
         val secondLastSegment = uri.pathSegments.getOrNull(uri.pathSegments.size - 2)
+        val firstSegment = uri.pathSegments.firstOrNull()
         when {
             lastSegment == "results" -> {
                 putExtra(IntentData.query, uri.getQueryParameter("search_query"))
             }
+            firstSegment?.startsWith("@") == true -> putExtra(IntentData.channelId, firstSegment)
             secondLastSegment == "channel" -> {
                 putExtra(IntentData.channelId, lastSegment)
             }

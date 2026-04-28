@@ -335,6 +335,7 @@
                 <data android:pathPrefix="/shorts/" />
                 <data android:pathPrefix="/live/" />
                 <!-- channel prefix -->
+                <data android:pathPrefix="/@" />
                 <data android:pathPrefix="/channel/" />
                 <data android:pathPrefix="/user/" />
                 <data android:pathPrefix="/c/" />
