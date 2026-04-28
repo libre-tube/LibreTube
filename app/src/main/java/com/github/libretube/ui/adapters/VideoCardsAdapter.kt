@@ -132,12 +132,16 @@ class VideoCardsAdapter(private val columnWidthDp: Float? = null) :
                 if (PlayerHelper.sponsorBlockEnabled) {
                     val sponsor = SponsorBlockLabelHelper.getVideoLabels(videoId)
                     withContext(Dispatchers.Main) {
-                        sponsorBadgeCard.isVisible = sponsor?.segments?.isNotEmpty() == true
-                        SponsorBlockLabelHelper.categoryIcon(sponsor?.segments?.firstOrNull()?.category)?.let {
+                        val category = sponsor?.segments?.firstOrNull()?.category
+                        sponsorBadgeCard.isVisible = category != null
+                        SponsorBlockLabelHelper.categoryIcon(category)?.let {
                             sponsorBadgeIcon.setImageDrawable(
                                 context.getDrawable(it)
                             )
                         }
+                        sponsorBadgeIcon.tooltipText =
+                            SponsorBlockLabelHelper.categoryLabel(category)
+                                ?.let { context.getString(it) }
                     }
                 }
 
