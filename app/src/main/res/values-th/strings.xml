@@ -84,7 +84,7 @@
     <string name="comments_count">ความคิดเห็น (%1$s)</string>
     <string name="music_videos">วิดีโอ YT Music</string>
     <string name="music_albums">อัลบั้ม YT Music</string>
-    <string name="segment_skipped">ข้ามเซกเมนต์</string>
+    <string name="segment_skipped">เซกเมนต์ที่ข้ามไปแล้ว</string>
     <string name="category_sponsor_summary">การโปรโมทแบบได้รับเงินสนับสนุน, การแนะนำแบบได้รับเงินสนับสนุน และการโฆษณาทางตรง ไม่รวมการโปรโมทตนเอง หรือการแนะนำฟรีให้ กับเนื้อหา, ผู้สร้าง, เว็บไซต์ และผลิตภัณฑ์</string>
     <string name="music_songs">เพลง YT Music</string>
     <string name="category_sponsor">สปอนเซอร์</string>
