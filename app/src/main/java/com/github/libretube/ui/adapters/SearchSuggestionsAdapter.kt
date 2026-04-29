@@ -63,7 +63,6 @@ class SearchSuggestionsAdapter(
         holder.binding.apply {
             when (item.type) {
                 SearchDataType.HISTORY -> {
-                    deleteHistory.isVisible = true
                     deleteHistory.setOnClickListener {
                         onSearchHistoryItemDeleted(SearchHistoryItem(suggestion))
                     }
@@ -78,6 +77,7 @@ class SearchSuggestionsAdapter(
                     )
                 }
             }
+            deleteHistory.isVisible = item.type == SearchDataType.HISTORY
             suggestionText.text = suggestion
             root.setOnClickListener {
                 onRootClickListener(suggestion)
