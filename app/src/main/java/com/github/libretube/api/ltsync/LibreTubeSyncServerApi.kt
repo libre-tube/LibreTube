@@ -22,45 +22,45 @@ import retrofit2.http.Path
 
 interface LibreTubeSyncServerApi {
     // workaround for https://stackoverflow.com/questions/37942474/delete-method-is-not-supportingnon-body-http-method-cannot-contain-body-or-t
-    @HTTP(method = "DELETE",  path ="account/delete", hasBody = true)
+    @HTTP(method = "DELETE",  path ="v1/account/delete", hasBody = true)
     suspend fun deleteAccount(@Body deleteUser: DeleteUser)
 
-    @POST("account/login")
+    @POST("v1/account/login")
     suspend fun loginAccount(@Body loginUser: LoginUser): LoginResponse
 
-    @POST("account/register")
+    @POST("v1/account/register")
     suspend fun registerAccount(@Body registerUser: RegisterUser): LoginResponse
 
-    @DELETE("playlists/{playlist_id}")
+    @DELETE("v1/playlists/{playlist_id}")
     suspend fun deletePlaylist(@Path("playlist_id") playlistId: String)
 
-    @GET("playlists/{playlist_id}")
+    @GET("v1/playlists/{playlist_id}")
     suspend fun getPlaylist(@Path("playlist_id") playlistId: String):  PlaylistResponse
 
-    @GET("playlists/")
+    @GET("v1/playlists/")
     suspend fun getPlaylists(): List<Playlist>
 
-    @POST("playlists/{playlist_id}/videos")
+    @POST("v1/playlists/{playlist_id}/videos")
     suspend fun addToPlaylist(@Path("playlist_id") playlistId: String, @Body createVideo: List<CreateVideo>)
 
-    @POST("playlists/")
+    @POST("v1/playlists/")
     suspend fun createPlaylist(@Body createPlaylist: CreatePlaylist):  Playlist
 
-    @DELETE("playlists/{playlist_id}/videos/{video_id}")
+    @DELETE("v1/playlists/{playlist_id}/videos/{video_id}")
     suspend fun removeFromPlaylist(@Path("playlist_id") playlistId: String, @Path("video_id") videoId: String)
 
-    @PATCH("playlists/{playlist_id}")
+    @PATCH("v1/playlists/{playlist_id}")
     suspend fun updatePlaylist(@Path("playlist_id") playlistId: String, @Body createPlaylist: CreatePlaylist): Playlist
 
-    @GET("subscriptions/")
+    @GET("v1/subscriptions/")
     suspend fun getSubscriptions(): List<Channel>
 
-    @GET("subscriptions/{channel_id}")
+    @GET("v1/subscriptions/{channel_id}")
     suspend fun getSubscription(@Path("channel_id") channelId: String): Channel
 
-    @PUT("subscriptions/")
+    @PUT("v1/subscriptions/")
     suspend fun subscribe(@Body channel: Channel)
 
-    @DELETE("subscriptions/{channel_id}")
+    @DELETE("v1/subscriptions/{channel_id}")
     suspend fun unsubscribe(@Path("channel_id") channelId: String)
 }
