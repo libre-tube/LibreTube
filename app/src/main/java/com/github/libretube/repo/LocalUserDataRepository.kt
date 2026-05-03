@@ -4,9 +4,13 @@ import com.github.libretube.api.obj.Playlist
 import com.github.libretube.api.obj.Playlists
 import com.github.libretube.api.obj.StreamItem
 import com.github.libretube.api.obj.Subscription
+import com.github.libretube.api.obj.WatchHistoryEntry
+import com.github.libretube.api.obj.WatchHistoryEntryMetadata
 import com.github.libretube.db.DatabaseHolder.Database
 import com.github.libretube.db.obj.LocalPlaylist
 import com.github.libretube.db.obj.LocalSubscription
+import com.github.libretube.db.obj.PlaylistBookmark
+import com.github.libretube.db.obj.SubscriptionGroup
 
 class LocalUserDataRepository : UserDataRepository {
     override var requiresLogin: Boolean = false
@@ -166,5 +170,58 @@ class LocalUserDataRepository : UserDataRepository {
                 it.verified
             )
         })
+    }
+
+    override suspend fun createSubscriptionGroup(name: String): String {
+        Database.subscriptionGroupsDao()
+            .createGroup(SubscriptionGroup(name = name))
+
+        // name is the ID in our database modeling
+        return name
+    }
+
+    override suspend fun renameSubscriptionGroup(
+        subscriptionGroupId: String,
+        newName: String
+    ) {
+        val updatedGroup = Database.subscriptionGroupsDao()
+            .getByName(subscriptionGroupId)!!.copy(name = newName)
+
+        // delete the old version of the group first before updating it, as the name is the
+        // primary key
+        Database.subscriptionGroupsDao().deleteGroup(subscriptionGroupId)
+        Database.subscriptionGroupsDao().createGroup(updatedGroup)
+    }
+
+    override suspend fun deleteSubscriptionGroup(subscriptionGroupId: String) {
+        Database.subscriptionGroupsDao()
+            .deleteGroup(subscriptionGroupId)
+    }
+
+    override suspend fun getSubscriptionGroup(subscriptionGroupId: String): SubscriptionGroup {
+        return Database.subscriptionGroupsDao().getByName(subscriptionGroupId)!!
+    }
+
+    override suspend fun getSubscriptionGroups(): List<SubscriptionGroup> {
+        return Database.subscriptionGroupsDao().getAll()
+            .sortedBy { it.index }
+    }
+
+    override suspend fun addToSubscriptionGroup(
+        subscriptionGroupId: String,
+        channelId: String
+    ) {
+        val group = Database.subscriptionGroupsDao().getByName(subscriptionGroupId)!!
+        group.channels = group.channels.plus(channelId).distinct()
+        Database.subscriptionGroupsDao().updateGroup(group)
+    }
+
+    override suspend fun removeFromSubscriptionGroup(
+        subscriptionGroupId: String,
+        channelId: String
+    ) {
+        val group = Database.subscriptionGroupsDao().getByName(subscriptionGroupId)!!
+        group.channels = group.channels.filter { it != channelId }
+        Database.subscriptionGroupsDao().updateGroup(group)
     }
 }
