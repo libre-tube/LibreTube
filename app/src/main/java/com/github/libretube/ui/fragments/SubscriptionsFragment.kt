@@ -133,6 +133,7 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment(R.layout.fragment_sub
                     .alpha(0.5f)
                     .scaleY(0.5f)
                     .withEndAction {
+                        val binding = _binding ?: return@withEndAction
                         binding.feedProgressContainer.isGone = true
                         binding.feedProgressContainer.scaleY = 1f
                         binding.feedProgressContainer.alpha = 1f
