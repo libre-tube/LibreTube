@@ -270,6 +270,10 @@ class SabrClient private constructor(
 
     @OptIn(UnstableApi::class)
     fun selectFormat(representation: Representation) {
+        if (videoFormat == representation || (::audioFormat.isInitialized && audioFormat == representation)) {
+            return
+        }
+
         var previousFormat: Representation? = null
         if (MimeTypes.isAudio(representation.format.containerMimeType)) {
             if (::audioFormat.isInitialized) {
