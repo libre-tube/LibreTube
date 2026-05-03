@@ -37,6 +37,7 @@ import com.github.libretube.helpers.ProxyHelper
 import com.github.libretube.parcelable.PlayerData
 import com.github.libretube.player.SabrMediaSource
 import com.github.libretube.player.manifest.SabrManifest
+import com.github.libretube.repo.UserDataRepositoryHelper
 import com.github.libretube.util.DeArrowUtil
 import com.github.libretube.util.PlayingQueue
 import com.github.libretube.util.YoutubeHlsPlaylistParser
@@ -89,10 +90,12 @@ open class OnlinePlayerService : AbstractPlayerService() {
                     // while it did not yet start actually, but did buffer only so far
                     if (PlayerHelper.watchHistoryEnabled) {
                         scope.launch(Dispatchers.IO) {
-                            streams?.let { streams ->
-                                val watchHistoryItem =
-                                    streams.toStreamItem(videoId).toWatchHistoryItem(videoId)
-                                DatabaseHelper.addToWatchHistory(watchHistoryItem)
+                            val streams = streams ?: return@launch
+                            val video = streams.toStreamItem(videoId)
+                            runCatching {
+                                UserDataRepositoryHelper.userDataRepository.addToWatchHistory(
+                                    video.toWatchHistoryEntry(exoPlayer?.currentPosition)
+                                )
                             }
                         }
                     }
@@ -140,7 +143,7 @@ open class OnlinePlayerService : AbstractPlayerService() {
                     MediaServiceRepository.instance.getStreams(videoId).let {
                         DeArrowUtil.deArrowStreams(it, videoId)
                     }
-                }  catch (e: Exception) {
+                } catch (e: Exception) {
                     Log.e(TAG(), e.stackTraceToString())
                     toastFromMainDispatcher(e.localizedMessage.orEmpty())
                     return@withContext null
@@ -179,8 +182,12 @@ open class OnlinePlayerService : AbstractPlayerService() {
         if (seekToPositionMs != 0L) {
             exoPlayer?.seekTo(seekToPositionMs)
         } else if (watchPositionsEnabled) {
-            DatabaseHelper.getWatchPositionBlocking(videoId)?.let {
-                if (!DatabaseHelper.isVideoWatched(it, streams?.duration)) exoPlayer?.seekTo(it)
+            CoroutineScope(Dispatchers.IO).launch {
+                UserDataRepositoryHelper.userDataRepository.getFromWatchHistory(videoId)?.metadata?.positionMillis?.let {
+                    if (!DatabaseHelper.isVideoWatched(it, streams?.duration)) {
+                        withContext(Dispatchers.Main) { exoPlayer?.seekTo(it) }
+                    }
+                }
             }
         }
 
@@ -258,11 +265,18 @@ open class OnlinePlayerService : AbstractPlayerService() {
                                 .buildUpon()
                                 .setSampleMimeType(MimeTypes.APPLICATION_MEDIA3_CUES)
                                 .setCodecs(format.sampleMimeType)
-                                .setCueReplacementBehavior( subtitleParserFactory.getCueReplacementBehavior(format))
+                                .setCueReplacementBehavior(
+                                    subtitleParserFactory.getCueReplacementBehavior(
+                                        format
+                                    )
+                                )
                                 .build()
                         )
                     } catch (e: Exception) {
-                        Log.w(this::class.simpleName, "failed to set subtitle lazy-loading: ${e.stackTrace}")
+                        Log.w(
+                            this::class.simpleName,
+                            "failed to set subtitle lazy-loading: ${e.stackTrace}"
+                        )
                     }
                     progressiveMediaSourceFactory.createMediaSource(MediaItem.fromUri(it.url!!))
                 }.toList()

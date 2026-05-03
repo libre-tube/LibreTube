@@ -18,6 +18,7 @@ import com.github.libretube.api.obj.Token
 import com.github.libretube.api.obj.WatchHistoryEntry
 import com.github.libretube.api.obj.WatchHistoryEntryMetadata
 import com.github.libretube.db.obj.PlaylistBookmark
+import com.github.libretube.enums.WatchHistoryStatus
 import com.github.libretube.extensions.toID
 import com.github.libretube.obj.PipedImportPlaylist
 import retrofit2.HttpException
@@ -181,8 +182,8 @@ class PipedUserDataRepository : UserDataRepository {
         channelId: String
     ) = localRepositoryDelegate.removeFromSubscriptionGroup(subscriptionGroupId, channelId)
 
-    override suspend fun addToWatchHistory(video: WatchHistoryEntry) =
-        localRepositoryDelegate.addToWatchHistory(video)
+    override suspend fun addToWatchHistory(watchHistoryEntry: WatchHistoryEntry) =
+        localRepositoryDelegate.addToWatchHistory(watchHistoryEntry)
 
     override suspend fun updateWatchHistoryEntry(metadata: WatchHistoryEntryMetadata) =
         localRepositoryDelegate.updateWatchHistoryEntry(metadata)
@@ -190,7 +191,12 @@ class PipedUserDataRepository : UserDataRepository {
     override suspend fun removeFromWatchHistory(videoId: String) =
         localRepositoryDelegate.removeFromWatchHistory(videoId)
 
-    override suspend fun getWatchHistory(page: Int) = localRepositoryDelegate.getWatchHistory(page)
+    override suspend fun getWatchHistory(
+        pageSize: Int,
+        cursor: Any?,
+        watchedState: WatchHistoryStatus
+    ): Pair<List<WatchHistoryEntry>, Any?> =
+        localRepositoryDelegate.getWatchHistory(pageSize, cursor, watchedState)
 
     override suspend fun getFromWatchHistory(videoId: String) =
         localRepositoryDelegate.getFromWatchHistory(videoId)

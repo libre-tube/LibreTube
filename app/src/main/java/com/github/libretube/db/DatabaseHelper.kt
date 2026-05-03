@@ -1,55 +1,22 @@
 package com.github.libretube.db
 
 import com.github.libretube.api.obj.StreamItem
+import com.github.libretube.api.obj.WatchHistoryEntry
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.db.DatabaseHolder.Database
 import com.github.libretube.db.dao.WatchHistoryRow
 import com.github.libretube.db.obj.SearchHistoryItem
-import com.github.libretube.db.obj.WatchHistoryItem
 import com.github.libretube.enums.ContentFilter
-import com.github.libretube.enums.WatchHistoryStatus
 import com.github.libretube.extensions.toID
 import com.github.libretube.helpers.PreferenceHelper
+import com.github.libretube.repo.LocalUserDataRepository.Companion.ABSOLUTE_WATCHED_THRESHOLD
+import com.github.libretube.repo.LocalUserDataRepository.Companion.RELATIVE_WATCHED_THRESHOLD
+import com.github.libretube.repo.UserDataRepositoryHelper
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
 
 object DatabaseHelper {
     private const val MAX_SEARCH_HISTORY_SIZE = 20
-
-    // can only mark as watched if less than 60s remaining
-    private const val ABSOLUTE_WATCHED_THRESHOLD = 60.0f
-
-    // can only mark as watched if at least 75% watched
-    private const val RELATIVE_WATCHED_THRESHOLD = 0.75f
-
-    suspend fun addToWatchHistory(watchHistoryItem: WatchHistoryItem) =
-        withContext(Dispatchers.IO) {
-            Database.watchHistoryDao().insert(watchHistoryItem)
-        }
-
-    data class WatchHistoryPage(val rows: List<WatchHistoryRow>, val nextCursor: Long?) {
-        val items get() = rows.map(WatchHistoryRow::item)
-    }
-
-    suspend fun getWatchHistoryPage(
-        pageSize: Int,
-        statusFilter: WatchHistoryStatus = WatchHistoryStatus.ALL,
-        cursor: Long? = null,
-    ): WatchHistoryPage {
-        val rows = Database.watchHistoryDao().getPage(
-            limit = pageSize,
-            cursor = cursor ?: Long.MAX_VALUE,
-            watched = statusFilter.isWatched,
-            absoluteWatchedThresholdSeconds = ABSOLUTE_WATCHED_THRESHOLD,
-            relativeWatchedThreshold = RELATIVE_WATCHED_THRESHOLD
-        )
-
-        return WatchHistoryPage(
-            rows = rows,
-            nextCursor = rows.lastOrNull()?.rowId?.minus(1)?.takeIf { rows.size == pageSize }
-        )
-    }
 
     suspend fun addToSearchHistory(searchHistoryItem: SearchHistoryItem) {
         Database.searchHistoryDao().insert(searchHistoryItem)
@@ -65,11 +32,10 @@ object DatabaseHelper {
         }
     }
 
-    suspend fun getWatchPosition(videoId: String) = Database.watchPositionDao().findById(videoId)?.position
-
-    fun getWatchPositionBlocking(videoId: String): Long? = runBlocking(Dispatchers.IO) {
-        getWatchPosition(videoId)
-    }
+    suspend fun getWatchPosition(videoId: String) = runCatching {
+        UserDataRepositoryHelper.userDataRepository
+            .getFromWatchHistory(videoId)
+    }.getOrNull()?.metadata?.positionMillis
 
     suspend fun isVideoWatched(videoId: String, duration: Long): Boolean =
         withContext(Dispatchers.IO) {

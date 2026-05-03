@@ -11,6 +11,7 @@ import com.github.libretube.api.obj.WatchHistoryEntry
 import com.github.libretube.api.obj.WatchHistoryEntryMetadata
 import com.github.libretube.db.obj.PlaylistBookmark
 import com.github.libretube.db.obj.SubscriptionGroup
+import com.github.libretube.enums.WatchHistoryStatus
 import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.parallelMap
 import com.github.libretube.obj.PipedImportPlaylist
@@ -54,10 +55,10 @@ interface UserDataRepository {
     suspend fun addToSubscriptionGroup(subscriptionGroupId: String, channelId: String)
     suspend fun removeFromSubscriptionGroup(subscriptionGroupId: String, channelId: String)
 
-    suspend fun addToWatchHistory(video: WatchHistoryEntry)
+    suspend fun addToWatchHistory(watchHistoryEntry: WatchHistoryEntry)
     suspend fun updateWatchHistoryEntry(metadata: WatchHistoryEntryMetadata)
     suspend fun removeFromWatchHistory(videoId: String)
-    suspend fun getWatchHistory(page: Int): List<WatchHistoryEntry>
+    suspend fun getWatchHistory(pageSize: Int, cursor: Any?, watchedState: WatchHistoryStatus): Pair<List<WatchHistoryEntry>, Any?>
     suspend fun getFromWatchHistory(videoId: String): WatchHistoryEntry?
     suspend fun clearWatchHistory()
 
