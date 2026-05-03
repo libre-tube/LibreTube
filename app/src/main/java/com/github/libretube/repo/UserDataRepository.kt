@@ -54,7 +54,7 @@ interface UserDataRepository {
     suspend fun addToSubscriptionGroup(subscriptionGroupId: String, channelId: String)
     suspend fun removeFromSubscriptionGroup(subscriptionGroupId: String, channelId: String)
 
-    suspend fun addToWatchHistory(video: WatchHistoryEntry)
+    suspend fun addToWatchHistory(watchHistoryEntry: WatchHistoryEntry)
     suspend fun updateWatchHistoryEntry(metadata: WatchHistoryEntryMetadata)
     suspend fun removeFromWatchHistory(videoId: String)
     suspend fun getWatchHistory(page: Int): List<WatchHistoryEntry>

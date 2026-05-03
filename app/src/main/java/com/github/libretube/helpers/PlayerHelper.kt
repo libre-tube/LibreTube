@@ -7,6 +7,7 @@ import android.content.pm.ActivityInfo
 import android.net.Uri
 import android.os.Looper
 import android.util.Base64
+import android.util.Log
 import android.view.accessibility.CaptioningManager
 import androidx.annotation.OptIn
 import androidx.annotation.StringRes
@@ -39,14 +40,16 @@ import com.github.libretube.api.obj.ChapterSegment
 import com.github.libretube.api.obj.Segment
 import com.github.libretube.api.obj.Streams
 import com.github.libretube.api.obj.Subtitle
+import com.github.libretube.api.obj.WatchHistoryEntryMetadata
 import com.github.libretube.constants.PreferenceKeys
-import com.github.libretube.db.DatabaseHolder
-import com.github.libretube.db.obj.WatchPosition
+import com.github.libretube.db.DatabaseHelper
 import com.github.libretube.enums.PlayerEvent
 import com.github.libretube.enums.SbSkipOptions
+import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.seekBy
 import com.github.libretube.extensions.togglePlayPauseState
 import com.github.libretube.obj.VideoStats
+import com.github.libretube.repo.UserDataRepositoryHelper
 import com.github.libretube.util.TextUtils
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -54,6 +57,7 @@ import kotlinx.coroutines.launch
 import java.util.Locale
 import kotlin.math.max
 import kotlin.math.roundToInt
+import kotlin.time.Clock
 
 object PlayerHelper {
     private const val ACTION_MEDIA_CONTROL = "media_control"
@@ -868,9 +872,22 @@ object PlayerHelper {
             return
         }
 
-        val watchPosition = WatchPosition(videoId, player.currentPosition)
+        val watchHistoryEntry = WatchHistoryEntryMetadata(
+            videoId = videoId,
+            finished = DatabaseHelper.isVideoWatched(
+                player.currentPosition,
+                player.duration.div(1000)
+            ),
+            addedDate = Clock.System.now().toEpochMilliseconds(),
+            positionMillis = player.currentPosition
+        )
         CoroutineScope(Dispatchers.IO).launch {
-            DatabaseHolder.Database.watchPositionDao().insert(watchPosition)
+            try {
+                UserDataRepositoryHelper.userDataRepository
+                    .updateWatchHistoryEntry(watchHistoryEntry)
+            } catch (e: Exception) {
+                Log.e(TAG(), e.toString())
+            }
         }
     }
 
