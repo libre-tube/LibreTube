@@ -224,4 +224,20 @@ class LocalUserDataRepository : UserDataRepository {
         group.channels = group.channels.filter { it != channelId }
         Database.subscriptionGroupsDao().updateGroup(group)
     }
+
+    override suspend fun getPlaylistBookmarks(): List<PlaylistBookmark> {
+        return Database.playlistBookmarkDao().getAll()
+    }
+
+    override suspend fun getPlaylistBookmark(playlistId: String): PlaylistBookmark? {
+        return Database.playlistBookmarkDao().findById(playlistId)
+    }
+
+    override suspend fun createPlaylistBookmark(playlist: PlaylistBookmark) {
+        Database.playlistBookmarkDao().insert(playlist)
+    }
+
+    override suspend fun deletePlaylistBookmark(playlistId: String) {
+        Database.playlistBookmarkDao().deleteById(playlistId)
+    }
 }
