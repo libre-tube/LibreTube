@@ -7,6 +7,10 @@ import com.github.libretube.api.obj.Playlist
 import com.github.libretube.api.obj.Playlists
 import com.github.libretube.api.obj.StreamItem
 import com.github.libretube.api.obj.Subscription
+import com.github.libretube.api.obj.WatchHistoryEntry
+import com.github.libretube.api.obj.WatchHistoryEntryMetadata
+import com.github.libretube.db.obj.PlaylistBookmark
+import com.github.libretube.db.obj.SubscriptionGroup
 import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.parallelMap
 import com.github.libretube.obj.PipedImportPlaylist
@@ -41,6 +45,26 @@ interface UserDataRepository {
     suspend fun removeFromPlaylist(playlistId: String, videoId: String, index: Int): Boolean
     suspend fun createPlaylist(playlistName: String): String?
     suspend fun deletePlaylist(playlistId: String): Boolean
+
+    suspend fun createSubscriptionGroup(name: String): String
+    suspend fun renameSubscriptionGroup(subscriptionGroupId: String, newName: String)
+    suspend fun deleteSubscriptionGroup(subscriptionGroupId: String)
+    suspend fun getSubscriptionGroup(subscriptionGroupId: String): SubscriptionGroup
+    suspend fun getSubscriptionGroups(): List<SubscriptionGroup>
+    suspend fun addToSubscriptionGroup(subscriptionGroupId: String, channelId: String)
+    suspend fun removeFromSubscriptionGroup(subscriptionGroupId: String, channelId: String)
+
+    suspend fun addToWatchHistory(video: WatchHistoryEntry)
+    suspend fun updateWatchHistoryEntry(metadata: WatchHistoryEntryMetadata)
+    suspend fun removeFromWatchHistory(videoId: String)
+    suspend fun getWatchHistory(page: Int): List<WatchHistoryEntry>
+    suspend fun getFromWatchHistory(videoId: String): WatchHistoryEntry?
+    suspend fun clearWatchHistory()
+
+    suspend fun getPlaylistBookmarks(): List<PlaylistBookmark>
+    suspend fun getPlaylistBookmark(playlistId: String): PlaylistBookmark?
+    suspend fun createPlaylistBookmark(playlist: PlaylistBookmark)
+    suspend fun deletePlaylistBookmark(playlistId: String)
 
     // The following methods can be overriden to offload the work to the server, but in most cases
     // the default implementation should work out just fine.
