@@ -20,6 +20,8 @@ data class WatchHistoryItem(
     @ColumnInfo var thumbnailUrl: String? = null,
     @ColumnInfo val duration: Long? = null,
     @ColumnInfo val isShort: Boolean = false
+
+    // TODO: store date when the video was added to the history
 ) {
     val isLive get() = (duration == null) || (duration <= 0L)
 
@@ -36,4 +38,5 @@ data class WatchHistoryItem(
         duration = duration,
         isShort = isShort
     )
+
 }
