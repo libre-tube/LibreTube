@@ -181,8 +181,8 @@ class PipedUserDataRepository : UserDataRepository {
         channelId: String
     ) = localRepositoryDelegate.removeFromSubscriptionGroup(subscriptionGroupId, channelId)
 
-    override suspend fun addToWatchHistory(video: WatchHistoryEntry) =
-        localRepositoryDelegate.addToWatchHistory(video)
+    override suspend fun addToWatchHistory(watchHistoryEntry: WatchHistoryEntry) =
+        localRepositoryDelegate.addToWatchHistory(watchHistoryEntry)
 
     override suspend fun updateWatchHistoryEntry(metadata: WatchHistoryEntryMetadata) =
         localRepositoryDelegate.updateWatchHistoryEntry(metadata)

@@ -10,6 +10,7 @@ import com.github.libretube.api.JsonHelper
 import com.github.libretube.api.PlaylistsHelper
 import com.github.libretube.api.SubscriptionHelper
 import com.github.libretube.db.DatabaseHelper
+import com.github.libretube.db.DatabaseHolder
 import com.github.libretube.db.obj.WatchHistoryItem
 import com.github.libretube.enums.ImportFormat
 import com.github.libretube.extensions.TAG
@@ -356,7 +357,7 @@ object ImportHelper {
         }
 
         for (video in videos) {
-            DatabaseHelper.addToWatchHistory(video)
+            DatabaseHolder.Database.watchHistoryDao().insert(video)
         }
 
         if (videos.isEmpty()) {

@@ -125,10 +125,12 @@ class HomeViewModel : ViewModel() {
     }
 
     private suspend fun loadWatchingFromDB(): List<StreamItem> {
-        val videos = DatabaseHelper.getWatchHistoryPage(1, 20)
+        val videos = runCatching {
+            UserDataRepositoryHelper.userDataRepository.getWatchHistory(1)
+        }.getOrElse { emptyList() }
 
         return DatabaseHelper
-            .filterUnwatched(videos.map { it.toStreamItem() })
+            .filterUnwatched(videos.map { it.video })
     }
 
     private suspend fun tryLoadFeed(subscriptionsViewModel: SubscriptionsViewModel): List<StreamItem> {
