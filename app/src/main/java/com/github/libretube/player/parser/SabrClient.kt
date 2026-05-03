@@ -420,7 +420,7 @@ class SabrClient private constructor(
             throw Exception("HTTP request failed: ${response.code}")
         }
 
-        return response.body?.bytes() ?: throw Exception("Empty response body")
+        return response.body.bytes()
     }
 
     /**
