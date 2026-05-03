@@ -209,7 +209,13 @@ class DefaultSabrChunkSource(
             }
         }.toTypedArray()
 
-        val previousTrackSelection = trackSelection.selectedIndex
+        // adaptive track selection may change the selected for when called `updateSelectedTrack`.
+        // this can lead to playback errors, if only one stream changes (e.g. video, but audio continues to be loaded).
+        // We artificially delay this by only changing the format on the next selection,
+        // ensuring there is some data already buffered (from the current data request).
+        //FIXME: there is probably a better way
+        val representationHolder = representationHolders[trackSelection.selectedIndex]
+        sabrClient.selectFormat(representationHolder.representation)
         trackSelection.updateSelectedTrack(
             playbackPositionUs,
             bufferedDurationUs,
@@ -217,12 +223,6 @@ class DefaultSabrChunkSource(
             queue,
             chunkIterators,
         )
-
-        val representationHolder = representationHolders[trackSelection.selectedIndex]
-        if (previousTrackSelection != trackSelection.selectedIndex) {
-            // selection changed, info the sabr client about it
-            sabrClient.selectFormat(representationHolder.representation)
-        }
 
         if (representationHolder.chunkExtractor != null) {
                 if (representationHolder.chunkIndex == null) {
