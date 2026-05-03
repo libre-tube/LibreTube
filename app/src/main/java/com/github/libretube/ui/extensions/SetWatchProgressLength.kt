@@ -11,6 +11,10 @@ import androidx.core.view.isVisible
 import androidx.core.view.updateLayoutParams
 import com.github.libretube.db.DatabaseHelper
 import com.github.libretube.helpers.ThemeHelper
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 /**
  * Shows the already watched time under the video
@@ -18,15 +22,7 @@ import com.github.libretube.helpers.ThemeHelper
  * @param duration The duration of the video in seconds
  */
 fun View.setWatchProgressLength(videoId: String, duration: Long) {
-    val progress = DatabaseHelper.getWatchPositionBlocking(videoId)?.div(1000)
-    if (progress == null || progress == 0L) {
-        isGone = true
-        return
-    }
-
-    updateLayoutParams<ConstraintLayout.LayoutParams> {
-        matchConstraintPercentWidth = progress.toFloat()/ duration.toFloat()
-    }
+    isGone = true
 
     var backgroundColor = ThemeHelper.getThemeColor(
         context,
@@ -46,6 +42,16 @@ fun View.setWatchProgressLength(videoId: String, duration: Long) {
         }
     }
 
+    CoroutineScope(Dispatchers.IO).launch {
+        val progress = DatabaseHelper.getWatchPosition(videoId)?.div(1000)
 
-    isVisible = true
+        if (progress != null && progress == 0L) {
+            withContext(Dispatchers.Main) {
+                updateLayoutParams<ConstraintLayout.LayoutParams> {
+                    matchConstraintPercentWidth = progress.toFloat()/ duration.toFloat()
+                }
+                isVisible = true
+            }
+        }
+    }
 }

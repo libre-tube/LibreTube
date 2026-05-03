@@ -9,6 +9,7 @@ import com.github.libretube.extensions.toLocalDate
 import com.github.libretube.helpers.ProxyHelper
 import kotlinx.parcelize.Parcelize
 import kotlinx.serialization.Serializable
+import kotlin.time.Clock
 
 @Serializable
 @Parcelize
@@ -69,6 +70,16 @@ data class StreamItem(
         uploaderAvatar = uploaderAvatar?.let { ProxyHelper.unwrapUrl(it) },
         thumbnailUrl = thumbnail?.let { ProxyHelper.unwrapUrl(it) },
         duration = duration
+    )
+
+    fun toWatchHistoryEntry() = WatchHistoryEntry(
+        metadata = WatchHistoryEntryMetadata(
+            videoId = url!!.toID(),
+            addedDate = Clock.System.now().toEpochMilliseconds(),
+            finished = false,
+            positionMillis = null
+        ),
+        video = this
     )
 
     companion object {

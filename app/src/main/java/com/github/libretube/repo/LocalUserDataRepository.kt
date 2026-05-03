@@ -11,9 +11,12 @@ import com.github.libretube.db.obj.LocalPlaylist
 import com.github.libretube.db.obj.LocalSubscription
 import com.github.libretube.db.obj.PlaylistBookmark
 import com.github.libretube.db.obj.SubscriptionGroup
+import com.github.libretube.db.obj.WatchPosition
 
 class LocalUserDataRepository : UserDataRepository {
     override var requiresLogin: Boolean = false
+
+    private val WATCH_HISTORY_PAGE_SIZE = 30
 
     override suspend fun getPlaylist(playlistId: String): Playlist {
         val relation = Database.localPlaylistsDao().getAll()
@@ -223,6 +226,49 @@ class LocalUserDataRepository : UserDataRepository {
         val group = Database.subscriptionGroupsDao().getByName(subscriptionGroupId)!!
         group.channels = group.channels.filter { it != channelId }
         Database.subscriptionGroupsDao().updateGroup(group)
+    }
+
+    override suspend fun addToWatchHistory(watchHistoryEntry: WatchHistoryEntry) {
+        val watchHistoryItem = watchHistoryEntry.video.toWatchHistoryItem(watchHistoryEntry.metadata.videoId)
+        Database.watchHistoryDao().insert(watchHistoryItem)
+
+        // create watch position
+        updateWatchHistoryEntry(watchHistoryEntry.metadata)
+    }
+
+    override suspend fun updateWatchHistoryEntry(metadata: WatchHistoryEntryMetadata) {
+        metadata.positionMillis?.let {
+            Database.watchPositionDao().insert(WatchPosition(videoId = metadata.videoId, position = it))
+        }
+    }
+
+    override suspend fun removeFromWatchHistory(videoId: String) {
+        Database.watchHistoryDao().deleteByVideoId(videoId)
+        Database.watchPositionDao().deleteByVideoId(videoId)
+    }
+
+    override suspend fun getWatchHistory(page: Int): List<WatchHistoryEntry> {
+        val watchHistoryDao = Database.watchHistoryDao()
+        val historySize = watchHistoryDao.getSize()
+
+        if (historySize < WATCH_HISTORY_PAGE_SIZE * (page - 1)) return emptyList()
+
+        val offset = historySize - (WATCH_HISTORY_PAGE_SIZE * page)
+        val limit = if (offset < 0) {
+            offset + WATCH_HISTORY_PAGE_SIZE
+        } else {
+            WATCH_HISTORY_PAGE_SIZE
+        }
+        return watchHistoryDao.getN(limit, maxOf(offset, 0)).reversed()
+            .map { it.toWatchHistoryEntry() }
+    }
+
+    override suspend fun getFromWatchHistory(videoId: String): WatchHistoryEntry? {
+        return Database.watchHistoryDao().findById(videoId)?.toWatchHistoryEntry()
+    }
+
+    override suspend fun clearWatchHistory() {
+        Database.watchHistoryDao().deleteAll()
     }
 
     override suspend fun getPlaylistBookmarks(): List<PlaylistBookmark> {

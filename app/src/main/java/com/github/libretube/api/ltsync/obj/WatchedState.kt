@@ -4,17 +4,17 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-enum class WatchedState(val value: String) {
+enum class WatchedState {
 
-    @SerialName(value = "Planned")
-    Planned("Planned"),
+    @SerialName(value = "planned")
+    Planned,
 
-    @SerialName(value = "Watching")
-    Watching("Watching"),
+    @SerialName(value = "watching")
+    Watching,
 
-    @SerialName(value = "Completed")
-    Completed("Completed"),
+    @SerialName(value = "completed")
+    Completed,
 
-    @SerialName(value = "Dropped")
-    Dropped("Dropped")
+    @SerialName(value = "dropped")
+    Dropped
 }

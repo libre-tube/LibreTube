@@ -26,6 +26,7 @@ import com.github.libretube.extensions.toAndroidUri
 import com.github.libretube.extensions.updateParameters
 import com.github.libretube.helpers.PlayerHelper
 import com.github.libretube.parcelable.PlayerData
+import com.github.libretube.repo.UserDataRepositoryHelper
 import com.github.libretube.ui.activities.MainActivity
 import com.github.libretube.ui.activities.NoInternetActivity
 import com.github.libretube.ui.fragments.DownloadTab
@@ -60,10 +61,11 @@ open class OfflinePlayerService : AbstractPlayerService() {
             // add video to watch history when playback starts
             if (playbackState == Player.STATE_READY && PlayerHelper.watchHistoryEnabled) {
                 scope.launch(Dispatchers.IO) {
-                    val watchHistoryItem =
-                        downloadWithItems?.download?.toStreamItem()?.toWatchHistoryItem(videoId)
-                    if (watchHistoryItem != null) {
-                        DatabaseHelper.addToWatchHistory(watchHistoryItem)
+                    val video = downloadWithItems?.download?.toStreamItem()
+                    if (video != null) {
+                        runCatching {
+                            UserDataRepositoryHelper.userDataRepository.addToWatchHistory(video.toWatchHistoryEntry())
+                        }
                     }
                 }
             }
@@ -216,7 +218,8 @@ open class OfflinePlayerService : AbstractPlayerService() {
                 .map { it.download }
 
             if (playerData.shuffle) downloads = downloads.shuffled()
-            else if (playerData.downloadSortingOrder != null) downloads = sortDownloadList(downloads, playerData.downloadSortingOrder!!)
+            else if (playerData.downloadSortingOrder != null) downloads =
+                sortDownloadList(downloads, playerData.downloadSortingOrder!!)
 
             PlayingQueue.add(*downloads.map { it.toStreamItem() }.toTypedArray())
         }

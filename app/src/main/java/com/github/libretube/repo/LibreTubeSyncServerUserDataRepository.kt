@@ -8,8 +8,11 @@ import com.github.libretube.api.ltsync.obj.DeleteUser
 import com.github.libretube.api.ltsync.obj.ExtendedPlaylist
 import com.github.libretube.api.ltsync.obj.ExtendedPublicPlaylist
 import com.github.libretube.api.ltsync.obj.ExtendedSubscriptionGroup
+import com.github.libretube.api.ltsync.obj.ExtendedWatchHistoryItem
 import com.github.libretube.api.ltsync.obj.LoginUser
 import com.github.libretube.api.ltsync.obj.RegisterUser
+import com.github.libretube.api.ltsync.obj.WatchHistoryItem
+import com.github.libretube.api.ltsync.obj.WatchedState
 import com.github.libretube.api.obj.Playlist
 import com.github.libretube.api.obj.Playlists
 import com.github.libretube.api.obj.StreamItem
@@ -30,7 +33,8 @@ class LibreTubeSyncServerUserDataRepository : UserDataRepository {
         try {
             return block()
         } catch (e: HttpException) {
-            throw Exception(e.response()?.errorBody()?.string() ?: e.message)
+            val message = e.response()?.errorBody()?.string()
+            throw Exception(message.orEmpty().ifEmpty { e.message })
         }
     }
 
@@ -265,6 +269,77 @@ class LibreTubeSyncServerUserDataRepository : UserDataRepository {
     ) {
         tryHttpOrRaiseError {
             api.removeFromSubscriptionGroup(subscriptionGroupId, channelId)
+        }
+    }
+
+    private fun WatchHistoryItem.toWatchHistoryEntryMetadata(videoId: String): WatchHistoryEntryMetadata {
+        return WatchHistoryEntryMetadata(
+            videoId = videoId,
+            addedDate = addedDate,
+            finished = watchedState == WatchedState.Completed,
+            positionMillis = positionMillis?.toLong()
+        )
+    }
+
+    private fun ExtendedWatchHistoryItem.toWatchHistoryEntry(): WatchHistoryEntry {
+        return WatchHistoryEntry(
+            metadata = metadata.toWatchHistoryEntryMetadata(video.id),
+            video = video.toStreamItem()
+        )
+    }
+
+    private fun WatchHistoryEntryMetadata.toWatchHistoryItem(): WatchHistoryItem {
+        return WatchHistoryItem(
+            addedDate = addedDate,
+            watchedState = if (finished) WatchedState.Completed else WatchedState.Watching,
+            positionMillis = positionMillis?.toInt()
+        )
+    }
+
+    override suspend fun getWatchHistory(page: Int): List<WatchHistoryEntry> {
+        return tryHttpOrRaiseError {
+            api.getWatchHistory(page).map { it.toWatchHistoryEntry() }
+        }
+    }
+
+    override suspend fun getFromWatchHistory(videoId: String): WatchHistoryEntry? {
+        return tryHttpOrRaiseError {
+            try {
+                api.getFromWatchHistory(videoId).toWatchHistoryEntry()
+            } catch (e: HttpException) {
+                // if we get 404, the video is not in the watch history
+                if (e.code() == 404) return@tryHttpOrRaiseError null
+                else throw e
+            }
+        }
+    }
+
+    override suspend fun clearWatchHistory() {
+        tryHttpOrRaiseError {
+            api.clearWatchHistory()
+        }
+    }
+
+    override suspend fun addToWatchHistory(watchHistoryEntry: WatchHistoryEntry) {
+        val video = watchHistoryEntry.video.toCreateVideo()
+        val metadata = watchHistoryEntry.metadata.toWatchHistoryItem()
+
+        tryHttpOrRaiseError {
+            api.addToWatchHistory(
+                ExtendedWatchHistoryItem(metadata, video)
+            )
+        }
+    }
+
+    override suspend fun updateWatchHistoryEntry(metadata: WatchHistoryEntryMetadata) {
+        tryHttpOrRaiseError {
+            api.updateWatchHistoryEntry(metadata.videoId, metadata.toWatchHistoryItem())
+        }
+    }
+
+    override suspend fun removeFromWatchHistory(videoId: String) {
+        tryHttpOrRaiseError {
+            api.removeFromWatchHistory(videoId)
         }
     }
 
