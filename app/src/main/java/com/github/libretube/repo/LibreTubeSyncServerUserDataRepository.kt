@@ -5,12 +5,19 @@ import com.github.libretube.api.ltsync.obj.Channel
 import com.github.libretube.api.ltsync.obj.CreatePlaylist
 import com.github.libretube.api.ltsync.obj.CreateVideo
 import com.github.libretube.api.ltsync.obj.DeleteUser
+import com.github.libretube.api.ltsync.obj.ExtendedPlaylist
+import com.github.libretube.api.ltsync.obj.ExtendedPublicPlaylist
+import com.github.libretube.api.ltsync.obj.ExtendedSubscriptionGroup
 import com.github.libretube.api.ltsync.obj.LoginUser
 import com.github.libretube.api.ltsync.obj.RegisterUser
 import com.github.libretube.api.obj.Playlist
 import com.github.libretube.api.obj.Playlists
 import com.github.libretube.api.obj.StreamItem
 import com.github.libretube.api.obj.Subscription
+import com.github.libretube.api.obj.WatchHistoryEntry
+import com.github.libretube.api.obj.WatchHistoryEntryMetadata
+import com.github.libretube.db.obj.PlaylistBookmark
+import com.github.libretube.db.obj.SubscriptionGroup
 import com.github.libretube.extensions.toID
 import retrofit2.HttpException
 
@@ -191,5 +198,73 @@ class LibreTubeSyncServerUserDataRepository : UserDataRepository {
 
     override suspend fun deletePlaylist(playlistId: String): Boolean {
         return runCatching { api.deletePlaylist(playlistId) }.isSuccess
+    }
+
+    override suspend fun createSubscriptionGroup(name: String): String {
+        return tryHttpOrRaiseError {
+            api.createSubscriptionGroup(
+                com.github.libretube.api.ltsync.obj.SubscriptionGroup(
+                    "",
+                    name
+                )
+            ).id
+        }
+    }
+
+    override suspend fun renameSubscriptionGroup(
+        subscriptionGroupId: String,
+        newName: String
+    ) {
+        tryHttpOrRaiseError {
+            api.updateSubscriptionGroup(
+                subscriptionGroupId, com.github.libretube.api.ltsync.obj.SubscriptionGroup(
+                    subscriptionGroupId, title = newName
+                )
+            )
+        }
+    }
+
+    override suspend fun deleteSubscriptionGroup(subscriptionGroupId: String) {
+        tryHttpOrRaiseError {
+            api.deleteSubscriptionGroup(subscriptionGroupId)
+        }
+    }
+
+    private fun ExtendedSubscriptionGroup.toSubscriptionGroup(): SubscriptionGroup {
+        return SubscriptionGroup(
+            id = group.id,
+            name = group.title,
+            channels = channels.map { it.id }
+        )
+    }
+
+    override suspend fun getSubscriptionGroup(subscriptionGroupId: String): SubscriptionGroup {
+        return tryHttpOrRaiseError {
+            api.getSubscriptionGroup(subscriptionGroupId).toSubscriptionGroup()
+        }
+    }
+
+    override suspend fun getSubscriptionGroups(): List<SubscriptionGroup> {
+        return tryHttpOrRaiseError {
+            api.getSubscriptionGroups().map { it.toSubscriptionGroup() }
+        }
+    }
+
+    override suspend fun addToSubscriptionGroup(
+        subscriptionGroupId: String,
+        channelId: String
+    ) {
+        tryHttpOrRaiseError {
+            api.addToSubscriptionGroup(subscriptionGroupId, channelId)
+        }
+    }
+
+    override suspend fun removeFromSubscriptionGroup(
+        subscriptionGroupId: String,
+        channelId: String
+    ) {
+        tryHttpOrRaiseError {
+            api.removeFromSubscriptionGroup(subscriptionGroupId, channelId)
+        }
     }
 }

@@ -118,7 +118,6 @@ object PreferenceKeys {
     const val CLEAR_WATCH_POSITIONS = "clear_watch_positions"
     const val SHARE_WITH_TIME_CODE = "share_with_time_code"
     const val SELECTED_SHARE_HOST = "selected_share_host"
-    const val CLEAR_BOOKMARKS = "clear_bookmarks"
     const val MAX_CONCURRENT_DOWNLOADS = "max_parallel_downloads"
     const val EXTERNAL_DOWNLOAD_PROVIDER = "external_download_provider"
     const val LOCAL_RYD = "local_return_youtube_dislikes"
