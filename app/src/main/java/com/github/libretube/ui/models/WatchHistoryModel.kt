@@ -4,28 +4,39 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.github.libretube.api.obj.WatchHistoryEntry
 import com.github.libretube.constants.PreferenceKeys
-import com.github.libretube.db.DatabaseHelper
 import com.github.libretube.db.DatabaseHolder
-import com.github.libretube.db.obj.WatchHistoryItem
 import com.github.libretube.enums.WatchHistoryStatus
+import com.github.libretube.extensions.toID
 import com.github.libretube.helpers.PreferenceHelper
+import com.github.libretube.repo.UserDataRepositoryHelper
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 
-class WatchHistoryModel : ViewModel() {
-    private val watchHistory = MutableLiveData<List<WatchHistoryItem>>()
-    val filteredWatchHistory: LiveData<List<WatchHistoryItem>> = watchHistory
+private sealed class WatchHistoryPage {
+    object First : WatchHistoryPage()
+    class HasNext(val nextCursor: Any?) : WatchHistoryPage()
+    object AllLoaded : WatchHistoryPage()
+}
 
-    private var cursor: Long? = Long.MAX_VALUE
+class WatchHistoryModel : ViewModel() {
+    private val _filteredWatchHistory = MutableLiveData<List<WatchHistoryEntry>>()
+    val filteredWatchHistory: LiveData<List<WatchHistoryEntry>> = _filteredWatchHistory
+
+    private var nextHistoryPage: WatchHistoryPage = WatchHistoryPage.First
     private var fetchJob: Job? = null
     private val downloadedVideoIds = mutableSetOf<String>()
     private val watchPositions = mutableMapOf<String, Long?>()
 
     private val selectedStatus = MutableStateFlow(
         WatchHistoryStatus.entries.getOrNull(
-            PreferenceHelper.getInt(PreferenceKeys.SELECTED_HISTORY_STATUS_FILTER, WatchHistoryStatus.ALL.ordinal)
+            PreferenceHelper.getInt(
+                PreferenceKeys.SELECTED_HISTORY_STATUS_FILTER,
+                WatchHistoryStatus.ALL.ordinal
+            )
         ) ?: WatchHistoryStatus.ALL
     )
 
@@ -40,36 +51,41 @@ class WatchHistoryModel : ViewModel() {
         viewModelScope.launch {
             selectedStatus.collect {
                 fetchJob?.cancel()
-                cursor = Long.MAX_VALUE
-                watchHistory.value = emptyList()
+                nextHistoryPage = WatchHistoryPage.First
+                _filteredWatchHistory.value = emptyList()
                 fetchNextPage()
             }
         }
     }
 
     fun fetchNextPage() {
-        val currentCursor = cursor ?: return
+        if (nextHistoryPage == WatchHistoryPage.AllLoaded) return
         if (fetchJob?.isActive == true) return
 
         fetchJob = viewModelScope.launch {
-            val page = DatabaseHelper.getWatchHistoryPage(
+            val (watchHistoryItems, nextCursor) = UserDataRepositoryHelper.userDataRepository.getWatchHistory(
                 pageSize = HISTORY_PAGE_SIZE,
-                statusFilter = selectedStatus.value,
-                cursor = currentCursor
+                watchedState = selectedStatus.value,
+                cursor = (nextHistoryPage as? WatchHistoryPage.HasNext)?.nextCursor
             )
             val downloaded = DatabaseHolder.Database.downloadDao()
-                .areVideosDownloaded(page.items.map(WatchHistoryItem::videoId))
+                .areVideosDownloaded(watchHistoryItems.map { it.video.url!!.toID() })
 
-            page.rows.forEachIndexed { index, (item: WatchHistoryItem, _, watchPosition: Long?) ->
+            watchHistoryItems.forEachIndexed { index, item ->
+                val videoId = item.video.url!!.toID()
                 if (downloaded[index]) {
-                    downloadedVideoIds += item.videoId
+                    downloadedVideoIds += videoId
                 } else {
-                    downloadedVideoIds -= item.videoId
+                    downloadedVideoIds -= videoId
                 }
-                watchPositions[item.videoId] = watchPosition
+                watchPositions[videoId] = item.metadata.positionMillis
             }
-            cursor = page.nextCursor
-            watchHistory.value = watchHistory.value.orEmpty() + page.items
+            nextHistoryPage = if (nextCursor == null) {
+                WatchHistoryPage.AllLoaded
+            } else {
+                WatchHistoryPage.HasNext(nextCursor)
+            }
+            _filteredWatchHistory.value = _filteredWatchHistory.value.orEmpty() + watchHistoryItems
         }
     }
 
@@ -77,22 +93,31 @@ class WatchHistoryModel : ViewModel() {
 
     fun getWatchPosition(videoId: String) = watchPositions[videoId]
 
-    fun onWatchStatusChanged(item: WatchHistoryItem, isVideoWatched: Boolean) {
+    fun onWatchStatusChanged(item: WatchHistoryEntry, isVideoWatched: Boolean) {
+        val videoId = item.video.url!!.toID()
+
         if (isVideoWatched) {
-            watchPositions[item.videoId] = Long.MAX_VALUE
+            watchPositions[videoId] = Long.MAX_VALUE
         } else {
-            watchPositions -= item.videoId
+            watchPositions -= videoId
         }
 
         if (!isVideoWatched || selectedStatus.value.isWatched == false) {
-            watchHistory.value = watchHistory.value.orEmpty() - item
+            _filteredWatchHistory.value = _filteredWatchHistory.value.orEmpty() - item
         }
     }
 
-    fun removeFromHistory(watchHistoryItem: WatchHistoryItem) =
-        viewModelScope.launch {
-            DatabaseHolder.Database.watchHistoryDao().delete(watchHistoryItem)
-            watchHistory.value = watchHistory.value.orEmpty() - watchHistoryItem
+    fun removeFromHistory(watchHistoryEntry: WatchHistoryEntry) =
+        viewModelScope.launch(Dispatchers.IO) {
+            runCatching {
+                UserDataRepositoryHelper.userDataRepository.removeFromWatchHistory(
+                    watchHistoryEntry.metadata.videoId
+                )
+
+                _filteredWatchHistory.postValue(
+                    _filteredWatchHistory.value.orEmpty() - watchHistoryEntry
+                )
+            }
         }
 
     companion object {

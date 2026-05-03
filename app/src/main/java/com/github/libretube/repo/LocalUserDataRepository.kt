@@ -7,13 +7,18 @@ import com.github.libretube.api.obj.Subscription
 import com.github.libretube.api.obj.WatchHistoryEntry
 import com.github.libretube.api.obj.WatchHistoryEntryMetadata
 import com.github.libretube.db.DatabaseHolder.Database
+import com.github.libretube.db.dao.WatchHistoryRow
 import com.github.libretube.db.obj.LocalPlaylist
 import com.github.libretube.db.obj.LocalSubscription
 import com.github.libretube.db.obj.PlaylistBookmark
 import com.github.libretube.db.obj.SubscriptionGroup
+import com.github.libretube.db.obj.WatchPosition
+import com.github.libretube.enums.WatchHistoryStatus
 
 class LocalUserDataRepository : UserDataRepository {
     override var requiresLogin: Boolean = false
+
+    private val WATCH_HISTORY_PAGE_SIZE = 30
 
     override suspend fun getPlaylist(playlistId: String): Playlist {
         val relation = Database.localPlaylistsDao().getAll()
@@ -225,6 +230,52 @@ class LocalUserDataRepository : UserDataRepository {
         Database.subscriptionGroupsDao().updateGroup(group)
     }
 
+    override suspend fun addToWatchHistory(watchHistoryEntry: WatchHistoryEntry) {
+        val watchHistoryItem = watchHistoryEntry.video.toWatchHistoryItem(watchHistoryEntry.metadata.videoId)
+        Database.watchHistoryDao().insert(watchHistoryItem)
+
+        // create watch position
+        updateWatchHistoryEntry(watchHistoryEntry.metadata)
+    }
+
+    override suspend fun updateWatchHistoryEntry(metadata: WatchHistoryEntryMetadata) {
+        metadata.positionMillis?.let {
+            Database.watchPositionDao().insert(WatchPosition(videoId = metadata.videoId, position = it))
+        }
+    }
+
+    override suspend fun removeFromWatchHistory(videoId: String) {
+        Database.watchHistoryDao().deleteByVideoId(videoId)
+        Database.watchPositionDao().deleteByVideoId(videoId)
+    }
+
+    override suspend fun getWatchHistory(
+        pageSize: Int,
+        cursor: Any?,
+        watchedState: WatchHistoryStatus
+    ): Pair<List<WatchHistoryEntry>, Any?> {
+        val rows = Database.watchHistoryDao().getPage(
+            limit = pageSize,
+            cursor = cursor as? Long ?: Long.MAX_VALUE,
+            watched = watchedState.isWatched,
+            absoluteWatchedThresholdSeconds = ABSOLUTE_WATCHED_THRESHOLD,
+            relativeWatchedThreshold = RELATIVE_WATCHED_THRESHOLD
+        )
+
+        val nextCursor = rows.lastOrNull()?.rowId?.minus(1)?.takeIf { rows.size == pageSize }
+        return rows.map { it.toWatchHistoryEntry() } to nextCursor
+    }
+
+    override suspend fun getFromWatchHistory(videoId: String): WatchHistoryEntry? {
+        val historyItem = Database.watchHistoryDao().findById(videoId) ?: return null
+        val watchPosition = Database.watchPositionDao().findById(videoId)
+        return WatchHistoryRow(historyItem, 0, watchPosition?.position).toWatchHistoryEntry()
+    }
+
+    override suspend fun clearWatchHistory() {
+        Database.watchHistoryDao().deleteAll()
+    }
+
     override suspend fun getPlaylistBookmarks(): List<PlaylistBookmark> {
         return Database.playlistBookmarkDao().getAll()
     }
@@ -239,5 +290,13 @@ class LocalUserDataRepository : UserDataRepository {
 
     override suspend fun deletePlaylistBookmark(playlistId: String) {
         Database.playlistBookmarkDao().deleteById(playlistId)
+    }
+
+    companion object {
+        // can only mark as watched if less than 60s remaining
+        const val ABSOLUTE_WATCHED_THRESHOLD = 60.0f
+
+        // can only mark as watched if at least 75% watched
+        const val RELATIVE_WATCHED_THRESHOLD = 0.75f
     }
 }

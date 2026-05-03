@@ -37,6 +37,7 @@ import com.github.libretube.helpers.ProxyHelper
 import com.github.libretube.parcelable.PlayerData
 import com.github.libretube.player.SabrMediaSource
 import com.github.libretube.player.manifest.SabrManifest
+import com.github.libretube.repo.UserDataRepositoryHelper
 import com.github.libretube.util.DeArrowUtil
 import com.github.libretube.util.PlayingQueue
 import com.github.libretube.util.YoutubeHlsPlaylistParser
@@ -64,7 +65,7 @@ open class OnlinePlayerService : AbstractPlayerService() {
      */
     private var streams: Streams? = null
 
-    private val scope = CoroutineScope(Dispatchers.IO)
+    private val scope = CoroutineScope(Dispatchers.Main)
 
     /*
     Current job that's loading a new video (the value is null if no video is loading at the moment).
@@ -88,11 +89,12 @@ open class OnlinePlayerService : AbstractPlayerService() {
                     // waiting for the player to be ready since the video can't be claimed to be watched
                     // while it did not yet start actually, but did buffer only so far
                     if (PlayerHelper.watchHistoryEnabled) {
+                        val watchHistoryEntry = streams?.toStreamItem(videoId)
+                            ?.toWatchHistoryEntry(exoPlayer?.currentPosition) ?: return
+
                         scope.launch(Dispatchers.IO) {
-                            streams?.let { streams ->
-                                val watchHistoryItem =
-                                    streams.toStreamItem(videoId).toWatchHistoryItem(videoId)
-                                DatabaseHelper.addToWatchHistory(watchHistoryItem)
+                            runCatching {
+                                UserDataRepositoryHelper.userDataRepository.addToWatchHistory(watchHistoryEntry)
                             }
                         }
                     }
@@ -140,7 +142,7 @@ open class OnlinePlayerService : AbstractPlayerService() {
                     MediaServiceRepository.instance.getStreams(videoId).let {
                         DeArrowUtil.deArrowStreams(it, videoId)
                     }
-                }  catch (e: Exception) {
+                } catch (e: Exception) {
                     Log.e(TAG(), e.stackTraceToString())
                     toastFromMainDispatcher(e.localizedMessage.orEmpty())
                     return@withContext null
@@ -179,8 +181,12 @@ open class OnlinePlayerService : AbstractPlayerService() {
         if (seekToPositionMs != 0L) {
             exoPlayer?.seekTo(seekToPositionMs)
         } else if (watchPositionsEnabled) {
-            DatabaseHelper.getWatchPositionBlocking(videoId)?.let {
-                if (!DatabaseHelper.isVideoWatched(it, streams?.duration)) exoPlayer?.seekTo(it)
+            scope.launch(Dispatchers.IO) {
+                UserDataRepositoryHelper.userDataRepository.getFromWatchHistory(videoId)?.metadata?.positionMillis?.let {
+                    if (!DatabaseHelper.isVideoWatched(it, streams?.duration)) {
+                        withContext(Dispatchers.Main) { exoPlayer?.seekTo(it) }
+                    }
+                }
             }
         }
 
@@ -258,11 +264,18 @@ open class OnlinePlayerService : AbstractPlayerService() {
                                 .buildUpon()
                                 .setSampleMimeType(MimeTypes.APPLICATION_MEDIA3_CUES)
                                 .setCodecs(format.sampleMimeType)
-                                .setCueReplacementBehavior( subtitleParserFactory.getCueReplacementBehavior(format))
+                                .setCueReplacementBehavior(
+                                    subtitleParserFactory.getCueReplacementBehavior(
+                                        format
+                                    )
+                                )
                                 .build()
                         )
                     } catch (e: Exception) {
-                        Log.w(this::class.simpleName, "failed to set subtitle lazy-loading: ${e.stackTrace}")
+                        Log.w(
+                            this::class.simpleName,
+                            "failed to set subtitle lazy-loading: ${e.stackTrace}"
+                        )
                     }
                     progressiveMediaSourceFactory.createMediaSource(MediaItem.fromUri(it.url!!))
                 }.toList()

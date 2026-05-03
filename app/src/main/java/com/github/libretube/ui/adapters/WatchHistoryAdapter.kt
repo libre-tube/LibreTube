@@ -6,9 +6,13 @@ import androidx.core.os.bundleOf
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.ListAdapter
+import com.github.libretube.api.obj.WatchHistoryEntry
 import com.github.libretube.constants.IntentData
 import com.github.libretube.databinding.VideoRowBinding
+import com.github.libretube.db.DatabaseHolder
 import com.github.libretube.db.obj.WatchHistoryItem
+import com.github.libretube.extensions.toID
+import com.github.libretube.extensions.toLocalDate
 import com.github.libretube.helpers.ImageHelper
 import com.github.libretube.helpers.NavigationHelper
 import com.github.libretube.parcelable.PlayerData
@@ -19,13 +23,17 @@ import com.github.libretube.ui.extensions.setWatchProgressLength
 import com.github.libretube.ui.sheets.VideoOptionsBottomSheet
 import com.github.libretube.ui.viewholders.WatchHistoryViewHolder
 import com.github.libretube.util.TextUtils
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class WatchHistoryAdapter(
     private val isVideoDownloaded: (String) -> Boolean,
     private val getWatchPosition: (String) -> Long?,
-    private val onWatchStatusChanged: (WatchHistoryItem, Boolean) -> Unit
+    private val onWatchStatusChanged: (WatchHistoryEntry, Boolean) -> Unit
 ) :
-    ListAdapter<WatchHistoryItem, WatchHistoryViewHolder>(DiffUtilItemCallback()) {
+    ListAdapter<WatchHistoryEntry, WatchHistoryViewHolder>(DiffUtilItemCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WatchHistoryViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
@@ -34,13 +42,15 @@ class WatchHistoryAdapter(
     }
 
     override fun onBindViewHolder(holder: WatchHistoryViewHolder, position: Int) {
-        val video = getItem(position)
+        val item =  getItem(position)!!
+        val video = item.video
+
         holder.binding.apply {
             videoTitle.text = video.title
-            channelName.text = video.uploader
+            channelName.text = video.uploaderName
             videoInfo.text =
-                video.uploadDate?.takeIf { !video.isLive }?.let { TextUtils.localizeDate(it) }
-            ImageHelper.loadImage(video.thumbnailUrl, thumbnail)
+                video.uploaded.toLocalDate().takeIf { !video.isLive }?.let { TextUtils.localizeDate(it) }
+            ImageHelper.loadImage(video.thumbnail, thumbnail)
 
             if (video.duration != null) {
                 // we pass in 0 for the uploadDate, as a future video cannot be watched already
@@ -62,7 +72,7 @@ class WatchHistoryAdapter(
             }
 
             root.setOnClickListener {
-                NavigationHelper.navigateVideo(root.context, PlayerData(video.videoId))
+                NavigationHelper.navigateVideo(root.context, PlayerData(video.url?.toID()))
             }
 
             val activity = (root.context as BaseActivity)
@@ -73,20 +83,20 @@ class WatchHistoryAdapter(
                     activity
                 ) { _, result ->
                     val isVideoWatched = result.getBoolean(VideoOptionsBottomSheet.IS_VIDEO_WATCHED)
-                    onWatchStatusChanged(video, isVideoWatched)
-                    currentList.indexOf(video).takeIf { it >= 0 }?.let(::notifyItemChanged)
+                    onWatchStatusChanged(item, isVideoWatched)
+                    currentList.indexOf(item).takeIf { it >= 0 }?.let(::notifyItemChanged)
                 }
                 val sheet = VideoOptionsBottomSheet()
-                sheet.arguments = bundleOf(IntentData.streamItem to video.toStreamItem())
+                sheet.arguments = bundleOf(IntentData.streamItem to video)
                 sheet.show(fragmentManager, WatchHistoryAdapter::class.java.name)
                 true
             }
 
             if (video.duration != null) watchProgress.setWatchProgressLength(
-                getWatchPosition(video.videoId),
+                getWatchPosition(video.url!!.toID()),
                 video.duration
             ) else watchProgress.isGone = true
-            downloadBadge.isVisible = isVideoDownloaded(video.videoId)
+            downloadBadge.isVisible = isVideoDownloaded(video.url!!.toID())
         }
     }
 }

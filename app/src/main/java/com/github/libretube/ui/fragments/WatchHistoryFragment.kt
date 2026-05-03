@@ -23,8 +23,11 @@ import com.github.libretube.enums.WatchHistoryStatus
 import com.github.libretube.extensions.ceilHalf
 import com.github.libretube.extensions.dpToPx
 import com.github.libretube.extensions.setOnDismissListener
+import com.github.libretube.extensions.toastFromMainDispatcher
 import com.github.libretube.helpers.NavigationHelper
 import com.github.libretube.parcelable.PlayerData
+
+import com.github.libretube.repo.UserDataRepositoryHelper
 import com.github.libretube.ui.adapters.WatchHistoryAdapter
 import com.github.libretube.ui.base.DynamicLayoutManagerFragment
 import com.github.libretube.ui.extensions.addOnBottomReachedListener
@@ -114,9 +117,10 @@ class WatchHistoryFragment : DynamicLayoutManagerFragment(R.layout.fragment_watc
                     binding.statusFilterChips.isGone = true
 
                     lifecycleScope.launch(Dispatchers.IO) {
-                        Database.withTransaction {
-                            Database.watchHistoryDao().deleteAll()
-                            if (selected[0]) Database.watchPositionDao().deleteAll()
+                        try {
+                            UserDataRepositoryHelper.userDataRepository.clearWatchHistory()
+                        } catch (e: Exception) {
+                            context?.toastFromMainDispatcher(e.message.orEmpty())
                         }
                     }
                 }
@@ -139,12 +143,12 @@ class WatchHistoryFragment : DynamicLayoutManagerFragment(R.layout.fragment_watc
             if (history.isEmpty()) return@setOnClickListener
 
             PlayingQueue.add(
-                *history.reversed().map(WatchHistoryItem::toStreamItem).toTypedArray()
+                *history.reversed().map{ it.video }.toTypedArray()
             )
             NavigationHelper.navigateVideo(
                 requireContext(),
                 PlayerData(
-                    history.last().videoId,
+                    history.last().metadata.videoId,
                     keepQueue = true
                 )
             )
@@ -161,12 +165,14 @@ class WatchHistoryFragment : DynamicLayoutManagerFragment(R.layout.fragment_watc
                     viewModel.fetchNextPage()
                 }
             }
+
+            binding.clear.isEnabled = history.isNotEmpty()
         }
 
         binding.watchHistoryRecView.addOnBottomReachedListener(prefetchDistance = 20) {
             viewModel.fetchNextPage()
         }
-
+    
         lifecycleScope.launch(Dispatchers.IO) {
             val hasItems = Database.watchHistoryDao().getSize() != 0
 
@@ -174,7 +180,6 @@ class WatchHistoryFragment : DynamicLayoutManagerFragment(R.layout.fragment_watc
                 binding.clear.isEnabled = hasItems
             }
         }
-
     }
 
     override fun onConfigurationChanged(newConfig: Configuration) {
