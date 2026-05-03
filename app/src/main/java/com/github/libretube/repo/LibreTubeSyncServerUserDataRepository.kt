@@ -267,4 +267,55 @@ class LibreTubeSyncServerUserDataRepository : UserDataRepository {
             api.removeFromSubscriptionGroup(subscriptionGroupId, channelId)
         }
     }
+
+    override suspend fun getPlaylistBookmarks(): List<PlaylistBookmark> {
+        return tryHttpOrRaiseError {
+            api.getPlaylistBookmarks().map {
+                it.toPlaylistBookmark()
+            }
+        }
+    }
+
+    override suspend fun getPlaylistBookmark(playlistId: String): PlaylistBookmark? {
+        return tryHttpOrRaiseError {
+            try {
+                api.getPlaylistBookmark(playlistId).toPlaylistBookmark()
+            } catch (e: HttpException) {
+                // The API returns 404 Not Found if the playlist is not bookmarked
+                if (e.code() == 404) return@tryHttpOrRaiseError null
+                else throw e
+            }
+        }
+    }
+
+    private fun PlaylistBookmark.toExtendedPublicPlaylist(): ExtendedPublicPlaylist =
+        ExtendedPublicPlaylist(
+            playlist = ExtendedPlaylist(
+                id = playlistId,
+                title = playlistName.orEmpty(),
+                description = "", // TODO: also store and support playlist descriptions
+                thumbnailUrl = thumbnailUrl,
+                videoCount = videos.toLong()
+            ),
+            uploader = Channel(
+                id = uploaderUrl.orEmpty(),
+                avatar = uploaderAvatar.orEmpty(),
+                name = uploader.orEmpty(),
+                verified = false
+            )
+        )
+
+    override suspend fun createPlaylistBookmark(playlist: PlaylistBookmark) {
+        tryHttpOrRaiseError {
+            api.createPlaylistBookmark(
+                playlist.toExtendedPublicPlaylist()
+            )
+        }
+    }
+
+    override suspend fun deletePlaylistBookmark(playlistId: String) {
+        tryHttpOrRaiseError {
+            api.deletePlaylistBookmark(playlistId)
+        }
+    }
 }
