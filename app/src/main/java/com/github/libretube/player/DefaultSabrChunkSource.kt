@@ -209,6 +209,7 @@ class DefaultSabrChunkSource(
             }
         }.toTypedArray()
 
+        val previousTrackSelection = trackSelection.selectedIndex
         trackSelection.updateSelectedTrack(
             playbackPositionUs,
             bufferedDurationUs,
@@ -218,6 +219,10 @@ class DefaultSabrChunkSource(
         )
 
         val representationHolder = representationHolders[trackSelection.selectedIndex]
+        if (previousTrackSelection != trackSelection.selectedIndex) {
+            // selection changed, info the sabr client about it
+            sabrClient.selectFormat(representationHolder.representation)
+        }
 
         if (representationHolder.chunkExtractor != null) {
                 if (representationHolder.chunkIndex == null) {
