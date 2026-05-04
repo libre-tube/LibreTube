@@ -10,7 +10,6 @@ import com.github.libretube.R
 import com.github.libretube.api.TrendingCategory
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.enums.SbSkipOptions
-import com.github.libretube.extensions.round
 import com.github.libretube.helpers.LocaleHelper.getDetectedCountry
 import kotlin.math.roundToInt
 
@@ -146,6 +145,19 @@ object PreferenceHelper {
         },
         PreferenceMigration(6, 7) {
             remove("disable_video_image_proxy")
+        },
+        PreferenceMigration(7, 8) {
+            remove("local_stream_extraction")
+
+            val usesFullLocalMode = getBoolean("full_local_mode", true)
+            putString(PreferenceKeys.YOUTUBE_DATA_SOURCE, if (usesFullLocalMode) "local" else "piped")
+            remove("full_local_mode")
+
+            val usesPipedAuth = getBoolean("auth_instance_toggle", false)
+            if (usesPipedAuth) putString(PreferenceKeys.SYNC_SERVER_TYPE, "piped")
+            remove("auth_instance_toggle")
+
+            remove("local_feed_extraction") // local feed extraction is default now unless Piped is used
         },
     )
 

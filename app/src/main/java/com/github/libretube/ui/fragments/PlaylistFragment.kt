@@ -38,6 +38,7 @@ import com.github.libretube.extensions.toastFromMainDispatcher
 import com.github.libretube.helpers.ImageHelper
 import com.github.libretube.helpers.NavigationHelper
 import com.github.libretube.helpers.PreferenceHelper
+import com.github.libretube.repo.UserDataRepositoryHelper
 import com.github.libretube.ui.adapters.PlaylistAdapter
 import com.github.libretube.ui.adapters.PlaylistItem
 import com.github.libretube.ui.base.BaseActivity
@@ -54,7 +55,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
-import org.schabi.newpipe.extractor.timeago.patterns.it
 
 class PlaylistFragment : DynamicLayoutManagerFragment(R.layout.fragment_playlist) {
     private var _binding: FragmentPlaylistBinding? = null
@@ -100,10 +100,14 @@ class PlaylistFragment : DynamicLayoutManagerFragment(R.layout.fragment_playlist
 
         binding.playlistProgress.isVisible = true
 
-        isBookmarked = runBlocking(Dispatchers.IO) {
-            DatabaseHolder.Database.playlistBookmarkDao().includes(playlistId)
+        lifecycleScope.launch(Dispatchers.IO) {
+            isBookmarked =
+                UserDataRepositoryHelper.userDataRepository.getPlaylistBookmark(playlistId) != null
+
+            withContext(Dispatchers.Main) {
+                updateBookmarkRes()
+            }
         }
-        updateBookmarkRes()
 
         commonPlayerViewModel.isMiniPlayerVisible.observe(viewLifecycleOwner) {
             binding.playlistRecView.updatePadding(bottom = if (it) 64f.dpToPx() else 0)
@@ -135,7 +139,7 @@ class PlaylistFragment : DynamicLayoutManagerFragment(R.layout.fragment_playlist
         lifecycleScope.launch {
             val response = try {
                 withContext(Dispatchers.IO) {
-                    PlaylistsHelper.getPlaylist(playlistId)
+                    PlaylistsHelper.getPlaylist(playlistId, playlistType)
                 }
             } catch (e: Exception) {
                 Log.e(TAG(), e.toString())
@@ -185,7 +189,8 @@ class PlaylistFragment : DynamicLayoutManagerFragment(R.layout.fragment_playlist
                         )
                     }
 
-                    binding.playlistInfo.text = getChannelAndVideoString(response, playlistFeed.size)
+                    binding.playlistInfo.text =
+                        getChannelAndVideoString(response, playlistFeed.size)
                 }
             })
 
@@ -266,11 +271,12 @@ class PlaylistFragment : DynamicLayoutManagerFragment(R.layout.fragment_playlist
                     updateBookmarkRes()
                     lifecycleScope.launch(Dispatchers.IO) {
                         if (!isBookmarked) {
-                            DatabaseHolder.Database.playlistBookmarkDao()
-                                .deleteById(playlistId)
+                            UserDataRepositoryHelper.userDataRepository
+                                .deletePlaylistBookmark(playlistId)
                         } else {
-                            DatabaseHolder.Database.playlistBookmarkDao()
-                                .insert(response.toPlaylistBookmark(playlistId))
+                            val bookmark = response.toPlaylistBookmark(playlistId)
+                            UserDataRepositoryHelper.userDataRepository
+                                .createPlaylistBookmark(bookmark)
                         }
                     }
                 }
@@ -339,14 +345,14 @@ class PlaylistFragment : DynamicLayoutManagerFragment(R.layout.fragment_playlist
         withContext(Dispatchers.IO) {
             // update the playlist thumbnail and title if bookmarked
             val playlistBookmark =
-                DatabaseHolder.Database.playlistBookmarkDao().findById(playlistId)
+                UserDataRepositoryHelper.userDataRepository.getPlaylistBookmark(playlistId)
                     ?: return@withContext
             if (playlistBookmark.thumbnailUrl != playlist.thumbnailUrl ||
                 playlistBookmark.playlistName != playlist.name ||
                 playlistBookmark.videos != playlist.videos
             ) {
-                DatabaseHolder.Database.playlistBookmarkDao()
-                    .update(playlist.toPlaylistBookmark(playlistBookmark.playlistId))
+                val bookmark = playlist.toPlaylistBookmark(playlistBookmark.playlistId)
+                UserDataRepositoryHelper.userDataRepository.createPlaylistBookmark(bookmark)
             }
         }
     }
@@ -402,7 +408,11 @@ class PlaylistFragment : DynamicLayoutManagerFragment(R.layout.fragment_playlist
         // try to remove the video from the playlist and show an undo snackbar if successful
         lifecycleScope.launch(Dispatchers.IO) {
             try {
-                PlaylistsHelper.removeFromPlaylist(playlistId, originalPlaylistPosition)
+                PlaylistsHelper.removeFromPlaylist(
+                    playlistId,
+                    video.url!!.toID(),
+                    originalPlaylistPosition
+                )
 
                 val shortTitle = TextUtils.limitTextToLength(video.title.orEmpty(), 50)
                 val snackBarText = getString(
@@ -462,7 +472,11 @@ class PlaylistFragment : DynamicLayoutManagerFragment(R.layout.fragment_playlist
      *
      * I.e., this method adds the given offset to all videos with an originalPlaylistIndex > modifiedPosition.
      */
-    private fun fixItemIndices(items: List<PlaylistItem>, modifiedPosition: Int, offset: Int): List<PlaylistItem> {
+    private fun fixItemIndices(
+        items: List<PlaylistItem>,
+        modifiedPosition: Int,
+        offset: Int
+    ): List<PlaylistItem> {
         return items.map {
             if (it.originalPlaylistIndex > modifiedPosition) {
                 it.copy(originalPlaylistIndex = it.originalPlaylistIndex + offset)

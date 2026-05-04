@@ -120,7 +120,7 @@ object DownloadHelper {
         } else {
             CoroutineScope(Dispatchers.IO).launch {
                 val playlistVideoIds = try {
-                    PlaylistsHelper.getPlaylist(playlistId)
+                    PlaylistsHelper.getPlaylist(playlistId, PlaylistsHelper.getPlaylistType(playlistId))
                 } catch (e: Exception) {
                     context.toastFromMainDispatcher(R.string.unknown_error)
                     return@launch

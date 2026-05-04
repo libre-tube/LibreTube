@@ -5,6 +5,7 @@ import androidx.core.view.isVisible
 import com.github.libretube.R
 import com.github.libretube.api.SubscriptionHelper
 import com.github.libretube.constants.PreferenceKeys
+import com.github.libretube.extensions.toastFromMainDispatcher
 import com.github.libretube.helpers.PreferenceHelper
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.snackbar.Snackbar
@@ -52,15 +53,20 @@ fun TextView.setupSubscriptionButton(
 
     val setSubscriptionState : (Boolean) -> Unit = { subscribe ->
         CoroutineScope(Dispatchers.IO).launch {
-            if (subscribe)
-                SubscriptionHelper.subscribe(
-                    channelId,
-                    channelName,
-                    channelAvatar,
-                    channelVerified
-                )
-            else
-                SubscriptionHelper.unsubscribe(channelId)
+            try {
+                if (subscribe)
+                    SubscriptionHelper.subscribe(
+                        channelId,
+                        channelName,
+                        channelAvatar,
+                        channelVerified
+                    )
+                else
+                    SubscriptionHelper.unsubscribe(channelId)
+            } catch (e: Exception) {
+                context.toastFromMainDispatcher(e.message.orEmpty())
+                return@launch
+            }
         }
         subscribed = subscribe
 

@@ -24,32 +24,6 @@ class HistorySettings : BasePreferenceFragment() {
             }
             true
         }
-
-        // clear watch history and positions
-        val clearWatchHistory = findPreference<Preference>(PreferenceKeys.CLEAR_WATCH_HISTORY)
-        clearWatchHistory?.setOnPreferenceClickListener {
-            showClearDialog(R.string.clear_history) {
-                Database.watchHistoryDao().deleteAll()
-            }
-            true
-        }
-
-        // clear watch positions
-        val clearWatchPositions = findPreference<Preference>(PreferenceKeys.CLEAR_WATCH_POSITIONS)
-        clearWatchPositions?.setOnPreferenceClickListener {
-            showClearDialog(R.string.reset_watch_positions) {
-                Database.watchPositionDao().deleteAll()
-            }
-            true
-        }
-
-        val resetBookmarks = findPreference<Preference>(PreferenceKeys.CLEAR_BOOKMARKS)
-        resetBookmarks?.setOnPreferenceClickListener {
-            showClearDialog(R.string.clear_bookmarks) {
-                Database.playlistBookmarkDao().deleteAll()
-            }
-            true
-        }
     }
 
     private fun showClearDialog(title: Int, actionOnConfirm: suspend () -> Unit) {

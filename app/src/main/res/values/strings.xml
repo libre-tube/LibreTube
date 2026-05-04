@@ -146,7 +146,7 @@
     <string name="shapedIcon">Silly shaped</string>
     <string name="flameIcon">Flying flame</string>
     <string name="birdIcon">Boosted bird</string>
-    <string name="instance_summary">Piped, login, and account</string>
+    <string name="instance_summary">Piped, data synchronization, and account</string>
     <string name="customInstance_summary">Add…</string>
     <string name="instance_name">Instance name</string>
     <string name="instance_api_url">URL to instance API</string>
@@ -419,7 +419,7 @@
     <string name="creation_date_reversed">Creation date (reversed)</string>
     <string name="alphabetic">Alphabetic</string>
     <string name="alphabetic_reversed">Alphabetic (reversed)</string>
-    <string name="welcome">Welcome to LibreTube</string>
+    <string name="welcome">Welcome to LibreTube! To get started, please select a synchronization mode below to decide whether to synchronize your user data across devices.</string>
     <string name="choose_instance">Please choose an instance first!</string>
     <string name="choose_instance_long">Please choose a Piped instance to use from below. The Piped instance will act as the middleman between you and YouTube. These instances are located at different physical locations - indicated by their country flag(s). Instances physically closer to you are likely faster than instances that are not. You can change the instance you use in the settings at any time.</string>
     <string name="mark_as_unwatched">Mark as unwatched</string>
@@ -467,6 +467,13 @@
     <string name="update_information">Update information</string>
     <string name="mode_of_operation">Mode of operation</string>
     <string name="delete_playlist_include_vidoes">Also delete all videos from the playlist?</string>
+    <string name="load_data_from">Load YouTube data from</string>
+    <string name="load_data_from_local">Directly from YouTube</string>
+    <string name="load_data_from_piped">via Piped (deprecated)</string>
+    <string name="libretube_sync_server">LibreTube sync server</string>
+    <string name="data_synchronization">Data synchronization</string>
+    <string name="sync_server_type">Sync user data (subscriptions, playlists) via</string>
+    <string name="sync_server_url">URL to LibreTube sync server</string>
 
     <!-- Backup & Restore Settings -->
     <string name="import_subscriptions_from">Import subscriptions from</string>
@@ -547,6 +554,10 @@
     <string name="showing_results_for">Showing results for:</string>
     <string name="long_press_fast_forward">Fast forward on long press</string>
     <string name="long_press_fast_forward_summary">Play video with double speed while tapping and holding the screen.</string>
+    <string name="sync_type_summary_none">Store all user data offline within the app. That means that you can\'t synchronize data between your devices, but might be the right choice if you only use a single device or don\'t care about syncing between devices.</string>
+    <string name="sync_type_summary_libretube">Store playlists and subscriptions data on LibreTube\'s sync server (%1$s). This allows you to log in to your account at any other device to have access to your subscriptions and playlists. Privacy Disclaimer: User data is pseudonymized on server side, but not end-to-end encrypted. By choice, you can also host your own version of the server, but usually the official server should be just fine.</string>
+    <string name="sync_type_summary_piped">Experts only, deprecated:\nStore playlists and subscriptions data on Piped (%1$s). As Piped doesn\'t have any public instances anymore, you have to be hosting your own Piped instance.</string>
+    <string name="switch_sync_type_warning">If you previously used a different sync type, please take a backup of your subscriptions and playlists first. You can then switch the sync type in the instance settings and re-import your data from the backup.</string>
 
     <!-- Notification channel strings -->
     <string name="download_channel_name">Download Service</string>

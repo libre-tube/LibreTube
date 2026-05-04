@@ -77,7 +77,7 @@ class PlaylistDownloadEnqueueService : LifecycleService() {
         nManager.notify(NotificationId.ENQUEUE_PLAYLIST_DOWNLOAD.id, buildNotification())
 
         lifecycleScope.launch(Dispatchers.IO) {
-            if (playlistType != PlaylistType.PUBLIC) {
+            if (playlistType == PlaylistType.PRIVATE) {
                 enqueuePrivatePlaylist()
             } else {
                 enqueuePublicPlaylist()
@@ -100,7 +100,7 @@ class PlaylistDownloadEnqueueService : LifecycleService() {
 
     private suspend fun enqueuePrivatePlaylist() {
         val playlist = try {
-            PlaylistsHelper.getPlaylist(playlistId)
+            PlaylistsHelper.getPlaylist(playlistId, PlaylistType.PRIVATE)
         } catch (e: Exception) {
             toastFromMainDispatcher(e.localizedMessage.orEmpty())
             stopSelf()

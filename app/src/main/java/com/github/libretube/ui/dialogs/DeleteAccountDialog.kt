@@ -10,12 +10,11 @@ import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.setFragmentResult
 import androidx.lifecycle.lifecycleScope
 import com.github.libretube.R
-import com.github.libretube.api.RetrofitInstance
-import com.github.libretube.api.obj.DeleteUserRequest
 import com.github.libretube.constants.IntentData
 import com.github.libretube.databinding.DialogDeleteAccountBinding
 import com.github.libretube.extensions.TAG
-import com.github.libretube.helpers.PreferenceHelper
+import com.github.libretube.extensions.toastFromMainDispatcher
+import com.github.libretube.repo.UserDataRepositoryHelper
 import com.github.libretube.ui.preferences.InstanceSettings
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.Dispatchers
@@ -28,6 +27,7 @@ class DeleteAccountDialog : DialogFragment() {
 
         return MaterialAlertDialogBuilder(requireContext())
             .setView(binding.root)
+            .setTitle(R.string.deleteAccount)
             .setPositiveButton(R.string.deleteAccount, null)
             .setNegativeButton(R.string.cancel, null)
             .show()
@@ -50,15 +50,16 @@ class DeleteAccountDialog : DialogFragment() {
     }
 
     private suspend fun deleteAccount(password: String) {
-        val token = PreferenceHelper.getToken()
+        val context = requireContext()
 
         try {
             withContext(Dispatchers.IO) {
-                RetrofitInstance.authApi.deleteAccount(token, DeleteUserRequest(password))
+                @Suppress("DEPRECATION")
+                UserDataRepositoryHelper.userDataRepository.deleteAccount(password)
             }
         } catch (e: Exception) {
             Log.e(TAG(), e.toString())
-            Toast.makeText(context, R.string.unknown_error, Toast.LENGTH_SHORT).show()
+            context.toastFromMainDispatcher(e.message.orEmpty())
             return
         }
         Toast.makeText(context, R.string.success, Toast.LENGTH_SHORT).show()
