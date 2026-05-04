@@ -21,6 +21,7 @@ import com.github.libretube.api.obj.Playlists
 import com.github.libretube.constants.IntentData
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.databinding.FragmentLibraryBinding
+import com.github.libretube.enums.PlaylistType
 import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.ceilHalf
 import com.github.libretube.extensions.dpToPx
@@ -44,7 +45,7 @@ class LibraryFragment : DynamicLayoutManagerFragment(R.layout.fragment_library) 
 
     private val commonPlayerViewModel: CommonPlayerViewModel by activityViewModels()
 
-    private val playlistsAdapter = PlaylistsAdapter(PlaylistsHelper.getPrivatePlaylistType())
+    private val playlistsAdapter = PlaylistsAdapter(PlaylistType.PRIVATE)
     private val playlistBookmarkAdapter = PlaylistBookmarkAdapter()
 
     override fun setLayoutManagers(gridItems: Int) {

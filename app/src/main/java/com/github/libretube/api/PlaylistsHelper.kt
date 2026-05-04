@@ -1,6 +1,5 @@
 package com.github.libretube.api
 
-import androidx.core.text.isDigitsOnly
 import com.github.libretube.api.obj.Playlist
 import com.github.libretube.api.obj.Playlists
 import com.github.libretube.api.obj.StreamItem
@@ -8,7 +7,6 @@ import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.enums.PlaylistType
 import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.obj.PipedImportPlaylist
-import com.github.libretube.repo.LocalUserDataRepository
 import com.github.libretube.repo.UserDataRepository
 import com.github.libretube.repo.UserDataRepositoryHelper
 import kotlinx.coroutines.Dispatchers
@@ -17,8 +15,6 @@ import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.withContext
 
 object PlaylistsHelper {
-    private val pipedPlaylistRegex =
-        "[\\da-fA-F]{8}-[\\da-fA-F]{4}-[\\da-fA-F]{4}-[\\da-fA-F]{4}-[\\da-fA-F]{12}".toRegex()
     const val MAX_CONCURRENT_IMPORT_CALLS = 5
 
     @Suppress("DEPRECATION")
@@ -43,9 +39,9 @@ object PlaylistsHelper {
         }
     }
 
-    suspend fun getPlaylist(playlistId: String): Playlist {
+    suspend fun getPlaylist(playlistId: String, playlistType: PlaylistType): Playlist {
         // load locally stored playlists with the auth api
-        return when (getPlaylistType(playlistId)) {
+        return when (playlistType) {
             PlaylistType.PUBLIC -> MediaServiceRepository.instance.getPlaylist(playlistId)
             else -> userDataRepository.getPlaylist(playlistId)
         }
@@ -54,7 +50,7 @@ object PlaylistsHelper {
     suspend fun getAllPlaylistsWithVideos(playlistIds: List<String>? = null): List<Playlist> {
         return withContext(Dispatchers.IO) {
             (playlistIds ?: getPlaylists().map { it.id!! })
-                .map { async { getPlaylist(it) } }
+                .map { async { getPlaylist(it, getPlaylistType(it)) } }
                 .awaitAll()
         }
     }
@@ -82,22 +78,7 @@ object PlaylistsHelper {
     suspend fun clonePlaylist(playlistId: String) = userDataRepository.clonePlaylist(playlistId)
     suspend fun deletePlaylist(playlistId: String) = userDataRepository.deletePlaylist(playlistId)
 
-    // TODO: getPrivatePlaylistType should not be needed, refactor so that the app only needs to
-    // distinguish between private and public playlists and accesses all private playlists the same
-    // way via the PlaylistsHelper
-    fun getPrivatePlaylistType(): PlaylistType {
-        return if (userDataRepository is LocalUserDataRepository) PlaylistType.LOCAL else PlaylistType.PRIVATE
-    }
-
-    // TODO: this method shouldn't be needed, instead the correct playlist type should be forwarded
-    // everywhere where it's needed. this way here is too error-prone, the regex might break easily
-    fun getPlaylistType(playlistId: String): PlaylistType {
-        return if (playlistId.isDigitsOnly()) {
-            PlaylistType.LOCAL
-        } else if (playlistId.matches(pipedPlaylistRegex)) {
-            PlaylistType.PRIVATE
-        } else {
-            PlaylistType.PUBLIC
-        }
-    }
+    // TODO: remove this and pass the type information down instead
+    private fun isYouTubePlaylist(playlistId: String) = playlistId.startsWith("PL") && playlistId.length == 34
+    fun getPlaylistType(playlistId: String) = if (isYouTubePlaylist(playlistId)) PlaylistType.PUBLIC else PlaylistType.PRIVATE
 }
