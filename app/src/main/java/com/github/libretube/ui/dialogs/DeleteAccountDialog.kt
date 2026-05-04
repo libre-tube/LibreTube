@@ -13,6 +13,7 @@ import com.github.libretube.R
 import com.github.libretube.constants.IntentData
 import com.github.libretube.databinding.DialogDeleteAccountBinding
 import com.github.libretube.extensions.TAG
+import com.github.libretube.extensions.toastFromMainDispatcher
 import com.github.libretube.repo.UserDataRepositoryHelper
 import com.github.libretube.ui.preferences.InstanceSettings
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -49,6 +50,8 @@ class DeleteAccountDialog : DialogFragment() {
     }
 
     private suspend fun deleteAccount(password: String) {
+        val context = requireContext()
+
         try {
             withContext(Dispatchers.IO) {
                 @Suppress("DEPRECATION")
@@ -56,7 +59,7 @@ class DeleteAccountDialog : DialogFragment() {
             }
         } catch (e: Exception) {
             Log.e(TAG(), e.toString())
-            Toast.makeText(context, R.string.unknown_error, Toast.LENGTH_SHORT).show()
+            context.toastFromMainDispatcher(e.message.orEmpty())
             return
         }
         Toast.makeText(context, R.string.success, Toast.LENGTH_SHORT).show()
