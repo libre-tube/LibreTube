@@ -21,6 +21,7 @@ data class ExtendedPublicPlaylist (
 ) {
     fun toPlaylistBookmark(): PlaylistBookmark {
         return PlaylistBookmark(
+            playlistId = playlist.id,
             playlistName = playlist.title,
             thumbnailUrl = playlist.thumbnailUrl,
             uploader = uploader.name,
