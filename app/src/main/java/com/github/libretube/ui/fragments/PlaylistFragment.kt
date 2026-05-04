@@ -139,7 +139,7 @@ class PlaylistFragment : DynamicLayoutManagerFragment(R.layout.fragment_playlist
         lifecycleScope.launch {
             val response = try {
                 withContext(Dispatchers.IO) {
-                    PlaylistsHelper.getPlaylist(playlistId)
+                    PlaylistsHelper.getPlaylist(playlistId, playlistType)
                 }
             } catch (e: Exception) {
                 Log.e(TAG(), e.toString())

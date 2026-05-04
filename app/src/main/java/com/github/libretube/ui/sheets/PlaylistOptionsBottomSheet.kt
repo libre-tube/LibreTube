@@ -71,7 +71,7 @@ class PlaylistOptionsBottomSheet : BaseBottomSheet() {
             // play the playlist in the background
             R.string.playOnBackground -> {
                 val playlist = withContext(Dispatchers.IO) {
-                    runCatching { PlaylistsHelper.getPlaylist(playlistId) }
+                    runCatching { PlaylistsHelper.getPlaylist(playlistId, playlistType) }
                 }.getOrElse {
                     context?.toastFromMainDispatcher(R.string.error)
                     return
@@ -87,7 +87,7 @@ class PlaylistOptionsBottomSheet : BaseBottomSheet() {
             }
 
             R.string.add_to_queue -> {
-                PlayingQueue.insertPlaylist(playlistId, null)
+                PlayingQueue.insertPlaylist(playlistId, playlistType, null)
             }
             // Clone the playlist to the users Piped account
             R.string.clonePlaylist -> {
