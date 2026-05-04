@@ -515,7 +515,10 @@ class CustomExoPlayerView(
     private fun setupKeyboardFocus() {
         isFocusable = true
         isFocusableInTouchMode = true
-        requestFocus()
+        // workaround (possibly a no-op?): we don't directly focus the player via
+        // requestFocus() because that leads the focus to be moved back to the search bar
+        // once exiting fullscreen
+        activity.window.decorView.requestFocus()
     }
 
     fun toggleSystemBars(showBars: Boolean) {
