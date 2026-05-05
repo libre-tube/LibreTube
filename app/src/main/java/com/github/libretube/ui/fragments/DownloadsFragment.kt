@@ -231,6 +231,7 @@ class DownloadsFragmentPage : DynamicLayoutManagerFragment(R.layout.fragment_dow
                 }
 
                 binding.playlistName.text = playlist.downloadPlaylist.title
+                binding.playlistName.isVisible = true
 
                 playlist.downloadVideos.map { it.videoId }
             }
@@ -284,6 +285,18 @@ class DownloadsFragmentPage : DynamicLayoutManagerFragment(R.layout.fragment_dow
             toggleVisibilities()
         }
 
+        binding.resumeAll.setOnClickListener {
+            val intent = Intent(requireContext(), DownloadService::class.java)
+            intent.action = DownloadService.ACTION_RESUME_ALL
+            requireContext().startService(intent)
+        }
+
+        binding.resumeAll.setOnClickListener {
+            val intent = Intent(requireContext(), DownloadService::class.java)
+            intent.action = DownloadService.ACTION_RESUME_ALL
+            requireContext().startService(intent)
+        }
+
         binding.deleteAll.setOnClickListener {
             showDeleteAllDialog(binding.root.context, adapter)
         }
@@ -325,9 +338,15 @@ class DownloadsFragmentPage : DynamicLayoutManagerFragment(R.layout.fragment_dow
         val binding = _binding ?: return
 
         val isEmpty = adapter.itemCount == 0
+        val hasIncomplete = adapter.currentList.any { download ->
+            download.downloadItems.any { item ->
+                runCatching { item.path.fileSize() }.getOrDefault(0L) < item.downloadSize
+            }
+        }
         binding.downloadsEmpty.isVisible = isEmpty
         binding.downloadsContainer.isGone = isEmpty
         binding.deleteAll.isGone = isEmpty
+        binding.resumeAll.isVisible = hasIncomplete
         binding.shuffleAll.isGone = isEmpty
     }
 
