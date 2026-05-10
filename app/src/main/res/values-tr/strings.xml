@@ -564,4 +564,8 @@
         <item quantity="one">%d dk</item>
         <item quantity="other">%d dk</item>
     </plurals>
+    <string name="ungrouped_channels">Gruplanmamış</string>
+    <string name="ungrouped_channels_with_count">Gruplanmamış (%1$d)</string>
+    <string name="long_press_fast_forward">Basılı tutmada ileri sar</string>
+    <string name="long_press_fast_forward_summary">Ekrana dokunup basılı tutarken videoyu iki kat hızda oynat.</string>
 </resources>
