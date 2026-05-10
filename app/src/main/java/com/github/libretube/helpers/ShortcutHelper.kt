@@ -8,6 +8,9 @@ import androidx.core.graphics.drawable.IconCompat
 import com.github.libretube.constants.IntentData
 import com.github.libretube.enums.TopLevelDestination
 import com.github.libretube.ui.activities.MainActivity
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 object ShortcutHelper {
 
@@ -25,9 +28,12 @@ object ShortcutHelper {
     }
 
     fun createShortcuts(context: Context) {
-        if (ShortcutManagerCompat.getDynamicShortcuts(context).isEmpty()) {
-            val dynamicShortcuts = TopLevelDestination.entries.map { createShortcut(context, it) }
-            ShortcutManagerCompat.setDynamicShortcuts(context, dynamicShortcuts)
+        CoroutineScope(Dispatchers.IO).launch {
+            if (ShortcutManagerCompat.getDynamicShortcuts(context).isEmpty()) {
+                val dynamicShortcuts =
+                    TopLevelDestination.entries.map { createShortcut(context, it) }
+                ShortcutManagerCompat.setDynamicShortcuts(context, dynamicShortcuts)
+            }
         }
     }
 }
