@@ -538,4 +538,31 @@
     <string name="trailers">Trailer</string>
     <string name="music">Musik</string>
     <string name="include_timestamp_in_filename">Sertakan stempel waktu dalam nama berkas</string>
+    <string name="category_hook">Pembuka / Salam Pembuka</string>
+    <string name="category_hook_summary">Hook naratif untuk menarik perhatian penonton dengan menampilkan cuplikan atau petunjuk kejadian yang akan muncul di video ini atau episode berikutnya</string>
+    <string name="show_updates_summary">Periksa update secara otomatis setiap kali aplikasi dibuka.</string>
+    <string name="checking_frequency_15_minutes">15 menit</string>
+    <string name="checking_frequency_30_minutes">30 menit</string>
+    <string name="checking_frequency_60_minutes">60 menit</string>
+    <string name="checking_frequency_2_hours">2 jam</string>
+    <string name="checking_frequency_6_hours">6 jam</string>
+    <string name="checking_frequency_12_hours">12 jam</string>
+    <string name="checking_frequency_1_day">1 hari</string>
+    <string name="sort_channel">Nama channel</string>
+    <string name="sort_size">Ukuran</string>
+    <string name="backup_creation_success">Pencadangan telah berhasil</string>
+    <string name="backup_creation_failed">Gagal untuk mencadangkan</string>
+    <string name="ungrouped_channels">Belum dikelompokkan</string>
+    <string name="ungrouped_channels_with_count">Belum dikelompokkan (%1$d)</string>
+    <string name="delete_playlist_include_vidoes">Apakah semua video dalam playlist juga ingin dihapus?</string>
+    <plurals name="minutes_left">
+        <item quantity="other">%d menit tersisa</item>
+    </plurals>
+    <plurals name="sleep_timer_chip_minutes">
+        <item quantity="other">%d menit</item>
+    </plurals>
+    <string name="did_you_mean">Maksud Anda:</string>
+    <string name="showing_results_for">Munculkan hasil dari:</string>
+    <string name="long_press_fast_forward">Tekan lama untuk percepat</string>
+    <string name="long_press_fast_forward_summary">Putar video dua kali lipat saat mengetuk dan menahan layar.</string>
 </resources>
