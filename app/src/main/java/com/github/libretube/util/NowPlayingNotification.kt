@@ -67,4 +67,7 @@ class NowPlayingNotification(
         runCatching { handlePlayerAction(PlayerEvent.valueOf(action)) }
         return true
     }
+
+    override fun getNotificationChannelInfo(): MediaNotification.Provider.NotificationChannelInfo =
+        nProvider.notificationChannelInfo
 }
