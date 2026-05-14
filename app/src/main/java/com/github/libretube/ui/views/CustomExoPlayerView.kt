@@ -1356,7 +1356,7 @@ class CustomExoPlayerView(
     }
 
     override fun onLongPressEnd() {
-        if (!PlayerHelper.doubleTapToSeek) return
+        if (!PlayerHelper.longPressFastForward) return
 
         backgroundBinding.fastForwardView.isGone = true
 
