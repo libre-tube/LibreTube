@@ -467,6 +467,7 @@ class AudioPlayerFragment : Fragment(R.layout.fragment_audio_player), AudioPlaye
                 JsonHelper.json.decodeFromString(it)
             }
 
+        updatePlayPauseButton()
         initializeSeekBar()
     }
 
