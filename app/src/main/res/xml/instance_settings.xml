@@ -6,7 +6,7 @@
 
         <SwitchPreferenceCompat
             android:icon="@drawable/ic_region"
-            android:defaultValue="false"
+            android:defaultValue="true"
             android:title="@string/full_local_mode"
             android:key="full_local_mode"
             android:disableDependentsState="true"
@@ -43,7 +43,7 @@
     <PreferenceCategory android:title="@string/authentication">
 
         <SwitchPreferenceCompat
-            android:defaultValue="false"
+            android:defaultValue="true"
             android:icon="@drawable/ic_region"
             android:summary="@string/local_feed_extraction_summary"
             android:title="@string/local_feed_extraction"
