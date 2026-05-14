@@ -315,9 +315,7 @@ abstract class AbstractPlayerService : MediaLibraryService(), MediaLibrarySessio
             addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
         }
         notificationProvider?.notificationIntent = notificationIntent
-        mediaLibrarySession?.let {
-            onUpdateNotification(it, true)
-        }
+        triggerNotificationUpdate()
     }
 
     abstract val isOfflinePlayer: Boolean
