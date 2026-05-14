@@ -156,7 +156,6 @@ class YoutubeHlsPlaylistParser : ParsingLoadable.Parser<HlsPlaylist> {
                 ),
                 it.groupId,
                 it.name,
-                null
             )
         }
     }
