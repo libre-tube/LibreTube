@@ -189,6 +189,7 @@ class PlayerFragment : Fragment(R.layout.fragment_player), CustomPlayerCallback 
      */
     private val playerActionReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context, intent: Intent) {
+            if (!::playerController.isInitialized) return
             val event = intent.serializableExtra<PlayerEvent>(PlayerHelper.CONTROL_TYPE) ?: return
 
             if (PlayerHelper.handlePlayerAction(playerController, event)) return
