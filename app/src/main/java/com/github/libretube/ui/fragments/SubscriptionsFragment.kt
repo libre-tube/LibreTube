@@ -23,6 +23,7 @@ import com.github.libretube.extensions.toID
 import com.github.libretube.helpers.NavigationHelper
 import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.obj.SelectableOption
+import com.github.libretube.parcelable.PlayerData
 import com.github.libretube.ui.adapters.VideoCardsAdapter
 import com.github.libretube.ui.base.DynamicLayoutManagerFragment
 import com.github.libretube.ui.models.EditChannelGroupsModel
@@ -242,8 +243,10 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment(R.layout.fragment_sub
 
         NavigationHelper.navigateVideo(
             requireContext(),
-            videoId = streams.first().url,
-            keepQueue = true
+            playerData = PlayerData(
+                videoId = streams.first().url,
+                keepQueue = true
+            )
         )
     }
 

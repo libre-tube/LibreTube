@@ -20,14 +20,14 @@ import com.github.libretube.db.DatabaseHolder.Database
 import com.github.libretube.db.obj.DownloadWithItems
 import com.github.libretube.db.obj.filterByTab
 import com.github.libretube.enums.FileType
-import com.github.libretube.extensions.serializable
+import com.github.libretube.extensions.parcelable
 import com.github.libretube.extensions.setMetadata
 import com.github.libretube.extensions.toAndroidUri
 import com.github.libretube.extensions.updateParameters
 import com.github.libretube.helpers.PlayerHelper
+import com.github.libretube.parcelable.PlayerData
 import com.github.libretube.ui.activities.MainActivity
 import com.github.libretube.ui.activities.NoInternetActivity
-import com.github.libretube.ui.fragments.DownloadSortingOrder
 import com.github.libretube.ui.fragments.DownloadTab
 import com.github.libretube.ui.fragments.DownloadsFragmentPage.Companion.sortDownloadList
 import com.github.libretube.util.PlayingQueue
@@ -47,10 +47,7 @@ open class OfflinePlayerService : AbstractPlayerService() {
     private var noInternetService: Boolean = false
 
     private var downloadWithItems: DownloadWithItems? = null
-    private lateinit var downloadTab: DownloadTab
-    private var shuffle: Boolean = false
-    private var playlistId: String? = null
-    private var downloadSortOrder: DownloadSortingOrder? = null
+    private lateinit var playerData: PlayerData
 
     private val scope = CoroutineScope(Dispatchers.Main)
 
@@ -76,27 +73,24 @@ open class OfflinePlayerService : AbstractPlayerService() {
     override suspend fun onServiceCreated(args: Bundle) {
         if (args.isEmpty) return
 
-        downloadTab = args.serializable(IntentData.downloadTab)!!
-        shuffle = args.getBoolean(IntentData.shuffle, false)
+        playerData = args.parcelable(IntentData.playerData)!!
         noInternetService = args.getBoolean(IntentData.noInternet, false)
         isAudioOnlyPlayer = args.getBoolean(IntentData.audioOnly, false)
-        playlistId = args.getString(IntentData.playlistId)
-        downloadSortOrder = args.serializable(IntentData.sortOptions)
 
         PlayingQueue.clear()
 
-        this.videoId = if (shuffle) {
+        this.videoId = if (playerData.shuffle) {
             runBlocking(Dispatchers.IO) {
-                if (downloadTab == DownloadTab.PLAYLIST) {
+                if (playerData.downloadTab == DownloadTab.PLAYLIST) {
                     Database.downloadDao()
-                        .getDownloadPlaylistById(playlistId!!).downloadVideos.randomOrNull()
+                        .getDownloadPlaylistById(playerData.playlistId!!).downloadVideos.randomOrNull()
                 } else {
-                    Database.downloadDao().getAll().filterByTab(downloadTab)
+                    Database.downloadDao().getAll().filterByTab(playerData.downloadTab!!)
                         .randomOrNull()?.download
                 }
             }?.videoId
         } else {
-            args.getString(IntentData.videoId)
+            playerData.videoId
         } ?: return
 
         exoPlayer?.addListener(playerListener)
@@ -204,25 +198,25 @@ open class OfflinePlayerService : AbstractPlayerService() {
     }
 
     private suspend fun fillQueue() {
-        if (downloadTab == DownloadTab.PLAYLIST) {
+        if (playerData.downloadTab == DownloadTab.PLAYLIST) {
             var videos = withContext(Dispatchers.IO) {
-                Database.downloadDao().getDownloadPlaylistById(playlistId!!)
+                Database.downloadDao().getDownloadPlaylistById(playerData.playlistId!!)
             }.downloadVideos
 
-            if (shuffle) videos = listOf(videos.first { it.videoId == videoId }) +
+            if (playerData.shuffle) videos = listOf(videos.first { it.videoId == videoId }) +
                     videos.filter { it.videoId != videoId }.shuffled()
-            else if (downloadSortOrder != null) videos =
-                sortDownloadList(videos, downloadSortOrder!!)
+            else if (playerData.downloadSortingOrder != null) videos =
+                sortDownloadList(videos, playerData.downloadSortingOrder!!)
             PlayingQueue.setStreams(videos.map { it.toStreamItem() })
         } else {
             var downloads = withContext(Dispatchers.IO) {
                 Database.downloadDao().getAll()
             }
-                .filterByTab(downloadTab)
+                .filterByTab(playerData.downloadTab!!)
                 .map { it.download }
 
-            if (shuffle) downloads = downloads.shuffled()
-            else if (downloadSortOrder != null) downloads = sortDownloadList(downloads, downloadSortOrder!!)
+            if (playerData.shuffle) downloads = downloads.shuffled()
+            else if (playerData.downloadSortingOrder != null) downloads = sortDownloadList(downloads, playerData.downloadSortingOrder!!)
 
             PlayingQueue.add(*downloads.map { it.toStreamItem() }.toTypedArray())
         }

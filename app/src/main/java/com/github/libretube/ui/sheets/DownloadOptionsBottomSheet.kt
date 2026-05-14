@@ -14,6 +14,7 @@ import com.github.libretube.helpers.BackgroundHelper
 import com.github.libretube.helpers.ContextHelper
 import com.github.libretube.helpers.NavigationHelper
 import com.github.libretube.obj.ShareData
+import com.github.libretube.parcelable.PlayerData
 import com.github.libretube.ui.activities.NoInternetActivity
 import com.github.libretube.ui.dialogs.ShareDialog
 import com.github.libretube.ui.fragments.DownloadTab
@@ -45,13 +46,20 @@ class DownloadOptionsBottomSheet : BaseBottomSheet() {
         }
 
         setSimpleItems(options.map { getString(it) }) { which ->
+            val playerData = PlayerData(
+                videoId,
+                playlistId = playlistId,
+                downloadTab = downloadTab,
+                isOffline = true
+            )
+
             when (options[which]) {
                 R.string.playOnBackground -> {
-                    BackgroundHelper.playOnBackgroundOffline(requireContext(), videoId, playlistId, downloadTab)
+                    BackgroundHelper.playOnBackground(requireContext(), playerData)
                 }
 
                 R.string.go_to_video -> {
-                    NavigationHelper.navigateVideo(requireContext(), videoId = videoId)
+                    NavigationHelper.navigateVideo(requireContext(), playerData)
                 }
 
                 R.string.share -> {

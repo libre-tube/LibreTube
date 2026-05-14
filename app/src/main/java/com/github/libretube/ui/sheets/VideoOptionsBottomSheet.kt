@@ -19,6 +19,7 @@ import com.github.libretube.helpers.NavigationHelper
 import com.github.libretube.helpers.PlayerHelper
 import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.obj.ShareData
+import com.github.libretube.parcelable.PlayerData
 import com.github.libretube.ui.activities.MainActivity
 import com.github.libretube.ui.dialogs.AddToPlaylistDialog
 import com.github.libretube.ui.dialogs.ShareDialog
@@ -60,8 +61,10 @@ class VideoOptionsBottomSheet : BaseBottomSheet() {
                 R.string.playOnBackground -> {
                     NavigationHelper.navigateVideo(
                         requireContext(),
-                        videoId = videoId,
-                        playlistId = playlistId,
+                        playerData = PlayerData(
+                            videoId = videoId,
+                            playlistId = playlistId,
+                        ),
                         audioOnlyPlayerRequested = true
                     )
                 }

@@ -17,6 +17,7 @@ import com.github.libretube.helpers.BackgroundHelper
 import com.github.libretube.helpers.ContextHelper
 import com.github.libretube.helpers.DownloadHelper
 import com.github.libretube.obj.ShareData
+import com.github.libretube.parcelable.PlayerData
 import com.github.libretube.ui.activities.MainActivity
 import com.github.libretube.ui.base.BaseActivity
 import com.github.libretube.ui.dialogs.DeletePlaylistDialog
@@ -87,8 +88,7 @@ class PlaylistOptionsBottomSheet : BaseBottomSheet() {
                     playlist.relatedStreams.firstOrNull()?.let {
                         BackgroundHelper.playOnBackground(
                             requireContext(),
-                            it.url!!.toID(),
-                            playlistId = playlistId
+                            PlayerData(it.url!!.toID(), playlistId = playlistId)
                         )
                     }
                 }

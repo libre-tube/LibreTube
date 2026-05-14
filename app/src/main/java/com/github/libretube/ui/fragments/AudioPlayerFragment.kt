@@ -43,6 +43,7 @@ import com.github.libretube.helpers.ImageHelper
 import com.github.libretube.helpers.NavigationHelper
 import com.github.libretube.helpers.PlayerHelper
 import com.github.libretube.helpers.ThemeHelper
+import com.github.libretube.parcelable.PlayerData
 import com.github.libretube.services.AbstractPlayerService
 import com.github.libretube.services.OfflinePlayerService
 import com.github.libretube.services.OnlinePlayerService
@@ -277,9 +278,11 @@ class AudioPlayerFragment : Fragment(R.layout.fragment_audio_player), AudioPlaye
 
         NavigationHelper.openVideoPlayerFragment(
             context = requireContext(),
-            videoId = videoId,
-            isOffline = isOffline,
-            alreadyStarted = true,
+            playerData = PlayerData(
+                videoId = videoId,
+                isOffline = isOffline
+            ),
+            alreadyStarted = true
         )
     }
 

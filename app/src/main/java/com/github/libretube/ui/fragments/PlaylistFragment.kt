@@ -38,6 +38,7 @@ import com.github.libretube.extensions.toastFromMainDispatcher
 import com.github.libretube.helpers.ImageHelper
 import com.github.libretube.helpers.NavigationHelper
 import com.github.libretube.helpers.PreferenceHelper
+import com.github.libretube.parcelable.PlayerData
 import com.github.libretube.ui.adapters.PlaylistAdapter
 import com.github.libretube.ui.adapters.PlaylistItem
 import com.github.libretube.ui.base.BaseActivity
@@ -285,12 +286,7 @@ class PlaylistFragment : DynamicLayoutManagerFragment(R.layout.fragment_playlist
                         val queue = playlistFeed.shuffled()
                         PlayingQueue.setStreams(queue)
 
-                        NavigationHelper.navigateVideo(
-                            requireContext(),
-                            queue.firstOrNull()?.url,
-                            playlistId = playlistId,
-                            keepQueue = true
-                        )
+                        navigateVideo(queue.firstOrNull() ?: return@setOnClickListener)
                     }
                 }
 
@@ -317,18 +313,24 @@ class PlaylistFragment : DynamicLayoutManagerFragment(R.layout.fragment_playlist
         }
     }
 
+    private fun navigateVideo(streamItem: StreamItem) {
+        NavigationHelper.navigateVideo(
+            requireContext(),
+            playerData = PlayerData(
+                streamItem.url!!.toID(),
+                playlistId = playlistId,
+                keepQueue = true
+            )
+        )
+    }
+
     private fun startVideoItemPlayback(streamItem: StreamItem) {
         if (playlistFeed.isEmpty()) return
 
         val sortedStreams = getSortedVideos()
         PlayingQueue.setStreams(sortedStreams.map { it.item })
 
-        NavigationHelper.navigateVideo(
-            requireContext(),
-            streamItem.url?.toID(),
-            playlistId = playlistId,
-            keepQueue = true
-        )
+        navigateVideo(streamItem)
     }
 
     /**

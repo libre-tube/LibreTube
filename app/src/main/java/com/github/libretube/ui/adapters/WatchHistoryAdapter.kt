@@ -12,6 +12,7 @@ import com.github.libretube.db.DatabaseHolder
 import com.github.libretube.db.obj.WatchHistoryItem
 import com.github.libretube.helpers.ImageHelper
 import com.github.libretube.helpers.NavigationHelper
+import com.github.libretube.parcelable.PlayerData
 import com.github.libretube.ui.adapters.callbacks.DiffUtilItemCallback
 import com.github.libretube.ui.base.BaseActivity
 import com.github.libretube.ui.extensions.setFormattedDuration
@@ -60,7 +61,7 @@ class WatchHistoryAdapter :
             }
 
             root.setOnClickListener {
-                NavigationHelper.navigateVideo(root.context, video.videoId)
+                NavigationHelper.navigateVideo(root.context, PlayerData(video.videoId))
             }
 
             val activity = (root.context as BaseActivity)

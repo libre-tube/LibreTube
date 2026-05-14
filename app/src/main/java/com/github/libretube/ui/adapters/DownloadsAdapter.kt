@@ -18,6 +18,7 @@ import com.github.libretube.extensions.formatAsFileSize
 import com.github.libretube.helpers.DownloadHelper
 import com.github.libretube.helpers.ImageHelper
 import com.github.libretube.helpers.NavigationHelper
+import com.github.libretube.parcelable.PlayerData
 import com.github.libretube.ui.adapters.callbacks.DiffUtilItemCallback
 import com.github.libretube.ui.base.BaseActivity
 import com.github.libretube.ui.extensions.setWatchProgressLength
@@ -111,25 +112,22 @@ class DownloadsAdapter(
             }
 
             root.setOnClickListener {
+                val playerData = PlayerData(
+                    videoId = download.videoId,
+                    playlistId = playlistId,
+                    downloadTab = downloadTab,
+                    downloadSortingOrder = currentSortOrder(),
+                    isOffline = true
+                )
+
                 when (downloadTab) {
                     DownloadTab.VIDEO, DownloadTab.PLAYLIST-> {
-                        NavigationHelper.navigateVideo(
-                            root.context,
-                            videoId = download.videoId,
-                            playlistId = playlistId,
-                            downloadTab = downloadTab,
-                            downloadSortingOrder = currentSortOrder(),
-                            isOffline = true
-                        )
+                        NavigationHelper.navigateVideo(root.context, playerData)
                     }
                     DownloadTab.AUDIO -> {
                         NavigationHelper.navigateVideo(
                             root.context,
-                            videoId = download.videoId,
-                            playlistId = playlistId,
-                            downloadTab = downloadTab,
-                            downloadSortingOrder = currentSortOrder(),
-                            isOffline = true,
+                            playerData,
                             audioOnlyPlayerRequested = true
                         )
                     }

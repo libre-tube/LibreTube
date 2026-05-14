@@ -47,6 +47,7 @@ import com.github.libretube.helpers.NavigationHelper
 import com.github.libretube.helpers.NetworkHelper
 import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.helpers.ThemeHelper
+import com.github.libretube.parcelable.PlayerData
 import com.github.libretube.ui.dialogs.ErrorDialog
 import com.github.libretube.ui.dialogs.ImportTempPlaylistDialog
 import com.github.libretube.ui.extensions.onSystemInsets
@@ -405,9 +406,11 @@ class MainActivity : AbstractPlayerHostActivity() {
                             searchViewModel.setQuery(newText)
                         }
                     }
+
                     SearchType.PLAYLIST -> {
                         playlistViewModel.setQuery(newText)
                     }
+
                     SearchType.DOWNLOADS -> {
                         downloadViewModel.setQuery(newText)
                     }
@@ -569,27 +572,29 @@ class MainActivity : AbstractPlayerHostActivity() {
                 binding.bottomNav.viewTreeObserver.addOnGlobalLayoutListener(object :
                     ViewTreeObserver.OnGlobalLayoutListener {
                     override fun onGlobalLayout() {
-                        NavigationHelper.navigateVideo(
-                            context = this@MainActivity,
-                            videoId = it,
-                            timestamp = intent.getLongExtra(IntentData.timeStamp, 0L)
-                        )
+                        navigationVideo(it)
 
                         binding.bottomNav.viewTreeObserver.removeOnGlobalLayoutListener(this)
                     }
                 })
             } else {
-                NavigationHelper.navigateVideo(
-                    context = this@MainActivity,
-                    videoId = it,
-                    timestamp = intent.getLongExtra(IntentData.timeStamp, 0L)
-                )
+                navigationVideo(it)
             }
 
             return true
         }
 
         return false
+    }
+
+    private fun navigationVideo(videoId: String) {
+        NavigationHelper.navigateVideo(
+            context = this@MainActivity,
+            playerData = PlayerData(
+                videoId = videoId,
+                timestamp = intent.getLongExtra(IntentData.timeStamp, 0L)
+            ),
+        )
     }
 
     private fun navigateToBottomSelectedItem(item: MenuItem): Boolean {

@@ -22,8 +22,6 @@ import com.github.libretube.services.OfflinePlayerService
 import com.github.libretube.services.OnlinePlayerService
 import com.github.libretube.ui.activities.AbstractPlayerHostActivity
 import com.github.libretube.ui.activities.NoInternetActivity
-import com.github.libretube.ui.fragments.DownloadSortingOrder
-import com.github.libretube.ui.fragments.DownloadTab
 import com.github.libretube.ui.fragments.PlayerFragment
 import com.github.libretube.util.PlayingQueue
 import com.github.libretube.util.PlayingQueueMode
@@ -38,16 +36,11 @@ object BackgroundHelper {
     private val handler = Handler(Looper.getMainLooper())
 
     /**
-     * Start the foreground service [OnlinePlayerService] to play in background. [position]
-     * is seek to position specified in milliseconds in the current [videoId].
+     * Start the foreground service [OnlinePlayerService] to play in background.
      */
     fun playOnBackground(
         context: Context,
-        videoId: String,
-        position: Long = 0,
-        playlistId: String? = null,
-        channelId: String? = null,
-        keepQueue: Boolean = false,
+        playerData: PlayerData,
     ) {
         // close the previous video player if open
         val fragmentManager =
@@ -56,14 +49,14 @@ object BackgroundHelper {
             fragmentManager.commit { remove(it) }
         }
 
-        val playerData = PlayerData(videoId, playlistId, channelId, keepQueue, position)
-
+        val noInternet = ContextHelper.tryUnwrapActivity<NoInternetActivity>(context) != null
+        val service = if (playerData.isOffline) OfflinePlayerService::class.java else OnlinePlayerService::class.java
         stopBackgroundPlay(context)
-        startMediaService(
-            context,
-            OnlinePlayerService::class.java,
-            bundleOf(IntentData.playerData to playerData, IntentData.audioOnly to true)
-        )
+        startMediaService(context, service, bundleOf(
+            IntentData.playerData to playerData,
+            IntentData.noInternet to noInternet,
+            IntentData.audioOnly to true
+        ))
     }
 
     /**
@@ -77,37 +70,6 @@ object BackgroundHelper {
             val intent = Intent(context, it)
             context.stopService(intent)
         }
-    }
-
-    /**
-     * Start the offline background player
-     *
-     * @param context the current context
-     * @param videoId the videoId of the video or null if all available downloads should be shuffled
-     */
-    fun playOnBackgroundOffline(
-        context: Context,
-        videoId: String?,
-        playlistId: String?,
-        downloadTab: DownloadTab,
-        shuffle: Boolean = false,
-        sortOrder: DownloadSortingOrder? = null,
-    ) {
-        // whether the service is started from the MainActivity or NoInternetActivity
-        val noInternet = ContextHelper.tryUnwrapActivity<NoInternetActivity>(context) != null
-
-        val arguments = bundleOf(
-            IntentData.videoId to videoId,
-            IntentData.playlistId to playlistId,
-            IntentData.shuffle to shuffle,
-            IntentData.downloadTab to downloadTab,
-            IntentData.noInternet to noInternet,
-            IntentData.audioOnly to true,
-            IntentData.sortOptions to sortOrder,
-        )
-
-        stopBackgroundPlay(context)
-        startMediaService(context, OfflinePlayerService::class.java, arguments)
     }
 
     @OptIn(UnstableApi::class)

@@ -21,8 +21,6 @@ import com.github.libretube.ui.activities.MainActivity
 import com.github.libretube.ui.activities.ZoomableImageActivity
 import com.github.libretube.ui.base.BaseActivity
 import com.github.libretube.ui.fragments.AudioPlayerFragment
-import com.github.libretube.ui.fragments.DownloadSortingOrder
-import com.github.libretube.ui.fragments.DownloadTab
 import com.github.libretube.ui.fragments.PlayerFragment
 import com.github.libretube.util.PlayingQueue
 
@@ -52,34 +50,22 @@ object NavigationHelper {
     @SuppressLint("UnsafeOptInUsageError")
     fun navigateVideo(
         context: Context,
-        videoId: String?,
-        playlistId: String? = null,
-        channelId: String? = null,
-        keepQueue: Boolean = false,
-        timestamp: Long = 0,
+        playerData: PlayerData,
         alreadyStarted: Boolean = false,
         forceVideo: Boolean = false,
         audioOnlyPlayerRequested: Boolean = false,
-        downloadTab: DownloadTab? = null,
-        downloadSortingOrder: DownloadSortingOrder? = null,
-        shuffle: Boolean = false,
-        isOffline: Boolean = false
     ) {
-        if (videoId == null) return
-        // TODO: refactor all related methods to take [PlayerData] objects as arguments instead
-        // of all these overcomplex amount of arguments!
-
         // attempt to attach to the current media session first by using the corresponding
         // video/audio player instance
         val activity = ContextHelper.unwrapActivity<AbstractPlayerHostActivity>(context)
         val attachedToRunningPlayer = activity.runOnPlayerFragment {
-            try {
-                // can only continue using player if in same mode (online/offline)
-                // otherwise, recreate the player
-                if (this.isOffline != isOffline) return@runOnPlayerFragment false
+            // can only continue using player if in same mode (online/offline)
+            // otherwise, recreate the player
+            if (playerData.isOffline != isOffline || playerData.videoId == null) return@runOnPlayerFragment false
 
+            try {
                 PlayingQueue.clearAfterCurrent()
-                this.playNextVideo(videoId.toID())
+                this.playNextVideo(playerData.videoId.toID())
 
                 if (audioOnlyPlayerRequested) {
                     // switch to audio only player
@@ -101,14 +87,14 @@ object NavigationHelper {
         val attachedToRunningAudioPlayer = activity.runOnAudioPlayerFragment {
             // can only continue using player if in same mode (online/offline)
             // otherwise, recreate the player
-            if (this.isOffline != isOffline) return@runOnAudioPlayerFragment false
+            if (playerData.isOffline != isOffline || playerData.videoId == null) return@runOnAudioPlayerFragment false
 
             PlayingQueue.clearAfterCurrent()
-            this.playNextVideo(videoId.toID())
+            this.playNextVideo(playerData.videoId.toID())
 
             if (!audioOnlyPlayerRequested && !audioOnlyMode) {
                 // switch to video only player
-                this.switchToVideoMode(videoId.toID())
+                this.switchToVideoMode(playerData.videoId.toID())
             } else {
                 // maximize player
                 this.binding.playerMotionLayout.transitionToStart()
@@ -121,40 +107,14 @@ object NavigationHelper {
         if (audioOnlyPlayerRequested || (audioOnlyMode && !forceVideo)) {
             // in contrast to the video player, the audio player doesn't start a media service on
             // its own!
-            if (isOffline) {
-                BackgroundHelper.playOnBackgroundOffline(
-                    context,
-                    videoId.toID(),
-                    playlistId,
-                    downloadTab!!,
-                    shuffle,
-                    downloadSortingOrder
-                )
-            } else {
-                BackgroundHelper.playOnBackground(
-                    context,
-                    videoId.toID(),
-                    timestamp,
-                    playlistId,
-                    channelId,
-                    keepQueue
-                )
-            }
+            BackgroundHelper.playOnBackground(context, playerData)
 
-            openAudioPlayerFragment(context, offlinePlayer = isOffline, minimizeByDefault = true)
+            openAudioPlayerFragment(context, offlinePlayer = playerData.isOffline, minimizeByDefault = true)
         } else {
             openVideoPlayerFragment(
                 context,
-                videoId.toID(),
-                playlistId,
-                channelId,
-                keepQueue,
-                timestamp,
-                alreadyStarted,
-                shuffle,
-                isOffline,
-                downloadTab,
-                downloadSortingOrder
+                playerData,
+                alreadyStarted
             )
         }
     }
@@ -191,21 +151,11 @@ object NavigationHelper {
      */
     fun openVideoPlayerFragment(
         context: Context,
-        videoId: String,
-        playlistId: String? = null,
-        channelId: String? = null,
-        keepQueue: Boolean = false,
-        timestamp: Long = 0,
+        playerData: PlayerData,
         alreadyStarted: Boolean = false,
-        shuffle: Boolean = false,
-        isOffline: Boolean = false,
-        downloadTab: DownloadTab? = null,
-        downloadSortingOrder: DownloadSortingOrder? = null,
     ) {
         val activity = ContextHelper.unwrapActivity<BaseActivity>(context)
 
-        val playerData =
-            PlayerData(videoId, playlistId, channelId, keepQueue, timestamp, shuffle, isOffline, downloadTab, downloadSortingOrder)
         val bundle = bundleOf(
             IntentData.playerData to playerData,
             IntentData.alreadyStarted to alreadyStarted,

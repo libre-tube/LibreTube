@@ -12,6 +12,7 @@ import com.github.libretube.extensions.toID
 import com.github.libretube.helpers.BackgroundHelper
 import com.github.libretube.helpers.NavigationHelper
 import com.github.libretube.obj.ShareData
+import com.github.libretube.parcelable.PlayerData
 import com.github.libretube.ui.dialogs.ShareDialog
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -71,8 +72,10 @@ class ChannelOptionsBottomSheet : BaseBottomSheet() {
                         channel.relatedStreams.firstOrNull()?.url?.toID()?.let {
                             NavigationHelper.navigateVideo(
                                 requireContext(),
-                                it,
-                                channelId = channelId
+                                PlayerData(
+                                    it,
+                                    channelId = channelId
+                                )
                             )
                         }
                     } catch (e: Exception) {
@@ -88,8 +91,10 @@ class ChannelOptionsBottomSheet : BaseBottomSheet() {
                         channel.relatedStreams.firstOrNull()?.url?.toID()?.let {
                             BackgroundHelper.playOnBackground(
                                 requireContext(),
-                                videoId = it,
-                                channelId = channelId
+                                PlayerData(
+                                    videoId = it,
+                                    channelId = channelId
+                                )
                             )
                         }
                     } catch (e: Exception) {

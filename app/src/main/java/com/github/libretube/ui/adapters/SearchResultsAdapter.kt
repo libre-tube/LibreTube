@@ -20,6 +20,7 @@ import com.github.libretube.extensions.formatShort
 import com.github.libretube.extensions.toID
 import com.github.libretube.helpers.ImageHelper
 import com.github.libretube.helpers.NavigationHelper
+import com.github.libretube.parcelable.PlayerData
 import com.github.libretube.ui.adapters.callbacks.DiffUtilItemCallback
 import com.github.libretube.ui.base.BaseActivity
 import com.github.libretube.ui.extensions.setFormattedDuration
@@ -103,7 +104,7 @@ class SearchResultsAdapter(
             ImageHelper.loadImage(item.uploaderAvatar, channelImage, true)
 
             root.setOnClickListener {
-                NavigationHelper.navigateVideo(root.context, item.url, timestamp = timeStamp)
+                NavigationHelper.navigateVideo(root.context, PlayerData(item.url, timestamp = timeStamp))
             }
 
             val videoId = item.url.toID()

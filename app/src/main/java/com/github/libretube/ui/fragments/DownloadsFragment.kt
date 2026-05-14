@@ -44,6 +44,7 @@ import com.github.libretube.helpers.DownloadHelper
 import com.github.libretube.helpers.NavigationHelper
 import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.obj.DownloadStatus
+import com.github.libretube.parcelable.PlayerData
 import com.github.libretube.receivers.DownloadReceiver
 import com.github.libretube.services.DownloadService
 import com.github.libretube.ui.adapters.DownloadPlaylistAdapter
@@ -291,11 +292,13 @@ class DownloadsFragmentPage : DynamicLayoutManagerFragment(R.layout.fragment_dow
         binding.shuffleAll.setOnClickListener {
             NavigationHelper.navigateVideo(
                 requireContext(),
-                videoId = null,
-                playlistId = downloadPlaylistId,
-                downloadTab = downloadTab,
-                shuffle = true,
-                isOffline = true,
+                playerData = PlayerData(
+                    videoId = null,
+                    playlistId = downloadPlaylistId,
+                    downloadTab = downloadTab,
+                    shuffle = true,
+                    isOffline = true,
+                ),
                 audioOnlyPlayerRequested = downloadTab == DownloadTab.AUDIO
             )
         }
@@ -449,7 +452,10 @@ class DownloadsFragmentPage : DynamicLayoutManagerFragment(R.layout.fragment_dow
         }
 
         // ugly HACK: should probably be refactored in the future
-        fun sortDownloadList(items: List<Download>, selectedSortType: DownloadSortingOrder): List<Download> {
+        fun sortDownloadList(
+            items: List<Download>,
+            selectedSortType: DownloadSortingOrder
+        ): List<Download> {
             return when (selectedSortType) {
                 DownloadSortingOrder.OLDEST -> items
                 DownloadSortingOrder.NEWEST -> items.reversed()
@@ -550,8 +556,11 @@ class PlaylistDownloadsFragmentPage : Fragment(R.layout.fragment_download_conten
         }
     }
 
-    private fun submitPlaylists(adapter: DownloadPlaylistAdapter, playlists: List<DownloadPlaylistWithDownload>) {
-        var sorted =  applySortOrder(playlists)
+    private fun submitPlaylists(
+        adapter: DownloadPlaylistAdapter,
+        playlists: List<DownloadPlaylistWithDownload>
+    ) {
+        var sorted = applySortOrder(playlists)
         val query = downloadsModel.searchQuery.value
         if (!query.isNullOrEmpty()) {
             sorted = sorted.filter {

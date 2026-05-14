@@ -23,6 +23,7 @@ import com.github.libretube.extensions.ceilHalf
 import com.github.libretube.extensions.dpToPx
 import com.github.libretube.extensions.setOnDismissListener
 import com.github.libretube.helpers.NavigationHelper
+import com.github.libretube.parcelable.PlayerData
 import com.github.libretube.ui.adapters.WatchHistoryAdapter
 import com.github.libretube.ui.base.DynamicLayoutManagerFragment
 import com.github.libretube.ui.extensions.addOnBottomReachedListener
@@ -138,8 +139,10 @@ class WatchHistoryFragment : DynamicLayoutManagerFragment(R.layout.fragment_watc
             )
             NavigationHelper.navigateVideo(
                 requireContext(),
-                history.last().videoId,
-                keepQueue = true
+                PlayerData(
+                    history.last().videoId,
+                    keepQueue = true
+                )
             )
         }
 

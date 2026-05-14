@@ -18,6 +18,7 @@ import com.github.libretube.extensions.toID
 import com.github.libretube.helpers.ImageHelper
 import com.github.libretube.helpers.NavigationHelper
 import com.github.libretube.helpers.PlayerHelper
+import com.github.libretube.parcelable.PlayerData
 import com.github.libretube.ui.adapters.callbacks.DiffUtilItemCallback
 import com.github.libretube.ui.base.BaseActivity
 import com.github.libretube.ui.extensions.setFormattedDuration
@@ -110,7 +111,7 @@ class VideoCardsAdapter(private val columnWidthDp: Float? = null) :
                 }
             }
             root.setOnClickListener {
-                NavigationHelper.navigateVideo(root.context, videoId)
+                NavigationHelper.navigateVideo(root.context, PlayerData(videoId))
             }
 
             root.setOnLongClickListener {
