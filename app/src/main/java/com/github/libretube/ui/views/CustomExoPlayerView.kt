@@ -383,22 +383,6 @@ class CustomExoPlayerView(
                 super.onIsPlayingChanged(isPlaying)
                 keepScreenOn = isPlaying
             }
-
-            override fun onPlaybackStateChanged(playbackState: Int) {
-                super.onPlaybackStateChanged(playbackState)
-
-                if (playbackState == Player.STATE_READY) {
-                    // set default caption language from preferences if caption language is available
-                    val captions = PlayerHelper.getCaptionTracks(player ?: return)
-                    val defaultLangCaption =
-                        captions.firstOrNull { it.language == PlayerHelper.defaultSubtitleCode }
-
-                    updateCurrentSubtitle(defaultLangCaption?.id)
-
-                    // if the video is live, the remaining time is displayed instead of duration
-                    updateDisplayedDurationType()
-                }
-            }
         })
 
         binding.playPauseBTN.setImageResource(
@@ -1448,6 +1432,7 @@ class CustomExoPlayerView(
         return width to height
     }
 
+    var alreadySetDefaultSubtitle: Boolean = false
     fun onPlaybackEvents(player: Player, events: Player.Events) {
         if (events.containsAny(
                 Player.EVENT_PLAYBACK_STATE_CHANGED,
@@ -1466,6 +1451,25 @@ class CustomExoPlayerView(
         if (events.contains(Player.EVENT_RENDERED_FIRST_FRAME)) {
             // if the video is not starting automatically, show the controller
             if (!PlayerHelper.playAutomatically) showControllerPermanently()
+        }
+
+        if (events.contains(Player.EVENT_RENDERED_FIRST_FRAME) && !alreadySetDefaultSubtitle) {
+            // only set the default subtitle at the start of the playback session
+            alreadySetDefaultSubtitle = true
+
+            // set default caption language from preferences if caption language is available
+            val captions = PlayerHelper.getCaptionTracks(player)
+            val defaultLangCaption =
+                captions.firstOrNull { it.language == PlayerHelper.defaultSubtitleCode }
+
+            updateCurrentSubtitle(defaultLangCaption?.id)
+
+            // if the video is live, the remaining time is displayed instead of duration
+            updateDisplayedDurationType()
+        }
+        if (events.contains(Player.EVENT_MEDIA_METADATA_CHANGED)) {
+            // new video started
+            alreadySetDefaultSubtitle = false
         }
 
         updateDisplayedDuration()
