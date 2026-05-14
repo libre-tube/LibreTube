@@ -113,8 +113,15 @@ class LocalFeedRepository : FeedRepository {
 
             // update subscriptions channels in case they've changed (e.g. different avatar or name)
             SubscriptionHelper.submitSubscriptionChannelInfosChanged(channels.filterNotNull())
+            val existingFeedItems = DatabaseHolder.Database.feedDao()
+                .getAll()
+                .associateBy(SubscriptionsFeedItem::videoId)
             DatabaseHolder.Database.feedDao()
-                .insertAll(collectedFeedItems.flatten().map(StreamItem::toFeedItem))
+                .insertAll(
+                    collectedFeedItems.flatten().map { streamItem ->
+                        streamItem.toFeedItem(existingFeedItems[streamItem.url?.toID()])
+                    }
+                )
         }
     }
 
