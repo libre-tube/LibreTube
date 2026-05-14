@@ -443,7 +443,7 @@ class PlayerFragment : Fragment(R.layout.fragment_player), CustomPlayerCallback 
 
         chaptersViewModel.chaptersLiveData.observe(viewLifecycleOwner) {
             binding.player.setCurrentChapterName()
-            playerControlsBinding.exoProgress.setChapters(it)
+            playerControlsBinding.exoProgress.setChapters(it.orEmpty())
         }
 
         viewModel.segments.observe(viewLifecycleOwner) { segments ->
