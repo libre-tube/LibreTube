@@ -4,6 +4,10 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.github.libretube.api.obj.StreamItem
+import com.github.libretube.api.obj.WatchHistoryEntry
+import com.github.libretube.api.obj.WatchHistoryEntryMetadata
+import com.github.libretube.db.DatabaseHelper
+import com.github.libretube.db.DatabaseHolder
 import com.github.libretube.extensions.toMillis
 import kotlinx.datetime.LocalDate
 import kotlinx.serialization.Serializable
@@ -20,6 +24,8 @@ data class WatchHistoryItem(
     @ColumnInfo var thumbnailUrl: String? = null,
     @ColumnInfo val duration: Long? = null,
     @ColumnInfo val isShort: Boolean = false
+
+    // TODO: store date when the video was added to the history
 ) {
     val isLive get() = (duration == null) || (duration <= 0L)
 
@@ -36,4 +42,21 @@ data class WatchHistoryItem(
         duration = duration,
         isShort = isShort
     )
+
+    suspend fun toWatchHistoryEntry(): WatchHistoryEntry {
+        val watchPosition = DatabaseHolder.Database.watchPositionDao().findById(videoId)
+        val isWatched = watchPosition?.position?.let {
+            DatabaseHelper.isVideoWatched(it, duration)
+        } ?: false
+
+        return WatchHistoryEntry(
+            metadata = WatchHistoryEntryMetadata(
+                videoId = videoId,
+                finished = isWatched,
+                addedDate = -1,
+                positionMillis = watchPosition?.position,
+            ),
+            video = toStreamItem()
+        )
+    }
 }

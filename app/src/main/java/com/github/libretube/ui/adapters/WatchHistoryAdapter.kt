@@ -6,10 +6,13 @@ import androidx.core.os.bundleOf
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.ListAdapter
+import com.github.libretube.api.obj.WatchHistoryEntry
 import com.github.libretube.constants.IntentData
 import com.github.libretube.databinding.VideoRowBinding
 import com.github.libretube.db.DatabaseHolder
 import com.github.libretube.db.obj.WatchHistoryItem
+import com.github.libretube.extensions.toID
+import com.github.libretube.extensions.toLocalDate
 import com.github.libretube.helpers.ImageHelper
 import com.github.libretube.helpers.NavigationHelper
 import com.github.libretube.ui.adapters.callbacks.DiffUtilItemCallback
@@ -25,7 +28,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class WatchHistoryAdapter :
-    ListAdapter<WatchHistoryItem, WatchHistoryViewHolder>(DiffUtilItemCallback()) {
+    ListAdapter<WatchHistoryEntry, WatchHistoryViewHolder>(DiffUtilItemCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WatchHistoryViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
@@ -34,13 +37,13 @@ class WatchHistoryAdapter :
     }
 
     override fun onBindViewHolder(holder: WatchHistoryViewHolder, position: Int) {
-        val video = getItem(holder.bindingAdapterPosition)
+        val video = getItem(holder.bindingAdapterPosition).video
         holder.binding.apply {
             videoTitle.text = video.title
-            channelName.text = video.uploader
+            channelName.text = video.uploaderName
             videoInfo.text =
-                video.uploadDate?.takeIf { !video.isLive }?.let { TextUtils.localizeDate(it) }
-            ImageHelper.loadImage(video.thumbnailUrl, thumbnail)
+                video.uploaded.toLocalDate().takeIf { !video.isLive }?.let { TextUtils.localizeDate(it) }
+            ImageHelper.loadImage(video.thumbnail, thumbnail)
 
             if (video.duration != null) {
                 // we pass in 0 for the uploadDate, as a future video cannot be watched already
@@ -60,7 +63,7 @@ class WatchHistoryAdapter :
             }
 
             root.setOnClickListener {
-                NavigationHelper.navigateVideo(root.context, video.videoId)
+                NavigationHelper.navigateVideo(root.context, video.url?.toID())
             }
 
             val activity = (root.context as BaseActivity)
@@ -73,19 +76,19 @@ class WatchHistoryAdapter :
                     notifyItemChanged(position)
                 }
                 val sheet = VideoOptionsBottomSheet()
-                sheet.arguments = bundleOf(IntentData.streamItem to video.toStreamItem())
+                sheet.arguments = bundleOf(IntentData.streamItem to video)
                 sheet.show(fragmentManager, WatchHistoryAdapter::class.java.name)
                 true
             }
 
             if (video.duration != null) watchProgress.setWatchProgressLength(
-                video.videoId,
+                video.url!!.toID(),
                 video.duration
             )
 
             CoroutineScope(Dispatchers.IO).launch {
                 val isDownloaded =
-                    DatabaseHolder.Database.downloadDao().exists(video.videoId)
+                    DatabaseHolder.Database.downloadDao().exists(video.url!!.toID())
 
                 withContext(Dispatchers.Main) {
                     downloadBadge.isVisible = isDownloaded

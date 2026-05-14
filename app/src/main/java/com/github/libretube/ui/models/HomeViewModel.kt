@@ -12,12 +12,12 @@ import com.github.libretube.api.obj.Playlists
 import com.github.libretube.api.obj.StreamItem
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.db.DatabaseHelper
-import com.github.libretube.db.DatabaseHolder
 import com.github.libretube.db.obj.PlaylistBookmark
 import com.github.libretube.extensions.runSafely
 import com.github.libretube.extensions.updateIfChanged
 import com.github.libretube.helpers.PlayerHelper
 import com.github.libretube.helpers.PreferenceHelper
+import com.github.libretube.repo.UserDataRepositoryHelper
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.async
@@ -105,7 +105,7 @@ class HomeViewModel : ViewModel() {
     private suspend fun loadBookmarks() {
         runSafely(
             onSuccess = { newBookmarks -> bookmarks.updateIfChanged(newBookmarks) },
-            ioBlock = { DatabaseHolder.Database.playlistBookmarkDao().getAll() }
+            ioBlock = { UserDataRepositoryHelper.userDataRepository.getPlaylistBookmarks() }
         )
     }
 
@@ -125,10 +125,12 @@ class HomeViewModel : ViewModel() {
     }
 
     private suspend fun loadWatchingFromDB(): List<StreamItem> {
-        val videos = DatabaseHelper.getWatchHistoryPage(1, 20)
+        val videos = runCatching {
+            UserDataRepositoryHelper.userDataRepository.getWatchHistory(1)
+        }.getOrElse { emptyList() }
 
         return DatabaseHelper
-            .filterUnwatched(videos.map { it.toStreamItem() })
+            .filterUnwatched(videos.map { it.video })
     }
 
     private suspend fun tryLoadFeed(subscriptionsViewModel: SubscriptionsViewModel): List<StreamItem> {

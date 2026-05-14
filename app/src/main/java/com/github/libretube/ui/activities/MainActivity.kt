@@ -104,6 +104,14 @@ class MainActivity : AbstractPlayerHostActivity() {
         installSplashScreen()
         super.onCreate(savedInstanceState)
 
+        // show welcome activity on first app startup (or after the update to prospectively v32)
+        if (!PreferenceHelper.getBoolean(PreferenceKeys.WELCOME_ACTIVITY_FINISHED, false)) {
+            val welcomeIntent = Intent(this, WelcomeActivity::class.java)
+            startActivity(welcomeIntent)
+            finish()
+            return
+        }
+
         // show noInternet Activity if no internet available on app startup
         if (!NetworkHelper.isNetworkAvailable(this)) {
             val noInternetIntent = Intent(this, NoInternetActivity::class.java)

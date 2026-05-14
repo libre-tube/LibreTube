@@ -12,6 +12,9 @@ interface SubscriptionGroupsDao {
     @Query("SELECT * FROM subscriptionGroups ORDER BY `index` ASC")
     suspend fun getAll(): List<SubscriptionGroup>
 
+    @Query("SELECT * FROM subscriptionGroups WHERE name = :name")
+    suspend fun getByName(name: String): SubscriptionGroup?
+
     @Query("SELECT EXISTS(SELECT * FROM subscriptionGroups WHERE name = :name)")
     suspend fun exists(name: String): Boolean
 
@@ -22,7 +25,7 @@ interface SubscriptionGroupsDao {
     suspend fun insertAll(subscriptionGroups: List<SubscriptionGroup>)
 
     @Update
-    suspend fun updateAll(subscriptionGroups: List<SubscriptionGroup>)
+    suspend fun updateGroup(subscriptionGroup: SubscriptionGroup)
 
     @Query("DELETE FROM subscriptionGroups WHERE name = :name")
     suspend fun deleteGroup(name: String)

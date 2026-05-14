@@ -40,7 +40,6 @@ import com.github.libretube.helpers.PlayerHelper.getCurrentSegment
 import com.github.libretube.ui.activities.MainActivity
 import com.github.libretube.util.DefaultTrackSelectorWithAudioQualitySupport
 import com.github.libretube.util.NowPlayingNotification
-import com.github.libretube.util.PauseableTimer
 import com.github.libretube.util.PlayingQueue
 import com.github.libretube.util.PlayingQueueMode
 import com.google.common.util.concurrent.ListenableFuture
@@ -64,11 +63,6 @@ abstract class AbstractPlayerService : MediaLibraryService(), MediaLibrarySessio
 
     val handler = Handler(Looper.getMainLooper())
 
-    private val watchPositionTimer = PauseableTimer(
-        onTick = ::saveWatchPosition,
-        delayMillis = PlayerHelper.WATCH_POSITION_TIMER_DELAY_MS
-    )
-
     // SponsorBlock Segment data
     private var sponsorBlockAutoSkip = true
     protected val sponsorBlockConfig = PlayerHelper.getSponsorBlockCategories()
@@ -86,10 +80,8 @@ abstract class AbstractPlayerService : MediaLibraryService(), MediaLibrarySessio
             super.onIsPlayingChanged(isPlaying)
 
             // Start or pause watch position timer
-            if (isPlaying) {
-                watchPositionTimer.resume()
-            } else {
-                watchPositionTimer.pause()
+            if (!isPlaying) {
+                saveWatchPosition()
             }
         }
 
@@ -460,7 +452,6 @@ abstract class AbstractPlayerService : MediaLibraryService(), MediaLibrarySessio
             saveWatchPosition()
 
             notificationProvider = null
-            watchPositionTimer.destroy()
 
             handler.removeCallbacksAndMessages(null)
 

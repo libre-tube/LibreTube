@@ -1,5 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string-array name="loadDataFrom">
+        <item>@string/load_data_from_local</item>
+        <item>@string/load_data_from_piped</item>
+    </string-array>
+
+    <string-array name="loadDataFromValue">
+        <item>local</item>
+        <item>piped</item>
+    </string-array>
+
+    <string-array name="syncProvider">
+        <item>@string/none</item>
+        <item>@string/libretube_sync_server</item>
+        <item>@string/piped</item>
+    </string-array>
+
+    <string-array name="syncProviderValue">
+        <item>none</item>
+        <item>libretube</item>
+        <item>piped</item>
+    </string-array>
+
     <string-array name="themes">
         <item>@string/systemDefault</item>
         <item>@string/lightTheme</item>

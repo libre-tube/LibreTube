@@ -13,16 +13,18 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.libretube.R
 import com.github.libretube.api.obj.Subscription
 import com.github.libretube.databinding.DialogEditChannelGroupBinding
-import com.github.libretube.db.DatabaseHolder
 import com.github.libretube.db.obj.SubscriptionGroup
+import com.github.libretube.extensions.toastFromMainDispatcher
+import com.github.libretube.repo.UserDataRepositoryHelper
 import com.github.libretube.ui.adapters.SubscriptionGroupChannelsAdapter
 import com.github.libretube.ui.models.EditChannelGroupsModel
 import com.github.libretube.ui.models.SubscriptionsViewModel
+import com.github.libretube.ui.sheets.AddChannelToGroupSheet.Companion.applyGroupsDiff
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.withContext
 
 class EditChannelGroupSheet : ExpandedBottomSheet(R.layout.dialog_edit_channel_group) {
     private var _binding: DialogEditChannelGroupBinding? = null
@@ -90,16 +92,22 @@ class EditChannelGroupSheet : ExpandedBottomSheet(R.layout.dialog_edit_channel_g
     }
 
     private fun saveGroup(group: SubscriptionGroup, oldGroupName: String) {
-        // delete the old instance if the group already existed and add the updated/new one
-        channelGroupsModel.groups.value = channelGroupsModel.groups.value
-            ?.filter { it.name != oldGroupName }
-            ?.plus(group)
+        val groupsBeforeChange = channelGroupsModel.groups.value.orEmpty()
 
         CoroutineScope(Dispatchers.IO).launch {
-            // delete the old version of the group first before updating it, as the name is the
-            // primary key
-            DatabaseHolder.Database.subscriptionGroupsDao().deleteGroup(oldGroupName)
-            DatabaseHolder.Database.subscriptionGroupsDao().createGroup(group)
+            try {
+                group.id = UserDataRepositoryHelper.userDataRepository.createSubscriptionGroup(group.name)
+                withContext(Dispatchers.Main) {
+                    channelGroupsModel.groups.value = channelGroupsModel.groups.value
+                        ?.filter { it.name != oldGroupName }
+                        ?.plus(group)
+                }
+
+                val groupsAfterChange = channelGroupsModel.groups.value.orEmpty()
+                applyGroupsDiff(groupsBeforeChange, groupsAfterChange)
+            } catch (e: Exception) {
+                context?.toastFromMainDispatcher(e.message.orEmpty())
+            }
         }
     }
 
@@ -131,12 +139,13 @@ class EditChannelGroupSheet : ExpandedBottomSheet(R.layout.dialog_edit_channel_g
             return getString(R.string.group_name_error_empty)
         }
 
-        val groupExists = runBlocking(Dispatchers.IO) {
-            DatabaseHolder.Database.subscriptionGroupsDao().exists(name)
-        }
-        if (groupExists && channelGroupsModel.groupToEdit?.name != name) {
-            return getString(R.string.group_name_error_exists)
-        }
+        // TODO: either remove this check or figure out how to support this for LibreTube sync server
+//        val groupExists = runBlocking(Dispatchers.IO) {
+//            DatabaseHolder.Database.subscriptionGroupsDao().exists(name)
+//        }
+//        if (groupExists && channelGroupsModel.groupToEdit?.name != name) {
+//            return getString(R.string.group_name_error_exists)
+//        }
 
         return null
     }

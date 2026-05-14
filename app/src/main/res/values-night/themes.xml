@@ -16,6 +16,9 @@
         <item name="loadingIndicatorStyle">@style/Widget.Material3.LoadingIndicator.Contained</item>
 
         <item name="materialAlertDialogTheme">@style/AlertDialogTheme</item>
+
+        <!-- needed for ButtonGroupPreference.kt -->
+        <item name="tonalButtonStyleCustomAttr">@style/Widget.Material3Expressive.Button.TonalButton</item>
     </style>
 
     <style name="StartupTheme" parent="Theme.SplashScreen">

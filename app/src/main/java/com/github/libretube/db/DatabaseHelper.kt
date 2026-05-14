@@ -1,16 +1,20 @@
 package com.github.libretube.db
 
+import android.util.Log
 import com.github.libretube.api.obj.StreamItem
+import com.github.libretube.api.obj.WatchHistoryEntry
+import com.github.libretube.api.obj.WatchHistoryEntryMetadata
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.db.DatabaseHolder.Database
 import com.github.libretube.db.obj.SearchHistoryItem
-import com.github.libretube.db.obj.WatchHistoryItem
 import com.github.libretube.enums.ContentFilter
+import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.toID
 import com.github.libretube.helpers.PreferenceHelper
+import com.github.libretube.repo.UserDataRepositoryHelper
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
+import kotlin.time.Clock
 
 object DatabaseHelper {
     private const val MAX_SEARCH_HISTORY_SIZE = 20
@@ -20,39 +24,6 @@ object DatabaseHelper {
 
     // can only mark as watched if at least 75% watched
     private const val RELATIVE_WATCHED_THRESHOLD = 0.75f
-
-    suspend fun addToWatchHistory(watchHistoryItem: WatchHistoryItem) =
-        withContext(Dispatchers.IO) {
-            Database.watchHistoryDao().insert(watchHistoryItem)
-            val maxHistorySize = PreferenceHelper.getString(
-                PreferenceKeys.WATCH_HISTORY_SIZE,
-                "100"
-            )
-            if (maxHistorySize == "unlimited") {
-                return@withContext
-            }
-
-            // delete the first watch history entry if the limit is reached
-            val historySize = Database.watchHistoryDao().getSize()
-            if (historySize > maxHistorySize.toInt()) {
-                Database.watchHistoryDao().delete(Database.watchHistoryDao().getOldest())
-            }
-        }
-
-    suspend fun getWatchHistoryPage(page: Int, pageSize: Int): List<WatchHistoryItem> {
-        val watchHistoryDao = Database.watchHistoryDao()
-        val historySize = watchHistoryDao.getSize()
-
-        if (historySize < pageSize * (page - 1)) return emptyList()
-
-        val offset = historySize - (pageSize * page)
-        val limit = if (offset < 0) {
-            offset + pageSize
-        } else {
-            pageSize
-        }
-        return watchHistoryDao.getN(limit, maxOf(offset, 0)).reversed()
-    }
 
     suspend fun addToSearchHistory(searchHistoryItem: SearchHistoryItem) {
         Database.searchHistoryDao().insert(searchHistoryItem)
@@ -68,10 +39,25 @@ object DatabaseHelper {
         }
     }
 
-    suspend fun getWatchPosition(videoId: String) = Database.watchPositionDao().findById(videoId)?.position
+    suspend fun getWatchPosition(videoId: String) = runCatching {
+        UserDataRepositoryHelper.userDataRepository
+            .getFromWatchHistory(videoId)
+    }.getOrNull()?.metadata?.positionMillis
 
-    fun getWatchPositionBlocking(videoId: String): Long? = runBlocking(Dispatchers.IO) {
-        getWatchPosition(videoId)
+    suspend fun addToWatchHistory(video: StreamItem) = try {
+        UserDataRepositoryHelper.userDataRepository.addToWatchHistory(
+            WatchHistoryEntry(
+                metadata = WatchHistoryEntryMetadata(
+                    videoId = video.url!!.toID(),
+                    addedDate = Clock.System.now().toEpochMilliseconds(),
+                    finished = false,
+                    positionMillis = null
+                ),
+                video = video
+            )
+        )
+    } catch (e: Exception) {
+        Log.e(TAG(), e.toString())
     }
 
     suspend fun isVideoWatched(videoId: String, duration: Long): Boolean =
@@ -99,10 +85,13 @@ object DatabaseHelper {
      * @param unfinished If true, only returns unfinished videos. If false, only returns finished videos.
      */
     suspend fun filterByWatchStatus(
-        watchHistoryItem: WatchHistoryItem,
+        watchHistoryItem: WatchHistoryEntry,
         unfinished: Boolean = true
     ): Boolean {
-        return unfinished xor isVideoWatched(watchHistoryItem.videoId, watchHistoryItem.duration ?: 0)
+        return unfinished xor isVideoWatched(
+            watchHistoryItem.metadata.videoId,
+            watchHistoryItem.video.duration ?: 0
+        )
     }
 
     suspend fun filterByStreamTypeAndWatchPosition(

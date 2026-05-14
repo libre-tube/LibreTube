@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?><!-- based on https://android.googlesource.com/platform/frameworks/support/+/refs/heads/androidx-main/preference/preference/src/main/res/layout/preference.xml -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:minHeight="?android:attr/listPreferredItemHeight"
+    android:gravity="center_vertical"
+    android:background="?android:attr/selectableItemBackground"
+    android:paddingStart="?android:attr/listPreferredItemPaddingStart"
+    android:orientation="horizontal"
+    tools:ignore="RtlSymmetry"
+    android:clipToPadding="false">
+
+    <FrameLayout
+        android:id="@+id/icon_frame"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center">
+
+        <ImageView
+            android:id="@android:id/icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:maxWidth="48dp"
+            app:maxHeight="48dp"
+            tools:src="@drawable/ic_server" />
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginStart="30dip">
+
+        <TextView
+            android:id="@android:id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="?android:attr/listPreferredItemPaddingEnd"
+            android:layout_marginTop="6dip"
+            android:layout_marginBottom="6dip"
+            android:singleLine="true"
+            android:textAppearance="?android:attr/textAppearanceListItem"
+            android:textColor="?android:attr/textColorPrimary"
+            android:ellipsize="marquee"
+            android:fadingEdge="horizontal"
+            tools:text="Title of the preference" />
+
+        <!-- Preference should place its actual preference widget here. -->
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="none"
+            android:paddingEnd="?android:attr/listPreferredItemPaddingEnd"
+            android:clipToPadding="false">
+
+            <com.google.android.material.button.MaterialButtonToggleGroup
+                android:id="@+id/button_group"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:spacing="4dp"
+                app:selectionRequired="true"
+                app:singleSelection="true"
+                tools:checkedButton="@id/all_subs_btn">
+
+                <com.google.android.material.button.MaterialButton
+                    style="?materialButtonTonalStyle"
+                    android:id="@+id/no_subs_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Option A" />
+
+                <com.google.android.material.button.MaterialButton
+                    style="?materialButtonTonalStyle"
+                    android:id="@+id/all_subs_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Option B" />
+
+            </com.google.android.material.button.MaterialButtonToggleGroup>
+
+        </HorizontalScrollView>
+
+    </LinearLayout>
+</LinearLayout>

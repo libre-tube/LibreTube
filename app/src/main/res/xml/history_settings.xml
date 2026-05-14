@@ -44,11 +44,6 @@
             app:title="@string/history_size"
             app:useSimpleSummaryProvider="true" />
 
-        <Preference
-            android:icon="@drawable/ic_trash"
-            app:key="clear_watch_history"
-            app:title="@string/clear_history" />
-
     </PreferenceCategory>
 
     <PreferenceCategory app:title="@string/watch_positions_title">
@@ -61,20 +56,6 @@
             app:key="watch_positions"
             app:title="@string/watch_positions"
             app:useSimpleSummaryProvider="true" />
-
-        <Preference
-            android:icon="@drawable/ic_reset"
-            app:key="clear_watch_positions"
-            app:title="@string/reset_watch_positions" />
-
-    </PreferenceCategory>
-
-    <PreferenceCategory app:title="@string/bookmarks">
-
-        <Preference
-            android:title="@string/clear_bookmarks"
-            app:icon="@drawable/ic_bookmark"
-            app:key="clear_bookmarks" />
 
     </PreferenceCategory>
 

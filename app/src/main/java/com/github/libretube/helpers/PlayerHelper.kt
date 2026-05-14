@@ -7,6 +7,7 @@ import android.content.pm.ActivityInfo
 import android.net.Uri
 import android.os.Looper
 import android.util.Base64
+import android.util.Log
 import android.view.accessibility.CaptioningManager
 import androidx.annotation.OptIn
 import androidx.annotation.StringRes
@@ -39,14 +40,16 @@ import com.github.libretube.api.obj.ChapterSegment
 import com.github.libretube.api.obj.Segment
 import com.github.libretube.api.obj.Streams
 import com.github.libretube.api.obj.Subtitle
+import com.github.libretube.api.obj.WatchHistoryEntryMetadata
 import com.github.libretube.constants.PreferenceKeys
-import com.github.libretube.db.DatabaseHolder
-import com.github.libretube.db.obj.WatchPosition
+import com.github.libretube.db.DatabaseHelper
 import com.github.libretube.enums.PlayerEvent
 import com.github.libretube.enums.SbSkipOptions
+import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.seekBy
 import com.github.libretube.extensions.togglePlayPauseState
 import com.github.libretube.obj.VideoStats
+import com.github.libretube.repo.UserDataRepositoryHelper
 import com.github.libretube.util.TextUtils
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -54,6 +57,7 @@ import kotlinx.coroutines.launch
 import java.util.Locale
 import kotlin.math.max
 import kotlin.math.roundToInt
+import kotlin.time.Clock
 
 object PlayerHelper {
     private const val ACTION_MEDIA_CONTROL = "media_control"
@@ -61,7 +65,6 @@ object PlayerHelper {
     const val SPONSOR_HIGHLIGHT_CATEGORY = "poi_highlight"
     const val ROLE_FLAG_AUTO_GEN_SUBTITLE = C.ROLE_FLAG_SUPPLEMENTARY
     private const val MINIMUM_BUFFER_DURATION = 1000 * 10 // exo default is 50s
-    const val WATCH_POSITION_TIMER_DELAY_MS = 1000L
 
     /**
      * Playback speed while the fast forward action is active (triggered by a long press on the player)
@@ -353,16 +356,10 @@ object PlayerHelper {
         )
 
     val fullLocalMode: Boolean
-        get() = PreferenceHelper.getBoolean(
-            PreferenceKeys.FULL_LOCAL_MODE,
-            false
-        )
-
-    val localStreamExtraction: Boolean
-        get() = PreferenceHelper.getBoolean(
-            PreferenceKeys.LOCAL_STREAM_EXTRACTION,
-            true
-        )
+        get() = PreferenceHelper.getString(
+            PreferenceKeys.YOUTUBE_DATA_SOURCE,
+            "local"
+        ) == "local"
 
     val localRYD: Boolean
         get() = PreferenceHelper.getBoolean(
@@ -466,6 +463,7 @@ object PlayerHelper {
             listOf(rewindAction, playPauseAction, forwardAction)
         }
     }
+
     @OptIn(UnstableApi::class)
     private fun createRendererFactory(context: Context): DefaultRenderersFactory {
         val renderersFactory = object : DefaultRenderersFactory(context) {
@@ -483,6 +481,7 @@ object PlayerHelper {
         }
         return renderersFactory
     }
+
     /**
      * Create a basic player, that is used for all types of playback situations inside the app
      */
@@ -872,9 +871,22 @@ object PlayerHelper {
             return
         }
 
-        val watchPosition = WatchPosition(videoId, player.currentPosition)
+        val watchHistoryEntry = WatchHistoryEntryMetadata(
+            videoId = videoId,
+            finished = DatabaseHelper.isVideoWatched(
+                player.currentPosition,
+                player.duration.div(1000)
+            ),
+            addedDate = Clock.System.now().toEpochMilliseconds(),
+            positionMillis = player.currentPosition
+        )
         CoroutineScope(Dispatchers.IO).launch {
-            DatabaseHolder.Database.watchPositionDao().insert(watchPosition)
+            try {
+                UserDataRepositoryHelper.userDataRepository
+                    .updateWatchHistoryEntry(watchHistoryEntry)
+            } catch (e: Exception) {
+                Log.e(TAG(), e.toString())
+            }
         }
     }
 

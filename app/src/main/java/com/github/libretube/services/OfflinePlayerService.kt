@@ -63,10 +63,9 @@ open class OfflinePlayerService : AbstractPlayerService() {
             // add video to watch history when playback starts
             if (playbackState == Player.STATE_READY && PlayerHelper.watchHistoryEnabled) {
                 scope.launch(Dispatchers.IO) {
-                    val watchHistoryItem =
-                        downloadWithItems?.download?.toStreamItem()?.toWatchHistoryItem(videoId)
-                    if (watchHistoryItem != null) {
-                        DatabaseHelper.addToWatchHistory(watchHistoryItem)
+                    val video = downloadWithItems?.download?.toStreamItem()
+                    if (video != null) {
+                        DatabaseHelper.addToWatchHistory(video)
                     }
                 }
             }

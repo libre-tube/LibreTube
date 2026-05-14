@@ -7,8 +7,8 @@ import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.R
 import com.github.libretube.databinding.SubscriptionGroupRowBinding
-import com.github.libretube.db.DatabaseHolder
 import com.github.libretube.db.obj.SubscriptionGroup
+import com.github.libretube.repo.UserDataRepositoryHelper
 import com.github.libretube.ui.models.EditChannelGroupsModel
 import com.github.libretube.ui.sheets.EditChannelGroupSheet
 import com.github.libretube.ui.viewholders.SubscriptionGroupsViewHolder
@@ -55,8 +55,8 @@ class SubscriptionGroupsAdapter(
             .setMessage(R.string.irreversible)
             .setPositiveButton(R.string.okay) { _, _ ->
                 CoroutineScope(Dispatchers.IO).launch {
-                    DatabaseHolder.Database.subscriptionGroupsDao()
-                        .deleteGroup(groups[position].name)
+                    UserDataRepositoryHelper.userDataRepository
+                        .deleteSubscriptionGroup(groups[position].id)
 
                     groups.removeAt(position)
                     viewModel.groups.postValue(groups)

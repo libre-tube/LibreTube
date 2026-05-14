@@ -8,6 +8,14 @@
         <attr name="defValue" format="float" />
     </declare-styleable>
 
+    <declare-styleable name="ButtonGroupPreference">
+        <attr name="optionEntries" format="reference" />
+        <attr name="optionValues" format="reference" />
+    </declare-styleable>
+
+    <!-- Needed to override the button style in ButtonGroupPreference.kt -->
+    <attr name="tonalButtonStyleCustomAttr" format="reference" />
+
     <declare-styleable name="DrawableTextView">
         <attr name="drawableStartDimen" format="dimension" />
         <attr name="drawableTopDimen" format="dimension" />
