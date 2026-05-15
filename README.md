@@ -46,9 +46,7 @@ About
 
 YouTube has an extremely invasive [privacy policy](https://support.google.com/youtube/answer/10364219) which relies on using user data in unethical ways. They store a lot of your personal data - ranging from ideas, music taste, content, political opinions, and much more than you think.
 
-This project is aimed at improving the users' privacy by being independent from Google and bypassing their data collection.
-
-Therefore, the app is using the [Piped API](https://github.com/TeamPiped/Piped), which uses proxies to circumvent Google's data collection and includes some other additional features.
+LibreTube aims at improving the users' privacy by being independent from Google and bypassing their data collection as much as possible. The app only sends the minimum amount of data necessary to ensure that the app works, e.g. it only loads the YouTube-video you want to play without tracking your behavior when using the app.
 
 If you have questions or need help, please make sure to read the [FAQ](https://libre-tube.github.io/#faq) before asking for help at the community channels. The [Matrix room](https://matrix.to/#/#LibreTube:matrix.org) is considered as the main communication channel, all other forums or social media accounts are maintained by volunteers from the community but not the developer(s).
 
@@ -151,11 +149,11 @@ Contributions in any form are welcome!
 Differences to NewPipe
 </h2>
 
-With LibreTube, you have the choice to either send all requests directly to YouTube or proxy them via Piped for better privacy. Piped acts as a middleman server between you and YouTube in this case, which prevents YouTube from accessing personal information such as your IP address. 
-Additionally, using Piped allows you to sync your subscriptions between LibreTube and Piped, which can be used on desktop too.
+LibreTube's main difference to NewPipe is that it has a much stronger focus on user experience. LibreTube uses the modern [Material 3 Expressive](https://m3.material.io) design, supports external APIs such as SponsorBlock, ReturnYouTubeDislike, or DeArrow, and allows you to synchronize your user data across devices, e.g. via Piped. <!-- TODO: replace with LibreTube sync server -->
 
-While LibreTube only supports YouTube, NewPipe also allows the use of other platforms like SoundCloud, PeerTube, Bandcamp and media.ccc.de.<br>
-Both are great clients for watching YouTube videos. It depends on the individual's use case which one fits their needs better.
+While LibreTube only supports content from YouTube, NewPipe also allows the use of other platforms like SoundCloud, PeerTube, Bandcamp and media.ccc.de.
+
+Both, LibreTube and NewPipe, are great clients for watching YouTube videos. There's no general answer about which one is better, just try them both and see which one fits you best.
 
 <h2 align="left">
 <sub>
