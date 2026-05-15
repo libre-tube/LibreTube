@@ -27,8 +27,16 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class HomeViewModel : ViewModel() {
-    private val hideWatched get() = PreferenceHelper.getBoolean(PreferenceKeys.HIDE_WATCHED_FROM_FEED, false)
-    private val showUpcoming get() = PreferenceHelper.getBoolean(PreferenceKeys.SHOW_UPCOMING_IN_FEED, true)
+    private val hideWatched
+        get() = PreferenceHelper.getBoolean(
+            PreferenceKeys.HIDE_WATCHED_FROM_FEED,
+            false
+        )
+    private val showUpcoming
+        get() = PreferenceHelper.getBoolean(
+            PreferenceKeys.SHOW_UPCOMING_IN_FEED,
+            true
+        )
 
     val trending: MutableLiveData<Pair<TrendingCategory, TrendsViewModel.TrendingStreams>> =
         MutableLiveData(null)
@@ -73,6 +81,7 @@ class HomeViewModel : ViewModel() {
             }
         }
     }
+
     private suspend fun loadTrending(context: Context) {
         val region = PreferenceHelper.getTrendingRegion(context)
         val category = PreferenceHelper.getString(
@@ -132,10 +141,12 @@ class HomeViewModel : ViewModel() {
     }
 
     private suspend fun tryLoadFeed(subscriptionsViewModel: SubscriptionsViewModel): List<StreamItem> {
-        subscriptionsViewModel.videoFeed.value?.let { return it }
-
-        val feed = SubscriptionHelper.getFeed(forceRefresh = false)
-        subscriptionsViewModel.videoFeed.postValue(feed)
+        // use cached feed if available, otherwise load feed from API/database
+        val feed = subscriptionsViewModel.videoFeed.value ?: run {
+            SubscriptionHelper.getFeed(forceRefresh = false).also {
+                subscriptionsViewModel.videoFeed.postValue(it)
+            }
+        }
 
         return DatabaseHelper.filterByStreamTypeAndWatchPosition(feed, hideWatched, showUpcoming)
     }
