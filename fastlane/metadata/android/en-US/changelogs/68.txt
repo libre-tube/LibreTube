@@ -1,0 +1,6 @@
+This release includes mostly bugfixes.
+
+Most importantly this fixes that:
+- the keyboard opened after you left a fullscreen video
+- local streams/feed extraction was not enabled by default, which is very inconvenient for new users
+- subtitles automatically disabled themselves when the video was buffering
