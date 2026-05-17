@@ -21,6 +21,9 @@ class PoTokenGenerator : PoTokenProvider {
     private var webPoTokenVisitorData: String? = null
     private var webPoTokenGenerator: PoTokenWebView? = null
 
+    private var poToken: PoTokenResult? = null
+
+    fun getCachedWebClientPoToken(): PoTokenResult? = poToken
 
     override fun getWebClientPoToken(videoId: String): PoTokenResult? {
         if (!supportsWebView) {
@@ -28,6 +31,7 @@ class PoTokenGenerator : PoTokenProvider {
         }
 
         return getWebClientPoToken(videoId, false)
+            .also { poToken = it }
     }
 
     /**

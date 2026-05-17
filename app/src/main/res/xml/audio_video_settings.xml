@@ -64,4 +64,15 @@
 
     </PreferenceCategory>
 
+    <PreferenceCategory app:title="@string/advanced">
+
+        <SwitchPreferenceCompat
+            android:icon="@drawable/ic_experiment"
+            android:summary="@string/sabr_streaming_summary"
+            app:defaultValue="false"
+            app:key="prefer_sabr"
+            app:title="@string/sabr_streaming" />
+
+    </PreferenceCategory>
+
 </PreferenceScreen>

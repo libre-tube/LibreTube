@@ -125,6 +125,7 @@ object PreferenceKeys {
     const val LOCAL_RYD = "local_return_youtube_dislikes"
     const val LOCAL_STREAM_EXTRACTION = "local_stream_extraction"
     const val INCLUDE_TIMESTAMP_IN_BACKUP_FILENAME = "include_timestamp_in_filename"
+    const val PREFER_SABR = "prefer_sabr"
 
     // History
     const val WATCH_HISTORY_SIZE = "watch_history_size"

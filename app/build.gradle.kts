@@ -1,5 +1,6 @@
 import java.util.Properties
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import com.google.protobuf.gradle.id
 
 plugins {
     alias(libs.plugins.androidApplication)
@@ -8,6 +9,7 @@ plugins {
     alias(libs.plugins.androidx.navigation.safeargs)
     alias(libs.plugins.baselineprofile)
     alias(libs.plugins.ksp)
+    alias(libs.plugins.google.protobuf)
 }
 
 /*
@@ -159,6 +161,8 @@ dependencies {
     implementation(libs.kotlinx.serialization)
     implementation(libs.kotlinx.datetime)
     implementation(libs.converter.kotlinx.serialization)
+    implementation(libs.google.protobuf.javalite)
+    implementation(libs.google.protobuf.kotlin.lite)
 
     /* NewPipe Extractor */
     implementation(libs.newpipeextractor)
@@ -182,4 +186,24 @@ dependencies {
 
     /* Testing */
     testImplementation(libs.junit)
+}
+
+//TODO: exclude from release protobuf
+protobuf {
+    protoc {
+        artifact = libs.protobuf.protoc.get().toString()
+    }
+    generateProtoTasks {
+        all().forEach { task ->
+            task.plugins {
+                //TODO: only generate kotlin code
+                id("java") {
+                    option("lite")
+                }
+//                id("kotlin") {
+//                    option("lite")
+//                }
+            }
+        }
+    }
 }
