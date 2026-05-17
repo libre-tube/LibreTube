@@ -45,19 +45,19 @@ data class StreamItem(
         )
     }
 
-    fun toFeedItem() = SubscriptionsFeedItem(
+    fun toFeedItem(existingFeedItem: SubscriptionsFeedItem? = null) = SubscriptionsFeedItem(
         videoId = url!!.toID(),
-        title = title,
-        thumbnail = thumbnail,
-        uploaderName = uploaderName,
-        uploaded = uploaded,
-        uploaderAvatar = uploaderAvatar,
-        uploaderUrl = uploaderUrl,
-        duration = duration,
-        uploaderVerified = uploaderVerified ?: false,
-        shortDescription = shortDescription,
-        views = views,
-        isShort = isShort
+        title = title ?: existingFeedItem?.title,
+        thumbnail = thumbnail ?: existingFeedItem?.thumbnail,
+        uploaderName = uploaderName ?: existingFeedItem?.uploaderName,
+        uploaded = uploaded.takeIf { it > 0 } ?: existingFeedItem?.uploaded ?: uploaded,
+        uploaderAvatar = uploaderAvatar ?: existingFeedItem?.uploaderAvatar,
+        uploaderUrl = uploaderUrl ?: existingFeedItem?.uploaderUrl,
+        duration = duration ?: existingFeedItem?.duration,
+        uploaderVerified = uploaderVerified ?: existingFeedItem?.uploaderVerified ?: false,
+        shortDescription = shortDescription ?: existingFeedItem?.shortDescription,
+        views = views ?: existingFeedItem?.views,
+        isShort = isShort || existingFeedItem?.isShort == true
     )
     
     fun toWatchHistoryItem(videoId: String) = WatchHistoryItem(
