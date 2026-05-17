@@ -547,6 +547,7 @@
     <string name="showing_results_for">Showing results for:</string>
     <string name="long_press_fast_forward">Fast forward on long press</string>
     <string name="long_press_fast_forward_summary">Play video with double speed while tapping and holding the screen.</string>
+    <string name="resume_all">Resume Downloads</string>
 
     <!-- Notification channel strings -->
     <string name="download_channel_name">Download Service</string>
