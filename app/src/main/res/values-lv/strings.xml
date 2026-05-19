@@ -17,7 +17,7 @@
     <string name="login_register">Pierakstīties/reģistrēties</string>
     <string name="empty">Jums jāievada lietotājvārds un parole.</string>
     <string name="yes">Jā</string>
-    <string name="videos">Videoklipi</string>
+    <string name="videos">Video</string>
     <string name="subscribe">Abonēt</string>
     <string name="share">Kopīgot</string>
     <string name="download">Lejupielādēt</string>
@@ -95,8 +95,8 @@
     <string name="location">Vieta</string>
     <string name="instance">Serveris (Instance)</string>
     <string name="customization">Pielāgojumi</string>
-    <string name="website">Mājaslapa</string>
-    <string name="sponsorblock_notifications">Notifikācijas</string>
+    <string name="website">Vietne</string>
+    <string name="sponsorblock_notifications">Paziņojumi</string>
     <string name="enabled">Ieslēgts</string>
     <string name="disabled">Izslēgts</string>
     <string name="app_icon">Ikona</string>
@@ -198,9 +198,9 @@
     <string name="playerAudioQuality">Audio kvalitāte</string>
     <string name="worst_quality">Sliktākā</string>
     <string name="default_subtitle_language">Subtitru valoda</string>
-    <string name="notifications">Notifikācijas</string>
-    <string name="notify_new_streams">Rādīt jauna satura notifikācijas</string>
-    <string name="notify_new_streams_summary">Rādīt notifikācijas par jaunu saturu no veidotājiem, kuriem jūs sekojat</string>
+    <string name="notifications">Paziņojumi</string>
+    <string name="notify_new_streams">Paziņot par jauniem video</string>
+    <string name="notify_new_streams_summary">Rāda paziņojumus, kad abonētie kanāli publicē jaunus video</string>
     <string name="irreversible">Vai tiešām? Šī darbība ir neatgriezeniska!</string>
     <string name="most_recent">Jaunākie</string>
     <string name="least_recent">Senākie</string>
@@ -212,7 +212,7 @@
     <string name="required_network">Nepieciešamais savienojums</string>
     <string name="network_all">Visi</string>
     <string name="network_wifi">Tikai caur Wi-Fi</string>
-    <string name="translate">Tulkošana</string>
+    <string name="translate">Tulkot</string>
     <string name="checking_frequency">Pārbaudīt ik pēc …</string>
     <string name="error_occurred">Kļūda</string>
     <string name="copied">Nokopēts</string>
@@ -242,7 +242,7 @@
     <string name="player_resize_mode">Izmēra mainīšanas režīms</string>
     <string name="maximum_image_cache">Maksimālais attēlu kešatmiņas izmērs</string>
     <string name="device_info">Informācija par ierīci</string>
-    <string name="audio_video_summary">Kvalitāte un formāts</string>
+    <string name="audio_video_summary">Kvalitāte un izšķirtspēja</string>
     <string name="delete">Dzēst no lejupielādēm</string>
     <string name="renamePlaylist">Pārsaukt atskaņošanas sarakstu</string>
     <string name="new_videos_badge">Jauno video indikators</string>
@@ -305,7 +305,7 @@
     <string name="unsupported_file_format">Neatbalstīts datnes formāts: %1$s</string>
     <string name="auto_quality">Automātiski</string>
     <string name="play_all">Atskaņot visus</string>
-    <string name="notification_time">Ierobežot paziņojumu laiku</string>
+    <string name="notification_time">Ierobežot paziņošanas laiku</string>
     <string name="limit_to_runtime">Tikai tad, kad izmanto</string>
     <string name="theme_monochrome">Minimālisma vienkrāsains</string>
     <string name="comments_disabled">Augšupielādētājs ir atspējojis komentārus.</string>
@@ -328,7 +328,7 @@
     <string name="bookmarks">Grāmatzīmes</string>
     <string name="bookmark">Grāmatzīme</string>
     <string name="codecs">Video kodeki</string>
-    <string name="push_channel_description">Parāda paziņojumu, kad ir pieejamas jaunas straumes.</string>
+    <string name="push_channel_description">Parāda paziņojumu, kad pieejami jauni video.</string>
     <string name="help">Palīdzība</string>
     <string name="faq">Biežāk uzdotie jautājumi</string>
     <string name="concurrent_downloads_limit_reached">Sasniegts vienlaikus atļauto lejuipelāžu skaits.</string>
@@ -341,7 +341,7 @@
     <string name="trending">Kas šobrīd ir tendencēs</string>
     <string name="clear_bookmarks">Dzēst grāmatzīmes</string>
     <string name="sleep_timer">Miega taimeris</string>
-    <string name="download_channel_description">Rādīt paziņojumu, lejupielādējot video.</string>
+    <string name="download_channel_description">Rāda paziņojumu, kad lejupielādē video.</string>
     <string name="uploaderAndVideoCount">%1$s • %2$d videoklipi</string>
     <string name="subscriberAndVideoCounts">%1$s abonenti • %2$d videoklipi</string>
     <string name="failed_fetching_instances">Nevarēja izgūt pieejamos gadījumus.</string>
@@ -371,7 +371,7 @@
     <string name="creation_date_reversed">Izveidošanas datums (apgriezts)</string>
     <string name="alphabetic_reversed">Alfabētisks (apgriezts)</string>
     <string name="unlimited_search_history">Neierobežota meklēšanas vēsture</string>
-    <string name="shorts_notifications">Notifikācijas īsajiem video</string>
+    <string name="shorts_notifications">Paziņot arī par jauniem īsajiem video</string>
     <string name="alphabetic">Alfabētisks</string>
     <string name="import_subscriptions_from">Ievietot abonementus no</string>
     <string name="export_subscriptions_to">Izgūt abonementus uz</string>
@@ -448,7 +448,7 @@
     <string name="audio_language">Audio valoda</string>
     <string name="repeat_mode_all">Atkārtot visus</string>
     <string name="dearrow_summary">Rāda daudz precīzākus un mazāk sensacionālus virsrakstus un sīkattēlus. Palielina ielādes laiku</string>
-    <string name="download_playlist_note">Lūdzu, atlasiet maksimālo audio/video lejupielādes kvalitāti. Subtitri tiks lejupielādēti tikai tad, ja tie ir pieejami.</string>
+    <string name="download_playlist_note">Lūdzu, atlasiet maksimālo audio/video lejupielādes kvalitāti. Subtitri arī tiks lejupielādēti, ja tie ir pieejami.</string>
     <string name="dubbed_audio_track">ieskaņotais</string>
     <string name="time_in_minutes">Laiks minūtēs</string>
     <string name="original_or_main_audio_track">oriģinālais vai galvenais</string>
@@ -534,4 +534,6 @@
     <string name="never_show_again">Nekad vairs nerādīt</string>
     <string name="unsubscribe_snackbar_message">Veiksmīgi atcelts %1$s abonements</string>
     <string name="backup_creation_failed">Neizdevās izveidot dublējumu</string>
+    <string name="playback_pitch_semitone_error_input">Vērtībai jābūt diapazonā no -%1$.1f (minimums) līdz %1$.1f (maksimums)</string>
+    <string name="enqueue_playlist_description">Paziņo, kad atskaņošanas saraksta video tiek ievietoti lejupielādes rindā.</string>
 </resources>
