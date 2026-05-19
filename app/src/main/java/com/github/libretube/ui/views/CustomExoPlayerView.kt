@@ -354,7 +354,6 @@ class CustomExoPlayerView(
 
         fullscreenResolution = PlayerHelper.getDefaultResolution(context, true)
         noFullscreenResolution = PlayerHelper.getDefaultResolution(context, false)
-        updateResolution(commonPlayerViewModel.isFullscreen.value == true)
     }
 
     override fun setPlayer(player: Player?) {
@@ -1059,7 +1058,7 @@ class CustomExoPlayerView(
             .show(supportFragmentManager)
     }
 
-    private fun updateResolution(isFullscreen: Boolean) {
+    fun updateResolution(isFullscreen: Boolean) {
         if (!isFullscreen && noFullscreenResolution != null) {
             setPlayerResolution(noFullscreenResolution!!)
         } else if (fullscreenResolution != null) {
