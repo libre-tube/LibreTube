@@ -559,7 +559,7 @@ class PlayerFragment : Fragment(R.layout.fragment_player), CustomPlayerCallback 
 
             playerController = it
             playerController.addListener(playerListener)
-            connectToPlayerView()
+            connectToPlayerView(playerController)
             updatePlayPauseButton()
 
             if (!startNewSession) {
@@ -802,7 +802,7 @@ class PlayerFragment : Fragment(R.layout.fragment_player), CustomPlayerCallback 
             )
         )
 
-        binding.player.player = null
+        binding.player.detachPlayer()
 
         playerController.release()
         killPlayerFragment()
@@ -1110,16 +1110,16 @@ class PlayerFragment : Fragment(R.layout.fragment_player), CustomPlayerCallback 
         playerBackgroundBinding.videoTransitionProgress.isVisible = !show
     }
 
-    private fun connectToPlayerView() {
+    private fun connectToPlayerView(player: Player) {
         // initialize the player view actions
         binding.player.initialize(
             chaptersViewModel,
             commonPlayerViewModel,
             viewModel,
             viewLifecycleOwner,
-            this
+            this,
+            player
         )
-        binding.player.player = playerController
     }
 
     @SuppressLint("SetTextI18n")
@@ -1415,7 +1415,7 @@ class PlayerFragment : Fragment(R.layout.fragment_player), CustomPlayerCallback 
             viewModel.isOrientationChangeInProgress = true
 
             // detach player view from player to stop surface rendering
-            binding.player.player = null
+            binding.player.detachPlayer()
 
             if (::playerController.isInitialized) playerController.release()
 
