@@ -523,8 +523,6 @@ class PlayerFragment : Fragment(R.layout.fragment_player), CustomPlayerCallback 
             onBackPressedCallback.isEnabled = isMiniPlayerVisible != true
         }
 
-        connectToPlayerView()
-
         toggleVideoInfoVisibility(false)
     }
 
@@ -561,6 +559,7 @@ class PlayerFragment : Fragment(R.layout.fragment_player), CustomPlayerCallback 
 
             playerController = it
             playerController.addListener(playerListener)
+            connectToPlayerView()
             updatePlayPauseButton()
 
             if (!startNewSession) {
@@ -1074,6 +1073,9 @@ class PlayerFragment : Fragment(R.layout.fragment_player), CustomPlayerCallback 
         // set the default subtitle if available
         binding.player.updateCurrentSubtitle(viewModel.currentCaptionId)
 
+        // set the default resolution
+        binding.player.updateResolution(commonPlayerViewModel.isFullscreen.value == true)
+
         if (streams.category == Streams.CATEGORY_MUSIC) {
             playerController.setPlaybackSpeed(1f)
         }
@@ -1117,6 +1119,7 @@ class PlayerFragment : Fragment(R.layout.fragment_player), CustomPlayerCallback 
             viewLifecycleOwner,
             this
         )
+        binding.player.player = playerController
     }
 
     @SuppressLint("SetTextI18n")
@@ -1125,10 +1128,7 @@ class PlayerFragment : Fragment(R.layout.fragment_player), CustomPlayerCallback 
 
         setPlayerDefaults()
 
-        binding.player.apply {
-            useController = false
-            player = playerController
-        }
+        binding.player.useController = false
 
         if (binding.playerMotionLayout.progress != 1.0f) {
             // show controllers when not in picture in picture mode
