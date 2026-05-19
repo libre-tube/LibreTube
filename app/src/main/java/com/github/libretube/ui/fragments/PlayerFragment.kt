@@ -559,7 +559,7 @@ class PlayerFragment : Fragment(R.layout.fragment_player), CustomPlayerCallback 
 
             playerController = it
             playerController.addListener(playerListener)
-            connectToPlayerView()
+            connectToPlayerView(playerController)
             updatePlayPauseButton()
 
             if (!startNewSession) {
@@ -1110,16 +1110,16 @@ class PlayerFragment : Fragment(R.layout.fragment_player), CustomPlayerCallback 
         playerBackgroundBinding.videoTransitionProgress.isVisible = !show
     }
 
-    private fun connectToPlayerView() {
+    private fun connectToPlayerView(player: Player) {
         // initialize the player view actions
         binding.player.initialize(
             chaptersViewModel,
             commonPlayerViewModel,
             viewModel,
             viewLifecycleOwner,
-            this
+            this,
+            player
         )
-        binding.player.player = playerController
     }
 
     @SuppressLint("SetTextI18n")

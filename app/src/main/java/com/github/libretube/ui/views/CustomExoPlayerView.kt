@@ -197,13 +197,15 @@ class CustomExoPlayerView(
         commonPlayerViewModel: CommonPlayerViewModel,
         playerViewModel: PlayerViewModel,
         viewLifecycleOwner: LifecycleOwner,
-        playerCallback: CustomPlayerCallback
+        playerCallback: CustomPlayerCallback,
+        player: Player,
     ) {
         this.chaptersViewModel = chaptersViewModel
         this.playerViewModel = playerViewModel
         this.commonPlayerViewModel = commonPlayerViewModel
         this.viewLifecycleOwner = viewLifecycleOwner
         this.playerCallback = playerCallback
+        this.player = player
 
         initializeGestureProgress()
 
@@ -262,14 +264,14 @@ class CustomExoPlayerView(
             updateDisplayedDurationType(false)
         }
         binding.position.setOnClickListener {
-            if (playerCallback.isVideoLive()) player?.let { it.seekTo(it.duration) }
+            if (playerCallback.isVideoLive()) player.let { it.seekTo(it.duration) }
         }
 
         activity.supportFragmentManager.setFragmentResultListener(
             ChaptersBottomSheet.SEEK_TO_POSITION_REQUEST_KEY,
             findViewTreeLifecycleOwner() ?: activity
         ) { _, bundle ->
-            player?.seekTo(bundle.getLong(IntentData.currentPosition))
+            player.seekTo(bundle.getLong(IntentData.currentPosition))
         }
 
         // enable the chapters dialog in the player
@@ -277,7 +279,7 @@ class CustomExoPlayerView(
             val sheet = chaptersBottomSheet ?: ChaptersBottomSheet()
                 .apply {
                     arguments = bundleOf(
-                        IntentData.duration to player?.duration?.div(1000)
+                        IntentData.duration to player.duration.div(1000)
                     )
                 }
                 .also {
@@ -352,22 +354,6 @@ class CustomExoPlayerView(
             submitDialog.show((context as BaseActivity).supportFragmentManager, null)
         }
 
-        fullscreenResolution = PlayerHelper.getDefaultResolution(context, true)
-        noFullscreenResolution = PlayerHelper.getDefaultResolution(context, false)
-    }
-
-    override fun setPlayer(player: Player?) {
-        // ensure that the below listeners are only
-        // initialized one single time to the same player
-        if (player == this.player) return
-
-        super.setPlayer(player)
-        player?.let {
-            connectViewToPlayer(it)
-        }
-    }
-
-    private fun connectViewToPlayer(player: Player) {
         binding.playPauseBTN.setOnClickListener {
             player.togglePlayPauseState()
         }
@@ -413,6 +399,9 @@ class CustomExoPlayerView(
 
             if (isFullscreen()) toggleSystemBars(!isPlayerLocked)
         }
+
+        fullscreenResolution = PlayerHelper.getDefaultResolution(context, true)
+        noFullscreenResolution = PlayerHelper.getDefaultResolution(context, false)
 
         updateCurrentPosition()
     }
