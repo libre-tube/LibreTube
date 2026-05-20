@@ -304,6 +304,12 @@ object PlayerHelper {
             true
         )
 
+    val swipeGestureSystemVolume: Boolean
+        get() = PreferenceHelper.getBoolean(
+            PreferenceKeys.PLAYER_SWIPE_CONTROLS_SYSTEM_VOLUME,
+            true
+        )
+
     val fullscreenGesturesEnabled: Boolean
         get() = PreferenceHelper.getBoolean(
             PreferenceKeys.FULLSCREEN_GESTURES,
