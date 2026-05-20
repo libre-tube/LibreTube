@@ -67,6 +67,7 @@ object PreferenceKeys {
     const val QUEUE_AUTO_INSERT_RELATED = "queue_insert_related_videos"
     const val AUTOPLAY_PLAYLISTS = "autoplay_playlists"
     const val PLAYER_SWIPE_CONTROLS = "player_swipe_controls"
+    const val PLAYER_SWIPE_CONTROLS_SYSTEM_VOLUME = "player_swipe_controls_system_volume"
     const val PLAYER_PINCH_CONTROL = "player_pinch_control"
     const val CAPTIONS_SIZE = "captions_size"
     const val DOUBLE_TAP_TO_SEEK = "double_tap_seek"
