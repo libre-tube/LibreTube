@@ -287,7 +287,7 @@ class SabrClient private constructor(
         }
 
         // clear previous format to prevent advertising stale data to the server
-        previousFormat?.let { initializedFormats.remove(it.stream.itag) }
+//        previousFormat?.let { initializedFormats.remove(it.stream.itag) }
     }
 
     fun getNextSegment(playbackRequest: PlaybackRequest): Segment? {
@@ -320,6 +320,11 @@ class SabrClient private constructor(
 
                     // fetch new data
                     media(playbackRequest)
+
+                    // clear previous formats to prevent advertising stale data to the server/buffering them
+                    // we only dio this after requesting new data, to avoid accidentally clearing to the currently selected format,
+                    // e.g. killing the current buffer
+                    initializedFormats.keys.retainAll { audioFormat.stream.itag == it || videoFormat?.stream?.itag == it }
                 }
                 format = format ?: initializedFormats[itag]
                 return@withContext format?.getSegment(playbackRequest.segment)
