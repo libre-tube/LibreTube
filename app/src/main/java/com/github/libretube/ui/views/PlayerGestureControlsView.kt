@@ -20,6 +20,8 @@ class PlayerGestureControlsView(
         // make progress accordingly, store oldProgress before changing it to avoid
         // inconsistency when old progress > new max
         binding.brightnessProgressBar.apply {
+            if (max == 0) return@apply
+
             val oldMax = max
             val oldProgress = progress
             max = (height * 0.7).toInt()
@@ -27,6 +29,8 @@ class PlayerGestureControlsView(
         }
 
         binding.volumeProgressBar.apply {
+            if (max == 0) return@apply
+
             val oldMax = max
             val oldProgress = progress
             max = (height * 0.7).toInt()
