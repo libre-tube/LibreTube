@@ -463,4 +463,26 @@
     <string name="autoplay_playlists">Reproducción automática en listas</string>
     <string name="export_playlist">Exportar lista</string>
     <string name="download_playlist">Descargar lista</string>
+    <string name="show_updates_summary">Buscar actualizaciones automáticamente cada vez que la aplicación se ejecute.</string>
+    <string name="checking_frequency_12_hours">12 horas</string>
+    <string name="checking_frequency_1_day">1 Día</string>
+    <string name="sort_channel">Nombre del canal</string>
+    <string name="change_instance">Cambiar instancia</string>
+    <string name="title">Titulo</string>
+    <string name="upvote">Arriba</string>
+    <string name="downvote">Abajo</string>
+    <string name="audio_language">Idioma del audio</string>
+    <string name="default_language">Por defecto</string>
+    <string name="external_player">Reproductor externo</string>
+    <string name="screenshot">Captura de pantalla</string>
+    <string name="screenshot_saved">Captura de pantalla guardada</string>
+    <string name="mode_of_operation">Modo de operación</string>
+    <string name="watched">Visto</string>
+    <string name="no_segments_found">Todavía no hay segmentos para este video.</string>
+    <string name="change">Cambiar</string>
+    <string name="gestures">Gestos</string>
+    <string name="dialog_play_offline_title">Una versión local de este vídeo esta disponible.</string>
+    <string name="authentication">Autenticación</string>
+    <string name="music">Música</string>
+    <string name="did_you_mean">Quisiste decir:</string>
 </resources>
