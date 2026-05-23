@@ -1,0 +1,4 @@
+This release fixes that channel videos and the feed don't load.
+The cause are breaking changes made by YouTube in their API.
+
+Big thanks to https://github.com/AudricV and https://github.com/Ecomont for working on the fixes upstream!
