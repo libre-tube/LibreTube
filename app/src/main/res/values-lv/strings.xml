@@ -92,7 +92,7 @@
     <string name="category_outro">Beigu ekrāns un titri</string>
     <string name="category_intro_summary">Šeit ietilpst brīži bez reāla satura, piemēram, pārtraukumi, statisks kadri, atkārtotas animācijas. Brīži, kuros ietilpst kaut kāda informācija, neskaitās</string>
     <string name="settings">Iestatījumi</string>
-    <string name="location">Vieta</string>
+    <string name="location">Atrašanās vieta</string>
     <string name="instance">Serveris (Instance)</string>
     <string name="customization">Pielāgojumi</string>
     <string name="website">Vietne</string>
@@ -117,7 +117,7 @@
     <string name="app_uptodate">Šī ir jaunākā versija.</string>
     <string name="advanced">Tehniski</string>
     <string name="player">Atskaņotājs</string>
-    <string name="appearance_summary">Pielāgojiet aplikāciju tā, kā jūs to vēlaties</string>
+    <string name="appearance_summary">Pielāgot lietotnes izskatu, izvietojumu un izkārtojumu pēc savas gaumes</string>
     <string name="playback_speed">Atskaņošanas ātrums</string>
     <string name="live">Tiešraide</string>
     <string name="customInstance_summary">Pievienot…</string>
@@ -161,8 +161,8 @@
     <string name="turnInternetOn">Lūdzu, ieslēdziet Wi-Fi vai mobilos datus, lai savienotos ar internetu.</string>
     <string name="open">Atvērt…</string>
     <string name="chapters">Nodaļas</string>
-    <string name="require_restart">Nepieciešams restartēt aplikāciju</string>
-    <string name="require_restart_message">Restartējiet aplikāciju, lai veiktu jaunās izmaiņas.</string>
+    <string name="require_restart">Nepieciešams lietotni aizvērt un palaist pa jaunu</string>
+    <string name="require_restart_message">Aizveriet un palaidiet pa jaunu lietotni, lai izmaiņas stātos spēkā.</string>
     <string name="auth_instance">Autentificētā instance</string>
     <string name="watch_positions">Saglabāt atskaņošanas pozīciju</string>
     <string name="auth_instance_summary">Lietojiet citu instanci priekš autentificētiem pieprasījumiem</string>
@@ -226,7 +226,7 @@
     <string name="add_to_queue">Pievienot rindai</string>
     <string name="misc">Citi</string>
     <string name="take_a_break">Laiks pārtraukumam</string>
-    <string name="yt_shorts">Īsais video</string>
+    <string name="yt_shorts">Īsie video</string>
     <string name="resize_mode_fill">Piepildīt</string>
     <string name="no_subtitles_available">Subtitri nav pieejami</string>
     <string name="resize_mode_zoom">Pietuvināt</string>
@@ -336,9 +336,9 @@
     <string name="concurrent_downloads">Vienlaikus atļautās lejupielādes</string>
     <string name="unknown">Nezināms</string>
     <string name="pause">Pauzēt</string>
-    <string name="trends">Trendi</string>
+    <string name="trends">Pašlaik populārs</string>
     <string name="double_tap_seek">Piesist divreiz, lai patītu</string>
-    <string name="trending">Kas šobrīd ir tendencēs</string>
+    <string name="trending">Kas pašlaik populārs</string>
     <string name="clear_bookmarks">Dzēst grāmatzīmes</string>
     <string name="sleep_timer">Miega taimeris</string>
     <string name="download_channel_description">Rāda paziņojumu, kad lejupielādē video.</string>
@@ -351,12 +351,12 @@
     <string name="featured">Piedāvātie</string>
     <string name="alternative_pip_controls">Alternatīvas PiP vadīklas</string>
     <string name="fullscreen_gestures">Pilnekrāna režīma ieslēgšanas/izslēgšanas žesti</string>
-    <string name="show_stream_thumbnails">Rādīt straumju sīktēlus</string>
-    <string name="show_stream_thumbnails_summary">Rādīt jaunu straumju sīktēlus. Patērē vairāk datus</string>
+    <string name="show_stream_thumbnails">Rādīt video sīkattēlus</string>
+    <string name="show_stream_thumbnails_summary">Rāda jauno video sīkattēlus. Patērē vairāk datus</string>
     <plurals name="channel_new_streams">
-        <item quantity="zero">%d jaunu straumju</item>
-        <item quantity="one">%d jauna straume</item>
-        <item quantity="other">%d jaunas straumes</item>
+        <item quantity="zero">%d jauni video</item>
+        <item quantity="one">%d jauns video</item>
+        <item quantity="other">%d jauni video</item>
     </plurals>
     <string name="go_to_video">Doties uz video</string>
     <string name="disable_proxy">Atspējot Piped starpniekserveri</string>
@@ -371,13 +371,13 @@
     <string name="creation_date_reversed">Izveidošanas datums (apgriezts)</string>
     <string name="alphabetic_reversed">Alfabētisks (apgriezts)</string>
     <string name="unlimited_search_history">Neierobežota meklēšanas vēsture</string>
-    <string name="shorts_notifications">Paziņot arī par jauniem īsajiem video</string>
+    <string name="shorts_notifications">Paziņot arī par jauniem īsiem video</string>
     <string name="alphabetic">Alfabētisks</string>
     <string name="import_subscriptions_from">Ievietot abonementus no</string>
     <string name="export_subscriptions_to">Izgūt abonementus uz</string>
     <string name="play_automatically">Atskaņot automātiski</string>
     <string name="play_automatically_summary">Sākt automātiski atskaņot video, kad to atlasa</string>
-    <string name="home_tab_content">Sākumlapas saturs</string>
+    <string name="home_tab_content">Sākuma cilnes saturs</string>
     <string name="welcome">Laipni lūgti LibreTube</string>
     <string name="choose_instance">Vispirms atlasiet instanci!</string>
     <string name="off">Izslēgts</string>
@@ -478,7 +478,7 @@
     <string name="sort_size">Izmēra</string>
     <string name="sort_channel">Kanāla nosaukuma</string>
     <string name="createNewPlaylist">Izveidot jaunu atskaņošanas sarakstu</string>
-    <string name="show_updates_summary">Automātiski pārbaudīt atjauninājumus katru reizi, kad tiek palaista lietotne.</string>
+    <string name="show_updates_summary">Automātiski pārbauda atjauninājumus katru reizi, kad palaiž lietotni.</string>
     <string name="checking_frequency_15_minutes">15 minūtēm</string>
     <string name="checking_frequency_30_minutes">30 minūtēm</string>
     <string name="checking_frequency_60_minutes">60 minūtēm</string>
@@ -536,4 +536,8 @@
     <string name="backup_creation_failed">Neizdevās izveidot dublējumu</string>
     <string name="playback_pitch_semitone_error_input">Vērtībai jābūt diapazonā no -%1$.1f (minimums) līdz %1$.1f (maksimums)</string>
     <string name="enqueue_playlist_description">Paziņo, kad atskaņošanas saraksta video tiek ievietoti lejupielādes rindā.</string>
+    <string name="authentication">Autorizācija</string>
+    <string name="trailers">Filmu reklāmkadri</string>
+    <string name="ungrouped_channels">Negrupētie</string>
+    <string name="tooltip_clear_queue">Notīrīt rindu</string>
 </resources>
