@@ -5,12 +5,19 @@ import android.os.Bundle
 import android.util.Log
 import androidx.core.net.toUri
 import androidx.media3.common.C
+import androidx.media3.common.Format
 import androidx.media3.common.MediaItem
 import androidx.media3.common.MediaItem.SubtitleConfiguration
 import androidx.media3.common.MimeTypes
 import androidx.media3.common.Player
 import androidx.media3.datasource.DefaultDataSource
 import androidx.media3.exoplayer.hls.HlsMediaSource
+import androidx.media3.exoplayer.source.MediaSource
+import androidx.media3.exoplayer.source.MergingMediaSource
+import androidx.media3.exoplayer.source.ProgressiveMediaSource
+import androidx.media3.extractor.ExtractorsFactory
+import androidx.media3.extractor.text.DefaultSubtitleParserFactory
+import androidx.media3.extractor.text.SubtitleExtractor
 import com.github.libretube.R
 import com.github.libretube.api.MediaServiceRepository
 import com.github.libretube.api.SubscriptionHelper
@@ -28,9 +35,9 @@ import com.github.libretube.helpers.PlayerHelper
 import com.github.libretube.helpers.PlayerHelper.getSubtitleRoleFlags
 import com.github.libretube.helpers.ProxyHelper
 import com.github.libretube.parcelable.PlayerData
-import com.github.libretube.util.DeArrowUtil
 import com.github.libretube.player.SabrMediaSource
 import com.github.libretube.player.manifest.SabrManifest
+import com.github.libretube.util.DeArrowUtil
 import com.github.libretube.util.PlayingQueue
 import com.github.libretube.util.YoutubeHlsPlaylistParser
 import kotlinx.coroutines.CoroutineScope
@@ -238,8 +245,29 @@ open class OnlinePlayerService : AbstractPlayerService() {
                     streams
                 )
                 val mediaSource = sabrMediaSourceFactory.createMediaSource(mediaItem)
+                val mediaSources = listOf<MediaSource>(mediaSource) + streams.subtitles.map {
+                    val format = Format.Builder()
+                        .setSampleMimeType(it.mimeType)
+                        .setLanguage(it.code)
+                        .setRoleFlags(getSubtitleRoleFlags(it))
+                        .build()
+                    val subtitleParserFactory = DefaultSubtitleParserFactory()
+                    val extractorsFactory = ExtractorsFactory {
+                        arrayOf(
+                            SubtitleExtractor(
+                                subtitleParserFactory.create(format), format
+                            )
+                        )
+                    }
+                    ProgressiveMediaSource.Factory(
+                        DefaultDataSource.Factory(this),
+                        extractorsFactory
+                    )
+                        .setLoadOnlySelectedTracks(true)
+                        .createMediaSource(MediaItem.fromUri(it.url!!))
+                }.toList()
 
-                exoPlayer?.setMediaSource(mediaSource)
+                exoPlayer?.setMediaSource(MergingMediaSource(*mediaSources.toTypedArray()))
                 return
             }
             // DASH
