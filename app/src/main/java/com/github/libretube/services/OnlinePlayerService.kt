@@ -259,12 +259,31 @@ open class OnlinePlayerService : AbstractPlayerService() {
                             )
                         )
                     }
-                    ProgressiveMediaSource.Factory(
-                        DefaultDataSource.Factory(this),
-                        extractorsFactory
-                    )
-                        .setLoadOnlySelectedTracks(true)
-                        .createMediaSource(MediaItem.fromUri(it.url!!))
+                    val progressiveMediaSourceFactory = ProgressiveMediaSource.Factory(
+                        DefaultDataSource.Factory(this), extractorsFactory
+                    ).setLoadOnlySelectedTracks(true)
+                    try {
+                        // `enableLazyLoadingWithSingleTrack` is private
+                        val method =
+                            ProgressiveMediaSource.Factory::class.java.getDeclaredMethod(
+                                "enableLazyLoadingWithSingleTrack",
+                                Int::class.java,
+                                Format::class.java
+                            )
+                        method.isAccessible = true
+                        method.invoke(
+                            progressiveMediaSourceFactory, SubtitleExtractor.TRACK_ID,
+                            format
+                                .buildUpon()
+                                .setSampleMimeType(MimeTypes.APPLICATION_MEDIA3_CUES)
+                                .setCodecs(format.sampleMimeType)
+                                .setCueReplacementBehavior( subtitleParserFactory.getCueReplacementBehavior(format))
+                                .build()
+                        )
+                    } catch (e: Exception) {
+                        Log.w(this::class.simpleName, "failed to set subtitle lazy-loading: ${e.stackTrace}")
+                    }
+                    progressiveMediaSourceFactory.createMediaSource(MediaItem.fromUri(it.url!!))
                 }.toList()
 
                 exoPlayer?.setMediaSource(MergingMediaSource(*mediaSources.toTypedArray()))
