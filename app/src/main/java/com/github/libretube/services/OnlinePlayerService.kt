@@ -128,9 +128,17 @@ open class OnlinePlayerService : AbstractPlayerService() {
         fetchVideoInfoJob = scope.launch {
             streams = withContext(Dispatchers.IO) {
                 try {
-                    MediaServiceRepository.instance.getStreams(videoId).let {
+                    /*MediaServiceRepository.instance.getStreams(videoId).let {
                         DeArrowUtil.deArrowStreams(it, videoId)
+                    }*/
+
+                    var streamData = MediaServiceRepository.instance.getStreams(videoId)
+                    while (streamData.audioStreams.isEmpty()) {
+                        streamData = MediaServiceRepository.instance.getStreams(videoId)
+                        toastFromMainDispatcher("SABR detected, reloading")
                     }
+                    DeArrowUtil.deArrowStreams(streamData, videoId)
+
                 }  catch (e: Exception) {
                     Log.e(TAG(), e.stackTraceToString())
                     toastFromMainDispatcher(e.localizedMessage.orEmpty())
