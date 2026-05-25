@@ -153,6 +153,8 @@
     <string name="addInstance">Add Instance</string>
     <string name="empty_instance">Fill in the name and the API URL.</string>
     <string name="invalid_url">Please enter a URL that works</string>
+    <string name="insecure_instance_title">Insecure instance</string>
+    <string name="insecure_instance_blocked_message">HTTP instances are not supported because they are not secure. Please use an HTTPS instance.</string>
     <string name="version">Version %1$s</string>
     <string name="show_updates">Check updates automatically</string>
     <string name="show_updates_summary">Check for updates automatically every time the app is started.</string>
