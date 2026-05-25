@@ -4,13 +4,13 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.ListAdapter
-import com.github.libretube.databinding.SuggestionRowBinding
-import com.github.libretube.ui.adapters.callbacks.DiffUtilItemCallback
-import com.github.libretube.ui.viewholders.SuggestionsViewHolder
 import com.github.libretube.R
+import com.github.libretube.databinding.SuggestionRowBinding
 import com.github.libretube.db.obj.SearchHistoryItem
 import com.github.libretube.enums.SearchDataType
 import com.github.libretube.obj.SearchDataItem
+import com.github.libretube.ui.adapters.callbacks.DiffUtilItemCallback
+import com.github.libretube.ui.viewholders.SuggestionsViewHolder
 import kotlin.collections.plus
 
 class SearchSuggestionsAdapter(
@@ -18,7 +18,6 @@ class SearchSuggestionsAdapter(
     private val onArrowClickListener: (String) -> Unit,
     private val onSearchHistoryItemDeleted: (SearchHistoryItem) -> Unit,
 ) : ListAdapter<SearchDataItem, SuggestionsViewHolder>(DiffUtilItemCallback<SearchDataItem>()) {
-
     /**
      *  Allow submit list partially, either [historyList] only or [suggestionList] only, without
      *  updating the whole list.
@@ -48,15 +47,24 @@ class SearchSuggestionsAdapter(
      * @see [submitSearchSuggestions]
      */
     @Deprecated("Use `submitSearchSuggestions()` instead.")
-    override fun submitList(list: List<SearchDataItem>?, commitCallback: Runnable?) {}
+    override fun submitList(
+        list: List<SearchDataItem>?,
+        commitCallback: Runnable?,
+    ) {}
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SuggestionsViewHolder {
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int,
+    ): SuggestionsViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         val binding = SuggestionRowBinding.inflate(layoutInflater, parent, false)
         return SuggestionsViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: SuggestionsViewHolder, position: Int) {
+    override fun onBindViewHolder(
+        holder: SuggestionsViewHolder,
+        position: Int,
+    ) {
         val item = getItem(holder.bindingAdapterPosition)
         val suggestion = item.query
 
@@ -67,13 +75,19 @@ class SearchSuggestionsAdapter(
                         onSearchHistoryItemDeleted(SearchHistoryItem(suggestion))
                     }
                     suggestionText.setCompoundDrawablesRelativeWithIntrinsicBounds(
-                        R.drawable.ic_history, 0, 0, 0
+                        R.drawable.ic_history,
+                        0,
+                        0,
+                        0,
                     )
                 }
 
                 SearchDataType.SUGGESTION -> {
                     suggestionText.setCompoundDrawablesRelativeWithIntrinsicBounds(
-                        R.drawable.ic_search, 0, 0, 0
+                        R.drawable.ic_search,
+                        0,
+                        0,
+                        0,
                     )
                 }
             }

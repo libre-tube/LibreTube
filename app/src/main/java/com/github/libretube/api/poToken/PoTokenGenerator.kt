@@ -18,9 +18,9 @@ class PoTokenGenerator : PoTokenProvider {
     private val supportsWebView by lazy { runCatching { CookieManager.getInstance() }.isSuccess }
 
     private object WebPoTokenGenLock
+
     private var webPoTokenVisitorData: String? = null
     private var webPoTokenGenerator: PoTokenWebView? = null
-
 
     override fun getWebClientPoToken(videoId: String): PoTokenResult? {
         if (!supportsWebView) {
@@ -35,7 +35,10 @@ class PoTokenGenerator : PoTokenProvider {
      * case the current [webPoTokenGenerator] threw an error last time
      * [PoTokenGenerator.getWebClientPoToken] was called
      */
-    private fun getWebClientPoToken(videoId: String, forceRecreate: Boolean): PoTokenResult {
+    private fun getWebClientPoToken(
+        videoId: String,
+        forceRecreate: Boolean,
+    ): PoTokenResult {
         val (poTokenGenerator, visitorData, hasBeenRecreated) =
             synchronized(WebPoTokenGenLock) {
                 val shouldRecreate = webPoTokenGenerator == null || forceRecreate || webPoTokenGenerator!!.isExpired()
@@ -45,58 +48,61 @@ class PoTokenGenerator : PoTokenProvider {
                     innertubeClientRequestInfo.clientInfo.clientVersion =
                         YoutubeParsingHelper.getClientVersion()
 
-                    webPoTokenVisitorData = YoutubeParsingHelper.getVisitorDataFromInnertube(
-                        innertubeClientRequestInfo,
-                        NewPipe.getPreferredLocalization(),
-                        NewPipe.getPreferredContentCountry(),
-                        YoutubeParsingHelper.getYouTubeHeaders(),
-                        YoutubeParsingHelper.YOUTUBEI_V1_URL,
-                        null,
-                        false
-                    )
+                    webPoTokenVisitorData =
+                        YoutubeParsingHelper.getVisitorDataFromInnertube(
+                            innertubeClientRequestInfo,
+                            NewPipe.getPreferredLocalization(),
+                            NewPipe.getPreferredContentCountry(),
+                            YoutubeParsingHelper.getYouTubeHeaders(),
+                            YoutubeParsingHelper.YOUTUBEI_V1_URL,
+                            null,
+                            false,
+                        )
 
                     runBlocking {
                         // close the current webPoTokenGenerator on the main thread
                         webPoTokenGenerator?.let { Handler(Looper.getMainLooper()).post { it.close() } }
 
                         // create a new webPoTokenGenerator
-                        webPoTokenGenerator = PoTokenWebView
-                            .newPoTokenGenerator(LibreTubeApp.instance)
+                        webPoTokenGenerator =
+                            PoTokenWebView
+                                .newPoTokenGenerator(LibreTubeApp.instance)
                     }
                 }
 
                 return@synchronized Triple(
                     webPoTokenGenerator!!,
                     webPoTokenVisitorData!!,
-                    shouldRecreate
+                    shouldRecreate,
                 )
             }
 
-        val poToken = try {
-            // Not using synchronized here, since poTokenGenerator would be able to generate
-            // multiple poTokens in parallel if needed. The only important thing is for exactly one
-            // visitorData/streaming poToken to be generated before anything else.
-            runBlocking {
-                poTokenGenerator.generatePoToken(videoId)
+        val poToken =
+            try {
+                // Not using synchronized here, since poTokenGenerator would be able to generate
+                // multiple poTokens in parallel if needed. The only important thing is for exactly one
+                // visitorData/streaming poToken to be generated before anything else.
+                runBlocking {
+                    poTokenGenerator.generatePoToken(videoId)
+                }
+            } catch (throwable: Throwable) {
+                if (hasBeenRecreated) {
+                    // the poTokenGenerator has just been recreated (and possibly this is already the
+                    // second time we try), so there is likely nothing we can do
+                    throw throwable
+                } else {
+                    // retry, this time recreating the [webPoTokenGenerator] from scratch;
+                    // this might happen for example if NewPipe goes in the background and the WebView
+                    // content is lost
+                    Log.e(TAG, "Failed to obtain poToken, retrying", throwable)
+                    return getWebClientPoToken(videoId = videoId, forceRecreate = true)
+                }
             }
-        } catch (throwable: Throwable) {
-            if (hasBeenRecreated) {
-                // the poTokenGenerator has just been recreated (and possibly this is already the
-                // second time we try), so there is likely nothing we can do
-                throw throwable
-            } else {
-                // retry, this time recreating the [webPoTokenGenerator] from scratch;
-                // this might happen for example if NewPipe goes in the background and the WebView
-                // content is lost
-                Log.e(TAG, "Failed to obtain poToken, retrying", throwable)
-                return getWebClientPoToken(videoId = videoId, forceRecreate = true)
-            }
-        }
-
 
         if (BuildConfig.DEBUG) {
             Log.d(
-                TAG, "poToken for $videoId: $poToken, visitor_data=$visitorData"
+                TAG,
+                "poToken for $videoId: $poToken, visitor_data=$visitorData",
             )
         }
 
@@ -109,4 +115,3 @@ class PoTokenGenerator : PoTokenProvider {
 
     override fun getIosClientPoToken(videoId: String?): PoTokenResult? = null
 }
-

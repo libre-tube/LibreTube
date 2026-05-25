@@ -51,7 +51,10 @@ class WatchHistoryFragment : DynamicLayoutManagerFragment(R.layout.fragment_watc
             GridLayoutManager(context, gridItems.ceilHalf())
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?,
+    ) {
         _binding = FragmentWatchHistoryBinding.bind(view)
         super.onViewCreated(view, savedInstanceState)
 
@@ -63,31 +66,42 @@ class WatchHistoryFragment : DynamicLayoutManagerFragment(R.layout.fragment_watc
         }
 
         binding.watchHistoryRecView.setOnDismissListener { position ->
-            val item = viewModel.filteredWatchHistory.value?.getOrNull(position)
-                ?: return@setOnDismissListener
+            val item =
+                viewModel.filteredWatchHistory.value?.getOrNull(position)
+                    ?: return@setOnDismissListener
             viewModel.removeFromHistory(item)
         }
 
         // observe changes to indicate if the history is empty
-        watchHistoryAdapter.registerAdapterDataObserver(object :
-            RecyclerView.AdapterDataObserver() {
-            override fun onItemRangeRemoved(positionStart: Int, itemCount: Int) {
-                if (watchHistoryAdapter.itemCount == 0) {
-                    binding.watchHistoryRecView.isGone = true
-                    binding.historyEmpty.isVisible = true
+        watchHistoryAdapter.registerAdapterDataObserver(
+            object :
+                RecyclerView.AdapterDataObserver() {
+                override fun onItemRangeRemoved(
+                    positionStart: Int,
+                    itemCount: Int,
+                ) {
+                    if (watchHistoryAdapter.itemCount == 0) {
+                        binding.watchHistoryRecView.isGone = true
+                        binding.historyEmpty.isVisible = true
+                    }
                 }
-            }
-        })
+            },
+        )
 
         binding.watchHistoryRecView.adapter = watchHistoryAdapter
 
         // manually restore the recyclerview state due to https://github.com/material-components/material-components-android/issues/3473
-        binding.watchHistoryRecView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
-                super.onScrollStateChanged(recyclerView, newState)
-                recyclerViewState = recyclerView.layoutManager?.onSaveInstanceState()
-            }
-        })
+        binding.watchHistoryRecView.addOnScrollListener(
+            object : RecyclerView.OnScrollListener() {
+                override fun onScrollStateChanged(
+                    recyclerView: RecyclerView,
+                    newState: Int,
+                ) {
+                    super.onScrollStateChanged(recyclerView, newState)
+                    recyclerViewState = recyclerView.layoutManager?.onSaveInstanceState()
+                }
+            },
+        )
 
         binding.chipContinue.isChecked = viewModel.selectedStatusFilter in arrayOf(0, 1)
         binding.chipFinished.isChecked = viewModel.selectedStatusFilter in arrayOf(0, 2)
@@ -100,8 +114,7 @@ class WatchHistoryFragment : DynamicLayoutManagerFragment(R.layout.fragment_watc
                 .setTitle(R.string.clear_history)
                 .setMultiChoiceItems(watchPositionItem, selected) { _, index, newValue ->
                     selected[index] = newValue
-                }
-                .setPositiveButton(R.string.okay) { _, _ ->
+                }.setPositiveButton(R.string.okay) { _, _ ->
                     binding.watchHistoryRecView.isGone = true
                     binding.historyEmpty.isVisible = true
                     binding.clear.isVisible = true
@@ -114,20 +127,20 @@ class WatchHistoryFragment : DynamicLayoutManagerFragment(R.layout.fragment_watc
                             if (selected[0]) Database.watchPositionDao().deleteAll()
                         }
                     }
-                }
-                .setNegativeButton(R.string.cancel, null)
+                }.setNegativeButton(R.string.cancel, null)
                 .show()
         }
 
         binding.statusFilterChips.setOnCheckedStateChangeListener { _, checkedIds ->
             val continueWatchingEnabled = checkedIds.contains(binding.chipContinue.id)
             val finishedEnabled = checkedIds.contains(binding.chipFinished.id)
-            viewModel.selectedStatusFilter = when {
-                continueWatchingEnabled && finishedEnabled -> 0
-                continueWatchingEnabled -> 1
-                finishedEnabled -> 2
-                else -> 0
-            }
+            viewModel.selectedStatusFilter =
+                when {
+                    continueWatchingEnabled && finishedEnabled -> 0
+                    continueWatchingEnabled -> 1
+                    finishedEnabled -> 2
+                    else -> 0
+                }
         }
 
         binding.playAll.setOnClickListener {
@@ -135,14 +148,14 @@ class WatchHistoryFragment : DynamicLayoutManagerFragment(R.layout.fragment_watc
             if (history.isEmpty()) return@setOnClickListener
 
             PlayingQueue.add(
-                *history.reversed().map(WatchHistoryItem::toStreamItem).toTypedArray()
+                *history.reversed().map(WatchHistoryItem::toStreamItem).toTypedArray(),
             )
             NavigationHelper.navigateVideo(
                 requireContext(),
                 PlayerData(
                     history.last().videoId,
-                    keepQueue = true
-                )
+                    keepQueue = true,
+                ),
             )
         }
 
@@ -168,7 +181,6 @@ class WatchHistoryFragment : DynamicLayoutManagerFragment(R.layout.fragment_watc
                 binding.clear.isEnabled = hasItems
             }
         }
-
     }
 
     override fun onConfigurationChanged(newConfig: Configuration) {

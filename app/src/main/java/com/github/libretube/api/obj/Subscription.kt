@@ -7,5 +7,5 @@ data class Subscription(
     val url: String,
     val name: String,
     val avatar: String? = null,
-    val verified: Boolean
+    val verified: Boolean,
 )

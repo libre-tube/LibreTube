@@ -49,8 +49,14 @@ class LoginDialog : DialogFragment() {
                     }
                 }
                 getButton(DialogInterface.BUTTON_NEGATIVE).setOnClickListener {
-                    val email = binding.username.text?.toString().orEmpty()
-                    val password = binding.password.text?.toString().orEmpty()
+                    val email =
+                        binding.username.text
+                            ?.toString()
+                            .orEmpty()
+                    val password =
+                        binding.password.text
+                            ?.toString()
+                            .orEmpty()
 
                     if (isEmail(email)) {
                         showPrivacyAlertDialog(email, password)
@@ -63,26 +69,36 @@ class LoginDialog : DialogFragment() {
             }
     }
 
-    private fun signIn(username: String, password: String, createNewAccount: Boolean = false) {
+    private fun signIn(
+        username: String,
+        password: String,
+        createNewAccount: Boolean = false,
+    ) {
         val login = Login(username, password)
         lifecycleScope.launch(Dispatchers.IO) {
-            val response = try {
-                if (createNewAccount) {
-                    RetrofitInstance.authApi.register(login)
-                } else {
-                    RetrofitInstance.authApi.login(login)
+            val response =
+                try {
+                    if (createNewAccount) {
+                        RetrofitInstance.authApi.register(login)
+                    } else {
+                        RetrofitInstance.authApi.login(login)
+                    }
+                } catch (e: HttpException) {
+                    val errorMessage =
+                        e
+                            .response()
+                            ?.errorBody()
+                            ?.string()
+                            ?.runCatching {
+                                JsonHelper.json.decodeFromString<Token>(this).error
+                            }?.getOrNull() ?: context?.getString(R.string.server_error).orEmpty()
+                    context?.toastFromMainDispatcher(errorMessage)
+                    return@launch
+                } catch (e: Exception) {
+                    Log.e(TAG(), e.toString())
+                    context?.toastFromMainDispatcher(e.localizedMessage.orEmpty())
+                    return@launch
                 }
-            } catch (e: HttpException) {
-                val errorMessage = e.response()?.errorBody()?.string()?.runCatching {
-                    JsonHelper.json.decodeFromString<Token>(this).error
-                }?.getOrNull() ?: context?.getString(R.string.server_error).orEmpty()
-                context?.toastFromMainDispatcher(errorMessage)
-                return@launch
-            } catch (e: Exception) {
-                Log.e(TAG(), e.toString())
-                context?.toastFromMainDispatcher(e.localizedMessage.orEmpty())
-                return@launch
-            }
 
             if (response.error != null) {
                 context?.toastFromMainDispatcher(response.error)
@@ -91,7 +107,7 @@ class LoginDialog : DialogFragment() {
             if (response.token == null) return@launch
 
             context?.toastFromMainDispatcher(
-                if (createNewAccount) R.string.registered else R.string.loggedIn
+                if (createNewAccount) R.string.registered else R.string.loggedIn,
             )
 
             PreferenceHelper.setToken(response.token)
@@ -100,25 +116,25 @@ class LoginDialog : DialogFragment() {
             withContext(Dispatchers.Main) {
                 setFragmentResult(
                     INSTANCE_DIALOG_REQUEST_KEY,
-                    bundleOf(IntentData.loginTask to true)
+                    bundleOf(IntentData.loginTask to true),
                 )
             }
             dialog?.dismiss()
         }
     }
 
-    private fun showPrivacyAlertDialog(email: String, password: String) {
+    private fun showPrivacyAlertDialog(
+        email: String,
+        password: String,
+    ) {
         MaterialAlertDialogBuilder(requireContext())
             .setTitle(R.string.privacy_alert)
             .setMessage(R.string.username_email)
             .setNegativeButton(R.string.proceed) { _, _ ->
                 signIn(email, password, true)
-            }
-            .setPositiveButton(R.string.cancel, null)
+            }.setPositiveButton(R.string.cancel, null)
             .show()
     }
 
-    private fun isEmail(text: String): Boolean {
-        return Patterns.EMAIL_ADDRESS.toRegex().matches(text)
-    }
+    private fun isEmail(text: String): Boolean = Patterns.EMAIL_ADDRESS.toRegex().matches(text)
 }

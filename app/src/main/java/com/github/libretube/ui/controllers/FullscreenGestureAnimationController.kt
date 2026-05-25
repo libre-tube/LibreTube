@@ -23,13 +23,19 @@ class FullscreenGestureAnimationController(
     private var swipeDirection = SwipeDirection.NONE
     private var swipeStartY = 0f
 
-    fun onSwipe(distanceY: Float, positionY: Float) {
+    fun onSwipe(
+        distanceY: Float,
+        positionY: Float,
+    ) {
         if (!isSwipeInProgress) {
             isSwipeInProgress = true
             swipeDirection = if (distanceY.toInt() > 0) SwipeDirection.UP else SwipeDirection.DOWN
             shouldHandleSwipe =
-                if (!playerView.isFullscreen()) swipeDirection == SwipeDirection.UP
-                else swipeDirection == SwipeDirection.DOWN
+                if (!playerView.isFullscreen()) {
+                    swipeDirection == SwipeDirection.UP
+                } else {
+                    swipeDirection == SwipeDirection.DOWN
+                }
 
             // Only allow swipe up when not in fullscreen and only allow swipe down when in
             // fullscreen
@@ -44,7 +50,7 @@ class FullscreenGestureAnimationController(
             when (swipeDirection) {
                 SwipeDirection.UP -> {
                     val swipeDistance = (swipeStartY - positionY).coerceAtLeast(0f)
-                    if (swipeDistance >= SWIPE_DISTANCE_THRESHOLD ) {
+                    if (swipeDistance >= SWIPE_DISTANCE_THRESHOLD) {
                         isSwipeCompleted = true
                         onSwipeUpCompleted()
                         return
@@ -78,17 +84,19 @@ class FullscreenGestureAnimationController(
         if (swipeDirection == SwipeDirection.NONE) return
 
         // Reset scale
-        if (shouldHandleSwipe) videoFrameView.animate()
-            .scaleX(1f)
-            .scaleY(1f)
-            .setInterpolator(AccelerateDecelerateInterpolator())
-            .setDuration(150)
-            .withEndAction {
-                // Reset pivot point back to the center
-                videoFrameView.pivotY = videoFrameView.height / 2f
-                videoFrameView.pivotX = videoFrameView.width / 2f
-            }
-            .start()
+        if (shouldHandleSwipe) {
+            videoFrameView
+                .animate()
+                .scaleX(1f)
+                .scaleY(1f)
+                .setInterpolator(AccelerateDecelerateInterpolator())
+                .setDuration(150)
+                .withEndAction {
+                    // Reset pivot point back to the center
+                    videoFrameView.pivotY = videoFrameView.height / 2f
+                    videoFrameView.pivotX = videoFrameView.width / 2f
+                }.start()
+        }
 
         isSwipeInProgress = false
         isSwipeCompleted = false

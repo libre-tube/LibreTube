@@ -24,10 +24,11 @@ open class BaseActivity : AppCompatActivity() {
     open val isDialogActivity: Boolean = false
 
     val screenOrientationPref by lazy {
-        val orientationPref = PreferenceHelper.getString(
-            PreferenceKeys.ORIENTATION,
-            resources.getString(R.string.config_default_orientation_pref)
-        )
+        val orientationPref =
+            PreferenceHelper.getString(
+                PreferenceKeys.ORIENTATION,
+                resources.getString(R.string.config_default_orientation_pref),
+            )
         when (orientationPref) {
             "portrait" -> ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT
             "landscape" -> ActivityInfo.SCREEN_ORIENTATION_USER_LANDSCAPE
@@ -62,18 +63,19 @@ open class BaseActivity : AppCompatActivity() {
     override fun attachBaseContext(newBase: Context?) {
         super.attachBaseContext(newBase)
 
-        val configuration = Configuration().apply {
-            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU) {
-                // TODO: remove this case in the future
-                @Suppress("DEPRECATION")
-                val locale = LocaleHelper.getAppLocale()
-                Locale.setDefault(locale)
-                setLocale(locale)
-            }
+        val configuration =
+            Configuration().apply {
+                if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU) {
+                    // TODO: remove this case in the future
+                    @Suppress("DEPRECATION")
+                    val locale = LocaleHelper.getAppLocale()
+                    Locale.setDefault(locale)
+                    setLocale(locale)
+                }
 
-            val uiPref = PreferenceHelper.getString(PreferenceKeys.THEME_MODE, "A")
-            AppCompatDelegate.setDefaultNightMode(getThemeMode(uiPref))
-        }
+                val uiPref = PreferenceHelper.getString(PreferenceKeys.THEME_MODE, "A")
+                AppCompatDelegate.setDefaultNightMode(getThemeMode(uiPref))
+            }
 
         applyOverrideConfiguration(configuration)
     }

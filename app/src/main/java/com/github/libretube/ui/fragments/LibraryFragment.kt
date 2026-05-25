@@ -52,20 +52,28 @@ class LibraryFragment : DynamicLayoutManagerFragment(R.layout.fragment_library) 
         _binding?.playlistRecView?.layoutManager = GridLayoutManager(context, gridItems.ceilHalf())
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?,
+    ) {
         _binding = FragmentLibraryBinding.bind(view)
         super.onViewCreated(view, savedInstanceState)
 
         binding.bookmarksRecView.adapter = playlistBookmarkAdapter
         // listen for playlists to become deleted
-        playlistsAdapter.registerAdapterDataObserver(object :
-            RecyclerView.AdapterDataObserver() {
-            override fun onItemRangeRemoved(positionStart: Int, itemCount: Int) {
-                _binding?.nothingHere?.isVisible = playlistsAdapter.itemCount == 0
-                _binding?.sortTV?.isVisible = playlistsAdapter.itemCount > 0
-                super.onItemRangeRemoved(positionStart, itemCount)
-            }
-        })
+        playlistsAdapter.registerAdapterDataObserver(
+            object :
+                RecyclerView.AdapterDataObserver() {
+                override fun onItemRangeRemoved(
+                    positionStart: Int,
+                    itemCount: Int,
+                ) {
+                    _binding?.nothingHere?.isVisible = playlistsAdapter.itemCount == 0
+                    _binding?.sortTV?.isVisible = playlistsAdapter.itemCount > 0
+                    super.onItemRangeRemoved(positionStart, itemCount)
+                }
+            },
+        )
         binding.playlistRecView.adapter = playlistsAdapter
 
         // listen for the mini player state changing
@@ -104,7 +112,7 @@ class LibraryFragment : DynamicLayoutManagerFragment(R.layout.fragment_library) 
 
         childFragmentManager.setFragmentResultListener(
             CREATE_PLAYLIST_DIALOG_REQUEST_KEY,
-            this
+            this,
         ) { _, resultBundle ->
             val isPlaylistCreated = resultBundle.getBoolean(IntentData.playlistTask)
             if (isPlaylistCreated) {
@@ -118,22 +126,24 @@ class LibraryFragment : DynamicLayoutManagerFragment(R.layout.fragment_library) 
 
         val sortOptions = resources.getStringArray(R.array.playlistSortingOptions)
         val sortOptionValues = resources.getStringArray(R.array.playlistSortingOptionsValues)
-        val order = PreferenceHelper.getString(
-            PreferenceKeys.PLAYLISTS_ORDER,
-            sortOptionValues.first()
-        )
+        val order =
+            PreferenceHelper.getString(
+                PreferenceKeys.PLAYLISTS_ORDER,
+                sortOptionValues.first(),
+            )
         val orderIndex = sortOptionValues.indexOf(order)
         binding.sortTV.text = sortOptions.getOrNull(orderIndex)
 
         binding.sortTV.setOnClickListener {
-            BaseBottomSheet().apply {
-                setSimpleItems(sortOptions.toList()) { index ->
-                    binding.sortTV.text = sortOptions[index]
-                    val value = sortOptionValues[index]
-                    PreferenceHelper.putString(PreferenceKeys.PLAYLISTS_ORDER, value)
-                    fetchPlaylists()
-                }
-            }.show(childFragmentManager)
+            BaseBottomSheet()
+                .apply {
+                    setSimpleItems(sortOptions.toList()) { index ->
+                        binding.sortTV.text = sortOptions[index]
+                        val value = sortOptionValues[index]
+                        PreferenceHelper.putString(PreferenceKeys.PLAYLISTS_ORDER, value)
+                        fetchPlaylists()
+                    }
+                }.show(childFragmentManager)
         }
     }
 
@@ -144,9 +154,10 @@ class LibraryFragment : DynamicLayoutManagerFragment(R.layout.fragment_library) 
 
     private fun initBookmarks() {
         lifecycleScope.launch {
-            val bookmarks = withContext(Dispatchers.IO) {
-                DatabaseHolder.Database.playlistBookmarkDao().getAll()
-            }
+            val bookmarks =
+                withContext(Dispatchers.IO) {
+                    DatabaseHolder.Database.playlistBookmarkDao().getAll()
+                }
 
             val binding = _binding ?: return@launch
 
@@ -168,15 +179,16 @@ class LibraryFragment : DynamicLayoutManagerFragment(R.layout.fragment_library) 
         _binding?.playlistRefresh?.isRefreshing = true
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.CREATED) {
-                val playlists = try {
-                    withContext(Dispatchers.IO) {
-                        PlaylistsHelper.getPlaylists()
+                val playlists =
+                    try {
+                        withContext(Dispatchers.IO) {
+                            PlaylistsHelper.getPlaylists()
+                        }
+                    } catch (e: Exception) {
+                        Log.e(TAG(), e.toString())
+                        Toast.makeText(context, R.string.unknown_error, Toast.LENGTH_SHORT).show()
+                        return@repeatOnLifecycle
                     }
-                } catch (e: Exception) {
-                    Log.e(TAG(), e.toString())
-                    Toast.makeText(context, R.string.unknown_error, Toast.LENGTH_SHORT).show()
-                    return@repeatOnLifecycle
-                }
 
                 val binding = _binding ?: return@repeatOnLifecycle
                 binding.playlistRefresh.isRefreshing = false

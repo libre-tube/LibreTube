@@ -17,23 +17,24 @@ import com.github.libretube.ui.extensions.setupSubscriptionButton
 import com.github.libretube.ui.sheets.ChannelOptionsBottomSheet
 import com.github.libretube.ui.viewholders.SubscriptionChannelViewHolder
 
-class SubscriptionChannelAdapter :
-    ListAdapter<Subscription, SubscriptionChannelViewHolder>(DiffUtilItemCallback()) {
-
+class SubscriptionChannelAdapter : ListAdapter<Subscription, SubscriptionChannelViewHolder>(DiffUtilItemCallback()) {
     // Track recently unsubscribed channels to preserve their unsubscribed state when
     // [onBindViewHolder] is re-called on these channels while scrolling the [RecyclerView]
     private val recentlyUnsubscribedList = mutableListOf<String>()
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
-        viewType: Int
+        viewType: Int,
     ): SubscriptionChannelViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         val binding = ChannelSubscriptionRowBinding.inflate(layoutInflater, parent, false)
         return SubscriptionChannelViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: SubscriptionChannelViewHolder, position: Int) {
+    override fun onBindViewHolder(
+        holder: SubscriptionChannelViewHolder,
+        position: Int,
+    ) {
         val subscription = getItem(holder.bindingAdapterPosition)
 
         holder.binding.apply {
@@ -45,11 +46,12 @@ class SubscriptionChannelAdapter :
             }
             root.setOnLongClickListener {
                 val channelOptionsSheet = ChannelOptionsBottomSheet()
-                channelOptionsSheet.arguments = bundleOf(
-                    IntentData.channelId to subscription.url.toID(),
-                    IntentData.channelName to subscription.name,
-                    IntentData.isSubscribed to true
-                )
+                channelOptionsSheet.arguments =
+                    bundleOf(
+                        IntentData.channelId to subscription.url.toID(),
+                        IntentData.channelName to subscription.name,
+                        IntentData.isSubscribed to true,
+                    )
                 val activity = ContextHelper.unwrapActivity<BaseActivity>(root.context)
                 channelOptionsSheet.show(activity.supportFragmentManager)
                 true
@@ -63,7 +65,7 @@ class SubscriptionChannelAdapter :
                 subscription.avatar,
                 subscription.verified,
                 notificationBell,
-                !isRecentlyUnsubscribed
+                !isRecentlyUnsubscribed,
             ) { isSubscribed ->
                 when (isSubscribed) {
                     true -> if (isRecentlyUnsubscribed) recentlyUnsubscribedList.remove(channelId)

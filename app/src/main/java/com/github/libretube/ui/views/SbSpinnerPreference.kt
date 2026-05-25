@@ -13,7 +13,10 @@ import androidx.preference.PreferenceViewHolder
 import com.github.libretube.R
 import com.github.libretube.helpers.PreferenceHelper
 
-class SbSpinnerPreference(context: Context, attrs: AttributeSet) : Preference(context, attrs) {
+class SbSpinnerPreference(
+    context: Context,
+    attrs: AttributeSet,
+) : Preference(context, attrs) {
     private lateinit var adapter: ArrayAdapter<CharSequence>
     private lateinit var initialValue: String
 
@@ -29,11 +32,12 @@ class SbSpinnerPreference(context: Context, attrs: AttributeSet) : Preference(co
         holder.itemView.findViewById<TextView>(android.R.id.summary)?.text = super.getSummary()
 
         // Set the spinner adapter
-        adapter = ArrayAdapter.createFromResource(
-            context,
-            R.array.sb_skip_options,
-            android.R.layout.simple_spinner_item
-        )
+        adapter =
+            ArrayAdapter.createFromResource(
+                context,
+                R.array.sb_skip_options,
+                android.R.layout.simple_spinner_item,
+            )
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spinner.adapter = adapter
 
@@ -46,22 +50,26 @@ class SbSpinnerPreference(context: Context, attrs: AttributeSet) : Preference(co
         }
 
         // Set a listener to handle item selection
-        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(
-                parent: AdapterView<*>,
-                view: View?,
-                position: Int,
-                id: Long
-            ) {
-                val newValue = getEntryValues()[position]
-                persistString(newValue)
-            }
+        spinner.onItemSelectedListener =
+            object : AdapterView.OnItemSelectedListener {
+                override fun onItemSelected(
+                    parent: AdapterView<*>,
+                    view: View?,
+                    position: Int,
+                    id: Long,
+                ) {
+                    val newValue = getEntryValues()[position]
+                    persistString(newValue)
+                }
 
-            override fun onNothingSelected(parent: AdapterView<*>) = Unit
-        }
+                override fun onNothingSelected(parent: AdapterView<*>) = Unit
+            }
     }
 
-    override fun onGetDefaultValue(ta: TypedArray, index: Int): Any {
+    override fun onGetDefaultValue(
+        ta: TypedArray,
+        index: Int,
+    ): Any {
         // Get the default value from the XML attribute, if specified
         val defaultValue = ta.getString(index).orEmpty()
         this.initialValue = defaultValue

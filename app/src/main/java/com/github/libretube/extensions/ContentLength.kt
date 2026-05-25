@@ -11,9 +11,10 @@ suspend fun URL.getContentLength(): Long? {
             val connection = openConnection() as HttpURLConnection
             connection.setRequestProperty("Range", "bytes=0-")
 
-            val value = connection.getHeaderField("content-length")
-                // If connection accepts range header, try to get total bytes
-                ?: connection.getHeaderField("content-range").split("/")[1]
+            val value =
+                connection.getHeaderField("content-length")
+                    // If connection accepts range header, try to get total bytes
+                    ?: connection.getHeaderField("content-range").split("/")[1]
 
             connection.disconnect()
             value.toLong()

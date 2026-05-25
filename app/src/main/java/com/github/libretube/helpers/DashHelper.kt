@@ -13,7 +13,6 @@ import javax.xml.transform.stream.StreamResult
 // Based off of https://github.com/TeamPiped/Piped/blob/master/src/utils/DashUtils.js
 
 object DashHelper {
-
     private val builderFactory: DocumentBuilderFactory = DocumentBuilderFactory.newInstance()
     private val transformerFactory: TransformerFactory = TransformerFactory.newInstance()
 
@@ -22,10 +21,13 @@ object DashHelper {
         val formats: MutableList<PipedStream> = mutableListOf(),
         val audioTrackId: String? = null,
         val audioTrackType: String? = null,
-        val audioLocale: String? = null
+        val audioLocale: String? = null,
     )
 
-    fun createManifest(streams: Streams, supportsHdr: Boolean): String {
+    fun createManifest(
+        streams: Streams,
+        supportsHdr: Boolean,
+    ): String {
         val builder = builderFactory.newDocumentBuilder()
 
         val doc = builder.newDocument()
@@ -42,7 +44,12 @@ object DashHelper {
 
         for (stream in streams.videoStreams) {
             // HDR is only supported by some new devices
-            if (!supportsHdr && stream.quality.orEmpty().uppercase().contains("HDR")) {
+            if (!supportsHdr &&
+                stream.quality
+                    .orEmpty()
+                    .uppercase()
+                    .contains("HDR")
+            ) {
                 continue
             }
 
@@ -62,8 +69,8 @@ object DashHelper {
             adapSetInfos.add(
                 AdapSetInfo(
                     stream.mimeType!!,
-                    mutableListOf(stream)
-                )
+                    mutableListOf(stream),
+                ),
             )
         }
 
@@ -86,8 +93,8 @@ object DashHelper {
                     mutableListOf(stream),
                     stream.audioTrackId,
                     stream.audioTrackType,
-                    stream.audioTrackLocale
-                )
+                    stream.audioTrackLocale,
+                ),
             )
         }
 
@@ -111,7 +118,7 @@ object DashHelper {
                 roleElement.setAttribute("schemeIdUri", "urn:mpeg:dash:role:2011")
                 roleElement.setAttribute(
                     "value",
-                    getRoleValueFromAudioTrackType(adapSet.audioTrackType)
+                    getRoleValueFromAudioTrackType(adapSet.audioTrackType),
                 )
                 adapSetElement.appendChild(roleElement)
             }
@@ -123,13 +130,14 @@ object DashHelper {
             }
 
             for (stream in adapSet.formats) {
-                val rep = let {
-                    if (isVideo) {
-                        createVideoRepresentation(doc, stream)
-                    } else {
-                        createAudioRepresentation(doc, stream)
+                val rep =
+                    let {
+                        if (isVideo) {
+                            createVideoRepresentation(doc, stream)
+                        } else {
+                            createAudioRepresentation(doc, stream)
+                        }
                     }
-                }
                 adapSetElement.appendChild(rep)
             }
 
@@ -151,7 +159,7 @@ object DashHelper {
 
     private fun createAudioRepresentation(
         doc: Document,
-        stream: PipedStream
+        stream: PipedStream,
     ): Element {
         val representation = doc.createElement("Representation")
         representation.setAttribute("bandwidth", stream.bitrate.toString())
@@ -161,7 +169,7 @@ object DashHelper {
         val audioChannelConfiguration = doc.createElement("AudioChannelConfiguration")
         audioChannelConfiguration.setAttribute(
             "schemeIdUri",
-            "urn:mpeg:dash:23003:3:audio_channel_configuration:2011"
+            "urn:mpeg:dash:23003:3:audio_channel_configuration:2011",
         )
         audioChannelConfiguration.setAttribute("value", "2")
 
@@ -175,7 +183,10 @@ object DashHelper {
         return representation
     }
 
-    private fun createSegmentBaseElement(document: Document, stream: PipedStream): Element {
+    private fun createSegmentBaseElement(
+        document: Document,
+        stream: PipedStream,
+    ): Element {
         val segmentBase = document.createElement("SegmentBase")
         segmentBase.setAttribute("indexRange", "${stream.indexStart}-${stream.indexEnd}")
 
@@ -186,18 +197,17 @@ object DashHelper {
         return segmentBase
     }
 
-    private fun getRoleValueFromAudioTrackType(audioTrackType: String): String {
-        return when (audioTrackType.lowercase()) {
+    private fun getRoleValueFromAudioTrackType(audioTrackType: String): String =
+        when (audioTrackType.lowercase()) {
             "descriptive" -> "description"
             "dubbed" -> "dub"
             "original" -> "main"
             else -> "alternate"
         }
-    }
 
     private fun createVideoRepresentation(
         doc: Document,
-        stream: PipedStream
+        stream: PipedStream,
     ): Element {
         val representation = doc.createElement("Representation")
         representation.setAttribute("codecs", stream.codec!!)

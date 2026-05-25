@@ -1,5 +1,5 @@
-import java.util.Properties
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import java.util.Properties
 
 plugins {
     alias(libs.plugins.androidApplication)
@@ -20,7 +20,7 @@ keyPassword=my_key_password
  */
 
 val keystoreProperties = Properties()
-val keystoreFileExists = rootProject.file("keystore.properties").exists();
+val keystoreFileExists = rootProject.file("keystore.properties").exists()
 if (keystoreFileExists) {
     keystoreProperties.load(rootProject.file("keystore.properties").inputStream())
 }
@@ -65,7 +65,7 @@ android {
             signingConfig = signingConfigs.findByName("release")?.takeIf { it.storeFile != null }
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
+                "proguard-rules.pro",
             )
         }
 
@@ -121,7 +121,7 @@ android {
 }
 
 dependencies {
-    /* Android Core */
+    // Android Core
     implementation(libs.androidx.activity)
     implementation(libs.androidx.appcompat)
     implementation(libs.androidx.core)
@@ -137,49 +137,48 @@ dependencies {
     implementation(libs.androidx.media)
     implementation(libs.androidx.swiperefreshlayout)
 
-    /* Android Lifecycle */
+    // Android Lifecycle
     implementation(libs.lifecycle.viewmodel)
     implementation(libs.lifecycle.runtime)
     implementation(libs.lifecycle.livedata)
     implementation(libs.lifecycle.service)
 
-    /* Design */
+    // Design
     implementation(libs.material)
 
-    /* ExoPlayer */
+    // ExoPlayer
     implementation(libs.androidx.media3.exoplayer)
     implementation(libs.androidx.media3.ui)
     implementation(libs.androidx.media3.exoplayer.hls)
     implementation(libs.androidx.media3.exoplayer.dash)
     implementation(libs.androidx.media3.session)
 
-    /* Retrofit and Kotlinx Serialization */
+    // Retrofit and Kotlinx Serialization
     implementation(libs.square.retrofit)
     implementation(libs.logging.interceptor)
     implementation(libs.kotlinx.serialization)
     implementation(libs.kotlinx.datetime)
     implementation(libs.converter.kotlinx.serialization)
 
-    /* NewPipe Extractor */
+    // NewPipe Extractor
     implementation(libs.newpipeextractor)
 
-
-    /* Coil */
+    // Coil
     coreLibraryDesugaring(libs.desugaring)
     implementation(libs.coil)
     implementation(libs.coil.network.okhttp)
 
-    /* Room */
+    // Room
     ksp(libs.room.compiler)
     implementation(libs.room)
 
-    /* Baseline profile generation */
+    // Baseline profile generation
     implementation(libs.androidx.profileinstaller)
     baselineProfile(project(":baselineprofile"))
 
-    /* AndroidX Paging */
+    // AndroidX Paging
     implementation(libs.androidx.paging)
 
-    /* Testing */
+    // Testing
     testImplementation(libs.junit)
 }

@@ -5,19 +5,23 @@ import android.content.Context
 import android.content.pm.PackageManager
 
 object PictureInPictureCompat {
-
-    fun isPictureInPictureAvailable(context: Context) =
-        context.packageManager.hasSystemFeature(PackageManager.FEATURE_PICTURE_IN_PICTURE)
+    fun isPictureInPictureAvailable(context: Context) = context.packageManager.hasSystemFeature(PackageManager.FEATURE_PICTURE_IN_PICTURE)
 
     fun isInPictureInPictureMode(activity: Activity) = activity.isInPictureInPictureMode
 
-    fun setPictureInPictureParams(activity: Activity, params: PictureInPictureParamsCompat) {
+    fun setPictureInPictureParams(
+        activity: Activity,
+        params: PictureInPictureParamsCompat,
+    ) {
         if (isPictureInPictureAvailable(activity)) {
             activity.setPictureInPictureParams(params.toPictureInPictureParams())
         }
     }
 
-    fun enterPictureInPictureMode(activity: Activity, params: PictureInPictureParamsCompat) {
+    fun enterPictureInPictureMode(
+        activity: Activity,
+        params: PictureInPictureParamsCompat,
+    ) {
         if (isPictureInPictureAvailable(activity)) {
             activity.enterPictureInPictureMode(params.toPictureInPictureParams())
         }

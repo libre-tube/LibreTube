@@ -15,7 +15,7 @@ import com.github.libretube.databinding.DropdownMenuBinding
  */
 class DropdownMenu(
     context: Context,
-    attributeSet: AttributeSet
+    attributeSet: AttributeSet,
 ) : FrameLayout(context, attributeSet) {
     private val binding =
         DropdownMenuBinding.inflate(LayoutInflater.from(context), this, true)
@@ -63,9 +63,7 @@ class DropdownMenu(
         if (itemIndex != -1) selectedItemPosition = itemIndex
     }
 
-    fun getSelectionIfNotFirst(): String? {
-        return selectedItem.takeIf { selectedItemPosition != 0 }
-    }
+    fun getSelectionIfNotFirst(): String? = selectedItem.takeIf { selectedItemPosition != 0 }
 
     init {
         context.obtainStyledAttributes(attributeSet, R.styleable.DropdownMenu, 0, 0).use {
@@ -76,7 +74,7 @@ class DropdownMenu(
 
         adapter = ArrayAdapter(context, R.layout.dropdown_item)
 
-        binding.autoCompleteTextView.setOnItemClickListener {_, _, position, _ ->
+        binding.autoCompleteTextView.setOnItemClickListener { _, _, position, _ ->
             onSelectionChangeListener?.invoke(position)
         }
     }

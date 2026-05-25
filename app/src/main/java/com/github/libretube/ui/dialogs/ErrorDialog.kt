@@ -22,7 +22,6 @@ class ErrorDialog : DialogFragment() {
             .setNegativeButton(R.string.okay, null)
             .setPositiveButton(androidx.preference.R.string.copy) { _, _ ->
                 ClipboardHelper.save(requireContext(), text = errorLog, notify = true)
-            }
-            .show()
+            }.show()
     }
 }

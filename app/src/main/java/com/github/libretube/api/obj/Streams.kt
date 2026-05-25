@@ -17,13 +17,11 @@ import kotlinx.serialization.Serializable
 data class Streams(
     var title: String,
     val description: String,
-
     @Serializable(SafeInstantSerializer::class)
     @SerialName("uploadDate")
     @IgnoredOnParcel
     val uploadTimestamp: Instant? = null,
     val uploaded: Long? = null,
-
     val uploader: String,
     val uploaderUrl: String?,
     val uploaderAvatar: String? = null,
@@ -49,8 +47,8 @@ data class Streams(
     val chapters: List<ChapterSegment> = emptyList(),
     val uploaderSubscriberCount: Long = 0,
     val previewFrames: List<PreviewFrames> = emptyList(),
-    var isShort: Boolean = false
-): Parcelable {
+    var isShort: Boolean = false,
+) : Parcelable {
     @IgnoredOnParcel
     val isLive = livestream || duration <= 0
 
@@ -59,16 +57,18 @@ data class Streams(
         val items = mutableListOf<DownloadItem>()
 
         if (!videoQuality.isNullOrEmpty() && !videoFormat.isNullOrEmpty()) {
-            val stream = videoStreams.find {
-                it.quality == videoQuality && it.format == videoFormat
-            }
+            val stream =
+                videoStreams.find {
+                    it.quality == videoQuality && it.format == videoFormat
+                }
             stream?.toDownloadItem(FileType.VIDEO, id)?.let { items.add(it) }
         }
 
         if (!audioQuality.isNullOrEmpty() && !audioFormat.isNullOrEmpty()) {
-            val stream = audioStreams.find {
-                it.quality == audioQuality && it.format == audioFormat && it.audioTrackLocale == audioTrackLocale
-            }
+            val stream =
+                audioStreams.find {
+                    it.quality == audioQuality && it.format == audioFormat && it.audioTrackLocale == audioTrackLocale
+                }
             stream?.toDownloadItem(FileType.AUDIO, id)?.let { items.add(it) }
         }
 
@@ -80,8 +80,8 @@ data class Streams(
         return items
     }
 
-    fun toStreamItem(videoId: String): StreamItem {
-        return StreamItem(
+    fun toStreamItem(videoId: String): StreamItem =
+        StreamItem(
             url = videoId,
             title = title,
             thumbnail = thumbnailUrl,
@@ -93,9 +93,8 @@ data class Streams(
             duration = duration,
             views = views,
             uploaderVerified = uploaderVerified,
-            shortDescription = description
+            shortDescription = description,
         )
-    }
 
     companion object {
         const val CATEGORY_MUSIC = "Music"

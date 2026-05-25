@@ -8,31 +8,32 @@ import com.github.libretube.ui.base.BaseActivity
 import com.github.libretube.ui.fragments.AudioPlayerFragment
 import com.github.libretube.ui.fragments.PlayerFragment
 
-abstract class AbstractPlayerHostActivity: BaseActivity() {
+abstract class AbstractPlayerHostActivity : BaseActivity() {
     abstract fun minimizePlayerContainerLayout()
+
     abstract fun maximizePlayerContainerLayout()
+
     abstract fun setPlayerContainerProgress(progress: Float)
 
     abstract fun clearSearchViewFocus(): Boolean
-
 
     /**
      * Attempt to run code on the player fragment if running
      * Returns true if a running player fragment was found and the action got consumed, else false
      */
-    fun runOnPlayerFragment(action: PlayerFragment.() -> Boolean): Boolean {
-        return supportFragmentManager.fragments.filterIsInstance<PlayerFragment>()
+    fun runOnPlayerFragment(action: PlayerFragment.() -> Boolean): Boolean =
+        supportFragmentManager.fragments
+            .filterIsInstance<PlayerFragment>()
             .firstOrNull()
             ?.let(action)
             ?: false
-    }
 
-    fun runOnAudioPlayerFragment(action: AudioPlayerFragment.() -> Boolean): Boolean {
-        return supportFragmentManager.fragments.filterIsInstance<AudioPlayerFragment>()
+    fun runOnAudioPlayerFragment(action: AudioPlayerFragment.() -> Boolean): Boolean =
+        supportFragmentManager.fragments
+            .filterIsInstance<AudioPlayerFragment>()
             .firstOrNull()
             ?.let(action)
             ?: false
-    }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         // Handle action bar item clicks here. The action bar will
@@ -62,7 +63,7 @@ abstract class AbstractPlayerHostActivity: BaseActivity() {
                     this,
                     supportFragmentManager,
                     AboutActivity.DONATE_URL,
-                    forceDefaultOpen = true
+                    forceDefaultOpen = true,
                 )
                 true
             }

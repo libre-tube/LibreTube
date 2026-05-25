@@ -12,9 +12,11 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior.PEEK_HEIGHT_A
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
-open class ExpandedBottomSheet(@LayoutRes layoutResId: Int) :
-    BottomSheetDialogFragment(layoutResId) {
+open class ExpandedBottomSheet(
+    @LayoutRes layoutResId: Int,
+) : BottomSheetDialogFragment(layoutResId) {
     private val bottomSheet: FrameLayout? get() = dialog?.findViewById(R.id.design_bottom_sheet)
+
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val dialog = super.onCreateDialog(savedInstanceState) as BottomSheetDialog
 

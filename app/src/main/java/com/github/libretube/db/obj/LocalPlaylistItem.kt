@@ -18,10 +18,10 @@ data class LocalPlaylistItem(
     @ColumnInfo val uploaderUrl: String? = null,
     @ColumnInfo val uploaderAvatar: String? = null,
     @ColumnInfo val thumbnailUrl: String? = null,
-    @ColumnInfo val duration: Long? = null
+    @ColumnInfo val duration: Long? = null,
 ) {
-    fun toStreamItem(): StreamItem {
-        return StreamItem(
+    fun toStreamItem(): StreamItem =
+        StreamItem(
             url = videoId,
             title = title,
             thumbnail = thumbnailUrl,
@@ -29,7 +29,6 @@ data class LocalPlaylistItem(
             uploaderUrl = uploaderUrl,
             uploaderAvatar = uploaderAvatar,
             uploadedDate = uploadDate,
-            duration = duration
+            duration = duration,
         )
-    }
 }

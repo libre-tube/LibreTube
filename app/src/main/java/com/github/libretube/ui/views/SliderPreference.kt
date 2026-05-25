@@ -16,7 +16,7 @@ import kotlin.math.roundToInt
  */
 class SliderPreference(
     context: Context,
-    attributeSet: AttributeSet
+    attributeSet: AttributeSet,
 ) : Preference(context, attributeSet) {
     private lateinit var sliderBinding: DialogSliderBinding
     private val defValue: Float
@@ -40,9 +40,10 @@ class SliderPreference(
     override fun getSummary(): CharSequence = getDisplayedCurrentValue(prefValue)
 
     override fun onClick() {
-        sliderBinding = DialogSliderBinding.inflate(
-            LayoutInflater.from(context)
-        )
+        sliderBinding =
+            DialogSliderBinding.inflate(
+                LayoutInflater.from(context),
+            )
 
         sliderBinding.slider.apply {
             value = prefValue
@@ -79,8 +80,7 @@ class SliderPreference(
             .setPositiveButton(R.string.okay) { _, _ ->
                 prefValue = sliderBinding.slider.value
                 summary = sliderBinding.slider.value.toString()
-            }
-            .show()
+            }.show()
         super.onClick()
     }
 

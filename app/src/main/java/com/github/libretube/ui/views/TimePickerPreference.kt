@@ -12,20 +12,20 @@ import java.time.LocalTime
 
 class TimePickerPreference(
     context: Context,
-    attributeSet: AttributeSet
+    attributeSet: AttributeSet,
 ) : Preference(context, attributeSet) {
-    override fun getSummary(): CharSequence {
-        return PreferenceHelper.getString(key, DEFAULT_VALUE)
-    }
+    override fun getSummary(): CharSequence = PreferenceHelper.getString(key, DEFAULT_VALUE)
 
     override fun onClick() {
         val prefTime = LocalTime.parse(PreferenceHelper.getString(key, DEFAULT_VALUE))
-        val picker = MaterialTimePicker.Builder()
-            .setInputMode(MaterialTimePicker.INPUT_MODE_CLOCK)
-            .setTimeFormat(timeFormat)
-            .setHour(prefTime.hour)
-            .setMinute(prefTime.minute)
-            .build()
+        val picker =
+            MaterialTimePicker
+                .Builder()
+                .setInputMode(MaterialTimePicker.INPUT_MODE_CLOCK)
+                .setTimeFormat(timeFormat)
+                .setHour(prefTime.hour)
+                .setMinute(prefTime.minute)
+                .build()
 
         picker.addOnPositiveButtonClickListener {
             val timeStr = LocalTime.of(picker.hour, picker.minute).toString()

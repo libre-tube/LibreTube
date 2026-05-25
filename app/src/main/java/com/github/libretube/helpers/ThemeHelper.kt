@@ -31,18 +31,19 @@ object ThemeHelper {
         activity.setTheme(getTheme(accentColor))
         if (accentColor == "my") DynamicColors.applyToActivityIfAvailable(activity)
 
-        val pureThemeEnabled = PreferenceHelper.getBoolean(
-            PreferenceKeys.PURE_THEME,
-            false
-        )
+        val pureThemeEnabled =
+            PreferenceHelper.getBoolean(
+                PreferenceKeys.PURE_THEME,
+                false,
+            )
         if (pureThemeEnabled) activity.theme.applyStyle(R.style.Pure, true)
     }
 
     /**
      * Update the accent color of the app and apply dynamic colors if needed
      */
-    private fun getTheme(accentColor: String): Int {
-        return when (accentColor) {
+    private fun getTheme(accentColor: String): Int =
+        when (accentColor) {
             // set the accent color, use the pure black/white theme if enabled
             "my" -> R.style.BaseTheme
             "red" -> R.style.Theme_Red
@@ -54,7 +55,6 @@ object ThemeHelper {
             "violet" -> R.style.Theme_Violet
             else -> throw IllegalArgumentException()
         }
-    }
 
     fun applyDialogActivityTheme(activity: Activity) {
         activity.theme.applyStyle(R.style.DialogActivity, true)
@@ -63,19 +63,21 @@ object ThemeHelper {
     /**
      * set the theme mode (light, dark, auto)
      */
-    fun getThemeMode(themeMode: String): Int {
-        return when (themeMode) {
+    fun getThemeMode(themeMode: String): Int =
+        when (themeMode) {
             "A" -> AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
             "L" -> AppCompatDelegate.MODE_NIGHT_NO
             "D" -> AppCompatDelegate.MODE_NIGHT_YES
             else -> AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
         }
-    }
 
     /**
      * change the app icon
      */
-    fun changeIcon(context: Context, newLogoActivityAlias: String) {
+    fun changeIcon(
+        context: Context,
+        newLogoActivityAlias: String,
+    ) {
         // Disable Old Icon(s)
         for (appIcon in IconsSheetAdapter.availableIcons) {
             val activityClass = context.packageName.removeSuffix(".debug") + "." + appIcon.activityAlias
@@ -84,7 +86,7 @@ object ThemeHelper {
             context.packageManager.setComponentEnabledSetting(
                 ComponentName(context.packageName, activityClass),
                 PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
-                PackageManager.DONT_KILL_APP
+                PackageManager.DONT_KILL_APP,
             )
         }
 
@@ -94,15 +96,17 @@ object ThemeHelper {
         context.packageManager.setComponentEnabledSetting(
             ComponentName(context.packageName, newLogoActivityClass),
             PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
-            PackageManager.DONT_KILL_APP
+            PackageManager.DONT_KILL_APP,
         )
     }
 
     /**
      * Get a color by a color resource attr
      */
-    fun getThemeColor(context: Context, colorCode: Int) =
-        MaterialColors.getColor(context, colorCode, Color.TRANSPARENT)
+    fun getThemeColor(
+        context: Context,
+        colorCode: Int,
+    ) = MaterialColors.getColor(context, colorCode, Color.TRANSPARENT)
 
     /**
      * Get the styled app name

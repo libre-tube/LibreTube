@@ -22,23 +22,25 @@ import kotlinx.parcelize.RawValue
 class AddToPlaylistViewModel(
     val savedStateHandle: SavedStateHandle,
 ) : ViewModel() {
-
     private val _uiState = savedStateHandle.getStateFlow(UI_STATE, UiState())
     val uiState = _uiState.asLiveData()
 
     fun fetchPlaylists() {
         viewModelScope.launch {
-            kotlin.runCatching {
-                PlaylistsHelper.getPlaylists()
-            }.onSuccess { playlists ->
-                savedStateHandle[UI_STATE] = _uiState.value.copy(
-                    playlists = playlists.filterNot { list -> list.name.isNullOrEmpty() }
-                )
-            }.onFailure {
-                savedStateHandle[UI_STATE] = _uiState.value.copy(
-                    message = UiState.Message(R.string.unknown_error)
-                )
-            }
+            kotlin
+                .runCatching {
+                    PlaylistsHelper.getPlaylists()
+                }.onSuccess { playlists ->
+                    savedStateHandle[UI_STATE] =
+                        _uiState.value.copy(
+                            playlists = playlists.filterNot { list -> list.name.isNullOrEmpty() },
+                        )
+                }.onFailure {
+                    savedStateHandle[UI_STATE] =
+                        _uiState.value.copy(
+                            message = UiState.Message(R.string.unknown_error),
+                        )
+                }
         }
     }
 
@@ -56,15 +58,16 @@ class AddToPlaylistViewModel(
                 }
                 PlaylistsHelper.addToPlaylist(playlist.id!!, *streams.toTypedArray())
             }.onSuccess {
-                savedStateHandle[UI_STATE] = _uiState.value.copy(
-                    message = UiState.Message(R.string.added_to_playlist, listOf(playlist.name!!)),
-                    saved = Unit,
-                )
-            }
-            .onFailure {
-                savedStateHandle[UI_STATE] = _uiState.value.copy(
-                    message = UiState.Message(R.string.unknown_error)
-                )
+                savedStateHandle[UI_STATE] =
+                    _uiState.value.copy(
+                        message = UiState.Message(R.string.added_to_playlist, listOf(playlist.name!!)),
+                        saved = Unit,
+                    )
+            }.onFailure {
+                savedStateHandle[UI_STATE] =
+                    _uiState.value.copy(
+                        message = UiState.Message(R.string.unknown_error),
+                    )
             }
         }
     }
@@ -98,12 +101,13 @@ class AddToPlaylistViewModel(
     companion object {
         private const val UI_STATE = "ui_state"
 
-        val Factory = viewModelFactory {
-            initializer {
-                AddToPlaylistViewModel(
-                    savedStateHandle = createSavedStateHandle(),
-                )
+        val Factory =
+            viewModelFactory {
+                initializer {
+                    AddToPlaylistViewModel(
+                        savedStateHandle = createSavedStateHandle(),
+                    )
+                }
             }
-        }
     }
 }

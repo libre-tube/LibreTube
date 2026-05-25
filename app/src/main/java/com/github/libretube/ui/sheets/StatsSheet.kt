@@ -17,7 +17,10 @@ class StatsSheet : ExpandedBottomSheet(R.layout.dialog_stats) {
         stats = arguments?.parcelable(IntentData.videoStats)!!
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?,
+    ) {
         val binding = DialogStatsBinding.bind(view)
         binding.videoId.setText(stats.videoId)
         binding.videoIdCopy.setEndIconOnClickListener {

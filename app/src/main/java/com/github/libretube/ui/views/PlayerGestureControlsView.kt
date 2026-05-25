@@ -9,11 +9,16 @@ import com.github.libretube.extensions.normalize
 
 class PlayerGestureControlsView(
     context: Context,
-    attrs: AttributeSet? = null
+    attrs: AttributeSet? = null,
 ) : ConstraintLayout(context, attrs) {
     val binding = PlayerGestureControlsViewBinding.inflate(LayoutInflater.from(context), this, true)
 
-    override fun onSizeChanged(width: Int, height: Int, oldWidth: Int, oldHeight: Int) {
+    override fun onSizeChanged(
+        width: Int,
+        height: Int,
+        oldWidth: Int,
+        oldHeight: Int,
+    ) {
         super.onSizeChanged(width, height, oldHeight, oldHeight)
 
         // Set new max value of progress bar corresponding to the new height and

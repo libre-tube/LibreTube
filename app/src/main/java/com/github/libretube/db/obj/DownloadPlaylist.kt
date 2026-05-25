@@ -27,9 +27,9 @@ data class DownloadPlaylistWithDownload(
     @Relation(
         parentColumn = "playlistId",
         entityColumn = "videoId",
-        associateBy = Junction(DownloadPlaylistVideosCrossRef::class)
+        associateBy = Junction(DownloadPlaylistVideosCrossRef::class),
     )
-    val downloadVideos: List<Download>
+    val downloadVideos: List<Download>,
 )
 
 /**
@@ -41,7 +41,7 @@ data class DownloadPlaylistWithDownloadWithItems(
         entity = Download::class,
         parentColumn = "playlistId",
         entityColumn = "videoId",
-        associateBy = Junction(DownloadPlaylistVideosCrossRef::class)
+        associateBy = Junction(DownloadPlaylistVideosCrossRef::class),
     )
-    val downloadVideos: List<DownloadWithItems>
+    val downloadVideos: List<DownloadWithItems>,
 )

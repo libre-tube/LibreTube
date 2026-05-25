@@ -13,5 +13,5 @@ data class VoteInfo(
     val dislikes: Long,
     val rating: Float,
     val viewCount: Long,
-    val deleted: Boolean
+    val deleted: Boolean,
 ) : Parcelable

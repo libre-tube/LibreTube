@@ -9,5 +9,5 @@ data class DeArrowTitle(
     val locked: Boolean,
     val original: Boolean,
     val title: String,
-    val votes: Int
+    val votes: Int,
 )

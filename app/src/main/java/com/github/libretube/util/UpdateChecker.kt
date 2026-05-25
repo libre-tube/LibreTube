@@ -16,7 +16,9 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.util.Locale
 
-class UpdateChecker(private val context: Context) {
+class UpdateChecker(
+    private val context: Context,
+) {
     suspend fun checkUpdate(isManualCheck: Boolean = false) {
         val currentAppVersion = BuildConfig.VERSION_NAME.filter { it.isDigit() }.toInt()
 
@@ -40,7 +42,7 @@ class UpdateChecker(private val context: Context) {
 
     private fun showUpdateAvailableDialog(
         changelog: String,
-        url: String
+        url: String,
     ) {
         val dialog = UpdateAvailableDialog()
         val args =
@@ -55,16 +57,16 @@ class UpdateChecker(private val context: Context) {
         }
     }
 
-    private fun sanitizeChangelog(changelog: String): String {
-        return changelog.substringBeforeLast("**Full Changelog**")
+    private fun sanitizeChangelog(changelog: String): String =
+        changelog
+            .substringBeforeLast("**Full Changelog**")
             .replace(Regex("in https://github\\.com/\\S+"), "")
-            .lines().joinToString("\n") { line ->
+            .lines()
+            .joinToString("\n") { line ->
                 if (line.startsWith("##")) line.uppercase(Locale.ROOT) + " :" else line
-            }
-            .replace("## ", "")
+            }.replace("## ", "")
             .replace(">", "")
             .replace("*", "•")
             .lines()
             .joinToString("\n") { it.trim() }
-    }
 }

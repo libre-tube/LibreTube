@@ -9,16 +9,17 @@ import kotlinx.coroutines.withContext
 
 class CommentRepliesPagingSource(
     private val videoId: String,
-    private val originalComment: Comment
+    private val originalComment: Comment,
 ) : PagingSource<String, Comment>() {
     override fun getRefreshKey(state: PagingState<String, Comment>) = null
 
-    override suspend fun load(params: LoadParams<String>): LoadResult<String, Comment> {
-        return try {
+    override suspend fun load(params: LoadParams<String>): LoadResult<String, Comment> =
+        try {
             val key = params.key.orEmpty().ifEmpty { originalComment.repliesPage.orEmpty() }
-            val result = withContext(Dispatchers.IO) {
-                MediaServiceRepository.instance.getCommentsNextPage(videoId, key)
-            }
+            val result =
+                withContext(Dispatchers.IO) {
+                    MediaServiceRepository.instance.getCommentsNextPage(videoId, key)
+                }
 
             val replies = result.comments.toMutableList()
             if (params.key.isNullOrEmpty()) {
@@ -29,5 +30,4 @@ class CommentRepliesPagingSource(
         } catch (e: Exception) {
             LoadResult.Error(e)
         }
-    }
 }

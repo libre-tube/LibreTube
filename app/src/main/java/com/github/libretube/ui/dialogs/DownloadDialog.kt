@@ -3,7 +3,6 @@ package com.github.libretube.ui.dialogs
 import android.app.Dialog
 import android.content.DialogInterface
 import android.os.Bundle
-import android.text.InputFilter
 import android.text.format.Formatter
 import android.util.Log
 import android.widget.Toast
@@ -21,7 +20,6 @@ import com.github.libretube.constants.IntentData
 import com.github.libretube.databinding.DialogDownloadBinding
 import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.getWhileDigit
-import com.github.libretube.extensions.sha256Sum
 import com.github.libretube.extensions.toastFromMainDispatcher
 import com.github.libretube.helpers.DownloadHelper
 import com.github.libretube.helpers.PlayerHelper
@@ -61,66 +59,83 @@ class DownloadDialog : DialogFragment() {
 
     private fun fetchAvailableSources(binding: DialogDownloadBinding) {
         lifecycleScope.launch {
-            val response = try {
-                withContext(Dispatchers.IO) {
-                    MediaServiceRepository.instance.getStreams(videoId)
+            val response =
+                try {
+                    withContext(Dispatchers.IO) {
+                        MediaServiceRepository.instance.getStreams(videoId)
+                    }
+                } catch (e: Exception) {
+                    Log.e(TAG(), e.stackTraceToString())
+                    context?.toastFromMainDispatcher(e.localizedMessage.orEmpty())
+                    return@launch
                 }
-            }  catch (e: Exception) {
-                Log.e(TAG(), e.stackTraceToString())
-                context?.toastFromMainDispatcher(e.localizedMessage.orEmpty())
-                return@launch
-            }
             initDownloadOptions(binding, response)
         }
     }
 
-    private fun initDownloadOptions(binding: DialogDownloadBinding, streams: Streams) {
+    private fun initDownloadOptions(
+        binding: DialogDownloadBinding,
+        streams: Streams,
+    ) {
         binding.videoTitle.text = streams.title
 
-        val videoStreams = streams.videoStreams.filter {
-            !it.url.isNullOrEmpty()
-        }.filter { !it.format.orEmpty().contains("HLS") }.sortedByDescending {
-            it.quality.getWhileDigit()
-        }
+        val videoStreams =
+            streams.videoStreams
+                .filter {
+                    !it.url.isNullOrEmpty()
+                }.filter { !it.format.orEmpty().contains("HLS") }
+                .sortedByDescending {
+                    it.quality.getWhileDigit()
+                }
 
-        val audioStreams = streams.audioStreams.filter {
-            !it.url.isNullOrEmpty()
-        }
-            .sortedBy {
-                // prioritize main audio track types (lower role flag) over secondary/subbed ones
-                PlayerHelper.getFullAudioRoleFlags(0, it.audioTrackType.orEmpty())
-            }
-            .sortedByDescending {
-                it.quality.getWhileDigit()
-            }
+        val audioStreams =
+            streams.audioStreams
+                .filter {
+                    !it.url.isNullOrEmpty()
+                }.sortedBy {
+                    // prioritize main audio track types (lower role flag) over secondary/subbed ones
+                    PlayerHelper.getFullAudioRoleFlags(0, it.audioTrackType.orEmpty())
+                }.sortedByDescending {
+                    it.quality.getWhileDigit()
+                }
 
-        val subtitles = streams.subtitles
-            .filter { !it.url.isNullOrEmpty() && !it.name.isNullOrEmpty() }
-            .sortedBy { it.name }
+        val subtitles =
+            streams.subtitles
+                .filter { !it.url.isNullOrEmpty() && !it.name.isNullOrEmpty() }
+                .sortedBy { it.name }
 
         if (subtitles.isEmpty()) binding.subtitleSpinner.isGone = true
 
-        binding.videoSpinner.items = videoStreams.map {
-            val fileSize = Formatter.formatShortFileSize(context, it.contentLength)
-            "${it.quality} ${it.codec} ($fileSize)"
-        }.toMutableList().also {
-            it.add(0, getString(R.string.no_video))
-        }
+        binding.videoSpinner.items =
+            videoStreams
+                .map {
+                    val fileSize = Formatter.formatShortFileSize(context, it.contentLength)
+                    "${it.quality} ${it.codec} ($fileSize)"
+                }.toMutableList()
+                .also {
+                    it.add(0, getString(R.string.no_video))
+                }
 
-        binding.audioSpinner.items = audioStreams.map {
-            val fileSize = it.contentLength
-                .takeIf { l -> l > 0 }
-                ?.let { cl -> Formatter.formatShortFileSize(context, cl) }
-            val infoStr = listOfNotNull(it.audioTrackLocale, fileSize)
-                .joinToString(", ")
-            "${it.quality} ${it.format} ($infoStr)"
-        }.toMutableList().also {
-            it.add(0, getString(R.string.no_audio))
-        }
+        binding.audioSpinner.items =
+            audioStreams
+                .map {
+                    val fileSize =
+                        it.contentLength
+                            .takeIf { l -> l > 0 }
+                            ?.let { cl -> Formatter.formatShortFileSize(context, cl) }
+                    val infoStr =
+                        listOfNotNull(it.audioTrackLocale, fileSize)
+                            .joinToString(", ")
+                    "${it.quality} ${it.format} ($infoStr)"
+                }.toMutableList()
+                .also {
+                    it.add(0, getString(R.string.no_audio))
+                }
 
-        binding.subtitleSpinner.items = subtitles.map { it.name.orEmpty() }.toMutableList().also {
-            it.add(0, getString(R.string.no_subtitle))
-        }
+        binding.subtitleSpinner.items =
+            subtitles.map { it.name.orEmpty() }.toMutableList().also {
+                it.add(0, getString(R.string.no_subtitle))
+            }
 
         restorePreviousSelections(binding, videoStreams, audioStreams, subtitles)
 
@@ -140,15 +155,16 @@ class DownloadDialog : DialogFragment() {
 
             saveSelections(videoStream, audioStream, subtitle)
 
-            val downloadData = DownloadData(
-                videoId = videoId,
-                videoFormat = videoStream?.format,
-                videoQuality = videoStream?.quality,
-                audioFormat = audioStream?.format,
-                audioQuality = audioStream?.quality,
-                audioLanguage = audioStream?.audioTrackLocale,
-                subtitleCode = subtitle?.code
-            )
+            val downloadData =
+                DownloadData(
+                    videoId = videoId,
+                    videoFormat = videoStream?.format,
+                    videoQuality = videoStream?.quality,
+                    audioFormat = audioStream?.format,
+                    audioQuality = audioStream?.quality,
+                    audioLanguage = audioStream?.audioTrackLocale,
+                    subtitleCode = subtitle?.code,
+                )
             DownloadHelper.startDownloadService(requireContext(), downloadData)
 
             dismiss()
@@ -161,7 +177,7 @@ class DownloadDialog : DialogFragment() {
     private fun saveSelections(
         videoStream: PipedStream?,
         audioStream: PipedStream?,
-        subtitle: Subtitle?
+        subtitle: Subtitle?,
     ) {
         PreferenceHelper.putString(SUBTITLE_LANGUAGE, subtitle?.code.orEmpty())
         PreferenceHelper.putString(VIDEO_DOWNLOAD_FORMAT, videoStream?.format.orEmpty())
@@ -179,19 +195,19 @@ class DownloadDialog : DialogFragment() {
         binding: DialogDownloadBinding,
         videoStreams: List<PipedStream>,
         audioStreams: List<PipedStream>,
-        subtitles: List<Subtitle>
+        subtitles: List<Subtitle>,
     ) {
         getStreamSelection(
             videoStreams,
             getSel(VIDEO_DOWNLOAD_QUALITY),
-            getSel(VIDEO_DOWNLOAD_FORMAT)
+            getSel(VIDEO_DOWNLOAD_FORMAT),
         )?.let {
             binding.videoSpinner.selectedItemPosition = it + 1
         }
         getStreamSelection(
             audioStreams,
             getSel(AUDIO_DOWNLOAD_QUALITY),
-            getSel(AUDIO_DOWNLOAD_FORMAT)
+            getSel(AUDIO_DOWNLOAD_FORMAT),
         )?.let {
             binding.audioSpinner.selectedItemPosition = it + 1
         }
@@ -204,7 +220,7 @@ class DownloadDialog : DialogFragment() {
     private fun getStreamSelection(
         streams: List<PipedStream>,
         quality: String,
-        format: String
+        format: String,
     ): Int? {
         if (quality.isBlank()) return null
 

@@ -20,7 +20,6 @@ data class BackupFile(
     //
     val format: String = "Piped",
     val version: Int = 1,
-
     //
     // only compatible with LibreTube itself, database objects
     //
@@ -29,22 +28,18 @@ data class BackupFile(
     var searchHistory: List<SearchHistoryItem>? = emptyList(),
     var customInstances: List<CustomInstance>? = emptyList(),
     var playlistBookmarks: List<PlaylistBookmark>? = emptyList(),
-
     //
     // Preferences, stored as a key value map
     //
     var preferences: List<PreferenceItem>? = emptyList(),
-
     //
     // Database objects with compatibility for Piped imports/exports
     //
     @JsonNames("groups", "channelGroups")
     var groups: List<SubscriptionGroup>? = emptyList(),
-
     @JsonNames("subscriptions", "localSubscriptions")
     var subscriptions: List<LocalSubscription>? = emptyList(),
-
     // playlists are exported in two different formats because the formats differ too much unfortunately
     var localPlaylists: List<LocalPlaylistWithVideos>? = emptyList(),
-    var playlists: List<PipedImportPlaylist>? = emptyList()
+    var playlists: List<PipedImportPlaylist>? = emptyList(),
 )

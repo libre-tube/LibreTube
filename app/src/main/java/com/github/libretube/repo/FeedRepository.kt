@@ -5,14 +5,16 @@ import com.github.libretube.db.obj.SubscriptionsFeedItem
 
 data class FeedProgress(
     val currentProgress: Int,
-    val total: Int
+    val total: Int,
 )
 
 interface FeedRepository {
     suspend fun getFeed(
         forceRefresh: Boolean,
-        onProgressUpdate: (FeedProgress) -> Unit
+        onProgressUpdate: (FeedProgress) -> Unit,
     ): List<StreamItem>
+
     suspend fun removeChannel(channelId: String) {}
+
     suspend fun submitFeedItemChange(feedItem: SubscriptionsFeedItem) {}
 }

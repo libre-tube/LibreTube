@@ -22,17 +22,15 @@ class UpdateAvailableDialog : DialogFragment() {
         }
     }
 
-    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        return MaterialAlertDialogBuilder(requireContext())
+    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog =
+        MaterialAlertDialogBuilder(requireContext())
             .setTitle(R.string.update_available)
             .setMessage(changelog)
             .setPositiveButton(R.string.download) { _, _ ->
                 releaseUrl?.let {
                     startActivity(Intent(Intent.ACTION_VIEW, it.toUri()))
                 }
-            }
-            .setNegativeButton(R.string.tooltip_dismiss, null)
+            }.setNegativeButton(R.string.tooltip_dismiss, null)
             .setCancelable(false)
             .show()
-    }
 }

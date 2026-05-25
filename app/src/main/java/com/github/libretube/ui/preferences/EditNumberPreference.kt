@@ -9,4 +9,7 @@ import com.github.libretube.ui.base.BasePreferenceFragment
  * [EditTextPreference] that only allows numeric input.
  * The actual functionality is done in [BasePreferenceFragment].
  */
-class EditNumberPreference(context: Context, attributeSet: AttributeSet?): EditTextPreference(context, attributeSet)
+class EditNumberPreference(
+    context: Context,
+    attributeSet: AttributeSet?,
+) : EditTextPreference(context, attributeSet)

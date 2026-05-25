@@ -11,49 +11,55 @@ data class DownloadWithItems(
     @Embedded val download: Download,
     @Relation(
         parentColumn = "videoId",
-        entityColumn = "videoId"
+        entityColumn = "videoId",
     )
     val downloadItems: List<DownloadItem>,
     @Relation(
         parentColumn = "videoId",
-        entityColumn = "videoId"
+        entityColumn = "videoId",
     )
     val downloadChapters: List<DownloadChapter> = emptyList(),
     @Relation(
         parentColumn = "videoId",
-        entityColumn = "videoId"
+        entityColumn = "videoId",
     )
-    val downloadSponsorBlockSegments: List<DownloadSponsorBlockSegment> = emptyList()
+    val downloadSponsorBlockSegments: List<DownloadSponsorBlockSegment> = emptyList(),
 ) {
-    fun toStreams(): Streams = Streams(
-        title = download.title,
-        description = download.description,
-        uploaderAvatar = null,
-        thumbnailUrl = download.thumbnailPath?.toUri()?.toString().orEmpty(),
-        category = "",
-        uploader = download.uploader,
-        uploaded = download.uploadDate?.toMillis(),
-        duration = download.duration ?: 0,
-        uploaderUrl = download.uploaderUrl,
-        uploaderVerified = false,
-        chapters = downloadChapters.map { it.toChapterSegment() },
-        views = download.views,
-        likes = download.likes,
-        dislikes = download.dislikes,
-        uploaderSubscriberCount = -1
-    )
+    fun toStreams(): Streams =
+        Streams(
+            title = download.title,
+            description = download.description,
+            uploaderAvatar = null,
+            thumbnailUrl =
+                download.thumbnailPath
+                    ?.toUri()
+                    ?.toString()
+                    .orEmpty(),
+            category = "",
+            uploader = download.uploader,
+            uploaded = download.uploadDate?.toMillis(),
+            duration = download.duration ?: 0,
+            uploaderUrl = download.uploaderUrl,
+            uploaderVerified = false,
+            chapters = downloadChapters.map { it.toChapterSegment() },
+            views = download.views,
+            likes = download.likes,
+            dislikes = download.dislikes,
+            uploaderSubscriberCount = -1,
+        )
 }
 
-fun List<DownloadWithItems>.filterByTab(tab: DownloadTab) = filter { dl ->
-    when (tab) {
-        DownloadTab.AUDIO -> {
-            dl.downloadItems.any { it.type == FileType.AUDIO } && dl.downloadItems.none { it.type == FileType.VIDEO }
-        }
+fun List<DownloadWithItems>.filterByTab(tab: DownloadTab) =
+    filter { dl ->
+        when (tab) {
+            DownloadTab.AUDIO -> {
+                dl.downloadItems.any { it.type == FileType.AUDIO } && dl.downloadItems.none { it.type == FileType.VIDEO }
+            }
 
-        DownloadTab.VIDEO -> {
-            dl.downloadItems.any { it.type == FileType.VIDEO } || dl.downloadItems.isEmpty()
-        }
+            DownloadTab.VIDEO -> {
+                dl.downloadItems.any { it.type == FileType.VIDEO } || dl.downloadItems.isEmpty()
+            }
 
-        DownloadTab.PLAYLIST -> throw IllegalArgumentException("not applicable for playlist tab, playlistId must be passed")
+            DownloadTab.PLAYLIST -> throw IllegalArgumentException("not applicable for playlist tab, playlistId must be passed")
+        }
     }
-}

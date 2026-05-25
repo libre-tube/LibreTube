@@ -30,7 +30,10 @@ class ChaptersBottomSheet : ExpandablePlayerSheet(R.layout.bottom_sheet) {
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?,
+    ) {
         _binding = BottomSheetBinding.bind(view)
         super.onViewCreated(view, savedInstanceState)
 
@@ -47,10 +50,9 @@ class ChaptersBottomSheet : ExpandablePlayerSheet(R.layout.bottom_sheet) {
                 v.paddingLeft,
                 v.paddingTop,
                 v.paddingRight,
-                systemInsets.bottom
+                systemInsets.bottom,
             )
         }
-
 
         binding.optionsRecycler.viewTreeObserver.addOnGlobalLayoutListener(
             object : ViewTreeObserver.OnGlobalLayoutListener {
@@ -61,7 +63,7 @@ class ChaptersBottomSheet : ExpandablePlayerSheet(R.layout.bottom_sheet) {
 
                     binding.optionsRecycler.viewTreeObserver.removeOnGlobalLayoutListener(this)
                 }
-            }
+            },
         )
 
         chaptersViewModel.currentChapterIndex.observe(viewLifecycleOwner) { currentIndex ->
@@ -92,7 +94,7 @@ class ChaptersBottomSheet : ExpandablePlayerSheet(R.layout.bottom_sheet) {
         dialog?.window?.apply {
             setFlags(
                 WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
-                WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
+                WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
             )
         }
     }

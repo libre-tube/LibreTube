@@ -10,8 +10,10 @@ import com.github.libretube.helpers.NotificationHelper
 import com.github.libretube.ui.base.BasePreferenceFragment
 
 class NotificationSettings : BasePreferenceFragment() {
-
-    override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
+    override fun onCreatePreferences(
+        savedInstanceState: Bundle?,
+        rootKey: String?,
+    ) {
         setPreferencesFromResource(R.xml.notification_settings, rootKey)
 
         val notificationsEnabled =
@@ -40,7 +42,7 @@ class NotificationSettings : BasePreferenceFragment() {
         NotificationHelper
             .enqueueWork(
                 context = requireContext(),
-                existingPeriodicWorkPolicy = ExistingPeriodicWorkPolicy.UPDATE
+                existingPeriodicWorkPolicy = ExistingPeriodicWorkPolicy.UPDATE,
             )
     }
 }

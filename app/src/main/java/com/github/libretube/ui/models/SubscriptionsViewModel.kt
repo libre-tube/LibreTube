@@ -25,17 +25,21 @@ class SubscriptionsViewModel : ViewModel() {
 
     var subFeedRecyclerViewState: Parcelable? = null
 
-    fun fetchFeed(context: Context, forceRefresh: Boolean) {
+    fun fetchFeed(
+        context: Context,
+        forceRefresh: Boolean,
+    ) {
         viewModelScope.launch(Dispatchers.IO) {
-            val videoFeed = try {
-                SubscriptionHelper.getFeed(forceRefresh = forceRefresh) { feedProgress ->
-                    this@SubscriptionsViewModel.feedProgress.postValue(feedProgress)
+            val videoFeed =
+                try {
+                    SubscriptionHelper.getFeed(forceRefresh = forceRefresh) { feedProgress ->
+                        this@SubscriptionsViewModel.feedProgress.postValue(feedProgress)
+                    }
+                } catch (e: Exception) {
+                    context.toastFromMainDispatcher(R.string.server_error)
+                    Log.e(TAG(), e.toString())
+                    return@launch
                 }
-            } catch (e: Exception) {
-                context.toastFromMainDispatcher(R.string.server_error)
-                Log.e(TAG(), e.toString())
-                return@launch
-            }
             this@SubscriptionsViewModel.videoFeed.postValue(videoFeed)
             videoFeed.firstOrNull { !it.isUpcoming }?.uploaded?.let {
                 PreferenceHelper.updateLastFeedWatchedTime(it, false)
@@ -45,13 +49,14 @@ class SubscriptionsViewModel : ViewModel() {
 
     fun fetchSubscriptions(context: Context) {
         viewModelScope.launch(Dispatchers.IO) {
-            val subscriptions = try {
-                SubscriptionHelper.getSubscriptions()
-            } catch (e: Exception) {
-                context.toastFromMainDispatcher(R.string.server_error)
-                Log.e(TAG(), e.toString())
-                return@launch
-            }
+            val subscriptions =
+                try {
+                    SubscriptionHelper.getSubscriptions()
+                } catch (e: Exception) {
+                    context.toastFromMainDispatcher(R.string.server_error)
+                    Log.e(TAG(), e.toString())
+                    return@launch
+                }
             this@SubscriptionsViewModel.subscriptions.postValue(subscriptions)
         }
     }

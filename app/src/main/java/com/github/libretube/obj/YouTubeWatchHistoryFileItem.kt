@@ -10,5 +10,5 @@ data class YouTubeWatchHistoryFileItem(
     val titleUrl: String = "",
     val activityControls: List<String> = emptyList(),
     val products: List<String> = emptyList(),
-    val subtitles: List<YouTubeWatchHistoryChannelInfo> = emptyList()
+    val subtitles: List<YouTubeWatchHistoryChannelInfo> = emptyList(),
 )

@@ -78,8 +78,14 @@ class SubmitSegmentDialog : DialogFragment() {
 
         requireDialog().hide()
 
-        var startTime = binding.startTime.text.toString().parseDurationString()
-        var endTime = binding.endTime.text.toString().parseDurationString()
+        var startTime =
+            binding.startTime.text
+                .toString()
+                .parseDurationString()
+        var endTime =
+            binding.endTime.text
+                .toString()
+                .parseDurationString()
 
         if (endTime == null || startTime == null || startTime > endTime) {
             context.toastFromMainDispatcher(R.string.sb_invalid_segment)
@@ -116,15 +122,18 @@ class SubmitSegmentDialog : DialogFragment() {
         val binding = _binding ?: return
         val context = requireContext().applicationContext
 
-        val segmentID = segments.getOrNull(binding.segmentsDropdown.selectedItemPosition)
-            ?.uuid ?: return
+        val segmentID =
+            segments
+                .getOrNull(binding.segmentsDropdown.selectedItemPosition)
+                ?.uuid ?: return
 
         // see https://wiki.sponsor.ajay.app/w/API_Docs#POST_/api/voteOnSponsorTime
-        val score = when {
-            binding.upvote.isChecked -> 1
-            binding.downvote.isChecked -> 0
-            else -> 20
-        }
+        val score =
+            when {
+                binding.upvote.isChecked -> 1
+                binding.downvote.isChecked -> 0
+                else -> 20
+            }
 
         dialog?.hide()
         lifecycleScope.launch(Dispatchers.IO) {
@@ -132,7 +141,7 @@ class SubmitSegmentDialog : DialogFragment() {
                 RetrofitInstance.externalApi.voteOnSponsorTime(
                     uuid = segmentID,
                     userID = PreferenceHelper.getSponsorBlockUserID(),
-                    score = score
+                    score = score,
                 )
                 context.toastFromMainDispatcher(R.string.success)
             } catch (e: Exception) {
@@ -144,12 +153,13 @@ class SubmitSegmentDialog : DialogFragment() {
 
     private suspend fun fetchSegments() {
         val categories = resources.getStringArray(R.array.sponsorBlockSegments).toList()
-        segments = try {
-            MediaServiceRepository.instance.getSegments(videoId, categories).segments
-        } catch (e: Exception) {
-            Log.e(TAG(), e.toString())
-            return
-        }
+        segments =
+            try {
+                MediaServiceRepository.instance.getSegments(videoId, categories).segments
+            } catch (e: Exception) {
+                Log.e(TAG(), e.toString())
+                return
+            }
 
         withContext(Dispatchers.Main) {
             val binding = _binding ?: return@withContext
@@ -160,12 +170,14 @@ class SubmitSegmentDialog : DialogFragment() {
                 return@withContext
             }
 
-            binding.segmentsDropdown.items = segments.map {
-                val (start, end) = it.segmentStartAndEnd
-                val (startStr, endStr) = DateUtils.formatElapsedTime(start.toLong()) to
-                        DateUtils.formatElapsedTime(end.toLong())
-                "${it.category} ($startStr - $endStr)"
-            }
+            binding.segmentsDropdown.items =
+                segments.map {
+                    val (start, end) = it.segmentStartAndEnd
+                    val (startStr, endStr) =
+                        DateUtils.formatElapsedTime(start.toLong()) to
+                            DateUtils.formatElapsedTime(end.toLong())
+                    "${it.category} ($startStr - $endStr)"
+                }
         }
     }
 

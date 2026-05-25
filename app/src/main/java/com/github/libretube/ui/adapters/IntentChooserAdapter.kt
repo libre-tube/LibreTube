@@ -15,9 +15,12 @@ import com.github.libretube.ui.viewholders.IntentChooserViewHolder
  */
 class IntentChooserAdapter(
     private val packages: List<ResolveInfo>,
-    private val queryUrl: String
+    private val queryUrl: String,
 ) : RecyclerView.Adapter<IntentChooserViewHolder>() {
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): IntentChooserViewHolder {
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int,
+    ): IntentChooserViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         val binding = IntentChooserItemBinding.inflate(layoutInflater, parent, false)
         return IntentChooserViewHolder(binding)
@@ -25,7 +28,10 @@ class IntentChooserAdapter(
 
     override fun getItemCount() = packages.size
 
-    override fun onBindViewHolder(holder: IntentChooserViewHolder, position: Int) {
+    override fun onBindViewHolder(
+        holder: IntentChooserViewHolder,
+        position: Int,
+    ) {
         val currentPackage = packages[position]
         holder.binding.apply {
             val drawable = currentPackage.loadIcon(root.context.packageManager)
@@ -34,8 +40,9 @@ class IntentChooserAdapter(
             appNameTV.text = appLabel
             root.setOnClickListener {
                 runCatching {
-                    val intent = Intent(Intent.ACTION_VIEW, queryUrl.toUri())
-                        .setPackage(currentPackage.activityInfo.packageName)
+                    val intent =
+                        Intent(Intent.ACTION_VIEW, queryUrl.toUri())
+                            .setPackage(currentPackage.activityInfo.packageName)
                     root.context.startActivity(intent)
                 }
             }

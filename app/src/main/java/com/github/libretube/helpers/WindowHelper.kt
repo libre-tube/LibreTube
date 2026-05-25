@@ -14,13 +14,17 @@ import com.github.libretube.ui.extensions.toggleSystemBars
 object WindowHelper {
     private const val NAVIGATION_MODE = "navigation_mode"
 
-    fun toggleFullscreen(window: Window, isFullscreen: Boolean) {
+    fun toggleFullscreen(
+        window: Window,
+        isFullscreen: Boolean,
+    ) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-            window.attributes.layoutInDisplayCutoutMode = if (isFullscreen) {
-                WindowManager.LayoutParams.LAYOUT_IN_DISPLAY_CUTOUT_MODE_SHORT_EDGES
-            } else {
-                WindowManager.LayoutParams.LAYOUT_IN_DISPLAY_CUTOUT_MODE_DEFAULT
-            }
+            window.attributes.layoutInDisplayCutoutMode =
+                if (isFullscreen) {
+                    WindowManager.LayoutParams.LAYOUT_IN_DISPLAY_CUTOUT_MODE_SHORT_EDGES
+                } else {
+                    WindowManager.LayoutParams.LAYOUT_IN_DISPLAY_CUTOUT_MODE_DEFAULT
+                }
         }
 
         WindowCompat.setDecorFitsSystemWindows(window, !isFullscreen)
@@ -37,7 +41,7 @@ object WindowHelper {
         // See: https://developer.android.com/training/system-ui/immersive#kotlin
         window.toggleSystemBars(
             types = WindowInsetsCompat.Type.systemBars(),
-            showBars = !isFullscreen
+            showBars = !isFullscreen,
         )
     }
 

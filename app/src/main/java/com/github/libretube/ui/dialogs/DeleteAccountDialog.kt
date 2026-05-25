@@ -65,7 +65,7 @@ class DeleteAccountDialog : DialogFragment() {
 
         setFragmentResult(
             InstanceSettings.INSTANCE_DIALOG_REQUEST_KEY,
-            bundleOf(IntentData.logoutTask to true)
+            bundleOf(IntentData.logoutTask to true),
         )
     }
 }

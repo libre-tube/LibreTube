@@ -95,15 +95,19 @@ class PlaylistFragment : DynamicLayoutManagerFragment(R.layout.fragment_playlist
         _binding?.playlistRecView?.layoutManager = GridLayoutManager(context, gridItems.ceilHalf())
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?,
+    ) {
         _binding = FragmentPlaylistBinding.bind(view)
         super.onViewCreated(view, savedInstanceState)
 
         binding.playlistProgress.isVisible = true
 
-        isBookmarked = runBlocking(Dispatchers.IO) {
-            DatabaseHolder.Database.playlistBookmarkDao().includes(playlistId)
-        }
+        isBookmarked =
+            runBlocking(Dispatchers.IO) {
+                DatabaseHolder.Database.playlistBookmarkDao().includes(playlistId)
+            }
         updateBookmarkRes()
 
         commonPlayerViewModel.isMiniPlayerVisible.observe(viewLifecycleOwner) {
@@ -111,12 +115,17 @@ class PlaylistFragment : DynamicLayoutManagerFragment(R.layout.fragment_playlist
         }
 
         // manually restore the recyclerview state due to https://github.com/material-components/material-components-android/issues/3473
-        binding.playlistRecView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
-                super.onScrollStateChanged(recyclerView, newState)
-                recyclerViewState = recyclerView.layoutManager?.onSaveInstanceState()
-            }
-        })
+        binding.playlistRecView.addOnScrollListener(
+            object : RecyclerView.OnScrollListener() {
+                override fun onScrollStateChanged(
+                    recyclerView: RecyclerView,
+                    newState: Int,
+                ) {
+                    super.onScrollStateChanged(recyclerView, newState)
+                    recyclerViewState = recyclerView.layoutManager?.onSaveInstanceState()
+                }
+            },
+        )
 
         fetchPlaylist()
     }
@@ -128,20 +137,21 @@ class PlaylistFragment : DynamicLayoutManagerFragment(R.layout.fragment_playlist
 
     private fun updateBookmarkRes() {
         binding.bookmark.setIconResource(
-            if (isBookmarked) R.drawable.ic_bookmark else R.drawable.ic_bookmark_outlined
+            if (isBookmarked) R.drawable.ic_bookmark else R.drawable.ic_bookmark_outlined,
         )
     }
 
     private fun fetchPlaylist() {
         lifecycleScope.launch {
-            val response = try {
-                withContext(Dispatchers.IO) {
-                    PlaylistsHelper.getPlaylist(playlistId)
+            val response =
+                try {
+                    withContext(Dispatchers.IO) {
+                        PlaylistsHelper.getPlaylist(playlistId)
+                    }
+                } catch (e: Exception) {
+                    Log.e(TAG(), e.toString())
+                    return@launch
                 }
-            } catch (e: Exception) {
-                Log.e(TAG(), e.toString())
-                return@launch
-            }
             val binding = _binding ?: return@launch
 
             playlistFeed = response.relatedStreams.toMutableList()
@@ -170,25 +180,31 @@ class PlaylistFragment : DynamicLayoutManagerFragment(R.layout.fragment_playlist
             // hide playlist description text view if not provided
             binding.playlistDescription.isGone = response.description.orEmpty().isBlank()
 
-            playlistAdapter = PlaylistAdapter(playlistId) { streamItem ->
-                startVideoItemPlayback(streamItem)
-            }
+            playlistAdapter =
+                PlaylistAdapter(playlistId) { streamItem ->
+                    startVideoItemPlayback(streamItem)
+                }
             binding.playlistRecView.adapter = playlistAdapter
 
             // listen for playlist items to become deleted
-            playlistAdapter!!.registerAdapterDataObserver(object :
-                RecyclerView.AdapterDataObserver() {
-                override fun onItemRangeRemoved(positionStart: Int, itemCount: Int) {
-                    if (positionStart == 0) {
-                        ImageHelper.loadImage(
-                            playlistFeed.firstOrNull()?.thumbnail.orEmpty(),
-                            binding.thumbnail
-                        )
-                    }
+            playlistAdapter!!.registerAdapterDataObserver(
+                object :
+                    RecyclerView.AdapterDataObserver() {
+                    override fun onItemRangeRemoved(
+                        positionStart: Int,
+                        itemCount: Int,
+                    ) {
+                        if (positionStart == 0) {
+                            ImageHelper.loadImage(
+                                playlistFeed.firstOrNull()?.thumbnail.orEmpty(),
+                                binding.thumbnail,
+                            )
+                        }
 
-                    binding.playlistInfo.text = getChannelAndVideoString(response, playlistFeed.size)
-                }
-            })
+                        binding.playlistInfo.text = getChannelAndVideoString(response, playlistFeed.size)
+                    }
+                },
+            )
 
             binding.playlistRecView.addOnBottomReachedListener {
                 if (isLoading) return@addOnBottomReachedListener
@@ -215,16 +231,17 @@ class PlaylistFragment : DynamicLayoutManagerFragment(R.layout.fragment_playlist
             // show playlist options
             binding.optionsMenu.setOnClickListener {
                 val sheet = PlaylistOptionsBottomSheet()
-                sheet.arguments = bundleOf(
-                    IntentData.playlistId to playlistId,
-                    IntentData.playlistName to playlistName.orEmpty(),
-                    IntentData.playlistType to playlistType
-                )
+                sheet.arguments =
+                    bundleOf(
+                        IntentData.playlistId to playlistId,
+                        IntentData.playlistName to playlistName.orEmpty(),
+                        IntentData.playlistType to playlistType,
+                    )
 
                 val fragmentManager = (context as BaseActivity).supportFragmentManager
                 fragmentManager.setFragmentResultListener(
                     PlaylistOptionsBottomSheet.PLAYLIST_OPTIONS_REQUEST_KEY,
-                    (context as BaseActivity)
+                    (context as BaseActivity),
                 ) { _, resultBundle ->
                     val newPlaylistDescription =
                         resultBundle.getString(IntentData.playlistDescription)
@@ -267,10 +284,12 @@ class PlaylistFragment : DynamicLayoutManagerFragment(R.layout.fragment_playlist
                     updateBookmarkRes()
                     lifecycleScope.launch(Dispatchers.IO) {
                         if (!isBookmarked) {
-                            DatabaseHolder.Database.playlistBookmarkDao()
+                            DatabaseHolder.Database
+                                .playlistBookmarkDao()
                                 .deleteById(playlistId)
                         } else {
-                            DatabaseHolder.Database.playlistBookmarkDao()
+                            DatabaseHolder.Database
+                                .playlistBookmarkDao()
                                 .insert(response.toPlaylistBookmark(playlistId))
                         }
                     }
@@ -295,18 +314,18 @@ class PlaylistFragment : DynamicLayoutManagerFragment(R.layout.fragment_playlist
                 } else {
                     binding.sortBTN.isVisible = true
                     binding.sortBTN.setOnClickListener {
-                        BaseBottomSheet().apply {
-                            setSimpleItems(sortOptions.toList()) { index ->
-                                selectedSortOrder = index
-                                binding.sortBTN.text = sortOptions[index]
-                                showPlaylistVideos()
-                            }
-                        }.show(childFragmentManager)
+                        BaseBottomSheet()
+                            .apply {
+                                setSimpleItems(sortOptions.toList()) { index ->
+                                    selectedSortOrder = index
+                                    binding.sortBTN.text = sortOptions[index]
+                                    showPlaylistVideos()
+                                }
+                            }.show(childFragmentManager)
                     }
                 }
 
                 binding.sortBTN.text = sortOptions[selectedSortOrder]
-
             }
 
             updatePlaylistBookmark(response)
@@ -316,11 +335,12 @@ class PlaylistFragment : DynamicLayoutManagerFragment(R.layout.fragment_playlist
     private fun navigateVideo(streamItem: StreamItem) {
         NavigationHelper.navigateVideo(
             requireContext(),
-            playerData = PlayerData(
-                streamItem.url!!.toID(),
-                playlistId = playlistId,
-                keepQueue = true
-            )
+            playerData =
+                PlayerData(
+                    streamItem.url!!.toID(),
+                    playlistId = playlistId,
+                    keepQueue = true,
+                ),
         )
     }
 
@@ -347,7 +367,8 @@ class PlaylistFragment : DynamicLayoutManagerFragment(R.layout.fragment_playlist
                 playlistBookmark.playlistName != playlist.name ||
                 playlistBookmark.videos != playlist.videos
             ) {
-                DatabaseHolder.Database.playlistBookmarkDao()
+                DatabaseHolder.Database
+                    .playlistBookmarkDao()
                     .update(playlist.toPlaylistBookmark(playlistBookmark.playlistId))
             }
         }
@@ -383,7 +404,12 @@ class PlaylistFragment : DynamicLayoutManagerFragment(R.layout.fragment_playlist
 
         val query = playlistViewModel.searchQuery.value
         if (!query.isNullOrEmpty()) {
-            videos = videos.filter { it.item.title.orEmpty().contains(query, ignoreCase = true) }
+            videos =
+                videos.filter {
+                    it.item.title
+                        .orEmpty()
+                        .contains(query, ignoreCase = true)
+                }
         }
 
         playlistAdapter?.submitList(videos)
@@ -407,22 +433,23 @@ class PlaylistFragment : DynamicLayoutManagerFragment(R.layout.fragment_playlist
                 PlaylistsHelper.removeFromPlaylist(playlistId, originalPlaylistPosition)
 
                 val shortTitle = TextUtils.limitTextToLength(video.title.orEmpty(), 50)
-                val snackBarText = getString(
-                    R.string.successfully_removed_from_playlist,
-                    shortTitle
-                )
+                val snackBarText =
+                    getString(
+                        R.string.successfully_removed_from_playlist,
+                        shortTitle,
+                    )
 
                 withContext(Dispatchers.Main) {
-                    Snackbar.make(binding.root, snackBarText, Snackbar.LENGTH_LONG)
+                    Snackbar
+                        .make(binding.root, snackBarText, Snackbar.LENGTH_LONG)
                         .setTextMaxLines(3)
                         .setAction(R.string.undo) {
                             reAddToPlaylist(
                                 video,
                                 sortedFeedPosition,
-                                originalPlaylistPosition
+                                originalPlaylistPosition,
                             )
-                        }
-                        .show()
+                        }.show()
                 }
             } catch (e: Exception) {
                 Log.e(TAG(), e.toString())
@@ -434,7 +461,7 @@ class PlaylistFragment : DynamicLayoutManagerFragment(R.layout.fragment_playlist
     private fun reAddToPlaylist(
         streamItem: StreamItem,
         sortedFeedPosition: Int,
-        originalFeedPosition: Int
+        originalFeedPosition: Int,
     ) {
         lifecycleScope.launch(Dispatchers.IO) {
             try {
@@ -464,18 +491,24 @@ class PlaylistFragment : DynamicLayoutManagerFragment(R.layout.fragment_playlist
      *
      * I.e., this method adds the given offset to all videos with an originalPlaylistIndex > modifiedPosition.
      */
-    private fun fixItemIndices(items: List<PlaylistItem>, modifiedPosition: Int, offset: Int): List<PlaylistItem> {
-        return items.map {
+    private fun fixItemIndices(
+        items: List<PlaylistItem>,
+        modifiedPosition: Int,
+        offset: Int,
+    ): List<PlaylistItem> =
+        items.map {
             if (it.originalPlaylistIndex > modifiedPosition) {
                 it.copy(originalPlaylistIndex = it.originalPlaylistIndex + offset)
             } else {
                 it
             }
         }
-    }
 
     @SuppressLint("StringFormatInvalid", "StringFormatMatches")
-    private fun getChannelAndVideoString(playlist: Playlist, count: Int): String {
+    private fun getChannelAndVideoString(
+        playlist: Playlist,
+        count: Int,
+    ): String {
         if (count < 0) return playlist.uploader.orEmpty()
         if (playlist.uploader == null) return getString(R.string.videoCount, count)
 
@@ -487,22 +520,25 @@ class PlaylistFragment : DynamicLayoutManagerFragment(R.layout.fragment_playlist
         isLoading = true
 
         lifecycleScope.launch {
-            val response = try {
-                withContext(Dispatchers.IO) {
-                    // load locally stored playlists with the auth api
-                    MediaServiceRepository.instance.getPlaylistNextPage(playlistId, nextPage!!)
+            val response =
+                try {
+                    withContext(Dispatchers.IO) {
+                        // load locally stored playlists with the auth api
+                        MediaServiceRepository.instance.getPlaylistNextPage(playlistId, nextPage!!)
+                    }
+                } catch (e: Exception) {
+                    context?.toastFromMainDispatcher(e.localizedMessage.orEmpty())
+                    Log.e(TAG(), e.toString())
+                    return@launch
                 }
-            } catch (e: Exception) {
-                context?.toastFromMainDispatcher(e.localizedMessage.orEmpty())
-                Log.e(TAG(), e.toString())
-                return@launch
-            }
 
             nextPage = response.nextpage
             val currentList = playlistAdapter?.currentList.orEmpty()
-            val newList = currentList + response.relatedStreams.mapIndexed { index, item ->
-                PlaylistItem(item, currentList.size + index)
-            }
+            val newList =
+                currentList +
+                    response.relatedStreams.mapIndexed { index, item ->
+                        PlaylistItem(item, currentList.size + index)
+                    }
             playlistAdapter?.submitList(newList)
             updatePlaylistDuration()
             isLoading = false
@@ -513,7 +549,7 @@ class PlaylistFragment : DynamicLayoutManagerFragment(R.layout.fragment_playlist
     private fun updatePlaylistDuration() {
         val totalDuration = playlistFeed.sumOf { it.duration ?: 0 } ?: return
         binding.playlistDuration.text = DateUtils.formatElapsedTime(totalDuration) +
-                if (nextPage != null) "+" else ""
+            if (nextPage != null) "+" else ""
     }
 
     override fun onConfigurationChanged(newConfig: Configuration) {

@@ -86,20 +86,21 @@ class MainActivity : AbstractPlayerHostActivity() {
     // PlaylistOptionsBottomSheet instead if Android allowed us to
     private var playlistExportFormat: ImportFormat = ImportFormat.NEWPIPE
     private var exportPlaylistId: String? = null
-    private val createPlaylistsFile = registerForActivityResult(
-        ActivityResultContracts.CreateDocument(FILETYPE_ANY)
-    ) { uri ->
-        if (uri == null) return@registerForActivityResult
+    private val createPlaylistsFile =
+        registerForActivityResult(
+            ActivityResultContracts.CreateDocument(FILETYPE_ANY),
+        ) { uri ->
+            if (uri == null) return@registerForActivityResult
 
-        lifecycleScope.launch(Dispatchers.IO) {
-            ImportHelper.exportPlaylists(
-                this@MainActivity,
-                uri,
-                playlistExportFormat,
-                selectedPlaylistIds = listOf(exportPlaylistId!!)
-            )
+            lifecycleScope.launch(Dispatchers.IO) {
+                ImportHelper.exportPlaylists(
+                    this@MainActivity,
+                    uri,
+                    playlistExportFormat,
+                    selectedPlaylistIds = listOf(exportPlaylistId!!),
+                )
+            }
         }
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         installSplashScreen()
@@ -122,28 +123,30 @@ class MainActivity : AbstractPlayerHostActivity() {
             // there's a possibility that the paddings are not being applied properly when
             // exiting from player's fullscreen. Adding OnGlobalLayoutListener serves as
             // a workaround for this issue
-            binding.root.viewTreeObserver.addOnGlobalLayoutListener(object :
-                ViewTreeObserver.OnGlobalLayoutListener {
-                override fun onGlobalLayout() {
-                    with(binding.appBarLayout) {
-                        setPadding(
-                            paddingLeft,
-                            systemBarInsets.top,
-                            paddingRight,
-                            paddingBottom
-                        )
+            binding.root.viewTreeObserver.addOnGlobalLayoutListener(
+                object :
+                    ViewTreeObserver.OnGlobalLayoutListener {
+                    override fun onGlobalLayout() {
+                        with(binding.appBarLayout) {
+                            setPadding(
+                                paddingLeft,
+                                systemBarInsets.top,
+                                paddingRight,
+                                paddingBottom,
+                            )
+                        }
+                        with(binding.bottomNav) {
+                            setPadding(
+                                paddingLeft,
+                                paddingTop,
+                                paddingRight,
+                                systemBarInsets.bottom,
+                            )
+                        }
+                        binding.root.viewTreeObserver.removeOnGlobalLayoutListener(this)
                     }
-                    with(binding.bottomNav) {
-                        setPadding(
-                            paddingLeft,
-                            paddingTop,
-                            paddingRight,
-                            systemBarInsets.bottom
-                        )
-                    }
-                    binding.root.viewTreeObserver.removeOnGlobalLayoutListener(this)
-                }
-            })
+                },
+            )
         }
         // manually update the bottom bar height in the mini player transition
         binding.bottomNav.addOnLayoutChangeListener { _, _, _, _, _, _, _, _, _ ->
@@ -151,16 +154,20 @@ class MainActivity : AbstractPlayerHostActivity() {
             transition.keyFrameList.forEach { keyFrame ->
                 // These frame positions are hardcoded in activity_main_scene.xml!
                 for (key in keyFrame.getKeyFramesForView(binding.bottomNav.id)) {
-                    if (key.framePosition == 1) key.setValue(
-                        Key.TRANSLATION_Y,
-                        binding.bottomNav.height
-                    )
+                    if (key.framePosition == 1) {
+                        key.setValue(
+                            Key.TRANSLATION_Y,
+                            binding.bottomNav.height,
+                        )
+                    }
                 }
                 for (key in keyFrame.getKeyFramesForView(binding.container.id)) {
-                    if (key.framePosition == 100) key.setValue(
-                        Key.TRANSLATION_Y,
-                        -binding.bottomNav.height
-                    )
+                    if (key.framePosition == 100) {
+                        key.setValue(
+                            Key.TRANSLATION_Y,
+                            -binding.bottomNav.height,
+                        )
+                    }
                 }
             }
             binding.root.scene.setTransition(transition)
@@ -181,16 +188,18 @@ class MainActivity : AbstractPlayerHostActivity() {
         binding.bottomNav.setupWithNavController(navController)
 
         // save start tab fragment id and apply navbar style
-        startFragmentId = try {
-            NavBarHelper.applyNavBarStyle(binding.bottomNav)
-        } catch (_: Exception) {
-            R.id.homeFragment
-        }
+        startFragmentId =
+            try {
+                NavBarHelper.applyNavBarStyle(binding.bottomNav)
+            } catch (_: Exception) {
+                R.id.homeFragment
+            }
 
         // set default tab as start fragment
-        navController.graph = navController.navInflater.inflate(R.navigation.nav).also {
-            it.setStartDestination(startFragmentId)
-        }
+        navController.graph =
+            navController.navInflater.inflate(R.navigation.nav).also {
+                it.setStartDestination(startFragmentId)
+            }
 
         // Prevent duplicate entries into backstack, if selected item and current
         // visible fragment is different, then navigate to selected item.
@@ -208,14 +217,19 @@ class MainActivity : AbstractPlayerHostActivity() {
             navigateToBottomSelectedItem(it)
         }
 
-        if (binding.bottomNav.menu.children.none { it.itemId == startFragmentId }) deselectBottomBarItems()
+        if (binding.bottomNav.menu.children
+                .none { it.itemId == startFragmentId }
+        ) {
+            deselectBottomBarItems()
+        }
 
         binding.toolbar.title = ThemeHelper.getStyledAppName(this)
 
         // handle error logs
         PreferenceHelper.getErrorLog().ifBlank { null }?.let {
-            if (!BuildConfig.DEBUG)
+            if (!BuildConfig.DEBUG) {
                 ErrorDialog().show(supportFragmentManager, null)
+            }
         }
 
         setupSubscriptionsBadge()
@@ -240,8 +254,10 @@ class MainActivity : AbstractPlayerHostActivity() {
      * Try to find a scroll or recycler view and scroll it back to the top
      */
     private fun tryScrollToTop(view: View?) {
-        val scrollView = view?.allViews
-            ?.firstOrNull { it is ScrollView || it is NestedScrollView || it is RecyclerView }
+        val scrollView =
+            view
+                ?.allViews
+                ?.firstOrNull { it is ScrollView || it is NestedScrollView || it is RecyclerView }
         when (scrollView) {
             is ScrollView -> scrollView.smoothScrollTo(0, 0)
             is NestedScrollView -> scrollView.smoothScrollTo(0, 0)
@@ -255,7 +271,7 @@ class MainActivity : AbstractPlayerHostActivity() {
     private fun setupSubscriptionsBadge() {
         if (!PreferenceHelper.getBoolean(
                 PreferenceKeys.NEW_VIDEOS_BADGE,
-                false
+                false,
             )
         ) {
             return
@@ -265,21 +281,25 @@ class MainActivity : AbstractPlayerHostActivity() {
 
         subscriptionsViewModel.videoFeed.observe(this) { feed ->
             val lastCheckedFeedTime = PreferenceHelper.getLastCheckedFeedTime(seenByUser = true)
-            val lastSeenVideoIndex = feed.orEmpty()
-                .filter { !it.isUpcoming }
-                .indexOfFirst { it.uploaded <= lastCheckedFeedTime }
+            val lastSeenVideoIndex =
+                feed
+                    .orEmpty()
+                    .filter { !it.isUpcoming }
+                    .indexOfFirst { it.uploaded <= lastCheckedFeedTime }
             if (lastSeenVideoIndex < 1) return@observe
 
             binding.bottomNav.getOrCreateBadge(R.id.subscriptionsFragment).apply {
                 number = lastSeenVideoIndex
-                backgroundColor = ThemeHelper.getThemeColor(
-                    this@MainActivity,
-                    androidx.appcompat.R.attr.colorPrimary
-                )
-                badgeTextColor = ThemeHelper.getThemeColor(
-                    this@MainActivity,
-                    com.google.android.material.R.attr.colorOnPrimary
-                )
+                backgroundColor =
+                    ThemeHelper.getThemeColor(
+                        this@MainActivity,
+                        androidx.appcompat.R.attr.colorPrimary,
+                    )
+                badgeTextColor =
+                    ThemeHelper.getThemeColor(
+                        this@MainActivity,
+                        com.google.android.material.R.attr.colorOnPrimary,
+                    )
             }
         }
     }
@@ -288,12 +308,13 @@ class MainActivity : AbstractPlayerHostActivity() {
         if (!this::navController.isInitialized) return false
         val id = navController.currentDestination?.id ?: return false
 
-        return id in listOf(
-            R.id.searchFragment,
-            R.id.searchResultFragment,
-            R.id.channelFragment,
-            R.id.playlistFragment
-        )
+        return id in
+            listOf(
+                R.id.searchFragment,
+                R.id.searchResultFragment,
+                R.id.channelFragment,
+                R.id.playlistFragment,
+            )
     }
 
     private fun addSearchQueryToHistory(query: String) {
@@ -328,120 +349,128 @@ class MainActivity : AbstractPlayerHostActivity() {
 
         // automatically set a different search icon in the playlists
         navController.addOnDestinationChangedListener { _, destination, _ ->
-            currentSearchType = when (destination.id) {
-                R.id.downloadsFragment -> SearchType.DOWNLOADS
-                R.id.playlistFragment -> SearchType.PLAYLIST
-                else -> SearchType.ONLINE
-            }
+            currentSearchType =
+                when (destination.id) {
+                    R.id.downloadsFragment -> SearchType.DOWNLOADS
+                    R.id.playlistFragment -> SearchType.PLAYLIST
+                    else -> SearchType.ONLINE
+                }
             // clear query in unused page so that they're reset when visiting the page the next time
             if (currentSearchType != SearchType.DOWNLOADS) downloadViewModel.setQuery(null)
             if (currentSearchType != SearchType.PLAYLIST) playlistViewModel.setQuery(null)
 
-            val searchIconResource = when (currentSearchType) {
-                SearchType.DOWNLOADS -> R.drawable.ic_download_search
-                SearchType.PLAYLIST -> R.drawable.ic_playlist_search
-                SearchType.ONLINE -> R.drawable.ic_search
-            }
+            val searchIconResource =
+                when (currentSearchType) {
+                    SearchType.DOWNLOADS -> R.drawable.ic_download_search
+                    SearchType.PLAYLIST -> R.drawable.ic_playlist_search
+                    SearchType.ONLINE -> R.drawable.ic_search
+                }
 
             searchItem.setIcon(searchIconResource)
         }
 
-        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(query: String): Boolean {
-                searchView.clearFocus()
+        searchView.setOnQueryTextListener(
+            object : SearchView.OnQueryTextListener {
+                override fun onQueryTextSubmit(query: String): Boolean {
+                    searchView.clearFocus()
 
-                // playlist and download search don't do anything on submit
-                // as they search while typing
-                if (currentSearchType != SearchType.ONLINE) return true
+                    // playlist and download search don't do anything on submit
+                    // as they search while typing
+                    if (currentSearchType != SearchType.ONLINE) return true
 
-                // handle inserted YouTube-like URLs and directly open the referenced
-                // channel, playlist or video instead of showing search results
-                if (query.toHttpUrlOrNull() != null) {
-                    val queryIntent = IntentHelper.resolveType(query.toUri())
+                    // handle inserted YouTube-like URLs and directly open the referenced
+                    // channel, playlist or video instead of showing search results
+                    if (query.toHttpUrlOrNull() != null) {
+                        val queryIntent = IntentHelper.resolveType(query.toUri())
 
-                    val didNavigate = navigateToMediaByIntent(queryIntent) {
-                        navController.popBackStack(R.id.searchFragment, true)
-                        searchItem.collapseActionView()
+                        val didNavigate =
+                            navigateToMediaByIntent(queryIntent) {
+                                navController.popBackStack(R.id.searchFragment, true)
+                                searchItem.collapseActionView()
+                            }
+                        if (didNavigate) return true
                     }
-                    if (didNavigate) return true
-                }
 
-                navController.navigate(NavDirections.showSearchResults(query))
+                    navController.navigate(NavDirections.showSearchResults(query))
 
-                addSearchQueryToHistory(query)
+                    addSearchQueryToHistory(query)
 
-                return true
-            }
-
-            override fun onQueryTextChange(newText: String?): Boolean {
-                if (!shouldOpenSuggestions) return true
-
-                // Prevent navigation when search view is collapsed
-                if (searchView.isIconified ||
-                    binding.bottomNav.menu.children.any {
-                        it.itemId == navController.currentDestination?.id
-                    }
-                ) {
                     return true
                 }
 
-                // prevent malicious navigation when the search view is getting collapsed
-                val destIds = listOf(
-                    R.id.searchResultFragment,
-                    R.id.channelFragment,
-                    R.id.playlistFragment
-                )
-                if (navController.currentDestination?.id in destIds && newText == null) {
-                    return false
-                }
+                override fun onQueryTextChange(newText: String?): Boolean {
+                    if (!shouldOpenSuggestions) return true
 
-                when (currentSearchType) {
-                    SearchType.ONLINE -> {
-                        if (navController.currentDestination?.id != R.id.searchFragment) {
-                            navController.navigate(
-                                R.id.searchFragment,
-                                bundleOf(IntentData.query to newText)
-                            )
-                        } else {
-                            searchViewModel.setQuery(newText)
+                    // Prevent navigation when search view is collapsed
+                    if (searchView.isIconified ||
+                        binding.bottomNav.menu.children.any {
+                            it.itemId == navController.currentDestination?.id
+                        }
+                    ) {
+                        return true
+                    }
+
+                    // prevent malicious navigation when the search view is getting collapsed
+                    val destIds =
+                        listOf(
+                            R.id.searchResultFragment,
+                            R.id.channelFragment,
+                            R.id.playlistFragment,
+                        )
+                    if (navController.currentDestination?.id in destIds && newText == null) {
+                        return false
+                    }
+
+                    when (currentSearchType) {
+                        SearchType.ONLINE -> {
+                            if (navController.currentDestination?.id != R.id.searchFragment) {
+                                navController.navigate(
+                                    R.id.searchFragment,
+                                    bundleOf(IntentData.query to newText),
+                                )
+                            } else {
+                                searchViewModel.setQuery(newText)
+                            }
+                        }
+
+                        SearchType.PLAYLIST -> {
+                            playlistViewModel.setQuery(newText)
+                        }
+
+                        SearchType.DOWNLOADS -> {
+                            downloadViewModel.setQuery(newText)
                         }
                     }
 
-                    SearchType.PLAYLIST -> {
-                        playlistViewModel.setQuery(newText)
+                    return true
+                }
+            },
+        )
+
+        searchItem.setOnActionExpandListener(
+            object : MenuItem.OnActionExpandListener {
+                override fun onMenuItemActionExpand(item: MenuItem): Boolean {
+                    if (currentSearchType == SearchType.ONLINE && navController.currentDestination?.id != R.id.searchResultFragment) {
+                        searchViewModel.setQuery(null)
+                        navController.navigate(R.id.openSearch)
+                    }
+                    item.setShowAsAction(
+                        MenuItem.SHOW_AS_ACTION_ALWAYS or MenuItem.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW,
+                    )
+                    return true
+                }
+
+                override fun onMenuItemActionCollapse(item: MenuItem): Boolean {
+                    // Handover back press to `BackPressedDispatcher` if not on a root destination
+                    if (navController.previousBackStackEntry != null) {
+                        this@MainActivity.onBackPressedDispatcher.onBackPressed()
                     }
 
-                    SearchType.DOWNLOADS -> {
-                        downloadViewModel.setQuery(newText)
-                    }
+                    // Suppress collapsing of search when search in progress.
+                    return !isSearchInProgress()
                 }
-
-                return true
-            }
-        })
-
-        searchItem.setOnActionExpandListener(object : MenuItem.OnActionExpandListener {
-            override fun onMenuItemActionExpand(item: MenuItem): Boolean {
-                if (currentSearchType == SearchType.ONLINE && navController.currentDestination?.id != R.id.searchResultFragment) {
-                    searchViewModel.setQuery(null)
-                    navController.navigate(R.id.openSearch)
-                }
-                item.setShowAsAction(
-                    MenuItem.SHOW_AS_ACTION_ALWAYS or MenuItem.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW
-                )
-                return true
-            }
-
-            override fun onMenuItemActionCollapse(item: MenuItem): Boolean {
-                // Handover back press to `BackPressedDispatcher` if not on a root destination
-                if (navController.previousBackStackEntry != null) {
-                    this@MainActivity.onBackPressedDispatcher.onBackPressed()
-                }
-
-                // Suppress collapsing of search when search in progress.
-                return !isSearchInProgress()
-            }
-        })
+            },
+        )
 
         // handle search queries passed by the intent
         if (savedSearchQuery != null) {
@@ -468,7 +497,10 @@ class MainActivity : AbstractPlayerHostActivity() {
      * Update the query text in the search bar and load the search suggestions
      * @param submit whether to immediately load the search results (not suggestions)
      */
-    fun setQuery(query: String, submit: Boolean) {
+    fun setQuery(
+        query: String,
+        submit: Boolean,
+    ) {
         if (::searchView.isInitialized) searchView.setQuery(query, submit)
     }
 
@@ -483,12 +515,21 @@ class MainActivity : AbstractPlayerHostActivity() {
         if (intent?.getBooleanExtra(IntentData.maximizePlayer, false) == true) {
             // attempt to open the current video player fragment
             if (intent?.getBooleanExtra(IntentData.audioOnly, false) == false) {
-                runOnPlayerFragment { binding.playerMotionLayout.transitionToStart(); true }
+                runOnPlayerFragment {
+                    binding.playerMotionLayout.transitionToStart()
+                    true
+                }
                 return
             }
 
             // if it's an audio only session, attempt to maximize the audio player or create a new one
-            if (runOnAudioPlayerFragment { binding.playerMotionLayout.transitionToStart(); true }) return
+            if (runOnAudioPlayerFragment {
+                    binding.playerMotionLayout.transitionToStart()
+                    true
+                }
+            ) {
+                return
+            }
 
             val offlinePlayer = intent!!.getBooleanExtra(IntentData.offlinePlayer, false)
             NavigationHelper.openAudioPlayerFragment(this, offlinePlayer = offlinePlayer)
@@ -523,7 +564,9 @@ class MainActivity : AbstractPlayerHostActivity() {
         // Rebind the download service if the user is currently downloading
         if (intent?.getBooleanExtra(IntentData.downloading, false) == true) {
             (supportFragmentManager.fragments.find { it is NavHostFragment })
-                ?.childFragmentManager?.fragments?.forEach { fragment ->
+                ?.childFragmentManager
+                ?.fragments
+                ?.forEach { fragment ->
                     (fragment as? DownloadsFragment)?.bindDownloadService()
                 }
         }
@@ -534,7 +577,10 @@ class MainActivity : AbstractPlayerHostActivity() {
      *
      * @return Whether the method handled the event and triggered the navigation to a new fragment
      */
-    fun navigateToMediaByIntent(intent: Intent, actionBefore: () -> Unit = {}): Boolean {
+    fun navigateToMediaByIntent(
+        intent: Intent,
+        actionBefore: () -> Unit = {},
+    ): Boolean {
         intent.getStringExtra(IntentData.channelId)?.let {
             actionBefore()
             navController.navigate(NavDirections.openChannel(channelId = it))
@@ -554,12 +600,12 @@ class MainActivity : AbstractPlayerHostActivity() {
             actionBefore()
             ImportTempPlaylistDialog()
                 .apply {
-                    arguments = bundleOf(
-                        IntentData.playlistName to intent.getStringExtra(IntentData.playlistName),
-                        IntentData.videoIds to it
-                    )
-                }
-                .show(supportFragmentManager, null)
+                    arguments =
+                        bundleOf(
+                            IntentData.playlistName to intent.getStringExtra(IntentData.playlistName),
+                            IntentData.videoIds to it,
+                        )
+                }.show(supportFragmentManager, null)
             return true
         }
 
@@ -569,14 +615,16 @@ class MainActivity : AbstractPlayerHostActivity() {
                 // the bottom navigation bar has to be created before opening the video
                 // otherwise the player layout measures aren't calculated properly
                 // and the miniplayer is opened at a closed state and overlapping the navigation bar
-                binding.bottomNav.viewTreeObserver.addOnGlobalLayoutListener(object :
-                    ViewTreeObserver.OnGlobalLayoutListener {
-                    override fun onGlobalLayout() {
-                        navigationVideo(it)
+                binding.bottomNav.viewTreeObserver.addOnGlobalLayoutListener(
+                    object :
+                        ViewTreeObserver.OnGlobalLayoutListener {
+                        override fun onGlobalLayout() {
+                            navigationVideo(it)
 
-                        binding.bottomNav.viewTreeObserver.removeOnGlobalLayoutListener(this)
-                    }
-                })
+                            binding.bottomNav.viewTreeObserver.removeOnGlobalLayoutListener(this)
+                        }
+                    },
+                )
             } else {
                 navigationVideo(it)
             }
@@ -590,10 +638,11 @@ class MainActivity : AbstractPlayerHostActivity() {
     private fun navigationVideo(videoId: String) {
         NavigationHelper.navigateVideo(
             context = this@MainActivity,
-            playerData = PlayerData(
-                videoId = videoId,
-                timestamp = intent.getLongExtra(IntentData.timeStamp, 0L)
-            ),
+            playerData =
+                PlayerData(
+                    videoId = videoId,
+                    timestamp = intent.getLongExtra(IntentData.timeStamp, 0L),
+                ),
         )
     }
 
@@ -623,7 +672,10 @@ class MainActivity : AbstractPlayerHostActivity() {
         loadIntentData()
     }
 
-    override fun onKeyUp(keyCode: Int, event: KeyEvent?): Boolean {
+    override fun onKeyUp(
+        keyCode: Int,
+        event: KeyEvent?,
+    ): Boolean {
         if (runOnPlayerFragment { this@runOnPlayerFragment.onKeyUp(keyCode, event) }) {
             return true
         }
@@ -635,7 +687,7 @@ class MainActivity : AbstractPlayerHostActivity() {
         playlistId: String,
         playlistName: String,
         format: ImportFormat,
-        includeTimestamp: Boolean
+        includeTimestamp: Boolean,
     ) {
         playlistExportFormat = format
         exportPlaylistId = playlistId
@@ -666,10 +718,9 @@ class MainActivity : AbstractPlayerHostActivity() {
             .setPositiveButton(R.string.never_show_again) { _, _ ->
                 PreferenceHelper.putInt(
                     PreferenceKeys.LAST_SHOWN_INFO_MESSAGE_VERSION_CODE,
-                    BuildConfig.VERSION_CODE
+                    BuildConfig.VERSION_CODE,
                 )
-            }
-            .show()
+            }.show()
     }
 
     override fun minimizePlayerContainerLayout() {

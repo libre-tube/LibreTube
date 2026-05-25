@@ -15,17 +15,16 @@ data class Playlist(
     val uploaderUrl: String? = null,
     val uploaderAvatar: String? = null,
     val videos: Int = 0,
-    var relatedStreams: List<StreamItem> = emptyList()
+    var relatedStreams: List<StreamItem> = emptyList(),
 ) {
-    fun toPlaylistBookmark(playlistId: String): PlaylistBookmark {
-        return PlaylistBookmark(
+    fun toPlaylistBookmark(playlistId: String): PlaylistBookmark =
+        PlaylistBookmark(
             playlistId = playlistId,
             playlistName = name,
             thumbnailUrl = thumbnailUrl?.let { ProxyHelper.unwrapUrl(it) },
             uploader = uploader,
             uploaderAvatar = uploaderAvatar?.let { ProxyHelper.unwrapUrl(it) },
             uploaderUrl = uploaderUrl,
-            videos = videos
+            videos = videos,
         )
-    }
 }
