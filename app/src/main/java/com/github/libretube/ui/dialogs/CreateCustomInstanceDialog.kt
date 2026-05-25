@@ -15,6 +15,7 @@ import com.github.libretube.ui.models.InstancesModel
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
 import java.net.MalformedURLException
+import java.util.Locale
 
 class CreateCustomInstanceDialog : DialogFragment() {
     val viewModel: InstancesModel by activityViewModels()
@@ -48,6 +49,18 @@ class CreateCustomInstanceDialog : DialogFragment() {
                     val instanceName = binding.instanceName.text.toString()
                     val apiUrl = binding.instanceApiUrl.text.toString()
                     val frontendUrl = binding.instanceFrontendUrl.text.toString()
+
+                    val isInsecureApiUrl = apiUrl.trim().lowercase(Locale.ROOT).startsWith("http://")
+                    val isInsecureFrontendUrl =
+                        frontendUrl.trim().lowercase(Locale.ROOT).startsWith("http://")
+                    if (isInsecureApiUrl || isInsecureFrontendUrl) {
+                        MaterialAlertDialogBuilder(requireContext())
+                            .setTitle(R.string.insecure_instance_title)
+                            .setMessage(R.string.insecure_instance_blocked_message)
+                            .setPositiveButton(R.string.okay, null)
+                            .show()
+                        return@setOnClickListener
+                    }
 
                     try {
                         viewModel.addCustomInstance(apiUrl, instanceName, frontendUrl)
