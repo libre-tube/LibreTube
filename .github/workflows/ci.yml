@@ -53,13 +53,11 @@ jobs:
             "platforms;android-36" \
             "build-tools;36.0.0"
 
-      # ktlint is intentionally not enforced yet because the repository has existing formatting violations.
-      # A follow-up PR should add a ktlint baseline or first reformat the codebase.
-      #- name: Run ktlint
-      #  run: |
-      #    curl -sSLo ktlint https://github.com/pinterest/ktlint/releases/download/1.5.0/ktlint
-      #    chmod +x ktlint
-      #    ./ktlint "**/*.kt" "**/*.kts"
+      - name: Run ktlint
+        run: |
+          curl -sSLo ktlint https://github.com/pinterest/ktlint/releases/download/1.5.0/ktlint
+          chmod +x ktlint
+          ./ktlint "**/*.kt" "**/*.kts"
 
       - name: Run Android lint
         run: ./gradlew :app:lintDebug --no-daemon
