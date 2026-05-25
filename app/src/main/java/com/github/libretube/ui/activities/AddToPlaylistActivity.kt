@@ -24,9 +24,12 @@ class AddToPlaylistActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val videoId = intent.getStringExtra(Intent.EXTRA_TEXT)?.let {
-            IntentHelper.resolveType(it.toUri())
-        }?.getStringExtra(IntentData.videoId)
+        val videoId =
+            intent
+                .getStringExtra(Intent.EXTRA_TEXT)
+                ?.let {
+                    IntentHelper.resolveType(it.toUri())
+                }?.getStringExtra(IntentData.videoId)
 
         if (videoId == null) {
             finish()
@@ -35,28 +38,30 @@ class AddToPlaylistActivity : BaseActivity() {
 
         supportFragmentManager.setFragmentResultListener(
             AddToPlaylistDialog.ADD_TO_PLAYLIST_DIALOG_DISMISSED_KEY,
-            this
+            this,
         ) { _, _ -> finish() }
 
         lifecycleScope.launch(Dispatchers.IO) {
-            val videoInfo = if (PreferenceHelper.getToken().isEmpty()) {
-                try {
-                    MediaServiceRepository.instance.getStreams(videoId).toStreamItem(videoId)
-                } catch (e: Exception) {
-                    toastFromMainDispatcher(R.string.unknown_error)
-                    withContext(Dispatchers.Main) {
-                        finish()
+            val videoInfo =
+                if (PreferenceHelper.getToken().isEmpty()) {
+                    try {
+                        MediaServiceRepository.instance.getStreams(videoId).toStreamItem(videoId)
+                    } catch (e: Exception) {
+                        toastFromMainDispatcher(R.string.unknown_error)
+                        withContext(Dispatchers.Main) {
+                            finish()
+                        }
+                        return@launch
                     }
-                    return@launch
+                } else {
+                    StreamItem(videoId)
                 }
-            } else {
-                StreamItem(videoId)
-            }
 
             withContext(Dispatchers.Main) {
-                AddToPlaylistDialog().apply {
-                    arguments = bundleOf(IntentData.videoInfo to videoInfo)
-                }.show(supportFragmentManager, null)
+                AddToPlaylistDialog()
+                    .apply {
+                        arguments = bundleOf(IntentData.videoInfo to videoInfo)
+                    }.show(supportFragmentManager, null)
             }
         }
     }

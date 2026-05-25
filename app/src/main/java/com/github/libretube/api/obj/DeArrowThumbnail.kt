@@ -9,5 +9,5 @@ data class DeArrowThumbnail(
     val original: Boolean,
     val thumbnail: String? = null,
     val timestamp: Float?,
-    val votes: Int
+    val votes: Int,
 )

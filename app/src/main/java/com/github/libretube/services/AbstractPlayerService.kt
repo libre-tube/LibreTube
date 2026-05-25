@@ -50,7 +50,9 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 @UnstableApi
-abstract class AbstractPlayerService : MediaLibraryService(), MediaLibrarySession.Callback {
+abstract class AbstractPlayerService :
+    MediaLibraryService(),
+    MediaLibrarySession.Callback {
     private var mediaLibrarySession: MediaLibrarySession? = null
     var exoPlayer: ExoPlayer? = null
 
@@ -64,10 +66,11 @@ abstract class AbstractPlayerService : MediaLibraryService(), MediaLibrarySessio
 
     val handler = Handler(Looper.getMainLooper())
 
-    private val watchPositionTimer = PauseableTimer(
-        onTick = ::saveWatchPosition,
-        delayMillis = PlayerHelper.WATCH_POSITION_TIMER_DELAY_MS
-    )
+    private val watchPositionTimer =
+        PauseableTimer(
+            onTick = ::saveWatchPosition,
+            delayMillis = PlayerHelper.WATCH_POSITION_TIMER_DELAY_MS,
+        )
 
     // SponsorBlock Segment data
     private var sponsorBlockAutoSkip = true
@@ -81,43 +84,44 @@ abstract class AbstractPlayerService : MediaLibraryService(), MediaLibrarySessio
      */
     protected var shouldHandleAutoplay = true
 
-    private val playerListener = object : Player.Listener {
-        override fun onIsPlayingChanged(isPlaying: Boolean) {
-            super.onIsPlayingChanged(isPlaying)
+    private val playerListener =
+        object : Player.Listener {
+            override fun onIsPlayingChanged(isPlaying: Boolean) {
+                super.onIsPlayingChanged(isPlaying)
 
-            // Start or pause watch position timer
-            if (isPlaying) {
-                watchPositionTimer.resume()
-            } else {
-                watchPositionTimer.pause()
-            }
-        }
-
-        override fun onPlayerError(error: PlaybackException) {
-            // show a toast on errors
-            toastFromMainThread(error.localizedMessage.orEmpty())
-        }
-
-        override fun onPlaybackStateChanged(playbackState: Int) {
-            super.onPlaybackStateChanged(playbackState)
-
-            when (playbackState) {
-                Player.STATE_ENDED -> {
-                    saveWatchPosition()
-                }
-
-                Player.STATE_READY -> {
-                    isTransitioning = false
+                // Start or pause watch position timer
+                if (isPlaying) {
+                    watchPositionTimer.resume()
+                } else {
+                    watchPositionTimer.pause()
                 }
             }
+
+            override fun onPlayerError(error: PlaybackException) {
+                // show a toast on errors
+                toastFromMainThread(error.localizedMessage.orEmpty())
+            }
+
+            override fun onPlaybackStateChanged(playbackState: Int) {
+                super.onPlaybackStateChanged(playbackState)
+
+                when (playbackState) {
+                    Player.STATE_ENDED -> {
+                        saveWatchPosition()
+                    }
+
+                    Player.STATE_READY -> {
+                        isTransitioning = false
+                    }
+                }
+            }
         }
-    }
 
     override fun onCustomCommand(
         session: MediaSession,
         controller: MediaSession.ControllerInfo,
         customCommand: SessionCommand,
-        args: Bundle
+        args: Bundle,
     ): ListenableFuture<SessionResult> {
         when (customCommand.customAction) {
             START_SERVICE_ACTION -> {
@@ -148,15 +152,17 @@ abstract class AbstractPlayerService : MediaLibraryService(), MediaLibrarySessio
 
     open fun runPlayerCommand(args: Bundle) {
         when {
-            args.containsKey(PlayerCommand.SKIP_SILENCE.name) -> exoPlayer?.skipSilenceEnabled =
-                args.getBoolean(PlayerCommand.SKIP_SILENCE.name)
+            args.containsKey(PlayerCommand.SKIP_SILENCE.name) ->
+                exoPlayer?.skipSilenceEnabled =
+                    args.getBoolean(PlayerCommand.SKIP_SILENCE.name)
 
-            args.containsKey(PlayerCommand.SET_VIDEO_TRACK_TYPE_DISABLED.name) -> trackSelector?.updateParameters {
-                setTrackTypeDisabled(
-                    C.TRACK_TYPE_VIDEO,
-                    args.getBoolean(PlayerCommand.SET_VIDEO_TRACK_TYPE_DISABLED.name)
-                )
-            }
+            args.containsKey(PlayerCommand.SET_VIDEO_TRACK_TYPE_DISABLED.name) ->
+                trackSelector?.updateParameters {
+                    setTrackTypeDisabled(
+                        C.TRACK_TYPE_VIDEO,
+                        args.getBoolean(PlayerCommand.SET_VIDEO_TRACK_TYPE_DISABLED.name),
+                    )
+                }
 
             args.containsKey(PlayerCommand.SET_AUDIO_ROLE_FLAGS.name) -> {
                 trackSelector?.updateParameters {
@@ -261,10 +267,11 @@ abstract class AbstractPlayerService : MediaLibraryService(), MediaLibrarySessio
     private fun checkForSegments() {
         handler.postDelayed(this::checkForSegments, 100)
 
-        val (currentSegment, sbSkipOption) = exoPlayer?.getCurrentSegment(
-            sponsorBlockSegments,
-            sponsorBlockConfig
-        ) ?: return
+        val (currentSegment, sbSkipOption) =
+            exoPlayer?.getCurrentSegment(
+                sponsorBlockSegments,
+                sponsorBlockConfig,
+            ) ?: return
 
         if (sbSkipOption in arrayOf(SbSkipOptions.AUTOMATIC, SbSkipOptions.AUTOMATIC_ONCE) && sponsorBlockAutoSkip) {
             exoPlayer?.seekTo(currentSegment.segmentStartAndEnd.second.toLong() * 1000)
@@ -276,11 +283,13 @@ abstract class AbstractPlayerService : MediaLibraryService(), MediaLibrarySessio
 
     protected fun updatePlaylistMetadata(updateAction: MediaMetadata.Builder.() -> Unit) {
         handler.post {
-            exoPlayer?.playlistMetadata = MediaMetadata.Builder()
-                .apply(updateAction)
-                // send a unique timestamp to notify that the metadata changed, even if playing the same video twice
-                .setTrackNumber(System.currentTimeMillis().mod(Int.MAX_VALUE))
-                .build()
+            exoPlayer?.playlistMetadata =
+                MediaMetadata
+                    .Builder()
+                    .apply(updateAction)
+                    // send a unique timestamp to notify that the metadata changed, even if playing the same video twice
+                    .setTrackNumber(System.currentTimeMillis().mod(Int.MAX_VALUE))
+                    .build()
         }
     }
 
@@ -308,12 +317,13 @@ abstract class AbstractPlayerService : MediaLibraryService(), MediaLibrarySessio
      * Trigger a notification update with an updated PendingIntent.
      */
     private fun updateNotification() {
-        val notificationIntent = Intent(this, getIntentActivity()).apply {
-            putExtra(IntentData.maximizePlayer, true)
-            putExtra(IntentData.offlinePlayer, isOfflinePlayer)
-            putExtra(IntentData.audioOnly, isAudioOnlyPlayer)
-            addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-        }
+        val notificationIntent =
+            Intent(this, getIntentActivity()).apply {
+                putExtra(IntentData.maximizePlayer, true)
+                putExtra(IntentData.offlinePlayer, isOfflinePlayer)
+                putExtra(IntentData.audioOnly, isAudioOnlyPlayer)
+                addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+            }
         notificationProvider?.notificationIntent = notificationIntent
         triggerNotificationUpdate()
     }
@@ -325,8 +335,7 @@ abstract class AbstractPlayerService : MediaLibraryService(), MediaLibrarySessio
         get() =
             (PlayerHelper.watchPositionsAudio && isAudioOnlyPlayer) || (PlayerHelper.watchPositionsVideo && !isAudioOnlyPlayer)
 
-    override fun onGetSession(controllerInfo: MediaSession.ControllerInfo): MediaLibrarySession? =
-        mediaLibrarySession
+    override fun onGetSession(controllerInfo: MediaSession.ControllerInfo): MediaLibrarySession? = mediaLibrarySession
 
     override fun onCreate() {
         super.onCreate()
@@ -343,29 +352,32 @@ abstract class AbstractPlayerService : MediaLibraryService(), MediaLibrarySessio
 
     override fun onConnect(
         session: MediaSession,
-        controller: MediaSession.ControllerInfo
+        controller: MediaSession.ControllerInfo,
     ): MediaSession.ConnectionResult {
         val connectionResult = super.onConnect(session, controller)
 
         val mediaNotificationSessionCommands =
-            connectionResult.availableSessionCommands.buildUpon()
+            connectionResult.availableSessionCommands
+                .buildUpon()
                 .also { builder ->
                     builder.addSessionCommands(
                         listOf(
                             startServiceCommand,
                             runPlayerActionCommand,
-                            stopServiceCommand
-                        )
+                            stopServiceCommand,
+                        ),
                     )
-                }
+                }.build()
+
+        val playerCommands =
+            connectionResult.availablePlayerCommands
+                .buildUpon()
+                .add(Player.COMMAND_SEEK_TO_NEXT)
+                .add(Player.COMMAND_SEEK_TO_PREVIOUS)
                 .build()
 
-        val playerCommands = connectionResult.availablePlayerCommands.buildUpon()
-            .add(Player.COMMAND_SEEK_TO_NEXT)
-            .add(Player.COMMAND_SEEK_TO_PREVIOUS)
-            .build()
-
-        return MediaSession.ConnectionResult.AcceptedResultBuilder(session)
+        return MediaSession.ConnectionResult
+            .AcceptedResultBuilder(session)
             .setAvailableSessionCommands(mediaNotificationSessionCommands)
             .setAvailablePlayerCommands(playerCommands)
             .build()
@@ -389,9 +401,11 @@ abstract class AbstractPlayerService : MediaLibraryService(), MediaLibrarySessio
         // this results in a race condition which service is the first one to create a `MediaLibrarySession`
         // the other one will just crash
         try {
-            mediaLibrarySession = MediaLibrarySession.Builder(this, forwardingPlayer, this)
-                .setId(this.javaClass.name)
-                .build()
+            mediaLibrarySession =
+                MediaLibrarySession
+                    .Builder(this, forwardingPlayer, this)
+                    .setId(this.javaClass.name)
+                    .build()
         } catch (e: Exception) {
             Log.e(TAG(), "failed to start media library session because it already exists")
             e.printStackTrace()
@@ -418,7 +432,7 @@ abstract class AbstractPlayerService : MediaLibraryService(), MediaLibrarySessio
     override fun onMediaButtonEvent(
         session: MediaSession,
         controllerInfo: MediaSession.ControllerInfo,
-        intent: Intent
+        intent: Intent,
     ): Boolean {
         val event: KeyEvent = intent.parcelableExtra(Intent.EXTRA_KEY_EVENT) ?: return false
         when (event.keyCode) {
@@ -493,14 +507,12 @@ abstract class AbstractPlayerService : MediaLibraryService(), MediaLibrarySessio
      * [Player] wrapper that handles seeking actions (next/previous) itself instead of using the
      * default [Player] implementation
      */
-    inner class MediaSessionForwarder(player: Player) : ForwardingPlayer(player) {
-        override fun hasNextMediaItem(): Boolean {
-            return PlayingQueue.hasNext()
-        }
+    inner class MediaSessionForwarder(
+        player: Player,
+    ) : ForwardingPlayer(player) {
+        override fun hasNextMediaItem(): Boolean = PlayingQueue.hasNext()
 
-        override fun hasPreviousMediaItem(): Boolean {
-            return PlayingQueue.hasPrev()
-        }
+        override fun hasPreviousMediaItem(): Boolean = PlayingQueue.hasPrev()
 
         override fun seekToPrevious() {
             handlePlayerAction(PlayerEvent.Prev)
@@ -510,11 +522,12 @@ abstract class AbstractPlayerService : MediaLibraryService(), MediaLibrarySessio
             handlePlayerAction(PlayerEvent.Next)
         }
 
-        override fun getAvailableCommands(): Player.Commands {
-            return super.getAvailableCommands().buildUpon()
+        override fun getAvailableCommands(): Player.Commands =
+            super
+                .getAvailableCommands()
+                .buildUpon()
                 .addAll(COMMAND_SEEK_TO_PREVIOUS, COMMAND_SEEK_TO_NEXT)
                 .build()
-        }
 
         override fun isCommandAvailable(command: Int): Boolean {
             if (command == COMMAND_SEEK_TO_NEXT || command == COMMAND_SEEK_TO_PREVIOUS) return true

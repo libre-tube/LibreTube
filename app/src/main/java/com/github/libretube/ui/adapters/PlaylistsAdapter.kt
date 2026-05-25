@@ -18,22 +18,31 @@ import com.github.libretube.ui.sheets.PlaylistOptionsBottomSheet.Companion.PLAYL
 import com.github.libretube.ui.viewholders.PlaylistsViewHolder
 
 class PlaylistsAdapter(
-    private val playlistType: PlaylistType
+    private val playlistType: PlaylistType,
 ) : ListAdapter<Playlists, PlaylistsViewHolder>(
-    DiffUtilItemCallback(areItemsTheSame = { oldItem, newItem -> oldItem.id == newItem.id })
-) {
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PlaylistsViewHolder {
+        DiffUtilItemCallback(areItemsTheSame = { oldItem, newItem -> oldItem.id == newItem.id }),
+    ) {
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int,
+    ): PlaylistsViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         val binding = PlaylistsRowBinding.inflate(layoutInflater, parent, false)
         return PlaylistsViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: PlaylistsViewHolder, position: Int) {
+    override fun onBindViewHolder(
+        holder: PlaylistsViewHolder,
+        position: Int,
+    ) {
         val playlist = getItem(holder.bindingAdapterPosition)
         holder.binding.apply {
             // set imageview drawable as empty playlist if imageview empty
-            if (playlist.thumbnail.orEmpty().split("/").size <= 4) {
+            if (playlist.thumbnail
+                    .orEmpty()
+                    .split("/")
+                    .size <= 4
+            ) {
                 playlistThumbnail.setImageResource(R.drawable.ic_empty_playlist)
                 playlistThumbnail
                     .setBackgroundColor(com.google.android.material.R.attr.colorSurface)
@@ -53,7 +62,7 @@ class PlaylistsAdapter(
             root.setOnLongClickListener {
                 fragmentManager.setFragmentResultListener(
                     PLAYLIST_OPTIONS_REQUEST_KEY,
-                    (root.context as BaseActivity)
+                    (root.context as BaseActivity),
                 ) { _, resultBundle ->
                     val newPlaylistDescription =
                         resultBundle.getString(IntentData.playlistDescription)
@@ -79,14 +88,15 @@ class PlaylistsAdapter(
                 }
 
                 val playlistOptionsDialog = PlaylistOptionsBottomSheet()
-                playlistOptionsDialog.arguments = bundleOf(
-                    IntentData.playlistId to playlist.id!!,
-                    IntentData.playlistName to playlist.name!!,
-                    IntentData.playlistType to playlistType
-                )
+                playlistOptionsDialog.arguments =
+                    bundleOf(
+                        IntentData.playlistId to playlist.id!!,
+                        IntentData.playlistName to playlist.name!!,
+                        IntentData.playlistType to playlistType,
+                    )
                 playlistOptionsDialog.show(
                     fragmentManager,
-                    PlaylistOptionsBottomSheet::class.java.name
+                    PlaylistOptionsBottomSheet::class.java.name,
                 )
                 true
             }
@@ -94,9 +104,10 @@ class PlaylistsAdapter(
     }
 
     private fun onDelete(position: Int) {
-        val newList = currentList.toMutableList().also {
-            it.removeAt(position)
-        }
+        val newList =
+            currentList.toMutableList().also {
+                it.removeAt(position)
+            }
         submitList(newList)
     }
 }

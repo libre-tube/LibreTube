@@ -14,23 +14,25 @@ object RetrofitInstance {
     const val PIPED_API_URL = "https://pipedapi.kavin.rocks"
 
     val authUrl
-        get() = if (
-            PreferenceHelper.getBoolean(
-                PreferenceKeys.AUTH_INSTANCE_TOGGLE,
-                false
-            )
-        ) {
-           PreferenceHelper.getString(
-                PreferenceKeys.AUTH_INSTANCE,
-                PIPED_API_URL
-            )
-        } else {
-            PipedMediaServiceRepository.apiUrl
-        }
+        get() =
+            if (
+                PreferenceHelper.getBoolean(
+                    PreferenceKeys.AUTH_INSTANCE_TOGGLE,
+                    false,
+                )
+            ) {
+                PreferenceHelper.getString(
+                    PreferenceKeys.AUTH_INSTANCE,
+                    PIPED_API_URL,
+                )
+            } else {
+                PipedMediaServiceRepository.apiUrl
+            }
 
     val apiLazyMgr = resettableManager()
-    val kotlinxConverterFactory = JsonHelper.json
-        .asConverterFactory("application/json".toMediaType())
+    val kotlinxConverterFactory =
+        JsonHelper.json
+            .asConverterFactory("application/json".toMediaType())
 
     val httpClient by lazy { buildClient() }
 
@@ -45,9 +47,10 @@ object RetrofitInstance {
         val httpClient = OkHttpClient().newBuilder()
 
         if (BuildConfig.DEBUG) {
-            val loggingInterceptor = HttpLoggingInterceptor().apply {
-                level = HttpLoggingInterceptor.Level.BASIC
-            }
+            val loggingInterceptor =
+                HttpLoggingInterceptor().apply {
+                    level = HttpLoggingInterceptor.Level.BASIC
+                }
 
             httpClient.addInterceptor(loggingInterceptor)
         }
@@ -55,10 +58,12 @@ object RetrofitInstance {
         return httpClient.build()
     }
 
-    inline fun <reified T: Any> buildRetrofitInstance(apiUrl: String): T = Retrofit.Builder()
-        .baseUrl(apiUrl)
-        .client(httpClient)
-        .addConverterFactory(kotlinxConverterFactory)
-        .build()
-        .create<T>()
+    inline fun <reified T : Any> buildRetrofitInstance(apiUrl: String): T =
+        Retrofit
+            .Builder()
+            .baseUrl(apiUrl)
+            .client(httpClient)
+            .addConverterFactory(kotlinxConverterFactory)
+            .build()
+            .create<T>()
 }

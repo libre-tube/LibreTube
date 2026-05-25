@@ -17,15 +17,16 @@ import com.github.libretube.ui.viewholders.CarouselPlaylistViewHolder
 data class CarouselPlaylist(
     val id: String,
     val title: String?,
-    val thumbnail: String?
+    val thumbnail: String?,
 )
 
-class CarouselPlaylistAdapter : ListAdapter<CarouselPlaylist, CarouselPlaylistViewHolder>(
-    DiffUtilItemCallback()
-) {
+class CarouselPlaylistAdapter :
+    ListAdapter<CarouselPlaylist, CarouselPlaylistViewHolder>(
+        DiffUtilItemCallback(),
+    ) {
     override fun onCreateViewHolder(
         parent: ViewGroup,
-        viewType: Int
+        viewType: Int,
     ): CarouselPlaylistViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         return CarouselPlaylistViewHolder(CarouselPlaylistThumbnailBinding.inflate(layoutInflater))
@@ -33,7 +34,7 @@ class CarouselPlaylistAdapter : ListAdapter<CarouselPlaylist, CarouselPlaylistVi
 
     override fun onBindViewHolder(
         holder: CarouselPlaylistViewHolder,
-        position: Int
+        position: Int,
     ) {
         val item = getItem(position)!!
 
@@ -48,11 +49,12 @@ class CarouselPlaylistAdapter : ListAdapter<CarouselPlaylist, CarouselPlaylistVi
 
             root.setOnLongClickListener {
                 val playlistOptionsDialog = PlaylistOptionsBottomSheet()
-                playlistOptionsDialog.arguments = bundleOf(
-                    IntentData.playlistId to item.id,
-                    IntentData.playlistName to item.title,
-                    IntentData.playlistType to type
-                )
+                playlistOptionsDialog.arguments =
+                    bundleOf(
+                        IntentData.playlistId to item.id,
+                        IntentData.playlistName to item.title,
+                        IntentData.playlistType to type,
+                    )
                 playlistOptionsDialog.show((root.context as BaseActivity).supportFragmentManager)
 
                 true

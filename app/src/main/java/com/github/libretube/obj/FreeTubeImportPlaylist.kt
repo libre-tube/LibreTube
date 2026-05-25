@@ -7,5 +7,5 @@ import kotlinx.serialization.Serializable
 data class FreeTubeImportPlaylist(
     @SerialName("playlistName") val name: String = "",
     var videos: List<FreeTubeVideo> = listOf(),
-    var protected: Boolean = true
+    var protected: Boolean = true,
 )

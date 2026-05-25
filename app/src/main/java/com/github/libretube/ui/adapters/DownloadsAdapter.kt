@@ -42,19 +42,26 @@ class DownloadsAdapter(
     private val downloadTab: DownloadTab,
     private val playlistId: String?,
     private val currentSortOrder: () -> DownloadSortingOrder,
-    private val toggleDownload: (DownloadWithItems) -> Boolean
+    private val toggleDownload: (DownloadWithItems) -> Boolean,
 ) : ListAdapter<DownloadWithItems, DownloadsViewHolder>(DiffUtilItemCallback()) {
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DownloadsViewHolder {
-        val binding = VideoRowBinding.inflate(
-            LayoutInflater.from(parent.context),
-            parent,
-            false
-        )
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int,
+    ): DownloadsViewHolder {
+        val binding =
+            VideoRowBinding.inflate(
+                LayoutInflater.from(parent.context),
+                parent,
+                false,
+            )
         return DownloadsViewHolder(binding)
     }
 
     @SuppressLint("SetTextI18n")
-    override fun onBindViewHolder(holder: DownloadsViewHolder, position: Int) {
+    override fun onBindViewHolder(
+        holder: DownloadsViewHolder,
+        position: Int,
+    ) {
         val downloadWithItems = getItem(holder.bindingAdapterPosition)
         val (download, items, _) = downloadWithItems
 
@@ -77,11 +84,12 @@ class DownloadsAdapter(
                 progressBar.progress = currentSize.toInt()
             }
 
-            val totalSizeInfo = if (downloadSize > 0) {
-                downloadSize.formatAsFileSize()
-            } else {
-                context.getString(R.string.unknown)
-            }
+            val totalSizeInfo =
+                if (downloadSize > 0) {
+                    downloadSize.formatAsFileSize()
+                } else {
+                    context.getString(R.string.unknown)
+                }
             if (downloadSize > currentSize) {
                 downloadOverlay.isVisible = true
                 resumePauseBtn.setImageResource(R.drawable.ic_download)
@@ -107,28 +115,29 @@ class DownloadsAdapter(
                         R.drawable.ic_pause
                     } else {
                         R.drawable.ic_download
-                    }
+                    },
                 )
             }
 
             root.setOnClickListener {
-                val playerData = PlayerData(
-                    videoId = download.videoId,
-                    playlistId = playlistId,
-                    downloadTab = downloadTab,
-                    downloadSortingOrder = currentSortOrder(),
-                    isOffline = true
-                )
+                val playerData =
+                    PlayerData(
+                        videoId = download.videoId,
+                        playlistId = playlistId,
+                        downloadTab = downloadTab,
+                        downloadSortingOrder = currentSortOrder(),
+                        isOffline = true,
+                    )
 
                 when (downloadTab) {
-                    DownloadTab.VIDEO, DownloadTab.PLAYLIST-> {
+                    DownloadTab.VIDEO, DownloadTab.PLAYLIST -> {
                         NavigationHelper.navigateVideo(root.context, playerData)
                     }
                     DownloadTab.AUDIO -> {
                         NavigationHelper.navigateVideo(
                             root.context,
                             playerData,
-                            audioOnlyPlayerRequested = true
+                            audioOnlyPlayerRequested = true,
                         )
                     }
                 }
@@ -139,7 +148,7 @@ class DownloadsAdapter(
                 val fragmentManager = activity.supportFragmentManager
                 fragmentManager.setFragmentResultListener(
                     DELETE_DOWNLOAD_REQUEST_KEY,
-                    activity
+                    activity,
                 ) { _, _ ->
                     // the position might have changed in the meanwhile if an other item was deleted
                     // apparently [onBindViewHolder] is only retriggered if the item changes, but
@@ -149,26 +158,28 @@ class DownloadsAdapter(
                 }
                 DownloadOptionsBottomSheet()
                     .apply {
-                        arguments = bundleOf(
-                            IntentData.streamItem to download.toStreamItem(),
-                            IntentData.playlistId to playlistId,
-                            IntentData.downloadTab to downloadTab
-                        )
-                    }
-                    .show(fragmentManager)
+                        arguments =
+                            bundleOf(
+                                IntentData.streamItem to download.toStreamItem(),
+                                IntentData.playlistId to playlistId,
+                                IntentData.downloadTab to downloadTab,
+                            )
+                    }.show(fragmentManager)
                 true
             }
         }
     }
 
-    fun showDeleteDialog(context: Context, position: Int) {
+    fun showDeleteDialog(
+        context: Context,
+        position: Int,
+    ) {
         MaterialAlertDialogBuilder(context)
             .setTitle(R.string.delete)
             .setMessage(R.string.irreversible)
             .setPositiveButton(R.string.okay) { _, _ ->
                 deleteDownload(position)
-            }
-            .setNegativeButton(R.string.cancel, null)
+            }.setNegativeButton(R.string.cancel, null)
             .show()
     }
 
@@ -177,19 +188,23 @@ class DownloadsAdapter(
             DownloadHelper.deleteDownloadIncludingFiles(getItem(position))
 
             withContext(Dispatchers.Main) {
-                submitList(currentList.toMutableList().also {
-                    it.removeAt(position)
-                })
+                submitList(
+                    currentList.toMutableList().also {
+                        it.removeAt(position)
+                    },
+                )
             }
         }
     }
 
     fun deleteAllDownloads(onlyDeleteWatched: Boolean) {
-        val (toDelete, toKeep) = currentList.partition {
-            !onlyDeleteWatched || runBlocking(Dispatchers.IO) {
-                DatabaseHelper.isVideoWatched(it.download.videoId, it.download.duration ?: 0)
+        val (toDelete, toKeep) =
+            currentList.partition {
+                !onlyDeleteWatched ||
+                    runBlocking(Dispatchers.IO) {
+                        DatabaseHelper.isVideoWatched(it.download.videoId, it.download.duration ?: 0)
+                    }
             }
-        }
 
         CoroutineScope(Dispatchers.IO).launch {
             for (item in toDelete) {

@@ -8,7 +8,7 @@ import com.github.libretube.api.obj.StreamItem
 class PipedNoAccountFeedRepository : FeedRepository {
     override suspend fun getFeed(
         forceRefresh: Boolean,
-        onProgressUpdate: (FeedProgress) -> Unit
+        onProgressUpdate: (FeedProgress) -> Unit,
     ): List<StreamItem> {
         val channelIds = SubscriptionHelper.getSubscriptionChannelIds()
 
@@ -17,9 +17,10 @@ class PipedNoAccountFeedRepository : FeedRepository {
                 RetrofitInstance.authApi
                     .getUnauthenticatedFeed(channelIds)
 
-            else -> RetrofitInstance.authApi.getUnauthenticatedFeed(
-                channelIds.joinToString(",")
-            )
+            else ->
+                RetrofitInstance.authApi.getUnauthenticatedFeed(
+                    channelIds.joinToString(","),
+                )
         }
     }
 }

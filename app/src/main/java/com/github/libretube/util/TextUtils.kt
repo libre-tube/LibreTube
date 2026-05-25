@@ -4,7 +4,6 @@ import android.content.Context
 import android.icu.text.RelativeDateTimeFormatter
 import android.net.Uri
 import android.text.format.DateUtils
-import androidx.core.text.isDigitsOnly
 import com.github.libretube.BuildConfig
 import com.github.libretube.R
 import com.github.libretube.extensions.formatShort
@@ -41,13 +40,9 @@ object TextUtils {
      * @param date The date to parse
      * @return localized date string
      */
-    fun localizeDate(date: KotlinLocalDate): String {
-        return date.toJavaLocalDate().format(MEDIUM_DATE_FORMATTER)
-    }
+    fun localizeDate(date: KotlinLocalDate): String = date.toJavaLocalDate().format(MEDIUM_DATE_FORMATTER)
 
-    fun localizeInstant(instant: kotlinx.datetime.Instant): String {
-        return localizeDate(instant.toLocalDate())
-    }
+    fun localizeInstant(instant: kotlinx.datetime.Instant): String = localizeDate(instant.toLocalDate())
 
     /**
      * Get time in seconds from a YouTube video link.
@@ -94,17 +89,22 @@ object TextUtils {
             return secondsTotal.toFloat() + millisDecimal
         }
 
-        return Duration.parseOrNull(timeString)?.inWholeMilliseconds?.toFloat()?.div(1000)
+        return Duration
+            .parseOrNull(timeString)
+            ?.inWholeMilliseconds
+            ?.toFloat()
+            ?.div(1000)
     }
 
     /**
      * Get video id if the link is a valid youtube video link
      */
-    fun getVideoIdFromUri(uri: Uri) = when (uri.host) {
-        "www.youtube.com", "m.youtube.com", "piped.video" -> uri.getQueryParameter("v")
-        "youtu.be" -> uri.lastPathSegment
-        else -> null
-    }
+    fun getVideoIdFromUri(uri: Uri) =
+        when (uri.host) {
+            "www.youtube.com", "m.youtube.com", "piped.video" -> uri.getQueryParameter("v")
+            "youtu.be" -> uri.lastPathSegment
+            else -> null
+        }
 
     fun formatRelativeDate(unixTime: Long): CharSequence {
         val date = LocalDateTime.ofInstant(Instant.ofEpochMilli(unixTime), ZoneId.systemDefault())
@@ -114,12 +114,14 @@ object TextUtils {
         return if (months > 0) {
             val years = months / 12
 
-            val (timeFormat, time) = if (years > 0) {
-                RelativeDateTimeFormatter.RelativeUnit.YEARS to years
-            } else {
-                RelativeDateTimeFormatter.RelativeUnit.MONTHS to months
-            }
-            RelativeDateTimeFormatter.getInstance()
+            val (timeFormat, time) =
+                if (years > 0) {
+                    RelativeDateTimeFormatter.RelativeUnit.YEARS to years
+                } else {
+                    RelativeDateTimeFormatter.RelativeUnit.MONTHS to months
+                }
+            RelativeDateTimeFormatter
+                .getInstance()
                 .format(time.toDouble(), RelativeDateTimeFormatter.Direction.LAST, timeFormat)
         } else {
             val weeks = date.until(now, ChronoUnit.WEEKS)
@@ -133,29 +135,35 @@ object TextUtils {
         return "${bitrate / 1024}kbps"
     }
 
-    fun limitTextToLength(text: String, maxLength: Int): String {
+    fun limitTextToLength(
+        text: String,
+        maxLength: Int,
+    ): String {
         if (text.length <= maxLength) return text
         return text.take(maxLength) + "…"
     }
 
-    fun getUserAgent(context: Context): String {
-        return "${context.packageName}/${BuildConfig.VERSION_NAME}"
-    }
+    fun getUserAgent(context: Context): String = "${context.packageName}/${BuildConfig.VERSION_NAME}"
 
-    fun formatViewsString(context: Context, views: Long, uploaded: Long, uploader: String? = null): String {
-        val viewsString = views.takeIf { it != -1L }?.formatShort()?.let {
-            context.getString(R.string.view_count, it)
-        }
-        val uploadDate = uploaded.takeIf { it > 0 }?.let {
-            formatRelativeDate(it)
-        }
+    fun formatViewsString(
+        context: Context,
+        views: Long,
+        uploaded: Long,
+        uploader: String? = null,
+    ): String {
+        val viewsString =
+            views.takeIf { it != -1L }?.formatShort()?.let {
+                context.getString(R.string.view_count, it)
+            }
+        val uploadDate =
+            uploaded.takeIf { it > 0 }?.let {
+                formatRelativeDate(it)
+            }
         return listOfNotNull(uploader, viewsString, uploadDate).joinToString(SEPARATOR)
     }
 
     /**
      * Timestamp of the current time which doesn't use any forbidden characters for file names like ':'
      */
-    fun getFileSafeTimeStampNow(): String {
-        return SAFE_FILENAME_DATETIME_FORMATTER.format(LocalDateTime.now())
-    }
+    fun getFileSafeTimeStampNow(): String = SAFE_FILENAME_DATETIME_FORMATTER.format(LocalDateTime.now())
 }

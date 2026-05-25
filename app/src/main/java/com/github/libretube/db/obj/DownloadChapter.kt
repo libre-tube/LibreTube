@@ -10,9 +10,7 @@ data class DownloadChapter(
     val videoId: String,
     val name: String,
     val start: Long,
-    val thumbnailUrl: String
+    val thumbnailUrl: String,
 ) {
-    fun toChapterSegment(): ChapterSegment {
-        return ChapterSegment(name, thumbnailUrl, start)
-    }
+    fun toChapterSegment(): ChapterSegment = ChapterSegment(name, thumbnailUrl, start)
 }

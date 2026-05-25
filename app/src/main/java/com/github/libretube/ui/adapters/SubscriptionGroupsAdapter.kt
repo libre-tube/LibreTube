@@ -20,11 +20,11 @@ import kotlinx.coroutines.launch
 class SubscriptionGroupsAdapter(
     var groups: MutableList<SubscriptionGroup>,
     private val viewModel: EditChannelGroupsModel,
-    private val parentFragmentManager: FragmentManager
+    private val parentFragmentManager: FragmentManager,
 ) : RecyclerView.Adapter<SubscriptionGroupsViewHolder>() {
     override fun onCreateViewHolder(
         parent: ViewGroup,
-        viewType: Int
+        viewType: Int,
     ): SubscriptionGroupsViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         val binding = SubscriptionGroupRowBinding.inflate(layoutInflater, parent, false)
@@ -33,7 +33,10 @@ class SubscriptionGroupsAdapter(
 
     override fun getItemCount() = groups.size
 
-    override fun onBindViewHolder(holder: SubscriptionGroupsViewHolder, position: Int) {
+    override fun onBindViewHolder(
+        holder: SubscriptionGroupsViewHolder,
+        position: Int,
+    ) {
         val subscriptionGroup = groups[position]
         holder.binding.apply {
             groupName.text = subscriptionGroup.name
@@ -49,20 +52,23 @@ class SubscriptionGroupsAdapter(
         }
     }
 
-    private fun showDeleteDialog(context: Context, position: Int) {
+    private fun showDeleteDialog(
+        context: Context,
+        position: Int,
+    ) {
         MaterialAlertDialogBuilder(context)
             .setTitle(R.string.delete)
             .setMessage(R.string.irreversible)
             .setPositiveButton(R.string.okay) { _, _ ->
                 CoroutineScope(Dispatchers.IO).launch {
-                    DatabaseHolder.Database.subscriptionGroupsDao()
+                    DatabaseHolder.Database
+                        .subscriptionGroupsDao()
                         .deleteGroup(groups[position].name)
 
                     groups.removeAt(position)
                     viewModel.groups.postValue(groups)
                 }
-            }
-            .setNegativeButton(R.string.cancel, null)
+            }.setNegativeButton(R.string.cancel, null)
             .show()
     }
 }

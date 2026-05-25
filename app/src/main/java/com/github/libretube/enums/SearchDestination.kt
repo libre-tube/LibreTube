@@ -6,5 +6,5 @@ package com.github.libretube.enums
 enum class SearchType {
     ONLINE,
     DOWNLOADS,
-    PLAYLIST
+    PLAYLIST,
 }

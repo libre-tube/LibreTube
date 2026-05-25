@@ -33,6 +33,7 @@ class RenamePlaylistDialog : DialogFragment() {
             currentPlaylistName = it.getString(IntentData.playlistName)!!
         }
     }
+
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val binding = DialogTextPreferenceBinding.inflate(layoutInflater)
         binding.input.inputType = InputType.TYPE_CLASS_TEXT
@@ -49,7 +50,8 @@ class RenamePlaylistDialog : DialogFragment() {
                 getButton(DialogInterface.BUTTON_POSITIVE).setOnClickListener {
                     val newPlaylistName = binding.input.text?.toString()
                     if (newPlaylistName.isNullOrEmpty()) {
-                        Toast.makeText(context, R.string.emptyPlaylistName, Toast.LENGTH_SHORT)
+                        Toast
+                            .makeText(context, R.string.emptyPlaylistName, Toast.LENGTH_SHORT)
                             .show()
                         return@setOnClickListener
                     }
@@ -61,20 +63,21 @@ class RenamePlaylistDialog : DialogFragment() {
 
                     lifecycleScope.launch {
                         requireDialog().hide()
-                        val success = try {
-                            withContext(Dispatchers.IO) {
-                                PlaylistsHelper.renamePlaylist(playlistId, newPlaylistName)
+                        val success =
+                            try {
+                                withContext(Dispatchers.IO) {
+                                    PlaylistsHelper.renamePlaylist(playlistId, newPlaylistName)
+                                }
+                            } catch (e: Exception) {
+                                Log.e(TAG(), e.toString())
+                                e.localizedMessage?.let { appContext.toastFromMainDispatcher(it) }
+                                return@launch
                             }
-                        } catch (e: Exception) {
-                            Log.e(TAG(), e.toString())
-                            e.localizedMessage?.let { appContext.toastFromMainDispatcher(it) }
-                            return@launch
-                        }
                         if (success) {
                             appContext.toastFromMainDispatcher(R.string.success)
                             setFragmentResult(
                                 PLAYLIST_OPTIONS_REQUEST_KEY,
-                                bundleOf(IntentData.playlistName to newPlaylistName)
+                                bundleOf(IntentData.playlistName to newPlaylistName),
                             )
                         } else {
                             appContext.toastFromMainDispatcher(R.string.server_error)

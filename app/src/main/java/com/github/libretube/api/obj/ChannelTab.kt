@@ -8,5 +8,5 @@ import kotlinx.serialization.Serializable
 @Parcelize
 data class ChannelTab(
     val name: String,
-    val data: String
+    val data: String,
 ) : Parcelable

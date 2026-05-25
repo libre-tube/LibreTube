@@ -36,7 +36,10 @@ class TrendsFragment : Fragment(R.layout.fragment_trends) {
     private var _binding: FragmentTrendsBinding? = null
     private val binding get() = _binding!!
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?,
+    ) {
         _binding = FragmentTrendsBinding.bind(view)
 
         val categories = MediaServiceRepository.instance.getTrendingCategories()
@@ -60,7 +63,10 @@ class TrendsFragment : Fragment(R.layout.fragment_trends) {
     }
 
     companion object {
-        fun showChangeRegionDialog(context: Context, onPositiveButtonClick: () -> Unit) {
+        fun showChangeRegionDialog(
+            context: Context,
+            onPositiveButtonClick: () -> Unit,
+        ) {
             val currentRegionPref = PreferenceHelper.getTrendingRegion(context)
 
             val countries = LocaleHelper.getAvailableCountries()
@@ -69,42 +75,40 @@ class TrendsFragment : Fragment(R.layout.fragment_trends) {
                 .setTitle(R.string.region)
                 .setSingleChoiceItems(
                     countries.map { it.name }.toTypedArray(),
-                    selected
+                    selected,
                 ) { _, checked ->
                     selected = checked
-                }
-                .setNegativeButton(R.string.cancel, null)
+                }.setNegativeButton(R.string.cancel, null)
                 .setPositiveButton(R.string.okay) { _, _ ->
                     PreferenceHelper.putString(PreferenceKeys.REGION, countries[selected].code)
                     onPositiveButtonClick()
-                }
-                .show()
+                }.show()
         }
     }
 }
 
-class TrendsAdapter(fragment: Fragment, private val categories: List<TrendingCategory>) :
-    FragmentStateAdapter(fragment) {
+class TrendsAdapter(
+    fragment: Fragment,
+    private val categories: List<TrendingCategory>,
+) : FragmentStateAdapter(fragment) {
     private val fragments: MutableList<TrendsContentFragment?> =
         MutableList(categories.size) { null }
 
     override fun createFragment(position: Int): Fragment {
-        val trendContentFragment = TrendsContentFragment().apply {
-            arguments = bundleOf(
-                IntentData.category to categories[position]
-            )
-        }
+        val trendContentFragment =
+            TrendsContentFragment().apply {
+                arguments =
+                    bundleOf(
+                        IntentData.category to categories[position],
+                    )
+            }
         fragments[position] = trendContentFragment
         return trendContentFragment
     }
 
-    override fun getItemCount(): Int {
-        return categories.size
-    }
+    override fun getItemCount(): Int = categories.size
 
-    fun getFragmentAt(position: Int): TrendsContentFragment? {
-        return fragments[position]
-    }
+    fun getFragmentAt(position: Int): TrendsContentFragment? = fragments[position]
 }
 
 class TrendsContentFragment : DynamicLayoutManagerFragment(R.layout.fragment_trends_content) {
@@ -119,12 +123,16 @@ class TrendsContentFragment : DynamicLayoutManagerFragment(R.layout.fragment_tre
         _binding?.recview?.layoutManager = GridLayoutManager(context, gridItems)
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?,
+    ) {
         _binding = FragmentTrendsContentBinding.bind(view)
         super.onViewCreated(view, savedInstanceState)
 
-        _category = requireArguments()
-            .serializable<TrendingCategory>(IntentData.category)!!
+        _category =
+            requireArguments()
+                .serializable<TrendingCategory>(IntentData.category)!!
 
         val adapter = VideoCardsAdapter()
         binding.recview.adapter = adapter
@@ -140,17 +148,16 @@ class TrendsContentFragment : DynamicLayoutManagerFragment(R.layout.fragment_tre
 
             val trendingRegion = PreferenceHelper.getTrendingRegion(requireContext())
             if (videos.streams.isEmpty() && (videos.region == trendingRegion)) {
-                Snackbar.make(
-                    requireParentFragment().requireView(),
-                    R.string.change_region,
-                    Snackbar.LENGTH_LONG
-                )
-                    .setAction(R.string.change) {
+                Snackbar
+                    .make(
+                        requireParentFragment().requireView(),
+                        R.string.change_region,
+                        Snackbar.LENGTH_LONG,
+                    ).setAction(R.string.change) {
                         TrendsFragment.showChangeRegionDialog(requireContext()) {
                             refreshTrending()
                         }
-                    }
-                    .show()
+                    }.show()
             }
         }
 
@@ -159,12 +166,17 @@ class TrendsContentFragment : DynamicLayoutManagerFragment(R.layout.fragment_tre
             refreshTrending()
         }
 
-        binding.recview.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
-                super.onScrollStateChanged(recyclerView, newState)
-                viewModel.recyclerViewState = recyclerView.layoutManager?.onSaveInstanceState()
-            }
-        })
+        binding.recview.addOnScrollListener(
+            object : RecyclerView.OnScrollListener() {
+                override fun onScrollStateChanged(
+                    recyclerView: RecyclerView,
+                    newState: Int,
+                ) {
+                    super.onScrollStateChanged(recyclerView, newState)
+                    viewModel.recyclerViewState = recyclerView.layoutManager?.onSaveInstanceState()
+                }
+            },
+        )
 
         viewModel.fetchTrending(requireContext(), category)
         lifecycleScope.launch {

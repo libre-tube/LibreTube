@@ -37,12 +37,15 @@ class DownloadPlaylistDialog : DialogFragment() {
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val binding = DialogDownloadPlaylistBinding.inflate(layoutInflater)
 
-        val possibleVideoQualities = resources.getStringArray(R.array.defres).toList().let {
-            // remove the automatic quality entry
-            it.subList(1, it.size)
-        }
-        val possibleAudioQualities = resources.getStringArray(R.array.audioQualityBitrates)
-            .toList()
+        val possibleVideoQualities =
+            resources.getStringArray(R.array.defres).toList().let {
+                // remove the automatic quality entry
+                it.subList(1, it.size)
+            }
+        val possibleAudioQualities =
+            resources
+                .getStringArray(R.array.audioQualityBitrates)
+                .toList()
 
         binding.playlistTitle.text = playlistName
         binding.videoSpinner.items = listOf(getString(R.string.no_video)) + possibleVideoQualities
@@ -59,17 +62,22 @@ class DownloadPlaylistDialog : DialogFragment() {
             .setView(binding.root)
             .setPositiveButton(R.string.download) { _, _ ->
                 with(binding) {
-                    val maxVideoQuality = possibleVideoQualities.getOrNull(videoSpinner.selectedItemPosition - 1)
-                        .getWhileDigit()
-                    val maxAudioQuality = possibleAudioQualities.getOrNull(audioSpinner.selectedItemPosition - 1)
-                        .getWhileDigit()
+                    val maxVideoQuality =
+                        possibleVideoQualities
+                            .getOrNull(videoSpinner.selectedItemPosition - 1)
+                            .getWhileDigit()
+                    val maxAudioQuality =
+                        possibleAudioQualities
+                            .getOrNull(audioSpinner.selectedItemPosition - 1)
+                            .getWhileDigit()
                     val captionLanguage = availableLanguages.getOrNull(subtitleSpinner.selectedItemPosition - 1)?.code
                     val audioLanguage = availableLanguages.getOrNull(audioLanguageSpinner.selectedItemPosition - 1)?.code
 
                     saveSelections(binding)
 
                     if (maxVideoQuality == null && maxAudioQuality == null) {
-                        Toast.makeText(context, R.string.nothing_selected, Toast.LENGTH_SHORT)
+                        Toast
+                            .makeText(context, R.string.nothing_selected, Toast.LENGTH_SHORT)
                             .show()
                         return@setPositiveButton
                     }
@@ -86,8 +94,7 @@ class DownloadPlaylistDialog : DialogFragment() {
 
                     ContextCompat.startForegroundService(requireContext(), downloadEnqueueIntent)
                 }
-            }
-            .setNegativeButton(R.string.cancel, null)
+            }.setNegativeButton(R.string.cancel, null)
             .show()
     }
 

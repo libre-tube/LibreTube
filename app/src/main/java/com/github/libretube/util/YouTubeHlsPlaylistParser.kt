@@ -31,7 +31,6 @@ import java.io.InputStream
  */
 @OptIn(UnstableApi::class)
 class YoutubeHlsPlaylistParser : ParsingLoadable.Parser<HlsPlaylist> {
-
     /**
      * Factory to create [YoutubeHlsPlaylistParser] instances.
      */
@@ -40,7 +39,7 @@ class YoutubeHlsPlaylistParser : ParsingLoadable.Parser<HlsPlaylist> {
 
         override fun createPlaylistParser(
             multivariantPlaylist: HlsMultivariantPlaylist,
-            previousMediaPlaylist: HlsMediaPlaylist?
+            previousMediaPlaylist: HlsMediaPlaylist?,
         ) = YoutubeHlsPlaylistParser(multivariantPlaylist, previousMediaPlaylist)
     }
 
@@ -62,7 +61,7 @@ class YoutubeHlsPlaylistParser : ParsingLoadable.Parser<HlsPlaylist> {
      */
     private constructor(
         multivariantPlaylist: HlsMultivariantPlaylist,
-        previousMediaPlaylist: HlsMediaPlaylist?
+        previousMediaPlaylist: HlsMediaPlaylist?,
     ) {
         this.hlsPlaylistParser = HlsPlaylistParser(multivariantPlaylist, previousMediaPlaylist)
     }
@@ -82,7 +81,10 @@ class YoutubeHlsPlaylistParser : ParsingLoadable.Parser<HlsPlaylist> {
      * [HlsPlaylistParser] instance or a [HlsMultivariantPlaylist] on which audio formats have been
      * edited to add the role track type flags to the existing ones on them if needed
      */
-    override fun parse(uri: Uri, inputStream: InputStream): HlsPlaylist {
+    override fun parse(
+        uri: Uri,
+        inputStream: InputStream,
+    ): HlsPlaylist {
         val hlsPlaylist = hlsPlaylistParser.parse(uri, inputStream)
         if (hlsPlaylist !is HlsMultivariantPlaylist) {
             return hlsPlaylist
@@ -104,7 +106,7 @@ class YoutubeHlsPlaylistParser : ParsingLoadable.Parser<HlsPlaylist> {
             hlsMultivariantPlaylist.muxedCaptionFormats,
             hlsMultivariantPlaylist.hasIndependentSegments,
             hlsMultivariantPlaylist.variableDefinitions,
-            hlsMultivariantPlaylist.sessionKeyDrmInitData
+            hlsMultivariantPlaylist.sessionKeyDrmInitData,
         )
     }
 
@@ -125,9 +127,7 @@ class YoutubeHlsPlaylistParser : ParsingLoadable.Parser<HlsPlaylist> {
      * @return a new list of audio [Rendition]s with audio track types set in the role flags of the
      * audio formats
      */
-    private fun getAudioRenditionsWithTrackTypeSet(
-        hlsMultivariantPlaylistAudios: List<Rendition>
-    ): List<Rendition> {
+    private fun getAudioRenditionsWithTrackTypeSet(hlsMultivariantPlaylistAudios: List<Rendition>): List<Rendition> {
         return hlsMultivariantPlaylistAudios.map {
             // Add the audio stream as it is if no path segments has been found
             // This should never happen, as YouTube always uses path segments for their HLS URLs
@@ -152,7 +152,7 @@ class YoutubeHlsPlaylistParser : ParsingLoadable.Parser<HlsPlaylist> {
                 it.url,
                 createAudioFormatFromAccountValue(
                     pathSegments[sgoapPathParameterValueIndex],
-                    it.format
+                    it.format,
                 ),
                 it.groupId,
                 it.name,
@@ -176,18 +176,21 @@ class YoutubeHlsPlaylistParser : ParsingLoadable.Parser<HlsPlaylist> {
      */
     private fun createAudioFormatFromAccountValue(
         sgoapPathParameterValue: String,
-        audioFormat: Format
+        audioFormat: Format,
     ): Format {
-        XTAGS_ACONT_VALUE_REGEX.find(sgoapPathParameterValue)?.groupValues?.get(1)
+        XTAGS_ACONT_VALUE_REGEX
+            .find(sgoapPathParameterValue)
+            ?.groupValues
+            ?.get(1)
             ?.let { acontValue ->
-                return audioFormat.buildUpon()
+                return audioFormat
+                    .buildUpon()
                     .setRoleFlags(
                         PlayerHelper.getFullAudioRoleFlags(
                             audioFormat.roleFlags,
-                            acontValue
-                        )
-                    )
-                    .build()
+                            acontValue,
+                        ),
+                    ).build()
             }
 
         // If no info about format being original, dubbed or descriptive, return the format as it is
@@ -195,7 +198,6 @@ class YoutubeHlsPlaylistParser : ParsingLoadable.Parser<HlsPlaylist> {
     }
 
     companion object {
-
         /**
          * Constant for the `sgoap` "path parameter" name.
          *

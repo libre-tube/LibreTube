@@ -17,7 +17,10 @@ import com.github.libretube.helpers.ThemeHelper
  * @param videoId The id of the video to inspect
  * @param duration The duration of the video in seconds
  */
-fun View.setWatchProgressLength(videoId: String, duration: Long) {
+fun View.setWatchProgressLength(
+    videoId: String,
+    duration: Long,
+) {
     val progress = DatabaseHelper.getWatchPositionBlocking(videoId)?.div(1000)
     if (progress == null || progress == 0L) {
         isGone = true
@@ -25,13 +28,14 @@ fun View.setWatchProgressLength(videoId: String, duration: Long) {
     }
 
     updateLayoutParams<ConstraintLayout.LayoutParams> {
-        matchConstraintPercentWidth = progress.toFloat()/ duration.toFloat()
+        matchConstraintPercentWidth = progress.toFloat() / duration.toFloat()
     }
 
-    var backgroundColor = ThemeHelper.getThemeColor(
-        context,
-        com.google.android.material.R.attr.colorPrimaryVariant
-    )
+    var backgroundColor =
+        ThemeHelper.getThemeColor(
+            context,
+            com.google.android.material.R.attr.colorPrimaryVariant,
+        )
     // increase the brightness for better contrast in light mode
     if (!ThemeHelper.isDarkMode(context)) {
         backgroundColor = ColorUtils.blendARGB(backgroundColor, Color.WHITE, 0.4f)
@@ -40,12 +44,15 @@ fun View.setWatchProgressLength(videoId: String, duration: Long) {
 
     // set corner-radius
     clipToOutline = true
-    outlineProvider = object : ViewOutlineProvider() {
-        override fun getOutline(view: View, outline: Outline) {
-            outline.setRoundRect(0, 0, view.width, view.height, 16f)
+    outlineProvider =
+        object : ViewOutlineProvider() {
+            override fun getOutline(
+                view: View,
+                outline: Outline,
+            ) {
+                outline.setRoundRect(0, 0, view.width, view.height, 16f)
+            }
         }
-    }
-
 
     isVisible = true
 }

@@ -12,15 +12,19 @@ import androidx.core.os.postDelayed
 import com.github.libretube.ui.interfaces.AudioPlayerOptions
 import kotlin.math.abs
 
-class AudioPlayerThumbnailListener(context: Context, private val listener: AudioPlayerOptions) :
-    View.OnTouchListener {
-
+class AudioPlayerThumbnailListener(
+    context: Context,
+    private val listener: AudioPlayerOptions,
+) : View.OnTouchListener {
     private val handler = Handler(Looper.getMainLooper())
     private val gestureDetector = GestureDetector(context, GestureListener(), handler)
     private var isMoving = false
 
     @SuppressLint("ClickableViewAccessibility")
-    override fun onTouch(v: View, event: MotionEvent): Boolean {
+    override fun onTouch(
+        v: View,
+        event: MotionEvent,
+    ): Boolean {
         if (event.action == MotionEvent.ACTION_UP && isMoving) {
             listener.onSwipeEnd()
             return false
@@ -38,7 +42,6 @@ class AudioPlayerThumbnailListener(context: Context, private val listener: Audio
     }
 
     private inner class GestureListener : GestureDetector.SimpleOnGestureListener() {
-
         override fun onDown(e: MotionEvent): Boolean {
             handler.postDelayed(ACTION_INTERVAL, SINGLE_PRESS_TOKEN) {
                 if (!isMoving) listener.onSingleTap()
@@ -51,7 +54,7 @@ class AudioPlayerThumbnailListener(context: Context, private val listener: Audio
             e1: MotionEvent?,
             e2: MotionEvent,
             distanceX: Float,
-            distanceY: Float
+            distanceY: Float,
         ): Boolean {
             val insideThreshHold = abs(e2.y - e1!!.y) <= MOVEMENT_THRESHOLD
 

@@ -13,5 +13,5 @@ data class Channel(
     val subscriberCount: Long = 0,
     val verified: Boolean = false,
     var relatedStreams: List<StreamItem> = emptyList(),
-    val tabs: List<ChannelTab> = emptyList()
+    val tabs: List<ChannelTab> = emptyList(),
 )

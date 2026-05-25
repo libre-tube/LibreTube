@@ -11,6 +11,6 @@ import com.github.libretube.services.AbstractPlayerService
 fun MediaController.navigateVideo(videoId: String) {
     sendCustomCommand(
         AbstractPlayerService.runPlayerActionCommand,
-        bundleOf(PlayerCommand.PLAY_VIDEO_BY_ID.name to videoId)
+        bundleOf(PlayerCommand.PLAY_VIDEO_BY_ID.name to videoId),
     )
 }

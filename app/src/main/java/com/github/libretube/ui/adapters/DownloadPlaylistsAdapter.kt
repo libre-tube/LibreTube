@@ -18,20 +18,20 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class DownloadPlaylistViewHolder(val binding: PlaylistsRowBinding) :
-    RecyclerView.ViewHolder(binding.root)
+class DownloadPlaylistViewHolder(
+    val binding: PlaylistsRowBinding,
+) : RecyclerView.ViewHolder(binding.root)
 
 class DownloadPlaylistAdapter(
-    val navigateToPlaylist: (playlist: DownloadPlaylistWithDownload) -> Unit
-) :
-    ListAdapter<DownloadPlaylistWithDownload, DownloadPlaylistViewHolder>(
+    val navigateToPlaylist: (playlist: DownloadPlaylistWithDownload) -> Unit,
+) : ListAdapter<DownloadPlaylistWithDownload, DownloadPlaylistViewHolder>(
         DiffUtilItemCallback<DownloadPlaylistWithDownload>(
-            areItemsTheSame = { a, b -> a.downloadPlaylist.playlistId == b.downloadPlaylist.playlistId }
-        )
+            areItemsTheSame = { a, b -> a.downloadPlaylist.playlistId == b.downloadPlaylist.playlistId },
+        ),
     ) {
     override fun onCreateViewHolder(
         parent: ViewGroup,
-        viewType: Int
+        viewType: Int,
     ): DownloadPlaylistViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         val binding = PlaylistsRowBinding.inflate(layoutInflater, parent, false)
@@ -40,7 +40,7 @@ class DownloadPlaylistAdapter(
 
     override fun onBindViewHolder(
         holder: DownloadPlaylistViewHolder,
-        position: Int
+        position: Int,
     ) {
         val item = getItem(position)!!
 
@@ -48,8 +48,10 @@ class DownloadPlaylistAdapter(
             playlistTitle.text = item.downloadPlaylist.title
             playlistDescription.text = item.downloadPlaylist.description
             ImageHelper.loadImage(
-                item.downloadPlaylist.thumbnailPath?.toUri()?.toString(),
-                playlistThumbnail
+                item.downloadPlaylist.thumbnailPath
+                    ?.toUri()
+                    ?.toString(),
+                playlistThumbnail,
             )
             videoCount.text = item.downloadVideos.size.toString()
 
@@ -64,15 +66,20 @@ class DownloadPlaylistAdapter(
      *
      * If [includeVideos] is set to true, all corresponding download items will be deleted as well.
      */
-    private fun deletePlaylist(position: Int, includeVideos: Boolean) {
+    private fun deletePlaylist(
+        position: Int,
+        includeVideos: Boolean,
+    ) {
         val playlist = getItem(position)!!
 
         CoroutineScope(Dispatchers.Main).launch {
             withContext(Dispatchers.IO) {
                 if (includeVideos) {
-                    val downloads = DatabaseHolder.Database.downloadDao()
-                        .getDownloadPlaylistByIdIncludingItems(playlist.downloadPlaylist.playlistId)
-                        .downloadVideos
+                    val downloads =
+                        DatabaseHolder.Database
+                            .downloadDao()
+                            .getDownloadPlaylistByIdIncludingItems(playlist.downloadPlaylist.playlistId)
+                            .downloadVideos
 
                     for (download in downloads) {
                         DownloadHelper.deleteDownloadIncludingFiles(download)
@@ -82,28 +89,30 @@ class DownloadPlaylistAdapter(
                 DatabaseHolder.Database.downloadDao().deletePlaylistIncludingVideoRefs(playlist.downloadPlaylist)
             }
 
-            val updatedList = currentList.filter {
-                it.downloadPlaylist.playlistId != playlist.downloadPlaylist.playlistId
-            }
+            val updatedList =
+                currentList.filter {
+                    it.downloadPlaylist.playlistId != playlist.downloadPlaylist.playlistId
+                }
             submitList(updatedList)
         }
     }
 
-    fun showDeleteDialog(context: Context, position: Int) {
+    fun showDeleteDialog(
+        context: Context,
+        position: Int,
+    ) {
         var includeVideos = false
 
         MaterialAlertDialogBuilder(context)
             .setTitle(R.string.deletePlaylist)
             .setMultiChoiceItems(
                 arrayOf(context.getString(R.string.delete_playlist_include_vidoes)),
-                null
+                null,
             ) { _, _, checked ->
                 includeVideos = checked
-            }
-            .setPositiveButton(R.string.okay) { _, _ ->
+            }.setPositiveButton(R.string.okay) { _, _ ->
                 deletePlaylist(position, includeVideos)
-            }
-            .setNegativeButton(R.string.cancel, null)
+            }.setNegativeButton(R.string.cancel, null)
             .show()
     }
 

@@ -23,10 +23,12 @@ import com.github.libretube.ui.models.CommentsViewModel
 import com.github.libretube.ui.sheets.CommentsSheet
 
 class CommentsMainFragment : Fragment(R.layout.fragment_comments) {
-
     private val viewModel: CommentsViewModel by activityViewModels()
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?,
+    ) {
         super.onViewCreated(view, savedInstanceState)
 
         val binding = FragmentCommentsBinding.bind(view)
@@ -36,54 +38,63 @@ class CommentsMainFragment : Fragment(R.layout.fragment_comments) {
         val commentsSheet = parentFragment as? CommentsSheet
         commentsSheet?.binding?.btnScrollToTop?.setOnClickListener {
             // scroll back to the top / first comment
-            layoutManager.startSmoothScroll(LinearSmoothScroller(view.context).also {
-                it.targetPosition = POSITION_START
-            })
+            layoutManager.startSmoothScroll(
+                LinearSmoothScroller(view.context).also {
+                    it.targetPosition = POSITION_START
+                },
+            )
             viewModel.setCommentsPosition(POSITION_START)
         }
 
-        binding.commentsRV.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
-                if (newState != RecyclerView.SCROLL_STATE_IDLE) return
+        binding.commentsRV.addOnScrollListener(
+            object : RecyclerView.OnScrollListener() {
+                override fun onScrollStateChanged(
+                    recyclerView: RecyclerView,
+                    newState: Int,
+                ) {
+                    if (newState != RecyclerView.SCROLL_STATE_IDLE) return
 
-                val firstVisiblePosition = layoutManager.findFirstVisibleItemPosition()
-                viewModel.setCommentsPosition(firstVisiblePosition)
-            }
-        })
-
-        commentsSheet?.updateFragmentInfo(false, getString(R.string.comments))
-
-        val commentPagingAdapter = CommentsPagingAdapter(
-            false,
-            requireArguments().getString(IntentData.channelAvatar),
-            handleLink = {
-                setFragmentResult(
-                    CommentsSheet.HANDLE_LINK_REQUEST_KEY,
-                    bundleOf(IntentData.url to it),
-                )
-            },
-            saveToClipboard = { comment ->
-                viewModel.saveToClipboard(view.context, comment)
-            },
-            navigateToChannel = { comment ->
-                NavigationHelper.navigateChannel(view.context, comment.commentorUrl)
-                setFragmentResult(CommentsSheet.DISMISS_SHEET_REQUEST_KEY, Bundle.EMPTY)
-            },
-            navigateToReplies = { comment, channelAvatar ->
-                if (comment.repliesPage != null) {
-                    val args = bundleOf(
-                        IntentData.videoId to viewModel.videoIdLiveData.value,
-                        IntentData.comment to comment,
-                        IntentData.channelAvatar to channelAvatar
-                    )
-                    parentFragmentManager.commit {
-                        viewModel.setLastOpenedCommentRepliesId(comment.commentId)
-                        replace<CommentsRepliesFragment>(R.id.commentFragContainer, args = args)
-                        addToBackStack(null)
-                    }
+                    val firstVisiblePosition = layoutManager.findFirstVisibleItemPosition()
+                    viewModel.setCommentsPosition(firstVisiblePosition)
                 }
             },
         )
+
+        commentsSheet?.updateFragmentInfo(false, getString(R.string.comments))
+
+        val commentPagingAdapter =
+            CommentsPagingAdapter(
+                false,
+                requireArguments().getString(IntentData.channelAvatar),
+                handleLink = {
+                    setFragmentResult(
+                        CommentsSheet.HANDLE_LINK_REQUEST_KEY,
+                        bundleOf(IntentData.url to it),
+                    )
+                },
+                saveToClipboard = { comment ->
+                    viewModel.saveToClipboard(view.context, comment)
+                },
+                navigateToChannel = { comment ->
+                    NavigationHelper.navigateChannel(view.context, comment.commentorUrl)
+                    setFragmentResult(CommentsSheet.DISMISS_SHEET_REQUEST_KEY, Bundle.EMPTY)
+                },
+                navigateToReplies = { comment, channelAvatar ->
+                    if (comment.repliesPage != null) {
+                        val args =
+                            bundleOf(
+                                IntentData.videoId to viewModel.videoIdLiveData.value,
+                                IntentData.comment to comment,
+                                IntentData.channelAvatar to channelAvatar,
+                            )
+                        parentFragmentManager.commit {
+                            viewModel.setLastOpenedCommentRepliesId(comment.commentId)
+                            replace<CommentsRepliesFragment>(R.id.commentFragContainer, args = args)
+                            addToBackStack(null)
+                        }
+                    }
+                },
+            )
         binding.commentsRV.adapter = commentPagingAdapter
 
         commentPagingAdapter.addLoadStateListener { loadStates ->
@@ -96,7 +107,10 @@ class CommentsMainFragment : Fragment(R.layout.fragment_comments) {
                 }
             }
 
-            if (loadStates.append is LoadState.NotLoading && loadStates.append.endOfPaginationReached && commentPagingAdapter.itemCount == 0) {
+            if (loadStates.append is LoadState.NotLoading &&
+                loadStates.append.endOfPaginationReached &&
+                commentPagingAdapter.itemCount == 0
+            ) {
                 binding.errorTV.text = getString(R.string.no_comments_available)
                 binding.errorTV.isVisible = true
             }
@@ -116,7 +130,7 @@ class CommentsMainFragment : Fragment(R.layout.fragment_comments) {
 
             commentsSheet?.updateFragmentInfo(
                 false,
-                getString(R.string.comments_count, commentCount.formatShort())
+                getString(R.string.comments_count, commentCount.formatShort()),
             )
         }
     }

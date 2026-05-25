@@ -16,5 +16,5 @@ data class SubscriptionGroup(
     @JsonNames("groupName", "name")
     var name: String,
     var channels: List<String> = listOf(),
-    var index: Int = 0
+    var index: Int = 0,
 )

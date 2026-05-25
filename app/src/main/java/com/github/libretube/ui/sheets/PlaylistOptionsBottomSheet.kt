@@ -53,9 +53,10 @@ class PlaylistOptionsBottomSheet : BaseBottomSheet() {
 
         if (PlayingQueue.isNotEmpty()) optionsList.add(R.string.add_to_queue)
 
-        val isBookmarked = runBlocking(Dispatchers.IO) {
-            DatabaseHolder.Database.playlistBookmarkDao().includes(playlistId)
-        }
+        val isBookmarked =
+            runBlocking(Dispatchers.IO) {
+                DatabaseHolder.Database.playlistBookmarkDao().includes(playlistId)
+            }
 
         if (playlistType == PlaylistType.PUBLIC) {
             optionsList.add(R.string.share)
@@ -63,7 +64,7 @@ class PlaylistOptionsBottomSheet : BaseBottomSheet() {
 
             // only add the bookmark option to the playlist if public
             optionsList.add(
-                if (isBookmarked) R.string.remove_bookmark else R.string.add_to_bookmarks
+                if (isBookmarked) R.string.remove_bookmark else R.string.add_to_bookmarks,
             )
         } else {
             optionsList.add(R.string.export_playlist)
@@ -78,17 +79,18 @@ class PlaylistOptionsBottomSheet : BaseBottomSheet() {
             when (optionsList[which]) {
                 // play the playlist in the background
                 R.string.playOnBackground -> {
-                    val playlist = withContext(Dispatchers.IO) {
-                        runCatching { PlaylistsHelper.getPlaylist(playlistId) }
-                    }.getOrElse {
-                        context?.toastFromMainDispatcher(R.string.error)
-                        return@setSimpleItems
-                    }
+                    val playlist =
+                        withContext(Dispatchers.IO) {
+                            runCatching { PlaylistsHelper.getPlaylist(playlistId) }
+                        }.getOrElse {
+                            context?.toastFromMainDispatcher(R.string.error)
+                            return@setSimpleItems
+                        }
 
                     playlist.relatedStreams.firstOrNull()?.let {
                         BackgroundHelper.playOnBackground(
                             requireContext(),
-                            PlayerData(it.url!!.toID(), playlistId = playlistId)
+                            PlayerData(it.url!!.toID(), playlistId = playlistId),
                         )
                     }
                 }
@@ -99,50 +101,55 @@ class PlaylistOptionsBottomSheet : BaseBottomSheet() {
                 // Clone the playlist to the users Piped account
                 R.string.clonePlaylist -> {
                     val context = requireContext()
-                    val playlistId = withContext(Dispatchers.IO) {
-                        runCatching {
-                            PlaylistsHelper.clonePlaylist(playlistId)
-                        }.getOrNull()
-                    }
+                    val playlistId =
+                        withContext(Dispatchers.IO) {
+                            runCatching {
+                                PlaylistsHelper.clonePlaylist(playlistId)
+                            }.getOrNull()
+                        }
                     context.toastFromMainDispatcher(
-                        if (playlistId != null) R.string.playlistCloned else R.string.server_error
+                        if (playlistId != null) R.string.playlistCloned else R.string.server_error,
                     )
                 }
                 // share the playlist
                 R.string.share -> {
                     val newShareDialog = ShareDialog()
-                    newShareDialog.arguments = bundleOf(
-                        IntentData.id to playlistId,
-                        IntentData.shareObjectType to ShareObjectType.PLAYLIST,
-                        IntentData.shareData to ShareData(currentPlaylist = playlistName)
-                    )
+                    newShareDialog.arguments =
+                        bundleOf(
+                            IntentData.id to playlistId,
+                            IntentData.shareObjectType to ShareObjectType.PLAYLIST,
+                            IntentData.shareData to ShareData(currentPlaylist = playlistName),
+                        )
                     // using parentFragmentManager, childFragmentManager doesn't work here
                     newShareDialog.show(parentFragmentManager, ShareDialog::class.java.name)
                 }
 
                 R.string.deletePlaylist -> {
                     val newDeletePlaylistDialog = DeletePlaylistDialog()
-                    newDeletePlaylistDialog.arguments = bundleOf(
-                        IntentData.playlistId to playlistId
-                    )
+                    newDeletePlaylistDialog.arguments =
+                        bundleOf(
+                            IntentData.playlistId to playlistId,
+                        )
                     newDeletePlaylistDialog.show(mFragmentManager, null)
                 }
 
                 R.string.renamePlaylist -> {
                     val newRenamePlaylistDialog = RenamePlaylistDialog()
-                    newRenamePlaylistDialog.arguments = bundleOf(
-                        IntentData.playlistId to playlistId,
-                        IntentData.playlistName to playlistName
-                    )
+                    newRenamePlaylistDialog.arguments =
+                        bundleOf(
+                            IntentData.playlistId to playlistId,
+                            IntentData.playlistName to playlistName,
+                        )
                     newRenamePlaylistDialog.show(mFragmentManager, null)
                 }
 
                 R.string.change_playlist_description -> {
                     val newPlaylistDescriptionDialog = PlaylistDescriptionDialog()
-                    newPlaylistDescriptionDialog.arguments = bundleOf(
-                        IntentData.playlistId to playlistId,
-                        IntentData.playlistDescription to ""
-                    )
+                    newPlaylistDescriptionDialog.arguments =
+                        bundleOf(
+                            IntentData.playlistId to playlistId,
+                            IntentData.playlistDescription to "",
+                        )
                     newPlaylistDescriptionDialog.show(mFragmentManager, null)
                 }
 
@@ -152,7 +159,7 @@ class PlaylistOptionsBottomSheet : BaseBottomSheet() {
                         mFragmentManager,
                         playlistId,
                         playlistName,
-                        playlistType
+                        playlistType,
                     )
                 }
 
@@ -162,10 +169,11 @@ class PlaylistOptionsBottomSheet : BaseBottomSheet() {
                     BackupRestoreSettings.createImportFormatDialog(
                         context,
                         R.string.export_playlist,
-                        BackupRestoreSettings.exportPlaylistFormatList + listOf(ImportFormat.URLSORIDS)
+                        BackupRestoreSettings.exportPlaylistFormatList + listOf(ImportFormat.URLSORIDS),
                     ) { format, includeTimestamp ->
                         exportFormat = format
-                        ContextHelper.unwrapActivity<MainActivity>(context)
+                        ContextHelper
+                            .unwrapActivity<MainActivity>(context)
                             .startPlaylistExport(playlistId, playlistName, exportFormat, includeTimestamp)
                     }
                 }
@@ -175,11 +183,12 @@ class PlaylistOptionsBottomSheet : BaseBottomSheet() {
                         if (isBookmarked) {
                             DatabaseHolder.Database.playlistBookmarkDao().deleteById(playlistId)
                         } else {
-                            val bookmark = try {
-                                MediaServiceRepository.instance.getPlaylist(playlistId)
-                            } catch (e: Exception) {
-                                return@withContext
-                            }.toPlaylistBookmark(playlistId)
+                            val bookmark =
+                                try {
+                                    MediaServiceRepository.instance.getPlaylist(playlistId)
+                                } catch (e: Exception) {
+                                    return@withContext
+                                }.toPlaylistBookmark(playlistId)
                             DatabaseHolder.Database.playlistBookmarkDao().insert(bookmark)
                         }
                     }

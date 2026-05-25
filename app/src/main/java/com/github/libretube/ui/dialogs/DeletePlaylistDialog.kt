@@ -27,8 +27,8 @@ class DeletePlaylistDialog : DialogFragment() {
         }
     }
 
-    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        return MaterialAlertDialogBuilder(requireContext())
+    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog =
+        MaterialAlertDialogBuilder(requireContext())
             .setTitle(R.string.deletePlaylist)
             .setMessage(R.string.areYouSure)
             .setPositiveButton(R.string.yes, null)
@@ -39,18 +39,17 @@ class DeletePlaylistDialog : DialogFragment() {
                     lifecycleScope.launch(Dispatchers.IO) {
                         val success = PlaylistsHelper.deletePlaylist(playlistId)
                         context.toastFromMainDispatcher(
-                            if (success) R.string.success else R.string.fail
+                            if (success) R.string.success else R.string.fail,
                         )
                         withContext(Dispatchers.Main) {
                             dismiss()
 
                             setFragmentResult(
                                 PlaylistOptionsBottomSheet.PLAYLIST_OPTIONS_REQUEST_KEY,
-                                bundleOf(IntentData.playlistTask to true)
+                                bundleOf(IntentData.playlistTask to true),
                             )
                         }
                     }
                 }
             }
-    }
 }

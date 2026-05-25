@@ -31,28 +31,34 @@ class SearchViewModel : ViewModel() {
     private val searchQuery = MutableStateFlow<String?>(null)
     private val sharingStarted = SharingStarted.WhileSubscribed(replayExpirationMillis = 0L)
 
-    private val isSearchSuggestionEnabled = flow {
-        emit(PreferenceHelper.getBoolean(PreferenceKeys.SEARCH_SUGGESTIONS, true))
-    }
-        .stateIn(viewModelScope, sharingStarted, true)
+    private val isSearchSuggestionEnabled =
+        flow {
+            emit(PreferenceHelper.getBoolean(PreferenceKeys.SEARCH_SUGGESTIONS, true))
+        }.stateIn(viewModelScope, sharingStarted, true)
 
     @OptIn(ExperimentalCoroutinesApi::class)
-    private val searchHistoryList = DatabaseHolder.Database.searchHistoryDao()
-        .getAllNewestFirstFlow()
-        .mapLatest { it.map { it.query } }
-        .stateIn(viewModelScope, sharingStarted, emptyList())
+    private val searchHistoryList =
+        DatabaseHolder.Database
+            .searchHistoryDao()
+            .getAllNewestFirstFlow()
+            .mapLatest { it.map { it.query } }
+            .stateIn(viewModelScope, sharingStarted, emptyList())
 
     /**
      * Emits a [Pair] of ([SearchDataType.HISTORY] and the results ([List]))
      */
     @OptIn(ExperimentalCoroutinesApi::class)
-    private val filteredSearchHistory = combine(searchQuery, searchHistoryList) { query, list ->
-        val result =
-            if (query.isNullOrBlank()) list
-            else list.take(MAX_FILTERED_SEARCH_HISTORY).filter { it.startsWith(query) }
+    private val filteredSearchHistory =
+        combine(searchQuery, searchHistoryList) { query, list ->
+            val result =
+                if (query.isNullOrBlank()) {
+                    list
+                } else {
+                    list.take(MAX_FILTERED_SEARCH_HISTORY).filter { it.startsWith(query) }
+                }
 
-        SearchDataType.HISTORY to result
-    }
+            SearchDataType.HISTORY to result
+        }
 
     /**
      * Emits a [Pair] of ([SearchDataType.SUGGESTION]  and the results ([List]))
@@ -78,37 +84,40 @@ class SearchViewModel : ViewModel() {
      * complete their collections, it will emit another result ([Result]) with both list ready.
      */
     @OptIn(ExperimentalCoroutinesApi::class)
-    val searchSuggestions = merge(filteredSearchHistory, onlineSearchSuggestions)
-        .runningFold(Result()) { prev, new ->
-            when (new.first) {
-                SearchDataType.HISTORY -> {
-                    prev.copy(
-                        historyList = new.second.map {
-                            SearchDataItem(it, SearchDataType.HISTORY)
-                        }
-                    )
-                }
+    val searchSuggestions =
+        merge(filteredSearchHistory, onlineSearchSuggestions)
+            .runningFold(Result()) { prev, new ->
+                when (new.first) {
+                    SearchDataType.HISTORY -> {
+                        prev.copy(
+                            historyList =
+                                new.second.map {
+                                    SearchDataItem(it, SearchDataType.HISTORY)
+                                },
+                        )
+                    }
 
-                SearchDataType.SUGGESTION -> {
-                    prev.copy(
-                        suggestionList = new.second.map {
-                            SearchDataItem(it, SearchDataType.SUGGESTION)
-                        }
-                    )
+                    SearchDataType.SUGGESTION -> {
+                        prev.copy(
+                            suggestionList =
+                                new.second.map {
+                                    SearchDataItem(it, SearchDataType.SUGGESTION)
+                                },
+                        )
+                    }
                 }
-            }
-        }.flowOn(Dispatchers.IO)
+            }.flowOn(Dispatchers.IO)
 
     @OptIn(ExperimentalCoroutinesApi::class)
-    val shouldShowEmptyHistoryMessage = combine(
-        searchHistoryList,
-        searchQuery,
-        isSearchSuggestionEnabled
-    ) { histories, query, suggestionsEnabled ->
-        histories.isEmpty() && (query.isNullOrBlank() || !suggestionsEnabled)
-    }
-        .flowOn(Dispatchers.IO)
-        .stateIn(viewModelScope, sharingStarted, true)
+    val shouldShowEmptyHistoryMessage =
+        combine(
+            searchHistoryList,
+            searchQuery,
+            isSearchSuggestionEnabled,
+        ) { histories, query, suggestionsEnabled ->
+            histories.isEmpty() && (query.isNullOrBlank() || !suggestionsEnabled)
+        }.flowOn(Dispatchers.IO)
+            .stateIn(viewModelScope, sharingStarted, true)
 
     fun setQuery(query: String?) {
         this.searchQuery.value = query

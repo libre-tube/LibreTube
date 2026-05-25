@@ -10,9 +10,11 @@ import com.github.libretube.helpers.NavigationHelper
 import com.github.libretube.helpers.NetworkHelper
 import com.google.android.material.snackbar.Snackbar
 
-class NoInternetFragment: Fragment(R.layout.fragment_nointernet) {
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+class NoInternetFragment : Fragment(R.layout.fragment_nointernet) {
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?,
+    ) {
         super.onViewCreated(view, savedInstanceState)
 
         val binding = FragmentNointernetBinding.bind(view)

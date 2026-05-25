@@ -20,13 +20,15 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
  * PreferenceFragmentCompat using the [MaterialAlertDialogBuilder] instead of the old dialog builder
  */
 abstract class BasePreferenceFragment : PreferenceFragmentCompat() {
-
     /**
      * Whether any preference dialog is currently visible to the user.
      */
     var isDialogVisible = false
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?,
+    ) {
         super.onViewCreated(view, savedInstanceState)
         // add bottom padding to the list, to ensure that the last item is not overlapped by the system bars
         listView.onSystemInsets { v, systemInsets ->
@@ -55,28 +57,29 @@ abstract class BasePreferenceFragment : PreferenceFragmentCompat() {
                             preference.value = newValue
                         }
                         dialog.dismiss()
-                    }
-                    .setNegativeButton(R.string.cancel, null)
+                    }.setNegativeButton(R.string.cancel, null)
                     .setOnDismissListener { isDialogVisible = false }
                     .show()
             }
 
             is MultiSelectListPreference -> {
-                val selectedItems = preference.entryValues.map {
-                    preference.values.contains(it)
-                }.toBooleanArray()
+                val selectedItems =
+                    preference.entryValues
+                        .map {
+                            preference.values.contains(it)
+                        }.toBooleanArray()
                 MaterialAlertDialogBuilder(requireContext())
                     .setTitle(preference.title)
                     .setMultiChoiceItems(preference.entries, selectedItems) { _, _, _ ->
-                        val newValues = preference.entryValues
-                            .filterIndexed { index, _ -> selectedItems[index] }
-                            .map { it.toString() }
-                            .toMutableSet()
+                        val newValues =
+                            preference.entryValues
+                                .filterIndexed { index, _ -> selectedItems[index] }
+                                .map { it.toString() }
+                                .toMutableSet()
                         if (preference.callChangeListener(newValues)) {
                             preference.values = newValues
                         }
-                    }
-                    .setPositiveButton(R.string.okay, null)
+                    }.setPositiveButton(R.string.okay, null)
                     .setOnDismissListener { isDialogVisible = false }
                     .show()
             }
@@ -102,8 +105,7 @@ abstract class BasePreferenceFragment : PreferenceFragmentCompat() {
                         if (preference.callChangeListener(newValue)) {
                             preference.text = newValue
                         }
-                    }
-                    .setNegativeButton(R.string.cancel, null)
+                    }.setNegativeButton(R.string.cancel, null)
                     .setOnDismissListener { isDialogVisible = false }
                     .show()
             }

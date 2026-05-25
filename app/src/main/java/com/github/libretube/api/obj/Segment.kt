@@ -22,24 +22,25 @@ data class Segment(
     val userID: String? = null,
     val videoDuration: Double,
     val votes: Int,
-    var skipped: Boolean = false
-): Parcelable {
+    var skipped: Boolean = false,
+) : Parcelable {
     @Transient
     @IgnoredOnParcel
     val segmentStartAndEnd = FloatFloatPair(segment[0], segment[1])
 
-    fun toDownloadSegment(videoId: String): DownloadSponsorBlockSegment = DownloadSponsorBlockSegment(
-        uuid = uuid,
-        videoId = videoId,
-        startTime = segmentStartAndEnd.first,
-        endTime = segmentStartAndEnd.second,
-        actionType = actionType,
-        category = category,
-        description = description,
-        locked = locked,
-        videoDuration = videoDuration.toFloat(),
-        votes = votes
-    )
+    fun toDownloadSegment(videoId: String): DownloadSponsorBlockSegment =
+        DownloadSponsorBlockSegment(
+            uuid = uuid,
+            videoId = videoId,
+            startTime = segmentStartAndEnd.first,
+            endTime = segmentStartAndEnd.second,
+            actionType = actionType,
+            category = category,
+            description = description,
+            locked = locked,
+            videoDuration = videoDuration.toFloat(),
+            votes = votes,
+        )
 
     companion object {
         const val TYPE_FULL = "full"

@@ -26,13 +26,13 @@ data class StreamItem(
     val uploaderVerified: Boolean? = null,
     val uploaded: Long = 0,
     val shortDescription: String? = null,
-    val isShort: Boolean = false
+    val isShort: Boolean = false,
 ) : Parcelable {
     val isLive get() = !isShort && ((duration == null) || (duration <= 0L))
     val isUpcoming get() = uploaded > System.currentTimeMillis()
 
-    fun toLocalPlaylistItem(playlistId: String): LocalPlaylistItem {
-        return LocalPlaylistItem(
+    fun toLocalPlaylistItem(playlistId: String): LocalPlaylistItem =
+        LocalPlaylistItem(
             playlistId = playlistId.toInt(),
             videoId = url!!.toID(),
             title = title,
@@ -41,35 +41,36 @@ data class StreamItem(
             uploaderUrl = uploaderUrl,
             uploaderAvatar = uploaderAvatar?.let { ProxyHelper.unwrapUrl(it) },
             uploadDate = uploadedDate,
-            duration = duration
+            duration = duration,
         )
-    }
 
-    fun toFeedItem() = SubscriptionsFeedItem(
-        videoId = url!!.toID(),
-        title = title,
-        thumbnail = thumbnail,
-        uploaderName = uploaderName,
-        uploaded = uploaded,
-        uploaderAvatar = uploaderAvatar,
-        uploaderUrl = uploaderUrl,
-        duration = duration,
-        uploaderVerified = uploaderVerified ?: false,
-        shortDescription = shortDescription,
-        views = views,
-        isShort = isShort
-    )
-    
-    fun toWatchHistoryItem(videoId: String) = WatchHistoryItem(
-        videoId = videoId,
-        title = title,
-        uploadDate = uploaded.toLocalDate(),
-        uploader = uploaderName,
-        uploaderUrl = uploaderUrl?.toID(),
-        uploaderAvatar = uploaderAvatar?.let { ProxyHelper.unwrapUrl(it) },
-        thumbnailUrl = thumbnail?.let { ProxyHelper.unwrapUrl(it) },
-        duration = duration
-    )
+    fun toFeedItem() =
+        SubscriptionsFeedItem(
+            videoId = url!!.toID(),
+            title = title,
+            thumbnail = thumbnail,
+            uploaderName = uploaderName,
+            uploaded = uploaded,
+            uploaderAvatar = uploaderAvatar,
+            uploaderUrl = uploaderUrl,
+            duration = duration,
+            uploaderVerified = uploaderVerified ?: false,
+            shortDescription = shortDescription,
+            views = views,
+            isShort = isShort,
+        )
+
+    fun toWatchHistoryItem(videoId: String) =
+        WatchHistoryItem(
+            videoId = videoId,
+            title = title,
+            uploadDate = uploaded.toLocalDate(),
+            uploader = uploaderName,
+            uploaderUrl = uploaderUrl?.toID(),
+            uploaderAvatar = uploaderAvatar?.let { ProxyHelper.unwrapUrl(it) },
+            thumbnailUrl = thumbnail?.let { ProxyHelper.unwrapUrl(it) },
+            duration = duration,
+        )
 
     companion object {
         const val TYPE_STREAM = "stream"

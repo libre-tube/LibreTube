@@ -4,5 +4,5 @@ enum class SbSkipOptions {
     OFF,
     MANUAL,
     AUTOMATIC,
-    AUTOMATIC_ONCE
+    AUTOMATIC_ONCE,
 }

@@ -36,8 +36,10 @@ import java.time.LocalTime
 /**
  * The notification worker which checks for new streams in a certain frequency
  */
-class NotificationWorker(appContext: Context, parameters: WorkerParameters) :
-    CoroutineWorker(appContext, parameters) {
+class NotificationWorker(
+    appContext: Context,
+    parameters: WorkerParameters,
+) : CoroutineWorker(appContext, parameters) {
     private val notificationManager = NotificationManagerCompat.from(appContext)
 
     override suspend fun doWork(): Result {
@@ -67,11 +69,10 @@ class NotificationWorker(appContext: Context, parameters: WorkerParameters) :
         }
     }
 
-    private fun getTimePickerPref(key: String): LocalTime {
-        return LocalTime.parse(
-            PreferenceHelper.getString(key, TimePickerPreference.DEFAULT_VALUE)
+    private fun getTimePickerPref(key: String): LocalTime =
+        LocalTime.parse(
+            PreferenceHelper.getString(key, TimePickerPreference.DEFAULT_VALUE),
         )
-    }
 
     /**
      * check whether new streams are available in subscriptions
@@ -80,13 +81,14 @@ class NotificationWorker(appContext: Context, parameters: WorkerParameters) :
         Log.d(TAG(), "Work manager started")
 
         // fetch the users feed
-        val videoFeed = try {
-            withContext(Dispatchers.IO) {
-                SubscriptionHelper.getFeed(forceRefresh = true)
-            }.filter { !it.isUpcoming }
-        } catch (e: Exception) {
-            return false
-        }
+        val videoFeed =
+            try {
+                withContext(Dispatchers.IO) {
+                    SubscriptionHelper.getFeed(forceRefresh = true)
+                }.filter { !it.isUpcoming }
+            } catch (e: Exception) {
+                return false
+            }
 
         val lastFeedCheckMillis = PreferenceHelper.getLastCheckedFeedTime(seenByUser = false)
 
@@ -97,15 +99,17 @@ class NotificationWorker(appContext: Context, parameters: WorkerParameters) :
         val enableShortsNotification =
             PreferenceHelper.getBoolean(PreferenceKeys.SHORTS_NOTIFICATIONS, false)
 
-        val channelGroups = videoFeed.asSequence()
-            // filter the new videos until the last seen video in the feed
-            .filter { it.uploaded > lastFeedCheckMillis }
-            // don't show notifications for shorts videos if not enabled
-            .filter { enableShortsNotification || !it.isShort }
-            // hide for notifications unsubscribed channels
-            .filter { it.uploaderUrl!!.toID() !in channelsToIgnore }
-            // group the new streams by the uploader
-            .groupBy { it.uploaderUrl!!.toID() }
+        val channelGroups =
+            videoFeed
+                .asSequence()
+                // filter the new videos until the last seen video in the feed
+                .filter { it.uploaded > lastFeedCheckMillis }
+                // don't show notifications for shorts videos if not enabled
+                .filter { enableShortsNotification || !it.isShort }
+                // hide for notifications unsubscribed channels
+                .filter { it.uploaderUrl!!.toID() !in channelsToIgnore }
+                // group the new streams by the uploader
+                .groupBy { it.uploaderUrl!!.toID() }
 
         // update the last feed check time in order to not show the same notification again
         PreferenceHelper.updateLastFeedWatchedTime(videoFeed.first().uploaded, seenByUser = false)
@@ -128,104 +132,118 @@ class NotificationWorker(appContext: Context, parameters: WorkerParameters) :
      *
      * For more information, see https://developer.android.com/develop/ui/views/notifications/group
      */
-    private suspend fun createNotificationsForChannel(group: String, streams: List<StreamItem>) {
+    private suspend fun createNotificationsForChannel(
+        group: String,
+        streams: List<StreamItem>,
+    ) {
         // Avoid creating notifications if permission is not granted.
         if (ContextCompat.checkSelfPermission(
                 applicationContext,
-                Manifest.permission.POST_NOTIFICATIONS
+                Manifest.permission.POST_NOTIFICATIONS,
             ) != PackageManager.PERMISSION_GRANTED
         ) {
             return
         }
 
         val summaryId = group.hashCode()
-        val intent = Intent(applicationContext, MainActivity::class.java)
-            .setFlags(INTENT_FLAGS)
-            .putExtra(IntentData.channelId, group)
-        val pendingIntent = PendingIntentCompat
-            .getActivity(applicationContext, summaryId, intent, FLAG_UPDATE_CURRENT, false)
+        val intent =
+            Intent(applicationContext, MainActivity::class.java)
+                .setFlags(INTENT_FLAGS)
+                .putExtra(IntentData.channelId, group)
+        val pendingIntent =
+            PendingIntentCompat
+                .getActivity(applicationContext, summaryId, intent, FLAG_UPDATE_CURRENT, false)
 
         // Create summary notification containing new streams for Android versions below 7.0.
-        val newStreams = applicationContext.resources
-            .getQuantityString(R.plurals.channel_new_streams, streams.size, streams.size)
-        val summary = NotificationCompat.InboxStyle()
-            .setSummaryText(newStreams)
+        val newStreams =
+            applicationContext.resources
+                .getQuantityString(R.plurals.channel_new_streams, streams.size, streams.size)
+        val summary =
+            NotificationCompat
+                .InboxStyle()
+                .setSummaryText(newStreams)
         streams.forEach {
             summary.addLine(it.title)
         }
-        val summaryNotification = createNotificationBuilder(group)
-            .setContentTitle(streams[0].uploaderName)
-            .setContentText(newStreams)
-            // The intent that will fire when the user taps the notification
-            .setContentIntent(pendingIntent)
-            .setGroupSummary(true)
-            .setStyle(summary)
-            .setGroupAlertBehavior(NotificationCompat.GROUP_ALERT_SUMMARY)
-            // Show channel avatar on Android versions below 7.0.
-            .setLargeIcon(downloadImage(streams[0].uploaderAvatar))
-            .build()
+        val summaryNotification =
+            createNotificationBuilder(group)
+                .setContentTitle(streams[0].uploaderName)
+                .setContentText(newStreams)
+                // The intent that will fire when the user taps the notification
+                .setContentIntent(pendingIntent)
+                .setGroupSummary(true)
+                .setStyle(summary)
+                .setGroupAlertBehavior(NotificationCompat.GROUP_ALERT_SUMMARY)
+                // Show channel avatar on Android versions below 7.0.
+                .setLargeIcon(downloadImage(streams[0].uploaderAvatar))
+                .build()
 
         // Create stream notifications. These are automatically grouped on Android 7.0 and later.
-        val notifications = withContext(Dispatchers.IO) {
-            streams.map { async { createStreamNotification(group, it) } }
-                .awaitAll()
-        }
+        val notifications =
+            withContext(Dispatchers.IO) {
+                streams
+                    .map { async { createStreamNotification(group, it) } }
+                    .awaitAll()
+            }
         notificationManager.notify(notifications)
         notificationManager.notify(summaryId, summaryNotification)
     }
 
     private suspend fun createStreamNotification(
         group: String,
-        stream: StreamItem
+        stream: StreamItem,
     ): NotificationWithIdAndTag {
         val videoId = stream.url!!.toID()
-        val intent = Intent(applicationContext, MainActivity::class.java)
-            .setFlags(INTENT_FLAGS)
-            .putExtra(IntentData.videoId, videoId)
+        val intent =
+            Intent(applicationContext, MainActivity::class.java)
+                .setFlags(INTENT_FLAGS)
+                .putExtra(IntentData.videoId, videoId)
         val notificationId = videoId.hashCode()
-        val pendingIntent = PendingIntentCompat
-            .getActivity(applicationContext, notificationId, intent, FLAG_UPDATE_CURRENT, false)
+        val pendingIntent =
+            PendingIntentCompat
+                .getActivity(applicationContext, notificationId, intent, FLAG_UPDATE_CURRENT, false)
 
         // Load stream thumbnails if the relevant toggle is enabled.
         val thumbnail = downloadImage(stream.thumbnail)
 
-        val notificationBuilder = createNotificationBuilder(group)
-            .setContentTitle(stream.title)
-            .setContentText(stream.uploaderName)
-            // The intent that will fire when the user taps the notification
-            .setContentIntent(pendingIntent)
-            .setSilent(true)
-            .setLargeIcon(thumbnail)
-            .setStyle(
-                NotificationCompat.BigPictureStyle()
-                    .bigPicture(thumbnail)
-                    .bigLargeIcon(null as Bitmap?) // Hides the icon when expanding
-            )
-            .setWhen(stream.uploaded)
-            .setShowWhen(true)
+        val notificationBuilder =
+            createNotificationBuilder(group)
+                .setContentTitle(stream.title)
+                .setContentText(stream.uploaderName)
+                // The intent that will fire when the user taps the notification
+                .setContentIntent(pendingIntent)
+                .setSilent(true)
+                .setLargeIcon(thumbnail)
+                .setStyle(
+                    NotificationCompat
+                        .BigPictureStyle()
+                        .bigPicture(thumbnail)
+                        .bigLargeIcon(null as Bitmap?), // Hides the icon when expanding
+                ).setWhen(stream.uploaded)
+                .setShowWhen(true)
 
         return NotificationWithIdAndTag(notificationId, notificationBuilder.build())
     }
 
-    private suspend fun downloadImage(url: String?): Bitmap? {
-        return if (PreferenceHelper.getBoolean(PreferenceKeys.SHOW_STREAM_THUMBNAILS, false)) {
+    private suspend fun downloadImage(url: String?): Bitmap? =
+        if (PreferenceHelper.getBoolean(PreferenceKeys.SHOW_STREAM_THUMBNAILS, false)) {
             ImageHelper.getImage(applicationContext, url)
         } else {
             null
         }
-    }
 
-    private fun createNotificationBuilder(group: String): NotificationCompat.Builder {
-        return NotificationCompat.Builder(applicationContext, PUSH_CHANNEL_NAME)
+    private fun createNotificationBuilder(group: String): NotificationCompat.Builder =
+        NotificationCompat
+            .Builder(applicationContext, PUSH_CHANNEL_NAME)
             .setSmallIcon(R.drawable.ic_launcher_lockscreen)
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
             .setAutoCancel(true)
             .setGroup(group)
             .setCategory(Notification.CATEGORY_SOCIAL)
-    }
 
     companion object {
-        private const val INTENT_FLAGS = Intent.FLAG_ACTIVITY_CLEAR_TOP or
+        private const val INTENT_FLAGS =
+            Intent.FLAG_ACTIVITY_CLEAR_TOP or
                 Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
     }
 }

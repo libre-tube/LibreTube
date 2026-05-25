@@ -61,7 +61,10 @@ object PlayingQueue {
     /**
      * @param skipExisting Whether to skip the [streamItem] if it's already part of the queue
      */
-    fun add(vararg streamItem: StreamItem, skipExisting: Boolean = false) = synchronized(queue) {
+    fun add(
+        vararg streamItem: StreamItem,
+        skipExisting: Boolean = false,
+    ) = synchronized(queue) {
         for (stream in streamItem) {
             if ((skipExisting && contains(stream)) || stream.title.isNullOrBlank()) continue
 
@@ -70,41 +73,45 @@ object PlayingQueue {
         }
     }
 
-    fun addAsNext(streamItem: StreamItem) = synchronized(queue) {
-        if (currentStream == streamItem) return
-        if (queue.contains(streamItem)) queue.remove(streamItem)
-        queue.add(currentIndex() + 1, streamItem)
-    }
+    fun addAsNext(streamItem: StreamItem) =
+        synchronized(queue) {
+            if (currentStream == streamItem) return
+            if (queue.contains(streamItem)) queue.remove(streamItem)
+            queue.add(currentIndex() + 1, streamItem)
+        }
 
     // return the next item, or if repeating enabled and no video left, the first one of the queue
-    fun getNext(): String? = synchronized(queue) {
-        val nextItem = queue.getOrNull(currentIndex() + 1)
-        if (nextItem != null) return nextItem.url?.toID()
+    fun getNext(): String? =
+        synchronized(queue) {
+            val nextItem = queue.getOrNull(currentIndex() + 1)
+            if (nextItem != null) return nextItem.url?.toID()
 
-        if (repeatMode == Player.REPEAT_MODE_ALL) return queue.firstOrNull()?.url?.toID()
+            if (repeatMode == Player.REPEAT_MODE_ALL) return queue.firstOrNull()?.url?.toID()
 
-        return null
-    }
+            return null
+        }
 
     // return the previous item, or if repeating enabled and no video left, the last one of the queue
-    fun getPrev(): String? = synchronized(queue) {
-        val prevItem = queue.getOrNull(currentIndex() - 1)
-        if (prevItem != null) return prevItem.url?.toID()
+    fun getPrev(): String? =
+        synchronized(queue) {
+            val prevItem = queue.getOrNull(currentIndex() - 1)
+            if (prevItem != null) return prevItem.url?.toID()
 
-        if (repeatMode == Player.REPEAT_MODE_ALL) return queue.lastOrNull()?.url?.toID()
+            if (repeatMode == Player.REPEAT_MODE_ALL) return queue.lastOrNull()?.url?.toID()
 
-        return null
-    }
+            return null
+        }
 
     fun hasPrev() = getPrev() != null
 
     fun hasNext() = getNext() != null
 
-    fun updateCurrent(streamItem: StreamItem) = synchronized(queue) {
-        currentStream = streamItem
+    fun updateCurrent(streamItem: StreamItem) =
+        synchronized(queue) {
+            currentStream = streamItem
 
-        if (!contains(streamItem)) add(streamItem)
-    }
+            if (!contains(streamItem)) add(streamItem)
+        }
 
     fun isNotEmpty() = queue.isNotEmpty()
 
@@ -114,33 +121,41 @@ object PlayingQueue {
 
     fun isLast() = currentIndex() == size() - 1
 
-    fun currentIndex(): Int = synchronized(queue) {
-        return queue.indexOfFirst {
-            it.url?.toID() == currentStream?.url?.toID()
-        }.takeIf { it >= 0 } ?: 0
-    }
+    fun currentIndex(): Int =
+        synchronized(queue) {
+            return queue
+                .indexOfFirst {
+                    it.url?.toID() == currentStream?.url?.toID()
+                }.takeIf { it >= 0 } ?: 0
+        }
 
     fun getCurrent(): StreamItem? = currentStream
 
-    fun contains(streamItem: StreamItem) = synchronized(queue) {
-        queue.any { it.url?.toID() == streamItem.url?.toID() }
-    }
+    fun contains(streamItem: StreamItem) =
+        synchronized(queue) {
+            queue.any { it.url?.toID() == streamItem.url?.toID() }
+        }
 
     // only returns a copy of the queue, no write access
     fun getStreams() = queue.toList()
 
-    fun setStreams(streams: List<StreamItem>) = synchronized(queue) {
-        queue.clear()
+    fun setStreams(streams: List<StreamItem>) =
+        synchronized(queue) {
+            queue.clear()
 
-        queue.addAll(streams)
-    }
+            queue.addAll(streams)
+        }
 
-    fun remove(index: Int) = synchronized(queue) {
-        queue.removeAt(index)
-        return@synchronized
-    }
+    fun remove(index: Int) =
+        synchronized(queue) {
+            queue.removeAt(index)
+            return@synchronized
+        }
 
-    fun move(from: Int, to: Int) = synchronized(queue) {
+    fun move(
+        from: Int,
+        to: Int,
+    ) = synchronized(queue) {
         queue.move(from, to)
     }
 
@@ -151,7 +166,9 @@ object PlayingQueue {
      * be touched, since it's an independent list.
      */
     private fun addToQueueAsync(
-        streams: List<StreamItem>, currentStreamItem: StreamItem? = null, isMainList: Boolean = true
+        streams: List<StreamItem>,
+        currentStreamItem: StreamItem? = null,
+        isMainList: Boolean = true,
     ) = synchronized(queue) {
         if (!isMainList) {
             add(*streams.toTypedArray())
@@ -177,7 +194,7 @@ object PlayingQueue {
     private suspend fun fetchMoreFromPlaylist(
         playlistId: String,
         nextPage: String?,
-        isMainList: Boolean
+        isMainList: Boolean,
     ) {
         var playlistNextPage = nextPage
         while (playlistNextPage != null) {
@@ -188,7 +205,10 @@ object PlayingQueue {
         }
     }
 
-    fun insertPlaylist(playlistId: String, newCurrentStream: StreamItem?) = runCatchingIO {
+    fun insertPlaylist(
+        playlistId: String,
+        newCurrentStream: StreamItem?,
+    ) = runCatchingIO {
         val playlist = PlaylistsHelper.getPlaylist(playlistId)
         val isMainList = newCurrentStream != null
         addToQueueAsync(playlist.relatedStreams, newCurrentStream, isMainList)
@@ -196,7 +216,10 @@ object PlayingQueue {
         fetchMoreFromPlaylist(playlistId, playlist.nextpage, isMainList)
     }.let { queueJobs.add(it) }
 
-    private suspend fun fetchMoreFromChannel(channelId: String, nextPage: String?) {
+    private suspend fun fetchMoreFromChannel(
+        channelId: String,
+        nextPage: String?,
+    ) {
         var channelNextPage = nextPage
         var pageIndex = 1
         while (channelNextPage != null && pageIndex < 10) {
@@ -208,23 +231,27 @@ object PlayingQueue {
         }
     }
 
-    private fun insertChannel(channelId: String, newCurrentStream: StreamItem) = runCatchingIO {
+    private fun insertChannel(
+        channelId: String,
+        newCurrentStream: StreamItem,
+    ) = runCatchingIO {
         val channel = MediaServiceRepository.instance.getChannel(channelId)
         addToQueueAsync(channel.relatedStreams, newCurrentStream)
         if (channel.nextpage == null) return@runCatchingIO
         fetchMoreFromChannel(channelId, channel.nextpage)
     }.let { queueJobs.add(it) }
 
-    fun insertByVideoId(videoId: String) = runCatchingIO {
-        val streams = MediaServiceRepository.instance.getStreams(videoId.toID())
-        add(streams.toStreamItem(videoId))
-    }
+    fun insertByVideoId(videoId: String) =
+        runCatchingIO {
+            val streams = MediaServiceRepository.instance.getStreams(videoId.toID())
+            add(streams.toStreamItem(videoId))
+        }
 
     fun updateQueue(
         streamItem: StreamItem,
         playlistId: String?,
         channelId: String?,
-        relatedStreams: List<StreamItem> = emptyList()
+        relatedStreams: List<StreamItem> = emptyList(),
     ) {
         updateCurrent(streamItem)
 
@@ -249,5 +276,5 @@ object PlayingQueue {
 
 enum class PlayingQueueMode {
     ONLINE,
-    OFFLINE
+    OFFLINE,
 }

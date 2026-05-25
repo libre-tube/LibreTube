@@ -17,18 +17,18 @@ import com.github.libretube.helpers.ClipboardHelper
 import com.github.libretube.ui.models.sources.CommentPagingSource
 
 class CommentsViewModel : ViewModel() {
-
     private var lastOpenedCommentRepliesId: String? = null
     val videoIdLiveData = MutableLiveData<String>()
 
-    val commentsLiveData = videoIdLiveData.switchMap {
-        Pager(PagingConfig(pageSize = 20, enablePlaceholders = false)) {
-            CommentPagingSource(it) {
-                _commentCountLiveData.updateIfChanged(it)
-            }
-        }.liveData
-    }
-        .cachedIn(viewModelScope)
+    val commentsLiveData =
+        videoIdLiveData
+            .switchMap {
+                Pager(PagingConfig(pageSize = 20, enablePlaceholders = false)) {
+                    CommentPagingSource(it) {
+                        _commentCountLiveData.updateIfChanged(it)
+                    }
+                }.liveData
+            }.cachedIn(viewModelScope)
 
     private val _commentCountLiveData = MutableLiveData<Long>()
     val commentCountLiveData: LiveData<Long> = _commentCountLiveData
@@ -62,11 +62,18 @@ class CommentsViewModel : ViewModel() {
         }
     }
 
-    fun saveToClipboard(context: Context, comment: Comment) {
+    fun saveToClipboard(
+        context: Context,
+        comment: Comment,
+    ) {
         ClipboardHelper.save(
             context,
-            text = comment.commentText.orEmpty().parseAsHtml().toString(),
-            notify = true
+            text =
+                comment.commentText
+                    .orEmpty()
+                    .parseAsHtml()
+                    .toString(),
+            notify = true,
         )
     }
 }

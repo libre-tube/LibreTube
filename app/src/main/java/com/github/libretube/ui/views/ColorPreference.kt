@@ -15,7 +15,10 @@ import com.github.libretube.constants.IntentData
 import com.github.libretube.ui.dialogs.ColorPickerDialog
 import com.github.libretube.ui.dialogs.ColorPickerDialog.Companion.COLOR_PICKER_REQUEST_KEY
 
-class ColorPreference(context: Context, attrs: AttributeSet) : Preference(context, attrs) {
+class ColorPreference(
+    context: Context,
+    attrs: AttributeSet,
+) : Preference(context, attrs) {
     private lateinit var circleView: View
     private var currentColor: Int? = null
 
@@ -41,16 +44,18 @@ class ColorPreference(context: Context, attrs: AttributeSet) : Preference(contex
         updateColorView()
     }
 
-    override fun onGetDefaultValue(ta: TypedArray, index: Int): Any {
-        return Color.parseColor(ta.getString(index))
-    }
+    override fun onGetDefaultValue(
+        ta: TypedArray,
+        index: Int,
+    ): Any = Color.parseColor(ta.getString(index))
 
     override fun onSetInitialValue(defaultValue: Any?) {
-        val color = if (defaultValue is Int) {
-            getPersistedInt(defaultValue)
-        } else {
-            getPersistedInt(Color.WHITE)
-        }
+        val color =
+            if (defaultValue is Int) {
+                getPersistedInt(defaultValue)
+            } else {
+                getPersistedInt(Color.WHITE)
+            }
         currentColor = color
         persistInt(color)
     }
@@ -68,7 +73,7 @@ class ColorPreference(context: Context, attrs: AttributeSet) : Preference(contex
             val fragmentManager = (context as AppCompatActivity).supportFragmentManager
             fragmentManager.setFragmentResultListener(
                 COLOR_PICKER_REQUEST_KEY,
-                context as AppCompatActivity
+                context as AppCompatActivity,
             ) { _, resultBundle ->
                 val newColor = resultBundle.getInt(IntentData.color)
                 setColor(newColor)
@@ -78,7 +83,5 @@ class ColorPreference(context: Context, attrs: AttributeSet) : Preference(contex
         }
     }
 
-    override fun getTitle(): CharSequence? {
-        return "${super.getTitle()}:"
-    }
+    override fun getTitle(): CharSequence? = "${super.getTitle()}:"
 }

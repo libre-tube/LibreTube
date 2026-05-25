@@ -16,8 +16,10 @@ import com.github.libretube.ui.models.CommonPlayerViewModel
 import java.time.Instant
 import kotlin.math.abs
 
-class PlayerGestureController(activity: BaseActivity, private val listener: PlayerGestureOptions) {
-
+class PlayerGestureController(
+    activity: BaseActivity,
+    private val listener: PlayerGestureOptions,
+) {
     private val orientation get() = Resources.getSystem().configuration.orientation
 
     private val commonPlayerViewModel: CommonPlayerViewModel by activity.viewModels()
@@ -71,17 +73,18 @@ class PlayerGestureController(activity: BaseActivity, private val listener: Play
                     scaleGestureWasInProgress = true
 
                     // scale gesture is triggered, cancel any other ongoing gesture detections
-                    MotionEvent.obtain(
-                        SystemClock.uptimeMillis(),
-                        SystemClock.uptimeMillis(),
-                        MotionEvent.ACTION_CANCEL,
-                        event.x,
-                        event.y,
-                        event.metaState
-                    ).also { cancelEvent ->
-                        gestureDetector.onTouchEvent(cancelEvent)
-                        cancelEvent.recycle()
-                    }
+                    MotionEvent
+                        .obtain(
+                            SystemClock.uptimeMillis(),
+                            SystemClock.uptimeMillis(),
+                            MotionEvent.ACTION_CANCEL,
+                            event.x,
+                            event.y,
+                            event.metaState,
+                        ).also { cancelEvent ->
+                            gestureDetector.onTouchEvent(cancelEvent)
+                            cancelEvent.recycle()
+                        }
                 }
             }
 
@@ -108,9 +111,7 @@ class PlayerGestureController(activity: BaseActivity, private val listener: Play
             return true
         }
 
-        override fun onScaleBegin(detector: ScaleGestureDetector): Boolean {
-            return true
-        }
+        override fun onScaleBegin(detector: ScaleGestureDetector): Boolean = true
 
         override fun onScaleEnd(detector: ScaleGestureDetector) {
             when {
@@ -176,19 +177,21 @@ class PlayerGestureController(activity: BaseActivity, private val listener: Play
             // if there has been a recent double click within the threshold, single clicks
             // are being treated as a repetition of the double click
             // e.g. this allows to continue seeking forward using single clicks after double-clicking once
-            lastDoublePressTime?.takeIf {
-                val millisElapsedSinceDoubleClick = Instant.now().toEpochMilli() - it.toEpochMilli()
-                millisElapsedSinceDoubleClick < DOUBLE_TAP_REPEAT_TIME_THRESHOLD_MILLIS
-            }?.let {
-                val upEvent = MotionEvent.obtain(e).apply {
-                    action = MotionEvent.ACTION_UP
-                }
-                onDoubleTapEvent(upEvent)
-                upEvent.recycle()
+            lastDoublePressTime
+                ?.takeIf {
+                    val millisElapsedSinceDoubleClick = Instant.now().toEpochMilli() - it.toEpochMilli()
+                    millisElapsedSinceDoubleClick < DOUBLE_TAP_REPEAT_TIME_THRESHOLD_MILLIS
+                }?.let {
+                    val upEvent =
+                        MotionEvent.obtain(e).apply {
+                            action = MotionEvent.ACTION_UP
+                        }
+                    onDoubleTapEvent(upEvent)
+                    upEvent.recycle()
 
-                lastDoublePressTime = Instant.now()
-                return true
-            }
+                    lastDoublePressTime = Instant.now()
+                    return true
+                }
 
             listener.onSingleTap(false)
 
@@ -199,7 +202,7 @@ class PlayerGestureController(activity: BaseActivity, private val listener: Play
             e1: MotionEvent?,
             e2: MotionEvent,
             distanceX: Float,
-            distanceY: Float
+            distanceY: Float,
         ): Boolean {
             val (width, height) = listener.getViewMeasures()
             val insideThreshHold = abs(e2.y - e1!!.y) <= MOVEMENT_THRESHOLD

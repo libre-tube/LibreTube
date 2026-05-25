@@ -36,13 +36,17 @@ class InstanceSettings : BasePreferenceFragment() {
     private var instances = mutableListOf<PipedInstance>()
     private val customInstancesModel: InstancesModel by activityViewModels()
 
-    override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
+    override fun onCreatePreferences(
+        savedInstanceState: Bundle?,
+        rootKey: String?,
+    ) {
         setPreferencesFromResource(R.xml.instance_settings, rootKey)
 
         val instancePref = findPreference<ListPreference>(PreferenceKeys.FETCH_INSTANCE)!!
-        val authInstanceToggle = findPreference<SwitchPreferenceCompat>(
-            PreferenceKeys.AUTH_INSTANCE_TOGGLE
-        )!!
+        val authInstanceToggle =
+            findPreference<SwitchPreferenceCompat>(
+                PreferenceKeys.AUTH_INSTANCE_TOGGLE,
+            )!!
         val authInstance = findPreference<ListPreference>(PreferenceKeys.AUTH_INSTANCE)!!
         val instancePrefs = listOf(instancePref, authInstance)
 
@@ -84,7 +88,7 @@ class InstanceSettings : BasePreferenceFragment() {
 
         childFragmentManager.setFragmentResultListener(
             INSTANCE_DIALOG_REQUEST_KEY,
-            this
+            this,
         ) { _, resultBundle ->
             val isLoggedIn = resultBundle.getBoolean(IntentData.loginTask)
             val isLoggedOut = resultBundle.getBoolean(IntentData.logoutTask)
@@ -126,37 +130,39 @@ class InstanceSettings : BasePreferenceFragment() {
         }
     }
 
-    private fun initInstancesPref(instancePrefs: List<ListPreference>) = runCatching {
-        // add the currently used instances to the list if they're currently down / not part
-        // of the public instances list
-        for (apiUrl in listOf(PipedMediaServiceRepository.apiUrl, RetrofitInstance.authUrl)) {
-            if (instances.none { it.apiUrl == apiUrl }) {
-                val origin = apiUrl.toHttpUrl().host
-                instances.add(PipedInstance(origin, apiUrl, isCurrentlyDown = true))
+    private fun initInstancesPref(instancePrefs: List<ListPreference>) =
+        runCatching {
+            // add the currently used instances to the list if they're currently down / not part
+            // of the public instances list
+            for (apiUrl in listOf(PipedMediaServiceRepository.apiUrl, RetrofitInstance.authUrl)) {
+                if (instances.none { it.apiUrl == apiUrl }) {
+                    val origin = apiUrl.toHttpUrl().host
+                    instances.add(PipedInstance(origin, apiUrl, isCurrentlyDown = true))
+                }
+            }
+
+            instances.sortBy { it.name }
+
+            // If any preference dialog is visible in this fragment, it's one of the instance selection
+            // dialogs. In order to prevent UX issues, we don't update the instances list then.
+            if (isDialogVisible) return@runCatching
+
+            for (instancePref in instancePrefs) {
+                // add custom instances to the list preference
+                instancePref.entries = instances.map { it.name }.toTypedArray()
+                instancePref.entryValues = instances.map { it.apiUrl }.toTypedArray()
+                instancePref.summaryProvider =
+                    Preference.SummaryProvider<ListPreference> { preference ->
+                        preference.entry
+                    }
             }
         }
 
-        instances.sortBy { it.name }
-
-        // If any preference dialog is visible in this fragment, it's one of the instance selection
-        // dialogs. In order to prevent UX issues, we don't update the instances list then.
-        if (isDialogVisible) return@runCatching
-
-        for (instancePref in instancePrefs) {
-            // add custom instances to the list preference
-            instancePref.entries = instances.map { it.name }.toTypedArray()
-            instancePref.entryValues = instances.map { it.apiUrl }.toTypedArray()
-            instancePref.summaryProvider =
-                Preference.SummaryProvider<ListPreference> { preference ->
-                    preference.entry
-                }
-        }
-    }
-
     override fun onDisplayPreferenceDialog(preference: Preference) {
-        if (preference.key in arrayOf(
+        if (preference.key in
+            arrayOf(
                 PreferenceKeys.FETCH_INSTANCE,
-                PreferenceKeys.AUTH_INSTANCE
+                PreferenceKeys.AUTH_INSTANCE,
             )
         ) {
             showInstanceSelectionDialog(preference as ListPreference)
@@ -174,21 +180,20 @@ class InstanceSettings : BasePreferenceFragment() {
         binding.optionsRecycler.layoutManager = LinearLayoutManager(context)
 
         val instances = ImmutableList.copyOf(this.instances)
-        binding.optionsRecycler.adapter = InstancesAdapter(selectedIndex) {
-            selectedInstance = instances[it].apiUrl
-        }.also { it.submitList(instances) }
+        binding.optionsRecycler.adapter =
+            InstancesAdapter(selectedIndex) {
+                selectedInstance = instances[it].apiUrl
+            }.also { it.submitList(instances) }
 
         MaterialAlertDialogBuilder(requireContext())
             .setTitle(preference.title)
             .setView(binding.root)
             .setNeutralButton(R.string.addInstance) { _, _ ->
                 CreateCustomInstanceDialog().show(childFragmentManager, null)
-            }
-            .setPositiveButton(R.string.okay) { _, _ ->
+            }.setPositiveButton(R.string.okay) { _, _ ->
                 preference.value = selectedInstance
                 resetForNewInstance()
-            }
-            .show()
+            }.show()
     }
 
     private fun logoutAndUpdateUI() {
@@ -200,9 +205,10 @@ class InstanceSettings : BasePreferenceFragment() {
     }
 
     private fun resetForNewInstance() {
-        val authInstanceToggle = findPreference<SwitchPreferenceCompat>(
-            PreferenceKeys.AUTH_INSTANCE_TOGGLE
-        )!!
+        val authInstanceToggle =
+            findPreference<SwitchPreferenceCompat>(
+                PreferenceKeys.AUTH_INSTANCE_TOGGLE,
+            )!!
 
         if (!authInstanceToggle.isChecked) {
             logoutAndUpdateUI()

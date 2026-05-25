@@ -8,12 +8,19 @@ import org.xml.sax.Locator
 import org.xml.sax.XMLReader
 
 class HtmlParser(
-    private val handler: LinkHandler
-) : Html.TagHandler, ContentHandler {
+    private val handler: LinkHandler,
+) : Html.TagHandler,
+    ContentHandler {
     private val tagStatus = ArrayDeque<Boolean>()
     private var wrapped: ContentHandler? = null
     private var text: Editable? = null
-    override fun handleTag(opening: Boolean, tag: String, output: Editable, xmlReader: XMLReader) {
+
+    override fun handleTag(
+        opening: Boolean,
+        tag: String,
+        output: Editable,
+        xmlReader: XMLReader,
+    ) {
         if (wrapped == null) {
             // record result object
             text = output
@@ -30,7 +37,7 @@ class HtmlParser(
         uri: String,
         localName: String,
         qName: String,
-        attributes: Attributes
+        attributes: Attributes,
     ) {
         val isHandled = handler.handleTag(true, localName, text, attributes)
         tagStatus.addLast(isHandled)
@@ -40,7 +47,11 @@ class HtmlParser(
         }
     }
 
-    override fun endElement(uri: String, localName: String, qName: String) {
+    override fun endElement(
+        uri: String,
+        localName: String,
+        qName: String,
+    ) {
         if (!tagStatus.removeLast()) {
             wrapped?.endElement(uri, localName, qName)
         }
@@ -59,7 +70,10 @@ class HtmlParser(
         wrapped?.endDocument()
     }
 
-    override fun startPrefixMapping(prefix: String, uri: String) {
+    override fun startPrefixMapping(
+        prefix: String,
+        uri: String,
+    ) {
         wrapped?.startPrefixMapping(prefix, uri)
     }
 
@@ -67,15 +81,26 @@ class HtmlParser(
         wrapped?.endPrefixMapping(prefix)
     }
 
-    override fun characters(ch: CharArray, start: Int, length: Int) {
+    override fun characters(
+        ch: CharArray,
+        start: Int,
+        length: Int,
+    ) {
         wrapped?.characters(ch, start, length)
     }
 
-    override fun ignorableWhitespace(ch: CharArray, start: Int, length: Int) {
+    override fun ignorableWhitespace(
+        ch: CharArray,
+        start: Int,
+        length: Int,
+    ) {
         wrapped?.ignorableWhitespace(ch, start, length)
     }
 
-    override fun processingInstruction(target: String, data: String) {
+    override fun processingInstruction(
+        target: String,
+        data: String,
+    ) {
         wrapped?.processingInstruction(target, data)
     }
 

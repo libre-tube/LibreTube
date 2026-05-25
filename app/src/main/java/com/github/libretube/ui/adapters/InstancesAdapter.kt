@@ -12,18 +12,24 @@ import com.github.libretube.ui.viewholders.InstancesViewHolder
 
 class InstancesAdapter(
     initialSelectionApiIndex: Int?,
-    private val onSelectInstance: (index: Int) -> Unit
+    private val onSelectInstance: (index: Int) -> Unit,
 ) : ListAdapter<PipedInstance, InstancesViewHolder>(DiffUtilItemCallback()) {
     private var selectedInstanceIndex = initialSelectionApiIndex?.takeIf { it >= 0 }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): InstancesViewHolder {
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int,
+    ): InstancesViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         val binding = InstanceRowBinding.inflate(layoutInflater)
         return InstancesViewHolder(binding)
     }
 
     @SuppressLint("SetTextI18n")
-    override fun onBindViewHolder(holder: InstancesViewHolder, position: Int) {
+    override fun onBindViewHolder(
+        holder: InstancesViewHolder,
+        position: Int,
+    ) {
         val instance = getItem(holder.bindingAdapterPosition)
 
         holder.binding.apply {

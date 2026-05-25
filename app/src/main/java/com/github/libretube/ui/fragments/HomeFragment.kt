@@ -32,7 +32,6 @@ import com.google.android.material.carousel.UncontainedCarouselStrategy
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 
-
 class HomeFragment : Fragment(R.layout.fragment_home) {
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
@@ -47,7 +46,10 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     private val bookmarkAdapter = CarouselPlaylistAdapter()
     private val playlistAdapter = CarouselPlaylistAdapter()
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?,
+    ) {
         _binding = FragmentHomeBinding.bind(view)
         super.onViewCreated(view, savedInstanceState)
 
@@ -64,16 +66,21 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         binding.featuredRV.adapter = feedAdapter
         binding.bookmarksRV.adapter = bookmarkAdapter
         binding.playlistsRV.adapter = playlistAdapter
-        binding.playlistsRV.adapter?.registerAdapterDataObserver(object :
-            RecyclerView.AdapterDataObserver() {
-            override fun onItemRangeRemoved(positionStart: Int, itemCount: Int) {
-                super.onItemRangeRemoved(positionStart, itemCount)
-                if (itemCount == 0) {
-                    binding.playlistsRV.isGone = true
-                    binding.playlistsTV.isGone = true
+        binding.playlistsRV.adapter?.registerAdapterDataObserver(
+            object :
+                RecyclerView.AdapterDataObserver() {
+                override fun onItemRangeRemoved(
+                    positionStart: Int,
+                    itemCount: Int,
+                ) {
+                    super.onItemRangeRemoved(positionStart, itemCount)
+                    if (itemCount == 0) {
+                        binding.playlistsRV.isGone = true
+                        binding.playlistsTV.isGone = true
+                    }
                 }
-            }
-        })
+            },
+        )
         binding.watchingRV.adapter = watchingAdapter
 
         with(homeViewModel) {
@@ -119,33 +126,34 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         val trendingCategories = MediaServiceRepository.instance.getTrendingCategories()
         binding.trendingCategory.isVisible = trendingCategories.size > 1
         binding.trendingCategory.setOnClickListener {
-            val currentTrendingCategoryPref = PreferenceHelper.getString(
-                PreferenceKeys.TRENDING_CATEGORY,
-                TrendingCategory.LIVE.name
-            ).let { categoryName -> trendingCategories.first { it.name == categoryName } }
+            val currentTrendingCategoryPref =
+                PreferenceHelper
+                    .getString(
+                        PreferenceKeys.TRENDING_CATEGORY,
+                        TrendingCategory.LIVE.name,
+                    ).let { categoryName -> trendingCategories.first { it.name == categoryName } }
 
-            val categories = trendingCategories.map { category ->
-                category to getString(category.titleRes)
-            }
+            val categories =
+                trendingCategories.map { category ->
+                    category to getString(category.titleRes)
+                }
 
             var selected = trendingCategories.indexOf(currentTrendingCategoryPref)
             MaterialAlertDialogBuilder(requireContext())
                 .setTitle(R.string.category)
                 .setSingleChoiceItems(
                     categories.map { it.second }.toTypedArray(),
-                    selected
+                    selected,
                 ) { _, checked ->
                     selected = checked
-                }
-                .setNegativeButton(R.string.cancel, null)
+                }.setNegativeButton(R.string.cancel, null)
                 .setPositiveButton(R.string.okay) { _, _ ->
                     PreferenceHelper.putString(
                         PreferenceKeys.TRENDING_CATEGORY,
-                        trendingCategories[selected].name
+                        trendingCategories[selected].name,
                     )
                     fetchHomeFeed()
-                }
-                .show()
+                }.show()
         }
 
         binding.refreshButton.setOnClickListener {
@@ -162,9 +170,10 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
         // Avoid re-fetching when re-entering the screen if it was loaded successfully, except when
         // the value of trending region has changed
-        val isTrendingRegionChanged = homeViewModel.trending.value?.let {
-            it.second.region != PreferenceHelper.getTrendingRegion(requireContext())
-        } == true
+        val isTrendingRegionChanged =
+            homeViewModel.trending.value?.let {
+                it.second.region != PreferenceHelper.getTrendingRegion(requireContext())
+            } == true
 
         if (homeViewModel.loadedSuccessfully.value == false || isTrendingRegionChanged) {
             fetchHomeFeed()
@@ -185,7 +194,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             context = requireContext(),
             subscriptionsViewModel = subscriptionsViewModel,
             visibleItems = visibleItems,
-            onUnusualLoadTime = ::showChangeInstanceSnackBar
+            onUnusualLoadTime = ::showChangeInstanceSnackBar,
         )
     }
 
@@ -198,7 +207,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         val region = PreferenceHelper.getTrendingRegion(requireContext())
         trendsViewModel.setStreamsForCategory(
             category,
-            TrendsViewModel.TrendingStreams(region, trendingStreams.streams)
+            TrendsViewModel.TrendingStreams(region, trendingStreams.streams),
         )
 
         makeVisible(binding.trendingRV, binding.trendingTV)
@@ -218,26 +227,30 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         if (bookmarks == null) return
 
         makeVisible(binding.bookmarksTV, binding.bookmarksRV)
-        bookmarkAdapter.submitList(bookmarks.map { bookmark ->
-            CarouselPlaylist(
-                id = bookmark.playlistId,
-                title = bookmark.playlistName,
-                thumbnail = bookmark.thumbnailUrl
-            )
-        })
+        bookmarkAdapter.submitList(
+            bookmarks.map { bookmark ->
+                CarouselPlaylist(
+                    id = bookmark.playlistId,
+                    title = bookmark.playlistName,
+                    thumbnail = bookmark.thumbnailUrl,
+                )
+            },
+        )
     }
 
     private fun showPlaylists(playlists: List<Playlists>?) {
         if (playlists == null) return
 
         makeVisible(binding.playlistsRV, binding.playlistsTV)
-        playlistAdapter.submitList(playlists.map { playlist ->
-            CarouselPlaylist(
-                id = playlist.id!!,
-                thumbnail = playlist.thumbnail,
-                title = playlist.name
-            )
-        })
+        playlistAdapter.submitList(
+            playlists.map { playlist ->
+                CarouselPlaylist(
+                    id = playlist.id!!,
+                    thumbnail = playlist.thumbnail,
+                    title = playlist.name,
+                )
+            },
+        )
     }
 
     private fun showContinueWatching(unwatchedVideos: List<StreamItem>?) {
@@ -297,9 +310,10 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     }
 
     private fun redirectToIntentSettings() {
-        val settingsIntent = Intent(context, SettingsActivity::class.java).apply {
-            putExtra(SettingsActivity.REDIRECT_KEY, SettingsActivity.REDIRECT_TO_INTENT_SETTINGS)
-        }
+        val settingsIntent =
+            Intent(context, SettingsActivity::class.java).apply {
+                putExtra(SettingsActivity.REDIRECT_KEY, SettingsActivity.REDIRECT_TO_INTENT_SETTINGS)
+            }
         startActivity(settingsIntent)
     }
 

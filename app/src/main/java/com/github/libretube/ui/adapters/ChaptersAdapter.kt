@@ -15,17 +15,23 @@ import com.github.libretube.ui.viewholders.ChaptersViewHolder
 class ChaptersAdapter(
     var chapters: List<ChapterSegment>,
     private val videoDurationSeconds: Long,
-    private val seekTo: (Long) -> Unit
+    private val seekTo: (Long) -> Unit,
 ) : RecyclerView.Adapter<ChaptersViewHolder>() {
     private var selectedPosition = 0
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChaptersViewHolder {
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int,
+    ): ChaptersViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         val binding = ChaptersRowBinding.inflate(layoutInflater, parent, false)
         return ChaptersViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: ChaptersViewHolder, position: Int) {
+    override fun onBindViewHolder(
+        holder: ChaptersViewHolder,
+        position: Int,
+    ) {
         val chapter = chapters[holder.absoluteAdapterPosition]
         holder.binding.apply {
             if (chapter.highlightDrawable != null) {
@@ -36,23 +42,26 @@ class ChaptersAdapter(
             chapterTitle.text = chapter.title
             timeStamp.text = DateUtils.formatElapsedTime(chapter.start)
 
-            val chapterEnd = if (chapter.highlightDrawable == null) {
-                chapters.getOrNull(position + 1)?.start ?: videoDurationSeconds
-            } else {
-                // the duration for chapters is hardcoded, since it's not provided by the SB API
-                minOf(chapter.start + ChapterSegment.HIGHLIGHT_LENGTH, videoDurationSeconds)
-            }
+            val chapterEnd =
+                if (chapter.highlightDrawable == null) {
+                    chapters.getOrNull(position + 1)?.start ?: videoDurationSeconds
+                } else {
+                    // the duration for chapters is hardcoded, since it's not provided by the SB API
+                    minOf(chapter.start + ChapterSegment.HIGHLIGHT_LENGTH, videoDurationSeconds)
+                }
             val durationSpan = chapterEnd - chapter.start
-            duration.text = root.context.getString(
-                R.string.duration_span,
-                DateUtils.formatElapsedTime(durationSpan)
-            )
+            duration.text =
+                root.context.getString(
+                    R.string.duration_span,
+                    DateUtils.formatElapsedTime(durationSpan),
+                )
 
-            val color = if (selectedPosition == position) {
-                ThemeHelper.getThemeColor(root.context, android.R.attr.colorControlHighlight)
-            } else {
-                Color.TRANSPARENT
-            }
+            val color =
+                if (selectedPosition == position) {
+                    ThemeHelper.getThemeColor(root.context, android.R.attr.colorControlHighlight)
+                } else {
+                    Color.TRANSPARENT
+                }
             chaptersLL.setBackgroundColor(color)
 
             root.setOnClickListener {

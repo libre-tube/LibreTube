@@ -41,43 +41,48 @@ object ImageHelper {
         val httpClient = OkHttpClient().newBuilder()
 
         if (BuildConfig.DEBUG) {
-            val loggingInterceptor = HttpLoggingInterceptor().apply {
-                level = HttpLoggingInterceptor.Level.BASIC
-            }
+            val loggingInterceptor =
+                HttpLoggingInterceptor().apply {
+                    level = HttpLoggingInterceptor.Level.BASIC
+                }
 
             httpClient.addInterceptor(loggingInterceptor)
         }
 
-        imageLoader = ImageLoader.Builder(context)
-            .crossfade(true)
-            .components {
-                add(
-                    OkHttpNetworkFetcherFactory(httpClient.build())
-                )
-            }
-            .apply {
-                if (maxCacheSize.isEmpty()) {
-                    diskCachePolicy(CachePolicy.DISABLED)
-                } else {
-                    diskCachePolicy(CachePolicy.ENABLED)
-                    memoryCachePolicy(CachePolicy.ENABLED)
-
-                    val diskCache = generateDiskCache(
-                        directory = context.coilFile,
-                        size = maxCacheSize.toInt()
+        imageLoader =
+            ImageLoader
+                .Builder(context)
+                .crossfade(true)
+                .components {
+                    add(
+                        OkHttpNetworkFetcherFactory(httpClient.build()),
                     )
-                    diskCache(diskCache)
-                }
-            }
-            .build()
+                }.apply {
+                    if (maxCacheSize.isEmpty()) {
+                        diskCachePolicy(CachePolicy.DISABLED)
+                    } else {
+                        diskCachePolicy(CachePolicy.ENABLED)
+                        memoryCachePolicy(CachePolicy.ENABLED)
+
+                        val diskCache =
+                            generateDiskCache(
+                                directory = context.coilFile,
+                                size = maxCacheSize.toInt(),
+                            )
+                        diskCache(diskCache)
+                    }
+                }.build()
     }
 
-    private fun generateDiskCache(directory: File, size: Int): DiskCache {
-        return DiskCache.Builder()
+    private fun generateDiskCache(
+        directory: File,
+        size: Int,
+    ): DiskCache =
+        DiskCache
+            .Builder()
             .directory(directory)
             .maxSizeBytes(size * 1024 * 1024L)
             .build()
-    }
 
     /**
      * Checks if the corresponding image for the given key (e.g. a url) is cached.
@@ -93,7 +98,11 @@ object ImageHelper {
     /**
      * load an image from a url into an imageView
      */
-    fun loadImage(url: String?, target: ImageView, whiteBackground: Boolean = false) {
+    fun loadImage(
+        url: String?,
+        target: ImageView,
+        whiteBackground: Boolean = false,
+    ) {
         if (url.isNullOrEmpty()) return
 
         // clear image to avoid loading issues at fast scrolling
@@ -111,12 +120,16 @@ object ImageHelper {
                 onSuccess = { _, _ ->
                     // set the background to white for transparent images
                     if (whiteBackground) target.setBackgroundColor(Color.WHITE)
-                }
+                },
             )
         }
     }
 
-    suspend fun downloadImage(context: Context, url: String, path: Path) {
+    suspend fun downloadImage(
+        context: Context,
+        url: String,
+        path: Path,
+    ) {
         val bitmap = getImage(context, url) ?: return
         withContext(Dispatchers.IO) {
             context.contentResolver.openOutputStream(path.toAndroidUri())?.use {
@@ -125,14 +138,20 @@ object ImageHelper {
         }
     }
 
-    suspend fun getImage(context: Context, url: String?): Bitmap? {
-        return getImage(context, url?.toUri())
-    }
+    suspend fun getImage(
+        context: Context,
+        url: String?,
+    ): Bitmap? = getImage(context, url?.toUri())
 
-    suspend fun getImage(context: Context, url: Uri?): Bitmap? {
-        val request = ImageRequest.Builder(context)
-            .data(url)
-            .build()
+    suspend fun getImage(
+        context: Context,
+        url: Uri?,
+    ): Bitmap? {
+        val request =
+            ImageRequest
+                .Builder(context)
+                .data(url)
+                .build()
 
         return imageLoader.execute(request).image?.toBitmap()
     }
@@ -148,7 +167,7 @@ object ImageHelper {
             (bitmap.width - newSize) / 2,
             (bitmap.height - newSize) / 2,
             newSize,
-            newSize
+            newSize,
         )
     }
 }

@@ -16,60 +16,72 @@ object NotificationHelper {
     /**
      * Enqueue the work manager task
      */
-    fun enqueueWork(context: Context, existingPeriodicWorkPolicy: ExistingPeriodicWorkPolicy) {
+    fun enqueueWork(
+        context: Context,
+        existingPeriodicWorkPolicy: ExistingPeriodicWorkPolicy,
+    ) {
         // get the notification preferences
         PreferenceHelper.initialize(context)
-        val notificationsEnabled = PreferenceHelper.getBoolean(
-            PreferenceKeys.NOTIFICATION_ENABLED,
-            true
-        )
+        val notificationsEnabled =
+            PreferenceHelper.getBoolean(
+                PreferenceKeys.NOTIFICATION_ENABLED,
+                true,
+            )
 
         // schedule the work manager request if logged in and notifications enabled
         if (!notificationsEnabled) {
             // cancel the work if notifications are disabled or the user is not logged in
-            WorkManager.getInstance(context)
+            WorkManager
+                .getInstance(context)
                 .cancelUniqueWork(NOTIFICATION_WORK_NAME)
             return
         }
 
-        val checkingFrequency = PreferenceHelper.getString(
-            PreferenceKeys.CHECKING_FREQUENCY,
-            "60"
-        ).toLong()
+        val checkingFrequency =
+            PreferenceHelper
+                .getString(
+                    PreferenceKeys.CHECKING_FREQUENCY,
+                    "60",
+                ).toLong()
 
         // required network type for the work
-        val networkType = when (
-            PreferenceHelper.getString(PreferenceKeys.REQUIRED_NETWORK, "all")
-        ) {
-            "all" -> NetworkType.CONNECTED
-            "wifi" -> NetworkType.UNMETERED
-            "metered" -> NetworkType.METERED
-            else -> NetworkType.CONNECTED
-        }
+        val networkType =
+            when (
+                PreferenceHelper.getString(PreferenceKeys.REQUIRED_NETWORK, "all")
+            ) {
+                "all" -> NetworkType.CONNECTED
+                "wifi" -> NetworkType.UNMETERED
+                "metered" -> NetworkType.METERED
+                else -> NetworkType.CONNECTED
+            }
 
         // requirements for the work
         // here: network needed to run the task
-        val constraints = Constraints.Builder()
-            .setRequiredNetworkType(networkType)
-            .build()
+        val constraints =
+            Constraints
+                .Builder()
+                .setRequiredNetworkType(networkType)
+                .build()
 
         // create the worker
-        val notificationWorker = PeriodicWorkRequestBuilder<NotificationWorker>(
-            checkingFrequency,
-            TimeUnit.MINUTES
-        )
-            .setConstraints(constraints)
-            .build()
+        val notificationWorker =
+            PeriodicWorkRequestBuilder<NotificationWorker>(
+                checkingFrequency,
+                TimeUnit.MINUTES,
+            ).setConstraints(constraints)
+                .build()
 
         // enqueue the task to the work manager instance
-        WorkManager.getInstance(context)
+        WorkManager
+            .getInstance(context)
             .enqueueUniquePeriodicWork(
                 NOTIFICATION_WORK_NAME,
                 existingPeriodicWorkPolicy,
-                notificationWorker
+                notificationWorker,
             )
 
         // for testing the notifications by the work manager
+
         /*
         WorkManager.getInstance(context)
             .enqueue(

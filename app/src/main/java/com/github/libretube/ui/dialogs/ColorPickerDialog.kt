@@ -15,7 +15,9 @@ import com.github.libretube.constants.IntentData
 import com.github.libretube.databinding.DialogColorPickerBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
-class ColorPickerDialog : DialogFragment(), SeekBar.OnSeekBarChangeListener {
+class ColorPickerDialog :
+    DialogFragment(),
+    SeekBar.OnSeekBarChangeListener {
     private var initialColor: Int? = null
 
     private var _binding: DialogColorPickerBinding? = null
@@ -38,33 +40,45 @@ class ColorPickerDialog : DialogFragment(), SeekBar.OnSeekBarChangeListener {
         binding.blueSeekBar.setOnSeekBarChangeListener(this)
 
         // Add listener to text input
-        binding.colorHexInput.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) =
-                Unit
+        binding.colorHexInput.addTextChangedListener(
+            object : TextWatcher {
+                override fun beforeTextChanged(
+                    s: CharSequence?,
+                    start: Int,
+                    count: Int,
+                    after: Int,
+                ) = Unit
 
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) = Unit
+                override fun onTextChanged(
+                    s: CharSequence?,
+                    start: Int,
+                    before: Int,
+                    count: Int,
+                ) = Unit
 
-            var isValid = true
-            var oldHex = ""
+                var isValid = true
+                var oldHex = ""
 
-            override fun afterTextChanged(s: Editable?) {
-                // Update color when text input changes
-                val hexColor = s.toString()
-                if (hexColor.length == 9 && oldHex != hexColor) {
-                    isValid = try {
-                        oldHex = hexColor
-                        val color = Color.parseColor(hexColor)
-                        setColor(color, true)
-                        true
-                    } catch (e: IllegalArgumentException) {
-                        if (isValid) {
-                            showInvalidColorMessage()
-                        }
-                        false
+                override fun afterTextChanged(s: Editable?) {
+                    // Update color when text input changes
+                    val hexColor = s.toString()
+                    if (hexColor.length == 9 && oldHex != hexColor) {
+                        isValid =
+                            try {
+                                oldHex = hexColor
+                                val color = Color.parseColor(hexColor)
+                                setColor(color, true)
+                                true
+                            } catch (e: IllegalArgumentException) {
+                                if (isValid) {
+                                    showInvalidColorMessage()
+                                }
+                                false
+                            }
                     }
                 }
-            }
-        })
+            },
+        )
 
         return MaterialAlertDialogBuilder(requireContext())
             .setView(binding.root)
@@ -72,10 +86,9 @@ class ColorPickerDialog : DialogFragment(), SeekBar.OnSeekBarChangeListener {
                 val color = getColor()
                 setFragmentResult(
                     COLOR_PICKER_REQUEST_KEY,
-                    bundleOf(IntentData.color to color)
+                    bundleOf(IntentData.color to color),
                 )
-            }
-            .setNegativeButton(R.string.cancel, null)
+            }.setNegativeButton(R.string.cancel, null)
             .show()
     }
 
@@ -84,7 +97,11 @@ class ColorPickerDialog : DialogFragment(), SeekBar.OnSeekBarChangeListener {
         _binding = null
     }
 
-    override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
+    override fun onProgressChanged(
+        seekBar: SeekBar?,
+        progress: Int,
+        fromUser: Boolean,
+    ) {
         // Update color preview when SeekBar progress changes
         setColorPreview(getColor())
     }
@@ -104,14 +121,18 @@ class ColorPickerDialog : DialogFragment(), SeekBar.OnSeekBarChangeListener {
     }
 
     // Get the color from the SeekBar progress values
-    private fun getColor() = Color.argb(
-        binding.alphaSeekBar.progress,
-        binding.redSeekBar.progress,
-        binding.greenSeekBar.progress,
-        binding.blueSeekBar.progress
-    )
+    private fun getColor() =
+        Color.argb(
+            binding.alphaSeekBar.progress,
+            binding.redSeekBar.progress,
+            binding.greenSeekBar.progress,
+            binding.blueSeekBar.progress,
+        )
 
-    private fun setColor(color: Int, textUpdate: Boolean = false) {
+    private fun setColor(
+        color: Int,
+        textUpdate: Boolean = false,
+    ) {
         // Set the SeekBar progress values based on the color
         binding.alphaSeekBar.progress = Color.alpha(color)
         binding.redSeekBar.progress = Color.red(color)
@@ -130,9 +151,7 @@ class ColorPickerDialog : DialogFragment(), SeekBar.OnSeekBarChangeListener {
         binding.colorPreview.setBackgroundColor(color)
     }
 
-    private fun colorToString(color: Int): String {
-        return String.format("#%08X", color)
-    }
+    private fun colorToString(color: Int): String = String.format("#%08X", color)
 
     companion object {
         const val COLOR_PICKER_REQUEST_KEY = "color_picker_request_key"

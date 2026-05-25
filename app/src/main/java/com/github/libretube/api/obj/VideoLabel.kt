@@ -10,5 +10,5 @@ data class VideoLabelData(
 
 @Serializable
 data class VideoLabel(
-    val category: String
+    val category: String,
 )

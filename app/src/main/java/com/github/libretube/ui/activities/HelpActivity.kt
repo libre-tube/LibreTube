@@ -23,7 +23,10 @@ class HelpActivity : BaseActivity() {
         setupCard(binding.lemmy, LEMMY_URL)
     }
 
-    private fun setupCard(card: MaterialCardView, link: String) {
+    private fun setupCard(
+        card: MaterialCardView,
+        link: String,
+    ) {
         card.setOnClickListener {
             IntentHelper.openLinkFromHref(this, supportFragmentManager, link)
         }

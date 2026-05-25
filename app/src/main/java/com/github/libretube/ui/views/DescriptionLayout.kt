@@ -27,7 +27,7 @@ import java.util.Locale
 
 class DescriptionLayout(
     context: Context,
-    attributeSet: AttributeSet?
+    attributeSet: AttributeSet?,
 ) : LinearLayout(context, attributeSet) {
     val binding = DescriptionLayoutBinding.inflate(LayoutInflater.from(context), this, true)
     private var streams: Streams? = null
@@ -50,7 +50,7 @@ class DescriptionLayout(
     fun setSegments(segments: List<Segment>) {
         if (PlayerHelper.getSponsorBlockCategories()[SB_SPONSOR_CATEGORY] == SbSkipOptions.OFF) {
             // only show the badge if the user requested to show sponsors
-           return
+            return
         }
 
         val category = segments.filter { it.actionType == Segment.TYPE_FULL }.firstNotNullOfOrNull { it.category }
@@ -77,23 +77,28 @@ class DescriptionLayout(
 
             metaInfo.isVisible = streams.metaInfo.isNotEmpty()
             // generate a meta info text with clickable links using html
-            val metaInfoText = streams.metaInfo.joinToString("\n\n") { info ->
-                val text = info.description.takeIf { it.isNotBlank() } ?: info.title
-                val links = info.urls.mapIndexed { index, url ->
-                    "<a href=\"$url\">${info.urlTexts.getOrNull(index).orEmpty()}</a>"
-                }.joinToString(", ")
-                "$text $links"
-            }
+            val metaInfoText =
+                streams.metaInfo.joinToString("\n\n") { info ->
+                    val text = info.description.takeIf { it.isNotBlank() } ?: info.title
+                    val links =
+                        info.urls
+                            .mapIndexed { index, url ->
+                                "<a href=\"$url\">${info.urlTexts.getOrNull(index).orEmpty()}</a>"
+                            }.joinToString(", ")
+                    "$text $links"
+                }
             metaInfo.text = metaInfoText.parseAsHtml()
 
-            val visibility = when (streams.visibility) {
-                "public" -> context?.getString(R.string.visibility_public)
-                "unlisted" -> context?.getString(R.string.visibility_unlisted)
-                // currently no other visibility could be returned, might change in the future however
-                else -> streams.visibility.replaceFirstChar {
-                    if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString()
-                }
-            }.orEmpty()
+            val visibility =
+                when (streams.visibility) {
+                    "public" -> context?.getString(R.string.visibility_public)
+                    "unlisted" -> context?.getString(R.string.visibility_unlisted)
+                    // currently no other visibility could be returned, might change in the future however
+                    else ->
+                        streams.visibility.replaceFirstChar {
+                            if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString()
+                        }
+                }.orEmpty()
             additionalVideoInfo.text =
                 "${context?.getString(R.string.category)}: ${streams.category}\n" +
                 "${context?.getString(R.string.license)}: ${streams.license}\n" +
@@ -126,8 +131,10 @@ class DescriptionLayout(
         // detect whether the description is html formatted
         if (description.contains("<") && description.contains(">")) {
             descTextView.movementMethod = LinkMovementMethodCompat.getInstance()
-            descTextView.text = description.replace("</a>", "</a> ")
-                .parseAsHtml(tagHandler = HtmlParser(LinkHandler(handleLink)))
+            descTextView.text =
+                description
+                    .replace("</a>", "</a> ")
+                    .parseAsHtml(tagHandler = HtmlParser(LinkHandler(handleLink)))
         } else {
             // Links can be present as plain text
             descTextView.autoLinkMask = Linkify.WEB_URLS
@@ -142,20 +149,23 @@ class DescriptionLayout(
         if (!isNewStateExpanded) {
             // show a short version of the view count and date
             val formattedDate = TextUtils.formatRelativeDate(streams.uploaded ?: -1L)
-            binding.playerViewsInfo.text = context.getString(R.string.normal_views, streams.views.formatShort(),  TextUtils.SEPARATOR + formattedDate)
+            binding.playerViewsInfo.text =
+                context.getString(R.string.normal_views, streams.views.formatShort(), TextUtils.SEPARATOR + formattedDate)
 
             // limit the title height to two lines
             binding.playerTitle.maxLines = 2
         } else {
             // show the full view count and upload date
             val formattedDate = streams.uploadTimestamp?.let { TextUtils.localizeInstant(it) }.orEmpty()
-            binding.playerViewsInfo.text = context.getString(R.string.normal_views, "%,d".format(streams.views),  TextUtils.SEPARATOR + formattedDate)
+            binding.playerViewsInfo.text =
+                context.getString(R.string.normal_views, "%,d".format(streams.views), TextUtils.SEPARATOR + formattedDate)
 
             // show the whole title
             binding.playerTitle.maxLines = Int.MAX_VALUE
         }
 
-        binding.playerDescriptionArrow.animate()
+        binding.playerDescriptionArrow
+            .animate()
             .rotation(if (isNewStateExpanded) 180F else 0F)
             .setDuration(ANIMATION_DURATION)
             .start()

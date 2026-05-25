@@ -13,18 +13,20 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 object ShortcutHelper {
-
-    private fun createShortcut(context: Context, appShortcut: TopLevelDestination): ShortcutInfoCompat {
+    private fun createShortcut(
+        context: Context,
+        appShortcut: TopLevelDestination,
+    ): ShortcutInfoCompat {
         val label = context.getString(appShortcut.label)
-        return ShortcutInfoCompat.Builder(context, appShortcut.route)
+        return ShortcutInfoCompat
+            .Builder(context, appShortcut.route)
             .setShortLabel(label)
             .setLongLabel(label)
             .setIcon(IconCompat.createWithResource(context, appShortcut.icon))
             .setIntent(
                 Intent(Intent.ACTION_VIEW, null, context, MainActivity::class.java)
-                    .putExtra(IntentData.fragmentToOpen, appShortcut.route)
-            )
-            .build()
+                    .putExtra(IntentData.fragmentToOpen, appShortcut.route),
+            ).build()
     }
 
     fun createShortcuts(context: Context) {

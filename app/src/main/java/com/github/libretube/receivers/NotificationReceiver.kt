@@ -7,11 +7,15 @@ import androidx.core.content.ContextCompat
 import com.github.libretube.services.DownloadService
 
 class NotificationReceiver : BroadcastReceiver() {
-    override fun onReceive(context: Context, intent: Intent) {
+    override fun onReceive(
+        context: Context,
+        intent: Intent,
+    ) {
         if (intent.action == null) return
 
-        val serviceIntent = Intent(context, DownloadService::class.java)
-            .setAction(intent.action)
+        val serviceIntent =
+            Intent(context, DownloadService::class.java)
+                .setAction(intent.action)
 
         val id = intent.getIntExtra("id", -1)
         if (id == -1) return

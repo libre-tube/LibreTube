@@ -1,7 +1,6 @@
 package com.github.libretube.ui.interfaces
 
 interface PlayerGestureOptions {
-
     fun onSingleTap(areControlsLocked: Boolean)
 
     fun onDoubleTapCenterScreen()
@@ -10,11 +9,20 @@ interface PlayerGestureOptions {
 
     fun onDoubleTapRightScreen()
 
-    fun onSwipeLeftScreen(distanceY: Float, positionY: Float)
+    fun onSwipeLeftScreen(
+        distanceY: Float,
+        positionY: Float,
+    )
 
-    fun onSwipeRightScreen(distanceY: Float, positionY: Float)
+    fun onSwipeRightScreen(
+        distanceY: Float,
+        positionY: Float,
+    )
 
-    fun onSwipeCenterScreen(distanceY: Float, positionY: Float)
+    fun onSwipeCenterScreen(
+        distanceY: Float,
+        positionY: Float,
+    )
 
     fun onSwipeEnd()
 

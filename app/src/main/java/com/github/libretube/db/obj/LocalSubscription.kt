@@ -12,15 +12,14 @@ import kotlinx.serialization.Serializable
 data class LocalSubscription(
     @PrimaryKey val channelId: String,
     @Ignore val url: String = "",
-
     @ColumnInfo(defaultValue = "NULL") val name: String? = null,
     @ColumnInfo(defaultValue = "NULL") val avatar: String? = null,
-    @ColumnInfo(defaultValue = "false") val verified: Boolean = false
+    @ColumnInfo(defaultValue = "false") val verified: Boolean = false,
 ) {
     constructor(
         channelId: String,
         name: String? = null,
         avatar: String? = null,
-        verified: Boolean = false
+        verified: Boolean = false,
     ) : this(channelId, "${ShareDialog.YOUTUBE_FRONTEND_URL}/channel/$channelId", name, avatar, verified)
 }

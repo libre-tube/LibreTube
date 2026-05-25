@@ -13,7 +13,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-
 fun TextView.setupSubscriptionButton(
     channelId: String?,
     channelName: String,
@@ -21,20 +20,24 @@ fun TextView.setupSubscriptionButton(
     channelVerified: Boolean,
     notificationBell: MaterialButton? = null,
     isSubscribed: Boolean? = null,
-    onIsSubscribedChange: (Boolean) -> Unit = {}
+    onIsSubscribedChange: (Boolean) -> Unit = {},
 ) {
     if (channelId == null) return
 
-    val notificationsEnabled = PreferenceHelper
-        .getBoolean(PreferenceKeys.NOTIFICATION_ENABLED, true)
+    val notificationsEnabled =
+        PreferenceHelper
+            .getBoolean(PreferenceKeys.NOTIFICATION_ENABLED, true)
     var subscribed = false
 
     fun updateUIStateAndNotifyObservers() {
         onIsSubscribedChange(subscribed)
 
         this@setupSubscriptionButton.text =
-            if (subscribed) context.getString(R.string.unsubscribe)
-            else context.getString(R.string.subscribe)
+            if (subscribed) {
+                context.getString(R.string.unsubscribe)
+            } else {
+                context.getString(R.string.subscribe)
+            }
 
         notificationBell?.isVisible = subscribed && notificationsEnabled
         this@setupSubscriptionButton.isVisible = true
@@ -50,17 +53,18 @@ fun TextView.setupSubscriptionButton(
 
     notificationBell?.setupNotificationBell(channelId)
 
-    val setSubscriptionState : (Boolean) -> Unit = { subscribe ->
+    val setSubscriptionState: (Boolean) -> Unit = { subscribe ->
         CoroutineScope(Dispatchers.IO).launch {
-            if (subscribe)
+            if (subscribe) {
                 SubscriptionHelper.subscribe(
                     channelId,
                     channelName,
                     channelAvatar,
-                    channelVerified
+                    channelVerified,
                 )
-            else
+            } else {
                 SubscriptionHelper.unsubscribe(channelId)
+            }
         }
         subscribed = subscribe
 
@@ -74,11 +78,11 @@ fun TextView.setupSubscriptionButton(
                     .make(
                         rootView,
                         context.getString(R.string.unsubscribe_snackbar_message, channelName),
-                        1000
-                    )
-                    .setAction(R.string.undo, {
+                        1000,
+                    ).setAction(R.string.undo, {
                         setSubscriptionState(true)
-                    }).show()
+                    })
+                    .show()
             }
             setSubscriptionState(!subscribed)
         }

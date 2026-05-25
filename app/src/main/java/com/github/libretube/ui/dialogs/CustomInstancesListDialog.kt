@@ -16,23 +16,23 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
-class CustomInstancesListDialog: DialogFragment() {
+class CustomInstancesListDialog : DialogFragment() {
     val viewModel: InstancesModel by activityViewModels()
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val binding = DialogCustomIntancesListBinding.inflate(layoutInflater)
-        val adapter = CustomInstancesAdapter(
-            onClickInstance = {
-                CreateCustomInstanceDialog()
-                    .apply {
-                        arguments = bundleOf(IntentData.customInstance to it)
-                    }
-                    .show(childFragmentManager, null)
-            },
-            onDeleteInstance = {
-                viewModel.deleteCustomInstance(it)
-            }
-        )
+        val adapter =
+            CustomInstancesAdapter(
+                onClickInstance = {
+                    CreateCustomInstanceDialog()
+                        .apply {
+                            arguments = bundleOf(IntentData.customInstance to it)
+                        }.show(childFragmentManager, null)
+                },
+                onDeleteInstance = {
+                    viewModel.deleteCustomInstance(it)
+                },
+            )
         binding.customInstancesRecycler.adapter = adapter
 
         lifecycleScope.launch {

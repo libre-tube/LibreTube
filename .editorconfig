@@ -1,0 +1,7 @@
+root = true
+
+[*]
+ktlint_standard_property-naming = disabled
+ktlint_standard_backing-property-naming = disabled
+ktlint_standard_function-naming = disabled
+ktlint_standard_filename = disabled

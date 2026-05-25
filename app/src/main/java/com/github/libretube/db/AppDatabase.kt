@@ -48,7 +48,7 @@ import com.github.libretube.db.obj.WatchPosition
         DownloadPlaylist::class,
         DownloadPlaylistVideosCrossRef::class,
         SubscriptionGroup::class,
-        SubscriptionsFeedItem::class
+        SubscriptionsFeedItem::class,
     ],
     version = 23,
     autoMigrations = [
@@ -59,8 +59,8 @@ import com.github.libretube.db.obj.WatchPosition
         AutoMigration(from = 16, to = 17),
         AutoMigration(from = 18, to = 19),
         AutoMigration(from = 19, to = 20),
-        AutoMigration(from = 20, to = 21)
-    ]
+        AutoMigration(from = 20, to = 21),
+    ],
 )
 @TypeConverters(Converters::class)
 abstract class AppDatabase : RoomDatabase() {

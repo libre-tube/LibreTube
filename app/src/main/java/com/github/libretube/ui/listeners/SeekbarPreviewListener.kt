@@ -23,19 +23,25 @@ import kotlin.math.absoluteValue
 class SeekbarPreviewListener(
     private val timeFrameReceiver: TimeFrameReceiver,
     private val playerBinding: ExoStyledPlayerControlViewBinding,
-    private val duration: Long
+    private val duration: Long,
 ) : TimeBar.OnScrubListener {
     private var lastPreviewPosition = Long.MAX_VALUE
-    private var prevProcessPreviewJob : Job? = null
+    private var prevProcessPreviewJob: Job? = null
 
-    override fun onScrubStart(timeBar: TimeBar, position: Long) {
+    override fun onScrubStart(
+        timeBar: TimeBar,
+        position: Long,
+    ) {
         processPreview(position)
     }
 
     /**
      * Show a preview of the scrubber position
      */
-    override fun onScrubMove(timeBar: TimeBar, position: Long) {
+    override fun onScrubMove(
+        timeBar: TimeBar,
+        position: Long,
+    ) {
         playerBinding.seekbarPreviewPosition.text = DateUtils.formatElapsedTime(position / 1000)
 
         // minimum of five seconds of additional seeking in order to show a preview
@@ -52,12 +58,17 @@ class SeekbarPreviewListener(
     /**
      * Hide the seekbar preview with a short delay
      */
-    override fun onScrubStop(timeBar: TimeBar, position: Long, canceled: Boolean) {
+    override fun onScrubStop(
+        timeBar: TimeBar,
+        position: Long,
+        canceled: Boolean,
+    ) {
         prevProcessPreviewJob?.cancel()
         prevProcessPreviewJob = null
 
         // animate the disappearance of the preview image
-        playerBinding.seekbarPreview.animate()
+        playerBinding.seekbarPreview
+            .animate()
             .alpha(0f)
             .translationYBy(30f)
             .setDuration(200)
@@ -65,8 +76,7 @@ class SeekbarPreviewListener(
                 playerBinding.seekbarPreview.isGone = true
                 playerBinding.seekbarPreview.translationY -= 30f
                 playerBinding.seekbarPreview.alpha = 1f
-            }
-            .start()
+            }.start()
     }
 
     /**
@@ -74,16 +84,17 @@ class SeekbarPreviewListener(
      */
     private fun processPreview(position: Long) {
         prevProcessPreviewJob?.cancel()
-        prevProcessPreviewJob = CoroutineScope(Dispatchers.IO).launch {
-            lastPreviewPosition = position
+        prevProcessPreviewJob =
+            CoroutineScope(Dispatchers.IO).launch {
+                lastPreviewPosition = position
 
-            val frame = timeFrameReceiver.getFrameAtTime(position)
-            withContext(Dispatchers.Main) {
-                playerBinding.previewProgressIndicator.isInvisible = true
-                playerBinding.seekbarPreviewImage.setImageBitmap(frame)
-                playerBinding.seekbarPreview.isVisible = true
+                val frame = timeFrameReceiver.getFrameAtTime(position)
+                withContext(Dispatchers.Main) {
+                    playerBinding.previewProgressIndicator.isInvisible = true
+                    playerBinding.seekbarPreviewImage.setImageBitmap(frame)
+                    playerBinding.seekbarPreview.isVisible = true
+                }
             }
-        }
     }
 
     /**
@@ -93,8 +104,9 @@ class SeekbarPreviewListener(
         playerBinding.seekbarPreview.updateLayoutParams<MarginLayoutParams> {
             val parentWidth = (playerBinding.seekbarPreview.parent as View).width
             // calculate the center-offset of the preview image view
-            val offset = parentWidth * (position.toFloat() / duration.toFloat()) -
-                playerBinding.seekbarPreview.width / 2
+            val offset =
+                parentWidth * (position.toFloat() / duration.toFloat()) -
+                    playerBinding.seekbarPreview.width / 2
             // normalize the offset to keep a minimum distance at left and right
             val maxPadding = parentWidth - MIN_PADDING - playerBinding.seekbarPreview.width
             marginStart = offset.toInt().coerceIn(MIN_PADDING, maxPadding)

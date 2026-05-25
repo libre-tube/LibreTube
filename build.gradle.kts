@@ -16,24 +16,26 @@ tasks.register("buildLanguages") {
 
     // reference: https://docs.gradle.org/current/userguide/working_with_files.html
     val resPath = projectDirectory.file("app/src/main/res")
-    val locales = resPath.asFile.listFiles()
-        .filter {
-            it.nameWithoutExtension.startsWith("values-") && File(
-                it,
-                "strings.xml"
-            ).exists()
-        }
-        .map {
-            it.nameWithoutExtension.removePrefix("values-")
-        } + "en" // en is the default locale, its values file has no -en suffix
+    val locales =
+        resPath.asFile
+            .listFiles()
+            .filter {
+                it.nameWithoutExtension.startsWith("values-") &&
+                    File(
+                        it,
+                        "strings.xml",
+                    ).exists()
+            }.map {
+                it.nameWithoutExtension.removePrefix("values-")
+            } + "en" // en is the default locale, its values file has no -en suffix
 
     val localesConfig =
         "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n" +
-                "<resources>\n" +
-                "<string-array name=\"languageCodes\">\n" +
-                locales.joinToString("\n") { "  <item>$it</item>" } + "\n" +
-                "</string-array>\n" +
-                "</resources>"
+            "<resources>\n" +
+            "<string-array name=\"languageCodes\">\n" +
+            locales.joinToString("\n") { "  <item>$it</item>" } + "\n" +
+            "</string-array>\n" +
+            "</resources>"
 
     val outputFile = projectDirectory.file("app/src/main/res/values/languages.xml").asFile
     if (!outputFile.exists()) outputFile.createNewFile()

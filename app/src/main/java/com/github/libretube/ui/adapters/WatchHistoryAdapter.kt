@@ -25,16 +25,20 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class WatchHistoryAdapter :
-    ListAdapter<WatchHistoryItem, WatchHistoryViewHolder>(DiffUtilItemCallback()) {
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WatchHistoryViewHolder {
+class WatchHistoryAdapter : ListAdapter<WatchHistoryItem, WatchHistoryViewHolder>(DiffUtilItemCallback()) {
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int,
+    ): WatchHistoryViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         val binding = VideoRowBinding.inflate(layoutInflater, parent, false)
         return WatchHistoryViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: WatchHistoryViewHolder, position: Int) {
+    override fun onBindViewHolder(
+        holder: WatchHistoryViewHolder,
+        position: Int,
+    ) {
         val video = getItem(holder.bindingAdapterPosition)
         holder.binding.apply {
             videoTitle.text = video.title
@@ -69,7 +73,7 @@ class WatchHistoryAdapter :
             root.setOnLongClickListener {
                 fragmentManager.setFragmentResultListener(
                     VideoOptionsBottomSheet.VIDEO_OPTIONS_SHEET_REQUEST_KEY,
-                    activity
+                    activity,
                 ) { _, _ ->
                     notifyItemChanged(position)
                 }
@@ -79,10 +83,12 @@ class WatchHistoryAdapter :
                 true
             }
 
-            if (video.duration != null) watchProgress.setWatchProgressLength(
-                video.videoId,
-                video.duration
-            )
+            if (video.duration != null) {
+                watchProgress.setWatchProgressLength(
+                    video.videoId,
+                    video.duration,
+                )
+            }
 
             CoroutineScope(Dispatchers.IO).launch {
                 val isDownloaded =

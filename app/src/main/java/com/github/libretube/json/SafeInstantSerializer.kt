@@ -6,8 +6,6 @@ import kotlinx.datetime.Instant
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.atStartOfDayIn
-import kotlinx.datetime.toInstant
-import kotlinx.datetime.toLocalDate
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.descriptors.PrimitiveKind.STRING
 import kotlinx.serialization.descriptors.PrimitiveSerialDescriptor
@@ -27,7 +25,10 @@ object SafeInstantSerializer : KSerializer<Instant> {
         }
     }
 
-    override fun serialize(encoder: Encoder, value: Instant) {
+    override fun serialize(
+        encoder: Encoder,
+        value: Instant,
+    ) {
         encoder.encodeString(value.toString())
     }
 }

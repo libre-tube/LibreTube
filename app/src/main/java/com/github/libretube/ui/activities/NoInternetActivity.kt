@@ -29,10 +29,10 @@ class NoInternetActivity : AbstractPlayerHostActivity() {
 
         // add padding to fragment containers to prevent overlap with edge-to-edge status bars
         binding.root.onSystemInsets { _, systemBarInsets ->
-            with (binding.mainLayout) {
+            with(binding.mainLayout) {
                 setPadding(paddingLeft, systemBarInsets.top, paddingRight, systemBarInsets.bottom)
             }
-            with (binding.container) {
+            with(binding.container) {
                 setPadding(paddingLeft, paddingTop, paddingRight, systemBarInsets.bottom)
             }
         }
@@ -54,32 +54,34 @@ class NoInternetActivity : AbstractPlayerHostActivity() {
         val searchView = searchItem.actionView as SearchView
         searchView.isIconified = true
 
-        searchItem.setOnActionExpandListener(object: MenuItem.OnActionExpandListener {
-            override fun onMenuItemActionCollapse(p0: MenuItem): Boolean {
-                return true
-            }
+        searchItem.setOnActionExpandListener(
+            object : MenuItem.OnActionExpandListener {
+                override fun onMenuItemActionCollapse(p0: MenuItem): Boolean = true
 
-            override fun onMenuItemActionExpand(p0: MenuItem): Boolean {
-                // automatically navigate to the downloads fragment when the user clicks the search bar
-                val navController = binding.fragment.findNavController()
-                if (navController.currentDestination?.id != R.id.downloadsFragment) {
-                    navController.navigate(R.id.downloadsFragment)
+                override fun onMenuItemActionExpand(p0: MenuItem): Boolean {
+                    // automatically navigate to the downloads fragment when the user clicks the search bar
+                    val navController = binding.fragment.findNavController()
+                    if (navController.currentDestination?.id != R.id.downloadsFragment) {
+                        navController.navigate(R.id.downloadsFragment)
+                    }
+                    return true
                 }
-                return true
-            }
-        })
+            },
+        )
 
-        searchView.setOnQueryTextListener(object: SearchView.OnQueryTextListener {
-            override fun onQueryTextChange(query: String?): Boolean {
-                downloadsModel.setQuery(query)
-                return true
-            }
+        searchView.setOnQueryTextListener(
+            object : SearchView.OnQueryTextListener {
+                override fun onQueryTextChange(query: String?): Boolean {
+                    downloadsModel.setQuery(query)
+                    return true
+                }
 
-            override fun onQueryTextSubmit(p0: String?): Boolean {
-                searchView.clearFocus()
-                return true
-            }
-        })
+                override fun onQueryTextSubmit(p0: String?): Boolean {
+                    searchView.clearFocus()
+                    return true
+                }
+            },
+        )
 
         return super.onCreateOptionsMenu(menu)
     }

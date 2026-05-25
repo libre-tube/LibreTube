@@ -15,10 +15,11 @@ class NavBarOptionsDialog : DialogFragment() {
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val binding = SimpleOptionsRecyclerBinding.inflate(layoutInflater)
         val options = NavBarHelper.getNavBarItems(requireContext())
-        val adapter = NavBarOptionsAdapter(
-            options.toMutableList(),
-            NavBarHelper.getStartFragmentId(requireContext())
-        )
+        val adapter =
+            NavBarOptionsAdapter(
+                options.toMutableList(),
+                NavBarHelper.getStartFragmentId(requireContext()),
+            )
 
         binding.optionsRecycler.layoutManager = LinearLayoutManager(context)
         binding.optionsRecycler.adapter = adapter
@@ -38,8 +39,7 @@ class NavBarOptionsDialog : DialogFragment() {
                 NavBarHelper.setStartFragment(requireContext(), adapter.selectedHomeTabId)
                 RequireRestartDialog()
                     .show(requireParentFragment().childFragmentManager, null)
-            }
-            .setNegativeButton(R.string.cancel, null)
+            }.setNegativeButton(R.string.cancel, null)
             .show()
     }
 }

@@ -22,26 +22,32 @@ object SubscriptionHelper {
     const val GET_SUBSCRIPTIONS_LIMIT = 100
 
     private val localFeedExtraction
-        get() = PreferenceHelper.getBoolean(
-            PreferenceKeys.LOCAL_FEED_EXTRACTION,
-            true
-        )
+        get() =
+            PreferenceHelper.getBoolean(
+                PreferenceKeys.LOCAL_FEED_EXTRACTION,
+                true,
+            )
     private val token get() = PreferenceHelper.getToken()
     private val subscriptionsRepository: SubscriptionsRepository
-        get() = when {
-            token.isNotEmpty() -> AccountSubscriptionsRepository()
-            localFeedExtraction -> LocalSubscriptionsRepository()
-            else -> PipedLocalSubscriptionsRepository()
-        }
+        get() =
+            when {
+                token.isNotEmpty() -> AccountSubscriptionsRepository()
+                localFeedExtraction -> LocalSubscriptionsRepository()
+                else -> PipedLocalSubscriptionsRepository()
+            }
     private val feedRepository: FeedRepository
-        get() = when {
-            localFeedExtraction -> LocalFeedRepository()
-            token.isNotEmpty() -> PipedAccountFeedRepository()
-            else -> PipedNoAccountFeedRepository()
-        }
+        get() =
+            when {
+                localFeedExtraction -> LocalFeedRepository()
+                token.isNotEmpty() -> PipedAccountFeedRepository()
+                else -> PipedNoAccountFeedRepository()
+            }
 
     suspend fun subscribe(
-        channelId: String, name: String, uploaderAvatar: String?, verified: Boolean
+        channelId: String,
+        name: String,
+        uploaderAvatar: String?,
+        verified: Boolean,
     ) = subscriptionsRepository.subscribe(channelId, name, uploaderAvatar, verified)
 
     suspend fun unsubscribe(channelId: String) {
@@ -49,19 +55,21 @@ object SubscriptionHelper {
         // remove videos from (local) feed
         feedRepository.removeChannel(channelId)
     }
-    suspend fun isSubscribed(channelId: String) = subscriptionsRepository.isSubscribed(channelId)
-    suspend fun importSubscriptions(newChannels: List<String>) =
-        subscriptionsRepository.importSubscriptions(newChannels)
 
-    suspend fun getSubscriptions() =
-        subscriptionsRepository.getSubscriptions().sortedBy { it.name.lowercase() }
+    suspend fun isSubscribed(channelId: String) = subscriptionsRepository.isSubscribed(channelId)
+
+    suspend fun importSubscriptions(newChannels: List<String>) = subscriptionsRepository.importSubscriptions(newChannels)
+
+    suspend fun getSubscriptions() = subscriptionsRepository.getSubscriptions().sortedBy { it.name.lowercase() }
 
     suspend fun getSubscriptionChannelIds() = subscriptionsRepository.getSubscriptionChannelIds()
-    suspend fun getFeed(forceRefresh: Boolean, onProgressUpdate: (FeedProgress) -> Unit = {}) =
-        feedRepository.getFeed(forceRefresh, onProgressUpdate)
 
-    suspend fun submitFeedItemChange(feedItem: SubscriptionsFeedItem) =
-        feedRepository.submitFeedItemChange(feedItem)
+    suspend fun getFeed(
+        forceRefresh: Boolean,
+        onProgressUpdate: (FeedProgress) -> Unit = {},
+    ) = feedRepository.getFeed(forceRefresh, onProgressUpdate)
+
+    suspend fun submitFeedItemChange(feedItem: SubscriptionsFeedItem) = feedRepository.submitFeedItemChange(feedItem)
 
     suspend fun submitSubscriptionChannelInfosChanged(subscriptions: List<Subscription>) =
         subscriptionsRepository.submitSubscriptionChannelInfosChanged(subscriptions)

@@ -12,8 +12,10 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class HistorySettings : BasePreferenceFragment() {
-
-    override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
+    override fun onCreatePreferences(
+        savedInstanceState: Bundle?,
+        rootKey: String?,
+    ) {
         setPreferencesFromResource(R.xml.history_settings, rootKey)
 
         // clear search history
@@ -52,7 +54,10 @@ class HistorySettings : BasePreferenceFragment() {
         }
     }
 
-    private fun showClearDialog(title: Int, actionOnConfirm: suspend () -> Unit) {
+    private fun showClearDialog(
+        title: Int,
+        actionOnConfirm: suspend () -> Unit,
+    ) {
         MaterialAlertDialogBuilder(requireContext())
             .setTitle(title)
             .setMessage(R.string.irreversible)
@@ -62,7 +67,6 @@ class HistorySettings : BasePreferenceFragment() {
                 CoroutineScope(Dispatchers.IO).launch {
                     actionOnConfirm.invoke()
                 }
-            }
-            .show()
+            }.show()
     }
 }

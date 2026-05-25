@@ -22,5 +22,4 @@ fun MaterialButton.setupNotificationBell(channelId: String) {
     }
 }
 
-private fun iconResource(isIgnorable: Boolean) =
-    if (isIgnorable) R.drawable.ic_bell else R.drawable.ic_notification
+private fun iconResource(isIgnorable: Boolean) = if (isIgnorable) R.drawable.ic_bell else R.drawable.ic_notification

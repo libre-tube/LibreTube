@@ -10,20 +10,26 @@ import com.github.libretube.ui.viewholders.CustomInstancesViewHolder
 
 class CustomInstancesAdapter(
     private val onClickInstance: (CustomInstance) -> Unit,
-    private val onDeleteInstance: (CustomInstance) -> Unit
+    private val onDeleteInstance: (CustomInstance) -> Unit,
 ) : ListAdapter<CustomInstance, CustomInstancesViewHolder>(
-    DiffUtilItemCallback()
-) {
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomInstancesViewHolder {
+        DiffUtilItemCallback(),
+    ) {
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int,
+    ): CustomInstancesViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         val binding = CustomInstanceRowBinding.inflate(layoutInflater, parent, false)
         return CustomInstancesViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: CustomInstancesViewHolder, position: Int) {
+    override fun onBindViewHolder(
+        holder: CustomInstancesViewHolder,
+        position: Int,
+    ) {
         val instance = getItem(position)!!
 
-        with (holder.binding) {
+        with(holder.binding) {
             instanceName.text = instance.name
 
             root.setOnClickListener {

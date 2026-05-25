@@ -29,14 +29,18 @@ class PlayingQueueSheet : ExpandedBottomSheet(R.layout.queue_bottom_sheet) {
     private val binding get() = _binding!!
 
     @SuppressLint("NotifyDataSetChanged")
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?,
+    ) {
         _binding = QueueBottomSheetBinding.bind(view)
         super.onViewCreated(view, savedInstanceState)
 
         binding.optionsRecycler.layoutManager = LinearLayoutManager(context)
-        val adapter = PlayingQueueAdapter { videoId ->
-            setFragmentResult(PLAYING_QUEUE_REQUEST_KEY, bundleOf(IntentData.videoId to videoId))
-        }
+        val adapter =
+            PlayingQueueAdapter { videoId ->
+                setFragmentResult(PLAYING_QUEUE_REQUEST_KEY, bundleOf(IntentData.videoId to videoId))
+            }
         binding.optionsRecycler.adapter = adapter
 
         // scroll to the currently playing video in the queue
@@ -49,11 +53,12 @@ class PlayingQueueSheet : ExpandedBottomSheet(R.layout.queue_bottom_sheet) {
 
         binding.repeat.setOnClickListener {
             // select the next available repeat mode
-            PlayingQueue.repeatMode = when (PlayingQueue.repeatMode) {
-                Player.REPEAT_MODE_OFF -> Player.REPEAT_MODE_ONE
-                Player.REPEAT_MODE_ONE -> Player.REPEAT_MODE_ALL
-                else -> Player.REPEAT_MODE_OFF
-            }
+            PlayingQueue.repeatMode =
+                when (PlayingQueue.repeatMode) {
+                    Player.REPEAT_MODE_OFF -> Player.REPEAT_MODE_ONE
+                    Player.REPEAT_MODE_ONE -> Player.REPEAT_MODE_ALL
+                    else -> Player.REPEAT_MODE_OFF
+                }
             updateRepeatButton()
         }
         updateRepeatButton()
@@ -64,12 +69,12 @@ class PlayingQueueSheet : ExpandedBottomSheet(R.layout.queue_bottom_sheet) {
                 .setPositiveButton(R.string.okay) { _, _ ->
                     val currentIndex = PlayingQueue.currentIndex()
                     PlayingQueue.setStreams(
-                        PlayingQueue.getStreams()
-                            .filterIndexed { index, _ -> index == currentIndex }
+                        PlayingQueue
+                            .getStreams()
+                            .filterIndexed { index, _ -> index == currentIndex },
                     )
                     adapter.notifyDataSetChanged()
-                }
-                .setNegativeButton(R.string.cancel, null)
+                }.setNegativeButton(R.string.cancel, null)
                 .show()
         }
         binding.sort.setOnClickListener {
@@ -99,7 +104,7 @@ class PlayingQueueSheet : ExpandedBottomSheet(R.layout.queue_bottom_sheet) {
             onDragListener = { from, to ->
                 PlayingQueue.move(from, to)
                 adapter.notifyItemMoved(from, to)
-            }
+            },
         )
     }
 
@@ -111,52 +116,54 @@ class PlayingQueueSheet : ExpandedBottomSheet(R.layout.queue_bottom_sheet) {
 
     @SuppressLint("NotifyDataSetChanged")
     private fun showSortDialog() {
-        val sortOptions = listOf(
-            R.string.creation_date,
-            R.string.most_views,
-            R.string.uploader_name,
-            R.string.shuffle,
-            R.string.tooltip_reverse
-        )
-            .map { requireContext().getString(it) }
-            .toTypedArray()
+        val sortOptions =
+            listOf(
+                R.string.creation_date,
+                R.string.most_views,
+                R.string.uploader_name,
+                R.string.shuffle,
+                R.string.tooltip_reverse,
+            ).map { requireContext().getString(it) }
+                .toTypedArray()
         MaterialAlertDialogBuilder(requireContext())
             .setTitle(R.string.sort_by)
             .setItems(sortOptions) { _, index ->
-                val newQueue = when (index) {
-                    0 -> PlayingQueue.getStreams().sortedBy { it.uploaded }
-                    1 -> PlayingQueue.getStreams().sortedBy { it.views }.reversed()
-                    2 -> PlayingQueue.getStreams().sortedBy { it.uploaderName }
-                    3 -> {
-                        val streams = PlayingQueue.getStreams()
-                        val currentIndex = PlayingQueue.currentIndex()
+                val newQueue =
+                    when (index) {
+                        0 -> PlayingQueue.getStreams().sortedBy { it.uploaded }
+                        1 -> PlayingQueue.getStreams().sortedBy { it.views }.reversed()
+                        2 -> PlayingQueue.getStreams().sortedBy { it.uploaderName }
+                        3 -> {
+                            val streams = PlayingQueue.getStreams()
+                            val currentIndex = PlayingQueue.currentIndex()
 
-                        // save all streams that need to be shuffled to a copy of the list
-                        val toShuffle = streams.filterIndexed { queueIndex, _ ->
-                            queueIndex > currentIndex
+                            // save all streams that need to be shuffled to a copy of the list
+                            val toShuffle =
+                                streams.filterIndexed { queueIndex, _ ->
+                                    queueIndex > currentIndex
+                                }
+
+                            // create a new list by replacing the old queue-end with the new, shuffled one
+                            streams
+                                .filter { it !in toShuffle }
+                                .plus(toShuffle.shuffled())
                         }
-
-                        // create a new list by replacing the old queue-end with the new, shuffled one
-                        streams
-                            .filter { it !in toShuffle }
-                            .plus(toShuffle.shuffled())
+                        4 -> PlayingQueue.getStreams().reversed()
+                        else -> throw IllegalArgumentException()
                     }
-                    4 -> PlayingQueue.getStreams().reversed()
-                    else -> throw IllegalArgumentException()
-                }
                 PlayingQueue.setStreams(newQueue)
                 _binding?.optionsRecycler?.adapter?.notifyDataSetChanged()
-            }
-            .show()
+            }.show()
     }
 
     @SuppressLint("NotifyDataSetChanged")
     private fun showWatchPositionsOptions() {
-        val options = arrayOf(
-            getString(R.string.mark_as_watched),
-            getString(R.string.mark_as_unwatched),
-            getString(R.string.remove_watched_videos)
-        )
+        val options =
+            arrayOf(
+                getString(R.string.mark_as_watched),
+                getString(R.string.mark_as_unwatched),
+                getString(R.string.remove_watched_videos),
+            )
         MaterialAlertDialogBuilder(requireContext())
             .setTitle(R.string.watch_positions)
             .setItems(options) { _, index ->
@@ -175,7 +182,8 @@ class PlayingQueueSheet : ExpandedBottomSheet(R.layout.queue_bottom_sheet) {
                     1 -> {
                         CoroutineScope(Dispatchers.IO).launch {
                             PlayingQueue.getStreams().forEach {
-                                DatabaseHolder.Database.watchPositionDao()
+                                DatabaseHolder.Database
+                                    .watchPositionDao()
                                     .deleteByVideoId(it.url.orEmpty().toID())
                             }
                         }
@@ -184,9 +192,10 @@ class PlayingQueueSheet : ExpandedBottomSheet(R.layout.queue_bottom_sheet) {
                     2 -> {
                         CoroutineScope(Dispatchers.IO).launch {
                             val currentStream = PlayingQueue.getCurrent()
-                            val streams = DatabaseHelper
-                                .filterUnwatched(PlayingQueue.getStreams())
-                                .toMutableList()
+                            val streams =
+                                DatabaseHelper
+                                    .filterUnwatched(PlayingQueue.getStreams())
+                                    .toMutableList()
                             if (currentStream != null &&
                                 streams.none { it.url?.toID() == currentStream.url?.toID() }
                             ) {
@@ -199,8 +208,7 @@ class PlayingQueueSheet : ExpandedBottomSheet(R.layout.queue_bottom_sheet) {
                         }
                     }
                 }
-            }
-            .show()
+            }.show()
     }
 
     override fun onDestroyView() {
