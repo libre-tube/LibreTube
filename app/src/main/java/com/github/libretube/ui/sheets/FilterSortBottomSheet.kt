@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.View
 import android.widget.RadioButton
 import android.widget.RadioGroup
-import androidx.core.os.bundleOf
 import androidx.fragment.app.setFragmentResult
 import com.github.libretube.R
 import com.github.libretube.constants.IntentData
@@ -113,11 +112,11 @@ class FilterSortBottomSheet : ExpandedBottomSheet(R.layout.filter_sort_sheet) {
         setFragmentResult(
             requestKey = FILTER_SORT_REQUEST_KEY,
             result =
-                bundleOf(
-                    IntentData.sortOptions to selectedIndex,
-                    IntentData.hideWatched to hideWatched,
-                    IntentData.showUpcoming to showUpcoming,
-                ),
+                Bundle().apply {
+                    putSerializable(IntentData.sortOptions, selectedIndex)
+                    putBoolean(IntentData.hideWatched, hideWatched)
+                    putBoolean(IntentData.showUpcoming, showUpcoming)
+                },
         )
     }
 

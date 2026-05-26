@@ -7,7 +7,6 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.widget.SeekBar
 import android.widget.Toast
-import androidx.core.os.bundleOf
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.setFragmentResult
 import com.github.libretube.R
@@ -86,7 +85,7 @@ class ColorPickerDialog :
                 val color = getColor()
                 setFragmentResult(
                     COLOR_PICKER_REQUEST_KEY,
-                    bundleOf(IntentData.color to color),
+                    Bundle().apply { putInt(IntentData.color, color) },
                 )
             }.setNegativeButton(R.string.cancel, null)
             .show()

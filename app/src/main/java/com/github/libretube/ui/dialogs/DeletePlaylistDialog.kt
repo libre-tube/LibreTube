@@ -3,7 +3,6 @@ package com.github.libretube.ui.dialogs
 import android.app.AlertDialog
 import android.app.Dialog
 import android.os.Bundle
-import androidx.core.os.bundleOf
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.setFragmentResult
 import androidx.lifecycle.lifecycleScope
@@ -46,7 +45,7 @@ class DeletePlaylistDialog : DialogFragment() {
 
                             setFragmentResult(
                                 PlaylistOptionsBottomSheet.PLAYLIST_OPTIONS_REQUEST_KEY,
-                                bundleOf(IntentData.playlistTask to true),
+                                Bundle().apply { putBoolean(IntentData.playlistTask, true) },
                             )
                         }
                     }

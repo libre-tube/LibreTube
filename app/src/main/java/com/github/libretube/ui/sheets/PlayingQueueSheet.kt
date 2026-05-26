@@ -3,7 +3,6 @@ package com.github.libretube.ui.sheets
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
-import androidx.core.os.bundleOf
 import androidx.fragment.app.setFragmentResult
 import androidx.media3.common.Player
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -39,7 +38,10 @@ class PlayingQueueSheet : ExpandedBottomSheet(R.layout.queue_bottom_sheet) {
         binding.optionsRecycler.layoutManager = LinearLayoutManager(context)
         val adapter =
             PlayingQueueAdapter { videoId ->
-                setFragmentResult(PLAYING_QUEUE_REQUEST_KEY, bundleOf(IntentData.videoId to videoId))
+                setFragmentResult(
+                    PLAYING_QUEUE_REQUEST_KEY,
+                    Bundle().apply { putString(IntentData.videoId, videoId) },
+                )
             }
         binding.optionsRecycler.adapter = adapter
 

@@ -1,7 +1,6 @@
 package com.github.libretube.ui.sheets
 
 import android.os.Bundle
-import androidx.core.os.bundleOf
 import com.github.libretube.R
 import com.github.libretube.api.MediaServiceRepository
 import com.github.libretube.api.PlaylistsHelper
@@ -115,11 +114,11 @@ class PlaylistOptionsBottomSheet : BaseBottomSheet() {
                 R.string.share -> {
                     val newShareDialog = ShareDialog()
                     newShareDialog.arguments =
-                        bundleOf(
-                            IntentData.id to playlistId,
-                            IntentData.shareObjectType to ShareObjectType.PLAYLIST,
-                            IntentData.shareData to ShareData(currentPlaylist = playlistName),
-                        )
+                        Bundle().apply {
+                            putString(IntentData.id, playlistId)
+                            putSerializable(IntentData.shareObjectType, ShareObjectType.PLAYLIST)
+                            putParcelable(IntentData.shareData, ShareData(currentPlaylist = playlistName))
+                        }
                     // using parentFragmentManager, childFragmentManager doesn't work here
                     newShareDialog.show(parentFragmentManager, ShareDialog::class.java.name)
                 }
@@ -127,29 +126,29 @@ class PlaylistOptionsBottomSheet : BaseBottomSheet() {
                 R.string.deletePlaylist -> {
                     val newDeletePlaylistDialog = DeletePlaylistDialog()
                     newDeletePlaylistDialog.arguments =
-                        bundleOf(
-                            IntentData.playlistId to playlistId,
-                        )
+                        Bundle().apply {
+                            putString(IntentData.playlistId, playlistId)
+                        }
                     newDeletePlaylistDialog.show(mFragmentManager, null)
                 }
 
                 R.string.renamePlaylist -> {
                     val newRenamePlaylistDialog = RenamePlaylistDialog()
                     newRenamePlaylistDialog.arguments =
-                        bundleOf(
-                            IntentData.playlistId to playlistId,
-                            IntentData.playlistName to playlistName,
-                        )
+                        Bundle().apply {
+                            putString(IntentData.playlistId, playlistId)
+                            putString(IntentData.playlistName, playlistName)
+                        }
                     newRenamePlaylistDialog.show(mFragmentManager, null)
                 }
 
                 R.string.change_playlist_description -> {
                     val newPlaylistDescriptionDialog = PlaylistDescriptionDialog()
                     newPlaylistDescriptionDialog.arguments =
-                        bundleOf(
-                            IntentData.playlistId to playlistId,
-                            IntentData.playlistDescription to "",
-                        )
+                        Bundle().apply {
+                            putString(IntentData.playlistId, playlistId)
+                            putString(IntentData.playlistDescription, "")
+                        }
                     newPlaylistDescriptionDialog.show(mFragmentManager, null)
                 }
 

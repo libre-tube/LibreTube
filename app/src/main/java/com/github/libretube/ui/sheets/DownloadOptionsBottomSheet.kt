@@ -1,7 +1,6 @@
 package com.github.libretube.ui.sheets
 
 import android.os.Bundle
-import androidx.core.os.bundleOf
 import androidx.fragment.app.setFragmentResult
 import com.github.libretube.R
 import com.github.libretube.api.obj.StreamItem
@@ -67,18 +66,18 @@ class DownloadOptionsBottomSheet : BaseBottomSheet() {
                 R.string.share -> {
                     val shareData = ShareData(currentVideo = videoId)
                     val bundle =
-                        bundleOf(
-                            IntentData.id to videoId,
-                            IntentData.shareObjectType to ShareObjectType.VIDEO,
-                            IntentData.shareData to shareData,
-                        )
+                        Bundle().apply {
+                            putString(IntentData.id, videoId)
+                            putSerializable(IntentData.shareObjectType, ShareObjectType.VIDEO)
+                            putParcelable(IntentData.shareData, shareData)
+                        }
                     val newShareDialog = ShareDialog()
                     newShareDialog.arguments = bundle
                     newShareDialog.show(parentFragmentManager, null)
                 }
 
                 R.string.delete -> {
-                    setFragmentResult(DELETE_DOWNLOAD_REQUEST_KEY, bundleOf())
+                    setFragmentResult(DELETE_DOWNLOAD_REQUEST_KEY, Bundle())
                     dialog?.dismiss()
                 }
 

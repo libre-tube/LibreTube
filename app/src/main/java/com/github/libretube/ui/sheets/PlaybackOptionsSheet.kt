@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
-import androidx.core.os.bundleOf
 import androidx.core.view.isGone
 import androidx.media3.common.PlaybackParameters
 import androidx.media3.session.MediaController
@@ -120,7 +119,7 @@ class PlaybackOptionsSheet(
         binding.skipSilence.setOnCheckedChangeListener { _, isChecked ->
             player.sendCustomCommand(
                 AbstractPlayerService.runPlayerActionCommand,
-                bundleOf(PlayerCommand.SKIP_SILENCE.name to isChecked),
+                Bundle().apply { putBoolean(PlayerCommand.SKIP_SILENCE.name, isChecked) },
             )
             PreferenceHelper.putBoolean(PreferenceKeys.SKIP_SILENCE, isChecked)
         }

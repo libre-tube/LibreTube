@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.app.Dialog
 import android.os.Bundle
 import android.widget.Toast
-import androidx.core.os.bundleOf
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.setFragmentResult
 import com.github.libretube.R
@@ -26,7 +25,7 @@ class LogoutDialog : DialogFragment() {
 
                 setFragmentResult(
                     InstanceSettings.INSTANCE_DIALOG_REQUEST_KEY,
-                    bundleOf(IntentData.logoutTask to true),
+                    Bundle().apply { putBoolean(IntentData.logoutTask, true) },
                 )
             }.show()
     }

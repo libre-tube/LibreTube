@@ -1,7 +1,6 @@
 package com.github.libretube.ui.sheets
 
 import android.os.Bundle
-import androidx.core.os.bundleOf
 import androidx.fragment.app.setFragmentResult
 import androidx.navigation.fragment.NavHostFragment
 import com.github.libretube.R
@@ -73,7 +72,7 @@ class VideoOptionsBottomSheet : BaseBottomSheet() {
                 R.string.addToPlaylist -> {
                     AddToPlaylistDialog()
                         .apply {
-                            arguments = bundleOf(IntentData.videoInfo to streamItem)
+                            arguments = Bundle().apply { putParcelable(IntentData.videoInfo, streamItem) }
                         }.show(
                             parentFragmentManager,
                             AddToPlaylistDialog::class.java.name,
@@ -90,11 +89,11 @@ class VideoOptionsBottomSheet : BaseBottomSheet() {
 
                 R.string.share -> {
                     val bundle =
-                        bundleOf(
-                            IntentData.id to videoId,
-                            IntentData.shareObjectType to ShareObjectType.VIDEO,
-                            IntentData.shareData to ShareData(currentVideo = streamItem.title),
-                        )
+                        Bundle().apply {
+                            putString(IntentData.id, videoId)
+                            putSerializable(IntentData.shareObjectType, ShareObjectType.VIDEO)
+                            putParcelable(IntentData.shareData, ShareData(currentVideo = streamItem.title))
+                        }
                     val newShareDialog = ShareDialog()
                     newShareDialog.arguments = bundle
                     // using parentFragmentManager is important here
@@ -132,7 +131,7 @@ class VideoOptionsBottomSheet : BaseBottomSheet() {
                                 ?.firstOrNull() as? SubscriptionsFragment
                         fragment?.removeItem(videoId)
                     }
-                    setFragmentResult(VIDEO_OPTIONS_SHEET_REQUEST_KEY, bundleOf())
+                    setFragmentResult(VIDEO_OPTIONS_SHEET_REQUEST_KEY, Bundle())
                 }
 
                 R.string.mark_as_unwatched -> {
@@ -140,7 +139,7 @@ class VideoOptionsBottomSheet : BaseBottomSheet() {
                         DatabaseHolder.Database.watchPositionDao().deleteByVideoId(videoId)
                         DatabaseHolder.Database.watchHistoryDao().deleteByVideoId(videoId)
                     }
-                    setFragmentResult(VIDEO_OPTIONS_SHEET_REQUEST_KEY, bundleOf())
+                    setFragmentResult(VIDEO_OPTIONS_SHEET_REQUEST_KEY, Bundle())
                 }
             }
         }
