@@ -2,9 +2,9 @@ package com.github.libretube.helpers
 
 import android.content.Context
 import android.content.Intent
+import android.os.Bundle
 import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
-import androidx.core.os.bundleOf
 import androidx.fragment.app.FragmentManager
 import com.github.libretube.R
 import com.github.libretube.api.PlaylistsHelper
@@ -86,7 +86,10 @@ object DownloadHelper {
         if (externalProviderPackageName.isBlank()) {
             DownloadDialog()
                 .apply {
-                    arguments = bundleOf(IntentData.videoId to videoId)
+                    arguments =
+                        Bundle().apply {
+                            putString(IntentData.videoId, videoId)
+                        }
                 }.show(fragmentManager, DownloadDialog::class.java.name)
         } else {
             val intent =
@@ -115,11 +118,11 @@ object DownloadHelper {
             val downloadPlaylistDialog =
                 DownloadPlaylistDialog().apply {
                     arguments =
-                        bundleOf(
-                            IntentData.playlistId to playlistId,
-                            IntentData.playlistName to playlistName,
-                            IntentData.playlistType to playlistType,
-                        )
+                        Bundle().apply {
+                            putString(IntentData.playlistId, playlistId)
+                            putString(IntentData.playlistName, playlistName)
+                            putSerializable(IntentData.playlistType, playlistType)
+                        }
                 }
             downloadPlaylistDialog.show(fragmentManager, null)
         } else if (playlistType == PlaylistType.PUBLIC) {

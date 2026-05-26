@@ -7,7 +7,6 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import androidx.annotation.OptIn
-import androidx.core.os.bundleOf
 import androidx.core.os.postDelayed
 import androidx.fragment.app.commit
 import androidx.media3.common.util.Log
@@ -55,11 +54,11 @@ object BackgroundHelper {
         startMediaService(
             context,
             service,
-            bundleOf(
-                IntentData.playerData to playerData,
-                IntentData.noInternet to noInternet,
-                IntentData.audioOnly to true,
-            ),
+            Bundle().apply {
+                putParcelable(IntentData.playerData, playerData)
+                putBoolean(IntentData.noInternet, noInternet)
+                putBoolean(IntentData.audioOnly, true)
+            },
         )
     }
 

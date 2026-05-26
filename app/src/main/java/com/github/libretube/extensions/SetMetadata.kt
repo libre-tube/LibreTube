@@ -1,9 +1,9 @@
 package com.github.libretube.extensions
 
+import android.os.Bundle
 import android.support.v4.media.MediaMetadataCompat
 import androidx.annotation.OptIn
 import androidx.core.net.toUri
-import androidx.core.os.bundleOf
 import androidx.media3.common.MediaItem
 import androidx.media3.common.MediaMetadata
 import androidx.media3.common.util.UnstableApi
@@ -21,14 +21,14 @@ fun MediaItem.Builder.setMetadata(
     // Avoid reaching the max parcelable size of 1MB for binder transactions.
     val clearedStreams = streams.copy(audioStreams = emptyList(), videoStreams = emptyList())
     val extras =
-        bundleOf(
-            MediaMetadataCompat.METADATA_KEY_TITLE to streams.title,
-            MediaMetadataCompat.METADATA_KEY_ARTIST to streams.uploader,
-            IntentData.videoId to videoId,
+        Bundle().apply {
+            putString(MediaMetadataCompat.METADATA_KEY_TITLE, streams.title)
+            putString(MediaMetadataCompat.METADATA_KEY_ARTIST, streams.uploader)
+            putString(IntentData.videoId, videoId)
             // JSON-encode as work-around for https://github.com/androidx/media/issues/564
-            IntentData.streams to JsonHelper.json.encodeToString(clearedStreams),
-            IntentData.chapters to JsonHelper.json.encodeToString(streams.chapters),
-        )
+            putString(IntentData.streams, JsonHelper.json.encodeToString(clearedStreams))
+            putString(IntentData.chapters, JsonHelper.json.encodeToString(streams.chapters))
+        }
     setMediaMetadata(
         MediaMetadata
             .Builder()
@@ -52,13 +52,13 @@ fun MediaItem.Builder.setMetadata(downloadWithItems: DownloadWithItems) =
         val streams = downloadWithItems.toStreams()
 
         val extras =
-            bundleOf(
-                MediaMetadataCompat.METADATA_KEY_TITLE to download.title,
-                MediaMetadataCompat.METADATA_KEY_ARTIST to download.uploader,
-                IntentData.videoId to download.videoId,
-                IntentData.streams to JsonHelper.json.encodeToString(streams),
-                IntentData.chapters to JsonHelper.json.encodeToString(chapters),
-            )
+            Bundle().apply {
+                putString(MediaMetadataCompat.METADATA_KEY_TITLE, download.title)
+                putString(MediaMetadataCompat.METADATA_KEY_ARTIST, download.uploader)
+                putString(IntentData.videoId, download.videoId)
+                putString(IntentData.streams, JsonHelper.json.encodeToString(streams))
+                putString(IntentData.chapters, JsonHelper.json.encodeToString(chapters))
+            }
         setMediaMetadata(
             MediaMetadata
                 .Builder()
