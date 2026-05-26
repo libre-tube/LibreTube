@@ -169,27 +169,28 @@ object PlayingQueue {
         streams: List<StreamItem>,
         currentStreamItem: StreamItem? = null,
         isMainList: Boolean = true,
-    ): Unit = synchronized(queue) {
-        if (!isMainList) {
+    ): Unit =
+        synchronized(queue) {
+            if (!isMainList) {
+                add(*streams.toTypedArray())
+                return
+            }
+            val currentStream = currentStreamItem ?: this.currentStream
+            // if the stream already got added to the queue earlier, although it's not yet
+            // been found in the playlist, remove it and re-add it later
+            var reAddStream = true
+            if (currentStream != null && streams.any { it.url?.toID() == currentStream.url?.toID() }) {
+                queue.removeAll { it.url?.toID() == currentStream.url?.toID() }
+                reAddStream = false
+            }
+            // add all new stream items to the queue
             add(*streams.toTypedArray())
-            return
-        }
-        val currentStream = currentStreamItem ?: this.currentStream
-        // if the stream already got added to the queue earlier, although it's not yet
-        // been found in the playlist, remove it and re-add it later
-        var reAddStream = true
-        if (currentStream != null && streams.any { it.url?.toID() == currentStream.url?.toID() }) {
-            queue.removeAll { it.url?.toID() == currentStream.url?.toID() }
-            reAddStream = false
-        }
-        // add all new stream items to the queue
-        add(*streams.toTypedArray())
 
-        if (currentStream != null && reAddStream) {
-            // re-add the stream to the end of the queue
-            updateCurrent(currentStream)
+            if (currentStream != null && reAddStream) {
+                // re-add the stream to the end of the queue
+                updateCurrent(currentStream)
+            }
         }
-    }
 
     private suspend fun fetchMoreFromPlaylist(
         playlistId: String,
