@@ -6,8 +6,8 @@ import android.content.pm.PackageManager
 import android.content.pm.ResolveInfo
 import android.net.Uri
 import android.os.Build
+import android.os.Bundle
 import androidx.core.net.toUri
-import androidx.core.os.bundleOf
 import androidx.fragment.app.FragmentManager
 import com.github.libretube.R
 import com.github.libretube.constants.IntentData
@@ -55,8 +55,12 @@ object IntentHelper {
             }
         } else {
             IntentChooserSheet()
-                .apply { arguments = bundleOf(IntentData.url to link) }
-                .show(fragmentManager)
+                .apply {
+                    arguments =
+                        Bundle().apply {
+                            putString(IntentData.url, link)
+                        }
+                }.show(fragmentManager)
         }
     }
 

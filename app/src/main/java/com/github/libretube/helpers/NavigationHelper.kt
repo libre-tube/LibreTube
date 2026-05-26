@@ -4,9 +4,9 @@ import android.annotation.SuppressLint
 import android.app.NotificationManager
 import android.content.Context
 import android.content.Intent
+import android.os.Bundle
 import android.os.Process
 import androidx.core.content.getSystemService
-import androidx.core.os.bundleOf
 import androidx.fragment.app.commitNow
 import androidx.fragment.app.replace
 import com.github.libretube.NavDirections
@@ -148,10 +148,10 @@ object NavigationHelper {
         val activity = ContextHelper.unwrapActivity<BaseActivity>(context)
         activity.supportFragmentManager.commitNow {
             val args =
-                bundleOf(
-                    IntentData.minimizeByDefault to minimizeByDefault,
-                    IntentData.offlinePlayer to offlinePlayer,
-                )
+                Bundle().apply {
+                    putBoolean(IntentData.minimizeByDefault, minimizeByDefault)
+                    putBoolean(IntentData.offlinePlayer, offlinePlayer)
+                }
             replace<AudioPlayerFragment>(R.id.container, args = args)
         }
     }
@@ -167,10 +167,10 @@ object NavigationHelper {
         val activity = ContextHelper.unwrapActivity<BaseActivity>(context)
 
         val bundle =
-            bundleOf(
-                IntentData.playerData to playerData,
-                IntentData.alreadyStarted to alreadyStarted,
-            )
+            Bundle().apply {
+                putParcelable(IntentData.playerData, playerData)
+                putBoolean(IntentData.alreadyStarted, alreadyStarted)
+            }
         activity.supportFragmentManager.commitNow {
             replace<PlayerFragment>(R.id.container, args = bundle)
         }

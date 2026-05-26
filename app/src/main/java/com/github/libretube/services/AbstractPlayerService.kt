@@ -8,7 +8,6 @@ import android.view.KeyEvent
 import androidx.annotation.CallSuper
 import androidx.annotation.OptIn
 import androidx.core.app.ServiceCompat
-import androidx.core.os.bundleOf
 import androidx.core.os.postDelayed
 import androidx.media3.common.C
 import androidx.media3.common.ForwardingPlayer
@@ -235,7 +234,11 @@ abstract class AbstractPlayerService :
         sponsorBlockSegments = emptyList()
 
         updatePlaylistMetadata {
-            setExtras(bundleOf(IntentData.videoId to videoId))
+            setExtras(
+                Bundle().apply {
+                    putString(IntentData.videoId, videoId)
+                },
+            )
         }
 
         exoPlayer?.clearMediaItems()
@@ -254,7 +257,11 @@ abstract class AbstractPlayerService :
         updatePlaylistMetadata {
             // JSON-encode as work-around for https://github.com/androidx/media/issues/564
             val segments = JsonHelper.json.encodeToString(sponsorBlockSegments)
-            setExtras(bundleOf(IntentData.segments to segments))
+            setExtras(
+                Bundle().apply {
+                    putString(IntentData.segments, segments)
+                },
+            )
         }
 
         checkForSegments()
