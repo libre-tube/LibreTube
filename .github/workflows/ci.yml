@@ -57,7 +57,14 @@ jobs:
         run: |
           curl -sSLo ktlint https://github.com/pinterest/ktlint/releases/download/1.5.0/ktlint
           chmod +x ktlint
-          ./ktlint "**/*.kt" "**/*.kts"
+          ./ktlint \
+            "app/src/**/*.kt" \
+            "baselineprofile/src/**/*.kt" \
+            "*.gradle.kts" \
+            "app/*.gradle.kts" \
+            "baselineprofile/*.gradle.kts" \
+            "gradle/**/*.gradle.kts" \
+            "settings.gradle.kts"
 
       - name: Run Android lint
         run: ./gradlew :app:lintDebug --no-daemon
