@@ -1,8 +1,8 @@
 package com.github.libretube.ui.adapters
 
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.os.bundleOf
 import androidx.recyclerview.widget.ListAdapter
 import com.github.libretube.api.obj.Subscription
 import com.github.libretube.constants.IntentData
@@ -47,11 +47,11 @@ class SubscriptionChannelAdapter : ListAdapter<Subscription, SubscriptionChannel
             root.setOnLongClickListener {
                 val channelOptionsSheet = ChannelOptionsBottomSheet()
                 channelOptionsSheet.arguments =
-                    bundleOf(
-                        IntentData.channelId to subscription.url.toID(),
-                        IntentData.channelName to subscription.name,
-                        IntentData.isSubscribed to true,
-                    )
+                    Bundle().apply {
+                        putString(IntentData.channelId, subscription.url.toID())
+                        putString(IntentData.channelName, subscription.name)
+                        putBoolean(IntentData.isSubscribed, true)
+                    }
                 val activity = ContextHelper.unwrapActivity<BaseActivity>(root.context)
                 channelOptionsSheet.show(activity.supportFragmentManager)
                 true

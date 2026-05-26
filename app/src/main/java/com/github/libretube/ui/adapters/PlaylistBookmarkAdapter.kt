@@ -1,9 +1,9 @@
 package com.github.libretube.ui.adapters
 
 import android.content.Context
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.ListAdapter
 import com.github.libretube.R
@@ -44,11 +44,11 @@ class PlaylistBookmarkAdapter :
     ) {
         val sheet = PlaylistOptionsBottomSheet()
         sheet.arguments =
-            bundleOf(
-                IntentData.playlistId to bookmark.playlistId,
-                IntentData.playlistName to bookmark.playlistName,
-                IntentData.playlistType to PlaylistType.PUBLIC,
-            )
+            Bundle().apply {
+                putString(IntentData.playlistId, bookmark.playlistId)
+                putString(IntentData.playlistName, bookmark.playlistName)
+                putSerializable(IntentData.playlistType, PlaylistType.PUBLIC)
+            }
         sheet.show(
             (context as BaseActivity).supportFragmentManager,
         )

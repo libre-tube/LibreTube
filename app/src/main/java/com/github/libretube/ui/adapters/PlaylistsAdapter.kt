@@ -1,8 +1,8 @@
 package com.github.libretube.ui.adapters
 
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.os.bundleOf
 import androidx.recyclerview.widget.ListAdapter
 import com.github.libretube.R
 import com.github.libretube.api.obj.Playlists
@@ -89,11 +89,11 @@ class PlaylistsAdapter(
 
                 val playlistOptionsDialog = PlaylistOptionsBottomSheet()
                 playlistOptionsDialog.arguments =
-                    bundleOf(
-                        IntentData.playlistId to playlist.id!!,
-                        IntentData.playlistName to playlist.name!!,
-                        IntentData.playlistType to playlistType,
-                    )
+                    Bundle().apply {
+                        putString(IntentData.playlistId, playlist.id!!)
+                        putString(IntentData.playlistName, playlist.name!!)
+                        putSerializable(IntentData.playlistType, playlistType)
+                    }
                 playlistOptionsDialog.show(
                     fragmentManager,
                     PlaylistOptionsBottomSheet::class.java.name,
