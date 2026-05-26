@@ -1,9 +1,9 @@
 package com.github.libretube.ui.adapters
 
 import android.annotation.SuppressLint
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.os.bundleOf
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.core.view.updateLayoutParams
@@ -133,7 +133,10 @@ class VideoCardsAdapter(
                     notifyItemChanged(position)
                 }
                 val sheet = VideoOptionsBottomSheet()
-                sheet.arguments = bundleOf(IntentData.streamItem to video)
+                sheet.arguments =
+                    Bundle().apply {
+                        putParcelable(IntentData.streamItem, video)
+                    }
                 sheet.show(fragmentManager, VideoCardsAdapter::class.java.name)
                 true
             }

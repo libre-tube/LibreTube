@@ -1,8 +1,8 @@
 package com.github.libretube.ui.adapters
 
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.os.bundleOf
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.paging.PagingDataAdapter
@@ -134,7 +134,10 @@ class SearchResultsAdapter(
                 val sheet = VideoOptionsBottomSheet()
                 val contentItemString = JsonHelper.json.encodeToString(item)
                 val streamItem: StreamItem = JsonHelper.json.decodeFromString(contentItemString)
-                sheet.arguments = bundleOf(IntentData.streamItem to streamItem)
+                sheet.arguments =
+                    Bundle().apply {
+                        putParcelable(IntentData.streamItem, streamItem)
+                    }
                 sheet.show(fragmentManager, SearchResultsAdapter::class.java.name)
                 true
             }
@@ -200,11 +203,11 @@ class SearchResultsAdapter(
             root.setOnLongClickListener {
                 val channelOptionsSheet = ChannelOptionsBottomSheet()
                 channelOptionsSheet.arguments =
-                    bundleOf(
-                        IntentData.channelId to item.url.toID(),
-                        IntentData.channelName to item.name,
-                        IntentData.isSubscribed to subscribed,
-                    )
+                    Bundle().apply {
+                        putString(IntentData.channelId, item.url.toID())
+                        putString(IntentData.channelName, item.name)
+                        putBoolean(IntentData.isSubscribed, subscribed)
+                    }
                 channelOptionsSheet.show((root.context as BaseActivity).supportFragmentManager)
                 true
             }
@@ -227,11 +230,11 @@ class SearchResultsAdapter(
             root.setOnLongClickListener {
                 val sheet = PlaylistOptionsBottomSheet()
                 sheet.arguments =
-                    bundleOf(
-                        IntentData.playlistId to item.url.toID(),
-                        IntentData.playlistName to item.name.orEmpty(),
-                        IntentData.playlistType to PlaylistType.PUBLIC,
-                    )
+                    Bundle().apply {
+                        putString(IntentData.playlistId, item.url.toID())
+                        putString(IntentData.playlistName, item.name.orEmpty())
+                        putSerializable(IntentData.playlistType, PlaylistType.PUBLIC)
+                    }
                 sheet.show(
                     (root.context as BaseActivity).supportFragmentManager,
                     PlaylistOptionsBottomSheet::class.java.name,

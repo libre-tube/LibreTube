@@ -2,10 +2,10 @@ package com.github.libretube.ui.adapters
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.os.Bundle
 import android.text.format.DateUtils
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.os.bundleOf
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.ListAdapter
@@ -159,11 +159,11 @@ class DownloadsAdapter(
                 DownloadOptionsBottomSheet()
                     .apply {
                         arguments =
-                            bundleOf(
-                                IntentData.streamItem to download.toStreamItem(),
-                                IntentData.playlistId to playlistId,
-                                IntentData.downloadTab to downloadTab,
-                            )
+                            Bundle().apply {
+                                putParcelable(IntentData.streamItem, download.toStreamItem())
+                                putString(IntentData.playlistId, playlistId)
+                                putSerializable(IntentData.downloadTab, downloadTab)
+                            }
                     }.show(fragmentManager)
                 true
             }

@@ -1,8 +1,8 @@
 package com.github.libretube.ui.adapters
 
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.os.bundleOf
 import androidx.recyclerview.widget.ListAdapter
 import com.github.libretube.api.PlaylistsHelper
 import com.github.libretube.constants.IntentData
@@ -50,11 +50,11 @@ class CarouselPlaylistAdapter :
             root.setOnLongClickListener {
                 val playlistOptionsDialog = PlaylistOptionsBottomSheet()
                 playlistOptionsDialog.arguments =
-                    bundleOf(
-                        IntentData.playlistId to item.id,
-                        IntentData.playlistName to item.title,
-                        IntentData.playlistType to type,
-                    )
+                    Bundle().apply {
+                        putString(IntentData.playlistId, item.id)
+                        putString(IntentData.playlistName, item.title)
+                        putSerializable(IntentData.playlistType, type)
+                    }
                 playlistOptionsDialog.show((root.context as BaseActivity).supportFragmentManager)
 
                 true

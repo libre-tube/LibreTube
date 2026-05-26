@@ -1,8 +1,8 @@
 package com.github.libretube.ui.adapters
 
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.os.bundleOf
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.ListAdapter
@@ -89,10 +89,10 @@ class PlaylistAdapter(
                 VideoOptionsBottomSheet()
                     .apply {
                         arguments =
-                            bundleOf(
-                                IntentData.streamItem to streamItem,
-                                IntentData.playlistId to playlistId,
-                            )
+                            Bundle().apply {
+                                putParcelable(IntentData.streamItem, streamItem)
+                                putString(IntentData.playlistId, playlistId)
+                            }
                     }.show(fragmentManager, VideoOptionsBottomSheet::class.java.name)
                 true
             }

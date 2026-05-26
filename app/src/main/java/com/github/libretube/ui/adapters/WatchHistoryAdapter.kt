@@ -1,8 +1,8 @@
 package com.github.libretube.ui.adapters
 
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.os.bundleOf
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.ListAdapter
@@ -78,7 +78,10 @@ class WatchHistoryAdapter : ListAdapter<WatchHistoryItem, WatchHistoryViewHolder
                     notifyItemChanged(position)
                 }
                 val sheet = VideoOptionsBottomSheet()
-                sheet.arguments = bundleOf(IntentData.streamItem to video.toStreamItem())
+                sheet.arguments =
+                    Bundle().apply {
+                        putParcelable(IntentData.streamItem, video.toStreamItem())
+                    }
                 sheet.show(fragmentManager, WatchHistoryAdapter::class.java.name)
                 true
             }
