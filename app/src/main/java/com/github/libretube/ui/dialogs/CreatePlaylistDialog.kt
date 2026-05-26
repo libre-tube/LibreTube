@@ -3,7 +3,6 @@ package com.github.libretube.ui.dialogs
 import android.app.Dialog
 import android.os.Bundle
 import android.widget.Toast
-import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.setFragmentResult
@@ -52,10 +51,10 @@ class CreatePlaylistDialog : DialogFragment() {
                     if (playlistId != null) {
                         setFragmentResult(
                             CREATE_PLAYLIST_DIALOG_REQUEST_KEY,
-                            bundleOf(
-                                IntentData.playlistTask to true,
-                                IntentData.playlistId to playlistId,
-                            ),
+                            Bundle().apply {
+                                putBoolean(IntentData.playlistTask, true)
+                                putString(IntentData.playlistId, playlistId)
+                            },
                         )
                     }
                     appContext?.toastFromMainDispatcher(
@@ -88,10 +87,10 @@ class CreatePlaylistDialog : DialogFragment() {
                     playlistId?.let {
                         setFragmentResult(
                             CREATE_PLAYLIST_DIALOG_REQUEST_KEY,
-                            bundleOf(
-                                IntentData.playlistTask to true,
-                                IntentData.playlistId to playlistId,
-                            ),
+                            Bundle().apply {
+                                putBoolean(IntentData.playlistTask, true)
+                                putString(IntentData.playlistId, playlistId)
+                            },
                         )
                     }
                     dismiss()

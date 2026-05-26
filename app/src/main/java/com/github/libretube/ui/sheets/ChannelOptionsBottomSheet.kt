@@ -2,7 +2,6 @@ package com.github.libretube.ui.sheets
 
 import android.os.Bundle
 import android.util.Log
-import androidx.core.os.bundleOf
 import com.github.libretube.R
 import com.github.libretube.api.MediaServiceRepository
 import com.github.libretube.constants.IntentData
@@ -49,11 +48,11 @@ class ChannelOptionsBottomSheet : BaseBottomSheet() {
             when (optionsList[which]) {
                 R.string.share -> {
                     val bundle =
-                        bundleOf(
-                            IntentData.id to channelId,
-                            IntentData.shareObjectType to ShareObjectType.CHANNEL,
-                            IntentData.shareData to ShareData(currentChannel = channelName),
-                        )
+                        Bundle().apply {
+                            putString(IntentData.id, channelId)
+                            putSerializable(IntentData.shareObjectType, ShareObjectType.CHANNEL)
+                            putParcelable(IntentData.shareData, ShareData(currentChannel = channelName))
+                        }
                     val newShareDialog = ShareDialog()
                     newShareDialog.arguments = bundle
                     newShareDialog.show(parentFragmentManager, null)
@@ -62,7 +61,7 @@ class ChannelOptionsBottomSheet : BaseBottomSheet() {
                 R.string.add_to_group -> {
                     val sheet =
                         AddChannelToGroupSheet().apply {
-                            arguments = bundleOf(IntentData.channelId to channelId)
+                            arguments = Bundle().apply { putString(IntentData.channelId, channelId) }
                         }
                     sheet.show(parentFragmentManager, null)
                 }

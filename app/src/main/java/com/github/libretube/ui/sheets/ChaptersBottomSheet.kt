@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.View
 import android.view.ViewTreeObserver
 import android.view.WindowManager
-import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.setFragmentResult
@@ -40,7 +39,10 @@ class ChaptersBottomSheet : ExpandablePlayerSheet(R.layout.bottom_sheet) {
         binding.optionsRecycler.layoutManager = LinearLayoutManager(context)
         val adapter =
             ChaptersAdapter(chaptersViewModel.chapters, duration) {
-                setFragmentResult(SEEK_TO_POSITION_REQUEST_KEY, bundleOf(IntentData.currentPosition to it))
+                setFragmentResult(
+                    SEEK_TO_POSITION_REQUEST_KEY,
+                    Bundle().apply { putLong(IntentData.currentPosition, it) },
+                )
             }
         binding.optionsRecycler.adapter = adapter
 

@@ -4,7 +4,6 @@ import android.app.Dialog
 import android.content.DialogInterface
 import android.os.Bundle
 import androidx.annotation.StringRes
-import androidx.core.os.bundleOf
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.setFragmentResult
 import androidx.lifecycle.lifecycleScope
@@ -123,7 +122,7 @@ class BackupDialog : DialogFragment() {
                         val encodedBackupFile = Json.encodeToString(backupFile)
                         setFragmentResult(
                             BACKUP_DIALOG_REQUEST_KEY,
-                            bundleOf(IntentData.backupFile to encodedBackupFile),
+                            Bundle().apply { putString(IntentData.backupFile, encodedBackupFile) },
                         )
 
                         dialog?.dismiss()

@@ -3,7 +3,6 @@ package com.github.libretube.ui.dialogs
 import android.app.Dialog
 import android.os.Bundle
 import android.widget.ArrayAdapter
-import androidx.core.os.bundleOf
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.setFragmentResult
 import com.github.libretube.R
@@ -34,12 +33,12 @@ class PlayOfflineDialog : DialogFragment() {
             .setPositiveButton(R.string.yes) { _, _ ->
                 setFragmentResult(
                     PLAY_OFFLINE_DIALOG_REQUEST_KEY,
-                    bundleOf(IntentData.isPlayingOffline to true),
+                    Bundle().apply { putBoolean(IntentData.isPlayingOffline, true) },
                 )
             }.setNegativeButton(getString(R.string.cancel)) { _, _ ->
                 setFragmentResult(
                     PLAY_OFFLINE_DIALOG_REQUEST_KEY,
-                    bundleOf(IntentData.isPlayingOffline to false),
+                    Bundle().apply { putBoolean(IntentData.isPlayingOffline, false) },
                 )
             }.show()
     }

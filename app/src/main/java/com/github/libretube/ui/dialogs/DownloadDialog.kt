@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.text.format.Formatter
 import android.util.Log
 import android.widget.Toast
-import androidx.core.os.bundleOf
 import androidx.core.view.isGone
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.setFragmentResult
@@ -244,7 +243,7 @@ class DownloadDialog : DialogFragment() {
     override fun onDismiss(dialog: DialogInterface) {
         super.onDismiss(dialog)
 
-        setFragmentResult(DOWNLOAD_DIALOG_DISMISSED_KEY, bundleOf())
+        setFragmentResult(DOWNLOAD_DIALOG_DISMISSED_KEY, Bundle())
     }
 
     companion object {
