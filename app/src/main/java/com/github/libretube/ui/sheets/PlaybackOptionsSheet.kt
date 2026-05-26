@@ -166,7 +166,7 @@ class PlaybackOptionsSheet(
     // desiredPlaybackPitch = defaultPlaybackPitch * (ratio^n)
     //
     // And the defaultPlaybackPitch value is 1.0f, so we can omit that
-    private fun semitoneToPlaybackPitch(semitone: Float): Float = SEMITONE_RATIO.pow(semitone).toFloat()
+    private fun semitoneToPlaybackPitch(semitone: Float): Float = SEMITONE_RATIO.pow(semitone)
 
     // Get the exponent(or in this case semitone) value from a known base (the semitone's ratio)
     private fun playbackPitchToSemitone(playbackPitch: Float): Float = log(playbackPitch, SEMITONE_RATIO)

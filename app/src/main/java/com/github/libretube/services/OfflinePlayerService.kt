@@ -199,18 +199,17 @@ open class OfflinePlayerService : AbstractPlayerService() {
                     .createMediaSource(subtitle, C.TIME_UNSET)
             }
 
-        var mediaSource: MediaSource? = null
-        listOfNotNull(videoSource, audioSource, subtitleSource).forEach { source ->
-            mediaSource =
-                if (mediaSource == null) source else MergingMediaSource(mediaSource!!, source)
-        }
+        val mediaSource =
+            listOfNotNull(videoSource, audioSource, subtitleSource).reduceOrNull { acc, source ->
+                MergingMediaSource(acc, source)
+            }
 
         if (mediaSource == null || isAudioOnlyPlayer && audioSource == null) {
             stopSelf()
             return
         }
 
-        exoPlayer?.setMediaSource(mediaSource!!)
+        exoPlayer?.setMediaSource(mediaSource)
 
         trackSelector?.updateParameters {
             setPreferredTextRoleFlags(C.ROLE_FLAG_CAPTION)

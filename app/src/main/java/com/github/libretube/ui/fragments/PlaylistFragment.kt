@@ -547,7 +547,7 @@ class PlaylistFragment : DynamicLayoutManagerFragment(R.layout.fragment_playlist
 
     @SuppressLint("SetTextI18n")
     private fun updatePlaylistDuration() {
-        val totalDuration = playlistFeed.sumOf { it.duration ?: 0 } ?: return
+        val totalDuration = playlistFeed.sumOf { it.duration ?: 0 }
         binding.playlistDuration.text = DateUtils.formatElapsedTime(totalDuration) +
             if (nextPage != null) "+" else ""
     }
