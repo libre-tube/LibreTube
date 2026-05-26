@@ -19,21 +19,22 @@ data class WatchHistoryItem(
     @ColumnInfo var uploaderAvatar: String? = null,
     @ColumnInfo var thumbnailUrl: String? = null,
     @ColumnInfo val duration: Long? = null,
-    @ColumnInfo val isShort: Boolean = false
+    @ColumnInfo val isShort: Boolean = false,
 ) {
     val isLive get() = (duration == null) || (duration <= 0L)
 
-    fun toStreamItem() = StreamItem(
-        url = videoId,
-        type = StreamItem.TYPE_STREAM,
-        title = title,
-        thumbnail = thumbnailUrl,
-        uploaderName = uploader,
-        uploaded = uploadDate?.toMillis() ?: 0,
-        uploadedDate = uploadDate?.toString(),
-        uploaderAvatar = uploaderAvatar,
-        uploaderUrl = uploaderUrl,
-        duration = duration,
-        isShort = isShort
-    )
+    fun toStreamItem() =
+        StreamItem(
+            url = videoId,
+            type = StreamItem.TYPE_STREAM,
+            title = title,
+            thumbnail = thumbnailUrl,
+            uploaderName = uploader,
+            uploaded = uploadDate?.toMillis() ?: 0,
+            uploadedDate = uploadDate?.toString(),
+            uploaderAvatar = uploaderAvatar,
+            uploaderUrl = uploaderUrl,
+            duration = duration,
+            isShort = isShort,
+        )
 }

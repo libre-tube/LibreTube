@@ -10,7 +10,6 @@ import androidx.media3.common.MimeTypes
 import androidx.media3.common.Player
 import androidx.media3.common.util.UnstableApi
 import androidx.media3.datasource.FileDataSource
-import androidx.media3.exoplayer.source.MediaSource
 import androidx.media3.exoplayer.source.MergingMediaSource
 import androidx.media3.exoplayer.source.ProgressiveMediaSource
 import androidx.media3.exoplayer.source.SingleSampleMediaSource
@@ -51,24 +50,25 @@ open class OfflinePlayerService : AbstractPlayerService() {
 
     private val scope = CoroutineScope(Dispatchers.Main)
 
-    private val playerListener = object : Player.Listener {
-        override fun onPlaybackStateChanged(playbackState: Int) {
-            if (playbackState == Player.STATE_ENDED) {
-                playNextVideo()
-            }
+    private val playerListener =
+        object : Player.Listener {
+            override fun onPlaybackStateChanged(playbackState: Int) {
+                if (playbackState == Player.STATE_ENDED) {
+                    playNextVideo()
+                }
 
-            // add video to watch history when playback starts
-            if (playbackState == Player.STATE_READY && PlayerHelper.watchHistoryEnabled) {
-                scope.launch(Dispatchers.IO) {
-                    val watchHistoryItem =
-                        downloadWithItems?.download?.toStreamItem()?.toWatchHistoryItem(videoId)
-                    if (watchHistoryItem != null) {
-                        DatabaseHelper.addToWatchHistory(watchHistoryItem)
+                // add video to watch history when playback starts
+                if (playbackState == Player.STATE_READY && PlayerHelper.watchHistoryEnabled) {
+                    scope.launch(Dispatchers.IO) {
+                        val watchHistoryItem =
+                            downloadWithItems?.download?.toStreamItem()?.toWatchHistoryItem(videoId)
+                        if (watchHistoryItem != null) {
+                            DatabaseHelper.addToWatchHistory(watchHistoryItem)
+                        }
                     }
                 }
             }
         }
-    }
 
     override suspend fun onServiceCreated(args: Bundle) {
         if (args.isEmpty) return
@@ -82,11 +82,18 @@ open class OfflinePlayerService : AbstractPlayerService() {
         this.videoId = if (playerData.shuffle) {
             runBlocking(Dispatchers.IO) {
                 if (playerData.downloadTab == DownloadTab.PLAYLIST) {
-                    Database.downloadDao()
-                        .getDownloadPlaylistById(playerData.playlistId!!).downloadVideos.randomOrNull()
+                    Database
+                        .downloadDao()
+                        .getDownloadPlaylistById(playerData.playlistId!!)
+                        .downloadVideos
+                        .randomOrNull()
                 } else {
-                    Database.downloadDao().getAll().filterByTab(playerData.downloadTab!!)
-                        .randomOrNull()?.download
+                    Database
+                        .downloadDao()
+                        .getAll()
+                        .filterByTab(playerData.downloadTab!!)
+                        .randomOrNull()
+                        ?.download
                 }
             }?.videoId
         } else {
@@ -101,9 +108,7 @@ open class OfflinePlayerService : AbstractPlayerService() {
         fillQueue()
     }
 
-    override fun getIntentActivity(): Class<*> {
-        return if (noInternetService) NoInternetActivity::class.java else MainActivity::class.java
-    }
+    override fun getIntentActivity(): Class<*> = if (noInternetService) NoInternetActivity::class.java else MainActivity::class.java
 
     /**
      * Attempt to start an audio player with the given download items
@@ -111,16 +116,17 @@ open class OfflinePlayerService : AbstractPlayerService() {
     override suspend fun startPlayback() {
         super.startPlayback()
 
-        val downloadWithItems = withContext(Dispatchers.IO) {
-            Database.downloadDao().findById(videoId)
-        } ?: return
+        val downloadWithItems =
+            withContext(Dispatchers.IO) {
+                Database.downloadDao().findById(videoId)
+            } ?: return
         this.downloadWithItems = downloadWithItems
 
         PlayingQueue.updateCurrent(downloadWithItems.download.toStreamItem())
 
         withContext(Dispatchers.Main) {
             setSponsorBlockSegments(
-                downloadWithItems.downloadSponsorBlockSegments.map { it.toSegment() }
+                downloadWithItems.downloadSponsorBlockSegments.map { it.toSegment() },
             )
 
             setMediaItem(downloadWithItems)
@@ -133,9 +139,11 @@ open class OfflinePlayerService : AbstractPlayerService() {
                 DatabaseHelper.getWatchPosition(videoId)?.let {
                     if (!DatabaseHelper.isVideoWatched(
                             it,
-                            downloadWithItems.download.duration
+                            downloadWithItems.download.duration,
                         )
-                    ) exoPlayer?.seekTo(it)
+                    ) {
+                        exoPlayer?.seekTo(it)
+                    }
                 }
             }
         }
@@ -148,48 +156,59 @@ open class OfflinePlayerService : AbstractPlayerService() {
         val audioUri = downloadFiles.firstOrNull { it.type == FileType.AUDIO }?.path?.toAndroidUri()
         val subtitleInfo = downloadFiles.firstOrNull { it.type == FileType.SUBTITLE }
 
-        val videoSource = videoUri?.let { videoUri ->
-            val videoItem = MediaItem.Builder()
-                .setUri(videoUri)
-                .setMetadata(downloadWithItems)
-                .build()
+        val videoSource =
+            videoUri?.let { videoUri ->
+                val videoItem =
+                    MediaItem
+                        .Builder()
+                        .setUri(videoUri)
+                        .setMetadata(downloadWithItems)
+                        .build()
 
-            ProgressiveMediaSource.Factory(FileDataSource.Factory())
-                .createMediaSource(videoItem)
-        }
+                ProgressiveMediaSource
+                    .Factory(FileDataSource.Factory())
+                    .createMediaSource(videoItem)
+            }
 
-        val audioSource = audioUri?.let { audioUri ->
-            val audioItem = MediaItem.Builder()
-                .setUri(audioUri)
-                .setMetadata(downloadWithItems)
-                .build()
+        val audioSource =
+            audioUri?.let { audioUri ->
+                val audioItem =
+                    MediaItem
+                        .Builder()
+                        .setUri(audioUri)
+                        .setMetadata(downloadWithItems)
+                        .build()
 
-            ProgressiveMediaSource.Factory(FileDataSource.Factory())
-                .createMediaSource(audioItem)
-        }
+                ProgressiveMediaSource
+                    .Factory(FileDataSource.Factory())
+                    .createMediaSource(audioItem)
+            }
 
-        val subtitleSource = subtitleInfo?.let { subtitleInfo ->
-            val subtitle = SubtitleConfiguration.Builder(subtitleInfo.path.toAndroidUri())
-                .setMimeType(MimeTypes.APPLICATION_TTML)
-                .setLanguage(subtitleInfo.language ?: "en")
-                .build()
+        val subtitleSource =
+            subtitleInfo?.let { subtitleInfo ->
+                val subtitle =
+                    SubtitleConfiguration
+                        .Builder(subtitleInfo.path.toAndroidUri())
+                        .setMimeType(MimeTypes.APPLICATION_TTML)
+                        .setLanguage(subtitleInfo.language ?: "en")
+                        .build()
 
-            SingleSampleMediaSource.Factory(FileDataSource.Factory())
-                .createMediaSource(subtitle, C.TIME_UNSET)
-        }
+                SingleSampleMediaSource
+                    .Factory(FileDataSource.Factory())
+                    .createMediaSource(subtitle, C.TIME_UNSET)
+            }
 
-        var mediaSource: MediaSource? = null
-        listOfNotNull(videoSource, audioSource, subtitleSource).forEach { source ->
-            mediaSource =
-                if (mediaSource == null) source else MergingMediaSource(mediaSource!!, source)
-        }
+        val mediaSource =
+            listOfNotNull(videoSource, audioSource, subtitleSource).reduceOrNull { acc, source ->
+                MergingMediaSource(acc, source)
+            }
 
         if (mediaSource == null || isAudioOnlyPlayer && audioSource == null) {
             stopSelf()
             return
         }
 
-        exoPlayer?.setMediaSource(mediaSource!!)
+        exoPlayer?.setMediaSource(mediaSource)
 
         trackSelector?.updateParameters {
             setPreferredTextRoleFlags(C.ROLE_FLAG_CAPTION)
@@ -199,24 +218,31 @@ open class OfflinePlayerService : AbstractPlayerService() {
 
     private suspend fun fillQueue() {
         if (playerData.downloadTab == DownloadTab.PLAYLIST) {
-            var videos = withContext(Dispatchers.IO) {
-                Database.downloadDao().getDownloadPlaylistById(playerData.playlistId!!)
-            }.downloadVideos
+            var videos =
+                withContext(Dispatchers.IO) {
+                    Database.downloadDao().getDownloadPlaylistById(playerData.playlistId!!)
+                }.downloadVideos
 
-            if (playerData.shuffle) videos = listOf(videos.first { it.videoId == videoId }) +
+            if (playerData.shuffle) {
+                videos = listOf(videos.first { it.videoId == videoId }) +
                     videos.filter { it.videoId != videoId }.shuffled()
-            else if (playerData.downloadSortingOrder != null) videos =
-                sortDownloadList(videos, playerData.downloadSortingOrder!!)
+            } else if (playerData.downloadSortingOrder != null) {
+                videos =
+                    sortDownloadList(videos, playerData.downloadSortingOrder!!)
+            }
             PlayingQueue.setStreams(videos.map { it.toStreamItem() })
         } else {
-            var downloads = withContext(Dispatchers.IO) {
-                Database.downloadDao().getAll()
-            }
-                .filterByTab(playerData.downloadTab!!)
-                .map { it.download }
+            var downloads =
+                withContext(Dispatchers.IO) {
+                    Database.downloadDao().getAll()
+                }.filterByTab(playerData.downloadTab!!)
+                    .map { it.download }
 
-            if (playerData.shuffle) downloads = downloads.shuffled()
-            else if (playerData.downloadSortingOrder != null) downloads = sortDownloadList(downloads, playerData.downloadSortingOrder!!)
+            if (playerData.shuffle) {
+                downloads = downloads.shuffled()
+            } else if (playerData.downloadSortingOrder != null) {
+                downloads = sortDownloadList(downloads, playerData.downloadSortingOrder!!)
+            }
 
             PlayingQueue.add(*downloads.map { it.toStreamItem() }.toTypedArray())
         }

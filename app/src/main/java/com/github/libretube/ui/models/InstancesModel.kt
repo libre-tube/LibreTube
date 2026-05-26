@@ -2,44 +2,47 @@ package com.github.libretube.ui.models
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.github.libretube.api.obj.PipedInstance
 import com.github.libretube.db.DatabaseHolder.Database
 import com.github.libretube.db.obj.CustomInstance
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.flowOn
-import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
 import java.net.MalformedURLException
 
 class InstancesModel : ViewModel() {
-    val customInstances = Database.customInstanceDao().getAllFlow()
-        .flowOn(Dispatchers.IO)
+    val customInstances =
+        Database
+            .customInstanceDao()
+            .getAllFlow()
+            .flowOn(Dispatchers.IO)
 
     fun addCustomInstance(
         apiUrlInput: String,
         instanceNameInput: String?,
-        frontendUrlInput: String?
+        frontendUrlInput: String?,
     ) {
         if (apiUrlInput.isEmpty()) throw IllegalArgumentException()
 
         val apiUrl = apiUrlInput.toHttpUrlOrNull() ?: throw MalformedURLException()
-        val frontendUrl = if (!frontendUrlInput.isNullOrBlank()) {
-            frontendUrlInput.toHttpUrlOrNull() ?: throw MalformedURLException()
-        } else {
-            null
-        }
+        val frontendUrl =
+            if (!frontendUrlInput.isNullOrBlank()) {
+                frontendUrlInput.toHttpUrlOrNull() ?: throw MalformedURLException()
+            } else {
+                null
+            }
 
         viewModelScope.launch(Dispatchers.IO) {
             val instanceName = instanceNameInput ?: apiUrl.host
 
-            Database.customInstanceDao()
+            Database
+                .customInstanceDao()
                 .insert(
                     CustomInstance(
                         instanceName,
                         apiUrl.toString(),
-                        frontendUrl?.toString().orEmpty()
-                    )
+                        frontendUrl?.toString().orEmpty(),
+                    ),
                 )
         }
     }

@@ -14,8 +14,10 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class MainSettings : BasePreferenceFragment() {
-
-    override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
+    override fun onCreatePreferences(
+        savedInstanceState: Bundle?,
+        rootKey: String?,
+    ) {
         setPreferencesFromResource(R.xml.settings, rootKey)
 
         val update = findPreference<Preference>("update")
@@ -37,7 +39,7 @@ class MainSettings : BasePreferenceFragment() {
             crashlog.isVisible = false
             true
         }
-        
+
         listOf(
             "general" to R.id.action_global_generalSettings,
             "instance" to R.id.action_global_instanceSettings,
@@ -47,7 +49,7 @@ class MainSettings : BasePreferenceFragment() {
             "audio_video" to R.id.action_global_audioVideoSettings,
             "history" to R.id.action_global_historySettings,
             "notifications" to R.id.action_global_notificationSettings,
-            "backup_restore" to R.id.action_global_backupRestoreSettings
+            "backup_restore" to R.id.action_global_backupRestoreSettings,
         ).forEach { (preferenceKey, actionId) ->
             findPreference<Preference>(preferenceKey)?.setOnPreferenceClickListener { _ ->
                 findNavController().navigate(actionId)

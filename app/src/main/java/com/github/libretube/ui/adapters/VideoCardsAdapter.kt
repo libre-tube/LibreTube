@@ -1,9 +1,9 @@
 package com.github.libretube.ui.adapters
 
 import android.annotation.SuppressLint
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.os.bundleOf
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.core.view.updateLayoutParams
@@ -32,39 +32,49 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class VideoCardsAdapter(private val columnWidthDp: Float? = null) :
-    ListAdapter<StreamItem, VideoCardsViewHolder>(DiffUtilItemCallback()) {
-
-    override fun getItemViewType(position: Int): Int {
-        return if (currentList[position].type == CAUGHT_UP_STREAM_TYPE) CAUGHT_UP_TYPE else NORMAL_TYPE
-    }
+class VideoCardsAdapter(
+    private val columnWidthDp: Float? = null,
+) : ListAdapter<StreamItem, VideoCardsViewHolder>(DiffUtilItemCallback()) {
+    override fun getItemViewType(position: Int): Int =
+        if (currentList[position].type == CAUGHT_UP_STREAM_TYPE) CAUGHT_UP_TYPE else NORMAL_TYPE
 
     fun removeItemById(videoId: String) {
-        val index = currentList.indexOfFirst {
-            it.url?.toID() == videoId
-        }.takeIf { it > 0 } ?: return
-        val updatedList = currentList.toMutableList().also {
-            it.removeAt(index)
-        }
+        val index =
+            currentList
+                .indexOfFirst {
+                    it.url?.toID() == videoId
+                }.takeIf { it > 0 } ?: return
+        val updatedList =
+            currentList.toMutableList().also {
+                it.removeAt(index)
+            }
 
         submitList(updatedList)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VideoCardsViewHolder {
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int,
+    ): VideoCardsViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         return when {
-            viewType == CAUGHT_UP_TYPE -> VideoCardsViewHolder(
-                AllCaughtUpRowBinding.inflate(layoutInflater, parent, false)
-            )
+            viewType == CAUGHT_UP_TYPE ->
+                VideoCardsViewHolder(
+                    AllCaughtUpRowBinding.inflate(layoutInflater, parent, false),
+                )
 
-            else -> VideoCardsViewHolder(
-                TrendingRowBinding.inflate(layoutInflater, parent, false)
-            )
+            else ->
+                VideoCardsViewHolder(
+                    TrendingRowBinding.inflate(layoutInflater, parent, false),
+                )
         }
     }
 
     @SuppressLint("SetTextI18n")
-    override fun onBindViewHolder(holder: VideoCardsViewHolder, position: Int) {
+    override fun onBindViewHolder(
+        holder: VideoCardsViewHolder,
+        position: Int,
+    ) {
         val video = getItem(holder.bindingAdapterPosition)
         val videoId = video.url.orEmpty().toID()
 
@@ -82,18 +92,19 @@ class VideoCardsAdapter(private val columnWidthDp: Float? = null) :
             watchProgress.setWatchProgressLength(videoId, video.duration ?: 0L)
 
             textViewTitle.text = video.title
-            textViewChannel.text = TextUtils.formatViewsString(
-                root.context,
-                video.views ?: -1,
-                video.uploaded,
-                video.uploaderName
-            )
+            textViewChannel.text =
+                TextUtils.formatViewsString(
+                    root.context,
+                    video.views ?: -1,
+                    video.uploaded,
+                    video.uploaderName,
+                )
 
             video.duration?.let {
                 thumbnailDuration.setFormattedDuration(
                     it,
                     video.isShort,
-                    video.uploaded
+                    video.uploaded,
                 )
             }
             ImageHelper.loadImage(video.thumbnail, thumbnail)
@@ -117,12 +128,15 @@ class VideoCardsAdapter(private val columnWidthDp: Float? = null) :
             root.setOnLongClickListener {
                 fragmentManager.setFragmentResultListener(
                     VideoOptionsBottomSheet.VIDEO_OPTIONS_SHEET_REQUEST_KEY,
-                    activity
+                    activity,
                 ) { _, _ ->
                     notifyItemChanged(position)
                 }
                 val sheet = VideoOptionsBottomSheet()
-                sheet.arguments = bundleOf(IntentData.streamItem to video)
+                sheet.arguments =
+                    Bundle().apply {
+                        putParcelable(IntentData.streamItem, video)
+                    }
                 sheet.show(fragmentManager, VideoCardsAdapter::class.java.name)
                 true
             }
@@ -137,11 +151,12 @@ class VideoCardsAdapter(private val columnWidthDp: Float? = null) :
                         sponsorBadgeCard.isVisible = category != null
                         SponsorBlockLabelHelper.categoryIcon(category)?.let {
                             sponsorBadgeIcon.setImageDrawable(
-                                context.getDrawable(it)
+                                context.getDrawable(it),
                             )
                         }
                         sponsorBadgeIcon.tooltipText =
-                            SponsorBlockLabelHelper.categoryLabel(category)
+                            SponsorBlockLabelHelper
+                                .categoryLabel(category)
                                 ?.let { context.getString(it) }
                     }
                 }

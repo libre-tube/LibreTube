@@ -19,9 +19,7 @@ object LocaleHelper {
         }
     }
 
-    fun isPerAppLocaleSettingSupported(): Boolean {
-        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU
-    }
+    fun isPerAppLocaleSettingSupported(): Boolean = Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU
 
     fun getLocaleFromAndroidCode(code: String): Locale {
         val normalizedCode = code.replace("-r", "-")
@@ -33,36 +31,35 @@ object LocaleHelper {
         }
     }
 
-    fun getDetectedCountry(context: Context): String {
-        return detectSIMCountry(context)
+    fun getDetectedCountry(context: Context): String =
+        detectSIMCountry(context)
             ?: detectNetworkCountry(context)
             ?: detectLocaleCountry(context)
             ?: "UK"
-    }
 
-    private fun detectSIMCountry(context: Context): String? {
-        return context.getSystemService<TelephonyManager>()?.simCountryIso?.ifEmpty { null }
-    }
+    private fun detectSIMCountry(context: Context): String? = context.getSystemService<TelephonyManager>()?.simCountryIso?.ifEmpty { null }
 
-    private fun detectNetworkCountry(context: Context): String? {
-        return context.getSystemService<TelephonyManager>()?.networkCountryIso?.ifEmpty { null }
-    }
+    private fun detectNetworkCountry(context: Context): String? =
+        context.getSystemService<TelephonyManager>()?.networkCountryIso?.ifEmpty {
+            null
+        }
 
-    private fun detectLocaleCountry(context: Context): String? {
-        return ConfigurationCompat.getLocales(context.resources.configuration)[0]!!.country
+    private fun detectLocaleCountry(context: Context): String? =
+        ConfigurationCompat
+            .getLocales(context.resources.configuration)[0]!!
+            .country
             .ifEmpty { null }
-    }
 
-    fun getAvailableCountries(): List<Country> {
-        return Locale.getISOCountries()
+    fun getAvailableCountries(): List<Country> =
+        Locale
+            .getISOCountries()
             .map { Country(Locale("", it).displayCountry, it) }
             .sortedBy { it.name }
-    }
 
-    fun getAvailableLocales(): List<Country> {
-        return Locale.getAvailableLocales()
+    fun getAvailableLocales(): List<Country> =
+        Locale
+            .getAvailableLocales()
             .distinctBy { it.language }
             .map { Country(it.displayLanguage, it.language) }
             .sortedBy { it.name }
-    }
 }

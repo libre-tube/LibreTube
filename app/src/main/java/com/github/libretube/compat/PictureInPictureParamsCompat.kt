@@ -17,21 +17,25 @@ class PictureInPictureParamsCompat private constructor(
     private val title: CharSequence?,
     private val subtitle: CharSequence?,
     private val aspectRatio: Rational?,
-    private val expandedAspectRatio: Rational?
+    private val expandedAspectRatio: Rational?,
 ) {
     @RequiresApi(Build.VERSION_CODES.O)
     fun toPictureInPictureParams(): PictureInPictureParams {
-        val pipParams = PictureInPictureParams.Builder()
-            .setSourceRectHint(sourceRectHint)
-            .setActions(actions.map { it.toRemoteAction() })
-            .setAspectRatio(aspectRatio)
+        val pipParams =
+            PictureInPictureParams
+                .Builder()
+                .setSourceRectHint(sourceRectHint)
+                .setActions(actions.map { it.toRemoteAction() })
+                .setAspectRatio(aspectRatio)
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-            pipParams.setAutoEnterEnabled(autoEnterEnabled)
+            pipParams
+                .setAutoEnterEnabled(autoEnterEnabled)
                 .setSeamlessResizeEnabled(seamlessResizeEnabled)
         }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            pipParams.setTitle(title)
+            pipParams
+                .setTitle(title)
                 .setSubtitle(subtitle)
                 .setCloseAction(closeAction?.toRemoteAction())
                 .setExpandedAspectRatio(expandedAspectRatio)
@@ -51,56 +55,66 @@ class PictureInPictureParamsCompat private constructor(
         private var aspectRatio: Rational? = null
         private var expandedAspectRatio: Rational? = null
 
-        fun setAutoEnterEnabled(autoEnterEnabled: Boolean) = apply {
-            this.autoEnterEnabled = autoEnterEnabled
-        }
+        fun setAutoEnterEnabled(autoEnterEnabled: Boolean) =
+            apply {
+                this.autoEnterEnabled = autoEnterEnabled
+            }
 
-        fun setSeamlessResizeEnabled(seamlessResizeEnabled: Boolean) = apply {
-            this.seamlessResizeEnabled = seamlessResizeEnabled
-        }
+        fun setSeamlessResizeEnabled(seamlessResizeEnabled: Boolean) =
+            apply {
+                this.seamlessResizeEnabled = seamlessResizeEnabled
+            }
 
-        fun setCloseAction(action: RemoteActionCompat?) = apply {
-            this.closeAction = action
-        }
+        fun setCloseAction(action: RemoteActionCompat?) =
+            apply {
+                this.closeAction = action
+            }
 
-        fun setActions(actions: List<RemoteActionCompat>) = apply {
-            this.actions = actions
-        }
+        fun setActions(actions: List<RemoteActionCompat>) =
+            apply {
+                this.actions = actions
+            }
 
-        fun setSourceRectHint(sourceRectHint: Rect?) = apply {
-            this.sourceRectHint = sourceRectHint
-        }
+        fun setSourceRectHint(sourceRectHint: Rect?) =
+            apply {
+                this.sourceRectHint = sourceRectHint
+            }
 
-        fun setTitle(title: CharSequence?) = apply {
-            this.title = title
-        }
+        fun setTitle(title: CharSequence?) =
+            apply {
+                this.title = title
+            }
 
-        fun setSubtitle(subtitle: CharSequence?) = apply {
-            this.subtitle = subtitle
-        }
+        fun setSubtitle(subtitle: CharSequence?) =
+            apply {
+                this.subtitle = subtitle
+            }
 
-        fun setAspectRatio(aspectRatio: Rational?) = apply {
-            this.aspectRatio = aspectRatio
-        }
+        fun setAspectRatio(aspectRatio: Rational?) =
+            apply {
+                this.aspectRatio = aspectRatio
+            }
 
         // Additional function replacing the project's extension function for the platform builder.
         fun setAspectRatio(videoSize: VideoSize): Builder {
             val ratio = (videoSize.width.toFloat() / videoSize.height)
-            val rational = when {
-                ratio.isNaN() -> Rational(4, 3)
-                ratio <= 0.418410 -> Rational(41841, 100000)
-                ratio >= 2.390000 -> Rational(239, 100)
-                else -> Rational(videoSize.width, videoSize.height)
-            }
+            val rational =
+                when {
+                    ratio.isNaN() -> Rational(4, 3)
+                    ratio <= 0.418410 -> Rational(41841, 100000)
+                    ratio >= 2.390000 -> Rational(239, 100)
+                    else -> Rational(videoSize.width, videoSize.height)
+                }
             return setAspectRatio(rational)
         }
 
-        fun setExpandedAspectRatio(expandedAspectRatio: Rational?) = apply {
-            this.expandedAspectRatio = expandedAspectRatio
-        }
+        fun setExpandedAspectRatio(expandedAspectRatio: Rational?) =
+            apply {
+                this.expandedAspectRatio = expandedAspectRatio
+            }
 
-        fun build(): PictureInPictureParamsCompat {
-            return PictureInPictureParamsCompat(
+        fun build(): PictureInPictureParamsCompat =
+            PictureInPictureParamsCompat(
                 autoEnterEnabled,
                 seamlessResizeEnabled,
                 closeAction,
@@ -109,8 +123,7 @@ class PictureInPictureParamsCompat private constructor(
                 title,
                 subtitle,
                 aspectRatio,
-                expandedAspectRatio
+                expandedAspectRatio,
             )
-        }
     }
 }

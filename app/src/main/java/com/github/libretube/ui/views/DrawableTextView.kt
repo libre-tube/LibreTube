@@ -15,7 +15,7 @@ import com.github.libretube.R
  */
 class DrawableTextView(
     context: Context,
-    attrs: AttributeSet? = null
+    attrs: AttributeSet? = null,
 ) : AppCompatTextView(context, attrs) {
     private var drawableStartDimen = 0F
     private var drawableTopDimen = 0F
@@ -29,29 +29,38 @@ class DrawableTextView(
             drawableEndDimen = getDimen(it, R.styleable.DrawableTextView_drawableEndDimen)
             drawableBottomDimen = getDimen(it, R.styleable.DrawableTextView_drawableBottomDimen)
 
-            gravity = it.getInt(
-                R.styleable.DrawableTextView_android_gravity,
-                Gravity.CENTER_VERTICAL
-            )
-            compoundDrawablePadding = it.getDimensionPixelOffset(
-                R.styleable.DrawableTextView_android_drawablePadding,
-                20
-            )
+            gravity =
+                it.getInt(
+                    R.styleable.DrawableTextView_android_gravity,
+                    Gravity.CENTER_VERTICAL,
+                )
+            compoundDrawablePadding =
+                it.getDimensionPixelOffset(
+                    R.styleable.DrawableTextView_android_drawablePadding,
+                    20,
+                )
         }
     }
 
-    private fun getDimen(ta: TypedArray, index: Int): Float {
-        return ta.getDimensionPixelOffset(index, 0).toFloat()
-    }
+    private fun getDimen(
+        ta: TypedArray,
+        index: Int,
+    ): Float = ta.getDimensionPixelOffset(index, 0).toFloat()
 
-    override fun onLayout(changed: Boolean, left: Int, top: Int, right: Int, bottom: Int) {
+    override fun onLayout(
+        changed: Boolean,
+        left: Int,
+        top: Int,
+        right: Int,
+        bottom: Int,
+    ) {
         super.onLayout(changed, left, top, right, bottom)
         val relDrawables = adjust(compoundDrawablesRelative)
         setCompoundDrawablesRelative(
             relDrawables[0],
             relDrawables[1],
             relDrawables[2],
-            relDrawables[3]
+            relDrawables[3],
         )
     }
 
@@ -60,7 +69,7 @@ class DrawableTextView(
             drawableStartDimen,
             drawableTopDimen,
             drawableEndDimen,
-            drawableBottomDimen
+            drawableBottomDimen,
         ).forEachIndexed { index, dimen ->
             drawables[index] = drawables[index].getAdjustedDrawable(dimen)
         }

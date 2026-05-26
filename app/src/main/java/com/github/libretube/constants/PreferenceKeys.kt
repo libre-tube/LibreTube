@@ -4,7 +4,6 @@ package com.github.libretube.constants
  * keys for the shared preferences
  */
 object PreferenceKeys {
-
     // Authentications
     const val TOKEN = "token"
     const val USERNAME = "username"

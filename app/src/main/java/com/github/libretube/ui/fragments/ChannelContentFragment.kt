@@ -35,10 +35,11 @@ class ChannelContentFragment : DynamicLayoutManagerFragment(R.layout.fragment_ch
     private var recyclerViewState: Parcelable? = null
 
     override fun setLayoutManagers(gridItems: Int) {
-        binding.channelRecView.layoutManager = GridLayoutManager(
-            requireContext(),
-            gridItems.ceilHalf()
-        )
+        binding.channelRecView.layoutManager =
+            GridLayoutManager(
+                requireContext(),
+                gridItems.ceilHalf(),
+            )
     }
 
     override fun onConfigurationChanged(newConfig: Configuration) {
@@ -47,7 +48,10 @@ class ChannelContentFragment : DynamicLayoutManagerFragment(R.layout.fragment_ch
         binding.channelRecView.layoutManager?.onRestoreInstanceState(recyclerViewState)
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?,
+    ) {
         _binding = FragmentChannelContentBinding.bind(view)
         super.onViewCreated(view, savedInstanceState)
 
@@ -60,9 +64,10 @@ class ChannelContentFragment : DynamicLayoutManagerFragment(R.layout.fragment_ch
             var nextPage = arguments.getString(IntentData.nextPage)
             var isLoading = false
 
-            val channelAdapter = VideosAdapter(showChannelInfo = false).also {
-                it.submitList(arguments.parcelableArrayList<StreamItem>(IntentData.videoList)!!)
-            }
+            val channelAdapter =
+                VideosAdapter(showChannelInfo = false).also {
+                    it.submitList(arguments.parcelableArrayList<StreamItem>(IntentData.videoList)!!)
+                }
             binding.channelRecView.adapter = channelAdapter
             binding.progressBar.isGone = true
 
@@ -72,13 +77,14 @@ class ChannelContentFragment : DynamicLayoutManagerFragment(R.layout.fragment_ch
                 isLoading = true
 
                 lifecycleScope.launch(Dispatchers.IO) {
-                    val resp = try {
-                       MediaServiceRepository.instance.getChannelNextPage(channelId, nextPage!!)
-                    } catch (e: Exception) {
-                        return@launch
-                    } finally {
-                        isLoading = false
-                    }
+                    val resp =
+                        try {
+                            MediaServiceRepository.instance.getChannelNextPage(channelId, nextPage!!)
+                        } catch (e: Exception) {
+                            return@launch
+                        } finally {
+                            isLoading = false
+                        }
 
                     nextPage = resp.nextpage
                     withContext(Dispatchers.Main) {
@@ -90,10 +96,11 @@ class ChannelContentFragment : DynamicLayoutManagerFragment(R.layout.fragment_ch
             val searchChannelAdapter = SearchResultsAdapter()
             binding.channelRecView.adapter = searchChannelAdapter
 
-            val pagingFlow = Pager(
-                PagingConfig(pageSize = 20, enablePlaceholders = false),
-                pagingSourceFactory = { ChannelTabPagingSource(tabData!!) }
-            ).flow
+            val pagingFlow =
+                Pager(
+                    PagingConfig(pageSize = 20, enablePlaceholders = false),
+                    pagingSourceFactory = { ChannelTabPagingSource(tabData) },
+                ).flow
 
             viewLifecycleOwner.lifecycleScope.launch {
                 launch {
@@ -112,11 +119,16 @@ class ChannelContentFragment : DynamicLayoutManagerFragment(R.layout.fragment_ch
             }
         }
 
-        binding.channelRecView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
-                recyclerViewState = recyclerView.layoutManager?.onSaveInstanceState()
-            }
-        })
+        binding.channelRecView.addOnScrollListener(
+            object : RecyclerView.OnScrollListener() {
+                override fun onScrollStateChanged(
+                    recyclerView: RecyclerView,
+                    newState: Int,
+                ) {
+                    recyclerViewState = recyclerView.layoutManager?.onSaveInstanceState()
+                }
+            },
+        )
     }
 
     override fun onDestroyView() {

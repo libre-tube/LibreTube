@@ -13,5 +13,5 @@ import kotlinx.serialization.Serializable
 class CustomInstance(
     @PrimaryKey var name: String = "",
     @ColumnInfo var apiUrl: String = "",
-    @ColumnInfo var frontendUrl: String = ""
+    @ColumnInfo var frontendUrl: String = "",
 ) : Parcelable

@@ -7,8 +7,8 @@ import com.github.libretube.ui.dialogs.ShareDialog.Companion.YOUTUBE_SHORT_URL
 /**
  * format a full YouTube url or a path to a video/channel/playlist ID
  */
-fun String.toID(): String {
-    return this
+fun String.toID(): String =
+    this
         // remove any youtube origins from urls
         .removePrefix(YOUTUBE_FRONTEND_URL)
         .removePrefix(YOUTUBE_MUSIC_URL)
@@ -20,4 +20,3 @@ fun String.toID(): String {
         .removeSuffix("/shorts")
         .removeSuffix("/streams")
         .removeSuffix("/videos")
-}

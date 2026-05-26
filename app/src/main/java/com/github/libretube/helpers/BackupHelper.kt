@@ -32,7 +32,11 @@ object BackupHelper {
      * Write a [BackupFile] containing the database content as well as the preferences
      */
     @OptIn(ExperimentalSerializationApi::class)
-    suspend fun createAdvancedBackup(context: Context, uri: Uri, backupFile: BackupFile) {
+    suspend fun createAdvancedBackup(
+        context: Context,
+        uri: Uri,
+        backupFile: BackupFile,
+    ) {
         try {
             context.contentResolver.openOutputStream(uri)?.use { outputStream ->
                 JsonHelper.json.encodeToStream(backupFile, outputStream)
@@ -48,10 +52,14 @@ object BackupHelper {
      * Restore data from a [BackupFile]
      */
     @OptIn(ExperimentalSerializationApi::class)
-    suspend fun restoreAdvancedBackup(context: Context, uri: Uri) = withContext(Dispatchers.IO) {
-        val backupFile = context.contentResolver.openInputStream(uri)?.use {
-            JsonHelper.json.decodeFromStream<BackupFile>(it)
-        } ?: return@withContext
+    suspend fun restoreAdvancedBackup(
+        context: Context,
+        uri: Uri,
+    ) = withContext(Dispatchers.IO) {
+        val backupFile =
+            context.contentResolver.openInputStream(uri)?.use {
+                JsonHelper.json.decodeFromStream<BackupFile>(it)
+            } ?: return@withContext
 
         Database.watchHistoryDao().insertAll(backupFile.watchHistory.orEmpty())
         Database.searchHistoryDao().insertAll(backupFile.searchHistory.orEmpty())
@@ -77,7 +85,10 @@ object BackupHelper {
     /**
      * Restore the shared preferences from a backup file
      */
-    private fun restorePreferences(context: Context, preferences: List<PreferenceItem>?) {
+    private fun restorePreferences(
+        context: Context,
+        preferences: List<PreferenceItem>?,
+    ) {
         if (preferences == null) return
 
         PreferenceManager.getDefaultSharedPreferences(context).edit(commit = true) {
@@ -86,14 +97,15 @@ object BackupHelper {
 
             // decide for each preference which type it is and save it to the preferences
             preferences.forEach { (key, jsonValue) ->
-                val value = if (jsonValue.isString) {
-                    jsonValue.content
-                } else {
-                    jsonValue.booleanOrNull
-                        ?: jsonValue.intOrNull
-                        ?: jsonValue.longOrNull
-                        ?: jsonValue.floatOrNull
-                }
+                val value =
+                    if (jsonValue.isString) {
+                        jsonValue.content
+                    } else {
+                        jsonValue.booleanOrNull
+                            ?: jsonValue.intOrNull
+                            ?: jsonValue.longOrNull
+                            ?: jsonValue.floatOrNull
+                    }
                 when (value) {
                     is Boolean -> putBoolean(key, value)
                     is Float -> putFloat(key, value)

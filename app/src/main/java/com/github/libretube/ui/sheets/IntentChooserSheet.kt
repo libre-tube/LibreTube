@@ -17,7 +17,10 @@ class IntentChooserSheet : BaseBottomSheet() {
         url = arguments?.getString(IntentData.url)!!
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?,
+    ) {
         val binding = BottomSheetBinding.bind(view)
         val packages = IntentHelper.getResolveInfo(requireContext(), url)
         binding.optionsRecycler.layoutManager = GridLayoutManager(context, 3)

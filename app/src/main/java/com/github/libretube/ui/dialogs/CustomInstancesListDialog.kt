@@ -3,7 +3,6 @@ package com.github.libretube.ui.dialogs
 import android.app.Dialog
 import android.content.DialogInterface
 import android.os.Bundle
-import androidx.core.os.bundleOf
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
@@ -16,23 +15,23 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
-class CustomInstancesListDialog: DialogFragment() {
+class CustomInstancesListDialog : DialogFragment() {
     val viewModel: InstancesModel by activityViewModels()
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val binding = DialogCustomIntancesListBinding.inflate(layoutInflater)
-        val adapter = CustomInstancesAdapter(
-            onClickInstance = {
-                CreateCustomInstanceDialog()
-                    .apply {
-                        arguments = bundleOf(IntentData.customInstance to it)
-                    }
-                    .show(childFragmentManager, null)
-            },
-            onDeleteInstance = {
-                viewModel.deleteCustomInstance(it)
-            }
-        )
+        val adapter =
+            CustomInstancesAdapter(
+                onClickInstance = {
+                    CreateCustomInstanceDialog()
+                        .apply {
+                            arguments = Bundle().apply { putParcelable(IntentData.customInstance, it) }
+                        }.show(childFragmentManager, null)
+                },
+                onDeleteInstance = {
+                    viewModel.deleteCustomInstance(it)
+                },
+            )
         binding.customInstancesRecycler.adapter = adapter
 
         lifecycleScope.launch {

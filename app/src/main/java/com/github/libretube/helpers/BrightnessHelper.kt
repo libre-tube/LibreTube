@@ -4,7 +4,9 @@ import android.app.Activity
 import android.view.WindowManager
 import com.github.libretube.extensions.normalize
 
-class BrightnessHelper(activity: Activity) {
+class BrightnessHelper(
+    activity: Activity,
+) {
     private val window = activity.window
     private val minBrightness = 0.0f
     private val maxBrightness = 1.0f
@@ -15,9 +17,10 @@ class BrightnessHelper(activity: Activity) {
     private var brightness: Float
         get() = window.attributes.screenBrightness
         set(value) {
-            window.attributes = window.attributes.apply {
-                screenBrightness = value
-            }
+            window.attributes =
+                window.attributes.apply {
+                    screenBrightness = value
+                }
         }
 
     /**
@@ -46,16 +49,17 @@ class BrightnessHelper(activity: Activity) {
     fun setBrightnessWithScale(
         value: Float,
         maxValue: Float,
-        minValue: Float = 0.0f
+        minValue: Float = 0.0f,
     ) {
-        brightness = linearToGamma(
-            value.normalize(
-                minValue,
-                maxValue,
-                minBrightness,
-                maxBrightness
+        brightness =
+            linearToGamma(
+                value.normalize(
+                    minValue,
+                    maxValue,
+                    minBrightness,
+                    maxBrightness,
+                ),
             )
-        )
 
         // remember brightness to restore it when fullscreen is entered again
         savedBrightness = brightness
@@ -71,15 +75,13 @@ class BrightnessHelper(activity: Activity) {
      */
     private fun linearToGamma(value: Float): Float {
         // original formula: (Math.exp((value*100+9.411)/19.811) / 255.0).toFloat()
-        return (Math.exp((value * LINEAR_MAX + LINEAR_OFFSET)/ SCALING_FACTOR) / GAMMA_MAX).toFloat()
+        return (Math.exp((value * LINEAR_MAX + LINEAR_OFFSET) / SCALING_FACTOR) / GAMMA_MAX).toFloat()
     }
 
     /**
      * Inverse method for [linearToGamma]
      */
-    private fun gammaToLinear(value: Float): Float {
-        return ((SCALING_FACTOR * Math.log(value * GAMMA_MAX) - LINEAR_OFFSET) / LINEAR_MAX).toFloat()
-    }
+    private fun gammaToLinear(value: Float): Float = ((SCALING_FACTOR * Math.log(value * GAMMA_MAX) - LINEAR_OFFSET) / LINEAR_MAX).toFloat()
 
     /**
      * Get scaled brightness with given range. if [saved] is
@@ -88,12 +90,13 @@ class BrightnessHelper(activity: Activity) {
     fun getBrightnessWithScale(
         maxValue: Float,
         minValue: Float = 0.0f,
-        saved: Boolean = false
+        saved: Boolean = false,
     ): Float {
         val value = if (saved) savedBrightness else brightness
 
-        val scaled = gammaToLinear(value)
-            .normalize(minBrightness, maxBrightness, minValue, maxValue)
+        val scaled =
+            gammaToLinear(value)
+                .normalize(minBrightness, maxBrightness, minValue, maxValue)
         return scaled
     }
 

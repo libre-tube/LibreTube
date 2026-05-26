@@ -8,13 +8,18 @@ import com.github.libretube.ui.adapters.callbacks.DiffUtilItemCallback
 import com.github.libretube.ui.viewholders.VideoTagsViewHolder
 
 class VideoTagsAdapter : ListAdapter<String, VideoTagsViewHolder>(DiffUtilItemCallback()) {
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VideoTagsViewHolder {
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int,
+    ): VideoTagsViewHolder {
         val binding = VideoTagRowBinding.inflate(LayoutInflater.from(parent.context))
         return VideoTagsViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: VideoTagsViewHolder, position: Int) {
+    override fun onBindViewHolder(
+        holder: VideoTagsViewHolder,
+        position: Int,
+    ) {
         val tag = getItem(holder.bindingAdapterPosition)
         holder.binding.apply {
             tagText.text = tag

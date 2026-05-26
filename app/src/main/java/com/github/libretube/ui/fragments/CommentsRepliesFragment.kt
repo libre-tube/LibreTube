@@ -27,11 +27,13 @@ import com.github.libretube.ui.models.CommentsViewModel
 import com.github.libretube.ui.sheets.CommentsSheet
 
 class CommentsRepliesFragment : Fragment(R.layout.fragment_comments) {
-
     private val viewModel by viewModels<CommentRepliesViewModel> { CommentRepliesViewModel.Factory }
     private val sharedModel by activityViewModels<CommentsViewModel>()
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?,
+    ) {
         super.onViewCreated(view, savedInstanceState)
 
         val binding = FragmentCommentsBinding.bind(view)
@@ -39,26 +41,27 @@ class CommentsRepliesFragment : Fragment(R.layout.fragment_comments) {
         val commentsSheet = parentFragment as? CommentsSheet
         commentsSheet?.binding?.btnScrollToTop?.isGone = true
 
-        val repliesAdapter = CommentsPagingAdapter(
-            true,
-            requireArguments().getString(IntentData.channelAvatar),
-            handleLink = {
-                setFragmentResult(
-                    CommentsSheet.HANDLE_LINK_REQUEST_KEY,
-                    bundleOf(IntentData.url to it),
-                )
-            },
-            saveToClipboard = { replyComment ->
-                viewModel.saveToClipboard(view.context, replyComment)
-            },
-            navigateToChannel = { comment ->
-                NavigationHelper.navigateChannel(view.context, comment.commentorUrl)
-                setFragmentResult(CommentsSheet.DISMISS_SHEET_REQUEST_KEY, Bundle.EMPTY)
-            }
-        )
+        val repliesAdapter =
+            CommentsPagingAdapter(
+                true,
+                requireArguments().getString(IntentData.channelAvatar),
+                handleLink = {
+                    setFragmentResult(
+                        CommentsSheet.HANDLE_LINK_REQUEST_KEY,
+                        bundleOf(IntentData.url to it),
+                    )
+                },
+                saveToClipboard = { replyComment ->
+                    viewModel.saveToClipboard(view.context, replyComment)
+                },
+                navigateToChannel = { comment ->
+                    NavigationHelper.navigateChannel(view.context, comment.commentorUrl)
+                    setFragmentResult(CommentsSheet.DISMISS_SHEET_REQUEST_KEY, Bundle.EMPTY)
+                },
+            )
         commentsSheet?.updateFragmentInfo(
             true,
-            "${getString(R.string.replies)} (${requireArguments().parcelable<Comment>(IntentData.comment)!!.replyCount.formatShort()})"
+            "${getString(R.string.replies)} (${requireArguments().parcelable<Comment>(IntentData.comment)!!.replyCount.formatShort()})",
         )
 
         binding.commentsRV.updatePadding(top = 0)
@@ -70,23 +73,30 @@ class CommentsRepliesFragment : Fragment(R.layout.fragment_comments) {
 
         commentsSheet?.binding?.btnScrollToTop?.setOnClickListener {
             // scroll back to the top / first comment
-            layoutManager.startSmoothScroll(LinearSmoothScroller(view.context).also {
-                it.targetPosition = POSITION_START
-            })
+            layoutManager.startSmoothScroll(
+                LinearSmoothScroller(view.context).also {
+                    it.targetPosition = POSITION_START
+                },
+            )
             sharedModel.setRepliesPosition(POSITION_START)
         }
 
-        binding.commentsRV.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
-                if (newState != RecyclerView.SCROLL_STATE_IDLE) return
+        binding.commentsRV.addOnScrollListener(
+            object : RecyclerView.OnScrollListener() {
+                override fun onScrollStateChanged(
+                    recyclerView: RecyclerView,
+                    newState: Int,
+                ) {
+                    if (newState != RecyclerView.SCROLL_STATE_IDLE) return
 
-                val firstVisiblePosition = layoutManager.findFirstVisibleItemPosition()
+                    val firstVisiblePosition = layoutManager.findFirstVisibleItemPosition()
 
-                sharedModel.setRepliesPosition(firstVisiblePosition)
+                    sharedModel.setRepliesPosition(firstVisiblePosition)
 
-                super.onScrollStateChanged(recyclerView, newState)
-            }
-        })
+                    super.onScrollStateChanged(recyclerView, newState)
+                }
+            },
+        )
 
         repliesAdapter.addLoadStateListener { loadStates ->
             binding.progress.isVisible = loadStates.refresh is LoadState.Loading

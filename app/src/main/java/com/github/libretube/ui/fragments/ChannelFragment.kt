@@ -25,8 +25,6 @@ import com.github.libretube.helpers.ClipboardHelper
 import com.github.libretube.helpers.ImageHelper
 import com.github.libretube.helpers.NavigationHelper
 import com.github.libretube.ui.adapters.VideosAdapter
-import com.github.libretube.ui.base.DynamicLayoutManagerFragment
-import com.github.libretube.ui.dialogs.ShareDialog
 import com.github.libretube.ui.extensions.setupSubscriptionButton
 import com.github.libretube.ui.sheets.ChannelOptionsBottomSheet
 import com.google.android.material.tabs.TabLayoutMediator
@@ -50,23 +48,28 @@ class ChannelFragment : Fragment(R.layout.fragment_channel) {
     private var isAppBarFullyExpanded: Boolean = true
     private val tabList = mutableListOf<ChannelTab>()
 
-    private val tabNamesMap = mapOf(
-        VIDEOS_TAB_KEY to R.string.videos,
-        "shorts" to R.string.yt_shorts,
-        "livestreams" to R.string.livestreams,
-        "playlists" to R.string.playlists,
-        "albums" to R.string.albums
-    )
+    private val tabNamesMap =
+        mapOf(
+            VIDEOS_TAB_KEY to R.string.videos,
+            "shorts" to R.string.yt_shorts,
+            "livestreams" to R.string.livestreams,
+            "playlists" to R.string.playlists,
+            "albums" to R.string.albums,
+        )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        channelName = args.channelName
-            ?.replace("/c/", "")
-            ?.replace("/user/", "")
+        channelName =
+            args.channelName
+                ?.replace("/c/", "")
+                ?.replace("/user/", "")
         channelId = args.channelId
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?,
+    ) {
         _binding = FragmentChannelBinding.bind(view)
         super.onViewCreated(view, savedInstanceState)
         // Check if the AppBarLayout is fully expanded
@@ -105,125 +108,131 @@ class ChannelFragment : Fragment(R.layout.fragment_channel) {
         _binding = null
     }
 
-    private fun fetchChannel() = lifecycleScope.launch {
-        isLoading = true
-        _binding?.channelRefresh?.isRefreshing = true
+    private fun fetchChannel() =
+        lifecycleScope.launch {
+            isLoading = true
+            _binding?.channelRefresh?.isRefreshing = true
 
-        val response = try {
-            withContext(Dispatchers.IO) {
-                if (channelId != null) {
-                    MediaServiceRepository.instance.getChannel(channelId!!)
-                } else {
-                    MediaServiceRepository.instance.getChannelByName(channelName!!)
+            val response =
+                try {
+                    withContext(Dispatchers.IO) {
+                        if (channelId != null) {
+                            MediaServiceRepository.instance.getChannel(channelId!!)
+                        } else {
+                            MediaServiceRepository.instance.getChannelByName(channelName!!)
+                        }
+                    }
+                } catch (e: Exception) {
+                    Log.e(TAG(), e.stackTraceToString())
+                    context?.toastFromMainDispatcher(e.localizedMessage.orEmpty())
+                    return@launch
+                } finally {
+                    _binding?.channelRefresh?.isRefreshing = false
+                    isLoading = false
                 }
+            val binding = _binding ?: return@launch
+
+            // needed if the channel gets loaded by the ID
+            channelId = response.id
+            channelName = response.name
+
+            val channelId = channelId ?: return@launch
+
+            var isSubscribed = false
+            binding.channelSubscribe.setupSubscriptionButton(
+                channelId,
+                response.name.orEmpty(),
+                response.avatarUrl,
+                response.verified,
+                binding.notificationBell,
+            ) {
+                isSubscribed = it
             }
-        } catch (e: Exception) {
-            Log.e(TAG(), e.stackTraceToString())
-            context?.toastFromMainDispatcher(e.localizedMessage.orEmpty())
-            return@launch
-        } finally {
-            _binding?.channelRefresh?.isRefreshing = false
+
+            binding.showMore.setOnClickListener {
+                ChannelOptionsBottomSheet()
+                    .apply {
+                        arguments =
+                            bundleOf(
+                                IntentData.channelId to channelId,
+                                IntentData.channelName to channelName,
+                                IntentData.isSubscribed to isSubscribed,
+                            )
+                    }.show(childFragmentManager)
+            }
+
+            nextPages[0] = response.nextpage
             isLoading = false
-        }
-        val binding = _binding ?: return@launch
+            binding.channelRefresh.isRefreshing = false
 
-        // needed if the channel gets loaded by the ID
-        channelId = response.id
-        channelName = response.name
+            binding.channelCoordinator.isVisible = true
 
-        val channelId = channelId ?: return@launch
+            binding.channelName.text = response.name
+            binding.channelName.setOnLongClickListener {
+                ClipboardHelper.save(requireContext(), text = response.name.orEmpty())
+                true
+            }
 
-        var isSubscribed = false
-        binding.channelSubscribe.setupSubscriptionButton(
-            channelId,
-            response.name.orEmpty(),
-            response.avatarUrl,
-            response.verified,
-            binding.notificationBell
-        ) {
-            isSubscribed = it
-        }
+            if (response.verified) {
+                binding.channelName
+                    .setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_verified, 0)
+            }
+            binding.channelSubs.text =
+                resources.getString(
+                    R.string.subscribers,
+                    response.subscriberCount.formatShort(),
+                )
+            if (response.description.orEmpty().isBlank()) {
+                binding.channelDescription.isGone = true
+            } else {
+                binding.channelDescription.text = response.description.orEmpty().trim()
+            }
 
-        binding.showMore.setOnClickListener {
-            ChannelOptionsBottomSheet()
-                .apply {
-                    arguments = bundleOf(
-                        IntentData.channelId to channelId,
-                        IntentData.channelName to channelName,
-                        IntentData.isSubscribed to isSubscribed
-                    )
+            ImageHelper.loadImage(response.bannerUrl, binding.channelBanner)
+            ImageHelper.loadImage(response.avatarUrl, binding.channelImage, true)
+
+            binding.channelImage.setOnClickListener {
+                NavigationHelper.openImagePreview(
+                    requireContext(),
+                    response.avatarUrl ?: return@setOnClickListener,
+                )
+            }
+
+            binding.channelBanner.setOnClickListener {
+                NavigationHelper.openImagePreview(
+                    requireContext(),
+                    response.bannerUrl ?: return@setOnClickListener,
+                )
+            }
+
+            channelContentAdapter =
+                ChannelContentAdapter(
+                    tabList,
+                    response.relatedStreams,
+                    response.nextpage,
+                    channelId,
+                    this@ChannelFragment,
+                )
+            binding.pager.adapter = channelContentAdapter
+            TabLayoutMediator(binding.tabParent, binding.pager) { tab, position ->
+                tab.text = tabList[position].name
+            }.attach()
+
+            channelAdapter =
+                VideosAdapter(showChannelInfo = false).also {
+                    it.submitList(response.relatedStreams)
                 }
-                .show(childFragmentManager)
+            tabList.clear()
+
+            val tabs = listOf(ChannelTab(VIDEOS_TAB_KEY, "")) + response.tabs
+            for (channelTab in tabs) {
+                val tabName =
+                    tabNamesMap[channelTab.name]?.let { getString(it) }
+                        ?: channelTab.name.replaceFirstChar(Char::titlecase)
+                tabList.add(ChannelTab(tabName, channelTab.data))
+            }
+            channelContentAdapter.notifyItemRangeChanged(0, tabList.size - 1)
         }
-
-        nextPages[0] = response.nextpage
-        isLoading = false
-        binding.channelRefresh.isRefreshing = false
-
-        binding.channelCoordinator.isVisible = true
-
-        binding.channelName.text = response.name
-        binding.channelName.setOnLongClickListener {
-            ClipboardHelper.save(requireContext(), text = response.name.orEmpty())
-            true
-        }
-
-        if (response.verified) {
-            binding.channelName
-                .setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_verified, 0)
-        }
-        binding.channelSubs.text = resources.getString(
-            R.string.subscribers,
-            response.subscriberCount.formatShort()
-        )
-        if (response.description.orEmpty().isBlank()) {
-            binding.channelDescription.isGone = true
-        } else {
-            binding.channelDescription.text = response.description.orEmpty().trim()
-        }
-
-        ImageHelper.loadImage(response.bannerUrl, binding.channelBanner)
-        ImageHelper.loadImage(response.avatarUrl, binding.channelImage, true)
-
-        binding.channelImage.setOnClickListener {
-            NavigationHelper.openImagePreview(
-                requireContext(),
-                response.avatarUrl ?: return@setOnClickListener
-            )
-        }
-
-        binding.channelBanner.setOnClickListener {
-            NavigationHelper.openImagePreview(
-                requireContext(),
-                response.bannerUrl ?: return@setOnClickListener
-            )
-        }
-
-        channelContentAdapter = ChannelContentAdapter(
-            tabList,
-            response.relatedStreams,
-            response.nextpage,
-            channelId,
-            this@ChannelFragment
-        )
-        binding.pager.adapter = channelContentAdapter
-        TabLayoutMediator(binding.tabParent, binding.pager) { tab, position ->
-            tab.text = tabList[position].name
-        }.attach()
-
-        channelAdapter = VideosAdapter(showChannelInfo = false).also {
-            it.submitList(response.relatedStreams)
-        }
-        tabList.clear()
-
-        val tabs = listOf(ChannelTab(VIDEOS_TAB_KEY, "")) + response.tabs
-        for (channelTab in tabs) {
-            val tabName = tabNamesMap[channelTab.name]?.let { getString(it) }
-                ?: channelTab.name.replaceFirstChar(Char::titlecase)
-            tabList.add(ChannelTab(tabName, channelTab.data))
-        }
-        channelContentAdapter.notifyItemRangeChanged(0, tabList.size - 1)
-    }
 
     companion object {
         private const val VIDEOS_TAB_KEY = "videos"
@@ -235,16 +244,18 @@ class ChannelContentAdapter(
     private val videos: List<StreamItem>,
     private val nextPage: String?,
     private val channelId: String?,
-    fragment: Fragment
+    fragment: Fragment,
 ) : FragmentStateAdapter(fragment) {
     override fun getItemCount() = list.size
 
-    override fun createFragment(position: Int) = ChannelContentFragment().apply {
-        arguments = bundleOf(
-            IntentData.tabData to list[position],
-            IntentData.videoList to videos.toMutableList(),
-            IntentData.channelId to channelId,
-            IntentData.nextPage to nextPage
-        )
-    }
+    override fun createFragment(position: Int) =
+        ChannelContentFragment().apply {
+            arguments =
+                bundleOf(
+                    IntentData.tabData to list[position],
+                    IntentData.videoList to videos.toMutableList(),
+                    IntentData.channelId to channelId,
+                    IntentData.nextPage to nextPage,
+                )
+        }
 }

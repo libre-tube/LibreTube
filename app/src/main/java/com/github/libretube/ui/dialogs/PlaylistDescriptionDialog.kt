@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.text.InputType
 import android.util.Log
 import android.widget.Toast
-import androidx.core.os.bundleOf
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.setFragmentResult
 import androidx.lifecycle.lifecycleScope
@@ -50,11 +49,12 @@ class PlaylistDescriptionDialog : DialogFragment() {
                 getButton(DialogInterface.BUTTON_POSITIVE).setOnClickListener {
                     val newDescription = binding.input.text?.toString()
                     if (newDescription.isNullOrEmpty()) {
-                        Toast.makeText(
-                            context,
-                            R.string.emptyPlaylistDescription,
-                            Toast.LENGTH_SHORT
-                        ).show()
+                        Toast
+                            .makeText(
+                                context,
+                                R.string.emptyPlaylistDescription,
+                                Toast.LENGTH_SHORT,
+                            ).show()
                         return@setOnClickListener
                     }
                     if (newDescription == currentPlaylistDescription) {
@@ -65,23 +65,26 @@ class PlaylistDescriptionDialog : DialogFragment() {
 
                     lifecycleScope.launch {
                         requireDialog().hide()
-                        val success = try {
-                            withContext(Dispatchers.IO) {
-                                PlaylistsHelper.changePlaylistDescription(
-                                    playlistId,
-                                    newDescription
-                                )
+                        val success =
+                            try {
+                                withContext(Dispatchers.IO) {
+                                    PlaylistsHelper.changePlaylistDescription(
+                                        playlistId,
+                                        newDescription,
+                                    )
+                                }
+                            } catch (e: Exception) {
+                                Log.e(TAG(), e.toString())
+                                e.localizedMessage?.let { appContext.toastFromMainDispatcher(it) }
+                                return@launch
                             }
-                        } catch (e: Exception) {
-                            Log.e(TAG(), e.toString())
-                            e.localizedMessage?.let { appContext.toastFromMainDispatcher(it) }
-                            return@launch
-                        }
                         if (success) {
                             appContext.toastFromMainDispatcher(R.string.success)
                             setFragmentResult(
                                 PLAYLIST_OPTIONS_REQUEST_KEY,
-                                bundleOf(IntentData.playlistDescription to newDescription)
+                                Bundle().apply {
+                                    putString(IntentData.playlistDescription, newDescription)
+                                },
                             )
                         } else {
                             appContext.toastFromMainDispatcher(R.string.server_error)

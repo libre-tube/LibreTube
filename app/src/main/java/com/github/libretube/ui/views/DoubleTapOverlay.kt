@@ -8,7 +8,7 @@ import com.github.libretube.databinding.DoubleTapOverlayBinding
 
 class DoubleTapOverlay(
     context: Context,
-    attrs: AttributeSet? = null
+    attrs: AttributeSet? = null,
 ) : LinearLayout(context, attrs) {
     val binding = DoubleTapOverlayBinding.inflate(LayoutInflater.from(context), this, true)
 }

@@ -47,24 +47,26 @@ class BackupRestoreSettings : BasePreferenceFragment() {
                 }
             }
         }
-    private val createBackupFile = registerForActivityResult(CreateDocument(FILETYPE_ANY)) { uri ->
-        if (uri == null) return@registerForActivityResult
-        lifecycleScope.launch(Dispatchers.IO) {
-            BackupHelper.createAdvancedBackup(requireContext().applicationContext, uri, backupFile)
+    private val createBackupFile =
+        registerForActivityResult(CreateDocument(FILETYPE_ANY)) { uri ->
+            if (uri == null) return@registerForActivityResult
+            lifecycleScope.launch(Dispatchers.IO) {
+                BackupHelper.createAdvancedBackup(requireContext().applicationContext, uri, backupFile)
+            }
         }
-    }
 
     /**
      * result listeners for importing and exporting subscriptions
      */
-    private val getSubscriptionsFile = registerForActivityResult(
-        ActivityResultContracts.GetContent()
-    ) { uri ->
-        if (uri == null) return@registerForActivityResult
-        CoroutineScope(Dispatchers.IO).launch {
-            ImportHelper.importSubscriptions(requireContext().applicationContext, uri, importFormat)
+    private val getSubscriptionsFile =
+        registerForActivityResult(
+            ActivityResultContracts.GetContent(),
+        ) { uri ->
+            if (uri == null) return@registerForActivityResult
+            CoroutineScope(Dispatchers.IO).launch {
+                ImportHelper.importSubscriptions(requireContext().applicationContext, uri, importFormat)
+            }
         }
-    }
 
     private val createSubscriptionsFile =
         registerForActivityResult(CreateDocument(FILETYPE_ANY)) { uri ->
@@ -73,11 +75,10 @@ class BackupRestoreSettings : BasePreferenceFragment() {
                 ImportHelper.exportSubscriptions(
                     requireContext().applicationContext,
                     uri,
-                    importFormat
+                    importFormat,
                 )
             }
         }
-
 
     // result listeners for importing and exporting playlists
     private val getPlaylistsFile =
@@ -87,7 +88,7 @@ class BackupRestoreSettings : BasePreferenceFragment() {
                     ImportHelper.importPlaylists(
                         requireContext().applicationContext,
                         file,
-                        importFormat
+                        importFormat,
                     )
                 }
             }
@@ -100,7 +101,7 @@ class BackupRestoreSettings : BasePreferenceFragment() {
                     ImportHelper.importWatchHistory(
                         requireContext().applicationContext,
                         file,
-                        importFormat
+                        importFormat,
                     )
                 }
             }
@@ -113,13 +114,16 @@ class BackupRestoreSettings : BasePreferenceFragment() {
                     ImportHelper.exportPlaylists(
                         requireContext().applicationContext,
                         uri,
-                        importFormat
+                        importFormat,
                     )
                 }
             }
         }
 
-    override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
+    override fun onCreatePreferences(
+        savedInstanceState: Bundle?,
+        rootKey: String?,
+    ) {
         setPreferencesFromResource(R.xml.import_export_settings, rootKey)
 
         val importSubscriptions = findPreference<Preference>("import_subscriptions")
@@ -127,7 +131,7 @@ class BackupRestoreSettings : BasePreferenceFragment() {
             createImportFormatDialog(
                 requireContext(),
                 R.string.import_subscriptions_from,
-                importSubscriptionFormatList
+                importSubscriptionFormatList,
             ) { format, _ ->
                 importFormat = format
                 getSubscriptionsFile.launch("*/*")
@@ -141,11 +145,11 @@ class BackupRestoreSettings : BasePreferenceFragment() {
                 requireContext(),
                 R.string.export_subscriptions_to,
                 exportSubscriptionFormatList,
-                isExport = true
+                isExport = true,
             ) { format, includeTimestamp ->
                 importFormat = format
                 createSubscriptionsFile.launch(
-                    getExportFileName(requireContext(), format, "subscriptions", includeTimestamp)
+                    getExportFileName(requireContext(), format, "subscriptions", includeTimestamp),
                 )
             }
             true
@@ -156,7 +160,7 @@ class BackupRestoreSettings : BasePreferenceFragment() {
             createImportFormatDialog(
                 requireContext(),
                 R.string.import_playlists_from,
-                importPlaylistFormatList
+                importPlaylistFormatList,
             ) { format, _ ->
                 importFormat = format
                 getPlaylistsFile.launch(arrayOf("*/*"))
@@ -170,11 +174,11 @@ class BackupRestoreSettings : BasePreferenceFragment() {
                 requireContext(),
                 R.string.export_playlists_to,
                 exportPlaylistFormatList,
-                isExport = true
+                isExport = true,
             ) { format, includeTimestamp ->
                 importFormat = format
                 createPlaylistsFile.launch(
-                    getExportFileName(requireContext(), format, "playlists", includeTimestamp)
+                    getExportFileName(requireContext(), format, "playlists", includeTimestamp),
                 )
             }
             true
@@ -185,7 +189,7 @@ class BackupRestoreSettings : BasePreferenceFragment() {
             createImportFormatDialog(
                 requireContext(),
                 R.string.import_watch_history,
-                importWatchHistoryFormatList
+                importWatchHistoryFormatList,
             ) { format, _ ->
                 importFormat = format
                 getWatchHistoryFile.launch(arrayOf("*/*"))
@@ -195,12 +199,12 @@ class BackupRestoreSettings : BasePreferenceFragment() {
 
         childFragmentManager.setFragmentResultListener(
             BACKUP_DIALOG_REQUEST_KEY,
-            this
+            this,
         ) { _, resultBundle ->
             val encodedBackupFile = resultBundle.getString(IntentData.backupFile)!!
             backupFile = Json.decodeFromString(encodedBackupFile)
             val timestamp = TextUtils.getFileSafeTimeStampNow()
-            createBackupFile.launch("libretube-backup-${timestamp}.json")
+            createBackupFile.launch("libretube-backup-$timestamp.json")
         }
         val advancedBackup = findPreference<Preference>("backup")
         advancedBackup?.setOnPreferenceClickListener {
@@ -223,25 +227,29 @@ class BackupRestoreSettings : BasePreferenceFragment() {
          */
         const val FILETYPE_ANY = "application/octet-stream"
 
-        val importSubscriptionFormatList = listOf(
-            ImportFormat.NEWPIPE,
-            ImportFormat.FREETUBE,
-            ImportFormat.YOUTUBECSV
-        )
-        val exportSubscriptionFormatList = listOf(
-            ImportFormat.NEWPIPE,
-            ImportFormat.FREETUBE
-        )
-        val importPlaylistFormatList = listOf(
-            ImportFormat.PIPED,
-            ImportFormat.FREETUBE,
-            ImportFormat.YOUTUBECSV,
-            ImportFormat.URLSORIDS
-        )
-        val exportPlaylistFormatList = listOf(
-            ImportFormat.PIPED,
-            ImportFormat.FREETUBE
-        )
+        val importSubscriptionFormatList =
+            listOf(
+                ImportFormat.NEWPIPE,
+                ImportFormat.FREETUBE,
+                ImportFormat.YOUTUBECSV,
+            )
+        val exportSubscriptionFormatList =
+            listOf(
+                ImportFormat.NEWPIPE,
+                ImportFormat.FREETUBE,
+            )
+        val importPlaylistFormatList =
+            listOf(
+                ImportFormat.PIPED,
+                ImportFormat.FREETUBE,
+                ImportFormat.YOUTUBECSV,
+                ImportFormat.URLSORIDS,
+            )
+        val exportPlaylistFormatList =
+            listOf(
+                ImportFormat.PIPED,
+                ImportFormat.FREETUBE,
+            )
         val importWatchHistoryFormatList = listOf(ImportFormat.YOUTUBEJSON)
 
         fun createImportFormatDialog(
@@ -249,38 +257,42 @@ class BackupRestoreSettings : BasePreferenceFragment() {
             @StringRes titleStringId: Int,
             formats: List<ImportFormat>,
             isExport: Boolean = false,
-            onConfirm: (ImportFormat, Boolean) -> Unit
+            onConfirm: (ImportFormat, Boolean) -> Unit,
         ) {
             var selectedIndex = 0
 
-            val dialog = MaterialAlertDialogBuilder(context)
-                .setTitle(context.getString(titleStringId))
-                .setSingleChoiceItems(
-                    formats.map { context.getString(it.value) }.toTypedArray(),
-                    selectedIndex
-                ) { _, i ->
-                    selectedIndex = i
-                }
+            val dialog =
+                MaterialAlertDialogBuilder(context)
+                    .setTitle(context.getString(titleStringId))
+                    .setSingleChoiceItems(
+                        formats.map { context.getString(it.value) }.toTypedArray(),
+                        selectedIndex,
+                    ) { _, i ->
+                        selectedIndex = i
+                    }
 
             val layoutInflater = LayoutInflater.from(context)
             val binding = DialogImportExportFormatChooserBinding.inflate(layoutInflater)
-            binding.includeTimestamp.isChecked = PreferenceHelper.getBoolean(
-                PreferenceKeys.INCLUDE_TIMESTAMP_IN_BACKUP_FILENAME,
-                false
-            )
+            binding.includeTimestamp.isChecked =
+                PreferenceHelper.getBoolean(
+                    PreferenceKeys.INCLUDE_TIMESTAMP_IN_BACKUP_FILENAME,
+                    false,
+                )
             if (isExport) {
                 dialog.setView(binding.root)
             }
 
-            dialog.setPositiveButton(R.string.okay) { _, _ ->
-                if (isExport) PreferenceHelper.putBoolean(
-                    PreferenceKeys.INCLUDE_TIMESTAMP_IN_BACKUP_FILENAME,
-                    binding.includeTimestamp.isChecked
-                )
+            dialog
+                .setPositiveButton(R.string.okay) { _, _ ->
+                    if (isExport) {
+                        PreferenceHelper.putBoolean(
+                            PreferenceKeys.INCLUDE_TIMESTAMP_IN_BACKUP_FILENAME,
+                            binding.includeTimestamp.isChecked,
+                        )
+                    }
 
-                onConfirm(formats[selectedIndex], binding.includeTimestamp.isChecked)
-            }
-                .setNegativeButton(R.string.cancel, null)
+                    onConfirm(formats[selectedIndex], binding.includeTimestamp.isChecked)
+                }.setNegativeButton(R.string.cancel, null)
                 .show()
         }
 
@@ -288,16 +300,16 @@ class BackupRestoreSettings : BasePreferenceFragment() {
             context: Context,
             format: ImportFormat,
             type: String,
-            includeTimestamp: Boolean
+            includeTimestamp: Boolean,
         ): String {
             var baseString = context.getString(format.value).lowercase()
-            baseString += "-${type}"
+            baseString += "-$type"
 
             if (includeTimestamp) {
                 baseString += "-${TextUtils.getFileSafeTimeStampNow()}"
             }
 
-            return "${baseString}.${format.fileExtension}"
+            return "$baseString.${format.fileExtension}"
         }
     }
 }

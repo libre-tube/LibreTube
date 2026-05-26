@@ -15,7 +15,10 @@ import com.github.libretube.ui.sheets.IconsBottomSheet
 import com.google.android.material.color.DynamicColors
 
 class AppearanceSettings : BasePreferenceFragment() {
-    override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
+    override fun onCreatePreferences(
+        savedInstanceState: Bundle?,
+        rootKey: String?,
+    ) {
         setPreferencesFromResource(R.xml.appearance_settings, rootKey)
 
         val themeToggle = findPreference<ListPreference>(PreferenceKeys.THEME_MODE)
@@ -38,10 +41,11 @@ class AppearanceSettings : BasePreferenceFragment() {
         }
 
         val changeIcon = findPreference<Preference>(PreferenceKeys.APP_ICON)
-        val iconPref = PreferenceHelper.getString(
-            PreferenceKeys.APP_ICON,
-            IconsSheetAdapter.Companion.AppIcon.Default.activityAlias
-        )
+        val iconPref =
+            PreferenceHelper.getString(
+                PreferenceKeys.APP_ICON,
+                IconsSheetAdapter.Companion.AppIcon.Default.activityAlias,
+            )
         IconsSheetAdapter.availableIcons.firstOrNull { it.activityAlias == iconPref }?.let {
             changeIcon?.summary = getString(it.nameResource)
         }
@@ -68,8 +72,16 @@ class AppearanceSettings : BasePreferenceFragment() {
      */
     private fun updateAccentColorValues(pref: ListPreference) {
         if (!DynamicColors.isDynamicColorAvailable()) {
-            pref.entries = pref.entries.toList().subList(1, pref.entries.size).toTypedArray()
-            pref.entryValues = pref.entryValues.toList().subList(1, pref.entryValues.size).toTypedArray()
+            pref.entries =
+                pref.entries
+                    .toList()
+                    .subList(1, pref.entries.size)
+                    .toTypedArray()
+            pref.entryValues =
+                pref.entryValues
+                    .toList()
+                    .subList(1, pref.entryValues.size)
+                    .toTypedArray()
         }
     }
 }

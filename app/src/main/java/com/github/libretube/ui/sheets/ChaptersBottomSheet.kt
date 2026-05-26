@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.View
 import android.view.ViewTreeObserver
 import android.view.WindowManager
-import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.setFragmentResult
@@ -30,14 +29,20 @@ class ChaptersBottomSheet : ExpandablePlayerSheet(R.layout.bottom_sheet) {
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?,
+    ) {
         _binding = BottomSheetBinding.bind(view)
         super.onViewCreated(view, savedInstanceState)
 
         binding.optionsRecycler.layoutManager = LinearLayoutManager(context)
         val adapter =
             ChaptersAdapter(chaptersViewModel.chapters, duration) {
-                setFragmentResult(SEEK_TO_POSITION_REQUEST_KEY, bundleOf(IntentData.currentPosition to it))
+                setFragmentResult(
+                    SEEK_TO_POSITION_REQUEST_KEY,
+                    Bundle().apply { putLong(IntentData.currentPosition, it) },
+                )
             }
         binding.optionsRecycler.adapter = adapter
 
@@ -47,10 +52,9 @@ class ChaptersBottomSheet : ExpandablePlayerSheet(R.layout.bottom_sheet) {
                 v.paddingLeft,
                 v.paddingTop,
                 v.paddingRight,
-                systemInsets.bottom
+                systemInsets.bottom,
             )
         }
-
 
         binding.optionsRecycler.viewTreeObserver.addOnGlobalLayoutListener(
             object : ViewTreeObserver.OnGlobalLayoutListener {
@@ -61,7 +65,7 @@ class ChaptersBottomSheet : ExpandablePlayerSheet(R.layout.bottom_sheet) {
 
                     binding.optionsRecycler.viewTreeObserver.removeOnGlobalLayoutListener(this)
                 }
-            }
+            },
         )
 
         chaptersViewModel.currentChapterIndex.observe(viewLifecycleOwner) { currentIndex ->
@@ -92,7 +96,7 @@ class ChaptersBottomSheet : ExpandablePlayerSheet(R.layout.bottom_sheet) {
         dialog?.window?.apply {
             setFlags(
                 WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
-                WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
+                WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
             )
         }
     }

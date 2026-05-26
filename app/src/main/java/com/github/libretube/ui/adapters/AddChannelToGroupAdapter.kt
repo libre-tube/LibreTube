@@ -9,15 +9,21 @@ import com.github.libretube.ui.adapters.callbacks.DiffUtilItemCallback
 import com.github.libretube.ui.viewholders.AddChannelToGroupViewHolder
 
 class AddChannelToGroupAdapter(
-    private val channelId: String
+    private val channelId: String,
 ) : ListAdapter<SubscriptionGroup, AddChannelToGroupViewHolder>(DiffUtilItemCallback()) {
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AddChannelToGroupViewHolder {
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int,
+    ): AddChannelToGroupViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         val binding = AddChannelToGroupRowBinding.inflate(layoutInflater, parent, false)
         return AddChannelToGroupViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: AddChannelToGroupViewHolder, position: Int) {
+    override fun onBindViewHolder(
+        holder: AddChannelToGroupViewHolder,
+        position: Int,
+    ) {
         val channelGroup = getItem(holder.bindingAdapterPosition)
 
         holder.binding.apply {

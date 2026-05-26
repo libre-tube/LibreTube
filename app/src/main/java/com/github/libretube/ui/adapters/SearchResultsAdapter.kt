@@ -1,8 +1,8 @@
 package com.github.libretube.ui.adapters
 
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.os.bundleOf
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.paging.PagingDataAdapter
@@ -39,34 +39,43 @@ import kotlinx.coroutines.withContext
 import kotlinx.serialization.encodeToString
 
 class SearchResultsAdapter(
-    private val timeStamp: Long = 0
+    private val timeStamp: Long = 0,
 ) : PagingDataAdapter<ContentItem, SearchViewHolder>(
-    DiffUtilItemCallback(
-        areItemsTheSame = { oldItem, newItem -> oldItem.url == newItem.url },
-        areContentsTheSame = { _, _ -> true },
-    )
-) {
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchViewHolder {
+        DiffUtilItemCallback(
+            areItemsTheSame = { oldItem, newItem -> oldItem.url == newItem.url },
+            areContentsTheSame = { _, _ -> true },
+        ),
+    ) {
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int,
+    ): SearchViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
 
         return when (viewType) {
-            0 -> SearchViewHolder(
-                VideoRowBinding.inflate(layoutInflater, parent, false)
-            )
+            0 ->
+                SearchViewHolder(
+                    VideoRowBinding.inflate(layoutInflater, parent, false),
+                )
 
-            1 -> SearchViewHolder(
-                ChannelRowBinding.inflate(layoutInflater, parent, false)
-            )
+            1 ->
+                SearchViewHolder(
+                    ChannelRowBinding.inflate(layoutInflater, parent, false),
+                )
 
-            2 -> SearchViewHolder(
-                PlaylistsRowBinding.inflate(layoutInflater, parent, false)
-            )
+            2 ->
+                SearchViewHolder(
+                    PlaylistsRowBinding.inflate(layoutInflater, parent, false),
+                )
 
             else -> throw IllegalArgumentException("Invalid type")
         }
     }
 
-    override fun onBindViewHolder(holder: SearchViewHolder, position: Int) {
+    override fun onBindViewHolder(
+        holder: SearchViewHolder,
+        position: Int,
+    ) {
         val searchItem = getItem(position)!!
 
         val videoRowBinding = holder.videoRowBinding
@@ -82,16 +91,19 @@ class SearchResultsAdapter(
         }
     }
 
-    override fun getItemViewType(position: Int): Int {
-        return when (getItem(position)?.type) {
+    override fun getItemViewType(position: Int): Int =
+        when (getItem(position)?.type) {
             StreamItem.TYPE_STREAM -> 0
             StreamItem.TYPE_CHANNEL -> 1
             StreamItem.TYPE_PLAYLIST -> 2
             else -> 3
         }
-    }
 
-    private fun bindVideo(item: ContentItem, binding: VideoRowBinding, position: Int) {
+    private fun bindVideo(
+        item: ContentItem,
+        binding: VideoRowBinding,
+        position: Int,
+    ) {
         binding.apply {
             ImageHelper.loadImage(item.thumbnail, thumbnail)
 
@@ -115,14 +127,17 @@ class SearchResultsAdapter(
             root.setOnLongClickListener {
                 fragmentManager.setFragmentResultListener(
                     VideoOptionsBottomSheet.VIDEO_OPTIONS_SHEET_REQUEST_KEY,
-                    activity
+                    activity,
                 ) { _, _ ->
                     notifyItemChanged(position)
                 }
                 val sheet = VideoOptionsBottomSheet()
                 val contentItemString = JsonHelper.json.encodeToString(item)
                 val streamItem: StreamItem = JsonHelper.json.decodeFromString(contentItemString)
-                sheet.arguments = bundleOf(IntentData.streamItem to streamItem)
+                sheet.arguments =
+                    Bundle().apply {
+                        putParcelable(IntentData.streamItem, streamItem)
+                    }
                 sheet.show(fragmentManager, SearchResultsAdapter::class.java.name)
                 true
             }
@@ -151,21 +166,25 @@ class SearchResultsAdapter(
         }
     }
 
-    private fun bindChannel(item: ContentItem, binding: ChannelRowBinding) {
+    private fun bindChannel(
+        item: ContentItem,
+        binding: ChannelRowBinding,
+    ) {
         binding.apply {
             ImageHelper.loadImage(item.thumbnail, searchChannelImage, true)
             searchChannelName.text = item.name
 
             val subscribers = item.subscribers.formatShort()
-            searchViews.text = if (item.subscribers >= 0 && item.videos >= 0) {
-                root.context.getString(R.string.subscriberAndVideoCounts, subscribers, item.videos)
-            } else if (item.subscribers >= 0) {
-                root.context.getString(R.string.subscribers, subscribers)
-            } else if (item.videos >= 0) {
-                root.context.getString(R.string.videoCount, item.videos)
-            } else {
-                ""
-            }
+            searchViews.text =
+                if (item.subscribers >= 0 && item.videos >= 0) {
+                    root.context.getString(R.string.subscriberAndVideoCounts, subscribers, item.videos)
+                } else if (item.subscribers >= 0) {
+                    root.context.getString(R.string.subscribers, subscribers)
+                } else if (item.videos >= 0) {
+                    root.context.getString(R.string.videoCount, item.videos)
+                } else {
+                    ""
+                }
 
             root.setOnClickListener {
                 NavigationHelper.navigateChannel(root.context, item.url)
@@ -176,25 +195,29 @@ class SearchResultsAdapter(
                 item.url.toID(),
                 item.name.orEmpty(),
                 item.thumbnail,
-                item.uploaderVerified ?: false
+                item.uploaderVerified ?: false,
             ) {
                 subscribed = it
             }
 
             root.setOnLongClickListener {
                 val channelOptionsSheet = ChannelOptionsBottomSheet()
-                channelOptionsSheet.arguments = bundleOf(
-                    IntentData.channelId to item.url.toID(),
-                    IntentData.channelName to item.name,
-                    IntentData.isSubscribed to subscribed
-                )
+                channelOptionsSheet.arguments =
+                    Bundle().apply {
+                        putString(IntentData.channelId, item.url.toID())
+                        putString(IntentData.channelName, item.name)
+                        putBoolean(IntentData.isSubscribed, subscribed)
+                    }
                 channelOptionsSheet.show((root.context as BaseActivity).supportFragmentManager)
                 true
             }
         }
     }
 
-    private fun bindPlaylist(item: ContentItem, binding: PlaylistsRowBinding) {
+    private fun bindPlaylist(
+        item: ContentItem,
+        binding: PlaylistsRowBinding,
+    ) {
         binding.apply {
             ImageHelper.loadImage(item.thumbnail, playlistThumbnail)
             if (item.videos >= 0) videoCount.text = item.videos.toString()
@@ -206,14 +229,15 @@ class SearchResultsAdapter(
 
             root.setOnLongClickListener {
                 val sheet = PlaylistOptionsBottomSheet()
-                sheet.arguments = bundleOf(
-                    IntentData.playlistId to item.url.toID(),
-                    IntentData.playlistName to item.name.orEmpty(),
-                    IntentData.playlistType to PlaylistType.PUBLIC
-                )
+                sheet.arguments =
+                    Bundle().apply {
+                        putString(IntentData.playlistId, item.url.toID())
+                        putString(IntentData.playlistName, item.name.orEmpty())
+                        putSerializable(IntentData.playlistType, PlaylistType.PUBLIC)
+                    }
                 sheet.show(
                     (root.context as BaseActivity).supportFragmentManager,
-                    PlaylistOptionsBottomSheet::class.java.name
+                    PlaylistOptionsBottomSheet::class.java.name,
                 )
                 true
             }

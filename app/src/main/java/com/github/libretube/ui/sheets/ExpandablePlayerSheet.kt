@@ -10,8 +10,9 @@ import com.github.libretube.ui.models.CommonPlayerViewModel
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 
-abstract class ExpandablePlayerSheet(@LayoutRes layoutResId: Int) :
-    UndimmedBottomSheet(layoutResId) {
+abstract class ExpandablePlayerSheet(
+    @LayoutRes layoutResId: Int,
+) : UndimmedBottomSheet(layoutResId) {
     private val commonPlayerViewModel: CommonPlayerViewModel by activityViewModels()
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
@@ -26,21 +27,32 @@ abstract class ExpandablePlayerSheet(@LayoutRes layoutResId: Int) :
                         ?: return@setOnShowListener
 
                 val behavior = BottomSheetBehavior.from(bottomSheet)
-                behavior.addBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
-                    override fun onStateChanged(bottomSheet: View, newState: Int) {
-                        if (newState == BottomSheetBehavior.STATE_HIDDEN) {
-                            dismissAllowingStateLoss()
+                behavior.addBottomSheetCallback(
+                    object : BottomSheetBehavior.BottomSheetCallback() {
+                        override fun onStateChanged(
+                            bottomSheet: View,
+                            newState: Int,
+                        ) {
+                            if (newState == BottomSheetBehavior.STATE_HIDDEN) {
+                                dismissAllowingStateLoss()
+                            }
                         }
-                    }
 
-                    override fun onSlide(bottomSheet: View, slideOffset: Float) = Unit
-                })
+                        override fun onSlide(
+                            bottomSheet: View,
+                            slideOffset: Float,
+                        ) = Unit
+                    },
+                )
             }
         }
         return dialog
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?,
+    ) {
         super.onViewCreated(view, savedInstanceState)
 
         commonPlayerViewModel.setSheetExpand(true)

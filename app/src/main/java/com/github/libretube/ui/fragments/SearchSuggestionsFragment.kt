@@ -28,26 +28,30 @@ class SearchSuggestionsFragment : Fragment(R.layout.fragment_search_suggestions)
     private val viewModel: SearchViewModel by activityViewModels()
     private val mainActivity get() = activity as MainActivity
 
-    private val suggestionsAdapter = SearchSuggestionsAdapter(
-        onRootClickListener = { suggestion ->
-            mainActivity.setQuery(suggestion, true)
-        },
-        onArrowClickListener = { suggestion ->
-            mainActivity.setQuery(suggestion, false)
-        },
-        onSearchHistoryItemDeleted = { historyItem ->
-            lifecycleScope.launch(Dispatchers.IO) {
-                DatabaseHolder.Database.searchHistoryDao().delete(historyItem)
-            }
-        }
-    )
+    private val suggestionsAdapter =
+        SearchSuggestionsAdapter(
+            onRootClickListener = { suggestion ->
+                mainActivity.setQuery(suggestion, true)
+            },
+            onArrowClickListener = { suggestion ->
+                mainActivity.setQuery(suggestion, false)
+            },
+            onSearchHistoryItemDeleted = { historyItem ->
+                lifecycleScope.launch(Dispatchers.IO) {
+                    DatabaseHolder.Database.searchHistoryDao().delete(historyItem)
+                }
+            },
+        )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewModel.setQuery(arguments?.getString(IntentData.query))
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?,
+    ) {
         _binding = FragmentSearchSuggestionsBinding.bind(view)
         super.onViewCreated(view, savedInstanceState)
         binding.suggestionsRecycler.adapter = suggestionsAdapter
@@ -62,7 +66,7 @@ class SearchSuggestionsFragment : Fragment(R.layout.fragment_search_suggestions)
                     viewModel.searchSuggestions.collectLatest { result ->
                         suggestionsAdapter.submitSearchSuggestions(
                             result.historyList,
-                            result.suggestionList
+                            result.suggestionList,
                         ) {
                             binding.suggestionsRecycler.scrollToPosition(0)
                         }

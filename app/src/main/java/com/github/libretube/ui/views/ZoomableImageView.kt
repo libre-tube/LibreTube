@@ -16,7 +16,10 @@ import kotlin.math.roundToInt
  * An image view that allows zooming the image inside
  * credits: https://stackoverflow.com/posts/6650473
  */
-class ZoomableImageView(context: Context, attr: AttributeSet?) : AppCompatImageView(context, attr) {
+class ZoomableImageView(
+    context: Context,
+    attr: AttributeSet?,
+) : AppCompatImageView(context, attr) {
     var bitmapMatrix = Matrix()
     var mode = NONE
     var last = PointF()
@@ -69,10 +72,14 @@ class ZoomableImageView(context: Context, attr: AttributeSet?) : AppCompatImageV
                     if (mode == ZOOM || mode == DRAG && saveScale > minScale) {
                         var deltaX = curr.x - last.x // x difference
                         var deltaY = curr.y - last.y // y difference
-                        val scaleWidth = (origWidth * saveScale).roundToInt()
-                            .toFloat() // width after applying current scale
-                        val scaleHeight = (origHeight * saveScale).roundToInt()
-                            .toFloat() // height after applying current scale
+                        val scaleWidth =
+                            (origWidth * saveScale)
+                                .roundToInt()
+                                .toFloat() // width after applying current scale
+                        val scaleHeight =
+                            (origHeight * saveScale)
+                                .roundToInt()
+                                .toFloat() // height after applying current scale
                         // if scaleWidth is smaller than the views width
                         // in other words if the image width fits in the view
                         // limit left and right movement
@@ -133,7 +140,10 @@ class ZoomableImageView(context: Context, attr: AttributeSet?) : AppCompatImageV
         bmHeight = bm.height.toFloat()
     }
 
-    override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
+    override fun onMeasure(
+        widthMeasureSpec: Int,
+        heightMeasureSpec: Int,
+    ) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec)
         width = MeasureSpec.getSize(widthMeasureSpec).toFloat()
         height = MeasureSpec.getSize(heightMeasureSpec).toFloat()
@@ -188,16 +198,20 @@ class ZoomableImageView(context: Context, attr: AttributeSet?) : AppCompatImageV
                         if (y < -bottom) {
                             bitmapMatrix.postTranslate(
                                 0f,
-                                -(y + bottom)
+                                -(y + bottom),
                             )
-                        } else if (y > 0) bitmapMatrix.postTranslate(0f, -y)
+                        } else if (y > 0) {
+                            bitmapMatrix.postTranslate(0f, -y)
+                        }
                     } else {
                         if (x < -right) {
                             bitmapMatrix.postTranslate(
                                 -(x + right),
-                                0f
+                                0f,
                             )
-                        } else if (x > 0) bitmapMatrix.postTranslate(-x, 0f)
+                        } else if (x > 0) {
+                            bitmapMatrix.postTranslate(-x, 0f)
+                        }
                     }
                 }
             } else {
@@ -210,15 +224,19 @@ class ZoomableImageView(context: Context, attr: AttributeSet?) : AppCompatImageV
                     if (x < -right) {
                         bitmapMatrix.postTranslate(
                             -(x + right),
-                            0f
+                            0f,
                         )
-                    } else if (x > 0) bitmapMatrix.postTranslate(-x, 0f)
+                    } else if (x > 0) {
+                        bitmapMatrix.postTranslate(-x, 0f)
+                    }
                     if (y < -bottom) {
                         bitmapMatrix.postTranslate(
                             0f,
-                            -(y + bottom)
+                            -(y + bottom),
                         )
-                    } else if (y > 0) bitmapMatrix.postTranslate(0f, -y)
+                    } else if (y > 0) {
+                        bitmapMatrix.postTranslate(0f, -y)
+                    }
                 }
             }
             return true

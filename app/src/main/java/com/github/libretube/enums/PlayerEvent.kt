@@ -7,5 +7,5 @@ enum class PlayerEvent {
     Next,
     Prev,
     Background,
-    Stop
+    Stop,
 }

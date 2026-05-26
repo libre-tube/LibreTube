@@ -9,7 +9,7 @@ import com.github.libretube.ui.interfaces.TimeFrameReceiver
 
 class OnlineTimeFrameReceiver(
     private val context: Context,
-    private val previewFrames: List<PreviewFrames>
+    private val previewFrames: List<PreviewFrames>,
 ) : TimeFrameReceiver() {
     override suspend fun getFrameAtTime(position: Long): Bitmap? {
         val previewFrame = getPreviewFrame(previewFrames, position) ?: return null
@@ -20,7 +20,10 @@ class OnlineTimeFrameReceiver(
     /**
      * Cut off a new bitmap from the image that contains multiple preview thumbnails
      */
-    private fun cutBitmapFromPreviewFrame(bitmap: Bitmap, previewFrame: PreviewFrame): Bitmap? {
+    private fun cutBitmapFromPreviewFrame(
+        bitmap: Bitmap,
+        previewFrame: PreviewFrame,
+    ): Bitmap? {
         val offsetX = previewFrame.positionX * previewFrame.frameWidth
         val offsetY = previewFrame.positionY * previewFrame.frameHeight
 
@@ -30,7 +33,7 @@ class OnlineTimeFrameReceiver(
                 offsetX,
                 offsetY,
                 previewFrame.frameWidth,
-                previewFrame.frameHeight
+                previewFrame.frameHeight,
             )
         }.getOrNull()
     }
@@ -38,7 +41,10 @@ class OnlineTimeFrameReceiver(
     /**
      * Get the preview frame according to the current position
      */
-    private fun getPreviewFrame(previewFrames: List<PreviewFrames>, position: Long): PreviewFrame? {
+    private fun getPreviewFrame(
+        previewFrames: List<PreviewFrames>,
+        position: Long,
+    ): PreviewFrame? {
         var startPosition = 0L
         // get the frames with the best quality
         val frames = previewFrames.maxByOrNull { it.frameHeight }

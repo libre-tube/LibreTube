@@ -89,8 +89,10 @@ import kotlin.math.ceil
 @androidx.annotation.OptIn(androidx.media3.common.util.UnstableApi::class)
 class CustomExoPlayerView(
     context: Context,
-    attributeSet: AttributeSet? = null
-) : PlayerView(context, attributeSet), PlayerOptions, PlayerGestureOptions {
+    attributeSet: AttributeSet? = null,
+) : PlayerView(context, attributeSet),
+    PlayerOptions,
+    PlayerGestureOptions {
     @Suppress("LeakingThis")
     val binding = ExoStyledPlayerControlViewBinding.bind(this)
     val backgroundBinding = CustomExoPlayerViewTemplateBinding.bind(this)
@@ -121,18 +123,20 @@ class CustomExoPlayerView(
         set(value) {
             PreferenceHelper.putInt(
                 PreferenceKeys.PLAYER_RESIZE_MODE,
-                value
+                value,
             )
         }
-        get() = PreferenceHelper.getInt(
-            PreferenceKeys.PLAYER_RESIZE_MODE,
-            AspectRatioFrameLayout.RESIZE_MODE_FIT
+        get() =
+            PreferenceHelper.getInt(
+                PreferenceKeys.PLAYER_RESIZE_MODE,
+                AspectRatioFrameLayout.RESIZE_MODE_FIT,
+            )
+    private val resizeModes =
+        listOf(
+            AspectRatioFrameLayout.RESIZE_MODE_FIT to R.string.resize_mode_fit,
+            AspectRatioFrameLayout.RESIZE_MODE_ZOOM to R.string.resize_mode_zoom,
+            AspectRatioFrameLayout.RESIZE_MODE_FILL to R.string.resize_mode_fill,
         )
-    private val resizeModes = listOf(
-        AspectRatioFrameLayout.RESIZE_MODE_FIT to R.string.resize_mode_fit,
-        AspectRatioFrameLayout.RESIZE_MODE_ZOOM to R.string.resize_mode_zoom,
-        AspectRatioFrameLayout.RESIZE_MODE_FILL to R.string.resize_mode_fill
-    )
 
     private val activity get() = context as BaseActivity
 
@@ -168,7 +172,6 @@ class CustomExoPlayerView(
     private var selectedAudioLanguageAndRoleFlags: Pair<String?, @C.RoleFlags Int>? = null
     private lateinit var playerCallback: CustomPlayerCallback
 
-
     // if null, it's been set to automatic
     private var fullscreenResolution: Int? = null
 
@@ -180,16 +183,17 @@ class CustomExoPlayerView(
         brightnessHelper = BrightnessHelper(activity)
         playerGestureController = PlayerGestureController(activity, this)
         audioHelper = AudioHelper(context)
-        fullscreenGestureAnimationController = FullscreenGestureAnimationController(
-            playerView = this,
-            videoFrameView = backgroundBinding.exoContentFrame,
-            onSwipeUpCompleted = {
-                if (!isFullscreen()) playerCallback.toggleFullscreen()
-            },
-            onSwipeDownCompleted = {
-                if (isFullscreen()) playerCallback.toggleFullscreen()
-            }
-        )
+        fullscreenGestureAnimationController =
+            FullscreenGestureAnimationController(
+                playerView = this,
+                videoFrameView = backgroundBinding.exoContentFrame,
+                onSwipeUpCompleted = {
+                    if (!isFullscreen()) playerCallback.toggleFullscreen()
+                },
+                onSwipeDownCompleted = {
+                    if (isFullscreen()) playerCallback.toggleFullscreen()
+                },
+            )
     }
 
     fun initialize(
@@ -197,7 +201,7 @@ class CustomExoPlayerView(
         commonPlayerViewModel: CommonPlayerViewModel,
         playerViewModel: PlayerViewModel,
         viewLifecycleOwner: LifecycleOwner,
-        playerCallback: CustomPlayerCallback
+        playerCallback: CustomPlayerCallback,
     ) {
         this.chaptersViewModel = chaptersViewModel
         this.playerViewModel = playerViewModel
@@ -224,25 +228,36 @@ class CustomExoPlayerView(
 
         // prevent the controls from disappearing while scrubbing the time bar
         if (!::seekBarListener.isInitialized) {
-            seekBarListener = object : TimeBar.OnScrubListener {
-                override fun onScrubStart(timeBar: TimeBar, position: Long) {
-                    cancelHideControllerTask()
+            seekBarListener =
+                object : TimeBar.OnScrubListener {
+                    override fun onScrubStart(
+                        timeBar: TimeBar,
+                        position: Long,
+                    ) {
+                        cancelHideControllerTask()
+                    }
+
+                    override fun onScrubMove(
+                        timeBar: TimeBar,
+                        position: Long,
+                    ) {
+                        cancelHideControllerTask()
+
+                        setCurrentChapterName(forceUpdate = true, enqueueNew = false)
+                        scrubbingTimeBar = true
+                    }
+
+                    override fun onScrubStop(
+                        timeBar: TimeBar,
+                        position: Long,
+                        canceled: Boolean,
+                    ) {
+                        enqueueHideControllerTask()
+
+                        setCurrentChapterName(forceUpdate = true, enqueueNew = false)
+                        scrubbingTimeBar = false
+                    }
                 }
-
-                override fun onScrubMove(timeBar: TimeBar, position: Long) {
-                    cancelHideControllerTask()
-
-                    setCurrentChapterName(forceUpdate = true, enqueueNew = false)
-                    scrubbingTimeBar = true
-                }
-
-                override fun onScrubStop(timeBar: TimeBar, position: Long, canceled: Boolean) {
-                    enqueueHideControllerTask()
-
-                    setCurrentChapterName(forceUpdate = true, enqueueNew = false)
-                    scrubbingTimeBar = false
-                }
-            }
             binding.exoProgress.addSeekBarListener(seekBarListener)
         }
 
@@ -267,22 +282,23 @@ class CustomExoPlayerView(
 
         activity.supportFragmentManager.setFragmentResultListener(
             ChaptersBottomSheet.SEEK_TO_POSITION_REQUEST_KEY,
-            findViewTreeLifecycleOwner() ?: activity
+            findViewTreeLifecycleOwner() ?: activity,
         ) { _, bundle ->
             player?.seekTo(bundle.getLong(IntentData.currentPosition))
         }
 
         // enable the chapters dialog in the player
         binding.chapterName.setOnClickListener {
-            val sheet = chaptersBottomSheet ?: ChaptersBottomSheet()
-                .apply {
-                    arguments = bundleOf(
-                        IntentData.duration to player?.duration?.div(1000)
-                    )
-                }
-                .also {
-                    chaptersBottomSheet = it
-                }
+            val sheet =
+                chaptersBottomSheet ?: ChaptersBottomSheet()
+                    .apply {
+                        arguments =
+                            bundleOf(
+                                IntentData.duration to player?.duration?.div(1000),
+                            )
+                    }.also {
+                        chaptersBottomSheet = it
+                    }
 
             if (sheet.isVisible) {
                 sheet.dismiss()
@@ -293,10 +309,10 @@ class CustomExoPlayerView(
 
         supportFragmentManager.setFragmentResultListener(
             PlayingQueueSheet.PLAYING_QUEUE_REQUEST_KEY,
-            findViewTreeLifecycleOwner() ?: activity
+            findViewTreeLifecycleOwner() ?: activity,
         ) { _, args ->
             (player as? MediaController)?.navigateVideo(
-                args.getString(IntentData.videoId) ?: return@setFragmentResultListener
+                args.getString(IntentData.videoId) ?: return@setFragmentResultListener,
             )
         }
         binding.queueToggle.setOnClickListener {
@@ -320,16 +336,17 @@ class CustomExoPlayerView(
 
         val updateSbImageResource = {
             binding.sbToggle.setImageResource(
-                if (sponsorBlockAutoSkip) R.drawable.ic_sb_enabled else R.drawable.ic_sb_disabled
+                if (sponsorBlockAutoSkip) R.drawable.ic_sb_enabled else R.drawable.ic_sb_disabled,
             )
         }
         updateSbImageResource()
         binding.sbToggle.setOnClickListener {
             sponsorBlockAutoSkip = !sponsorBlockAutoSkip
             (player as? MediaController)?.sendCustomCommand(
-                AbstractPlayerService.runPlayerActionCommand, bundleOf(
-                    PlayerCommand.SET_SB_AUTO_SKIP_ENABLED.name to sponsorBlockAutoSkip
-                )
+                AbstractPlayerService.runPlayerActionCommand,
+                bundleOf(
+                    PlayerCommand.SET_SB_AUTO_SKIP_ENABLED.name to sponsorBlockAutoSkip,
+                ),
             )
             updateSbImageResource()
         }
@@ -373,20 +390,25 @@ class CustomExoPlayerView(
             player.togglePlayPauseState()
         }
 
-        player.addListener(object : Player.Listener {
-            override fun onEvents(player: Player, events: Player.Events) {
-                super.onEvents(player, events)
-                this@CustomExoPlayerView.onPlaybackEvents(player, events)
-            }
+        player.addListener(
+            object : Player.Listener {
+                override fun onEvents(
+                    player: Player,
+                    events: Player.Events,
+                ) {
+                    super.onEvents(player, events)
+                    this@CustomExoPlayerView.onPlaybackEvents(player, events)
+                }
 
-            override fun onIsPlayingChanged(isPlaying: Boolean) {
-                super.onIsPlayingChanged(isPlaying)
-                keepScreenOn = isPlaying
-            }
-        })
+                override fun onIsPlayingChanged(isPlaying: Boolean) {
+                    super.onIsPlayingChanged(isPlaying)
+                    keepScreenOn = isPlaying
+                }
+            },
+        )
 
         binding.playPauseBTN.setImageResource(
-            PlayerHelper.getPlayPauseActionIcon(player)
+            PlayerHelper.getPlayPauseActionIcon(player),
         )
 
         binding.exoProgress.setPlayer(player)
@@ -397,11 +419,12 @@ class CustomExoPlayerView(
         binding.lockPlayer.setOnClickListener {
             // change the locked/unlocked icon
             val icon = if (!isPlayerLocked) R.drawable.ic_locked else R.drawable.ic_unlocked
-            val tooltip = if (!isPlayerLocked) {
-                R.string.tooltip_unlocked
-            } else {
-                R.string.tooltip_locked
-            }
+            val tooltip =
+                if (!isPlayerLocked) {
+                    R.string.tooltip_unlocked
+                } else {
+                    R.string.tooltip_locked
+                }
 
             binding.lockPlayer.setImageResource(icon)
             TooltipCompat.setTooltipText(binding.lockPlayer, context.getString(tooltip))
@@ -437,17 +460,24 @@ class CustomExoPlayerView(
         val duration = player?.duration?.div(1000) ?: return
         if (duration < 0) return
 
-        val durationWithoutSegments = duration - playerViewModel?.segments?.value.orEmpty().sumOf {
-            val (start, end) = it.segmentStartAndEnd
-            end.toDouble() - start.toDouble()
-        }.toLong()
+        val durationWithoutSegments =
+            duration -
+                playerViewModel
+                    ?.segments
+                    ?.value
+                    .orEmpty()
+                    .sumOf {
+                        val (start, end) = it.segmentStartAndEnd
+                        end.toDouble() - start.toDouble()
+                    }.toLong()
         val durationString = DateUtils.formatElapsedTime(duration)
 
-        binding.duration.text = if (durationWithoutSegments < duration) {
-            "$durationString (${DateUtils.formatElapsedTime(durationWithoutSegments)})"
-        } else {
-            durationString
-        }
+        binding.duration.text =
+            if (durationWithoutSegments < duration) {
+                "$durationString (${DateUtils.formatElapsedTime(durationWithoutSegments)})"
+            } else {
+                durationString
+            }
     }
 
     private fun buildSbBundleArgs(): Bundle? {
@@ -458,7 +488,7 @@ class CustomExoPlayerView(
         return bundleOf(
             IntentData.currentPosition to currentPosition,
             IntentData.duration to duration,
-            IntentData.videoId to videoId
+            IntentData.videoId to videoId,
         )
     }
 
@@ -467,7 +497,10 @@ class CustomExoPlayerView(
      * @param forceUpdate Update the current chapter name no matter if the seek bar is scrubbed
      * @param enqueueNew set a timeout to automatically repeat this function again in 100ms
      */
-    fun setCurrentChapterName(forceUpdate: Boolean = false, enqueueNew: Boolean = true) {
+    fun setCurrentChapterName(
+        forceUpdate: Boolean = false,
+        enqueueNew: Boolean = true,
+    ) {
         val player = player ?: return
         val chapters = chaptersViewModel.chapters
 
@@ -507,18 +540,20 @@ class CustomExoPlayerView(
 
     fun toggleSystemBars(showBars: Boolean) {
         getWindow().toggleSystemBars(
-            types = if (showBars) {
-                WindowHelper.getGestureControlledBars(context)
-            } else {
-                WindowInsetsCompat.Type.systemBars()
-            },
-            showBars = showBars
+            types =
+                if (showBars) {
+                    WindowHelper.getGestureControlledBars(context)
+                } else {
+                    WindowInsetsCompat.Type.systemBars()
+                },
+            showBars = showBars,
         )
     }
 
     private fun updateDisplayedDurationType(showTimeLeft: Boolean? = null) {
-        var shouldShowTimeLeft = showTimeLeft ?: PreferenceHelper
-            .getBoolean(PreferenceKeys.SHOW_TIME_LEFT, false)
+        var shouldShowTimeLeft =
+            showTimeLeft ?: PreferenceHelper
+                .getBoolean(PreferenceKeys.SHOW_TIME_LEFT, false)
         // always show the time left only if it's a livestream
         if (playerCallback.isVideoLive()) shouldShowTimeLeft = true
         if (showTimeLeft != null) {
@@ -543,7 +578,8 @@ class CustomExoPlayerView(
         // remove the callback to hide the controller
         cancelHideControllerTask()
         super.hideController()
-        backgroundBinding.exoControlsBackground.animate()
+        backgroundBinding.exoControlsBackground
+            .animate()
             .alpha(0f)
             .setDuration(500)
             .start()
@@ -559,7 +595,8 @@ class CustomExoPlayerView(
         // automatically hide the controller after 2 seconds
         enqueueHideControllerTask()
         super.showController()
-        backgroundBinding.exoControlsBackground.animate()
+        backgroundBinding.exoControlsBackground
+            .animate()
             .alpha(1f)
             .setDuration(200)
             .start()
@@ -581,7 +618,7 @@ class CustomExoPlayerView(
             doubleTapOverlayBinding.rewindLayout.rewindTV,
             doubleTapOverlayBinding.forwardLayout.forwardTV,
             binding.seekButtonForward.forwardTV,
-            binding.seekButtonRewind.rewindTV
+            binding.seekButtonRewind.rewindTV,
         ).forEach {
             it.text = seekIncrementText
         }
@@ -606,91 +643,92 @@ class CustomExoPlayerView(
         }
     }
 
-    fun getOptionsMenuItems(): List<BottomSheetItem> = listOf(
-        BottomSheetItem(
-            context.getString(R.string.repeat_mode),
-            R.drawable.ic_repeat,
-            {
-                when (PlayingQueue.repeatMode) {
-                    Player.REPEAT_MODE_OFF -> context.getString(R.string.repeat_mode_none)
-                    Player.REPEAT_MODE_ONE -> context.getString(R.string.repeat_mode_current)
-                    Player.REPEAT_MODE_ALL -> context.getString(R.string.repeat_mode_all)
-                    else -> throw IllegalArgumentException()
-                }
-            }
-        ) {
-            onRepeatModeClicked()
-        },
-        BottomSheetItem(
-            context.getString(R.string.player_resize_mode),
-            R.drawable.ic_aspect_ratio,
-            {
-                resizeModes.find { it.first == resizeMode }?.second?.let {
-                    context.getString(it)
-                }
-            }
-        ) {
-            onResizeModeClicked()
-        },
-        BottomSheetItem(
-            context.getString(R.string.playback_speed),
-            R.drawable.ic_speed,
-            {
-                "${player?.playbackParameters?.speed?.round(2)}x"
-            }
-        ) {
-            onPlaybackSpeedClicked()
-        },
-        BottomSheetItem(
-            context.getString(R.string.sleep_timer),
-            R.drawable.ic_sleep,
-            {
-                if (SleepTimer.timeLeftMillis > 0) {
-                    val minutesLeft =
-                        ceil(SleepTimer.timeLeftMillis.toDouble() / DateUtils.MINUTE_IN_MILLIS).toInt()
-                    context.resources.getQuantityString(
-                        R.plurals.minutes_left,
-                        minutesLeft,
-                        minutesLeft
-                    )
-                } else {
-                    context.getString(R.string.disabled)
-                }
-            }
-        ) {
-            onSleepTimerClicked()
-        },
-        BottomSheetItem(
-            context.getString(R.string.quality),
-            R.drawable.ic_hd,
-            this::getCurrentResolutionSummary
-        ) {
-            onQualityClicked()
-        },
-        BottomSheetItem(
-            context.getString(R.string.audio_track),
-            R.drawable.ic_audio,
-            this::getCurrentAudioTrackTitle
-        ) {
-            onAudioStreamClicked()
-        },
-        BottomSheetItem(
-            context.getString(R.string.captions),
-            R.drawable.ic_caption,
-            {
-                player?.let { PlayerHelper.getCurrentPlayedCaptionFormat(it)?.language }
-                    ?: context.getString(R.string.none)
-            }
-        ) {
-            onCaptionsClicked()
-        },
-        BottomSheetItem(
-            context.getString(R.string.stats_for_nerds),
-            R.drawable.ic_info
-        ) {
-            onStatsClicked()
-        }
-    )
+    fun getOptionsMenuItems(): List<BottomSheetItem> =
+        listOf(
+            BottomSheetItem(
+                context.getString(R.string.repeat_mode),
+                R.drawable.ic_repeat,
+                {
+                    when (PlayingQueue.repeatMode) {
+                        Player.REPEAT_MODE_OFF -> context.getString(R.string.repeat_mode_none)
+                        Player.REPEAT_MODE_ONE -> context.getString(R.string.repeat_mode_current)
+                        Player.REPEAT_MODE_ALL -> context.getString(R.string.repeat_mode_all)
+                        else -> throw IllegalArgumentException()
+                    }
+                },
+            ) {
+                onRepeatModeClicked()
+            },
+            BottomSheetItem(
+                context.getString(R.string.player_resize_mode),
+                R.drawable.ic_aspect_ratio,
+                {
+                    resizeModes.find { it.first == resizeMode }?.second?.let {
+                        context.getString(it)
+                    }
+                },
+            ) {
+                onResizeModeClicked()
+            },
+            BottomSheetItem(
+                context.getString(R.string.playback_speed),
+                R.drawable.ic_speed,
+                {
+                    "${player?.playbackParameters?.speed?.round(2)}x"
+                },
+            ) {
+                onPlaybackSpeedClicked()
+            },
+            BottomSheetItem(
+                context.getString(R.string.sleep_timer),
+                R.drawable.ic_sleep,
+                {
+                    if (SleepTimer.timeLeftMillis > 0) {
+                        val minutesLeft =
+                            ceil(SleepTimer.timeLeftMillis.toDouble() / DateUtils.MINUTE_IN_MILLIS).toInt()
+                        context.resources.getQuantityString(
+                            R.plurals.minutes_left,
+                            minutesLeft,
+                            minutesLeft,
+                        )
+                    } else {
+                        context.getString(R.string.disabled)
+                    }
+                },
+            ) {
+                onSleepTimerClicked()
+            },
+            BottomSheetItem(
+                context.getString(R.string.quality),
+                R.drawable.ic_hd,
+                this::getCurrentResolutionSummary,
+            ) {
+                onQualityClicked()
+            },
+            BottomSheetItem(
+                context.getString(R.string.audio_track),
+                R.drawable.ic_audio,
+                this::getCurrentAudioTrackTitle,
+            ) {
+                onAudioStreamClicked()
+            },
+            BottomSheetItem(
+                context.getString(R.string.captions),
+                R.drawable.ic_caption,
+                {
+                    player?.let { PlayerHelper.getCurrentPlayedCaptionFormat(it)?.language }
+                        ?: context.getString(R.string.none)
+                },
+            ) {
+                onCaptionsClicked()
+            },
+            BottomSheetItem(
+                context.getString(R.string.stats_for_nerds),
+                R.drawable.ic_info,
+            ) {
+                onStatsClicked()
+            },
+        )
 
     @androidx.annotation.OptIn(androidx.media3.common.util.UnstableApi::class)
     private fun getCurrentResolutionSummary(): String {
@@ -714,7 +752,7 @@ class CustomExoPlayerView(
         val selectedAudioLanguagesAndRoleFlags =
             PlayerHelper.getAudioLanguagesAndRoleFlagsFromTrackGroups(
                 player!!.currentTracks.groups,
-                true
+                true,
             )
 
         if (selectedAudioLanguagesAndRoleFlags.isEmpty()) {
@@ -728,7 +766,7 @@ class CustomExoPlayerView(
         if (selectedAudioLanguagesAndRoleFlags.size == 1 &&
             firstSelectedAudioFormat.first == null &&
             !PlayerHelper.haveAudioTrackRoleFlagSet(
-                firstSelectedAudioFormat.second
+                firstSelectedAudioFormat.second,
             )
         ) {
             // Regardless of audio format or quality, if there is only one
@@ -741,10 +779,9 @@ class CustomExoPlayerView(
 
         return PlayerHelper.getAudioTrackNameFromFormat(
             context,
-            firstSelectedAudioFormat
+            firstSelectedAudioFormat,
         )
     }
-
 
     // lock the player
     private fun lockPlayer(isLocked: Boolean) {
@@ -766,11 +803,11 @@ class CustomExoPlayerView(
             if (isLocked) {
                 ContextCompat.getColor(
                     context,
-                    androidx.media3.ui.R.color.exo_black_opacity_60
+                    androidx.media3.ui.R.color.exo_black_opacity_60,
                 )
             } else {
                 Color.TRANSPARENT
-            }
+            },
         )
 
         // disable tap and swipe gesture if the player is locked
@@ -786,7 +823,7 @@ class CustomExoPlayerView(
                 rewindLayout.rewindBTN,
                 rewindLayout.rewindIV,
                 rewindLayout.rewindTV,
-                true
+                true,
             )
 
             // start callback to hide the button
@@ -806,7 +843,7 @@ class CustomExoPlayerView(
                 forwardLayout.forwardBTN,
                 forwardLayout.forwardIV,
                 forwardLayout.forwardTV,
-                false
+                false,
             )
 
             // start callback to hide the button
@@ -821,44 +858,49 @@ class CustomExoPlayerView(
         container: FrameLayout,
         imageView: ImageView,
         textView: TextView,
-        isRewind: Boolean
+        isRewind: Boolean,
     ) {
         container.isVisible = true
         // the direction of the action
         val direction = if (isRewind) -1 else 1
 
         // clear previous animation
-        imageView.animate()
+        imageView
+            .animate()
             .rotation(0F)
             .setDuration(0)
             .start()
 
-        textView.animate()
+        textView
+            .animate()
             .translationX(0f)
             .setDuration(0)
             .start()
 
         // start the rotate animation of the drawable
-        imageView.animate()
+        imageView
+            .animate()
             .rotation(direction * 30F)
             .setDuration(ANIMATION_DURATION)
             .withEndAction {
                 // reset the animation when finished
-                imageView.animate()
+                imageView
+                    .animate()
                     .rotation(0F)
                     .setDuration(ANIMATION_DURATION)
                     .start()
-            }
-            .start()
+            }.start()
 
         // animate the text view to move outside the image view
-        textView.animate()
+        textView
+            .animate()
             .translationX(direction * 100f)
             .setDuration((ANIMATION_DURATION * 1.5).toLong())
             .withEndAction {
                 // move the text back into the button
                 runnableHandler.postDelayed(100) {
-                    textView.animate()
+                    textView
+                        .animate()
                         .setDuration(ANIMATION_DURATION / 2)
                         .translationX(0f)
                         .start()
@@ -885,7 +927,7 @@ class CustomExoPlayerView(
             if (distance <= 0) {
                 brightnessHelper.resetToSystemBrightness()
                 gestureViewBinding.brightnessImageView.setImageResource(
-                    R.drawable.ic_brightness_auto
+                    R.drawable.ic_brightness_auto,
                 )
                 gestureViewBinding.brightnessTextView.text = resources.getString(R.string.auto)
                 return
@@ -914,7 +956,7 @@ class CustomExoPlayerView(
                 when {
                     distance > 0 -> R.drawable.ic_volume_up
                     else -> R.drawable.ic_volume_off
-                }
+                },
             )
         }
         bar.incrementProgressBy(distance.toInt())
@@ -934,13 +976,13 @@ class CustomExoPlayerView(
         BaseBottomSheet()
             .setSimpleItems(
                 resizeModes.map { context.getString(it.second) },
-                preselectedItem = resizeModes.first { it.first == resizeMode }.second.let {
-                    context.getString(it)
-                }
+                preselectedItem =
+                    resizeModes.first { it.first == resizeMode }.second.let {
+                        context.getString(it)
+                    },
             ) { index ->
                 resizeMode = resizeModes[index].first
-            }
-            .show(supportFragmentManager)
+            }.show(supportFragmentManager)
     }
 
     override fun setResizeMode(resizeMode: Int) {
@@ -954,15 +996,16 @@ class CustomExoPlayerView(
         BaseBottomSheet()
             .setSimpleItems(
                 PlayerHelper.repeatModes.map { context.getString(it.second) },
-                preselectedItem = PlayerHelper.repeatModes
-                    .firstOrNull { it.first == PlayingQueue.repeatMode }
-                    ?.second?.let {
-                        context.getString(it)
-                    }
+                preselectedItem =
+                    PlayerHelper.repeatModes
+                        .firstOrNull { it.first == PlayingQueue.repeatMode }
+                        ?.second
+                        ?.let {
+                            context.getString(it)
+                        },
             ) { index ->
                 PlayingQueue.repeatMode = PlayerHelper.repeatModes[index].first
-            }
-            .show(supportFragmentManager)
+            }.show(supportFragmentManager)
     }
 
     override fun onSleepTimerClicked() {
@@ -972,44 +1015,50 @@ class CustomExoPlayerView(
     override fun onCaptionsClicked() {
         val player = player ?: return
 
-        val captions = PlayerHelper.getCaptionTracks(player)
-            // put normal tracks before auto-generated tracks
-            .sortedBy { it.roleFlags == PlayerHelper.ROLE_FLAG_AUTO_GEN_SUBTITLE }
-            .associateWith {
-                val displayName = Locale.forLanguageTag(it.language.orEmpty())
-                    .getDisplayLanguage(Locale.getDefault())
+        val captions =
+            PlayerHelper
+                .getCaptionTracks(player)
+                // put normal tracks before auto-generated tracks
+                .sortedBy { it.roleFlags == PlayerHelper.ROLE_FLAG_AUTO_GEN_SUBTITLE }
+                .associateWith {
+                    val displayName =
+                        Locale
+                            .forLanguageTag(it.language.orEmpty())
+                            .getDisplayLanguage(Locale.getDefault())
 
-                if (it.roleFlags == PlayerHelper.ROLE_FLAG_AUTO_GEN_SUBTITLE) {
-                    "$displayName (${context.getString(R.string.auto_generated)})"
-                } else {
-                    displayName
+                    if (it.roleFlags == PlayerHelper.ROLE_FLAG_AUTO_GEN_SUBTITLE) {
+                        "$displayName (${context.getString(R.string.auto_generated)})"
+                    } else {
+                        displayName
+                    }
                 }
-            }
 
         val currentSubtitle = PlayerHelper.getCurrentPlayedCaptionFormat(player)
         BaseBottomSheet()
             .setSimpleItems(
                 listOf(context.getString(R.string.none)) + captions.values.toList(),
-                preselectedItem = captions.entries.firstOrNull { (track, _) ->
-                    track == currentSubtitle
-                }?.value ?: context.getString(R.string.none)
+                preselectedItem =
+                    captions.entries
+                        .firstOrNull { (track, _) ->
+                            track == currentSubtitle
+                        }?.value ?: context.getString(R.string.none),
             ) { index ->
                 val captionsFormat =
                     captions.keys.toList().getOrNull(index - 1)
 
                 updateCurrentSubtitle(captionsFormat?.id)
                 playerViewModel?.currentCaptionId = captionsFormat?.id
-            }
-            .show(supportFragmentManager)
+            }.show(supportFragmentManager)
     }
 
     fun updateCurrentSubtitle(trackId: String?) {
         val player = player as? MediaController ?: return
 
         player.sendCustomCommand(
-            AbstractPlayerService.runPlayerActionCommand, bundleOf(
-                PlayerCommand.SET_CAPTION_TRACK.name to trackId
-            )
+            AbstractPlayerService.runPlayerActionCommand,
+            bundleOf(
+                PlayerCommand.SET_CAPTION_TRACK.name to trackId,
+            ),
         )
     }
 
@@ -1019,15 +1068,16 @@ class CustomExoPlayerView(
     private fun getAvailableResolutions(): List<VideoResolution> {
         val player = player ?: return emptyList()
 
-        val resolutions = player.currentTracks.groups.asSequence()
-            .flatMap { group ->
-                (0 until group.length).map {
-                    group.getTrackFormat(it).height
-                }
-            }
-            .filter { it > 0 }
-            .map { VideoResolution("${it}p", it) }
-            .toSortedSet(compareByDescending { it.resolution })
+        val resolutions =
+            player.currentTracks.groups
+                .asSequence()
+                .flatMap { group ->
+                    (0 until group.length).map {
+                        group.getTrackFormat(it).height
+                    }
+                }.filter { it > 0 }
+                .map { VideoResolution("${it}p", it) }
+                .toSortedSet(compareByDescending { it.resolution })
 
         resolutions.add(VideoResolution(context.getString(R.string.auto_quality), Int.MAX_VALUE))
         return resolutions.toList()
@@ -1041,9 +1091,11 @@ class CustomExoPlayerView(
         BaseBottomSheet()
             .setSimpleItems(
                 resolutions.map(VideoResolution::name),
-                preselectedItem = resolutions.firstOrNull {
-                    it.resolution == selectedResolution
-                }?.name ?: context.getString(R.string.auto_quality)
+                preselectedItem =
+                    resolutions
+                        .firstOrNull {
+                            it.resolution == selectedResolution
+                        }?.name ?: context.getString(R.string.auto_quality),
             ) { which ->
                 val newResolution = resolutions[which].resolution
                 setPlayerResolution(newResolution, true)
@@ -1054,8 +1106,7 @@ class CustomExoPlayerView(
                 } else {
                     fullscreenResolution = newResolution
                 }
-            }
-            .show(supportFragmentManager)
+            }.show(supportFragmentManager)
     }
 
     private fun updateResolution(isFullscreen: Boolean) {
@@ -1068,7 +1119,10 @@ class CustomExoPlayerView(
         }
     }
 
-    fun setPlayerResolution(resolution: Int, isSelectedByUser: Boolean = false) {
+    fun setPlayerResolution(
+        resolution: Int,
+        isSelectedByUser: Boolean = false,
+    ) {
         val player = player as? MediaController ?: return
 
         val transformedResolution =
@@ -1079,9 +1133,10 @@ class CustomExoPlayerView(
             }
 
         player.sendCustomCommand(
-            AbstractPlayerService.runPlayerActionCommand, bundleOf(
-                PlayerCommand.SET_RESOLUTION.name to transformedResolution
-            )
+            AbstractPlayerService.runPlayerActionCommand,
+            bundleOf(
+                PlayerCommand.SET_RESOLUTION.name to transformedResolution,
+            ),
         )
 
         selectedResolution = resolution
@@ -1091,20 +1146,25 @@ class CustomExoPlayerView(
         val player = player as? MediaController ?: return
         val context = context ?: return
 
-        val audioLanguagesAndRoleFlags = PlayerHelper.getAudioLanguagesAndRoleFlagsFromTrackGroups(
-            player.currentTracks.groups,
-            false
-        )
-        val audioLanguages = audioLanguagesAndRoleFlags.map {
-            PlayerHelper.getAudioTrackNameFromFormat(context, it)
-        }
+        val audioLanguagesAndRoleFlags =
+            PlayerHelper.getAudioLanguagesAndRoleFlagsFromTrackGroups(
+                player.currentTracks.groups,
+                false,
+            )
+        val audioLanguages =
+            audioLanguagesAndRoleFlags.map {
+                PlayerHelper.getAudioTrackNameFromFormat(context, it)
+            }
         val baseBottomSheet = BaseBottomSheet()
 
-        if (audioLanguagesAndRoleFlags.isEmpty() || (audioLanguagesAndRoleFlags.size == 1 &&
+        if (audioLanguagesAndRoleFlags.isEmpty() ||
+            (
+                audioLanguagesAndRoleFlags.size == 1 &&
                     audioLanguagesAndRoleFlags[0].first == null &&
                     !PlayerHelper.haveAudioTrackRoleFlagSet(
-                        audioLanguagesAndRoleFlags[0].second
-                    ))
+                        audioLanguagesAndRoleFlags[0].second,
+                    )
+            )
         ) {
             // Regardless of audio format or quality, if there is only one audio stream which has
             // no language and no role flags, it should mean that there is only a single audio
@@ -1113,25 +1173,28 @@ class CustomExoPlayerView(
             baseBottomSheet.setSimpleItems(
                 listOf(context.getString(R.string.default_or_unknown_audio_track)),
                 preselectedItem = context.getString(R.string.default_or_unknown_audio_track),
-                listener = null
+                listener = null,
             )
         } else {
             baseBottomSheet.setSimpleItems(
                 audioLanguages,
-                preselectedItem = selectedAudioLanguageAndRoleFlags?.let {
-                    PlayerHelper.getAudioTrackNameFromFormat(context, it)
-                },
+                preselectedItem =
+                    selectedAudioLanguageAndRoleFlags?.let {
+                        PlayerHelper.getAudioTrackNameFromFormat(context, it)
+                    },
             ) { index ->
                 val selectedAudioFormat = audioLanguagesAndRoleFlags[index]
                 player.sendCustomCommand(
-                    AbstractPlayerService.runPlayerActionCommand, bundleOf(
-                        PlayerCommand.SET_AUDIO_ROLE_FLAGS.name to selectedAudioFormat.second
-                    )
+                    AbstractPlayerService.runPlayerActionCommand,
+                    bundleOf(
+                        PlayerCommand.SET_AUDIO_ROLE_FLAGS.name to selectedAudioFormat.second,
+                    ),
                 )
                 player.sendCustomCommand(
-                    AbstractPlayerService.runPlayerActionCommand, bundleOf(
-                        PlayerCommand.SET_AUDIO_LANGUAGE.name to selectedAudioFormat.first
-                    )
+                    AbstractPlayerService.runPlayerActionCommand,
+                    bundleOf(
+                        PlayerCommand.SET_AUDIO_LANGUAGE.name to selectedAudioFormat.first,
+                    ),
                 )
                 selectedAudioLanguageAndRoleFlags = selectedAudioFormat
             }
@@ -1230,9 +1293,13 @@ class CustomExoPlayerView(
         val timeLeft = duration - position
 
         binding.position.text =
-            if (playerCallback.isVideoLive()) context.getString(R.string.live) else DateUtils.formatElapsedTime(
-                position
-            )
+            if (playerCallback.isVideoLive()) {
+                context.getString(R.string.live)
+            } else {
+                DateUtils.formatElapsedTime(
+                    position,
+                )
+            }
         binding.timeLeft.text = "-${DateUtils.formatElapsedTime(timeLeft)}"
 
         runnableHandler.postDelayed(100, UPDATE_POSITION_TOKEN, this::updateCurrentPosition)
@@ -1270,7 +1337,10 @@ class CustomExoPlayerView(
         forward()
     }
 
-    override fun onSwipeLeftScreen(distanceY: Float, positionY: Float) {
+    override fun onSwipeLeftScreen(
+        distanceY: Float,
+        positionY: Float,
+    ) {
         if (!PlayerHelper.swipeGestureEnabled) {
             if (PlayerHelper.fullscreenGesturesEnabled) onSwipeCenterScreen(distanceY, positionY)
             return
@@ -1280,7 +1350,10 @@ class CustomExoPlayerView(
         updateBrightness(distanceY)
     }
 
-    override fun onSwipeRightScreen(distanceY: Float, positionY: Float) {
+    override fun onSwipeRightScreen(
+        distanceY: Float,
+        positionY: Float,
+    ) {
         if (!PlayerHelper.swipeGestureEnabled) {
             if (PlayerHelper.fullscreenGesturesEnabled) onSwipeCenterScreen(distanceY, positionY)
             return
@@ -1290,7 +1363,10 @@ class CustomExoPlayerView(
         updateVolume(distanceY)
     }
 
-    override fun onSwipeCenterScreen(distanceY: Float, positionY: Float) {
+    override fun onSwipeCenterScreen(
+        distanceY: Float,
+        positionY: Float,
+    ) {
         if (!PlayerHelper.fullscreenGesturesEnabled) return
         fullscreenGestureAnimationController.onSwipe(distanceY, positionY)
     }
@@ -1332,10 +1408,11 @@ class CustomExoPlayerView(
         // after the fast forward action is done
         rememberedPlaybackSpeed = player.playbackParameters.speed
 
-        val newSpeed = minOf(
-            player.playbackParameters.speed * PlayerHelper.FAST_FORWARD_SPEED_FACTOR,
-            PlayerHelper.MAXIMUM_PLAYBACK_SPEED
-        )
+        val newSpeed =
+            minOf(
+                player.playbackParameters.speed * PlayerHelper.FAST_FORWARD_SPEED_FACTOR,
+                PlayerHelper.MAXIMUM_PLAYBACK_SPEED,
+            )
         player.playbackParameters = PlaybackParameters(newSpeed, player.playbackParameters.pitch)
     }
 
@@ -1358,7 +1435,7 @@ class CustomExoPlayerView(
             }
             subtitleView?.setFixedTextSize(
                 Cue.TEXT_SIZE_TYPE_ABSOLUTE,
-                PlayerHelper.captionsTextSize * 1.5f
+                PlayerHelper.captionsTextSize * 1.5f,
             )
             if (resizeMode == AspectRatioFrameLayout.RESIZE_MODE_ZOOM) {
                 subtitleView?.setBottomPaddingFraction(SUBTITLE_BOTTOM_PADDING_FRACTION)
@@ -1369,7 +1446,7 @@ class CustomExoPlayerView(
             }
             subtitleView?.setFixedTextSize(
                 Cue.TEXT_SIZE_TYPE_ABSOLUTE,
-                PlayerHelper.captionsTextSize
+                PlayerHelper.captionsTextSize,
             )
             subtitleView?.setBottomPaddingFraction(SubtitleView.DEFAULT_BOTTOM_PADDING_FRACTION)
         }
@@ -1396,7 +1473,10 @@ class CustomExoPlayerView(
         return playerGestureController.onTouchEvent(event)
     }
 
-    override fun onKeyUp(keyCode: Int, event: KeyEvent?): Boolean {
+    override fun onKeyUp(
+        keyCode: Int,
+        event: KeyEvent?,
+    ): Boolean {
         when (keyCode) {
             KeyEvent.KEYCODE_SPACE, KeyEvent.KEYCODE_MEDIA_PLAY_PAUSE -> {
                 player?.togglePlayPauseState()
@@ -1428,20 +1508,22 @@ class CustomExoPlayerView(
         return true
     }
 
-    override fun getViewMeasures(): Pair<Int, Int> {
-        return width to height
-    }
+    override fun getViewMeasures(): Pair<Int, Int> = width to height
 
     var alreadySetDefaultSubtitle: Boolean = false
-    fun onPlaybackEvents(player: Player, events: Player.Events) {
+
+    fun onPlaybackEvents(
+        player: Player,
+        events: Player.Events,
+    ) {
         if (events.containsAny(
                 Player.EVENT_PLAYBACK_STATE_CHANGED,
                 Player.EVENT_IS_PLAYING_CHANGED,
-                Player.EVENT_PLAY_WHEN_READY_CHANGED
+                Player.EVENT_PLAY_WHEN_READY_CHANGED,
             )
         ) {
             binding.playPauseBTN.setImageResource(
-                PlayerHelper.getPlayPauseActionIcon(player)
+                PlayerHelper.getPlayPauseActionIcon(player),
             )
 
             // keep screen on if the video is playing

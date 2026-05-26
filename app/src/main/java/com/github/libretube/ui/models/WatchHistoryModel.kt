@@ -24,13 +24,15 @@ class WatchHistoryModel : ViewModel() {
     private var currentPage = 1
     private var isLoading = false
 
-    private val selectedStatus = MutableStateFlow(
-        PreferenceHelper.getInt(PreferenceKeys.SELECTED_HISTORY_STATUS_FILTER, 0)
-    )
+    private val selectedStatus =
+        MutableStateFlow(
+            PreferenceHelper.getInt(PreferenceKeys.SELECTED_HISTORY_STATUS_FILTER, 0),
+        )
 
     val filteredWatchHistory =
         combine(watchHistory.asFlow(), selectedStatus) { history, _ -> history }
-            .flowOn(Dispatchers.IO).map { history -> history.filter { it.shouldIncludeByFilters() } }
+            .flowOn(Dispatchers.IO)
+            .map { history -> history.filter { it.shouldIncludeByFilters() } }
             .asLiveData()
 
     var selectedStatusFilter
@@ -51,30 +53,32 @@ class WatchHistoryModel : ViewModel() {
         }
     }
 
-    fun fetchNextPage() = viewModelScope.launch(Dispatchers.IO) {
-        if (isLoading) return@launch
-        isLoading = true
+    fun fetchNextPage() =
+        viewModelScope.launch(Dispatchers.IO) {
+            if (isLoading) return@launch
+            isLoading = true
 
-        val newHistory = withContext(Dispatchers.IO) {
-            DatabaseHelper.getWatchHistoryPage(currentPage, HISTORY_PAGE_SIZE)
+            val newHistory =
+                withContext(Dispatchers.IO) {
+                    DatabaseHelper.getWatchHistoryPage(currentPage, HISTORY_PAGE_SIZE)
+                }
+
+            isLoading = false
+            currentPage++
+
+            watchHistory.postValue(
+                watchHistory.value.orEmpty().toMutableList().apply {
+                    addAll(newHistory)
+                },
+            )
         }
-
-        isLoading = false
-        currentPage++
-
-        watchHistory.postValue(
-            watchHistory.value.orEmpty().toMutableList().apply {
-                addAll(newHistory)
-            }
-        )
-    }
 
     fun removeFromHistory(watchHistoryItem: WatchHistoryItem) =
         viewModelScope.launch(Dispatchers.IO) {
             DatabaseHolder.Database.watchHistoryDao().delete(watchHistoryItem)
 
             watchHistory.postValue(
-                watchHistory.value.orEmpty().filter { it != watchHistoryItem }
+                watchHistory.value.orEmpty().filter { it != watchHistoryItem },
             )
         }
 

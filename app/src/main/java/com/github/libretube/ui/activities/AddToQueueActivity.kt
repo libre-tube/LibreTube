@@ -16,9 +16,11 @@ class AddToQueueActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val videoId = intent.getStringExtra(Intent.EXTRA_TEXT)
-            ?.let { IntentHelper.resolveType(it.toUri()) }
-            ?.getStringExtra(IntentData.videoId)
+        val videoId =
+            intent
+                .getStringExtra(Intent.EXTRA_TEXT)
+                ?.let { IntentHelper.resolveType(it.toUri()) }
+                ?.getStringExtra(IntentData.videoId)
 
         if (videoId != null) {
             val newIntent = packageManager.getLaunchIntentForPackage(packageName)

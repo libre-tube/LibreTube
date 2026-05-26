@@ -18,18 +18,17 @@ object SponsorBlockLabelHelper {
      *
      * See https://wiki.sponsor.ajay.app/w/Full_Video_Labels for more details.
      */
-    suspend fun getVideoLabels(
-        videoId: String,
-    ): VideoLabelData? {
+    suspend fun getVideoLabels(videoId: String): VideoLabelData? {
         // if we have the response cached, return it
         cache.get(videoId)?.let { return it }
 
         return runCatching {
-            RetrofitInstance.externalApi.getVideoLabels(
-                // use hashed video id for privacy
-                // https://wiki.sponsor.ajay.app/w/API_Docs/Draft#GET_/api/videoLabels/:sha256HashPrefix
-                videoId.sha256Sum().substring(0, 5),
-            ).firstOrNull { it.videoID == videoId }
+            RetrofitInstance.externalApi
+                .getVideoLabels(
+                    // use hashed video id for privacy
+                    // https://wiki.sponsor.ajay.app/w/API_Docs/Draft#GET_/api/videoLabels/:sha256HashPrefix
+                    videoId.sha256Sum().substring(0, 5),
+                ).firstOrNull { it.videoID == videoId }
                 .also { cache.put(videoId, it) }
         }.getOrNull()
     }
@@ -40,12 +39,13 @@ object SponsorBlockLabelHelper {
      * If there is no matching icon, `null` is returned.
      */
     @DrawableRes
-    fun categoryIcon(category: String?): Int? = when (category) {
-        "exclusive_access" -> R.drawable.ic_exclusive_content
-        "selfpromo" -> R.drawable.ic_selfpromo_content
-        "sponsor" -> R.drawable.ic_paid_content
-        else -> null
-    }
+    fun categoryIcon(category: String?): Int? =
+        when (category) {
+            "exclusive_access" -> R.drawable.ic_exclusive_content
+            "selfpromo" -> R.drawable.ic_selfpromo_content
+            "sponsor" -> R.drawable.ic_paid_content
+            else -> null
+        }
 
     /**
      * Returns a suitable label to display the category.
@@ -53,10 +53,11 @@ object SponsorBlockLabelHelper {
      * If there is no matching label, `null` is returned.
      */
     @StringRes
-    fun categoryLabel(category: String?): Int? = when (category) {
-        "sponsor" -> R.string.category_sponsor
-        "exclusive_access" -> R.string.category_exclusive_access
-        "selfpromo" -> R.string.category_selfpromo
-        else -> null
-    }
+    fun categoryLabel(category: String?): Int? =
+        when (category) {
+            "sponsor" -> R.string.category_sponsor
+            "exclusive_access" -> R.string.category_exclusive_access
+            "selfpromo" -> R.string.category_selfpromo
+            else -> null
+        }
 }

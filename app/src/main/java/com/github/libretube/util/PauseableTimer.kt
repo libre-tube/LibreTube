@@ -7,7 +7,7 @@ import java.util.TimerTask
 
 class PauseableTimer(
     private val onTick: () -> Unit,
-    private val delayMillis: Long = 1000L
+    private val delayMillis: Long = 1000L,
 ) {
     val handler: Handler = Handler(Looper.getMainLooper())
 
@@ -27,7 +27,7 @@ class PauseableTimer(
                 }
             },
             delayMillis,
-            delayMillis
+            delayMillis,
         )
     }
 

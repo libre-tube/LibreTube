@@ -38,9 +38,14 @@ interface LocalPlaylistsDao {
     suspend fun deletePlaylistItemsByPlaylistId(playlistId: String)
 
     @Query("DELETE FROM localPlaylistItem WHERE playlistId = :playlistId AND videoId = :videoId")
-    suspend fun deletePlaylistItemsByVideoId(playlistId: String, videoId: String)
+    suspend fun deletePlaylistItemsByVideoId(
+        playlistId: String,
+        videoId: String,
+    )
 
     @Query("SELECT * FROM localPlaylistItem WHERE playlistId = :playlistId AND videoId = :videoId LIMIT 1")
-    suspend fun getPlaylistVideo(playlistId: String, videoId: String): LocalPlaylistItem?
-
+    suspend fun getPlaylistVideo(
+        playlistId: String,
+        videoId: String,
+    ): LocalPlaylistItem?
 }

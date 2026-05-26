@@ -27,14 +27,16 @@ object SleepTimer {
     private var snackBar: Snackbar? = null
     private val handler = Handler(Looper.getMainLooper())
 
-
     /**
      * Start the sleep timer that will close the app after the specified delay
      *
      * @param context This must not be the applicationContext, but an activity context!
      * @param delayInMinutes The delay in minutes before the timer ends
      */
-    fun start(context: Context, delayInMinutes: Long) {
+    fun start(
+        context: Context,
+        delayInMinutes: Long,
+    ) {
         if (delayInMinutes == 0L) return
 
         // Stop any existing timer first
@@ -58,7 +60,6 @@ object SleepTimer {
         }
     }
 
-
     private fun onTimerTick(context: Context) {
         timeLeftMillis -= TIMER_DELAY
         val secondsLeft = timeLeftMillis / DateUtils.SECOND_IN_MILLIS
@@ -76,9 +77,10 @@ object SleepTimer {
         // Update snackbar only on whole seconds to avoid excessive UI updates
         val isWholeSecond = timeLeftMillis % DateUtils.SECOND_IN_MILLIS == 0L
         if (secondsLeft in 1..SNACKBAR_START_SECONDS && isWholeSecond) {
-            val activity = ContextHelper.tryUnwrapActivity<BaseActivity>(context)?.takeIf {
-                !it.isFinishing && !it.isDestroyed
-            }
+            val activity =
+                ContextHelper.tryUnwrapActivity<BaseActivity>(context)?.takeIf {
+                    !it.isFinishing && !it.isDestroyed
+                }
             if (activity != null) {
                 handler.post {
                     showOrUpdateSnackBar(activity)
@@ -97,7 +99,6 @@ object SleepTimer {
         }
     }
 
-
     private fun showOrUpdateSnackBar(activity: BaseActivity) {
         val secondsLeft = timeLeftMillis / DateUtils.SECOND_IN_MILLIS
         val message = "${activity.getString(R.string.take_a_break)}: $secondsLeft"
@@ -105,13 +106,15 @@ object SleepTimer {
         if (snackBar?.isShownOrQueued == true) {
             snackBar?.setText(message)
         } else {
-            snackBar = Snackbar.make(
-                activity.window.decorView.rootView,
-                message,
-                Snackbar.LENGTH_INDEFINITE
-            ).setAction(R.string.cancel) {
-                stop(activity)
-            }
+            snackBar =
+                Snackbar
+                    .make(
+                        activity.window.decorView.rootView,
+                        message,
+                        Snackbar.LENGTH_INDEFINITE,
+                    ).setAction(R.string.cancel) {
+                        stop(activity)
+                    }
             snackBar?.show()
         }
     }

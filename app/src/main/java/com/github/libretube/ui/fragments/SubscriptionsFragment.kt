@@ -37,7 +37,6 @@ import com.google.android.material.chip.Chip
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-
 class SubscriptionsFragment : DynamicLayoutManagerFragment(R.layout.fragment_subscriptions) {
     private var _binding: FragmentSubscriptionsBinding? = null
     private val binding get() = _binding!!
@@ -79,7 +78,10 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment(R.layout.fragment_sub
     }
 
     @SuppressLint("SetTextI18n")
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?,
+    ) {
         _binding = FragmentSubscriptionsBinding.bind(view)
         super.onViewCreated(view, savedInstanceState)
 
@@ -116,13 +118,13 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment(R.layout.fragment_sub
                 alreadyShowedFeedOnce = true
             }
 
-           feed?.firstOrNull { !it.isUpcoming }?.uploaded?.let {
+            feed?.firstOrNull { !it.isUpcoming }?.uploaded?.let {
                 PreferenceHelper.updateLastFeedWatchedTime(it, true)
             }
 
             // ungrouped chip is hidden if the user doesn't use channel groups
-            binding.chipUngrouped.isVisible = !channelGroupsModel.groups.value.isNullOrEmpty()
-                    && filterUngroupedStreamItems(feed.orEmpty()).isNotEmpty()
+            binding.chipUngrouped.isVisible = !channelGroupsModel.groups.value.isNullOrEmpty() &&
+                filterUngroupedStreamItems(feed.orEmpty()).isNotEmpty()
         }
 
         viewModel.feedProgress.observe(viewLifecycleOwner) { progress ->
@@ -130,7 +132,8 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment(R.layout.fragment_sub
                 // the automatic animation by setting animateLayoutChanges looks very buggy
                 // so we display a custom animation when the feed finished loading
                 // https://stackoverflow.com/questions/37704046/animatelayoutchanges-buggy-when-changing-visibility-to-gone
-                binding.feedProgressContainer.animate()
+                binding.feedProgressContainer
+                    .animate()
                     .alpha(0.5f)
                     .scaleY(0.5f)
                     .withEndAction {
@@ -138,8 +141,7 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment(R.layout.fragment_sub
                         binding.feedProgressContainer.isGone = true
                         binding.feedProgressContainer.scaleY = 1f
                         binding.feedProgressContainer.alpha = 1f
-                    }
-                    .setDuration(200)
+                    }.setDuration(200)
                     .start()
             } else {
                 binding.feedProgressContainer.isVisible = true
@@ -176,19 +178,27 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment(R.layout.fragment_sub
             ChannelGroupsSheet().show(childFragmentManager, null)
         }
 
-        binding.subFeed.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
-                super.onScrollStateChanged(recyclerView, newState)
-                viewModel.subFeedRecyclerViewState =
-                    recyclerView.layoutManager?.onSaveInstanceState()?.takeIf {
-                        recyclerView.computeVerticalScrollOffset() != 0
-                    }
-            }
-        })
+        binding.subFeed.addOnScrollListener(
+            object : RecyclerView.OnScrollListener() {
+                override fun onScrollStateChanged(
+                    recyclerView: RecyclerView,
+                    newState: Int,
+                ) {
+                    super.onScrollStateChanged(recyclerView, newState)
+                    viewModel.subFeedRecyclerViewState =
+                        recyclerView.layoutManager?.onSaveInstanceState()?.takeIf {
+                            recyclerView.computeVerticalScrollOffset() != 0
+                        }
+                }
+            },
+        )
 
         lifecycleScope.launch(Dispatchers.IO) {
-            val groups = DatabaseHolder.Database.subscriptionGroupsDao().getAll()
-                .sortedBy { it.index }
+            val groups =
+                DatabaseHolder.Database
+                    .subscriptionGroupsDao()
+                    .getAll()
+                    .sortedBy { it.index }
             channelGroupsModel.groups.postValue(groups)
         }
     }
@@ -197,7 +207,7 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment(R.layout.fragment_sub
         binding.filterSort.setOnClickListener {
             childFragmentManager.setFragmentResultListener(
                 FILTER_SORT_REQUEST_KEY,
-                viewLifecycleOwner
+                viewLifecycleOwner,
             ) { _, resultBundle ->
                 selectedSortOrder = resultBundle.getInt(IntentData.sortOptions)
                 hideWatched = resultBundle.getBoolean(IntentData.hideWatched)
@@ -207,22 +217,22 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment(R.layout.fragment_sub
 
             FilterSortBottomSheet()
                 .apply {
-                    arguments = bundleOf(
-                        IntentData.sortOptions to fetchSortOptions(),
-                        IntentData.hideWatched to hideWatched,
-                        IntentData.showUpcoming to showUpcoming,
-                    )
-                }
-                .show(childFragmentManager)
+                    arguments =
+                        bundleOf(
+                            IntentData.sortOptions to fetchSortOptions(),
+                            IntentData.hideWatched to hideWatched,
+                            IntentData.showUpcoming to showUpcoming,
+                        )
+                }.show(childFragmentManager)
         }
     }
 
-    private fun fetchSortOptions(): List<SelectableOption> {
-        return resources.getStringArray(R.array.sortOptions)
+    private fun fetchSortOptions(): List<SelectableOption> =
+        resources
+            .getStringArray(R.array.sortOptions)
             .mapIndexed { index, option ->
                 SelectableOption(isSelected = index == selectedSortOrder, name = option)
             }
-    }
 
     override fun onDestroyView() {
         super.onDestroyView()
@@ -230,12 +240,13 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment(R.layout.fragment_sub
     }
 
     private suspend fun playByGroup(groupIndex: Int) {
-        val streams = viewModel.videoFeed.value.orEmpty()
-            .filterByGroup(groupIndex)
-            .let {
-                DatabaseHelper.filterByStreamTypeAndWatchPosition(it, hideWatched, showUpcoming)
-            }
-            .sortedBySelectedOrder()
+        val streams =
+            viewModel.videoFeed.value
+                .orEmpty()
+                .filterByGroup(groupIndex)
+                .let {
+                    DatabaseHelper.filterByStreamTypeAndWatchPosition(it, hideWatched, showUpcoming)
+                }.sortedBySelectedOrder()
 
         if (streams.isEmpty()) return
 
@@ -243,10 +254,11 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment(R.layout.fragment_sub
 
         NavigationHelper.navigateVideo(
             requireContext(),
-            playerData = PlayerData(
-                videoId = streams.first().url,
-                keepQueue = true
-            )
+            playerData =
+                PlayerData(
+                    videoId = streams.first().url,
+                    keepQueue = true,
+                ),
         )
     }
 
@@ -313,29 +325,32 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment(R.layout.fragment_sub
         }
     }
 
-    private fun List<StreamItem>.sortedBySelectedOrder() = when (selectedSortOrder) {
-        0 -> this
-        1 -> this.reversed()
-        2 -> this.sortedBy { it.views }.reversed()
-        3 -> this.sortedBy { it.views }
-        4 -> this.sortedBy { it.uploaderName }
-        5 -> this.sortedBy { it.uploaderName }.reversed()
-        else -> this
-    }
+    private fun List<StreamItem>.sortedBySelectedOrder() =
+        when (selectedSortOrder) {
+            0 -> this
+            1 -> this.reversed()
+            2 -> this.sortedBy { it.views }.reversed()
+            3 -> this.sortedBy { it.views }
+            4 -> this.sortedBy { it.uploaderName }
+            5 -> this.sortedBy { it.uploaderName }.reversed()
+            else -> this
+        }
 
     private suspend fun showFeed(restoreScrollState: Boolean = true) {
         val binding = _binding ?: return
         val videoFeed = viewModel.videoFeed.value ?: return
 
-        val feed = videoFeed
-            .filterByGroup(selectedFilterGroup)
-            .let {
-                DatabaseHelper.filterByStreamTypeAndWatchPosition(it, hideWatched, showUpcoming)
-            }
+        val feed =
+            videoFeed
+                .filterByGroup(selectedFilterGroup)
+                .let {
+                    DatabaseHelper.filterByStreamTypeAndWatchPosition(it, hideWatched, showUpcoming)
+                }
 
-        val sortedFeed = feed
-            .sortedBySelectedOrder()
-            .toMutableList()
+        val sortedFeed =
+            feed
+                .sortedBySelectedOrder()
+                .toMutableList()
 
         // add an "all caught up item"
         if (selectedSortOrder == 0) {
@@ -345,7 +360,7 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment(R.layout.fragment_sub
             if (caughtUpIndex > 0 && !feed[caughtUpIndex - 1].isUpcoming) {
                 sortedFeed.add(
                     caughtUpIndex,
-                    StreamItem(type = VideoCardsAdapter.CAUGHT_UP_STREAM_TYPE)
+                    StreamItem(type = VideoCardsAdapter.CAUGHT_UP_STREAM_TYPE),
                 )
             }
         }

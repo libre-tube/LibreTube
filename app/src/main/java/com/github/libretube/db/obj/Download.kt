@@ -24,16 +24,17 @@ data class Download(
     val likes: Long = 0,
     val dislikes: Long = -1,
 ) {
-    fun toStreamItem() = StreamItem(
-        url = videoId,
-        title = title,
-        shortDescription = description,
-        thumbnail = thumbnailPath?.toUri()?.toString(),
-        duration = duration,
-        uploaded = uploadDate?.toMillis() ?: 0L,
-        uploadedDate = uploadDate?.toString(),
-        uploaderName = uploader,
-        uploaderUrl = uploaderUrl,
-        views = views,
-    )
+    fun toStreamItem() =
+        StreamItem(
+            url = videoId,
+            title = title,
+            shortDescription = description,
+            thumbnail = thumbnailPath?.toUri()?.toString(),
+            duration = duration,
+            uploaded = uploadDate?.toMillis() ?: 0L,
+            uploadedDate = uploadDate?.toString(),
+            uploaderName = uploader,
+            uploaderUrl = uploaderUrl,
+            views = views,
+        )
 }

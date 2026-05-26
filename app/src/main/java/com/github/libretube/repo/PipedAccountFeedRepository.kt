@@ -7,7 +7,7 @@ import com.github.libretube.helpers.PreferenceHelper
 class PipedAccountFeedRepository : FeedRepository {
     override suspend fun getFeed(
         forceRefresh: Boolean,
-        onProgressUpdate: (FeedProgress) -> Unit
+        onProgressUpdate: (FeedProgress) -> Unit,
     ): List<StreamItem> {
         val token = PreferenceHelper.getToken()
 

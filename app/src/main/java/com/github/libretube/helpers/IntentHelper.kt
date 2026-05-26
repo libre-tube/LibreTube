@@ -6,8 +6,8 @@ import android.content.pm.PackageManager
 import android.content.pm.ResolveInfo
 import android.net.Uri
 import android.os.Build
+import android.os.Bundle
 import androidx.core.net.toUri
-import androidx.core.os.bundleOf
 import androidx.fragment.app.FragmentManager
 import com.github.libretube.R
 import com.github.libretube.constants.IntentData
@@ -16,18 +16,22 @@ import com.github.libretube.ui.sheets.IntentChooserSheet
 import com.github.libretube.util.TextUtils.toTimeInSeconds
 
 object IntentHelper {
-    private fun getResolveIntent(link: String) = Intent(Intent.ACTION_VIEW)
-        .setData(link.toUri())
-        .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+    private fun getResolveIntent(link: String) =
+        Intent(Intent.ACTION_VIEW)
+            .setData(link.toUri())
+            .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
 
-    fun getResolveInfo(context: Context, link: String): List<ResolveInfo> {
+    fun getResolveInfo(
+        context: Context,
+        link: String,
+    ): List<ResolveInfo> {
         val intent = getResolveIntent(link)
 
         return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             context.packageManager
                 .queryIntentActivities(
                     intent,
-                    PackageManager.ResolveInfoFlags.of(PackageManager.MATCH_ALL.toLong())
+                    PackageManager.ResolveInfoFlags.of(PackageManager.MATCH_ALL.toLong()),
                 )
         } else {
             context.packageManager
@@ -35,7 +39,12 @@ object IntentHelper {
         }
     }
 
-    fun openLinkFromHref(context: Context, fragmentManager: FragmentManager, link: String, forceDefaultOpen: Boolean = false) {
+    fun openLinkFromHref(
+        context: Context,
+        fragmentManager: FragmentManager,
+        link: String,
+        forceDefaultOpen: Boolean = false,
+    ) {
         val resolveInfoList = getResolveInfo(context, link)
 
         if (resolveInfoList.isEmpty() || forceDefaultOpen) {
@@ -46,8 +55,12 @@ object IntentHelper {
             }
         } else {
             IntentChooserSheet()
-                .apply { arguments = bundleOf(IntentData.url to link) }
-                .show(fragmentManager)
+                .apply {
+                    arguments =
+                        Bundle().apply {
+                            putString(IntentData.url, link)
+                        }
+                }.show(fragmentManager)
         }
     }
 
@@ -56,7 +69,10 @@ object IntentHelper {
     /**
      * Resolve the uri and return a bundle with the arguments
      */
-    fun resolveType(intent: Intent, uri: Uri) = with(intent) {
+    fun resolveType(
+        intent: Intent,
+        uri: Uri,
+    ) = with(intent) {
         val lastSegment = uri.lastPathSegment
         val secondLastSegment = uri.pathSegments.getOrNull(uri.pathSegments.size - 2)
         when {

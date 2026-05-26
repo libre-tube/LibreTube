@@ -18,27 +18,29 @@ import kotlinx.coroutines.launch
 
 class ImportTempPlaylistDialog : DialogFragment() {
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        val title = arguments?.getString(IntentData.playlistName)
-            ?.takeIf { it.isNotEmpty() }
-            ?: TextUtils.getFileSafeTimeStampNow()
+        val title =
+            arguments
+                ?.getString(IntentData.playlistName)
+                ?.takeIf { it.isNotEmpty() }
+                ?: TextUtils.getFileSafeTimeStampNow()
         val videoIds = arguments?.getStringArray(IntentData.videoIds).orEmpty()
 
         return MaterialAlertDialogBuilder(requireContext())
             .setTitle(R.string.import_temp_playlist)
             .setMessage(
                 requireContext()
-                    .getString(R.string.import_temp_playlist_summary, title, videoIds.size)
-            )
-            .setNegativeButton(R.string.cancel, null)
+                    .getString(R.string.import_temp_playlist_summary, title, videoIds.size),
+            ).setNegativeButton(R.string.cancel, null)
             .setPositiveButton(R.string.okay) { _, _ ->
                 val context = requireContext().applicationContext
 
                 CoroutineScope(Dispatchers.IO).launch {
                     try {
-                        val playlist = PipedImportPlaylist(
-                            name = title,
-                            videos = videoIds.toList()
-                        )
+                        val playlist =
+                            PipedImportPlaylist(
+                                name = title,
+                                videos = videoIds.toList(),
+                            )
 
                         PlaylistsHelper.importPlaylists(listOf(playlist))
                         context.toastFromMainDispatcher(R.string.playlistCreated)
@@ -49,7 +51,6 @@ class ImportTempPlaylistDialog : DialogFragment() {
                         }
                     }
                 }
-            }
-            .create()
+            }.create()
     }
 }

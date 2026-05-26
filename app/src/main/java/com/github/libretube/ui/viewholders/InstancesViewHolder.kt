@@ -4,5 +4,5 @@ import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.databinding.InstanceRowBinding
 
 class InstancesViewHolder(
-    val binding: InstanceRowBinding
+    val binding: InstanceRowBinding,
 ) : RecyclerView.ViewHolder(binding.root)

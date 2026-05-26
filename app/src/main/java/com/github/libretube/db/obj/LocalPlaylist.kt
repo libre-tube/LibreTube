@@ -11,5 +11,5 @@ data class LocalPlaylist(
     var id: Int = 0,
     var name: String = "",
     var thumbnailUrl: String = "",
-    var description: String? = ""
+    var description: String? = "",
 )

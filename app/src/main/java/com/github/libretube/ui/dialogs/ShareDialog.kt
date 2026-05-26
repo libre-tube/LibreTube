@@ -41,60 +41,71 @@ class ShareDialog : DialogFragment() {
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         // get the api urls of the other custom instances
-        val customInstances = runBlocking(Dispatchers.IO) {
-            Database.customInstanceDao().getAll().filter { it.frontendUrl.isNotEmpty() }
-        }
+        val customInstances =
+            runBlocking(Dispatchers.IO) {
+                Database.customInstanceDao().getAll().filter { it.frontendUrl.isNotEmpty() }
+            }
 
-        val shareableTitle = shareData.currentChannel
-            ?: shareData.currentVideo
-            ?: shareData.currentPlaylist.orEmpty()
+        val shareableTitle =
+            shareData.currentChannel
+                ?: shareData.currentVideo
+                ?: shareData.currentPlaylist.orEmpty()
 
         val binding = DialogShareBinding.inflate(layoutInflater)
 
         // add one radio button per custom instance
         for (customInstance in customInstances) {
-            val radioButton = RadioButton(context).apply {
-                text = customInstance.name
-                // the view ids are the hash code of the name
-                // this guarantees that the right instance is selected
-                // even if the order of the custom instances changed
-                id = customInstance.name.hashCode()
-                layoutParams = LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.WRAP_CONTENT,
-                    LinearLayout.LayoutParams.WRAP_CONTENT
-                )
-            }
+            val radioButton =
+                RadioButton(context).apply {
+                    text = customInstance.name
+                    // the view ids are the hash code of the name
+                    // this guarantees that the right instance is selected
+                    // even if the order of the custom instances changed
+                    id = customInstance.name.hashCode()
+                    layoutParams =
+                        LinearLayout.LayoutParams(
+                            LinearLayout.LayoutParams.WRAP_CONTENT,
+                            LinearLayout.LayoutParams.WRAP_CONTENT,
+                        )
+                }
             binding.shareHostGroup.addView(radioButton)
         }
 
         binding.shareHostGroup.check(
-            when (val previousSelection =
-                PreferenceHelper.getInt(PreferenceKeys.SELECTED_SHARE_HOST, 0)) {
+            when (
+                val previousSelection =
+                    PreferenceHelper.getInt(PreferenceKeys.SELECTED_SHARE_HOST, 0)
+            ) {
                 0 -> binding.youtube.id
                 1 -> binding.piped.id
-                else -> customInstances.firstOrNull {
-                    it.name.hashCode() == previousSelection
-                }?.name?.hashCode() ?: 0
-            }
+                else ->
+                    customInstances
+                        .firstOrNull {
+                            it.name.hashCode() == previousSelection
+                        }?.name
+                        ?.hashCode() ?: 0
+            },
         )
 
         binding.shareHostGroup.setOnCheckedChangeListener { _, checkedId ->
             binding.linkPreview.text = generateLinkText(binding, customInstances)
             PreferenceHelper.putInt(
-                PreferenceKeys.SELECTED_SHARE_HOST, when {
+                PreferenceKeys.SELECTED_SHARE_HOST,
+                when {
                     binding.youtube.isChecked -> 0
                     binding.piped.isChecked -> 1
                     else -> checkedId
-                }
+                },
             )
         }
 
         if (shareObjectType == ShareObjectType.VIDEO) {
             binding.timeStampSwitchLayout.isVisible = true
-            binding.timeCodeSwitch.isChecked = PreferenceHelper.getBoolean(
-                PreferenceKeys.SHARE_WITH_TIME_CODE,
-                false
-            )
+            binding.timeCodeSwitch.isChecked =
+                PreferenceHelper.getBoolean(
+                    PreferenceKeys.SHARE_WITH_TIME_CODE,
+                    false,
+                )
             binding.timeCodeSwitch.setOnCheckedChangeListener { _, isChecked ->
                 binding.timeStampInputLayout.isVisible = isChecked
                 PreferenceHelper.putBoolean(PreferenceKeys.SHARE_WITH_TIME_CODE, isChecked)
@@ -121,50 +132,56 @@ class ShareDialog : DialogFragment() {
             .setTitle(getString(R.string.share))
             .setView(binding.root)
             .setPositiveButton(R.string.share) { _, _ ->
-                val intent = Intent(Intent.ACTION_SEND)
-                    .putExtra(Intent.EXTRA_TEXT, binding.linkPreview.text.toString())
-                    .putExtra(Intent.EXTRA_SUBJECT, shareableTitle)
-                    .setType("text/plain")
+                val intent =
+                    Intent(Intent.ACTION_SEND)
+                        .putExtra(Intent.EXTRA_TEXT, binding.linkPreview.text.toString())
+                        .putExtra(Intent.EXTRA_SUBJECT, shareableTitle)
+                        .setType("text/plain")
                 val shareIntent = Intent.createChooser(intent, getString(R.string.shareTo))
                 requireContext().startActivity(shareIntent)
-            }
-            .setNegativeButton(R.string.cancel, null)
+            }.setNegativeButton(R.string.cancel, null)
             .show()
     }
 
     private fun generateLinkText(
         binding: DialogShareBinding,
-        customInstances: List<CustomInstance>
+        customInstances: List<CustomInstance>,
     ): String {
-        val host = when {
-            binding.piped.isChecked -> PIPED_FRONTEND_URL
-            binding.youtube.isChecked -> YOUTUBE_FRONTEND_URL
-            // only available for custom instances
-            else -> {
-                val selectedCustomInstance = customInstances
-                    .firstOrNull { it.name.hashCode() == binding.shareHostGroup.checkedRadioButtonId }
-                selectedCustomInstance?.frontendUrl?.trimEnd('/') ?: YOUTUBE_FRONTEND_URL
-            }
-        }
-        val url = when (shareObjectType) {
-            ShareObjectType.VIDEO -> {
-                val queryParams = mutableListOf<String>()
-                if (host != YOUTUBE_FRONTEND_URL) {
-                    queryParams.add("v=${id}")
+        val host =
+            when {
+                binding.piped.isChecked -> PIPED_FRONTEND_URL
+                binding.youtube.isChecked -> YOUTUBE_FRONTEND_URL
+                // only available for custom instances
+                else -> {
+                    val selectedCustomInstance =
+                        customInstances
+                            .firstOrNull { it.name.hashCode() == binding.shareHostGroup.checkedRadioButtonId }
+                    selectedCustomInstance?.frontendUrl?.trimEnd('/') ?: YOUTUBE_FRONTEND_URL
                 }
-                if (binding.timeCodeSwitch.isChecked) {
-                    queryParams += "t=${binding.timeStamp.text}"
-                }
-                val baseUrl =
-                    if (host == YOUTUBE_FRONTEND_URL) "$YOUTUBE_SHORT_URL/$id" else "$host/watch"
-
-                if (queryParams.isEmpty()) baseUrl
-                else baseUrl + "?" + queryParams.joinToString("&")
             }
+        val url =
+            when (shareObjectType) {
+                ShareObjectType.VIDEO -> {
+                    val queryParams = mutableListOf<String>()
+                    if (host != YOUTUBE_FRONTEND_URL) {
+                        queryParams.add("v=$id")
+                    }
+                    if (binding.timeCodeSwitch.isChecked) {
+                        queryParams += "t=${binding.timeStamp.text}"
+                    }
+                    val baseUrl =
+                        if (host == YOUTUBE_FRONTEND_URL) "$YOUTUBE_SHORT_URL/$id" else "$host/watch"
 
-            ShareObjectType.PLAYLIST -> "$host/playlist?list=$id"
-            else -> "$host/channel/$id"
-        }
+                    if (queryParams.isEmpty()) {
+                        baseUrl
+                    } else {
+                        baseUrl + "?" + queryParams.joinToString("&")
+                    }
+                }
+
+                ShareObjectType.PLAYLIST -> "$host/playlist?list=$id"
+                else -> "$host/channel/$id"
+            }
 
         return url
     }

@@ -2,9 +2,9 @@ package com.github.libretube.helpers
 
 import android.content.Context
 import android.content.Intent
+import android.os.Bundle
 import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
-import androidx.core.os.bundleOf
 import androidx.fragment.app.FragmentManager
 import com.github.libretube.R
 import com.github.libretube.api.PlaylistsHelper
@@ -41,7 +41,10 @@ object DownloadHelper {
     const val DEFAULT_TIMEOUT = 15 * 1000
     private const val VIDEO_MIMETYPE = "video/*"
 
-    fun getDownloadDir(context: Context, path: String): Path {
+    fun getDownloadDir(
+        context: Context,
+        path: String,
+    ): Path {
         val storageDir =
             try {
                 context.getExternalFilesDir(null)!!
@@ -51,39 +54,51 @@ object DownloadHelper {
         return (storageDir.toPath() / path).createDirectories()
     }
 
-    fun getMaxConcurrentDownloads(): Int {
-        return PreferenceHelper.getString(
-            PreferenceKeys.MAX_CONCURRENT_DOWNLOADS,
-            "6"
-        ).toFloat().toInt()
-    }
+    fun getMaxConcurrentDownloads(): Int =
+        PreferenceHelper
+            .getString(
+                PreferenceKeys.MAX_CONCURRENT_DOWNLOADS,
+                "6",
+            ).toFloat()
+            .toInt()
 
-    fun startDownloadService(context: Context, downloadData: DownloadData? = null) {
-        val intent = Intent(context, DownloadService::class.java)
-            .putExtra(IntentData.downloadData, downloadData)
+    fun startDownloadService(
+        context: Context,
+        downloadData: DownloadData? = null,
+    ) {
+        val intent =
+            Intent(context, DownloadService::class.java)
+                .putExtra(IntentData.downloadData, downloadData)
 
         ContextCompat.startForegroundService(context, intent)
     }
 
-    fun DownloadItem.getNotificationId(): Int {
-        return Int.MAX_VALUE - id
-    }
+    fun DownloadItem.getNotificationId(): Int = Int.MAX_VALUE - id
 
-    fun startDownloadDialog(context: Context, fragmentManager: FragmentManager, videoId: String) {
+    fun startDownloadDialog(
+        context: Context,
+        fragmentManager: FragmentManager,
+        videoId: String,
+    ) {
         val externalProviderPackageName =
             PreferenceHelper.getString(PreferenceKeys.EXTERNAL_DOWNLOAD_PROVIDER, "")
 
         if (externalProviderPackageName.isBlank()) {
-            DownloadDialog().apply {
-                arguments = bundleOf(IntentData.videoId to videoId)
-            }.show(fragmentManager, DownloadDialog::class.java.name)
+            DownloadDialog()
+                .apply {
+                    arguments =
+                        Bundle().apply {
+                            putString(IntentData.videoId, videoId)
+                        }
+                }.show(fragmentManager, DownloadDialog::class.java.name)
         } else {
-            val intent = Intent(Intent.ACTION_VIEW)
-                .setPackage(externalProviderPackageName)
-                .setDataAndType(
-                    "${ShareDialog.YOUTUBE_FRONTEND_URL}/watch?v=$videoId".toUri(),
-                    VIDEO_MIMETYPE
-                )
+            val intent =
+                Intent(Intent.ACTION_VIEW)
+                    .setPackage(externalProviderPackageName)
+                    .setDataAndType(
+                        "${ShareDialog.YOUTUBE_FRONTEND_URL}/watch?v=$videoId".toUri(),
+                        VIDEO_MIMETYPE,
+                    )
 
             runCatching { context.startActivity(intent) }
         }
@@ -94,44 +109,49 @@ object DownloadHelper {
         fragmentManager: FragmentManager,
         playlistId: String,
         playlistName: String,
-        playlistType: PlaylistType
+        playlistType: PlaylistType,
     ) {
         val externalProviderPackageName =
             PreferenceHelper.getString(PreferenceKeys.EXTERNAL_DOWNLOAD_PROVIDER, "")
 
         if (externalProviderPackageName.isBlank()) {
-            val downloadPlaylistDialog = DownloadPlaylistDialog().apply {
-                arguments = bundleOf(
-                    IntentData.playlistId to playlistId,
-                    IntentData.playlistName to playlistName,
-                    IntentData.playlistType to playlistType
-                )
-            }
+            val downloadPlaylistDialog =
+                DownloadPlaylistDialog().apply {
+                    arguments =
+                        Bundle().apply {
+                            putString(IntentData.playlistId, playlistId)
+                            putString(IntentData.playlistName, playlistName)
+                            putSerializable(IntentData.playlistType, playlistType)
+                        }
+                }
             downloadPlaylistDialog.show(fragmentManager, null)
         } else if (playlistType == PlaylistType.PUBLIC) {
-            val intent = Intent(Intent.ACTION_VIEW)
-                .setPackage(externalProviderPackageName)
-                .setDataAndType(
-                    "${ShareDialog.YOUTUBE_FRONTEND_URL}/playlist?list=$playlistId".toUri(),
-                    VIDEO_MIMETYPE
-                )
+            val intent =
+                Intent(Intent.ACTION_VIEW)
+                    .setPackage(externalProviderPackageName)
+                    .setDataAndType(
+                        "${ShareDialog.YOUTUBE_FRONTEND_URL}/playlist?list=$playlistId".toUri(),
+                        VIDEO_MIMETYPE,
+                    )
 
             runCatching { context.startActivity(intent) }
         } else {
             CoroutineScope(Dispatchers.IO).launch {
-                val playlistVideoIds = try {
-                    PlaylistsHelper.getPlaylist(playlistId)
-                } catch (e: Exception) {
-                    context.toastFromMainDispatcher(R.string.unknown_error)
-                    return@launch
-                }.relatedStreams.mapNotNull { it.url?.toID() }.joinToString(",")
+                val playlistVideoIds =
+                    try {
+                        PlaylistsHelper.getPlaylist(playlistId)
+                    } catch (e: Exception) {
+                        context.toastFromMainDispatcher(R.string.unknown_error)
+                        return@launch
+                    }.relatedStreams.mapNotNull { it.url?.toID() }.joinToString(",")
 
-                val intent = Intent(Intent.ACTION_VIEW)
-                    .setPackage(externalProviderPackageName)
-                    .setDataAndType(
-                        "${ShareDialog.YOUTUBE_FRONTEND_URL}/watch_videos?video_ids=${playlistVideoIds}".toUri(),
-                        VIDEO_MIMETYPE
-                    )
+                val intent =
+                    Intent(Intent.ACTION_VIEW)
+                        .setPackage(externalProviderPackageName)
+                        .setDataAndType(
+                            "${ShareDialog.YOUTUBE_FRONTEND_URL}/watch_videos?video_ids=$playlistVideoIds".toUri(),
+                            VIDEO_MIMETYPE,
+                        )
 
                 withContext(Dispatchers.Main) {
                     runCatching { context.startActivity(intent) }
@@ -140,7 +160,10 @@ object DownloadHelper {
         }
     }
 
-    fun extractDownloadInfoText(context: Context, download: DownloadWithItems): List<String> {
+    fun extractDownloadInfoText(
+        context: Context,
+        download: DownloadWithItems,
+    ): List<String> {
         val downloadInfo = mutableListOf<String>()
         download.downloadItems.firstOrNull { it.type == FileType.VIDEO }?.let { videoItem ->
             downloadInfo.add(context.getString(R.string.video) + ": ${videoItem.format} ${videoItem.quality}")

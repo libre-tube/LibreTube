@@ -28,15 +28,17 @@ import kotlinx.coroutines.withContext
 
 class HomeViewModel : ViewModel() {
     private val hideWatched
-        get() = PreferenceHelper.getBoolean(
-            PreferenceKeys.HIDE_WATCHED_FROM_FEED,
-            false
-        )
+        get() =
+            PreferenceHelper.getBoolean(
+                PreferenceKeys.HIDE_WATCHED_FROM_FEED,
+                false,
+            )
     private val showUpcoming
-        get() = PreferenceHelper.getBoolean(
-            PreferenceKeys.SHOW_UPCOMING_IN_FEED,
-            true
-        )
+        get() =
+            PreferenceHelper.getBoolean(
+                PreferenceKeys.SHOW_UPCOMING_IN_FEED,
+                true,
+            )
 
     val trending: MutableLiveData<Pair<TrendingCategory, TrendsViewModel.TrendingStreams>> =
         MutableLiveData(null)
@@ -55,73 +57,77 @@ class HomeViewModel : ViewModel() {
         context: Context,
         subscriptionsViewModel: SubscriptionsViewModel,
         visibleItems: Set<String>,
-        onUnusualLoadTime: () -> Unit
+        onUnusualLoadTime: () -> Unit,
     ) {
         isLoading.value = true
 
         loadHomeJob?.cancel()
-        loadHomeJob = viewModelScope.launch {
-            val result = async {
-                awaitAll(
-                    async { if (visibleItems.contains(TRENDING)) loadTrending(context) },
-                    async { if (visibleItems.contains(FEATURED)) loadFeed(subscriptionsViewModel) },
-                    async { if (visibleItems.contains(BOOKMARKS)) loadBookmarks() },
-                    async { if (visibleItems.contains(PLAYLISTS)) loadPlaylists() },
-                    async { if (visibleItems.contains(WATCHING)) loadVideosToContinueWatching() }
-                )
-                loadedSuccessfully.value = sections.any { it.value != null }
-                isLoading.value = false
-            }
+        loadHomeJob =
+            viewModelScope.launch {
+                val result =
+                    async {
+                        awaitAll(
+                            async { if (visibleItems.contains(TRENDING)) loadTrending(context) },
+                            async { if (visibleItems.contains(FEATURED)) loadFeed(subscriptionsViewModel) },
+                            async { if (visibleItems.contains(BOOKMARKS)) loadBookmarks() },
+                            async { if (visibleItems.contains(PLAYLISTS)) loadPlaylists() },
+                            async { if (visibleItems.contains(WATCHING)) loadVideosToContinueWatching() },
+                        )
+                        loadedSuccessfully.value = sections.any { it.value != null }
+                        isLoading.value = false
+                    }
 
-            withContext(Dispatchers.IO) {
-                delay(UNUSUAL_LOAD_TIME_MS)
-                if (result.isActive) {
-                    onUnusualLoadTime.invoke()
+                withContext(Dispatchers.IO) {
+                    delay(UNUSUAL_LOAD_TIME_MS)
+                    if (result.isActive) {
+                        onUnusualLoadTime.invoke()
+                    }
                 }
             }
-        }
     }
 
     private suspend fun loadTrending(context: Context) {
         val region = PreferenceHelper.getTrendingRegion(context)
-        val category = PreferenceHelper.getString(
-            PreferenceKeys.TRENDING_CATEGORY,
-            TrendingCategory.LIVE.name
-        ).let { TrendingCategory.valueOf(it) }
+        val category =
+            PreferenceHelper
+                .getString(
+                    PreferenceKeys.TRENDING_CATEGORY,
+                    TrendingCategory.LIVE.name,
+                ).let { TrendingCategory.valueOf(it) }
 
         runSafely(
             onSuccess = { videos ->
                 trending.updateIfChanged(
                     Pair(
                         category,
-                        TrendsViewModel.TrendingStreams(region, videos)
-                    )
+                        TrendsViewModel.TrendingStreams(region, videos),
+                    ),
                 )
             },
             ioBlock = {
                 MediaServiceRepository.instance.getTrending(region, category)
-            }
+            },
         )
     }
 
     private suspend fun loadFeed(subscriptionsViewModel: SubscriptionsViewModel) {
         runSafely(
             onSuccess = { videos -> feed.updateIfChanged(videos) },
-            ioBlock = { tryLoadFeed(subscriptionsViewModel) }
+            ioBlock = { tryLoadFeed(subscriptionsViewModel) },
         )
     }
 
     private suspend fun loadBookmarks() {
         runSafely(
             onSuccess = { newBookmarks -> bookmarks.updateIfChanged(newBookmarks) },
-            ioBlock = { DatabaseHolder.Database.playlistBookmarkDao().getAll() }
+            ioBlock = { DatabaseHolder.Database.playlistBookmarkDao().getAll() },
         )
     }
 
     private suspend fun loadPlaylists() {
         runSafely(
             onSuccess = { newPlaylists -> playlists.updateIfChanged(newPlaylists) },
-            ioBlock = { PlaylistsHelper.getPlaylists() }
+            ioBlock = { PlaylistsHelper.getPlaylists() },
         )
     }
 
@@ -129,7 +135,7 @@ class HomeViewModel : ViewModel() {
         if (!PlayerHelper.watchHistoryEnabled) return
         runSafely(
             onSuccess = { videos -> continueWatching.updateIfChanged(videos) },
-            ioBlock = ::loadWatchingFromDB
+            ioBlock = ::loadWatchingFromDB,
         )
     }
 
@@ -142,11 +148,12 @@ class HomeViewModel : ViewModel() {
 
     private suspend fun tryLoadFeed(subscriptionsViewModel: SubscriptionsViewModel): List<StreamItem> {
         // use cached feed if available, otherwise load feed from API/database
-        val feed = subscriptionsViewModel.videoFeed.value ?: run {
-            SubscriptionHelper.getFeed(forceRefresh = false).also {
-                subscriptionsViewModel.videoFeed.postValue(it)
+        val feed =
+            subscriptionsViewModel.videoFeed.value ?: run {
+                SubscriptionHelper.getFeed(forceRefresh = false).also {
+                    subscriptionsViewModel.videoFeed.postValue(it)
+                }
             }
-        }
 
         return DatabaseHelper.filterByStreamTypeAndWatchPosition(feed, hideWatched, showUpcoming)
     }
