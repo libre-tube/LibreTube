@@ -13,5 +13,5 @@ data class PreviewFrames(
     val totalCount: Int,
     val durationPerFrame: Long,
     val framesPerPageX: Int,
-    val framesPerPageY: Int
-): Parcelable
+    val framesPerPageY: Int,
+) : Parcelable

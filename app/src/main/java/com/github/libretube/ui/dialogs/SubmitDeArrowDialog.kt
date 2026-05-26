@@ -22,7 +22,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class SubmitDeArrowDialog: DialogFragment() {
+class SubmitDeArrowDialog : DialogFragment() {
     private var videoId: String = ""
     private var currentPosition: Float = 0f
 
@@ -70,13 +70,14 @@ class SubmitDeArrowDialog: DialogFragment() {
     }
 
     private suspend fun fetchDeArrowData() {
-        val data = try {
-            withContext(Dispatchers.IO) {
-                MediaServiceRepository.instance.getDeArrowContent(videoId)
-            } ?: return
-        } catch (e: Exception) {
-            return
-        }
+        val data =
+            try {
+                withContext(Dispatchers.IO) {
+                    MediaServiceRepository.instance.getDeArrowContent(videoId)
+                } ?: return
+            } catch (e: Exception) {
+                return
+            }
 
         binding.dearrowTitle.items = data.titles.map { it.title }
     }
@@ -87,12 +88,16 @@ class SubmitDeArrowDialog: DialogFragment() {
 
         val userID = PreferenceHelper.getSponsorBlockUserID()
         val userAgent = TextUtils.getUserAgent(context)
-        val title = binding.dearrowTitle.selectedItem
-            .takeIf { it.isNotEmpty() && binding.titleCheckbox.isChecked }
-            ?.let { DeArrowSubmitTitle(it) }
-        val thumbnail = binding.thumbnailTime.text.toString().parseDurationString()
-            ?.takeIf { binding.thumbnailTimeCheckbox.isChecked }
-            ?.let { DeArrowSubmitThumbnail(it) }
+        val title =
+            binding.dearrowTitle.selectedItem
+                .takeIf { it.isNotEmpty() && binding.titleCheckbox.isChecked }
+                ?.let { DeArrowSubmitTitle(it) }
+        val thumbnail =
+            binding.thumbnailTime.text
+                .toString()
+                .parseDurationString()
+                ?.takeIf { binding.thumbnailTimeCheckbox.isChecked }
+                ?.let { DeArrowSubmitThumbnail(it) }
         val requestBody = DeArrowBody(videoId, userID, userAgent, title, thumbnail)
 
         try {

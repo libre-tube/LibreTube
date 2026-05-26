@@ -14,5 +14,5 @@ enum class PlaylistType {
     /**
      * YouTube playlist
      */
-    PUBLIC
+    PUBLIC,
 }

@@ -13,7 +13,7 @@ object ClipboardHelper {
         context: Context,
         label: String = context.getString(R.string.copied),
         text: String,
-        notify: Boolean = false
+        notify: Boolean = false,
     ) {
         val clip = ClipData.newPlainText(label, text)
         context.getSystemService<ClipboardManager>()!!.setPrimaryClip(clip)

@@ -1,8 +1,8 @@
 package com.github.libretube.ui.adapters
 
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.os.bundleOf
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.ListAdapter
@@ -25,16 +25,20 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class WatchHistoryAdapter :
-    ListAdapter<WatchHistoryItem, WatchHistoryViewHolder>(DiffUtilItemCallback()) {
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WatchHistoryViewHolder {
+class WatchHistoryAdapter : ListAdapter<WatchHistoryItem, WatchHistoryViewHolder>(DiffUtilItemCallback()) {
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int,
+    ): WatchHistoryViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         val binding = VideoRowBinding.inflate(layoutInflater, parent, false)
         return WatchHistoryViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: WatchHistoryViewHolder, position: Int) {
+    override fun onBindViewHolder(
+        holder: WatchHistoryViewHolder,
+        position: Int,
+    ) {
         val video = getItem(holder.bindingAdapterPosition)
         holder.binding.apply {
             videoTitle.text = video.title
@@ -69,20 +73,25 @@ class WatchHistoryAdapter :
             root.setOnLongClickListener {
                 fragmentManager.setFragmentResultListener(
                     VideoOptionsBottomSheet.VIDEO_OPTIONS_SHEET_REQUEST_KEY,
-                    activity
+                    activity,
                 ) { _, _ ->
                     notifyItemChanged(position)
                 }
                 val sheet = VideoOptionsBottomSheet()
-                sheet.arguments = bundleOf(IntentData.streamItem to video.toStreamItem())
+                sheet.arguments =
+                    Bundle().apply {
+                        putParcelable(IntentData.streamItem, video.toStreamItem())
+                    }
                 sheet.show(fragmentManager, WatchHistoryAdapter::class.java.name)
                 true
             }
 
-            if (video.duration != null) watchProgress.setWatchProgressLength(
-                video.videoId,
-                video.duration
-            )
+            if (video.duration != null) {
+                watchProgress.setWatchProgressLength(
+                    video.videoId,
+                    video.duration,
+                )
+            }
 
             CoroutineScope(Dispatchers.IO).launch {
                 val isDownloaded =

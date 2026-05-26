@@ -24,10 +24,11 @@ object DatabaseHelper {
     suspend fun addToWatchHistory(watchHistoryItem: WatchHistoryItem) =
         withContext(Dispatchers.IO) {
             Database.watchHistoryDao().insert(watchHistoryItem)
-            val maxHistorySize = PreferenceHelper.getString(
-                PreferenceKeys.WATCH_HISTORY_SIZE,
-                "100"
-            )
+            val maxHistorySize =
+                PreferenceHelper.getString(
+                    PreferenceKeys.WATCH_HISTORY_SIZE,
+                    "100",
+                )
             if (maxHistorySize == "unlimited") {
                 return@withContext
             }
@@ -39,18 +40,22 @@ object DatabaseHelper {
             }
         }
 
-    suspend fun getWatchHistoryPage(page: Int, pageSize: Int): List<WatchHistoryItem> {
+    suspend fun getWatchHistoryPage(
+        page: Int,
+        pageSize: Int,
+    ): List<WatchHistoryItem> {
         val watchHistoryDao = Database.watchHistoryDao()
         val historySize = watchHistoryDao.getSize()
 
         if (historySize < pageSize * (page - 1)) return emptyList()
 
         val offset = historySize - (pageSize * page)
-        val limit = if (offset < 0) {
-            offset + pageSize
-        } else {
-            pageSize
-        }
+        val limit =
+            if (offset < 0) {
+                offset + pageSize
+            } else {
+                pageSize
+            }
         return watchHistoryDao.getN(limit, maxOf(offset, 0)).reversed()
     }
 
@@ -70,18 +75,25 @@ object DatabaseHelper {
 
     suspend fun getWatchPosition(videoId: String) = Database.watchPositionDao().findById(videoId)?.position
 
-    fun getWatchPositionBlocking(videoId: String): Long? = runBlocking(Dispatchers.IO) {
-        getWatchPosition(videoId)
-    }
+    fun getWatchPositionBlocking(videoId: String): Long? =
+        runBlocking(Dispatchers.IO) {
+            getWatchPosition(videoId)
+        }
 
-    suspend fun isVideoWatched(videoId: String, duration: Long): Boolean =
+    suspend fun isVideoWatched(
+        videoId: String,
+        duration: Long,
+    ): Boolean =
         withContext(Dispatchers.IO) {
             val position = getWatchPosition(videoId) ?: return@withContext false
 
             return@withContext isVideoWatched(position, duration)
         }
 
-    fun isVideoWatched(positionMillis: Long, durationSeconds: Long?): Boolean {
+    fun isVideoWatched(
+        positionMillis: Long,
+        durationSeconds: Long?,
+    ): Boolean {
         if (durationSeconds == null) return false
 
         val progress = positionMillis / 1000
@@ -89,38 +101,36 @@ object DatabaseHelper {
         return durationSeconds - progress <= ABSOLUTE_WATCHED_THRESHOLD && progress >= RELATIVE_WATCHED_THRESHOLD * durationSeconds
     }
 
-    suspend fun filterUnwatched(streams: List<StreamItem>): List<StreamItem> {
-        return streams.filter {
+    suspend fun filterUnwatched(streams: List<StreamItem>): List<StreamItem> =
+        streams.filter {
             !isVideoWatched(it.url.orEmpty().toID(), it.duration ?: 0)
         }
-    }
 
     /**
      * @param unfinished If true, only returns unfinished videos. If false, only returns finished videos.
      */
     suspend fun filterByWatchStatus(
         watchHistoryItem: WatchHistoryItem,
-        unfinished: Boolean = true
-    ): Boolean {
-        return unfinished xor isVideoWatched(watchHistoryItem.videoId, watchHistoryItem.duration ?: 0)
-    }
+        unfinished: Boolean = true,
+    ): Boolean = unfinished xor isVideoWatched(watchHistoryItem.videoId, watchHistoryItem.duration ?: 0)
 
     suspend fun filterByStreamTypeAndWatchPosition(
         streams: List<StreamItem>,
         hideWatched: Boolean,
-        showUpcoming: Boolean
+        showUpcoming: Boolean,
     ): List<StreamItem> {
-        val streamItems = streams.filter {
-            if (!showUpcoming && it.isUpcoming) return@filter false
+        val streamItems =
+            streams.filter {
+                if (!showUpcoming && it.isUpcoming) return@filter false
 
-            val isVideo = !it.isShort && !it.isLive
-            return@filter when {
-                !ContentFilter.SHORTS.isEnabled && it.isShort -> false
-                !ContentFilter.VIDEOS.isEnabled && isVideo -> false
-                !ContentFilter.LIVESTREAMS.isEnabled && it.isLive -> false
-                else -> true
+                val isVideo = !it.isShort && !it.isLive
+                return@filter when {
+                    !ContentFilter.SHORTS.isEnabled && it.isShort -> false
+                    !ContentFilter.VIDEOS.isEnabled && isVideo -> false
+                    !ContentFilter.LIVESTREAMS.isEnabled && it.isLive -> false
+                    else -> true
+                }
             }
-        }
         if (!hideWatched) return streamItems
 
         return filterUnwatched(streamItems)

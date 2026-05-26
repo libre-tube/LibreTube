@@ -11,17 +11,19 @@ import com.github.libretube.helpers.ThemeHelper
 import com.google.android.material.elevation.SurfaceColors
 import kotlin.math.abs
 
-class CustomSwipeToRefresh(context: Context?, attrs: AttributeSet?) :
-    SwipeRefreshLayout(context!!, attrs) {
+class CustomSwipeToRefresh(
+    context: Context?,
+    attrs: AttributeSet?,
+) : SwipeRefreshLayout(context!!, attrs) {
     private val mTouchSlop: Int = ViewConfiguration.get(this.context).scaledTouchSlop
     private var mPrevX = 0f
 
     init {
         setColorSchemeColors(
-            ThemeHelper.getThemeColor(this.context, androidx.appcompat.R.attr.colorPrimary)
+            ThemeHelper.getThemeColor(this.context, androidx.appcompat.R.attr.colorPrimary),
         )
         setProgressBackgroundColorSchemeColor(
-            SurfaceColors.getColorForElevation(this.context, 20f)
+            SurfaceColors.getColorForElevation(this.context, 20f),
         )
     }
 

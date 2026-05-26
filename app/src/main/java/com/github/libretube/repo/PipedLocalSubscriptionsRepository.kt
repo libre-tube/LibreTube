@@ -8,7 +8,10 @@ import com.github.libretube.db.obj.LocalSubscription
 
 class PipedLocalSubscriptionsRepository : SubscriptionsRepository {
     override suspend fun subscribe(
-        channelId: String, name: String, uploaderAvatar: String?, verified: Boolean
+        channelId: String,
+        name: String,
+        uploaderAvatar: String?,
+        verified: Boolean,
     ) {
         // further meta info is not needed when using Piped local subscriptions
         Database.localSubscriptionDao().insert(LocalSubscription(channelId))
@@ -19,9 +22,7 @@ class PipedLocalSubscriptionsRepository : SubscriptionsRepository {
         Database.localSubscriptionDao().insertAll(newChannels.map { LocalSubscription(it) })
     }
 
-    override suspend fun isSubscribed(channelId: String): Boolean {
-        return Database.localSubscriptionDao().includes(channelId)
-    }
+    override suspend fun isSubscribed(channelId: String): Boolean = Database.localSubscriptionDao().includes(channelId)
 
     override suspend fun unsubscribe(channelId: String) {
         Database.localSubscriptionDao().deleteById(channelId)
@@ -31,17 +32,17 @@ class PipedLocalSubscriptionsRepository : SubscriptionsRepository {
         val channelIds = getSubscriptionChannelIds()
 
         return when {
-            channelIds.size > GET_SUBSCRIPTIONS_LIMIT -> RetrofitInstance.authApi.unauthenticatedSubscriptions(
-                    channelIds
+            channelIds.size > GET_SUBSCRIPTIONS_LIMIT ->
+                RetrofitInstance.authApi.unauthenticatedSubscriptions(
+                    channelIds,
                 )
 
-            else -> RetrofitInstance.authApi.unauthenticatedSubscriptions(
-                channelIds.joinToString(",")
-            )
+            else ->
+                RetrofitInstance.authApi.unauthenticatedSubscriptions(
+                    channelIds.joinToString(","),
+                )
         }
     }
 
-    override suspend fun getSubscriptionChannelIds(): List<String> {
-        return Database.localSubscriptionDao().getAll().map { it.channelId }
-    }
+    override suspend fun getSubscriptionChannelIds(): List<String> = Database.localSubscriptionDao().getAll().map { it.channelId }
 }

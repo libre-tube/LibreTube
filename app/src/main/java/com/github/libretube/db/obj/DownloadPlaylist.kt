@@ -2,6 +2,7 @@ package com.github.libretube.db.obj
 
 import androidx.room.Embedded
 import androidx.room.Entity
+import androidx.room.Index
 import androidx.room.Junction
 import androidx.room.PrimaryKey
 import androidx.room.Relation
@@ -16,7 +17,10 @@ data class DownloadPlaylist(
     val description: String? = null,
 )
 
-@Entity(primaryKeys = ["playlistId", "videoId"])
+@Entity(
+    primaryKeys = ["playlistId", "videoId"],
+    indices = [Index(value = ["videoId"])],
+)
 data class DownloadPlaylistVideosCrossRef(
     val playlistId: String,
     val videoId: String,
@@ -27,9 +31,9 @@ data class DownloadPlaylistWithDownload(
     @Relation(
         parentColumn = "playlistId",
         entityColumn = "videoId",
-        associateBy = Junction(DownloadPlaylistVideosCrossRef::class)
+        associateBy = Junction(DownloadPlaylistVideosCrossRef::class),
     )
-    val downloadVideos: List<Download>
+    val downloadVideos: List<Download>,
 )
 
 /**
@@ -41,7 +45,7 @@ data class DownloadPlaylistWithDownloadWithItems(
         entity = Download::class,
         parentColumn = "playlistId",
         entityColumn = "videoId",
-        associateBy = Junction(DownloadPlaylistVideosCrossRef::class)
+        associateBy = Junction(DownloadPlaylistVideosCrossRef::class),
     )
-    val downloadVideos: List<DownloadWithItems>
+    val downloadVideos: List<DownloadWithItems>,
 )

@@ -1,7 +1,6 @@
 package com.github.libretube.ui.sheets
 
 import android.os.Bundle
-import androidx.core.os.bundleOf
 import androidx.fragment.app.setFragmentResult
 import androidx.navigation.fragment.NavHostFragment
 import com.github.libretube.R
@@ -61,37 +60,40 @@ class VideoOptionsBottomSheet : BaseBottomSheet() {
                 R.string.playOnBackground -> {
                     NavigationHelper.navigateVideo(
                         requireContext(),
-                        playerData = PlayerData(
-                            videoId = videoId,
-                            playlistId = playlistId,
-                        ),
-                        audioOnlyPlayerRequested = true
+                        playerData =
+                            PlayerData(
+                                videoId = videoId,
+                                playlistId = playlistId,
+                            ),
+                        audioOnlyPlayerRequested = true,
                     )
                 }
                 // Add Video to Playlist Dialog
                 R.string.addToPlaylist -> {
-                    AddToPlaylistDialog().apply {
-                        arguments = bundleOf(IntentData.videoInfo to streamItem)
-                    }.show(
-                        parentFragmentManager,
-                        AddToPlaylistDialog::class.java.name
-                    )
+                    AddToPlaylistDialog()
+                        .apply {
+                            arguments = Bundle().apply { putParcelable(IntentData.videoInfo, streamItem) }
+                        }.show(
+                            parentFragmentManager,
+                            AddToPlaylistDialog::class.java.name,
+                        )
                 }
 
                 R.string.download -> {
                     DownloadHelper.startDownloadDialog(
                         requireContext(),
                         parentFragmentManager,
-                        videoId
+                        videoId,
                     )
                 }
 
                 R.string.share -> {
-                    val bundle = bundleOf(
-                        IntentData.id to videoId,
-                        IntentData.shareObjectType to ShareObjectType.VIDEO,
-                        IntentData.shareData to ShareData(currentVideo = streamItem.title)
-                    )
+                    val bundle =
+                        Bundle().apply {
+                            putString(IntentData.id, videoId)
+                            putSerializable(IntentData.shareObjectType, ShareObjectType.VIDEO)
+                            putParcelable(IntentData.shareData, ShareData(currentVideo = streamItem.title))
+                        }
                     val newShareDialog = ShareDialog()
                     newShareDialog.arguments = bundle
                     // using parentFragmentManager is important here
@@ -117,14 +119,19 @@ class VideoOptionsBottomSheet : BaseBottomSheet() {
                     }
                     if (PreferenceHelper.getBoolean(PreferenceKeys.HIDE_WATCHED_FROM_FEED, false)) {
                         // get the host fragment containing the current fragment
-                        val navHostFragment = (context as MainActivity).supportFragmentManager
-                            .findFragmentById(R.id.fragment) as NavHostFragment?
+                        val navHostFragment =
+                            (context as MainActivity)
+                                .supportFragmentManager
+                                .findFragmentById(R.id.fragment) as NavHostFragment?
                         // get the current fragment
-                        val fragment = navHostFragment?.childFragmentManager?.fragments
-                            ?.firstOrNull() as? SubscriptionsFragment
+                        val fragment =
+                            navHostFragment
+                                ?.childFragmentManager
+                                ?.fragments
+                                ?.firstOrNull() as? SubscriptionsFragment
                         fragment?.removeItem(videoId)
                     }
-                    setFragmentResult(VIDEO_OPTIONS_SHEET_REQUEST_KEY, bundleOf())
+                    setFragmentResult(VIDEO_OPTIONS_SHEET_REQUEST_KEY, Bundle())
                 }
 
                 R.string.mark_as_unwatched -> {
@@ -132,7 +139,7 @@ class VideoOptionsBottomSheet : BaseBottomSheet() {
                         DatabaseHolder.Database.watchPositionDao().deleteByVideoId(videoId)
                         DatabaseHolder.Database.watchHistoryDao().deleteByVideoId(videoId)
                     }
-                    setFragmentResult(VIDEO_OPTIONS_SHEET_REQUEST_KEY, bundleOf())
+                    setFragmentResult(VIDEO_OPTIONS_SHEET_REQUEST_KEY, Bundle())
                 }
             }
         }
@@ -152,9 +159,10 @@ class VideoOptionsBottomSheet : BaseBottomSheet() {
 
         // show the mark as watched or unwatched option if watch positions are enabled
         if (PlayerHelper.watchPositionsAny || PlayerHelper.watchHistoryEnabled) {
-            val watchHistoryEntry = runBlocking(Dispatchers.IO) {
-                DatabaseHolder.Database.watchHistoryDao().findById(videoId)
-            }
+            val watchHistoryEntry =
+                runBlocking(Dispatchers.IO) {
+                    DatabaseHolder.Database.watchHistoryDao().findById(videoId)
+                }
 
             val position = DatabaseHelper.getWatchPositionBlocking(videoId) ?: 0
             val isCompleted = DatabaseHelper.isVideoWatched(position, streamItem.duration ?: 0)

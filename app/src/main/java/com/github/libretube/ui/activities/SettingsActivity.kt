@@ -9,7 +9,6 @@ import com.github.libretube.databinding.ActivitySettingsBinding
 import com.github.libretube.ui.base.BaseActivity
 
 class SettingsActivity : BaseActivity() {
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -19,12 +18,13 @@ class SettingsActivity : BaseActivity() {
         setContentView(binding.root)
 
         // ensure that the toolbar's back button is always visible
-        val appBarConfiguration = AppBarConfiguration.Builder()
-            .setFallbackOnNavigateUpListener {
-                finish()
-                true
-            }
-            .build()
+        val appBarConfiguration =
+            AppBarConfiguration
+                .Builder()
+                .setFallbackOnNavigateUpListener {
+                    finish()
+                    true
+                }.build()
         binding.toolbar.setupWithNavController(navController, appBarConfiguration)
 
         if (intent.extras?.getString(REDIRECT_KEY) == REDIRECT_TO_INTENT_SETTINGS) {

@@ -1,9 +1,9 @@
 package com.github.libretube.ui.adapters
 
 import android.annotation.SuppressLint
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.os.bundleOf
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.ListAdapter
@@ -29,25 +29,31 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class VideosAdapter(
-    private val showChannelInfo: Boolean = true
+    private val showChannelInfo: Boolean = true,
 ) : ListAdapter<StreamItem, VideosViewHolder>(DiffUtilItemCallback()) {
-
     fun insertItems(newItems: List<StreamItem>) {
-        val updatedList = currentList.toMutableList().also {
-            it.addAll(newItems)
-        }
+        val updatedList =
+            currentList.toMutableList().also {
+                it.addAll(newItems)
+            }
 
         submitList(updatedList)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VideosViewHolder {
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int,
+    ): VideosViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         val binding = VideoRowBinding.inflate(layoutInflater, parent, false)
         return VideosViewHolder(binding)
     }
 
     @SuppressLint("SetTextI18n")
-    override fun onBindViewHolder(holder: VideosViewHolder, position: Int) {
+    override fun onBindViewHolder(
+        holder: VideosViewHolder,
+        position: Int,
+    ) {
         val video = getItem(holder.bindingAdapterPosition)
         val videoId = video.url.orEmpty().toID()
 
@@ -81,12 +87,15 @@ class VideosAdapter(
             root.setOnLongClickListener {
                 fragmentManager.setFragmentResultListener(
                     VideoOptionsBottomSheet.VIDEO_OPTIONS_SHEET_REQUEST_KEY,
-                    activity
+                    activity,
                 ) { _, _ ->
                     notifyItemChanged(position)
                 }
                 val sheet = VideoOptionsBottomSheet()
-                sheet.arguments = bundleOf(IntentData.streamItem to video)
+                sheet.arguments =
+                    Bundle().apply {
+                        putParcelable(IntentData.streamItem, video)
+                    }
                 sheet.show(fragmentManager, VideosAdapter::class.java.name)
                 true
             }

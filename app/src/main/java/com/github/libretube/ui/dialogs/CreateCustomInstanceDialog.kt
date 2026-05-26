@@ -31,7 +31,10 @@ class CreateCustomInstanceDialog : DialogFragment() {
             if (hasFocus || !binding.instanceName.text.isNullOrEmpty()) return@setOnFocusChangeListener
 
             // automatically set the api name
-            val apiUrl = binding.instanceApiUrl.text.toString().toHttpUrlOrNull()
+            val apiUrl =
+                binding.instanceApiUrl.text
+                    .toString()
+                    .toHttpUrlOrNull()
             if (apiUrl != null) {
                 binding.instanceName.setText(apiUrl.host)
             }

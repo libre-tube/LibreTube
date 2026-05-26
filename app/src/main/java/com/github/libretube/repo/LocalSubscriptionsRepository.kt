@@ -16,14 +16,18 @@ import java.util.concurrent.atomic.AtomicInteger
 
 class LocalSubscriptionsRepository : SubscriptionsRepository {
     override suspend fun subscribe(
-        channelId: String, name: String, uploaderAvatar: String?, verified: Boolean
+        channelId: String,
+        name: String,
+        uploaderAvatar: String?,
+        verified: Boolean,
     ) {
-        val localSubscription = LocalSubscription(
-            channelId = channelId,
-            name = name,
-            avatar = uploaderAvatar,
-            verified = verified
-        )
+        val localSubscription =
+            LocalSubscription(
+                channelId = channelId,
+                name = name,
+                avatar = uploaderAvatar,
+                verified = verified,
+            )
 
         Database.localSubscriptionDao().insert(localSubscription)
     }
@@ -32,9 +36,7 @@ class LocalSubscriptionsRepository : SubscriptionsRepository {
         Database.localSubscriptionDao().deleteById(channelId)
     }
 
-    override suspend fun isSubscribed(channelId: String): Boolean {
-        return Database.localSubscriptionDao().includes(channelId)
-    }
+    override suspend fun isSubscribed(channelId: String): Boolean = Database.localSubscriptionDao().includes(channelId)
 
     override suspend fun importSubscriptions(newChannels: List<String>) {
         val subscribedChannels = getSubscriptionChannelIds()
@@ -46,7 +48,7 @@ class LocalSubscriptionsRepository : SubscriptionsRepository {
         val channelExtractionCount = AtomicInteger()
         for (chunk in newFiltered.chunked(CHANNEL_CHUNK_SIZE)) {
             // avoid being rate-limited by adding random delays between requests
-            val count = channelExtractionCount.get();
+            val count = channelExtractionCount.get()
             if (count >= CHANNEL_BATCH_SIZE) {
                 // add a delay after each BATCH_SIZE amount of fully-fetched channels
                 delay(CHANNEL_BATCH_DELAY.random())
@@ -55,7 +57,7 @@ class LocalSubscriptionsRepository : SubscriptionsRepository {
 
             chunk.parallelMap { channelId ->
                 try {
-                    val channelUrl = "$YOUTUBE_FRONTEND_URL/channel/${channelId}"
+                    val channelUrl = "$YOUTUBE_FRONTEND_URL/channel/$channelId"
                     val channelInfo = ChannelInfo.getInfo(channelUrl)
 
                     val avatarUrl = channelInfo.avatars.maxByOrNull { it.height }?.url
@@ -84,23 +86,23 @@ class LocalSubscriptionsRepository : SubscriptionsRepository {
                 url = it.channelId,
                 name = it.name.orEmpty(),
                 avatar = it.avatar,
-                verified = it.verified
+                verified = it.verified,
             )
         }
     }
 
-    override suspend fun getSubscriptionChannelIds(): List<String> {
-        return Database.localSubscriptionDao().getAll().map { it.channelId }
-    }
+    override suspend fun getSubscriptionChannelIds(): List<String> = Database.localSubscriptionDao().getAll().map { it.channelId }
 
     override suspend fun submitSubscriptionChannelInfosChanged(subscriptions: List<Subscription>) {
-        Database.localSubscriptionDao().updateAll(subscriptions.map {
-            LocalSubscription(
-                it.url,
-                it.name,
-                it.avatar,
-                it.verified
-            )
-        })
+        Database.localSubscriptionDao().updateAll(
+            subscriptions.map {
+                LocalSubscription(
+                    it.url,
+                    it.name,
+                    it.avatar,
+                    it.verified,
+                )
+            },
+        )
     }
 }

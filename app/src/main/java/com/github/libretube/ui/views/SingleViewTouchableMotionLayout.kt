@@ -12,9 +12,10 @@ import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.constraintlayout.motion.widget.TransitionAdapter
 import com.github.libretube.R
 
-class SingleViewTouchableMotionLayout(context: Context, attributeSet: AttributeSet? = null) :
-    MotionLayout(context, attributeSet) {
-
+class SingleViewTouchableMotionLayout(
+    context: Context,
+    attributeSet: AttributeSet? = null,
+) : MotionLayout(context, attributeSet) {
     private val viewToDetectTouch by lazy {
         findViewById<View>(R.id.main_container) ?: findViewById(R.id.audio_player_container)
     }
@@ -34,17 +35,29 @@ class SingleViewTouchableMotionLayout(context: Context, attributeSet: AttributeS
     private var shouldInterceptTouchEvent = false
 
     init {
-        super.setTransitionListener(object : TransitionAdapter() {
-            override fun onTransitionChange(p0: MotionLayout?, p1: Int, p2: Int, p3: Float) {
-                transitionListenerList.filterNotNull()
-                    .forEach { it.onTransitionChange(p0, p1, p2, p3) }
-            }
+        super.setTransitionListener(
+            object : TransitionAdapter() {
+                override fun onTransitionChange(
+                    p0: MotionLayout?,
+                    p1: Int,
+                    p2: Int,
+                    p3: Float,
+                ) {
+                    transitionListenerList
+                        .filterNotNull()
+                        .forEach { it.onTransitionChange(p0, p1, p2, p3) }
+                }
 
-            override fun onTransitionCompleted(p0: MotionLayout?, p1: Int) {
-                transitionListenerList.filterNotNull()
-                    .forEach { it.onTransitionCompleted(p0, p1) }
-            }
-        })
+                override fun onTransitionCompleted(
+                    p0: MotionLayout?,
+                    p1: Int,
+                ) {
+                    transitionListenerList
+                        .filterNotNull()
+                        .forEach { it.onTransitionCompleted(p0, p1) }
+                }
+            },
+        )
     }
 
     override fun setTransitionListener(listener: TransitionListener?) {
@@ -66,7 +79,7 @@ class SingleViewTouchableMotionLayout(context: Context, attributeSet: AttributeS
             e1: MotionEvent?,
             e2: MotionEvent,
             distanceX: Float,
-            distanceY: Float
+            distanceY: Float,
         ): Boolean {
             if (isStrictlyDownSwipe && distanceY > 0) {
                 isStrictlyDownSwipe = false
@@ -85,9 +98,10 @@ class SingleViewTouchableMotionLayout(context: Context, attributeSet: AttributeS
      * Add a listener when the view is swiped down while the current transition's state is in
      * end state (minimized state)
      */
-    fun addSwipeDownListener(listener: () -> Unit) = apply {
-        swipeDownListener.add(listener)
-    }
+    fun addSwipeDownListener(listener: () -> Unit) =
+        apply {
+            swipeDownListener.add(listener)
+        }
 
     override fun onInterceptTouchEvent(event: MotionEvent?): Boolean {
         when (event?.action) {
@@ -116,13 +130,15 @@ class SingleViewTouchableMotionLayout(context: Context, attributeSet: AttributeS
 
                         // inject down MotionEvent from current position to properly trigger
                         // motion scene's swipe action
-                        MotionEvent.obtain(event).apply {
-                            action = MotionEvent.ACTION_DOWN
-                            setLocation(event.x, event.y)
-                        }.also { downEvent ->
-                            onTouchEvent(downEvent)
-                            downEvent.recycle()
-                        }
+                        MotionEvent
+                            .obtain(event)
+                            .apply {
+                                action = MotionEvent.ACTION_DOWN
+                                setLocation(event.x, event.y)
+                            }.also { downEvent ->
+                                onTouchEvent(downEvent)
+                                downEvent.recycle()
+                            }
                     }
                 }
             }
@@ -130,6 +146,7 @@ class SingleViewTouchableMotionLayout(context: Context, attributeSet: AttributeS
 
         return shouldInterceptTouchEvent
     }
+
     @SuppressLint("ClickableViewAccessibility")
     override fun onTouchEvent(event: MotionEvent): Boolean {
         if (isTouchDownInsideHitArea && startedMinimized) {

@@ -19,7 +19,10 @@ class SleepTimerSheet : ExpandedBottomSheet(R.layout.sleep_timer_sheet) {
     private val binding get() = _binding!!
     private val handler = Handler(Looper.getMainLooper())
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?,
+    ) {
         _binding = SleepTimerSheetBinding.bind(view)
         super.onViewCreated(view, savedInstanceState)
 
@@ -27,7 +30,10 @@ class SleepTimerSheet : ExpandedBottomSheet(R.layout.sleep_timer_sheet) {
         updateTimeLeftText()
 
         binding.startSleepTimer.setOnClickListener {
-            val time = binding.timeInput.text.toString().toLongOrNull()
+            val time =
+                binding.timeInput.text
+                    .toString()
+                    .toLongOrNull()
 
             if (time == null) {
                 Toast.makeText(context, R.string.invalid_input, Toast.LENGTH_SHORT).show()
@@ -51,17 +57,19 @@ class SleepTimerSheet : ExpandedBottomSheet(R.layout.sleep_timer_sheet) {
         val chipDurations = listOf(10, 20, 30, 45, 60)
 
         chipDurations.forEach { duration ->
-            val chip = layoutInflater.inflate(
-                R.layout.assist_chip,
-                binding.quickSelectChips,
-                false
-            ) as Chip
+            val chip =
+                layoutInflater.inflate(
+                    R.layout.assist_chip,
+                    binding.quickSelectChips,
+                    false,
+                ) as Chip
             chip.apply {
-                text = resources.getQuantityString(
-                    R.plurals.sleep_timer_chip_minutes,
-                    duration,
-                    duration
-                )
+                text =
+                    resources.getQuantityString(
+                        R.plurals.sleep_timer_chip_minutes,
+                        duration,
+                        duration,
+                    )
                 setOnClickListener {
                     binding.timeInput.apply {
                         setText(duration.toString())

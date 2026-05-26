@@ -41,7 +41,10 @@ class SearchResultFragment : DynamicLayoutManagerFragment(R.layout.fragment_sear
         _binding?.searchRecycler?.layoutManager = GridLayoutManager(context, gridItems.ceilHalf())
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?,
+    ) {
         _binding = FragmentSearchResultBinding.bind(view)
         super.onViewCreated(view, savedInstanceState)
 
@@ -65,20 +68,29 @@ class SearchResultFragment : DynamicLayoutManagerFragment(R.layout.fragment_sear
                     R.id.chip_music_playlists -> "music_playlists"
                     R.id.chip_music_artists -> "music_artists"
                     else -> throw IllegalArgumentException("Filter out of range")
-                }
+                },
             )
         }
 
-        val timeStamp = args.query.toHttpUrlOrNull()?.queryParameter("t")?.toTimeInSeconds()
+        val timeStamp =
+            args.query
+                .toHttpUrlOrNull()
+                ?.queryParameter("t")
+                ?.toTimeInSeconds()
         val searchResultsAdapter = SearchResultsAdapter(timeStamp ?: 0)
         binding.searchRecycler.adapter = searchResultsAdapter
 
-        binding.searchRecycler.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
-                super.onScrollStateChanged(recyclerView, newState)
-                recyclerViewState = recyclerView.layoutManager?.onSaveInstanceState()
-            }
-        })
+        binding.searchRecycler.addOnScrollListener(
+            object : RecyclerView.OnScrollListener() {
+                override fun onScrollStateChanged(
+                    recyclerView: RecyclerView,
+                    newState: Int,
+                ) {
+                    super.onScrollStateChanged(recyclerView, newState)
+                    recyclerViewState = recyclerView.layoutManager?.onSaveInstanceState()
+                }
+            },
+        )
 
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
@@ -105,19 +117,20 @@ class SearchResultFragment : DynamicLayoutManagerFragment(R.layout.fragment_sear
 
             val (suggestion, corrected) = suggestion
             binding.searchSuggestion.text = suggestion
-            binding.searchSuggestionLabel.text = if (corrected) {
-                getString(R.string.showing_results_for)
-            } else {
-                binding.searchSuggestionContainer.setOnClickListener {
-                    mainActivity.setQuery(suggestion, true)
+            binding.searchSuggestionLabel.text =
+                if (corrected) {
+                    getString(R.string.showing_results_for)
+                } else {
+                    binding.searchSuggestionContainer.setOnClickListener {
+                        mainActivity.setQuery(suggestion, true)
+                    }
+                    getString(R.string.did_you_mean)
                 }
-                getString(R.string.did_you_mean)
-            }
         }
 
         setOnBackPressed {
             findNavController().popBackStack(R.id.searchFragment, true) ||
-                    findNavController().popBackStack()
+                findNavController().popBackStack()
         }
     }
 

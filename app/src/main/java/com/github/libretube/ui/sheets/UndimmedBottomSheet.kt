@@ -14,23 +14,30 @@ import androidx.core.view.updateLayoutParams
 /**
  * A bottom sheet that allows touches on its top/background
  */
-abstract class UndimmedBottomSheet(@LayoutRes layoutResId: Int) : ExpandedBottomSheet(layoutResId) {
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+abstract class UndimmedBottomSheet(
+    @LayoutRes layoutResId: Int,
+) : ExpandedBottomSheet(layoutResId) {
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?,
+    ) {
         super.onViewCreated(view, savedInstanceState)
 
-        getDragHandle().viewTreeObserver.addOnGlobalLayoutListener(object :
-            ViewTreeObserver.OnGlobalLayoutListener {
-            override fun onGlobalLayout() {
-                getDragHandle().viewTreeObserver.removeOnGlobalLayoutListener(this)
+        getDragHandle().viewTreeObserver.addOnGlobalLayoutListener(
+            object :
+                ViewTreeObserver.OnGlobalLayoutListener {
+                override fun onGlobalLayout() {
+                    getDragHandle().viewTreeObserver.removeOnGlobalLayoutListener(this)
 
-                if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
-                    // limit the recyclerview height to not cover the video
-                    getBottomSheet().updateLayoutParams {
-                        height = getSheetMaxHeightPx()
+                    if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
+                        // limit the recyclerview height to not cover the video
+                        getBottomSheet().updateLayoutParams {
+                            height = getSheetMaxHeightPx()
+                        }
                     }
                 }
-            }
-        })
+            },
+        )
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
@@ -71,6 +78,8 @@ abstract class UndimmedBottomSheet(@LayoutRes layoutResId: Int) : ExpandedBottom
     }
 
     abstract fun getSheetMaxHeightPx(): Int
+
     abstract fun getDragHandle(): View
+
     abstract fun getBottomSheet(): FrameLayout
 }

@@ -7,5 +7,5 @@ import kotlinx.serialization.Serializable
 data class FreetubeSubscriptions(
     @SerialName("_id") val id: String = "",
     val name: String = "",
-    val subscriptions: List<FreetubeSubscription> = emptyList()
+    val subscriptions: List<FreetubeSubscription> = emptyList(),
 )

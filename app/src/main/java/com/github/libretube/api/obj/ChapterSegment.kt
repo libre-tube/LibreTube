@@ -16,8 +16,8 @@ data class ChapterSegment(
     // Used only for video highlights
     @Transient
     @IgnoredOnParcel
-    var highlightDrawable: Drawable? = null
-): Parcelable {
+    var highlightDrawable: Drawable? = null,
+) : Parcelable {
     companion object {
         /**
          * Length to show for a highlight in seconds

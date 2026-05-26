@@ -7,5 +7,5 @@ import kotlinx.serialization.Serializable
 data class SubmitSegmentResponse(
     @SerialName("UUID") val uuid: String,
     val category: String,
-    val segment: List<Float>
+    val segment: List<Float>,
 )

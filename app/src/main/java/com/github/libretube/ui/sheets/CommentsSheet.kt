@@ -29,7 +29,10 @@ class CommentsSheet : ExpandablePlayerSheet(R.layout.comments_sheet) {
         }
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?,
+    ) {
         _binding = CommentsSheetBinding.bind(view)
         super.onViewCreated(view, savedInstanceState)
 
@@ -62,11 +65,10 @@ class CommentsSheet : ExpandablePlayerSheet(R.layout.comments_sheet) {
         dialog?.window?.apply {
             setFlags(
                 WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
-                WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
+                WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
             )
         }
     }
-
 
     override fun onDestroyView() {
         super.onDestroyView()
@@ -79,7 +81,10 @@ class CommentsSheet : ExpandablePlayerSheet(R.layout.comments_sheet) {
 
     override fun getBottomSheet() = binding.standardBottomSheet
 
-    fun updateFragmentInfo(showBackButton: Boolean, title: String) {
+    fun updateFragmentInfo(
+        showBackButton: Boolean,
+        title: String,
+    ) {
         binding.btnBack.isVisible = showBackButton
         binding.commentsTitle.text = title
         backPressedCallback?.isEnabled = showBackButton

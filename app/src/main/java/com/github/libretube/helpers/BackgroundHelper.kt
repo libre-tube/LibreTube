@@ -7,7 +7,6 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import androidx.annotation.OptIn
-import androidx.core.os.bundleOf
 import androidx.core.os.postDelayed
 import androidx.fragment.app.commit
 import androidx.media3.common.util.Log
@@ -52,11 +51,15 @@ object BackgroundHelper {
         val noInternet = ContextHelper.tryUnwrapActivity<NoInternetActivity>(context) != null
         val service = if (playerData.isOffline) OfflinePlayerService::class.java else OnlinePlayerService::class.java
         stopBackgroundPlay(context)
-        startMediaService(context, service, bundleOf(
-            IntentData.playerData to playerData,
-            IntentData.noInternet to noInternet,
-            IntentData.audioOnly to true
-        ))
+        startMediaService(
+            context,
+            service,
+            Bundle().apply {
+                putParcelable(IntentData.playerData, playerData)
+                putBoolean(IntentData.noInternet, noInternet)
+                putBoolean(IntentData.audioOnly, true)
+            },
+        )
     }
 
     /**
@@ -65,7 +68,7 @@ object BackgroundHelper {
     fun stopBackgroundPlay(context: Context) {
         arrayOf(
             OnlinePlayerService::class.java,
-            OfflinePlayerService::class.java
+            OfflinePlayerService::class.java,
         ).forEach {
             val intent = Intent(context, it)
             context.stopService(intent)
@@ -77,7 +80,7 @@ object BackgroundHelper {
         context: Context,
         serviceClass: Class<*>,
         arguments: Bundle = Bundle.EMPTY,
-        onController: (MediaController) -> Unit = {}
+        onController: (MediaController) -> Unit = {},
     ) {
         val context = context.applicationContext
         val sessionToken =
@@ -85,40 +88,45 @@ object BackgroundHelper {
 
         val controllerFuture =
             MediaController.Builder(context, sessionToken).buildAsync()
-        Futures.addCallback(controllerFuture, object : FutureCallback<MediaController> {
-            override fun onSuccess(result: MediaController?) {
-                val controller = controllerFuture.get()
-                if (!arguments.isEmpty) controller.sendCustomCommand(
-                    AbstractPlayerService.startServiceCommand,
-                    arguments
-                )
-                onController(controller)
-            }
-
-            // HACK:
-            // if failing to connect to the media session, that's probably because
-            // two media services were started at the same time
-            // hence, we retry it here
-            // see also: https://github.com/androidx/media/issues/1096
-            override fun onFailure(t: Throwable) {
-                Log.e(TAG(), t.toString())
-                handler.postDelayed(200) {
-                    startMediaService(context, serviceClass, arguments, onController)
+        Futures.addCallback(
+            controllerFuture,
+            object : FutureCallback<MediaController> {
+                override fun onSuccess(result: MediaController?) {
+                    val controller = controllerFuture.get()
+                    if (!arguments.isEmpty) {
+                        controller.sendCustomCommand(
+                            AbstractPlayerService.startServiceCommand,
+                            arguments,
+                        )
+                    }
+                    onController(controller)
                 }
-            }
-        }, MoreExecutors.directExecutor())
+
+                // HACK:
+                // if failing to connect to the media session, that's probably because
+                // two media services were started at the same time
+                // hence, we retry it here
+                // see also: https://github.com/androidx/media/issues/1096
+                override fun onFailure(t: Throwable) {
+                    Log.e(TAG(), t.toString())
+                    handler.postDelayed(200) {
+                        startMediaService(context, serviceClass, arguments, onController)
+                    }
+                }
+            },
+            MoreExecutors.directExecutor(),
+        )
     }
 
     /**
      * Get the service class of the currently active player based on the playing queue mode
      */
-    fun getCurrentPlayerServiceClass(): Class<*> {
-        return if (PlayingQueue.queueMode == PlayingQueueMode.OFFLINE) {
+    fun getCurrentPlayerServiceClass(): Class<*> =
+        if (PlayingQueue.queueMode == PlayingQueueMode.OFFLINE) {
             OfflinePlayerService::class.java
         } else {
             OnlinePlayerService::class.java
         }
-    }
 
     /**
      * Start a media service for the currently active player (online or offline)
@@ -127,11 +135,10 @@ object BackgroundHelper {
     fun startCurrentMediaService(
         context: Context,
         arguments: Bundle = Bundle.EMPTY,
-        onController: (MediaController) -> Unit = {}
+        onController: (MediaController) -> Unit = {},
     ) {
         startMediaService(context, getCurrentPlayerServiceClass(), arguments, onController)
     }
-
 
     /**
      * Set the volume of the currently active player
@@ -139,7 +146,10 @@ object BackgroundHelper {
      * @param context the current context
      * @param volume the volume level to set (0.0 to 1.0)
      */
-    fun setVolume(context: Context, volume: Float) {
+    fun setVolume(
+        context: Context,
+        volume: Float,
+    ) {
         startCurrentMediaService(context, Bundle.EMPTY) { controller ->
             try {
                 controller.volume = volume.coerceIn(0f, 1f)

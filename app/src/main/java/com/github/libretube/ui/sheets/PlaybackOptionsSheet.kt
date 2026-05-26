@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
-import androidx.core.os.bundleOf
 import androidx.core.view.isGone
 import androidx.media3.common.PlaybackParameters
 import androidx.media3.session.MediaController
@@ -23,21 +22,25 @@ import kotlin.math.log
 import kotlin.math.pow
 
 class PlaybackOptionsSheet(
-    private val player: MediaController
+    private val player: MediaController,
 ) : ExpandedBottomSheet(R.layout.playback_bottom_sheet) {
     private var _binding: PlaybackBottomSheetBinding? = null
     private val binding get() = _binding!!
 
     @androidx.annotation.OptIn(androidx.media3.common.util.UnstableApi::class)
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?,
+    ) {
         _binding = PlaybackBottomSheetBinding.bind(view)
 
         binding.speedShortcuts.layoutManager =
             LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
 
-        binding.speedShortcuts.adapter = SliderLabelsAdapter(SUGGESTED_SPEEDS) {
-            binding.speed.value = it
-        }
+        binding.speedShortcuts.adapter =
+            SliderLabelsAdapter(SUGGESTED_SPEEDS) {
+                binding.speed.value = it
+            }
 
         binding.speed.value = player.playbackParameters.speed
         binding.pitch.value = playbackPitchToSemitone(player.playbackParameters.pitch)
@@ -53,17 +56,22 @@ class PlaybackOptionsSheet(
 
             if (editText.text.isEmpty()) {
                 // reset to previous value
-                binding.semitoneEditText.setText(binding.pitch.value.round(2).toString())
+                binding.semitoneEditText.setText(
+                    binding.pitch.value
+                        .round(2)
+                        .toString(),
+                )
                 clearEditTextFocusAndHideKeyboard()
                 return@setOnEditorActionListener false
             }
 
             val enteredSemitoneValue = editText.text.toString().toFloat()
             if (enteredSemitoneValue.absoluteValue > SEMITONES_IN_ONE_OCTAVE) {
-                editText.error = context?.getString(
-                    R.string.playback_pitch_semitone_error_input,
-                    SEMITONES_IN_ONE_OCTAVE
-                )
+                editText.error =
+                    context?.getString(
+                        R.string.playback_pitch_semitone_error_input,
+                        SEMITONES_IN_ONE_OCTAVE,
+                    )
 
                 // return true here to prevent the keyboard from closing when
                 // the user entered a wrong value
@@ -111,7 +119,7 @@ class PlaybackOptionsSheet(
         binding.skipSilence.setOnCheckedChangeListener { _, isChecked ->
             player.sendCustomCommand(
                 AbstractPlayerService.runPlayerActionCommand,
-                bundleOf(PlayerCommand.SKIP_SILENCE.name to isChecked)
+                Bundle().apply { putBoolean(PlayerCommand.SKIP_SILENCE.name, isChecked) },
             )
             PreferenceHelper.putBoolean(PreferenceKeys.SKIP_SILENCE, isChecked)
         }
@@ -123,10 +131,11 @@ class PlaybackOptionsSheet(
     }
 
     private fun onChange() {
-        player.playbackParameters = PlaybackParameters(
-            binding.speed.value.round(2),
-            semitoneToPlaybackPitch(binding.pitch.value)
-        )
+        player.playbackParameters =
+            PlaybackParameters(
+                binding.speed.value.round(2),
+                semitoneToPlaybackPitch(binding.pitch.value),
+            )
         binding.semitoneEditText.setText((binding.pitch.value).round(2).toString())
         binding.pitchResetButton.isGone = binding.pitch.value == 0f
 
@@ -156,14 +165,10 @@ class PlaybackOptionsSheet(
     // desiredPlaybackPitch = defaultPlaybackPitch * (ratio^n)
     //
     // And the defaultPlaybackPitch value is 1.0f, so we can omit that
-    private fun semitoneToPlaybackPitch(semitone: Float): Float {
-        return SEMITONE_RATIO.pow(semitone).toFloat()
-    }
+    private fun semitoneToPlaybackPitch(semitone: Float): Float = SEMITONE_RATIO.pow(semitone)
 
     // Get the exponent(or in this case semitone) value from a known base (the semitone's ratio)
-    private fun playbackPitchToSemitone(playbackPitch: Float): Float {
-        return log(playbackPitch, SEMITONE_RATIO)
-    }
+    private fun playbackPitchToSemitone(playbackPitch: Float): Float = log(playbackPitch, SEMITONE_RATIO)
 
     private fun incrementDecrementSemitoneBy(value: Float) {
         var currentSemitone = binding.pitch.value

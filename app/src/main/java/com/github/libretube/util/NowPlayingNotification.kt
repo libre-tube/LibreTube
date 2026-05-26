@@ -20,19 +20,20 @@ import com.google.common.collect.ImmutableList
 class NowPlayingNotification(
     private val context: Context,
     var notificationIntent: Intent = Intent(),
-): MediaNotification.Provider {
-    private val nProvider = DefaultMediaNotificationProvider.Builder(context)
-        .setNotificationId(NotificationId.PLAYER_PLAYBACK.id)
-        .setChannelId(PLAYER_CHANNEL_NAME)
-        .setChannelName(R.string.player_channel_name)
-        .build()
+) : MediaNotification.Provider {
+    private val nProvider =
+        DefaultMediaNotificationProvider
+            .Builder(context)
+            .setNotificationId(NotificationId.PLAYER_PLAYBACK.id)
+            .setChannelId(PLAYER_CHANNEL_NAME)
+            .setChannelName(R.string.player_channel_name)
+            .build()
 
     private fun createCurrentContentIntent(): PendingIntent? {
         // starts a new MainActivity Intent when the player notification is clicked
         // it doesn't start a completely new MainActivity because the MainActivity's launchMode
         // is set to "singleTop" in the AndroidManifest (important!!!)
         // that's the only way to launch back into the previous activity (e.g. the player view)
-
 
         return PendingIntentCompat
             .getActivity(context, 0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT, false)
@@ -42,9 +43,10 @@ class NowPlayingNotification(
      * Forward the action to the responsible notification owner (e.g. PlayerFragment)
      */
     private fun handlePlayerAction(action: PlayerEvent) {
-        val intent = Intent(PlayerHelper.getIntentActionName(context))
-            .setPackage(context.packageName)
-            .putExtra(PlayerHelper.CONTROL_TYPE, action)
+        val intent =
+            Intent(PlayerHelper.getIntentActionName(context))
+                .setPackage(context.packageName)
+                .putExtra(PlayerHelper.CONTROL_TYPE, action)
         context.sendBroadcast(intent)
     }
 
@@ -52,7 +54,7 @@ class NowPlayingNotification(
         mediaSession: MediaSession,
         customLayout: ImmutableList<CommandButton>,
         actionFactory: MediaNotification.ActionFactory,
-        onNotificationChangedCallback: MediaNotification.Provider.Callback
+        onNotificationChangedCallback: MediaNotification.Provider.Callback,
     ): MediaNotification {
         createCurrentContentIntent()?.let { mediaSession.setSessionActivity(it) }
         nProvider.setSmallIcon(R.drawable.ic_launcher_lockscreen)
@@ -62,7 +64,7 @@ class NowPlayingNotification(
     override fun handleCustomCommand(
         session: MediaSession,
         action: String,
-        extras: Bundle
+        extras: Bundle,
     ): Boolean {
         runCatching { handlePlayerAction(PlayerEvent.valueOf(action)) }
         return true

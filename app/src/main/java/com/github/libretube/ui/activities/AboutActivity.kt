@@ -48,7 +48,10 @@ class AboutActivity : BaseActivity() {
         }
     }
 
-    private fun setupCard(card: MaterialCardView, link: String) {
+    private fun setupCard(
+        card: MaterialCardView,
+        link: String,
+    ) {
         card.setOnClickListener {
             IntentHelper.openLinkFromHref(this, supportFragmentManager, link)
         }
@@ -62,23 +65,24 @@ class AboutActivity : BaseActivity() {
         // copy the link to the clipboard
         ClipboardHelper.save(this, text = href)
         // show the snackBar with open action
-        Snackbar.make(
-            binding.root,
-            R.string.copied_to_clipboard,
-            Snackbar.LENGTH_LONG
-        )
-            .setAction(R.string.open_copied) {
+        Snackbar
+            .make(
+                binding.root,
+                R.string.copied_to_clipboard,
+                Snackbar.LENGTH_LONG,
+            ).setAction(R.string.open_copied) {
                 IntentHelper.openLinkFromHref(this, supportFragmentManager, href)
-            }
-            .setAnimationMode(Snackbar.ANIMATION_MODE_FADE)
+            }.setAnimationMode(Snackbar.ANIMATION_MODE_FADE)
             .show()
     }
 
     private fun showLicense() {
-        val licenseHtml = assets.open("gpl3.html")
-            .bufferedReader()
-            .use { it.readText() }
-            .parseAsHtml(HtmlCompat.FROM_HTML_SEPARATOR_LINE_BREAK_PARAGRAPH)
+        val licenseHtml =
+            assets
+                .open("gpl3.html")
+                .bufferedReader()
+                .use { it.readText() }
+                .parseAsHtml(HtmlCompat.FROM_HTML_SEPARATOR_LINE_BREAK_PARAGRAPH)
 
         MaterialAlertDialogBuilder(this)
             .setPositiveButton(getString(R.string.okay)) { _, _ -> }
@@ -90,7 +94,8 @@ class AboutActivity : BaseActivity() {
     private fun showDeviceInfo() {
         val metrics = Resources.getSystem().displayMetrics
 
-        val text = "Manufacturer: ${Build.MANUFACTURER}\n" +
+        val text =
+            "Manufacturer: ${Build.MANUFACTURER}\n" +
                 "Board: ${Build.BOARD}\n" +
                 "Arch: ${Build.SUPPORTED_ABIS[0]}\n" +
                 "Android SDK: ${Build.VERSION.SDK_INT}\n" +
@@ -103,8 +108,7 @@ class AboutActivity : BaseActivity() {
             .setMessage(text)
             .setNegativeButton(R.string.copy_tooltip) { _, _ ->
                 ClipboardHelper.save(this@AboutActivity, text = text)
-            }
-            .setPositiveButton(R.string.okay, null)
+            }.setPositiveButton(R.string.okay, null)
             .show()
     }
 

@@ -1,7 +1,6 @@
 package com.github.libretube.ui.sheets
 
 import android.os.Bundle
-import androidx.core.os.bundleOf
 import androidx.fragment.app.setFragmentResult
 import com.github.libretube.R
 import com.github.libretube.api.obj.StreamItem
@@ -28,11 +27,12 @@ class DownloadOptionsBottomSheet : BaseBottomSheet() {
         val downloadTab = arguments?.serializable<DownloadTab>(IntentData.downloadTab)!!
         val playlistId = arguments?.getString(IntentData.playlistId)
 
-        val options = mutableListOf(
-            R.string.playOnBackground,
-            R.string.share,
-            R.string.delete
-        )
+        val options =
+            mutableListOf(
+                R.string.playOnBackground,
+                R.string.share,
+                R.string.delete,
+            )
 
         // can't navigate to video while in offline activity
         if (ContextHelper.tryUnwrapActivity<NoInternetActivity>(requireContext()) == null) {
@@ -46,12 +46,13 @@ class DownloadOptionsBottomSheet : BaseBottomSheet() {
         }
 
         setSimpleItems(options.map { getString(it) }) { which ->
-            val playerData = PlayerData(
-                videoId,
-                playlistId = playlistId,
-                downloadTab = downloadTab,
-                isOffline = true
-            )
+            val playerData =
+                PlayerData(
+                    videoId,
+                    playlistId = playlistId,
+                    downloadTab = downloadTab,
+                    isOffline = true,
+                )
 
             when (options[which]) {
                 R.string.playOnBackground -> {
@@ -64,18 +65,19 @@ class DownloadOptionsBottomSheet : BaseBottomSheet() {
 
                 R.string.share -> {
                     val shareData = ShareData(currentVideo = videoId)
-                    val bundle = bundleOf(
-                        IntentData.id to videoId,
-                        IntentData.shareObjectType to ShareObjectType.VIDEO,
-                        IntentData.shareData to shareData
-                    )
+                    val bundle =
+                        Bundle().apply {
+                            putString(IntentData.id, videoId)
+                            putSerializable(IntentData.shareObjectType, ShareObjectType.VIDEO)
+                            putParcelable(IntentData.shareData, shareData)
+                        }
                     val newShareDialog = ShareDialog()
                     newShareDialog.arguments = bundle
                     newShareDialog.show(parentFragmentManager, null)
                 }
 
                 R.string.delete -> {
-                    setFragmentResult(DELETE_DOWNLOAD_REQUEST_KEY, bundleOf())
+                    setFragmentResult(DELETE_DOWNLOAD_REQUEST_KEY, Bundle())
                     dialog?.dismiss()
                 }
 

@@ -8,7 +8,6 @@ import androidx.core.text.method.LinkMovementMethodCompat
 import androidx.core.text.parseAsHtml
 import androidx.core.view.isVisible
 import androidx.core.view.updateLayoutParams
-import androidx.core.view.updatePadding
 import androidx.paging.PagingDataAdapter
 import com.github.libretube.R
 import com.github.libretube.api.obj.Comment
@@ -30,38 +29,46 @@ class CommentsPagingAdapter(
     private val navigateToChannel: (Comment) -> Unit,
     private val navigateToReplies: ((Comment, String?) -> Unit)? = null,
 ) : PagingDataAdapter<Comment, CommentViewHolder>(
-    DiffUtilItemCallback(
-        areItemsTheSame = { oldItem, newItem -> oldItem.commentId == newItem.commentId },
-        areContentsTheSame = { _, _ -> true },
-    )
-) {
-
+        DiffUtilItemCallback(
+            areItemsTheSame = { oldItem, newItem -> oldItem.commentId == newItem.commentId },
+            areContentsTheSame = { _, _ -> true },
+        ),
+    ) {
     private var clickEventConsumedByLinkHandler = false
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CommentViewHolder {
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int,
+    ): CommentViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         val binding = CommentsRowBinding.inflate(layoutInflater, parent, false)
         return CommentViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: CommentViewHolder, position: Int) {
+    override fun onBindViewHolder(
+        holder: CommentViewHolder,
+        position: Int,
+    ) {
         holder.binding.apply {
             val comment = getItem(position)!!
             commentAuthor.text = comment.author
             commentAuthor.setBackgroundResource(
-                if (comment.channelOwner) R.drawable.comment_channel_owner_bg else 0
+                if (comment.channelOwner) R.drawable.comment_channel_owner_bg else 0,
             )
             commentInfos.text = comment.commentedTimeMillis?.let {
                 TextUtils.formatRelativeDate(it)
             } ?: comment.commentedTime
 
             commentText.movementMethod = LinkMovementMethodCompat.getInstance()
-            val linkHandler = LinkHandler {
-                clickEventConsumedByLinkHandler = true
-                handleLink.invoke(it)
-            }
-            commentText.text = comment.commentText?.replace("</a>", "</a> ")
-                ?.parseAsHtml(tagHandler = HtmlParser(linkHandler))
+            val linkHandler =
+                LinkHandler {
+                    clickEventConsumedByLinkHandler = true
+                    handleLink.invoke(it)
+                }
+            commentText.text =
+                comment.commentText
+                    ?.replace("</a>", "</a> ")
+                    ?.parseAsHtml(tagHandler = HtmlParser(linkHandler))
 
             ImageHelper.loadImage(comment.thumbnail, commentorImage, true)
             likesTextView.text = comment.likeCount.formatShort()
@@ -90,24 +97,26 @@ class CommentsPagingAdapter(
                     root.setBackgroundColor(
                         ThemeHelper.getThemeColor(
                             root.context,
-                            com.google.android.material.R.attr.colorSurface
-                        )
+                            com.google.android.material.R.attr.colorSurface,
+                        ),
                     )
                 } else {
-                    root.background = AppCompatResources.getDrawable(
-                        root.context,
-                        R.drawable.rounded_ripple
-                    )
+                    root.background =
+                        AppCompatResources.getDrawable(
+                            root.context,
+                            R.drawable.rounded_ripple,
+                        )
                     commentorImage.updateLayoutParams<ViewGroup.MarginLayoutParams> { leftMargin = 58 }
                 }
             } else {
-                val onClickListener = View.OnClickListener {
-                    if (clickEventConsumedByLinkHandler) {
-                        clickEventConsumedByLinkHandler = false
-                        return@OnClickListener
+                val onClickListener =
+                    View.OnClickListener {
+                        if (clickEventConsumedByLinkHandler) {
+                            clickEventConsumedByLinkHandler = false
+                            return@OnClickListener
+                        }
+                        navigateToReplies?.invoke(comment, channelAvatar)
                     }
-                    navigateToReplies?.invoke(comment, channelAvatar)
-                }
                 root.setOnClickListener(onClickListener)
                 commentText.setOnClickListener(onClickListener)
             }

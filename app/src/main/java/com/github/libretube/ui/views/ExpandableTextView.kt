@@ -8,9 +8,10 @@ import androidx.appcompat.widget.AppCompatTextView
 import com.github.libretube.R
 import com.github.libretube.helpers.ClipboardHelper
 
-class ExpandableTextView(context: Context, attributeSet: AttributeSet? = null) :
-    AppCompatTextView(context, attributeSet) {
-
+class ExpandableTextView(
+    context: Context,
+    attributeSet: AttributeSet? = null,
+) : AppCompatTextView(context, attributeSet) {
     init {
         maxLines = DEFAULT_MAX_LINES
         ellipsize = TextUtils.TruncateAt.END

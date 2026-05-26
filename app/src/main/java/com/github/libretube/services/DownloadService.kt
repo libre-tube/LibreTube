@@ -99,7 +99,8 @@ class DownloadService : LifecycleService() {
     val downloadFlow: SharedFlow<Pair<Int, DownloadStatus>> = _downloadFlow
 
     private val httpClient: OkHttpClient by lazy {
-        OkHttpClient.Builder()
+        OkHttpClient
+            .Builder()
             .connectTimeout(Duration.ofMillis(DownloadHelper.DEFAULT_TIMEOUT.toLong()))
             .readTimeout(Duration.ofMillis(DownloadHelper.DEFAULT_TIMEOUT.toLong()))
             .retryOnConnectionFailure(true)
@@ -118,22 +119,28 @@ class DownloadService : LifecycleService() {
      */
     fun registerNetworkChangedCallback() {
         val connectivityManager = getSystemService<ConnectivityManager>()
-        connectivityManager?.registerDefaultNetworkCallback(object :
-            ConnectivityManager.NetworkCallback() {
-            override fun onAvailable(network: Network) {
-                super.onAvailable(network)
+        connectivityManager?.registerDefaultNetworkCallback(
+            object :
+                ConnectivityManager.NetworkCallback() {
+                override fun onAvailable(network: Network) {
+                    super.onAvailable(network)
 
-                // pause all downloads when switching to an unmetered connection
-                if (NetworkHelper.isNetworkMetered(this@DownloadService)) {
-                    for (download in downloadQueue.keyIterator()) {
-                        pause(download)
+                    // pause all downloads when switching to an unmetered connection
+                    if (NetworkHelper.isNetworkMetered(this@DownloadService)) {
+                        for (download in downloadQueue.keyIterator()) {
+                            pause(download)
+                        }
                     }
                 }
-            }
-        })
+            },
+        )
     }
 
-    override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
+    override fun onStartCommand(
+        intent: Intent?,
+        flags: Int,
+        startId: Int,
+    ): Int {
         super.onStartCommand(intent, flags, startId)
         val downloadId = intent?.getIntExtra("id", -1)
         when (intent?.action) {
@@ -144,20 +151,22 @@ class DownloadService : LifecycleService() {
 
         registerNetworkChangedCallback()
 
-        val downloadData = intent?.parcelableExtra<DownloadData>(IntentData.downloadData)
-            ?: return START_NOT_STICKY
+        val downloadData =
+            intent?.parcelableExtra<DownloadData>(IntentData.downloadData)
+                ?: return START_NOT_STICKY
         val videoId = downloadData.videoId
 
         lifecycleScope.launch(coroutineContext) {
-            val streams = try {
-                withContext(Dispatchers.IO) {
-                    MediaServiceRepository.instance.getStreams(videoId)
+            val streams =
+                try {
+                    withContext(Dispatchers.IO) {
+                        MediaServiceRepository.instance.getStreams(videoId)
+                    }
+                } catch (e: Exception) {
+                    Log.e(TAG(), e.stackTraceToString())
+                    toastFromMainDispatcher(e.localizedMessage.orEmpty())
+                    return@launch
                 }
-            } catch (e: Exception) {
-                Log.e(TAG(), e.stackTraceToString())
-                toastFromMainDispatcher(e.localizedMessage.orEmpty())
-                return@launch
-            }
 
             storeVideoMetadata(videoId, streams)
 
@@ -170,31 +179,36 @@ class DownloadService : LifecycleService() {
         return START_NOT_STICKY
     }
 
-    private suspend fun storeVideoMetadata(videoId: String, streams: Streams) {
+    private suspend fun storeVideoMetadata(
+        videoId: String,
+        streams: Streams,
+    ) {
         val thumbnailTargetPath = getDownloadPath(DownloadHelper.THUMBNAIL_DIR, videoId)
 
-        val download = Download(
-            videoId,
-            streams.title,
-            streams.description,
-            streams.uploader,
-            streams.duration,
-            streams.uploadTimestamp?.toLocalDate(),
-            thumbnailTargetPath,
-            streams.uploaderUrl,
-            streams.views,
-            streams.likes,
-            streams.dislikes,
-        )
+        val download =
+            Download(
+                videoId,
+                streams.title,
+                streams.description,
+                streams.uploader,
+                streams.duration,
+                streams.uploadTimestamp?.toLocalDate(),
+                thumbnailTargetPath,
+                streams.uploaderUrl,
+                streams.views,
+                streams.likes,
+                streams.dislikes,
+            )
         Database.downloadDao().insertDownload(download)
 
         for (chapter in streams.chapters) {
-            val downloadChapter = DownloadChapter(
-                videoId = videoId,
-                name = chapter.title,
-                start = chapter.start,
-                thumbnailUrl = chapter.image
-            )
+            val downloadChapter =
+                DownloadChapter(
+                    videoId = videoId,
+                    name = chapter.title,
+                    start = chapter.start,
+                    thumbnailUrl = chapter.image,
+                )
             Database.downloadDao().insertDownloadChapter(downloadChapter)
         }
 
@@ -214,21 +228,22 @@ class DownloadService : LifecycleService() {
     private suspend fun downloadExtraVideoMetadata(
         videoId: String,
         thumbnailUrl: String,
-        thumbnailTargetPath: Path
+        thumbnailTargetPath: Path,
     ) {
         coroutineScope {
             launch {
-                val segmentData = try {
-                    val categories = PlayerHelper.getSponsorBlockCategories()
-                    MediaServiceRepository.instance.getSegments(videoId, categories.map { it.key })
-                } catch (e: Exception) {
-                    Log.e(TAG(), "failed to download SponsorBlock segments for $videoId")
-                    Log.e(TAG(), e.stackTraceToString())
-                    return@launch
-                }
+                val segmentData =
+                    try {
+                        val categories = PlayerHelper.getSponsorBlockCategories()
+                        MediaServiceRepository.instance.getSegments(videoId, categories.map { it.key })
+                    } catch (e: Exception) {
+                        Log.e(TAG(), "failed to download SponsorBlock segments for $videoId")
+                        Log.e(TAG(), e.stackTraceToString())
+                        return@launch
+                    }
 
                 Database.downloadDao().insertSponsorBlockSegments(
-                    segmentData.segments.map { it.toDownloadSegment(videoId) }
+                    segmentData.segments.map { it.toDownloadSegment(videoId) },
                 )
             }
 
@@ -237,7 +252,7 @@ class DownloadService : LifecycleService() {
                     ImageHelper.downloadImage(
                         this@DownloadService,
                         ProxyHelper.rewriteUrlUsingProxyPreference(thumbnailUrl),
-                        thumbnailTargetPath
+                        thumbnailTargetPath,
                     )
                 } catch (e: Exception) {
                     Log.e(TAG(), "failed to download image $thumbnailUrl")
@@ -311,7 +326,7 @@ class DownloadService : LifecycleService() {
         item: DownloadItem,
         url: URL,
         totalReadBefore: Long,
-        notificationBuilder: Builder
+        notificationBuilder: Builder,
     ): Long {
         val source =
             startConnection(item, url, totalReadBefore, item.downloadSize) ?: return totalReadBefore
@@ -325,18 +340,20 @@ class DownloadService : LifecycleService() {
         var lastRead = 0L
 
         // Check if downloading is still active and read next bytes.
-        while (downloadQueue[item.id] && sourceByte
+        while (downloadQueue[item.id] &&
+            sourceByte
                 .read(sink.buffer, DownloadHelper.DOWNLOAD_CHUNK_SIZE)
                 .also { lastRead = it } != -1L
         ) {
             sink.emit()
             totalRead += lastRead
             _downloadFlow.emit(
-                item.id to DownloadStatus.Progress(
-                    lastRead,
-                    totalRead,
-                    item.downloadSize
-                )
+                item.id to
+                    DownloadStatus.Progress(
+                        lastRead,
+                        totalRead,
+                        item.downloadSize,
+                    ),
             )
             if (item.downloadSize != -1L &&
                 System.currentTimeMillis() / 1000 > lastTime
@@ -360,21 +377,20 @@ class DownloadService : LifecycleService() {
     private fun updateNotification(
         notificationBuilder: Builder,
         item: DownloadItem,
-        totalRead: Int
+        totalRead: Int,
     ) {
         notificationBuilder
             .setContentText(
                 totalRead.formatAsFileSize() + " / " +
-                        item.downloadSize.formatAsFileSize()
-            )
-            .setProgress(
+                    item.downloadSize.formatAsFileSize(),
+            ).setProgress(
                 item.downloadSize.toInt(),
                 totalRead,
-                false
+                false,
             )
         notificationManager.notify(
             item.getNotificationId(),
-            notificationBuilder.build()
+            notificationBuilder.build(),
         )
     }
 
@@ -382,19 +398,24 @@ class DownloadService : LifecycleService() {
         item: DownloadItem,
         url: URL,
         alreadyRead: Long,
-        readLimit: Long?
+        readLimit: Long?,
     ): ResponseBody? {
-        val limit = readLimit?.let {
-            // generate a random byte distance to make it more difficult to fingerprint
-            val nextBytesToReadSize = (BYTES_PER_REQUEST_MIN..BYTES_PER_REQUEST_MAX).random()
-            min(readLimit, alreadyRead + nextBytesToReadSize)
-        }?.toString().orEmpty()
+        val limit =
+            readLimit
+                ?.let {
+                    // generate a random byte distance to make it more difficult to fingerprint
+                    val nextBytesToReadSize = (BYTES_PER_REQUEST_MIN..BYTES_PER_REQUEST_MAX).random()
+                    min(readLimit, alreadyRead + nextBytesToReadSize)
+                }?.toString()
+                .orEmpty()
 
-        val request = Request.Builder()
-            .url(url)
-            .method("GET", null)
-            .header("Range", "bytes=$alreadyRead-$limit")
-            .build()
+        val request =
+            Request
+                .Builder()
+                .url(url)
+                .method("GET", null)
+                .header("Range", "bytes=$alreadyRead-$limit")
+                .build()
 
         return withContext(Dispatchers.IO) {
             // Retry connecting to server for n times.
@@ -415,7 +436,10 @@ class DownloadService : LifecycleService() {
         }
     }
 
-    private suspend fun handleResponse(item: DownloadItem, response: Response): ResponseBody? {
+    private suspend fun handleResponse(
+        item: DownloadItem,
+        response: Response,
+    ): ResponseBody? {
         // If link is expired try to regenerate using available info.
         if (response.code == 403) {
             regenerateLink(item)
@@ -448,11 +472,12 @@ class DownloadService : LifecycleService() {
      * for the requested file.
      */
     private fun start(item: DownloadItem) {
-        item.path = when (item.type) {
-            FileType.AUDIO -> getDownloadPath(DownloadHelper.AUDIO_DIR, item.fileName)
-            FileType.VIDEO -> getDownloadPath(DownloadHelper.VIDEO_DIR, item.fileName)
-            FileType.SUBTITLE -> getDownloadPath(DownloadHelper.SUBTITLE_DIR, item.fileName)
-        }.apply { deleteIfExists() }.createFile()
+        item.path =
+            when (item.type) {
+                FileType.AUDIO -> getDownloadPath(DownloadHelper.AUDIO_DIR, item.fileName)
+                FileType.VIDEO -> getDownloadPath(DownloadHelper.VIDEO_DIR, item.fileName)
+                FileType.SUBTITLE -> getDownloadPath(DownloadHelper.SUBTITLE_DIR, item.fileName)
+            }.apply { deleteIfExists() }.createFile()
 
         lifecycleScope.launch(coroutineContext) {
             item.id = Database.downloadDao().insertDownloadItem(item).toInt()
@@ -502,15 +527,16 @@ class DownloadService : LifecycleService() {
     /**
      * Stop downloading job for given [id]. If no downloads are active, stop the service.
      */
-    private fun stop(id: Int) = lifecycleScope.launch(coroutineContext) {
-        downloadQueue[id] = false
-        _downloadFlow.emit(id to DownloadStatus.Stopped)
+    private fun stop(id: Int) =
+        lifecycleScope.launch(coroutineContext) {
+            downloadQueue[id] = false
+            _downloadFlow.emit(id to DownloadStatus.Stopped)
 
-        val item = Database.downloadDao().findDownloadItemById(id) ?: return@launch
-        notificationManager.cancel(item.getNotificationId())
-        Database.downloadDao().deleteDownloadItemById(id)
-        stopServiceIfDone()
-    }
+            val item = Database.downloadDao().findDownloadItemById(id) ?: return@launch
+            notificationManager.cancel(item.getNotificationId())
+            Database.downloadDao().deleteDownloadItemById(id)
+            stopServiceIfDone()
+        }
 
     /**
      * Stop service if no downloads are active
@@ -527,56 +553,62 @@ class DownloadService : LifecycleService() {
      * Regenerate stream url using available info format and quality.
      */
     private suspend fun regenerateLink(item: DownloadItem) {
-        val streams = runCatching {
-            MediaServiceRepository.instance.getStreams(item.videoId)
-        }.getOrNull() ?: return
-        val stream = when (item.type) {
-            FileType.AUDIO -> streams.audioStreams
-            FileType.VIDEO -> streams.videoStreams
-            else -> null
-        }
-        stream?.find {
-            it.format == item.format && it.quality == item.quality && it.audioTrackLocale == item.language
-        }?.let {
-            item.url = it.url
-        }
+        val streams =
+            runCatching {
+                MediaServiceRepository.instance.getStreams(item.videoId)
+            }.getOrNull() ?: return
+        val stream =
+            when (item.type) {
+                FileType.AUDIO -> streams.audioStreams
+                FileType.VIDEO -> streams.videoStreams
+                else -> null
+            }
+        stream
+            ?.find {
+                it.format == item.format && it.quality == item.quality && it.audioTrackLocale == item.language
+            }?.let {
+                item.url = it.url
+            }
         Database.downloadDao().updateDownloadItem(item)
     }
 
     /**
      * Check whether the file downloading or not.
      */
-    fun isDownloading(id: Int): Boolean {
-        return downloadQueue[id]
-    }
+    fun isDownloading(id: Int): Boolean = downloadQueue[id]
 
     private fun notifyForeground() {
         notificationManager = getSystemService()!!
 
-        summaryNotificationBuilder = Builder(this, DOWNLOAD_CHANNEL_NAME)
-            .setSmallIcon(R.drawable.ic_launcher_lockscreen)
-            .setContentTitle(getString(R.string.downloading))
-            .setForegroundServiceBehavior(NotificationCompat.FOREGROUND_SERVICE_IMMEDIATE)
-            .setGroup(DOWNLOAD_NOTIFICATION_GROUP)
-            .setPriority(NotificationCompat.PRIORITY_LOW)
-            .setOnlyAlertOnce(true)
-            .setGroupSummary(true)
+        summaryNotificationBuilder =
+            Builder(this, DOWNLOAD_CHANNEL_NAME)
+                .setSmallIcon(R.drawable.ic_launcher_lockscreen)
+                .setContentTitle(getString(R.string.downloading))
+                .setForegroundServiceBehavior(NotificationCompat.FOREGROUND_SERVICE_IMMEDIATE)
+                .setGroup(DOWNLOAD_NOTIFICATION_GROUP)
+                .setPriority(NotificationCompat.PRIORITY_LOW)
+                .setOnlyAlertOnce(true)
+                .setGroupSummary(true)
 
         ServiceCompat.startForeground(
-            this, NotificationId.DOWNLOAD_IN_PROGRESS.id, summaryNotificationBuilder.build(),
+            this,
+            NotificationId.DOWNLOAD_IN_PROGRESS.id,
+            summaryNotificationBuilder.build(),
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
                 ServiceInfo.FOREGROUND_SERVICE_TYPE_DATA_SYNC
             } else {
                 0
-            }
+            },
         )
     }
 
     private fun getNotificationBuilder(item: DownloadItem): Builder {
-        val intent = Intent(this@DownloadService, MainActivity::class.java)
-            .putExtra(IntentData.OPEN_DOWNLOADS, true)
-        val activityIntent = PendingIntentCompat
-            .getActivity(this@DownloadService, 0, intent, FLAG_CANCEL_CURRENT, false)
+        val intent =
+            Intent(this@DownloadService, MainActivity::class.java)
+                .putExtra(IntentData.OPEN_DOWNLOADS, true)
+        val activityIntent =
+            PendingIntentCompat
+                .getActivity(this@DownloadService, 0, intent, FLAG_CANCEL_CURRENT, false)
 
         return Builder(this, DOWNLOAD_CHANNEL_NAME)
             .setContentTitle("[${item.type}] ${item.fileName}")
@@ -590,7 +622,7 @@ class DownloadService : LifecycleService() {
 
     private fun setResumeNotification(
         notificationBuilder: Builder,
-        item: DownloadItem
+        item: DownloadItem,
     ) {
         notificationBuilder
             .setSmallIcon(android.R.drawable.stat_sys_download)
@@ -606,7 +638,7 @@ class DownloadService : LifecycleService() {
     private fun setPauseNotification(
         notificationBuilder: Builder,
         item: DownloadItem,
-        isCompleted: Boolean = false
+        isCompleted: Boolean = false,
     ) {
         notificationBuilder
             .setProgress(0, 0, false)
@@ -628,50 +660,57 @@ class DownloadService : LifecycleService() {
     }
 
     private fun getResumeAction(id: Int): NotificationCompat.Action {
-        val intent = Intent(this, NotificationReceiver::class.java)
-            .setAction(ACTION_DOWNLOAD_RESUME)
-            .putExtra("id", id)
+        val intent =
+            Intent(this, NotificationReceiver::class.java)
+                .setAction(ACTION_DOWNLOAD_RESUME)
+                .putExtra("id", id)
 
-        return NotificationCompat.Action.Builder(
-            R.drawable.ic_play,
-            getString(R.string.resume),
-            PendingIntentCompat.getBroadcast(this, id, intent, FLAG_UPDATE_CURRENT, false)
-        ).build()
+        return NotificationCompat.Action
+            .Builder(
+                R.drawable.ic_play,
+                getString(R.string.resume),
+                PendingIntentCompat.getBroadcast(this, id, intent, FLAG_UPDATE_CURRENT, false),
+            ).build()
     }
 
     private fun getPauseAction(id: Int): NotificationCompat.Action {
-        val intent = Intent(this, NotificationReceiver::class.java)
-            .setAction(ACTION_DOWNLOAD_PAUSE)
-            .putExtra("id", id)
+        val intent =
+            Intent(this, NotificationReceiver::class.java)
+                .setAction(ACTION_DOWNLOAD_PAUSE)
+                .putExtra("id", id)
 
-        return NotificationCompat.Action.Builder(
-            R.drawable.ic_pause,
-            getString(R.string.pause),
-            PendingIntentCompat.getBroadcast(this, id, intent, FLAG_UPDATE_CURRENT, false)
-        ).build()
+        return NotificationCompat.Action
+            .Builder(
+                R.drawable.ic_pause,
+                getString(R.string.pause),
+                PendingIntentCompat.getBroadcast(this, id, intent, FLAG_UPDATE_CURRENT, false),
+            ).build()
     }
 
     private fun getStopAction(id: Int): NotificationCompat.Action {
-        val intent = Intent(this, NotificationReceiver::class.java).apply {
-            action = ACTION_DOWNLOAD_STOP
-            putExtra("id", id)
-        }
+        val intent =
+            Intent(this, NotificationReceiver::class.java).apply {
+                action = ACTION_DOWNLOAD_STOP
+                putExtra("id", id)
+            }
 
         // the request code must differ from the one of the pause/resume action
         val requestCode = Int.MAX_VALUE / 2 - id
-        return NotificationCompat.Action.Builder(
-            R.drawable.ic_stop,
-            getString(R.string.stop),
-            PendingIntentCompat.getBroadcast(this, requestCode, intent, FLAG_UPDATE_CURRENT, false)
-        ).build()
+        return NotificationCompat.Action
+            .Builder(
+                R.drawable.ic_stop,
+                getString(R.string.stop),
+                PendingIntentCompat.getBroadcast(this, requestCode, intent, FLAG_UPDATE_CURRENT, false),
+            ).build()
     }
 
     /**
      * Get a [Path] from the corresponding download directory and the file name
      */
-    private fun getDownloadPath(directory: String, fileName: String): Path {
-        return DownloadHelper.getDownloadDir(this, directory) / fileName
-    }
+    private fun getDownloadPath(
+        directory: String,
+        fileName: String,
+    ): Path = DownloadHelper.getDownloadDir(this, directory) / fileName
 
     override fun onDestroy() {
         downloadQueue.clear()

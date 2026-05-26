@@ -12,7 +12,7 @@ import android.view.View
 fun View.animateDown(
     duration: Long,
     dy: Float,
-    onEnd: () -> Unit = { }
+    onEnd: () -> Unit = { },
 ) {
     this
         .animate()

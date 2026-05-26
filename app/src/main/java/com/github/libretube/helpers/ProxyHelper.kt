@@ -12,8 +12,10 @@ object ProxyHelper {
     fun fetchProxyUrl() {
         CoroutineScope(Dispatchers.IO).launch {
             runCatching {
-                RetrofitInstance.externalApi.getInstanceConfig(PipedMediaServiceRepository.apiUrl)
-                    .imageProxyUrl?.let {
+                RetrofitInstance.externalApi
+                    .getInstanceConfig(PipedMediaServiceRepository.apiUrl)
+                    .imageProxyUrl
+                    ?.let {
                         PreferenceHelper.putString(PreferenceKeys.IMAGE_PROXY_URL, it)
                     }
             }
@@ -23,9 +25,7 @@ object ProxyHelper {
     /**
      * Decide whether the proxy should be used or not for a given stream URL based on user preferences
      */
-    fun rewriteUrlUsingProxyPreference(url: String): String {
-        return proxyRewriteUrl(url) ?: url
-    }
+    fun rewriteUrlUsingProxyPreference(url: String): String = proxyRewriteUrl(url) ?: url
 
     /**
      * Rewrite the URL to use the stored image proxy url of the selected instance.
@@ -34,14 +34,17 @@ object ProxyHelper {
     private fun proxyRewriteUrl(url: String?): String? {
         if (url == null) return null
 
-        val proxyUrl = PreferenceHelper.getString(PreferenceKeys.IMAGE_PROXY_URL, "")
-            .toHttpUrlOrNull()
+        val proxyUrl =
+            PreferenceHelper
+                .getString(PreferenceKeys.IMAGE_PROXY_URL, "")
+                .toHttpUrlOrNull()
 
         // parsedUrl should now be a plain YouTube URL without using any proxy
         val parsedUrl = unwrapUrl(url).toHttpUrlOrNull()
         if (proxyUrl == null || parsedUrl == null) return null
 
-        return parsedUrl.newBuilder()
+        return parsedUrl
+            .newBuilder()
             .host(proxyUrl.host)
             .port(proxyUrl.port)
             .setQueryParameter("host", parsedUrl.host)
@@ -63,7 +66,8 @@ object ProxyHelper {
             return url
         }
 
-        return parsedUrl.newBuilder()
+        return parsedUrl
+            .newBuilder()
             .host(host)
             .removeAllQueryParameters("host")
             .removeAllQueryParameters("qhash")

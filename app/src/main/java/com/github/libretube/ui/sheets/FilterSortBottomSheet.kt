@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.View
 import android.widget.RadioButton
 import android.widget.RadioGroup
-import androidx.core.os.bundleOf
 import androidx.fragment.app.setFragmentResult
 import com.github.libretube.R
 import com.github.libretube.constants.IntentData
@@ -31,7 +30,10 @@ class FilterSortBottomSheet : ExpandedBottomSheet(R.layout.filter_sort_sheet) {
         super.onCreate(savedInstanceState)
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?,
+    ) {
         _binding = FilterSortSheetBinding.bind(view)
         addSortOptions()
         setInitialFiltersState()
@@ -54,18 +56,20 @@ class FilterSortBottomSheet : ExpandedBottomSheet(R.layout.filter_sort_sheet) {
         }
     }
 
-    private fun createRadioButton(index: Int, name: String): RadioButton {
-        return RadioButton(context).apply {
+    private fun createRadioButton(
+        index: Int,
+        name: String,
+    ): RadioButton =
+        RadioButton(context).apply {
             tag = index
             text = name
-            layoutParams = RadioGroup.LayoutParams(
-                RadioGroup.LayoutParams.MATCH_PARENT,
-                RadioGroup.LayoutParams.WRAP_CONTENT
-            )
+            layoutParams =
+                RadioGroup.LayoutParams(
+                    RadioGroup.LayoutParams.MATCH_PARENT,
+                    RadioGroup.LayoutParams.WRAP_CONTENT,
+                )
             textAlignment = View.TEXT_ALIGNMENT_VIEW_START
         }
-    }
-
 
     private fun setInitialFiltersState() {
         binding.filterVideos.isChecked = ContentFilter.VIDEOS.isEnabled
@@ -107,11 +111,12 @@ class FilterSortBottomSheet : ExpandedBottomSheet(R.layout.filter_sort_sheet) {
     private fun notifyChange() {
         setFragmentResult(
             requestKey = FILTER_SORT_REQUEST_KEY,
-            result = bundleOf(
-                IntentData.sortOptions to selectedIndex,
-                IntentData.hideWatched to hideWatched,
-                IntentData.showUpcoming to showUpcoming
-            )
+            result =
+                Bundle().apply {
+                    putSerializable(IntentData.sortOptions, selectedIndex)
+                    putBoolean(IntentData.hideWatched, hideWatched)
+                    putBoolean(IntentData.showUpcoming, showUpcoming)
+                },
         )
     }
 

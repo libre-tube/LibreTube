@@ -4,7 +4,6 @@ import android.app.Dialog
 import android.content.DialogInterface
 import android.os.Bundle
 import android.widget.Toast
-import androidx.core.os.bundleOf
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.setFragmentResult
@@ -21,7 +20,6 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
  * videoId: The id of the video to add. If non is provided, insert the whole playing queue
  */
 class AddToPlaylistDialog : DialogFragment() {
-
     private var videoInfo: StreamItem? = null
     private val viewModel: AddToPlaylistViewModel by activityViewModels { AddToPlaylistViewModel.Factory }
 
@@ -35,7 +33,7 @@ class AddToPlaylistDialog : DialogFragment() {
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         childFragmentManager.setFragmentResultListener(
             CreatePlaylistDialog.CREATE_PLAYLIST_DIALOG_REQUEST_KEY,
-            this
+            this,
         ) { _, resultBundle ->
             val addedToPlaylist = resultBundle.getBoolean(IntentData.playlistTask)
             if (addedToPlaylist) {
@@ -79,7 +77,8 @@ class AddToPlaylistDialog : DialogFragment() {
 
             msg?.let {
                 with(binding.root.context) {
-                    Toast.makeText(this, getString(it.resId, it.formatArgs), Toast.LENGTH_SHORT)
+                    Toast
+                        .makeText(this, getString(it.resId, it.formatArgs), Toast.LENGTH_SHORT)
                         .show()
                 }
                 viewModel.onMessageShown()
@@ -100,7 +99,7 @@ class AddToPlaylistDialog : DialogFragment() {
     override fun onDismiss(dialog: DialogInterface) {
         super.onDismiss(dialog)
 
-        setFragmentResult(ADD_TO_PLAYLIST_DIALOG_DISMISSED_KEY, bundleOf())
+        setFragmentResult(ADD_TO_PLAYLIST_DIALOG_DISMISSED_KEY, Bundle())
     }
 
     companion object {

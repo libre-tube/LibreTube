@@ -19,22 +19,23 @@ data class SubscriptionsFeedItem(
     val uploaderVerified: Boolean,
     val uploaded: Long = 0,
     val shortDescription: String? = null,
-    val isShort: Boolean = false
+    val isShort: Boolean = false,
 ) {
-    fun toStreamItem() = StreamItem(
-        url = videoId,
-        type = StreamItem.TYPE_STREAM,
-        title = title,
-        thumbnail = thumbnail,
-        uploaderName = uploaderName,
-        uploaded = uploaded,
-        uploadedDate = uploaded.toLocalDate().toString(),
-        uploaderAvatar = uploaderAvatar,
-        uploaderUrl = uploaderUrl,
-        duration = duration,
-        uploaderVerified = uploaderVerified,
-        shortDescription = shortDescription,
-        views = views,
-        isShort = isShort
-    )
+    fun toStreamItem() =
+        StreamItem(
+            url = videoId,
+            type = StreamItem.TYPE_STREAM,
+            title = title,
+            thumbnail = thumbnail,
+            uploaderName = uploaderName,
+            uploaded = uploaded,
+            uploadedDate = uploaded.toLocalDate().toString(),
+            uploaderAvatar = uploaderAvatar,
+            uploaderUrl = uploaderUrl,
+            duration = duration,
+            uploaderVerified = uploaderVerified,
+            shortDescription = shortDescription,
+            views = views,
+            isShort = isShort,
+        )
 }

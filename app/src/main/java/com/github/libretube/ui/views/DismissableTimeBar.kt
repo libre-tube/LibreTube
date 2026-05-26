@@ -17,8 +17,8 @@ import kotlin.math.abs
 @UnstableApi
 open class DismissableTimeBar(
     context: Context,
-    attributeSet: AttributeSet? = null
-): DefaultTimeBar(context, attributeSet) {
+    attributeSet: AttributeSet? = null,
+) : DefaultTimeBar(context, attributeSet) {
     var exoPlayer: Player? = null
 
     private val listeners = mutableListOf<OnScrubListener>()
@@ -32,22 +32,34 @@ open class DismissableTimeBar(
     private val touchSlopPx: Int = ViewConfiguration.get(context).scaledTouchSlop
 
     init {
-        super.addListener(object : OnScrubListener {
-            override fun onScrubStart(timeBar: TimeBar, position: Long) {
-                listeners.forEach { it.onScrubStart(timeBar, position) }
-            }
+        super.addListener(
+            object : OnScrubListener {
+                override fun onScrubStart(
+                    timeBar: TimeBar,
+                    position: Long,
+                ) {
+                    listeners.forEach { it.onScrubStart(timeBar, position) }
+                }
 
-            override fun onScrubMove(timeBar: TimeBar, position: Long) {
-                listeners.forEach { it.onScrubMove(timeBar, position) }
-            }
+                override fun onScrubMove(
+                    timeBar: TimeBar,
+                    position: Long,
+                ) {
+                    listeners.forEach { it.onScrubMove(timeBar, position) }
+                }
 
-            override fun onScrubStop(timeBar: TimeBar, position: Long, canceled: Boolean) {
-                listeners.forEach { it.onScrubStop(timeBar, position, canceled) }
+                override fun onScrubStop(
+                    timeBar: TimeBar,
+                    position: Long,
+                    canceled: Boolean,
+                ) {
+                    listeners.forEach { it.onScrubStop(timeBar, position, canceled) }
 
-                if (canceled) return
-                if (shouldPlayerSeek) exoPlayer?.seekTo(position)
-            }
-        })
+                    if (canceled) return
+                    if (shouldPlayerSeek) exoPlayer?.seekTo(position)
+                }
+            },
+        )
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -70,10 +82,11 @@ open class DismissableTimeBar(
                     val dy = abs(event.y - initialY)
                     if (dx > touchSlopPx || dy > touchSlopPx) {
                         // Begin scrubbing now by synthesizing a DOWN at the current progress X
-                        val fakeDown = MotionEvent.obtain(event).apply {
-                            action = MotionEvent.ACTION_DOWN
-                            setLocation(event.x, event.y)
-                        }
+                        val fakeDown =
+                            MotionEvent.obtain(event).apply {
+                                action = MotionEvent.ACTION_DOWN
+                                setLocation(event.x, event.y)
+                            }
                         super.onTouchEvent(fakeDown)
                         fakeDown.recycle()
 
@@ -99,7 +112,7 @@ open class DismissableTimeBar(
                     dragStarted = false
                     shouldPlayerSeek =
                         event.y > TOUCH_SEEK_LIMIT_ABOVE.dpToPx() &&
-                                event.y < TOUCH_SEEK_LIMIT_BELOW.dpToPx()
+                        event.y < TOUCH_SEEK_LIMIT_BELOW.dpToPx()
 
                     return super.onTouchEvent(event)
                 }

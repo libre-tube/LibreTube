@@ -13,7 +13,10 @@ interface WatchHistoryDao {
     suspend fun getAll(): List<WatchHistoryItem>
 
     @Query("SELECT * FROM watchHistoryItem LIMIT :limit OFFSET :offset")
-    suspend fun getN(limit: Int, offset: Int): List<WatchHistoryItem>
+    suspend fun getN(
+        limit: Int,
+        offset: Int,
+    ): List<WatchHistoryItem>
 
     @Query("SELECT COUNT(videoId) FROM watchHistoryItem")
     suspend fun getSize(): Int

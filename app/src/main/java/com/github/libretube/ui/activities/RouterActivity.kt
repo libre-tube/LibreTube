@@ -27,9 +27,10 @@ class RouterActivity : BaseActivity() {
     private fun handleSendText(uri: Uri) {
         Log.i(TAG(), uri.toString())
 
-        val intent = packageManager.getLaunchIntentForPackage(packageName)!!.let { intent ->
-            IntentHelper.resolveType(intent, uri)
-        }
+        val intent =
+            packageManager.getLaunchIntentForPackage(packageName)!!.let { intent ->
+                IntentHelper.resolveType(intent, uri)
+            }
         intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK
         startActivity(intent)
         finishAndRemoveTask()

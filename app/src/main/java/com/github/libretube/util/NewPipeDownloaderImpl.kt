@@ -9,8 +9,10 @@ import org.schabi.newpipe.extractor.exceptions.ReCaptchaException
 import java.io.IOException
 
 class NewPipeDownloaderImpl : Downloader() {
-    private val client = OkHttpClient.Builder()
-        .build()
+    private val client =
+        OkHttpClient
+            .Builder()
+            .build()
 
     @Throws(IOException::class, ReCaptchaException::class)
     override fun execute(request: Request): Response {
@@ -19,10 +21,12 @@ class NewPipeDownloaderImpl : Downloader() {
         val headers = request.headers()
         val dataToSend = request.dataToSend()
 
-        val requestBuilder = okhttp3.Request.Builder()
-            .method(httpMethod, dataToSend?.toRequestBody())
-            .url(url)
-            .addHeader("User-Agent", USER_AGENT)
+        val requestBuilder =
+            okhttp3.Request
+                .Builder()
+                .method(httpMethod, dataToSend?.toRequestBody())
+                .url(url)
+                .addHeader("User-Agent", USER_AGENT)
 
         for ((headerKey, headerValues) in headers) {
             requestBuilder.removeHeader(headerKey)
@@ -39,13 +43,13 @@ class NewPipeDownloaderImpl : Downloader() {
             }
 
             else -> {
-                val responseBodyToReturn = response.body?.string()
+                val responseBodyToReturn = response.body.string()
                 Response(
                     response.code,
                     response.message,
                     response.headers.toMultimap(),
                     responseBodyToReturn,
-                    response.request.url.toString()
+                    response.request.url.toString(),
                 )
             }
         }

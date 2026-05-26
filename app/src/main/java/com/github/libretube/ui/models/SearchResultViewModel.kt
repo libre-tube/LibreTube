@@ -16,30 +16,34 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.flatMapLatest
 
-class SearchResultViewModel(savedStateHandle: SavedStateHandle) : ViewModel() {
+class SearchResultViewModel(
+    savedStateHandle: SavedStateHandle,
+) : ViewModel() {
     private val args = SearchResultFragmentArgs.fromSavedStateHandle(savedStateHandle)
 
     // parse search URLs from YouTube entered in the search bar
-    private val searchQuery = TextUtils.getVideoIdFromUri(args.query.toUri())?.let { videoId ->
-        "${ShareDialog.YOUTUBE_FRONTEND_URL}/watch?v=$videoId"
-    } ?: args.query
+    private val searchQuery =
+        TextUtils.getVideoIdFromUri(args.query.toUri())?.let { videoId ->
+            "${ShareDialog.YOUTUBE_FRONTEND_URL}/watch?v=$videoId"
+        } ?: args.query
 
     private val filterMutableData = MutableStateFlow("all")
 
     val searchSuggestion = MutableLiveData<Pair<String, Boolean>?>()
 
     @OptIn(ExperimentalCoroutinesApi::class)
-    val searchResultsFlow = filterMutableData.flatMapLatest {
-        Pager(
-            PagingConfig(pageSize = 20, enablePlaceholders = false),
-            pagingSourceFactory = {
-                SearchPagingSource(searchQuery, it) { suggestion ->
-                    searchSuggestion.postValue(suggestion)
-                }
-            }
-        ).flow
-    }
-        .cachedIn(viewModelScope)
+    val searchResultsFlow =
+        filterMutableData
+            .flatMapLatest {
+                Pager(
+                    PagingConfig(pageSize = 20, enablePlaceholders = false),
+                    pagingSourceFactory = {
+                        SearchPagingSource(searchQuery, it) { suggestion ->
+                            searchSuggestion.postValue(suggestion)
+                        }
+                    },
+                ).flow
+            }.cachedIn(viewModelScope)
 
     fun setFilter(filter: String) {
         filterMutableData.value = filter

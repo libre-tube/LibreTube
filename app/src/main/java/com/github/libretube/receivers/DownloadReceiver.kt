@@ -8,7 +8,10 @@ import com.github.libretube.services.DownloadService
 import com.github.libretube.ui.activities.MainActivity
 
 class DownloadReceiver : BroadcastReceiver() {
-    override fun onReceive(context: Context?, intent: Intent?) {
+    override fun onReceive(
+        context: Context?,
+        intent: Intent?,
+    ) {
         val activityIntent = Intent(context, MainActivity::class.java)
 
         when (intent?.action) {

@@ -16,7 +16,6 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationBarView
 
 object NavBarHelper {
-
     private const val SEPARATOR = ","
 
     fun hasTabs(): Boolean {
@@ -30,12 +29,13 @@ object NavBarHelper {
 
     // contains "-" -> invisible menu item, else -> visible menu item
     fun getNavBarItems(context: Context): List<MenuItem> {
-        val prefItems = try {
-            getNavBarPrefs()
-        } catch (e: Exception) {
-            Log.e("fail to parse nav items", e.toString())
-            return getDefaultNavBarItems(context)
-        }
+        val prefItems =
+            try {
+                getNavBarPrefs()
+            } catch (e: Exception) {
+                Log.e("fail to parse nav items", e.toString())
+                return getDefaultNavBarItems(context)
+            }
         val p = PopupMenu(context, null)
         MenuInflater(context).inflate(R.menu.bottom_menu, p.menu)
 
@@ -45,7 +45,7 @@ object NavBarHelper {
                 navBarItems.add(
                     p.menu[it.replace("-", "").toInt()].apply {
                         this.isVisible = !it.contains("-")
-                    }
+                    },
                 )
             }
             return navBarItems
@@ -63,7 +63,10 @@ object NavBarHelper {
         return navBarItems
     }
 
-    fun setNavBarItems(items: List<MenuItem>, context: Context) {
+    fun setNavBarItems(
+        items: List<MenuItem>,
+        context: Context,
+    ) {
         val prefString = mutableListOf<String>()
         val defaultNavBarItems = getDefaultNavBarItems(context)
         items.forEach { newItem ->
@@ -72,7 +75,7 @@ object NavBarHelper {
         }
         PreferenceHelper.putString(
             PreferenceKeys.NAVBAR_ITEMS,
-            prefString.joinToString(SEPARATOR)
+            prefString.joinToString(SEPARATOR),
         )
     }
 
@@ -81,14 +84,15 @@ object NavBarHelper {
      * @return Id of the start fragment
      */
     fun applyNavBarStyle(bottomNav: BottomNavigationView): Int {
-        val labelVisibilityMode = when (
-            PreferenceHelper.getString(PreferenceKeys.LABEL_VISIBILITY, "selected")
-        ) {
-            "always" -> NavigationBarView.LABEL_VISIBILITY_LABELED
-            "selected" -> NavigationBarView.LABEL_VISIBILITY_SELECTED
-            "never" -> NavigationBarView.LABEL_VISIBILITY_UNLABELED
-            else -> NavigationBarView.LABEL_VISIBILITY_AUTO
-        }
+        val labelVisibilityMode =
+            when (
+                PreferenceHelper.getString(PreferenceKeys.LABEL_VISIBILITY, "selected")
+            ) {
+                "always" -> NavigationBarView.LABEL_VISIBILITY_LABELED
+                "selected" -> NavigationBarView.LABEL_VISIBILITY_SELECTED
+                "never" -> NavigationBarView.LABEL_VISIBILITY_UNLABELED
+                else -> NavigationBarView.LABEL_VISIBILITY_AUTO
+            }
         bottomNav.labelVisibilityMode = labelVisibilityMode
 
         val navBarItems = getNavBarItems(bottomNav.context)
@@ -97,7 +101,7 @@ object NavBarHelper {
         // remove the old items
         navBarItems.forEach {
             menuItems.add(
-                bottomNav.menu.findItem(it.itemId)
+                bottomNav.menu.findItem(it.itemId),
             )
             bottomNav.menu.removeItem(it.itemId)
         }
@@ -106,12 +110,13 @@ object NavBarHelper {
             if (navBarItem.isVisible) {
                 val menuItem = menuItems.first { it.itemId == navBarItem.itemId }
 
-                bottomNav.menu.add(
-                    menuItem.groupId,
-                    menuItem.itemId,
-                    Menu.NONE,
-                    menuItem.title
-                ).icon = menuItem.icon
+                bottomNav.menu
+                    .add(
+                        menuItem.groupId,
+                        menuItem.itemId,
+                        Menu.NONE,
+                        menuItem.title,
+                    ).icon = menuItem.icon
             }
         }
         if (navBarItems.none { it.isVisible }) bottomNav.isGone = true
@@ -129,14 +134,16 @@ object NavBarHelper {
         }
     }
 
-    fun setStartFragment(context: Context, itemId: Int) {
+    fun setStartFragment(
+        context: Context,
+        itemId: Int,
+    ) {
         val index = getDefaultNavBarItems(context).indexOfFirst { it.itemId == itemId }
         PreferenceHelper.putInt(PreferenceKeys.START_FRAGMENT, index)
     }
 
-    private fun getNavBarPrefs(): List<String> {
-        return PreferenceHelper
+    private fun getNavBarPrefs(): List<String> =
+        PreferenceHelper
             .getString(PreferenceKeys.NAVBAR_ITEMS, "")
             .split(SEPARATOR)
-    }
 }

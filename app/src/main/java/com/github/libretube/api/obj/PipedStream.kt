@@ -29,14 +29,16 @@ data class PipedStream(
     val audioTrackId: String? = null,
     val contentLength: Long = -1,
     val audioTrackType: String? = null,
-    val audioTrackLocale: String? = null
-): Parcelable {
-    private fun getQualityString(videoId: String): String {
-        return "${videoId}_${quality?.replace(" ", "_")}_$format." +
+    val audioTrackLocale: String? = null,
+) : Parcelable {
+    private fun getQualityString(videoId: String): String =
+        "${videoId}_${quality?.replace(" ", "_")}_$format." +
             mimeType?.split("/")?.last()
-    }
 
-    fun toDownloadItem(fileType: FileType, videoId: String) = DownloadItem(
+    fun toDownloadItem(
+        fileType: FileType,
+        videoId: String,
+    ) = DownloadItem(
         type = fileType,
         videoId = videoId,
         fileName = getQualityString(videoId),
@@ -45,6 +47,6 @@ data class PipedStream(
         format = format,
         quality = quality,
         language = audioTrackLocale,
-        downloadSize = contentLength
+        downloadSize = contentLength,
     )
 }

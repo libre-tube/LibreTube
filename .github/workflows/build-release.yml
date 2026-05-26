@@ -12,18 +12,43 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+
     steps:
-      - uses: actions/checkout@v6
+      - name: Checkout
+        uses: actions/checkout@v4
 
       - name: Set up JDK
-        uses: actions/setup-java@v5
+        uses: actions/setup-java@v4
         with:
-          distribution: "zulu"
+          distribution: zulu
           java-version: "17"
-          cache: "gradle"
+          cache: gradle
 
-      - name: Build APK
-        run: ./gradlew assembleRelease --no-daemon
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v4
+
+      - name: Install Android SDK packages
+        run: |
+          yes | "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" --licenses >/dev/null || true
+          "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" \
+            "platform-tools" \
+            "platforms;android-36" \
+            "build-tools;36.0.0"
+
+      - name: Make Gradle executable
+        run: chmod +x ./gradlew
+
+      - name: Run release lint
+        run: ./gradlew :app:lintRelease --no-daemon
+
+      - name: Run unit tests
+        run: ./gradlew :app:testDebugUnitTest --no-daemon
+
+      - name: Build release APK
+        run: ./gradlew :app:assembleRelease --no-daemon
 
       - name: Sign APK
         uses: ilharp/sign-android-release@v2
@@ -33,7 +58,7 @@ jobs:
           keyAlias: ${{ secrets.ANDROID_RELEASE_KEY_ALIAS }}
           keyStorePassword: ${{ secrets.ANDROID_RELEASE_KEYSTORE_PASSWORD }}
           keyPassword: ${{ secrets.ANDROID_RELEASE_KEY_PASSWORD }}
-          buildToolsVersion: 35.0.0
+          buildToolsVersion: 36.0.0
 
       - name: Create changelog
         id: changelog
@@ -42,23 +67,21 @@ jobs:
           token: ${{ github.token }}
           tag: ${{ github.ref_name }}
 
-      # Create a summary based on the latest fastlane metadata changelog
       - name: Create changelog summary
         id: changelog-summary
         run: |
-            summary_file=$(find fastlane/metadata/android/en-US/changelogs/ | sort -t '/' -k 6n | tail -n 1) # get name of latest changelog file
-            summary_quoted=$(cat "$summary_file" | xargs -d '\n' -I {} echo "> {}") # prefix each line with "> "
-            summary=$(echo -e "> [!NOTE]\n> ## Release Highlights\n$summary_quoted") # format as GitHub markdown admonitions
-            echo "summary<<EOF"$'\n'"$summary"$'\n'EOF >> $GITHUB_OUTPUT # make available as actions output
-            
+          summary_file=$(find fastlane/metadata/android/en-US/changelogs/ | sort -t '/' -k 6n | tail -n 1)
+          summary_quoted=$(cat "$summary_file" | xargs -d '\n' -I {} echo "> {}")
+          summary=$(echo -e "> [!NOTE]\n> ## Release Highlights\n$summary_quoted")
+          echo "summary<<EOF"$'\n'"$summary"$'\n'EOF >> "$GITHUB_OUTPUT"
 
-      - name: Rename apk file
+      - name: Rename APK file
         run: mv "${{ steps.sign.outputs.signedFile }}" "app-release.apk"
 
       - name: Create release
         uses: softprops/action-gh-release@v2
         with:
-          body:
+          body: |
             ${{ steps.changelog-summary.outputs.summary }}
 
             ${{ steps.changelog.outputs.changes }}

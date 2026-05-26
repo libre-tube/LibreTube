@@ -10,7 +10,10 @@ class AccountSubscriptionsRepository : SubscriptionsRepository {
     private val token get() = PreferenceHelper.getToken()
 
     override suspend fun subscribe(
-        channelId: String, name: String, uploaderAvatar: String?, verified: Boolean
+        channelId: String,
+        name: String,
+        uploaderAvatar: String?,
+        verified: Boolean,
     ) {
         runCatching {
             RetrofitInstance.authApi.subscribe(token, Subscribe(channelId))
@@ -23,21 +26,16 @@ class AccountSubscriptionsRepository : SubscriptionsRepository {
         }
     }
 
-    override suspend fun isSubscribed(channelId: String): Boolean? {
-        return runCatching {
+    override suspend fun isSubscribed(channelId: String): Boolean? =
+        runCatching {
             RetrofitInstance.authApi.isSubscribed(channelId, token)
         }.getOrNull()?.subscribed
-    }
 
     override suspend fun importSubscriptions(newChannels: List<String>) {
         RetrofitInstance.authApi.importSubscriptions(false, token, newChannels)
     }
 
-    override suspend fun getSubscriptions(): List<Subscription> {
-        return RetrofitInstance.authApi.subscriptions(token)
-    }
+    override suspend fun getSubscriptions(): List<Subscription> = RetrofitInstance.authApi.subscriptions(token)
 
-    override suspend fun getSubscriptionChannelIds(): List<String> {
-        return getSubscriptions().map { it.url.toID() }
-    }
+    override suspend fun getSubscriptionChannelIds(): List<String> = getSubscriptions().map { it.url.toID() }
 }

@@ -9,7 +9,7 @@ data class LocalPlaylistWithVideos(
     @Embedded val playlist: LocalPlaylist = LocalPlaylist(),
     @Relation(
         parentColumn = "id",
-        entityColumn = "playlistId"
+        entityColumn = "playlistId",
     )
-    val videos: List<LocalPlaylistItem> = listOf()
+    val videos: List<LocalPlaylistItem> = listOf(),
 )

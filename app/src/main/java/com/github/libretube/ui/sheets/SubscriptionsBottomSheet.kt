@@ -39,7 +39,10 @@ class SubscriptionsBottomSheet : ExpandedBottomSheet(R.layout.sheet_subscription
     private val viewModel: SubscriptionsViewModel by activityViewModels()
     private val channelGroupsModel: EditChannelGroupsModel by activityViewModels()
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?,
+    ) {
         _binding = SheetSubscriptionsBinding.bind(view)
         super.onViewCreated(view, savedInstanceState)
 
@@ -61,8 +64,7 @@ class SubscriptionsBottomSheet : ExpandedBottomSheet(R.layout.sheet_subscription
                         channelGroupsModel.groups.asFlow(),
                     ) { subscriptions, groups ->
                         subscriptions to groups
-                    }
-                        .flowOn(Dispatchers.IO)
+                    }.flowOn(Dispatchers.IO)
                         .collectLatest {
                             initHeaderLayout()
                             showFilteredSubscriptions()
@@ -85,7 +87,7 @@ class SubscriptionsBottomSheet : ExpandedBottomSheet(R.layout.sheet_subscription
         binding.allSubsBtn.text =
             "%s (%d)".format(
                 requireContext().getString(R.string.subscriptions),
-                viewModel.subscriptions.value?.size ?: 0
+                viewModel.subscriptions.value?.size ?: 0,
             )
         binding.allSubsBtn.setOnClickListener {
             binding.groupEditBtn.isVisible = false
@@ -95,10 +97,11 @@ class SubscriptionsBottomSheet : ExpandedBottomSheet(R.layout.sheet_subscription
 
         // "ungrouped" category is hidden if the user doesn't use channel groups
         if (!channelGroupsModel.groups.value.isNullOrEmpty()) {
-            binding.ungroupedSubsBtn.text = requireContext().getString(
-                R.string.ungrouped_channels_with_count,
-                viewModel.subscriptions.value?.size ?: 0
-            )
+            binding.ungroupedSubsBtn.text =
+                requireContext().getString(
+                    R.string.ungrouped_channels_with_count,
+                    viewModel.subscriptions.value?.size ?: 0,
+                )
             binding.ungroupedSubsBtn.setOnClickListener {
                 binding.groupEditBtn.isVisible = false
 
@@ -112,15 +115,16 @@ class SubscriptionsBottomSheet : ExpandedBottomSheet(R.layout.sheet_subscription
             binding.allSubsBtn.text =
                 "%s (%d)".format(
                     requireContext().getString(R.string.all),
-                    viewModel.subscriptions.value?.size ?: 0
+                    viewModel.subscriptions.value?.size ?: 0,
                 )
 
             binding.groupSubsBtn.isVisible = true
             binding.groupSubsBtn.isChecked = true
-            binding.groupSubsBtn.text = "%s (%d)".format(
-                channelGroup.name,
-                channelGroup.channels.size
-            )
+            binding.groupSubsBtn.text =
+                "%s (%d)".format(
+                    channelGroup.name,
+                    channelGroup.channels.size,
+                )
             binding.groupSubsBtn.setOnClickListener {
                 binding.groupEditBtn.isVisible = true
 
@@ -146,15 +150,16 @@ class SubscriptionsBottomSheet : ExpandedBottomSheet(R.layout.sheet_subscription
 
         val shouldFilterByGroup = binding.groupSubsBtn.isChecked
         val shouldFilterUngrouped = binding.ungroupedSubsBtn.isChecked
-        val filteredSubscriptions = viewModel.subscriptions.value.orEmpty()
-            .filterByGroup(
-                when {
-                    shouldFilterByGroup -> selectedChannelGroup
-                    shouldFilterUngrouped -> -2
-                    else -> -1 // all
-                }
-            )
-            .filter { it.name.lowercase().contains(loweredQuery) }
+        val filteredSubscriptions =
+            viewModel.subscriptions.value
+                .orEmpty()
+                .filterByGroup(
+                    when {
+                        shouldFilterByGroup -> selectedChannelGroup
+                        shouldFilterUngrouped -> -2
+                        else -> -1 // all
+                    },
+                ).filter { it.name.lowercase().contains(loweredQuery) }
 
         adapter.submitList(filteredSubscriptions)
     }
@@ -163,8 +168,9 @@ class SubscriptionsBottomSheet : ExpandedBottomSheet(R.layout.sheet_subscription
         if (groupIndex == -1) return this
         if (groupIndex == -2) return getUngroupedChannels()
 
-        val group = channelGroupsModel.groups.value?.getOrNull(groupIndex)
-            ?: return this
+        val group =
+            channelGroupsModel.groups.value?.getOrNull(groupIndex)
+                ?: return this
 
         return filter { group.channels.contains(it.url.toID()) }
     }

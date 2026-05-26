@@ -25,32 +25,32 @@ interface Resettable {
     fun reset()
 }
 
-class ResettableLazy<PROPTYPE>(val manager: ResettableLazyManager, val init: () -> PROPTYPE) :
-    Resettable {
+class ResettableLazy<PROPTYPE>(
+    val manager: ResettableLazyManager,
+    val init: () -> PROPTYPE,
+) : Resettable {
     @Volatile
     var lazyHolder = makeInitBlock()
 
-    operator fun getValue(thisRef: Any?, property: KProperty<*>): PROPTYPE {
-        return lazyHolder.value
-    }
+    operator fun getValue(
+        thisRef: Any?,
+        property: KProperty<*>,
+    ): PROPTYPE = lazyHolder.value
 
     override fun reset() {
         lazyHolder = makeInitBlock()
     }
 
-    private fun makeInitBlock(): Lazy<PROPTYPE> {
-        return lazy {
+    private fun makeInitBlock(): Lazy<PROPTYPE> =
+        lazy {
             manager.register(this)
             init()
         }
-    }
 }
 
 fun <PROPTYPE> resettableLazy(
     manager: ResettableLazyManager,
-    init: () -> PROPTYPE
-): ResettableLazy<PROPTYPE> {
-    return ResettableLazy(manager, init)
-}
+    init: () -> PROPTYPE,
+): ResettableLazy<PROPTYPE> = ResettableLazy(manager, init)
 
 fun resettableManager(): ResettableLazyManager = ResettableLazyManager()

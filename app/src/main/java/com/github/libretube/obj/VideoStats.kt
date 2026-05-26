@@ -8,5 +8,5 @@ data class VideoStats(
     val videoId: String,
     var videoInfo: String,
     var videoQuality: String,
-    var audioInfo: String
+    var audioInfo: String,
 ) : Parcelable

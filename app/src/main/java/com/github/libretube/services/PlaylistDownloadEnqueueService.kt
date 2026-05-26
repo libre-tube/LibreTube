@@ -59,11 +59,15 @@ class PlaylistDownloadEnqueueService : LifecycleService() {
                 ServiceInfo.FOREGROUND_SERVICE_TYPE_DATA_SYNC
             } else {
                 0
-            }
+            },
         )
     }
 
-    override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
+    override fun onStartCommand(
+        intent: Intent?,
+        flags: Int,
+        startId: Int,
+    ): Int {
         nManager = getSystemService()!!
 
         playlistId = intent!!.getStringExtra(IntentData.playlistId)!!
@@ -87,43 +91,46 @@ class PlaylistDownloadEnqueueService : LifecycleService() {
         return super.onStartCommand(intent, flags, startId)
     }
 
-    private fun buildNotification(): Notification {
-        return NotificationCompat.Builder(this, PLAYLIST_DOWNLOAD_ENQUEUE_CHANNEL_NAME)
+    private fun buildNotification(): Notification =
+        NotificationCompat
+            .Builder(this, PLAYLIST_DOWNLOAD_ENQUEUE_CHANNEL_NAME)
             .setSmallIcon(R.drawable.ic_download)
             .setContentTitle(
-                getString(R.string.enqueueing_playlist_download, playlistName ?: "...")
-            )
-            .setProgress(amountOfVideos, amountOfVideosDone, false)
+                getString(R.string.enqueueing_playlist_download, playlistName ?: "..."),
+            ).setProgress(amountOfVideos, amountOfVideosDone, false)
             .setOnlyAlertOnce(true)
             .build()
-    }
 
     private suspend fun enqueuePrivatePlaylist() {
-        val playlist = try {
-            PlaylistsHelper.getPlaylist(playlistId)
-        } catch (e: Exception) {
-            toastFromMainDispatcher(e.localizedMessage.orEmpty())
-            stopSelf()
-            return
-        }
+        val playlist =
+            try {
+                PlaylistsHelper.getPlaylist(playlistId)
+            } catch (e: Exception) {
+                toastFromMainDispatcher(e.localizedMessage.orEmpty())
+                stopSelf()
+                return
+            }
         amountOfVideos = playlist.videos
         enqueueStreams(playlistId, playlist.relatedStreams)
     }
 
     private suspend fun enqueuePublicPlaylist() {
-        val playlist = try {
-            MediaServiceRepository.instance.getPlaylist(playlistId)
-        } catch (e: Exception) {
-            toastFromMainDispatcher(e.localizedMessage.orEmpty())
-            stopSelf()
-            return
-        }
+        val playlist =
+            try {
+                MediaServiceRepository.instance.getPlaylist(playlistId)
+            } catch (e: Exception) {
+                toastFromMainDispatcher(e.localizedMessage.orEmpty())
+                stopSelf()
+                return
+            }
 
         val thumbnailPath = getDownloadPath(DownloadHelper.PLAYLIST_THUMBNAIL_DIR, playlistId)
         CoroutineScope(Dispatchers.IO).launch {
             playlist.thumbnailUrl?.let { url ->
                 ImageHelper.downloadImage(
-                    this@PlaylistDownloadEnqueueService, url, thumbnailPath
+                    this@PlaylistDownloadEnqueueService,
+                    url,
+                    thumbnailPath,
                 )
             }
         }
@@ -134,7 +141,7 @@ class PlaylistDownloadEnqueueService : LifecycleService() {
                 title = playlist.name.orEmpty(),
                 description = playlist.description,
                 thumbnailPath = thumbnailPath,
-            )
+            ),
         )
 
         amountOfVideos = playlist.videos
@@ -145,9 +152,10 @@ class PlaylistDownloadEnqueueService : LifecycleService() {
         var alreadyRetriedOnce = false
 
         while (nextPage != null) {
-            val playlistPage = runCatching {
-                MediaServiceRepository.instance.getPlaylistNextPage(playlistId, nextPage!!)
-            }.getOrNull()
+            val playlistPage =
+                runCatching {
+                    MediaServiceRepository.instance.getPlaylistNextPage(playlistId, nextPage)
+                }.getOrNull()
 
             if (playlistPage == null && alreadyRetriedOnce) {
                 toastFromMainDispatcher(R.string.unknown_error)
@@ -167,7 +175,10 @@ class PlaylistDownloadEnqueueService : LifecycleService() {
         }
     }
 
-    private suspend fun enqueueStreams(playlistId: String, streams: List<StreamItem>) {
+    private suspend fun enqueueStreams(
+        playlistId: String,
+        streams: List<StreamItem>,
+    ) {
         nManager.notify(NotificationId.ENQUEUE_PLAYLIST_DOWNLOAD.id, buildNotification())
 
         for (stream in streams) {
@@ -177,33 +188,37 @@ class PlaylistDownloadEnqueueService : LifecycleService() {
             DatabaseHolder.Database.downloadDao().insertPlaylistVideoConnection(
                 DownloadPlaylistVideosCrossRef(
                     videoId = videoId,
-                    playlistId = playlistId
-                )
+                    playlistId = playlistId,
+                ),
             )
 
             // only download videos that have not been downloaded before
             if (!DatabaseHolder.Database.downloadDao().exists(videoId)) {
-                val videoInfo = runCatching {
-                    MediaServiceRepository.instance.getStreams(videoId)
-                }.getOrNull()
+                val videoInfo =
+                    runCatching {
+                        MediaServiceRepository.instance.getStreams(videoId)
+                    }.getOrNull()
 
                 if (videoInfo != null) {
                     val videoStream = getStream(videoInfo.videoStreams, maxVideoQuality)
                     val audioStream = getStream(videoInfo.audioStreams, maxAudioQuality)
 
-                    val downloadData = DownloadData(
-                        videoId = videoId,
-                        videoFormat = videoStream?.format,
-                        videoQuality = videoStream?.quality,
-                        audioFormat = audioStream?.format,
-                        audioQuality = audioStream?.quality,
-                        audioLanguage = audioLanguage.takeIf {
-                            videoInfo.audioStreams.any { it.audioTrackLocale == audioLanguage }
-                        },
-                        subtitleCode = captionLanguage.takeIf {
-                            videoInfo.subtitles.any { it.code == captionLanguage }
-                        }
-                    )
+                    val downloadData =
+                        DownloadData(
+                            videoId = videoId,
+                            videoFormat = videoStream?.format,
+                            videoQuality = videoStream?.quality,
+                            audioFormat = audioStream?.format,
+                            audioQuality = audioStream?.quality,
+                            audioLanguage =
+                                audioLanguage.takeIf {
+                                    videoInfo.audioStreams.any { it.audioTrackLocale == audioLanguage }
+                                },
+                            subtitleCode =
+                                captionLanguage.takeIf {
+                                    videoInfo.subtitles.any { it.code == captionLanguage }
+                                },
+                        )
                     DownloadHelper.startDownloadService(this, downloadData)
                 }
             }
@@ -216,12 +231,16 @@ class PlaylistDownloadEnqueueService : LifecycleService() {
         if (amountOfVideos == amountOfVideosDone) stopSelf()
     }
 
-    private fun getStream(streams: List<PipedStream>, maxQuality: Int?): PipedStream? {
+    private fun getStream(
+        streams: List<PipedStream>,
+        maxQuality: Int?,
+    ): PipedStream? {
         val maxStreamQuality = maxQuality ?: return null
 
         // sort streams by their quality/bitrate
-        val sortedStreams = streams
-            .sortedBy { it.quality.getWhileDigit() }
+        val sortedStreams =
+            streams
+                .sortedBy { it.quality.getWhileDigit() }
 
         // return the last item below the maximum quality - or if there's none - the stream with
         // the lowest quality available
@@ -231,9 +250,10 @@ class PlaylistDownloadEnqueueService : LifecycleService() {
     }
 
     @Suppress("SameParameterValue")
-    private fun getDownloadPath(directory: String, fileName: String): Path {
-        return DownloadHelper.getDownloadDir(this, directory) / fileName
-    }
+    private fun getDownloadPath(
+        directory: String,
+        fileName: String,
+    ): Path = DownloadHelper.getDownloadDir(this, directory) / fileName
 
     override fun onDestroy() {
         ServiceCompat.stopForeground(this, ServiceCompat.STOP_FOREGROUND_REMOVE)

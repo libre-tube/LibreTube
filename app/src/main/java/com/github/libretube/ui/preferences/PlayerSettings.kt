@@ -15,8 +15,10 @@ import com.github.libretube.helpers.LocaleHelper
 import com.github.libretube.ui.base.BasePreferenceFragment
 
 class PlayerSettings : BasePreferenceFragment() {
-
-    override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
+    override fun onCreatePreferences(
+        savedInstanceState: Bundle?,
+        rootKey: String?,
+    ) {
         setPreferencesFromResource(R.xml.player_settings, rootKey)
 
         val defaultSubtitle = findPreference<ListPreference>(PreferenceKeys.DEFAULT_SUBTITLE)
@@ -53,12 +55,16 @@ class PlayerSettings : BasePreferenceFragment() {
 
     private fun setupSubtitlePref(preference: ListPreference) {
         val locales = LocaleHelper.getAvailableLocales()
-        val localeNames = locales.map { it.name }
-            .toMutableList()
+        val localeNames =
+            locales
+                .map { it.name }
+                .toMutableList()
         localeNames.add(0, requireContext().getString(R.string.none))
 
-        val localeCodes = locales.map { it.code }
-            .toMutableList()
+        val localeCodes =
+            locales
+                .map { it.code }
+                .toMutableList()
         localeCodes.add(0, "")
 
         preference.entries = localeNames.toTypedArray()

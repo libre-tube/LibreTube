@@ -1,8 +1,8 @@
 package com.github.libretube.ui.adapters
 
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.os.bundleOf
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.ListAdapter
@@ -36,20 +36,28 @@ data class PlaylistItem(
 
 class PlaylistAdapter(
     private val playlistId: String,
-    private val onVideoClick: (StreamItem) -> Unit
-) : ListAdapter<PlaylistItem, PlaylistViewHolder>(DiffUtilItemCallback(
-    // the index is not relevant for whether the playlist videos are the same
-    // hence only compare the videos themselves
-    areItemsTheSame = { a, b -> a.item == b.item },
-    areContentsTheSame = { a, b -> a.item == b.item },
-)) {
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PlaylistViewHolder {
+    private val onVideoClick: (StreamItem) -> Unit,
+) : ListAdapter<PlaylistItem, PlaylistViewHolder>(
+        DiffUtilItemCallback(
+            // the index is not relevant for whether the playlist videos are the same
+            // hence only compare the videos themselves
+            areItemsTheSame = { a, b -> a.item == b.item },
+            areContentsTheSame = { a, b -> a.item == b.item },
+        ),
+    ) {
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int,
+    ): PlaylistViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         val binding = VideoRowBinding.inflate(layoutInflater, parent, false)
         return PlaylistViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: PlaylistViewHolder, position: Int) {
+    override fun onBindViewHolder(
+        holder: PlaylistViewHolder,
+        position: Int,
+    ) {
         val (streamItem, _) = getItem(position)!!
         val videoId = streamItem.url!!.toID()
 
@@ -74,17 +82,18 @@ class PlaylistAdapter(
             root.setOnLongClickListener {
                 fragmentManager.setFragmentResultListener(
                     VIDEO_OPTIONS_SHEET_REQUEST_KEY,
-                    activity
+                    activity,
                 ) { _, _ ->
                     notifyItemChanged(position)
                 }
-                VideoOptionsBottomSheet().apply {
-                    arguments = bundleOf(
-                        IntentData.streamItem to streamItem,
-                        IntentData.playlistId to playlistId
-                    )
-                }
-                    .show(fragmentManager, VideoOptionsBottomSheet::class.java.name)
+                VideoOptionsBottomSheet()
+                    .apply {
+                        arguments =
+                            Bundle().apply {
+                                putParcelable(IntentData.streamItem, streamItem)
+                                putString(IntentData.playlistId, playlistId)
+                            }
+                    }.show(fragmentManager, VideoOptionsBottomSheet::class.java.name)
                 true
             }
 

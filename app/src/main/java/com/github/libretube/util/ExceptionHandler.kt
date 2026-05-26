@@ -3,10 +3,12 @@ package com.github.libretube.util
 import com.github.libretube.helpers.PreferenceHelper
 
 class ExceptionHandler(
-    private val defaultExceptionHandler: Thread.UncaughtExceptionHandler?
+    private val defaultExceptionHandler: Thread.UncaughtExceptionHandler?,
 ) : Thread.UncaughtExceptionHandler {
-
-    override fun uncaughtException(thread: Thread, exc: Throwable) {
+    override fun uncaughtException(
+        thread: Thread,
+        exc: Throwable,
+    ) {
         // OkHttp spawns threads to parse the response headers
         // if an exception is on a thread spawned by OkHttp, there's no apparent other way to catch them
         // work around for Cronet spawning different threads with uncaught Exception when used with Coil
