@@ -99,7 +99,7 @@ class ChannelContentFragment : DynamicLayoutManagerFragment(R.layout.fragment_ch
             val pagingFlow =
                 Pager(
                     PagingConfig(pageSize = 20, enablePlaceholders = false),
-                    pagingSourceFactory = { ChannelTabPagingSource(tabData!!) },
+                    pagingSourceFactory = { ChannelTabPagingSource(tabData) },
                 ).flow
 
             viewLifecycleOwner.lifecycleScope.launch {

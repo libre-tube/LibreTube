@@ -125,7 +125,7 @@ class LocalPlaylistsRepository : PlaylistRepository {
             nextPage =
                 runCatching {
                     MediaServiceRepository.instance
-                        .getPlaylistNextPage(playlistId, nextPage!!)
+                        .getPlaylistNextPage(playlistId, nextPage)
                         .apply {
                             PlaylistsHelper.addToPlaylist(newPlaylist, *relatedStreams.toTypedArray())
                         }.nextpage
