@@ -133,7 +133,7 @@ open class OnlinePlayerService : AbstractPlayerService() {
                     }*/
 
                     var streamData = MediaServiceRepository.instance.getStreams(videoId)
-                    while (streamData.audioStreams.isEmpty()) {
+                    while (streamData.videoStreams.size == 1 && streamData.videoStreams[0].indexStart == -1 && streamData.videoStreams[0].indexEnd == -1 && streamData.videoStreams[0].initStart == -1 && streamData.videoStreams[0].initEnd == -1 && streamData.videoStreams[0].videoOnly == false) {
                         streamData = MediaServiceRepository.instance.getStreams(videoId)
                         toastFromMainDispatcher("SABR detected, reloading")
                     }
