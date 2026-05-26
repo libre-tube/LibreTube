@@ -3,7 +3,6 @@ package com.github.libretube.ui.activities
 import android.content.Intent
 import android.os.Bundle
 import androidx.core.net.toUri
-import androidx.core.os.bundleOf
 import com.github.libretube.constants.IntentData
 import com.github.libretube.enums.PlaylistType
 import com.github.libretube.helpers.IntentHelper
@@ -32,17 +31,20 @@ class DownloadActivity : BaseActivity() {
 
             DownloadDialog()
                 .apply {
-                    arguments = bundleOf(IntentData.videoId to videoId)
+                    arguments =
+                        Bundle().apply {
+                            putString(IntentData.videoId, videoId)
+                        }
                 }.show(supportFragmentManager, null)
         } else if (playlistId != null) {
             DownloadPlaylistDialog()
                 .apply {
                     arguments =
-                        bundleOf(
-                            IntentData.playlistId to playlistId,
-                            IntentData.playlistType to PlaylistType.PUBLIC,
-                            IntentData.playlistName to intent.getStringExtra(Intent.EXTRA_TITLE),
-                        )
+                        Bundle().apply {
+                            putString(IntentData.playlistId, playlistId)
+                            putSerializable(IntentData.playlistType, PlaylistType.PUBLIC)
+                            putString(IntentData.playlistName, intent.getStringExtra(Intent.EXTRA_TITLE))
+                        }
                 }.show(supportFragmentManager, null)
         } else {
             finish()
