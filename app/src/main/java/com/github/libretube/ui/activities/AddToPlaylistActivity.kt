@@ -3,7 +3,6 @@ package com.github.libretube.ui.activities
 import android.content.Intent
 import android.os.Bundle
 import androidx.core.net.toUri
-import androidx.core.os.bundleOf
 import androidx.lifecycle.lifecycleScope
 import com.github.libretube.R
 import com.github.libretube.api.MediaServiceRepository
@@ -60,7 +59,10 @@ class AddToPlaylistActivity : BaseActivity() {
             withContext(Dispatchers.Main) {
                 AddToPlaylistDialog()
                     .apply {
-                        arguments = bundleOf(IntentData.videoInfo to videoInfo)
+                        arguments =
+                            Bundle().apply {
+                                putParcelable(IntentData.videoInfo, videoInfo)
+                            }
                     }.show(supportFragmentManager, null)
             }
         }

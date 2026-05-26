@@ -15,7 +15,6 @@ import androidx.appcompat.widget.SearchView
 import androidx.constraintlayout.motion.widget.Key
 import androidx.core.content.pm.ShortcutManagerCompat
 import androidx.core.net.toUri
-import androidx.core.os.bundleOf
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.view.allViews
 import androidx.core.view.children
@@ -426,7 +425,9 @@ class MainActivity : AbstractPlayerHostActivity() {
                             if (navController.currentDestination?.id != R.id.searchFragment) {
                                 navController.navigate(
                                     R.id.searchFragment,
-                                    bundleOf(IntentData.query to newText),
+                                    Bundle().apply {
+                                        putString(IntentData.query, newText)
+                                    },
                                 )
                             } else {
                                 searchViewModel.setQuery(newText)
@@ -601,10 +602,10 @@ class MainActivity : AbstractPlayerHostActivity() {
             ImportTempPlaylistDialog()
                 .apply {
                     arguments =
-                        bundleOf(
-                            IntentData.playlistName to intent.getStringExtra(IntentData.playlistName),
-                            IntentData.videoIds to it,
-                        )
+                        Bundle().apply {
+                            putString(IntentData.playlistName, intent.getStringExtra(IntentData.playlistName))
+                            putStringArray(IntentData.videoIds, it)
+                        }
                 }.show(supportFragmentManager, null)
             return true
         }
