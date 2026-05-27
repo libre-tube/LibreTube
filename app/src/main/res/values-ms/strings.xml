@@ -116,4 +116,20 @@
     <string name="torchIcon">Obor trendy</string>
     <string name="shapedIcon">Bentuk lucu</string>
     <string name="flameIcon">Api terbang</string>
+    <string name="disabled">Opf</string>
+    <string name="customInstance_summary">Tmbh…</string>
+    <string name="resume">Sambung</string>
+    <string name="stop">Henti</string>
+    <string name="github">github</string>
+    <string name="open">Buka…</string>
+    <string name="always">Selalu</string>
+    <string name="selected">Dipilih</string>
+    <string name="best_quality">Terbaik</string>
+    <string name="most_recent">Terbaru</string>
+    <string name="network_all">Semua</string>
+    <string name="resize_mode_fit">Muat</string>
+    <string name="resize_mode_fill">Penuh</string>
+    <string name="repeat_mode_none">Tk mau</string>
+    <string name="repeat_mode_current">Kini</string>
+    <string name="open_copied">Buka</string>
 </resources>
