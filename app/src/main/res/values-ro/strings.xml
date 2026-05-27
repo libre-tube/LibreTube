@@ -559,4 +559,16 @@
     <string name="include_timestamp_in_filename">Includeți marcajul temporal în numele fișierului</string>
     <string name="did_you_mean">V-ați referit la:</string>
     <string name="showing_results_for">Se afișează rezultate pentru:</string>
+    <string name="sort_channel">Numele canalului</string>
+    <string name="sort_size">Mărime</string>
+    <string name="ungrouped_channels">Negrupat</string>
+    <string name="ungrouped_channels_with_count">Negrupat (%1$d)</string>
+    <plurals name="sleep_timer_chip_minutes">
+        <item quantity="one">un minut</item>
+        <item quantity="few">%d minute</item>
+        <item quantity="other">%d minute</item>
+    </plurals>
+    <string name="long_press_fast_forward_summary">Redă videoclipul cu dublu de viteza atunci când atingi și țin de ecran.</string>
+    <string name="show_updates_summary">Verifică pentru actualizări automat de fiecare dată când aplicația este deschisă.</string>
+    <string name="long_press_fast_forward">Atinge pe lung pentru a derula repede</string>
 </resources>
