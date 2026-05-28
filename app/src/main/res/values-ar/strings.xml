@@ -193,7 +193,7 @@
     <string name="data_saver_mode_summary">تخطي الصور المصغرة والصور الأخرى</string>
     <string name="history_summary">سجل المشاهدة والبحث</string>
     <string name="general">عام</string>
-    <string name="general_summary">التنزيلات &amp; إعدادات متقدمة</string>
+    <string name="general_summary">التنزيلات و إعدادات متقدمة</string>
     <string name="caption_settings">التسميات التوضيحية</string>
     <string name="playerAudioQuality">جودة الصوت</string>
     <string name="worst_quality">أسوأ</string>
@@ -407,7 +407,7 @@
     <string name="dubbed_audio_track">مدبلجة</string>
     <string name="descriptive_audio_track">وصفي</string>
     <string name="default_or_unknown_audio_track">افتراضي أو غير معروف</string>
-    <string name="unknown_or_no_audio">غير معروف أو لا يوجد صوت</string>
+    <string name="unknown_or_no_audio">مجهول أو لا يوجد صوت</string>
     <string name="audio_track_format">%1$s - %2$s</string>
     <string name="unknown_audio_language">لغة صوت غير معروفة</string>
     <string name="continue_watching">مواصلة المشاهدة</string>
