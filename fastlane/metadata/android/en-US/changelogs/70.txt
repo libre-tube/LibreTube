@@ -1,0 +1,1 @@
+Fixed issues with video playback and channel pages due to recent YouTube API changes.
