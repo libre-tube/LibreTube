@@ -27,9 +27,9 @@
     <string name="app_theme">Tema</string>
     <string name="error">Algo salió mal.</string>
     <string name="empty">Debes introducir un nombre de usuario y una contraseña.</string>
-    <string name="notgmail">en cuenta de Piped</string>
+    <string name="notgmail">Esto es para tu cuenta Piped</string>
     <string name="defres">Resolución de video</string>
-    <string name="grid">Columnas de la cuadrícula</string>
+    <string name="grid">Columnas de la cuadrícula (retrato)</string>
     <string name="emptyList">No hay nada aquí.</string>
     <string name="areYouSure">¿Eliminar lista de reproducción?</string>
     <string name="playlistCreated">Lista de reproducción creada.</string>
@@ -453,7 +453,7 @@
     <string name="view_count">%1$s vistas</string>
     <string name="unsubscribe_snackbar_message">Desuscripción exitosa de %1$s</string>
     <string name="successfully_removed_from_playlist">Removido %1$s de la lista exitosamente.</string>
-    <string name="grid_landscape">Cuadrícula vertical</string>
+    <string name="grid_landscape">Cuadrícula vertical (panorámico)</string>
     <string name="music_artists">YT Music: Artistas</string>
     <string name="finished">Finalizados</string>
     <string name="same_as_fullscreen">Igual que pantalla completa</string>
@@ -485,4 +485,18 @@
     <string name="authentication">Autenticación</string>
     <string name="music">Música</string>
     <string name="did_you_mean">Quisiste decir:</string>
+    <string name="comments_count">Comentarios (%1$s)</string>
+    <string name="albums">Álbumes</string>
+    <string name="category_exclusive_access">Acceso Exclusivo</string>
+    <string name="category_hook">Gancho/Saludos</string>
+    <string name="show_updates">Comprobar actualizaciones automáticamente</string>
+    <string name="best_quality">Mejor</string>
+    <string name="repeat_mode_all">Repetir todo</string>
+    <string name="pip">PeP</string>
+    <string name="delete_all">¡Todas las descargas serán eliminadas!</string>
+    <string name="suggest_change_instance">La carga está tardando más de lo normal. Considera cambiar instancias</string>
+    <string name="import_watch_history">Importar historial de visualización</string>
+    <string name="audio_codecs">Códecs de audio</string>
+    <string name="copy_tooltip">Copiar</string>
+    <string name="segment">Segmento</string>
 </resources>
