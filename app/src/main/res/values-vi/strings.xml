@@ -5,7 +5,7 @@
     <string name="library">Thư viện</string>
     <string name="yes">Có</string>
     <string name="search_hint">Tìm kiếm</string>
-    <string name="videos">Các video</string>
+    <string name="videos">Các đoạn phim</string>
     <string name="subscribe">Đăng ký</string>
     <string name="unsubscribe">Hủy đăng ký</string>
     <string name="share">Chia sẻ</string>
@@ -28,7 +28,7 @@
     <string name="unknown_error">Lỗi mạng.</string>
     <string name="error">Đã xảy ra lỗi.</string>
     <string name="empty">Bạn phải nhập tên đăng nhập và mật khẩu.</string>
-    <string name="defres">Độ phân giải mặc định của video</string>
+    <string name="defres">Độ phân giải mặc định của đoạn phim</string>
     <string name="grid">Cột lưới (khổ dọc)</string>
     <string name="emptyList">Không có gì ở đây.</string>
     <string name="deletePlaylist">Xóa danh sách phát</string>
@@ -43,7 +43,7 @@
     <string name="changeLanguage">Ngôn ngữ</string>
     <string name="systemLanguage">Ngôn ngữ hệ thống</string>
     <string name="instance">Máy chủ</string>
-    <string name="videoCount">%1$d video</string>
+    <string name="videoCount">%1$d đoạn phim</string>
     <string name="website">Trang web</string>
     <string name="noInternet">Kết nối với mạng trước.</string>
     <string name="retry">Thử lại</string>
@@ -56,7 +56,7 @@
     <string name="search_history">Lịch sử tìm kiếm</string>
     <string name="clear_history">Xóa lịch sử</string>
     <string name="music_songs">Bài hát trên YT Music</string>
-    <string name="music_videos">Videos âm nhạc trên YT Music</string>
+    <string name="music_videos">Các thước phim âm nhạc trên YT Music</string>
     <string name="music_albums">An bom nhạc trên YT Music</string>
     <string name="music_playlists">Danh sách nhạc trên YT Music</string>
     <string name="sponsorblock">Chặn quảng cáo được tài trợ</string>
@@ -100,7 +100,7 @@
     <string name="invalid_url">Hãy nhập một URL mà hoạt đông được</string>
     <string name="darkTheme">Tối</string>
     <string name="lightTheme">Sáng</string>
-    <string name="category_filler_summary">Dành cho các cảnh được thêm vào để bổ sung hoặc hài hước không bắt buộc để hiểu nội dung chính của video</string>
+    <string name="category_filler_summary">Dành cho các cảnh được thêm vào để bổ sung hoặc hài hước không bắt buộc để hiểu nội dung chính của thước phim</string>
     <string name="category_music_offtopic">Âm nhạc: Phần không có nhạc</string>
     <string name="category_filler">Tình tiết cho có / Câu đùa</string>
     <string name="category_preview">Xem trước/Tóm tắt</string>
@@ -121,7 +121,7 @@
     <string name="server_error">Có vẻ như có một vấn đề với máy chủ được chọn. Hãy thử một máy chủ Piped khác.</string>
     <string name="category_segments">Các phân đoạn quảng cáo</string>
     <string name="category_sponsor_summary">Quảng cáo có trả tiền, giới thiệu có trả tiền và quảng cáo trực tiếp. Không phải để tự quảng cáo hoặc gửi lời cảm ơn miễn phí tới các hoạt động chính nghĩa / người sáng tạo / trang web / sản phẩm mà họ thích</string>
-    <string name="category_intro_summary">Khoảng thời gian không có chứa nội dung của video. Có thể là tạm ngưng, khung tĩnh, hoạt ảnh lặp lại. Không nên sử dụng cho các phân đoạn chuyển cảnh có chứa thông tin</string>
+    <string name="category_intro_summary">Khoảng thời gian không có chứa nội dung của thước phim. Có thể là tạm ngưng, khung tĩnh, hoạt ảnh lặp lại. Không nên sử dụng cho các phân đoạn chuyển cảnh có chứa thông tin</string>
     <string name="category_music_offtopic_summary">Chỉ sử dụng cho các video âm nhạc. Nó bao gồm các phần không phải là một phần của bản phối chính thức trong video. Chung quy lại, video phải giống với Spotify hoặc bất kỳ bản phối khác càng nhiều càng tốt, giảm nói chuyện hoặc các yếu tố gây xao nhãng khác</string>
     <string name="buffering_goal">Tải trước</string>
     <string name="shareTo">Chia sẻ URL tới</string>
@@ -277,7 +277,7 @@
     <string name="livestreams">Trực tiếp</string>
     <string name="defaultIconLight">Light mặc định</string>
     <string name="auto_quality">Tự động</string>
-    <string name="limit_to_runtime">Giới hạn thực thi</string>
+    <string name="limit_to_runtime">Theo giới hạn môi trường</string>
     <string name="trends">Xu hướng</string>
     <string name="featured">Tính năng</string>
     <string name="trending">Xu hướng hiện tại</string>
@@ -300,8 +300,8 @@
     <string name="pause">Tạm ngừng</string>
     <string name="pinch_control">Kiểm soát chụm</string>
     <string name="replies">Phản hồi</string>
-    <string name="uploaderAndVideoCount">%1$s • %2$d video</string>
-    <string name="subscriberAndVideoCounts">%1$s người đăng ký • %2$d video</string>
+    <string name="uploaderAndVideoCount">%1$s • %2$d đoạn phim</string>
+    <string name="subscriberAndVideoCounts">­%1$s người đăng ký • %2$d đoạn phim</string>
     <string name="normal_views">%1$s lượt xem%2$s</string>
     <string name="unknown">Không xác định</string>
     <string name="resume">Tiếp tục</string>
