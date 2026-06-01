@@ -483,10 +483,10 @@
     <string name="audio_track_format">%1$s - %2$s</string>
     <string name="unknown_audio_language">Unknown audio language</string>
     <string name="unknown_audio_track_type">Unknown audio track type</string>
-    <string name="original_or_main_audio_track">original or main</string>
-    <string name="dubbed_audio_track">dubbed</string>
-    <string name="descriptive_audio_track">descriptive</string>
-    <string name="default_or_unknown_audio_track">default or unknown</string>
+    <string name="original_or_main_audio_track">Original</string>
+    <string name="dubbed_audio_track">Dubbed</string>
+    <string name="descriptive_audio_track">Audio Description</string>
+    <string name="default_or_unknown_audio_track">Default</string>
     <string name="unknown_or_no_audio">unknown or no audio</string>
     <string name="continue_watching">Continue watching</string>
     <string name="screen_orientation">Screen orientation</string>
