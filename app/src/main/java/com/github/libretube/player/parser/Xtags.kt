@@ -7,22 +7,25 @@ import misc.Common.XTags
  * Extra tags about a format.
  */
 class Xtags {
-    private var enabledFeatures: List<String> = emptyList()
+    private var values: Map<String, String>
 
     constructor(xtags: String) {
         val xtags = XTags.parseFrom(Base64.decode(xtags, Base64.URL_SAFE))
-        xtags?.xtagsList?.filter { it.value == "1" }?.map { it.key }?.let {
-            enabledFeatures = it
-        }
+        values = xtags?.xtagsList?.associate { it.key to it.value }.orEmpty()
     }
+
+    /**
+     * Returns whether a feature is enabled.
+     */
+    private fun isEnabled(feature: String) = values[feature] == "1"
 
     /**
      *  Whether the format uses [dynamic range compression](https://en.wikipedia.org/wiki/Dynamic_range_compression).
      */
-    fun isDrcAudio() = enabledFeatures.contains("drc")
+    fun isDrcAudio() = isEnabled("drc")
 
     /**
      *  Whether the audio/voices are artificially boosted.
      */
-    fun isVoiceBoosted() = enabledFeatures.contains("vb")
+    fun isVoiceBoosted() = isEnabled("vb")
 }
