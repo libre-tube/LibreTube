@@ -312,7 +312,7 @@
     <string name="theme_monochrome">Azaldılmış saya</string>
     <string name="play_latest_videos">Ən son videoları oynat</string>
     <string name="nothing_selected">Heç nə seçilməyib!</string>
-    <string name="color_violet">Bütöv bənövşəyi</string>
+    <string name="color_violet">Hərtərəfli bənövşəyi</string>
     <string name="failed_fetching_instances">Mövcud instansiyaları əldə etmək mümkün olmadı.</string>
     <string name="hide_watched_from_feed">Artıq baxılan videoları gizlət</string>
     <string name="playlistUrl">Oynatma Siyahısı URL\'si</string>
