@@ -156,7 +156,7 @@
     <string name="reset_message">Нулирай всички настройки и излизане?</string>
     <string name="autoplay_playlists_summary">Автоматично изпълни следващ видеоклип в плейлисти, независимо от избраната настройка за автоматично пускане</string>
     <string name="dearrow_summary">Покажи по-точни и по-малко сензационни заглавия и миниатюри. Увеличава времето за зареждане</string>
-    <string name="default_or_unknown_audio_track">по подразбиране или неизвестен</string>
+    <string name="default_or_unknown_audio_track">По подразбиране</string>
     <string name="export_subscriptions_to">Изнеси абонаменти към</string>
     <string name="shareTo">Сподели URL към</string>
     <string name="disable_proxy">Деактивирай Piped прокси</string>
@@ -228,7 +228,7 @@
     <string name="segment">Сегмент</string>
     <string name="download_completed">Изтеглянето завърши</string>
     <string name="auth_instance">Инстанция за удостоверяване</string>
-    <string name="dubbed_audio_track">дублиран</string>
+    <string name="dubbed_audio_track">Дублиран</string>
     <string name="none">Нищо</string>
     <string name="limit_to_runtime">Ограничете до време на изпълнение</string>
     <string name="category_sponsor_summary">Платена промоция, платени реферали и директни реклами. Не за самореклама или безплатни искрени възгласи към каузи, създатели, уебсайтове и продукти</string>
@@ -316,7 +316,7 @@
     <string name="add_to_queue">Добави към опашката</string>
     <string name="color_yellow">Жълт</string>
     <string name="captions">Надписи</string>
-    <string name="original_or_main_audio_track">оригинален или основен</string>
+    <string name="original_or_main_audio_track">Оригинал</string>
     <string name="caption_settings">Надписи</string>
     <string name="import_playlists">Внеси плейлисти</string>
     <string name="tooltip_repeat">Повторение</string>
@@ -446,7 +446,7 @@
     <string name="tooltip_sort">Вид</string>
     <string name="duration">Продължителност</string>
     <string name="tooltip_watch_position">Позиция на гледане</string>
-    <string name="descriptive_audio_track">нагледен</string>
+    <string name="descriptive_audio_track">Аудио описание</string>
     <string name="seek_increment">Търсене напред</string>
     <string name="downvote">Долу</string>
     <string name="color">Цвят</string>
