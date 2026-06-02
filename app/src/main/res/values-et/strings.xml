@@ -409,7 +409,7 @@
     <string name="download_playlist">Laadi esitusloend alla</string>
     <string name="default_language">Vaikimisi</string>
     <string name="behavior_when_minimized">Rakenduse käitumine minimeeritud vaates</string>
-    <string name="descriptive_audio_track">kirjeldav</string>
+    <string name="descriptive_audio_track">Helikirjeldus</string>
     <string name="sb_invalid_segment">Vigane segmendi algus või lõpp</string>
     <string name="segment_type">Segmendi tüüp</string>
     <string name="contribute_to_sponsorblock">Osale SponsorBlocki sisu täiendamisel</string>
@@ -435,7 +435,7 @@
     <string name="export_playlists_to">Vali rakendus, mille jaoks ekspordid esitusloendid</string>
     <string name="home_tab_content">Avalehe sisu</string>
     <string name="show_search_suggestions">Näita otsingusoovitusi</string>
-    <string name="original_or_main_audio_track">algne või põhiline</string>
+    <string name="original_or_main_audio_track">Algne</string>
     <string name="unknown_or_no_audio">teadmata või heliriba puudub</string>
     <string name="continue_watching">Jätka vaatamist</string>
     <string name="screen_orientation">Ekraani paigutus</string>
@@ -461,8 +461,8 @@
     <string name="import_subscriptions_from">Vali imporditavate tellimuste allikas</string>
     <string name="tooltip_sponsorblock">Lülita SponsorBlocki kasutamine sisse/välja</string>
     <string name="remove_watched_videos">Eemalda vaadatud videod</string>
-    <string name="default_or_unknown_audio_track">vaikimisi või teadmata</string>
-    <string name="dubbed_audio_track">dubleeritud</string>
+    <string name="default_or_unknown_audio_track">Vaikimisi</string>
+    <string name="dubbed_audio_track">Dubleeritud</string>
     <string name="successfully_removed_from_playlist">„%1$s“ eemaldamine esitusloendist õnnestus.</string>
     <string name="watched">Vaadatud</string>
     <string name="uptime">%.2f%% töövõimeaeg</string>
