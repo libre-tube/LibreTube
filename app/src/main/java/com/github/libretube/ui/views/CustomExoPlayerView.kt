@@ -1121,9 +1121,7 @@ class CustomExoPlayerView(
                 .map {
                     PlayerHelper.getAudioTrackNameFromFormat(context, it)
                 },
-                preselectedItem = selectedAudioLanguageAndRoleFlags?.let {
-                    PlayerHelper.getAudioTrackNameFromFormat(context, it)
-                },
+                preselectedItem = getCurrentAudioTrackTitle(),
             ) { index ->
                 val selectedAudioFormat = audioLanguagesAndRoleFlags[index]
                 player.sendCustomCommand(
