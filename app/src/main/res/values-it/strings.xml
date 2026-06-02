@@ -402,11 +402,11 @@
     <string name="unknown_audio_language">Lingua audio sconosciuta</string>
     <string name="unknown_audio_track_type">Tipo di traccia audio sconosciuta</string>
     <string name="audio_track_format">%1$s - %2$s</string>
-    <string name="descriptive_audio_track">descrittivo</string>
-    <string name="default_or_unknown_audio_track">predefinito o sconosciuto</string>
+    <string name="descriptive_audio_track">Descrizione audio</string>
+    <string name="default_or_unknown_audio_track">Predefinito</string>
     <string name="unknown_or_no_audio">sconosciuto o senza audio</string>
-    <string name="dubbed_audio_track">doppiato</string>
-    <string name="original_or_main_audio_track">originale o principale</string>
+    <string name="dubbed_audio_track">Doppiato</string>
+    <string name="original_or_main_audio_track">Originale</string>
     <string name="continue_watching">Continua a guardare</string>
     <string name="dearrow">Attiva DeArrow</string>
     <string name="dearrow_summary">Mostra titoli e miniature più accurati e meno sensazionalistici. Aumenta i tempi di caricamento</string>
