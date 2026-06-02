@@ -1114,17 +1114,19 @@ class CustomExoPlayerView(
                 listener = null
             )
         } else {
-            baseBottomSheet.setSimpleItems(
-                audioLanguagesAndRoleFlags
+            val sortedAudioTracks = audioLanguagesAndRoleFlags
                 // audio tracks have only a single flag set
                 // ordered by main, dubbed, audio descriptive
                 .sortedBy { it.second }
+
+            baseBottomSheet.setSimpleItems(
+                sortedAudioTracks
                 .map {
                     PlayerHelper.getAudioTrackNameFromFormat(context, it)
                 },
                 preselectedItem = getCurrentAudioTrackTitle(),
             ) { index ->
-                val selectedAudioFormat = audioLanguagesAndRoleFlags[index]
+                val selectedAudioFormat = sortedAudioTracks[index]
                 player.sendCustomCommand(
                     AbstractPlayerService.runPlayerActionCommand, bundleOf(
                         PlayerCommand.SET_AUDIO_ROLE_FLAGS.name to selectedAudioFormat.second
