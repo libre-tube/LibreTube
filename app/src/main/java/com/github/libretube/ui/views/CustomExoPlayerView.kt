@@ -710,7 +710,7 @@ class CustomExoPlayerView(
         }
 
         // The player reference should be not changed between the null check
-        // and its access, so a non null assertion should be safe here
+        // and its access, so a non-null assertion should be safe here
         val selectedAudioLanguagesAndRoleFlags =
             PlayerHelper.getAudioLanguagesAndRoleFlagsFromTrackGroups(
                 player!!.currentTracks.groups,
@@ -739,9 +739,10 @@ class CustomExoPlayerView(
             return context.getString(R.string.default_or_unknown_audio_track)
         }
 
+
         return PlayerHelper.getAudioTrackNameFromFormat(
             context,
-            firstSelectedAudioFormat
+            firstSelectedAudioFormat,
         )
     }
 
