@@ -98,7 +98,7 @@ object DashHelper {
             adapSetElement.setAttribute("subsegmentAlignment", "true")
 
             if (adapSet.audioTrackId != null) {
-                adapSetElement.setAttribute("lang", adapSet.audioTrackId.substring(0, 2))
+                adapSetElement.setAttribute("lang", adapSet.audioTrackId.split('.')[0])
             } else if (adapSet.audioLocale != null) {
                 adapSetElement.setAttribute("lang", adapSet.audioLocale)
             }
