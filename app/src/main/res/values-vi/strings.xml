@@ -57,7 +57,7 @@
     <string name="clear_history">Xóa lịch sử</string>
     <string name="music_songs">Bài hát trên YT Music</string>
     <string name="music_videos">Các đoạn phim âm nhạc trên YT Music</string>
-    <string name="music_albums">An bom nhạc trên YT Music</string>
+    <string name="music_albums">Bộ sưu tập nhạc trên YT Music</string>
     <string name="music_playlists">Danh sách nhạc trên YT Music</string>
     <string name="sponsorblock">Chặn quảng cáo được tài trợ</string>
     <string name="segment_skipped">Đã bỏ qua phân đoạn quảng cáo</string>
@@ -340,8 +340,8 @@
     <string name="continue_watching">Tiếp tục xem</string>
     <string name="backup_restore_summary">Nhập &amp; xuất danh sách đăng ký, danh sách phát, …</string>
     <string name="privacy_alert">Cảnh báo về quyền riêng tư</string>
-    <string name="original_or_main_audio_track">bản gốc hoặc chính</string>
-    <string name="default_or_unknown_audio_track">mặc định hoặc không xác định</string>
+    <string name="original_or_main_audio_track">Bản gốc</string>
+    <string name="default_or_unknown_audio_track">Mặc định</string>
     <string name="mark_as_unwatched">Đánh dấu là chưa xem</string>
     <string name="duration">Thời lượng</string>
     <string name="duration_reversed">Thời lượng (đảo ngược)</string>
@@ -393,8 +393,8 @@
     <string name="manual">Thủ công</string>
     <string name="unknown_audio_language">Ngôn ngữ âm thanh không xác định</string>
     <string name="unknown_audio_track_type">Loại ghi âm thanh không xác định</string>
-    <string name="dubbed_audio_track">lồng tiếng</string>
-    <string name="descriptive_audio_track">mô tả</string>
+    <string name="dubbed_audio_track">Lồng tiếng</string>
+    <string name="descriptive_audio_track">Mô tả âm thanh</string>
     <string name="unknown_or_no_audio">không xác định hoặc không có âm thanh</string>
     <string name="category">Loại</string>
     <string name="change_playlist_description">Thay đổi mô tả danh sách phát</string>
@@ -498,7 +498,7 @@
     <string name="contribute_to_dearrow">Đóng góp cho DeArrow</string>
     <string name="title">Tiêu đề</string>
     <string name="import_temp_playlist">Nhập danh sách phát tạm thời?</string>
-    <string name="import_temp_playlist_summary">Bạn có muốn tạo danh sách phát mới có tên \'%1$s\' không? Danh sách phát sẽ chứa %2$d video.</string>
+    <string name="import_temp_playlist_summary">Bạn có muốn tạo danh sách phát mới có tên \'%1$s\' không? Danh sách phát sẽ chứa %2$d đoạn phim.</string>
     <string name="dialog_play_offline_body">Bạn có muốn phát đoạn phim từ mục tải về?</string>
     <string name="view_count">%1$s lượt xem</string>
     <string name="delete_only_watched_videos">Chỉ xóa những đoạn phim đã xem</string>
@@ -540,7 +540,7 @@
         <item quantity="other">%d phút</item>
     </plurals>
     <string name="external_download_provider">Dịch vụ tải đoạn phim bên ngoài</string>
-    <string name="external_download_provider_summary">Điền tên gói ứng dụng (ID ứng dụng) mà bạn muốn dùng để tải video. Bỏ trống để dùng dịch vụ tải đoạn phim có sẵn của LibreTube.</string>
+    <string name="external_download_provider_summary">Điền id ứng dụng mà bạn muốn dùng để tải đoạn phim. Bỏ trống để dùng dịch vụ tải đoạn phim có sẵn của LibreTube.</string>
     <string name="local_stream_extraction">Trính xuất đoạn phim từ nguồn</string>
     <string name="local_stream_extraction_summary">Trực tiếp trích xuất thông tin phát lại của đoạn phim từ YouTube mà không dùng đến Piped.</string>
     <string name="local_ryd">Trích xuất từ Return Youtube Dislike</string>
