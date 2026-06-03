@@ -400,10 +400,10 @@
     <string name="stop">Dayandır</string>
     <string name="audio_track_format">%1$s - %2$s</string>
     <string name="unknown_audio_track_type">Naməlum səs axını növü</string>
-    <string name="original_or_main_audio_track">orijinal və ya əsas</string>
-    <string name="dubbed_audio_track">dublyaj edilib</string>
-    <string name="descriptive_audio_track">təsviri</string>
-    <string name="default_or_unknown_audio_track">standart və ya naməlum</string>
+    <string name="original_or_main_audio_track">Orijinal</string>
+    <string name="dubbed_audio_track">Dublyaj olunub</string>
+    <string name="descriptive_audio_track">Səs Təsviri</string>
+    <string name="default_or_unknown_audio_track">İlkin</string>
     <string name="unknown_or_no_audio">naməlum və ya səs yoxdur</string>
     <string name="unknown_audio_language">Naməlum səs dili</string>
     <string name="continue_watching">Baxmağa davam et</string>
