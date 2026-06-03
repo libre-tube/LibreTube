@@ -400,10 +400,10 @@
     <string name="audio_track_format">%1$s - %2$s</string>
     <string name="unknown_audio_track_type">未知音轨类型</string>
     <string name="unknown_audio_language">未知音频语言</string>
-    <string name="original_or_main_audio_track">原始或主音轨</string>
-    <string name="dubbed_audio_track">配音的</string>
-    <string name="descriptive_audio_track">描述性</string>
-    <string name="default_or_unknown_audio_track">默认或未知</string>
+    <string name="original_or_main_audio_track">原始</string>
+    <string name="dubbed_audio_track">配音</string>
+    <string name="descriptive_audio_track">音频描述</string>
+    <string name="default_or_unknown_audio_track">默认</string>
     <string name="unknown_or_no_audio">未知或无音频</string>
     <string name="continue_watching">继续观看</string>
     <string name="dearrow">启用 DeArrow</string>
