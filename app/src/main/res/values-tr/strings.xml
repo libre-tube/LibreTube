@@ -405,13 +405,13 @@
     <string name="duration_span">Süre: %1$s</string>
     <string name="audio_track_format">%1$s - %2$s</string>
     <string name="unknown_audio_language">Bilinmeyen ses dili</string>
-    <string name="dubbed_audio_track">dublajlı</string>
+    <string name="dubbed_audio_track">Dublajlı</string>
     <string name="visibility">Görünürlük</string>
     <string name="visibility_public">Herkese açık</string>
     <string name="visibility_unlisted">Listelenmemiş</string>
     <string name="unknown_audio_track_type">Bilinmeyen ses parçası türü</string>
-    <string name="descriptive_audio_track">açıklayıcı</string>
-    <string name="default_or_unknown_audio_track">Varsayılan veya bilinmeyen</string>
+    <string name="descriptive_audio_track">Sesli Açıklayıcı</string>
+    <string name="default_or_unknown_audio_track">Varsayılan</string>
     <string name="unknown_or_no_audio">bilinmeyen veya ses yok</string>
     <string name="group_name_error_exists">Lütfen benzersiz bir ad seçin</string>
     <string name="resolution_limited">sınırlı</string>
@@ -432,7 +432,7 @@
     <string name="player_channel_description">Oynatılırken bir bildirim göster.</string>
     <string name="tooltip_scroll_to_top">En yukarı git</string>
     <string name="segment_type">Bölüm türü</string>
-    <string name="original_or_main_audio_track">orijinal veya ana</string>
+    <string name="original_or_main_audio_track">Orijinal</string>
     <string name="tooltip_repeat">Tekrarla</string>
     <string name="tooltip_fullscreen">Tam Ekran</string>
     <string name="tooltip_sponsorblock">SponsorBlock\'u aç/kapa</string>
