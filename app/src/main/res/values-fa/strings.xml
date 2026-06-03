@@ -385,11 +385,11 @@
     <string name="choose_instance_long">لطفاً نمونه‌ای از پایپد را برای استفاده برگزینید. نمونه پایپد به‌عنوان مرد میانی بین شما و یوتوب عمل خواهد کرد. این نمونه‌ها در مکان‌های فیزیکی مختلفی قرار دارند - که با پرچم(های) کشورشان مشخص شده‌اند. نمونه‌هایی که از لحاظ فیزیکی به شما نزدیک‌تر هستند احتمالا سریع‌تر از نمونه‌هایی هستند که از شما دور‌ترند. می‌توانید در هر زمانی نمونه‌تان را تغییر دهید.</string>
     <string name="dearrow">به کار انداختن DeArrow</string>
     <string name="unknown_audio_track_type">گونهٔ قطعهٔ صوتی ناشناخته</string>
-    <string name="dubbed_audio_track">دوبله شده</string>
-    <string name="descriptive_audio_track">توصیفی</string>
-    <string name="default_or_unknown_audio_track">پیش‌فرض یا ناشناخته</string>
+    <string name="dubbed_audio_track">دوبله</string>
+    <string name="descriptive_audio_track">شرح صوتی</string>
+    <string name="default_or_unknown_audio_track">پیش‌گزیده</string>
     <string name="unknown_or_no_audio">ناشناخته یا بدون صوت</string>
-    <string name="original_or_main_audio_track">اولیه یا اصلی</string>
+    <string name="original_or_main_audio_track">اصلی</string>
     <string name="chapters_videoHighlight">بخش برجسته ویدئو</string>
     <string name="off">خاموش</string>
     <string name="manual">دستی</string>
