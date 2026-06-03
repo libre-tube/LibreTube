@@ -246,8 +246,8 @@
     <string name="alphabetic">Abecedne</string>
     <string name="alphabetic_reversed">Abecedne (v opačnom poradí)</string>
     <string name="home_tab_content">Obsah karty Domov</string>
-    <string name="original_or_main_audio_track">pôvodný alebo základný</string>
-    <string name="unknown_audio_track_type">Neznámy typ zvukového streamu</string>
+    <string name="original_or_main_audio_track">Pôvodná</string>
+    <string name="unknown_audio_track_type">Neznámy typ zvukovej stopy</string>
     <string name="finished">Dokončené</string>
     <string name="dearrow">Povoliť DeArrow</string>
     <string name="import_playlists_from">Importovať zoznamy skladieb z</string>
@@ -295,9 +295,9 @@
     <string name="visibility_public">Verejné</string>
     <string name="visibility_unlisted">Mimo zoznam</string>
     <string name="import_subscriptions_from">Importovať odbery z</string>
-    <string name="default_or_unknown_audio_track">štandardný alebo neznámy</string>
-    <string name="descriptive_audio_track">popisný</string>
-    <string name="dubbed_audio_track">dabovaný</string>
+    <string name="default_or_unknown_audio_track">Východzia</string>
+    <string name="descriptive_audio_track">Audio popis</string>
+    <string name="dubbed_audio_track">Dabovaná</string>
     <string name="autoplay_playlists">Automaticky prehrať zoznamy skladieb</string>
     <string name="audio_only_mode">Iba zvuk</string>
     <string name="sleep_timer">Časovač spánku</string>
