@@ -136,7 +136,7 @@
     <string name="group_name_error_empty">Settu inn heiti</string>
     <string name="sort_by">Raða eftir</string>
     <string name="tooltip_repeat">Endurtaka</string>
-    <string name="descriptive_audio_track">lýsandi</string>
+    <string name="descriptive_audio_track">Lýsing</string>
     <string name="tooltip_watch_position">Staðsetning áhorfs</string>
     <string name="continue_watching">Halda áfram að horfa</string>
     <string name="remember_playback_speed">Muna afspilunarhraða</string>
@@ -418,9 +418,9 @@
     <string name="play_all">Spila allt</string>
     <string name="unknown_audio_language">Óþekkt tungumál hljóðs</string>
     <string name="unknown_audio_track_type">Óþekkt tegund hljóðrásar</string>
-    <string name="dubbed_audio_track">yfirtalað</string>
-    <string name="original_or_main_audio_track">upprunalegt eða aðal</string>
-    <string name="default_or_unknown_audio_track">sjálfgefið eða óþekkt</string>
+    <string name="dubbed_audio_track">Yfirtalað</string>
+    <string name="original_or_main_audio_track">Upprunalegt</string>
+    <string name="default_or_unknown_audio_track">Ssjálfgefið</string>
     <string name="disable_proxy_summary">Náðu í myndskeið og myndir beint af netþjónum YouTube. Virkjaðu þennan valkost einungis ef þú notar alltaf VPN</string>
     <string name="copy_tooltip">Afrita</string>
     <string name="disable_proxy">Gera Piped-milliþjón óvirkan</string>
