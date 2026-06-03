@@ -389,7 +389,7 @@
     <string name="change_playlist_description">Modifier la description de la playlist</string>
     <string name="group_name_error_exists">Veuillez choisir un nom unique</string>
     <string name="dearrow_summary">Afficher des titres et des miniatures plus précis et moins sensationnalistes. Augmente les temps de chargement</string>
-    <string name="default_or_unknown_audio_track">par défaut ou inconnu</string>
+    <string name="default_or_unknown_audio_track">Par défaut</string>
     <string name="resolution_limited">limité</string>
     <string name="tooltip_close">Fermer</string>
     <string name="unknown_or_no_audio">inconnu ou pas d’audio</string>
@@ -405,7 +405,7 @@
     <string name="remove_watched_videos">Supprimer les vidéos visionnées</string>
     <string name="tooltip_play">Lire</string>
     <string name="category_highlight">Afficher le moment fort de la vidéo</string>
-    <string name="dubbed_audio_track">doublée</string>
+    <string name="dubbed_audio_track">Doublé</string>
     <string name="category_highlight_summary">Il peut s\'agir du titre annoncé, de la miniature ou de la partie la plus intéressante de la vidéo. Vous pouvez y accéder en appuyant dessus dans la section des chapitres.</string>
     <string name="uploader_name">Nom de l’Uploader</string>
     <string name="tooltip_filter">Filtre</string>
@@ -422,7 +422,7 @@
     <string name="dearrow">Activer DeArrow</string>
     <string name="segment_type">Type de segment</string>
     <string name="visibility_public">Public</string>
-    <string name="original_or_main_audio_track">original ou principal</string>
+    <string name="original_or_main_audio_track">Original</string>
     <string name="tooltip_repeat">Répéter</string>
     <string name="audio_track_format">%1$s - %2$s</string>
     <string name="tooltip_fullscreen">Plein écran</string>
@@ -446,7 +446,7 @@
     <string name="invalid_color">Valeur de couleur invalide !</string>
     <string name="tooltip_sort">Trier</string>
     <string name="tooltip_watch_position">Position de lecture</string>
-    <string name="descriptive_audio_track">descriptif</string>
+    <string name="descriptive_audio_track">Description Audio</string>
     <string name="color">Couleur</string>
     <string name="show_search_suggestions">Afficher les suggestions de recherche</string>
     <string name="no_fullscreen_resolution">Résolution sans plein écran</string>
