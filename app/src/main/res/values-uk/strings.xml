@@ -401,11 +401,11 @@
     <string name="chapters_videoHighlight">Виділене у відео</string>
     <string name="stop">Зупинити</string>
     <string name="unknown_audio_language">Невідома мова звукової доріжки</string>
-    <string name="original_or_main_audio_track">оригінальний або основний</string>
-    <string name="dubbed_audio_track">дубльований</string>
+    <string name="original_or_main_audio_track">Оригінальна</string>
+    <string name="dubbed_audio_track">Дубльована</string>
     <string name="unknown_or_no_audio">невідомий або відсутній звук</string>
-    <string name="descriptive_audio_track">описовий</string>
-    <string name="default_or_unknown_audio_track">за замовчуванням або невідомо</string>
+    <string name="descriptive_audio_track">Аудіоопис</string>
+    <string name="default_or_unknown_audio_track">Типово</string>
     <string name="audio_track_format">%1$s - %2$s</string>
     <string name="unknown_audio_track_type">Невідомий тип звукової доріжки</string>
     <string name="continue_watching">Продовжити перегляд</string>
