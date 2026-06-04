@@ -111,7 +111,7 @@
     <string name="appearance_summary">Змініть застосунок, так, як вам до вподоби</string>
     <string name="live">Наживо</string>
     <string name="advanced">Розширені</string>
-    <string name="defaultIcon">Звичайна</string>
+    <string name="defaultIcon">За замовчуванням</string>
     <string name="legacyIcon">Втрачений спадок</string>
     <string name="gradientIcon">Плавний градієнт</string>
     <string name="flameIcon">Летючий вогонь</string>
@@ -142,13 +142,13 @@
     <string name="downloading">Завантаження…</string>
     <string name="turnInternetOn">Увімкніть Wi-Fi або мобільні дані для з\'єднання з інтернетом.</string>
     <string name="open">Відкрити…</string>
-    <string name="reset">Відновити до стандартних налаштувань</string>
+    <string name="reset">Відновити налаштування за замовчуванням</string>
     <string name="reset_message">Скинути всі налаштування та вийти з облікового запису?</string>
     <string name="deleteAccount">Видалити обліковий запис</string>
     <string name="deleteAccount_summary">Видалити ваш обліковий запис Piped</string>
     <string name="restore">Відновити</string>
     <string name="require_restart_message">Перезапустіть застосунок, щоб застосувати нові зміни.</string>
-    <string name="player_summary">Налаштування та поведінка програвача</string>
+    <string name="player_summary">Значення за замовчуванням та поведінка</string>
     <string name="pauseOnScreenOff">Автопауза</string>
     <string name="pauseOnScreenOff_summary">Призупиняти відтворення, коли екран вимкнено</string>
     <string name="customInstance_summary">Додати…</string>
@@ -291,7 +291,7 @@
     <string name="swipe_controls">Керування посуваннями</string>
     <string name="swipe_controls_summary">Проведіть по екрану, щоб відрегулювати яскравість і гучність у повноекранному режимі</string>
     <string name="volume">Гучність</string>
-    <string name="defaults">Типові</string>
+    <string name="defaults">Значення за замовчуванням</string>
     <string name="double_tap_seek">Двічі торкніться, щоб шукати</string>
     <string name="double_tap_seek_summary">Двічі торкніться ліворуч або праворуч, щоб перемотати назад або вперед</string>
     <string name="no_comments_available">До цього відео немає коментарів.</string>
@@ -401,11 +401,11 @@
     <string name="chapters_videoHighlight">Виділене у відео</string>
     <string name="stop">Зупинити</string>
     <string name="unknown_audio_language">Невідома мова звукової доріжки</string>
-    <string name="original_or_main_audio_track">Оригінальна</string>
-    <string name="dubbed_audio_track">Дубльована</string>
+    <string name="original_or_main_audio_track">Оригінал</string>
+    <string name="dubbed_audio_track">Дубльований</string>
     <string name="unknown_or_no_audio">невідомий або відсутній звук</string>
     <string name="descriptive_audio_track">Аудіоопис</string>
-    <string name="default_or_unknown_audio_track">Типово</string>
+    <string name="default_or_unknown_audio_track">За замовчуванням</string>
     <string name="audio_track_format">%1$s - %2$s</string>
     <string name="unknown_audio_track_type">Невідомий тип звукової доріжки</string>
     <string name="continue_watching">Продовжити перегляд</string>
@@ -487,7 +487,7 @@
     <string name="delete_all">Всі завантаження будуть видалені!</string>
     <string name="enqueueing_playlist_download">Додати відео зі списку відтворення
 \n%1$s до черги на завантаження</string>
-    <string name="default_language">Типова</string>
+    <string name="default_language">За замовчуванням</string>
     <string name="download_playlist">Завантажити список відтворення</string>
     <string name="download_playlist_note">Виберіть максимальну якість завантажуваного аудіо/відео. Субтитри будуть завантажені, лише якщо вони доступні.</string>
     <string name="enqueue_playlist_description">Показує сповіщення під час створення черги на завантаження відео зі списку відтворення.</string>
