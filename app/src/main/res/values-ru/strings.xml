@@ -149,7 +149,7 @@
     <string name="instance_frontend_url">Ссылка на сервер (необязательно)</string>
     <string name="quality">Качество</string>
     <string name="behavior">Поведение</string>
-    <string name="player_summary">Настройки и поведение</string>
+    <string name="player_summary">Значения по умолчанию и поведение</string>
     <string name="seek_increment">Шаг перемотки</string>
     <string name="pauseOnScreenOff">Автоматическая пауза</string>
     <string name="pauseOnScreenOff_summary">Останавливать воспроизведение при отключении экрана</string>
@@ -291,7 +291,7 @@
     <string name="auto">Авто</string>
     <string name="swipe_controls_summary">Регулирование яркости и громкости жестами прокрутки в полноэкранном режиме</string>
     <string name="swipe_controls">Управление прокруткой</string>
-    <string name="defaults">По умолчанию</string>
+    <string name="defaults">Значение по умолчанию</string>
     <string name="no_comments_available">Это видео не имеет комментариев.</string>
     <string name="double_tap_seek">Двойное нажатие для перемотки</string>
     <string name="double_tap_seek_summary">Нажмите дважды слева или справа, чтобы перемотать назад или вперед</string>
@@ -403,10 +403,10 @@
     <string name="unknown_audio_language">Неизвестный язык аудиодорожки</string>
     <string name="audio_track_format">%1$s - %2$s</string>
     <string name="unknown_audio_track_type">Неизвестный тип звуковой дорожки</string>
-    <string name="descriptive_audio_track">описательная</string>
-    <string name="dubbed_audio_track">дублированная</string>
-    <string name="default_or_unknown_audio_track">по умолчанию или неизвестная</string>
-    <string name="original_or_main_audio_track">оригинальная или основная</string>
+    <string name="descriptive_audio_track">Аудиоописание</string>
+    <string name="dubbed_audio_track">Дублированный</string>
+    <string name="default_or_unknown_audio_track">По умолчанию</string>
+    <string name="original_or_main_audio_track">Оригинал</string>
     <string name="unknown_or_no_audio">неизвестно или нет звука</string>
     <string name="continue_watching">Продолжить просмотр</string>
     <string name="dearrow">Включить DeArrow</string>
