@@ -403,10 +403,10 @@
     <string name="chapters_videoHighlight">ملخصات الفيديو</string>
     <string name="stop">إيقاف</string>
     <string name="unknown_audio_track_type">نوع مسار صوتي غير معروف</string>
-    <string name="original_or_main_audio_track">أصلي أو رئيسي</string>
-    <string name="dubbed_audio_track">مدبلجة</string>
-    <string name="descriptive_audio_track">وصفي</string>
-    <string name="default_or_unknown_audio_track">افتراضي أو غير معروف</string>
+    <string name="original_or_main_audio_track">الأصلي</string>
+    <string name="dubbed_audio_track">مدبلج</string>
+    <string name="descriptive_audio_track">وصف الصوت</string>
+    <string name="default_or_unknown_audio_track">الافتراضي</string>
     <string name="unknown_or_no_audio">مجهول أو لا يوجد صوت</string>
     <string name="audio_track_format">%1$s - %2$s</string>
     <string name="unknown_audio_language">لغة صوت غير معروفة</string>
