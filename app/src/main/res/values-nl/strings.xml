@@ -230,7 +230,7 @@
     <string name="most_views">Meeste weergaven</string>
     <string name="least_views">Minste weergaven</string>
     <string name="brightness">Helderheid</string>
-    <string name="descriptive_audio_track">beschrijvend</string>
+    <string name="descriptive_audio_track">Audio­descriptie</string>
     <string name="deleteAccount">Account verwijderen</string>
     <string name="watch_history">Kijk­geschiedenis</string>
     <string name="auth_instance">Authenticatie-instantie</string>
@@ -262,7 +262,7 @@
     <string name="category">Categorie</string>
     <string name="duration">Duur</string>
     <string name="shuffle">Husselen</string>
-    <string name="dubbed_audio_track">nagesynchroniseerd</string>
+    <string name="dubbed_audio_track">Na­gesynchroniseerd</string>
     <string name="tooltip_dismiss">Afwijzen</string>
     <string name="tooltip_fullscreen">Volledig scherm</string>
     <string name="tooltip_close">Sluiten</string>
@@ -372,7 +372,7 @@
     <string name="import_subscriptions_from">Abonnementen importeren uit</string>
     <string name="show_search_suggestions">Zoek­suggesties</string>
     <string name="export_subscriptions_to">Abonnementen exporteren naar</string>
-    <string name="default_or_unknown_audio_track">standaard of onbekend</string>
+    <string name="default_or_unknown_audio_track">Standaard</string>
     <string name="unsupported_file_format">Niet-ondersteund bestands­formaat: %1$s</string>
     <string name="mark_as_watched">Markeren als gezien</string>
     <string name="trending">Nu trending</string>
@@ -419,7 +419,7 @@
     <string name="skip_buttons_summary">Toon knoppen om naar de volgende of vorige video te gaan</string>
     <string name="sb_custom_colors">Aangepaste segment­kleuren</string>
     <string name="invalid_color">Ongeldige kleur­waarde ingevoerd!</string>
-    <string name="original_or_main_audio_track">origineel</string>
+    <string name="original_or_main_audio_track">Origineel</string>
     <string name="unknown_audio_track_type">Onbekend audio­spoor­type</string>
     <string name="group_name_error_empty">Voer een naam in</string>
     <string name="tooltip_scroll_to_top">Naar boven scrollen</string>
