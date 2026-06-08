@@ -324,7 +324,7 @@
     <string name="audio_track_format">%1$s - %2$s</string>
     <string name="unknown_audio_language">ภาษาเสียงที่ไม่ทราบ</string>
     <string name="unknown_audio_track_type">ประเภทช่องเสียงที่ไม่ทราบ</string>
-    <string name="original_or_main_audio_track">ต้นฉบับหรือหลัก</string>
+    <string name="original_or_main_audio_track">ต้นฉบับ</string>
     <string name="dubbed_audio_track">พากย์</string>
     <string name="descriptive_audio_track">เสียงบรรยายภาพ</string>
     <string name="default_or_unknown_audio_track">ค่าเริ่มต้นหรือไม่ทราบ</string>
