@@ -589,7 +589,7 @@ class SabrClient private constructor(
                         // try to regenerate the poToken for the next request
                         poToken = generatePoToken()
                     }
-                    // we assume that we got a attestation pending warning before and already tried to regenerate the token,
+                    // we assume that we got an attestation pending warning before and already tried to regenerate the token,
                     // but it's not accepted, so we bail
                     3 -> throw Exception("Attestation required")
                     else -> Log.e(TAG, "processPart: Unknown StreamProtectionStatus (${status.status})")
