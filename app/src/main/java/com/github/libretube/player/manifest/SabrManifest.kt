@@ -15,6 +15,7 @@ import androidx.media3.common.util.UnstableApi
 import androidx.media3.exoplayer.offline.FilterableManifest
 import com.github.libretube.api.obj.PipedStream
 import com.github.libretube.api.obj.Streams
+import com.github.libretube.player.parser.Xtags
 
 /**
  * Represents server adaptive-bitrate streaming media metadata.
@@ -70,6 +71,7 @@ class SabrManifest(
         val audioAdaptationSets = streams.audioStreams.groupBy { it.mimeType + it.audioTrackId }
             .map { (_, streams) ->
                 AdaptationSet(C.TRACK_TYPE_AUDIO, streams.map {
+                    val xtags = Xtags(it.xtags.orEmpty())
                     buildRepresentation(
                         it,
                         Format.Builder()
@@ -78,12 +80,12 @@ class SabrManifest(
                             .setSampleMimeType(MimeTypes.getAudioMediaMimeType(it.codec))
                             .setAverageBitrate(it.bitrate ?: -1)
                             .setChannelCount(2)
-                            .setLanguage(it.audioTrackId?.substring(0, 2)?: it.audioTrackLocale)
+                            .setLanguage(it.audioTrackId?.take(2)?: xtags.language() ?: it.audioTrackLocale)
                             .setRoleFlags(
                                 when (it.audioTrackType?.lowercase()) {
                                     "descriptive" -> ROLE_FLAG_DESCRIBES_VIDEO
                                     "original" -> ROLE_FLAG_MAIN
-                                    "dubbed", "auto-dubbed" -> ROLE_FLAG_DUB
+                                    "dubbed", "auto-dubbed", "dubbed-auto" -> ROLE_FLAG_DUB
                                     "secondary" -> ROLE_FLAG_SUPPLEMENTARY
                                     else -> 0
                                 }
@@ -91,7 +93,7 @@ class SabrManifest(
                             .build()
                     )
                 })
-            };
+            }
         adaptationSets = videoAdaptionSets + audioAdaptationSets
     }
 

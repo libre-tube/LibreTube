@@ -25,6 +25,13 @@ class Xtags {
     fun isDrcAudio() = isEnabled("drc")
 
     /**
+     *  The language of the audio track.
+     *
+     *  For example `en-US`.
+     */
+    fun language() = values["lang"]
+
+    /**
      *  Whether the audio/voices are artificially boosted.
      */
     fun isVoiceBoosted() = isEnabled("vb")
