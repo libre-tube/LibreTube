@@ -400,9 +400,6 @@ class CustomExoPlayerView(
             if (isFullscreen()) toggleSystemBars(!isPlayerLocked)
         }
 
-        fullscreenResolution = PlayerHelper.getDefaultResolution(context, true)
-        noFullscreenResolution = PlayerHelper.getDefaultResolution(context, false)
-
         updateCurrentPosition()
     }
 
@@ -1059,7 +1056,13 @@ class CustomExoPlayerView(
             .show(supportFragmentManager)
     }
 
-    fun updateResolution(isFullscreen: Boolean) {
+    fun setToDefaultResolution() {
+        fullscreenResolution = PlayerHelper.getDefaultResolution(context, true)
+        noFullscreenResolution = PlayerHelper.getDefaultResolution(context, false)
+        updateResolution(isFullscreen())
+    }
+
+    private fun updateResolution(isFullscreen: Boolean) {
         if (!isFullscreen && noFullscreenResolution != null) {
             setPlayerResolution(noFullscreenResolution!!)
         } else if (fullscreenResolution != null) {
