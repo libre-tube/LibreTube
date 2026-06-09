@@ -1074,7 +1074,7 @@ class PlayerFragment : Fragment(R.layout.fragment_player), CustomPlayerCallback 
         binding.player.updateCurrentSubtitle(viewModel.currentCaptionId)
 
         // set the default resolution
-        binding.player.updateResolution(commonPlayerViewModel.isFullscreen.value == true)
+        binding.player.setToDefaultResolution()
 
         if (streams.category == Streams.CATEGORY_MUSIC) {
             playerController.setPlaybackSpeed(1f)
