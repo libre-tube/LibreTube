@@ -448,7 +448,7 @@
     <string name="group_name_error_exists">Válasszon egyedi nevet</string>
     <string name="contribute_to_sponsorblock">Hozzájárulás a SponsorBlock-hoz</string>
     <string name="sponsorblock_user_id">SponsorBlock felhasználói azonosító</string>
-    <string name="donate">Adományozás</string>
+    <string name="donate">Adakozás</string>
     <string name="music_artists">YT Music előadók</string>
     <string name="autoplay_playlists_summary">Automatikusan lejátssza a következő videót egy lejátszási listában az automatikus lejátszási adatoktól függetlenül</string>
     <string name="vote_for_segment">Szavazás szakaszra</string>
