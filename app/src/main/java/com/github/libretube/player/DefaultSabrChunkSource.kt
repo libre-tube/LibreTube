@@ -264,7 +264,6 @@ class DefaultSabrChunkSource(
             lastAvailableSegmentNum
         )
 
-        //TODO: is this check needed?
         if (segmentNum > lastAvailableSegmentNum
             || (missingLastSegment && segmentNum >= lastAvailableSegmentNum)) {
           // The segment is beyond the end of the period.
@@ -272,7 +271,6 @@ class DefaultSabrChunkSource(
           return;
         }
 
-        //TODO: is this check needed?
         if (representationHolder.getSegmentStartTimeUs(segmentNum) >= representationHolder.periodDurationUs) {
           // The period duration clips the period to a position before the segment.
           out.endOfStream = true;
