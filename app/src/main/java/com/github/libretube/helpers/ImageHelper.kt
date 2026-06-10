@@ -4,7 +4,9 @@ import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.Color
 import android.net.Uri
+import android.os.storage.StorageManager
 import android.widget.ImageView
+import androidx.core.content.getSystemService
 import androidx.core.net.toUri
 import coil3.ImageLoader
 import coil3.disk.DiskCache
@@ -16,14 +18,12 @@ import coil3.request.ImageRequest
 import coil3.request.crossfade
 import coil3.toBitmap
 import com.github.libretube.BuildConfig
-import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.extensions.toAndroidUri
 import com.github.libretube.util.DataSaverMode
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
-import java.io.File
 import java.nio.file.Path
 
 object ImageHelper {
@@ -36,8 +36,6 @@ object ImageHelper {
      * Initialize the image loader
      */
     fun initializeImageLoader(context: Context) {
-        val maxCacheSize = PreferenceHelper.getString(PreferenceKeys.MAX_IMAGE_CACHE, "128")
-
         val httpClient = OkHttpClient().newBuilder()
 
         if (BuildConfig.DEBUG) {
@@ -56,26 +54,20 @@ object ImageHelper {
                 )
             }
             .apply {
-                if (maxCacheSize.isEmpty()) {
-                    diskCachePolicy(CachePolicy.DISABLED)
-                } else {
-                    diskCachePolicy(CachePolicy.ENABLED)
-                    memoryCachePolicy(CachePolicy.ENABLED)
+                diskCachePolicy(CachePolicy.ENABLED)
+                memoryCachePolicy(CachePolicy.ENABLED)
 
-                    val diskCache = generateDiskCache(
-                        directory = context.coilFile,
-                        size = maxCacheSize.toInt()
-                    )
-                    diskCache(diskCache)
-                }
+                val storageManager = context.getSystemService<StorageManager>()!!
+                val availableCache = storageManager.getCacheQuotaBytes(
+                    storageManager.getUuidForPath(context.coilFile)
+                )
+                val diskCache = DiskCache.Builder()
+                    .directory(context.coilFile)
+                    // only use a certain percentage of the available cache size for images
+                    .maxSizeBytes(availableCache)
+                    .build()
+                diskCache(diskCache)
             }
-            .build()
-    }
-
-    private fun generateDiskCache(directory: File, size: Int): DiskCache {
-        return DiskCache.Builder()
-            .directory(directory)
-            .maxSizeBytes(size * 1024 * 1024L)
             .build()
     }
 
