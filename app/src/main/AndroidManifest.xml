@@ -41,27 +41,21 @@
             android:label="@string/noInternet"
             android:launchMode="singleTop"
             android:configChanges="keyboard|keyboardHidden|screenSize|smallestScreenSize|screenLayout|orientation|uiMode"
-            android:supportsPictureInPicture="true"
-            android:screenOrientation="locked" />
+            android:supportsPictureInPicture="true" />
 
         <activity
             android:name=".ui.activities.SettingsActivity"
-            android:label="@string/settings"
-            android:screenOrientation="locked" />
+            android:label="@string/settings" />
 
         <activity
             android:name=".ui.activities.AboutActivity"
-            android:label="@string/settings"
-            android:screenOrientation="locked" />
+            android:label="@string/settings" />
 
         <activity
             android:name=".ui.activities.HelpActivity"
-            android:label="@string/settings"
-            android:screenOrientation="locked" />
+            android:label="@string/settings" />
 
-        <activity
-            android:name=".ui.activities.ZoomableImageActivity"
-            android:screenOrientation="locked" />
+        <activity android:name=".ui.activities.ZoomableImageActivity" />
 
         <activity
             android:name=".ui.activities.AddToQueueActivity"
@@ -115,7 +109,6 @@
             android:configChanges="keyboard|keyboardHidden|screenSize|smallestScreenSize|screenLayout|orientation|uiMode"
             android:exported="true"
             android:launchMode="singleTask"
-            android:screenOrientation="locked"
             android:supportsPictureInPicture="true"
             android:theme="@style/SplashScreenTheme"
             android:windowSoftInputMode="adjustPan">
@@ -399,7 +392,7 @@
             android:foregroundServiceType="mediaPlayback">
 
             <intent-filter>
-                <action android:name="androidx.media3.session.MediaSessionService"/>
+                <action android:name="androidx.media3.session.MediaSessionService" />
             </intent-filter>
 
         </service>
@@ -411,7 +404,7 @@
             android:foregroundServiceType="mediaPlayback">
 
             <intent-filter>
-                <action android:name="androidx.media3.session.MediaSessionService"/>
+                <action android:name="androidx.media3.session.MediaSessionService" />
             </intent-filter>
 
         </service>

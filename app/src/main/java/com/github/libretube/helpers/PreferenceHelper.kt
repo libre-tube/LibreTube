@@ -10,7 +10,6 @@ import com.github.libretube.R
 import com.github.libretube.api.TrendingCategory
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.enums.SbSkipOptions
-import com.github.libretube.extensions.round
 import com.github.libretube.helpers.LocaleHelper.getDetectedCountry
 import kotlin.math.roundToInt
 

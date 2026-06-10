@@ -22,15 +22,6 @@
             android:title="@string/audio_only_mode"
             app:key="audio_only_mode" />
 
-        <ListPreference
-            android:defaultValue="@string/config_default_orientation_pref"
-            android:entries="@array/orientation"
-            android:entryValues="@array/orientation_values"
-            android:icon="@drawable/ic_screen_rotation"
-            app:key="orientation"
-            app:title="@string/screen_orientation"
-            app:useSimpleSummaryProvider="true" />
-
         <SwitchPreferenceCompat
             android:defaultValue="true"
             android:icon="@drawable/ic_suggestions"

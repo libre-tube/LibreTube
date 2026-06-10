@@ -315,18 +315,6 @@
         <item>automatic_once</item>
     </string-array>
 
-    <string-array name="orientation">
-        <item>@string/portrait</item>
-        <item>@string/landscape</item>
-        <item>@string/auto_rotation</item>
-    </string-array>
-
-    <string-array name="orientation_values">
-        <item>portrait</item>
-        <item>landscape</item>
-        <item>auto</item>
-    </string-array>
-
     <string-array name="sponsorBlockSegments">
         <item>sponsor</item>
         <item>intro</item>

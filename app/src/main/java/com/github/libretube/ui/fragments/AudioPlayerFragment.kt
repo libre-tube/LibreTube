@@ -242,7 +242,7 @@ class AudioPlayerFragment : Fragment(R.layout.fragment_audio_player), AudioPlaye
                 binding.audioPlayerContainer.isClickable = false
                 binding.playerMotionLayout.transitionToEnd()
                 activity.minimizePlayerContainerLayout()
-                activity.requestOrientationChange()
+                activity.restoreAutoRotation()
             }
 
             override fun handleOnBackProgressed(backEvent: BackEventCompat) {
