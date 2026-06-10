@@ -143,7 +143,7 @@
     <string name="no_audio">Senza audio</string>
     <string name="no_video">Senza video</string>
     <string name="video">Video</string>
-    <string name="downloading">Download in corso…</string>
+    <string name="downloading">Scaricamento in corso…</string>
     <string name="instance_frontend_url">URL verso il frontend dell\'istanza (opzionale)</string>
     <string name="quality">Qualità</string>
     <string name="behavior">Comportamento</string>
@@ -187,7 +187,7 @@
     <string name="watch_history_summary">Cronologia locale delle visualizzazioni</string>
     <string name="data_saver_mode_summary">Salta miniature ed altre immagini</string>
     <string name="history_summary">Cronologia ricerche e visualizzazioni</string>
-    <string name="general_summary">Download e risparmio dati</string>
+    <string name="general_summary">Scaricamenti e risparmio dati</string>
     <string name="copied_to_clipboard">Copiato negli appunti</string>
     <string name="watch_positions_title">Posizioni di riproduzione memorizzate</string>
     <string name="captions">Sottotitoli</string>
@@ -255,7 +255,7 @@
     <string name="preferences">Preferenze</string>
     <string name="backup_customInstances">Istanze personalizzate</string>
     <string name="play_next">Riproduci il successivo</string>
-    <string name="download_channel_name">Servizio di Download</string>
+    <string name="download_channel_name">Servizio di download</string>
     <string name="push_channel_name">Operatore di notifica</string>
     <string name="push_channel_description">Mostra una notifica quando sono disponibili nuovi video.</string>
     <string name="navigation_bar">Barra di navigazione</string>
@@ -327,8 +327,8 @@
     <string name="no_subtitle">Nessun sottotitolo</string>
     <string name="download_paused">Scaricamento in pausa</string>
     <string name="download_completed">Scaricamento completato</string>
-    <string name="concurrent_downloads">Max download simultanei</string>
-    <string name="concurrent_downloads_limit_reached">Limite massimo di download simultanei raggiunto.</string>
+    <string name="concurrent_downloads">Max scaricamenti simultanei</string>
+    <string name="concurrent_downloads_limit_reached">Limite massimo di scaricamenti simultanei raggiunto.</string>
     <string name="unknown">Sconosciuto</string>
     <string name="resume">Riprendi</string>
     <string name="audio_only_mode">Modalità solo audio</string>
@@ -485,7 +485,7 @@
     <string name="download_playlist_note">Seleziona la qualità audio/video massima da scaricare. I sottotitoli verranno scaricati solo se disponibili.</string>
     <string name="download_playlist">Scarica playlist</string>
     <string name="enqueueing_playlist_download">Accodamento di video da scaricare della playlist %1$s</string>
-    <string name="delete_all">Tutti i download verranno eliminati!</string>
+    <string name="delete_all">Tutti gli scaricamenti verranno eliminati!</string>
     <string name="enqueue_playlist_description">Mostra una notifica quando si accodano video di una playlist da scaricare.</string>
     <string name="audio_language">Lingua dell\'audio</string>
     <string name="default_language">Predefinita</string>
@@ -514,7 +514,7 @@
     <string name="audio_codecs">Codec audio</string>
     <string name="view_count">%1$s visualizzazioni</string>
     <string name="dialog_play_offline_title">Una versione locale di questo video e` disponibile.</string>
-    <string name="dialog_play_offline_body">Vuoi riprodurre il video dalla cartella di download?</string>
+    <string name="dialog_play_offline_body">Vuoi riprodurre il video dalla cartella di scaricamento?</string>
     <string name="delete_only_watched_videos">Elimina solo i video già visti</string>
     <string name="upcoming">In arrivo</string>
     <string name="category_exclusive_access">Accesso esclusivo</string>
@@ -571,4 +571,5 @@
     <string name="ungrouped_channels_with_count">Non raggruppati (%1$d)</string>
     <string name="long_press_fast_forward">Avanzamento veloce su pressione lunga</string>
     <string name="long_press_fast_forward_summary">Riproduci il video a velocità doppia mentre tengo premuto lo schermo.</string>
+    <string name="resume_all">Riprendi scaricamenti</string>
 </resources>
