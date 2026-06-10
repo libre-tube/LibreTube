@@ -11,7 +11,6 @@ import com.github.libretube.BuildConfig
 import com.github.libretube.R
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.extensions.toastFromMainThread
-import com.github.libretube.helpers.ImageHelper
 import com.github.libretube.helpers.LocaleHelper
 import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.ui.base.BasePreferenceFragment
@@ -70,12 +69,6 @@ class GeneralSettings : BasePreferenceFragment() {
         val autoRotation = findPreference<ListPreference>(PreferenceKeys.ORIENTATION)
         autoRotation?.setOnPreferenceChangeListener { _, _ ->
             RequireRestartDialog().show(childFragmentManager, RequireRestartDialog::class.java.name)
-            true
-        }
-
-        val maxImageCache = findPreference<ListPreference>(PreferenceKeys.MAX_IMAGE_CACHE)
-        maxImageCache?.setOnPreferenceChangeListener { _, _ ->
-            ImageHelper.initializeImageLoader(requireContext())
             true
         }
 

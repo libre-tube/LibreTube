@@ -83,15 +83,6 @@
             app:key="data_saver_mode_key"
             app:title="@string/data_saver_mode" />
 
-        <ListPreference
-            android:entries="@array/cacheSize"
-            android:entryValues="@array/cacheSizeValues"
-            android:icon="@drawable/ic_cache"
-            app:defaultValue="128"
-            app:key="image_cache_size"
-            app:title="@string/maximum_image_cache"
-            app:useSimpleSummaryProvider="true" />
-
         <SwitchPreferenceCompat
             android:icon="@drawable/ic_badge"
             android:summary="@string/new_videos_badge_summary"
