@@ -39,6 +39,7 @@ object DownloadHelper {
     const val PLAYLIST_THUMBNAIL_DIR = "playlist_thumbnail"
     const val DOWNLOAD_CHUNK_SIZE = 8L * 1024
     const val DEFAULT_TIMEOUT = 15 * 1000
+    const val MAX_CONCURRENT_DOWNLOADS = 6
     private const val VIDEO_MIMETYPE = "video/*"
 
     fun getDownloadDir(context: Context, path: String): Path {
@@ -49,13 +50,6 @@ object DownloadHelper {
                 context.filesDir
             }
         return (storageDir.toPath() / path).createDirectories()
-    }
-
-    fun getMaxConcurrentDownloads(): Int {
-        return PreferenceHelper.getString(
-            PreferenceKeys.MAX_CONCURRENT_DOWNLOADS,
-            "6"
-        ).toFloat().toInt()
     }
 
     fun startDownloadService(context: Context, downloadData: DownloadData? = null) {

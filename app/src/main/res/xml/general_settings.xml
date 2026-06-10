@@ -48,15 +48,6 @@
 
     <PreferenceCategory app:title="@string/downloads">
 
-        <com.github.libretube.ui.views.SliderPreference
-            android:icon="@drawable/ic_download"
-            android:key="max_parallel_downloads"
-            android:title="@string/concurrent_downloads"
-            app:defValue="6"
-            app:stepSize="1"
-            app:valueFrom="1"
-            app:valueTo="6" />
-
         <EditTextPreference
             android:icon="@drawable/ic_open"
             android:key="external_download_provider"

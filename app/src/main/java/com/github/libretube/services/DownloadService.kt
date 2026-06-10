@@ -442,7 +442,7 @@ class DownloadService : LifecycleService() {
      */
     private fun mayStartNewDownload(): Boolean {
         val downloadCount = downloadQueue.valueIterator().asSequence().count { it }
-        return downloadCount < DownloadHelper.getMaxConcurrentDownloads()
+        return downloadCount < DownloadHelper.MAX_CONCURRENT_DOWNLOADS
     }
 
     /**
@@ -518,9 +518,8 @@ class DownloadService : LifecycleService() {
                 }
             }
 
-            val max = DownloadHelper.getMaxConcurrentDownloads()
             val current = downloadQueue.valueIterator().asSequence().count { it }
-            val slotsToFill = max - current
+            val slotsToFill = DownloadHelper.MAX_CONCURRENT_DOWNLOADS - current
 
             if (slotsToFill > 0) {
                 val candidates = incompleteItems.filter { !downloadQueue[it.id] }
