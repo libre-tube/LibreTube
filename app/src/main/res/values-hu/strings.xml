@@ -568,4 +568,5 @@
     <string name="ungrouped_channels_with_count">Nem csoportosított (%1$d)</string>
     <string name="long_press_fast_forward">Gyors előretekerés hosszú megnyomáskor</string>
     <string name="long_press_fast_forward_summary">A képernyőre koppintva és rajta tartva kétszeres sebességgel játszhatja le a videót.</string>
+    <string name="resume_all">Letöltések folytatása</string>
 </resources>
