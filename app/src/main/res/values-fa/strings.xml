@@ -568,4 +568,5 @@
     <string name="ungrouped_channels_with_count">گروه نشده (%1$d)</string>
     <string name="long_press_fast_forward">پیشروی سریع با نگه داشتن طولانی</string>
     <string name="long_press_fast_forward_summary">پخش ویدیو با سرعت دو برابر هنگام زدن و نگه داشتن صفحه.</string>
+    <string name="resume_all">از سر گیری بارگیری‌ها</string>
 </resources>
