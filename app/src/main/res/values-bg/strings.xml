@@ -478,7 +478,7 @@
     <string name="no_segments_found">Все още няма сегменти за този видеоклип.</string>
     <string name="successfully_removed_from_playlist">Успешно премахване \"%1$s\" от плейлиста.</string>
     <string name="copy_tooltip">Копирай</string>
-    <string name="delete_all">Всички изтеглени файлове ще бъдат изтрити!</string>
+    <string name="delete_all">Всички изтегляния ще бъдат изтрити!</string>
     <string name="change_instance">Промяна на инстанция</string>
     <string name="change">Промяна</string>
     <string name="behavior_when_minimized">Поведение при минимизиране</string>
@@ -568,4 +568,5 @@
     <string name="ungrouped_channels_with_count">Разгрупирано (%1$d)</string>
     <string name="long_press_fast_forward">Бързо превъртане напред с продължително натискане</string>
     <string name="long_press_fast_forward_summary">Възпроизвеждайте видео с двойна скорост, докато докосвате и задържате екрана.</string>
+    <string name="resume_all">Възстановяване на изтеглянията</string>
 </resources>
