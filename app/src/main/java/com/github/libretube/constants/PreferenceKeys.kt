@@ -18,6 +18,10 @@ object PreferenceKeys {
     const val START_FRAGMENT = "start_fragment"
     const val UNLIMITED_SEARCH_HISTORY = "unlimited_search_history"
     const val AUDIO_ONLY_MODE = "audio_only_mode"
+    const val SWIPE_LEFT = "swipe_left"
+    const val SWIPE_LEFT_PLAYLIST = "swipe_left_playlist"
+    const val SWIPE_RIGHT = "swipe_right"
+    const val SWIPE_RIGHT_PLAYLIST = "swipe_right_playlist"
 
     // Appearance
     const val THEME_MODE = "theme_toggle"

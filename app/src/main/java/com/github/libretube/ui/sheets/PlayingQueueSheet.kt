@@ -13,6 +13,7 @@ import com.github.libretube.databinding.QueueBottomSheetBinding
 import com.github.libretube.db.DatabaseHelper
 import com.github.libretube.db.DatabaseHolder
 import com.github.libretube.db.obj.WatchPosition
+import com.github.libretube.extensions.SwipeOptions
 import com.github.libretube.extensions.setActionListener
 import com.github.libretube.extensions.toID
 import com.github.libretube.ui.adapters.PlayingQueueAdapter
@@ -85,17 +86,17 @@ class PlayingQueueSheet : ExpandedBottomSheet(R.layout.queue_bottom_sheet) {
         }
 
         binding.optionsRecycler.setActionListener(
-            allowSwipe = true,
-            allowDrag = true,
-            onDismissedListener = { position ->
-                if (position == PlayingQueue.currentIndex()) {
-                    adapter.notifyItemChanged(position)
-                    return@setActionListener
+            swipeLeft = SwipeOptions(
+                onSwipeListener = onSwipeListener@{ position ->
+                    if (position == PlayingQueue.currentIndex()) {
+                        adapter.notifyItemChanged(position)
+                        return@onSwipeListener
+                    }
+                    PlayingQueue.remove(position)
+                    adapter.notifyItemRemoved(position)
+                    adapter.notifyItemRangeChanged(position, adapter.itemCount)
                 }
-                PlayingQueue.remove(position)
-                adapter.notifyItemRemoved(position)
-                adapter.notifyItemRangeChanged(position, adapter.itemCount)
-            },
+            ),
             onDragListener = { from, to ->
                 PlayingQueue.move(from, to)
                 adapter.notifyItemMoved(from, to)

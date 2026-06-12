@@ -5,10 +5,12 @@ import android.net.Uri
 import android.os.Bundle
 import android.provider.Settings
 import androidx.core.app.ActivityCompat
+import androidx.lifecycle.lifecycleScope
 import androidx.preference.ListPreference
 import androidx.preference.Preference
 import com.github.libretube.BuildConfig
 import com.github.libretube.R
+import com.github.libretube.api.PlaylistsHelper
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.extensions.toastFromMainThread
 import com.github.libretube.helpers.ImageHelper
@@ -17,6 +19,7 @@ import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.ui.base.BasePreferenceFragment
 import com.github.libretube.ui.dialogs.RequireRestartDialog
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import kotlinx.coroutines.launch
 import java.util.Locale
 
 class GeneralSettings : BasePreferenceFragment() {
@@ -82,6 +85,79 @@ class GeneralSettings : BasePreferenceFragment() {
         val resetSettings = findPreference<Preference>(PreferenceKeys.RESET_SETTINGS)
         resetSettings?.setOnPreferenceClickListener {
             showResetDialog()
+            true
+        }
+
+        val swipeLeft = findPreference<ListPreference>(PreferenceKeys.SWIPE_LEFT)
+        val swipeLeftPlaylist = findPreference<ListPreference>(PreferenceKeys.SWIPE_LEFT_PLAYLIST)
+
+        val swipeRight = findPreference<ListPreference>(PreferenceKeys.SWIPE_RIGHT)
+        val swipeRightPlaylist = findPreference<ListPreference>(PreferenceKeys.SWIPE_RIGHT_PLAYLIST)
+
+        val togglePlaylist = { newValue: String?, playlistPreference: ListPreference? ->
+            if (newValue == "addToPlaylist") {
+                lifecycleScope.launch {
+                    kotlin.runCatching {
+                        PlaylistsHelper.getPlaylists()
+                    }.onSuccess { playlists ->
+                        val currentValue = playlistPreference?.value
+                        playlistPreference?.isVisible = true
+
+                        val filteredPlaylists = playlists.filterNot { list -> list.name.isNullOrEmpty() }
+
+                        playlistPreference?.entries = (listOf(resources.getString(R.string.manual)) + filteredPlaylists.map { it.name }).toTypedArray()
+                        playlistPreference?.entryValues = (listOf("manual") + filteredPlaylists.map { it.id }).toTypedArray()
+
+                        if (!filteredPlaylists.map { it.id }.contains(playlistPreference?.value)) {
+                            playlistPreference?.value = "manual"
+                            playlistPreference?.summary = resources.getString((R.string.manual))
+                        } else {
+                            playlistPreference?.value = currentValue
+                            playlistPreference?.summary = playlistPreference.entry
+                        }
+                    }.onFailure {
+                        context?.toastFromMainThread(R.string.error)
+                    }
+                }
+            } else {
+                playlistPreference?.isVisible = false;
+            }
+        }
+
+        togglePlaylist(swipeLeft?.value, swipeLeftPlaylist)
+        togglePlaylist(swipeRight?.value, swipeRightPlaylist)
+
+        swipeLeft?.setOnPreferenceChangeListener { _, newValue ->
+            if (newValue is String) {
+                togglePlaylist(newValue, swipeLeftPlaylist)
+            }
+            true
+        }
+        swipeRight?.setOnPreferenceChangeListener { _, newValue ->
+            if (newValue is String) {
+                togglePlaylist(newValue, swipeRightPlaylist)
+            }
+            true
+        }
+
+        val setSummary = { preference: ListPreference, newValue: String ->
+            val entries = preference.entries
+            val values = preference.entryValues
+            val index = values?.indexOf(newValue)
+            if (index != null && index >= 0 && entries != null && index < entries.count()) {
+                preference.summary = entries[index]
+            }
+        }
+        swipeLeftPlaylist?.setOnPreferenceChangeListener { preference, newValue ->
+            if (preference is ListPreference && newValue is String) {
+                setSummary(preference, newValue)
+            }
+            true
+        }
+        swipeRightPlaylist?.setOnPreferenceChangeListener { preference, newValue ->
+            if (preference is ListPreference && newValue is String) {
+                setSummary(preference, newValue)
+            }
             true
         }
     }

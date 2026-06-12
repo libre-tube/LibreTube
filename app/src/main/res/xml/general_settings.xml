@@ -46,6 +46,40 @@
 
     </PreferenceCategory>
 
+    <PreferenceCategory app:title="@string/video_card_swipe_actions">
+
+        <ListPreference
+            android:defaultValue="none"
+            android:entries="@array/video_swipe_actions"
+            android:entryValues="@array/video_swipe_actions_values"
+            android:icon="@drawable/ic_swipe_gesture"
+            app:key="swipe_left"
+            app:title="@string/swipe_left"
+            app:useSimpleSummaryProvider="true" />
+
+        <ListPreference
+            android:defaultValue="manual"
+            android:icon="@drawable/ic_playlist_add"
+            app:key="swipe_left_playlist"
+            app:title="@string/addToPlaylist" />
+
+        <ListPreference
+            android:defaultValue="none"
+            android:entries="@array/video_swipe_actions"
+            android:entryValues="@array/video_swipe_actions_values"
+            android:icon="@drawable/ic_swipe_gesture"
+            app:key="swipe_right"
+            app:title="@string/swipe_right"
+            app:useSimpleSummaryProvider="true" />
+
+        <ListPreference
+            android:icon="@drawable/ic_playlist_add"
+            android:defaultValue="manual"
+            app:key="swipe_right_playlist"
+            app:title="@string/addToPlaylist"/>
+
+    </PreferenceCategory>
+
     <PreferenceCategory app:title="@string/downloads">
 
         <com.github.libretube.ui.views.SliderPreference

@@ -1,6 +1,10 @@
 package com.github.libretube.enums
 
-enum class ShareObjectType {
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
+enum class ShareObjectType: Parcelable {
     VIDEO,
     PLAYLIST,
     CHANNEL

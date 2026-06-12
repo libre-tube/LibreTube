@@ -327,6 +327,30 @@
         <item>auto</item>
     </string-array>
 
+    <string-array name="video_swipe_actions">
+        <item>@string/none</item>
+        <item>@string/addToPlaylist</item>
+        <item>@string/add_to_queue</item>
+        <item>@string/play_next</item>
+        <item>@string/playOnBackground</item>
+        <item>@string/download</item>
+        <item>@string/share</item>
+        <item>@string/mark_as_watched</item>
+        <item>@string/mark_as_unwatched</item>
+    </string-array>
+
+    <string-array name="video_swipe_actions_values">
+        <item>none</item>
+        <item>addToPlaylist</item>
+        <item>addToQueue</item>
+        <item>playNext</item>
+        <item>playOnBackground</item>
+        <item>download</item>
+        <item>share</item>
+        <item>markAsWatched</item>
+        <item>markAsUnwatched</item>
+    </string-array>
+
     <string-array name="sponsorBlockSegments">
         <item>sponsor</item>
         <item>intro</item>

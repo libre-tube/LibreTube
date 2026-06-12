@@ -91,6 +91,11 @@ class SearchResultsAdapter(
         }
     }
 
+    fun getStreamItemAt(position: Int): StreamItem? {
+        val item = getItem(position)
+        return if (item?.type == StreamItem.TYPE_STREAM) item.toStreamItem() else null
+    }
+
     private fun bindVideo(item: ContentItem, binding: VideoRowBinding, position: Int) {
         binding.apply {
             ImageHelper.loadImage(item.thumbnail, thumbnail)

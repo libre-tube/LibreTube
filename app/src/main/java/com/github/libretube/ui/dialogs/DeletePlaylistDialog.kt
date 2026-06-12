@@ -10,7 +10,9 @@ import androidx.lifecycle.lifecycleScope
 import com.github.libretube.R
 import com.github.libretube.api.PlaylistsHelper
 import com.github.libretube.constants.IntentData
+import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.extensions.toastFromMainDispatcher
+import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.ui.sheets.PlaylistOptionsBottomSheet
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.Dispatchers
@@ -41,6 +43,17 @@ class DeletePlaylistDialog : DialogFragment() {
                         context.toastFromMainDispatcher(
                             if (success) R.string.success else R.string.fail
                         )
+
+                        val swipeLeftPlaylist = PreferenceHelper.getString(PreferenceKeys.SWIPE_LEFT_PLAYLIST, "manual")
+                        if (swipeLeftPlaylist == playlistId) {
+                            PreferenceHelper.putString(PreferenceKeys.SWIPE_LEFT_PLAYLIST, "manual")
+                        }
+
+                        val swipeRightPlaylist = PreferenceHelper.getString(PreferenceKeys.SWIPE_RIGHT_PLAYLIST, "manual")
+                        if (swipeRightPlaylist == playlistId) {
+                            PreferenceHelper.putString(PreferenceKeys.SWIPE_RIGHT_PLAYLIST, "manual")
+                        }
+
                         withContext(Dispatchers.Main) {
                             dismiss()
 

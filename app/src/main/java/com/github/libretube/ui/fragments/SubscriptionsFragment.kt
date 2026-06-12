@@ -19,9 +19,11 @@ import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.databinding.FragmentSubscriptionsBinding
 import com.github.libretube.db.DatabaseHelper
 import com.github.libretube.db.DatabaseHolder
+import com.github.libretube.extensions.setActionListener
 import com.github.libretube.extensions.toID
 import com.github.libretube.helpers.NavigationHelper
 import com.github.libretube.helpers.PreferenceHelper
+import com.github.libretube.helpers.SwipeActionHelper
 import com.github.libretube.obj.SelectableOption
 import com.github.libretube.parcelable.PlayerData
 import com.github.libretube.ui.adapters.VideoCardsAdapter
@@ -185,6 +187,19 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment(R.layout.fragment_sub
                     }
             }
         })
+
+        val swipeLeft = PreferenceHelper.getString(PreferenceKeys.SWIPE_LEFT, "none")
+        val swipeRight = PreferenceHelper.getString(PreferenceKeys.SWIPE_RIGHT, "none")
+        val swipeLeftPlaylist = PreferenceHelper.getString(PreferenceKeys.SWIPE_LEFT_PLAYLIST, "manual")
+        val swipeRightPlaylist = PreferenceHelper.getString(PreferenceKeys.SWIPE_RIGHT_PLAYLIST, "manual")
+        val swipeActionHelper = SwipeActionHelper(requireContext(), childFragmentManager, 2.0)
+        viewModel.videoFeed.value?.also {
+            val getVideoAt = { position: Int -> it[position] }
+            binding.subFeed.setActionListener(
+                swipeLeft = swipeActionHelper.getSwipeOptions(swipeLeft, swipeLeftPlaylist,  getVideoAt),
+                swipeRight = swipeActionHelper.getSwipeOptions(swipeRight, swipeRightPlaylist, getVideoAt)
+            )
+        }
 
         lifecycleScope.launch(Dispatchers.IO) {
             val groups = DatabaseHolder.Database.subscriptionGroupsDao().getAll()

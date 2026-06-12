@@ -16,8 +16,12 @@ import androidx.paging.LoadState
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.R
+import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.databinding.FragmentSearchResultBinding
 import com.github.libretube.extensions.ceilHalf
+import com.github.libretube.extensions.setActionListener
+import com.github.libretube.helpers.PreferenceHelper
+import com.github.libretube.helpers.SwipeActionHelper
 import com.github.libretube.ui.activities.MainActivity
 import com.github.libretube.ui.adapters.SearchResultsAdapter
 import com.github.libretube.ui.base.DynamicLayoutManagerFragment
@@ -112,6 +116,28 @@ class SearchResultFragment : DynamicLayoutManagerFragment(R.layout.fragment_sear
                     mainActivity.setQuery(suggestion, true)
                 }
                 getString(R.string.did_you_mean)
+            }
+        }
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.searchResultsFlow.collect { pagingData ->
+                searchResultsAdapter.submitData(pagingData)
+
+                val getCurrentItem = { position: Int -> searchResultsAdapter.getStreamItemAt(position) }
+                val getDisableActions = { position: Int -> searchResultsAdapter.getItemViewType(position) != 0 }
+
+                val swipeLeft = PreferenceHelper.getString(PreferenceKeys.SWIPE_LEFT, "none")
+                val swipeRight = PreferenceHelper.getString(PreferenceKeys.SWIPE_RIGHT, "none")
+                val swipeLeftPlaylist = PreferenceHelper.getString(PreferenceKeys.SWIPE_LEFT_PLAYLIST, "manual")
+                val swipeRightPlaylist = PreferenceHelper.getString(PreferenceKeys.SWIPE_RIGHT_PLAYLIST, "manual")
+                val swipeActionHelper = SwipeActionHelper(requireContext(), childFragmentManager, 1.0)
+                viewModel.searchResultsFlow.also {
+                    binding.searchRecycler.setActionListener(
+                        swipeLeft = swipeActionHelper.getSwipeOptions(swipeLeft, swipeLeftPlaylist,  getCurrentItem),
+                        swipeRight = swipeActionHelper.getSwipeOptions(swipeRight, swipeRightPlaylist, getCurrentItem),
+                        getDisableActions = getDisableActions
+                    )
+                }
             }
         }
 
