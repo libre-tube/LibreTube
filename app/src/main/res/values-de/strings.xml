@@ -401,10 +401,10 @@
     <string name="audio_track_format">%1$s - %2$s</string>
     <string name="unknown_audio_language">Unbekannte Audiosprache</string>
     <string name="unknown_audio_track_type">Unbekannter Audio-Track-Typ</string>
-    <string name="original_or_main_audio_track">Original- oder Hauptspur</string>
+    <string name="original_or_main_audio_track">Original</string>
     <string name="dubbed_audio_track">Synchronisiert</string>
-    <string name="descriptive_audio_track">Deskriptiv</string>
-    <string name="default_or_unknown_audio_track">Standard oder unbekannt</string>
+    <string name="descriptive_audio_track">Audiodeskription</string>
+    <string name="default_or_unknown_audio_track">Standard</string>
     <string name="unknown_or_no_audio">Unbekannt oder kein Ton</string>
     <string name="continue_watching">Weiterschauen</string>
     <string name="dearrow_summary">Präzisere und weniger sensationslüsterne Titel und Miniaturansichten (Thumbnails) anzeigen. Erhöht die Ladezeiten.</string>
