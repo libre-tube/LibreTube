@@ -75,6 +75,7 @@ data class Streams(
         }
 
         if (!subCode.isNullOrEmpty()) {
+            // TODO: doesn't support track types, i.e. if there are two caption tracks for the same language
             val subtitle = subtitles.find { it.code == subCode }
             subtitle?.toDownloadItem(id)?.let { items.add(it) }
         }
