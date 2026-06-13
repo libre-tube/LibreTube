@@ -175,7 +175,7 @@ class SabrClient private constructor(
     private val dispatcher = Dispatchers.IO.limitedParallelism(1)
 
     /** Audio format video format */
-    private lateinit var audioFormat: Representation
+    private var audioFormat: Representation? = null
     /** Optional video format */
     private var videoFormat: Representation? = null
 
@@ -270,7 +270,7 @@ class SabrClient private constructor(
 
     @OptIn(UnstableApi::class)
     fun selectFormat(representation: Representation) {
-        if (videoFormat == representation || (::audioFormat.isInitialized && audioFormat == representation)) {
+        if (videoFormat == representation || audioFormat == representation) {
             return
         }
 
@@ -281,6 +281,18 @@ class SabrClient private constructor(
         }
     }
 
+    /**
+     * Get the number of the last segment.
+     *
+     * Calling [getNextSegment] with [PlaybackRequest.segment] set to a value larger than the last
+     * segment number will crash the client.
+     */
+    fun getEndSegmentNumber(formatId: FormatId): Long? = initializedFormats[formatId.itag]?.endSegmentNumber
+
+    /**
+     * Download the stream chunk specified in [playbackRequest].
+     * Segments are usually of a length between 2 and 10 seconds.
+     */
     fun getNextSegment(playbackRequest: PlaybackRequest): Segment? {
         if (fatalError != null) {
             throw Exception("SABR error: ${fatalError!!.type}")
@@ -315,7 +327,7 @@ class SabrClient private constructor(
                     // clear previous formats to prevent advertising stale data to the server/buffering them
                     // we only dio this after requesting new data, to avoid accidentally clearing to the currently selected format,
                     // e.g. killing the current buffer
-                    initializedFormats.keys.retainAll { audioFormat.stream.itag == it || videoFormat?.stream?.itag == it }
+                    initializedFormats.keys.retainAll { audioFormat?.stream?.itag == it || videoFormat?.stream?.itag == it }
                 }
                 format = format ?: initializedFormats[itag]
                 return@withContext format?.getSegment(playbackRequest.segment)
@@ -346,7 +358,7 @@ class SabrClient private constructor(
      */
     private suspend fun fetchStreamData(
         playbackRequest: PlaybackRequest,
-        audioFormat: Representation,
+        audioFormat: Representation?,
         videoFormat: Representation?,
     ): ByteArray {
         backoffTime?.let { backoff ->
@@ -356,7 +368,7 @@ class SabrClient private constructor(
         }
 
         val now = Instant.now().toEpochMilli()
-        val xtags = Xtags(audioFormat.formatId().xtags)
+        val xtags = audioFormat?.formatId()?.xtags?.let { Xtags(it) }
 
         val clientState = ClientAbrState.newBuilder()
             // we pretend we're slightly in the previous (n-1) segment, so we get n-th segment, instead of the (n+1)-th one
@@ -367,9 +379,9 @@ class SabrClient private constructor(
             .setTimeSinceLastSeek(lastSeekMs?.let { now - it } ?: 0)
             .setTimeSinceLastManualFormatSelectionMs(lastManualFormatSelectionMs?.let { now - it } ?: 0)
             .setTimeSinceLastActionMs(lastActionMs?.let { now - it } ?: 0)
-            .setAudioTrackId(audioFormat.stream.audioTrackId ?: "")
-            .setDrcEnabled(audioFormat.stream.isDrc ?: false || xtags.isDrcAudio())
-            .setEnableVoiceBoost(xtags.isVoiceBoosted())
+            .setAudioTrackId(audioFormat?.stream?.audioTrackId.orEmpty())
+            .setDrcEnabled(audioFormat?.stream?.isDrc ?: false || xtags?.isDrcAudio() ?: false)
+            .setEnableVoiceBoost(xtags?.isVoiceBoosted() ?: false)
             .setClientViewportIsFlexible(false)
             .setBandwidthEstimate(bandwidthEstimator.bitrateEstimate)
             .setVisibility(1)
@@ -378,7 +390,7 @@ class SabrClient private constructor(
         val playbackRequest = VideoPlaybackAbrRequest.newBuilder().setClientAbrState(clientState)
             .addAllSelectedFormatIds(initializedFormats.values.map { it.id }.toList())
             .setVideoPlaybackUstreamerConfig(ustreamerConfig)
-            .addAllPreferredAudioFormatIds(listOf(audioFormat.formatId()))
+            .addAllPreferredAudioFormatIds(listOfNotNull(audioFormat?.formatId()))
             .addAllPreferredVideoFormatIds(listOfNotNull(videoFormat?.formatId()))
             .addAllSelectedFormatIds(initializedFormats.map { it.value.id }.toList())
             .addAllBufferedRanges(initializedFormats.values.flatMap { it.buildBufferedRanges() })
