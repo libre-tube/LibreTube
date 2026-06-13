@@ -139,8 +139,8 @@
     <string name="appearance_summary">اضبط التطبيق حسب رغبتك</string>
     <string name="customInstance_summary">أضف…</string>
     <string name="shareTo">مشاركة الرابط إلى</string>
-    <string name="no_audio">لا يوجد صوت</string>
-    <string name="no_video">لا يوجد فيديو</string>
+    <string name="no_audio">لا صوت</string>
+    <string name="no_video">لا فيديو</string>
     <string name="audio">صوت</string>
     <string name="video">فيديو</string>
     <string name="downloading">جارِ التنزيل…</string>
