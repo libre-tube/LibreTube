@@ -1,5 +1,6 @@
 package com.github.libretube.services
 
+import android.annotation.SuppressLint
 import android.app.NotificationManager
 import android.app.PendingIntent.FLAG_CANCEL_CURRENT
 import android.app.PendingIntent.FLAG_UPDATE_CURRENT
@@ -26,6 +27,7 @@ import androidx.lifecycle.lifecycleScope
 import com.github.libretube.LibreTubeApp.Companion.DOWNLOAD_CHANNEL_NAME
 import com.github.libretube.R
 import com.github.libretube.api.MediaServiceRepository
+import com.github.libretube.api.obj.PipedStream
 import com.github.libretube.api.obj.Streams
 import com.github.libretube.constants.IntentData
 import com.github.libretube.db.DatabaseHolder.Database
@@ -36,7 +38,6 @@ import com.github.libretube.enums.FileType
 import com.github.libretube.enums.NotificationId
 import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.formatAsFileSize
-import com.github.libretube.extensions.getContentLength
 import com.github.libretube.extensions.parcelableExtra
 import com.github.libretube.extensions.toLocalDate
 import com.github.libretube.extensions.toastFromMainDispatcher
@@ -53,36 +54,32 @@ import com.github.libretube.receivers.NotificationReceiver
 import com.github.libretube.receivers.NotificationReceiver.Companion.ACTION_DOWNLOAD_PAUSE
 import com.github.libretube.receivers.NotificationReceiver.Companion.ACTION_DOWNLOAD_RESUME
 import com.github.libretube.receivers.NotificationReceiver.Companion.ACTION_DOWNLOAD_STOP
+import com.github.libretube.repo.DownloadProgressResult
+import com.github.libretube.repo.DownloadProvider
+import com.github.libretube.repo.RawByteStreamDownloadProvider
 import com.github.libretube.ui.activities.MainActivity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.asCoroutineDispatcher
 import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import okhttp3.OkHttpClient
-import okhttp3.Request
-import okhttp3.Response
-import okhttp3.ResponseBody
+import okhttp3.HttpUrl.Companion.toHttpUrl
 import okio.buffer
 import okio.sink
-import okio.source
-import java.io.IOException
 import java.net.HttpURLConnection
-import java.net.URL
 import java.nio.file.Path
 import java.nio.file.StandardOpenOption
-import java.time.Duration
 import java.util.concurrent.Executors
 import kotlin.coroutines.cancellation.CancellationException
 import kotlin.io.path.createFile
 import kotlin.io.path.deleteIfExists
 import kotlin.io.path.div
 import kotlin.io.path.fileSize
-import kotlin.math.min
 
 /**
  * Download service with custom implementation of downloading using [HttpURLConnection].
@@ -99,13 +96,10 @@ class DownloadService : LifecycleService() {
     private val _downloadFlow = MutableSharedFlow<Pair<Int, DownloadStatus>>()
     val downloadFlow: SharedFlow<Pair<Int, DownloadStatus>> = _downloadFlow
 
-    private val httpClient: OkHttpClient by lazy {
-        OkHttpClient.Builder()
-            .connectTimeout(Duration.ofMillis(DownloadHelper.DEFAULT_TIMEOUT.toLong()))
-            .readTimeout(Duration.ofMillis(DownloadHelper.DEFAULT_TIMEOUT.toLong()))
-            .retryOnConnectionFailure(true)
-            .build()
-    }
+    /**
+     * Cache that contains all the already-loaded video info.
+     */
+    private val cachedStreamsInfo: MutableMap<String, Streams> = mutableMapOf()
 
     override fun onCreate() {
         super.onCreate()
@@ -151,15 +145,7 @@ class DownloadService : LifecycleService() {
         val videoId = downloadData.videoId
 
         lifecycleScope.launch(coroutineContext) {
-            val streams = try {
-                withContext(Dispatchers.IO) {
-                    MediaServiceRepository.instance.getStreams(videoId)
-                }
-            } catch (e: Exception) {
-                Log.e(TAG(), e.stackTraceToString())
-                toastFromMainDispatcher(e.localizedMessage.orEmpty())
-                return@launch
-            }
+            val streams = loadStreamsInfo(videoId) ?: return@launch
 
             storeVideoMetadata(videoId, streams)
 
@@ -170,6 +156,24 @@ class DownloadService : LifecycleService() {
         }
 
         return START_NOT_STICKY
+    }
+
+    private suspend fun loadStreamsInfo(videoId: String): Streams? {
+        if (cachedStreamsInfo.contains(videoId))
+            return cachedStreamsInfo[videoId]
+
+        val streams = try {
+            withContext(Dispatchers.IO) {
+                MediaServiceRepository.instance.getStreams(videoId)
+            }
+        } catch (e: Exception) {
+            Log.e(TAG(), e.stackTraceToString())
+            toastFromMainDispatcher(e.localizedMessage.orEmpty())
+            return null
+        }
+
+        cachedStreamsInfo[videoId] = streams
+        return streams
     }
 
     private suspend fun storeVideoMetadata(videoId: String, streams: Streams) {
@@ -253,25 +257,70 @@ class DownloadService : LifecycleService() {
      * Download file and emit [DownloadStatus] to the collectors of [downloadFlow]
      * and notification.
      */
-    private suspend fun downloadFile(item: DownloadItem) {
+    @SuppressLint("UnsafeOptInUsageError")
+    private suspend fun selectFormatAndDownloadFile(item: DownloadItem) {
+        val streams = loadStreamsInfo(item.videoId) ?: return
+        if (item.type == FileType.SUBTITLE) {
+            // subtitles are always plain files and don't use SABR
+            val subtitle = streams.subtitles.firstOrNull { it.code == item.language } ?: return
+            downloadFile(item, RawByteStreamDownloadProvider(subtitle.url!!.toHttpUrl()))
+        } else {
+            val selectedStream = selectMatchingStream(streams, item) ?: return
+            if (selectedStream.url?.startsWith("http") == true) {
+                downloadFile(item, RawByteStreamDownloadProvider(selectedStream.url!!.toHttpUrl()))
+            }
+        }
+    }
+
+    /**
+     * Starts and progresses until the download is canceled or finished.
+     *
+     * You should probably not call this directly, call [selectFormatAndDownloadFile].
+     */
+    private suspend fun downloadFile(
+        item: DownloadItem,
+        downloadProvider: DownloadProvider,
+    ) {
         downloadQueue[item.id] = true
         val notificationBuilder = getNotificationBuilder(item)
         setResumeNotification(notificationBuilder, item)
 
+        val sink = item.path.sink(StandardOpenOption.APPEND).buffer()
         var totalRead = item.path.fileSize()
-        val url = URL(ProxyHelper.rewriteUrlUsingProxyPreference(item.url ?: return))
-
-        // only fetch the content length if it's not been returned by the API
-        if (item.downloadSize <= 0L) {
-            url.getContentLength()?.let { size ->
-                item.downloadSize = size
-                Database.downloadDao().updateDownloadItem(item)
-            }
-        }
-
-        while (totalRead < item.downloadSize) {
+        var numberOfTries = 0
+        while (downloadQueue[item.id] && totalRead < item.downloadSize) {
             try {
-                totalRead = progressDownload(item, url, totalRead, notificationBuilder)
+                when (val result = downloadProvider.downloadNextChunk(item, sink)) {
+                    DownloadProgressResult.DownloadComplete -> {
+                        setPauseNotification(notificationBuilder, item, true)
+                        _downloadFlow.emit(item.id to DownloadStatus.Completed)
+                        downloadQueue[item.id] = false
+                        break
+                    }
+                    DownloadProgressResult.Failed -> {
+                        if (numberOfTries < MAX_SEGMENT_RETRIES) {
+                            // try to download segment again after a short delay
+                            delay(200)
+                            numberOfTries++
+                        } else {
+                            setPauseNotification(notificationBuilder, item, false)
+                            pause(item.id)
+                            break
+                        }
+                    }
+                    is DownloadProgressResult.Progressed -> {
+                        numberOfTries = 0
+                        totalRead += result.bytes
+                        _downloadFlow.emit(
+                            item.id to DownloadStatus.Progress(
+                                result.bytes,
+                                totalRead,
+                                item.downloadSize
+                            )
+                        )
+                        updateNotification(notificationBuilder, item, totalRead.toInt())
+                    }
+                }
             } catch (_: CancellationException) {
                 break
             } catch (e: Exception) {
@@ -282,18 +331,20 @@ class DownloadService : LifecycleService() {
             }
         }
 
-        val completed = totalRead >= item.downloadSize
-        if (completed) {
-            _downloadFlow.emit(item.id to DownloadStatus.Completed)
-        } else {
-            _downloadFlow.emit(item.id to DownloadStatus.Paused)
+        withContext(Dispatchers.IO) {
+            sink.flush()
+            sink.close()
         }
 
-        setPauseNotification(notificationBuilder, item, completed)
-
-        downloadQueue[item.id] = false
-
         // start the next download if there are any remaining ones enqueued
+        startNextEnqueueDownload()
+
+        // if no new download was enqueued (i.e. there's no paused/stopped download left),
+        // look if any downloads are still running, and if not, stop the service
+        stopServiceIfDone()
+    }
+
+    private suspend fun startNextEnqueueDownload() {
         for (id in downloadQueue.keyIterator()) {
             if (downloadQueue[id]) continue
 
@@ -303,60 +354,6 @@ class DownloadService : LifecycleService() {
                 return
             }
         }
-
-        // if no new download was enqueued (i.e. there's no paused/stopped download left),
-        // look if any downloads are still running, and if not, stop the service
-        stopServiceIfDone()
-    }
-
-    private suspend fun progressDownload(
-        item: DownloadItem,
-        url: URL,
-        totalReadBefore: Long,
-        notificationBuilder: Builder
-    ): Long {
-        val source =
-            startConnection(item, url, totalReadBefore, item.downloadSize) ?: return totalReadBefore
-
-        var totalRead = totalReadBefore
-
-        val sink = item.path.sink(StandardOpenOption.APPEND).buffer()
-        val sourceByte = source.byteStream().source()
-
-        var lastTime = System.currentTimeMillis() / 1000
-        var lastRead = 0L
-
-        // Check if downloading is still active and read next bytes.
-        while (downloadQueue[item.id] && sourceByte
-                .read(sink.buffer, DownloadHelper.DOWNLOAD_CHUNK_SIZE)
-                .also { lastRead = it } != -1L
-        ) {
-            sink.emit()
-            totalRead += lastRead
-            _downloadFlow.emit(
-                item.id to DownloadStatus.Progress(
-                    lastRead,
-                    totalRead,
-                    item.downloadSize
-                )
-            )
-            if (item.downloadSize != -1L &&
-                System.currentTimeMillis() / 1000 > lastTime
-            ) {
-                updateNotification(notificationBuilder, item, totalRead.toInt())
-
-                lastTime = System.currentTimeMillis() / 1000
-            }
-        }
-
-        withContext(Dispatchers.IO) {
-            sink.flush()
-            sink.close()
-            sourceByte.close()
-            source.close()
-        }
-
-        return totalRead
     }
 
     private fun updateNotification(
@@ -378,62 +375,6 @@ class DownloadService : LifecycleService() {
             item.getNotificationId(),
             notificationBuilder.build()
         )
-    }
-
-    private suspend fun startConnection(
-        item: DownloadItem,
-        url: URL,
-        alreadyRead: Long,
-        readLimit: Long?
-    ): ResponseBody? {
-        val limit = readLimit?.let {
-            // generate a random byte distance to make it more difficult to fingerprint
-            val nextBytesToReadSize = (BYTES_PER_REQUEST_MIN..BYTES_PER_REQUEST_MAX).random()
-            min(readLimit, alreadyRead + nextBytesToReadSize)
-        }?.toString().orEmpty()
-
-        val request = Request.Builder()
-            .url(url)
-            .method("GET", null)
-            .header("Range", "bytes=$alreadyRead-$limit")
-            .build()
-
-        return withContext(Dispatchers.IO) {
-            // Retry connecting to server for n times.
-            try {
-                val call = httpClient.newCall(request)
-                val response = call.execute()
-
-                return@withContext handleResponse(item, response)
-            } catch (e: IOException) {
-                Log.e(this::javaClass.name, e.printStackTrace().toString())
-
-                val message = getString(R.string.downloadfailed)
-                _downloadFlow.emit(item.id to DownloadStatus.Error(message))
-                toastFromMainThread(message)
-
-                return@withContext null
-            }
-        }
-    }
-
-    private suspend fun handleResponse(item: DownloadItem, response: Response): ResponseBody? {
-        // If link is expired try to regenerate using available info.
-        if (response.code == 403) {
-            regenerateLink(item)
-            response.close()
-            downloadFile(item)
-            return null
-        } else if (response.code !in 200..299) {
-            val message = getString(R.string.downloadfailed) + ": " + response.message
-            _downloadFlow.emit(item.id to DownloadStatus.Error(message))
-            toastFromMainThread(message)
-            response.close()
-            pause(item.id)
-            return null
-        }
-
-        return response.body
     }
 
     /**
@@ -460,7 +401,7 @@ class DownloadService : LifecycleService() {
             item.id = Database.downloadDao().insertDownloadItem(item).toInt()
 
             if (mayStartNewDownload()) {
-                downloadFile(item)
+                selectFormatAndDownloadFile(item)
             } else {
                 pause(item.id)
             }
@@ -484,7 +425,7 @@ class DownloadService : LifecycleService() {
 
         lifecycleScope.launch(coroutineContext) {
             val file = Database.downloadDao().findDownloadItemById(id) ?: return@launch
-            downloadFile(file)
+            selectFormatAndDownloadFile(file)
         }
     }
 
@@ -527,7 +468,7 @@ class DownloadService : LifecycleService() {
 
                 candidates.forEach { item ->
                     launch {
-                        downloadFile(item)
+                        selectFormatAndDownloadFile(item)
                     }
                 }
             }
@@ -558,24 +499,15 @@ class DownloadService : LifecycleService() {
         }
     }
 
-    /**
-     * Regenerate stream url using available info format and quality.
-     */
-    private suspend fun regenerateLink(item: DownloadItem) {
-        val streams = runCatching {
-            MediaServiceRepository.instance.getStreams(item.videoId)
-        }.getOrNull() ?: return
+    private fun selectMatchingStream(streams: Streams, item: DownloadItem): PipedStream? {
         val stream = when (item.type) {
             FileType.AUDIO -> streams.audioStreams
             FileType.VIDEO -> streams.videoStreams
-            else -> null
+            FileType.SUBTITLE -> null
         }
-        stream?.find {
+        return stream?.find {
             it.format == item.format && it.quality == item.quality && it.audioTrackLocale == item.language
-        }?.let {
-            item.url = it.url
         }
-        Database.downloadDao().updateDownloadItem(item)
     }
 
     /**
@@ -734,11 +666,7 @@ class DownloadService : LifecycleService() {
         const val ACTION_RESUME_ALL =
             "com.github.libretube.services.DownloadService.ACTION_RESUME_ALL"
 
-        // any values that are not in that range are strictly rate limited by YT or are very slow due
-        // to the amount of requests that's being made
-        private const val BYTES_PER_REQUEST_MIN = 500_000L
-        private const val BYTES_PER_REQUEST_MAX = 3_000_000L
-
+        private const val MAX_SEGMENT_RETRIES = 3
         var IS_DOWNLOAD_RUNNING = false
     }
 }
