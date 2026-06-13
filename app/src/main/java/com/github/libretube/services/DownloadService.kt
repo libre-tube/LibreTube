@@ -57,6 +57,7 @@ import com.github.libretube.receivers.NotificationReceiver.Companion.ACTION_DOWN
 import com.github.libretube.repo.DownloadProgressResult
 import com.github.libretube.repo.DownloadProvider
 import com.github.libretube.repo.RawByteStreamDownloadProvider
+import com.github.libretube.repo.SabrDownloadProvider
 import com.github.libretube.ui.activities.MainActivity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -268,6 +269,9 @@ class DownloadService : LifecycleService() {
             val selectedStream = selectMatchingStream(streams, item) ?: return
             if (selectedStream.url?.startsWith("http") == true) {
                 downloadFile(item, RawByteStreamDownloadProvider(selectedStream.url!!.toHttpUrl()))
+            } else {
+                val sabrDownloader = SabrDownloadProvider(item, streams, selectedStream)
+                downloadFile(item, sabrDownloader)
             }
         }
     }
