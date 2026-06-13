@@ -8,7 +8,6 @@ import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
-import com.github.libretube.R
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.helpers.LocaleHelper
 import com.github.libretube.helpers.PreferenceHelper
@@ -23,19 +22,6 @@ import java.util.Locale
 open class BaseActivity : AppCompatActivity() {
     open val isDialogActivity: Boolean = false
 
-    val screenOrientationPref by lazy {
-        val orientationPref = PreferenceHelper.getString(
-            PreferenceKeys.ORIENTATION,
-            resources.getString(R.string.config_default_orientation_pref)
-        )
-        when (orientationPref) {
-            "portrait" -> ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT
-            "landscape" -> ActivityInfo.SCREEN_ORIENTATION_USER_LANDSCAPE
-            "auto" -> ActivityInfo.SCREEN_ORIENTATION_USER
-            else -> throw IllegalArgumentException()
-        }
-    }
-
     /**
      * Whether the phone of the user has a cutout like a notch or not
      */
@@ -46,8 +32,8 @@ open class BaseActivity : AppCompatActivity() {
         ThemeHelper.updateTheme(this)
         if (isDialogActivity) ThemeHelper.applyDialogActivityTheme(this)
 
-        // enable auto-rotation if enabled
-        requestOrientationChange()
+        // enable auto-rotation
+        restoreAutoRotation()
 
         // wait for the window decor view to be drawn before detecting display cutouts
         window.decorView.setOnApplyWindowInsetsListener { view, insets ->
@@ -79,9 +65,9 @@ open class BaseActivity : AppCompatActivity() {
     }
 
     /**
-     * Rotate the screen according to the app orientation preference
+     * Re-enable automatic rotation of the screen.
      */
-    open fun requestOrientationChange() {
-        requestedOrientation = screenOrientationPref
+    open fun restoreAutoRotation() {
+        requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_USER
     }
 }

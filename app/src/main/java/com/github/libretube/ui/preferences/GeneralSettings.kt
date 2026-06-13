@@ -67,18 +67,6 @@ class GeneralSettings : BasePreferenceFragment() {
             }
         }
 
-        val autoRotation = findPreference<ListPreference>(PreferenceKeys.ORIENTATION)
-        autoRotation?.setOnPreferenceChangeListener { _, _ ->
-            RequireRestartDialog().show(childFragmentManager, RequireRestartDialog::class.java.name)
-            true
-        }
-
-        val maxImageCache = findPreference<ListPreference>(PreferenceKeys.MAX_IMAGE_CACHE)
-        maxImageCache?.setOnPreferenceChangeListener { _, _ ->
-            ImageHelper.initializeImageLoader(requireContext())
-            true
-        }
-
         val resetSettings = findPreference<Preference>(PreferenceKeys.RESET_SETTINGS)
         resetSettings?.setOnPreferenceClickListener {
             showResetDialog()

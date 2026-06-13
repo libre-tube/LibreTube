@@ -353,11 +353,6 @@ class PlayerFragment : Fragment(R.layout.fragment_player), CustomPlayerCallback 
         }
     }
 
-    private val lockedOrientations = listOf(
-        ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT,
-        ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
-    )
-
     private var screenshotBitmap: Bitmap? = null
     private val openScreenshotFile =
         registerForActivityResult(ActivityResultContracts.CreateDocument("image/png")) { uri ->
@@ -497,7 +492,7 @@ class PlayerFragment : Fragment(R.layout.fragment_player), CustomPlayerCallback 
                     binding.playerMotionLayout.setTransitionDuration(250)
                     binding.playerMotionLayout.transitionToEnd()
                     baseActivity.minimizePlayerContainerLayout()
-                    baseActivity.requestOrientationChange()
+                    baseActivity.restoreAutoRotation()
                 }
             }
 
@@ -629,7 +624,7 @@ class PlayerFragment : Fragment(R.layout.fragment_player), CustomPlayerCallback 
                     playerBackgroundBinding.sbSkipBtn.isGone = true
 
                     baseActivity.setPlayerContainerProgress(1f)
-                    baseActivity.requestOrientationChange()
+                    baseActivity.restoreAutoRotation()
                 }
 
                 updateMaxSheetHeight()
@@ -838,7 +833,7 @@ class PlayerFragment : Fragment(R.layout.fragment_player), CustomPlayerCallback 
         commonPlayerViewModel.isFullscreen.value = false
 
         if (!PlayerHelper.autoFullscreenEnabled) {
-            baseActivity.requestedOrientation = baseActivity.screenOrientationPref
+            baseActivity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_USER
         }
 
         openOrCloseFullscreenDialog(false)
@@ -983,7 +978,7 @@ class PlayerFragment : Fragment(R.layout.fragment_player), CustomPlayerCallback 
         }
 
         // restore the orientation that's used by the main activity
-        baseActivity.requestOrientationChange()
+        baseActivity.restoreAutoRotation()
 
         _binding = null
     }
@@ -1321,14 +1316,7 @@ class PlayerFragment : Fragment(R.layout.fragment_player), CustomPlayerCallback 
      */
     @SuppressLint("SourceLockedOrientationActivity")
     private fun changeOrientationMode() {
-        if (PlayerHelper.autoFullscreenEnabled) {
-            // enable auto rotation
-            baseActivity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_SENSOR
-        } else {
-            // go to portrait mode
-            baseActivity.requestedOrientation =
-                (requireActivity() as BaseActivity).screenOrientationPref
-        }
+        baseActivity.restoreAutoRotation()
     }
 
 
@@ -1405,7 +1393,7 @@ class PlayerFragment : Fragment(R.layout.fragment_player), CustomPlayerCallback 
      * If true, the activity will be automatically restarted
      */
     private fun restartActivityIfNeeded() {
-        if (baseActivity.screenOrientationPref in lockedOrientations || viewModel.isOrientationChangeInProgress) return
+        if (viewModel.isOrientationChangeInProgress) return
 
         val orientation = resources.configuration.orientation
         if (commonPlayerViewModel.isFullscreen.value != true && orientation != playerLayoutOrientation) {
