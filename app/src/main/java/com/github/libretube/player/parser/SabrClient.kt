@@ -81,19 +81,6 @@ data class Segment(
      * Length of the media data.
      */
     fun length(): Int = data.sumOf { it.size }
-
-    /**
-     * Media data as a single array.
-     */
-    fun data(): ByteArray {
-        val result = ByteArray(length())
-        var offset = 0
-        for (chunk in data) {
-            System.arraycopy(chunk, 0, result, offset, chunk.size)
-            offset += chunk.size
-        }
-        return result
-    }
 }
 
 /**
