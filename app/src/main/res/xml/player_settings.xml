@@ -12,6 +12,14 @@
             app:title="@string/swipe_controls" />
 
         <SwitchPreferenceCompat
+            android:dependency="player_swipe_controls"
+            android:defaultValue="true"
+            android:icon="@drawable/ic_volume"
+            android:summary="@string/swipe_controls_system_volume_summary"
+            app:key="player_swipe_controls_system_volume"
+            app:title="@string/swipe_controls_system_volume" />
+
+        <SwitchPreferenceCompat
             android:defaultValue="false"
             android:icon="@drawable/ic_fullscreen"
             app:key="fullscreen_gestures"
