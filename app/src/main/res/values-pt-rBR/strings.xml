@@ -402,12 +402,12 @@
     <string name="dearrow">Habilitar DeArrow</string>
     <string name="dearrow_summary">Mostrar títulos e miniaturas mais precisos e menos sensacionalistas. Aumenta o tempo de carregamento dos vídeos</string>
     <string name="continue_watching">Continuar assistindo</string>
-    <string name="descriptive_audio_track">descritivo</string>
-    <string name="default_or_unknown_audio_track">padrão ou desconhecido</string>
+    <string name="descriptive_audio_track">Audiodescrição</string>
+    <string name="default_or_unknown_audio_track">Padrão</string>
     <string name="unknown_or_no_audio">desconhecido ou sem audio</string>
-    <string name="original_or_main_audio_track">original ou principal</string>
+    <string name="original_or_main_audio_track">Original</string>
     <string name="unknown_audio_track_type">Tipo de faixa de áudio desconhecido</string>
-    <string name="dubbed_audio_track">apelidada</string>
+    <string name="dubbed_audio_track">Dublada</string>
     <string name="unknown_audio_language">Idioma de áudio desconhecido</string>
     <string name="visibility">Visibilidade</string>
     <string name="visibility_unlisted">Não listado</string>
@@ -571,4 +571,5 @@
     <string name="ungrouped_channels_with_count">Não agrupados (%1$d)</string>
     <string name="long_press_fast_forward">Avanço rápido com um toque longo</string>
     <string name="long_press_fast_forward_summary">Reproduzir vídeos em velocidade dupla enquanto tocar e pressionar a tela.</string>
+    <string name="resume_all">Retomar downloads</string>
 </resources>
