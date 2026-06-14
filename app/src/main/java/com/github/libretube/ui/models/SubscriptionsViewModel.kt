@@ -10,6 +10,7 @@ import com.github.libretube.R
 import com.github.libretube.api.SubscriptionHelper
 import com.github.libretube.api.obj.StreamItem
 import com.github.libretube.api.obj.Subscription
+import com.github.libretube.db.obj.SubscriptionGroup
 import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.toastFromMainDispatcher
 import com.github.libretube.helpers.PreferenceHelper
@@ -24,6 +25,9 @@ class SubscriptionsViewModel : ViewModel() {
     val feedProgress = MutableLiveData<FeedProgress?>()
 
     var subFeedRecyclerViewState: Parcelable? = null
+
+    val groups = MutableLiveData<List<SubscriptionGroup>>()
+    var groupToEdit: SubscriptionGroup? = null
 
     fun fetchFeed(context: Context, forceRefresh: Boolean) {
         viewModelScope.launch(Dispatchers.IO) {

@@ -16,7 +16,6 @@ import com.github.libretube.databinding.DialogEditChannelGroupBinding
 import com.github.libretube.db.DatabaseHolder
 import com.github.libretube.db.obj.SubscriptionGroup
 import com.github.libretube.ui.adapters.SubscriptionGroupChannelsAdapter
-import com.github.libretube.ui.models.EditChannelGroupsModel
 import com.github.libretube.ui.models.SubscriptionsViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -28,8 +27,7 @@ class EditChannelGroupSheet : ExpandedBottomSheet(R.layout.dialog_edit_channel_g
     private var _binding: DialogEditChannelGroupBinding? = null
     private val binding get() = _binding!!
 
-    private val subscriptionsModel: SubscriptionsViewModel by activityViewModels()
-    private val channelGroupsModel: EditChannelGroupsModel by activityViewModels()
+    private val viewModel: SubscriptionsViewModel by activityViewModels()
     private var channels = listOf<Subscription>()
 
     private lateinit var channelsAdapter: SubscriptionGroupChannelsAdapter
@@ -38,15 +36,15 @@ class EditChannelGroupSheet : ExpandedBottomSheet(R.layout.dialog_edit_channel_g
         _binding = DialogEditChannelGroupBinding.bind(view)
 
         channelsAdapter = SubscriptionGroupChannelsAdapter(
-            channelGroupsModel.groupToEdit!!
+            viewModel.groupToEdit!!
         ) {
-            channelGroupsModel.groupToEdit = it
+            viewModel.groupToEdit = it
             updateConfirmStatus()
         }
 
         binding.channelsRV.adapter = channelsAdapter
-        binding.groupName.setText(channelGroupsModel.groupToEdit?.name)
-        val oldGroupName = channelGroupsModel.groupToEdit?.name.orEmpty()
+        binding.groupName.setText(viewModel.groupToEdit?.name)
+        val oldGroupName = viewModel.groupToEdit?.name.orEmpty()
 
         binding.channelsRV.layoutManager = LinearLayoutManager(context)
 
@@ -64,7 +62,7 @@ class EditChannelGroupSheet : ExpandedBottomSheet(R.layout.dialog_edit_channel_g
 
         updateConfirmStatus()
         binding.confirm.setOnClickListener {
-            val updatedGroup = channelGroupsModel.groupToEdit?.copy(
+            val updatedGroup = viewModel.groupToEdit?.copy(
                 name = binding.groupName.text.toString().ifEmpty { return@setOnClickListener }
             ) ?: return@setOnClickListener
             saveGroup(updatedGroup, oldGroupName)
@@ -75,10 +73,10 @@ class EditChannelGroupSheet : ExpandedBottomSheet(R.layout.dialog_edit_channel_g
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 launch(Dispatchers.IO) {
-                    subscriptionsModel.fetchSubscriptions(requireContext())
+                    viewModel.fetchSubscriptions(requireContext())
                 }
                 launch {
-                    subscriptionsModel.subscriptions.asFlow().collectLatest { subscriptions ->
+                    viewModel.subscriptions.asFlow().collectLatest { subscriptions ->
                         subscriptions?.let {
                             channels = it
                             showChannels(it, null)
@@ -91,7 +89,7 @@ class EditChannelGroupSheet : ExpandedBottomSheet(R.layout.dialog_edit_channel_g
 
     private fun saveGroup(group: SubscriptionGroup, oldGroupName: String) {
         // delete the old instance if the group already existed and add the updated/new one
-        channelGroupsModel.groups.value = channelGroupsModel.groups.value
+        viewModel.groups.value = viewModel.groups.value
             ?.filter { it.name != oldGroupName }
             ?.plus(group)
 
@@ -122,7 +120,7 @@ class EditChannelGroupSheet : ExpandedBottomSheet(R.layout.dialog_edit_channel_g
             val name = groupName.text.toString()
             groupName.error = getGroupNameError(name)
 
-            confirm.isEnabled = groupName.error == null && !channelGroupsModel.groupToEdit?.channels.isNullOrEmpty()
+            confirm.isEnabled = groupName.error == null && !viewModel.groupToEdit?.channels.isNullOrEmpty()
         }
     }
 
@@ -134,7 +132,7 @@ class EditChannelGroupSheet : ExpandedBottomSheet(R.layout.dialog_edit_channel_g
         val groupExists = runBlocking(Dispatchers.IO) {
             DatabaseHolder.Database.subscriptionGroupsDao().exists(name)
         }
-        if (groupExists && channelGroupsModel.groupToEdit?.name != name) {
+        if (groupExists && viewModel.groupToEdit?.name != name) {
             return getString(R.string.group_name_error_exists)
         }
 
