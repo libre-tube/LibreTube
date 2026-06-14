@@ -12,13 +12,10 @@ class AudioHelper(private val context: Context) {
         .getStreamMinVolume(audioManager, AudioManager.STREAM_MUSIC)
     private val maximumVolumeIndex = audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC)
 
-    private var videoVolumeCached = 1f
-
-    var videoVolume: Float
-        get() = videoVolumeCached
+   var videoVolume: Float = 1f
         set(value) {
-            videoVolumeCached = value.coerceIn(0f, 1f)
-            BackgroundHelper.setVolume(context, videoVolumeCached)
+            field = value.coerceIn(0f, 1f)
+            BackgroundHelper.setVolume(context, field)
         }
 
     var systemVolume: Int
