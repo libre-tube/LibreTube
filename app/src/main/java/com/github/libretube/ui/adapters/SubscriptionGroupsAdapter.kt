@@ -9,7 +9,7 @@ import com.github.libretube.R
 import com.github.libretube.databinding.SubscriptionGroupRowBinding
 import com.github.libretube.db.DatabaseHolder
 import com.github.libretube.db.obj.SubscriptionGroup
-import com.github.libretube.ui.models.EditChannelGroupsModel
+import com.github.libretube.ui.models.SubscriptionsViewModel
 import com.github.libretube.ui.sheets.EditChannelGroupSheet
 import com.github.libretube.ui.viewholders.SubscriptionGroupsViewHolder
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -19,7 +19,7 @@ import kotlinx.coroutines.launch
 
 class SubscriptionGroupsAdapter(
     var groups: MutableList<SubscriptionGroup>,
-    private val viewModel: EditChannelGroupsModel,
+    private val viewModel: SubscriptionsViewModel,
     private val parentFragmentManager: FragmentManager
 ) : RecyclerView.Adapter<SubscriptionGroupsViewHolder>() {
     override fun onCreateViewHolder(
