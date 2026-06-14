@@ -1,5 +1,6 @@
 package com.github.libretube.player.parser
 
+import android.util.Base64
 import android.util.Log
 import androidx.annotation.OptIn
 import androidx.media3.common.MimeTypes
@@ -183,6 +184,10 @@ class SabrClient private constructor(
         manifest.videoId,
         manifest.serverAbrStreamingUri.toString(),
         ByteString.copyFrom(manifest.videoPlaybackUstreamerConfig)
+    )
+
+    constructor(videoId: String, url: String, ustreamerConfig: String) : this(
+        videoId, url, ByteString.copyFrom(Base64.decode(ustreamerConfig, Base64.URL_SAFE))
     )
 
     init {

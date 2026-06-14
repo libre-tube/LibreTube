@@ -4,18 +4,10 @@ import android.net.Uri
 import android.util.Base64
 import androidx.core.net.toUri
 import androidx.media3.common.C
-import androidx.media3.common.C.ROLE_FLAG_DESCRIBES_VIDEO
-import androidx.media3.common.C.ROLE_FLAG_DUB
-import androidx.media3.common.C.ROLE_FLAG_MAIN
-import androidx.media3.common.C.ROLE_FLAG_SUPPLEMENTARY
-import androidx.media3.common.Format
-import androidx.media3.common.MimeTypes
 import androidx.media3.common.StreamKey
 import androidx.media3.common.util.UnstableApi
 import androidx.media3.exoplayer.offline.FilterableManifest
-import com.github.libretube.api.obj.PipedStream
 import com.github.libretube.api.obj.Streams
-import com.github.libretube.player.parser.Xtags
 
 /**
  * Represents server adaptive-bitrate streaming media metadata.
@@ -54,44 +46,14 @@ class SabrManifest(
         val videoAdaptionSets = streams.videoStreams.groupBy { it.mimeType }
             .map { (_, streams) ->
                 AdaptationSet(C.TRACK_TYPE_VIDEO, streams.map {
-                    buildRepresentation(
-                        it,
-                        Format.Builder()
-                            .setCodecs(it.codec)
-                            .setContainerMimeType(it.mimeType)
-                            .setSampleMimeType(MimeTypes.getVideoMediaMimeType(it.codec))
-                            .setAverageBitrate(it.bitrate ?: -1)
-                            .setFrameRate(it.fps?.toFloat() ?: -1f)
-                            .setWidth(it.width ?: -1)
-                            .setHeight(it.height ?: -1).build(),
-                    )
+                    Representation(it)
                 })
             };
 
         val audioAdaptationSets = streams.audioStreams.groupBy { it.mimeType + it.audioTrackId }
             .map { (_, streams) ->
                 AdaptationSet(C.TRACK_TYPE_AUDIO, streams.map {
-                    val xtags = Xtags(it.xtags.orEmpty())
-                    buildRepresentation(
-                        it,
-                        Format.Builder()
-                            .setCodecs(it.codec)
-                            .setContainerMimeType(it.mimeType)
-                            .setSampleMimeType(MimeTypes.getAudioMediaMimeType(it.codec))
-                            .setAverageBitrate(it.bitrate ?: -1)
-                            .setChannelCount(2)
-                            .setLanguage(it.audioTrackId?.take(2)?: xtags.language() ?: it.audioTrackLocale)
-                            .setRoleFlags(
-                                when (it.audioTrackType?.lowercase()) {
-                                    "descriptive" -> ROLE_FLAG_DESCRIBES_VIDEO
-                                    "original" -> ROLE_FLAG_MAIN
-                                    "dubbed", "auto-dubbed", "dubbed-auto" -> ROLE_FLAG_DUB
-                                    "secondary" -> ROLE_FLAG_SUPPLEMENTARY
-                                    else -> 0
-                                }
-                            )
-                            .build()
-                    )
+                    Representation(it)
                 })
             }
         adaptationSets = videoAdaptionSets + audioAdaptationSets
@@ -99,12 +61,5 @@ class SabrManifest(
 
     override fun copy(streamKeys: List<StreamKey>): SabrManifest {
         return this
-    }
-
-    companion object {
-        private fun buildRepresentation(stream: PipedStream, format: Format) = Representation(
-            format,
-            stream,
-        )
     }
 }
