@@ -14,7 +14,7 @@
         <SwitchPreferenceCompat
             android:dependency="player_swipe_controls"
             android:defaultValue="true"
-            android:icon="@drawable/ic_swipe_gesture_system_volume"
+            android:icon="@drawable/ic_volume"
             android:summary="@string/swipe_controls_system_volume_summary"
             app:key="player_swipe_controls_system_volume"
             app:title="@string/swipe_controls_system_volume" />
