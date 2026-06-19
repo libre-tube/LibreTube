@@ -123,8 +123,13 @@ object TextUtils {
                 .format(time.toDouble(), RelativeDateTimeFormatter.Direction.LAST, timeFormat)
         } else {
             val weeks = date.until(now, ChronoUnit.WEEKS)
-            val minResolution = if (weeks > 0) DateUtils.WEEK_IN_MILLIS else 0L
-            DateUtils.getRelativeTimeSpanString(unixTime, System.currentTimeMillis(), minResolution)
+            
+            if(weeks > 0){
+                RelativeDateTimeFormatter.getInstance()
+                  .format(weeks.toDouble(), RelativeDateTimeFormatter.Direction.LAST, RelativeDateTimeFormatter.RelativeUnit.WEEKS)
+            } else {
+                DateUtils.getRelativeTimeSpanString(unixTime, System.currentTimeMillis(), 0L)
+            }
         }
     }
 
