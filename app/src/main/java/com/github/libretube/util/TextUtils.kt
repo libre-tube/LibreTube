@@ -107,30 +107,42 @@ object TextUtils {
     }
 
     fun formatRelativeDate(unixTime: Long): CharSequence {
-        val date = LocalDateTime.ofInstant(Instant.ofEpochMilli(unixTime), ZoneId.systemDefault())
+        
         val now = LocalDateTime.now()
-        val months = date.until(now, ChronoUnit.MONTHS)
+        val relativeTime = getRelativeTimeUnit(unixTime, now)
 
-        return if (months > 0) {
-            val years = months / 12
-
-            val (timeFormat, time) = if (years > 0) {
-                RelativeDateTimeFormatter.RelativeUnit.YEARS to years
-            } else {
-                RelativeDateTimeFormatter.RelativeUnit.MONTHS to months
+        return if (relativeTime != null) {
+            val (unit,amount) = relativeTime
+            val formatUnit = when (unit){
+                ChronoUnit.YEARS -> RelativeDateTimeFormatter.RelativeUnit.YEARS
+                ChronoUnit.MONTHS -> RelativeDateTimeFormatter.RelativeUnit.MONTHS
+                else -> RelativeDateTimeFormatter.RelativeUnit.WEEKS
             }
+           
             RelativeDateTimeFormatter.getInstance()
-                .format(time.toDouble(), RelativeDateTimeFormatter.Direction.LAST, timeFormat)
+                .format(amount.toDouble(), RelativeDateTimeFormatter.Direction.LAST, formatUnit)
         } else {
-            val weeks = date.until(now, ChronoUnit.WEEKS)
-            
-            if(weeks > 0){
-                RelativeDateTimeFormatter.getInstance()
-                  .format(weeks.toDouble(), RelativeDateTimeFormatter.Direction.LAST, RelativeDateTimeFormatter.RelativeUnit.WEEKS)
-            } else {
                 DateUtils.getRelativeTimeSpanString(unixTime, System.currentTimeMillis(), 0L)
             }
-        }
+    }
+    
+
+    internal fun getRelativeTimeUnit(
+        unixTime:Long, now: LocalDateTime, zone: ZoneId = ZoneId.systemDefault()
+    ): Pair<ChronoUnit, Long>? {
+
+     val date= LocalDateTime.ofInstant(Instant.ofEpochMilli(unixTime), zone)
+     val months = date.until(now, ChronoUnit.MONTHS)
+     if(months>0){
+        val years = months/12
+        return if (years>0) ChronoUnit.YEARS to  years 
+        else ChronoUnit.MONTHS to months
+     }
+
+     val weeks = date.until(now, ChronoUnit.WEEKS)
+     if(weeks>0) return ChronoUnit.WEEKS to weeks
+     return null
+
     }
 
     fun formatBitrate(bitrate: Int?): String {
