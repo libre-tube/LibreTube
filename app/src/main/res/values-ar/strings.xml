@@ -169,7 +169,7 @@
     <string name="auto_rotation">التدوير التلقائي</string>
     <string name="landscape">افقي</string>
     <string name="portrait">عمودي</string>
-    <string name="turnInternetOn">يرجى تشغيل Wi-Fi أو بيانات الجوال للاتصال بالإنترنت.</string>
+    <string name="turnInternetOn">يُرجى تشغيل Wi-Fi أو بيانات الجوّال للاتصال بالإنترنت.</string>
     <string name="open">فتح …</string>
     <string name="chapters">الفصول</string>
     <string name="require_restart_message">أعد تشغيل التطبيق لاستخدام التغييرات الجديدة.</string>
@@ -386,7 +386,7 @@
     <string name="mark_as_unwatched">علّم لم اشاهده</string>
     <string name="welcome">مرحبا بك في ليبري تيوب</string>
     <string name="choose_instance">يُرجى اختيار نُسْخَة أولاً!</string>
-    <string name="choose_instance_long">يرجى اختيار خادم Piped للاستخدامه من القائمة أدناه سيعمل هذا الخادم كوسيط بينك وبين YouTube تقع هذه الخوادم في مواقع جغرافية مختلفة موضّحة بعلم الدولة/الدول الخاصة بها عادةً ما تكون الخوادم الأقرب إلى موقعك الفعلي أسرع من الخوادم البعيدة يمكنك تغيير الخادم الذي تستخدمه في أي وقت من خلال الإعدادات.</string>
+    <string name="choose_instance_long">يُرجى اختيار خادم Piped للاستخدامه من القائمة أدناه سيعمل هذا الخادم كوسيط بينك وبين YouTube تقع هذه الخوادم في مواقع جغرافية مختلفة موضّحة بعلم الدولة/الدول الخاصة بها عادةً ما تكون الخوادم الأقرب إلى موقعك الفعلي أسرع من الخوادم البعيدة يمكنك تغيير الخادم الذي تستخدمه في أي وقت من خلال الإعدادات.</string>
     <string name="emptyPlaylistDescription">لا يمكن أن يكون وصف قائمة التشغيل فارغا</string>
     <string name="playlist_description">وصف قائمة التشغيل</string>
     <string name="change_playlist_description">تغيير وصف قائمة التشغيل</string>
