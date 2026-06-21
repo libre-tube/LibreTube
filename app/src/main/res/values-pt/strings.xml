@@ -403,10 +403,10 @@
     <string name="audio_track_format">%1$s - %2$s</string>
     <string name="unknown_audio_language">Idioma de áudio desconhecido</string>
     <string name="unknown_audio_track_type">Tipo de faixa de áudio desconhecido</string>
-    <string name="original_or_main_audio_track">original ou principal</string>
-    <string name="dubbed_audio_track">traduzido</string>
-    <string name="descriptive_audio_track">descritivo</string>
-    <string name="default_or_unknown_audio_track">padrão ou desconhecido</string>
+    <string name="original_or_main_audio_track">Original</string>
+    <string name="dubbed_audio_track">Dobrado</string>
+    <string name="descriptive_audio_track">Descrição de áudio</string>
+    <string name="default_or_unknown_audio_track">Padrão</string>
     <string name="unknown_or_no_audio">desconhecido ou sem áudio</string>
     <string name="dearrow">Ativar \'DeArrow\'</string>
     <string name="dearrow_summary">Mostrar títulos e miniaturas mais precisas e menos sensacionalistas. Pode aumentar o tempo de carregamento dos vídeos</string>
@@ -571,4 +571,5 @@
     <string name="ungrouped_channels_with_count">Sem grupo (%1$d)</string>
     <string name="long_press_fast_forward">Avanço rápido com toque longo</string>
     <string name="long_press_fast_forward_summary">Duplicar velocidade de reprodução com um toque longo no ecrã.</string>
+    <string name="resume_all">Retomar descargas</string>
 </resources>
