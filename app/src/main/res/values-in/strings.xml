@@ -399,11 +399,11 @@
     <string name="chapters_videoHighlight">Sorotan Video</string>
     <string name="unknown_audio_track_type">Jenis trek audio tidak diketahui</string>
     <string name="audio_track_format">%1$s - %2$s</string>
-    <string name="original_or_main_audio_track">asli atau utama</string>
+    <string name="original_or_main_audio_track">Asli</string>
     <string name="unknown_audio_language">Bahasa audio tidak diketahui</string>
-    <string name="dubbed_audio_track">disulih suara</string>
-    <string name="descriptive_audio_track">deskriptif</string>
-    <string name="default_or_unknown_audio_track">bawaan atau tidak diketahui</string>
+    <string name="dubbed_audio_track">Disulih suara</string>
+    <string name="descriptive_audio_track">Deskripsi Audio</string>
+    <string name="default_or_unknown_audio_track">Bawaan</string>
     <string name="unknown_or_no_audio">tidak diketahui atau tidak ada audio</string>
     <string name="continue_watching">Lanjut Menonton</string>
     <string name="dearrow">Aktifkan DeArrow</string>
@@ -565,4 +565,5 @@
     <string name="showing_results_for">Munculkan hasil dari:</string>
     <string name="long_press_fast_forward">Tekan lama untuk percepat</string>
     <string name="long_press_fast_forward_summary">Putar video dua kali lipat saat mengetuk dan menahan layar.</string>
+    <string name="resume_all">Lanjutkan Unduhan</string>
 </resources>
