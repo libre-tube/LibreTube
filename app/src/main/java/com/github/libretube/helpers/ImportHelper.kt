@@ -33,7 +33,7 @@ import java.util.stream.Collectors
 object ImportHelper {
     private val IMPORT_THUMBNAIL_QUALITY = "mqdefault"
     private val VIDEO_ID_LENGTH = 11
-    private val YOUTUBE_IMG_URL = "https://img.youtube.com"
+    private const val YOUTUBE_IMG_URL = "https://img.youtube.com"
 
 
     // format: playlistName-videos.csv, where "videos" could also be i18ned to a different language

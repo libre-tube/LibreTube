@@ -61,19 +61,15 @@ import com.github.libretube.ui.preferences.BackupRestoreSettings
 import com.github.libretube.ui.preferences.BackupRestoreSettings.Companion.FILETYPE_ANY
 import com.github.libretube.util.UpdateChecker
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import dagger.hilt.android.AndroidEntryPoint
-import jakarta.inject.Inject
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
 
 
 
-@AndroidEntryPoint
 class MainActivity : AbstractPlayerHostActivity() {
     lateinit var binding: ActivityMainBinding
 
-    @Inject
     private lateinit var importHelper: ImportHelper
 
     lateinit var navController: NavController

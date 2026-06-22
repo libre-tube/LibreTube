@@ -3,7 +3,6 @@ appcompat = "1.7.1"
 core = "1.18.0"
 documentfile = "1.1.0"
 gradle = "9.2.1"
-hiltAndroid = "2.51"
 junit = "4.13.2"
 kotlin = "2.3.21"
 ksp = "2.3.5"
@@ -37,8 +36,6 @@ swiperefreshlayout = "1.2.0"
 splashscreen = "1.2.0"
 protobuf = "4.33.5"
 protobufPlugin = "0.9.6"
-hilt = "2.52"
-hiltWorkerAndCompiler = "1.2.0"
 workRuntimeKtx = "2.9.1"
 
 [libraries]
@@ -88,10 +85,6 @@ androidx-swiperefreshlayout = { group = "androidx.swiperefreshlayout", name = "s
 protobuf-protoc = { module = "com.google.protobuf:protoc", version.ref = "protobuf" }
 google-protobuf-javalite = { module = 'com.google.protobuf:protobuf-javalite', version.ref = 'protobuf' }
 google-protobuf-kotlin-lite = { module = 'com.google.protobuf:protobuf-kotlin-lite', version.ref = 'protobuf' }
-hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hilt" }
-dagger-hilt-compiler = { module = "com.google.dagger:hilt-compiler", version.ref = "hilt" }
-androidx-hilt-compiler = { module = "androidx.hilt:hilt-compiler", version.ref = "hiltWorkerAndCompiler" }
-androidx-hilt-work = { module = "androidx.hilt:hilt-work", version.ref = "hiltWorkerAndCompiler" }
 
 
 
