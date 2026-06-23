@@ -1,3 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="startpage">باشبەت</string>
+    <string name="subscriptions">ئەزالىقلىرىم</string>
+    <string name="library">ئامبار</string>
+    <string name="search_hint">ئىزدەش</string>
+    <string name="videos">ۋىدېئولار</string>
+    <string name="subscribe">ئەزا بولۇش</string>
+    <string name="unsubscribe">ئەزالىقتىن چىقىش</string>
+    <string name="share">ھەمبەھىرلەش</string>
+    <string name="download">چۈشۈرۈش</string>
+    <string name="save">ساقلاش</string>
+    <string name="username">ئەزا نامى</string>
+    <string name="password">شىفىر</string>
+    <string name="login">كىرىش</string>
+    <string name="register">تىزىملىتىش</string>
+    <string name="logout">چىقىش</string>
+    <string name="cancel">بىكار قىلىش</string>
+    <string name="loggedIn">كىردىڭىز</string>
+    <string name="yes">ھەئە</string>
+    <string name="loggedout">چىقتىڭىز</string>
+    <string name="registered">تىزىملىتىلدى. ئەمدى قاناللارغا ئەزا بولالايسىز</string>
 </resources>
