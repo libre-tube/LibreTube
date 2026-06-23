@@ -4,7 +4,6 @@ import android.content.Context
 import android.icu.text.RelativeDateTimeFormatter
 import android.net.Uri
 import android.text.format.DateUtils
-import androidx.core.text.isDigitsOnly
 import com.github.libretube.BuildConfig
 import com.github.libretube.R
 import com.github.libretube.extensions.formatShort
@@ -110,22 +109,17 @@ object TextUtils {
         val date = LocalDateTime.ofInstant(Instant.ofEpochMilli(unixTime), ZoneId.systemDefault())
         val now = LocalDateTime.now()
         val months = date.until(now, ChronoUnit.MONTHS)
+        val weeks = date.until(now, ChronoUnit.WEEKS)
 
-        return if (months > 0) {
-            val years = months / 12
-
-            val (timeFormat, time) = if (years > 0) {
-                RelativeDateTimeFormatter.RelativeUnit.YEARS to years
-            } else {
-                RelativeDateTimeFormatter.RelativeUnit.MONTHS to months
-            }
-            RelativeDateTimeFormatter.getInstance()
-                .format(time.toDouble(), RelativeDateTimeFormatter.Direction.LAST, timeFormat)
-        } else {
-            val weeks = date.until(now, ChronoUnit.WEEKS)
-            val minResolution = if (weeks > 0) DateUtils.WEEK_IN_MILLIS else 0L
-            DateUtils.getRelativeTimeSpanString(unixTime, System.currentTimeMillis(), minResolution)
+        val (timeFormat, time) = when {
+            months >= 12 -> RelativeDateTimeFormatter.RelativeUnit.YEARS to months / 12
+            months > 0 -> RelativeDateTimeFormatter.RelativeUnit.MONTHS to months
+            weeks > 0 -> RelativeDateTimeFormatter.RelativeUnit.WEEKS to weeks
+            else -> return  DateUtils.getRelativeTimeSpanString(unixTime, System.currentTimeMillis(), 0)
         }
+
+        return RelativeDateTimeFormatter.getInstance()
+            .format(time.toDouble(), RelativeDateTimeFormatter.Direction.LAST, timeFormat)
     }
 
     fun formatBitrate(bitrate: Int?): String {
