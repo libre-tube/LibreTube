@@ -11,9 +11,13 @@ import com.github.libretube.ui.adapters.AddChannelToGroupAdapter
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import androidx.fragment.app.activityViewModels
+import com.github.libretube.ui.models.SubscriptionsViewModel
 
 class AddChannelToGroupSheet : ExpandedBottomSheet(R.layout.dialog_add_channel_to_group) {
     private lateinit var channelId: String
+
+    private val viewModel: SubscriptionsViewModel by activityViewModels()
 
     private val addToGroupAdapter by lazy(LazyThreadSafetyMode.NONE) {
         AddChannelToGroupAdapter(channelId)
@@ -47,6 +51,8 @@ class AddChannelToGroupSheet : ExpandedBottomSheet(R.layout.dialog_add_channel_t
 
                     lifecycleScope.launch(Dispatchers.IO) {
                         subGroupsDao.updateAll(subscriptionGroups)
+
+                        viewModel.groups.postValue(subscriptionGroups)
 
                         withContext(Dispatchers.Main) {
                             dialog?.dismiss()
