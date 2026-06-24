@@ -535,6 +535,7 @@ class PlaylistDownloadsFragmentPage : Fragment(R.layout.fragment_download_conten
                 Database.downloadDao().getDownloadPlaylists()
             }
 
+            binding.downloadsEmpty.isVisible = downloadPlaylists.isEmpty()
             if (downloadPlaylists.isNotEmpty()) {
                 submitPlaylists(adapter, downloadPlaylists)
 

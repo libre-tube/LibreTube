@@ -66,11 +66,6 @@
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             android:orientation="vertical" />
 
-        <androidx.fragment.app.FragmentContainerView
-            android:id="@+id/fragment"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
     </LinearLayout>
 
     <LinearLayout
@@ -129,5 +124,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         tools:targetApi="o"
         tools:visibility="visible" />
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
