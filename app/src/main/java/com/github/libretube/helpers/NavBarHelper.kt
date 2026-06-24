@@ -2,16 +2,16 @@ package com.github.libretube.helpers
 
 import android.content.Context
 import android.util.Log
-import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.widget.PopupMenu
-import androidx.core.view.forEach
 import androidx.core.view.get
 import androidx.core.view.isGone
+import androidx.core.view.iterator
 import androidx.core.view.size
 import com.github.libretube.R
 import com.github.libretube.constants.PreferenceKeys
+import com.github.libretube.ui.dialogs.NavBarItem
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationBarView
 
@@ -29,41 +29,33 @@ object NavBarHelper {
     }
 
     // contains "-" -> invisible menu item, else -> visible menu item
-    fun getNavBarItems(context: Context): List<MenuItem> {
+    fun getNavBarItemPreference(context: Context): List<Pair<Int, Boolean>> {
         val prefItems = try {
             getNavBarPrefs()
         } catch (e: Exception) {
             Log.e("fail to parse nav items", e.toString())
-            return getDefaultNavBarItems(context)
+            return getDefaultNavBarItems(context).map { it.itemId to it.isVisible }
         }
         val p = PopupMenu(context, null)
         MenuInflater(context).inflate(R.menu.bottom_menu, p.menu)
 
         if (prefItems.size == p.menu.size) {
-            val navBarItems = mutableListOf<MenuItem>()
-            prefItems.forEach {
-                navBarItems.add(
-                    p.menu[it.replace("-", "").toInt()].apply {
-                        this.isVisible = !it.contains("-")
-                    }
-                )
+            return prefItems.map {
+                val menuItemId = p.menu[it.replace("-", "").toInt()].itemId
+                val isVisible = !it.contains("-")
+                menuItemId to isVisible
             }
-            return navBarItems
         }
-        return getDefaultNavBarItems(context)
+        return getDefaultNavBarItems(context).map { it.itemId to it.isVisible }
     }
 
     private fun getDefaultNavBarItems(context: Context): List<MenuItem> {
         val p = PopupMenu(context, null)
         MenuInflater(context).inflate(R.menu.bottom_menu, p.menu)
-        val navBarItems = mutableListOf<MenuItem>()
-        p.menu.forEach {
-            navBarItems.add(it)
-        }
-        return navBarItems
+        return p.menu.iterator().asSequence().toList()
     }
 
-    fun setNavBarItems(items: List<MenuItem>, context: Context) {
+    fun setNavBarItemsPreference(context: Context, items: List<NavBarItem>) {
         val prefString = mutableListOf<String>()
         val defaultNavBarItems = getDefaultNavBarItems(context)
         items.forEach { newItem ->
@@ -91,39 +83,23 @@ object NavBarHelper {
         }
         bottomNav.labelVisibilityMode = labelVisibilityMode
 
-        val navBarItems = getNavBarItems(bottomNav.context)
+        val navBarItems = getNavBarItemPreference(bottomNav.context)
+        val startFragmentId = getStartFragmentId(bottomNav.context)
 
-        val menuItems = mutableListOf<MenuItem>()
-        // remove the old items
-        navBarItems.forEach {
-            menuItems.add(
-                bottomNav.menu.findItem(it.itemId)
-            )
-            bottomNav.menu.removeItem(it.itemId)
+        navBarItems.forEach { (menuItemId, isVisible) ->
+            bottomNav.menu.findItem(menuItemId).isVisible = isVisible
         }
+        if (navBarItems.none { (_, isVisible) -> isVisible }) bottomNav.isGone = true
 
-        navBarItems.forEach { navBarItem ->
-            if (navBarItem.isVisible) {
-                val menuItem = menuItems.first { it.itemId == navBarItem.itemId }
-
-                bottomNav.menu.add(
-                    menuItem.groupId,
-                    menuItem.itemId,
-                    Menu.NONE,
-                    menuItem.title
-                ).icon = menuItem.icon
-            }
-        }
-        if (navBarItems.none { it.isVisible }) bottomNav.isGone = true
-
-        return getStartFragmentId(bottomNav.context)
+        return startFragmentId
     }
 
     fun getStartFragmentId(context: Context): Int {
         val pref = PreferenceHelper.getInt(PreferenceKeys.START_FRAGMENT, Int.MAX_VALUE)
         val defaultNavItems = getDefaultNavBarItems(context)
         return if (pref == Int.MAX_VALUE) {
-            getNavBarItems(context).firstOrNull { it.isVisible }?.itemId ?: R.id.homeFragment
+            getNavBarItemPreference(context).firstOrNull { (_, isVisible) -> isVisible }?.first
+                ?: R.id.homeFragment
         } else {
             defaultNavItems[pref].itemId
         }
@@ -132,6 +108,12 @@ object NavBarHelper {
     fun setStartFragment(context: Context, itemId: Int) {
         val index = getDefaultNavBarItems(context).indexOfFirst { it.itemId == itemId }
         PreferenceHelper.putInt(PreferenceKeys.START_FRAGMENT, index)
+    }
+
+    fun getNavBarItemTitle(context: Context, menuItemId: Int): String? {
+        val p = PopupMenu(context, null)
+        MenuInflater(context).inflate(R.menu.bottom_menu, p.menu)
+        return p.menu.findItem(menuItemId).title?.toString()
     }
 
     private fun getNavBarPrefs(): List<String> {
