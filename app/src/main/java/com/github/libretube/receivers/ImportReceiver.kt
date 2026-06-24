@@ -20,11 +20,10 @@ class ImportReceiver(
     ) : BroadcastReceiver() {
     override fun onReceive(context: Context?, intent: Intent?) {
         val id = intent?.getStringExtra(EXTRA_UUID)
-        val parsedId: UUID? = try {
+        val parsedId = runCatching {
             UUID.fromString(id)
-        } catch (e: Exception) {
-            null
-        }
+        }.getOrNull()
+
         if(parsedId != uuid) {
             return
         }

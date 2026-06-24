@@ -25,7 +25,6 @@ import com.github.libretube.ui.dialogs.ShareDialog.Companion.YOUTUBE_FRONTEND_UR
 import com.github.libretube.util.TextUtils
 import com.github.libretube.workers.ImportCoroutineWorker
 import kotlinx.serialization.ExperimentalSerializationApi
-import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.decodeFromStream
 import kotlinx.serialization.json.encodeToStream
 import java.util.stream.Collectors
@@ -328,7 +327,7 @@ object ImportHelper {
 
     @OptIn(ExperimentalSerializationApi::class)
     fun importWatchHistory( context: Context,uris: List<Uri>, importFormat: ImportFormat) {
-        ImportCoroutineWorker.importWatchHistory(context,uris,importFormat)
+        ImportCoroutineWorker.startImportWatchHistoryWorker(context,uris,importFormat)
     }
 
     private fun extractYTPlaylistName(context: Context, uri: Uri): String? {

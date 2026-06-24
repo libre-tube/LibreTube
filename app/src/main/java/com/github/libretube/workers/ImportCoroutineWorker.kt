@@ -5,6 +5,7 @@ import android.app.NotificationManager
 import android.content.Context
 import android.net.Uri
 import androidx.core.content.ContextCompat
+import androidx.core.net.toUri
 import androidx.work.CoroutineWorker
 import androidx.work.ForegroundInfo
 import androidx.work.OneTimeWorkRequestBuilder
@@ -29,22 +30,20 @@ import kotlinx.coroutines.withContext
 import kotlinx.serialization.json.decodeFromStream
 import java.util.UUID
 
-class ImportCoroutineWorker (
-    appContext: Context,
+class ImportCoroutineWorker(
+    private val appContext: Context,
     workerParams: WorkerParameters,
 ) : CoroutineWorker(appContext, workerParams) {
 
-    private val notificationFactory: NotificationProvider = NotificationHandler(id,appContext);
+    private val notificationFactory: NotificationProvider = NotificationHandler(id, appContext);
     private val notificationManager =
         appContext.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-    private val IMPORT_THUMBNAIL_QUALITY = "mqdefault"
-    private val VIDEO_ID_LENGTH = 11
-    private val YOUTUBE_IMG_URL = "https://img.youtube.com"
+
     override suspend fun doWork(): Result {
         setForeground(getForegroundInfo())
         val pausingHandle = ImportHandler()
         val importType = inputData.getString(WorkersData.IMPORT_TYPE)
-            ?: ImportType.IMPORT_WATCH_HISTORY.toString()
+            ?: throw Exception(appContext.getString(R.string.import_format_unsupported))
         val importEnum: ImportType = enumValueOf<ImportType>(importType)
         when (importEnum) {
             ImportType.IMPORT_WATCH_HISTORY -> {
@@ -52,7 +51,6 @@ class ImportCoroutineWorker (
                     ImportWatchHistory()
                 }
             }
-
             else -> Unit
         }
         return Result.success()
@@ -61,13 +59,12 @@ class ImportCoroutineWorker (
 
     private suspend fun ImportWatchHistory(): Unit {
         registerReceiver()
-
         val fileUrisString = inputData.getStringArray(WorkersData.FILES)
         val importFormatString =
             inputData.getString(WorkersData.IMPORT_FORMAT) ?: ImportFormat.YOUTUBEJSON.toString()
         val importFormat = enumValueOf<ImportFormat>(importFormatString)
-        val videos = fileUrisString?.map { a ->
-            val fileUrisDeserialized = Uri.parse(a)
+        val videos = fileUrisString?.flatMap { path ->
+            val fileUrisDeserialized = path.toUri()
             when (importFormat) {
                 ImportFormat.YOUTUBEJSON -> {
                     applicationContext.contentResolver.openInputStream(fileUrisDeserialized)?.use {
@@ -94,16 +91,13 @@ class ImportCoroutineWorker (
 
                 else -> emptyList()
             }
-        }?.flatten().orEmpty()
+        }.orEmpty()
 
-        registerReceiver()
         var index = 0
-        while (index < videos.size) {
-            checkIfPausedOrCancelled(index, videos.size) {
-                if (it) {
-                    DatabaseHelper.addToWatchHistory(videos.get(index))
-                    index++
-                }
+        while (videos.isNotEmpty() && index < videos.size) {
+            runActionAndUpdateNotificationIfNotPaused(index, videos.size) {
+                DatabaseHelper.addToWatchHistory(videos.get(index))
+                index++
             }
         }
 
@@ -114,30 +108,38 @@ class ImportCoroutineWorker (
         }
     }
 
-
-    var lastUpdateTime = 0L
-    val updateInterval = 500L
-    private suspend fun checkIfPausedOrCancelled(
+    private suspend fun runActionAndUpdateNotificationIfNotPaused(
         currentState: Int,
         finalState: Int,
-        dispatch: suspend (Boolean) -> Unit
+        action: suspend () -> Unit
     ) {
         val importHandler = ImportHandler.current()
         val now = System.currentTimeMillis()
         if (importHandler.isPaused) {
-            dispatch(false)
-            notifyNotification(notificationFactory.updateState(currentState, finalState, ImportState.PAUSED))
+            updateNotification(
+                notificationFactory.updateState(
+                    currentState,
+                    finalState,
+                    ImportState.PAUSED
+                )
+            )
             importHandler.awaitResumed()
         } else if (!importHandler.isPaused) {
-            dispatch(true)
+            action()
             if (now - lastUpdateTime >= updateInterval) {
-                notifyNotification(notificationFactory.updateState(currentState, finalState, ImportState.RUNNING))
+                updateNotification(
+                    notificationFactory.updateState(
+                        currentState,
+                        finalState,
+                        ImportState.RUNNING
+                    )
+                )
                 lastUpdateTime = now
             }
         }
     }
 
-    private fun notifyNotification(notification: Notification) {
+    private fun updateNotification(notification: Notification) {
         notificationManager.notify(id.hashCode(), notification)
     }
 
@@ -148,7 +150,7 @@ class ImportCoroutineWorker (
     }
 
     private suspend fun registerReceiver() {
-        val importReceiver = ImportReceiver(id,ImportHandler.current())
+        val importReceiver = ImportReceiver(id, ImportHandler.current())
         ContextCompat.registerReceiver(
             applicationContext,
             importReceiver,
@@ -158,19 +160,29 @@ class ImportCoroutineWorker (
     }
 
     companion object {
-        fun importWatchHistory(context: Context,uris: List<Uri>, importFormat: ImportFormat) {
+        fun startImportWatchHistoryWorker(
+            context: Context,
+            uris: List<Uri>,
+            importFormat: ImportFormat
+        ) {
             val uuid = UUID.randomUUID()
             val workRequest = OneTimeWorkRequestBuilder<ImportCoroutineWorker>()
                 .setId(uuid)
                 .setInputData(
                     workDataOf(
                         WorkersData.FILES to uris.map { it.toString() }.toTypedArray(),
-                        WorkersData.IMPORT_TYPE to ImportFormat.YOUTUBEJSON.value,
+                        WorkersData.IMPORT_TYPE to ImportType.IMPORT_WATCH_HISTORY.toString(),
                         WorkersData.IMPORT_FORMAT to importFormat.value
                     )
                 )
                 .build()
-           WorkManager.getInstance(context).enqueue(workRequest)
+            WorkManager.getInstance(context).enqueue(workRequest)
         }
+
+        private const val IMPORT_THUMBNAIL_QUALITY = "mqdefault"
+        private const val VIDEO_ID_LENGTH = 11
+        private const val YOUTUBE_IMG_URL = "https://img.youtube.com"
+        private var lastUpdateTime = 0L
+        private const val updateInterval = 500L
     }
 }

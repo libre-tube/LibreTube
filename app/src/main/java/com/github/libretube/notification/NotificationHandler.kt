@@ -36,7 +36,7 @@ class NotificationHandler (private  val uuid: UUID,private val context: Context)
 
     private val actionPause by lazy {
         NotificationCompat.Action(
-            R.drawable.ic_action_pause,
+            R.drawable.ic_pause,
             context.getString(R.string.pause),
             ImportReceiver.createPausePendingIntent(context, uuid),
         )
@@ -44,7 +44,7 @@ class NotificationHandler (private  val uuid: UUID,private val context: Context)
 
     private val actionResume by lazy {
         NotificationCompat.Action(
-            R.drawable.ic_action_resume,
+            R.drawable.ic_play,
             context.getString(R.string.resume),
             ImportReceiver.createResumePendingIntent(context, uuid),
         )
