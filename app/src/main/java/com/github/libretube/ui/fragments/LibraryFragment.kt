@@ -88,8 +88,8 @@ class LibraryFragment : DynamicLayoutManagerFragment(R.layout.fragment_library) 
             findNavController().navigate(R.id.action_libraryFragment_to_downloadsFragment)
         }
 
-        val navBarItems = NavBarHelper.getNavBarItems(requireContext())
-        if (navBarItems.filter { it.isVisible }.any { it.itemId == R.id.downloadsFragment }) {
+        val navBarItems = NavBarHelper.getNavBarItemPreference(requireContext())
+        if (navBarItems.any { (itemId, isVisible) -> isVisible && itemId == R.id.downloadsFragment }) {
             binding.downloads.isGone = true
         }
 
