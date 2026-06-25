@@ -89,13 +89,6 @@ class CommentsMainFragment : Fragment(R.layout.fragment_comments) {
         commentPagingAdapter.addLoadStateListener { loadStates ->
             binding.progress.isVisible = loadStates.refresh is LoadState.Loading
 
-            val refreshState = loadStates.source.refresh
-            if (refreshState is LoadState.NotLoading && commentPagingAdapter.itemCount > 0) {
-                viewModel.currentCommentsPosition.value?.let { position ->
-                    binding.commentsRV.scrollToPosition(maxOf(position, POSITION_START))
-                }
-            }
-
             if (loadStates.append is LoadState.NotLoading && loadStates.append.endOfPaginationReached && commentPagingAdapter.itemCount == 0) {
                 binding.errorTV.text = getString(R.string.no_comments_available)
                 binding.errorTV.isVisible = true
