@@ -30,8 +30,8 @@ class CommentsViewModel : ViewModel() {
     }
         .cachedIn(viewModelScope)
 
-    private val _commentCountLiveData = MutableLiveData<Long>()
-    val commentCountLiveData: LiveData<Long> = _commentCountLiveData
+    private val _commentCountLiveData = MutableLiveData<Long?>()
+    val commentCountLiveData: LiveData<Long?> = _commentCountLiveData
 
     private val _currentCommentsPosition = MutableLiveData(0)
     val currentCommentsPosition: LiveData<Int> = _currentCommentsPosition
@@ -41,6 +41,7 @@ class CommentsViewModel : ViewModel() {
 
     fun reset() {
         _currentCommentsPosition.value = 0
+        _commentCountLiveData.value = null
     }
 
     fun setCommentsPosition(position: Int) {
