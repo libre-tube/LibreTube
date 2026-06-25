@@ -1,10 +1,12 @@
 package com.github.libretube.api.poToken
 
 import android.content.Context
+import android.os.Build
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
 import android.webkit.JavascriptInterface
+import android.webkit.WebSettings
 import android.webkit.WebView
 import androidx.annotation.MainThread
 import com.github.libretube.BuildConfig
@@ -32,12 +34,20 @@ class PoTokenWebView private constructor(
     }
     private lateinit var expirationInstant: Instant
 
+    private var WebSettings.safeBrowsingEnabledCompat: Boolean
+        get() = Build.VERSION.SDK_INT >= Build.VERSION_CODES.O && safeBrowsingEnabled
+        set(value) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                safeBrowsingEnabled = value
+            }
+        }
+
     //region Initialization
     init {
         webView.settings.apply {
             //noinspection SetJavaScriptEnabled we want to use JavaScript!
             javaScriptEnabled = true
-            safeBrowsingEnabled = false
+            safeBrowsingEnabledCompat = false
             userAgentString = USER_AGENT
             blockNetworkLoads = true // the WebView does not need internet access
         }

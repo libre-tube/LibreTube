@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
+import androidx.core.view.ViewCompat
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.core.view.updateLayoutParams
@@ -140,9 +141,12 @@ class VideoCardsAdapter(private val columnWidthDp: Float? = null) :
                                 context.getDrawable(it)
                             )
                         }
-                        sponsorBadgeIcon.tooltipText =
-                            SponsorBlockLabelHelper.categoryLabel(category)
-                                ?.let { context.getString(it) }
+                        SponsorBlockLabelHelper.categoryLabel(category)?.let {
+                            ViewCompat.setTooltipText(
+                                sponsorBadgeIcon,
+                                context.getString(it)
+                            )
+                        }
                     }
                 }
 
