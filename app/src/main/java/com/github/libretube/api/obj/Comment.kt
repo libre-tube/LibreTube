@@ -22,5 +22,6 @@ data class Comment(
     val verified: Boolean,
     val replyCount: Long,
     val creatorReplied: Boolean = false,
-    val channelOwner: Boolean = false
+    val channelOwner: Boolean = false,
+    val isEdited: Boolean = false
 ) : Parcelable

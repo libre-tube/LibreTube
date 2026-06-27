@@ -214,7 +214,8 @@ fun CommentsInfoItem.toComment() = Comment(
     replyCount = replyCount.toLong(),
     repliesPage = replies?.toNextPageString(),
     thumbnail = thumbnails.maxByOrNull { it.height }?.url.orEmpty(),
-    channelOwner = isChannelOwner
+    channelOwner = isChannelOwner,
+    isEdited = isEdited,
 )
 
 // the following classes are necessary because kotlinx can't deserialize
