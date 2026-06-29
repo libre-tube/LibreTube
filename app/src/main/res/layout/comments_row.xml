@@ -68,7 +68,20 @@
                     android:layout_height="16dp"
                     android:layout_marginStart="4dp"
                     android:visibility="gone"
+                    android:tooltipText="@string/comment_verified"
+                    android:contentDescription="@string/comment_verified"
                     app:srcCompat="@drawable/ic_verified"
+                    tools:visibility="visible" />
+
+                <ImageView
+                    android:id="@+id/edited_imageView"
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:layout_marginStart="4dp"
+                    android:visibility="gone"
+                    android:contentDescription="@string/comment_edited"
+                    android:tooltipText="@string/comment_edited"
+                    app:srcCompat="@drawable/ic_edit"
                     tools:visibility="visible" />
 
                 <ImageView
@@ -77,6 +90,8 @@
                     android:layout_height="16dp"
                     android:layout_marginStart="4dp"
                     android:visibility="gone"
+                    android:contentDescription="@string/comment_pinned"
+                    android:tooltipText="@string/comment_pinned"
                     app:srcCompat="@drawable/ic_pinned"
                     tools:visibility="visible" />
             </LinearLayout>

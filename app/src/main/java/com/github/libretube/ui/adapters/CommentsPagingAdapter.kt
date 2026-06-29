@@ -75,6 +75,7 @@ class CommentsPagingAdapter(
             }
 
             verifiedImageView.isVisible = comment.verified
+            editedImageView.isVisible = comment.isEdited
             pinnedImageView.isVisible = comment.pinned
             heartedImageView.isVisible = comment.hearted
             repliesCount.isVisible = !isReplies && comment.repliesPage != null
