@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.os.Parcelable
 import android.view.View
 import androidx.core.view.isGone
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.paging.LoadState
 import androidx.paging.Pager
@@ -14,16 +15,15 @@ import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.R
 import com.github.libretube.api.MediaServiceRepository
 import com.github.libretube.api.obj.ChannelTab
-import com.github.libretube.api.obj.StreamItem
 import com.github.libretube.constants.IntentData
 import com.github.libretube.databinding.FragmentChannelContentBinding
 import com.github.libretube.extensions.ceilHalf
 import com.github.libretube.extensions.parcelable
-import com.github.libretube.extensions.parcelableArrayList
 import com.github.libretube.ui.adapters.SearchResultsAdapter
 import com.github.libretube.ui.adapters.VideosAdapter
 import com.github.libretube.ui.base.DynamicLayoutManagerFragment
 import com.github.libretube.ui.extensions.addOnBottomReachedListener
+import com.github.libretube.ui.models.ChannelViewModel
 import com.github.libretube.ui.models.sources.ChannelTabPagingSource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -33,6 +33,8 @@ class ChannelContentFragment : DynamicLayoutManagerFragment(R.layout.fragment_ch
     private var _binding: FragmentChannelContentBinding? = null
     private val binding get() = _binding!!
     private var recyclerViewState: Parcelable? = null
+
+    private val viewModel: ChannelViewModel by viewModels({ requireParentFragment() })
 
     override fun setLayoutManagers(gridItems: Int) {
         binding.channelRecView.layoutManager = GridLayoutManager(
@@ -57,11 +59,11 @@ class ChannelContentFragment : DynamicLayoutManagerFragment(R.layout.fragment_ch
         val tabData = arguments.parcelable<ChannelTab>(IntentData.tabData)
 
         if (tabData?.data.isNullOrEmpty()) {
-            var nextPage = arguments.getString(IntentData.nextPage)
+            var nextPage = viewModel.nextPage
             var isLoading = false
 
             val channelAdapter = VideosAdapter(showChannelInfo = false).also {
-                it.submitList(arguments.parcelableArrayList<StreamItem>(IntentData.videoList)!!)
+                it.submitList(viewModel.relatedStreams.orEmpty())
             }
             binding.channelRecView.adapter = channelAdapter
             binding.progressBar.isGone = true

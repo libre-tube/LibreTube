@@ -7,6 +7,7 @@ import androidx.core.os.bundleOf
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.RecyclerView
@@ -24,10 +25,8 @@ import com.github.libretube.extensions.toastFromMainDispatcher
 import com.github.libretube.helpers.ClipboardHelper
 import com.github.libretube.helpers.ImageHelper
 import com.github.libretube.helpers.NavigationHelper
-import com.github.libretube.ui.adapters.VideosAdapter
-import com.github.libretube.ui.base.DynamicLayoutManagerFragment
-import com.github.libretube.ui.dialogs.ShareDialog
 import com.github.libretube.ui.extensions.setupSubscriptionButton
+import com.github.libretube.ui.models.ChannelViewModel
 import com.github.libretube.ui.sheets.ChannelOptionsBottomSheet
 import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.coroutines.Dispatchers
@@ -38,15 +37,14 @@ class ChannelFragment : Fragment(R.layout.fragment_channel) {
     private var _binding: FragmentChannelBinding? = null
     private val binding get() = _binding!!
     private val args by navArgs<ChannelFragmentArgs>()
+    private val viewModel: ChannelViewModel by viewModels()
 
     private var channelId: String? = null
     private var channelName: String? = null
-    private var channelAdapter: VideosAdapter? = null
     private var isLoading = true
 
     private lateinit var channelContentAdapter: ChannelContentAdapter
 
-    private var nextPages = Array<String?>(5) { null }
     private var isAppBarFullyExpanded: Boolean = true
     private val tabList = mutableListOf<ChannelTab>()
 
@@ -156,7 +154,8 @@ class ChannelFragment : Fragment(R.layout.fragment_channel) {
                 .show(childFragmentManager)
         }
 
-        nextPages[0] = response.nextpage
+        viewModel.relatedStreams = response.relatedStreams
+        viewModel.nextPage = response.nextpage
         isLoading = false
         binding.channelRefresh.isRefreshing = false
 
@@ -201,8 +200,6 @@ class ChannelFragment : Fragment(R.layout.fragment_channel) {
 
         channelContentAdapter = ChannelContentAdapter(
             tabList,
-            response.relatedStreams,
-            response.nextpage,
             channelId,
             this@ChannelFragment
         )
@@ -211,9 +208,6 @@ class ChannelFragment : Fragment(R.layout.fragment_channel) {
             tab.text = tabList[position].name
         }.attach()
 
-        channelAdapter = VideosAdapter(showChannelInfo = false).also {
-            it.submitList(response.relatedStreams)
-        }
         tabList.clear()
 
         val tabs = listOf(ChannelTab(VIDEOS_TAB_KEY, "")) + response.tabs
@@ -232,8 +226,6 @@ class ChannelFragment : Fragment(R.layout.fragment_channel) {
 
 class ChannelContentAdapter(
     private val list: List<ChannelTab>,
-    private val videos: List<StreamItem>,
-    private val nextPage: String?,
     private val channelId: String?,
     fragment: Fragment
 ) : FragmentStateAdapter(fragment) {
@@ -242,9 +234,7 @@ class ChannelContentAdapter(
     override fun createFragment(position: Int) = ChannelContentFragment().apply {
         arguments = bundleOf(
             IntentData.tabData to list[position],
-            IntentData.videoList to videos.toMutableList(),
-            IntentData.channelId to channelId,
-            IntentData.nextPage to nextPage
+            IntentData.channelId to channelId
         )
     }
 }
