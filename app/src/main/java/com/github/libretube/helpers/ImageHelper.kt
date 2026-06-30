@@ -4,6 +4,7 @@ import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.Color
 import android.net.Uri
+import android.os.Build
 import android.os.storage.StorageManager
 import android.widget.ImageView
 import androidx.core.content.getSystemService
@@ -24,6 +25,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
+import java.io.File
 import java.nio.file.Path
 
 object ImageHelper {
@@ -57,14 +59,26 @@ object ImageHelper {
                 diskCachePolicy(CachePolicy.ENABLED)
                 memoryCachePolicy(CachePolicy.ENABLED)
 
-                val storageManager = context.getSystemService<StorageManager>()!!
-                val availableCache = storageManager.getCacheQuotaBytes(
-                    storageManager.getUuidForPath(context.coilFile)
-                )
+                fun Context.maxCacheSizeBytes(path: File): Long {
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                        getSystemService<StorageManager>()?.let {
+                            return it.getCacheQuotaBytes(it.getUuidForPath(path))
+                        }
+                    }
+
+                    val totalGb = path.totalSpace / (1024 * 1024 * 1024)
+                    val cacheMb = when {
+                        totalGb <= 16 -> 32
+                        totalGb <= 32 -> 64
+                        else -> 128
+                    }
+                    return cacheMb * 1024 * 1024L
+                }
+
                 val diskCache = DiskCache.Builder()
                     .directory(context.coilFile)
                     // only use a certain percentage of the available cache size for images
-                    .maxSizeBytes(availableCache)
+                    .maxSizeBytes(context.maxCacheSizeBytes(context.coilFile))
                     .build()
                 diskCache(diskCache)
             }
