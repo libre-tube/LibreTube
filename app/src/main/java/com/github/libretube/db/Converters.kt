@@ -5,6 +5,7 @@ import com.github.libretube.api.JsonHelper
 import kotlinx.datetime.LocalDate
 import kotlinx.serialization.encodeToString
 import java.nio.file.Path
+import java.nio.file.Paths
 import kotlin.io.path.Path
 
 object Converters {
@@ -24,5 +25,6 @@ object Converters {
     fun stringListToJson(value: List<String>) = JsonHelper.json.encodeToString(value)
 
     @TypeConverter
-    fun jsonToStringList(value: String) = JsonHelper.json.decodeFromString<List<String>>(value)
+    fun jsonToStringList(value: String) =
+        JsonHelper.json.decodeFromString<List<String>>(value)
 }

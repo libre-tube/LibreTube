@@ -548,7 +548,8 @@
     <string name="long_press_fast_forward">Fast forward on long press</string>
     <string name="long_press_fast_forward_summary">Play video with double speed while tapping and holding the screen.</string>
     <string name="resume_all">Resume Downloads</string>
-
+    <string name="importing">Importing</string>
+    <string name="preparing">Preparing…</string>
     <!-- Notification channel strings -->
     <string name="download_channel_name">Download Service</string>
     <string name="download_channel_description">Shows a notification when downloading media.</string>
@@ -562,6 +563,10 @@
         <item quantity="one">%d new stream</item>
         <item quantity="other">%d new streams</item>
     </plurals>
+    <string name="percentage_completed">%d completed</string>
+    <string name="import_channel_name">Import Worker</string>
+    <string name="import_channel_description">Shows a notification when importing</string>
+    <string name="import_format_unsupported">Import format not supported</string>
     <!--Tooltips -->
     <string name="tooltip_repeat">Repeat</string>
     <string name="tooltip_reverse">Reverse</string>
