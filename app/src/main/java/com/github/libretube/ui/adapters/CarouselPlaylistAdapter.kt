@@ -4,9 +4,9 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.recyclerview.widget.ListAdapter
-import com.github.libretube.api.PlaylistsHelper
 import com.github.libretube.constants.IntentData
 import com.github.libretube.databinding.CarouselPlaylistThumbnailBinding
+import com.github.libretube.enums.PlaylistType
 import com.github.libretube.helpers.ImageHelper
 import com.github.libretube.helpers.NavigationHelper
 import com.github.libretube.ui.adapters.callbacks.DiffUtilItemCallback
@@ -20,7 +20,7 @@ data class CarouselPlaylist(
     val thumbnail: String?
 )
 
-class CarouselPlaylistAdapter : ListAdapter<CarouselPlaylist, CarouselPlaylistViewHolder>(
+class CarouselPlaylistAdapter(private val playlistType: PlaylistType) : ListAdapter<CarouselPlaylist, CarouselPlaylistViewHolder>(
     DiffUtilItemCallback()
 ) {
     override fun onCreateViewHolder(
@@ -41,9 +41,8 @@ class CarouselPlaylistAdapter : ListAdapter<CarouselPlaylist, CarouselPlaylistVi
             playlistName.text = item.title
             ImageHelper.loadImage(item.thumbnail, thumbnail)
 
-            val type = PlaylistsHelper.getPlaylistType(item.id)
             root.setOnClickListener {
-                NavigationHelper.navigatePlaylist(root.context, item.id, type)
+                NavigationHelper.navigatePlaylist(root.context, item.id, playlistType)
             }
 
             root.setOnLongClickListener {
@@ -51,7 +50,7 @@ class CarouselPlaylistAdapter : ListAdapter<CarouselPlaylist, CarouselPlaylistVi
                 playlistOptionsDialog.arguments = bundleOf(
                     IntentData.playlistId to item.id,
                     IntentData.playlistName to item.title,
-                    IntentData.playlistType to type
+                    IntentData.playlistType to playlistType
                 )
                 playlistOptionsDialog.show((root.context as BaseActivity).supportFragmentManager)
 

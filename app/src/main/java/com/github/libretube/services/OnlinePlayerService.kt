@@ -37,6 +37,7 @@ import com.github.libretube.helpers.ProxyHelper
 import com.github.libretube.parcelable.PlayerData
 import com.github.libretube.player.SabrMediaSource
 import com.github.libretube.player.manifest.SabrManifest
+import com.github.libretube.repo.UserDataRepositoryHelper
 import com.github.libretube.util.DeArrowUtil
 import com.github.libretube.util.PlayingQueue
 import com.github.libretube.util.YoutubeHlsPlaylistParser
@@ -90,9 +91,8 @@ open class OnlinePlayerService : AbstractPlayerService() {
                     if (PlayerHelper.watchHistoryEnabled) {
                         scope.launch(Dispatchers.IO) {
                             streams?.let { streams ->
-                                val watchHistoryItem =
-                                    streams.toStreamItem(videoId).toWatchHistoryItem(videoId)
-                                DatabaseHelper.addToWatchHistory(watchHistoryItem)
+                                val video = streams.toStreamItem(videoId)
+                                DatabaseHelper.addToWatchHistory(video)
                             }
                         }
                     }
@@ -140,7 +140,7 @@ open class OnlinePlayerService : AbstractPlayerService() {
                     MediaServiceRepository.instance.getStreams(videoId).let {
                         DeArrowUtil.deArrowStreams(it, videoId)
                     }
-                }  catch (e: Exception) {
+                } catch (e: Exception) {
                     Log.e(TAG(), e.stackTraceToString())
                     toastFromMainDispatcher(e.localizedMessage.orEmpty())
                     return@withContext null
@@ -179,8 +179,12 @@ open class OnlinePlayerService : AbstractPlayerService() {
         if (seekToPositionMs != 0L) {
             exoPlayer?.seekTo(seekToPositionMs)
         } else if (watchPositionsEnabled) {
-            DatabaseHelper.getWatchPositionBlocking(videoId)?.let {
-                if (!DatabaseHelper.isVideoWatched(it, streams?.duration)) exoPlayer?.seekTo(it)
+            CoroutineScope(Dispatchers.IO).launch {
+                UserDataRepositoryHelper.userDataRepository.getFromWatchHistory(videoId)?.metadata?.positionMillis?.let {
+                    if (!DatabaseHelper.isVideoWatched(it, streams?.duration)) {
+                        withContext(Dispatchers.Main) { exoPlayer?.seekTo(it) }
+                    }
+                }
             }
         }
 

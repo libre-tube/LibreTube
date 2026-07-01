@@ -5,11 +5,12 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asFlow
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
+import com.github.libretube.api.obj.WatchHistoryEntry
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.db.DatabaseHelper
-import com.github.libretube.db.DatabaseHolder
 import com.github.libretube.db.obj.WatchHistoryItem
 import com.github.libretube.helpers.PreferenceHelper
+import com.github.libretube.repo.UserDataRepositoryHelper
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.combine
@@ -19,7 +20,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class WatchHistoryModel : ViewModel() {
-    private val watchHistory = MutableLiveData<List<WatchHistoryItem>>()
+    private val watchHistory = MutableLiveData<List<WatchHistoryEntry>>()
 
     private var currentPage = 1
     private var isLoading = false
@@ -40,7 +41,7 @@ class WatchHistoryModel : ViewModel() {
             selectedStatus.value = value
         }
 
-    private suspend fun WatchHistoryItem.shouldIncludeByFilters(): Boolean {
+    private suspend fun WatchHistoryEntry.shouldIncludeByFilters(): Boolean {
         // no watch position filter
         if (selectedStatusFilter == 0) return true
 
@@ -56,7 +57,12 @@ class WatchHistoryModel : ViewModel() {
         isLoading = true
 
         val newHistory = withContext(Dispatchers.IO) {
-            DatabaseHelper.getWatchHistoryPage(currentPage, HISTORY_PAGE_SIZE)
+            try {
+                UserDataRepositoryHelper.userDataRepository.getWatchHistory(currentPage)
+            } catch (e: Exception) {
+                // TODO: proper error handling
+                return@withContext emptyList()
+            }
         }
 
         isLoading = false
@@ -69,16 +75,14 @@ class WatchHistoryModel : ViewModel() {
         )
     }
 
-    fun removeFromHistory(watchHistoryItem: WatchHistoryItem) =
+    fun removeFromHistory(watchHistoryEntry: WatchHistoryEntry) =
         viewModelScope.launch(Dispatchers.IO) {
-            DatabaseHolder.Database.watchHistoryDao().delete(watchHistoryItem)
+            runCatching {
+                UserDataRepositoryHelper.userDataRepository.removeFromWatchHistory(watchHistoryEntry.metadata.videoId)
 
-            watchHistory.postValue(
-                watchHistory.value.orEmpty().filter { it != watchHistoryItem }
-            )
+                watchHistory.postValue(
+                    watchHistory.value.orEmpty().filter { it != watchHistoryEntry }
+                )
+            }
         }
-
-    companion object {
-        private const val HISTORY_PAGE_SIZE = 10
-    }
 }
