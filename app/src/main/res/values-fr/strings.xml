@@ -572,4 +572,6 @@
     <string name="long_press_fast_forward">Avance rapide en appuyant longuement</string>
     <string name="long_press_fast_forward_summary">Lisez la vidéo en vitesse double en appuyant longuement sur l\'écran.</string>
     <string name="resume_all">Reprendre les téléchargements</string>
+    <string name="comment_verified">Vérifié</string>
+    <string name="comment_pinned">Épinglé</string>
 </resources>
