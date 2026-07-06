@@ -401,6 +401,7 @@ class SabrClient private constructor(
         lastRequestMs = Instant.now().toEpochMilli()
         val response = client.newCall(request).execute()
         if (!response.isSuccessful) {
+            Log.e(TAG, "fetchStreamData: Failed to fetch data (${response.code})")
             throw Exception("HTTP request failed: ${response.code}")
         }
 
