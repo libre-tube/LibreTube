@@ -581,4 +581,6 @@
     <string name="long_press_fast_forward">تقديم سريع عند الضغط مطولاً</string>
     <string name="long_press_fast_forward_summary">شغّل الفيديو بضعف السرعة من خلال النقر مع الاستمرار على الشاشة.</string>
     <string name="resume_all">استئناف التنزيلات</string>
+    <string name="comment_verified">مُتحقّق منه</string>
+    <string name="comment_pinned">مثبَّت</string>
 </resources>
