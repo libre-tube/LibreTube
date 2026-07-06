@@ -572,4 +572,6 @@
     <string name="long_press_fast_forward">Avanzamento veloce su pressione lunga</string>
     <string name="long_press_fast_forward_summary">Riproduci il video a velocità doppia mentre tengo premuto lo schermo.</string>
     <string name="resume_all">Riprendi scaricamenti</string>
+    <string name="comment_verified">Verificato</string>
+    <string name="comment_pinned">Fissato</string>
 </resources>
