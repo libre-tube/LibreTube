@@ -569,4 +569,6 @@
     <string name="long_press_fast_forward">Basılı tutmada ileri sar</string>
     <string name="long_press_fast_forward_summary">Ekrana dokunup basılı tutarken videoyu iki kat hızda oynat.</string>
     <string name="resume_all">İndirmeleri Devam Ettir</string>
+    <string name="comment_verified">Doğrulandı</string>
+    <string name="comment_pinned">Sabitlendi</string>
 </resources>
