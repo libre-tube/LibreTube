@@ -574,4 +574,6 @@
     <string name="long_press_fast_forward">Rychlé přetočení vpřed při podržení</string>
     <string name="long_press_fast_forward_summary">Přehrát video dvojnásobnou rychlostí při klepnutí a podržení prstu na obrazovce.</string>
     <string name="resume_all">Pokračovat ve stahování</string>
+    <string name="comment_verified">Ověřený</string>
+    <string name="comment_pinned">Připnutý</string>
 </resources>
