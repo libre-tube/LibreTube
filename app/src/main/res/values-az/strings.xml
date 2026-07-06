@@ -569,4 +569,6 @@
     <string name="long_press_fast_forward">Uzun basanda sürətli irəliyə</string>
     <string name="long_press_fast_forward_summary">Ekrana toxunub və saxlayarkən videonu ikiqat sürətlə oynat.</string>
     <string name="resume_all">Yükləmələri Dayandır</string>
+    <string name="comment_verified">Təsdiqləndi</string>
+    <string name="comment_pinned">Nişanlandı</string>
 </resources>
