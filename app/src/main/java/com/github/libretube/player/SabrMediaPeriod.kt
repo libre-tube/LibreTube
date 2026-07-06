@@ -29,7 +29,6 @@ import com.github.libretube.player.manifest.AdaptationSet
 import com.github.libretube.player.manifest.Representation
 import com.github.libretube.player.manifest.SabrManifest
 import com.github.libretube.player.parser.SabrClient
-import com.google.protobuf.ByteString
 import java.time.Instant
 import java.util.Arrays
 
@@ -261,7 +260,7 @@ class SabrMediaPeriod(
             } else if (streams[i] is ChunkSampleStream<*>) {
                 // Update selection in existing stream.
                 val stream = streams[i] as ChunkSampleStream<SabrChunkSource?>
-                stream.getChunkSource()?.updateTrackSelection(selection)
+                stream.getChunkSource().updateTrackSelection(selection)
             }
         }
     }

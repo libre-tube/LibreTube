@@ -348,6 +348,7 @@ class SabrClient private constructor(
         val clientState = ClientAbrState.newBuilder()
             // we pretend we're slightly in the previous (n-1) segment, so we get n-th segment, instead of the (n+1)-th one
             .setPlayerTimeMs(playbackRequest.segmentStartTimeMs.minus(500).coerceAtLeast(0))
+            //TODO: setMediaCapabilities for Android client: https://github.com/coletdjnz/yt-dlp-dev/blob/effe62991b1b87aafcc8f77a374d7ead9d461803/yt_dlp/extractor/youtube/_streaming/sabr/processor.py#L239
             .setEnabledTrackTypesBitfield(if (videoFormat == null) 1 else 0)
             .setPlaybackRate(playbackRequest.playbackSpeed)
             .setElapsedWallTimeMs(lastRequestMs?.let { now -  it } ?: 0 )
@@ -450,6 +451,7 @@ class SabrClient private constructor(
                 // repeated segment are skipped, when their header is found and their not added
                 // to the partial segment queue
                 val segment = partialSegments[headerId] ?: return
+                //TODO: decompress gzipped data (not send for the WEB client)
                 segment.data.add(parser.data())
             }
 
