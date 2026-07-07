@@ -569,4 +569,6 @@
     <string name="long_press_fast_forward">Gyors előretekerés hosszú megnyomáskor</string>
     <string name="long_press_fast_forward_summary">A képernyőre koppintva és rajta tartva kétszeres sebességgel játszhatja le a videót.</string>
     <string name="resume_all">Letöltések folytatása</string>
+    <string name="comment_verified">Ellenőrzött</string>
+    <string name="comment_pinned">Kitűzött</string>
 </resources>
