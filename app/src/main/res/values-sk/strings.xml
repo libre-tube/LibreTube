@@ -574,4 +574,6 @@
     <string name="long_press_fast_forward">Dlhé stlačenie rychlého posunu dopredu</string>
     <string name="long_press_fast_forward_summary">Prehrávajte video dvojnásobnou rýchlosťou pri ťuknutí a podržaní obrazovky.</string>
     <string name="resume_all">Pokračovať v sťahovanį</string>
+    <string name="comment_verified">Overený</string>
+    <string name="comment_pinned">Pripnutý</string>
 </resources>
