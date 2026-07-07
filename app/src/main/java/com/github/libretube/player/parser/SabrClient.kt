@@ -20,6 +20,7 @@ import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.RequestBody.Companion.toRequestBody
+import org.schabi.newpipe.extractor.services.youtube.YoutubeParsingHelper
 import video_streaming.BufferedRangeOuterClass.BufferedRange
 import video_streaming.ClientAbrStateOuterClass.ClientAbrState
 import video_streaming.FormatInitializationMetadataOuterClass.FormatInitializationMetadata
@@ -376,7 +377,7 @@ class SabrClient private constructor(
                     .setClientInfo(
                         StreamerContext.ClientInfo.newBuilder()
                             .setClientName(1)
-                            .setClientVersion("2.20250122.04.00")
+                            .setClientVersion(YoutubeParsingHelper.getClientVersion())
                             .setOsName("Windows")
                             .setOsVersion("10")
                             .build()
