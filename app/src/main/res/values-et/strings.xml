@@ -569,4 +569,6 @@
     <string name="long_press_fast_forward">Pika puudutusega kerid edasi</string>
     <string name="long_press_fast_forward_summary">Ekraani puudutamisel ja hoidmisel kerid videot edasi topeltkiirusega.</string>
     <string name="resume_all">Jätka allalaadimisi</string>
+    <string name="comment_verified">Kontrollitud</string>
+    <string name="comment_pinned">Esiplaanile tõstetud</string>
 </resources>
