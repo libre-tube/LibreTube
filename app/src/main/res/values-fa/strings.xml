@@ -569,4 +569,6 @@
     <string name="long_press_fast_forward">پیشروی سریع با نگه داشتن طولانی</string>
     <string name="long_press_fast_forward_summary">پخش ویدیو با سرعت دو برابر هنگام زدن و نگه داشتن صفحه.</string>
     <string name="resume_all">از سر گیری بارگیری‌ها</string>
+    <string name="comment_pinned">سنجاق شده</string>
+    <string name="comment_verified">تأیید شده</string>
 </resources>
