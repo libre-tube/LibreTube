@@ -576,4 +576,6 @@
     <string name="long_press_fast_forward">Перемотування вперед довгим натисканням</string>
     <string name="long_press_fast_forward_summary">Відтворюйте відео з подвійною швидкістю, натиснувши та утримуючи екран.</string>
     <string name="resume_all">Завантаження резюме</string>
+    <string name="comment_verified">Перевірено</string>
+    <string name="comment_pinned">Закріплено</string>
 </resources>
