@@ -575,4 +575,6 @@
     <string name="long_press_fast_forward">Ускорение при долгом нажатии</string>
     <string name="long_press_fast_forward_summary">Воспроизводить видео с удвоенной скоростью при долгом нажатии на экран.</string>
     <string name="resume_all">Загрузка резюме</string>
+    <string name="comment_verified">Проверено</string>
+    <string name="comment_pinned">Закреплено</string>
 </resources>
