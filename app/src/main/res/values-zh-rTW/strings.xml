@@ -566,4 +566,6 @@
     <string name="long_press_fast_forward">長按快轉</string>
     <string name="long_press_fast_forward_summary">輕觸並長按螢幕，即可以兩倍速播放影片。</string>
     <string name="resume_all">繼續下載</string>
+    <string name="comment_verified">已驗證</string>
+    <string name="comment_pinned">已釘選</string>
 </resources>
