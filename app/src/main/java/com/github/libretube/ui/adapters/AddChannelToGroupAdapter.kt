@@ -31,6 +31,9 @@ class AddChannelToGroupAdapter(
                     channelGroup.channels -= channelId
                 }
             }
+            root.setOnClickListener {
+                groupCheckbox.isChecked = !groupCheckbox.isChecked
+            }
         }
     }
 }
