@@ -33,5 +33,5 @@ data class DownloadItem(
     var language: String? = null,
     var downloadSize: Long = -1L
 ) {
-    val isFinished get() = runCatching { path.fileSize() }.getOrDefault(0L) < downloadSize
+    val isFinished get() = downloadSize > 0L && runCatching { path.fileSize() }.getOrDefault(0L) >= downloadSize
 }
