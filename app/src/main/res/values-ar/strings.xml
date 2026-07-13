@@ -66,7 +66,7 @@
     <string name="history">السجل</string>
     <string name="channels">القنوات</string>
     <string name="all">الكل</string>
-    <string name="okay">حسناً</string>
+    <string name="okay">حسنًا</string>
     <string name="search_history">سجل البحث</string>
     <string name="clear_history">مسح السجل</string>
     <string name="music_songs">موسيقى يوتيوب</string>
@@ -153,7 +153,7 @@
     <string name="pauseOnScreenOff_summary">أوقف التشغيل مؤقتا عند إيقاف تشغيل الشاشة</string>
     <string name="reset">استعادة الإعدادات الافتراضية</string>
     <string name="reset_message">إعادة تعيين جميع الإعدادات وتسجيل الخروج؟</string>
-    <string name="clonePlaylist">نسخ قائمة التشغيل</string>
+    <string name="clonePlaylist">استنسخ قائمة التشغيل</string>
     <string name="deleteAccount">احذف الحساب</string>
     <string name="restore">استعِد</string>
     <string name="deleteAccount_summary">احذف حساب Piped الخاص بك</string>
@@ -481,7 +481,7 @@
     <string name="grid_landscape">أعمدة الشبكة (أفقي)</string>
     <string name="rich_caption_rendering">التسميات التوضيحية المتقدمة</string>
     <string name="rich_caption_rendering_summary">عرض التسميات التوضيحية على الويب للحصول على تجربة أكثر ثراءً وتخصيصًا</string>
-    <string name="copy_tooltip">نسخ</string>
+    <string name="copy_tooltip">انسخ</string>
     <string name="change">غيّر</string>
     <string name="change_instance">غير الخادم</string>
     <string name="suggest_change_instance">يستغرق التنزيل أكثر من المعتاد. يُرجى النظر في تغيير الخادم</string>
@@ -516,7 +516,7 @@
     <string name="import_watch_history">استيراد سجل المشاهدة</string>
     <string name="audio_codecs">مرمازات الصوت</string>
     <string name="view_count">مشاهدات %1$s</string>
-    <string name="dialog_play_offline_title">تتوفر نسخة محلية من هذا الفيديو.</string>
+    <string name="dialog_play_offline_title">تتوفر نُسخة محلية من هذا الفيديو.</string>
     <string name="dialog_play_offline_body">هل ترغب في تشغيل الفيديو من مجلد التنزيل ؟</string>
     <string name="upcoming">القادمة</string>
     <string name="delete_only_watched_videos">احذف فقط مقاطع الفيديو التي شاهدتها بالفعل</string>
@@ -545,7 +545,7 @@
     <string name="screenshot_saved">حُفظت لقطة الشاشة</string>
     <string name="did_you_mean">هل تقصد:</string>
     <string name="showing_results_for">يظهر نتائج ل:</string>
-    <string name="delete_playlist_include_vidoes">حذف جميع مقاطع الفيديو من قائمة التشغيل أيضًا؟</string>
+    <string name="delete_playlist_include_vidoes">احذف جميع مقاطع الفيديو من قائمة التشغيل أيضًا؟</string>
     <string name="category_hook">خطّاف/تحيات</string>
     <string name="category_hook_summary">للحصول على خطافات سردية تجذب انتباه المشاهد (غالبًا كالمشهد الأول) عن طريق التشويق أو وصف أحداث من وقت لاحق في نفس الفيديو أو حلقات مستقبلية في سلسلة</string>
     <string name="checking_frequency_15_minutes">15 دقيقة</string>
