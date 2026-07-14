@@ -379,7 +379,11 @@ class PlaylistFragment : DynamicLayoutManagerFragment(R.layout.fragment_playlist
 
         val query = playlistViewModel.searchQuery.value
         if (!query.isNullOrEmpty()) {
-            videos = videos.filter { it.item.title.orEmpty().contains(query, ignoreCase = true) }
+            videos = videos.filter {
+                it.item.title.orEmpty()
+                    .contains(query, ignoreCase = true) || it.item.uploaderName.orEmpty()
+                    .contains(query, ignoreCase = true)
+            }
         }
 
         playlistAdapter?.submitList(videos)
