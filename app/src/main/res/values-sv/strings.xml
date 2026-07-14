@@ -545,4 +545,6 @@
     <string name="checking_frequency_12_hours">12 timmar</string>
     <string name="checking_frequency_1_day">1 dygn</string>
     <string name="category_hook">Hook/Hälsningar</string>
+    <string name="comment_verified">Verifierad</string>
+    <string name="comment_pinned">Fastnålad</string>
 </resources>
