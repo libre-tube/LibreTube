@@ -385,7 +385,7 @@
     <string name="require_restart_message">Herstart de app om de wijzigingen toe te passen.</string>
     <string name="share_with_time">Delen met tijdscode</string>
     <string name="added_to_playlist">Toegevoegd aan afspeellijst %1$s</string>
-    <string name="pinch_control_summary">Gebruik knijpgebaren om in of uit te zoomen</string>
+    <string name="pinch_control_summary">Gebruik knijp­gebaren om in of uit te zoomen</string>
     <string name="hide_watched_from_feed">Bekeken video\'s verbergen</string>
     <string name="change_region">Trending is niet beschikbaar voor de huidige regio. Selecteer een andere onder instellingen.</string>
     <string name="comments_disabled">Opmerkingen zijn uitgeschakeld door de uploader.</string>
@@ -569,4 +569,6 @@
     <string name="long_press_fast_forward">Snel vooruit­spoelen bij lang indrukken</string>
     <string name="long_press_fast_forward_summary">Speel de video op dubbele snelheid af door het scherm ingedrukt te houden.</string>
     <string name="resume_all">Downloads hervatten</string>
+    <string name="comment_verified">Geverifieerd</string>
+    <string name="comment_pinned">Vast­gezet</string>
 </resources>
