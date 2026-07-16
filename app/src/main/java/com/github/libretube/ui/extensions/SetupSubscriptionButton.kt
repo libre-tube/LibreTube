@@ -72,6 +72,7 @@ fun TextView.setupSubscriptionButton(
             if (subscribed) {
                 Snackbar
                     .make(
+                        context,
                         rootView,
                         context.getString(R.string.unsubscribe_snackbar_message, channelName),
                         1000
