@@ -237,7 +237,7 @@
     <string name="repeat_mode_current">ਵਰਤਮਾਨ</string>
     <string name="backup_restore">ਬੈਕਅੱਪ ਅਤੇ ਰੀਸਟੋਰ</string>
     <string name="backup">ਬੈਕਅੱਪ</string>
-    <string name="picture_in_picture">ਪਿਕਚਰ ਇਨ ਪਿਕਚਰ PIP</string>
+    <string name="picture_in_picture">ਪਿਕਚਰ ਇਨ ਪਿਕਚਰ</string>
     <string name="player_resize_mode">ਰੀਸਾਈਜ਼ ਮੋਡ</string>
     <string name="copied_to_clipboard">ਕਲਿੱਪਬੋਰਡ \'ਤੇ ਕਾਪੀ ਕੀਤਾ ਗਿਆ</string>
     <string name="open_copied">ਖੋਲ੍ਹੋ</string>
@@ -361,7 +361,7 @@
         <item quantity="other">%d ਨਵੀਆਂ ਸਟ੍ਰੀਮਾਂ</item>
     </plurals>
     <string name="auto_fullscreen_shorts">ਛੋਟੇ ਵੀਡੀਓ \'ਤੇ ਪੂਰੀ ਸਕਰੀਨ ਆਪਣੇ-ਆਪ ਚਲਾਓ</string>
-    <string name="channel_groups">ਚੈਨਲ ਸਮੂਹ</string>
+    <string name="channel_groups">ਚੈਨਲ ਗਰੁੱਪ</string>
     <string name="play_automatically">ਆਪਣੇ-ਆਪ ਚਲਾਓ</string>
     <string name="play_automatically_summary">ਚੁਣਨ \'ਤੇ ਆਪਣੇ ਆਪ ਵੀਡੀਓ ਚਲਾਉਣਾ ਸ਼ੁਰੂ ਕਰੋ</string>
     <string name="show_stream_thumbnails">ਸਟ੍ਰੀਮ ਥੰਮਨੇਲ ਦਿਖਾਓ</string>
@@ -398,16 +398,16 @@
     <string name="stop">ਰੁਕੋ</string>
     <string name="category_highlight">ਵੀਡੀਓ ਹਾਈਲਾਈਟ ਵੇਖੋ</string>
     <string name="category_highlight_summary">ਜਾਂ ਤਾਂ ਵਿਗਿਆਪਨ ਕੀਤਾ ਸਿਰਲੇਖ, ਥੰਮਨੇਲ ਜਾਂ ਵੀਡੀਓ ਦਾ ਸਭ ਤੋਂ ਦਿਲਚਸਪ ਭਾਗ ਹੋ ਸਕਦਾ ਹੈ। ਤੁਸੀਂ ਚੈਪਟਰ ਭਾਗ ਵਿੱਚ ਇਸ \'ਤੇ ਟੈਪ ਕਰਕੇ ਇਸ \'ਤੇ ਜਾ ਸਕਦੇ ਹੋ</string>
-    <string name="original_or_main_audio_track">ਅਸਲੀ ਜਾਂ ਮੁੱਖ</string>
+    <string name="original_or_main_audio_track">ਮੂਲ</string>
     <string name="continue_watching">ਵੇਖਣਾ ਜਾਰੀ ਰੱਖੋ</string>
     <string name="dearrow">DeArrow ਇਨੇਬਲ ਕਰੋ</string>
     <string name="dearrow_summary">ਵਧੇਰੇ ਸਟੀਕ ਅਤੇ ਘੱਟ ਸਨਸਨੀਖੇਜ਼ ਸਿਰਲੇਖ ਅਤੇ ਥੰਮਨੇਲ ਦਿਖਾਓ। ਲੋਡ ਹੋਣ ਦਾ ਸਮਾਂ ਵਧਾਉਂਦਾ ਹੈ</string>
     <string name="unknown_audio_track_type">ਅਗਿਆਤ ਆਡੀਓ ਟਰੈਕ ਕਿਸਮ</string>
     <string name="dubbed_audio_track">ਡੱਬ ਕੀਤਾ</string>
     <string name="unknown_audio_language">ਅਗਿਆਤ ਆਡੀਓ ਭਾਸ਼ਾ</string>
-    <string name="descriptive_audio_track">ਡਿਸਕਰਿਪਟਵ</string>
+    <string name="descriptive_audio_track">ਆਡੀਓ ਡਿਸਕਰਿਪਸ਼ਨ</string>
     <string name="audio_track_format">%1$s - %2$s</string>
-    <string name="default_or_unknown_audio_track">ਡਿਫੌਲਟ ਜਾਂ ਅਗਿਆਤ</string>
+    <string name="default_or_unknown_audio_track">ਡਿਫ਼ਾਲਟ</string>
     <string name="unknown_or_no_audio">ਅਗਿਆਤ ਜਾਂ ਕੋਈ ਆਡੀਓ ਨਹੀਂ</string>
     <string name="visibility">ਵੇਖਣਯੋਗਤਾ</string>
     <string name="visibility_public">ਜਨਤਕ</string>
@@ -436,7 +436,7 @@
     <string name="tooltip_sponsorblock">ਸਪਾਂਸਰਬਲਾਕ ਟੌਗਲ ਕਰੋ</string>
     <string name="tooltip_play">ਚਲਾਓ</string>
     <string name="tooltip_filter">ਫਿਲਟਰ</string>
-    <string name="tooltip_edit_groups">ਗਰੁੱਪਾਂ ਦਾ ਸੰਪਾਦਨ</string>
+    <string name="tooltip_edit_groups">ਗਰੁੱਪਾਂ ਦਾ ਸੰਪਾਦਨ ਕਰੋ</string>
     <string name="tooltip_create_playlist">ਪਲੇਲਿਸਟ ਬਣਾਓ</string>
     <string name="tooltip_scroll_to_top">ਸਿਖਰ ਤੱਕ ਸਕ੍ਰੋਲ ਕਰੋ</string>
     <string name="group_name_error_empty">ਕਿਰਪਾ ਕਰਕੇ ਇੱਕ ਨਾਮ ਦਰਜ ਕਰੋ</string>
@@ -532,4 +532,43 @@
     <string name="show_upcoming_videos">ਆਗਾਮੀ ਵੀਡੀਓ ਵਿਖਾਓ</string>
     <string name="createNewPlaylist">ਨਵੀਂ ਪਲੇਲਿਸਟ ਬਣਾਓ</string>
     <string name="category_hook">ਹੁੱਕ/ਸ਼ੁਭਕਾਮਨਾਵਾਂ</string>
+    <string name="show_updates_summary">ਹਰ ਵਾਰ ਐਪ ਸ਼ੁਰੂ ਹੋਣ \'ਤੇ ਆਪਣੇ ਆਪ ਅੱਪਡੇਟਾਂ ਦੀ ਜਾਂਚ ਕਰੋ।</string>
+    <string name="checking_frequency_15_minutes">15 ਮਿੰਟ</string>
+    <string name="checking_frequency_30_minutes">30 ਮਿੰਟ</string>
+    <string name="checking_frequency_60_minutes">60 ਮਿੰਟ</string>
+    <string name="checking_frequency_2_hours">2 ਘੰਟੇ</string>
+    <string name="checking_frequency_6_hours">6 ਘੰਟੇ</string>
+    <string name="checking_frequency_12_hours">12 ਘੰਟੇ</string>
+    <string name="checking_frequency_1_day">1 ਦਿਨ</string>
+    <string name="sort_channel">ਚੈਨਲ ਦਾ ਨਾਮ</string>
+    <string name="sort_size">ਆਕਾਰ</string>
+    <string name="backup_creation_success">ਬੈਕਅੱਪ ਸਫਲਤਾਪੂਰਵਕ ਪੂਰਾ ਹੋਇਆ</string>
+    <string name="backup_creation_failed">ਬੈਕਅੱਪ ਬਣਾਉਣ ਵਿੱਚ ਅਸਫਲ</string>
+    <string name="playback_pitch_semitone_error_input">ਮੁੱਲ -%1$.1f (ਘੱਟੋ-ਘੱਟ) ਅਤੇ %1$.1f (ਵੱਧ ਤੋਂ ਵੱਧ) ਦੇ ਵਿਚਕਾਰ ਹੋਣਾ ਚਾਹੀਦਾ ਹੈ</string>
+    <string name="unsubscribe_snackbar_message">%1$s ਤੋਂ ਸਫਲਤਾਪੂਰਵਕ ਅਨ-ਸਬਸਕ੍ਰਾਈਬ ਹੋਏ</string>
+    <string name="ungrouped_channels">ਬਿਨਾਂ ਕਿਸੇ ਗਰੁੱਪ ਤੋਂ</string>
+    <string name="ungrouped_channels_with_count">ਬਿਨਾਂ ਕਿਸੇ ਗਰੁੱਪ ਤੋਂ (%1$d)</string>
+    <string name="comment_pinned">ਪਿੰਨ ਕੀਤਾ</string>
+    <string name="category_hook_summary">ਬਿਰਤਾਂਤਕ ਹੁੱਕਾਂ ਲਈ ਜੋ ਦਰਸ਼ਕ ਦਾ ਧਿਆਨ ਆਪਣੇ ਵੱਲ ਖਿੱਚਦੇ ਹਨ (ਅਕਸਰ ਪਹਿਲੇ ਦ੍ਰਿਸ਼ ਵਜੋਂ) ਉਸੇ ਵੀਡੀਓ ਵਿੱਚ ਬਾਅਦ ਦੀਆਂ ਘਟਨਾਵਾਂ ਜਾਂ ਲੜੀ ਦੇ ਭਵਿੱਖ ਦੇ ਐਪੀਸੋਡਾਂ ਨੂੰ ਛੇੜ ਕੇ ਜਾਂ ਵਰਣਨ ਕਰਕੇ</string>
+    <string name="screenshot_saved">ਸਕ੍ਰੀਨਸ਼ਾਟ ਸੁਰੱਖਿਅਤ ਕੀਤਾ ਗਿਆ</string>
+    <string name="delete_playlist_include_vidoes">ਕੀ ਪਲੇਲਿਸਟ ਤੋਂ ਸਾਰੇ ਵੀਡੀਓ ਵੀ ਮਿਟਾਉਣੇ ਹਨ?</string>
+    <plurals name="minutes_left">
+        <item quantity="one">%d ਮਿੰਟ ਬਾਕੀ</item>
+        <item quantity="other">%d ਮਿੰਟ ਬਾਕੀ</item>
+    </plurals>
+    <plurals name="sleep_timer_chip_minutes">
+        <item quantity="one">%d ਮਿੰਟ</item>
+        <item quantity="other">%d ਮਿੰਟ</item>
+    </plurals>
+    <string name="gaming">ਗੇਮਿੰਗ</string>
+    <string name="podcasts">ਪੌਡਕਾਸਟ</string>
+    <string name="trailers">ਟ੍ਰੇਲਰ</string>
+    <string name="music">ਸੰਗੀਤ</string>
+    <string name="include_timestamp_in_filename">ਫ਼ਾਈਲ ਨਾਮ ਵਿੱਚ ਟਾਈਮਸਟੈਂਪ ਸ਼ਾਮਿਲ ਕਰੋ</string>
+    <string name="did_you_mean">ਕੀ ਤੁਹਾਡਾ ਮਤਲਬ:</string>
+    <string name="showing_results_for">ਇਸਦੇ ਨਤੀਜੇ ਦਿਖਾ ਰਿਹਾ ਹੈ:</string>
+    <string name="long_press_fast_forward">ਦੇਰ ਤੱਕ ਦਬਾਉਣ \'ਤੇ ਤੇਜ਼ੀ ਨਾਲ ਅੱਗੇ ਵਧੋ</string>
+    <string name="long_press_fast_forward_summary">ਸਕ੍ਰੀਨ ਨੂੰ ਟੈਪ ਕਰਕੇ ਹੋਲਡ ਕਰਦੇ ਹੋਏ ਦੁੱਗਣੀ ਸਪੀਡ ਨਾਲ ਵੀਡੀਓ ਚਲਾਓ।</string>
+    <string name="resume_all">ਡਾਊਨਲੋਡ ਰਜ਼ਿਊਮ ਕਰੋ</string>
+    <string name="comment_verified">ਪ੍ਰਮਾਣਿਤ</string>
 </resources>
