@@ -298,6 +298,12 @@ object PlayerHelper {
             true
         )
 
+    val speedStepSize: Float
+        get() = PreferenceHelper.getString(
+            PreferenceKeys.SPEED_STEP_SIZE,
+            "0.25"
+        ).toFloat()
+
     val swipeGestureEnabled: Boolean
         get() = PreferenceHelper.getBoolean(
             PreferenceKeys.PLAYER_SWIPE_CONTROLS,

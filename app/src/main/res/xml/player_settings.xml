@@ -150,6 +150,15 @@
 
     <PreferenceCategory app:title="@string/misc">
 
+        <ListPreference
+            android:defaultValue="0.25"
+            android:entries="@array/playback_speed_step_sizes"
+            android:entryValues="@array/playback_speed_step_sizes"
+            android:icon="@drawable/ic_step"
+            app:key="playback_speed_step_size"
+            app:title="speed Step Size"
+            app:useSimpleSummaryProvider="true" />
+
         <com.github.libretube.ui.preferences.EditNumberPreference
             android:icon="@drawable/ic_time"
             app:defaultValue="50"

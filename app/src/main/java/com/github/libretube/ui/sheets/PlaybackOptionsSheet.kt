@@ -15,12 +15,14 @@ import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.databinding.PlaybackBottomSheetBinding
 import com.github.libretube.enums.PlayerCommand
 import com.github.libretube.extensions.round
+import com.github.libretube.helpers.PlayerHelper
 import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.services.AbstractPlayerService
 import com.github.libretube.ui.adapters.SliderLabelsAdapter
 import kotlin.math.absoluteValue
 import kotlin.math.log
 import kotlin.math.pow
+import kotlin.math.round
 
 class PlaybackOptionsSheet(
     private val player: MediaController
@@ -36,10 +38,14 @@ class PlaybackOptionsSheet(
             LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
 
         binding.speedShortcuts.adapter = SliderLabelsAdapter(SUGGESTED_SPEEDS) {
-            binding.speed.value = it
+            binding.speed.value =
+                (round(it / PlayerHelper.speedStepSize) * PlayerHelper.speedStepSize)
         }
-
-        binding.speed.value = player.playbackParameters.speed
+        PlayerHelper.speedStepSize.also {
+            binding.speed.stepSize = it
+            binding.speed.valueFrom = it
+            binding.speed.value = (round(player.playbackParameters.speed / it) * it)
+        }
         binding.pitch.value = playbackPitchToSemitone(player.playbackParameters.pitch)
 
         val currentSemitone = binding.pitch.value.round(2)

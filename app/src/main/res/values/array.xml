@@ -342,4 +342,12 @@
         <item>pause</item>
         <item>none</item>
     </string-array>
+
+    <string-array name="playback_speed_step_sizes">
+        <item>0.05</item>
+        <item>0.1</item>
+        <item>0.25</item>
+        <item>0.5</item>
+    </string-array>
+
 </resources>
