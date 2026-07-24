@@ -7,6 +7,7 @@ import android.view.KeyEvent
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.view.ViewGroup
 import android.view.ViewTreeObserver
 import android.widget.ScrollView
 import androidx.activity.result.contract.ActivityResultContracts
@@ -19,6 +20,7 @@ import androidx.core.os.bundleOf
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.view.allViews
 import androidx.core.view.children
+import androidx.core.view.doOnPreDraw
 import androidx.core.view.isNotEmpty
 import androidx.core.widget.NestedScrollView
 import androidx.lifecycle.lifecycleScope
@@ -63,6 +65,8 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
+import androidx.core.view.get
+import androidx.core.view.size
 
 class MainActivity : AbstractPlayerHostActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -81,7 +85,8 @@ class MainActivity : AbstractPlayerHostActivity() {
     private val searchViewModel: SearchViewModel by viewModels()
     private val downloadViewModel: DownloadsViewModel by viewModels()
     private val playlistViewModel: PlaylistViewModel by viewModels()
-
+    //this to save width of the selected item Indicator after calculate it
+    private var cachedIndicatorWidths = mutableMapOf<Int, Int>()
     // registering for activity results is only possible, this here should have been part of
     // PlaylistOptionsBottomSheet instead if Android allowed us to
     private var playlistExportFormat: ImportFormat = ImportFormat.NEWPIPE
@@ -205,6 +210,9 @@ class MainActivity : AbstractPlayerHostActivity() {
         }
 
         binding.bottomNav.setOnItemSelectedListener {
+            if (resources.configuration.smallestScreenWidthDp >= 600) {
+                applyIndicatorForSelection()
+            }
             navigateToBottomSelectedItem(it)
         }
 
@@ -223,6 +231,37 @@ class MainActivity : AbstractPlayerHostActivity() {
         loadIntentData()
 
         showUserInfoDialogIfNeeded()
+    }
+
+    private fun applyIndicatorForSelection() {
+        val visibleCount = (0 until binding.bottomNav.menu.size)
+            .count { binding.bottomNav.menu[it].isVisible }
+        val menuView =
+            binding.bottomNav.getChildAt(0) as? ViewGroup ?: return
+        val selectedId = binding.bottomNav.selectedItemId
+        cachedIndicatorWidths[selectedId]?.let { cachedWidth ->
+            binding.bottomNav.itemActiveIndicatorWidth = cachedWidth
+            return
+        }
+        calculateSelectedItemSize(selectedId, menuView, visibleCount)
+    }
+
+    private fun calculateSelectedItemSize(
+        selectedId: Int,
+        menuView: ViewGroup,
+        visibleCount: Int
+    ) {
+        val selectedIndex = (0 until binding.bottomNav.menu.size)
+            .firstOrNull { binding.bottomNav.menu[it].itemId == selectedId }
+            ?: return
+
+        val selectedChild = menuView.getChildAt(selectedIndex) ?: return
+
+        selectedChild.doOnPreDraw {
+            val width = selectedChild.width / visibleCount
+            binding.bottomNav.itemActiveIndicatorWidth = width
+            cachedIndicatorWidths[selectedId] = width
+        }
     }
 
     /**
