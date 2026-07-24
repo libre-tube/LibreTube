@@ -6,13 +6,19 @@ import androidx.core.content.getSystemService
 import androidx.media.AudioManagerCompat
 import com.github.libretube.extensions.normalize
 
-class AudioHelper(context: Context) {
+class AudioHelper(private val context: Context) {
     private val audioManager = context.getSystemService<AudioManager>()!!
     private val minimumVolumeIndex = AudioManagerCompat
         .getStreamMinVolume(audioManager, AudioManager.STREAM_MUSIC)
     private val maximumVolumeIndex = audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC)
 
-    var volume: Int
+   var videoVolume: Float = 1f
+        set(value) {
+            field = value.coerceIn(0f, 1f)
+            BackgroundHelper.setVolume(context, field)
+        }
+
+    var systemVolume: Int
         get() = audioManager.getStreamVolume(AudioManager.STREAM_MUSIC) - minimumVolumeIndex
         set(value) {
             val vol = value.coerceIn(minimumVolumeIndex, maximumVolumeIndex)
@@ -20,10 +26,18 @@ class AudioHelper(context: Context) {
         }
 
     fun setVolumeWithScale(value: Int, maxValue: Int, minValue: Int = 0) {
-        volume = value.normalize(minValue, maxValue, minimumVolumeIndex, maximumVolumeIndex)
+        if (PlayerHelper.swipeGestureSystemVolume) {
+            systemVolume = value.normalize(minValue, maxValue, minimumVolumeIndex, maximumVolumeIndex)
+        } else {
+            videoVolume = value.toFloat().normalize(minValue.toFloat(), maxValue.toFloat(), 0f, 1f)
+        }
     }
 
     fun getVolumeWithScale(maxValue: Int, minValue: Int = 0): Int {
-        return volume.normalize(minimumVolumeIndex, maximumVolumeIndex, minValue, maxValue)
+        return if (PlayerHelper.swipeGestureSystemVolume) {
+            systemVolume.normalize(minimumVolumeIndex, maximumVolumeIndex, minValue, maxValue)
+        } else {
+            videoVolume.normalize(0f, 1f, minValue.toFloat(), maxValue.toFloat()).toInt()
+        }
     }
 }
