@@ -20,6 +20,7 @@ import androidx.core.os.bundleOf
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.view.allViews
 import androidx.core.view.children
+import androidx.core.view.doOnPreDraw
 import androidx.core.view.isNotEmpty
 import androidx.core.widget.NestedScrollView
 import androidx.lifecycle.lifecycleScope
@@ -238,9 +239,8 @@ class MainActivity : AbstractPlayerHostActivity() {
         val menuView =
             binding.bottomNav.getChildAt(0) as? ViewGroup ?: return
         val selectedId = binding.bottomNav.selectedItemId
-        if (cachedIndicatorWidths[selectedId] != null) {
-            binding.bottomNav.itemActiveIndicatorWidth =
-                cachedIndicatorWidths[selectedId] ?: 0
+        cachedIndicatorWidths[selectedId]?.let { cachedWidth ->
+            binding.bottomNav.itemActiveIndicatorWidth = cachedWidth
             return
         }
         calculateSelectedItemSize(selectedId, menuView, visibleCount)
@@ -254,11 +254,14 @@ class MainActivity : AbstractPlayerHostActivity() {
         val selectedIndex = (0 until binding.bottomNav.menu.size)
             .firstOrNull { binding.bottomNav.menu[it].itemId == selectedId }
             ?: return
-        binding.bottomNav.postDelayed({
-            val selectedChild = menuView.getChildAt(selectedIndex) ?: return@postDelayed
-            binding.bottomNav.itemActiveIndicatorWidth = selectedChild.width / visibleCount
-            cachedIndicatorWidths[selectedId] = selectedChild.width / visibleCount
-        }, 200)
+
+        val selectedChild = menuView.getChildAt(selectedIndex) ?: return
+
+        selectedChild.doOnPreDraw {
+            val width = selectedChild.width / visibleCount
+            binding.bottomNav.itemActiveIndicatorWidth = width
+            cachedIndicatorWidths[selectedId] = width
+        }
     }
 
     /**
