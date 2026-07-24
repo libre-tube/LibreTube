@@ -352,13 +352,13 @@ class DownloadsFragmentPage : DynamicLayoutManagerFragment(R.layout.fragment_dow
     }
 
     private fun showDeleteAllDialog(context: Context, adapter: DownloadsAdapter) {
-        var onlyDeleteWatchedVideos = false
+        var onlyDeleteWatchedVideos = true
 
         MaterialAlertDialogBuilder(context)
             .setTitle(R.string.delete_all)
             .setMultiChoiceItems(
                 arrayOf(getString(R.string.delete_only_watched_videos)),
-                null
+                booleanArrayOf(true)
             ) { _, _, selected ->
                 onlyDeleteWatchedVideos = selected
             }
