@@ -9,11 +9,11 @@ import androidx.recyclerview.widget.ListAdapter
 import com.github.libretube.R
 import com.github.libretube.constants.IntentData
 import com.github.libretube.databinding.PlaylistsRowBinding
-import com.github.libretube.db.DatabaseHolder
 import com.github.libretube.db.obj.PlaylistBookmark
 import com.github.libretube.enums.PlaylistType
 import com.github.libretube.helpers.ImageHelper
 import com.github.libretube.helpers.NavigationHelper
+import com.github.libretube.repo.UserDataRepositoryHelper
 import com.github.libretube.ui.adapters.callbacks.DiffUtilItemCallback
 import com.github.libretube.ui.base.BaseActivity
 import com.github.libretube.ui.sheets.PlaylistOptionsBottomSheet
@@ -64,10 +64,11 @@ class PlaylistBookmarkAdapter: ListAdapter<PlaylistBookmark, PlaylistBookmarkVie
                 )
                 CoroutineScope(Dispatchers.IO).launch {
                     if (!isBookmarked) {
-                        DatabaseHolder.Database.playlistBookmarkDao()
-                            .deleteById(bookmark.playlistId)
+                        UserDataRepositoryHelper.userDataRepository
+                            .deletePlaylistBookmark(bookmark.playlistId)
                     } else {
-                        DatabaseHolder.Database.playlistBookmarkDao().insert(bookmark)
+                        UserDataRepositoryHelper.userDataRepository
+                            .createPlaylistBookmark(bookmark)
                     }
                 }
             }

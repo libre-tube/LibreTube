@@ -8,6 +8,8 @@ import androidx.fragment.app.setFragmentResult
 import androidx.media3.common.Player
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.libretube.R
+import com.github.libretube.api.obj.WatchHistoryEntry
+import com.github.libretube.api.obj.WatchHistoryEntryMetadata
 import com.github.libretube.constants.IntentData
 import com.github.libretube.databinding.QueueBottomSheetBinding
 import com.github.libretube.db.DatabaseHelper
@@ -15,6 +17,7 @@ import com.github.libretube.db.DatabaseHolder
 import com.github.libretube.db.obj.WatchPosition
 import com.github.libretube.extensions.setActionListener
 import com.github.libretube.extensions.toID
+import com.github.libretube.repo.UserDataRepositoryHelper
 import com.github.libretube.ui.adapters.PlayingQueueAdapter
 import com.github.libretube.ui.dialogs.AddToPlaylistDialog
 import com.github.libretube.util.PlayingQueue
@@ -23,6 +26,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import kotlin.time.Clock
 
 class PlayingQueueSheet : ExpandedBottomSheet(R.layout.queue_bottom_sheet) {
     private var _binding: QueueBottomSheetBinding? = null
@@ -166,8 +170,19 @@ class PlayingQueueSheet : ExpandedBottomSheet(R.layout.queue_bottom_sheet) {
                             PlayingQueue.getStreams().forEach {
                                 val videoId = it.url.orEmpty().toID()
                                 val duration = it.duration ?: 0
-                                val watchPosition = WatchPosition(videoId, duration * 1000)
-                                DatabaseHolder.Database.watchPositionDao().insert(watchPosition)
+                                val watchHistoryEntry = WatchHistoryEntry(
+                                    video = it,
+                                    metadata = WatchHistoryEntryMetadata(
+                                        videoId = videoId,
+                                        finished = true,
+                                        positionMillis = duration * 1000,
+                                        addedDate = Clock.System.now().toEpochMilliseconds()
+                                    )
+                                )
+                                runCatching {
+                                    UserDataRepositoryHelper.userDataRepository
+                                        .addToWatchHistory(watchHistoryEntry)
+                                }
                             }
                         }
                     }
@@ -175,8 +190,11 @@ class PlayingQueueSheet : ExpandedBottomSheet(R.layout.queue_bottom_sheet) {
                     1 -> {
                         CoroutineScope(Dispatchers.IO).launch {
                             PlayingQueue.getStreams().forEach {
-                                DatabaseHolder.Database.watchPositionDao()
-                                    .deleteByVideoId(it.url.orEmpty().toID())
+                                val videoId = it.url.orEmpty().toID()
+                                runCatching {
+                                    UserDataRepositoryHelper.userDataRepository
+                                        .removeFromWatchHistory(videoId)
+                                }
                             }
                         }
                     }

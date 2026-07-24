@@ -18,6 +18,7 @@ import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.constants.PreferenceKeys.HOME_TAB_CONTENT
 import com.github.libretube.databinding.FragmentHomeBinding
 import com.github.libretube.db.obj.PlaylistBookmark
+import com.github.libretube.enums.PlaylistType
 import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.ui.activities.SettingsActivity
 import com.github.libretube.ui.adapters.CarouselPlaylist
@@ -44,8 +45,8 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     private val trendingAdapter = VideoCardsAdapter()
     private val feedAdapter = VideoCardsAdapter(columnWidthDp = 250f)
     private val watchingAdapter = VideoCardsAdapter(columnWidthDp = 250f)
-    private val bookmarkAdapter = CarouselPlaylistAdapter()
-    private val playlistAdapter = CarouselPlaylistAdapter()
+    private val bookmarkAdapter = CarouselPlaylistAdapter(PlaylistType.PUBLIC)
+    private val playlistAdapter = CarouselPlaylistAdapter(PlaylistType.PRIVATE)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         _binding = FragmentHomeBinding.bind(view)
