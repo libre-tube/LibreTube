@@ -38,6 +38,7 @@ import video_streaming.StreamerContextOuterClass.StreamerContext.SabrContext
 import video_streaming.UmpPartId.UMPPartId
 import video_streaming.VideoPlaybackAbrRequestOuterClass.VideoPlaybackAbrRequest
 import java.time.Instant
+import kotlin.math.max
 
 class PlaybackRequest(
     /* Format for which new media data is being requested */
@@ -373,6 +374,10 @@ class SabrClient private constructor(
             .setEnableVoiceBoost(xtags?.isVoiceBoosted() ?: false)
             .setClientViewportIsFlexible(false)
             .setBandwidthEstimate(bandwidthEstimator.bitrateEstimate)
+            .setStickyResolution(max(videoFormat?.stream?.height ?: 0, 360))
+            .setClientViewportHeight(max(videoFormat?.stream?.height ?: 0, 360))
+            .setClientViewportWidth(max(videoFormat?.stream?.width ?: 0, 640))
+            .setLastManualSelectedResolution(max(videoFormat?.stream?.height ?: 0, 360))
             .setVisibility(1)
             .build()
 
