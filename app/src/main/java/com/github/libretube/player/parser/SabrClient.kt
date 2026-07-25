@@ -396,10 +396,12 @@ class SabrClient private constructor(
                     .setPoToken(poToken ?: ByteString.empty())
                     .setClientInfo(
                         StreamerContext.ClientInfo.newBuilder()
-                            .setClientName(1)
-                            .setClientVersion(YoutubeParsingHelper.getClientVersion())
-                            .setOsName("Windows")
-                            .setOsVersion("10")
+                            .setClientName(101)
+                            .setClientVersion("1.02")
+                            .setDeviceMake("Apple")
+                            .setDeviceModel("RealityDevice14,1")
+                            .setOsName("visionOS")
+                            .setOsVersion("25.6.0.23O471")
                             .build()
                     )
                     .addAllSabrContexts(activeSabrContexts.mapNotNull { sabrContexts[it] })
@@ -626,7 +628,6 @@ class SabrClient private constructor(
         private const val CONTENT_TYPE = "application/x-protobuf"
         private const val ENCODING = "identity"
         private const val ACCEPT = "application/vnd.yt-ump"
-        private const val USER_AGENT =
-            "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:140.0) Gecko/20100101 Firefox/140.0"
+        private const val USER_AGENT = "com.google.visionos.youtube/1.02(RealityDevice14,1; U; CPU visionOS 25_6_0 like Mac OS X; GB)";
     }
 }
