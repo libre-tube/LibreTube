@@ -358,9 +358,9 @@ class SabrClient private constructor(
         val now = Instant.now().toEpochMilli()
         val xtags = audioFormat?.formatId()?.xtags?.let { Xtags(it) }
 
+        val playerTimeMs = playbackRequest.segmentStartTimeMs
         val clientState = ClientAbrState.newBuilder()
-            // we pretend we're slightly in the previous (n-1) segment, so we get n-th segment, instead of the (n+1)-th one
-            .setPlayerTimeMs(playbackRequest.segmentStartTimeMs.minus(500).coerceAtLeast(0))
+            .setPlayerTimeMs(playerTimeMs)
             //TODO: setMediaCapabilities for Android client: https://github.com/coletdjnz/yt-dlp-dev/blob/effe62991b1b87aafcc8f77a374d7ead9d461803/yt_dlp/extractor/youtube/_streaming/sabr/processor.py#L239
             .setEnabledTrackTypesBitfield(if (videoFormat == null) 1 else 0)
             .setPlaybackRate(playbackRequest.playbackSpeed)
@@ -377,6 +377,7 @@ class SabrClient private constructor(
             .build()
 
         val playbackRequest = VideoPlaybackAbrRequest.newBuilder().setClientAbrState(clientState)
+            .setPlayerTimeMs(playerTimeMs)
             .addAllSelectedFormatIds(initializedFormats.values.map { it.id }.toList())
             .setVideoPlaybackUstreamerConfig(ustreamerConfig)
             .addAllPreferredAudioFormatIds(listOfNotNull(audioFormat?.formatId()))
