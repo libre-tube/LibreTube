@@ -1,6 +1,7 @@
 package com.github.libretube.player
 
 import android.net.Uri
+import android.util.Log
 import androidx.core.net.toUri
 import androidx.media3.common.C
 import androidx.media3.common.util.UnstableApi
@@ -29,8 +30,16 @@ class SabrDataSource(
 
         transferInitializing(dataSpec)
         transferStarted(dataSpec)
-        val segment = runCatching { sabrClient.getNextSegment(playbackRequest!!) }
-            .getOrNull() ?: throw IOException()
+        val segment = try {
+            sabrClient.getNextSegment(playbackRequest!!)!!
+        } catch (e: Exception) {
+            Log.e(
+                SabrClient::class.java.name,
+                "open: failed to get segment ${playbackRequest!!.segment} for ${playbackRequest.format.itag}: $e"
+            )
+            throw IOException()
+        }
+
         data = CompositeBuffer(segment.data)
         return data!!.remaining().toLong()
     }
