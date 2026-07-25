@@ -53,7 +53,9 @@ class ChannelFragment : Fragment(R.layout.fragment_channel) {
         "shorts" to R.string.yt_shorts,
         "livestreams" to R.string.livestreams,
         "playlists" to R.string.playlists,
-        "albums" to R.string.albums
+        "albums" to R.string.albums,
+        "podcasts" to R.string.podcasts,
+        "courses" to R.string.courses,
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {

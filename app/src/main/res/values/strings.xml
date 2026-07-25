@@ -318,6 +318,7 @@
     <string name="color">Color</string>
     <string name="invalid_color">Invalid color value entered!</string>
     <string name="livestreams">Livestreams</string>
+    <string name="courses">Courses</string>
     <string name="defaultIconLight">Default light</string>
     <string name="playlistCloned">Playlist cloned</string>
     <string name="unsubscribe_snackbar_message">Successfully unsubscribed from %1$s</string>
