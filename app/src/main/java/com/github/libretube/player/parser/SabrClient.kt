@@ -212,6 +212,9 @@ class SabrClient private constructor(
         }
         .build()
 
+    /** Sequence number of the request. */
+    private var requestNumber = 1
+
     /**
      * PlaybackCookie
      *
@@ -409,7 +412,7 @@ class SabrClient private constructor(
 
         // ideally we would use HTTP3 here, like the official, however okhttp does not support it
         val request = Request.Builder()
-            .url(url)
+            .url("$url&rn=${requestNumber++}")
             .post(
                 playbackRequest.toByteArray()
                     .toRequestBody(CONTENT_TYPE.toMediaType())
