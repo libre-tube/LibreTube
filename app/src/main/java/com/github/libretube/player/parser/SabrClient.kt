@@ -383,11 +383,10 @@ class SabrClient private constructor(
 
         val playbackRequest = VideoPlaybackAbrRequest.newBuilder().setClientAbrState(clientState)
             .setPlayerTimeMs(playerTimeMs)
-            .addAllSelectedFormatIds(initializedFormats.values.map { it.id }.toList())
             .setVideoPlaybackUstreamerConfig(ustreamerConfig)
             .addAllPreferredAudioFormatIds(listOfNotNull(audioFormat?.formatId()))
             .addAllPreferredVideoFormatIds(listOfNotNull(videoFormat?.formatId()))
-            .addAllSelectedFormatIds(initializedFormats.map { it.value.id }.toList())
+            .addAllSelectedFormatIds(initializedFormats.values.map { it.id }.toList())
             .addAllBufferedRanges(initializedFormats.values.flatMap { it.buildBufferedRanges() })
             .setStreamerContext(
                 StreamerContext.newBuilder()
