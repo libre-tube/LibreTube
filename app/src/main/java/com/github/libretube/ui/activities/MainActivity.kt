@@ -85,7 +85,7 @@ class MainActivity : AbstractPlayerHostActivity() {
     private val searchViewModel: SearchViewModel by viewModels()
     private val downloadViewModel: DownloadsViewModel by viewModels()
     private val playlistViewModel: PlaylistViewModel by viewModels()
-    //this to save width of the selected item Indicator after calculate it
+    // save width of selected bottom bar item Indicator after calculating it
     private var cachedIndicatorWidths = mutableMapOf<Int, Int>()
     // registering for activity results is only possible, this here should have been part of
     // PlaylistOptionsBottomSheet instead if Android allowed us to
@@ -210,7 +210,7 @@ class MainActivity : AbstractPlayerHostActivity() {
         }
 
         binding.bottomNav.setOnItemSelectedListener {
-            if (resources.configuration.smallestScreenWidthDp >= 600) {
+            if (resources.configuration.smallestScreenWidthDp >= MINIMUM_SCREEN_SIZE_TABLET) {
                 applyIndicatorForSelection()
             }
             navigateToBottomSelectedItem(it)
@@ -243,10 +243,10 @@ class MainActivity : AbstractPlayerHostActivity() {
             binding.bottomNav.itemActiveIndicatorWidth = cachedWidth
             return
         }
-        calculateSelectedItemSize(selectedId, menuView, visibleCount)
+        updateBottomBarSelectionBackgroundSize(selectedId, menuView, visibleCount)
     }
 
-    private fun calculateSelectedItemSize(
+    private fun updateBottomBarSelectionBackgroundSize(
         selectedId: Int,
         menuView: ViewGroup,
         visibleCount: Int
@@ -733,5 +733,8 @@ class MainActivity : AbstractPlayerHostActivity() {
 
         searchView.clearFocus()
         return true
+    }
+    companion object {
+        const val MINIMUM_SCREEN_SIZE_TABLET = 600
     }
 }
