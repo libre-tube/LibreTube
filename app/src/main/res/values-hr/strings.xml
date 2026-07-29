@@ -130,7 +130,6 @@
     <string name="normal_views">%1$s pregleda%2$s</string>
     <string name="defaultIcon">Zadano</string>
     <string name="gradientIcon">Glib gradijent</string>
-    <string name="fireIcon"></string>
     <string name="instance_summary">Piped, prijava i račun</string>
     <string name="customInstance_summary">Dodati…</string>
     <string name="empty_instance">Unesite naziv i API URL.</string>
@@ -144,7 +143,6 @@
     <string name="buffering_goal_summary">Maksimalan broj sekundi videozapisa za međuspremanje</string>
     <string name="no_audio">Nema zvuka</string>
     <string name="no_video">Nema slike</string>
-    <string name="no_subtitle"></string>
     <string name="audio">Zvuk</string>
     <string name="downloading">Preuzimanje…</string>
     <string name="download_paused">Preuzimanje pauzirano</string>
@@ -199,7 +197,6 @@
     <string name="rich_caption_rendering_summary">Prikažite web-titlove za bogatije i prilagođeno iskustvo</string>
     <string name="captions">Natpisi</string>
     <string name="none">Nijedan</string>
-    <string name="general"></string>
     <string name="general_summary">Preuzimanja i ušteda podataka</string>
     <string name="caption_settings">Natpisi</string>
     <string name="playerAudioQuality">Kvaliteta zvuka</string>
