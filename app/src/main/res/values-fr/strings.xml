@@ -574,4 +574,5 @@
     <string name="resume_all">Reprendre les téléchargements</string>
     <string name="comment_verified">Vérifié</string>
     <string name="comment_pinned">Épinglé</string>
+    <string name="courses">Cours</string>
 </resources>
