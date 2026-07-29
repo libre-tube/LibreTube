@@ -571,4 +571,5 @@
     <string name="resume_all">Jätka allalaadimisi</string>
     <string name="comment_verified">Kontrollitud</string>
     <string name="comment_pinned">Esiplaanile tõstetud</string>
+    <string name="courses">Kursused</string>
 </resources>
