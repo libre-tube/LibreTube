@@ -93,6 +93,9 @@ class DownloadService : LifecycleService() {
     private lateinit var notificationManager: NotificationManager
     private lateinit var summaryNotificationBuilder: Builder
 
+    /**
+     * Maps all currently running downloads to `true`, and all paused or stopped downloads to `false`.
+     */
     private val downloadQueue = SparseBooleanArray()
     private val _downloadFlow = MutableSharedFlow<Pair<Int, DownloadStatus>>()
     val downloadFlow: SharedFlow<Pair<Int, DownloadStatus>> = _downloadFlow
@@ -292,7 +295,7 @@ class DownloadService : LifecycleService() {
         val sink = item.path.sink(StandardOpenOption.APPEND).buffer()
         var totalRead = item.path.fileSize()
         var numberOfTries = 0
-        while (downloadQueue[item.id] && totalRead < item.downloadSize) {
+        while (downloadQueue[item.id] && !item.isFinished) {
             try {
                 when (val result = downloadProvider.downloadNextChunk(item, sink)) {
                     DownloadProgressResult.DownloadComplete -> {
@@ -342,6 +345,9 @@ class DownloadService : LifecycleService() {
 
         // start the next download if there are any remaining ones enqueued
         startNextEnqueueDownload()
+
+        // explicitly send a pause event if the user paused the download, although it's not yet finished
+        if (!item.isFinished) pause(item.id)
 
         // if no new download was enqueued (i.e. there's no paused/stopped download left),
         // look if any downloads are still running, and if not, stop the service
