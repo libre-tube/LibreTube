@@ -577,4 +577,5 @@
     <string name="resume_all">Возобновить загрузку</string>
     <string name="comment_verified">Проверено</string>
     <string name="comment_pinned">Закреплено</string>
+    <string name="courses">Курсы</string>
 </resources>
