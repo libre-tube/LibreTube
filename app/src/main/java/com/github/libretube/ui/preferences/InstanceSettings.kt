@@ -18,6 +18,7 @@ import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.enums.SyncServerType
 import com.github.libretube.extensions.toastFromMainThread
 import com.github.libretube.helpers.PreferenceHelper
+import com.github.libretube.repo.UserDataRepositoryHelper
 import com.github.libretube.ui.base.BasePreferenceFragment
 import com.github.libretube.ui.dialogs.DeleteAccountDialog
 import com.github.libretube.ui.dialogs.LoginDialog
@@ -132,6 +133,16 @@ class InstanceSettings : BasePreferenceFragment() {
         } else {
             super.onDisplayPreferenceDialog(preference)
         }
+    }
+
+    override fun onDestroy() {
+        @Suppress("DEPRECATION")
+        if (UserDataRepositoryHelper.userDataRepository.requiresLogin && PreferenceHelper.getToken().isEmpty()) {
+            context?.toastFromMainThread(R.string.missing_auth_falling_back)
+            PreferenceHelper.putString(PreferenceKeys.SYNC_SERVER_TYPE, SyncServerType.NONE.name.lowercase())
+        }
+
+        super.onDestroy()
     }
 
     private fun showInstanceSelectionDialog(preference: ListPreference) {
