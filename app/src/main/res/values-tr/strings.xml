@@ -5,10 +5,10 @@
     <string name="download">İndir</string>
     <string name="password">Parola</string>
     <string name="unsubscribe">Abonelikten çık</string>
-    <string name="registered">Kaydoldunuz. Artık istediğiniz kanala abone olabilirsiniz.</string>
+    <string name="registered">Kaydoldunuz. Artık istediğiniz kanallara abone olabilirsiniz.</string>
     <string name="downloadfailed">İndirme başarısız.</string>
     <string name="app_theme">Tema</string>
-    <string name="unknown_error">Bağlantı hatası.</string>
+    <string name="unknown_error">Ağ hatası.</string>
     <string name="empty">Kullanıcı adı ve parola girmelisiniz.</string>
     <string name="notgmail">Bu, Piped hesabı içindir</string>
     <string name="defres">Video çözünürlüğü</string>
@@ -571,4 +571,5 @@
     <string name="resume_all">İndirmeleri Devam Ettir</string>
     <string name="comment_verified">Doğrulandı</string>
     <string name="comment_pinned">Sabitlendi</string>
+    <string name="courses">Dersler</string>
 </resources>
