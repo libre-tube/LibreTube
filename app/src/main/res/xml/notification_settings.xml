@@ -13,14 +13,6 @@
 
         <SwitchPreferenceCompat
             android:dependency="notification_toggle"
-            android:icon="@drawable/ic_image"
-            app:defaultValue="false"
-            app:key="show_stream_thumbnails"
-            app:summary="@string/show_stream_thumbnails_summary"
-            app:title="@string/show_stream_thumbnails" />
-
-        <SwitchPreferenceCompat
-            android:dependency="notification_toggle"
             android:icon="@drawable/ic_video"
             app:defaultValue="false"
             app:key="shorts_notifications"

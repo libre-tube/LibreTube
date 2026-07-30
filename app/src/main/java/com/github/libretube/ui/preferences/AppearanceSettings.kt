@@ -50,12 +50,6 @@ class AppearanceSettings : BasePreferenceFragment() {
             true
         }
 
-        val labelVisibilityMode = findPreference<ListPreference>(PreferenceKeys.LABEL_VISIBILITY)
-        labelVisibilityMode?.setOnPreferenceChangeListener { _, _ ->
-            RequireRestartDialog().show(childFragmentManager, RequireRestartDialog::class.java.name)
-            true
-        }
-
         val navBarOptions = findPreference<Preference>(PreferenceKeys.NAVBAR_ITEMS)
         navBarOptions?.setOnPreferenceClickListener {
             NavBarOptionsDialog().show(childFragmentManager, null)

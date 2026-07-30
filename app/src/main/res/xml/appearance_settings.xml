@@ -36,25 +36,12 @@
 
     </PreferenceCategory>
 
-    <PreferenceCategory app:title="@string/navigation_bar">
+    <PreferenceCategory app:title="@string/layout">
 
         <Preference
             android:icon="@drawable/ic_home"
             app:key="navbar_items"
-            app:title="@string/navbar_order" />
-
-        <ListPreference
-            android:icon="@drawable/ic_label"
-            app:defaultValue="selected"
-            app:entries="@array/labelVisibility"
-            app:entryValues="@array/labelVisibilityValues"
-            app:key="label_visibility"
-            app:title="@string/navLabelVisibility"
-            app:useSimpleSummaryProvider="true" />
-
-    </PreferenceCategory>
-
-    <PreferenceCategory app:title="@string/layout">
+            app:title="@string/navigation_bar" />
 
         <MultiSelectListPreference
             android:entries="@array/homeTabItems"

@@ -149,6 +149,13 @@ object PreferenceHelper {
         PreferenceMigration(7, 8) {
             remove("image_cache_size")
             remove("max_parallel_downloads")
+        },
+        PreferenceMigration(8, 9) {
+            remove("label_visibility")
+            remove("playback_during_call")
+            remove("behavior_when_minimized")
+            remove("show_stream_thumbnails")
+            remove("watch_history_size")
         }
     )
 

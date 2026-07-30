@@ -24,19 +24,6 @@ object DatabaseHelper {
     suspend fun addToWatchHistory(watchHistoryItem: WatchHistoryItem) =
         withContext(Dispatchers.IO) {
             Database.watchHistoryDao().insert(watchHistoryItem)
-            val maxHistorySize = PreferenceHelper.getString(
-                PreferenceKeys.WATCH_HISTORY_SIZE,
-                "100"
-            )
-            if (maxHistorySize == "unlimited") {
-                return@withContext
-            }
-
-            // delete the first watch history entry if the limit is reached
-            val historySize = Database.watchHistoryDao().getSize()
-            if (historySize > maxHistorySize.toInt()) {
-                Database.watchHistoryDao().delete(Database.watchHistoryDao().getOldest())
-            }
         }
 
     suspend fun getWatchHistoryPage(page: Int, pageSize: Int): List<WatchHistoryItem> {

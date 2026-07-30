@@ -58,15 +58,6 @@
             app:key="skip_buttons"
             app:title="@string/skip_buttons" />
 
-        <ListPreference
-            android:defaultValue="pip"
-            android:icon="@drawable/ic_window"
-            app:entries="@array/onMinimize"
-            app:entryValues="@array/onMinimizeValues"
-            app:key="behavior_when_minimized"
-            app:title="@string/behavior_when_minimized"
-            app:useSimpleSummaryProvider="true" />
-
         <SwitchPreferenceCompat
             android:disableDependentsState="true"
             android:icon="@drawable/ic_rotating_circle"
@@ -156,13 +147,6 @@
             app:key="buffering_goal"
             app:summary="@string/buffering_goal_summary"
             app:title="@string/buffering_goal" />
-
-        <SwitchPreferenceCompat
-            android:icon="@drawable/ic_call"
-            android:summary="@string/playback_during_call_summary"
-            app:defaultValue="false"
-            app:key="playback_during_call"
-            app:title="@string/playback_during_call" />
 
         <SwitchPreferenceCompat
             android:defaultValue="false"
