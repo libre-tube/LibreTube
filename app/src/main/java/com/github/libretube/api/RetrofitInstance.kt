@@ -23,7 +23,7 @@ object RetrofitInstance {
             PIPED_API_URL
         )
 
-    private val libretubeSyncServerUrl
+    val libretubeSyncServerUrl
         get() = PreferenceHelper.getString(
             PreferenceKeys.LIBRETUBE_SYNC_SERVER_URL,
             LIBRETUBE_SYNC_SERVER_URL
