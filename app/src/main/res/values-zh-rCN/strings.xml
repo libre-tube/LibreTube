@@ -568,4 +568,5 @@
     <string name="resume_all">继续下载</string>
     <string name="comment_verified">已认证</string>
     <string name="comment_pinned">已置顶</string>
+    <string name="courses">课程</string>
 </resources>
