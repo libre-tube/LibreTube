@@ -25,7 +25,6 @@ object PreferenceKeys {
     const val ACCENT_COLOR = "accent_color"
     const val GRID_COLUMNS_PORTRAIT = "grid"
     const val GRID_COLUMNS_LANDSCAPE = "grid_landscape"
-    const val LABEL_VISIBILITY = "label_visibility"
     const val APP_ICON = "icon_change"
     const val NEW_VIDEOS_BADGE = "new_videos_badge"
     const val PLAYLISTS_ORDER = "playlists_order"
@@ -78,8 +77,6 @@ object PreferenceKeys {
     const val PLAY_AUTOMATICALLY = "play_automatically"
     const val FULLSCREEN_GESTURES = "fullscreen_gestures"
     const val SHOW_TIME_LEFT = "show_time_left"
-    const val ALLOW_PLAYBACK_DURING_CALL = "playback_during_call"
-    const val BEHAVIOR_WHEN_MINIMIZED = "behavior_when_minimized"
     const val REPEAT_MODE = "repeat_mode"
 
     // SponsorBlock
@@ -91,7 +88,6 @@ object PreferenceKeys {
 
     // Notifications
     const val NOTIFICATION_ENABLED = "notification_toggle"
-    const val SHOW_STREAM_THUMBNAILS = "show_stream_thumbnails"
     const val SHORTS_NOTIFICATIONS = "shorts_notifications"
     const val CHECKING_FREQUENCY = "checking_frequency"
     const val REQUIRED_NETWORK = "required_network"
@@ -125,7 +121,6 @@ object PreferenceKeys {
     const val INCLUDE_TIMESTAMP_IN_BACKUP_FILENAME = "include_timestamp_in_filename"
 
     // History
-    const val WATCH_HISTORY_SIZE = "watch_history_size"
     const val SELECTED_HISTORY_STATUS_FILTER = "filter_history_status"
 
     // Internally saved data / not a preference

@@ -207,24 +207,6 @@
         <item>metered</item>
     </string-array>
 
-    <string-array name="historySize">
-        <item>20</item>
-        <item>50</item>
-        <item>100</item>
-        <item>150</item>
-        <item>200</item>
-        <item>@string/unlimited</item>
-    </string-array>
-
-    <string-array name="historySizeValues">
-        <item>20</item>
-        <item>50</item>
-        <item>100</item>
-        <item>150</item>
-        <item>200</item>
-        <item>unlimited</item>
-    </string-array>
-
     <string-array name="playlistSortingOptions">
         <item>@string/creation_date</item>
         <item>@string/creation_date_reversed</item>
@@ -329,17 +311,5 @@
         <item>@string/category_filler</item>
         <item>@string/category_music_offtopic</item>
         <item>@string/category_preview</item>
-    </string-array>
-
-    <string-array name="onMinimize">
-        <item>@string/picture_in_picture</item>
-        <item>@string/pause</item>
-        <item>@string/none</item>
-    </string-array>
-
-    <string-array name="onMinimizeValues">
-        <item>pip</item>
-        <item>pause</item>
-        <item>none</item>
     </string-array>
 </resources>

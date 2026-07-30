@@ -13,7 +13,6 @@ import com.github.libretube.R
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.ui.dialogs.NavBarItem
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.android.material.navigation.NavigationBarView
 
 object NavBarHelper {
 
@@ -73,16 +72,6 @@ object NavBarHelper {
      * @return Id of the start fragment
      */
     fun applyNavBarStyle(bottomNav: BottomNavigationView): Int {
-        val labelVisibilityMode = when (
-            PreferenceHelper.getString(PreferenceKeys.LABEL_VISIBILITY, "selected")
-        ) {
-            "always" -> NavigationBarView.LABEL_VISIBILITY_LABELED
-            "selected" -> NavigationBarView.LABEL_VISIBILITY_SELECTED
-            "never" -> NavigationBarView.LABEL_VISIBILITY_UNLABELED
-            else -> NavigationBarView.LABEL_VISIBILITY_AUTO
-        }
-        bottomNav.labelVisibilityMode = labelVisibilityMode
-
         val navBarItems = getNavBarItemPreference(bottomNav.context)
         val startFragmentId = getStartFragmentId(bottomNav.context)
 

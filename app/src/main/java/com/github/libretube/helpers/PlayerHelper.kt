@@ -251,18 +251,6 @@ object PlayerHelper {
             false
         )
 
-    private val behaviorWhenMinimized
-        get() = PreferenceHelper.getString(
-            PreferenceKeys.BEHAVIOR_WHEN_MINIMIZED,
-            "pip"
-        )
-
-    val pipEnabled: Boolean
-        get() = behaviorWhenMinimized == "pip"
-
-    val pauseOnQuit: Boolean
-        get() = behaviorWhenMinimized == "pause"
-
     var autoPlayEnabled: Boolean
         get() = PreferenceHelper.getBoolean(
             PreferenceKeys.AUTOPLAY,
@@ -381,12 +369,6 @@ object PlayerHelper {
             .getBoolean(PreferenceKeys.AUTOPLAY_PLAYLISTS, false))
     }
 
-    private val handleAudioFocus
-        get() = !PreferenceHelper.getBoolean(
-            PreferenceKeys.ALLOW_PLAYBACK_DURING_CALL,
-            false
-        )
-
     fun getDefaultResolution(context: Context, isFullscreen: Boolean): Int? {
         var prefKey = if (NetworkHelper.isNetworkMetered(context)) {
             PreferenceKeys.DEFAULT_RESOLUTION_MOBILE
@@ -501,7 +483,7 @@ object PlayerHelper {
             .setTrackSelector(trackSelector)
             .setHandleAudioBecomingNoisy(true)
             .setLoadControl(getLoadControl())
-            .setAudioAttributes(audioAttributes, handleAudioFocus)
+            .setAudioAttributes(audioAttributes, true)
             .build()
             .apply {
                 loadPlaybackParams()

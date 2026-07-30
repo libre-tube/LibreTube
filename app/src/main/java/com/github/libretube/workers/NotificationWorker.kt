@@ -84,7 +84,7 @@ class NotificationWorker(appContext: Context, parameters: WorkerParameters) :
             withContext(Dispatchers.IO) {
                 SubscriptionHelper.getFeed(forceRefresh = true)
             }.filter { !it.isUpcoming }
-        } catch (e: Exception) {
+        } catch (_: Exception) {
             return false
         }
 
@@ -208,7 +208,7 @@ class NotificationWorker(appContext: Context, parameters: WorkerParameters) :
     }
 
     private suspend fun downloadImage(url: String?): Bitmap? {
-        return if (PreferenceHelper.getBoolean(PreferenceKeys.SHOW_STREAM_THUMBNAILS, false)) {
+        return if (PreferenceHelper.getBoolean(PreferenceKeys.DATA_SAVER_MODE, false)) {
             ImageHelper.getImage(applicationContext, url)
         } else {
             null
