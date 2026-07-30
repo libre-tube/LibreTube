@@ -1039,7 +1039,9 @@ class PlayerFragment : Fragment(R.layout.fragment_player), CustomPlayerCallback 
                     SbSkipOptions.MANUAL
                 ) || autoSkipTemporarilyDisabled
             ) {
-                playerBackgroundBinding.sbSkipBtn.isVisible = true
+                if (!PictureInPictureCompat.isInPictureInPictureMode(requireActivity())) {
+                    playerBackgroundBinding.sbSkipBtn.isVisible = true
+                }
                 playerBackgroundBinding.sbSkipBtn.setOnClickListener {
                     playerController.seekTo((segment.segmentStartAndEnd.second * 1000f).toLong())
                     segment.skipped = true
@@ -1339,6 +1341,7 @@ class PlayerFragment : Fragment(R.layout.fragment_player), CustomPlayerCallback 
             disableController()
 
             binding.player.updateCurrentSubtitle(null)
+            playerBackgroundBinding.sbSkipBtn.isGone = true
 
             openOrCloseFullscreenDialog(true)
             pipActivity = activity
