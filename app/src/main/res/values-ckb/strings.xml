@@ -154,7 +154,7 @@
     <string name="category_filler">ڕێگریکردنی گاڵتەجاری/نوکتەکان</string>
     <string name="category_music_offtopic">میوزیک: کە پەیوەندی نییە بە میوزیکەوە</string>
     <string name="category_preview">پێشبینین/لێدانەوە</string>
-    <string name="color_accent">ڕەنگ</string>
+    <string name="color_accent">لەهجە</string>
     <string name="color_red">سوور</string>
     <string name="color_purple">ئەرخەوانی</string>
     <string name="material_you">ماتریاڵی نوێ</string>
@@ -502,8 +502,8 @@
     <string name="time_in_minutes">ماوە بە خولەک</string>
     <string name="no_segments_found">هیچ نیشانەکراوێک بەردەست نیە بۆ ئەم ڤیدیۆییە.</string>
     <string name="external_download_provider">دابینکەری دابەزاندنی دەرەکی</string>
-    <string name="external_download_provider_summary">"ناوی پاکێجی ئەو ئەپە بنووسە کە دەتەوێت بۆ دابەزاندنی ڤیدیۆ بەکاری بهێنیت.  بۆ بەکارهێنانی دابەزاندنی ناوەکی LibreTube بە بەتاڵی بهێڵەرەوە."</string>
-    <string name="pip">PiP</string>
+    <string name="external_download_provider_summary">ناوی پاکێجی ئەو ئەپە بنووسە کە دەتەوێت بۆ دابەزاندنی ڤیدیۆ بەکاری بهێنیت. بۆ بەکارهێنانی دابەزاندنی ناوەکی LibreTube بە بەتاڵی بهێڵەرەوە.</string>
+    <string name="pip">وێنە لە وێنەدا</string>
     <string name="screenshot">گرتەی شاشە</string>
     <string name="local_stream_extraction">ستریمی ناوخۆیی</string>
     <string name="local_stream_extraction_summary">وەرگرتنی زانیاری ڤیدیۆ ڕاستەوخۆ لە یوتوبەوە بەبێ بەکارهێنانی Piped.</string>
@@ -530,4 +530,45 @@
     <string name="full_local_mode">دۆخی تەواو ناوخۆیی</string>
     <string name="full_local_mode_desc">وەرگرتنی داتاکان ڕاستەخۆ لە یوتوبەوە، بەبێ بەکارهێنانی Piped.</string>
     <string name="authentication">ڕێگەپێدان</string>
+    <string name="createNewPlaylist">پلەیلیستی نوێ دروست بکە</string>
+    <string name="category_hook_summary">بۆ ئەو گرێیە چیرۆکییانەی کە سەرنجی بینەر ڕادەکێشن (زۆرجار وەک یەکەم دیمەن)، لە ڕێگەی ئاماژەدان یان باسکردنی ڕووداوەکانی بەشەکانی دواتری هەمان ڤیدیۆ یان ئەڵقەکانی داهاتووی زنجیرەکە</string>
+    <string name="show_updates_summary">هەر جارێک ئەپەکە دەکرێتەوە، بە شێوەیەکی ئۆتۆماتیکی نوێکاری بپشکنە.</string>
+    <string name="checking_frequency_15_minutes">15 خولەک</string>
+    <string name="checking_frequency_30_minutes">30 خولەک</string>
+    <string name="checking_frequency_60_minutes">60 خولەک</string>
+    <string name="checking_frequency_2_hours">2 کاتژمێر</string>
+    <string name="checking_frequency_6_hours">6 کاتژمێر</string>
+    <string name="checking_frequency_12_hours">12 کاتژمێڕ</string>
+    <string name="checking_frequency_1_day">1 ڕۆژ</string>
+    <string name="sort_channel">ناوی کەناڵ</string>
+    <string name="sort_size">قەبارە</string>
+    <string name="backup_creation_success">پاشکۆکردنەکە بە سەرکەوتوویی تەواو بوو</string>
+    <string name="backup_creation_failed">شکستی هێنا لە دروستکردنی پاشەکەوت</string>
+    <string name="playback_pitch_semitone_error_input">بەها دەبێت لە نێوان -%1$.1f (کەمترین) و %1$.1f (زۆرترین) بێت</string>
+    <string name="courses">خولەکان</string>
+    <string name="unsubscribe_snackbar_message">بە سەرکەوتوویی بەشداریکردن لە %1$s هەڵوەشایەوە</string>
+    <string name="ungrouped_channels">بێ گرووپ</string>
+    <string name="ungrouped_channels_with_count">بێ گرووپ (%1$d)</string>
+    <string name="screenshot_saved">وێنەی شاشە هەڵگیراوە</string>
+    <string name="delete_playlist_include_vidoes">هەروەها هەموو ڤیدیۆکان لە پلەیلیستەکە بسڕەوە؟</string>
+    <plurals name="minutes_left">
+        <item quantity="one">%d خولەک ماوە</item>
+    </plurals>
+    <string name="gaming">یاریکردن</string>
+    <string name="podcasts">پۆدکاستەکان</string>
+    <string name="trailers">ترەیلەرەکان</string>
+    <string name="music">مووزیک</string>
+    <string name="include_timestamp_in_filename">مۆری کات لە ناوی فایلەکەدا دابنێ</string>
+    <string name="did_you_mean">مەبەستت بوو:</string>
+    <string name="showing_results_for">پیشاندانی ئەنجامەکان بۆ:</string>
+    <string name="long_press_fast_forward">خێرا بەرەو پێشەوە لەسەر پەستانی درێژ</string>
+    <string name="long_press_fast_forward_summary">ڤیدیۆ بە خێرایی دوو هێندە لێبدە لەکاتی لێدان و ڕاگرتنی شاشەکە.</string>
+    <string name="resume_all">دابەزاندنەکان دەستپێبکەرەوە</string>
+    <string name="comment_verified">پشتڕاستکراوەتەوە</string>
+    <string name="comment_pinned">پین کراوە</string>
+    <string name="category_hook">قولاب/سڵاوکردن</string>
+    <plurals name="sleep_timer_chip_minutes">
+        <item quantity="one">d% خولەک</item>
+        <item quantity="other">d% خولەک</item>
+    </plurals>
 </resources>
