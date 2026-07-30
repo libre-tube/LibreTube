@@ -4,16 +4,20 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.content.pm.ActivityInfo
+import android.content.res.Resources
 import android.net.Uri
 import android.os.Looper
 import android.util.Base64
 import android.view.accessibility.CaptioningManager
+import androidx.annotation.DrawableRes
 import androidx.annotation.OptIn
 import androidx.annotation.StringRes
 import androidx.core.app.PendingIntentCompat
 import androidx.core.app.RemoteActionCompat
 import androidx.core.content.getSystemService
+import androidx.core.content.res.ResourcesCompat
 import androidx.core.graphics.drawable.IconCompat
+import androidx.core.graphics.drawable.toBitmap
 import androidx.core.net.toUri
 import androidx.media3.common.AudioAttributes
 import androidx.media3.common.C
@@ -406,7 +410,7 @@ object PlayerHelper {
 
     private fun getRemoteAction(
         activity: Activity,
-        id: Int,
+        icon: IconCompat,
         @StringRes title: Int,
         event: PlayerEvent
     ): RemoteActionCompat {
@@ -417,9 +421,14 @@ object PlayerHelper {
             PendingIntentCompat.getBroadcast(activity, event.ordinal, intent, 0, false)!!
 
         val text = activity.getString(title)
-        val icon = IconCompat.createWithResource(activity, id)
-
         return RemoteActionCompat(icon, text, text, pendingIntent)
+    }
+
+    private fun seekIconWithSpeed(resources: Resources, @DrawableRes resourceId: Int): IconCompat {
+        val textSize = 15 * resources.displayMetrics.density
+        val bitmap = ResourcesCompat.getDrawable(resources, resourceId, null)!!.toBitmap()
+        ImageHelper.insertText(bitmap, seekIncrement.div(1000).toString(), 0.5f, 0.65f, textSize)
+        return IconCompat.createWithBitmap(bitmap)
     }
 
     /**
@@ -428,35 +437,36 @@ object PlayerHelper {
     fun getPiPModeActions(activity: Activity, isPlaying: Boolean): List<RemoteActionCompat> {
         val audioModeAction = getRemoteAction(
             activity,
-            R.drawable.ic_headphones,
+            IconCompat.createWithResource(activity, R.drawable.ic_headphones),
             R.string.background_mode,
             PlayerEvent.Background
         )
 
+
         val rewindAction = getRemoteAction(
             activity,
-            R.drawable.ic_rewind,
+            seekIconWithSpeed(activity.resources, R.drawable.ic_rewind),
             R.string.rewind,
             PlayerEvent.Rewind
         )
 
         val playPauseAction = getRemoteAction(
             activity,
-            if (isPlaying) R.drawable.ic_pause else R.drawable.ic_play,
+            IconCompat.createWithResource(activity, if (isPlaying) R.drawable.ic_pause else R.drawable.ic_play),
             if (isPlaying) R.string.resume else R.string.pause,
             PlayerEvent.PlayPause
         )
 
         val skipNextAction = getRemoteAction(
             activity,
-            R.drawable.ic_next,
+            IconCompat.createWithResource(activity, R.drawable.ic_next),
             R.string.play_next,
             PlayerEvent.Next
         )
 
         val forwardAction = getRemoteAction(
             activity,
-            R.drawable.ic_forward,
+            seekIconWithSpeed(activity.resources, R.drawable.ic_forward),
             R.string.forward,
             PlayerEvent.Forward
         )

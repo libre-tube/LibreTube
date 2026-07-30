@@ -2,7 +2,10 @@ package com.github.libretube.helpers
 
 import android.content.Context
 import android.graphics.Bitmap
+import android.graphics.Canvas
 import android.graphics.Color
+import android.graphics.Paint
+import android.graphics.Rect
 import android.net.Uri
 import android.os.storage.StorageManager
 import android.widget.ImageView
@@ -129,18 +132,15 @@ object ImageHelper {
         return imageLoader.execute(request).image?.toBitmap()
     }
 
-    /**
-     * Get a squared bitmap with the same width and height from a bitmap
-     * @param bitmap The bitmap to resize
-     */
-    fun getSquareBitmap(bitmap: Bitmap): Bitmap {
-        val newSize = minOf(bitmap.width, bitmap.height)
-        return Bitmap.createBitmap(
-            bitmap,
-            (bitmap.width - newSize) / 2,
-            (bitmap.height - newSize) / 2,
-            newSize,
-            newSize
-        )
+    fun insertText(bitmap: Bitmap, text: String, posX: Float, posY: Float, fontSize: Float) {
+        val canvas = Canvas(bitmap)
+
+        canvas.drawBitmap(bitmap, null, Rect(0, 0, bitmap.width, bitmap.height), null)
+        canvas.drawText(text, bitmap.width * posX, bitmap.height * posY, Paint().apply {
+            style = Paint.Style.FILL
+            textSize = fontSize
+            color = Color.WHITE
+            textAlign = Paint.Align.CENTER
+        })
     }
 }
