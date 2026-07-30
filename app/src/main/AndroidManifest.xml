@@ -46,8 +46,24 @@
 
         <activity
             android:name=".ui.activities.SettingsActivity"
+            android:exported="true"
+            android:launchMode="singleTop"
             android:label="@string/settings"
-            android:screenOrientation="locked" />
+            android:screenOrientation="locked">
+
+            <!-- OIDC callbacks -->
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="${applicationId}" />
+                <data android:host="login_callback" />
+                <data android:host="delete_callback" />
+            </intent-filter>
+
+        </activity>
 
         <activity
             android:name=".ui.activities.AboutActivity"
@@ -404,7 +420,7 @@
             android:foregroundServiceType="mediaPlayback">
 
             <intent-filter>
-                <action android:name="androidx.media3.session.MediaSessionService"/>
+                <action android:name="androidx.media3.session.MediaSessionService" />
             </intent-filter>
 
         </service>
@@ -416,7 +432,7 @@
             android:foregroundServiceType="mediaPlayback">
 
             <intent-filter>
-                <action android:name="androidx.media3.session.MediaSessionService"/>
+                <action android:name="androidx.media3.session.MediaSessionService" />
             </intent-filter>
 
         </service>

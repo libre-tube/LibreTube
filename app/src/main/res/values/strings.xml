@@ -560,6 +560,7 @@
     <string name="sync_type_summary_libretube">Store playlists and subscriptions data on LibreTube\'s sync server (%1$s). This allows you to log in to your account at any other device to have access to your subscriptions and playlists. Privacy Disclaimer: User data is pseudonymized on server side, but not end-to-end encrypted. By choice, you can also host your own version of the server, but usually the official server should be just fine.</string>
     <string name="sync_type_summary_piped">Experts only, deprecated:\nStore playlists and subscriptions data on Piped (%1$s). As Piped doesn\'t have any public instances anymore, you have to be hosting your own Piped instance.</string>
     <string name="switch_sync_type_warning">If you previously used a different sync type, please take a backup of your subscriptions and playlists first. You can then switch the sync type in the instance settings and re-import your data from the backup.</string>
+    <string name="oidc_login">Continue with OIDC</string>
 
     <!-- Notification channel strings -->
     <string name="download_channel_name">Download Service</string>

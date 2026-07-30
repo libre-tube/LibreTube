@@ -28,6 +28,7 @@ class LibreTubeSyncServerUserDataRepository : UserDataRepository {
     override var requiresLogin: Boolean = true
 
     private val api get() = RetrofitInstance.libretubeSyncServerApi
+    private val baseUrl get() = RetrofitInstance.libretubeSyncServerUrl
 
     private suspend fun <T> tryHttpOrRaiseError(block: suspend () -> T): T {
         try {
@@ -67,6 +68,11 @@ class LibreTubeSyncServerUserDataRepository : UserDataRepository {
             )
         }
     }
+
+    override fun getOidcLoginUrl(redirectUrl: String): String =
+        "$baseUrl/v1/account/oidc/authenticate?redirect_url=$redirectUrl"
+    override fun getOidcDeleteAccountUrl(redirectUrl: String): String =
+        "$baseUrl/v1/account/oidc/delete?redirect_url=$redirectUrl"
 
     override suspend fun subscribe(
         channelId: String,

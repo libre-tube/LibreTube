@@ -2,13 +2,17 @@ package com.github.libretube.ui.dialogs
 
 import android.app.Dialog
 import android.content.DialogInterface
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import androidx.core.net.toUri
 import androidx.core.os.bundleOf
+import androidx.core.view.isVisible
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.setFragmentResult
 import androidx.lifecycle.lifecycleScope
+import com.github.libretube.BuildConfig
 import com.github.libretube.R
 import com.github.libretube.constants.IntentData
 import com.github.libretube.databinding.DialogDeleteAccountBinding
@@ -24,6 +28,20 @@ import kotlinx.coroutines.withContext
 class DeleteAccountDialog : DialogFragment() {
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val binding = DialogDeleteAccountBinding.inflate(layoutInflater)
+
+        @Suppress("DEPRECATION")
+        val oidcDeleteUrl =
+            UserDataRepositoryHelper.userDataRepository.getOidcDeleteAccountUrl("${BuildConfig.APPLICATION_ID}://delete_callback")
+        binding.oidcLogin.isVisible = oidcDeleteUrl != null
+
+        binding.oidcLogin.setOnClickListener {
+            val intent = Intent().apply {
+                action = Intent.ACTION_VIEW
+                data = oidcDeleteUrl?.toUri()
+            }
+            activity?.startActivity(intent)
+            dismiss()
+        }
 
         return MaterialAlertDialogBuilder(requireContext())
             .setView(binding.root)
