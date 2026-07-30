@@ -155,7 +155,7 @@ class InstanceSettings : BasePreferenceFragment() {
         }
     }
 
-    private fun toggleAuthAccountActionsUI(hasAuthSupport: Boolean) {
+    fun toggleAuthAccountActionsUI(hasAuthSupport: Boolean) {
         val loggedIn = PreferenceHelper.getToken().isNotBlank()
 
         findPreference<Preference>(PreferenceKeys.LOGIN_REGISTER)?.isVisible = !loggedIn && hasAuthSupport
