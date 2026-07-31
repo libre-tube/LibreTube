@@ -571,4 +571,5 @@
     <string name="resume_all">Letöltések folytatása</string>
     <string name="comment_verified">Ellenőrzött</string>
     <string name="comment_pinned">Kitűzött</string>
+    <string name="courses">Kurzusok</string>
 </resources>
