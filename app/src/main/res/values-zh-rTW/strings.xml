@@ -568,4 +568,5 @@
     <string name="resume_all">繼續下載</string>
     <string name="comment_verified">已驗證</string>
     <string name="comment_pinned">已釘選</string>
+    <string name="courses">課程</string>
 </resources>
