@@ -568,7 +568,7 @@
     <string name="ungrouped_channels_with_count">Qruplaşdırılmayan (%1$d)</string>
     <string name="long_press_fast_forward">Uzun basanda sürətli irəliyə</string>
     <string name="long_press_fast_forward_summary">Ekrana toxunub və saxlayarkən videonu ikiqat sürətlə oynat.</string>
-    <string name="resume_all">Yükləmələri Dayandır</string>
+    <string name="resume_all">Yükləmələrə Davam Et</string>
     <string name="comment_verified">Təsdiqləndi</string>
     <string name="comment_pinned">Nişanlandı</string>
     <string name="courses">Kurslar</string>
