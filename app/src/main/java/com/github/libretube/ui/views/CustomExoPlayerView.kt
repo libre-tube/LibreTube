@@ -867,11 +867,10 @@ class CustomExoPlayerView(
 
     private fun initializeGestureProgress() {
         gestureViewBinding.brightnessProgressBar.let { bar ->
-            bar.progress =
-                brightnessHelper.getBrightnessWithScale(bar.max.toFloat(), saved = true).toInt()
+            bar.progress = (brightnessHelper.savedWindowBrightness * bar.max).toInt().coerceIn(0, bar.max)
         }
         gestureViewBinding.volumeProgressBar.let { bar ->
-            bar.progress = audioHelper.getVolumeWithScale(bar.max)
+            bar.progress = (audioHelper.deviceVolume * bar.max).toInt().coerceIn(0, bar.max)
         }
     }
 
@@ -894,7 +893,7 @@ class CustomExoPlayerView(
 
         bar.incrementProgressBy(distance.toInt())
         gestureViewBinding.brightnessTextView.text = "${bar.progress.normalize(0, bar.max, 0, 100)}"
-        brightnessHelper.setBrightnessWithScale(bar.progress.toFloat(), bar.max.toFloat())
+        brightnessHelper.windowBrightness = bar.progress.toFloat() / bar.max
     }
 
     private fun updateVolume(distance: Float) {
@@ -904,7 +903,7 @@ class CustomExoPlayerView(
                 isVisible = true
                 // Volume could be changed using other mediums, sync progress
                 // bar with new value.
-                bar.progress = audioHelper.getVolumeWithScale(bar.max)
+                bar.progress = (audioHelper.deviceVolume * bar.max).toInt().coerceIn(0, bar.max)
             }
         }
 
@@ -917,7 +916,7 @@ class CustomExoPlayerView(
             )
         }
         bar.incrementProgressBy(distance.toInt())
-        audioHelper.setVolumeWithScale(bar.progress, bar.max)
+        audioHelper.deviceVolume = bar.progress.toFloat() / bar.max
 
         gestureViewBinding.volumeTextView.text = "${bar.progress.normalize(0, bar.max, 0, 100)}"
     }
