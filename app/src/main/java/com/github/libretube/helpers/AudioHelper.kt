@@ -3,27 +3,31 @@ package com.github.libretube.helpers
 import android.content.Context
 import android.media.AudioManager
 import androidx.core.content.getSystemService
-import androidx.media.AudioManagerCompat
-import com.github.libretube.extensions.normalize
+import androidx.media3.common.C
+import androidx.media3.common.audio.AudioManagerCompat
+import androidx.media3.common.util.UnstableApi
 
+@UnstableApi
 class AudioHelper(context: Context) {
     private val audioManager = context.getSystemService<AudioManager>()!!
     private val minimumVolumeIndex = AudioManagerCompat
-        .getStreamMinVolume(audioManager, AudioManager.STREAM_MUSIC)
-    private val maximumVolumeIndex = audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC)
+        .getStreamMinVolume(audioManager, C.STREAM_TYPE_MUSIC)
+    private val maximumVolumeIndex = AudioManagerCompat
+        .getStreamMaxVolume(audioManager, C.STREAM_TYPE_MUSIC)
+    private val volumeRange = maximumVolumeIndex - minimumVolumeIndex
 
-    var volume: Int
-        get() = audioManager.getStreamVolume(AudioManager.STREAM_MUSIC) - minimumVolumeIndex
-        set(value) {
-            val vol = value.coerceIn(minimumVolumeIndex, maximumVolumeIndex)
-            audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, vol, 0)
+    var deviceVolume: Float
+        get() = run {
+            val volume =
+                audioManager.getStreamVolume(AudioManager.STREAM_MUSIC) - minimumVolumeIndex
+            volume.toFloat() / volumeRange
         }
-
-    fun setVolumeWithScale(value: Int, maxValue: Int, minValue: Int = 0) {
-        volume = value.normalize(minValue, maxValue, minimumVolumeIndex, maximumVolumeIndex)
-    }
-
-    fun getVolumeWithScale(maxValue: Int, minValue: Int = 0): Int {
-        return volume.normalize(minimumVolumeIndex, maximumVolumeIndex, minValue, maxValue)
-    }
+        set(value) {
+            val vol = (value * volumeRange + minimumVolumeIndex).toInt()
+            audioManager.setStreamVolume(
+                AudioManager.STREAM_MUSIC,
+                vol.coerceIn(minimumVolumeIndex, maximumVolumeIndex),
+                0
+            )
+        }
 }

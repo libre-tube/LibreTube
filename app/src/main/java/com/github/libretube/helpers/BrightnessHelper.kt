@@ -2,63 +2,46 @@ package com.github.libretube.helpers
 
 import android.app.Activity
 import android.view.WindowManager
-import com.github.libretube.extensions.normalize
+import kotlin.math.exp
+import kotlin.math.ln
 
 class BrightnessHelper(activity: Activity) {
     private val window = activity.window
-    private val minBrightness = 0.0f
-    private val maxBrightness = 1.0f
 
     /**
-     * Wrapper for the current screen brightness
+     * Wrapper for the current screen brightness, linearly scaled between 0 and 1.
      */
-    private var brightness: Float
-        get() = window.attributes.screenBrightness
+    var windowBrightness: Float
+        get() = gammaToLinear(window.attributes.screenBrightness)
         set(value) {
             window.attributes = window.attributes.apply {
-                screenBrightness = value
+                screenBrightness = linearToGamma(value).coerceIn(0.0f, 1.0f)
             }
+
+            savedWindowBrightness = value
         }
 
     /**
      * Wrapper for the brightness saved per session.
      * Used to restore the previous fullscreen brightness when entering fullscreen.
      */
-    private var savedBrightness = window.attributes.screenBrightness
+    var savedWindowBrightness = windowBrightness
+        private set
 
     /**
      * Restore screen brightness to device system brightness.
      */
     fun resetToSystemBrightness() {
-        brightness = WindowManager.LayoutParams.BRIGHTNESS_OVERRIDE_NONE
+        window.attributes = window.attributes.apply {
+            screenBrightness = WindowManager.LayoutParams.BRIGHTNESS_OVERRIDE_NONE
+        }
     }
 
     /**
      * Set current screen brightness to saved brightness value.
      */
     fun restoreSavedBrightness() {
-        brightness = savedBrightness
-    }
-
-    /**
-     * Set current brightness value with scaling to given range.
-     */
-    fun setBrightnessWithScale(
-        value: Float,
-        maxValue: Float,
-        minValue: Float = 0.0f
-    ) {
-        brightness = linearToGamma(
-            value.normalize(
-                minValue,
-                maxValue,
-                minBrightness,
-                maxBrightness
-            )
-        )
-
-        // remember brightness to restore it when fullscreen is entered again
-        savedBrightness = brightness
+        windowBrightness = savedWindowBrightness
     }
 
     /**
@@ -71,30 +54,14 @@ class BrightnessHelper(activity: Activity) {
      */
     private fun linearToGamma(value: Float): Float {
         // original formula: (Math.exp((value*100+9.411)/19.811) / 255.0).toFloat()
-        return (Math.exp((value * LINEAR_MAX + LINEAR_OFFSET)/ SCALING_FACTOR) / GAMMA_MAX).toFloat()
+        return (exp((value * LINEAR_MAX + LINEAR_OFFSET) / SCALING_FACTOR) / GAMMA_MAX).toFloat()
     }
 
     /**
      * Inverse method for [linearToGamma]
      */
     private fun gammaToLinear(value: Float): Float {
-        return ((SCALING_FACTOR * Math.log(value * GAMMA_MAX) - LINEAR_OFFSET) / LINEAR_MAX).toFloat()
-    }
-
-    /**
-     * Get scaled brightness with given range. if [saved] is
-     * true value will be restored from the session (per played queue)
-     */
-    fun getBrightnessWithScale(
-        maxValue: Float,
-        minValue: Float = 0.0f,
-        saved: Boolean = false
-    ): Float {
-        val value = if (saved) savedBrightness else brightness
-
-        val scaled = gammaToLinear(value)
-            .normalize(minBrightness, maxBrightness, minValue, maxValue)
-        return scaled
+        return ((SCALING_FACTOR * ln(value * GAMMA_MAX) - LINEAR_OFFSET) / LINEAR_MAX).toFloat()
     }
 
     companion object {
