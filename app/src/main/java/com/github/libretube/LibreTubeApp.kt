@@ -58,7 +58,7 @@ class LibreTubeApp : Application() {
          */
         ShortcutHelper.createShortcuts(this)
 
-        NewPipeExtractorInstance.init()
+        NewPipeExtractorInstance.init(this)
     }
 
     /**
