@@ -99,8 +99,6 @@ class PlaylistFragment : DynamicLayoutManagerFragment(R.layout.fragment_playlist
         _binding = FragmentPlaylistBinding.bind(view)
         super.onViewCreated(view, savedInstanceState)
 
-        binding.playlistProgress.isVisible = true
-
         isBookmarked = runBlocking(Dispatchers.IO) {
             DatabaseHolder.Database.playlistBookmarkDao().includes(playlistId)
         }
@@ -133,6 +131,9 @@ class PlaylistFragment : DynamicLayoutManagerFragment(R.layout.fragment_playlist
     }
 
     private fun fetchPlaylist() {
+        binding.playlistError.isGone = true
+        binding.playlistProgress.isVisible = true
+        
         lifecycleScope.launch {
             val response = try {
                 withContext(Dispatchers.IO) {
@@ -140,6 +141,10 @@ class PlaylistFragment : DynamicLayoutManagerFragment(R.layout.fragment_playlist
                 }
             } catch (e: Exception) {
                 Log.e(TAG(), e.toString())
+                val binding = _binding ?: return@launch
+                binding.playlistProgress.isGone = true
+                binding.playlistError.isVisible = true
+                binding.playlistRetry.setOnClickListener { fetchPlaylist() }
                 return@launch
             }
             val binding = _binding ?: return@launch
