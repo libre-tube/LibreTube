@@ -365,7 +365,7 @@
     <string name="play_automatically">ਆਪਣੇ-ਆਪ ਚਲਾਓ</string>
     <string name="play_automatically_summary">ਚੁਣਨ \'ਤੇ ਆਪਣੇ ਆਪ ਵੀਡੀਓ ਚਲਾਉਣਾ ਸ਼ੁਰੂ ਕਰੋ</string>
     <string name="show_stream_thumbnails">ਸਟ੍ਰੀਮ ਥੰਮਨੇਲ ਦਿਖਾਓ</string>
-    <string name="show_stream_thumbnails_summary">ਨਵੀਆਂ ਸਟ੍ਰੀਮਾਂ ਦੇ ਥੰਮਨੇਲ ਵਿਖਾਓ। ਇਸਨੂੰ ਸਮਰੱਥ ਕਰਨ ਨਾਲ ਵਾਧੂ ਡੇਟਾ ਦੀ ਖਪਤ ਹੋਵੇਗੀ</string>
+    <string name="show_stream_thumbnails_summary">ਨਵੀਆਂ ਸਟ੍ਰੀਮਾਂ ਦੇ ਥੰਮਨੇਲ ਵਿਖਾਓ। ਇਸਨੂੰ ਸਮਰੱਥ ਕਰਨ ਨਾਲ ਵਾਧੂ ਡਾਟਾ ਦੀ ਖਪਤ ਹੋਵੇਗੀ</string>
     <string name="home_tab_content">ਹੋਮ ਟੈਬ ਸਮੱਗਰੀ</string>
     <string name="choose_instance">ਕਿਰਪਾ ਕਰਕੇ ਪਹਿਲਾਂ ਇੰਸਟੈਂਸ ਚੁਣੋ!</string>
     <string name="mark_as_unwatched">ਅਣਡਿੱਠੀ ਵਜੋਂ ਨਿਸ਼ਾਨਦੇਹ ਕਰੋ</string>
@@ -405,7 +405,7 @@
     <string name="unknown_audio_track_type">ਅਗਿਆਤ ਆਡੀਓ ਟਰੈਕ ਕਿਸਮ</string>
     <string name="dubbed_audio_track">ਡੱਬ ਕੀਤਾ</string>
     <string name="unknown_audio_language">ਅਗਿਆਤ ਆਡੀਓ ਭਾਸ਼ਾ</string>
-    <string name="descriptive_audio_track">ਆਡੀਓ ਡਿਸਕਰਿਪਸ਼ਨ</string>
+    <string name="descriptive_audio_track">ਆਡੀਓ ਵਿਵਰਣ</string>
     <string name="audio_track_format">%1$s - %2$s</string>
     <string name="default_or_unknown_audio_track">ਡਿਫ਼ਾਲਟ</string>
     <string name="unknown_or_no_audio">ਅਗਿਆਤ ਜਾਂ ਕੋਈ ਆਡੀਓ ਨਹੀਂ</string>
@@ -571,4 +571,5 @@
     <string name="long_press_fast_forward_summary">ਸਕ੍ਰੀਨ ਨੂੰ ਟੈਪ ਕਰਕੇ ਹੋਲਡ ਕਰਦੇ ਹੋਏ ਦੁੱਗਣੀ ਸਪੀਡ ਨਾਲ ਵੀਡੀਓ ਚਲਾਓ।</string>
     <string name="resume_all">ਡਾਊਨਲੋਡ ਰਜ਼ਿਊਮ ਕਰੋ</string>
     <string name="comment_verified">ਪ੍ਰਮਾਣਿਤ</string>
+    <string name="courses">ਕੋਰਸ</string>
 </resources>
