@@ -43,4 +43,8 @@ interface LocalPlaylistsDao {
     @Query("SELECT * FROM localPlaylistItem WHERE playlistId = :playlistId AND videoId = :videoId LIMIT 1")
     suspend fun getPlaylistVideo(playlistId: String, videoId: String): LocalPlaylistItem?
 
+
+    @Query("SELECT * FROM localPlaylistItem WHERE videoId = :videoId LIMIT 1")
+    suspend fun getVideoFromPlaylist(videoId: String): LocalPlaylistItem?
+
 }
