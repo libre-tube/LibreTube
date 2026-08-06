@@ -8,6 +8,9 @@ import com.github.libretube.R
 import com.github.libretube.databinding.ActivitySettingsBinding
 import com.github.libretube.ui.base.BaseActivity
 
+import com.github.libretube.ui.preferences.InstanceSettings
+import com.github.libretube.ui.preferences.MainSettings
+
 class SettingsActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
