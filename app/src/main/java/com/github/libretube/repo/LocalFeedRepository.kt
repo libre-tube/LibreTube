@@ -53,15 +53,18 @@ class LocalFeedRepository : FeedRepository {
         val minimumDateMillis = nowMillis - Duration.ofDays(MAX_FEED_AGE_DAYS).toMillis()
 
         val channelIds = SubscriptionHelper.getSubscriptionChannelIds()
+        // remove all channels that are no longer subscribed to, e.g. when the user switched
+        // the account
+        DatabaseHolder.Database.feedDao().deleteAllExcept(channelIds)
 
         if (!forceRefresh) {
             val feed = DatabaseHolder.Database.feedDao().getAll()
-            val oneDayAgo = nowMillis - Duration.ofDays(1).toMillis()
-
-            // only refresh if feed is empty or last refresh was more than a day ago
             val lastRefreshMillis =
                 PreferenceHelper.getLong(PreferenceKeys.LAST_LOCAL_FEED_REFRESH_TIMESTAMP_MILLIS, 0)
-            if (feed.isNotEmpty() && lastRefreshMillis > oneDayAgo) {
+            val durationSinceLastRefresh = nowMillis - lastRefreshMillis
+
+            // only refresh if feed is empty or last refresh was more than a day ago
+            if (feed.isNotEmpty() && durationSinceLastRefresh < Duration.ofDays(1).toMillis()) {
                 return feed.map(SubscriptionsFeedItem::toStreamItem)
             }
         }

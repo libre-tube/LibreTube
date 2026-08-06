@@ -11,7 +11,6 @@ import android.widget.TextView
 import androidx.preference.Preference
 import androidx.preference.PreferenceViewHolder
 import com.github.libretube.R
-import com.github.libretube.helpers.PreferenceHelper
 
 class SbSpinnerPreference(context: Context, attrs: AttributeSet) : Preference(context, attrs) {
     private lateinit var adapter: ArrayAdapter<CharSequence>
@@ -40,7 +39,7 @@ class SbSpinnerPreference(context: Context, attrs: AttributeSet) : Preference(co
         spinner.onItemSelectedListener = null
 
         // Set the initial selected item
-        PreferenceHelper.getString(key, initialValue).let { selectedItem ->
+        getPersistedString(initialValue).let { selectedItem ->
             val position = getEntryValues().indexOf(selectedItem)
             spinner.setSelection(position)
         }
