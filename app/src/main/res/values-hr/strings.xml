@@ -204,4 +204,6 @@
     <string name="best_quality">Najbolje</string>
     <string name="default_subtitle_language">Jezik titlova</string>
     <string name="notifications">Obavijesti</string>
+    <string name="category_segments">Dijelovi</string>
+    <string name="category_music_offtopic">Glazba: Odjeljak „Ne-glazba”</string>
 </resources>
