@@ -11,7 +11,7 @@
     <string name="username">Nama Pengguna</string>
     <string name="register">Daftar</string>
     <string name="logout">Keluar</string>
-    <string name="cancel">Batalkan</string>
+    <string name="cancel">Batal</string>
     <string name="loggedIn">Berhasil masuk.</string>
     <string name="loggedout">Berhasil keluar.</string>
     <string name="registered">Didaftarkan. Sekarang Anda dapat berlangganan ke saluran.</string>
@@ -20,7 +20,7 @@
     <string name="downloadfailed">Unduhan Gagal.</string>
     <string name="import_from_yt">Impor langganan</string>
     <string name="notgmail">Ini untuk akun Piped Anda</string>
-    <string name="already_logged_in">Anda sudah masuk, Anda dapat keluar dari akun anda.</string>
+    <string name="already_logged_in">Anda sudah masuk, Anda dapat keluar dari akun Anda.</string>
     <string name="instances">Pilih…</string>
     <string name="customInstance">Kustom</string>
     <string name="region">Wilayah</string>
@@ -566,4 +566,7 @@
     <string name="long_press_fast_forward">Tekan lama untuk percepat</string>
     <string name="long_press_fast_forward_summary">Putar video dua kali lipat saat mengetuk dan menahan layar.</string>
     <string name="resume_all">Lanjutkan Unduhan</string>
+    <string name="courses">Kursus</string>
+    <string name="comment_pinned">Disematkan</string>
+    <string name="comment_verified">Terverifikasi</string>
 </resources>
