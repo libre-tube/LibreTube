@@ -955,8 +955,12 @@ class PlayerFragment : Fragment(R.layout.fragment_player), CustomPlayerCallback 
         }
 
         // disable the auto PiP mode for SDK >= 32
-        PictureInPictureCompat
-            .setPictureInPictureParams(requireActivity(), pipParams)
+        // wrapped in runCatching since the activity may already be finishing/destroyed
+        // at this point, which makes the system throw an IllegalStateException
+        runCatching {
+            PictureInPictureCompat
+                .setPictureInPictureParams(requireActivity(), pipParams)
+        }
 
         runCatching {
             if (fullscreenDialog.isShowing) fullscreenDialog.dismiss()
