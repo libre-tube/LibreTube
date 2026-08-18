@@ -403,14 +403,14 @@
     <string name="continue_watching">Працягнуць прагляд</string>
     <string name="dearrow">Ўключыць DeArrow</string>
     <string name="dearrow_summary">Паказвайце больш дакладныя і менш сенсацыйныя назвы і мініяцюры. Павялічвае час загрузкі</string>
-    <string name="default_or_unknown_audio_track">па змаўчанні або невядома</string>
+    <string name="default_or_unknown_audio_track">Па ўмаўчанні</string>
     <string name="unknown_or_no_audio">невядома або няма гуку</string>
     <string name="stop">Спыніць</string>
     <string name="chapters_videoHighlight">Асноўныя моманты відэа</string>
     <string name="category_highlight">Вылучыць асноўныя моманты</string>
-    <string name="dubbed_audio_track">дубляваная</string>
-    <string name="original_or_main_audio_track">арыгінальны або асноўны</string>
-    <string name="descriptive_audio_track">апісальная</string>
+    <string name="dubbed_audio_track">Дубліраваны</string>
+    <string name="original_or_main_audio_track">Арыгінал</string>
+    <string name="descriptive_audio_track">Аўдыё апісанне</string>
     <string name="visibility">Бачнасць</string>
     <string name="visibility_public">Грамадская</string>
     <string name="visibility_unlisted">Не паказваецца</string>
@@ -574,4 +574,8 @@
     <string name="ungrouped_channels_with_count">Без групы (%1$d)</string>
     <string name="long_press_fast_forward">Паскарэнне пры доўгім націску</string>
     <string name="long_press_fast_forward_summary">Прайграваць відэа на 2х пры націску і ўтрымліванні.</string>
+    <string name="courses">Курсы</string>
+    <string name="resume_all">Аднавіць загрузку</string>
+    <string name="comment_verified">Праверана</string>
+    <string name="comment_pinned">Замацавана</string>
 </resources>
