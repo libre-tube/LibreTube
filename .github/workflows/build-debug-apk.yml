@@ -1,4 +1,4 @@
-name: Build Debug APK
+name: Build Signed APK
 
 on:
   workflow_dispatch:
@@ -18,14 +18,24 @@ jobs:
           distribution: "temurin"
           cache: "gradle"
 
-      - name: Build Debug APK
-        run: ./gradlew assembleDebug --no-daemon
+      - name: Decode keystore
+        run: |
+          echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 -d > app/release-key.jks
+          cat > keystore.properties <<EOF
+          storeFile=release-key.jks
+          storePassword=${{ secrets.KEYSTORE_STORE_PASSWORD }}
+          keyAlias=${{ secrets.KEYSTORE_KEY_ALIAS }}
+          keyPassword=${{ secrets.KEYSTORE_KEY_PASSWORD }}
+          EOF
+
+      - name: Build Release APK
+        run: ./gradlew assembleRelease --no-daemon
 
       - name: Create Release
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: debug-build-${{ github.run_number }}
-          name: "Debug Build #${{ github.run_number }}"
-          body: "Build automática com as melhorias de error handling e instance fallback."
-          files: app/build/outputs/apk/debug/*.apk
-          make_latest: false
+          tag_name: release-${{ github.run_number }}
+          name: "LibreTube v31.4 - Build #${{ github.run_number }}"
+          body: "APK assinado com todas as melhorias de error handling, instance fallback e SABR."
+          files: app/build/outputs/apk/release/*.apk
+          make_latest: true
