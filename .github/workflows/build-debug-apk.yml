@@ -6,6 +6,8 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - uses: actions/checkout@v6
 
@@ -19,8 +21,11 @@ jobs:
       - name: Build Debug APK
         run: ./gradlew assembleDebug --no-daemon
 
-      - name: Upload APK
-        uses: actions/upload-artifact@v6
+      - name: Create Release
+        uses: softprops/action-gh-release@v2
         with:
-          name: LibreTube-debug
-          path: app/build/outputs/apk/debug/*.apk
+          tag_name: debug-build-${{ github.run_number }}
+          name: "Debug Build #${{ github.run_number }}"
+          body: "Build automática com as melhorias de error handling e instance fallback."
+          files: app/build/outputs/apk/debug/*.apk
+          make_latest: false
