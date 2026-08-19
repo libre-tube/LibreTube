@@ -10,6 +10,7 @@ import androidx.media3.datasource.DataSource
 import androidx.media3.datasource.DataSpec
 import com.github.libretube.player.parser.CompositeBuffer
 import com.github.libretube.player.parser.PlaybackRequest
+import com.github.libretube.player.parser.SABRException
 import com.github.libretube.player.parser.SabrClient
 import java.io.IOException
 
@@ -32,12 +33,21 @@ class SabrDataSource(
         transferStarted(dataSpec)
         val segment = try {
             sabrClient.getNextSegment(playbackRequest!!)!!
+        } catch (e: SABRException) {
+            Log.e(TAG, "SABR streaming error: ${e.userFacingMessage}", e)
+            throw IOException(e.userFacingMessage, e)
         } catch (e: Exception) {
-            Log.e(
-                SabrClient::class.java.name,
-                "open: failed to get segment ${playbackRequest!!.segment} for ${playbackRequest.format.itag}: $e"
-            )
-            throw IOException()
+            val errorMsg = buildString {
+                append("Failed to get segment")
+                if (playbackRequest != null) {
+                    append(" #${playbackRequest.segment}")
+                    append(" for itag=${playbackRequest.format.itag}")
+                    append(" at position=${playbackRequest.playerPosition}ms")
+                }
+                append(": ${e.message ?: e.javaClass.simpleName}")
+            }
+            Log.e(TAG, errorMsg, e)
+            throw IOException(errorMsg, e)
         }
 
         data = CompositeBuffer(segment.data)
@@ -78,5 +88,9 @@ class SabrDataSource(
         // e.g. for format metadata
         bytesTransferred(bytesToRead)
         return bytesToRead
+    }
+
+    companion object {
+        private const val TAG = "SabrDataSource"
     }
 }

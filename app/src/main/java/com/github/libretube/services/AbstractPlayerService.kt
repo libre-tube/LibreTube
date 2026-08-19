@@ -81,6 +81,7 @@ abstract class AbstractPlayerService : MediaLibraryService(), MediaLibrarySessio
      */
     protected var shouldHandleAutoplay = true
 
+    private var errorRetryCount = 0
     private val playerListener = object : Player.Listener {
         override fun onIsPlayingChanged(isPlaying: Boolean) {
             super.onIsPlayingChanged(isPlaying)
@@ -88,14 +89,32 @@ abstract class AbstractPlayerService : MediaLibraryService(), MediaLibrarySessio
             // Start or pause watch position timer
             if (isPlaying) {
                 watchPositionTimer.resume()
+                // Reset error retry count when playback succeeds
+                errorRetryCount = 0
             } else {
                 watchPositionTimer.pause()
             }
         }
 
         override fun onPlayerError(error: PlaybackException) {
-            // show a toast on errors
-            toastFromMainThread(error.localizedMessage.orEmpty())
+            val errorMsg = error.localizedMessage.orEmpty()
+            Log.e(TAG(), "Player error: $errorMsg", error)
+
+            // Attempt automatic retry for transient errors (up to 2 times)
+            if (errorRetryCount < MAX_ERROR_RETRIES && isTransientError(error)) {
+                errorRetryCount++
+                Log.w(TAG(), "Attempting automatic retry $errorRetryCount/$MAX_ERROR_RETRIES")
+                handler.postDelayed({
+                    try {
+                        exoPlayer?.play()
+                    } catch (e: Exception) {
+                        Log.e(TAG(), "Retry failed", e)
+                        showErrorToUser(error)
+                    }
+                }, RETRY_DELAY_MS * errorRetryCount)
+            } else {
+                showErrorToUser(error)
+            }
         }
 
         override fun onPlaybackStateChanged(playbackState: Int) {
@@ -108,8 +127,51 @@ abstract class AbstractPlayerService : MediaLibraryService(), MediaLibrarySessio
 
                 Player.STATE_READY -> {
                     isTransitioning = false
+                    errorRetryCount = 0
                 }
             }
+        }
+    }
+
+    private fun isTransientError(error: PlaybackException): Boolean {
+        val errorMsg = error.localizedMessage.orEmpty().lowercase()
+        return errorMsg.contains("source error") ||
+                errorMsg.contains("ioexception") ||
+                errorMsg.contains("network") ||
+                errorMsg.contains("timeout") ||
+                errorMsg.contains("connection") ||
+                errorMsg.contains("sabr") ||
+                errorMsg.contains("streaming error") ||
+                errorMsg.contains("retrying") ||
+                error.errorCode == PlaybackException.ERROR_CODE_IO_NETWORK_CONNECTION_FAILED ||
+                error.errorCode == PlaybackException.ERROR_CODE_IO_NETWORK_CONNECTION_TIMEOUT ||
+                error.errorCode == PlaybackException.ERROR_CODE_IO_UNSPECIFIED
+    }
+
+    private fun showErrorToUser(error: PlaybackException) {
+        val message = getReadableErrorMessage(error)
+        toastFromMainThread(message)
+    }
+
+    private fun getReadableErrorMessage(error: PlaybackException): String {
+        val errorMsg = error.localizedMessage.orEmpty()
+        return when {
+            errorMsg.contains("Source error", ignoreCase = true) ->
+                getString(R.string.playback_source_error)
+            errorMsg.contains("SABR", ignoreCase = true) ||
+            errorMsg.contains("streaming error", ignoreCase = true) ->
+                errorMsg.ifEmpty { getString(R.string.sabr_error_message) }
+            errorMsg.contains("network", ignoreCase = true) ||
+            errorMsg.contains("connection", ignoreCase = true) ->
+                getString(R.string.network_error_message)
+            errorMsg.contains("timeout", ignoreCase = true) ->
+                getString(R.string.timeout_error_message)
+            errorMsg.contains("attestation", ignoreCase = true) ->
+                getString(R.string.attestation_error_message)
+            errorMsg.contains("reload", ignoreCase = true) ->
+                getString(R.string.player_reload_message)
+            errorMsg.isNotEmpty() -> errorMsg
+            else -> getString(R.string.unknown_error)
         }
     }
 
@@ -527,6 +589,8 @@ abstract class AbstractPlayerService : MediaLibraryService(), MediaLibrarySessio
         private const val START_SERVICE_ACTION = "start_service_action"
         private const val STOP_SERVICE_ACTION = "stop_service_action"
         private const val RUN_PLAYER_COMMAND_ACTION = "run_player_command_action"
+        private const val MAX_ERROR_RETRIES = 2
+        private const val RETRY_DELAY_MS = 2000L
 
         val startServiceCommand = SessionCommand(START_SERVICE_ACTION, Bundle.EMPTY)
         val stopServiceCommand = SessionCommand(STOP_SERVICE_ACTION, Bundle.EMPTY)

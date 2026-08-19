@@ -34,6 +34,14 @@
     <string name="server_error">There seem to be a problem with the selected server. Try another instance.</string>
     <string name="unknown_error">Network error.</string>
     <string name="error">Something went wrong.</string>
+    <string name="playback_source_error">Playback failed. The video stream could not be loaded.</string>
+    <string name="network_error_message">Network connection error. Check your internet connection.</string>
+    <string name="timeout_error_message">Connection timed out. The server took too long to respond.</string>
+    <string name="sabr_error_message">Streaming protocol error. Retrying…</string>
+    <string name="attestation_error_message">YouTube requires verification. Retrying…</string>
+    <string name="player_reload_message">The player needs to be reloaded. Retrying…</string>
+    <string name="instance_fallback">Switched to another server due to connection issues.</string>
+    <string name="no_streams_found">No video streams found. The instance may not support this video.</string>
     <string name="empty">You have to enter a username and password.</string>
     <string name="notgmail">This is for a Piped account</string>
     <string name="defres">Video resolution</string>

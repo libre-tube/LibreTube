@@ -197,8 +197,12 @@ class SabrClient private constructor(
      */
     private val partialSegments = mutableMapOf<Int, Segment>()
 
-    /** HTTP Client for requesting UMP data. */
+    /** HTTP Client for requesting UMP data with timeouts and retry. */
     private val client: OkHttpClient = OkHttpClient.Builder()
+        .connectTimeout(15, java.util.concurrent.TimeUnit.SECONDS)
+        .readTimeout(30, java.util.concurrent.TimeUnit.SECONDS)
+        .writeTimeout(15, java.util.concurrent.TimeUnit.SECONDS)
+        .retryOnConnectionFailure(true)
         .addInterceptor { chain ->
             val request = chain.request().newBuilder()
                 .addHeader("Content-Type", CONTENT_TYPE)
@@ -424,7 +428,23 @@ class SabrClient private constructor(
         lastRequestMs = Instant.now().toEpochMilli()
         val response = client.newCall(request).execute()
         if (!response.isSuccessful) {
-            Log.e(TAG, "fetchStreamData: Failed to fetch data (${response.code})")
+            val errorBody = response.body?.string()?.take(200)
+            Log.e(TAG, "fetchStreamData: Failed to fetch data (${response.code}): $errorBody")
+            response.close()
+
+            // Retry on server errors (5xx) or rate limiting (429)
+            if (response.code in 500..599 || response.code == 429) {
+                Log.w(TAG, "fetchStreamData: Retrying after ${SABR_RETRY_DELAY_MS}ms (HTTP ${response.code})")
+                delay(SABR_RETRY_DELAY_MS)
+                val retryResponse = client.newCall(request).execute()
+                if (!retryResponse.isSuccessful) {
+                    Log.e(TAG, "fetchStreamData: Retry failed (${retryResponse.code})")
+                    retryResponse.close()
+                    throw Exception("HTTP request failed: ${response.code} (retry also failed: ${retryResponse.code})")
+                }
+                return retryResponse.body.bytes()
+            }
+
             throw Exception("HTTP request failed: ${response.code}")
         }
 
@@ -604,7 +624,7 @@ class SabrClient private constructor(
                 val error = SabrError.parseFrom(part.data)
                 Log.e(TAG, "processPart: Received SABR error: ${error.type} (${error.code})")
                 fatalError = error
-                throw Exception("SABR error: ${error.type}")
+                throw SABRException(error.type, error.code)
             }
 
             else -> {
@@ -629,5 +649,6 @@ class SabrClient private constructor(
         private const val ENCODING = "identity"
         private const val ACCEPT = "application/vnd.yt-ump"
         private const val USER_AGENT = "com.google.visionos.youtube/1.02(RealityDevice14,1; U; CPU visionOS 25_6_0 like Mac OS X; GB)";
+        private const val SABR_RETRY_DELAY_MS = 1500L
     }
 }

@@ -219,6 +219,7 @@ class PlayerFragment : Fragment(R.layout.fragment_player), CustomPlayerCallback 
 
     private var bufferingTimeoutTask: Runnable? = null
 
+    private var errorRetryCount = 0
     private val playerListener = object : Player.Listener {
         override fun onIsPlayingChanged(isPlaying: Boolean) {
             PictureInPictureCompat.setPictureInPictureParams(requireActivity(), pipParams)
@@ -327,14 +328,30 @@ class PlayerFragment : Fragment(R.layout.fragment_player), CustomPlayerCallback 
         }
 
         /**
-         * Catch player errors to prevent the app from stopping
+         * Catch player errors to prevent the app from stopping.
+         * Implements smart retry with exponential backoff for transient errors.
          */
         override fun onPlayerError(error: PlaybackException) {
             super.onPlayerError(error)
-            try {
-                playerController.play()
-            } catch (e: Exception) {
-                e.printStackTrace()
+            val errorMsg = error.localizedMessage.orEmpty()
+
+            if (isTransientPlayerError(error) && errorRetryCount < MAX_PLAYER_ERROR_RETRIES) {
+                errorRetryCount++
+                val delayMs = RETRY_BASE_DELAY_MS * errorRetryCount
+                android.util.Log.w(
+                    PLAYER_TAG,
+                    "Transient player error (attempt $errorRetryCount/$MAX_PLAYER_ERROR_RETRIES): $errorMsg"
+                )
+                handler.postDelayed({
+                    try {
+                        playerController.play()
+                    } catch (e: Exception) {
+                        android.util.Log.e(PLAYER_TAG, "Retry failed", e)
+                    }
+                }, delayMs)
+            } else {
+                android.util.Log.e(PLAYER_TAG, "Player error (non-retryable): $errorMsg", error)
+                errorRetryCount = 0
             }
         }
 
@@ -1459,5 +1476,26 @@ class PlayerFragment : Fragment(R.layout.fragment_player), CustomPlayerCallback 
 
     override fun isVideoLive(): Boolean {
         return ::streams.isInitialized && streams.isLive
+    }
+
+    private fun isTransientPlayerError(error: PlaybackException): Boolean {
+        val errorMsg = error.localizedMessage.orEmpty().lowercase()
+        return errorMsg.contains("source error") ||
+                errorMsg.contains("ioexception") ||
+                errorMsg.contains("network") ||
+                errorMsg.contains("timeout") ||
+                errorMsg.contains("connection") ||
+                errorMsg.contains("sabr") ||
+                errorMsg.contains("streaming error") ||
+                errorMsg.contains("retrying") ||
+                error.errorCode == PlaybackException.ERROR_CODE_IO_NETWORK_CONNECTION_FAILED ||
+                error.errorCode == PlaybackException.ERROR_CODE_IO_NETWORK_CONNECTION_TIMEOUT ||
+                error.errorCode == PlaybackException.ERROR_CODE_IO_UNSPECIFIED
+    }
+
+    companion object {
+        private const val PLAYER_TAG = "PlayerFragment"
+        private const val MAX_PLAYER_ERROR_RETRIES = 2
+        private const val RETRY_BASE_DELAY_MS = 2000L
     }
 }

@@ -20,6 +20,7 @@ import androidx.media3.extractor.text.DefaultSubtitleParserFactory
 import androidx.media3.extractor.text.SubtitleExtractor
 import com.github.libretube.R
 import com.github.libretube.api.MediaServiceRepository
+import com.github.libretube.api.InstanceSwitchedException
 import com.github.libretube.api.SubscriptionHelper
 import com.github.libretube.api.obj.Segment
 import com.github.libretube.api.obj.Streams
@@ -140,7 +141,19 @@ open class OnlinePlayerService : AbstractPlayerService() {
                     MediaServiceRepository.instance.getStreams(videoId).let {
                         DeArrowUtil.deArrowStreams(it, videoId)
                     }
-                }  catch (e: Exception) {
+                } catch (e: InstanceSwitchedException) {
+                    // Instance was switched, retry with the new instance
+                    Log.w(TAG(), "Instance switched to ${e.newInstanceUrl}, retrying stream fetch")
+                    try {
+                        MediaServiceRepository.instance.getStreams(videoId).let {
+                            DeArrowUtil.deArrowStreams(it, videoId)
+                        }
+                    } catch (retryException: Exception) {
+                        Log.e(TAG(), "Retry after instance switch failed: ${retryException.message}")
+                        toastFromMainDispatcher(retryException.localizedMessage.orEmpty())
+                        return@withContext null
+                    }
+                } catch (e: Exception) {
                     Log.e(TAG(), e.stackTraceToString())
                     toastFromMainDispatcher(e.localizedMessage.orEmpty())
                     return@withContext null
@@ -321,7 +334,8 @@ open class OnlinePlayerService : AbstractPlayerService() {
             }
             // NO STREAM FOUND
             else -> {
-                toastFromMainThread(R.string.unknown_error)
+                Log.w(TAG(), "No stream sources available for video $videoId")
+                toastFromMainThread(R.string.no_streams_found)
                 return
             }
         }

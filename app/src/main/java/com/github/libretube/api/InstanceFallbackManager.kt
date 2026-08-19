@@ -1,0 +1,151 @@
+package com.github.libretube.api
+
+import android.util.Log
+import com.github.libretube.constants.PreferenceKeys
+import com.github.libretube.db.DatabaseHolder
+import com.github.libretube.helpers.PreferenceHelper
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
+import okhttp3.OkHttpClient
+import okhttp3.Request
+import java.util.concurrent.TimeUnit
+
+/**
+ * Manages automatic fallback between Piped instances when the primary instance fails.
+ *
+ * When a streaming or API request fails, this manager:
+ * 1. Marks the failed instance as potentially down
+ * 2. Tries alternative instances from the user's custom instance list
+ * 3. Returns the first working instance
+ * 4. Updates the preference to use the working instance for future requests
+ */
+object InstanceFallbackManager {
+    private const val TAG = "InstanceFallback"
+    private const val HEALTH_CHECK_TIMEOUT_SECONDS = 8L
+    private const val MAX_FALLBACK_ATTEMPTS = 3
+    private const val INSTANCE_COOLDOWN_MS = 60_000L // 1 minute cooldown before retrying a failed instance
+
+    private data class InstanceHealth(
+        val apiUrl: String,
+        var lastFailureTime: Long = 0L,
+        var failureCount: Int = 0,
+    )
+
+    private val instanceHealthMap = mutableMapOf<String, InstanceHealth>()
+
+    private val healthCheckClient = OkHttpClient.Builder()
+        .connectTimeout(HEALTH_CHECK_TIMEOUT_SECONDS, TimeUnit.SECONDS)
+        .readTimeout(HEALTH_CHECK_TIMEOUT_SECONDS, TimeUnit.SECONDS)
+        .build()
+
+    /**
+     * Get the current fetch instance, checking if it's healthy first.
+     * If the current instance is unhealthy, fall back to a working one.
+     */
+    suspend fun getHealthyInstance(): String = withContext(Dispatchers.IO) {
+        val currentInstance = PreferenceHelper.getString(PreferenceKeys.FETCH_INSTANCE, RetrofitInstance.PIPED_API_URL)
+
+        // Check if current instance is healthy or in cooldown
+        val currentHealth = instanceHealthMap[currentInstance]
+        if (currentHealth != null && isInstanceInCooldown(currentHealth)) {
+            Log.w(TAG, "Current instance $currentInstance is in cooldown, searching for fallback")
+            val fallback = findWorkingInstance(currentInstance)
+            if (fallback != null) {
+                return@withContext fallback
+            }
+        }
+
+        // Try to health-check the current instance
+        if (!isInstanceReachable(currentInstance)) {
+            markInstanceFailed(currentInstance)
+            Log.w(TAG, "Current instance $currentInstance is unreachable, searching for fallback")
+            val fallback = findWorkingInstance(currentInstance)
+            if (fallback != null) {
+                return@withContext fallback
+            }
+        }
+
+        currentInstance
+    }
+
+    /**
+     * Mark the current instance as failed and switch to a fallback if available.
+     * Returns the new instance URL, or null if no fallback was found.
+     */
+    suspend fun onInstanceFailed(failedApiUrl: String): String? = withContext(Dispatchers.IO) {
+        markInstanceFailed(failedApiUrl)
+        findWorkingInstance(failedApiUrl)
+    }
+
+    /**
+     * Reset health status for an instance (e.g. when the user manually selects it).
+     */
+    fun resetInstanceHealth(apiUrl: String) {
+        instanceHealthMap.remove(apiUrl)
+    }
+
+    private fun markInstanceFailed(apiUrl: String) {
+        val health = instanceHealthMap.getOrPut(apiUrl) { InstanceHealth(apiUrl) }
+        health.lastFailureTime = System.currentTimeMillis()
+        health.failureCount++
+        Log.w(TAG, "Instance $apiUrl marked as failed (failures: ${health.failureCount})")
+    }
+
+    private fun isInstanceInCooldown(health: InstanceHealth): Boolean {
+        return System.currentTimeMillis() - health.lastFailureTime < INSTANCE_COOLDOWN_MS
+    }
+
+    /**
+     * Find a working instance from the list of custom instances,
+     * excluding the failed instance.
+     */
+    private suspend fun findWorkingInstance(excludeApiUrl: String): String? {
+        val customInstances = DatabaseHolder.Database.customInstanceDao().getAll()
+
+        // Filter out the failed instance and instances in cooldown
+        val candidates = customInstances
+            .map { it.apiUrl }
+            .filter { it != excludeApiUrl }
+            .filter { apiUrl ->
+                val health = instanceHealthMap[apiUrl]
+                health == null || !isInstanceInCooldown(health)
+            }
+            .take(MAX_FALLBACK_ATTEMPTS)
+
+        for (apiUrl in candidates) {
+            if (isInstanceReachable(apiUrl)) {
+                Log.i(TAG, "Found working fallback instance: $apiUrl")
+                // Update the preference to use this instance
+                PreferenceHelper.putString(PreferenceKeys.FETCH_INSTANCE, apiUrl)
+                RetrofitInstance.apiLazyMgr.reset()
+                return apiUrl
+            } else {
+                markInstanceFailed(apiUrl)
+            }
+        }
+
+        Log.e(TAG, "No working fallback instance found")
+        return null
+    }
+
+    /**
+     * Check if a Piped instance is reachable by hitting its /config endpoint.
+     */
+    private fun isInstanceReachable(apiUrl: String): Boolean {
+        return try {
+            val url = "${apiUrl.trimEnd('/')}/config"
+            val request = Request.Builder()
+                .url(url)
+                .get()
+                .build()
+            val response = healthCheckClient.newCall(request).execute()
+            val isReachable = response.isSuccessful
+            response.close()
+            Log.d(TAG, "Health check for $apiUrl: ${if (isReachable) "OK" else "FAIL (${response.code})"}")
+            isReachable
+        } catch (e: Exception) {
+            Log.d(TAG, "Health check failed for $apiUrl: ${e.message}")
+            false
+        }
+    }
+}
