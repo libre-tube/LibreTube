@@ -310,7 +310,6 @@ class CustomExoPlayerView(
         commonPlayerViewModel.isFullscreen.observe(viewLifecycleOwner) { isFullscreen ->
             updateTopBarMargin()
 
-            binding.fullscreen.isInvisible = PlayerHelper.autoFullscreenEnabled
             val fullscreenDrawable =
                 if (isFullscreen) R.drawable.ic_fullscreen_exit else R.drawable.ic_fullscreen
             binding.fullscreen.setImageResource(fullscreenDrawable)
