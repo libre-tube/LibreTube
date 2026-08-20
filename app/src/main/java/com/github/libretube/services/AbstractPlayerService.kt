@@ -101,7 +101,7 @@ abstract class AbstractPlayerService : MediaLibraryService(), MediaLibrarySessio
             Log.e(TAG(), "Player error: $errorMsg", error)
 
             // Attempt automatic retry for transient errors (up to 2 times)
-            if (errorRetryCount < MAX_ERROR_RETRIES && isTransientError(error)) {
+            if (errorRetryCount < MAX_ERROR_RETRIES && PlayerHelper.isTransientPlayerError(error)) {
                 errorRetryCount++
                 Log.w(TAG(), "Attempting automatic retry $errorRetryCount/$MAX_ERROR_RETRIES")
                 handler.postDelayed({
@@ -131,21 +131,6 @@ abstract class AbstractPlayerService : MediaLibraryService(), MediaLibrarySessio
                 }
             }
         }
-    }
-
-    private fun isTransientError(error: PlaybackException): Boolean {
-        val errorMsg = error.localizedMessage.orEmpty().lowercase()
-        return errorMsg.contains("source error") ||
-                errorMsg.contains("ioexception") ||
-                errorMsg.contains("network") ||
-                errorMsg.contains("timeout") ||
-                errorMsg.contains("connection") ||
-                errorMsg.contains("sabr") ||
-                errorMsg.contains("streaming error") ||
-                errorMsg.contains("retrying") ||
-                error.errorCode == PlaybackException.ERROR_CODE_IO_NETWORK_CONNECTION_FAILED ||
-                error.errorCode == PlaybackException.ERROR_CODE_IO_NETWORK_CONNECTION_TIMEOUT ||
-                error.errorCode == PlaybackException.ERROR_CODE_IO_UNSPECIFIED
     }
 
     private fun showErrorToUser(error: PlaybackException) {

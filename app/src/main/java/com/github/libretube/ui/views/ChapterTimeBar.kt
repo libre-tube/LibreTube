@@ -11,6 +11,7 @@ import android.os.Build
 import android.util.AttributeSet
 import android.view.View
 import androidx.core.view.marginLeft
+import androidx.media3.common.C
 import androidx.media3.common.util.UnstableApi
 import com.github.libretube.api.obj.ChapterSegment
 import com.github.libretube.extensions.dpToPx
@@ -69,7 +70,9 @@ class ChapterTimeBar(
     }
 
     private fun Long.toLength(): Int {
-        return (this * 1000f / exoPlayer!!.duration * length).toInt()
+        val duration = exoPlayer?.duration ?: return 0
+        if (duration <= 0L || duration == C.TIME_UNSET) return 0
+        return (this * 1000f / duration * length).toInt()
     }
 
     fun setChapters(chapters: List<ChapterSegment>) {

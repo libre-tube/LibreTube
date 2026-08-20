@@ -34,6 +34,7 @@ import com.google.common.util.concurrent.MoreExecutors
  */
 object BackgroundHelper {
     private val handler = Handler(Looper.getMainLooper())
+    private const val MAX_SERVICE_RETRIES = 3
 
     /**
      * Start the foreground service [OnlinePlayerService] to play in background.
@@ -77,6 +78,7 @@ object BackgroundHelper {
         context: Context,
         serviceClass: Class<*>,
         arguments: Bundle = Bundle.EMPTY,
+        retryCount: Int = 0,
         onController: (MediaController) -> Unit = {}
     ) {
         val context = context.applicationContext
@@ -102,8 +104,10 @@ object BackgroundHelper {
             // see also: https://github.com/androidx/media/issues/1096
             override fun onFailure(t: Throwable) {
                 Log.e(TAG(), t.toString())
-                handler.postDelayed(200) {
-                    startMediaService(context, serviceClass, arguments, onController)
+                if (retryCount < MAX_SERVICE_RETRIES) {
+                    handler.postDelayed(200) {
+                        startMediaService(context, serviceClass, arguments, retryCount + 1, onController)
+                    }
                 }
             }
         }, MoreExecutors.directExecutor())
@@ -129,7 +133,7 @@ object BackgroundHelper {
         arguments: Bundle = Bundle.EMPTY,
         onController: (MediaController) -> Unit = {}
     ) {
-        startMediaService(context, getCurrentPlayerServiceClass(), arguments, onController)
+        startMediaService(context, getCurrentPlayerServiceClass(), arguments, onController = onController)
     }
 
 

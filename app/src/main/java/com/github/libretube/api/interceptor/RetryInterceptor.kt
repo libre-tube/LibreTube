@@ -95,7 +95,11 @@ class RetryInterceptor(
     }
 
     private fun sleep(ms: Long) {
-        runCatching { Thread.sleep(ms) }
+        try {
+            Thread.sleep(ms)
+        } catch (_: InterruptedException) {
+            Thread.currentThread().interrupt()
+        }
     }
 
     companion object {

@@ -22,6 +22,7 @@ import androidx.core.net.toUri
 import androidx.media3.common.AudioAttributes
 import androidx.media3.common.C
 import androidx.media3.common.Format
+import androidx.media3.common.PlaybackException
 import androidx.media3.common.PlaybackParameters
 import androidx.media3.common.Player
 import androidx.media3.common.Tracks
@@ -896,5 +897,24 @@ object PlayerHelper {
 
             else -> false
         }
+    }
+
+    /**
+     * Shared logic to determine if a playback error is transient and worth retrying.
+     * Used by both [AbstractPlayerService] and [PlayerFragment].
+     */
+    fun isTransientPlayerError(error: PlaybackException): Boolean {
+        val errorMsg = error.localizedMessage.orEmpty().lowercase()
+        return errorMsg.contains("source error") ||
+                errorMsg.contains("ioexception") ||
+                errorMsg.contains("network") ||
+                errorMsg.contains("timeout") ||
+                errorMsg.contains("connection") ||
+                errorMsg.contains("sabr") ||
+                errorMsg.contains("streaming error") ||
+                errorMsg.contains("retrying") ||
+                error.errorCode == PlaybackException.ERROR_CODE_IO_NETWORK_CONNECTION_FAILED ||
+                error.errorCode == PlaybackException.ERROR_CODE_IO_NETWORK_CONNECTION_TIMEOUT ||
+                error.errorCode == PlaybackException.ERROR_CODE_IO_UNSPECIFIED
     }
 }

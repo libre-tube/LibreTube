@@ -201,8 +201,9 @@ class PlayerGestureController(activity: BaseActivity, private val listener: Play
             distanceX: Float,
             distanceY: Float
         ): Boolean {
+            if (e1 == null) return false
             val (width, height) = listener.getViewMeasures()
-            val insideThreshHold = abs(e2.y - e1!!.y) <= MOVEMENT_THRESHOLD
+            val insideThreshHold = abs(e2.y - e1.y) <= MOVEMENT_THRESHOLD
             val insideBorder =
                 (e1.x < BORDER_THRESHOLD || e1.y < BORDER_THRESHOLD || e1.x > width - BORDER_THRESHOLD || e1.y > height - BORDER_THRESHOLD)
 

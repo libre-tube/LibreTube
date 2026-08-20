@@ -111,7 +111,11 @@ open class OnlinePlayerService : AbstractPlayerService() {
         isAudioOnlyPlayer = args.getBoolean(IntentData.audioOnly)
 
         // get the intent arguments
-        videoId = playerData.videoId!!
+        videoId = playerData.videoId ?: run {
+            Log.e(TAG(), "videoId is null in playerData, stopping service")
+            stopSelf()
+            return
+        }
         playlistId = playerData.playlistId
         channelId = playerData.channelId
         startTimestampSeconds = playerData.timestamp
@@ -165,7 +169,10 @@ open class OnlinePlayerService : AbstractPlayerService() {
                 PlayingQueue.updateCurrent(it)
 
                 if (!PlayingQueue.hasNext()) {
-                    PlayingQueue.updateQueue(it, playlistId, channelId, streams!!.relatedStreams)
+                    val currentStreams = streams
+                    if (currentStreams != null) {
+                        PlayingQueue.updateQueue(it, playlistId, channelId, currentStreams.relatedStreams)
+                    }
                 }
 
                 // update feed item with newer information, e.g. more up-to-date views
@@ -258,7 +265,7 @@ open class OnlinePlayerService : AbstractPlayerService() {
                     streams
                 )
                 val mediaSource = sabrMediaSourceFactory.createMediaSource(mediaItem)
-                val mediaSources = listOf<MediaSource>(mediaSource) + streams.subtitles.map {
+                val mediaSources = listOf<MediaSource>(mediaSource) + streams.subtitles.mapNotNull {
                     val format = Format.Builder()
                         .setSampleMimeType(it.mimeType)
                         .setLanguage(it.code)
@@ -296,7 +303,7 @@ open class OnlinePlayerService : AbstractPlayerService() {
                     } catch (e: Exception) {
                         Log.w(this::class.simpleName, "failed to set subtitle lazy-loading: ${e.stackTrace}")
                     }
-                    progressiveMediaSourceFactory.createMediaSource(MediaItem.fromUri(it.url!!))
+                    progressiveMediaSourceFactory.createMediaSource(MediaItem.fromUri(it.url ?: return@mapNotNull null))
                 }.toList()
 
                 exoPlayer?.setMediaSource(MergingMediaSource(*mediaSources.toTypedArray()))
@@ -341,9 +348,10 @@ open class OnlinePlayerService : AbstractPlayerService() {
         }
     }
 
-    private fun getSubtitleConfigs(): List<SubtitleConfiguration> = streams?.subtitles?.map {
+    private fun getSubtitleConfigs(): List<SubtitleConfiguration> = streams?.subtitles?.mapNotNull {
+        val url = it.url ?: return@mapNotNull null
         val roleFlags = getSubtitleRoleFlags(it)
-        SubtitleConfiguration.Builder(it.url!!.toUri())
+        SubtitleConfiguration.Builder(url.toUri())
             .setRoleFlags(roleFlags)
             .setLanguage(it.code)
             .setMimeType(it.mimeType).build()

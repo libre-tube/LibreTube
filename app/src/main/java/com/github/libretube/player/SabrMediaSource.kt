@@ -117,7 +117,8 @@ class SabrMediaSource(
 
     override fun prepareSourceInternal(mediaTransferListener: TransferListener?) {
         this.mediaTransferListener = mediaTransferListener
-        drmSessionManager.setPlayer(Looper.myLooper()!!, playerId)
+        val looper = Looper.myLooper() ?: Looper.getMainLooper()
+        drmSessionManager.setPlayer(looper, playerId)
         drmSessionManager.prepare()
         processManifest()
     }

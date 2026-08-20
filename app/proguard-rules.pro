@@ -30,8 +30,8 @@
 #-keepnames class **
 
 # Keep data classes used for Retrofit
--keep class com.github.libretube.obj.** { *; }
 -keep class com.github.libretube.api.obj.** { *; }
+-keep class com.github.libretube.obj.** { *; }
 -keep class com.github.libretube.obj.update.** { *; }
 
 # Keep rules required by Kotlinx Serialization
@@ -136,3 +136,12 @@
 -dontwarn java.beans.IntrospectionException
 -dontwarn java.beans.Introspector
 -dontwarn java.beans.PropertyDescriptor
+
+# Keep SABR player classes (used via MediaSource factories)
+-keep class com.github.libretube.player.SabrMediaSource** { *; }
+-keep class com.github.libretube.player.SabrDataSource** { *; }
+-keep class com.github.libretube.player.SabrMediaPeriod { *; }
+-keep class com.github.libretube.player.SabrChunkSource { *; }
+-keep class com.github.libretube.player.DefaultSabrChunkSource** { *; }
+-keep class com.github.libretube.player.parser.SabrClient { *; }
+-keep class com.github.libretube.player.parser.PlaybackRequest { *; }

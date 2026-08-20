@@ -53,7 +53,8 @@ class AudioPlayerThumbnailListener(context: Context, private val listener: Audio
             distanceX: Float,
             distanceY: Float
         ): Boolean {
-            val insideThreshHold = abs(e2.y - e1!!.y) <= MOVEMENT_THRESHOLD
+            if (e1 == null) return false
+            val insideThreshHold = abs(e2.y - e1.y) <= MOVEMENT_THRESHOLD
 
             // If the movement is inside threshold or scroll is horizontal then return false
             if (!isMoving && (insideThreshHold || abs(distanceX) > abs(distanceY))) {

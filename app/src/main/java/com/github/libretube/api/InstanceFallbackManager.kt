@@ -8,6 +8,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import okhttp3.OkHttpClient
 import okhttp3.Request
+import java.util.concurrent.ConcurrentHashMap
 import java.util.concurrent.TimeUnit
 
 /**
@@ -31,7 +32,7 @@ object InstanceFallbackManager {
         var failureCount: Int = 0,
     )
 
-    private val instanceHealthMap = mutableMapOf<String, InstanceHealth>()
+    private val instanceHealthMap = ConcurrentHashMap<String, InstanceHealth>()
 
     private val healthCheckClient = OkHttpClient.Builder()
         .connectTimeout(HEALTH_CHECK_TIMEOUT_SECONDS, TimeUnit.SECONDS)
@@ -140,8 +141,9 @@ object InstanceFallbackManager {
                 .build()
             val response = healthCheckClient.newCall(request).execute()
             val isReachable = response.isSuccessful
+            val responseCode = response.code
             response.close()
-            Log.d(TAG, "Health check for $apiUrl: ${if (isReachable) "OK" else "FAIL (${response.code})"}")
+            Log.d(TAG, "Health check for $apiUrl: ${if (isReachable) "OK" else "FAIL ($responseCode)"}")
             isReachable
         } catch (e: Exception) {
             Log.d(TAG, "Health check failed for $apiUrl: ${e.message}")

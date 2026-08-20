@@ -149,13 +149,11 @@ class DefaultSabrChunkSource(
     }
 
     override fun updateTrackSelection(trackSelection: ExoTrackSelection?) {
-        this.trackSelection = trackSelection!!
+        this.trackSelection = trackSelection ?: return
     }
 
     override fun maybeThrowError() {
-        if (fatalError != null) {
-            throw fatalError!!
-        }
+        fatalError?.let { throw it }
     }
 
     override fun getPreferredQueueSize(
@@ -446,14 +444,26 @@ class DefaultSabrChunkSource(
         val segmentCount: Long
             get() = chunkIndex?.length?.toLong() ?: 0
 
-        fun getSegmentStartTimeUs(segmentNum: Long): Long = chunkIndex!!.timesUs[segmentNum.toInt()]
+        fun getSegmentStartTimeUs(segmentNum: Long): Long {
+            val index = chunkIndex ?: return C.TIME_UNSET
+            return index.timesUs[segmentNum.toInt()]
+        }
 
-        fun getSegmentEndTimeUs(segmentNum: Long): Long =
-            (getSegmentStartTimeUs(segmentNum) + chunkIndex!!.durationsUs[segmentNum.toInt()])
+        fun getSegmentEndTimeUs(segmentNum: Long): Long {
+            val startTime = getSegmentStartTimeUs(segmentNum)
+            if (startTime == C.TIME_UNSET) return C.TIME_UNSET
+            val index = chunkIndex ?: return C.TIME_UNSET
+            return startTime + index.durationsUs[segmentNum.toInt()]
+        }
 
-        fun getSegmentNum(positionUs: Long): Long =
-            chunkIndex!!.getChunkIndex(positionUs).toLong()
+        fun getSegmentNum(positionUs: Long): Long {
+            val index = chunkIndex ?: return 0
+            return index.getChunkIndex(positionUs).toLong()
+        }
 
-        fun getLastAvailableSegmentNum(): Long = chunkIndex!!.length.toLong() - 1
+        fun getLastAvailableSegmentNum(): Long {
+            val index = chunkIndex ?: return 0
+            return index.length.toLong() - 1
+        }
     }
 }

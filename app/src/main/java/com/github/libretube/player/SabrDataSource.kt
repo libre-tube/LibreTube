@@ -27,12 +27,16 @@ class SabrDataSource(
     }
 
     override fun open(dataSpec: DataSpec): Long {
-        val playbackRequest = dataSpec.customData as PlaybackRequest?
+        val playbackRequest = dataSpec.customData as? PlaybackRequest
 
         transferInitializing(dataSpec)
         transferStarted(dataSpec)
+        if (playbackRequest == null) {
+            throw IOException("SabrDataSource: missing PlaybackRequest in DataSpec.customData")
+        }
         val segment = try {
-            sabrClient.getNextSegment(playbackRequest!!)!!
+            sabrClient.getNextSegment(playbackRequest)
+                ?: throw IOException("SabrDataSource: getNextSegment returned null")
         } catch (e: SABRException) {
             Log.e(TAG, "SABR streaming error: ${e.userFacingMessage}", e)
             throw IOException(e.userFacingMessage, e)
@@ -72,17 +76,17 @@ class SabrDataSource(
         offset: Int,
         length: Int,
     ): Int {
-        assert(data != null)
-        if (length == 0) {
+        val currentData = data
+        if (currentData == null || length == 0) {
             return 0;
         }
 
-        if (!data!!.hasRemaining()) {
+        if (!currentData.hasRemaining()) {
             return C.RESULT_END_OF_INPUT
         }
 
-        val bytesToRead = minOf(length, data!!.remaining())
-        data!!.read(buffer, offset, bytesToRead)
+        val bytesToRead = minOf(length, currentData.remaining())
+        currentData.read(buffer, offset, bytesToRead)
 
         // this is not the actual amount of bytes transferred, since the SABR stream has some overhead,
         // e.g. for format metadata

@@ -108,7 +108,6 @@ import com.github.libretube.util.PlayingQueue
 import com.github.libretube.util.TextUtils
 import com.github.libretube.util.TextUtils.toTimeInSeconds
 import com.google.android.material.snackbar.Snackbar
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
@@ -222,7 +221,8 @@ class PlayerFragment : Fragment(R.layout.fragment_player), CustomPlayerCallback 
     private var errorRetryCount = 0
     private val playerListener = object : Player.Listener {
         override fun onIsPlayingChanged(isPlaying: Boolean) {
-            PictureInPictureCompat.setPictureInPictureParams(requireActivity(), pipParams)
+            if (!isAdded) return
+            runCatching { PictureInPictureCompat.setPictureInPictureParams(requireActivity(), pipParams) }
 
             if (isPlaying && PlayerHelper.sponsorBlockEnabled) {
                 handler.postDelayed(
@@ -267,7 +267,10 @@ class PlayerFragment : Fragment(R.layout.fragment_player), CustomPlayerCallback 
             }
 
             // listen for the stop button in the notification
-            if (playbackState == PlaybackState.STATE_STOPPED &&
+            // Note: using Player.STATE_IDLE instead of PlaybackState.STATE_STOPPED (which is
+            // from the old Android media framework and has value 1, not matching Media3's states)
+            if (playbackState == Player.STATE_IDLE &&
+                _binding != null &&
                 PictureInPictureCompat.isInPictureInPictureMode(requireActivity())
             ) {
                 // finish PiP by finishing the activity
@@ -313,8 +316,8 @@ class PlayerFragment : Fragment(R.layout.fragment_player), CustomPlayerCallback 
 
                 // fix: if the fragment is recreated, play the current video, and not the initial one
                 arguments?.run {
-                    val playerData =
-                        parcelable<PlayerData>(IntentData.playerData)!!.copy(videoId = videoId)
+                    val existingData = parcelable<PlayerData>(IntentData.playerData) ?: return@run
+                    val playerData = existingData.copy(videoId = videoId)
                     putParcelable(IntentData.playerData, playerData)
                 }
             }
@@ -335,7 +338,7 @@ class PlayerFragment : Fragment(R.layout.fragment_player), CustomPlayerCallback 
             super.onPlayerError(error)
             val errorMsg = error.localizedMessage.orEmpty()
 
-            if (isTransientPlayerError(error) && errorRetryCount < MAX_PLAYER_ERROR_RETRIES) {
+            if (PlayerHelper.isTransientPlayerError(error) && errorRetryCount < MAX_PLAYER_ERROR_RETRIES) {
                 errorRetryCount++
                 val delayMs = RETRY_BASE_DELAY_MS * errorRetryCount
                 android.util.Log.w(
@@ -343,6 +346,7 @@ class PlayerFragment : Fragment(R.layout.fragment_player), CustomPlayerCallback 
                     "Transient player error (attempt $errorRetryCount/$MAX_PLAYER_ERROR_RETRIES): $errorMsg"
                 )
                 handler.postDelayed({
+                    if (!isAdded || _binding == null || !::playerController.isInitialized) return@postDelayed
                     try {
                         playerController.play()
                     } catch (e: Exception) {
@@ -378,13 +382,14 @@ class PlayerFragment : Fragment(R.layout.fragment_player), CustomPlayerCallback 
                 return@registerForActivityResult
             }
 
-            CoroutineScope(Dispatchers.IO).launch {
+            lifecycleScope.launch(Dispatchers.IO) {
                 context?.contentResolver?.openOutputStream(uri)?.use { outputStream ->
                     screenshotBitmap?.compress(Bitmap.CompressFormat.PNG, 100, outputStream)
                 }
                 screenshotBitmap = null
 
                 withContext(Dispatchers.Main) {
+                    if (!isAdded) return@withContext
                     Snackbar.make(
                         requireView(),
                         R.string.screenshot_saved,
@@ -432,8 +437,13 @@ class PlayerFragment : Fragment(R.layout.fragment_player), CustomPlayerCallback 
         }
 
 
-        val playerData = requireArguments().parcelable<PlayerData>(IntentData.playerData)!!
-        videoId = playerData.videoId!!
+        val playerData = requireArguments().parcelable<PlayerData>(IntentData.playerData)
+        if (playerData?.videoId == null) {
+            // gracefully handle missing player data instead of crashing
+            android.util.Log.e("PlayerFragment", "Missing playerData or videoId in arguments")
+            return
+        }
+        videoId = playerData.videoId
         isOffline = playerData.isOffline
         playlistId = playerData.playlistId
         channelId = playerData.channelId
@@ -891,12 +901,13 @@ class PlayerFragment : Fragment(R.layout.fragment_player), CustomPlayerCallback 
             fullscreenDialog.dismiss()
         }
 
-        WindowHelper.toggleFullscreen(fullscreenDialog.window!!, open)
+        val dialogWindow = fullscreenDialog.window ?: return
+        WindowHelper.toggleFullscreen(dialogWindow, open)
     }
 
     override fun onPause() {
         // check whether the screen is on
-        val isInteractive = requireContext().getSystemService<PowerManager>()!!.isInteractive
+        val isInteractive = requireContext().getSystemService<PowerManager>()?.isInteractive ?: true
 
         // disable video stream since it's not needed when screen off or when PiP is not
         // enabled, except when the user is intentionally entering PiP mode via the dedicated button
@@ -1476,21 +1487,6 @@ class PlayerFragment : Fragment(R.layout.fragment_player), CustomPlayerCallback 
 
     override fun isVideoLive(): Boolean {
         return ::streams.isInitialized && streams.isLive
-    }
-
-    private fun isTransientPlayerError(error: PlaybackException): Boolean {
-        val errorMsg = error.localizedMessage.orEmpty().lowercase()
-        return errorMsg.contains("source error") ||
-                errorMsg.contains("ioexception") ||
-                errorMsg.contains("network") ||
-                errorMsg.contains("timeout") ||
-                errorMsg.contains("connection") ||
-                errorMsg.contains("sabr") ||
-                errorMsg.contains("streaming error") ||
-                errorMsg.contains("retrying") ||
-                error.errorCode == PlaybackException.ERROR_CODE_IO_NETWORK_CONNECTION_FAILED ||
-                error.errorCode == PlaybackException.ERROR_CODE_IO_NETWORK_CONNECTION_TIMEOUT ||
-                error.errorCode == PlaybackException.ERROR_CODE_IO_UNSPECIFIED
     }
 
     companion object {
