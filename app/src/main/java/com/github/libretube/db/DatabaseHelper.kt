@@ -26,39 +26,39 @@ object DatabaseHelper {
             Database.watchHistoryDao().insert(watchHistoryItem)
         }
 
-    suspend fun getWatchHistoryPage(page: Int, pageSize: Int): List<WatchHistoryItem> {
-        val watchHistoryDao = Database.watchHistoryDao()
-        val historySize = watchHistoryDao.getSize()
+    data class WatchHistoryPage(
+        val items: List<WatchHistoryItem>,
+        val nextCursor: Long?
+    )
 
-        if (historySize < pageSize * (page - 1)) return emptyList()
-
-        val offset = historySize - (pageSize * page)
-        val limit = if (offset < 0) {
-            offset + pageSize
-        } else {
-            pageSize
-        }
-        return watchHistoryDao.getN(limit, maxOf(offset, 0)).reversed()
-    }
-
-    suspend fun getFilteredWatchHistoryPage(
-        page: Int,
+    suspend fun getWatchHistoryPage(
         pageSize: Int,
-        statusFilter: Int
-    ): List<WatchHistoryItem> {
+        statusFilter: Int = 0,
+        cursor: Long = Long.MAX_VALUE
+    ): WatchHistoryPage {
+        val watchHistoryDao = Database.watchHistoryDao()
         val watched = when (statusFilter) {
-            0 -> return getWatchHistoryPage(page, pageSize)
+            0 -> null
             1 -> 0
             2 -> 1
             else -> throw IllegalArgumentException()
         }
 
-        return Database.watchHistoryDao().getFilteredPage(
-            limit = pageSize,
-            offset = pageSize * (page - 1),
-            watched = watched,
-            absoluteWatchedThreshold = ABSOLUTE_WATCHED_THRESHOLD,
-            relativeWatchedThreshold = RELATIVE_WATCHED_THRESHOLD
+        val rows = if (watched == null) {
+            watchHistoryDao.getPage(pageSize, cursor)
+        } else {
+            watchHistoryDao.getFilteredPage(
+                limit = pageSize,
+                cursor = cursor,
+                watched = watched,
+                absoluteWatchedThreshold = ABSOLUTE_WATCHED_THRESHOLD,
+                relativeWatchedThreshold = RELATIVE_WATCHED_THRESHOLD
+            )
+        }
+
+        return WatchHistoryPage(
+            items = rows.map { it.item },
+            nextCursor = rows.lastOrNull()?.rowId?.minus(1)
         )
     }
 

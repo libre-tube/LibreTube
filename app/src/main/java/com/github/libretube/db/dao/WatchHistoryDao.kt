@@ -1,42 +1,57 @@
 package com.github.libretube.db.dao
 
+import androidx.room.ColumnInfo
 import androidx.room.Dao
 import androidx.room.Delete
+import androidx.room.Embedded
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.github.libretube.db.obj.WatchHistoryItem
+
+data class WatchHistoryPageItem(
+    @Embedded val item: WatchHistoryItem,
+    @ColumnInfo(name = "historyRowId") val rowId: Long
+)
 
 @Dao
 interface WatchHistoryDao {
     @Query("SELECT * FROM watchHistoryItem")
     suspend fun getAll(): List<WatchHistoryItem>
 
-    @Query("SELECT * FROM watchHistoryItem LIMIT :limit OFFSET :offset")
-    suspend fun getN(limit: Int, offset: Int): List<WatchHistoryItem>
+    @Query(
+        """
+        SELECT h.*, h.rowid AS historyRowId
+        FROM watchHistoryItem AS h
+        WHERE h.rowid <= :cursor
+        ORDER BY h.rowid DESC
+        LIMIT :limit
+        """
+    )
+    suspend fun getPage(limit: Int, cursor: Long): List<WatchHistoryPageItem>
 
     @Query(
         """
-        SELECT h.*
+        SELECT h.*, h.rowid AS historyRowId
         FROM watchHistoryItem AS h
         LEFT JOIN watchPosition AS p ON p.videoId = h.videoId
-        WHERE CASE WHEN
+        WHERE h.rowid <= :cursor AND CASE WHEN
             p.videoId IS NOT NULL AND
             COALESCE(h.duration, 0) - (p.position / 1000) <= :absoluteWatchedThreshold AND
             (p.position / 1000) >= :relativeWatchedThreshold * COALESCE(h.duration, 0)
             THEN 1 ELSE 0
         END = :watched
         ORDER BY h.rowid DESC
-        LIMIT :limit OFFSET :offset
+        LIMIT :limit
         """
     )
     suspend fun getFilteredPage(
         limit: Int,
-        offset: Int,
+        cursor: Long,
         watched: Int,
         absoluteWatchedThreshold: Float,
         relativeWatchedThreshold: Float
-    ): List<WatchHistoryItem>
+    ): List<WatchHistoryPageItem>
 
     @Query("SELECT COUNT(videoId) FROM watchHistoryItem")
     suspend fun getSize(): Int

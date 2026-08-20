@@ -18,7 +18,7 @@ class WatchHistoryModel : ViewModel() {
     private val watchHistory = MutableLiveData<List<WatchHistoryItem>>()
     val filteredWatchHistory: LiveData<List<WatchHistoryItem>> = watchHistory
 
-    private var currentPage = 1
+    private var cursor = Long.MAX_VALUE
     private var fetchJob: Job? = null
     private var reachedEnd = false
     private var filterGeneration = 0
@@ -35,7 +35,7 @@ class WatchHistoryModel : ViewModel() {
             fetchJob?.cancel()
             fetchJob = null
             filterGeneration++
-            currentPage = 1
+            cursor = Long.MAX_VALUE
             reachedEnd = false
             watchHistory.value = emptyList()
             fetchNextPage()
@@ -44,24 +44,24 @@ class WatchHistoryModel : ViewModel() {
     fun fetchNextPage() {
         if (fetchJob?.isActive == true || reachedEnd) return
 
-        val page = currentPage
+        val requestedCursor = cursor
         val generation = filterGeneration
         val requestedStatus = selectedStatusFilter
         fetchJob = viewModelScope.launch {
-            val newHistory = withContext(Dispatchers.IO) {
-                DatabaseHelper.getFilteredWatchHistoryPage(
-                    page,
-                    HISTORY_PAGE_SIZE,
-                    requestedStatus
+            val page = withContext(Dispatchers.IO) {
+                DatabaseHelper.getWatchHistoryPage(
+                    pageSize = HISTORY_PAGE_SIZE,
+                    statusFilter = requestedStatus,
+                    cursor = requestedCursor
                 )
             }
 
-            if (generation != filterGeneration || page != currentPage) return@launch
+            if (generation != filterGeneration || requestedCursor != cursor) return@launch
 
-            currentPage++
-            reachedEnd = newHistory.size < HISTORY_PAGE_SIZE
+            cursor = page.nextCursor ?: cursor
+            reachedEnd = page.items.size < HISTORY_PAGE_SIZE
             watchHistory.value = watchHistory.value.orEmpty().toMutableList().apply {
-                addAll(newHistory)
+                addAll(page.items)
             }
         }
     }
