@@ -47,12 +47,11 @@ class WatchHistoryModel : ViewModel() {
 
         val requestedCursor = cursor
         val generation = filterGeneration
-        val requestedStatus = selectedStatusFilter
         fetchJob = viewModelScope.launch {
             val page = withContext(Dispatchers.IO) {
                 DatabaseHelper.getWatchHistoryPage(
                     pageSize = HISTORY_PAGE_SIZE,
-                    statusFilter = requestedStatus,
+                    statusFilter = statusFilter,
                     cursor = requestedCursor
                 )
             }
