@@ -54,7 +54,7 @@ interface WatchHistoryDao {
         limit: Int,
         cursor: Long,
         watched: Int,
-        absoluteWatchedThreshold: Float,
+        absoluteWatchedThresholdSeconds: Float,
         relativeWatchedThreshold: Float
     ): List<WatchHistoryPageItem>
 
