@@ -327,7 +327,7 @@
     <string name="original_or_main_audio_track">ต้นฉบับ</string>
     <string name="dubbed_audio_track">พากย์</string>
     <string name="descriptive_audio_track">เสียงบรรยายภาพ</string>
-    <string name="default_or_unknown_audio_track">ค่าเริ่มต้นหรือไม่ทราบ</string>
+    <string name="default_or_unknown_audio_track">ค่าเริ่มต้น</string>
     <string name="unknown_or_no_audio">ไม่ทราบหรือไม่มีเสียง</string>
     <string name="continue_watching">ดูต่อ</string>
     <string name="screen_orientation">แนวหน้าจอ</string>
@@ -558,4 +558,6 @@
     <string name="long_press_fast_forward">เร่งความเร็ววิดีโอเมื่อกดข้าง</string>
     <string name="long_press_fast_forward_summary">เล่นวิดีโอด้วยความเร็วสองเท่าเมื่อแตะค้างหน้าจอ</string>
     <string name="resume_all">ดาวน์โหลดต่อ</string>
+    <string name="comment_verified">ผ่านการอนุมัติแล้ว</string>
+    <string name="comment_pinned">ปักหมุด</string>
 </resources>
