@@ -66,8 +66,6 @@ object PlayerHelper {
     const val SPONSOR_HIGHLIGHT_CATEGORY = "poi_highlight"
     const val ROLE_FLAG_AUTO_GEN_SUBTITLE = C.ROLE_FLAG_SUPPLEMENTARY
     private const val MINIMUM_BUFFER_DURATION = 1000 * 10 // exo default is 50s
-    private const val DEFAULT_LOAD_CONTROL_MIN_BUFFER_MS = 15_000 // 15s min buffer (up from 50s default)
-    private const val DEFAULT_LOAD_CONTROL_MAX_BUFFER_MS = 60_000 // 60s max buffer (up from 50s default)
     const val WATCH_POSITION_TIMER_DELAY_MS = 1000L
 
     /**
@@ -512,12 +510,10 @@ object PlayerHelper {
             // cache the last three minutes
             .setBackBuffer(1000 * 60 * 3, true)
             .setBufferDurationsMs(
-                DEFAULT_LOAD_CONTROL_MIN_BUFFER_MS,
-                max(bufferingGoal, DEFAULT_LOAD_CONTROL_MIN_BUFFER_MS),
-                // Start playback with 10s of buffer
                 MINIMUM_BUFFER_DURATION,
-                // Increase rebuffer duration for smoother playback after stalls
-                DEFAULT_LOAD_CONTROL_MAX_BUFFER_MS
+                max(bufferingGoal, MINIMUM_BUFFER_DURATION),
+                DefaultLoadControl.DEFAULT_BUFFER_FOR_PLAYBACK_MS,
+                DefaultLoadControl.DEFAULT_BUFFER_FOR_PLAYBACK_AFTER_REBUFFER_MS
             )
             .build()
     }
