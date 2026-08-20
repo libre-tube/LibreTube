@@ -114,10 +114,10 @@ class WatchHistoryModel : ViewModel() {
             when (selectedStatusFilter) {
                 0 -> true
                 1 -> it.watchPosition?.let { position ->
-                    !DatabaseHelper.isVideoWatched(position, it.item.duration)
+                    !DatabaseHelper.isVideoWatched(position, it.item.duration ?: 0)
                 } ?: true
                 2 -> it.watchPosition?.let { position ->
-                    DatabaseHelper.isVideoWatched(position, it.item.duration)
+                    DatabaseHelper.isVideoWatched(position, it.item.duration ?: 0)
                 } ?: false
                 else -> false
             }

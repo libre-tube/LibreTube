@@ -42,9 +42,8 @@ interface WatchHistoryDao {
         LEFT JOIN watchPosition AS p ON p.videoId = h.videoId
         WHERE h.rowid <= :cursor AND CASE WHEN
             p.videoId IS NOT NULL AND
-            h.duration IS NOT NULL AND
-            h.duration - (p.position / 1000) <= :absoluteWatchedThreshold AND
-            (p.position / 1000) >= :relativeWatchedThreshold * h.duration
+            COALESCE(h.duration, 0) - (p.position / 1000) <= :absoluteWatchedThreshold AND
+            (p.position / 1000) >= :relativeWatchedThreshold * COALESCE(h.duration, 0)
             THEN 1 ELSE 0
         END = :watched
         ORDER BY h.rowid DESC
