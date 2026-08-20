@@ -512,10 +512,10 @@ object PlayerHelper {
             // cache the last three minutes
             .setBackBuffer(1000 * 60 * 3, true)
             .setBufferDurationsMs(
-                MINIMUM_BUFFER_DURATION,
-                max(bufferingGoal, MINIMUM_BUFFER_DURATION),
-                // Increase initial buffer for faster start on slow connections
                 DEFAULT_LOAD_CONTROL_MIN_BUFFER_MS,
+                max(bufferingGoal, DEFAULT_LOAD_CONTROL_MIN_BUFFER_MS),
+                // Start playback with 10s of buffer
+                MINIMUM_BUFFER_DURATION,
                 // Increase rebuffer duration for smoother playback after stalls
                 DEFAULT_LOAD_CONTROL_MAX_BUFFER_MS
             )
