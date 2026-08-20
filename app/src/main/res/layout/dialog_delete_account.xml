@@ -18,4 +18,11 @@
             android:inputType="textPassword" />
     </com.google.android.material.textfield.TextInputLayout>
 
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/oidc_login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:text="@string/oidc_login" />
+
 </LinearLayout>
