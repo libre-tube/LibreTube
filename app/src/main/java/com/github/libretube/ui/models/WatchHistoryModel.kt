@@ -1,9 +1,8 @@
 package com.github.libretube.ui.models
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.asFlow
-import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.db.DatabaseHelper
@@ -11,71 +10,69 @@ import com.github.libretube.db.DatabaseHolder
 import com.github.libretube.db.obj.WatchHistoryItem
 import com.github.libretube.helpers.PreferenceHelper
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.combine
-import kotlinx.coroutines.flow.flowOn
-import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class WatchHistoryModel : ViewModel() {
     private val watchHistory = MutableLiveData<List<WatchHistoryItem>>()
+    val filteredWatchHistory: LiveData<List<WatchHistoryItem>> = watchHistory
 
     private var currentPage = 1
-    private var isLoading = false
-
-    private val selectedStatus = MutableStateFlow(
+    private var fetchJob: Job? = null
+    private var reachedEnd = false
+    private var filterGeneration = 0
+    private var statusFilter =
         PreferenceHelper.getInt(PreferenceKeys.SELECTED_HISTORY_STATUS_FILTER, 0)
-    )
-
-    val filteredWatchHistory =
-        combine(watchHistory.asFlow(), selectedStatus) { history, _ -> history }
-            .flowOn(Dispatchers.IO).map { history -> history.filter { it.shouldIncludeByFilters() } }
-            .asLiveData()
 
     var selectedStatusFilter
-        get() = selectedStatus.value
+        get() = statusFilter
         set(value) {
+            if (statusFilter == value) return
+
             PreferenceHelper.putInt(PreferenceKeys.SELECTED_HISTORY_STATUS_FILTER, value)
-            selectedStatus.value = value
+            statusFilter = value
+            fetchJob?.cancel()
+            fetchJob = null
+            filterGeneration++
+            currentPage = 1
+            reachedEnd = false
+            watchHistory.value = emptyList()
+            fetchNextPage()
         }
 
-    private suspend fun WatchHistoryItem.shouldIncludeByFilters(): Boolean {
-        // no watch position filter
-        if (selectedStatusFilter == 0) return true
+    fun fetchNextPage() {
+        if (fetchJob?.isActive == true || reachedEnd) return
 
-        return when (selectedStatusFilter) {
-            1 -> DatabaseHelper.filterByWatchStatus(this)
-            2 -> DatabaseHelper.filterByWatchStatus(this, false)
-            else -> throw IllegalArgumentException()
-        }
-    }
+        val page = currentPage
+        val generation = filterGeneration
+        val requestedStatus = selectedStatusFilter
+        fetchJob = viewModelScope.launch {
+            val newHistory = withContext(Dispatchers.IO) {
+                DatabaseHelper.getFilteredWatchHistoryPage(
+                    page,
+                    HISTORY_PAGE_SIZE,
+                    requestedStatus
+                )
+            }
 
-    fun fetchNextPage() = viewModelScope.launch(Dispatchers.IO) {
-        if (isLoading) return@launch
-        isLoading = true
+            if (generation != filterGeneration || page != currentPage) return@launch
 
-        val newHistory = withContext(Dispatchers.IO) {
-            DatabaseHelper.getWatchHistoryPage(currentPage, HISTORY_PAGE_SIZE)
-        }
-
-        isLoading = false
-        currentPage++
-
-        watchHistory.postValue(
-            watchHistory.value.orEmpty().toMutableList().apply {
+            currentPage++
+            reachedEnd = newHistory.size < HISTORY_PAGE_SIZE
+            watchHistory.value = watchHistory.value.orEmpty().toMutableList().apply {
                 addAll(newHistory)
             }
-        )
+        }
     }
 
     fun removeFromHistory(watchHistoryItem: WatchHistoryItem) =
-        viewModelScope.launch(Dispatchers.IO) {
-            DatabaseHolder.Database.watchHistoryDao().delete(watchHistoryItem)
+        viewModelScope.launch {
+            withContext(Dispatchers.IO) {
+                DatabaseHolder.Database.watchHistoryDao().delete(watchHistoryItem)
+            }
 
-            watchHistory.postValue(
-                watchHistory.value.orEmpty().filter { it != watchHistoryItem }
-            )
+            watchHistory.value = watchHistory.value.orEmpty().filter { it != watchHistoryItem }
         }
 
     companion object {

@@ -15,6 +15,29 @@ interface WatchHistoryDao {
     @Query("SELECT * FROM watchHistoryItem LIMIT :limit OFFSET :offset")
     suspend fun getN(limit: Int, offset: Int): List<WatchHistoryItem>
 
+    @Query(
+        """
+        SELECT h.*
+        FROM watchHistoryItem AS h
+        LEFT JOIN watchPosition AS p ON p.videoId = h.videoId
+        WHERE CASE WHEN
+            p.videoId IS NOT NULL AND
+            COALESCE(h.duration, 0) - (p.position / 1000) <= :absoluteWatchedThreshold AND
+            (p.position / 1000) >= :relativeWatchedThreshold * COALESCE(h.duration, 0)
+            THEN 1 ELSE 0
+        END = :watched
+        ORDER BY h.rowid DESC
+        LIMIT :limit OFFSET :offset
+        """
+    )
+    suspend fun getFilteredPage(
+        limit: Int,
+        offset: Int,
+        watched: Int,
+        absoluteWatchedThreshold: Float,
+        relativeWatchedThreshold: Float
+    ): List<WatchHistoryItem>
+
     @Query("SELECT COUNT(videoId) FROM watchHistoryItem")
     suspend fun getSize(): Int
 

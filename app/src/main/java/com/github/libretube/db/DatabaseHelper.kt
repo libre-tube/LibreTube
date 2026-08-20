@@ -41,6 +41,27 @@ object DatabaseHelper {
         return watchHistoryDao.getN(limit, maxOf(offset, 0)).reversed()
     }
 
+    suspend fun getFilteredWatchHistoryPage(
+        page: Int,
+        pageSize: Int,
+        statusFilter: Int
+    ): List<WatchHistoryItem> {
+        val watched = when (statusFilter) {
+            0 -> return getWatchHistoryPage(page, pageSize)
+            1 -> 0
+            2 -> 1
+            else -> throw IllegalArgumentException()
+        }
+
+        return Database.watchHistoryDao().getFilteredPage(
+            limit = pageSize,
+            offset = pageSize * (page - 1),
+            watched = watched,
+            absoluteWatchedThreshold = ABSOLUTE_WATCHED_THRESHOLD,
+            relativeWatchedThreshold = RELATIVE_WATCHED_THRESHOLD
+        )
+    }
+
     suspend fun addToSearchHistory(searchHistoryItem: SearchHistoryItem) {
         Database.searchHistoryDao().insert(searchHistoryItem)
 
