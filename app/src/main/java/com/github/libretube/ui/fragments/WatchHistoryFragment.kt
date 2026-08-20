@@ -44,7 +44,7 @@ class WatchHistoryFragment : DynamicLayoutManagerFragment(R.layout.fragment_watc
     private var recyclerViewState: Parcelable? = null
 
     private val viewModel: WatchHistoryModel by viewModels()
-    private val watchHistoryAdapter = WatchHistoryAdapter()
+    private val watchHistoryAdapter = WatchHistoryAdapter { viewModel.refreshItem(it) }
 
     override fun setLayoutManagers(gridItems: Int) {
         _binding?.watchHistoryRecView?.layoutManager =
@@ -63,7 +63,7 @@ class WatchHistoryFragment : DynamicLayoutManagerFragment(R.layout.fragment_watc
         }
 
         binding.watchHistoryRecView.setOnDismissListener { position ->
-            val item = viewModel.filteredWatchHistory.value?.getOrNull(position)
+            val item = viewModel.filteredWatchHistory.value?.getOrNull(position)?.item
                 ?: return@setOnDismissListener
             viewModel.removeFromHistory(item)
         }
@@ -131,7 +131,7 @@ class WatchHistoryFragment : DynamicLayoutManagerFragment(R.layout.fragment_watc
         }
 
         binding.playAll.setOnClickListener {
-            val history = viewModel.filteredWatchHistory.value.orEmpty()
+            val history = viewModel.filteredWatchHistory.value.orEmpty().map { it.item }
             if (history.isEmpty()) return@setOnClickListener
 
             PlayingQueue.add(
@@ -152,12 +152,14 @@ class WatchHistoryFragment : DynamicLayoutManagerFragment(R.layout.fragment_watc
             binding.clear.isVisible = history.isNotEmpty()
             binding.playAll.isVisible = history.isNotEmpty()
 
-            watchHistoryAdapter.submitList(history)
+            watchHistoryAdapter.submitList(history) {
+                if (_binding?.watchHistoryRecView?.canScrollVertically(1) == false) {
+                    viewModel.fetchNextPage()
+                }
+            }
         }
 
-        viewModel.fetchNextPage()
-
-        binding.watchHistoryRecView.addOnBottomReachedListener {
+        binding.watchHistoryRecView.addOnBottomReachedListener(prefetchDistance = 20) {
             viewModel.fetchNextPage()
         }
 
@@ -169,6 +171,11 @@ class WatchHistoryFragment : DynamicLayoutManagerFragment(R.layout.fragment_watc
             }
         }
 
+    }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.refresh()
     }
 
     override fun onConfigurationChanged(newConfig: Configuration) {

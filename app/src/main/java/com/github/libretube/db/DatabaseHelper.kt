@@ -3,6 +3,7 @@ package com.github.libretube.db
 import com.github.libretube.api.obj.StreamItem
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.db.DatabaseHolder.Database
+import com.github.libretube.db.dao.WatchHistoryPageItem
 import com.github.libretube.db.obj.SearchHistoryItem
 import com.github.libretube.db.obj.WatchHistoryItem
 import com.github.libretube.enums.ContentFilter
@@ -27,9 +28,11 @@ object DatabaseHelper {
         }
 
     data class WatchHistoryPage(
-        val items: List<WatchHistoryItem>,
+        val rows: List<WatchHistoryPageItem>,
         val nextCursor: Long?
-    )
+    ) {
+        val items get() = rows.map(WatchHistoryPageItem::item)
+    }
 
     suspend fun getWatchHistoryPage(
         pageSize: Int,
@@ -57,7 +60,7 @@ object DatabaseHelper {
         }
 
         return WatchHistoryPage(
-            items = rows.map { it.item },
+            rows = rows,
             nextCursor = rows.lastOrNull()?.rowId?.minus(1)
         )
     }
