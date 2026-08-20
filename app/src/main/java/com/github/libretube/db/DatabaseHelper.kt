@@ -41,9 +41,9 @@ object DatabaseHelper {
     ): WatchHistoryPage {
         val watchHistoryDao = Database.watchHistoryDao()
         val watched = when (statusFilter) {
-            0 -> null
-            1 -> 0
-            2 -> 1
+            0 -> STATUS_ALL
+            1 -> STATUS_CONTINUE_WATCHING
+            2 -> STATUS_FINISHED
             else -> throw IllegalArgumentException()
         }
 
