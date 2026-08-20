@@ -1,0 +1,5 @@
+This release fixes the recent video playback issues and that playlists contain no videos.
+
+To overcome the video playback issues, we implemented YouTube's new, custom streaming protocol (called SABR). YouTube started to progressively remove support for traditional streaming protocols, so LibreTube's support for the new protocol should make video playback much more reliable.
+
+Apart from this, the release includes support for podcasts and courses tabs on channels, a "resume all" option for downloads, as well as many minor bug fixes and small improvements.
