@@ -61,20 +61,28 @@ jobs:
           keyStorePassword: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
           keyPassword: ${{ secrets.ANDROID_KEY_PASSWORD }}
 
-      - name: Upload to Archive
-        continue-on-error: true
-        run: |
-          mv .github/uploader.py .
-          echo "GH_REPO = '${{ github.repository }}'" > config_file.py
-          git clone --filter=blob:none https://github.com/libre-tube/NightlyBuilds nightly
-          rm -rf nightly/*.apk
-          mv app/build/outputs/apk/debug/*.apk nightly/
-          cd nightly
-          python ../uploader.py
+#      - name: Upload to Archive
+#        continue-on-error: true
+#        run: |
+#          mv .github/uploader.py .
+#          echo "GH_REPO = '${{ github.repository }}'" > config_file.py
+#          git clone --filter=blob:none https://github.com/libre-tube/NightlyBuilds nightly
+#          rm -rf nightly/*.apk
+#          mv app/build/outputs/apk/debug/*.apk nightly/
+#          cd nightly
+#          python ../uploader.py
+
+      - name: Create Nightly Release
+        uses: softprops/action-gh-release@v3
+        if: github.ref_type == 'tag'
+        with:
+          repository: libre-tube/NightlyBuilds
+          prelease: true
+          working_directory: nightly
+          files: *.apk
       
       - name: Upload APK
         uses: actions/upload-artifact@v6
         with:
           name: app
           path: nightly/*.apk
-
