@@ -31,7 +31,6 @@ import com.github.libretube.ui.models.CommonPlayerViewModel
 import com.github.libretube.ui.models.WatchHistoryModel
 import com.github.libretube.util.PlayingQueue
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -161,7 +160,7 @@ class WatchHistoryFragment : DynamicLayoutManagerFragment(R.layout.fragment_watc
             viewModel.fetchNextPage()
         }
 
-        CoroutineScope(Dispatchers.IO).launch {
+        lifecycleScope.launch(Dispatchers.IO) {
             val hasItems = Database.watchHistoryDao().getSize() != 0
 
             withContext(Dispatchers.Main) {
