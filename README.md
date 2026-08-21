@@ -20,10 +20,10 @@
 [<img src="assets/badges/ghload.png" alt="Get it on GitHub" width="30%">](https://github.com/libre-tube/LibreTube/releases/latest)
 [<img src="assets/badges/ghload-nightly.png" alt="Get it on GitHub (Nightly)" width="30%">](https://github.com/libre-tube/NightlyBuilds/raw/main/app-debug-signed.apk)
 
-> **Note about Nightly releases** <br>
-> Nightly releases can be used for testing app features and fixes before the official release. Nightly builds are likley to be less stable than normal releases, most users should use the release build. **Use nightly builds at your own discretion**
-
 </div>
+
+> **Note About Nightly** <br>
+> Nightly builds include features/fixes before the official release. Nightly builds are generally less stable than normal releases. **Use nightly builds at your own discretion**
 
 <details>
   <summary>📜️ Credits</summary>
