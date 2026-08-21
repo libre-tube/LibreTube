@@ -6,6 +6,7 @@ import com.github.libretube.api.obj.StreamItem
 import com.github.libretube.api.obj.Subscription
 import com.github.libretube.api.toStreamItem
 import com.github.libretube.constants.PreferenceKeys
+import com.github.libretube.constants.YouTubeConstants
 import com.github.libretube.db.DatabaseHolder
 import com.github.libretube.db.obj.SubscriptionsFeedItem
 import com.github.libretube.enums.ContentFilter
@@ -13,7 +14,6 @@ import com.github.libretube.extensions.parallelMap
 import com.github.libretube.extensions.toID
 import com.github.libretube.helpers.NewPipeExtractorInstance
 import com.github.libretube.helpers.PreferenceHelper
-import com.github.libretube.ui.dialogs.ShareDialog.Companion.YOUTUBE_FRONTEND_URL
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.withContext
@@ -28,21 +28,24 @@ import java.time.Instant
 import java.util.concurrent.atomic.AtomicInteger
 
 class LocalFeedRepository : FeedRepository {
-    private val relevantTabs =
+
+    private val feedDao get() = DatabaseHolder.Database.feedDao()
+
+    private val relevantTabs by lazy {
         listOf(
             ContentFilter.LIVESTREAMS to ChannelTabs.LIVESTREAMS,
             ContentFilter.VIDEOS to ChannelTabs.VIDEOS,
             ContentFilter.SHORTS to ChannelTabs.SHORTS
-        ).mapNotNull { (filter, tab) ->
-            if (filter.isEnabled) tab else null
-        }.toTypedArray()
+        ).mapNotNull { (filter, tab) -> if (filter.isEnabled) tab else null }
+            .toTypedArray()
+    }
 
     override suspend fun submitFeedItemChange(feedItem: SubscriptionsFeedItem) {
-        DatabaseHolder.Database.feedDao().update(feedItem)
+        feedDao.update(feedItem)
     }
 
     override suspend fun removeChannel(channelId: String) {
-        DatabaseHolder.Database.feedDao().delete(channelId)
+        feedDao.delete(channelId)
     }
 
     override suspend fun getFeed(
@@ -52,25 +55,29 @@ class LocalFeedRepository : FeedRepository {
         val nowMillis = Instant.now().toEpochMilli()
         val minimumDateMillis = nowMillis - Duration.ofDays(MAX_FEED_AGE_DAYS).toMillis()
 
-        val channelIds = SubscriptionHelper.getSubscriptionChannelIds()
-
         if (!forceRefresh) {
-            val feed = DatabaseHolder.Database.feedDao().getAll()
-            val oneDayAgo = nowMillis - Duration.ofDays(1).toMillis()
-
-            // only refresh if feed is empty or last refresh was more than a day ago
-            val lastRefreshMillis =
-                PreferenceHelper.getLong(PreferenceKeys.LAST_LOCAL_FEED_REFRESH_TIMESTAMP_MILLIS, 0)
-            if (feed.isNotEmpty() && lastRefreshMillis > oneDayAgo) {
-                return feed.map(SubscriptionsFeedItem::toStreamItem)
-            }
+            val cachedFeed = tryGetCachedFeed(nowMillis)
+            if (cachedFeed != null) return cachedFeed
         }
 
-        DatabaseHolder.Database.feedDao().cleanUpOlderThan(minimumDateMillis)
+        feedDao.cleanUpOlderThan(minimumDateMillis)
+        val channelIds = SubscriptionHelper.getSubscriptionChannelIds()
         refreshFeed(channelIds, minimumDateMillis, onProgressUpdate)
         PreferenceHelper.putLong(PreferenceKeys.LAST_LOCAL_FEED_REFRESH_TIMESTAMP_MILLIS, nowMillis)
 
-        return DatabaseHolder.Database.feedDao().getAll().map(SubscriptionsFeedItem::toStreamItem)
+        return feedDao.getAll().map(SubscriptionsFeedItem::toStreamItem)
+    }
+
+    private suspend fun tryGetCachedFeed(nowMillis: Long): List<StreamItem>? {
+        val feed = feedDao.getAll()
+        if (feed.isEmpty()) return null
+
+        val lastRefreshMillis =
+            PreferenceHelper.getLong(PreferenceKeys.LAST_LOCAL_FEED_REFRESH_TIMESTAMP_MILLIS, 0)
+        val oneDayAgo = nowMillis - Duration.ofDays(1).toMillis()
+        if (lastRefreshMillis <= oneDayAgo) return null
+
+        return feed.map(SubscriptionsFeedItem::toStreamItem)
     }
 
     private suspend fun refreshFeed(
@@ -87,9 +94,8 @@ class LocalFeedRepository : FeedRepository {
         }
 
         for (channelIdChunk in channelIds.chunked(CHANNEL_CHUNK_SIZE)) {
-            val count = channelExtractionCount.get();
+            val count = channelExtractionCount.get()
             if (count >= CHANNEL_BATCH_SIZE) {
-                // add a delay after each BATCH_SIZE amount of fully-fetched channels
                 delay(CHANNEL_BATCH_DELAY.random())
                 channelExtractionCount.set(0)
             }
@@ -97,9 +103,9 @@ class LocalFeedRepository : FeedRepository {
             val (channels, collectedFeedItems) = channelIdChunk.parallelMap { channelId ->
                 try {
                     getRelatedStreams(channelId, minimumDateMillis).also {
-                        if (it.second.isNotEmpty())
-                            // increase counter if we had to fully fetch the channel
+                        if (it.streamItems.isNotEmpty()) {
                             channelExtractionCount.incrementAndGet()
+                        }
                     }
                 } catch (e: Exception) {
                     Log.e(channelId, e.stackTraceToString())
@@ -109,46 +115,40 @@ class LocalFeedRepository : FeedRepository {
                         onProgressUpdate(FeedProgress(totalExtractionCount.incrementAndGet(), channelIds.size))
                     }
                 }
-            }.filterNotNull().unzip()
+            }.filterNotNull().map { it.subscription to it.streamItems }.unzip()
 
-            // update subscriptions channels in case they've changed (e.g. different avatar or name)
             SubscriptionHelper.submitSubscriptionChannelInfosChanged(channels.filterNotNull())
-            DatabaseHolder.Database.feedDao()
-                .insertAll(collectedFeedItems.flatten().map(StreamItem::toFeedItem))
+            feedDao.insertAll(collectedFeedItems.flatten().map(StreamItem::toFeedItem))
         }
     }
 
     private suspend fun getRelatedStreams(
         channelId: String,
         minimumDateMillis: Long
-    ): Pair<Subscription?, List<StreamItem>> {
-        val channelUrl = "$YOUTUBE_FRONTEND_URL/channel/${channelId}"
+    ): ChannelFeedResult {
+        val channelUrl = "${YouTubeConstants.FRONTEND_URL}/channel/$channelId"
         val feedInfo = FeedInfo.getInfo(channelUrl)
         val feedInfoItems = feedInfo.relatedItems.associateBy { it.url }
 
-        val mostRecentChannelVideo = feedInfo.relatedItems.maxBy {
-            it.uploadDate?.offsetDateTime()?.toInstant()?.toEpochMilli() ?: 0
-        } ?: return Pair(null, emptyList())
+        val mostRecentUploadTime = feedInfo.relatedItems
+            .maxByOrNull { it.uploadDate?.offsetDateTime()?.toInstant()?.toEpochMilli() ?: 0 }
+            ?.uploadDate?.offsetDateTime()?.toInstant()?.toEpochMilli() ?: 0
 
-        // check if the channel has at least one video whose upload time is newer than the maximum
-        // feed ago and which is not yet stored in the database
-        val mostRecentUploadTime =
-            mostRecentChannelVideo.uploadDate?.offsetDateTime()?.toInstant()?.toEpochMilli() ?: 0
-        val hasNewerUploads =
-            mostRecentUploadTime > minimumDateMillis && !DatabaseHolder.Database.feedDao()
-                .contains(mostRecentChannelVideo.url.toID())
-        if (!hasNewerUploads) return Pair(null, emptyList())
+        val hasNewerUploads = mostRecentUploadTime > minimumDateMillis &&
+                !feedDao.contains(feedInfo.relatedItems.maxByOrNull {
+                    it.uploadDate?.offsetDateTime()?.toInstant()?.toEpochMilli() ?: 0
+                }?.url?.toID().orEmpty())
+        if (!hasNewerUploads) return ChannelFeedResult.EMPTY
 
         val channelInfo = ChannelInfo.getInfo(channelUrl)
         val channelAvatar = channelInfo.avatars.maxByOrNull { it.height }?.url
-        val subscription =
-            Subscription(channelId, channelInfo.name, channelAvatar, channelInfo.isVerified)
+        val subscription = Subscription(channelId, channelInfo.name, channelAvatar, channelInfo.isVerified)
 
         val relevantInfoTabs = channelInfo.tabs.filter { tab ->
             relevantTabs.any { tab.contentFilters.contains(it) }
         }
 
-        val related = relevantInfoTabs.parallelMap { tab ->
+        val streamItems = relevantInfoTabs.parallelMap { tab ->
             runCatching {
                 ChannelTabInfo.getInfo(NewPipeExtractorInstance.extractor, tab).relatedItems
             }.getOrElse { emptyList() }
@@ -159,40 +159,32 @@ class LocalFeedRepository : FeedRepository {
                     ContentAvailability.UPCOMING,
                     ContentAvailability.UNKNOWN
                 )
-            }
+            }.map { item ->
+                item.toStreamItem(channelAvatar, feedInfoItems[item.url])
+            }.filter { it.uploaded > minimumDateMillis }
 
-        val streamItems = related.map { item ->
-            // avatar is not always included in these info items, thus must be taken from channel info response
-            item.toStreamItem(
-                channelAvatar,
-                // shorts fetched via the shorts tab don't have upload dates so we fall back to the feedInfo
-                feedInfoItems[item.url]
-            )
-        }.filter { it.uploaded > minimumDateMillis }
-        return Pair(subscription, streamItems)
+        return ChannelFeedResult(subscription, streamItems)
+    }
+
+    private data class ChannelFeedResult(
+        val subscription: Subscription?,
+        val streamItems: List<StreamItem>
+    ) {
+        companion object {
+            val EMPTY = ChannelFeedResult(null, emptyList())
+        }
     }
 
     companion object {
-        /**
-         * Amount of feeds that are fetched concurrently.
-         *
-         * Should ideally be a factor of `BATCH_SIZE` to be correctly applied.
-         */
+        /** Amount of feeds fetched concurrently. Should be a factor of BATCH_SIZE. */
         const val CHANNEL_CHUNK_SIZE = 5
 
-        /**
-         * Maximum amount of feeds that should be fetched together, before a delay should be applied.
-         */
+        /** Maximum feeds fetched together before applying a delay. */
         const val CHANNEL_BATCH_SIZE = 50
 
-        /**
-         * Millisecond delay after fetching `BATCH_SIZE` channels to avoid throttling.
-         *
-         * A channel is only counted as fetched when it had a recent upload, requiring to fetch
-         * the channelInfo via Innertube.
-         */
+        /** Millisecond delay after fetching BATCH_SIZE channels to avoid throttling. */
         val CHANNEL_BATCH_DELAY = (500L..1500L)
 
-        private const val MAX_FEED_AGE_DAYS = 30L // 30 days
+        private const val MAX_FEED_AGE_DAYS = 30L
     }
 }

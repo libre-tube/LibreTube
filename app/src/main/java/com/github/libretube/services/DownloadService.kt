@@ -47,6 +47,7 @@ import com.github.libretube.helpers.DownloadHelper.getNotificationId
 import com.github.libretube.helpers.ImageHelper
 import com.github.libretube.helpers.NetworkHelper
 import com.github.libretube.helpers.PlayerHelper
+import com.github.libretube.helpers.SponsorBlockHelper
 import com.github.libretube.helpers.ProxyHelper
 import com.github.libretube.obj.DownloadStatus
 import com.github.libretube.parcelable.DownloadData
@@ -229,7 +230,7 @@ class DownloadService : LifecycleService() {
         coroutineScope {
             launch {
                 val segmentData = try {
-                    val categories = PlayerHelper.getSponsorBlockCategories()
+                    val categories = SponsorBlockHelper.getCategories()
                     MediaServiceRepository.instance.getSegments(videoId, categories.map { it.key })
                 } catch (e: Exception) {
                     Log.e(TAG(), "failed to download SponsorBlock segments for $videoId")

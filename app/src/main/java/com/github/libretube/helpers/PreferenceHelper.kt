@@ -159,9 +159,6 @@ object PreferenceHelper {
         }
     )
 
-    /**
-     * set the context that is being used to access the shared preferences
-     */
     fun initialize(context: Context) {
         settings = getDefaultSharedPreferences(context)
         authSettings = getAuthenticationPreferences(context)

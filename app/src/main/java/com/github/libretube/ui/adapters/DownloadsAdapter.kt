@@ -22,8 +22,8 @@ import com.github.libretube.parcelable.PlayerData
 import com.github.libretube.ui.adapters.callbacks.DiffUtilItemCallback
 import com.github.libretube.ui.base.BaseActivity
 import com.github.libretube.ui.extensions.setWatchProgressLength
-import com.github.libretube.ui.fragments.DownloadSortingOrder
-import com.github.libretube.ui.fragments.DownloadTab
+import com.github.libretube.enums.DownloadSortingOrder
+import com.github.libretube.enums.DownloadTab
 import com.github.libretube.ui.sheets.DownloadOptionsBottomSheet
 import com.github.libretube.ui.sheets.DownloadOptionsBottomSheet.Companion.DELETE_DOWNLOAD_REQUEST_KEY
 import com.github.libretube.ui.viewholders.DownloadsViewHolder

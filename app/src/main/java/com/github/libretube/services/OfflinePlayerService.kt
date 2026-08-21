@@ -28,7 +28,7 @@ import com.github.libretube.helpers.PlayerHelper
 import com.github.libretube.parcelable.PlayerData
 import com.github.libretube.ui.activities.MainActivity
 import com.github.libretube.ui.activities.NoInternetActivity
-import com.github.libretube.ui.fragments.DownloadTab
+import com.github.libretube.enums.DownloadTab
 import com.github.libretube.ui.fragments.DownloadsFragmentPage.Companion.sortDownloadList
 import com.github.libretube.util.PlayingQueue
 import kotlinx.coroutines.CoroutineScope

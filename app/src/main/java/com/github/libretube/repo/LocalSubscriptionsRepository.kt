@@ -2,19 +2,24 @@ package com.github.libretube.repo
 
 import android.util.Log
 import com.github.libretube.api.obj.Subscription
-import com.github.libretube.db.DatabaseHolder.Database
+import com.github.libretube.constants.YouTubeConstants
+import com.github.libretube.db.DatabaseHolder
+import com.github.libretube.db.dao.LocalSubscriptionDao
 import com.github.libretube.db.obj.LocalSubscription
 import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.parallelMap
 import com.github.libretube.repo.LocalFeedRepository.Companion.CHANNEL_BATCH_DELAY
 import com.github.libretube.repo.LocalFeedRepository.Companion.CHANNEL_BATCH_SIZE
 import com.github.libretube.repo.LocalFeedRepository.Companion.CHANNEL_CHUNK_SIZE
-import com.github.libretube.ui.dialogs.ShareDialog.Companion.YOUTUBE_FRONTEND_URL
 import kotlinx.coroutines.delay
 import org.schabi.newpipe.extractor.channel.ChannelInfo
+import java.util.concurrent.CopyOnWriteArrayList
 import java.util.concurrent.atomic.AtomicInteger
 
 class LocalSubscriptionsRepository : SubscriptionsRepository {
+
+    private val dao: LocalSubscriptionDao get() = DatabaseHolder.Database.localSubscriptionDao()
+
     override suspend fun subscribe(
         channelId: String, name: String, uploaderAvatar: String?, verified: Boolean
     ) {
@@ -24,40 +29,35 @@ class LocalSubscriptionsRepository : SubscriptionsRepository {
             avatar = uploaderAvatar,
             verified = verified
         )
-
-        Database.localSubscriptionDao().insert(localSubscription)
+        dao.insert(localSubscription)
     }
 
     override suspend fun unsubscribe(channelId: String) {
-        Database.localSubscriptionDao().deleteById(channelId)
+        dao.deleteById(channelId)
     }
 
     override suspend fun isSubscribed(channelId: String): Boolean {
-        return Database.localSubscriptionDao().includes(channelId)
+        return dao.includes(channelId)
     }
 
     override suspend fun importSubscriptions(newChannels: List<String>) {
-        val subscribedChannels = getSubscriptionChannelIds()
+        val subscribedChannels = getSubscriptionChannelIds().toSet()
+        val newFiltered = newChannels.filter { it !in subscribedChannels }
 
-        val newFiltered = newChannels.filter { !subscribedChannels.contains(it) }
-
-        val failedChannels = mutableListOf<String>()
-
+        val failedChannels = CopyOnWriteArrayList<String>()
         val channelExtractionCount = AtomicInteger()
+
         for (chunk in newFiltered.chunked(CHANNEL_CHUNK_SIZE)) {
-            // avoid being rate-limited by adding random delays between requests
-            val count = channelExtractionCount.get();
+            val count = channelExtractionCount.get()
             if (count >= CHANNEL_BATCH_SIZE) {
-                // add a delay after each BATCH_SIZE amount of fully-fetched channels
                 delay(CHANNEL_BATCH_DELAY.random())
                 channelExtractionCount.set(0)
             }
 
             chunk.parallelMap { channelId ->
                 try {
-                    val channelUrl = "$YOUTUBE_FRONTEND_URL/channel/${channelId}"
+                    val channelUrl = "${YouTubeConstants.FRONTEND_URL}/channel/$channelId"
                     val channelInfo = ChannelInfo.getInfo(channelUrl)
-
                     val avatarUrl = channelInfo.avatars.maxByOrNull { it.height }?.url
                     subscribe(channelId, channelInfo.name, avatarUrl, channelInfo.isVerified)
                 } catch (e: Exception) {
@@ -67,19 +67,16 @@ class LocalSubscriptionsRepository : SubscriptionsRepository {
             }
         }
 
-        if (!failedChannels.isEmpty()) {
+        if (failedChannels.isNotEmpty()) {
             throw Exception("Failed to import ${failedChannels.joinToString(", ")}")
         }
     }
 
     override suspend fun getSubscriptions(): List<Subscription> {
-        // load all channels that have not been fetched yet
-        val unfinished = Database.localSubscriptionDao().getChannelsWithoutMetaInfo()
-        runCatching {
-            importSubscriptions(unfinished.map { it.channelId })
-        }
+        val unfinished = dao.getChannelsWithoutMetaInfo()
+        runCatching { importSubscriptions(unfinished.map { it.channelId }) }
 
-        return Database.localSubscriptionDao().getAll().map {
+        return dao.getAll().map {
             Subscription(
                 url = it.channelId,
                 name = it.name.orEmpty(),
@@ -90,17 +87,12 @@ class LocalSubscriptionsRepository : SubscriptionsRepository {
     }
 
     override suspend fun getSubscriptionChannelIds(): List<String> {
-        return Database.localSubscriptionDao().getAll().map { it.channelId }
+        return dao.getAll().map { it.channelId }
     }
 
     override suspend fun submitSubscriptionChannelInfosChanged(subscriptions: List<Subscription>) {
-        Database.localSubscriptionDao().updateAll(subscriptions.map {
-            LocalSubscription(
-                it.url,
-                it.name,
-                it.avatar,
-                it.verified
-            )
+        dao.updateAll(subscriptions.map {
+            LocalSubscription(it.url, it.name, it.avatar, it.verified)
         })
     }
 }

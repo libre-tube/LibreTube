@@ -24,7 +24,7 @@ import com.github.libretube.obj.NewPipeSubscriptions
 import com.github.libretube.obj.PipedImportPlaylist
 import com.github.libretube.obj.PipedPlaylistFile
 import com.github.libretube.obj.YouTubeWatchHistoryFileItem
-import com.github.libretube.ui.dialogs.ShareDialog.Companion.YOUTUBE_FRONTEND_URL
+import com.github.libretube.constants.YouTubeConstants
 import com.github.libretube.util.TextUtils
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.encodeToString
@@ -75,7 +75,7 @@ object ImportHelper {
                     JsonHelper.json.decodeFromStream<NewPipeSubscriptions>(it)
                 }
                 subscriptions?.subscriptions.orEmpty().map {
-                    it.url.replace("$YOUTUBE_FRONTEND_URL/channel/", "")
+                    it.url.replace("${YouTubeConstants.FRONTEND_URL}/channel/", "")
                 }
             }
 
@@ -84,7 +84,7 @@ object ImportHelper {
                     JsonHelper.json.decodeFromStream<FreetubeSubscriptions>(it)
                 }
                 subscriptions?.subscriptions.orEmpty().map {
-                    it.url.replace("$YOUTUBE_FRONTEND_URL/channel/", "")
+                    it.url.replace("${YouTubeConstants.FRONTEND_URL}/channel/", "")
                 }
             }
 
@@ -113,7 +113,7 @@ object ImportHelper {
         when (importFormat) {
             ImportFormat.NEWPIPE -> {
                 val newPipeChannels = subs.map {
-                    NewPipeSubscription(it.name, 0, "$YOUTUBE_FRONTEND_URL/channel/${it.url}")
+                    NewPipeSubscription(it.name, 0, "${YouTubeConstants.FRONTEND_URL}/channel/${it.url}")
                 }
                 val newPipeSubscriptions = NewPipeSubscriptions(subscriptions = newPipeChannels)
                 context.contentResolver.openOutputStream(uri)?.use {
@@ -126,7 +126,7 @@ object ImportHelper {
                     FreetubeSubscription(
                         it.name,
                         "",
-                        "$YOUTUBE_FRONTEND_URL/channel/${it.url}"
+                        "${YouTubeConstants.FRONTEND_URL}/channel/${it.url}"
                     )
                 }
                 val freeTubeSubscriptions = FreetubeSubscriptions(subscriptions = freeTubeChannels)
@@ -279,7 +279,7 @@ object ImportHelper {
             ImportFormat.PIPED -> {
                 val playlistFile = PipedPlaylistFile(playlists = playlists.map {
                     val videos = it.relatedStreams.map { item ->
-                        "$YOUTUBE_FRONTEND_URL/watch?v=${item.url!!.toID()}"
+                        "${YouTubeConstants.FRONTEND_URL}/watch?v=${item.url!!.toID()}"
                     }
                     PipedImportPlaylist(it.name, "playlist", "private", videos)
                 })
@@ -315,7 +315,7 @@ object ImportHelper {
             ImportFormat.URLSORIDS -> {
                 val urlListExport = playlists
                     .flatMap { it.relatedStreams }
-                    .joinToString("\n") { YOUTUBE_FRONTEND_URL + "/watch?v=" + it.url!!.toID() }
+                    .joinToString("\n") { YouTubeConstants.FRONTEND_URL + "/watch?v=" + it.url!!.toID() }
 
                 context.contentResolver.openOutputStream(uri)?.use {
                     it.write(urlListExport.toByteArray())

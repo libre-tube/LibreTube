@@ -19,13 +19,12 @@ import com.github.libretube.db.obj.DownloadWithItems
 
 @Dao
 interface DownloadDao {
+
+    // region Downloads
+
     @Transaction
     @Query("SELECT * FROM download")
     suspend fun getAll(): List<DownloadWithItems>
-
-    @Transaction
-    @Query("SELECT * FROM download WHERE videoId = :videoId")
-    suspend fun getDownloadById(videoId: String): DownloadWithItems?
 
     @Transaction
     @Query("SELECT * FROM download WHERE videoId = :videoId")
@@ -34,17 +33,19 @@ interface DownloadDao {
     @Query("SELECT EXISTS (SELECT * FROM download WHERE videoId = :videoId)")
     suspend fun exists(videoId: String): Boolean
 
-    @Query("SELECT * FROM downloaditem WHERE id = :id")
-    suspend fun findDownloadItemById(id: Int): DownloadItem?
-
-    @Query("DELETE FROM downloaditem WHERE id = :id")
-    suspend fun deleteDownloadItemById(id: Int)
-
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertDownload(download: Download)
 
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun insertDownloadChapter(downloadChapter: DownloadChapter)
+    @Transaction
+    @Delete
+    suspend fun deleteDownload(download: Download)
+
+    // endregion
+
+    // region Download Items
+
+    @Query("SELECT * FROM downloaditem WHERE id = :id")
+    suspend fun findDownloadItemById(id: Int): DownloadItem?
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertDownloadItem(downloadItem: DownloadItem): Long
@@ -52,9 +53,19 @@ interface DownloadDao {
     @Update(onConflict = OnConflictStrategy.REPLACE)
     suspend fun updateDownloadItem(downloadItem: DownloadItem)
 
-    @Transaction
-    @Delete
-    suspend fun deleteDownload(download: Download)
+    @Query("DELETE FROM downloaditem WHERE id = :id")
+    suspend fun deleteDownloadItemById(id: Int)
+
+    // endregion
+
+    // region Download Chapters
+
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    suspend fun insertDownloadChapter(downloadChapter: DownloadChapter)
+
+    // endregion
+
+    // region Download Playlists
 
     @Transaction
     @Query("SELECT * FROM downloadPlaylist")
@@ -71,29 +82,29 @@ interface DownloadDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertPlaylist(downloadPlaylist: DownloadPlaylist)
 
-    /**
-     * Connect a [DownloadPlaylist] to a [Download] to link the playlist to the video.
-     */
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertPlaylistVideoConnection(crossRef: DownloadPlaylistVideosCrossRef)
 
-    @Suppress("DEPRECATION")
-    suspend fun deletePlaylistIncludingVideoRefs(playlist: DownloadPlaylist) {
-        deletePlaylistCrossRef(playlist.playlistId)
-        deletePlaylist(playlist)
-    }
+    @Query("DELETE FROM downloadplaylistvideoscrossref WHERE playlistId = :playlistId")
+    suspend fun deletePlaylistCrossRef(playlistId: String)
 
     @Delete
-    @Deprecated("Call deletePlaylistIncludingVideoRefs instead!")
-    suspend fun deletePlaylist(playlist: DownloadPlaylist)
+    suspend fun deletePlaylistEntity(playlist: DownloadPlaylist)
 
-    @Query("DELETE FROM downloadplaylistvideoscrossref WHERE playlistId = :playlistId")
-    @Deprecated("Call deletePlaylistIncludingVideoRefs instead!")
-    suspend fun deletePlaylistCrossRef(playlistId: String)
+    suspend fun deletePlaylistIncludingVideoRefs(playlist: DownloadPlaylist) {
+        deletePlaylistCrossRef(playlist.playlistId)
+        deletePlaylistEntity(playlist)
+    }
 
     @Query("SELECT * FROM downloadplaylistvideoscrossref WHERE playlistId = :playlistId")
     suspend fun getVideoIdsFromPlaylist(playlistId: String): List<DownloadPlaylistVideosCrossRef>
 
+    // endregion
+
+    // region SponsorBlock
+
     @Insert
     suspend fun insertSponsorBlockSegments(segments: List<DownloadSponsorBlockSegment>)
+
+    // endregion
 }

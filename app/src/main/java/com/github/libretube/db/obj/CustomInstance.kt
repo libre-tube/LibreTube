@@ -10,8 +10,8 @@ import kotlinx.serialization.Serializable
 @Serializable
 @Entity(tableName = "customInstance")
 @Parcelize
-class CustomInstance(
-    @PrimaryKey var name: String = "",
-    @ColumnInfo var apiUrl: String = "",
-    @ColumnInfo var frontendUrl: String = ""
+data class CustomInstance(
+    @PrimaryKey val name: String = "",
+    @ColumnInfo val apiUrl: String = "",
+    @ColumnInfo val frontendUrl: String = ""
 ) : Parcelable

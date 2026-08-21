@@ -5,7 +5,7 @@ import androidx.room.Relation
 import com.github.libretube.api.obj.Streams
 import com.github.libretube.enums.FileType
 import com.github.libretube.extensions.toMillis
-import com.github.libretube.ui.fragments.DownloadTab
+import com.github.libretube.enums.DownloadTab
 
 data class DownloadWithItems(
     @Embedded val download: Download,

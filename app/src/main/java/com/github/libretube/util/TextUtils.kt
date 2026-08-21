@@ -6,6 +6,7 @@ import android.net.Uri
 import android.text.format.DateUtils
 import com.github.libretube.BuildConfig
 import com.github.libretube.R
+import com.github.libretube.constants.YouTubeConstants
 import com.github.libretube.extensions.formatShort
 import com.github.libretube.extensions.toLocalDate
 import com.google.common.math.IntMath.pow
@@ -99,7 +100,7 @@ object TextUtils {
     /**
      * Get video id if the link is a valid youtube video link
      */
-    fun getVideoIdFromUri(uri: Uri) = when (uri.host) {
+    fun getVideoIdFromUri(uri: Uri): String? = when (uri.host) {
         "www.youtube.com", "m.youtube.com", "piped.video" -> uri.getQueryParameter("v")
         "youtu.be" -> uri.lastPathSegment
         else -> null

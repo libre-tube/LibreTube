@@ -9,7 +9,7 @@ import com.github.libretube.LibreTubeApp
 import com.github.libretube.api.poToken.PoTokenGenerator
 import com.github.libretube.player.manifest.Representation
 import com.github.libretube.player.manifest.SabrManifest
-import com.github.libretube.ui.dialogs.ShareDialog
+import com.github.libretube.constants.YouTubeConstants
 import com.google.protobuf.ByteString
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -208,8 +208,8 @@ class SabrClient private constructor(
                 .addHeader("Content-Type", CONTENT_TYPE)
                 .addHeader("Accept-Encoding", ENCODING)
                 .addHeader("Accept", ACCEPT)
-                .addHeader("Origin", ShareDialog.YOUTUBE_FRONTEND_URL)
-                .addHeader("Referer", "${ShareDialog.YOUTUBE_FRONTEND_URL}/")
+                .addHeader("Origin", YouTubeConstants.FRONTEND_URL)
+                .addHeader("Referer", "${YouTubeConstants.FRONTEND_URL}/")
                 .addHeader("User-Agent", USER_AGENT)
                 .build()
             chain.proceed(request)

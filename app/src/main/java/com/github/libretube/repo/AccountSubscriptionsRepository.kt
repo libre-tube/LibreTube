@@ -7,20 +7,17 @@ import com.github.libretube.extensions.toID
 import com.github.libretube.helpers.PreferenceHelper
 
 class AccountSubscriptionsRepository : SubscriptionsRepository {
+
     private val token get() = PreferenceHelper.getToken()
 
     override suspend fun subscribe(
         channelId: String, name: String, uploaderAvatar: String?, verified: Boolean
     ) {
-        runCatching {
-            RetrofitInstance.authApi.subscribe(token, Subscribe(channelId))
-        }
+        runCatching { RetrofitInstance.authApi.subscribe(token, Subscribe(channelId)) }
     }
 
     override suspend fun unsubscribe(channelId: String) {
-        runCatching {
-            RetrofitInstance.authApi.unsubscribe(token, Subscribe(channelId))
-        }
+        runCatching { RetrofitInstance.authApi.unsubscribe(token, Subscribe(channelId)) }
     }
 
     override suspend fun isSubscribed(channelId: String): Boolean? {

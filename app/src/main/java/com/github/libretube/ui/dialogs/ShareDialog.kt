@@ -11,6 +11,7 @@ import androidx.fragment.app.DialogFragment
 import com.github.libretube.R
 import com.github.libretube.constants.IntentData
 import com.github.libretube.constants.PreferenceKeys
+import com.github.libretube.constants.YouTubeConstants
 import com.github.libretube.databinding.DialogShareBinding
 import com.github.libretube.db.DatabaseHelper
 import com.github.libretube.db.DatabaseHolder.Database
@@ -137,42 +138,41 @@ class ShareDialog : DialogFragment() {
         customInstances: List<CustomInstance>
     ): String {
         val host = when {
-            binding.piped.isChecked -> PIPED_FRONTEND_URL
-            binding.youtube.isChecked -> YOUTUBE_FRONTEND_URL
-            // only available for custom instances
+            binding.piped.isChecked -> YouTubeConstants.PIPED_FRONTEND_URL
+            binding.youtube.isChecked -> YouTubeConstants.FRONTEND_URL
             else -> {
                 val selectedCustomInstance = customInstances
                     .firstOrNull { it.name.hashCode() == binding.shareHostGroup.checkedRadioButtonId }
-                selectedCustomInstance?.frontendUrl?.trimEnd('/') ?: YOUTUBE_FRONTEND_URL
+                selectedCustomInstance?.frontendUrl?.trimEnd('/') ?: YouTubeConstants.FRONTEND_URL
             }
         }
         val url = when (shareObjectType) {
             ShareObjectType.VIDEO -> {
                 val queryParams = mutableListOf<String>()
-                if (host != YOUTUBE_FRONTEND_URL) {
+                if (host != YouTubeConstants.FRONTEND_URL) {
                     queryParams.add("v=${id}")
                 }
                 if (binding.timeCodeSwitch.isChecked) {
                     queryParams += "t=${binding.timeStamp.text}"
                 }
                 val baseUrl =
-                    if (host == YOUTUBE_FRONTEND_URL) "$YOUTUBE_SHORT_URL/$id" else "$host/watch"
+                    if (host == YouTubeConstants.FRONTEND_URL) "${YouTubeConstants.SHORT_URL}/$id" else "$host${YouTubeConstants.WATCH_PATH}"
 
                 if (queryParams.isEmpty()) baseUrl
                 else baseUrl + "?" + queryParams.joinToString("&")
             }
 
-            ShareObjectType.PLAYLIST -> "$host/playlist?list=$id"
-            else -> "$host/channel/$id"
+            ShareObjectType.PLAYLIST -> "$host${YouTubeConstants.PLAYLIST_PATH}$id"
+            else -> "$host${YouTubeConstants.CHANNEL_PATH}$id"
         }
 
         return url
     }
 
     companion object {
-        const val YOUTUBE_FRONTEND_URL = "https://www.youtube.com"
-        const val YOUTUBE_MUSIC_URL = "https://music.youtube.com"
-        const val YOUTUBE_SHORT_URL = "https://youtu.be"
-        const val PIPED_FRONTEND_URL = "https://piped.video"
+        const val YOUTUBE_FRONTEND_URL = YouTubeConstants.FRONTEND_URL
+        const val YOUTUBE_MUSIC_URL = YouTubeConstants.MUSIC_URL
+        const val YOUTUBE_SHORT_URL = YouTubeConstants.SHORT_URL
+        const val PIPED_FRONTEND_URL = YouTubeConstants.PIPED_FRONTEND_URL
     }
 }

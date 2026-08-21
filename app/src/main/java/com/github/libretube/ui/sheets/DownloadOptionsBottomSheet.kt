@@ -17,7 +17,7 @@ import com.github.libretube.obj.ShareData
 import com.github.libretube.parcelable.PlayerData
 import com.github.libretube.ui.activities.NoInternetActivity
 import com.github.libretube.ui.dialogs.ShareDialog
-import com.github.libretube.ui.fragments.DownloadTab
+import com.github.libretube.enums.DownloadTab
 import com.github.libretube.util.PlayingQueue
 import com.github.libretube.util.PlayingQueueMode
 

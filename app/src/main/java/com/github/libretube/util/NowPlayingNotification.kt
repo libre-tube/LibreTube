@@ -13,6 +13,7 @@ import com.github.libretube.LibreTubeApp.Companion.PLAYER_CHANNEL_NAME
 import com.github.libretube.R
 import com.github.libretube.enums.NotificationId
 import com.github.libretube.enums.PlayerEvent
+import com.github.libretube.helpers.PipHelper
 import com.github.libretube.helpers.PlayerHelper
 import com.google.common.collect.ImmutableList
 
@@ -42,7 +43,7 @@ class NowPlayingNotification(
      * Forward the action to the responsible notification owner (e.g. PlayerFragment)
      */
     private fun handlePlayerAction(action: PlayerEvent) {
-        val intent = Intent(PlayerHelper.getIntentActionName(context))
+        val intent = Intent(PipHelper.getIntentActionName(context))
             .setPackage(context.packageName)
             .putExtra(PlayerHelper.CONTROL_TYPE, action)
         context.sendBroadcast(intent)

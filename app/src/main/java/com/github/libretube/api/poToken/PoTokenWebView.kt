@@ -9,7 +9,7 @@ import android.webkit.WebView
 import androidx.annotation.MainThread
 import com.github.libretube.BuildConfig
 import com.github.libretube.api.RetrofitInstance
-import com.github.libretube.api.USER_AGENT
+import com.github.libretube.constants.ApiConstants
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -38,7 +38,7 @@ class PoTokenWebView private constructor(
             //noinspection SetJavaScriptEnabled we want to use JavaScript!
             javaScriptEnabled = true
             safeBrowsingEnabled = false
-            userAgentString = USER_AGENT
+            userAgentString = ApiConstants.USER_AGENT
             blockNetworkLoads = true // the WebView does not need internet access
         }
 

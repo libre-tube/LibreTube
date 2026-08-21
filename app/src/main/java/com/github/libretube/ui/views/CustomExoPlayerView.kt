@@ -14,8 +14,6 @@ import android.view.KeyEvent
 import android.view.MotionEvent
 import android.view.Window
 import android.widget.FrameLayout
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.appcompat.widget.TooltipCompat
 import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
@@ -29,7 +27,6 @@ import androidx.core.view.updateLayoutParams
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.findViewTreeLifecycleOwner
 import androidx.media3.common.C
-import androidx.media3.common.PlaybackParameters
 import androidx.media3.common.Player
 import androidx.media3.common.text.Cue
 import androidx.media3.session.MediaController
@@ -49,18 +46,14 @@ import com.github.libretube.enums.PlayerCommand
 import com.github.libretube.extensions.dpToPx
 import com.github.libretube.extensions.navigateVideo
 import com.github.libretube.extensions.normalize
-import com.github.libretube.extensions.round
 import com.github.libretube.extensions.seekBy
-import com.github.libretube.extensions.toID
 import com.github.libretube.extensions.togglePlayPauseState
 import com.github.libretube.extensions.updateIfChanged
-import com.github.libretube.helpers.AudioHelper
 import com.github.libretube.helpers.BrightnessHelper
+import com.github.libretube.helpers.CaptionHelper
 import com.github.libretube.helpers.PlayerHelper
 import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.helpers.WindowHelper
-import com.github.libretube.obj.BottomSheetItem
-import com.github.libretube.obj.VideoResolution
 import com.github.libretube.services.AbstractPlayerService
 import com.github.libretube.ui.base.BaseActivity
 import com.github.libretube.ui.controllers.FullscreenGestureAnimationController
@@ -76,14 +69,8 @@ import com.github.libretube.ui.models.CommonPlayerViewModel
 import com.github.libretube.ui.models.PlayerViewModel
 import com.github.libretube.ui.sheets.BaseBottomSheet
 import com.github.libretube.ui.sheets.ChaptersBottomSheet
-import com.github.libretube.ui.sheets.PlaybackOptionsSheet
 import com.github.libretube.ui.sheets.PlayingQueueSheet
-import com.github.libretube.ui.sheets.SleepTimerSheet
-import com.github.libretube.ui.sheets.StatsSheet
-import com.github.libretube.ui.tools.SleepTimer
 import com.github.libretube.util.PlayingQueue
-import java.util.Locale
-import kotlin.math.ceil
 
 @SuppressLint("ClickableViewAccessibility")
 @androidx.annotation.OptIn(androidx.media3.common.util.UnstableApi::class)
@@ -95,59 +82,22 @@ class CustomExoPlayerView(
     val binding = ExoStyledPlayerControlViewBinding.bind(this)
     val backgroundBinding = CustomExoPlayerViewTemplateBinding.bind(this)
 
-    /**
-     * Objects for player tap and swipe gesture
-     */
     private val gestureViewBinding: PlayerGestureControlsViewBinding get() = backgroundBinding.playerGestureControlsView.binding
     private val doubleTapOverlayBinding: DoubleTapOverlayBinding get() = backgroundBinding.doubleTapOverlay.binding
 
     private var playerGestureController: PlayerGestureController
     private var brightnessHelper: BrightnessHelper
-    private var audioHelper: AudioHelper
     private lateinit var chaptersViewModel: ChaptersViewModel
     private lateinit var seekBarListener: TimeBar.OnScrubListener
     private var fullscreenGestureAnimationController: FullscreenGestureAnimationController
     private var chaptersBottomSheet: ChaptersBottomSheet? = null
     private var scrubbingTimeBar = false
 
-    /**
-     * Objects from the parent fragment
-     */
-
     private val runnableHandler = Handler(Looper.getMainLooper())
     private var isPlayerLocked: Boolean = false
 
-    private var resizeModePref: Int
-        set(value) {
-            PreferenceHelper.putInt(
-                PreferenceKeys.PLAYER_RESIZE_MODE,
-                value
-            )
-        }
-        get() = PreferenceHelper.getInt(
-            PreferenceKeys.PLAYER_RESIZE_MODE,
-            AspectRatioFrameLayout.RESIZE_MODE_FIT
-        )
-    private val resizeModes = listOf(
-        AspectRatioFrameLayout.RESIZE_MODE_FIT to R.string.resize_mode_fit,
-        AspectRatioFrameLayout.RESIZE_MODE_ZOOM to R.string.resize_mode_zoom,
-        AspectRatioFrameLayout.RESIZE_MODE_FILL to R.string.resize_mode_fill
-    )
-
     private val activity get() = context as BaseActivity
-
-    private val supportFragmentManager
-        get() = activity.supportFragmentManager
-
-    /**
-     * Playback speed that has been set before the fast forward mode
-     * has been triggered by a long press.
-     */
-    private var rememberedPlaybackSpeed: Float? = null
-
-    private fun toggleController(show: Boolean = !isControllerFullyVisible) {
-        if (show) showController() else hideController()
-    }
+    private val supportFragmentManager get() = activity.supportFragmentManager
 
     private var playerViewModel: PlayerViewModel? = null
     private var commonPlayerViewModel: CommonPlayerViewModel? = null
@@ -155,40 +105,35 @@ class CustomExoPlayerView(
 
     private val handler = Handler(Looper.getMainLooper())
 
-    /**
-     * The window that needs to be addressed for showing and hiding the system bars
-     * If null, the activity's default/main window will be used
-     */
     var currentWindow: Window? = null
-
-    private var selectedResolution: Int? = null
     var sponsorBlockAutoSkip = true
         private set
 
-    private var selectedAudioLanguageAndRoleFlags: Pair<String?, @C.RoleFlags Int>? = null
     private lateinit var playerCallback: CustomPlayerCallback
 
-
-    // if null, it's been set to automatic
-    private var fullscreenResolution: Int? = null
-
-    // the resolution to use when the video is not played in fullscreen
-    // if null, use same quality as fullscreen
-    private var noFullscreenResolution: Int? = null
+    private lateinit var menuHandler: PlayerMenuHandler
+    private lateinit var seekHelper: PlayerSeekHelper
 
     init {
+        val audioHelper = com.github.libretube.helpers.AudioHelper(context)
         brightnessHelper = BrightnessHelper(activity)
         playerGestureController = PlayerGestureController(activity, this)
-        audioHelper = AudioHelper(context)
         fullscreenGestureAnimationController = FullscreenGestureAnimationController(
             playerView = this,
             videoFrameView = backgroundBinding.exoContentFrame,
-            onSwipeUpCompleted = {
-                if (!isFullscreen()) playerCallback.toggleFullscreen()
-            },
-            onSwipeDownCompleted = {
-                if (isFullscreen()) playerCallback.toggleFullscreen()
-            }
+            onSwipeUpCompleted = { if (!isFullscreen()) playerCallback.toggleFullscreen() },
+            onSwipeDownCompleted = { if (isFullscreen()) playerCallback.toggleFullscreen() }
+        )
+
+        seekHelper = PlayerSeekHelper(
+            playerProvider = { player },
+            gestureBinding = { doubleTapOverlayBinding },
+            controlBinding = { binding },
+            fastForwardViewProvider = { backgroundBinding.fastForwardView },
+            isPlayerLocked = { isPlayerLocked },
+            handler = runnableHandler,
+            hideForwardToken = HIDE_FORWARD_BUTTON_TOKEN,
+            hideRewindToken = HIDE_REWIND_BUTTON_TOKEN
         )
     }
 
@@ -207,24 +152,33 @@ class CustomExoPlayerView(
         this.playerCallback = playerCallback
         super.player = player
 
+        menuHandler = PlayerMenuHandler(
+            context = context,
+            fragmentManager = supportFragmentManager,
+            playerProvider = { player },
+            playerViewModelProvider = { playerViewModel },
+            isVideoLive = { playerCallback.isVideoLive() },
+            getVideoId = { playerCallback.getVideoId() },
+            isVideoShort = { playerCallback.isVideoShort() },
+            onResizeModeChanged = { resizeMode = it },
+            onSubtitleTrackChanged = ::updateCurrentSubtitle
+        )
+
         initializeGestureProgress()
 
-        initRewindAndForward()
+        seekHelper.initRewindAndForward()
         applyCaptionsStyle()
         initializeAdvancedOptions()
 
         setupKeyboardFocus()
 
-        // don't let the player view hide its controls automatically
         controllerShowTimeoutMs = -1
-        // don't let the player view show its controls automatically
         controllerAutoShow = false
 
         binding.fullscreen.setOnClickListener { playerCallback.toggleFullscreen() }
 
-        resizeMode = resizeModePref
+        resizeMode = menuHandler.resizeMode
 
-        // prevent the controls from disappearing while scrubbing the time bar
         if (!::seekBarListener.isInitialized) {
             seekBarListener = object : TimeBar.OnScrubListener {
                 override fun onScrubStart(timeBar: TimeBar, position: Long) {
@@ -233,14 +187,12 @@ class CustomExoPlayerView(
 
                 override fun onScrubMove(timeBar: TimeBar, position: Long) {
                     cancelHideControllerTask()
-
                     setCurrentChapterName(forceUpdate = true, enqueueNew = false)
                     scrubbingTimeBar = true
                 }
 
                 override fun onScrubStop(timeBar: TimeBar, position: Long, canceled: Boolean) {
                     enqueueHideControllerTask()
-
                     setCurrentChapterName(forceUpdate = true, enqueueNew = false)
                     scrubbingTimeBar = false
                 }
@@ -249,20 +201,14 @@ class CustomExoPlayerView(
         }
 
         binding.autoPlay.isChecked = PlayerHelper.autoPlayEnabled
-
         binding.autoPlay.setOnCheckedChangeListener { _, isChecked ->
             PlayerHelper.autoPlayEnabled = isChecked
         }
 
-        // restore the duration type from the previous session
         updateDisplayedDurationType()
 
-        binding.duration.setOnClickListener {
-            updateDisplayedDurationType(true)
-        }
-        binding.timeLeft.setOnClickListener {
-            updateDisplayedDurationType(false)
-        }
+        binding.duration.setOnClickListener { updateDisplayedDurationType(true) }
+        binding.timeLeft.setOnClickListener { updateDisplayedDurationType(false) }
         binding.position.setOnClickListener {
             if (playerCallback.isVideoLive()) player.let { it.seekTo(it.duration) }
         }
@@ -274,23 +220,15 @@ class CustomExoPlayerView(
             player.seekTo(bundle.getLong(IntentData.currentPosition))
         }
 
-        // enable the chapters dialog in the player
         binding.chapterName.setOnClickListener {
             val sheet = chaptersBottomSheet ?: ChaptersBottomSheet()
                 .apply {
-                    arguments = bundleOf(
-                        IntentData.duration to player.duration.div(1000)
-                    )
+                    arguments = bundleOf(IntentData.duration to player.duration.div(1000))
                 }
-                .also {
-                    chaptersBottomSheet = it
-                }
+                .also { chaptersBottomSheet = it }
 
-            if (sheet.isVisible) {
-                sheet.dismiss()
-            } else {
-                sheet.show(activity.supportFragmentManager)
-            }
+            if (sheet.isVisible) sheet.dismiss()
+            else sheet.show(activity.supportFragmentManager)
         }
 
         supportFragmentManager.setFragmentResultListener(
@@ -317,7 +255,7 @@ class CustomExoPlayerView(
 
             binding.exoTitle.isInvisible = !isFullscreen
 
-            updateResolution(isFullscreen)
+            menuHandler.updateResolution(isFullscreen)
         }
 
         val updateSbImageResource = {
@@ -342,7 +280,7 @@ class CustomExoPlayerView(
             PreferenceHelper.getBoolean(PreferenceKeys.CONTRIBUTE_TO_SB, false)
         binding.sbSubmit.setOnClickListener {
             val submitSegmentDialog = SubmitSegmentDialog()
-            submitSegmentDialog.arguments = buildSbBundleArgs() ?: return@setOnClickListener
+            submitSegmentDialog.arguments = menuHandler.buildSbBundleArgs() ?: return@setOnClickListener
             submitSegmentDialog.show((context as BaseActivity).supportFragmentManager, null)
         }
 
@@ -350,13 +288,11 @@ class CustomExoPlayerView(
             PreferenceHelper.getBoolean(PreferenceKeys.CONTRIBUTE_TO_DEARROW, false)
         binding.dearrowSubmit.setOnClickListener {
             val submitDialog = SubmitDeArrowDialog()
-            submitDialog.arguments = buildSbBundleArgs() ?: return@setOnClickListener
+            submitDialog.arguments = menuHandler.buildSbBundleArgs() ?: return@setOnClickListener
             submitDialog.show((context as BaseActivity).supportFragmentManager, null)
         }
 
-        binding.playPauseBTN.setOnClickListener {
-            player.togglePlayPauseState()
-        }
+        binding.playPauseBTN.setOnClickListener { player.togglePlayPauseState() }
 
         player.addListener(object : Player.Listener {
             override fun onEvents(player: Player, events: Player.Events) {
@@ -370,31 +306,19 @@ class CustomExoPlayerView(
             }
         })
 
-        binding.playPauseBTN.setImageResource(
-            PlayerHelper.getPlayPauseActionIcon(player)
-        )
-
+        binding.playPauseBTN.setImageResource(PlayerHelper.getPlayPauseActionIcon(player))
         binding.exoProgress.setPlayer(player)
 
         if (player.isPlaying) keepScreenOn = true
 
-        // locking the player
         binding.lockPlayer.setOnClickListener {
-            // change the locked/unlocked icon
             val icon = if (!isPlayerLocked) R.drawable.ic_locked else R.drawable.ic_unlocked
-            val tooltip = if (!isPlayerLocked) {
-                R.string.tooltip_unlocked
-            } else {
-                R.string.tooltip_locked
-            }
+            val tooltip = if (!isPlayerLocked) R.string.tooltip_unlocked else R.string.tooltip_locked
 
             binding.lockPlayer.setImageResource(icon)
             TooltipCompat.setTooltipText(binding.lockPlayer, context.getString(tooltip))
 
-            // show/hide all the controls
             lockPlayer(isPlayerLocked)
-
-            // change locked status
             isPlayerLocked = !isPlayerLocked
 
             if (isFullscreen()) toggleSystemBars(!isPlayerLocked)
@@ -403,32 +327,24 @@ class CustomExoPlayerView(
         updateCurrentPosition()
     }
 
-    /**
-     * @see CustomExoPlayerView.initialize
-     * @see CustomExoPlayerView.detachPlayer
-     */
     @Deprecated("Use `initialize()` instead to attach `Player` and use `detachPlayer()` to detach it")
     override fun setPlayer(player: Player?) {
         super.setPlayer(player)
     }
 
-    fun detachPlayer(){
+    fun detachPlayer() {
         super.setPlayer(null)
     }
 
     private fun syncQueueButtons() {
         if (!PlayerHelper.skipButtonsEnabled) return
 
-        // toggle the visibility of next and prev buttons based on queue and whether the player view is locked
         binding.skipPrev.isInvisible = !PlayingQueue.hasPrev() || isPlayerLocked
         binding.skipNext.isInvisible = !PlayingQueue.hasNext() || isPlayerLocked
 
         handler.postDelayed(this::syncQueueButtons, 100)
     }
 
-    /**
-     * Update the displayed duration of the video
-     */
     private fun updateDisplayedDuration() {
         if (playerCallback.isVideoLive()) return
 
@@ -448,36 +364,16 @@ class CustomExoPlayerView(
         }
     }
 
-    private fun buildSbBundleArgs(): Bundle? {
-        val currentPosition = player?.currentPosition?.takeIf { it != C.TIME_UNSET } ?: 0
-        val duration = player?.duration?.takeIf { it != C.TIME_UNSET }
-        val videoId = PlayingQueue.getCurrent()?.url?.toID() ?: return null
-
-        return bundleOf(
-            IntentData.currentPosition to currentPosition,
-            IntentData.duration to duration,
-            IntentData.videoId to videoId
-        )
-    }
-
-    /**
-     * Set the name of the video chapter in the [CustomExoPlayerView]
-     * @param forceUpdate Update the current chapter name no matter if the seek bar is scrubbed
-     * @param enqueueNew set a timeout to automatically repeat this function again in 100ms
-     */
     fun setCurrentChapterName(forceUpdate: Boolean = false, enqueueNew: Boolean = true) {
         val player = player ?: return
         val chapters = chaptersViewModel.chapters
 
         binding.chapterName.isInvisible = chapters.isEmpty()
 
-        // the following logic to set the chapter title can be skipped if no chapters are available
         if (chapters.isEmpty()) return
 
-        // call the function again in 100ms
         if (enqueueNew) postDelayed(this::setCurrentChapterName, 100)
 
-        // if the user is scrubbing the time bar, don't update
         if (scrubbingTimeBar && !forceUpdate) return
 
         val currentIndex = PlayerHelper.getCurrentChapterIndex(player.currentPosition, chapters)
@@ -485,42 +381,30 @@ class CustomExoPlayerView(
 
         chaptersViewModel.currentChapterIndex.updateIfChanged(currentIndex ?: -1)
 
-        // change the chapter name textView text to the chapterName
         if (newChapterName != binding.chapterName.text) {
             binding.chapterName.text = newChapterName
         }
     }
 
-    /**
-     * focus the player view so that all keyboard events will be moved here
-     */
     private fun setupKeyboardFocus() {
         isFocusable = true
         isFocusableInTouchMode = true
-        // workaround (possibly a no-op?): we don't directly focus the player via
-        // requestFocus() because that leads the focus to be moved back to the search bar
-        // once exiting fullscreen
         activity.window.decorView.requestFocus()
     }
 
     fun toggleSystemBars(showBars: Boolean) {
         getWindow().toggleSystemBars(
-            types = if (showBars) {
-                WindowHelper.getGestureControlledBars(context)
-            } else {
-                WindowInsetsCompat.Type.systemBars()
-            },
+            types = if (showBars) WindowHelper.getGestureControlledBars(context)
+            else WindowInsetsCompat.Type.systemBars(),
             showBars = showBars
         )
     }
 
     private fun updateDisplayedDurationType(showTimeLeft: Boolean? = null) {
-        var shouldShowTimeLeft = showTimeLeft ?: PreferenceHelper
-            .getBoolean(PreferenceKeys.SHOW_TIME_LEFT, false)
-        // always show the time left only if it's a livestream
+        var shouldShowTimeLeft = showTimeLeft
+            ?: PreferenceHelper.getBoolean(PreferenceKeys.SHOW_TIME_LEFT, false)
         if (playerCallback.isVideoLive()) shouldShowTimeLeft = true
         if (showTimeLeft != null) {
-            // save whether to show time left or duration for next session
             PreferenceHelper.putBoolean(PreferenceKeys.SHOW_TIME_LEFT, shouldShowTimeLeft)
         }
         binding.timeLeft.isVisible = shouldShowTimeLeft
@@ -538,467 +422,44 @@ class CustomExoPlayerView(
     }
 
     override fun hideController() {
-        // remove the callback to hide the controller
         cancelHideControllerTask()
         super.hideController()
-        backgroundBinding.exoControlsBackground.animate()
-            .alpha(0f)
-            .setDuration(500)
-            .start()
+        backgroundBinding.exoControlsBackground.animate().alpha(0f).setDuration(500).start()
 
-        if (isFullscreen()) {
-            toggleSystemBars(false)
-        }
+        if (isFullscreen()) toggleSystemBars(false)
     }
 
     override fun showController() {
-        // remove the previous callback from the queue to prevent a flashing behavior
         cancelHideControllerTask()
-        // automatically hide the controller after 2 seconds
         enqueueHideControllerTask()
         super.showController()
-        backgroundBinding.exoControlsBackground.animate()
-            .alpha(1f)
-            .setDuration(200)
-            .start()
+        backgroundBinding.exoControlsBackground.animate().alpha(1f).setDuration(200).start()
 
-        if (isFullscreen() && !isPlayerLocked) {
-            toggleSystemBars(true)
-        }
+        if (isFullscreen() && !isPlayerLocked) toggleSystemBars(true)
     }
 
     fun showControllerPermanently() {
-        // remove the previous callback from the queue to prevent a flashing behavior
         cancelHideControllerTask()
         super.showController()
-    }
-
-    private fun initRewindAndForward() {
-        val seekIncrementText = (PlayerHelper.seekIncrement / 1000).toString()
-        listOf(
-            doubleTapOverlayBinding.rewindLayout.rewindTV,
-            doubleTapOverlayBinding.forwardLayout.forwardTV,
-            binding.seekButtonForward.forwardTV,
-            binding.seekButtonRewind.rewindTV
-        ).forEach {
-            it.text = seekIncrementText
-        }
-        binding.seekButtonForward.forwardBTN.setOnClickListener {
-            player?.seekBy(PlayerHelper.seekIncrement)
-        }
-        binding.seekButtonRewind.rewindBTN.setOnClickListener {
-            player?.seekBy(-PlayerHelper.seekIncrement)
-        }
-
-        if (!PlayerHelper.doubleTapToSeek) {
-            binding.seekButtonForward.forwardBTN.isVisible = !isPlayerLocked
-            binding.seekButtonRewind.rewindBTN.isVisible = !isPlayerLocked
-        }
     }
 
     private fun initializeAdvancedOptions() {
         binding.toggleOptions.setOnClickListener {
-            val items = getOptionsMenuItems()
+            val items = menuHandler.buildOptionsMenuItems()
             val bottomSheetFragment = BaseBottomSheet().setItems(items, null)
             bottomSheetFragment.show(supportFragmentManager, null)
         }
     }
 
-    fun getOptionsMenuItems(): List<BottomSheetItem> = listOf(
-        BottomSheetItem(
-            context.getString(R.string.repeat_mode),
-            R.drawable.ic_repeat,
-            {
-                when (PlayingQueue.repeatMode) {
-                    Player.REPEAT_MODE_OFF -> context.getString(R.string.repeat_mode_none)
-                    Player.REPEAT_MODE_ONE -> context.getString(R.string.repeat_mode_current)
-                    Player.REPEAT_MODE_ALL -> context.getString(R.string.repeat_mode_all)
-                    else -> throw IllegalArgumentException()
-                }
-            }
-        ) {
-            onRepeatModeClicked()
-        },
-        BottomSheetItem(
-            context.getString(R.string.player_resize_mode),
-            R.drawable.ic_aspect_ratio,
-            {
-                resizeModes.find { it.first == resizeMode }?.second?.let {
-                    context.getString(it)
-                }
-            }
-        ) {
-            onResizeModeClicked()
-        },
-        BottomSheetItem(
-            context.getString(R.string.playback_speed),
-            R.drawable.ic_speed,
-            {
-                "${player?.playbackParameters?.speed?.round(2)}x"
-            }
-        ) {
-            onPlaybackSpeedClicked()
-        },
-        BottomSheetItem(
-            context.getString(R.string.sleep_timer),
-            R.drawable.ic_sleep,
-            {
-                if (SleepTimer.timeLeftMillis > 0) {
-                    val minutesLeft =
-                        ceil(SleepTimer.timeLeftMillis.toDouble() / DateUtils.MINUTE_IN_MILLIS).toInt()
-                    context.resources.getQuantityString(
-                        R.plurals.minutes_left,
-                        minutesLeft,
-                        minutesLeft
-                    )
-                } else {
-                    context.getString(R.string.disabled)
-                }
-            }
-        ) {
-            onSleepTimerClicked()
-        },
-        BottomSheetItem(
-            context.getString(R.string.quality),
-            R.drawable.ic_hd,
-            this::getCurrentResolutionSummary
-        ) {
-            onQualityClicked()
-        },
-        BottomSheetItem(
-            context.getString(R.string.audio_track),
-            R.drawable.ic_audio,
-            this::getCurrentAudioTrackTitle
-        ) {
-            onAudioStreamClicked()
-        },
-        BottomSheetItem(
-            context.getString(R.string.captions),
-            R.drawable.ic_caption,
-            {
-                player?.let { PlayerHelper.getCurrentPlayedCaptionFormat(it)?.language }
-                    ?: context.getString(R.string.none)
-            }
-        ) {
-            onCaptionsClicked()
-        },
-        BottomSheetItem(
-            context.getString(R.string.stats_for_nerds),
-            R.drawable.ic_info
-        ) {
-            onStatsClicked()
-        }
-    )
+    fun getOptionsMenuItems() = menuHandler.buildOptionsMenuItems()
 
-    @androidx.annotation.OptIn(androidx.media3.common.util.UnstableApi::class)
-    private fun getCurrentResolutionSummary(): String {
-        val currentQuality = player?.videoSize?.height ?: 0
-        var summary = "${currentQuality}p"
-        if (selectedResolution == null) {
-            summary += " - ${context.getString(R.string.auto)}"
-        } else if ((selectedResolution ?: 0) > currentQuality) {
-            summary += " - ${context.getString(R.string.resolution_limited)}"
-        }
-        return summary
+    fun setToDefaultResolution() {
+        menuHandler.setToDefaultResolution(context)
+        menuHandler.updateResolution(isFullscreen())
     }
 
-    private fun getCurrentAudioTrackTitle(): String {
-        if (player == null) {
-            return context.getString(R.string.unknown_or_no_audio)
-        }
-
-        // The player reference should be not changed between the null check
-        // and its access, so a non-null assertion should be safe here
-        val selectedAudioLanguagesAndRoleFlags =
-            PlayerHelper.getAudioLanguagesAndRoleFlagsFromTrackGroups(
-                player!!.currentTracks.groups,
-                true
-            )
-
-        if (selectedAudioLanguagesAndRoleFlags.isEmpty()) {
-            return context.getString(R.string.unknown_or_no_audio)
-        }
-
-        // At most one audio track should be selected regardless of audio
-        // format or quality
-        val firstSelectedAudioFormat = selectedAudioLanguagesAndRoleFlags[0]
-
-        if (selectedAudioLanguagesAndRoleFlags.size == 1 &&
-            firstSelectedAudioFormat.first == null &&
-            !PlayerHelper.haveAudioTrackRoleFlagSet(
-                firstSelectedAudioFormat.second
-            )
-        ) {
-            // Regardless of audio format or quality, if there is only one
-            // audio stream which has no language and no role flags, it
-            // should mean that there is only a single audio track which
-            // has no language or track type set in the video played
-            // Consider it as the default audio track (or unknown)
-            return context.getString(R.string.default_or_unknown_audio_track)
-        }
-
-
-        return PlayerHelper.getAudioTrackNameFromFormat(
-            context,
-            firstSelectedAudioFormat,
-        )
-    }
-
-
-    // lock the player
-    private fun lockPlayer(isLocked: Boolean) {
-        // isLocked is the current (old) state of the player lock
-        binding.exoTopBarRight.isVisible = isLocked
-        binding.exoCenterControls.isVisible = isLocked
-        binding.bottomBar.isVisible = isLocked
-        binding.closeImageButton.isVisible = isLocked
-        binding.exoTitle.isVisible = isLocked
-        binding.playPauseBTN.isVisible = isLocked
-
-        if (!PlayerHelper.doubleTapToSeek) {
-            binding.seekButtonRewind.rewindBTN.isVisible = isLocked
-            binding.seekButtonForward.forwardBTN.isVisible = isLocked
-        }
-
-        // hide the dimming background overlay if locked
-        backgroundBinding.exoControlsBackground.setBackgroundColor(
-            if (isLocked) {
-                ContextCompat.getColor(
-                    context,
-                    androidx.media3.ui.R.color.exo_black_opacity_60
-                )
-            } else {
-                Color.TRANSPARENT
-            }
-        )
-
-        // disable tap and swipe gesture if the player is locked
-        playerGestureController.areControlsLocked = !isLocked
-    }
-
-    private fun rewind() {
-        player?.seekBy(-PlayerHelper.seekIncrement)
-
-        // show the rewind button
-        doubleTapOverlayBinding.apply {
-            animateSeeking(
-                rewindLayout.rewindBTN,
-                rewindLayout.rewindIV,
-                rewindLayout.rewindTV,
-                true
-            )
-
-            // start callback to hide the button
-            runnableHandler.removeCallbacksAndMessages(HIDE_REWIND_BUTTON_TOKEN)
-            runnableHandler.postDelayed(700, HIDE_REWIND_BUTTON_TOKEN) {
-                rewindLayout.rewindBTN.isGone = true
-            }
-        }
-    }
-
-    private fun forward() {
-        player?.seekBy(PlayerHelper.seekIncrement)
-
-        // show the forward button
-        doubleTapOverlayBinding.apply {
-            animateSeeking(
-                forwardLayout.forwardBTN,
-                forwardLayout.forwardIV,
-                forwardLayout.forwardTV,
-                false
-            )
-
-            // start callback to hide the button
-            runnableHandler.removeCallbacksAndMessages(HIDE_FORWARD_BUTTON_TOKEN)
-            runnableHandler.postDelayed(700, HIDE_FORWARD_BUTTON_TOKEN) {
-                forwardLayout.forwardBTN.isGone = true
-            }
-        }
-    }
-
-    private fun animateSeeking(
-        container: FrameLayout,
-        imageView: ImageView,
-        textView: TextView,
-        isRewind: Boolean
-    ) {
-        container.isVisible = true
-        // the direction of the action
-        val direction = if (isRewind) -1 else 1
-
-        // clear previous animation
-        imageView.animate()
-            .rotation(0F)
-            .setDuration(0)
-            .start()
-
-        textView.animate()
-            .translationX(0f)
-            .setDuration(0)
-            .start()
-
-        // start the rotate animation of the drawable
-        imageView.animate()
-            .rotation(direction * 30F)
-            .setDuration(ANIMATION_DURATION)
-            .withEndAction {
-                // reset the animation when finished
-                imageView.animate()
-                    .rotation(0F)
-                    .setDuration(ANIMATION_DURATION)
-                    .start()
-            }
-            .start()
-
-        // animate the text view to move outside the image view
-        textView.animate()
-            .translationX(direction * 100f)
-            .setDuration((ANIMATION_DURATION * 1.5).toLong())
-            .withEndAction {
-                // move the text back into the button
-                runnableHandler.postDelayed(100) {
-                    textView.animate()
-                        .setDuration(ANIMATION_DURATION / 2)
-                        .translationX(0f)
-                        .start()
-                }
-            }
-    }
-
-    private fun initializeGestureProgress() {
-        gestureViewBinding.brightnessProgressBar.let { bar ->
-            bar.progress = (brightnessHelper.savedWindowBrightness * bar.max).toInt().coerceIn(0, bar.max)
-        }
-        gestureViewBinding.volumeProgressBar.let { bar ->
-            bar.progress = (audioHelper.deviceVolume * bar.max).toInt().coerceIn(0, bar.max)
-        }
-    }
-
-    private fun updateBrightness(distance: Float) {
-        gestureViewBinding.brightnessControlView.isVisible = true
-        val bar = gestureViewBinding.brightnessProgressBar
-
-        if (bar.progress == 0) {
-            // If brightness progress goes to below 0, set to system brightness
-            if (distance <= 0) {
-                brightnessHelper.resetToSystemBrightness()
-                gestureViewBinding.brightnessImageView.setImageResource(
-                    R.drawable.ic_brightness_auto
-                )
-                gestureViewBinding.brightnessTextView.text = resources.getString(R.string.auto)
-                return
-            }
-            gestureViewBinding.brightnessImageView.setImageResource(R.drawable.ic_brightness)
-        }
-
-        bar.incrementProgressBy(distance.toInt())
-        gestureViewBinding.brightnessTextView.text = "${bar.progress.normalize(0, bar.max, 0, 100)}"
-        brightnessHelper.windowBrightness = bar.progress.toFloat() / bar.max
-    }
-
-    private fun updateVolume(distance: Float) {
-        val bar = gestureViewBinding.volumeProgressBar
-        gestureViewBinding.volumeControlView.apply {
-            if (isGone) {
-                isVisible = true
-                // Volume could be changed using other mediums, sync progress
-                // bar with new value.
-                bar.progress = (audioHelper.deviceVolume * bar.max).toInt().coerceIn(0, bar.max)
-            }
-        }
-
-        if (bar.progress == 0) {
-            gestureViewBinding.volumeImageView.setImageResource(
-                when {
-                    distance > 0 -> R.drawable.ic_volume_up
-                    else -> R.drawable.ic_volume_off
-                }
-            )
-        }
-        bar.incrementProgressBy(distance.toInt())
-        audioHelper.deviceVolume = bar.progress.toFloat() / bar.max
-
-        gestureViewBinding.volumeTextView.text = "${bar.progress.normalize(0, bar.max, 0, 100)}"
-    }
-
-    override fun onPlaybackSpeedClicked() {
-        (player as? MediaController)?.let {
-            PlaybackOptionsSheet(it).show(supportFragmentManager)
-        }
-    }
-
-    override fun onResizeModeClicked() {
-        // switching between original aspect ratio (black bars) and zoomed to fill device screen
-        BaseBottomSheet()
-            .setSimpleItems(
-                resizeModes.map { context.getString(it.second) },
-                preselectedItem = resizeModes.first { it.first == resizeMode }.second.let {
-                    context.getString(it)
-                }
-            ) { index ->
-                resizeMode = resizeModes[index].first
-            }
-            .show(supportFragmentManager)
-    }
-
-    override fun setResizeMode(resizeMode: Int) {
-        super.setResizeMode(resizeMode)
-        // automatically remember the resize mode for the next session
-        resizeModePref = resizeMode
-    }
-
-    override fun onRepeatModeClicked() {
-        // repeat mode options dialog
-        BaseBottomSheet()
-            .setSimpleItems(
-                PlayerHelper.repeatModes.map { context.getString(it.second) },
-                preselectedItem = PlayerHelper.repeatModes
-                    .firstOrNull { it.first == PlayingQueue.repeatMode }
-                    ?.second?.let {
-                        context.getString(it)
-                    }
-            ) { index ->
-                PlayingQueue.repeatMode = PlayerHelper.repeatModes[index].first
-            }
-            .show(supportFragmentManager)
-    }
-
-    override fun onSleepTimerClicked() {
-        SleepTimerSheet().show(supportFragmentManager)
-    }
-
-    override fun onCaptionsClicked() {
-        val player = player ?: return
-
-        val captions = PlayerHelper.getCaptionTracks(player)
-            // put normal tracks before auto-generated tracks
-            .sortedBy { it.roleFlags == PlayerHelper.ROLE_FLAG_AUTO_GEN_SUBTITLE }
-            .associateWith {
-                val displayName = Locale.forLanguageTag(it.language.orEmpty())
-                    .getDisplayLanguage(Locale.getDefault())
-
-                if (it.roleFlags == PlayerHelper.ROLE_FLAG_AUTO_GEN_SUBTITLE) {
-                    "$displayName (${context.getString(R.string.auto_generated)})"
-                } else {
-                    displayName
-                }
-            }
-
-        val currentSubtitle = PlayerHelper.getCurrentPlayedCaptionFormat(player)
-        BaseBottomSheet()
-            .setSimpleItems(
-                listOf(context.getString(R.string.none)) + captions.values.toList(),
-                preselectedItem = captions.entries.firstOrNull { (track, _) ->
-                    track == currentSubtitle
-                }?.value ?: context.getString(R.string.none)
-            ) { index ->
-                val captionsFormat =
-                    captions.keys.toList().getOrNull(index - 1)
-
-                updateCurrentSubtitle(captionsFormat?.id)
-                playerViewModel?.currentCaptionId = captionsFormat?.id
-            }
-            .show(supportFragmentManager)
+    fun setPlayerResolution(resolution: Int, isSelectedByUser: Boolean = false) {
+        menuHandler.setPlayerResolution(resolution, isSelectedByUser)
     }
 
     fun updateCurrentSubtitle(trackId: String?) {
@@ -1011,181 +472,100 @@ class CustomExoPlayerView(
         )
     }
 
-    /**
-     * Get all available player resolutions
-     */
-    private fun getAvailableResolutions(): List<VideoResolution> {
-        val player = player ?: return emptyList()
+    private fun lockPlayer(isLocked: Boolean) {
+        binding.exoTopBarRight.isVisible = isLocked
+        binding.exoCenterControls.isVisible = isLocked
+        binding.bottomBar.isVisible = isLocked
+        binding.closeImageButton.isVisible = isLocked
+        binding.exoTitle.isVisible = isLocked
+        binding.playPauseBTN.isVisible = isLocked
 
-        val resolutions = player.currentTracks.groups.asSequence()
-            .flatMap { group ->
-                (0 until group.length).map {
-                    group.getTrackFormat(it).height
-                }
-            }
-            .filter { it > 0 }
-            .map { VideoResolution("${it}p", it) }
-            .toSortedSet(compareByDescending { it.resolution })
+        if (!PlayerHelper.doubleTapToSeek) {
+            binding.seekButtonRewind.rewindBTN.isVisible = isLocked
+            binding.seekButtonForward.forwardBTN.isVisible = isLocked
+        }
 
-        resolutions.add(VideoResolution(context.getString(R.string.auto_quality), Int.MAX_VALUE))
-        return resolutions.toList()
+        backgroundBinding.exoControlsBackground.setBackgroundColor(
+            if (isLocked) ContextCompat.getColor(context, androidx.media3.ui.R.color.exo_black_opacity_60)
+            else Color.TRANSPARENT
+        )
+
+        playerGestureController.areControlsLocked = !isLocked
     }
 
-    override fun onQualityClicked() {
-        // get the available resolutions
-        val resolutions = getAvailableResolutions()
-
-        // Dialog for quality selection
-        BaseBottomSheet()
-            .setSimpleItems(
-                resolutions.map(VideoResolution::name),
-                preselectedItem = resolutions.firstOrNull {
-                    it.resolution == selectedResolution
-                }?.name ?: context.getString(R.string.auto_quality)
-            ) { which ->
-                val newResolution = resolutions[which].resolution
-                setPlayerResolution(newResolution, true)
-
-                // save the selected resolution to update on fullscreen change
-                if (noFullscreenResolution != null && isFullscreen()) {
-                    noFullscreenResolution = newResolution
-                } else {
-                    fullscreenResolution = newResolution
-                }
-            }
-            .show(supportFragmentManager)
-    }
-
-    fun setToDefaultResolution() {
-        fullscreenResolution = PlayerHelper.getDefaultResolution(context, true)
-        noFullscreenResolution = PlayerHelper.getDefaultResolution(context, false)
-        updateResolution(isFullscreen())
-    }
-
-    private fun updateResolution(isFullscreen: Boolean) {
-        if (!isFullscreen && noFullscreenResolution != null) {
-            setPlayerResolution(noFullscreenResolution!!)
-        } else if (fullscreenResolution != null) {
-            setPlayerResolution(fullscreenResolution!!)
-        } else {
-            setPlayerResolution(Int.MAX_VALUE)
+    private fun initializeGestureProgress() {
+        gestureViewBinding.brightnessProgressBar.let { bar ->
+            bar.progress = (brightnessHelper.savedWindowBrightness * bar.max).toInt().coerceIn(0, bar.max)
+        }
+        gestureViewBinding.volumeProgressBar.let { bar ->
+            val audioHelper = com.github.libretube.helpers.AudioHelper(context)
+            bar.progress = (audioHelper.deviceVolume * bar.max).toInt().coerceIn(0, bar.max)
         }
     }
 
-    fun setPlayerResolution(resolution: Int, isSelectedByUser: Boolean = false) {
-        val player = player as? MediaController ?: return
+    private fun updateBrightness(distance: Float) {
+        gestureViewBinding.brightnessControlView.isVisible = true
+        val bar = gestureViewBinding.brightnessProgressBar
 
-        val transformedResolution =
-            if (!isSelectedByUser && playerCallback.isVideoShort()) {
-                ceil(resolution * 16.0 / 9.0).toInt()
-            } else {
-                resolution
+        if (bar.progress == 0) {
+            if (distance <= 0) {
+                brightnessHelper.resetToSystemBrightness()
+                gestureViewBinding.brightnessImageView.setImageResource(R.drawable.ic_brightness_auto)
+                gestureViewBinding.brightnessTextView.text = resources.getString(R.string.auto)
+                return
             }
+            gestureViewBinding.brightnessImageView.setImageResource(R.drawable.ic_brightness)
+        }
 
-        player.sendCustomCommand(
-            AbstractPlayerService.runPlayerActionCommand, bundleOf(
-                PlayerCommand.SET_RESOLUTION.name to transformedResolution
-            )
-        )
-
-        selectedResolution = resolution
+        bar.incrementProgressBy(distance.toInt())
+        gestureViewBinding.brightnessTextView.text = "${bar.progress.normalize(0, bar.max, 0, 100)}"
+        brightnessHelper.windowBrightness = bar.progress.toFloat() / bar.max
     }
 
-    override fun onAudioStreamClicked() {
-        val player = player as? MediaController ?: return
-        val context = context ?: return
-
-        val audioLanguagesAndRoleFlags = PlayerHelper.getAudioLanguagesAndRoleFlagsFromTrackGroups(
-            player.currentTracks.groups,
-            false
-        )
-        val baseBottomSheet = BaseBottomSheet()
-
-        if (audioLanguagesAndRoleFlags.isEmpty() || (audioLanguagesAndRoleFlags.size == 1 &&
-                    audioLanguagesAndRoleFlags[0].first == null &&
-                    !PlayerHelper.haveAudioTrackRoleFlagSet(
-                        audioLanguagesAndRoleFlags[0].second
-                    ))
-        ) {
-            // Regardless of audio format or quality, if there is only one audio stream which has
-            // no language and no role flags, it should mean that there is only a single audio
-            // track which has no language or track type set in the video played
-            // Consider it as the default audio track (or unknown)
-            baseBottomSheet.setSimpleItems(
-                listOf(context.getString(R.string.default_or_unknown_audio_track)),
-                preselectedItem = context.getString(R.string.default_or_unknown_audio_track),
-                listener = null
-            )
-        } else {
-            val sortedAudioTracks = audioLanguagesAndRoleFlags
-                // audio tracks have only a single flag set
-                // ordered by main, dubbed, audio descriptive
-                .sortedBy { it.second }
-
-            baseBottomSheet.setSimpleItems(
-                sortedAudioTracks
-                .map {
-                    PlayerHelper.getAudioTrackNameFromFormat(context, it)
-                },
-                preselectedItem = getCurrentAudioTrackTitle(),
-            ) { index ->
-                val selectedAudioFormat = sortedAudioTracks[index]
-                player.sendCustomCommand(
-                    AbstractPlayerService.runPlayerActionCommand, bundleOf(
-                        PlayerCommand.SET_AUDIO_ROLE_FLAGS.name to selectedAudioFormat.second
-                    )
-                )
-                player.sendCustomCommand(
-                    AbstractPlayerService.runPlayerActionCommand, bundleOf(
-                        PlayerCommand.SET_AUDIO_LANGUAGE.name to selectedAudioFormat.first
-                    )
-                )
-                selectedAudioLanguageAndRoleFlags = selectedAudioFormat
+    private fun updateVolume(distance: Float) {
+        val audioHelper = com.github.libretube.helpers.AudioHelper(context)
+        val bar = gestureViewBinding.volumeProgressBar
+        gestureViewBinding.volumeControlView.apply {
+            if (isGone) {
+                isVisible = true
+                bar.progress = (audioHelper.deviceVolume * bar.max).toInt().coerceIn(0, bar.max)
             }
         }
 
-        baseBottomSheet.show(supportFragmentManager)
-    }
+        if (bar.progress == 0) {
+            gestureViewBinding.volumeImageView.setImageResource(
+                if (distance > 0) R.drawable.ic_volume_up else R.drawable.ic_volume_off
+            )
+        }
+        bar.incrementProgressBy(distance.toInt())
+        audioHelper.deviceVolume = bar.progress.toFloat() / bar.max
 
-    override fun onStatsClicked() {
-        val player = player ?: return
-
-        val videoStats =
-            PlayerHelper.getVideoStats(player.currentTracks, playerCallback.getVideoId())
-        StatsSheet()
-            .apply { arguments = bundleOf(IntentData.videoStats to videoStats) }
-            .show(supportFragmentManager)
+        gestureViewBinding.volumeTextView.text = "${bar.progress.normalize(0, bar.max, 0, 100)}"
     }
 
     fun isFullscreen() = commonPlayerViewModel?.isFullscreen?.value ?: false
 
     override fun onConfigurationChanged(newConfig: Configuration?) {
         super.onConfigurationChanged(newConfig)
-
         updateMarginsByFullscreenMode()
     }
 
-    /**
-     * Updates the margins according to the current orientation and fullscreen mode
-     */
     fun updateMarginsByFullscreenMode() {
-        // add a larger bottom margin to the time bar in landscape mode
         binding.exoProgress.updateLayoutParams<MarginLayoutParams> {
             bottomMargin = (if (isFullscreen()) 20f else 0f).dpToPx()
         }
 
         updateTopBarMargin()
 
-        // don't add extra padding if there's no cutout and no margin set that would need to be undone
         if (!activity.hasCutout && binding.topBar.marginStart == LANDSCAPE_MARGIN_HORIZONTAL_NONE) return
 
-        // add a margin to the top and the bottom bar in landscape mode for notches
         val isForcedLandscape =
             activity.requestedOrientation == ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE
         val isInLandscape =
             resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE
         val horizontalMargin =
-            if (isFullscreen() && (isInLandscape || isForcedLandscape)) LANDSCAPE_MARGIN_HORIZONTAL else LANDSCAPE_MARGIN_HORIZONTAL_NONE
+            if (isFullscreen() && (isInLandscape || isForcedLandscape)) LANDSCAPE_MARGIN_HORIZONTAL
+            else LANDSCAPE_MARGIN_HORIZONTAL_NONE
 
         listOf(binding.topBar, binding.bottomBar).forEach {
             it.updateLayoutParams<MarginLayoutParams> {
@@ -1197,25 +577,17 @@ class CustomExoPlayerView(
         binding.fullscreen.layoutParams =
             (binding.fullscreen.layoutParams as MarginLayoutParams).apply {
                 if (isFullscreen()) {
-                    // Add extra bottom margin in fullscreen mode
-                    bottomMargin =
-                        resources.getDimensionPixelSize(R.dimen.fullscreen_button_margin_bottom)
-                    marginEnd =
-                        resources.getDimensionPixelSize(R.dimen.fullscreen_button_margin_end)
+                    bottomMargin = resources.getDimensionPixelSize(R.dimen.fullscreen_button_margin_bottom)
+                    marginEnd = resources.getDimensionPixelSize(R.dimen.fullscreen_button_margin_end)
                 } else {
-                    // Reset to default margin
-                    bottomMargin =
-                        resources.getDimensionPixelSize(R.dimen.normal_button_margin_bottom)
+                    bottomMargin = resources.getDimensionPixelSize(R.dimen.normal_button_margin_bottom)
                     marginEnd = resources.getDimensionPixelSize(R.dimen.normal_button_margin_end)
                 }
             }
     }
 
-    /**
-     * Load the captions style according to the users preferences
-     */
     private fun applyCaptionsStyle() {
-        val captionStyle = PlayerHelper.getCaptionStyle(context)
+        val captionStyle = CaptionHelper.getCaptionStyle(context)
         subtitleView?.apply {
             setApplyEmbeddedFontSizes(false)
             setFixedTextSize(Cue.TEXT_SIZE_TYPE_ABSOLUTE, PlayerHelper.captionsTextSize)
@@ -1226,10 +598,6 @@ class CustomExoPlayerView(
         }
     }
 
-    /**
-     * Set the current position text (e.g. "10:00 - 17:37"). This does not set the timebar
-     * progress, ExoPlayer handles that automatically.
-     */
     @SuppressLint("SetTextI18n")
     private fun updateCurrentPosition() {
         val position = player?.currentPosition?.div(1000) ?: 0
@@ -1237,52 +605,52 @@ class CustomExoPlayerView(
         val timeLeft = duration - position
 
         binding.position.text =
-            if (playerCallback.isVideoLive()) context.getString(R.string.live) else DateUtils.formatElapsedTime(
-                position
-            )
+            if (playerCallback.isVideoLive()) context.getString(R.string.live)
+            else DateUtils.formatElapsedTime(position)
         binding.timeLeft.text = "-${DateUtils.formatElapsedTime(timeLeft)}"
 
         runnableHandler.postDelayed(100, UPDATE_POSITION_TOKEN, this::updateCurrentPosition)
     }
 
-    /**
-     * Add extra margin to the top bar to not overlap the status bar.
-     */
     fun updateTopBarMargin() {
         binding.topBar.updateLayoutParams<MarginLayoutParams> {
             topMargin = (if (isFullscreen()) 18f else 0f).dpToPx()
         }
     }
 
+    // PlayerOptions delegation
+    override fun onPlaybackSpeedClicked() = menuHandler.onPlaybackSpeedClicked()
+    override fun onResizeModeClicked() = menuHandler.onResizeModeClicked()
+    override fun onRepeatModeClicked() = menuHandler.onRepeatModeClicked()
+    override fun onSleepTimerClicked() = menuHandler.onSleepTimerClicked()
+    override fun onCaptionsClicked() = menuHandler.onCaptionsClicked()
+    override fun onQualityClicked() = menuHandler.onQualityClicked()
+    override fun onAudioStreamClicked() = menuHandler.onAudioStreamClicked()
+    override fun onStatsClicked() = menuHandler.onStatsClicked()
+
+    override fun setResizeMode(resizeMode: Int) {
+        super.setResizeMode(resizeMode)
+        menuHandler.saveResizeMode(resizeMode)
+    }
+
+    // PlayerGestureOptions delegation
     override fun onSingleTap(areControlsLocked: Boolean) {
         if (areControlsLocked) {
-            // keep showing the 'locked' icon
             toggleController(true)
             return
         }
         toggleController()
     }
 
-    override fun onDoubleTapCenterScreen() {
-        player?.togglePlayPauseState()
-    }
-
-    override fun onDoubleTapLeftScreen() {
-        if (!PlayerHelper.doubleTapToSeek) return
-        rewind()
-    }
-
-    override fun onDoubleTapRightScreen() {
-        if (!PlayerHelper.doubleTapToSeek) return
-        forward()
-    }
+    override fun onDoubleTapCenterScreen() = player?.togglePlayPauseState() ?: Unit
+    override fun onDoubleTapLeftScreen() { if (PlayerHelper.doubleTapToSeek) seekHelper.rewind() }
+    override fun onDoubleTapRightScreen() { if (PlayerHelper.doubleTapToSeek) seekHelper.forward() }
 
     override fun onSwipeLeftScreen(distanceY: Float, positionY: Float) {
         if (!PlayerHelper.swipeGestureEnabled) {
             if (PlayerHelper.fullscreenGesturesEnabled) onSwipeCenterScreen(distanceY, positionY)
             return
         }
-
         if (isControllerFullyVisible) hideController()
         updateBrightness(distanceY)
     }
@@ -1292,7 +660,6 @@ class CustomExoPlayerView(
             if (PlayerHelper.fullscreenGesturesEnabled) onSwipeCenterScreen(distanceY, positionY)
             return
         }
-
         if (isControllerFullyVisible) hideController()
         updateVolume(distanceY)
     }
@@ -1311,7 +678,6 @@ class CustomExoPlayerView(
     override fun onZoom() {
         if (!PlayerHelper.pinchGestureEnabled) return
         resizeMode = AspectRatioFrameLayout.RESIZE_MODE_ZOOM
-
         if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
             subtitleView?.setBottomPaddingFraction(SUBTITLE_BOTTOM_PADDING_FRACTION)
         }
@@ -1320,75 +686,29 @@ class CustomExoPlayerView(
     override fun onMinimize() {
         if (!PlayerHelper.pinchGestureEnabled) return
         resizeMode = AspectRatioFrameLayout.RESIZE_MODE_FIT
-
         subtitleView?.setBottomPaddingFraction(SubtitleView.DEFAULT_BOTTOM_PADDING_FRACTION)
     }
 
-    override fun onLongPress() {
-        if (!PlayerHelper.longPressFastForward) return
-
-        backgroundBinding.fastForwardView.isVisible = true
-        val player = player ?: return
-
-        // using the fast forward action wouldn't change anything in this case
-        if (player.playbackParameters.speed >= PlayerHelper.MAXIMUM_PLAYBACK_SPEED) {
-            return
-        }
-
-        // backup current playback speed in order to restore it
-        // after the fast forward action is done
-        rememberedPlaybackSpeed = player.playbackParameters.speed
-
-        val newSpeed = minOf(
-            player.playbackParameters.speed * PlayerHelper.FAST_FORWARD_SPEED_FACTOR,
-            PlayerHelper.MAXIMUM_PLAYBACK_SPEED
-        )
-        player.playbackParameters = PlaybackParameters(newSpeed, player.playbackParameters.pitch)
-    }
-
-    override fun onLongPressEnd() {
-        if (!PlayerHelper.longPressFastForward) return
-
-        backgroundBinding.fastForwardView.isGone = true
-
-        val player = player ?: return
-        rememberedPlaybackSpeed?.let {
-            player.playbackParameters = PlaybackParameters(it, player.playbackParameters.pitch)
-        }
-        rememberedPlaybackSpeed = null
-    }
+    override fun onLongPress() = seekHelper.onLongPress()
+    override fun onLongPressEnd() = seekHelper.onLongPressEnd()
 
     override fun onFullscreenChange(isFullscreen: Boolean) {
         if (isFullscreen) {
-            if (PlayerHelper.swipeGestureEnabled) {
-                brightnessHelper.restoreSavedBrightness()
-            }
-            subtitleView?.setFixedTextSize(
-                Cue.TEXT_SIZE_TYPE_ABSOLUTE,
-                PlayerHelper.captionsTextSize * 1.5f
-            )
+            if (PlayerHelper.swipeGestureEnabled) brightnessHelper.restoreSavedBrightness()
+            subtitleView?.setFixedTextSize(Cue.TEXT_SIZE_TYPE_ABSOLUTE, PlayerHelper.captionsTextSize * 1.5f)
             if (resizeMode == AspectRatioFrameLayout.RESIZE_MODE_ZOOM) {
                 subtitleView?.setBottomPaddingFraction(SUBTITLE_BOTTOM_PADDING_FRACTION)
             }
         } else {
-            if (PlayerHelper.swipeGestureEnabled) {
-                brightnessHelper.resetToSystemBrightness()
-            }
-            subtitleView?.setFixedTextSize(
-                Cue.TEXT_SIZE_TYPE_ABSOLUTE,
-                PlayerHelper.captionsTextSize
-            )
+            if (PlayerHelper.swipeGestureEnabled) brightnessHelper.resetToSystemBrightness()
+            subtitleView?.setFixedTextSize(Cue.TEXT_SIZE_TYPE_ABSOLUTE, PlayerHelper.captionsTextSize)
             subtitleView?.setBottomPaddingFraction(SubtitleView.DEFAULT_BOTTOM_PADDING_FRACTION)
         }
 
         updateMarginsByFullscreenMode()
     }
 
-    /**
-     * Listen for all child touch events
-     */
     override fun onInterceptTouchEvent(ev: MotionEvent?): Boolean {
-        // when a control is clicked, restart the countdown to hide the controller
         if (isControllerFullyVisible) {
             cancelHideControllerTask()
             enqueueHideControllerTask()
@@ -1399,45 +719,18 @@ class CustomExoPlayerView(
     override fun onTouchEvent(event: MotionEvent?): Boolean {
         if (event == null) return false
         if (!useController) return false
-
         return playerGestureController.onTouchEvent(event)
     }
 
     override fun onKeyUp(keyCode: Int, event: KeyEvent?): Boolean {
-        when (keyCode) {
-            KeyEvent.KEYCODE_SPACE, KeyEvent.KEYCODE_MEDIA_PLAY_PAUSE -> {
-                player?.togglePlayPauseState()
-            }
-
-            KeyEvent.KEYCODE_DPAD_RIGHT, KeyEvent.KEYCODE_MEDIA_FAST_FORWARD -> {
-                forward()
-            }
-
-            KeyEvent.KEYCODE_DPAD_LEFT, KeyEvent.KEYCODE_MEDIA_REWIND -> {
-                rewind()
-            }
-
-            KeyEvent.KEYCODE_N, KeyEvent.KEYCODE_NAVIGATE_NEXT -> {
-                PlayingQueue.getNext()?.let { (player as? MediaController)?.navigateVideo(it) }
-            }
-
-            KeyEvent.KEYCODE_P, KeyEvent.KEYCODE_NAVIGATE_PREVIOUS -> {
-                PlayingQueue.getPrev()?.let { (player as? MediaController)?.navigateVideo(it) }
-            }
-
-            KeyEvent.KEYCODE_F -> {
-                playerCallback.toggleFullscreen()
-            }
-
-            else -> return false
+        if (keyCode == KeyEvent.KEYCODE_F) {
+            playerCallback.toggleFullscreen()
+            return true
         }
-
-        return true
+        return seekHelper.onKeyUp(keyCode, event)
     }
 
-    override fun getViewMeasures(): Pair<Int, Int> {
-        return width to height
-    }
+    override fun getViewMeasures(): Pair<Int, Int> = width to height
 
     var alreadySetDefaultSubtitle: Boolean = false
     fun onPlaybackEvents(player: Player, events: Player.Events) {
@@ -1447,35 +740,25 @@ class CustomExoPlayerView(
                 Player.EVENT_PLAY_WHEN_READY_CHANGED
             )
         ) {
-            binding.playPauseBTN.setImageResource(
-                PlayerHelper.getPlayPauseActionIcon(player)
-            )
-
-            // keep screen on if the video is playing
+            binding.playPauseBTN.setImageResource(PlayerHelper.getPlayPauseActionIcon(player))
             keepScreenOn = player.isPlaying == true
         }
 
         if (events.contains(Player.EVENT_RENDERED_FIRST_FRAME)) {
-            // if the video is not starting automatically, show the controller
             if (!PlayerHelper.playAutomatically) showControllerPermanently()
         }
 
         if (events.contains(Player.EVENT_RENDERED_FIRST_FRAME) && !alreadySetDefaultSubtitle) {
-            // only set the default subtitle at the start of the playback session
             alreadySetDefaultSubtitle = true
 
-            // set default caption language from preferences if caption language is available
             val captions = PlayerHelper.getCaptionTracks(player)
             val defaultLangCaption =
                 captions.firstOrNull { it.language == PlayerHelper.defaultSubtitleCode }
 
             updateCurrentSubtitle(defaultLangCaption?.id)
-
-            // if the video is live, the remaining time is displayed instead of duration
             updateDisplayedDurationType()
         }
         if (events.contains(Player.EVENT_MEDIA_METADATA_CHANGED)) {
-            // new video started
             alreadySetDefaultSubtitle = false
         }
 
@@ -1484,6 +767,10 @@ class CustomExoPlayerView(
 
     fun getWindow(): Window = currentWindow ?: activity.window
 
+    private fun toggleController(show: Boolean = !isControllerFullyVisible) {
+        if (show) showController() else hideController()
+    }
+
     companion object {
         private const val HIDE_CONTROLLER_TOKEN = "hideController"
         private const val HIDE_FORWARD_BUTTON_TOKEN = "hideForwardButton"
@@ -1491,7 +778,7 @@ class CustomExoPlayerView(
         private const val UPDATE_POSITION_TOKEN = "updatePosition"
 
         private const val SUBTITLE_BOTTOM_PADDING_FRACTION = 0.158f
-        private const val ANIMATION_DURATION = 100L
+        const val ANIMATION_DURATION = 100L
         private const val AUTO_HIDE_CONTROLLER_DELAY = 2000L
         private val LANDSCAPE_MARGIN_HORIZONTAL = 20f.dpToPx()
         private val LANDSCAPE_MARGIN_HORIZONTAL_NONE = 0f.dpToPx()

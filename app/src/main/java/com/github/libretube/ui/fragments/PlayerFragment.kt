@@ -60,6 +60,7 @@ import com.github.libretube.constants.IntentData
 import com.github.libretube.databinding.FragmentPlayerBinding
 import com.github.libretube.db.DatabaseHolder
 import com.github.libretube.enums.FileType
+import com.github.libretube.enums.DownloadTab
 import com.github.libretube.enums.PlayerCommand
 import com.github.libretube.enums.PlayerEvent
 import com.github.libretube.enums.SbSkipOptions
@@ -76,6 +77,7 @@ import com.github.libretube.helpers.ImageHelper
 import com.github.libretube.helpers.NavigationHelper
 import com.github.libretube.helpers.PlayerHelper
 import com.github.libretube.helpers.PlayerHelper.getCurrentSegment
+import com.github.libretube.helpers.PipHelper
 import com.github.libretube.helpers.ThemeHelper
 import com.github.libretube.helpers.WindowHelper
 import com.github.libretube.obj.ShareData
@@ -415,7 +417,7 @@ class PlayerFragment : Fragment(R.layout.fragment_player), CustomPlayerCallback 
         ContextCompat.registerReceiver(
             requireContext(),
             playerActionReceiver,
-            IntentFilter(PlayerHelper.getIntentActionName(requireContext())),
+            IntentFilter(PipHelper.getIntentActionName(requireContext())),
             ContextCompat.RECEIVER_NOT_EXPORTED
         )
     }
@@ -1303,7 +1305,7 @@ class PlayerFragment : Fragment(R.layout.fragment_player), CustomPlayerCallback 
     private suspend fun getTimeFrameReceiver(): TimeFrameReceiver? = withContext(Dispatchers.IO) {
         return@withContext if (isOffline) {
             val downloadItems =
-                DatabaseHolder.Database.downloadDao().getDownloadById(videoId)?.downloadItems
+                DatabaseHolder.Database.downloadDao().findById(videoId)?.downloadItems
             downloadItems?.firstOrNull { it.path.exists() && it.type == FileType.VIDEO }?.path?.let {
                 OfflineTimeFrameReceiver(requireContext(), it)
             }

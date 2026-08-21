@@ -37,6 +37,7 @@ import com.github.libretube.extensions.toastFromMainThread
 import com.github.libretube.extensions.updateParameters
 import com.github.libretube.helpers.PlayerHelper
 import com.github.libretube.helpers.PlayerHelper.getCurrentSegment
+import com.github.libretube.helpers.SponsorBlockHelper
 import com.github.libretube.ui.activities.MainActivity
 import com.github.libretube.util.DefaultTrackSelectorWithAudioQualitySupport
 import com.github.libretube.util.NowPlayingNotification
@@ -71,7 +72,7 @@ abstract class AbstractPlayerService : MediaLibraryService(), MediaLibrarySessio
 
     // SponsorBlock Segment data
     private var sponsorBlockAutoSkip = true
-    protected val sponsorBlockConfig = PlayerHelper.getSponsorBlockCategories()
+    protected val sponsorBlockConfig = SponsorBlockHelper.getCategories()
     private var sponsorBlockSegments = listOf<Segment>()
 
     /**
@@ -290,7 +291,7 @@ abstract class AbstractPlayerService : MediaLibraryService(), MediaLibrarySessio
 
     protected fun setSponsorBlockSegments(segments: List<Segment>) {
         sponsorBlockSegments = segments
-        if (!PlayerHelper.sponsorBlockEnabled) return
+        if (!SponsorBlockHelper.sponsorBlockEnabled) return
 
         updatePlaylistMetadata {
             // JSON-encode as work-around for https://github.com/androidx/media/issues/564
@@ -317,7 +318,7 @@ abstract class AbstractPlayerService : MediaLibraryService(), MediaLibrarySessio
             exoPlayer?.seekTo(currentSegment.segmentStartAndEnd.second.toLong() * 1000)
             currentSegment.skipped = true
 
-            if (PlayerHelper.sponsorBlockNotifications) toastFromMainThread(R.string.segment_skipped)
+            if (SponsorBlockHelper.sponsorBlockNotifications) toastFromMainThread(R.string.segment_skipped)
         }
     }
 

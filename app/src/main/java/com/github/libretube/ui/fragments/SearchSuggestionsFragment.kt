@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.View
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -16,25 +15,22 @@ import com.github.libretube.databinding.FragmentSearchSuggestionsBinding
 import com.github.libretube.db.DatabaseHolder
 import com.github.libretube.ui.activities.MainActivity
 import com.github.libretube.ui.adapters.SearchSuggestionsAdapter
+import com.github.libretube.ui.base.BaseBindingFragment
 import com.github.libretube.ui.extensions.setOnBackPressed
 import com.github.libretube.ui.models.SearchViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
-class SearchSuggestionsFragment : Fragment(R.layout.fragment_search_suggestions) {
-    private var _binding: FragmentSearchSuggestionsBinding? = null
-    private val binding get() = _binding!!
+class SearchSuggestionsFragment :
+    BaseBindingFragment<FragmentSearchSuggestionsBinding>(R.layout.fragment_search_suggestions) {
+
     private val viewModel: SearchViewModel by activityViewModels()
     private val mainActivity get() = activity as MainActivity
 
     private val suggestionsAdapter = SearchSuggestionsAdapter(
-        onRootClickListener = { suggestion ->
-            mainActivity.setQuery(suggestion, true)
-        },
-        onArrowClickListener = { suggestion ->
-            mainActivity.setQuery(suggestion, false)
-        },
+        onRootClickListener = { suggestion -> mainActivity.setQuery(suggestion, true) },
+        onArrowClickListener = { suggestion -> mainActivity.setQuery(suggestion, false) },
         onSearchHistoryItemDeleted = { historyItem ->
             lifecycleScope.launch(Dispatchers.IO) {
                 DatabaseHolder.Database.searchHistoryDao().delete(historyItem)
@@ -42,13 +38,16 @@ class SearchSuggestionsFragment : Fragment(R.layout.fragment_search_suggestions)
         }
     )
 
+    override fun setBinding(view: View) {
+        setBindingDirect(FragmentSearchSuggestionsBinding.bind(view))
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewModel.setQuery(arguments?.getString(IntentData.query))
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        _binding = FragmentSearchSuggestionsBinding.bind(view)
         super.onViewCreated(view, savedInstanceState)
         binding.suggestionsRecycler.adapter = suggestionsAdapter
 
@@ -68,11 +67,8 @@ class SearchSuggestionsFragment : Fragment(R.layout.fragment_search_suggestions)
                         }
                     }
                 }
-
                 launch {
-                    viewModel.shouldShowEmptyHistoryMessage.collectLatest {
-                        toggleEmptyHistoryMessageVisibility(it)
-                    }
+                    viewModel.shouldShowEmptyHistoryMessage.collectLatest { toggleEmptyHistoryMessageVisibility(it) }
                 }
             }
         }
@@ -81,11 +77,5 @@ class SearchSuggestionsFragment : Fragment(R.layout.fragment_search_suggestions)
     private fun toggleEmptyHistoryMessageVisibility(show: Boolean) {
         binding.historyEmpty.isVisible = show
         binding.suggestionsRecycler.isGone = show
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-
-        _binding = null
     }
 }

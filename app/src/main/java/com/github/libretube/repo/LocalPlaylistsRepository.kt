@@ -7,15 +7,17 @@ import com.github.libretube.api.obj.Playlist
 import com.github.libretube.api.obj.Playlists
 import com.github.libretube.api.obj.StreamItem
 import com.github.libretube.db.DatabaseHolder
+import com.github.libretube.db.dao.LocalPlaylistsDao
 import com.github.libretube.db.obj.LocalPlaylist
 import com.github.libretube.extensions.parallelMap
 import com.github.libretube.obj.PipedImportPlaylist
 
-class LocalPlaylistsRepository: PlaylistRepository {
-    override suspend fun getPlaylist(playlistId: String): Playlist {
-        val relation = DatabaseHolder.Database.localPlaylistsDao().getAll()
-            .first { it.playlist.id.toString() == playlistId }
+class LocalPlaylistsRepository : PlaylistRepository {
 
+    private val dao: LocalPlaylistsDao get() = DatabaseHolder.Database.localPlaylistsDao()
+
+    override suspend fun getPlaylist(playlistId: String): Playlist {
+        val relation = dao.getAll().first { it.playlist.id.toString() == playlistId }
         return Playlist(
             name = relation.playlist.name,
             description = relation.playlist.description,
@@ -26,98 +28,78 @@ class LocalPlaylistsRepository: PlaylistRepository {
     }
 
     override suspend fun getPlaylists(): List<Playlists> {
-        return DatabaseHolder.Database.localPlaylistsDao().getAll()
-            .map {
-                Playlists(
-                    id = it.playlist.id.toString(),
-                    name = it.playlist.name,
-                    shortDescription = it.playlist.description,
-                    thumbnail = it.playlist.thumbnailUrl,
-                    videos = it.videos.size.toLong()
-                )
-            }
+        return dao.getAll().map {
+            Playlists(
+                id = it.playlist.id.toString(),
+                name = it.playlist.name,
+                shortDescription = it.playlist.description,
+                thumbnail = it.playlist.thumbnailUrl,
+                videos = it.videos.size.toLong()
+            )
+        }
     }
 
     override suspend fun addToPlaylist(playlistId: String, vararg videos: StreamItem): Boolean {
-        val localPlaylist = DatabaseHolder.Database.localPlaylistsDao().getAll()
-            .first { it.playlist.id.toString() == playlistId }
+        val localPlaylist = dao.getAll().first { it.playlist.id.toString() == playlistId }
 
         for (video in videos) {
             val localPlaylistItem = video.toLocalPlaylistItem(playlistId)
 
-            val existingVideo = DatabaseHolder.Database.localPlaylistsDao()
-                .getPlaylistVideo(playlistId, localPlaylistItem.videoId)
+            val existingVideo = dao.getPlaylistVideo(playlistId, localPlaylistItem.videoId)
             if (existingVideo != null) {
-                // update existing video metadata
                 localPlaylistItem.id = existingVideo.id
-                DatabaseHolder.Database.localPlaylistsDao().updatePlaylistVideo(localPlaylistItem)
+                dao.updatePlaylistVideo(localPlaylistItem)
                 continue
             }
 
-            // add the new video to the database
-            DatabaseHolder.Database.localPlaylistsDao().addPlaylistVideo(localPlaylistItem)
-
-            val playlist = localPlaylist.playlist
-            if (playlist.thumbnailUrl.isEmpty()) {
-                // set the new playlist thumbnail URL
-                localPlaylistItem.thumbnailUrl?.let {
-                    playlist.thumbnailUrl = it
-                    DatabaseHolder.Database.localPlaylistsDao().updatePlaylist(playlist)
-                }
-            }
+            dao.addPlaylistVideo(localPlaylistItem)
+            updateThumbnailIfNeeded(localPlaylist.playlist, localPlaylistItem.thumbnailUrl)
         }
 
         return true
     }
 
     override suspend fun renamePlaylist(playlistId: String, newName: String): Boolean {
-        val playlist = DatabaseHolder.Database.localPlaylistsDao().getAll()
-            .first { it.playlist.id.toString() == playlistId }.playlist
+        val playlist = dao.getAll().first { it.playlist.id.toString() == playlistId }.playlist
         playlist.name = newName
-        DatabaseHolder.Database.localPlaylistsDao().updatePlaylist(playlist)
-
+        dao.updatePlaylist(playlist)
         return true
     }
 
     override suspend fun changePlaylistDescription(playlistId: String, newDescription: String): Boolean {
-        val playlist = DatabaseHolder.Database.localPlaylistsDao().getAll()
-            .first { it.playlist.id.toString() == playlistId }.playlist
+        val playlist = dao.getAll().first { it.playlist.id.toString() == playlistId }.playlist
         playlist.description = newDescription
-        DatabaseHolder.Database.localPlaylistsDao().updatePlaylist(playlist)
-
+        dao.updatePlaylist(playlist)
         return true
     }
 
     override suspend fun clonePlaylist(playlistId: String): String {
         val playlist = MediaServiceRepository.instance.getPlaylist(playlistId)
-        val newPlaylist = createPlaylist(playlist.name ?: "Unknown name")
+        val newPlaylistId = createPlaylist(playlist.name ?: "Unknown name")
 
-        PlaylistsHelper.addToPlaylist(newPlaylist, *playlist.relatedStreams.toTypedArray())
+        PlaylistsHelper.addToPlaylist(newPlaylistId, *playlist.relatedStreams.toTypedArray())
 
         var nextPage = playlist.nextpage
         while (nextPage != null) {
             nextPage = runCatching {
                 MediaServiceRepository.instance.getPlaylistNextPage(playlistId, nextPage!!).apply {
-                    PlaylistsHelper.addToPlaylist(newPlaylist, *relatedStreams.toTypedArray())
+                    PlaylistsHelper.addToPlaylist(newPlaylistId, *relatedStreams.toTypedArray())
                 }.nextpage
             }.getOrNull()
         }
 
-        return playlistId
+        return newPlaylistId
     }
 
     override suspend fun removeFromPlaylist(playlistId: String, index: Int): Boolean {
-        val transaction = DatabaseHolder.Database.localPlaylistsDao().getAll()
-            .first { it.playlist.id.toString() == playlistId }
-        DatabaseHolder.Database.localPlaylistsDao().removePlaylistVideo(
-            transaction.videos[index]
-        )
-        // set a new playlist thumbnail if the first video got removed
+        val playlistWithVideos = dao.getAll().first { it.playlist.id.toString() == playlistId }
+        dao.removePlaylistVideo(playlistWithVideos.videos[index])
+
         if (index == 0) {
-            transaction.playlist.thumbnailUrl =
-                transaction.videos.getOrNull(1)?.thumbnailUrl.orEmpty()
+            playlistWithVideos.playlist.thumbnailUrl =
+                playlistWithVideos.videos.getOrNull(1)?.thumbnailUrl.orEmpty()
         }
-        DatabaseHolder.Database.localPlaylistsDao().updatePlaylist(transaction.playlist)
+        dao.updatePlaylist(playlistWithVideos.playlist)
 
         return true
     }
@@ -126,8 +108,6 @@ class LocalPlaylistsRepository: PlaylistRepository {
         for (playlist in playlists) {
             val playlistId = createPlaylist(playlist.name!!)
 
-            // if not logged in, all video information needs to become fetched manually
-            // Only do so with `MAX_CONCURRENT_IMPORT_CALLS` videos at once to prevent performance issues
             for (videoIdList in playlist.videos.chunked(MAX_CONCURRENT_IMPORT_CALLS)) {
                 val streams = videoIdList.parallelMap {
                     runCatching { MediaServiceRepository.instance.getStreams(it) }
@@ -142,13 +122,19 @@ class LocalPlaylistsRepository: PlaylistRepository {
 
     override suspend fun createPlaylist(playlistName: String): String {
         val playlist = LocalPlaylist(name = playlistName, thumbnailUrl = "")
-        return DatabaseHolder.Database.localPlaylistsDao().createPlaylist(playlist).toString()
+        return dao.createPlaylist(playlist).toString()
     }
 
     override suspend fun deletePlaylist(playlistId: String): Boolean {
-        DatabaseHolder.Database.localPlaylistsDao().deletePlaylistById(playlistId)
-        DatabaseHolder.Database.localPlaylistsDao().deletePlaylistItemsByPlaylistId(playlistId)
-
+        dao.deletePlaylistById(playlistId)
+        dao.deletePlaylistItemsByPlaylistId(playlistId)
         return true
+    }
+
+    private suspend fun updateThumbnailIfNeeded(playlist: LocalPlaylist, thumbnailUrl: String?) {
+        if (playlist.thumbnailUrl.isEmpty() && !thumbnailUrl.isNullOrEmpty()) {
+            playlist.thumbnailUrl = thumbnailUrl
+            dao.updatePlaylist(playlist)
+        }
     }
 }

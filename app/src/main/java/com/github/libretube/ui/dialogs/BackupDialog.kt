@@ -10,6 +10,7 @@ import androidx.fragment.app.setFragmentResult
 import androidx.lifecycle.lifecycleScope
 import com.github.libretube.R
 import com.github.libretube.constants.IntentData
+import com.github.libretube.constants.YouTubeConstants
 import com.github.libretube.db.DatabaseHolder.Database
 import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.obj.BackupFile
@@ -56,7 +57,7 @@ class BackupDialog : DialogFragment() {
             it.localPlaylists = Database.localPlaylistsDao().getAll()
             it.playlists = it.localPlaylists?.map { (playlist, playlistVideos) ->
                 val videos = playlistVideos.map { item ->
-                    "${ShareDialog.YOUTUBE_FRONTEND_URL}/watch?v=${item.videoId}"
+                    "${YouTubeConstants.FRONTEND_URL}/watch?v=${item.videoId}"
                 }
                 PipedImportPlaylist(playlist.name, "playlist", "private", videos)
             }

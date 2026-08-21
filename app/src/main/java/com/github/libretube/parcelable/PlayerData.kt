@@ -1,8 +1,8 @@
 package com.github.libretube.parcelable
 
 import android.os.Parcelable
-import com.github.libretube.ui.fragments.DownloadSortingOrder
-import com.github.libretube.ui.fragments.DownloadTab
+import com.github.libretube.enums.DownloadSortingOrder
+import com.github.libretube.enums.DownloadTab
 import kotlinx.parcelize.Parcelize
 
 @Parcelize

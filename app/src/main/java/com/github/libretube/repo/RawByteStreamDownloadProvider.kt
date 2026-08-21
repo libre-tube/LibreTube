@@ -21,6 +21,7 @@ import kotlin.math.min
  * Download from RAW HTTP stream.
  */
 class RawByteStreamDownloadProvider(val url: HttpUrl) : DownloadProvider {
+
     private val httpClient: OkHttpClient by lazy {
         OkHttpClient.Builder()
             .connectTimeout(Duration.ofMillis(DownloadHelper.DEFAULT_TIMEOUT.toLong()))
@@ -34,16 +35,14 @@ class RawByteStreamDownloadProvider(val url: HttpUrl) : DownloadProvider {
         sink: BufferedSink,
     ): DownloadProgressResult {
         val startByteOffset = item.path.fileSize()
-        val source =
-            startConnection(url, startByteOffset, item.downloadSize) ?: return DownloadProgressResult.Failed
+        val source = startConnection(url, startByteOffset, item.downloadSize)
+            ?: return DownloadProgressResult.Failed
 
         val sourceByte = source.byteStream().source()
 
         var totalRead = 0L
         var lastRead = 0L
-        // Check if downloading is still active and read next bytes.
-        while (sourceByte
-                .read(sink.buffer, DownloadHelper.DOWNLOAD_CHUNK_SIZE)
+        while (sourceByte.read(sink.buffer, DownloadHelper.DOWNLOAD_CHUNK_SIZE)
                 .also { lastRead = it } != -1L
         ) {
             sink.emit()
@@ -78,32 +77,31 @@ class RawByteStreamDownloadProvider(val url: HttpUrl) : DownloadProvider {
             .build()
 
         return withContext(Dispatchers.IO) {
-            // Retry connecting to server for n times.
             try {
-                val call = httpClient.newCall(request)
-                val response = call.execute()
+                val response = httpClient.newCall(request).execute()
+                val body = response.body
 
                 if (response.code == 403) {
-                    response.close()
-                    Log.e(TAG(), "Got HTTP 403 while downloading: ${response.body.string()}")
+                    val errorBody = body?.string().orEmpty()
+                    Log.e(TAG(), "HTTP 403 while downloading: $errorBody")
+                    body?.close()
                     return@withContext null
-                } else if (response.code !in 200..299) {
-                    response.close()
-                    return@withContext null // TODO: print response.message
                 }
 
-                return@withContext response.body
-            } catch (e: IOException) {
-                Log.e(this.javaClass.name, e.printStackTrace().toString())
-                // TODO: forward error message
+                if (response.code !in 200..299 || body == null) {
+                    body?.close()
+                    return@withContext null
+                }
 
+                return@withContext body
+            } catch (e: IOException) {
+                Log.e(TAG(), "Connection failed: ${e.message}")
                 return@withContext null
             }
         }
     }
 
     companion object {
-        // maximum working tested chunk size is 3MB, the 512MB value here is from NewPipe
         private const val BYTES_PER_REQUEST = 512 * 1024L
     }
 }

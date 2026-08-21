@@ -8,7 +8,7 @@ import androidx.lifecycle.viewModelScope
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.cachedIn
-import com.github.libretube.ui.dialogs.ShareDialog
+import com.github.libretube.constants.YouTubeConstants
 import com.github.libretube.ui.fragments.SearchResultFragmentArgs
 import com.github.libretube.ui.models.sources.SearchPagingSource
 import com.github.libretube.util.TextUtils
@@ -21,7 +21,7 @@ class SearchResultViewModel(savedStateHandle: SavedStateHandle) : ViewModel() {
 
     // parse search URLs from YouTube entered in the search bar
     private val searchQuery = TextUtils.getVideoIdFromUri(args.query.toUri())?.let { videoId ->
-        "${ShareDialog.YOUTUBE_FRONTEND_URL}/watch?v=$videoId"
+        "${YouTubeConstants.FRONTEND_URL}/watch?v=$videoId"
     } ?: args.query
 
     private val filterMutableData = MutableStateFlow("all")

@@ -1,6 +1,6 @@
 package com.github.libretube.obj
 
-import com.github.libretube.ui.dialogs.ShareDialog
+import com.github.libretube.constants.YouTubeConstants
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -8,5 +8,5 @@ import kotlinx.serialization.Serializable
 data class FreetubeSubscription(
     val name: String,
     @SerialName("id") val channelId: String,
-    val url: String = "${ShareDialog.YOUTUBE_FRONTEND_URL}/channel/$channelId"
+    val url: String = "${YouTubeConstants.FRONTEND_URL}${YouTubeConstants.CHANNEL_PATH}$channelId"
 )

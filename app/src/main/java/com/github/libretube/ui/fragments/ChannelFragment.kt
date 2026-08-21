@@ -6,17 +6,14 @@ import android.view.View
 import androidx.core.os.bundleOf
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.RecyclerView
-import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.github.libretube.R
 import com.github.libretube.api.MediaServiceRepository
 import com.github.libretube.api.obj.ChannelTab
-import com.github.libretube.api.obj.StreamItem
 import com.github.libretube.constants.IntentData
 import com.github.libretube.databinding.FragmentChannelBinding
 import com.github.libretube.extensions.TAG
@@ -25,6 +22,7 @@ import com.github.libretube.extensions.toastFromMainDispatcher
 import com.github.libretube.helpers.ClipboardHelper
 import com.github.libretube.helpers.ImageHelper
 import com.github.libretube.helpers.NavigationHelper
+import com.github.libretube.ui.base.BaseBindingFragment
 import com.github.libretube.ui.extensions.setupSubscriptionButton
 import com.github.libretube.ui.models.ChannelViewModel
 import com.github.libretube.ui.sheets.ChannelOptionsBottomSheet
@@ -33,9 +31,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class ChannelFragment : Fragment(R.layout.fragment_channel) {
-    private var _binding: FragmentChannelBinding? = null
-    private val binding get() = _binding!!
+class ChannelFragment : BaseBindingFragment<FragmentChannelBinding>(R.layout.fragment_channel) {
     private val args by navArgs<ChannelFragmentArgs>()
     private val viewModel: ChannelViewModel by viewModels()
 
@@ -58,6 +54,10 @@ class ChannelFragment : Fragment(R.layout.fragment_channel) {
         "courses" to R.string.courses,
     )
 
+    override fun setBinding(view: View) {
+        setBindingDirect(FragmentChannelBinding.bind(view))
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         channelName = args.channelName
@@ -67,28 +67,23 @@ class ChannelFragment : Fragment(R.layout.fragment_channel) {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        _binding = FragmentChannelBinding.bind(view)
         super.onViewCreated(view, savedInstanceState)
-        // Check if the AppBarLayout is fully expanded
+
         binding.channelAppBar.addOnOffsetChangedListener { _, verticalOffset ->
             isAppBarFullyExpanded = verticalOffset == 0
         }
 
         binding.pager.reduceDragSensitivity()
 
-        // Determine if the child can scroll up
         binding.channelRefresh.setOnChildScrollUpCallback { _, _ ->
             !isAppBarFullyExpanded
         }
 
-        binding.channelRefresh.setOnRefreshListener {
-            fetchChannel()
-        }
+        binding.channelRefresh.setOnRefreshListener { fetchChannel() }
 
         fetchChannel()
     }
 
-    // adjust sensitivity due to the issue of viewpager2 with SwipeToRefresh https://issuetracker.google.com/issues/138314213
     private fun ViewPager2.reduceDragSensitivity() {
         val recyclerViewField = ViewPager2::class.java.getDeclaredField("mRecyclerView")
         recyclerViewField.isAccessible = true
@@ -100,14 +95,9 @@ class ChannelFragment : Fragment(R.layout.fragment_channel) {
         touchSlopField.set(recyclerView, touchSlop * 3)
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
-
     private fun fetchChannel() = lifecycleScope.launch {
         isLoading = true
-        _binding?.channelRefresh?.isRefreshing = true
+        binding.channelRefresh.isRefreshing = true
 
         val response = try {
             withContext(Dispatchers.IO) {
@@ -122,12 +112,10 @@ class ChannelFragment : Fragment(R.layout.fragment_channel) {
             context?.toastFromMainDispatcher(e.localizedMessage.orEmpty())
             return@launch
         } finally {
-            _binding?.channelRefresh?.isRefreshing = false
+            binding.channelRefresh.isRefreshing = false
             isLoading = false
         }
-        val binding = _binding ?: return@launch
 
-        // needed if the channel gets loaded by the ID
         channelId = response.id
         channelName = response.name
 
@@ -200,11 +188,7 @@ class ChannelFragment : Fragment(R.layout.fragment_channel) {
             )
         }
 
-        channelContentAdapter = ChannelContentAdapter(
-            tabList,
-            channelId,
-            this@ChannelFragment
-        )
+        channelContentAdapter = ChannelContentAdapter(tabList, channelId, this@ChannelFragment)
         binding.pager.adapter = channelContentAdapter
         TabLayoutMediator(binding.tabParent, binding.pager) { tab, position ->
             tab.text = tabList[position].name
@@ -223,20 +207,5 @@ class ChannelFragment : Fragment(R.layout.fragment_channel) {
 
     companion object {
         private const val VIDEOS_TAB_KEY = "videos"
-    }
-}
-
-class ChannelContentAdapter(
-    private val list: List<ChannelTab>,
-    private val channelId: String?,
-    fragment: Fragment
-) : FragmentStateAdapter(fragment) {
-    override fun getItemCount() = list.size
-
-    override fun createFragment(position: Int) = ChannelContentFragment().apply {
-        arguments = bundleOf(
-            IntentData.tabData to list[position],
-            IntentData.channelId to channelId
-        )
     }
 }

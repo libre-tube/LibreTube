@@ -19,6 +19,7 @@ import com.github.libretube.extensions.toID
 import com.github.libretube.extensions.toastFromMainDispatcher
 import com.github.libretube.parcelable.DownloadData
 import com.github.libretube.services.DownloadService
+import com.github.libretube.constants.YouTubeConstants
 import com.github.libretube.ui.dialogs.DownloadDialog
 import com.github.libretube.ui.dialogs.DownloadPlaylistDialog
 import com.github.libretube.ui.dialogs.ShareDialog
@@ -75,7 +76,7 @@ object DownloadHelper {
             val intent = Intent(Intent.ACTION_VIEW)
                 .setPackage(externalProviderPackageName)
                 .setDataAndType(
-                    "${ShareDialog.YOUTUBE_FRONTEND_URL}/watch?v=$videoId".toUri(),
+                    "${YouTubeConstants.FRONTEND_URL}/watch?v=$videoId".toUri(),
                     VIDEO_MIMETYPE
                 )
 
@@ -106,7 +107,7 @@ object DownloadHelper {
             val intent = Intent(Intent.ACTION_VIEW)
                 .setPackage(externalProviderPackageName)
                 .setDataAndType(
-                    "${ShareDialog.YOUTUBE_FRONTEND_URL}/playlist?list=$playlistId".toUri(),
+                    "${YouTubeConstants.FRONTEND_URL}/playlist?list=$playlistId".toUri(),
                     VIDEO_MIMETYPE
                 )
 
@@ -123,7 +124,7 @@ object DownloadHelper {
                 val intent = Intent(Intent.ACTION_VIEW)
                     .setPackage(externalProviderPackageName)
                     .setDataAndType(
-                        "${ShareDialog.YOUTUBE_FRONTEND_URL}/watch_videos?video_ids=${playlistVideoIds}".toUri(),
+                        "${YouTubeConstants.FRONTEND_URL}/watch_videos?video_ids=${playlistVideoIds}".toUri(),
                         VIDEO_MIMETYPE
                     )
 
