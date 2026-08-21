@@ -13,15 +13,15 @@
 > **Note** <br>
 > We don't accept feature or bug requests on these platforms. Kindly submit requests only on GitHub.
 
-> **Note about Nightly releases** <br>
-> Nightly releases can be used for testing app features and fixes before the official release. Nightly builds may be less stable then normal releases and are not tested to the same standards, **Use at your own discretion**
-
 </div><div align="center" style="width:100%; display:flex; justify-content:space-between;">
 
 [<img src="assets/badges/fdrload.png" alt="Get it on F-Droid" width="30%">](https://f-droid.org/en/packages/com.github.libretube/)
 [<img src="assets/badges/izzyload.png" alt="Get it on IzzyOnDroid" width="30%">](https://apt.izzysoft.de/fdroid/index/apk/com.github.libretube)<br/>
 [<img src="assets/badges/ghload.png" alt="Get it on GitHub" width="30%">](https://github.com/libre-tube/LibreTube/releases/latest)
 [<img src="assets/badges/ghload-nightly.png" alt="Get it on GitHub (Nightly)" width="30%">](https://github.com/libre-tube/NightlyBuilds/raw/main/app-debug-signed.apk)
+
+> **Note about Nightly releases** <br>
+> Nightly releases can be used for testing app features and fixes before the official release. Nightly builds are likley to be less stable than normal releases, most users should use the release build. **Use nightly builds at your own discretion**
 
 </div>
 
