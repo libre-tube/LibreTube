@@ -33,3 +33,4 @@ google-services.json
 .DS_Store
 *.idsig
 release.keystore
+libretube-release.jks
