@@ -18,7 +18,7 @@
 [<img src="assets/badges/fdrload.png" alt="Get it on F-Droid" width="30%">](https://f-droid.org/en/packages/com.github.libretube/)
 [<img src="assets/badges/izzyload.png" alt="Get it on IzzyOnDroid" width="30%">](https://apt.izzysoft.de/fdroid/index/apk/com.github.libretube)<br/>
 [<img src="assets/badges/ghload.png" alt="Get it on GitHub" width="30%">](https://github.com/libre-tube/LibreTube/releases/latest)
-[<img src="assets/debus-widgets/nightly.svg" alt="Get it on GitHub (Nightly)" width="30%">](https://github.com/libre-tube/NightlyBuilds/raw/main/app-debug-signed.apk)
+[<img src="assets/badges/ghload-nightly.png" alt="Get it on GitHub (Nightly)" width="30%">](https://github.com/libre-tube/NightlyBuilds/raw/main/app-debug-signed.apk)
 
 </div>
 
