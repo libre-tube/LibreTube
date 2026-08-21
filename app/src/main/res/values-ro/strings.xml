@@ -402,14 +402,14 @@
     <string name="dearrow">Activați DeArrow</string>
     <string name="unknown_audio_language">Limbă audio necunoscută</string>
     <string name="unknown_audio_track_type">Tip de pistă audio necunoscut</string>
-    <string name="original_or_main_audio_track">original sau principal</string>
-    <string name="dubbed_audio_track">dublat</string>
-    <string name="descriptive_audio_track">descriptiv</string>
+    <string name="original_or_main_audio_track">Original sau principal</string>
+    <string name="dubbed_audio_track">Dublat</string>
+    <string name="descriptive_audio_track">Descriere audio</string>
     <string name="continue_watching">Continuați să urmăriți</string>
     <string name="dearrow_summary">Afișați titluri și miniaturi mai precise și mai puțin senzaționaliste. Mărește timpii de încărcare</string>
     <string name="audio_track_format">%1$s - %2$s</string>
     <string name="unknown_or_no_audio">necunoscut sau fără sunet</string>
-    <string name="default_or_unknown_audio_track">implicit sau necunoscut</string>
+    <string name="default_or_unknown_audio_track">Prestabilit</string>
     <string name="group_name_error_exists">Vă rugăm să alegeți un nume care să fie unic</string>
     <string name="resolution_limited">limitată</string>
     <string name="auto_generated">generate automat</string>
@@ -568,7 +568,11 @@
         <item quantity="few">%d minute</item>
         <item quantity="other">%d minute</item>
     </plurals>
-    <string name="long_press_fast_forward_summary">Redă videoclipul cu dublu de viteza atunci când atingi și țin de ecran.</string>
+    <string name="long_press_fast_forward_summary">Redă videoclipul la o viteză dublă atunci când atingi și ții apăsat pe ecran.</string>
     <string name="show_updates_summary">Verifică pentru actualizări automat de fiecare dată când aplicația este deschisă.</string>
     <string name="long_press_fast_forward">Atinge pe lung pentru a derula repede</string>
+    <string name="courses">Cursuri</string>
+    <string name="resume_all">Continuă descărcările</string>
+    <string name="comment_verified">Verificat</string>
+    <string name="comment_pinned">Fixat</string>
 </resources>
