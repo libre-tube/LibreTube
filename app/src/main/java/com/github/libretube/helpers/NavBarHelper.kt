@@ -2,6 +2,7 @@ package com.github.libretube.helpers
 
 import android.content.Context
 import android.util.Log
+import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.widget.PopupMenu
@@ -75,8 +76,15 @@ object NavBarHelper {
         val navBarItems = getNavBarItemPreference(bottomNav.context)
         val startFragmentId = getStartFragmentId(bottomNav.context)
 
+        // copy menu items 1:1, but add them in user-preferred order
         navBarItems.forEach { (menuItemId, isVisible) ->
-            bottomNav.menu.findItem(menuItemId).isVisible = isVisible
+            val oldMenuItem = bottomNav.menu.findItem(menuItemId)
+            bottomNav.menu.removeItem(oldMenuItem.itemId)
+
+            // we re-add all items, even if they're hidden, otherwise the nav graph breaks
+            val newMenuItem = bottomNav.menu.add(oldMenuItem.groupId, oldMenuItem.itemId, Menu.NONE, oldMenuItem.title)
+            newMenuItem.icon = oldMenuItem.icon
+            newMenuItem.isVisible = isVisible
         }
         if (navBarItems.none { (_, isVisible) -> isVisible }) bottomNav.isGone = true
 

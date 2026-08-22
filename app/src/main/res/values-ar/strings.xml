@@ -5,9 +5,9 @@
     <string name="registered">سجَّلت. تستطيع الآن الاشتراك بالقنوات.</string>
     <string name="search_hint">بحث</string>
     <string name="unsubscribe">إلغاء الإشتراك</string>
-    <string name="download">تنزيل</string>
+    <string name="download">نزِّل</string>
     <string name="subscribe">إشترك</string>
-    <string name="share">مشاركة</string>
+    <string name="share">شارك</string>
     <string name="password">كلمة المرور</string>
     <string name="cancel">إلغاء</string>
     <string name="loggedIn">والِج.</string>
@@ -61,7 +61,7 @@
     <string name="location">الموقع</string>
     <string name="website">موقع الإنترنت</string>
     <string name="videoCount">%1$d فيديوهات</string>
-    <string name="instance">خادم piped</string>
+    <string name="instance">خادم Piped</string>
     <string name="customization">تخصيصات</string>
     <string name="history">السجل</string>
     <string name="channels">القنوات</string>
@@ -100,7 +100,7 @@
     <string name="app_icon">أيقونة</string>
     <string name="enabled">مفعل</string>
     <string name="disabled">ايقاف</string>
-    <string name="playOnBackground">تشغيل في الخلفية</string>
+    <string name="playOnBackground">شغِّل في الخلفية</string>
     <string name="defaultIcon">الإفتراضي</string>
     <string name="update_summary">التحقق من وجود تحديث</string>
     <string name="app_uptodate">تُشغِّل أحدث إصدار.</string>
@@ -138,7 +138,7 @@
     <string name="playback_speed">سرعة التشغيل</string>
     <string name="appearance_summary">اضبط التطبيق حسب رغبتك</string>
     <string name="customInstance_summary">أضف…</string>
-    <string name="shareTo">مشاركة الرابط إلى</string>
+    <string name="shareTo">شارك الرابط إلى</string>
     <string name="no_audio">لا صوت</string>
     <string name="no_video">لا فيديو</string>
     <string name="audio">صوت</string>
@@ -295,7 +295,7 @@
     <string name="no_comments_available">هذا الفيديو ليس له تعليقات.</string>
     <string name="comments_disabled">التعليقات معطلة من قبل القائم بالتحميل.</string>
     <string name="double_tap_seek_summary">انقر مرتين على اليسار أو اليمين لترجيع موضع المشغل أو إعادة تقديمه</string>
-    <string name="all_caught_up">كل شيء تم عرضه</string>
+    <string name="all_caught_up">كل شيء عُرِض</string>
     <string name="captions_size">حجم التسميات التوضيحية</string>
     <string name="double_tap_seek">انقر نقرًا مزدوجًا للسعي</string>
     <string name="all_caught_up_summary">لقد شاهدت جميع مقاطع الفيديو الجديدة</string>
@@ -330,7 +330,7 @@
     <string name="download_paused">إيقاف التنزيل مؤقتًا</string>
     <string name="download_completed">اكتمل التنزيل</string>
     <string name="concurrent_downloads">أقصى عدد من التنزيلات المتزامنة</string>
-    <string name="concurrent_downloads_limit_reached">تم الوصول إلى الحد الأقصى من التنزيلات المتزامنة.</string>
+    <string name="concurrent_downloads_limit_reached">وصل إلى الحد الأقصى من التنزيلات المتزامنة.</string>
     <string name="unknown">غير معروف</string>
     <string name="resume">استئناف</string>
     <string name="sleep_timer">مؤقت النوم</string>
@@ -458,7 +458,7 @@
     <string name="same_as_fullscreen">مطابق لإعداد الشاشة الكاملة</string>
     <string name="playback_during_call_summary">لاحظ أن هذا يؤثر أيضًا على التطبيق بحيث لا يتعامل مع أي نوع من التركيز الصوتي بعد الآن</string>
     <string name="playback_during_call">متابعة التشغيل أثناء المكالمة</string>
-    <string name="autoplay_playlists_summary">تشغيل الفيديو التالي تلقائيًا في قوائم التشغيل بغض النظر عن إعداد التشغيل التلقائي المحدد</string>
+    <string name="autoplay_playlists_summary">شغِّل الفيديو التالي تلقائيًا في قوائم التشغيل بغض النظر عن إعداد التشغيل التلقائي المحدد</string>
     <string name="autoplay_playlists">شغّل قوائم التشغيل تلقائيًا</string>
     <string name="remember_playback_speed">تذكر سرعة التشغيل</string>
     <string name="vote_for_segment">التصويت للجزء</string>
@@ -491,8 +491,8 @@
     <string name="download_playlist_note">الرجاء تحديد الحد الأقصى لجودة الصوت/الفيديو للتنزيل. سيتم تنزيل التسميات التوضيحية فقط إذا كانت متوفرة.</string>
     <string name="enqueue_playlist_description">يعرض إشعارًا عند وضع مقاطع فيديو في قائمة التشغيل لتنزيلها.</string>
     <string name="enqueueing_playlist_download">وضع مقاطع الفيديو في قائمة الانتظار لتنزيل قائمة التشغيل %1$s</string>
-    <string name="delete_all">سيتم حذف جميع التنزيلات!</string>
-    <string name="also_clear_watch_positions">أيضًا امسح مواضع المشاهدة</string>
+    <string name="delete_all">ستُحذف جميع التنزيلات!</string>
+    <string name="also_clear_watch_positions">امسح أيضًا مواضع المشاهدة</string>
     <string name="gestures">الإيماءات</string>
     <string name="behavior_when_minimized">السلوك عند التصغير</string>
     <string name="comments_count">التعليقات (%1$s)</string>

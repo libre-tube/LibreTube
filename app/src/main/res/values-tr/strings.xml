@@ -265,7 +265,7 @@
     <string name="added_to_playlist">Oynatma listesine eklendi %1$s</string>
     <string name="queue">Sıra</string>
     <string name="livestreams">Canlı yayınlar</string>
-    <string name="defaultIconLight">Varsayılan ışık</string>
+    <string name="defaultIconLight">Varsayılan aydınlık</string>
     <string name="playlistCloned">Oynatma listesi kopyalandı</string>
     <string name="play_all">Tümünü oynat</string>
     <string name="time">Zaman</string>
