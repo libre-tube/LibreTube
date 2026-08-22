@@ -22,8 +22,8 @@
 
 </div>
 
-> **Note About Nightly** <br>
-> Nightly builds include features/fixes before the official release. Nightly builds are generally less stable than normal releases. **Use nightly builds at your own discretion**
+> **Note about Nightly builds** <br>
+> Nightly builds include features/fixes before the official release. Therefore, they are generally less stable than normal releases. Use nightly builds at your own risk.
 
 <details>
   <summary>📜️ Credits</summary>
