@@ -3,10 +3,11 @@ package com.github.libretube.db
 import com.github.libretube.api.obj.StreamItem
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.db.DatabaseHolder.Database
-import com.github.libretube.db.dao.WatchHistoryPageItem
+import com.github.libretube.db.dao.WatchHistoryRow
 import com.github.libretube.db.obj.SearchHistoryItem
 import com.github.libretube.db.obj.WatchHistoryItem
 import com.github.libretube.enums.ContentFilter
+import com.github.libretube.enums.WatchHistoryStatus
 import com.github.libretube.extensions.toID
 import com.github.libretube.helpers.PreferenceHelper
 import kotlinx.coroutines.Dispatchers
@@ -27,41 +28,26 @@ object DatabaseHelper {
             Database.watchHistoryDao().insert(watchHistoryItem)
         }
 
-    data class WatchHistoryPage(
-        val rows: List<WatchHistoryPageItem>,
-        val nextCursor: Long?
-    ) {
-        val items get() = rows.map(WatchHistoryPageItem::item)
+    data class WatchHistoryPage(val rows: List<WatchHistoryRow>, val nextCursor: Long?) {
+        val items get() = rows.map(WatchHistoryRow::item)
     }
 
     suspend fun getWatchHistoryPage(
         pageSize: Int,
-        statusFilter: Int = 0,
+        statusFilter: WatchHistoryStatus = WatchHistoryStatus.ALL,
         cursor: Long = Long.MAX_VALUE
     ): WatchHistoryPage {
-        val watchHistoryDao = Database.watchHistoryDao()
-        val watched = when (statusFilter) {
-            0 -> STATUS_ALL
-            1 -> STATUS_CONTINUE_WATCHING
-            2 -> STATUS_FINISHED
-            else -> throw IllegalArgumentException()
-        }
-
-        val rows = if (watched == null) {
-            watchHistoryDao.getPage(pageSize, cursor)
-        } else {
-            watchHistoryDao.getFilteredPage(
-                limit = pageSize,
-                cursor = cursor,
-                watched = watched,
-                absoluteWatchedThreshold = ABSOLUTE_WATCHED_THRESHOLD,
-                relativeWatchedThreshold = RELATIVE_WATCHED_THRESHOLD
-            )
-        }
+        val rows = Database.watchHistoryDao().getPage(
+            limit = pageSize,
+            cursor = cursor,
+            watched = statusFilter.isWatched,
+            absoluteWatchedThresholdSeconds = ABSOLUTE_WATCHED_THRESHOLD,
+            relativeWatchedThreshold = RELATIVE_WATCHED_THRESHOLD
+        )
 
         return WatchHistoryPage(
             rows = rows,
-            nextCursor = rows.lastOrNull()?.rowId?.minus(1)
+            nextCursor = rows.lastOrNull()?.rowId?.minus(1)?.takeIf { rows.size == pageSize }
         )
     }
 
@@ -104,16 +90,6 @@ object DatabaseHelper {
         return streams.filter {
             !isVideoWatched(it.url.orEmpty().toID(), it.duration ?: 0)
         }
-    }
-
-    /**
-     * @param unfinished If true, only returns unfinished videos. If false, only returns finished videos.
-     */
-    suspend fun filterByWatchStatus(
-        watchHistoryItem: WatchHistoryItem,
-        unfinished: Boolean = true
-    ): Boolean {
-        return unfinished xor isVideoWatched(watchHistoryItem.videoId, watchHistoryItem.duration ?: 0)
     }
 
     suspend fun filterByStreamTypeAndWatchPosition(

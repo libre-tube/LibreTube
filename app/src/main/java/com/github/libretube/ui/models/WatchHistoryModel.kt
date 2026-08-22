@@ -7,130 +7,93 @@ import androidx.lifecycle.viewModelScope
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.db.DatabaseHelper
 import com.github.libretube.db.DatabaseHolder
-import com.github.libretube.db.dao.WatchHistoryPageItem
 import com.github.libretube.db.obj.WatchHistoryItem
+import com.github.libretube.enums.WatchHistoryStatus
 import com.github.libretube.helpers.PreferenceHelper
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class WatchHistoryModel : ViewModel() {
-    private val watchHistory = MutableLiveData<List<WatchHistoryPageItem>>()
-    val filteredWatchHistory: LiveData<List<WatchHistoryPageItem>> = watchHistory
+    private val watchHistory = MutableLiveData<List<WatchHistoryItem>>()
+    val filteredWatchHistory: LiveData<List<WatchHistoryItem>> = watchHistory
 
-    private var cursor = Long.MAX_VALUE
+    private var cursor: Long? = Long.MAX_VALUE
     private var fetchJob: Job? = null
-    private var reachedEnd = false
-    private var filterGeneration = 0
-    private var statusFilter =
-        PreferenceHelper.getInt(PreferenceKeys.SELECTED_HISTORY_STATUS_FILTER, 0)
+    private val downloadedVideoIds = mutableSetOf<String>()
+    private val watchPositions = mutableMapOf<String, Long?>()
+
+    private val selectedStatus = MutableStateFlow(
+        WatchHistoryStatus.entries.getOrNull(
+            PreferenceHelper.getInt(PreferenceKeys.SELECTED_HISTORY_STATUS_FILTER, WatchHistoryStatus.ALL.ordinal)
+        ) ?: WatchHistoryStatus.ALL
+    )
 
     var selectedStatusFilter
-        get() = statusFilter
+        get() = selectedStatus.value
         set(value) {
-            if (statusFilter == value) return
-
-            PreferenceHelper.putInt(PreferenceKeys.SELECTED_HISTORY_STATUS_FILTER, value)
-            statusFilter = value
-            fetchJob?.cancel()
-            fetchJob = null
-            filterGeneration++
-            cursor = Long.MAX_VALUE
-            reachedEnd = false
-            watchHistory.value = emptyList()
-            fetchNextPage()
+            PreferenceHelper.putInt(PreferenceKeys.SELECTED_HISTORY_STATUS_FILTER, value.ordinal)
+            selectedStatus.value = value
         }
 
-    fun fetchNextPage() {
-        if (fetchJob?.isActive == true || reachedEnd) return
-
-        val requestedCursor = cursor
-        val generation = filterGeneration
-        fetchJob = viewModelScope.launch {
-            val page = withContext(Dispatchers.IO) {
-                DatabaseHelper.getWatchHistoryPage(
-                    pageSize = HISTORY_PAGE_SIZE,
-                    statusFilter = statusFilter,
-                    cursor = requestedCursor
-                )
-            }
-
-            if (generation != filterGeneration || requestedCursor != cursor) return@launch
-
-            cursor = page.nextCursor ?: cursor
-            reachedEnd = page.rows.size < HISTORY_PAGE_SIZE
-            watchHistory.value = watchHistory.value.orEmpty().toMutableList().apply {
-                addAll(page.rows)
+    init {
+        viewModelScope.launch {
+            selectedStatus.collect {
+                fetchJob?.cancel()
+                cursor = Long.MAX_VALUE
+                watchHistory.value = emptyList()
+                fetchNextPage()
             }
         }
     }
 
-    fun refresh() {
-        val pageSize = maxOf(watchHistory.value.orEmpty().size, HISTORY_PAGE_SIZE)
-        fetchJob?.cancel()
-        fetchJob = null
-        filterGeneration++
-        val generation = filterGeneration
-        val requestedStatus = selectedStatusFilter
+    fun fetchNextPage() {
+        val currentCursor = cursor ?: return
+        if (fetchJob?.isActive == true) return
 
         fetchJob = viewModelScope.launch {
-            val page = withContext(Dispatchers.IO) {
-                DatabaseHelper.getWatchHistoryPage(
-                    pageSize = pageSize,
-                    statusFilter = requestedStatus
-                )
-            }
-            if (generation != filterGeneration) return@launch
+            val page = DatabaseHelper.getWatchHistoryPage(
+                pageSize = HISTORY_PAGE_SIZE,
+                statusFilter = selectedStatus.value,
+                cursor = currentCursor
+            )
+            val downloaded = DatabaseHolder.Database.downloadDao()
+                .areVideosDownloaded(page.items.map(WatchHistoryItem::videoId))
 
-            cursor = page.nextCursor ?: Long.MAX_VALUE
-            reachedEnd = page.rows.size < pageSize
-            watchHistory.value = page.rows
+            page.rows.forEachIndexed { index, row ->
+                val item = row.item
+                if (downloaded[index]) downloadedVideoIds += item.videoId else downloadedVideoIds -= item.videoId
+                watchPositions[item.videoId] = row.watchPosition
+            }
+            cursor = page.nextCursor
+            watchHistory.value = watchHistory.value.orEmpty() + page.items
+        }
+    }
+
+    fun isVideoDownloaded(videoId: String) = videoId in downloadedVideoIds
+
+    fun getWatchPosition(videoId: String) = watchPositions[videoId]
+
+    fun onWatchStatusChanged(item: WatchHistoryItem, isVideoWatched: Boolean) {
+        if (isVideoWatched) {
+            watchPositions[item.videoId] = Long.MAX_VALUE
+        } else {
+            watchPositions -= item.videoId
+        }
+
+        if (!isVideoWatched || selectedStatus.value.isWatched == false) {
+            watchHistory.value = watchHistory.value.orEmpty() - item
         }
     }
 
     fun removeFromHistory(watchHistoryItem: WatchHistoryItem) =
         viewModelScope.launch {
-            withContext(Dispatchers.IO) {
-                DatabaseHolder.Database.watchHistoryDao().delete(watchHistoryItem)
-            }
-
-            watchHistory.value = watchHistory.value.orEmpty().filter { it.item != watchHistoryItem }
+            DatabaseHolder.Database.watchHistoryDao().delete(watchHistoryItem)
+            watchHistory.value = watchHistory.value.orEmpty() - watchHistoryItem
         }
-
-    fun refreshItem(videoId: String) = viewModelScope.launch {
-        val generation = filterGeneration
-        val row = withContext(Dispatchers.IO) {
-            DatabaseHolder.Database.watchHistoryDao().getPageItem(videoId)
-        }
-        if (generation != filterGeneration) return@launch
-
-        val history = watchHistory.value.orEmpty()
-        val index = history.indexOfFirst { it.item.videoId == videoId }
-        if (index == -1) return@launch
-
-        val refreshedRow = row?.takeIf {
-            when (selectedStatusFilter) {
-                0 -> true
-                1 -> it.watchPosition?.let { position ->
-                    !DatabaseHelper.isVideoWatched(position, it.item.duration ?: 0)
-                } ?: true
-                2 -> it.watchPosition?.let { position ->
-                    DatabaseHelper.isVideoWatched(position, it.item.duration ?: 0)
-                } ?: false
-                else -> false
-            }
-        }
-
-        watchHistory.value = history.toMutableList().apply {
-            removeAt(index)
-            if (refreshedRow != null) {
-                add(if (refreshedRow.rowId > history.first().rowId) 0 else index, refreshedRow)
-            }
-        }
-    }
 
     companion object {
-        private const val HISTORY_PAGE_SIZE = 30
+        private const val HISTORY_PAGE_SIZE = 10
     }
 }

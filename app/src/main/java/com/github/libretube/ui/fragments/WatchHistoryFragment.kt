@@ -19,6 +19,7 @@ import com.github.libretube.R
 import com.github.libretube.databinding.FragmentWatchHistoryBinding
 import com.github.libretube.db.DatabaseHolder.Database
 import com.github.libretube.db.obj.WatchHistoryItem
+import com.github.libretube.enums.WatchHistoryStatus
 import com.github.libretube.extensions.ceilHalf
 import com.github.libretube.extensions.dpToPx
 import com.github.libretube.extensions.setOnDismissListener
@@ -44,7 +45,6 @@ class WatchHistoryFragment : DynamicLayoutManagerFragment(R.layout.fragment_watc
     private var recyclerViewState: Parcelable? = null
 
     private val viewModel: WatchHistoryModel by viewModels()
-    private val watchHistoryAdapter = WatchHistoryAdapter { viewModel.refreshItem(it) }
 
     override fun setLayoutManagers(gridItems: Int) {
         _binding?.watchHistoryRecView?.layoutManager =
@@ -55,6 +55,12 @@ class WatchHistoryFragment : DynamicLayoutManagerFragment(R.layout.fragment_watc
         _binding = FragmentWatchHistoryBinding.bind(view)
         super.onViewCreated(view, savedInstanceState)
 
+        val watchHistoryAdapter = WatchHistoryAdapter(
+            viewModel::isVideoDownloaded,
+            viewModel::getWatchPosition,
+            viewModel::onWatchStatusChanged
+        )
+
         commonPlayerViewModel.isMiniPlayerVisible.observe(viewLifecycleOwner) { isMiniPlayerVisible ->
             _binding?.watchHistoryRecView?.updatePadding(bottom = if (isMiniPlayerVisible) 64f.dpToPx() else 0)
             _binding?.playAll?.updateLayoutParams<MarginLayoutParams> {
@@ -63,7 +69,7 @@ class WatchHistoryFragment : DynamicLayoutManagerFragment(R.layout.fragment_watc
         }
 
         binding.watchHistoryRecView.setOnDismissListener { position ->
-            val item = viewModel.filteredWatchHistory.value?.getOrNull(position)?.item
+            val item = viewModel.filteredWatchHistory.value?.getOrNull(position)
                 ?: return@setOnDismissListener
             viewModel.removeFromHistory(item)
         }
@@ -89,8 +95,8 @@ class WatchHistoryFragment : DynamicLayoutManagerFragment(R.layout.fragment_watc
             }
         })
 
-        binding.chipContinue.isChecked = viewModel.selectedStatusFilter in arrayOf(0, 1)
-        binding.chipFinished.isChecked = viewModel.selectedStatusFilter in arrayOf(0, 2)
+        binding.chipContinue.isChecked = viewModel.selectedStatusFilter != WatchHistoryStatus.FINISHED
+        binding.chipFinished.isChecked = viewModel.selectedStatusFilter != WatchHistoryStatus.CONTINUE_WATCHING
 
         val watchPositionItem = arrayOf(getString(R.string.also_clear_watch_positions))
         val selected = booleanArrayOf(false)
@@ -123,15 +129,14 @@ class WatchHistoryFragment : DynamicLayoutManagerFragment(R.layout.fragment_watc
             val continueWatchingEnabled = checkedIds.contains(binding.chipContinue.id)
             val finishedEnabled = checkedIds.contains(binding.chipFinished.id)
             viewModel.selectedStatusFilter = when {
-                continueWatchingEnabled && finishedEnabled -> 0
-                continueWatchingEnabled -> 1
-                finishedEnabled -> 2
-                else -> 0
+                continueWatchingEnabled == finishedEnabled -> WatchHistoryStatus.ALL
+                continueWatchingEnabled -> WatchHistoryStatus.CONTINUE_WATCHING
+                else -> WatchHistoryStatus.FINISHED
             }
         }
 
         binding.playAll.setOnClickListener {
-            val history = viewModel.filteredWatchHistory.value.orEmpty().map { it.item }
+            val history = viewModel.filteredWatchHistory.value.orEmpty()
             if (history.isEmpty()) return@setOnClickListener
 
             PlayingQueue.add(
@@ -171,11 +176,6 @@ class WatchHistoryFragment : DynamicLayoutManagerFragment(R.layout.fragment_watc
             }
         }
 
-    }
-
-    override fun onResume() {
-        super.onResume()
-        viewModel.refresh()
     }
 
     override fun onConfigurationChanged(newConfig: Configuration) {

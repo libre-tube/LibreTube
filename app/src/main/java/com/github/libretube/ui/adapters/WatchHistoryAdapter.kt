@@ -8,7 +8,7 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.ListAdapter
 import com.github.libretube.constants.IntentData
 import com.github.libretube.databinding.VideoRowBinding
-import com.github.libretube.db.dao.WatchHistoryPageItem
+import com.github.libretube.db.obj.WatchHistoryItem
 import com.github.libretube.helpers.ImageHelper
 import com.github.libretube.helpers.NavigationHelper
 import com.github.libretube.parcelable.PlayerData
@@ -21,11 +21,11 @@ import com.github.libretube.ui.viewholders.WatchHistoryViewHolder
 import com.github.libretube.util.TextUtils
 
 class WatchHistoryAdapter(
-    private val onWatchStatusChanged: (String) -> Unit
+    private val isVideoDownloaded: (String) -> Boolean,
+    private val getWatchPosition: (String) -> Long?,
+    private val onWatchStatusChanged: (WatchHistoryItem, Boolean) -> Unit
 ) :
-    ListAdapter<WatchHistoryPageItem, WatchHistoryViewHolder>(
-        DiffUtilItemCallback(areItemsTheSame = { old, new -> old.item.videoId == new.item.videoId })
-    ) {
+    ListAdapter<WatchHistoryItem, WatchHistoryViewHolder>(DiffUtilItemCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WatchHistoryViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
@@ -34,8 +34,7 @@ class WatchHistoryAdapter(
     }
 
     override fun onBindViewHolder(holder: WatchHistoryViewHolder, position: Int) {
-        val pageItem = getItem(position)
-        val video = pageItem.item
+        val video = getItem(position)
         holder.binding.apply {
             videoTitle.text = video.title
             channelName.text = video.uploader
@@ -72,8 +71,10 @@ class WatchHistoryAdapter(
                 fragmentManager.setFragmentResultListener(
                     VideoOptionsBottomSheet.VIDEO_OPTIONS_SHEET_REQUEST_KEY,
                     activity
-                ) { _, _ ->
-                    onWatchStatusChanged(video.videoId)
+                ) { _, result ->
+                    val isVideoWatched = result.getBoolean(VideoOptionsBottomSheet.IS_VIDEO_WATCHED)
+                    onWatchStatusChanged(video, isVideoWatched)
+                    currentList.indexOf(video).takeIf { it >= 0 }?.let(::notifyItemChanged)
                 }
                 val sheet = VideoOptionsBottomSheet()
                 sheet.arguments = bundleOf(IntentData.streamItem to video.toStreamItem())
@@ -81,10 +82,11 @@ class WatchHistoryAdapter(
                 true
             }
 
-            if (video.duration != null) {
-                watchProgress.setWatchProgressLength(pageItem.watchPosition, video.duration)
-            } else watchProgress.isGone = true
-            downloadBadge.isVisible = pageItem.isDownloaded
+            if (video.duration != null) watchProgress.setWatchProgressLength(
+                getWatchPosition(video.videoId),
+                video.duration
+            ) else watchProgress.isGone = true
+            downloadBadge.isVisible = isVideoDownloaded(video.videoId)
         }
     }
 }
