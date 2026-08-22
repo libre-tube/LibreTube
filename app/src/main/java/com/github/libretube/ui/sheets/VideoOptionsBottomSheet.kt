@@ -124,7 +124,7 @@ class VideoOptionsBottomSheet : BaseBottomSheet() {
                             ?.firstOrNull() as? SubscriptionsFragment
                         fragment?.removeItem(videoId)
                     }
-                    setFragmentResult(VIDEO_OPTIONS_SHEET_REQUEST_KEY, bundleOf())
+                    setFragmentResult(VIDEO_OPTIONS_SHEET_REQUEST_KEY, bundleOf(IS_VIDEO_WATCHED to true))
                 }
 
                 R.string.mark_as_unwatched -> {
@@ -132,7 +132,7 @@ class VideoOptionsBottomSheet : BaseBottomSheet() {
                         DatabaseHolder.Database.watchPositionDao().deleteByVideoId(videoId)
                         DatabaseHolder.Database.watchHistoryDao().deleteByVideoId(videoId)
                     }
-                    setFragmentResult(VIDEO_OPTIONS_SHEET_REQUEST_KEY, bundleOf())
+                    setFragmentResult(VIDEO_OPTIONS_SHEET_REQUEST_KEY, bundleOf(IS_VIDEO_WATCHED to false))
                 }
             }
         }
@@ -172,5 +172,6 @@ class VideoOptionsBottomSheet : BaseBottomSheet() {
 
     companion object {
         const val VIDEO_OPTIONS_SHEET_REQUEST_KEY = "video_options_sheet_request_key"
+        const val IS_VIDEO_WATCHED = "isVideoWatched"
     }
 }
