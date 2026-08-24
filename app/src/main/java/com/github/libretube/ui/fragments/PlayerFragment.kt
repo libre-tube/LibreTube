@@ -416,13 +416,16 @@ class PlayerFragment : Fragment(R.layout.fragment_player), CustomPlayerCallback 
 
 
         val playerData = requireArguments().parcelable<PlayerData>(IntentData.playerData)!!
-        videoId = playerData.videoId!!
+        // when shuffling downloads, the video to start with is picked by the player service
+        // and reported back through the playlist metadata, so there is none to show yet
+        playerData.videoId?.let { videoId = it }
         isOffline = playerData.isOffline
         playlistId = playerData.playlistId
         channelId = playerData.channelId
 
         // remember if playback already started once and only restart playback if that's the first run
         val createNewSession = !requireArguments().getBoolean(IntentData.alreadyStarted)
+                || playerData.videoId == null
         requireArguments().putBoolean(IntentData.alreadyStarted, true)
 
         changeOrientationMode()
@@ -450,7 +453,7 @@ class PlayerFragment : Fragment(R.layout.fragment_player), CustomPlayerCallback 
             }
         }
 
-        val localDownloadVersion = runBlocking(Dispatchers.IO) {
+        val localDownloadVersion = if (isOffline) null else runBlocking(Dispatchers.IO) {
             DatabaseHolder.Database.downloadDao().findById(videoId)
         }
 
@@ -526,7 +529,7 @@ class PlayerFragment : Fragment(R.layout.fragment_player), CustomPlayerCallback 
             val isNoInternet = activity is NoInternetActivity
 
             OfflinePlayerService::class.java to bundleOf(
-                IntentData.videoId to videoId,
+                IntentData.videoId to playerData.videoId,
                 IntentData.playerData to playerData
                     .copy(downloadTab = playerData.downloadTab ?: DownloadTab.VIDEO),
                 IntentData.noInternet to isNoInternet
