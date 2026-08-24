@@ -19,6 +19,11 @@ jobs:
   debug-builds:
     runs-on: ubuntu-latest
     steps:
+      - name: Get Date and Time
+        run: |
+          echo "TIME=$(date -u +'%T')" >> $GITHUB_ENV
+          echo "DATE=$(date -u +'%d-%m-%Y')" >> $GITHUB_ENV
+  
       - uses: actions/checkout@v6
       - uses: gradle/actions/wrapper-validation@v5
       - uses: actions/setup-python@v6
@@ -60,20 +65,29 @@ jobs:
           keyAlias: ${{ secrets.ANDROID_KEY_ALIAS }}
           keyStorePassword: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
           keyPassword: ${{ secrets.ANDROID_KEY_PASSWORD }}
-
-      - name: Upload to Archive
-        continue-on-error: true
-        run: |
-          mv .github/uploader.py .
-          echo "GH_REPO = '${{ github.repository }}'" > config_file.py
-          git clone --filter=blob:none https://github.com/libre-tube/NightlyBuilds nightly
-          rm -rf nightly/*.apk
-          mv app/build/outputs/apk/debug/*.apk nightly/
-          cd nightly
-          python ../uploader.py
       
       - name: Upload APK
         uses: actions/upload-artifact@v6
         with:
           name: app
-          path: nightly/*.apk
+          path: app/build/outputs/apk/debug/*.apk
+
+      - name: Create Nightly Tag
+        run: git tag -f nightly && git push -f origin nightly
+          
+      - name: Create Nightly Release
+        uses: ncipollo/release-action@v1
+        with:
+          token: ${{ secrets.GH_TOKEN }}
+          tag:  nightly
+          makeLatest: true
+          prerelease: true
+          allowUpdates: true
+          updateOnlyUnreleased: true
+          artifacts: app/build/outputs/apk/debug/*.apk
+          name: LibreTube Nightly ${{ env.DATE }}
+          body: |
+            LibreTube Nightly build from ${{ env.DATE }} ${{ env.TIME }}
+            
+            > **Note about Nightly builds** <br>
+            > Nightly builds include features/fixes before the official release. Therefore, they are generally less stable than normal releases. Use nightly builds at your own risk.
