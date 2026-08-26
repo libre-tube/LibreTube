@@ -572,4 +572,7 @@
     <string name="long_press_fast_forward">Avanço rápido com um toque longo</string>
     <string name="long_press_fast_forward_summary">Reproduzir vídeos em velocidade dupla enquanto tocar e pressionar a tela.</string>
     <string name="resume_all">Retomar downloads</string>
+    <string name="courses">Cursos</string>
+    <string name="comment_verified">Verificado</string>
+    <string name="comment_pinned">Fixado</string>
 </resources>
