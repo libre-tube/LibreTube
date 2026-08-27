@@ -181,4 +181,6 @@
     <string name="codecs">Codecs</string>
     <string name="uploaderAndVideoCount">%1$s • %2$d 條片</string>
     <string name="least_recent">最舊</string>
+    <string name="captions">字幕</string>
+    <string name="none">冇</string>
 </resources>
