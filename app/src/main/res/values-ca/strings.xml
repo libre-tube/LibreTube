@@ -561,4 +561,15 @@
     <string name="resume_all">Reprèn les baixades</string>
     <string name="comment_verified">Verificat</string>
     <string name="comment_pinned">Fixat</string>
+    <string name="category_hook">Ganxo o salutacions</string>
+    <string name="category_hook_summary">Per a ganxos narratius que atrapen l\'atenció de l\'espectador (sovint com la primera escena) burlant-se o descrivint esdeveniments posteriors en el mateix vídeo o futurs episodis d\'una sèrie</string>
+    <string name="unsubscribe_snackbar_message">S\'ha cancel·lat amb èxit la subscripció de %1$s</string>
+    <string name="delete_playlist_include_vidoes">Voleu suprimir també tots els vídeos de la llista de reproducció?</string>
+    <plurals name="minutes_left">
+        <item quantity="one">%d min romanent</item>
+        <item quantity="other">%d min romanents</item>
+    </plurals>
+    <string name="showing_results_for">Es mostren els resultats de:</string>
+    <string name="long_press_fast_forward">Avança ràpidament en prémer llarg</string>
+    <string name="long_press_fast_forward_summary">Reprodueix vídeo a doble velocitat mentre toqueu i manteniu premuda la pantalla.</string>
 </resources>
