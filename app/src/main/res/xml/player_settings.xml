@@ -130,13 +130,6 @@
             android:icon="@drawable/ic_list"
             android:title="@string/queue_insert_related_videos"
             app:key="queue_insert_related_videos" />
-
-        <SwitchPreferenceCompat
-            android:defaultValue="false"
-            android:summary="@string/autoplay_playlists_summary"
-            android:title="@string/autoplay_playlists"
-            app:key="autoplay_playlists" />
-
     </PreferenceCategory>
 
     <PreferenceCategory app:title="@string/misc">
