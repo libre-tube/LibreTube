@@ -156,7 +156,10 @@ object PreferenceHelper {
             remove("behavior_when_minimized")
             remove("show_stream_thumbnails")
             remove("watch_history_size")
-        }
+        },
+        PreferenceMigration(9, 10) {
+            remove("autoplay_playlists")
+        },
     )
 
     /**

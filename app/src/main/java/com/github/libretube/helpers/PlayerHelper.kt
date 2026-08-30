@@ -369,8 +369,7 @@ object PlayerHelper {
         }
 
     fun isAutoPlayEnabled(isPlaylist: Boolean = false): Boolean {
-        return autoPlayEnabled || (isPlaylist && PreferenceHelper
-            .getBoolean(PreferenceKeys.AUTOPLAY_PLAYLISTS, false))
+        return autoPlayEnabled || isPlaylist
     }
 
     fun getDefaultResolution(context: Context, isFullscreen: Boolean): Int? {
