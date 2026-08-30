@@ -124,7 +124,7 @@ class LocalFeedRepository : FeedRepository {
     ): Pair<Subscription?, List<StreamItem>> {
         val channelUrl = "$YOUTUBE_FRONTEND_URL/channel/${channelId}"
         val feedInfo = FeedInfo.getInfo(channelUrl)
-        val feedInfoItems = feedInfo.relatedItems.associateBy { it.url }
+        val feedInfoItems = feedInfo.relatedItems.associateBy { it.url.toID() }
 
         val mostRecentChannelVideo = feedInfo.relatedItems.maxBy {
             it.uploadDate?.offsetDateTime()?.toInstant()?.toEpochMilli() ?: 0
@@ -166,7 +166,7 @@ class LocalFeedRepository : FeedRepository {
             item.toStreamItem(
                 channelAvatar,
                 // shorts fetched via the shorts tab don't have upload dates so we fall back to the feedInfo
-                feedInfoItems[item.url]
+                feedInfoItems[item.url.toID()]
             )
         }.filter { it.uploaded > minimumDateMillis }
         return Pair(subscription, streamItems)

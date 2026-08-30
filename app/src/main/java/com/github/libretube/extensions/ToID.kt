@@ -14,6 +14,7 @@ fun String.toID(): String {
         .removePrefix(YOUTUBE_MUSIC_URL)
         .removePrefix(YOUTUBE_SHORT_URL)
         .replace("/watch?v=", "") // videos
+        .replace("/shorts/", "") // shorts
         .replace("/channel/", "") // channels
         .replace("/playlist?list=", "") // playlists
         // channel urls for different categories than the main one
