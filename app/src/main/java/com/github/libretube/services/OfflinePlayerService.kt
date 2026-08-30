@@ -222,15 +222,6 @@ open class OfflinePlayerService : AbstractPlayerService() {
         }
     }
 
-    private fun playNextVideo(videoId: String? = null) {
-        if (PlayingQueue.repeatMode == Player.REPEAT_MODE_ONE) {
-            exoPlayer?.seekTo(0)
-        } else if (PlayerHelper.isAutoPlayEnabled() && shouldHandleAutoplay) {
-            val nextId = videoId ?: PlayingQueue.getNext() ?: return
-            navigateVideo(nextId)
-        }
-    }
-
     /**
      * Stop the service when app is removed from the task manager.
      */

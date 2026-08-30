@@ -362,10 +362,6 @@ object PlayerHelper {
             PreferenceHelper.putInt(PreferenceKeys.REPEAT_MODE, value)
         }
 
-    fun isAutoPlayEnabled(isPlaylist: Boolean = false): Boolean {
-        return autoPlayEnabled || isPlaylist
-    }
-
     fun getDefaultResolution(context: Context, isFullscreen: Boolean): Int? {
         var prefKey = if (NetworkHelper.isNetworkMetered(context)) {
             PreferenceKeys.DEFAULT_RESOLUTION_MOBILE

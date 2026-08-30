@@ -112,8 +112,6 @@ object PlayingQueue {
 
     fun size() = queue.size
 
-    fun isLast() = currentIndex() == size() - 1
-
     fun currentIndex(): Int = synchronized(queue) {
         return queue.indexOfFirst {
             it.url?.toID() == currentStream?.url?.toID()
@@ -224,7 +222,6 @@ object PlayingQueue {
         streamItem: StreamItem,
         playlistId: String?,
         channelId: String?,
-        relatedStreams: List<StreamItem> = emptyList()
     ) {
         updateCurrent(streamItem)
 
@@ -232,16 +229,7 @@ object PlayingQueue {
             insertPlaylist(playlistId, streamItem)
         } else if (channelId != null) {
             insertChannel(channelId, streamItem)
-        } else if (relatedStreams.isNotEmpty()) {
-            insertRelatedStreams(relatedStreams)
         }
-    }
-
-    fun insertRelatedStreams(streams: List<StreamItem>) {
-        // don't add new videos to the queue if queue has still videos (e.g. repeat)
-        if (hasNext() || !PlayerHelper.autoPlayEnabled) return
-
-        add(*streams.filter { !it.isLive }.toTypedArray(), skipExisting = true)
     }
 }
 
