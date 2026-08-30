@@ -258,7 +258,7 @@ class PlayerFragment : Fragment(R.layout.fragment_player), CustomPlayerCallback 
 
                 // if the current tracks are empty, the player is transitioning at the moment
                 val isTransitioning = playerController.currentTracks.isEmpty
-                if (PlayerHelper.isAutoPlayEnabled(playlistId != null) && autoPlayCountdownEnabled && !isTransitioning) {
+                if ((PlayingQueue.hasNext() || PlayerHelper.autoPlayEnabled) && autoPlayCountdownEnabled && !isTransitioning) {
                     showAutoPlayCountdown()
                 } else {
                     binding.player.showControllerPermanently()
@@ -1232,7 +1232,11 @@ class PlayerFragment : Fragment(R.layout.fragment_player), CustomPlayerCallback 
             }
         }
         playerBackgroundBinding.autoplayCountdown.startCountdown {
-            PlayingQueue.getNext()?.let { playNextVideo(it) }
+            val nextVideo = PlayingQueue.getNext()
+                ?: streams.relatedStreams.firstOrNull { !it.isLive }?.url?.toID()
+                    ?.takeIf { PlayerHelper.autoPlayEnabled }
+                ?: return@startCountdown
+            playNextVideo(nextVideo)
         }
     }
 

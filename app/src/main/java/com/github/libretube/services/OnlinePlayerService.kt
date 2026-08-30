@@ -75,7 +75,7 @@ open class OnlinePlayerService : AbstractPlayerService() {
         override fun onPlaybackStateChanged(playbackState: Int) {
             when (playbackState) {
                 Player.STATE_ENDED -> {
-                    if (!isTransitioning) playNextVideo()
+                    if (!isTransitioning) playNextVideo(relatedStreams = streams?.relatedStreams)
                 }
 
                 Player.STATE_IDLE -> {
@@ -152,7 +152,7 @@ open class OnlinePlayerService : AbstractPlayerService() {
                 PlayingQueue.updateCurrent(it)
 
                 if (!PlayingQueue.hasNext()) {
-                    PlayingQueue.updateQueue(it, playlistId, channelId, streams!!.relatedStreams)
+                    PlayingQueue.updateQueue(it, playlistId, channelId)
                 }
 
                 // update feed item with newer information, e.g. more up-to-date views
@@ -189,25 +189,6 @@ open class OnlinePlayerService : AbstractPlayerService() {
             playWhenReady = PlayerHelper.playAutomatically || isAudioOnlyPlayer
             prepare()
         }
-    }
-
-    /**
-     * Plays the next video from the queue
-     */
-    private fun playNextVideo(nextId: String? = null) {
-        if (nextId == null) {
-            if (PlayingQueue.repeatMode == Player.REPEAT_MODE_ONE) {
-                exoPlayer?.seekTo(0)
-                return
-            }
-
-            if (!PlayerHelper.isAutoPlayEnabled(playlistId != null) || !shouldHandleAutoplay) return
-        }
-
-        val nextVideo = nextId ?: PlayingQueue.getNext() ?: return
-
-        // play new video on background
-        navigateVideo(nextVideo)
     }
 
     private suspend fun getSponsorBlockSegments(): List<Segment> {

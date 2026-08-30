@@ -27,12 +27,14 @@ import androidx.media3.session.SessionResult
 import com.github.libretube.R
 import com.github.libretube.api.JsonHelper
 import com.github.libretube.api.obj.Segment
+import com.github.libretube.api.obj.StreamItem
 import com.github.libretube.constants.IntentData
 import com.github.libretube.enums.PlayerCommand
 import com.github.libretube.enums.PlayerEvent
 import com.github.libretube.enums.SbSkipOptions
 import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.parcelableExtra
+import com.github.libretube.extensions.toID
 import com.github.libretube.extensions.toastFromMainThread
 import com.github.libretube.extensions.updateParameters
 import com.github.libretube.helpers.PlayerHelper
@@ -217,6 +219,32 @@ abstract class AbstractPlayerService : MediaLibraryService(), MediaLibrarySessio
                     !args.getBoolean(PlayerCommand.SET_AUTOPLAY_COUNTDOWN_ENABLED.name)
             }
         }
+    }
+
+    /**
+     * Plays the next video.
+     *
+     * If a video ID is explicitly given, it is played next,
+     * otherwise a queued video (which includes playlists) is chosen.
+     *
+     * If no video is queued and autoplay is enabled, a related video is used.
+     */
+    fun playNextVideo(videoId: String? = null, relatedStreams: List<StreamItem>? = null) {
+        if (PlayingQueue.repeatMode == Player.REPEAT_MODE_ONE) {
+            exoPlayer?.seekTo(0)
+            return
+        }
+
+        if (!shouldHandleAutoplay) {
+            return
+        }
+
+        val nextVideo = videoId ?: PlayingQueue.getNext()
+        ?: relatedStreams?.firstOrNull { !it.isLive }?.url?.toID()
+            ?.takeIf { PlayerHelper.autoPlayEnabled }
+        ?: return
+
+        navigateVideo(nextVideo)
     }
 
     /**
