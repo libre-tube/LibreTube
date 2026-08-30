@@ -284,12 +284,6 @@ object PlayerHelper {
             "1"
         ).replace("F", "").toFloat()
 
-    val autoInsertRelatedVideos: Boolean
-        get() = PreferenceHelper.getBoolean(
-            PreferenceKeys.QUEUE_AUTO_INSERT_RELATED,
-            true
-        )
-
     val swipeGestureEnabled: Boolean
         get() = PreferenceHelper.getBoolean(
             PreferenceKeys.PLAYER_SWIPE_CONTROLS,
