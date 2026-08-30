@@ -238,10 +238,8 @@ object PlayingQueue {
     }
 
     fun insertRelatedStreams(streams: List<StreamItem>) {
-        if (!PlayerHelper.autoInsertRelatedVideos) return
-
-        // don't add new videos to the queue if the user chose to repeat only the current queue
-        if (isLast() && repeatMode == Player.REPEAT_MODE_ALL) return
+        // don't add new videos to the queue if queue has still videos (e.g. repeat)
+        if (hasNext() || !PlayerHelper.autoPlayEnabled) return
 
         add(*streams.filter { !it.isLive }.toTypedArray(), skipExisting = true)
     }

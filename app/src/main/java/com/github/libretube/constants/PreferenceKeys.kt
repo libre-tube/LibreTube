@@ -63,7 +63,6 @@ object PreferenceKeys {
     const val DEFAULT_SUBTITLE = "default_subtitle"
     const val SKIP_BUTTONS = "skip_buttons"
     const val PLAYER_RESIZE_MODE = "current_player_resize_mode"
-    const val QUEUE_AUTO_INSERT_RELATED = "queue_insert_related_videos"
     const val PLAYER_SWIPE_CONTROLS = "player_swipe_controls"
     const val PLAYER_PINCH_CONTROL = "player_pinch_control"
     const val CAPTIONS_SIZE = "captions_size"

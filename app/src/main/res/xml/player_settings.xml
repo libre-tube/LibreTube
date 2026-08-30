@@ -123,15 +123,6 @@
 
     </PreferenceCategory>
 
-    <PreferenceCategory app:title="@string/queue">
-
-        <SwitchPreferenceCompat
-            android:defaultValue="true"
-            android:icon="@drawable/ic_list"
-            android:title="@string/queue_insert_related_videos"
-            app:key="queue_insert_related_videos" />
-    </PreferenceCategory>
-
     <PreferenceCategory app:title="@string/misc">
 
         <com.github.libretube.ui.preferences.EditNumberPreference
