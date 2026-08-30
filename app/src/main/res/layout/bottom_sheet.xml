@@ -41,6 +41,7 @@
                     android:maxLines="2"
                     android:ellipsize="end"
                     android:textSize="27sp"
+                    android:textStyle="bold"
                     tools:text="Very long text that is going across more than two lines in total"/>
 
                 <com.google.android.material.divider.MaterialDivider
