@@ -216,8 +216,6 @@
     <string name="history_empty">Belum ada riwayat.</string>
     <string name="required_network">Dibutuhkan koneksi</string>
     <string name="export_subscriptions">Ekspor langganan</string>
-    <string name="skip_buttons">Tombol lewat</string>
-    <string name="skip_buttons_summary">Tampilkan tombol untuk melewati ke video berikutnya atau sebelumnya</string>
     <string name="history_size">Ukuran riwayat maksimum</string>
     <string name="unlimited">Tidak terbatas</string>
     <string name="add_to_queue">Tambahkan ke antrean</string>

@@ -52,13 +52,6 @@
             app:valueTo="60.0" />
 
         <SwitchPreferenceCompat
-            android:defaultValue="false"
-            android:icon="@drawable/ic_next"
-            android:summary="@string/skip_buttons_summary"
-            app:key="skip_buttons"
-            app:title="@string/skip_buttons" />
-
-        <SwitchPreferenceCompat
             android:disableDependentsState="true"
             android:icon="@drawable/ic_rotating_circle"
             android:summary="@string/autoRotatePlayer_summary"

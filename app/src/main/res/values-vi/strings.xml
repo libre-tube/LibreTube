@@ -240,8 +240,6 @@
     <string name="network_wifi">Chỉ trên Wi-Fi</string>
     <string name="copied">Đã sao chép</string>
     <string name="export_subscriptions">Xuất danh sách đăng ký</string>
-    <string name="skip_buttons">Nút bỏ qua</string>
-    <string name="skip_buttons_summary">Hiện nút để bỏ qua đến đoạn phim tiếp theo hoặc trước đó</string>
     <string name="history_size">Dung lượng lịch sử tối đa</string>
     <string name="unlimited">Không giới hạn</string>
     <string name="background_mode">Chế độ nền</string>

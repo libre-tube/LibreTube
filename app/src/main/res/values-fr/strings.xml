@@ -218,7 +218,6 @@
     <string name="error_occurred">Erreur</string>
     <string name="share_with_time">Partager avec l’horodatage</string>
     <string name="export_subscriptions">Exporter les abonnements</string>
-    <string name="skip_buttons">Boutons de saut</string>
     <string name="unlimited">Illimité</string>
     <string name="history_size">Taille maximale de l’historique</string>
     <string name="background_mode">Mode arrière-plan</string>
@@ -226,7 +225,6 @@
     <string name="yt_shorts">Shorts</string>
     <string name="misc">Divers</string>
     <string name="take_a_break">Il est temps de faire une pause</string>
-    <string name="skip_buttons_summary">Afficher les boutons pour sauter à la vidéo suivante ou précédente</string>
     <string name="backup_restore">Sauvegarde et restauration</string>
     <string name="backup">Sauvegarder</string>
     <string name="picture_in_picture">Image dans l’image</string>

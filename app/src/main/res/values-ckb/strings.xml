@@ -181,7 +181,6 @@
     <string name="default_subtitle_language">زمانی ژێرنووس</string>
     <string name="network_all">هەمووی</string>
     <string name="export_subscriptions">هەڵگرتنی هاوبەشیكردنەکان</string>
-    <string name="skip_buttons">دوگمەکانی پەڕاندن</string>
     <string name="backup">پاشکەوتکردن</string>
     <string name="open_copied">کردنەوە</string>
     <string name="audio_video_summary">کوالێتی و شێواز</string>
@@ -258,7 +257,6 @@
     <string name="error_occurred">هەڵە هەیە</string>
     <string name="copied">لەبەریگیرایەوە</string>
     <string name="share_with_time">بڵاوکردنەوە لەگەڵ هەمان کاتدا</string>
-    <string name="skip_buttons_summary">پیشاندانی دوگمەکانی پێشخستن و دواخستنی ڤیدیۆ</string>
     <string name="background_mode">دۆخی پشت شاشە</string>
     <string name="add_to_queue">زیادکردن بۆ دواخراو</string>
     <string name="misc">هەمەجۆر</string>

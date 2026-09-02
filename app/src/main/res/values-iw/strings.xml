@@ -218,8 +218,6 @@
     <string name="error_occurred">שגיאה</string>
     <string name="share_with_time">שיתוף עם קוד זמן</string>
     <string name="export_subscriptions">ייצוא מינויים</string>
-    <string name="skip_buttons">כפתורי דילוג</string>
-    <string name="skip_buttons_summary">להציג כפתורים לדילוג לסרטון הקודם או הבא</string>
     <string name="background_mode">מצב רקע</string>
     <string name="history_size">גודל ההיסטוריה המרבי</string>
     <string name="unlimited">לא מוגבל</string>

@@ -111,8 +111,6 @@
     <string name="notify_new_streams">Pranešimai apie naujas transliacijas</string>
     <string name="irreversible">Ar tikrai\? To nebus galima atšaukti!</string>
     <string name="export_subscriptions">Eksportuoti prenumeratas</string>
-    <string name="skip_buttons">Praleidimo mygtukai</string>
-    <string name="skip_buttons_summary">Rodyti mygtukus, kad pereitumėte prie kito arba ankstesnio vaizdo įrašo</string>
     <string name="history_size">Didžiausias istorijos dydis</string>
     <string name="unlimited">Neribotas</string>
     <string name="background_mode">Fono režimas</string>

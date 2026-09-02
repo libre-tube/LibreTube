@@ -172,7 +172,6 @@
     <string name="irreversible">ଆପଣ ନିଶ୍ଚିତ କି!</string>
     <string name="history_empty">ବର୍ତ୍ତମାନ ସୁଦ୍ଧା କୌଣସି ଇତିହାସ ନାହିଁ ।</string>
     <string name="copied">କପି ହୋଇଛି</string>
-    <string name="skip_buttons">ଏଡ଼ାଇବା ବଟନ୍</string>
     <string name="history_size">ସର୍ବାଧିକ ଇତିହାସ ଆକାର</string>
     <string name="unlimited">ଅସଂଖ୍ୟ</string>
     <string name="yt_shorts">ସର୍ଟ ଗୁଡ଼ିକ</string>
@@ -254,7 +253,6 @@
     <string name="misc">ବିବିଧ</string>
     <string name="background_mode">ପୃଷ୍ଠଭୂମି ସ୍ଥିତି</string>
     <string name="backup">ନକଲ</string>
-    <string name="skip_buttons_summary">ପରବର୍ତ୍ତୀ କିମ୍ବା ପୂର୍ବ ଭିଡିଓକୁ ଯିବାକୁ ବଟନ୍ ଦେଖାନ୍ତୁ</string>
     <string name="take_a_break">ବିରତି ପାଇଁ ସମୟ</string>
     <string name="add_to_queue">ଧାଡିରେ ଯୋଡନ୍ତୁ</string>
     <string name="picture_in_picture">ଛବି ରେ ଛବି</string>

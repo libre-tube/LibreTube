@@ -217,8 +217,6 @@
     <string name="error_occurred">Hata</string>
     <string name="copied">Kopyalandı</string>
     <string name="share_with_time">Zaman koduyla paylaş</string>
-    <string name="skip_buttons">Atlama düğmeleri</string>
-    <string name="skip_buttons_summary">Sonraki veya önceki videoya atlamak için düğmeleri göster</string>
     <string name="history_size">Maksimum geçmiş boyutu</string>
     <string name="unlimited">Sınırsız</string>
     <string name="background_mode">Arka plan modu</string>

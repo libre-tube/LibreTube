@@ -239,8 +239,6 @@
     <string name="checking_frequency">Перевірка кожні …</string>
     <string name="most_views">Найбільше переглядів</string>
     <string name="least_views">Найменше переглядів</string>
-    <string name="skip_buttons">Кнопки пропуску</string>
-    <string name="skip_buttons_summary">Показувати кнопки для переходу до наступного або попереднього відео</string>
     <string name="history_size">Максимальний розмір історії</string>
     <string name="background_mode">Фоновий режим</string>
     <string name="misc">Різне</string>

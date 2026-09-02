@@ -218,8 +218,6 @@
     <string name="copied">Kopieret</string>
     <string name="share_with_time">Del med tidskode</string>
     <string name="export_subscriptions">Eksportér abonnementer</string>
-    <string name="skip_buttons">Spring over-knapper</string>
-    <string name="skip_buttons_summary">Vis knapper for at springe til næste eller forrige video</string>
     <string name="unlimited">Ubegrænset</string>
     <string name="history_size">Maksimal historikstørrelse</string>
     <string name="background_mode">Baggrundstilstand</string>

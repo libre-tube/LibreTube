@@ -248,8 +248,6 @@
     <string name="copied">কপি কৰা হৈছে</string>
     <string name="share_with_time">টাইম ক’ডৰ সৈতে ভাগ-বতৰা</string>
     <string name="export_subscriptions">চাবস্ক্ৰিপচন এক্সপ’ৰ্ট কৰক</string>
-    <string name="skip_buttons">এৰাই যোৱা বুটাম</string>
-    <string name="skip_buttons_summary">পৰৱৰ্তী বা পূৰ্বৱৰ্তী ভিডিঅ’লৈ এৰাই যাবলৈ বুটাম দেখুৱাওক</string>
     <string name="history_size">সৰ্বাধিক ইতিহাসৰ আকাৰ</string>
     <string name="unlimited">অসীম</string>
     <string name="background_mode">পটভূমি মোড</string>

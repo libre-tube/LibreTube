@@ -219,8 +219,6 @@
     <string name="network_wifi">Vain Wi-Fi</string>
     <string name="translate">Käännös</string>
     <string name="error_occurred">Virhe</string>
-    <string name="skip_buttons">Ohituspainikkeet</string>
-    <string name="skip_buttons_summary">Näytä painikkeet siirtyäksesi seuraavaan tai edelliseen videoon</string>
     <string name="history_size">Historian enimmäiskoko</string>
     <string name="background_mode">Taustatila</string>
     <string name="resize_mode_fit">Sovita</string>

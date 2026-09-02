@@ -146,7 +146,6 @@
     <string name="most_views">Cele mai multe vizualizări</string>
     <string name="copied">Copiat</string>
     <string name="take_a_break">Este timpul să luați o pauză</string>
-    <string name="skip_buttons_summary">Afișați butoanele pentru a trece la videoclipul următor sau anterior</string>
     <string name="background_mode">Modul de fundal</string>
     <string name="picture_in_picture">Suprapunere imagine</string>
     <string name="player_resize_mode">Mod redimensionare</string>
@@ -341,7 +340,6 @@
     <string name="autoplay_countdown">Numărătoarea inversă pentru redarea automată</string>
     <string name="video_id">ID video</string>
     <string name="landscape">Peisaj</string>
-    <string name="skip_buttons">Butoane de omitere</string>
     <string name="resize_mode_fit">Potrivire</string>
     <string name="local_playlists">Liste de redare locale</string>
     <string name="import_playlists">Importați liste de redare</string>

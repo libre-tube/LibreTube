@@ -240,7 +240,6 @@
     <string name="maximum_image_cache">Dimension maxime del cache de imagines</string>
     <string name="export_subscriptions">Exportar subscriptiones</string>
     <string name="local_subscriptions">Subscriptiones local</string>
-    <string name="skip_buttons">Buttones de salto</string>
     <string name="add_to_queue">Adder al cauda</string>
     <string name="backup">Copia de securitate</string>
     <string name="skip_segment">Saltar</string>
@@ -253,7 +252,6 @@
     <string name="autoRotatePlayer_summary">Reproduction in schermo plen quando le apparato es girate</string>
     <string name="resize_mode_zoom">Zoom</string>
     <string name="backup_customInstances">Instantias personalisate</string>
-    <string name="skip_buttons_summary">Monstrar le buttones pro saltar al video sequente o previe</string>
     <string name="picture_in_picture">Imagine-in-imagine</string>
     <string name="play_next">Reproducer le sequente</string>
     <string name="no_subtitles_available">Necun subtitulos disponibile</string>

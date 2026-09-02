@@ -229,7 +229,6 @@
     <string name="network_all">すべて</string>
     <string name="network_metered">モバイルデータ通信</string>
     <string name="network_wifi">Wi-Fiのみ</string>
-    <string name="skip_buttons_summary">次の動画、前の動画にスキップするボタンを表示します</string>
     <string name="history_size">履歴の最大保持数</string>
     <string name="background_mode">バックグラウンドモード</string>
     <string name="misc">その他</string>
@@ -255,7 +254,6 @@
     <string name="least_recent">最古</string>
     <string name="no_search_result">結果がありません。</string>
     <string name="added_to_playlist">再生リスト %1$s に追加しました</string>
-    <string name="skip_buttons">スキップボタン</string>
     <string name="livestreams">ライブ</string>
     <string name="download_channel_name">ダウンロードサービス</string>
     <string name="push_channel_name">通知の実行</string>

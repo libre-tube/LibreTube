@@ -218,8 +218,6 @@
     <string name="copied">Nokopēts</string>
     <string name="export_subscriptions">Izgūt abonementus</string>
     <string name="share_with_time">Sākot no</string>
-    <string name="skip_buttons">Izlaišanas pogas</string>
-    <string name="skip_buttons_summary">Rādīt pogas, kas ļauj pāriet uz nākamo vai iepriekšējo video</string>
     <string name="history_size">Maksimālais vēstures izmērs</string>
     <string name="background_mode">Fona režīms</string>
     <string name="unlimited">Neierobežots</string>

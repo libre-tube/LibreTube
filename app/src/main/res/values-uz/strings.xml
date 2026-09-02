@@ -162,8 +162,6 @@
     <string name="copied">Nusxa olindi</string>
     <string name="share_with_time">Vaqt kodi bilan ulashish</string>
     <string name="export_subscriptions">Obunalarni eksport qilish</string>
-    <string name="skip_buttons">O‘tkazib yuborish tugmalari</string>
-    <string name="skip_buttons_summary">Keyingi yoki oldingi videoga o‘tish uchun tugmalarni ko‘rsatish</string>
     <string name="update_available">Yangilanish mavjud</string>
     <string name="appearance">Tashqi ko‘rinish</string>
     <string name="downloads">Yuklab olishlar</string>

@@ -285,7 +285,6 @@
     <string name="least_views">Kõige vähem vaatamisi</string>
     <string name="translate">Tõlge</string>
     <string name="network_wifi">Vaid WiFi</string>
-    <string name="skip_buttons">Vahelejätmise nupud</string>
     <string name="category_preview_summary">Segmentide jaoks, mis kirjeldavad tulevast sisu ilma olulise lisateabeta. Kui see sisaldab videoklippe, mis leiduvad vaid siin, siis ilmselgelt on tegemist vale kategooriaga</string>
     <string name="category_highlight_summary">See võib olla reklaampealkiri, pisipilt või video kõige huvitavam koht. Klõpsides peatükkide loendile saad sa selle lõigu vahele jätta</string>
     <string name="turnInternetOn">Internetiühenduse loomiseks palun lülita sisse WiFi või mobiilne andmesideühendus.</string>
@@ -317,7 +316,6 @@
     <string name="most_views">Kõige rohkem vaatamisi</string>
     <string name="least_recent">Vanim</string>
     <string name="unlimited">Piiramatu</string>
-    <string name="skip_buttons_summary">Näita nuppe, mis võimaldavad sul hüpata eelmise või järgmise video juurde</string>
     <string name="history_size">Ajaloo suurim lubatud maht</string>
     <string name="change_region">Populaarsust koguvate videote valik pole selle piirkonna jaoks saadaval. Palun vali seadistustest mõni muu eelistus.</string>
     <string name="time_code">Ajamärge (sekundites)</string>

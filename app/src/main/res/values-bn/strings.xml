@@ -199,8 +199,6 @@
     <string name="network_wifi">শুধু ওয়াই-ফাইতে</string>
     <string name="translate">অনুবাদ</string>
     <string name="general_summary">ভাষা এবং এলাকা</string>
-    <string name="skip_buttons">স্কিপ বাটন</string>
-    <string name="skip_buttons_summary">আগের অথবা পরের ভিডিওতে যাওয়ার জন্য বাটন দেখান</string>
     <string name="required_network">নেটওয়ার্ক প্রয়োজন</string>
     <string name="take_a_break">বিরতি নেয়ার সময় চলে এসেছে</string>
     <string name="no_subtitles_available">কোনো সাবটাইটেল পাওয়া যায় নি</string>

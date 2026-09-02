@@ -170,8 +170,6 @@
     <string name="gradientIcon">ग्लिब ग्रेडिएंट</string>
     <string name="fireIcon">फैशनेबल आग</string>
     <string name="torchIcon">ट्रेंडी मशाल</string>
-    <string name="skip_buttons">स्किप बटन</string>
-    <string name="skip_buttons_summary">अगले या पिछले वीडियो पर जाने के लिए बटन दिखाएं</string>
     <string name="category_preview_summary">अतिरिक्त जानकारी के बिना भविष्य की सामग्री का विवरण देने वाले सेगमेंट के लिए। यदि इसमें क्लिप शामिल हैं जो केवल यहां दिखाई देती हैं, तो बहुत संभव है कि यह गलत श्रेणी हो</string>
     <string name="category_filler_summary">केवल फिलर या हास्य के लिए जोड़े गए स्पर्शरेखा दृश्यों के लिए वीडियो की मुख्य सामग्री को समझने की आवश्यकता नहीं है</string>
     <string name="update_available">अपडेट उपलब्ध है</string>

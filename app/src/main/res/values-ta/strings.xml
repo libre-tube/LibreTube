@@ -503,12 +503,10 @@
     <string name="flameIcon">பறக்கும் சுடர்</string>
     <string name="auth_instance">அங்கீகார நிகழ்வு</string>
     <string name="auth_instance_summary">அங்கீகரிக்கப்பட்ட அழைப்புகளுக்கு வேறு நிகழ்வைப் பயன்படுத்தவும்</string>
-    <string name="skip_buttons_summary">அடுத்த அல்லது முந்தைய வீடியோவுக்கு தவிர்க்க பொத்தான்களைக் காட்டு</string>
     <string name="history_size">அதிகபட்ச வரலாற்று அளவு</string>
     <string name="network_metered">அளவிடப்பட்ட</string>
     <string name="unlimited">வரம்பற்றது</string>
     <string name="background_mode">பின்னணி முறை</string>
-    <string name="skip_buttons">பொத்தான்களைத் தவிர்க்கவும்</string>
     <string name="repeat_mode_all">அனைத்தையும் மீண்டும் செய்யவும்</string>
     <string name="backup">காப்புப்பிரதி</string>
     <string name="picture_in_picture">படம்-படம்</string>

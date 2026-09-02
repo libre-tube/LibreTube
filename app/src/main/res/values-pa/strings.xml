@@ -219,8 +219,6 @@
     <string name="copied">ਕਾਪੀ ਕੀਤਾ</string>
     <string name="share_with_time">ਟਾਈਮ ਕੋਡ ਨਾਲ ਸਾਂਝਾ ਕਰੋ</string>
     <string name="export_subscriptions">ਸਬਸਕ੍ਰਿਪਸ਼ਨਾਂ ਨਿਰਯਾਤ ਕਰੋ</string>
-    <string name="skip_buttons">ਸਕਿਪ ਬਟਨ</string>
-    <string name="skip_buttons_summary">ਅਗਲੇ ਜਾਂ ਪਿਛਲੇ ਵੀਡੀਓ \'ਤੇ ਜਾਣ ਲਈ ਬਟਨ ਦਿਖਾਓ</string>
     <string name="history_size">ਇਤਿਹਾਸ ਦਾ ਅਧਿਕਤਮ ਆਕਾਰ</string>
     <string name="unlimited">ਅਸੀਮਤ</string>
     <string name="background_mode">ਬੈਕਗਰਾਊਂਡ ਮੋਡ</string>

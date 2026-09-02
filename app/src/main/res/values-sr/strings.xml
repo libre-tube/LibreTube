@@ -218,8 +218,6 @@
     <string name="worst_quality">Најгори</string>
     <string name="share_with_time">Дели са временским кодом</string>
     <string name="export_subscriptions">Изези праћења</string>
-    <string name="skip_buttons">Дугмад за прескакање</string>
-    <string name="skip_buttons_summary">Прикажите дугмад за прескакање на следећи или претходни видео снимак</string>
     <string name="history_size">Максимална величина историје</string>
     <string name="background_mode">Позадински режим</string>
     <string name="unlimited">Неограничено</string>

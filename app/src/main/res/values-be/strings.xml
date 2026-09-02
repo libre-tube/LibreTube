@@ -223,8 +223,6 @@
     <string name="no_search_result">Няма вынікаў.</string>
     <string name="error_occurred">Памылка</string>
     <string name="copied">Скапіравана</string>
-    <string name="skip_buttons">Кнопкі пропуску</string>
-    <string name="skip_buttons_summary">Паказаць кнопкі для пераходу да наступнага або папярэдняга відэа</string>
     <string name="history_size">Максімальны памер гісторыі</string>
     <string name="unlimited">Неабмежаваны</string>
     <string name="background_mode">Фонавы рэжым</string>

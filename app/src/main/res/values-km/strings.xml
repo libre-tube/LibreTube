@@ -177,7 +177,6 @@
     <string name="export_subscriptions">នាំចេញការជាវ</string>
     <string name="network_all">ទាំងអស់</string>
     <string name="download_paused">ការទាញយកបានផ្អាក</string>
-    <string name="skip_buttons">ប៊ូតុងរំលង</string>
     <string name="reset_watch_positions">កំណត់ជាថ្មី</string>
     <string name="add_to_queue">បន្ថែមទៅជួរ</string>
     <string name="captions">អក្សររត់</string>
@@ -217,7 +216,6 @@
     <string name="data_saver_mode_summary">រំលងរូបតូចៗ និងរូបភាពផ្សេងទៀត</string>
     <string name="quality">គុណភាព</string>
     <string name="never">មិនដែល</string>
-    <string name="skip_buttons_summary">បង្ហាញប៊ូតុងដើម្បីរំលងទៅវីដេអូបន្ទាប់ ឬមុន</string>
     <string name="worst_quality">អាក្រក់បំផុត</string>
     <string name="general_summary">ភាសា និងតំបន់</string>
     <string name="player">ការីចាក់</string>
