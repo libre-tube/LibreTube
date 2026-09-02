@@ -227,11 +227,6 @@ abstract class AbstractPlayerService : MediaLibraryService(), MediaLibrarySessio
     @CallSuper
     open fun navigateVideo(videoId: String) {
         sponsorBlockSegments = emptyList()
-
-        updatePlaylistMetadata {
-            setExtras(bundleOf(IntentData.videoId to videoId))
-        }
-
         exoPlayer?.clearMediaItems()
 
         this.videoId = videoId
@@ -407,6 +402,10 @@ abstract class AbstractPlayerService : MediaLibraryService(), MediaLibrarySessio
     @CallSuper
     open suspend fun startPlayback() {
         isTransitioning = true
+
+        updatePlaylistMetadata {
+            setExtras(bundleOf(IntentData.videoId to videoId))
+        }
     }
 
     private fun saveWatchPosition() {

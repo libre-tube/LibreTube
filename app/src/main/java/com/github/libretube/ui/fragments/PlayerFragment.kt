@@ -416,7 +416,7 @@ class PlayerFragment : Fragment(R.layout.fragment_player), CustomPlayerCallback 
 
 
         val playerData = requireArguments().parcelable<PlayerData>(IntentData.playerData)!!
-        videoId = playerData.videoId!!
+        playerData.videoId?.let { videoId = it }
         isOffline = playerData.isOffline
         playlistId = playerData.playlistId
         channelId = playerData.channelId
@@ -450,11 +450,12 @@ class PlayerFragment : Fragment(R.layout.fragment_player), CustomPlayerCallback 
             }
         }
 
-        val localDownloadVersion = runBlocking(Dispatchers.IO) {
-            DatabaseHolder.Database.downloadDao().findById(videoId)
-        }
-
-        if (!isOffline && localDownloadVersion != null && createNewSession) {
+        val localDownloadVersion = if (!isOffline && createNewSession) {
+            runBlocking(Dispatchers.IO) {
+                DatabaseHolder.Database.downloadDao().findById(videoId)
+            }
+        } else null
+        if (localDownloadVersion != null) {
             // the dialog must also be visible when in fullscreen, thus we need to use the activity's
             // fragment manager and not the one from [PlayerFragment]
             val fragmentManager = requireActivity().supportFragmentManager
@@ -526,7 +527,6 @@ class PlayerFragment : Fragment(R.layout.fragment_player), CustomPlayerCallback 
             val isNoInternet = activity is NoInternetActivity
 
             OfflinePlayerService::class.java to bundleOf(
-                IntentData.videoId to videoId,
                 IntentData.playerData to playerData
                     .copy(downloadTab = playerData.downloadTab ?: DownloadTab.VIDEO),
                 IntentData.noInternet to isNoInternet
@@ -1274,6 +1274,8 @@ class PlayerFragment : Fragment(R.layout.fragment_player), CustomPlayerCallback 
 
     private suspend fun getTimeFrameReceiver(): TimeFrameReceiver? = withContext(Dispatchers.IO) {
         return@withContext if (isOffline) {
+            if (!::videoId.isInitialized) return@withContext null
+
             val downloadItems =
                 DatabaseHolder.Database.downloadDao().getDownloadById(videoId)?.downloadItems
             downloadItems?.firstOrNull { it.path.exists() && it.type == FileType.VIDEO }?.path?.let {
