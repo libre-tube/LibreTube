@@ -105,7 +105,7 @@
     <string name="category_filler">Tình tiết cho có / Câu đùa</string>
     <string name="category_preview">Xem trước/Tóm tắt</string>
     <string name="category_preview_summary">Đối với các phân đoạn nêu chi tiết nội dung trong tương lai mà không có thông tin bổ sung. Nếu nó bao gồm các clip chỉ xuất hiện ở đây, thì rất có thể đây là danh mục sai</string>
-    <string name="material_you">Material You</string>
+    <string name="material_you">Cá nhân sắc</string>
     <string name="app_icon">Biểu tượng</string>
     <string name="enabled">Kích hoạt</string>
     <string name="disabled">Tắt</string>
@@ -255,12 +255,12 @@
     <string name="copied_to_clipboard">Sao chép vào clipboard</string>
     <string name="audio_video_summary">Chất lượng và định dạng</string>
     <string name="delete">Xóa khỏi tải xuống</string>
-    <string name="renamePlaylist">Đổi tên playlist</string>
+    <string name="renamePlaylist">Đổi tên danh sách phát</string>
     <string name="mobile_data">Dữ liệu di động</string>
     <string name="play_next">Tiếp theo</string>
     <string name="navigation_bar">Thanh điều hướng</string>
     <string name="change_region">Xu hướng dường như không khả dụng cho khu vực hiện tại. Vui lòng chọn một cái khác trong cài đặt.</string>
-    <string name="playlistCloned">Danh sách phát đã được sao chép</string>
+    <string name="playlistCloned">Danh sách phát đã được nhân bản</string>
     <string name="play_all">Phát tất cả</string>
     <string name="queue">Hàng đợi</string>
     <string name="time">Thời lượng</string>
@@ -568,4 +568,5 @@
     <string name="resume_all">Tiếp tục tải xuống</string>
     <string name="comment_verified">Đã xác thực</string>
     <string name="comment_pinned">Đã ghim</string>
+    <string name="courses">Các khoá học</string>
 </resources>
