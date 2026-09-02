@@ -332,7 +332,7 @@ class PlayerFragment : Fragment(R.layout.fragment_player), CustomPlayerCallback 
         override fun onPlayerError(error: PlaybackException) {
             super.onPlayerError(error)
             try {
-                playerController.play()
+                playerController.togglePlayPauseState()
             } catch (e: Exception) {
                 e.printStackTrace()
             }

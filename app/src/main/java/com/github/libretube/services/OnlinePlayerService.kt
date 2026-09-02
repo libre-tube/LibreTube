@@ -79,7 +79,9 @@ open class OnlinePlayerService : AbstractPlayerService() {
                 }
 
                 Player.STATE_IDLE -> {
-                    onDestroy()
+                    if (shouldStopOnlinePlayerService(exoPlayer, playbackState)) {
+                        onDestroy()
+                    }
                 }
 
                 Player.STATE_BUFFERING -> {}
@@ -344,4 +346,8 @@ open class OnlinePlayerService : AbstractPlayerService() {
             .setSubtitleConfigurations(getSubtitleConfigs())
             .setMetadata(streams, videoId)
             .build()
+}
+
+internal fun shouldStopOnlinePlayerService(player: Player?, playbackState: Int): Boolean {
+    return playbackState == Player.STATE_IDLE && player?.playerError == null
 }
