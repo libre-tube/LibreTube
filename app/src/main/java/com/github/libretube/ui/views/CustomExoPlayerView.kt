@@ -213,8 +213,6 @@ class CustomExoPlayerView(
         applyCaptionsStyle()
         initializeAdvancedOptions()
 
-        setupKeyboardFocus()
-
         // don't let the player view hide its controls automatically
         controllerShowTimeoutMs = -1
         // don't let the player view show its controls automatically
@@ -488,18 +486,6 @@ class CustomExoPlayerView(
         if (newChapterName != binding.chapterName.text) {
             binding.chapterName.text = newChapterName
         }
-    }
-
-    /**
-     * focus the player view so that all keyboard events will be moved here
-     */
-    private fun setupKeyboardFocus() {
-        isFocusable = true
-        isFocusableInTouchMode = true
-        // workaround (possibly a no-op?): we don't directly focus the player via
-        // requestFocus() because that leads the focus to be moved back to the search bar
-        // once exiting fullscreen
-        activity.window.decorView.requestFocus()
     }
 
     fun toggleSystemBars(showBars: Boolean) {
