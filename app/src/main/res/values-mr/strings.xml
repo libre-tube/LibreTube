@@ -226,7 +226,6 @@
     <string name="download_channel_description">मीडिया डाऊनलोड करताना नोटिफिकेशन दाखवते.</string>
     <string name="auto">ऑटो</string>
     <string name="history_size">अधिकतम इतिहास आकार</string>
-    <string name="skip_buttons_summary">पुढील किंवा मागील व्हिडिओवर जाण्यासाठी बटणे दर्शवा</string>
     <string name="add_to_queue">रांगेत जोडा</string>
     <string name="misc">विविध</string>
     <string name="take_a_break">विश्रांती घेण्याची वेळ आली आहे</string>
@@ -271,7 +270,6 @@
     <string name="least_views">किमान व्ह्यूज</string>
     <string name="required_network">आवश्यक कनेक्शन</string>
     <string name="network_all">सर्व</string>
-    <string name="skip_buttons">स्किप बटन</string>
     <string name="unlimited">अमर्यादित</string>
     <string name="background_mode">बॅकग्राऊंड मोड</string>
     <string name="repeat_mode_current">चालू</string>

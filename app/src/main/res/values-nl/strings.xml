@@ -307,7 +307,6 @@
     <string name="watch_positions_title">Afspeel­posities onthouden</string>
     <string name="system_caption_style">Ondertitelstijl van systeem</string>
     <string name="export_subscriptions">Abonnementen exporteren</string>
-    <string name="skip_buttons">Knoppen voor volgende/vorige</string>
     <string name="player_resize_mode">Beeldformaat</string>
     <string name="device_info">Apparaat­info</string>
     <string name="mobile_data">Mobiele gegevens</string>
@@ -416,7 +415,6 @@
     <string name="show_stream_thumbnails">Stream-miniaturen</string>
     <string name="watch_history_summary">Houd bekeken video\'s lokaal bij</string>
     <string name="history_summary">Kijk- en zoek­geschiedenis</string>
-    <string name="skip_buttons_summary">Toon knoppen om naar de volgende of vorige video te gaan</string>
     <string name="sb_custom_colors">Aangepaste segment­kleuren</string>
     <string name="invalid_color">Ongeldige kleur­waarde ingevoerd!</string>
     <string name="original_or_main_audio_track">Origineel</string>

@@ -218,8 +218,6 @@
     <string name="error_occurred">Xəta</string>
     <string name="share_with_time">Vaxt koduyla paylaş</string>
     <string name="export_subscriptions">Abunəlikləri İxrac et</string>
-    <string name="skip_buttons">Ötürmə düymələri</string>
-    <string name="skip_buttons_summary">Növbəti və ya əvvəlki videoya ötürmək üçün düymələr göstər</string>
     <string name="history_size">Maksimum tarixçə həcmi</string>
     <string name="unlimited">Qeyri-məhdud</string>
     <string name="background_mode">Arxa plan rejimi</string>

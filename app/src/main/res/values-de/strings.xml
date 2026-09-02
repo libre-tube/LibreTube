@@ -232,7 +232,6 @@
     <string name="navigation_bar">Navigationsleiste</string>
     <string name="download_channel_name">Download-Service</string>
     <string name="push_channel_name">Benachrichtigungsdienst</string>
-    <string name="skip_buttons">Überspringen-Buttons</string>
     <string name="history_size">Maximale Verlaufsgröße</string>
     <string name="resize_mode_fill">Ausfüllen</string>
     <string name="audio_video_summary">Qualität und Format</string>
@@ -249,7 +248,6 @@
     <string name="share_with_time">Mit Zeitstempel teilen</string>
     <string name="export_subscriptions">Abos exportieren</string>
     <string name="delete">Aus Downloads löschen</string>
-    <string name="skip_buttons_summary">Schaltflächen anzeigen, um zum nächsten oder vorherigen Video zu springen</string>
     <string name="resize_mode_zoom">Vergrößern</string>
     <string name="repeat_mode">Endlosschleife</string>
     <string name="resize_mode_fit">Anpassen</string>

@@ -169,14 +169,12 @@
     <string name="required_network">Gerekli birikme</string>
     <string name="network_all">Ählisi</string>
     <string name="network_wifi">Diňe Wi-Fi-da</string>
-    <string name="skip_buttons_summary">Indiki ýa-da öňki wideo geçmek üçin düwmeleri görkez</string>
     <string name="add_to_queue">Nobata goşuň</string>
     <string name="open_copied">Aç</string>
     <string name="notify_new_streams">Täze wideolar üçin bildirişler</string>
     <string name="most_views">Iň köp görülen</string>
     <string name="least_views">Iň az görülen</string>
     <string name="share_with_time">Başlangyç wagty bilen paýlaşyň</string>
-    <string name="skip_buttons">Geçirme düwmesi</string>
     <string name="history_size">Bellikleriň maksimum ululygy</string>
     <string name="unlimited">Çäklendirilmedik</string>
     <string name="background_mode">Fon tertibi</string>

@@ -161,6 +161,9 @@ object PreferenceHelper {
             remove("autoplay_playlists")
             remove("queue_insert_related_videos")
         },
+        PreferenceMigration(10, 11) {
+            remove("skip_buttons")
+        }
     )
 
     /**

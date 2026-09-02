@@ -132,8 +132,6 @@
     <string name="category_filler">Időkitöltés/viccek</string>
     <string name="category_preview">Előnézet/visszatekintés</string>
     <string name="watch_history">Megtekintési előzmények</string>
-    <string name="skip_buttons">Kihagyás gombok</string>
-    <string name="skip_buttons_summary">Gombok megjelenítése a következő vagy az előző videóra való ugráshoz</string>
     <string name="category_filler_summary">A felesleges jelenetekhez, amelyek csak időkitöltésre lettek hozzáadva, illetve olyan humorhoz amely nem szükséges a videó fő témájának a megértéséhez</string>
     <string name="category_music_offtopic_summary">Kizárólag zenei videókban való felhasználásra. A videó olyan részeit kell lefednie, amelyek nem részei a hivatalos mixeknek. Végül a videónak a lehető legjobban kell hasonlítania a Spotify vagy bármely más mix változathoz, vagy csökkenteni kell a beszédet vagy más zavaró elemeket</string>
     <string name="category_preview_summary">A jövőbeli tartalmakat részletező szakaszokhoz, melyek nem nyújtanak további információt. Ha olyan klipeket tartalmaz, amelyek csak itt jelennek meg, akkor nagyon valószínű, hogy nem ez a megfelelő kategória</string>

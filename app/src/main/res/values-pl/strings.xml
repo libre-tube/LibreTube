@@ -157,8 +157,6 @@
     <string name="required_network">Wymagane połączenie</string>
     <string name="network_all">Każdy typ sieci</string>
     <string name="no_search_result">Brak wyników.</string>
-    <string name="skip_buttons">Przyciski pomijania</string>
-    <string name="skip_buttons_summary">Pokaż przyciski umożliwiające przejście do następnego lub poprzedniego filmu</string>
     <string name="watch_positions">Zapamiętaj pozycję</string>
     <string name="github">GitHub</string>
     <string name="landscape">Wymuś tryb poziomy</string>

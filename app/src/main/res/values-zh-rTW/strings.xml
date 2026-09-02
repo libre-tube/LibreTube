@@ -225,7 +225,6 @@
     <string name="history_summary">觀看和搜尋歷史</string>
     <string name="playerAudioQuality">音訊品質</string>
     <string name="captions_size">字幕大小</string>
-    <string name="skip_buttons_summary">顯示按鈕，跳至上一部或下一部影片</string>
     <string name="take_a_break">是時候休息一下了</string>
     <string name="maximum_image_cache">最大圖片快取大小</string>
     <string name="device_info">裝置資訊</string>
@@ -296,7 +295,6 @@
     <string name="play_latest_videos">播放最新影片</string>
     <string name="audio_track">音訊曲目</string>
     <string name="export_subscriptions">匯出訂閱播放清單</string>
-    <string name="skip_buttons">跳過按鈕</string>
     <string name="no_search_result">無結果。</string>
     <string name="error_occurred">錯誤</string>
     <string name="copied">已複製</string>

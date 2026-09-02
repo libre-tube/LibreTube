@@ -229,8 +229,6 @@
     <string name="take_a_break">Es hora de tomar un descanso</string>
     <string name="error_occurred">Error</string>
     <string name="copied">Copiado</string>
-    <string name="skip_buttons">Botones de omisión</string>
-    <string name="skip_buttons_summary">Mostrar botones para pasar al vídeo siguiente o anterior</string>
     <string name="history_size">Tamaño máximo del historial</string>
     <string name="unlimited">Ilimitado</string>
     <string name="background_mode">Modo segundo plano</string>

@@ -305,8 +305,6 @@
     <string name="no_subtitles_available">사용 가능한 자막 없음</string>
     <string name="take_a_break">휴식을 취할 시간</string>
     <string name="history_size">최대 기록 크기</string>
-    <string name="skip_buttons_summary">다음 또는 이전 비디오로 건너뛰기 위한 버튼을 표시합니다</string>
-    <string name="skip_buttons">건너뛰기 버튼</string>
     <string name="trending">최신 유행</string>
     <string name="mobile_data">모바일 데이터</string>
     <string name="color_violet">화려한 보라색</string>

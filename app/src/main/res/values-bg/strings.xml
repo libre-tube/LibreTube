@@ -312,7 +312,6 @@
     <string name="areYouSure">Изтрий плейлистът?</string>
     <string name="download_paused">Изтеглянето е на пауза</string>
     <string name="sleep_timer">Таймер за заспиване</string>
-    <string name="skip_buttons">Бутони за прескачане</string>
     <string name="add_to_queue">Добави към опашката</string>
     <string name="color_yellow">Жълт</string>
     <string name="captions">Надписи</string>
@@ -407,7 +406,6 @@
     <string name="empty">Трябва да въведете потребителско име и парола.</string>
     <string name="playlistUrl">Плейлист URL</string>
     <string name="time_code">Времеви код (секунди)</string>
-    <string name="skip_buttons_summary">Покажи бутони за прескачане към следващия или предишен видеоклип</string>
     <string name="watch_positions_title">Запомнени позиции на възпроизвеждане</string>
     <string name="yt_shorts">Кратки видеа</string>
     <string name="worst_quality">Лошо</string>

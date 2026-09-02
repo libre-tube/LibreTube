@@ -185,7 +185,6 @@
     <string name="none">Κανένα</string>
     <string name="watch_positions_title">Αποθηκευμένες θέσεις παρακολούθησης</string>
     <string name="general_summary">Γλώσσα και περιοχή</string>
-    <string name="skip_buttons_summary">Εμφάνιση κουμπιών για να μεταβείτε στο επόμενο ή το προηγούμενο βίντεο</string>
     <string name="unlimited">Απεριόριστο</string>
     <string name="resize_mode_zoom">Μεγέθυνση</string>
     <string name="history_size">Μέγιστο μέγεθος ιστορικού</string>
@@ -215,7 +214,6 @@
     <string name="share_with_time">Μοιραστείτε με κωδικό χρόνου</string>
     <string name="chapters">Κεφάλαια</string>
     <string name="export_subscriptions">Εξαγωγή εγγραφών</string>
-    <string name="skip_buttons">Κουμπιά παράκαμψης</string>
     <string name="background_mode">Λειτουργία παρασκηνίου</string>
     <string name="add_to_queue">Προσθήκη στην ουρά</string>
     <string name="misc">Διάφορα</string>

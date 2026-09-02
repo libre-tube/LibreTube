@@ -207,7 +207,6 @@
     <string name="show_stream_thumbnails_summary">Mostra les miniatures de les noves retransmissions. Activar-ho consumirà dades addicionals</string>
     <string name="network_all">Totes</string>
     <string name="download_paused">Descàrrega en pausa</string>
-    <string name="skip_buttons">Botons de saltar</string>
     <string name="reset_watch_positions">Restableix</string>
     <string name="add_to_queue">Afegir a la cua</string>
     <string name="captions">Subtítols</string>
@@ -248,7 +247,6 @@
     <string name="music_artists">Artistes de YT Music</string>
     <string name="data_saver_mode_summary">Omet les miniatures i altres imatges</string>
     <string name="never">Mai</string>
-    <string name="skip_buttons_summary">Mostra els botons per passar al vídeo següent o anterior</string>
     <string name="watch_positions_title">Posicions de reproducció recordades</string>
     <string name="yt_shorts">Curts</string>
     <string name="worst_quality">La pitjor</string>

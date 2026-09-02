@@ -414,8 +414,6 @@ class CustomExoPlayerView(
     }
 
     private fun syncQueueButtons() {
-        if (!PlayerHelper.skipButtonsEnabled) return
-
         // toggle the visibility of next and prev buttons based on queue and whether the player view is locked
         binding.skipPrev.isInvisible = !PlayingQueue.hasPrev() || isPlayerLocked
         binding.skipNext.isInvisible = !PlayingQueue.hasNext() || isPlayerLocked

@@ -249,12 +249,6 @@ object PlayerHelper {
             return code
         }
 
-    val skipButtonsEnabled: Boolean
-        get() = PreferenceHelper.getBoolean(
-            PreferenceKeys.SKIP_BUTTONS,
-            false
-        )
-
     var autoPlayEnabled: Boolean
         get() = PreferenceHelper.getBoolean(
             PreferenceKeys.AUTOPLAY,

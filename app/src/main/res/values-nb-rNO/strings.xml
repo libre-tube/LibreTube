@@ -218,8 +218,6 @@
     <string name="caption_settings">Undertekster</string>
     <string name="navLabelVisibility">Etikettsynlighet</string>
     <string name="export_subscriptions">Eksporter abonnementer</string>
-    <string name="skip_buttons">Knapper for sporveksling</string>
-    <string name="skip_buttons_summary">Vis knapper for å hoppe til neste eller forrige video</string>
     <string name="history_size">Maks. historikkstørrelse</string>
     <string name="unlimited">Ubegrenset</string>
     <string name="background_mode">Bakgrunnsmodus</string>

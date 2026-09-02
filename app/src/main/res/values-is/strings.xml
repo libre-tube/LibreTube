@@ -376,10 +376,8 @@
     <string name="export_subscriptions">Flytja út áskriftir</string>
     <string name="unlimited">Ótakmarkað</string>
     <string name="translate">Þýðing</string>
-    <string name="skip_buttons">Sleppa-hnappar</string>
     <string name="share_with_time">Deila með tímakóða</string>
     <string name="history_size">Hámarksstærð ferils</string>
-    <string name="skip_buttons_summary">Birta hnappa til að hoppa yfir á næsta eða fyrra myndskeið</string>
     <string name="repeat_mode_all">Endurtaka allt</string>
     <string name="backup_restore">Afrita og endurheimta</string>
     <string name="backup">Öryggisafrit</string>

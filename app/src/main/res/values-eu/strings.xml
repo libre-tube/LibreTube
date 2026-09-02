@@ -217,7 +217,6 @@
     <string name="copied">Kopiatuta</string>
     <string name="share_with_time">Partekatu denbora kodearekin</string>
     <string name="error_occurred">Akatsa</string>
-    <string name="skip_buttons">Omititzeko botoiak</string>
     <string name="history_size">Historiaren gehienezko tamaina</string>
     <string name="unlimited">Mugagabea</string>
     <string name="background_mode">Atzeko planoko modua</string>
@@ -225,7 +224,6 @@
     <string name="misc">Anitza</string>
     <string name="take_a_break">Atsedena hartzeko ordua</string>
     <string name="export_subscriptions">Harpidetzak esportatu</string>
-    <string name="skip_buttons_summary">Erakutsi botoiak hurrengo edo aurreko bideora joateko</string>
     <string name="yt_shorts">Motzak</string>
     <string name="device_info">Gailuaren informazioa</string>
     <string name="no_subtitles_available">Ez dago azpititulurik erabilgarri</string>

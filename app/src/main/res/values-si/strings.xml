@@ -165,7 +165,6 @@
     <string name="copied">පිටපත් කර ඇත</string>
     <string name="share_with_time">කාල කේතය සමඟ බෙදා ගන්න</string>
     <string name="export_subscriptions">දායකත්වයන් අපනයනය කරන්න</string>
-    <string name="skip_buttons_summary">ඊළඟ හෝ පෙර වීඩියෝවට යාමට බොත්තම් පෙන්වන්න</string>
     <string name="history_size">උපරිම ඉතිහාස ප්‍රමාණය</string>
     <string name="background_mode">පසුබිම් ප්‍රකාරය</string>
     <string name="misc">වෙනත්</string>
@@ -298,7 +297,6 @@
     <string name="notify_new_streams_summary">ඔබ අනුගමනය කරන නිර්මාණකරුවන්ගෙන් නව ප්‍රවාහ සඳහා දැනුම්දීම් පෙන්වන්න</string>
     <string name="history_empty">තවමත් ඉතිහාසයක් නැත.</string>
     <string name="required_network">සම්බන්ධතාවයක් අවශ්‍ය</string>
-    <string name="skip_buttons">මඟ හරින බොත්තම්</string>
     <string name="new_videos_badge">නව වීඩියෝ සඳහා දර්ශකය</string>
     <string name="resize_mode_zoom">විශාලනය කරන්න</string>
     <string name="repeat_mode_none">කිසිවක් නැත</string>

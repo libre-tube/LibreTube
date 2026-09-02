@@ -105,7 +105,6 @@
     <string name="network_all">તમામ</string>
     <string name="network_wifi">ફક્ત વાઇ-ફાઇ પર</string>
     <string name="no_search_result">પરિણામ નથી.</string>
-    <string name="skip_buttons">બટનો છોડો</string>
     <string name="background_mode">પાશ્વભાગ સ્થિતિ</string>
     <string name="misc">મિશ્ર</string>
     <string name="take_a_break">વિરામ લેવાનો સમય છે</string>
@@ -150,7 +149,6 @@
     <string name="watch_history">ઇતિહાસ જુઓ</string>
     <string name="privacy_alert">ગોપનીયતા ચેતવણી</string>
     <string name="login">પ્રવેશ કરો</string>
-    <string name="skip_buttons_summary">પછીની અથવા પહેલાંની વિડિયો પર જવા માટે બટનો બતાવો</string>
     <string name="startpage">ઘર</string>
     <string name="subscriptions">સબસ્ક્રિપ્શન્સ</string>
     <string name="library">પુસ્તકાલય</string>

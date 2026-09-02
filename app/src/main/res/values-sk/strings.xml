@@ -174,8 +174,6 @@
     <string name="no_search_result">Žiadne výsledky.</string>
     <string name="share_with_time">Zdieľať s časovým kódom</string>
     <string name="watch_history">História sledovania</string>
-    <string name="skip_buttons">Tlačidlá prechodu</string>
-    <string name="skip_buttons_summary">Zobrazí tlačidlá prechodu na ďalšie alebo predchádzajúce video</string>
     <string name="watch_positions">Zapamätať pozíciu</string>
     <string name="auth_instance">Overovacia inštancia</string>
     <string name="github">GitHub</string>

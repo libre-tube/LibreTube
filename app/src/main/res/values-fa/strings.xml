@@ -138,7 +138,6 @@
     <string name="pauseOnScreenOff">مکث خودکار</string>
     <string name="notify_new_streams">نمایش آگاهی برای جریان‌های جدید</string>
     <string name="default_subtitle_language">زبان زیرنویس</string>
-    <string name="skip_buttons">دکمه‌های پرش</string>
     <string name="player_summary">پیش‌گزیده‌ها و رفتار</string>
     <string name="watch_history">سابقه تماشا</string>
     <string name="deleteAccount">حذف حساب</string>
@@ -280,7 +279,6 @@
     <string name="delete">حذف از دانلودها</string>
     <string name="change_region">به نظر می رسد پرطرفدار ها برای منطقه فعلی در دسترس نیست. لطفاً یکی دیگر را در تنظیمات انتخاب کنید.</string>
     <string name="pauseOnScreenOff_summary">مکث پخش هنگام خاموش بودن صفحه</string>
-    <string name="skip_buttons_summary">نمایش دکمه ها برای پرش به ویدیو بعدی یا قبلی</string>
     <string name="instance_frontend_url">آدرس اینترنتی برای رابط جلویی نمونه (اختیاری)</string>
     <string name="seek_increment">پیشروی جویش</string>
     <string name="auth_instances">گزینش نمونه‌ای برای هویت‌سنجی</string>

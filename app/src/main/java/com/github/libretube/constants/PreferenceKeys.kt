@@ -61,7 +61,6 @@ object PreferenceKeys {
     const val PLAYER_AUDIO_QUALITY = "player_audio_quality"
     const val PLAYER_AUDIO_QUALITY_MOBILE = "player_audio_quality_mobile"
     const val DEFAULT_SUBTITLE = "default_subtitle"
-    const val SKIP_BUTTONS = "skip_buttons"
     const val PLAYER_RESIZE_MODE = "current_player_resize_mode"
     const val PLAYER_SWIPE_CONTROLS = "player_swipe_controls"
     const val PLAYER_PINCH_CONTROL = "player_pinch_control"

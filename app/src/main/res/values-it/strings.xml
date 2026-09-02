@@ -224,8 +224,6 @@
     <string name="irreversible">Sei sicuro\? Non può essere annullato!</string>
     <string name="most_recent">Più recenti</string>
     <string name="export_subscriptions">Esporta iscrizioni</string>
-    <string name="skip_buttons">Pulsanti di skip</string>
-    <string name="skip_buttons_summary">Mostra pulsanti per saltare al video successivo o precedente</string>
     <string name="history_size">Dimensione massima della cronologia</string>
     <string name="unlimited">Illimitata</string>
     <string name="resize_mode_fill">Riempi</string>
