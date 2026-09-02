@@ -374,29 +374,24 @@ class MainActivity : AbstractPlayerHostActivity() {
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
-                if (!shouldOpenSuggestions) return true
-
-                // Prevent navigation when search view is collapsed
-                if (searchView.isIconified ||
-                    binding.bottomNav.menu.children.any {
-                        it.itemId == navController.currentDestination?.id
-                    }
-                ) {
-                    return true
-                }
-
-                // prevent malicious navigation when the search view is getting collapsed
-                val destIds = listOf(
-                    R.id.searchResultFragment,
-                    R.id.channelFragment,
-                    R.id.playlistFragment
-                )
-                if (navController.currentDestination?.id in destIds && newText == null) {
-                    return false
-                }
-
                 when (currentSearchType) {
                     SearchType.ONLINE -> {
+                        if (!shouldOpenSuggestions) return true
+
+                        // Prevent navigation when search view is collapsed
+                        if (searchView.isIconified ||
+                            binding.bottomNav.menu.children.any {
+                                it.itemId == navController.currentDestination?.id
+                            }
+                        ) {
+                            return true
+                        }
+
+                        // prevent malicious navigation when the search view is getting collapsed
+                        if (navController.currentDestination?.id == R.id.searchResultFragment && newText == null) {
+                            return false
+                        }
+
                         if (navController.currentDestination?.id != R.id.searchFragment) {
                             navController.navigate(
                                 R.id.searchFragment,
