@@ -14,26 +14,6 @@
         android:orientation="vertical"
         tools:ignore="UselessParent">
 
-        <RadioGroup
-            android:id="@+id/share_host_group"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <RadioButton
-                android:id="@+id/youtube"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/youtube" />
-
-            <RadioButton
-                android:id="@+id/piped"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/piped" />
-
-        </RadioGroup>
-
         <LinearLayout
             android:id="@+id/time_stamp_switch_layout"
             android:layout_width="match_parent"
