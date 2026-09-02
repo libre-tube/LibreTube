@@ -31,25 +31,12 @@ jobs:
           python-version: '3.x' # Version range or exact version of a Python version to use, using SemVer's version range syntax
           architecture: 'x64' # optional x64 or x86. Defaults to x64 if not specified
 
-      - name: Retrieve Commit Info
-        run: |
-          cd .github
-          curl https://api.github.com/repos/${{ github.repository }}/commits/${{ github.sha }} > commit.json
-          cd ..
-
       - name: Set up JDK 17
         uses: actions/setup-java@v5
         with:
           java-version: 17
           distribution: "temurin"
           cache: "gradle"
-
-      - name: Git Configuraion
-        run: |
-          git config --global user.name "libretube-bot"
-          git config --global user.email "libretube@proton.me"
-          git config --global credential.helper store
-          echo "https://libretube-bot:${{ secrets.GH_TOKEN }}@github.com" > ~/.git-credentials
 
       - name: Compile
         run: |
@@ -78,7 +65,7 @@ jobs:
       - name: Create Nightly Release
         uses: ncipollo/release-action@v1
         with:
-          token: ${{ secrets.GH_TOKEN }}
+          token: ${{ github.token }}
           tag:  nightly
           makeLatest: true
           prerelease: true
