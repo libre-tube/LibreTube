@@ -17,6 +17,8 @@ on:
 
 jobs:
   debug-builds:
+    permissions:
+      contents: write
     runs-on: ubuntu-latest
     steps:
       - name: Get Date and Time
@@ -60,9 +62,11 @@ jobs:
           path: app/build/outputs/apk/debug/*.apk
 
       - name: Create Nightly Tag
+        if: github.ref == 'refs/heads/master'
         run: git tag -f nightly && git push -f origin nightly
           
       - name: Create Nightly Release
+        if: github.ref == 'refs/heads/master'
         uses: ncipollo/release-action@v1
         with:
           token: ${{ github.token }}
@@ -76,5 +80,5 @@ jobs:
           body: |
             LibreTube Nightly build from ${{ env.DATE }} ${{ env.TIME }}
             
-            > **Note about Nightly builds** <br>
+            > [!NOTE]
             > Nightly builds include features/fixes before the official release. Therefore, they are generally less stable than normal releases. Use nightly builds at your own risk.
