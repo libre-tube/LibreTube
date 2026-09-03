@@ -20,7 +20,6 @@
     <string name="region">Regiune</string>
     <string name="login_register">Autentificare/Înregistrare</string>
     <string name="importsuccess">Abonat</string>
-    <string name="downloadfailed">Descărcare eșuată.</string>
     <string name="import_from_yt">Importați abonamente</string>
     <string name="import_from_yt_summary">Din YouTube sau NewPipe</string>
     <string name="app_theme">Temă</string>
@@ -147,7 +146,6 @@
     <string name="copied">Copiat</string>
     <string name="take_a_break">Este timpul să luați o pauză</string>
     <string name="background_mode">Modul de fundal</string>
-    <string name="picture_in_picture">Suprapunere imagine</string>
     <string name="player_resize_mode">Mod redimensionare</string>
     <string name="open_copied">Deschideți</string>
     <string name="new_videos_badge_summary">Afișați o insignă cu cantitatea de videoclipuri noi, dacă există</string>
@@ -168,8 +166,6 @@
     <string name="notify_new_streams">Afișează notificări pentru fluxuri noi</string>
     <string name="checking_frequency">Se verifică o dată la…</string>
     <string name="most_recent">Cele mai recente</string>
-    <string name="history_size">Dimensiunea maximă a istoricului</string>
-    <string name="unlimited">Nelimitat</string>
     <string name="add_to_queue">Adăugați în coadă</string>
     <string name="misc">Diverse</string>
     <string name="audio_video_summary">Calitate și format</string>
@@ -185,7 +181,6 @@
     <string name="downloading">Se descarcă…</string>
     <string name="download_paused">Descărcare întreruptă</string>
     <string name="download_completed">Descărcare finalizată</string>
-    <string name="concurrent_downloads">Descărcări simultane maxime</string>
     <string name="concurrent_downloads_limit_reached">A fost atinsă limita maximă de descărcări simultane.</string>
     <string name="resume">Reluați</string>
     <string name="player_autoplay">Redare automată</string>
@@ -208,7 +203,6 @@
     <string name="turnInternetOn">Activați Wi-Fi sau date mobile pentru a vă conecta la internet.</string>
     <string name="pure_theme">Tema pură</string>
     <string name="pure_theme_summary">Alb pur/temă neagră</string>
-    <string name="navLabelVisibility">Vizibilitatea etichetei</string>
     <string name="reset_watch_positions">Resetați</string>
     <string name="preferences">Preferințe</string>
     <string name="worst_quality">Cel mai slab</string>
@@ -222,13 +216,11 @@
     <string name="share_with_time">Distribuiți cu codul de timp</string>
     <string name="export_subscriptions">Exportați abonamentele</string>
     <string name="yt_shorts">Shorts</string>
-    <string name="no_subtitles_available">Nu există subtitrări disponibile</string>
     <string name="repeat_mode">Mod repetare</string>
     <string name="resize_mode_fill">Umplere</string>
     <string name="resize_mode_zoom">Zoom</string>
     <string name="backup_restore">Backup și restaurare</string>
     <string name="backup">Backup</string>
-    <string name="maximum_image_cache">Dimensiunea maximă a memoriei cache de imagini</string>
     <string name="copied_to_clipboard">Copiat în clipboard</string>
     <string name="delete">Ștergeți din descărcări</string>
     <string name="local_subscriptions">Abonamente locale</string>
@@ -247,7 +239,6 @@
     <string name="autoRotatePlayer">Ecran complet automat</string>
     <string name="aspect_ratio">Raportul de aspect video</string>
     <string name="open">Deschideți…</string>
-    <string name="selected">Selectat</string>
     <string name="mobile_data">Date mobile</string>
     <string name="never">Niciodată</string>
     <string name="require_restart_message">Reporniți aplicația pentru a utiliza noile modificări.</string>
@@ -265,7 +256,6 @@
     <string name="playlistCloned">Playlist clonat</string>
     <string name="play_all">Redați toate</string>
     <string name="notification_time_summary">Limitați intervalul de timp în care sunt afișate notificările de flux</string>
-    <string name="queue_insert_related_videos">Inserați videoclipuri similare</string>
     <string name="brightness">Luminozitate</string>
     <string name="double_tap_seek_summary">Atingeți de două ori la stânga sau la dreapta pentru a derula înapoi sau înainte poziția player-ului</string>
     <string name="remove_bookmark">Eliminați marcajul</string>
@@ -274,7 +264,6 @@
     <string name="push_channel_name">Worker de notificare</string>
     <string name="download_channel_name">Serviciu de descărcare</string>
     <string name="swipe_controls">Comenzi cu glisare</string>
-    <string name="defaults">Implicite</string>
     <string name="queue">Coadă</string>
     <string name="trending">În tendințe acum</string>
     <string name="clear_bookmarks">Ștergeți marcajele</string>
@@ -282,14 +271,12 @@
     <string name="swipe_controls_summary">Folosiți gestul de glisare pentru a regla luminozitatea și volumul în modul ecran complet</string>
     <string name="rewind">Înapoi</string>
     <string name="alternative_pip_controls">Controale suprapunere alternative</string>
-    <string name="failed_fetching_instances">Nu s-au putut prelua instanțele disponibile.</string>
     <string name="hide_watched_from_feed">Ascundeți videoclipurile deja vizionate</string>
     <string name="push_channel_description">Afișați o notificare când sunt disponibile fluxuri noi.</string>
     <string name="autoplay_countdown_summary">Afișați o numărătoare inversă de 5 secunde înainte de redarea automată a următorului videoclip</string>
     <string name="playing_next">Următorul video în %1$s</string>
     <string name="livestreams">Fluxuri live</string>
     <string name="time">Timp</string>
-    <string name="navbar_order">Ordine</string>
     <string name="layout">Aspect</string>
     <string name="audio_track">Pistă audio</string>
     <string name="app_backup">Backup aplicație</string>
@@ -301,7 +288,6 @@
     <string name="notification_time">Restricționați timpul de notificare</string>
     <string name="unsupported_file_format">Format de fișier nesuportat: %1$s</string>
     <string name="auto_quality">Auto</string>
-    <string name="limit_to_runtime">Limitare la timpul de execuție</string>
     <string name="trends">Tendințe</string>
     <string name="featured">Recomandate</string>
     <string name="captions_size">Dimensiunea subtitrărilor</string>
@@ -332,7 +318,6 @@
     <string name="bookmark">Marcaj</string>
     <string name="pinch_control">Controlul prin ciupire</string>
     <string name="category">Categoria</string>
-    <string name="codecs">Codecuri video</string>
     <string name="sleep_timer">Cronometru de somn</string>
     <string name="color_violet">Violet versatil</string>
     <string name="auto">Automat</string>
@@ -348,8 +333,6 @@
     <string name="theme_monochrome">Monocrom minimalist</string>
     <string name="uploaderAndVideoCount">%1$s • %2$d videoclipuri</string>
     <string name="subscriberAndVideoCounts">%1$s abonați • %2$d videoclipuri</string>
-    <string name="disable_proxy">Dezactivați proxy-ul Piped</string>
-    <string name="disable_proxy_summary">Încărcați videoclipuri și imagini direct de pe serverele YouTube. Activați opțiunea numai dacă utilizați un VPN</string>
     <string name="auto_fullscreen_shorts">Ecran complet automat pentru videoclipuri scurte</string>
     <string name="channel_groups">Grupuri de canale</string>
     <string name="group_name">Numele grupului</string>
@@ -363,8 +346,6 @@
         <item quantity="few">%d fluxuri noi</item>
         <item quantity="other">%d fluxuri noi</item>
     </plurals>
-    <string name="show_stream_thumbnails">Afișează miniaturile fluxului</string>
-    <string name="show_stream_thumbnails_summary">Afișează miniaturi ale noilor fluxuri. Activarea acestei opțiuni va consuma date suplimentare</string>
     <string name="unlimited_search_history">Istoric de căutare nelimitat</string>
     <string name="duration">Durată</string>
     <string name="duration_reversed">Durată (inversată)</string>
@@ -377,10 +358,7 @@
     <string name="export_subscriptions_to">Exportați abonamente la</string>
     <string name="import_playlists_from">Importă playlist-uri din</string>
     <string name="export_playlists_to">Exportă playlist-uri la</string>
-    <string name="choose_instance">Mai întâi alegeți o instanță!</string>
     <string name="mark_as_unwatched">Marcați ca nevăzut</string>
-    <string name="welcome">Bun venit la LibreTube</string>
-    <string name="choose_instance_long">Vă rugăm să alegeți o instanță Piped pe care să o utilizați de mai jos. Instanța Piped va acționa ca intermediar între dvs. și YouTube. Aceste instanțe sunt situate în diferite locații fizice - indicate de steagurile țării lor. Instanțele mai apropiate fizic de tine sunt probabil mai rapide decât cazurile care nu sunt. Puteți schimba oricând instanța pe care o utilizați în setări.</string>
     <string name="home_tab_content">Conținutul filei Acasă</string>
     <string name="off">Oprit</string>
     <string name="automatic">Automat</string>
@@ -434,7 +412,6 @@
     <string name="music_artists">YT Music Artiști</string>
     <string name="repeat_mode_all">Repetă toate</string>
     <string name="automatic_once">Automat o dată</string>
-    <string name="watched">Privit</string>
     <string name="tooltip_dismiss">Ignorați</string>
     <string name="sb_invalid_segment">Începutul sau sfârșitul segmentului invalid</string>
     <string name="tooltip_watch_position">Poziția redării</string>
@@ -443,11 +420,9 @@
     <string name="player_channel_description">Afișează o notificare la redare</string>
     <string name="player_channel_name">Serviciu player</string>
     <string name="no_segments_found">Nu există încă segmente pentru acest video.</string>
-    <string name="autoplay_playlists">Redare automată liste</string>
     <string name="tooltip_repeat">Repetă</string>
     <string name="grid_landscape">Coloane grilă (peisaj)</string>
     <string name="finished">Terminat</string>
-    <string name="playback_during_call">Continuați redarea în timpul apelului telefonic</string>
     <string name="contribute_to_sponsorblock">Contribuiți prin SponsorBlock</string>
     <string name="vote_for_segment">Votează pentru segment</string>
     <string name="upvote">Sus</string>
@@ -456,16 +431,13 @@
     <string name="tooltip_options">Opțiuni</string>
     <string name="rich_caption_rendering">Redare bogată subtitrări</string>
     <string name="rich_caption_rendering_summary">Redă subtitrările pentru o experiență mai bogată și mai personalizată</string>
-    <string name="autoplay_playlists_summary">Redați automat videoclipul următor din listele de redare, indiferent de setarea de redare automată selectată</string>
     <string name="downvote">Jos</string>
     <string name="tooltip_reverse">Verso</string>
     <string name="copy_tooltip">Copiază</string>
-    <string name="playback_during_call_summary">Rețineți că acest lucru afectează și aplicația pentru a nu mai gestiona niciun fel de focalizare audio</string>
     <string name="segment_submitted">Segment trimis</string>
     <string name="undo">Anulează</string>
     <string name="segment">Segment</string>
     <string name="sponsorblock_user_id">SponsorBlock UserID</string>
-    <string name="remember_playback_speed">Reține viteza de redare</string>
     <string name="successfully_removed_from_playlist">„%1$s” a fost eliminat cu succes din listă.</string>
     <string name="uptime">%.2f%% timp de funcționare</string>
     <string name="tooltip_sort">Sortare</string>
@@ -489,7 +461,6 @@
     <string name="download_playlist_note">Selectează calitatea audio/video maximă de descărcat. Subtitrările vor fi descărcate numai dacă sunt disponibile.</string>
     <string name="default_language">Implicit</string>
     <string name="gestures">Gesturi</string>
-    <string name="behavior_when_minimized">Comportament când este minimizat</string>
     <string name="comments_count">Comentarii (%1$s)</string>
     <string name="external_player">Player extern</string>
     <string name="show_updates">Verifică automat actualizările</string>
@@ -519,7 +490,6 @@
     <string name="unsubscribe_snackbar_message">V-ați dezabonat cu succes de la %1$s</string>
     <string name="export_playlist">Exportează playlistul</string>
     <string name="import_watch_history">Importează istoricul de vizionare</string>
-    <string name="audio_codecs">Codecuri audio</string>
     <string name="screenshot_saved">Captură de ecran salvată</string>
     <string name="crashlog">Jurnal de blocări</string>
     <string name="never_show_again">Nu mai arăta din nou</string>

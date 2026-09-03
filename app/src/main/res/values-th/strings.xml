@@ -12,7 +12,6 @@
     <string name="region">ภูมิภาค</string>
     <string name="login_register">ลงชื่อเข้าใช้/สมัครสมาชิก</string>
     <string name="importsuccess">ติดตามแล้ว</string>
-    <string name="downloadfailed">ดาวน์โหลดล้มเหลว</string>
     <string name="search_hint">ค้นหา</string>
     <string name="subscribe">ติดตาม</string>
     <string name="download">ดาวน์โหลด</string>
@@ -113,7 +112,6 @@
     <string name="volume">ระดับเสียง</string>
     <string name="enabled">เปิด</string>
     <string name="disabled">ปิด</string>
-    <string name="defaults">ค่าเริ่มต้น</string>
     <string name="auto">อัตโนมัติ</string>
     <string name="screenshot">ถ่ายภาพ</string>
     <string name="shuffle">สุ่ม</string>
@@ -153,7 +151,6 @@
     <string name="duration">ระยะเวลา</string>
     <string name="shorts_notifications">การแจ้งเตือนสำหรับ Shorts</string>
     <string name="manual">ข้ามเอง</string>
-    <string name="disable_proxy_summary">โหลดวิดีโอและภาพจากเซิร์ฟเวอร์ YouTube โดยตรง เปิดการตั้งค่านี้ถ้าคุณใช้ VPN ตลอดเวลา</string>
     <string name="help">ช่วยเหลือ</string>
     <string name="faq">คำถามที่พบบ่อย</string>
     <string name="hide_watched_from_feed">ซ่อนวิดีโอที่ดูแล้ว</string>
@@ -206,12 +203,9 @@
     <string name="checking_frequency_1_day">1 วัน</string>
     <string name="most_recent">ใหม่สุด</string>
     <string name="least_recent">เก่าสุด</string>
-    <string name="history_size">ขนาดประวัติสูงสุด</string>
-    <string name="unlimited">ไม่จำกัด</string>
     <string name="background_mode">โหมดพื้นหลัง</string>
     <string name="add_to_queue">เพิ่มลงในคิว</string>
     <string name="take_a_break">ได้เวลาพักแล้ว</string>
-    <string name="no_subtitles_available">ไม่มีคำบรรยายภาพ</string>
     <string name="repeat_mode">โหมดการเล่นซ้ำ</string>
     <string name="resize_mode_fit">พอดีจอ</string>
     <string name="resize_mode_fill">ใส่เต็มจอ</string>
@@ -219,7 +213,6 @@
     <string name="repeat_mode_none">ไม่ใช้</string>
     <string name="pip">PiP</string>
     <string name="player_resize_mode">โหมดการขยาย</string>
-    <string name="maximum_image_cache">ขนาดแคชภาพสูงสุด</string>
     <string name="copied_to_clipboard">คัดลอกไปยังคลิปบอร์ดแล้ว</string>
     <string name="open_copied">เปิด</string>
     <string name="device_info">ข้อมูลอุปกรณ์</string>
@@ -259,24 +252,18 @@
     <string name="audio_only_mode_summary">เปลี่ยน LibreTube ให้เป็นเครื่องเล่นเพลง</string>
     <string name="sleep_timer">ตั้งเวลาปิด</string>
     <string name="skip_silence">ข้ามส่วนที่เงียบ</string>
-    <string name="codecs">วิดีโอ Codecs</string>
-    <string name="audio_codecs">เสียง Codecs</string>
     <string name="category">หมวดหมู่</string>
     <string name="stats_for_nerds">สถิติสำหรับเด็กเนิร์ด</string>
     <string name="video_id">วิดีโอ ID</string>
     <string name="copy_tooltip">คัดลอก</string>
     <string name="autoplay_countdown">นับถอยหลังเล่นอัตโนมัติ</string>
     <string name="autoplay_countdown_summary">แสดงนับถอยหลัง 5 วินาทีก่อนที่จะเล่นวิดีโอถัดไปโดยอัตโนมัติ</string>
-    <string name="disable_proxy">ปิด Piped Proxy</string>
     <string name="auto_fullscreen_shorts">เต็มหน้าจออัตโนมัติบนวิดีโอ Short</string>
     <string name="creation_date">วันที่สร้าง</string>
     <string name="duration_reversed">ระยะเวลา (กลับกัน)</string>
     <string name="creation_date_reversed">วันที่สร้าง (กลับกัน)</string>
     <string name="alphabetic">ตัวอักษร</string>
     <string name="alphabetic_reversed">ตัวอักษร (กลับกัน)</string>
-    <string name="welcome">ยินดีต้อนรับสู่ LibreTube</string>
-    <string name="choose_instance">กรุณาเลือกอินสแตนซ์ก่อน!</string>
-    <string name="choose_instance_long">กรุณาเลือกอินสแตนซ์ Piped เพื่อใช้จากด้านล่าง อินสแตนซ์ Piped ทำหน้าที่เป็นคนกลางระหว่างคุณกับ YouTube อินสแตนซ์เหล่านี้ตั้งอยู่ในตำแหน่งจริงที่ต่างกันออกไป ‐ ระบุเอาไว้ด้วยธงชาติ ตำแหน่งอินสแตนซ์ที่ตั้งใกล้อยู่กับคุณมีความเป็นไปได้ที่จะเร็วกว่าอินสแตนซ์ที่ห่างไกลไป คุณสามารถเปลี่ยนอินสแตนซ์ที่คุณใช้ในการตั้งค่าได้ตลอดเวลา</string>
     <string name="mark_as_unwatched">ทำเครื่องหมายว่ายังไม่ได้ดู</string>
     <string name="category_exclusive_access">สปอนเซอร์พิเศษ</string>
     <string name="category_hook">ฮุค/แนะนำตัว</string>
@@ -303,7 +290,6 @@
     <string name="remove_watched_videos">ลบวิดีโอที่ดูแล้ว</string>
     <string name="no_fullscreen_resolution">ขนาดแบบไม่เต็มหน้าจอ</string>
     <string name="same_as_fullscreen">ขนาดเดียวกันกับเต็มหน้าจอ</string>
-    <string name="playback_during_call">เล่นวิดีโอต่อในขณะที่มีสายโทรเข้า</string>
     <string name="download_playlist_note">กรุณาเลือกคุณภาพเสียง/วิดีโอสูงสุด คำบรรยายภาพจะดาวน์โหลดถ้ามี</string>
     <string name="audio_language">ภาษาเสียง</string>
     <string name="default_language">ค่าเริ่มต้น</string>
@@ -337,9 +323,7 @@
     <string name="sb_invalid_segment">ตำแหน่งเริ่มหรือจบของเซกเมนต์ไม่ถูกต้อง</string>
     <string name="contribute_to_sponsorblock">ช่วยเหลือให้ SponsorBlock</string>
     <string name="sponsorblock_user_id">SponsorBlock UserID</string>
-    <string name="remember_playback_speed">จดจำความเร็วในการเล่น</string>
     <string name="successfully_removed_from_playlist">ลบ \"%1$s\" ออกจากเพลย์ลิสต์เรียบร้อยแล้ว</string>
-    <string name="watched">ดูแล้ว</string>
     <string name="no_segments_found">ยังไม่มีเซกเมนต์อยู่ในวิดีโอตอนนี้</string>
     <plurals name="minutes_left">
         <item quantity="other">อีก %d นาที</item>
@@ -395,7 +379,6 @@
     <string name="downloading">กำลังดาวน์โหลด…</string>
     <string name="download_paused">หยุดการดาวน์โหลดชั่วคราว</string>
     <string name="download_completed">ดาวน์โหลดเสร็จสิ้น</string>
-    <string name="concurrent_downloads">ปริมาณการดาวน์โหลดพร้อมกันสูงสุด</string>
     <string name="concurrent_downloads_limit_reached">ปริมาณการดาวน์โหลดพร้อมกันถึงขีดจำกัดแล้ว</string>
     <string name="unknown">ไม่ทราบ</string>
     <string name="pause">หยุดพัก</string>
@@ -419,9 +402,7 @@
     <string name="fullscreen_orientation">แนวหน้าจอเมื่อเต็มหน้าจอ</string>
     <string name="chapters">ส่วนเนื้อหา</string>
     <string name="require_restart_message">รีสตาร์ทแอปเพื่อใช้การตั้งค่าใหม่ที่เปลี่ยนไป</string>
-    <string name="navLabelVisibility">แสดงชื่อปุ่ม</string>
     <string name="always">ตลอดเวลา</string>
-    <string name="selected">เฉพาะที่เลือก</string>
     <string name="never">ปิดตลอดเวลา</string>
     <string name="autoRotatePlayer">เต็มหน้าจออัตโนมัติ</string>
     <string name="autoRotatePlayer_summary">เต็มหน้าจอเมื่อหมุนหน้าจอ</string>
@@ -438,11 +419,7 @@
     <string name="backup_customInstances">อินสแตนซ์กำหนดเอง</string>
     <string name="change_instance">เปลี่ยนอินสแตนซ์</string>
     <string name="suggest_change_instance">ใช้เวลาโหลดนานกว่าปกติ ลองเปลี่ยนอินสแตนซ์</string>
-    <string name="failed_fetching_instances">ไม่สามารถโหลดข้อมูลจากอินสแตนซ์ที่มีอยู่ได้</string>
     <string name="clear_bookmarks">เคลียร์บุ๊กมาร์ก</string>
-    <string name="queue_insert_related_videos">ใส่วิดีโอที่เกี่ยวข้อง</string>
-    <string name="autoplay_playlists">เพลย์ลิสต์อัตโนมัติ</string>
-    <string name="autoplay_playlists_summary">เล่นวิดีโอถัดไปในเพลย์ลิสต์โดยอัตโนมัติโดยไม่สนการตั้งค่าเล่นอัตโนมัติ</string>
     <string name="local_playlists">เพลย์ลิสต์</string>
     <string name="swipe_controls">ควบคุมด้วยการปัด</string>
     <string name="bookmarks">บุ๊กมาร์ก</string>
@@ -451,8 +428,6 @@
     <string name="remove_bookmark">ลบออกจากบุ๊กมาร์ก</string>
     <string name="pinch_control">ควบคุมด้วยการบีบ</string>
     <string name="pinch_control_summary">บีบเพื่อขยายเข้า/ออก</string>
-    <string name="behavior_when_minimized">รูปแบบในขณะย่อเล็ก</string>
-    <string name="playback_during_call_summary">หมายเหตุด้วยว่าจะส่งผลให้แอปไม่สามารถควบคุมการโฟกัสของระบบเสียง</string>
     <string name="segment_submitted">ส่งเซกเมนต์เรียบร้อยแล้ว</string>
     <string name="vote_for_segment">โหวตเซกเมนต์</string>
     <string name="upvote">เห็นด้วย</string>
@@ -465,8 +440,6 @@
     <string name="general_summary">ดาวน์โหลดและประหยัดข้อมูล</string>
     <string name="notify_new_streams">แสดงการแจ้งเตือนสำหรับวิดีโอใหม่</string>
     <string name="notify_new_streams_summary">แสดงการแจ้งเตือนสำหรับวิดีโอใหม่จากช่องที่คุณกำลังติดตามอยู่</string>
-    <string name="show_stream_thumbnails">แสดงรูปภาพวิดีโอ</string>
-    <string name="show_stream_thumbnails_summary">แสดงรูปภาพของวิดีโอใหม่ จะใช้ข้อมูลเพิ่มขึ้นเมื่อเปิดการตั้งค่านี้</string>
     <string name="most_views">ยอดวิวมากสุด</string>
     <string name="least_views">ยอดวิวน้อยสุด</string>
     <string name="network_all">ทั้งหมด</string>
@@ -485,7 +458,6 @@
     <string name="backup">สำรองข้อมูล</string>
     <string name="backup_creation_success">สำรองข้อมูลเสร็จเรียบร้อยแล้ว</string>
     <string name="backup_creation_failed">ล้มเหลวในการสร้างสำรองข้อมูล</string>
-    <string name="picture_in_picture">แสดงให้เป็นภาพซ้อนภาพ</string>
     <string name="new_videos_badge">สัญลักษณ์วิดีโอใหม่</string>
     <string name="new_videos_badge_summary">แสดงตราสัญลักษณ์พร้อมระบุปริมาณของวิดีโอใหม่ถ้ามี</string>
     <string name="skip_segment">ข้ามเซกเมนต์</string>
@@ -496,10 +468,8 @@
     <string name="unsubscribe_snackbar_message">ยกเลิกการติดตาม %1$s เรียบร้อยแล้ว</string>
     <string name="notification_time">จำกัดเวลาการแจ้งเตือน</string>
     <string name="notification_time_summary">จำกัดช่วงเวลาที่การแจ้งเตือนวิดีโอสามารถแจ้งเตือนได้</string>
-    <string name="navbar_order">เรียง</string>
     <string name="layout">รูปแบบ</string>
     <string name="audio_track">ช่องเสียง</string>
-    <string name="limit_to_runtime">จนกว่าจะปิดแอป</string>
     <string name="alternative_pip_controls">ปุ่มควบคุมภาพซ้อนภาพอีกรูปแบบ</string>
     <string name="alternative_pip_controls_summary">แสดงแค่ปุ่มข้ามและปุ่มเสียงเท่านั้นในโหมดภาพซ้อนภาพแทนปุ่มกรอข้ามและกรอกลับ</string>
     <string name="channel_groups">กลุ่มช่อง</string>

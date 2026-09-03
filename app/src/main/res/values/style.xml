@@ -170,15 +170,6 @@
         <item name="animationMode">slide</item>
     </style>
 
-    <style name="channelChip" parent="@style/Widget.Material3.Chip.Filter">
-
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:padding">10dp</item>
-        <item name="android:visibility">gone</item>
-
-    </style>
-
     <style name="HomeCategoryTitle">
 
         <item name="android:layout_width">wrap_content</item>

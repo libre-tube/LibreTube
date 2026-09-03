@@ -26,7 +26,6 @@
     <string name="region">地區</string>
     <string name="login_register">登入/註冊</string>
     <string name="importsuccess">已訂閱</string>
-    <string name="downloadfailed">下載失敗。</string>
     <string name="import_from_yt">匯入訂閱播放清單</string>
     <string name="import_from_yt_summary">從Youtube或NewPipe</string>
     <string name="app_theme">主題</string>
@@ -200,11 +199,9 @@
     <string name="notification_time">限制通知時間</string>
     <string name="notification_time_summary">限制串流通知顯示的時間</string>
     <string name="download_completed">下載完成</string>
-    <string name="failed_fetching_instances">無法取得可用執行個體。</string>
     <string name="play_next">播放下一部</string>
     <string name="require_restart">需要重新啟動APP</string>
     <string name="auth_instance_summary">授權呼叫時使用不同的執行個體</string>
-    <string name="concurrent_downloads">最大並行下載數</string>
     <string name="concurrent_downloads_limit_reached">已達到最大並行下載數。</string>
     <string name="unknown">未知</string>
     <string name="resume">繼續</string>
@@ -212,8 +209,6 @@
     <string name="portrait">縱向</string>
     <string name="turnInternetOn">請開啟Wifi或行動數據連上網路。</string>
     <string name="never">永不</string>
-    <string name="selected">已選取</string>
-    <string name="navLabelVisibility">標籤可見度</string>
     <string name="always">總是</string>
     <string name="autoRotatePlayer">自動全螢幕</string>
     <string name="pure_theme">純粹主題</string>
@@ -226,7 +221,6 @@
     <string name="playerAudioQuality">音訊品質</string>
     <string name="captions_size">字幕大小</string>
     <string name="take_a_break">是時候休息一下了</string>
-    <string name="maximum_image_cache">最大圖片快取大小</string>
     <string name="device_info">裝置資訊</string>
     <string name="delete">從下載刪除</string>
     <string name="new_videos_badge">新影片的指示器</string>
@@ -248,13 +242,10 @@
     <string name="none">無</string>
     <string name="system_caption_style">系統說明文字樣式</string>
     <string name="translate">翻譯</string>
-    <string name="history_size">最大歷史紀錄</string>
-    <string name="unlimited">無限</string>
     <string name="yt_shorts">短影片</string>
     <string name="repeat_mode_current">目前的</string>
     <string name="backup_restore">備份與還原</string>
     <string name="backup">備份</string>
-    <string name="picture_in_picture">畫中畫</string>
     <string name="renamePlaylist">重新命名播放清單</string>
     <string name="mobile_data">行動數據</string>
     <string name="navigation_bar">導航列</string>
@@ -263,7 +254,6 @@
     <string name="require_restart_message">重啟APP以套用變更。</string>
     <string name="share_with_time">分享時包含時間戳</string>
     <string name="pinch_control_summary">使用手勢放大縮小</string>
-    <string name="defaults">預設</string>
     <string name="general_summary">下載與數據節省功能</string>
     <string name="worst_quality">最差</string>
     <string name="caption_settings">字幕</string>
@@ -274,7 +264,6 @@
     <string name="checking_frequency">檢查頻率…</string>
     <string name="most_views">最多觀看</string>
     <string name="most_recent">最新</string>
-    <string name="no_subtitles_available">無字幕可用</string>
     <string name="irreversible">您確定嗎？此操作無法撤銷！</string>
     <string name="least_views">最少觀看</string>
     <string name="audio_video_summary">品質與格式</string>
@@ -311,13 +300,11 @@
     <string name="audio_only_mode_summary">將LibreTube變成音樂播放器</string>
     <string name="no_subtitle">無字幕</string>
     <string name="download_paused">下載暫停</string>
-    <string name="navbar_order">排序</string>
     <string name="layout">版面</string>
     <string name="auto_quality">自動</string>
     <string name="trending">現正熱門</string>
     <string name="comments_disabled">上傳者停用了留言功能。</string>
     <string name="theme_monochrome">極簡單色</string>
-    <string name="queue_insert_related_videos">插入相關影片</string>
     <string name="bookmarks">書籤</string>
     <string name="bookmark">加入書籤</string>
     <string name="clear_bookmarks">清除書籤</string>
@@ -325,7 +312,6 @@
     <string name="add_to_bookmarks">新增至書籤</string>
     <string name="remove_bookmark">移除書籤</string>
     <string name="double_tap_seek_summary">按螢幕左邊或右邊兩下快轉影片</string>
-    <string name="limit_to_runtime">限制執行時間</string>
     <string name="sleep_timer">睡眠定時器</string>
     <string name="skip_silence">跳過無聲片段</string>
     <string name="help">幫助</string>
@@ -342,7 +328,6 @@
     <string name="playing_next">接下來在 %1$s 播放</string>
     <string name="unsupported_file_format">不支援的檔案格式：%1$s</string>
     <string name="category">類別</string>
-    <string name="codecs">視訊編解碼器</string>
     <string name="subscriberAndVideoCounts">%1$s 訂閱者 • %2$d 個影片</string>
     <string name="uploaderAndVideoCount">%1$s • %2$d 個影片</string>
     <string name="replies">回覆</string>
@@ -350,20 +335,16 @@
     <string name="duration_reversed">持續時間（反轉）</string>
     <string name="unlimited_search_history">無限制搜尋歷史紀錄</string>
     <string name="fullscreen_gestures">進入/退出全螢幕手勢</string>
-    <string name="show_stream_thumbnails_summary">顯示新串流的縮圖。啟用此選項會消耗更多流量</string>
     <string name="stats_for_nerds">詳細統計資料</string>
     <string name="auto_fullscreen_shorts">短片自動全螢幕</string>
     <plurals name="channel_new_streams">
         <item quantity="other">%d 個新串流</item>
     </plurals>
     <string name="go_to_video">前往影片</string>
-    <string name="disable_proxy">停用 Piped 代理伺服器</string>
     <string name="channel_groups">頻道群組</string>
     <string name="new_group">新</string>
     <string name="group_name">群組名稱</string>
     <string name="shorts_notifications">短片通知</string>
-    <string name="show_stream_thumbnails">顯示串流縮圖</string>
-    <string name="disable_proxy_summary">直接從 YouTube 的伺服器載入影片與圖片。若您一律使用 VPN 則僅應在此時僅用此選項</string>
     <string name="video_id">影片 ID</string>
     <string name="play_automatically">自動播放</string>
     <string name="play_automatically_summary">選取時自動開始播放影片</string>
@@ -377,9 +358,6 @@
     <string name="export_playlists_to">匯出播放清單</string>
     <string name="home_tab_content">首頁分頁內容</string>
     <string name="mark_as_unwatched">標記為尚未觀看</string>
-    <string name="welcome">歡迎使用 LibreTube</string>
-    <string name="choose_instance">請先選擇站台！</string>
-    <string name="choose_instance_long">請從下方選擇一個要使用的 Piped 站台。Piped 站台將會充當您與 YouTube 之間的中間人。這些站台位於不同的實際位置，由其國旗表示。離您較近的站台可能會比離您較遠的站台要快。您隨時都可以在設定中變更您使用的站台。</string>
     <string name="playlist_description">播放清單描述</string>
     <string name="change_playlist_description">變更播放清單描述</string>
     <string name="emptyPlaylistDescription">播放清單描述不能為空</string>
@@ -449,11 +427,6 @@
     <string name="music_artists">YouTube Music 藝人</string>
     <string name="no_fullscreen_resolution">非全螢幕解析度</string>
     <string name="same_as_fullscreen">與全螢幕相同</string>
-    <string name="playback_during_call_summary">請注意，這也會影響應用程式，使其不再處理任何種類的音訊焦點</string>
-    <string name="playback_during_call">電話通話中持續播放</string>
-    <string name="autoplay_playlists_summary">無論選定的自動播放設定如何，都會自動播放在播放清單上的下一部影片</string>
-    <string name="autoplay_playlists">自動播放播放清單</string>
-    <string name="remember_playback_speed">記住播放速度</string>
     <string name="vote_for_segment">為分節投票</string>
     <string name="upvote">上</string>
     <string name="segment">分節</string>
@@ -465,7 +438,6 @@
     <string name="time_in_minutes">時間以分鐘為單位</string>
     <string name="invalid_input">無效的輸入</string>
     <string name="disable_sleep_timer">停用睡眠計時器</string>
-    <string name="watched">已觀看</string>
     <string name="start_sleep_timer">開始睡眠計時器</string>
     <string name="finished">已結束</string>
     <string name="no_segments_found">此影片尚無任何片段。</string>
@@ -486,7 +458,6 @@
     <string name="enqueue_playlist_description">將要下載的播放清單的影片加入佇列時顯示通知。</string>
     <string name="default_language">預設</string>
     <string name="also_clear_watch_positions">也清除觀看位置</string>
-    <string name="behavior_when_minimized">最小化時的行為</string>
     <string name="gestures">手勢</string>
     <string name="comments_count">留言 (%1$s)</string>
     <string name="external_player">外部播放器</string>
@@ -507,7 +478,6 @@
     <string name="local_ryd">本機回傳 YouTube 不喜歡擷取程式</string>
     <string name="local_ryd_summary">直接從 https://returnyoutubedislikeapi.com 取得不喜歡資訊</string>
     <string name="import_watch_history">匯入觀看歷史紀錄</string>
-    <string name="audio_codecs">音訊編解碼器</string>
     <string name="view_count">%1$s 次觀看</string>
     <string name="dialog_play_offline_title">此影片有本機版本。</string>
     <string name="dialog_play_offline_body">您想要播放下載資料夾中的影片嗎？</string>

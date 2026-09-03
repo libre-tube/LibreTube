@@ -27,7 +27,6 @@
     <string name="region">Region</string>
     <string name="login_register">Log in/register</string>
     <string name="importsuccess">Subscribed</string>
-    <string name="downloadfailed">Download failed.</string>
     <string name="import_from_yt">Import subscriptions</string>
     <string name="import_from_yt_summary">From YouTube or NewPipe</string>
     <string name="app_theme">Theme</string>
@@ -168,7 +167,6 @@
     <string name="downloading">Downloading…</string>
     <string name="download_paused">Download paused</string>
     <string name="download_completed">Download completed</string>
-    <string name="concurrent_downloads">Max concurrent downloads</string>
     <string name="concurrent_downloads_limit_reached">Max concurrent downloads limit reached.</string>
     <string name="unknown">Unknown</string>
     <string name="pause">Pause</string>
@@ -205,9 +203,7 @@
     <string name="chapters">Chapters</string>
     <string name="require_restart">App restart required</string>
     <string name="require_restart_message">Restart the app to use the new changes.</string>
-    <string name="navLabelVisibility">Label visibility</string>
     <string name="always">Always</string>
-    <string name="selected">Selected</string>
     <string name="never">Never</string>
     <string name="autoRotatePlayer">Auto-fullscreen</string>
     <string name="autoRotatePlayer_summary">Fullscreen playback when the device gets turned</string>
@@ -235,8 +231,6 @@
     <string name="notifications">Notifications</string>
     <string name="notify_new_streams">Show notifications for new streams</string>
     <string name="notify_new_streams_summary">Display notifications for new streams from creators you follow</string>
-    <string name="show_stream_thumbnails">Show stream thumbnails</string>
-    <string name="show_stream_thumbnails_summary">Show the thumbnails of new streams. Enabling this will consume additional data</string>
     <string name="checking_frequency">Checking every …</string>
     <string name="checking_frequency_15_minutes">15 minutes</string>
     <string name="checking_frequency_30_minutes">30 minutes</string>
@@ -263,14 +257,11 @@
     <string name="copied">Copied</string>
     <string name="share_with_time">Share with time code</string>
     <string name="export_subscriptions">Export subscriptions</string>
-    <string name="history_size">Maximum history size</string>
-    <string name="unlimited">Unlimited</string>
     <string name="background_mode">Background mode</string>
     <string name="add_to_queue">Add to queue</string>
     <string name="misc">Misc</string>
     <string name="take_a_break">Time to take a break</string>
     <string name="yt_shorts">Shorts</string>
-    <string name="no_subtitles_available">No subtitles available</string>
     <string name="repeat_mode">Repeat mode</string>
     <string name="resize_mode_fit">Fit</string>
     <string name="resize_mode_fill">Fill</string>
@@ -282,10 +273,8 @@
     <string name="backup">Backup</string>
     <string name="backup_creation_success">Backup completed successfully</string>
     <string name="backup_creation_failed">Failed to create backup</string>
-    <string name="picture_in_picture">Picture-in-Picture</string>
     <string name="pip">PiP</string>
     <string name="player_resize_mode">Resize mode</string>
-    <string name="maximum_image_cache">Max image cache size</string>
     <string name="copied_to_clipboard">Copied to clipboard</string>
     <string name="open_copied">Open</string>
     <string name="device_info">Device Info</string>
@@ -326,12 +315,10 @@
     <string name="end_time">End time</string>
     <string name="notification_time">Restrict notification time</string>
     <string name="notification_time_summary">Limit the time span in which stream notifications are shown</string>
-    <string name="navbar_order">Order</string>
     <string name="layout">Layout</string>
     <string name="audio_track">Audio track</string>
     <string name="unsupported_file_format">Unsupported file format: %1$s</string>
     <string name="auto_quality">Auto</string>
-    <string name="limit_to_runtime">Limit to runtime</string>
     <string name="trends">Trends</string>
     <string name="featured">Featured</string>
     <string name="trending">What\'s trending now</string>
@@ -346,7 +333,6 @@
     <string name="swipe_controls_summary">Swipe to adjust the brightness and volume while in fullscreen mode</string>
     <string name="pinch_control">Pinch control</string>
     <string name="pinch_control_summary">Use pinch gesture to zoom in/out</string>
-    <string name="defaults">Defaults</string>
     <string name="comments_disabled">Comments are disabled by the uploader.</string>
     <string name="no_comments_available">This video has no comments.</string>
     <string name="theme_monochrome">Minimalistic monochrome</string>
@@ -368,7 +354,6 @@
     <string name="play_latest_videos">Play latest videos</string>
     <string name="nothing_selected">Nothing selected!</string>
     <string name="color_violet">Versatile violet</string>
-    <string name="failed_fetching_instances">Could not fetch available instances.</string>
     <string name="hide_watched_from_feed">Hide already watched videos</string>
     <string name="playlistUrl">Playlist URL</string>
     <string name="shuffle">Shuffle</string>
@@ -384,8 +369,6 @@
     <string name="skip_silence">Skip silence</string>
     <string name="help">Help</string>
     <string name="faq">FAQ</string>
-    <string name="codecs">Video codecs</string>
-    <string name="audio_codecs">Audio codecs</string>
     <string name="mark_as_watched">Mark as watched</string>
     <string name="category">Category</string>
     <string name="stats_for_nerds">Stats for nerds</string>
@@ -394,8 +377,6 @@
     <string name="autoplay_countdown">Autoplay countdown</string>
     <string name="autoplay_countdown_summary">Show a 5s countdown before auto-playing the next video</string>
     <string name="playing_next">Playing next in %1$s</string>
-    <string name="disable_proxy">Disable Piped proxy</string>
-    <string name="disable_proxy_summary">Load videos and images directly from YouTube\'s servers. Only enable the option if you always use a VPN</string>
     <string name="auto_fullscreen_shorts">Auto fullscreen on short videos</string>
     <string name="channel_groups">Channel groups</string>
     <string name="new_group">New</string>
@@ -415,9 +396,6 @@
     <string name="creation_date_reversed">Creation date (reversed)</string>
     <string name="alphabetic">Alphabetic</string>
     <string name="alphabetic_reversed">Alphabetic (reversed)</string>
-    <string name="welcome">Welcome to LibreTube</string>
-    <string name="choose_instance">Please choose an instance first!</string>
-    <string name="choose_instance_long">Please choose a Piped instance to use from below. The Piped instance will act as the middleman between you and YouTube. These instances are located at different physical locations - indicated by their country flag(s). Instances physically closer to you are likely faster than instances that are not. You can change the instance you use in the settings at any time.</string>
     <string name="mark_as_unwatched">Mark as unwatched</string>
     <string name="change_playlist_description">Change playlist description</string>
     <string name="playlist_description">Playlist description</string>
@@ -440,8 +418,6 @@
     <string name="remove_watched_videos">Remove watched videos</string>
     <string name="no_fullscreen_resolution">No-fullscreen resolution</string>
     <string name="same_as_fullscreen">Same as fullscreen</string>
-    <string name="playback_during_call">Continue playback during phone call</string>
-    <string name="playback_during_call_summary">Note that this also affects the app to not handle any kind of audio focus anymore</string>
     <string name="segment_submitted">Segment submitted</string>
     <string name="vote_for_segment">Vote for segment</string>
     <string name="upvote">Up</string>
@@ -454,7 +430,6 @@
     <string name="enqueueing_playlist_download">Enqueueing videos to download of playlist "%1$s"</string>
     <string name="audio_language">Audio language</string>
     <string name="default_language">Default</string>
-    <string name="behavior_when_minimized">Behavior when minimized</string>
     <string name="external_player">External player</string>
     <string name="screenshot">Screenshot</string>
     <string name="screenshot_saved">Screenshot saved</string>
@@ -494,9 +469,7 @@
     <string name="sb_invalid_segment">Invalid segment start or end</string>
     <string name="contribute_to_sponsorblock">Contribute to SponsorBlock</string>
     <string name="sponsorblock_user_id">SponsorBlock UserID</string>
-    <string name="remember_playback_speed">Remember playback speed</string>
     <string name="successfully_removed_from_playlist">Successfully removed \"%1$s\" from the playlist.</string>
-    <string name="watched">Watched</string>
     <string name="no_segments_found">There are no segments for this video yet.</string>
     <string name="start_sleep_timer">Start sleep timer</string>
     <string name="disable_sleep_timer">Disable sleep timer</string>

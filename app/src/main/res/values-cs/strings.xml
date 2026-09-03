@@ -16,7 +16,6 @@
     <string name="instances">Vybrat…</string>
     <string name="customInstance">Vlastní</string>
     <string name="importsuccess">Úspěšně přihlášeno k odběru</string>
-    <string name="downloadfailed">Stahování se nezdařilo.</string>
     <string name="app_theme">Motiv aplikace</string>
     <string name="server_error">Zdá se, že s vybraným serverem je problém. Zkuste jinou instanci.</string>
     <string name="unknown_error">Chyba sítě.</string>
@@ -157,7 +156,6 @@
     <string name="player">Přehrávač</string>
     <string name="appearance_summary">Upravte si aplikaci podle svých představ</string>
     <string name="live">Živě</string>
-    <string name="navLabelVisibility">Viditelnost štítků</string>
     <string name="always">Vždy</string>
     <string name="quality">Kvalita</string>
     <string name="captions">Titulky</string>
@@ -180,7 +178,6 @@
     <string name="reset_watch_positions">Obnovit</string>
     <string name="general">Obecné</string>
     <string name="never">Nikdy</string>
-    <string name="selected">Vybrané</string>
     <string name="autoRotatePlayer">Automaticky na celou obrazovku</string>
     <string name="autoRotatePlayer_summary">Při otočení přepnout přehrávání na celou obrazovku</string>
     <string name="pure_theme">Čistý motiv</string>
@@ -218,9 +215,7 @@
     <string name="copied">Zkopírováno</string>
     <string name="share_with_time">Sdílet s časovým kódem</string>
     <string name="export_subscriptions">Exportovat odběry</string>
-    <string name="history_size">Maximální velikost historie</string>
     <string name="background_mode">Režim na pozadí</string>
-    <string name="unlimited">Neomezená</string>
     <string name="add_to_queue">Přidat do fronty</string>
     <string name="misc">Různé</string>
     <string name="take_a_break">Čas na přestávku</string>
@@ -228,15 +223,12 @@
     <string name="repeat_mode_current">Aktuální</string>
     <string name="repeat_mode_none">Žádný</string>
     <string name="resize_mode_fit">Vejít se</string>
-    <string name="no_subtitles_available">Nejsou dostupné žádné titulky</string>
     <string name="repeat_mode">Režim opakování</string>
     <string name="resize_mode_fill">Vyplnit</string>
     <string name="resize_mode_zoom">Přiblížit</string>
     <string name="backup_restore">Záloha a obnovení</string>
     <string name="backup">Záloha</string>
-    <string name="picture_in_picture">Obraz v obraze</string>
     <string name="player_resize_mode">Režim změny velikosti</string>
-    <string name="maximum_image_cache">Max. velikost mezipaměti obrázků</string>
     <string name="copied_to_clipboard">Zkopírováno do schránky</string>
     <string name="open_copied">Otevřít</string>
     <string name="device_info">Informace o zařízení</string>
@@ -271,23 +263,19 @@
     <string name="notification_time">Omezit čas upozornění</string>
     <string name="end_time">Koncový čas</string>
     <string name="notification_time_summary">Omezit časové rozmezí, ve kterém budou zobrazována upozornění o videích</string>
-    <string name="navbar_order">Pořadí</string>
     <string name="layout">Rozložení</string>
     <string name="audio_track">Zvuková stopa</string>
     <string name="auto_quality">Auto</string>
-    <string name="limit_to_runtime">Omezení doby běhu</string>
     <string name="trends">Trendy</string>
     <string name="featured">Doporučené</string>
     <string name="trending">Co je právě v trendech</string>
     <string name="bookmarks">Záložky</string>
     <string name="bookmark">Uložit</string>
     <string name="clear_bookmarks">Vymazat záložky</string>
-    <string name="queue_insert_related_videos">Vložit související videa</string>
     <string name="local_playlists">Místní playlisty</string>
     <string name="brightness">Jas</string>
     <string name="auto">Auto</string>
     <string name="swipe_controls">Ovládání přejetím prstem</string>
-    <string name="defaults">Výchozí nastavení</string>
     <string name="volume">Hlasitost</string>
     <string name="swipe_controls_summary">Přejeďte prstem pro upravení jasu a hlasitosti v režimu celé obrazovky</string>
     <string name="no_comments_available">Toto video nemá žádné komentáře.</string>
@@ -311,7 +299,6 @@
     <string name="play_latest_videos">Přehrát nejnovější videa</string>
     <string name="nothing_selected">Nic není vybráno!</string>
     <string name="color_violet">Všestranná fialová</string>
-    <string name="failed_fetching_instances">Nepodařilo se načíst dostupné instance.</string>
     <string name="hide_watched_from_feed">Skrýt zhlédnutá videa</string>
     <string name="playlistUrl">URL playlistu</string>
     <string name="shuffle">Náhodně</string>
@@ -325,7 +312,6 @@
     <string name="no_subtitle">Bez titulků</string>
     <string name="download_paused">Stahování pozastaveno</string>
     <string name="download_completed">Stahování dokončeno</string>
-    <string name="concurrent_downloads">Maximální počet souběžných stahování</string>
     <string name="concurrent_downloads_limit_reached">Dosažen limit maximálního počtu souběžných stahování.</string>
     <string name="unknown">Neznámý</string>
     <string name="resume">Pokračovat</string>
@@ -336,7 +322,6 @@
     <string name="help">Nápověda</string>
     <string name="faq">Často kladené dotazy</string>
     <string name="replies">Odpovědi</string>
-    <string name="codecs">Video kodeky</string>
     <string name="mark_as_watched">Označit jako zhlédnuté</string>
     <string name="unsupported_file_format">Nepodporovaný formát souboru: %1$s</string>
     <string name="category">Kategorie</string>
@@ -348,8 +333,6 @@
     <string name="video_id">ID videa</string>
     <string name="uploaderAndVideoCount">%1$s • %2$d videí</string>
     <string name="subscriberAndVideoCounts">%1$s odběratelů • %2$d videí</string>
-    <string name="disable_proxy_summary">Načítat videa a obrázky přímo ze serverů YouTube. Tuto možnost povolte pouze v případě, že vždy používáte VPN</string>
-    <string name="disable_proxy">Zakázat proxy přes Piped</string>
     <string name="auto_fullscreen_shorts">Automatická celá obrazovka u Shorts</string>
     <string name="new_group">Nová</string>
     <string name="group_name">Název skupiny</string>
@@ -363,8 +346,6 @@
         <item quantity="few">%d nová videa</item>
         <item quantity="other">%d nových videí</item>
     </plurals>
-    <string name="show_stream_thumbnails">Zobrazit náhledy videí</string>
-    <string name="show_stream_thumbnails_summary">Zobrazit náhledy nových videí. Povolením této funkce bude spotřebováno více dat</string>
     <string name="unlimited_search_history">Neomezená historie vyhledávání</string>
     <string name="duration_reversed">Délka (obráceně)</string>
     <string name="duration">Délka</string>
@@ -378,9 +359,6 @@
     <string name="export_playlists_to">Exportovat playlisty do</string>
     <string name="import_playlists_from">Importovat playlisty z</string>
     <string name="home_tab_content">Obsah domovské stránky</string>
-    <string name="welcome">Vítejte v LibreTube</string>
-    <string name="choose_instance">Nejprve prosím vyberte instanci!</string>
-    <string name="choose_instance_long">Níže si vyberte instanci Piped, kterou chcete použít. Instance Piped bude fungovat jako prostředník mezi vámi a službou YouTube. Tyto instance se nacházejí na různých fyzických místech - jsou označeny vlajkou (vlajkami) své země. Instance, které jsou fyzicky blíže k vám, budou pravděpodobně rychlejší než instance, které jsou dále. Používanou instanci můžete kdykoli změnit v nastavení.</string>
     <string name="mark_as_unwatched">Označit jako nezhlédnuté</string>
     <string name="playlist_description">Popis playlistu</string>
     <string name="emptyPlaylistDescription">Popis playlistu nemůže být prázdný</string>
@@ -449,13 +427,8 @@
     <string name="sponsorblock_user_id">ID uživatele SponsorBlock</string>
     <string name="donate">Přispět</string>
     <string name="no_fullscreen_resolution">Rozlišení mimo celou obrazovku</string>
-    <string name="playback_during_call_summary">Má to také vliv na to, že aplikace již nezpracovává žádný druh zaměření zvuku</string>
     <string name="music_artists">Umělci YT Music</string>
-    <string name="playback_during_call">Pokračovat v přehrávání při hovoru</string>
     <string name="same_as_fullscreen">Stejné jako při celé obrazovce</string>
-    <string name="autoplay_playlists_summary">Automaticky přehrát další video v playlistu nezávisle na zvoleném nastavení automatického přehrávání</string>
-    <string name="autoplay_playlists">Automatické přehrávání playlistů</string>
-    <string name="remember_playback_speed">Zapamatovat rychlost přehrávání</string>
     <string name="segment_submitted">Segment odeslán</string>
     <string name="vote_for_segment">Hlasovat pro segment</string>
     <string name="upvote">Pro</string>
@@ -464,7 +437,6 @@
     <string name="downvote">Proti</string>
     <string name="repeat_mode_all">Opakovat vše</string>
     <string name="successfully_removed_from_playlist">Video „%1$s“ úspěšně odebráno z playlistu.</string>
-    <string name="watched">Zhlédnuto</string>
     <string name="finished">Dokončeno</string>
     <string name="no_segments_found">U tohoto videa zatím nejsou žádné segmenty.</string>
     <string name="time_in_minutes">Čas v minutách</string>
@@ -489,7 +461,6 @@
     <string name="delete_all">Všechny stažené soubory budou smazány!</string>
     <string name="also_clear_watch_positions">Vymazat taky pozice sledování</string>
     <string name="gestures">Gesta</string>
-    <string name="behavior_when_minimized">Chování při minimalizaci</string>
     <string name="external_player">Externí přehrávač</string>
     <string name="comments_count">Komentáře (%1$s)</string>
     <string name="show_updates">Automaticky kontrolovat aktualizace</string>
@@ -509,7 +480,6 @@
     <string name="local_ryd">Lokální extraktor Return YouTube Dislike</string>
     <string name="local_ryd_summary">Přímo načítat informace o palcích dolů z https://returnyoutubedislikeapi.com</string>
     <string name="import_watch_history">Importovat historii sledování</string>
-    <string name="audio_codecs">Zvukové kodeky</string>
     <string name="view_count">%1$s zhlédnutí</string>
     <string name="dialog_play_offline_title">Je dostupná lokální verze tohoto videa.</string>
     <string name="dialog_play_offline_body">Chcete přehrát stažené video?</string>

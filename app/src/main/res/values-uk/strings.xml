@@ -5,7 +5,6 @@
     <string name="server_error">Схоже, виникла проблема з вибраним сервером. Спробуйте інший приклад.</string>
     <string name="share">Поділитися</string>
     <string name="register">Зареєструватися</string>
-    <string name="downloadfailed">Завантаження не вдалося.</string>
     <string name="empty">Вам необхідно ввести ім\'я користувача та пароль.</string>
     <string name="clear_history">Очистити історію</string>
     <string name="category_selfpromo_summary">Схоже до категорії \"Спонсор\", але стосується безплатних оголошень або самореклами. Це включає розділи про свої товари, фінансові внески або інформацію про тих з ким вони співпрацювали</string>
@@ -172,9 +171,7 @@
     <string name="audio">Аудіо</string>
     <string name="autoRotatePlayer_summary">Повноекранне відтворення при ввімкненні пристрою</string>
     <string name="require_restart">Потрібен перезапуск застосунку</string>
-    <string name="navLabelVisibility">Відображення міток</string>
     <string name="always">Завжди</string>
-    <string name="selected">Вибрано</string>
     <string name="never">Ніколи</string>
     <string name="autoRotatePlayer">Авто-повноекранний</string>
     <string name="pure_theme">Чисто чорна тема</string>
@@ -194,14 +191,12 @@
     <string name="notify_new_streams">Показувати сповіщення про нові трансляції</string>
     <string name="notifications">Сповіщення</string>
     <string name="take_a_break">Час зробити перерву</string>
-    <string name="no_subtitles_available">Субтитри відсутні</string>
     <string name="yt_shorts">Короткі відео</string>
     <string name="backup">Резервне копіювання</string>
     <string name="delete">Видалити з завантажень</string>
     <string name="required_network">Необхідне з\'єднання</string>
     <string name="network_metered">Обмежена</string>
     <string name="repeat_mode_current">Поточний</string>
-    <string name="picture_in_picture">Зображення в зображенні</string>
     <string name="new_videos_badge_summary">Показувати значок із кількістю нових відео, якщо такі є</string>
     <string name="repeat_mode_none">Вимкнено</string>
     <string name="skip_segment">Пропустити сегмент</string>
@@ -227,19 +222,16 @@
     <string name="no_search_result">Результатів немає.</string>
     <string name="export_subscriptions">Експорт підписок</string>
     <string name="push_channel_description">Показує сповіщення, коли доступні нові трансляції.</string>
-    <string name="unlimited">Необмежено</string>
     <string name="add_to_queue">Додати в чергу</string>
     <string name="repeat_mode">Режим повторення</string>
     <string name="resize_mode_fit">Вміщення</string>
     <string name="resize_mode_fill">Заповнення</string>
     <string name="resize_mode_zoom">Наближення</string>
-    <string name="maximum_image_cache">Макс. розмір кешу зображень</string>
     <string name="data_saver_mode">Режим заощадження даних</string>
     <string name="search_history_summary">Пам\'ятати історію пошуку</string>
     <string name="checking_frequency">Перевірка кожні …</string>
     <string name="most_views">Найбільше переглядів</string>
     <string name="least_views">Найменше переглядів</string>
-    <string name="history_size">Максимальний розмір історії</string>
     <string name="background_mode">Фоновий режим</string>
     <string name="misc">Різне</string>
     <string name="player_resize_mode">Режим зміни розміру</string>
@@ -271,25 +263,21 @@
     <string name="time">Час</string>
     <string name="start_time">Час початку</string>
     <string name="notification_time">Обмежити час сповіщень</string>
-    <string name="navbar_order">Порядок</string>
     <string name="layout">Вигляд</string>
     <string name="audio_track">Звукова доріжка</string>
     <string name="auto_quality">Авто</string>
-    <string name="limit_to_runtime">Обмеження часом роботи</string>
     <string name="featured">Популярні</string>
     <string name="trending">Що зараз у тренді</string>
     <string name="trends">Тренди</string>
     <string name="bookmarks">Закладки</string>
     <string name="bookmark">Закладка</string>
     <string name="clear_bookmarks">Очистити закладки</string>
-    <string name="queue_insert_related_videos">Вставити пов\'язані відео</string>
     <string name="local_playlists">Локальні добірки</string>
     <string name="brightness">Яскравість</string>
     <string name="auto">Авто</string>
     <string name="swipe_controls">Керування посуваннями</string>
     <string name="swipe_controls_summary">Проведіть по екрану, щоб відрегулювати яскравість і гучність у повноекранному режимі</string>
     <string name="volume">Гучність</string>
-    <string name="defaults">Значення за замовчуванням</string>
     <string name="double_tap_seek">Двічі торкніться, щоб шукати</string>
     <string name="double_tap_seek_summary">Двічі торкніться ліворуч або праворуч, щоб перемотати назад або вперед</string>
     <string name="no_comments_available">До цього відео немає коментарів.</string>
@@ -311,7 +299,6 @@
     <string name="play_latest_videos">Грати останні відео</string>
     <string name="nothing_selected">Нічого не вибрано!</string>
     <string name="color_violet">Універсальний фіолетовий</string>
-    <string name="failed_fetching_instances">Неможливо отримати доступні сервери.</string>
     <string name="hide_watched_from_feed">Приховати вже переглянуті відео</string>
     <string name="playlistUrl">URL добірки</string>
     <string name="shuffle">Перетасувати</string>
@@ -326,7 +313,6 @@
     <string name="audio_only_mode_summary">Перетворіть LibreTube на музичний програвач</string>
     <string name="no_subtitle">Немає субтитрів</string>
     <string name="download_paused">Завантаження призупинено</string>
-    <string name="concurrent_downloads">Максимум одночасних завантажень</string>
     <string name="concurrent_downloads_limit_reached">Досягнуто максимальної кількості одночасних завантажень.</string>
     <string name="unknown">Невідомо</string>
     <string name="download_completed">Завантаження завершено</string>
@@ -336,7 +322,6 @@
     <string name="sleep_timer">Таймер сну</string>
     <string name="skip_silence">Пропускати тишу</string>
     <string name="replies">Відповіді</string>
-    <string name="codecs">Відеокодеки</string>
     <string name="mark_as_watched">Позначити переглянутим</string>
     <string name="unsupported_file_format">Непідтримуваний формат файлу: %1$s</string>
     <string name="category">Категорія</string>
@@ -348,8 +333,6 @@
     <string name="video_id">ID відео</string>
     <string name="uploaderAndVideoCount">%1$s • %2$d відео</string>
     <string name="subscriberAndVideoCounts">%1$s підписників • %2$d відео</string>
-    <string name="disable_proxy">Вимкнути транспортний проксі</string>
-    <string name="disable_proxy_summary">Завантажувати відео та зображення безпосередньо з серверів YouTube. Увімкніть цю опцію лише якщо завжди використовуєте VPN</string>
     <string name="auto_fullscreen_shorts">Автоматичний повноекранний режим для коротких відео</string>
     <string name="new_group">Нова</string>
     <string name="channel_groups">Групи каналів</string>
@@ -364,8 +347,6 @@
         <item quantity="many">%d нових трансляцій</item>
         <item quantity="other">%d нових трансляцій</item>
     </plurals>
-    <string name="show_stream_thumbnails_summary">Показувати обкладинки нових трансляцій. Увімкнення цієї опції споживатиме додаткові дані</string>
-    <string name="show_stream_thumbnails">Показувати обкладинки трансляцій</string>
     <string name="unlimited_search_history">Необмежена історія запитів</string>
     <string name="duration">Тривалість</string>
     <string name="duration_reversed">Тривалість (у зворотному порядку)</string>
@@ -380,9 +361,6 @@
     <string name="export_playlists_to">Експорт списків відтворення в</string>
     <string name="home_tab_content">Вміст головної вкладки</string>
     <string name="mark_as_unwatched">Позначити як непереглянуте</string>
-    <string name="welcome">Ласкаво просимо до LibreTube</string>
-    <string name="choose_instance">Спочатку виберіть сервер!</string>
-    <string name="choose_instance_long">Виберіть сервер Piped для використання нижче. Сервер Piped буде посередником між вами та YouTube. Ці сервери розташовані в різних фізичних місцях, позначених прапорами відповідних країн. Фізично ближчі до вас сервери, швидше за все, працюють швидше, ніж віддалені. Ви можете будь-коли змінити використовуваний сервер у налаштуваннях.</string>
     <string name="change_playlist_description">Змінити опис добірки</string>
     <string name="emptyPlaylistDescription">Опис добірки обов\'язковий</string>
     <string name="playlist_description">Опис добірки</string>
@@ -452,11 +430,6 @@
     <string name="music_artists">Виконавці YT Music</string>
     <string name="no_fullscreen_resolution">Роздільність для не повноекранного режиму</string>
     <string name="same_as_fullscreen">Така ж як для повноекранного режиму</string>
-    <string name="playback_during_call_summary">Зауважте, що це також впливає на те, що застосунок більше не працюватиме з будь-яким типом аудіофокусу</string>
-    <string name="playback_during_call">Продовжити відтворення під час телефонного виклику</string>
-    <string name="autoplay_playlists_summary">Автоматично відтворювати наступне відео в добірках незалежно від обраних налаштувань автовідтворення</string>
-    <string name="autoplay_playlists">Автовідтворення добірок</string>
-    <string name="remember_playback_speed">Пам\'ятати швидкість відтворення</string>
     <string name="vote_for_segment">Проголосувати за сегмент</string>
     <string name="upvote">Підняти</string>
     <string name="segment">Сегмент</string>
@@ -465,7 +438,6 @@
     <string name="downvote">Понизити</string>
     <string name="repeat_mode_all">Повторити все</string>
     <string name="successfully_removed_from_playlist">\"%1$s\" вилучено з добірки.</string>
-    <string name="watched">Переглянуто</string>
     <string name="finished">Завершено</string>
     <string name="no_segments_found">Для цього відео ще немає сегментів.</string>
     <string name="time_in_minutes">Час у хвилинах</string>
@@ -490,7 +462,6 @@
     <string name="download_playlist_note">Виберіть максимальну якість завантажуваного аудіо/відео. Субтитри будуть завантажені, лише якщо вони доступні.</string>
     <string name="enqueue_playlist_description">Показує сповіщення під час створення черги на завантаження відео зі списку відтворення.</string>
     <string name="also_clear_watch_positions">Також очистити позиції перегляду</string>
-    <string name="behavior_when_minimized">Поведінка при згортанні</string>
     <string name="gestures">Жести</string>
     <string name="comments_count">Коментарі (%1$s)</string>
     <string name="external_player">Зовнішній програвач</string>
@@ -511,7 +482,6 @@
     <string name="local_ryd">Локальний видобувач «Повернення дизлайків на Youtube»</string>
     <string name="local_ryd_summary">Безпосередньо отримайте інформацію про дизлайки на сайті https://returnyoutubedislikeapi.com</string>
     <string name="import_watch_history">Імпорт історії перегляду</string>
-    <string name="audio_codecs">Аудіокодеки</string>
     <string name="view_count">Переглядів: %1$s</string>
     <string name="dialog_play_offline_title">Доступна локальна версія цього відео.</string>
     <string name="dialog_play_offline_body">Відтворити відео з теки завантаження?</string>

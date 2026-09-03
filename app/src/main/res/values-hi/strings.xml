@@ -21,7 +21,6 @@
     <string name="customInstance">अलग इंस्टेंस जोड़ें</string>
     <string name="login_register">लॉग इन/रजिस्टर</string>
     <string name="importsuccess">सफलतापूर्वक सब्सक्राइब हो गया</string>
-    <string name="downloadfailed">डाउनलोड विफल।</string>
     <string name="import_from_yt">सब्सक्रिप्शनस आयात करें</string>
     <string name="app_theme">ऐप थीम</string>
     <string name="server_error">चुने हुए सर्वर में समस्या लगती है। कोई और इंस्टेंस चुनकर प्रयास करें।</string>
@@ -111,14 +110,11 @@
     <string name="required_network">कनेक्शन आवश्यक</string>
     <string name="share_with_time">समय कोड के साथ साझा करें</string>
     <string name="export_subscriptions">सब्सक्रिप्शनस निर्यात करें</string>
-    <string name="history_size">अधिकतम इतिहास आकार</string>
-    <string name="unlimited">असीमित</string>
     <string name="background_mode">बैकग्राउंड मोड</string>
     <string name="add_to_queue">क़तार में जोड़ें</string>
     <string name="misc">विविध</string>
     <string name="take_a_break">ब्रेक लेने का समय</string>
     <string name="yt_shorts">शॉर्ट</string>
-    <string name="no_subtitles_available">कोई उपशीर्षक उपलब्ध नहीं है</string>
     <string name="repeat_mode">रिपीट मोड</string>
     <string name="resize_mode_fit">फिॅट</string>
     <string name="resize_mode_fill">फिल</string>
@@ -127,9 +123,7 @@
     <string name="repeat_mode_current">मौजूदा</string>
     <string name="backup_restore">बैकअप और रीस्टोर</string>
     <string name="backup">बैकअप</string>
-    <string name="picture_in_picture">पिक्चर इन पिक्चर</string>
     <string name="player_resize_mode">आकार बदलें मोड</string>
-    <string name="maximum_image_cache">अधिकतम इमेज कैश आकार</string>
     <string name="copied_to_clipboard">क्लिपबोर्ड पर कापी हुआ</string>
     <string name="open_copied">खोलें</string>
     <string name="audio_video_summary">गुणवत्ता और प्रारूप</string>
@@ -147,7 +141,6 @@
     <string name="playback_pitch">पिॅच</string>
     <string name="error_occurred">ख़राबी</string>
     <string name="copied">कॉपी किया गया</string>
-    <string name="navbar_order">क्रम</string>
     <string name="layout">लेआउट</string>
     <string name="change_region">वर्तमान क्षेत्र के लिए चलन में अनुपलब्ध प्रतीत होता है। कृपया सेटिंग्स में दूसरे का चयन करें।</string>
     <string name="device_info">डिवाइस की जानकारी</string>
@@ -188,7 +181,6 @@
     <string name="translate">अनुवाद</string>
     <string name="no_search_result">कोई परिणाम नहीं।</string>
     <string name="auto_quality">ऑटो</string>
-    <string name="limit_to_runtime">रनटाइम तक सीमित करें</string>
     <string name="trends">चलन में</string>
     <string name="featured">फीचर्ड</string>
     <string name="trending">अभी क्या चलन में है</string>
@@ -205,7 +197,6 @@
     <string name="swipe_controls_summary">फ़ुलस्क्रीन मोड में चमक और वॉल्यूम एडजस्ट करने के लिए स्वाइप करें</string>
     <string name="download_channel_name">डाउनलोड सेवा</string>
     <string name="download_channel_description">मीडिया डाउनलोड करते समय एक सूचना दिखाता है।</string>
-    <string name="queue_insert_related_videos">संबंधित वीडियो डालें</string>
     <string name="push_channel_description">नई स्ट्रीमें उपलब्ध होने पर एक सूचना दिखाता है।</string>
     <string name="related_streams_summary">आप जो देखते हैं उसके साथ मिलती-जुलती स्ट्रीम दिखाएं</string>
     <string name="empty_instance">नाम और एपीआई यूआरएल भरें।</string>
@@ -223,7 +214,6 @@
     <string name="reset_message">सभी सेटिंग रीसेट करें और लॉग आउट करें\?</string>
     <string name="autoRotatePlayer_summary">डिवाइस घूमाने पर फ़ुलस्क्रीन प्लेबैक</string>
     <string name="require_restart_message">नए परिवर्तनों का उपयोग करने के लिए ऐप को पुनरारंभ करें।</string>
-    <string name="defaults">डिफ़ॉल्टस</string>
     <string name="least_recent">सबसे पुराने</string>
     <string name="no_video">विडियो नहीं</string>
     <string name="audio">ऑडियो</string>
@@ -253,9 +243,7 @@
     <string name="open">खोलें…</string>
     <string name="chapters">अध्याय</string>
     <string name="require_restart">ऐप को पुनरारंभ करना आवश्यक है</string>
-    <string name="navLabelVisibility">लेबल दृश्यता</string>
     <string name="always">हमेशा</string>
-    <string name="selected">चयनित</string>
     <string name="never">कभी नहीँ</string>
     <string name="data_saver_mode">डेटा-सेवर मोड</string>
     <string name="data_saver_mode_summary">थंमनेल और अन्य छवियों को छोड़ें</string>
@@ -311,7 +299,6 @@
     <string name="play_latest_videos">नवीनतम वीडियो चलाएँ</string>
     <string name="color_violet">बहुमुखी बैंगनी</string>
     <string name="nothing_selected">कुछ चुना नहीं!</string>
-    <string name="failed_fetching_instances">उपलब्ध इंस्टेंस ला नहीं पाया।</string>
     <string name="hide_watched_from_feed">पहले से देखे गए वीडियो छिपाएं</string>
     <string name="playlistUrl">प्लेलिस्ट URL</string>
     <string name="shuffle">शफल</string>
@@ -327,7 +314,6 @@
     <string name="no_subtitle">कोई उपशीर्षक नहीं</string>
     <string name="download_paused">डाउनलोड रोका गया</string>
     <string name="download_completed">डाउनलोड पूरा हुआ</string>
-    <string name="concurrent_downloads">अधिकतम समवर्ती डाउनलोड</string>
     <string name="unknown">अनजान</string>
     <string name="concurrent_downloads_limit_reached">अधिकतम समवर्ती डाउनलोड सीमा पूरी हो गई है।</string>
     <string name="resume">फिर शुरू करें</string>
@@ -338,7 +324,6 @@
     <string name="replies">जवाब</string>
     <string name="unsupported_file_format">असमर्थित फाइल फॉर्मेट: %1$s</string>
     <string name="mark_as_watched">देखा गया चिह्नित करें</string>
-    <string name="codecs">वीडियो कोडेक्स</string>
     <string name="normal_views">%1$s ने देखा %2$s</string>
     <string name="autoplay_countdown">ऑटोप्ले की उलटी गिनती</string>
     <string name="autoplay_countdown_summary">अगले वीडियो को स्वतः चलाने से पहले 5 सेकंड उलटी गिनती दिखाएं</string>
@@ -348,8 +333,6 @@
     <string name="category">वर्ग</string>
     <string name="uploaderAndVideoCount">%1$s • %2$d वीडियोज</string>
     <string name="subscriberAndVideoCounts">%1$s सब्सक्राइबर • %2$d वीडियोज</string>
-    <string name="disable_proxy">Piped proxy अक्षम करें</string>
-    <string name="disable_proxy_summary">YouTube के सर्वर से सीधे वीडियो और चित्र लोड करें। यदि आप हमेशा VPN का उपयोग करते हैं तो ही विकल्प को सक्षम करें</string>
     <string name="auto_fullscreen_shorts">शॉर्ट वीडियो पर ऑटो फुलस्क्रीन</string>
     <string name="fullscreen_gestures">फ़ुलस्क्रीन में वीडियो देखने/उससे बाहर निकलने के जेस्चर</string>
     <string name="go_to_video">वीडियो पर जाएं</string>
@@ -362,8 +345,6 @@
     <string name="group_name">समूह नाम</string>
     <string name="play_automatically">स्वचालित रूप से खेलें</string>
     <string name="play_automatically_summary">चुनते समय स्वचालित रूप से वीडियो चलाना प्रारंभ करें</string>
-    <string name="show_stream_thumbnails">स्ट्रीम थंमनेल दिखाएं</string>
-    <string name="show_stream_thumbnails_summary">नई स्ट्रीमों के थंमनेल दिखाएं। इसे सक्षम करने से अतिरिक्त डेटा की खपत होगी</string>
     <string name="home_tab_content">होम टैब कॉन्टेंट</string>
     <string name="mark_as_unwatched">\'नहीं देखा गया\' के तौर पर मार्क करें</string>
     <string name="duration">अवधि</string>
@@ -377,10 +358,7 @@
     <string name="export_subscriptions_to">सदस्यताएं यहां एक्सपोर्ट करें</string>
     <string name="import_playlists_from">प्लेलिस्ट इससे इंपोर्ट करें</string>
     <string name="export_playlists_to">प्लेलिस्ट यहां एक्सपोर्ट करें</string>
-    <string name="welcome">LibreTube में आपका स्वागत है</string>
-    <string name="choose_instance">कृपया पहले एक इंस्टेंस चुनें!</string>
     <string name="unlimited_search_history">असीमित खोज इतिहास</string>
-    <string name="choose_instance_long">कृपया नीचे से उपयोग करने के लिए एक पाइप ्ड इंस्टेंस चुनें। पाइप्ड इंस्टेंस आपके और यूट्यूब के बीच बिचौलिये के रूप में कार्य करेगा। ये उदाहरण विभिन्न भौतिक स्थानों पर स्थित हैं - उनके देश के ध्वज (ओं) द्वारा इंगित किया गया है। शारीरिक रूप से आपके करीब के उदाहरण उन उदाहरणों की तुलना में तेज होते हैं जो नहीं हैं। आप किसी भी समय सेटिंग्स में उपयोग किए जाने वाले इंस्टेंस को बदल सकते हैं।</string>
     <string name="change_playlist_description">प्लेलिस्ट विवरण बदलें</string>
     <string name="playlist_description">प्लेलिस्ट विवरण</string>
     <string name="emptyPlaylistDescription">प्लेलिस्ट विवरण रिक्त नहीं हो सकता</string>
@@ -450,11 +428,6 @@
     <string name="music_artists">YT म्युजिक कलाकार</string>
     <string name="no_fullscreen_resolution">बगैर-फ़ुलस्क्रीन रिज़ॉल्यूशन</string>
     <string name="same_as_fullscreen">फ़ुलस्क्रीन के समान</string>
-    <string name="playback_during_call_summary">ध्यान दें कि इससे ऐप पर भी प्रभाव पड़ेगा और वह अब किसी भी प्रकार के ऑडियो फोकस को संभाल नहीं पाएगा</string>
-    <string name="playback_during_call">फ़ोन कॉल के दौरान प्लेबैक जारी रखें</string>
-    <string name="autoplay_playlists_summary">चयनित ऑटोप्ले सेटिंग की परवाह किए बिना प्लेलिस्ट में स्वचालित रूप से अगला वीडियो चलाएं</string>
-    <string name="autoplay_playlists">ऑटोप्ले प्लेलिस्ट</string>
-    <string name="remember_playback_speed">प्लेबैक गति याद रखें</string>
     <string name="vote_for_segment">सेगमेंट के लिए वोट करें</string>
     <string name="upvote">अपवोट करें</string>
     <string name="segment">सेगमेंट</string>
@@ -466,7 +439,6 @@
     <string name="time_in_minutes">समय मिनटों में</string>
     <string name="invalid_input">अमान्य इनपुट</string>
     <string name="disable_sleep_timer">स्लीप टाइमर अक्षम करें</string>
-    <string name="watched">देखा गया</string>
     <string name="start_sleep_timer">स्लीप टाइमर प्रारंभ करें</string>
     <string name="finished">समाप्त</string>
     <string name="no_segments_found">इस वीडियो के लिए अभी तक कोई सेगमेंट नहीं हैं।</string>
@@ -487,7 +459,6 @@
     <string name="download_playlist_note">कृपया डाउनलोड करने के लिए अधिकतम ऑडियो/वीडियो गुणवत्ता चुनें। कैप्शन केवल उपलब्ध होने पर ही डाउनलोड किए जाएंगे।</string>
     <string name="enqueueing_playlist_download">प्लेलिस्ट %1$s को डाउनलोड करने के लिए वीडियो को कतारबद्ध किया जा रहा है</string>
     <string name="also_clear_watch_positions">देखने की स्थिति भी साफ़ करें</string>
-    <string name="behavior_when_minimized">व्यवहार जब मिनीमाईज किया जाए</string>
     <string name="comments_count">टिप्पणियाँ (%1$s)</string>
     <string name="external_player">बाहरी प्लेयर</string>
     <string name="gestures">इशारे</string>
@@ -508,7 +479,6 @@
     <string name="local_ryd">Return Youtube Dislike की स्थानीय प्राप्ती</string>
     <string name="local_ryd_summary">https://returnyoutubedislikeapi.com से सीधे डिसलाईकस की जानकारी प्राप्त करें</string>
     <string name="import_watch_history">देखने का इतिहास आयात करें</string>
-    <string name="audio_codecs">ऑडियो कोडेक्स</string>
     <string name="view_count">%1$s व्यूज़</string>
     <string name="category_exclusive_access">विशेष प्रवेश</string>
     <string name="upcoming">आने वाला</string>

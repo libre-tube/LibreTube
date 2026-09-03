@@ -15,7 +15,6 @@
     <string name="customInstance">自訂</string>
     <string name="region">地區</string>
     <string name="importsuccess">訂閱咗</string>
-    <string name="downloadfailed">下載失敗咗.</string>
     <string name="import_from_yt">匯入訂閱</string>
     <string name="import_from_yt_summary">嚟自 YouTube 或者 NewPipe</string>
     <string name="app_theme">主題</string>
@@ -124,9 +123,7 @@
     <string name="pure_theme_summary">純白 / 黑色主題</string>
     <string name="pure_theme">純白主題</string>
     <string name="always">成日</string>
-    <string name="selected">已經揀左</string>
     <string name="mark_as_watched">Mark 低做已經睇咗</string>
-    <string name="no_subtitles_available">搵唔到字幕</string>
     <string name="play_latest_videos">播最後一條片</string>
     <string name="add_to_bookmarks">加去拉把</string>
     <string name="sleep_timer">瞓教計時器</string>
@@ -178,7 +175,6 @@
     <string name="mobile_data">電話 data</string>
     <string name="category">分類</string>
     <string name="download_channel_description">我 Down 緊野個陣就出個通知俾我.</string>
-    <string name="codecs">Codecs</string>
     <string name="uploaderAndVideoCount">%1$s • %2$d 條片</string>
     <string name="least_recent">最舊</string>
     <string name="captions">字幕</string>

@@ -16,7 +16,6 @@
     <string name="instances">Escolher…</string>
     <string name="customInstance">Personalizada</string>
     <string name="login_register">Fazer login/criar conta</string>
-    <string name="downloadfailed">Falha no download.</string>
     <string name="import_from_yt">Importar inscrições</string>
     <string name="app_theme">Tema</string>
     <string name="server_error">Parece que existe um problema com o servidor selecionado. Tente outra instância.</string>
@@ -154,7 +153,6 @@
     <string name="deleteAccount_summary">Exclua sua conta Piped</string>
     <string name="no_audio">Sem áudio</string>
     <string name="always">Sempre</string>
-    <string name="selected">Selecionado</string>
     <string name="watch_history_summary">Mantenha o controle dos vídeos assistidos localmente</string>
     <string name="reset_watch_positions">Redefinir</string>
     <string name="autoRotatePlayer">Tela cheia automática</string>
@@ -188,7 +186,6 @@
     <string name="video">Vídeo</string>
     <string name="player_autoplay">Reprodução automática</string>
     <string name="turnInternetOn">Ative o Wi-Fi ou os dados móveis para se conectar à Internet.</string>
-    <string name="navLabelVisibility">Visibilidade dos textos</string>
     <string name="never">Nunca</string>
     <string name="autoRotatePlayer_summary">Reproduzir no modo tela cheia quando a tela do dispositivo for ligada</string>
     <string name="pure_theme">Tema natural</string>
@@ -216,7 +213,6 @@
     <string name="worst_quality">Pior qualidade</string>
     <string name="new_videos_badge_summary">Mostrar um ícone com a quantidade de novos vídeos, se houver</string>
     <string name="backup_restore">Backup &amp; Restauração</string>
-    <string name="maximum_image_cache">Tamanho máximo do cache de imagens</string>
     <string name="open_copied">Abrir</string>
     <string name="audio_video_summary">Qualidade e formato</string>
     <string name="delete">Excluir dos downloads</string>
@@ -230,9 +226,7 @@
     <string name="take_a_break">Hora de fazer uma pausa</string>
     <string name="resize_mode_fill">Preencher</string>
     <string name="repeat_mode_none">Nenhum</string>
-    <string name="picture_in_picture">Picture-in-picture (PiP)</string>
     <string name="yt_shorts">Shorts</string>
-    <string name="no_subtitles_available">Nenhuma legenda disponível</string>
     <string name="repeat_mode">Modo de repetição</string>
     <string name="backup">Backup</string>
     <string name="resize_mode_fit">Encaixar</string>
@@ -243,7 +237,6 @@
     <string name="navigation_bar">Barra de navegação</string>
     <string name="download_channel_description">Mostrar notificação ao fazer downloads.</string>
     <string name="export_subscriptions">Exportar inscrições</string>
-    <string name="history_size">Tamanho máximo do histórico</string>
     <string name="resize_mode_zoom">Zoom</string>
     <string name="player_resize_mode">Redimensionamento</string>
     <string name="renamePlaylist">Renomear playlist</string>
@@ -255,7 +248,6 @@
     <string name="device_info">Informações do dispositivo</string>
     <string name="share_with_time">Compartilhar no momento atual</string>
     <string name="download_channel_name">Assistente de Download</string>
-    <string name="unlimited">Ilimitado</string>
     <string name="copied_to_clipboard">Copiado para a área de transferência</string>
     <string name="wifi">Wi-Fi</string>
     <string name="mobile_data">Dados móveis</string>
@@ -271,11 +263,9 @@
     <string name="end_time">Horário final</string>
     <string name="notification_time_summary">Limitar o intervalo de tempo em que as notificações são mostradas</string>
     <string name="notification_time">Restringir horário para notificação</string>
-    <string name="navbar_order">Organizar</string>
     <string name="layout">Layout</string>
     <string name="audio_track">Faixa de áudio</string>
     <string name="auto_quality">Auto</string>
-    <string name="limit_to_runtime">Limite de tempo para execução</string>
     <string name="trends">Em alta</string>
     <string name="featured">Destaques</string>
     <string name="trending">Em alta agora</string>
@@ -283,13 +273,11 @@
     <string name="bookmark">Favorito</string>
     <string name="clear_bookmarks">Excluir favoritos</string>
     <string name="local_playlists">Playlist locais</string>
-    <string name="queue_insert_related_videos">Inserir vídeos relacionados</string>
     <string name="auto">Auto</string>
     <string name="swipe_controls">Controles deslizantes</string>
     <string name="swipe_controls_summary">Deslize para ajustar o brilho e o volume no modo de tela cheia</string>
     <string name="brightness">Brilho</string>
     <string name="volume">Volume</string>
-    <string name="defaults">Padrões</string>
     <string name="no_comments_available">Este vídeo não tem comentários.</string>
     <string name="comments_disabled">Os comentários foram desabilitados pelo autor.</string>
     <string name="captions_size">Tamanho das legendas</string>
@@ -311,7 +299,6 @@
     <string name="play_latest_videos">Reproduzir os vídeos mais recentes</string>
     <string name="nothing_selected">Nada selecionado!</string>
     <string name="color_violet">Violeta versátil</string>
-    <string name="failed_fetching_instances">Não foi possível buscar as instâncias disponíveis.</string>
     <string name="hide_watched_from_feed">Ocultar vídeos já assistidos</string>
     <string name="playlistUrl">URL da playlist</string>
     <string name="shuffle">Aleatório</string>
@@ -325,7 +312,6 @@
     <string name="no_subtitle">Sem legenda</string>
     <string name="download_paused">Download pausado</string>
     <string name="download_completed">Download concluído</string>
-    <string name="concurrent_downloads">Número de downloads simultâneos</string>
     <string name="concurrent_downloads_limit_reached">Limite máximo de downloads simultâneos atingido.</string>
     <string name="unknown">Desconhecido</string>
     <string name="resume">Continuar</string>
@@ -336,7 +322,6 @@
     <string name="help">Ajuda</string>
     <string name="faq">Perguntas frequentes</string>
     <string name="replies">Respostas</string>
-    <string name="codecs">Codecs de vídeo</string>
     <string name="unsupported_file_format">Formato de arquivo não suportado: %1$s</string>
     <string name="mark_as_watched">Marcar como assistido</string>
     <string name="category">Categoria</string>
@@ -348,8 +333,6 @@
     <string name="autoplay_countdown_summary">Mostrar contagem regressiva de 5 segundos antes de reproduzir o próximo vídeo</string>
     <string name="uploaderAndVideoCount">%1$s • %2$d vídeos</string>
     <string name="subscriberAndVideoCounts">%1$s inscritos • %2$d vídeos</string>
-    <string name="disable_proxy">Desabilitar proxy Piped</string>
-    <string name="disable_proxy_summary">Carregar vídeos e imagens diretamente dos servidores do YouTube. Habilitar esta opção apenas se você sempre usa uma VPN</string>
     <string name="auto_fullscreen_shorts">Tela cheia automática em vídeos curtos</string>
     <string name="new_group">Novo</string>
     <string name="channel_groups">Grupos de canais</string>
@@ -363,8 +346,6 @@
         <item quantity="many">%d novos vídeos</item>
         <item quantity="other">%d novos vídeos</item>
     </plurals>
-    <string name="show_stream_thumbnails_summary">Mostrar miniaturas de novos vídeos. Habilitar isso consumirá dados adicionais</string>
-    <string name="show_stream_thumbnails">Mostrar miniaturas do vídeo</string>
     <string name="unlimited_search_history">Histórico de busca ilimitado</string>
     <string name="duration">Duração</string>
     <string name="duration_reversed">Duração (invertida)</string>
@@ -379,9 +360,6 @@
     <string name="export_playlists_to">Exportar playlists para</string>
     <string name="home_tab_content">Conteúdo da tela inicial</string>
     <string name="mark_as_unwatched">Marcar como não assistido</string>
-    <string name="choose_instance_long">Escolha uma instância Piped para usar abaixo. A instância Piped atuará como intermediária entre você e o YouTube. Essas instâncias estão localizadas em locais físicos diferentes, indicados pelas bandeiras dos países. As instâncias fisicamente mais próximas de você são provavelmente mais rápidas do que as instâncias que não estão. Você pode alterar a instância usada nas configurações a qualquer momento.</string>
-    <string name="choose_instance">Escolha uma instância primeiro!</string>
-    <string name="welcome">Bem-vindo ao LibreTube</string>
     <string name="change_playlist_description">Alterar descrição da playlist</string>
     <string name="playlist_description">Descrição da playlist</string>
     <string name="emptyPlaylistDescription">A descrição da playlist não pode estar vazia</string>
@@ -448,14 +426,9 @@
     <string name="contribute_to_sponsorblock">Contribuir para SponsorBlock</string>
     <string name="sponsorblock_user_id">ID do usuário SponsorBlock</string>
     <string name="donate">Doações</string>
-    <string name="autoplay_playlists_summary">Reproduzir automaticamente o próximo vídeo nas playlists, independentemente da configuração de reprodução automática selecionada</string>
     <string name="no_fullscreen_resolution">Resolução sem tela cheia</string>
-    <string name="playback_during_call_summary">Observe que isso também afeta o aplicativo para não lidar mais com nenhum tipo de foco de áudio</string>
     <string name="music_artists">Artistas do YT Music</string>
-    <string name="playback_during_call">Continuar a reprodução durante uma chamada telefônica</string>
-    <string name="autoplay_playlists">Reproduzir playlists automaticamente</string>
     <string name="same_as_fullscreen">O mesmo que tela cheia</string>
-    <string name="remember_playback_speed">Lembrar velocidade de reprodução</string>
     <string name="vote_for_segment">Votar no segmento</string>
     <string name="upvote">Gostei</string>
     <string name="segment">Segmento</string>
@@ -467,7 +440,6 @@
     <string name="time_in_minutes">Tempo em minutos</string>
     <string name="invalid_input">Entrada inválida</string>
     <string name="disable_sleep_timer">Desabilitar temporizador</string>
-    <string name="watched">Assistido</string>
     <string name="start_sleep_timer">Iniciar temporizador</string>
     <string name="finished">Finalizado</string>
     <string name="no_segments_found">Ainda não há segmentos para este vídeo.</string>
@@ -488,7 +460,6 @@
     <string name="enqueueing_playlist_download">Enfileirando vídeos para o download da playlist %1$s</string>
     <string name="delete_all">Todos os downloads serão excluídos!</string>
     <string name="also_clear_watch_positions">Excluir também as posições de reprodução</string>
-    <string name="behavior_when_minimized">Comportamento quando minimizado</string>
     <string name="gestures">Gestos</string>
     <string name="comments_count">Comentários (%1$s)</string>
     <string name="external_player">Player externo</string>
@@ -509,7 +480,6 @@
     <string name="local_ryd">Habilitar \'Return Youtube Dislike\'</string>
     <string name="local_ryd_summary">Obtenha informações de \"Não gostei\" diretamente em https://returnyoutubedislikeapi.com</string>
     <string name="import_watch_history">Importar histórico de exibição</string>
-    <string name="audio_codecs">Codecs de áudio</string>
     <string name="view_count">%1$s visualizações</string>
     <string name="dialog_play_offline_title">Uma versão local desse vídeo está disponível.</string>
     <string name="dialog_play_offline_body">Gostaria de reproduzir o vídeo a partir da pasta de downloads?</string>

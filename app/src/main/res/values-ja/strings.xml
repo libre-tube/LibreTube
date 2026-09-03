@@ -43,7 +43,6 @@
     <string name="loggedIn">ログインしました。</string>
     <string name="download">ダウンロード</string>
     <string name="instances">選択…</string>
-    <string name="downloadfailed">ダウンロードに失敗しました。</string>
     <string name="unknown_error">ネットワークエラー。</string>
     <string name="createPlaylist">再生リストを作成</string>
     <string name="playlistCreated">再生リストを作成しました。</string>
@@ -168,9 +167,7 @@
     <string name="video">映像</string>
     <string name="player_autoplay">自動再生</string>
     <string name="data_saver_mode_summary">サムネイルや他の画像を読み込まない</string>
-    <string name="navLabelVisibility">ラベルの表示</string>
     <string name="always">常に表示</string>
-    <string name="selected">選択中のみ</string>
     <string name="never">表示しない</string>
     <string name="autoRotatePlayer">自動で全画面</string>
     <string name="autoRotatePlayer_summary">端末を回転させるとプレーヤーを全画面にします</string>
@@ -210,7 +207,6 @@
     <string name="add_to_queue">再生キューに追加</string>
     <string name="irreversible">続けますか？この操作は元に戻せません！</string>
     <string name="export_subscriptions">登録チャンネルをエクスポート</string>
-    <string name="unlimited">無制限</string>
     <string name="resize_mode_fit">フィット</string>
     <string name="resize_mode_fill">フィル</string>
     <string name="wifi">Wi-Fi</string>
@@ -229,14 +225,12 @@
     <string name="network_all">すべて</string>
     <string name="network_metered">モバイルデータ通信</string>
     <string name="network_wifi">Wi-Fiのみ</string>
-    <string name="history_size">履歴の最大保持数</string>
     <string name="background_mode">バックグラウンドモード</string>
     <string name="misc">その他</string>
     <string name="take_a_break">休憩の時間になりました</string>
     <string name="yt_shorts">ショート</string>
     <string name="repeat_mode">リピートの種類</string>
     <string name="resize_mode_zoom">ズーム</string>
-    <string name="no_subtitles_available">字幕なし</string>
     <string name="repeat_mode_none">なし</string>
     <string name="delete">ダウンロードから削除</string>
     <string name="renamePlaylist">再生リストの名前を変更</string>
@@ -262,16 +256,13 @@
     <string name="most_views">再生回数が多い</string>
     <string name="backup_restore">バックアップと復元</string>
     <string name="backup">バックアップ</string>
-    <string name="picture_in_picture">ピクチャインピクチャ</string>
     <string name="player_resize_mode">リサイズ方法</string>
-    <string name="maximum_image_cache">最大画像キャッシュサイズ</string>
     <string name="copied_to_clipboard">クリップボードにコピーしました</string>
     <string name="open_copied">開く</string>
     <string name="repeat_mode_current">現在の動画</string>
     <string name="audio_video_summary">画質と形式</string>
     <string name="time_code">時間指定用のタイムコード (秒)</string>
     <string name="download_channel_description">メディアのダウンロード中に通知を表示します。</string>
-    <string name="navbar_order">並べ替え</string>
     <string name="layout">配置</string>
     <string name="local_playlists">端末内の再生リスト</string>
     <string name="color_violet">深紫色</string>
@@ -288,7 +279,6 @@
     <string name="nothing_selected">何も選択されていません！</string>
     <string name="pinch_control">つまむ操作</string>
     <string name="pinch_control_summary">つまむ操作を使って拡大/縮小します</string>
-    <string name="defaults">標準設定</string>
     <string name="comments_disabled">コメントは投稿者によって無効化されています。</string>
     <string name="theme_monochrome">無彩色</string>
     <string name="double_tap_seek_summary">プレーヤーの左または右を2回タップして、動画を早送りしたり巻き戻したりできます</string>
@@ -303,15 +293,12 @@
     <string name="play_latest_videos">最新の動画を再生</string>
     <string name="audio_track">音声トラック</string>
     <string name="auto_quality">自動</string>
-    <string name="limit_to_runtime">ランタイムの上限</string>
     <string name="trends">急上昇</string>
     <string name="featured">注目</string>
     <string name="trending">急上昇中</string>
-    <string name="queue_insert_related_videos">関連動画を挿入する</string>
     <string name="bookmarks">ブックマーク</string>
     <string name="bookmark">ブックマーク</string>
     <string name="clear_bookmarks">ブックマークを消去</string>
-    <string name="failed_fetching_instances">利用可能なインスタンスを取得できませんでした。</string>
     <string name="hide_watched_from_feed">視聴済みの動画を非表示</string>
     <string name="playlistUrl">再生リストのURL</string>
     <string name="shuffle">シャッフル再生</string>
@@ -334,12 +321,10 @@
     <string name="audio_only_mode_summary">LibreTube を音楽プレーヤーに変えます</string>
     <string name="mark_as_watched">視聴済みにする</string>
     <string name="category">カテゴリー</string>
-    <string name="codecs">映像コーデック</string>
     <string name="concurrent_downloads_limit_reached">同時ダウンロード数の上限に達しました。</string>
     <string name="no_subtitle">字幕なし</string>
     <string name="download_paused">ダウンロードを一時停止しました</string>
     <string name="download_completed">ダウンロード完了</string>
-    <string name="concurrent_downloads">最大同時ダウンロード数</string>
     <string name="unknown">不明</string>
     <string name="resume">再開</string>
     <string name="autoplay_countdown_summary">次の動画を自動再生する前に5秒間の秒読みを表示します</string>
@@ -347,8 +332,6 @@
     <string name="uploaderAndVideoCount">%1$s • %2$d 本の動画</string>
     <string name="subscriberAndVideoCounts">登録者数 %1$s人 • %2$d 本の動画</string>
     <string name="replies">返信</string>
-    <string name="disable_proxy">Pipedのプロキシを無効化</string>
-    <string name="disable_proxy_summary">動画や画像を YouTube のサーバーから直接取得します。VPN を常時使用する際にのみ有効にしてください</string>
     <string name="auto_fullscreen_shorts">ショート動画を自動で全画面表示</string>
     <string name="sleep_timer">スリープタイマー</string>
     <string name="fullscreen_gestures">ジェスチャで全画面を開始/終了</string>
@@ -357,8 +340,6 @@
     <plurals name="channel_new_streams">
         <item quantity="other">%d 本の新着動画</item>
     </plurals>
-    <string name="show_stream_thumbnails">動画のサムネイルを表示する</string>
-    <string name="show_stream_thumbnails_summary">新しい動画のサムネイルを表示します。有効にすると、データ容量が追加で消費されます</string>
     <string name="channel_groups">登録チャンネルのグループ</string>
     <string name="new_group">新規追加</string>
     <string name="group_name">グループ名</string>
@@ -377,9 +358,6 @@
     <string name="unlimited_search_history">無制限の検索履歴</string>
     <string name="home_tab_content">ホームタブに表示するコンテンツ</string>
     <string name="mark_as_unwatched">未視聴にする</string>
-    <string name="welcome">LibreTube へようこそ</string>
-    <string name="choose_instance">最初にインスタンスを選択！</string>
-    <string name="choose_instance_long">使用する Piped のインスタンスを以下から選択します。Piped のインスタンスは、あなたと YouTube との間の仲介役です。これらインスタンスは物理的に様々な場所にあり、国旗で示されています。物理的にあなたと近いインスタンスはそうでないより高速な可能性が高いです。インスタンスの選択はいつでも設定から変更できます。</string>
     <string name="change_playlist_description">再生リストの説明を変更</string>
     <string name="playlist_description">再生リストの説明</string>
     <string name="emptyPlaylistDescription">再生リストの説明は空にできません</string>
@@ -445,14 +423,9 @@
     <string name="sb_invalid_segment">シーンの開始または終了が無効です</string>
     <string name="sponsorblock_user_id">SponsorBlock ユーザー名</string>
     <string name="contribute_to_sponsorblock">SponsorBlock に貢献</string>
-    <string name="autoplay_playlists_summary">選択した自動再生の設定に関係なく、再生リストの次の動画を自動で再生</string>
-    <string name="playback_during_call_summary">これによりアプリはさらなる音声フォーカスを処理できなくなります</string>
     <string name="donate">寄付</string>
     <string name="music_artists">YT Musicアーティスト</string>
-    <string name="playback_during_call">通話中に再生を続ける</string>
-    <string name="autoplay_playlists">再生リストを自動再生</string>
     <string name="same_as_fullscreen">全画面用 (上記) と同じ</string>
-    <string name="remember_playback_speed">再生速度を記憶</string>
     <string name="no_fullscreen_resolution">全画面表示でない時の解像度</string>
     <string name="vote_for_segment">登録済みシーンを評価</string>
     <string name="upvote">賛成</string>
@@ -462,7 +435,6 @@
     <string name="downvote">反対</string>
     <string name="repeat_mode_all">すべてリピート</string>
     <string name="successfully_removed_from_playlist">再生リストから以下を削除しました: %1$s</string>
-    <string name="watched">再生した</string>
     <string name="finished">最後まで見た</string>
     <string name="no_segments_found">シーンがまだ未登録の動画です。</string>
     <string name="time_in_minutes">分数</string>
@@ -487,7 +459,6 @@
     <string name="enqueueing_playlist_download">以下の再生リストの動画をダウンロード %1$s</string>
     <string name="also_clear_watch_positions">再生済みの位置の記憶も消去</string>
     <string name="gestures">ジェスチャー</string>
-    <string name="behavior_when_minimized">最小化時の動作</string>
     <string name="comments_count">コメント (%1$s)</string>
     <string name="external_player">別の再生プレイヤー</string>
     <string name="show_updates">最新版を自動で確認</string>
@@ -507,7 +478,6 @@
     <string name="local_ryd_summary">以下から低評価を直接取得 https://returnyoutubedislikeapi.com</string>
     <string name="local_ryd">Return Youtube Dislikes 取得ツール</string>
     <string name="import_watch_history">視聴履歴をインポート</string>
-    <string name="audio_codecs">音声コーデック</string>
     <string name="view_count">%1$s回</string>
     <string name="dialog_play_offline_title">この動画は端末内にあります。</string>
     <string name="dialog_play_offline_body">ダウンロードフォルダにある動画を再生しますか？</string>

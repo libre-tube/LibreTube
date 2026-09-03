@@ -20,7 +20,6 @@
     <string name="already_logged_in">Olet jo kirjautunut sisään, voit kirjautua ulos tililtäsi.</string>
     <string name="login_register">Kirjaudu sisään/rekisteröidy</string>
     <string name="importsuccess">Tilattu</string>
-    <string name="downloadfailed">Lataus epäonnistui.</string>
     <string name="server_error">Valitussa palvelimessa näyttää olevan ongelma. Kokeile toista instanssia.</string>
     <string name="empty">Käyttäjätunnus ja salasana eivät voi olla tyhjiä.</string>
     <string name="notgmail">Tämä on sinun Piped-tilillesi</string>
@@ -163,7 +162,6 @@
     <string name="volume">Äänenvoimakkuus</string>
     <string name="auto">Auto</string>
     <string name="swipe_controls">Pyyhkäisy kontrollit</string>
-    <string name="defaults">Oletukset</string>
     <string name="chapters">Osiot</string>
     <string name="require_restart">Sovellus vaatii uudelleenkäynnistyksen</string>
     <string name="search_history_summary">Muista haut</string>
@@ -179,14 +177,10 @@
     <string name="start_time">Aloitusaika</string>
     <string name="hide_watched_from_feed">Piilota katsotut videot</string>
     <string name="push_channel_description">Näyttää ilmoituksen, kun uusia striimejä on saatavilla.</string>
-    <string name="unlimited">Rajoittamaton</string>
-    <string name="picture_in_picture">Kuva kuvassa</string>
     <string name="backup">Varmuuskopio</string>
     <string name="open_copied">Avaa</string>
     <string name="renamePlaylist">Nimeä uudelleen soittolista</string>
     <string name="mobile_data">Mobiilidata</string>
-    <string name="disable_proxy">Poista Piped välityspalvelin käytöstä</string>
-    <string name="disable_proxy_summary">Lataa videot ja kuvat suoraan YouTuben palvelimilta. Ota vaihtoehto käyttöön vain, jos käytät VPN:ää</string>
     <string name="navigation_bar">Navigointipalkki</string>
     <string name="most_recent">Uusin</string>
     <string name="device_info">Laitetieto</string>
@@ -209,7 +203,6 @@
     <string name="turnInternetOn">Ota Wi-Fi tai mobiilidata käyttöön yhdistääksesi internetiin.</string>
     <string name="open">Avaa…</string>
     <string name="require_restart_message">Käynnistä sovellus uudelleen käyttääksesi uusia muutoksia.</string>
-    <string name="navLabelVisibility">Nimikkeen näkyvyys</string>
     <string name="always">Aina</string>
     <string name="reset_watch_positions">Nollaa</string>
     <string name="general">Yleinen</string>
@@ -219,7 +212,6 @@
     <string name="network_wifi">Vain Wi-Fi</string>
     <string name="translate">Käännös</string>
     <string name="error_occurred">Virhe</string>
-    <string name="history_size">Historian enimmäiskoko</string>
     <string name="background_mode">Taustatila</string>
     <string name="resize_mode_fit">Sovita</string>
     <string name="backup_restore">Varmuuskopio ja palautus</string>
@@ -243,7 +235,6 @@
     <string name="no_subtitle">Ei tekstitystä</string>
     <string name="download_paused">Lataus keskeytetty</string>
     <string name="download_completed">Lataus valmis</string>
-    <string name="concurrent_downloads">Maksimi samanaikaisia latauksia</string>
     <string name="concurrent_downloads_limit_reached">Samanaikaisten latausten enimmäisraja saavutettu.</string>
     <string name="unknown">Tuntematon</string>
     <string name="resume">Jatka</string>
@@ -253,7 +244,6 @@
     <string name="auth_instances">Valitse todentamisinstanssi</string>
     <string name="github">GitHub</string>
     <string name="audio_video">Ääni ja video</string>
-    <string name="selected">Valittu</string>
     <string name="never">Ei koskaan</string>
     <string name="autoRotatePlayer">Auto-koko näyttö</string>
     <string name="autoRotatePlayer_summary">Koko näytön toisto, kun laite käännetään</string>
@@ -283,12 +273,10 @@
     <string name="add_to_queue">Lisää jonoon</string>
     <string name="misc">Sekalaiset</string>
     <string name="take_a_break">Aika pitää tauko</string>
-    <string name="no_subtitles_available">Ei tekstityksiä saatavilla</string>
     <string name="repeat_mode">Uudelleentoiston tila</string>
     <string name="resize_mode_fill">Täytä</string>
     <string name="resize_mode_zoom">Zoomaa</string>
     <string name="repeat_mode_none">Ei mitään</string>
-    <string name="maximum_image_cache">Kuva välimustin enimmäiskoko</string>
     <string name="audio_video_summary">Laatu ja formaatti</string>
     <string name="delete">Poista latauksista</string>
     <string name="wifi">Wi-Fi</string>
@@ -303,16 +291,13 @@
     <string name="queue">Jono</string>
     <string name="play_all">Toista kaikki</string>
     <string name="notification_time">Rajoita ilmoitusaikaa</string>
-    <string name="navbar_order">Järjestys</string>
     <string name="audio_track">Ääniraita</string>
     <string name="auto_quality">Auto</string>
-    <string name="limit_to_runtime">Rajoita suoritusaikaa</string>
     <string name="trends">Trendit</string>
     <string name="featured">Esillä</string>
     <string name="trending">Mikä trendaa nyt</string>
     <string name="bookmarks">Kirjanmerkit</string>
     <string name="bookmark">Kirjanmerkki</string>
-    <string name="queue_insert_related_videos">Lisää aiheeseen liittyviä videoita</string>
     <string name="brightness">Kirkkaus</string>
     <string name="swipe_controls_summary">Käytä pyyhkäisyelettä säätääksesi kirkkautta ja äänenvoimakkuutta kokoruudun tilassa</string>
     <string name="comments_disabled">Lataaja on poistanut kommentit käytöstä.</string>
@@ -325,7 +310,6 @@
     <string name="proceed">Jatka</string>
     <string name="play_latest_videos">Toista uusimmat videot</string>
     <string name="color_violet">Vaihteleva violetti</string>
-    <string name="failed_fetching_instances">Saatavilla olevia instansseja ei voitu toimittaa.</string>
     <string name="playlistUrl">Soittolistan URL-osoite</string>
     <string name="shuffle">Sekoita</string>
     <string name="add_to_bookmarks">Lisää kirjanmerkkeihin</string>
@@ -346,7 +330,6 @@
     <string name="defaultIconLight">Oletus vaalea</string>
     <string name="category">Kategoria</string>
     <string name="clear_bookmarks">Tyhjennä kirjanmerkit</string>
-    <string name="codecs">Videokoodekit</string>
     <string name="new_group">Uusi</string>
     <string name="duration">Kesto</string>
     <string name="alphabetic">Aakkosellinen</string>
@@ -375,7 +358,6 @@
     <string name="undo">Kumoa</string>
     <string name="segment">Osio</string>
     <string name="finished">Loppu</string>
-    <string name="watched">Katsottu</string>
     <string name="copy_tooltip">Kopioi</string>
     <string name="change">Muuta</string>
     <string name="default_language">Oletus</string>
@@ -419,7 +401,6 @@
     <string name="segment_type">Osion tyyppi</string>
     <string name="sponsorblock_user_id">SponsorBlock UserID</string>
     <string name="no_fullscreen_resolution">Ei-kokoruudun resoluutio</string>
-    <string name="autoplay_playlists">Toista soittolistat automaattisesti</string>
     <string name="segment_submitted">Osio syötetty</string>
     <string name="invalid_input">Epäkelpo syöttö</string>
     <string name="uptime">%.2f%% käynnissäoloaika</string>
@@ -429,7 +410,6 @@
     <string name="external_player">Ulkoinen soitin</string>
     <string name="comments_count">Kommentit (%1$s)</string>
     <string name="thumbnail_time">Pienoiskuvan aika</string>
-    <string name="audio_codecs">Äänikoodekit</string>
     <string name="view_count">%1$s katselukerta</string>
     <string name="category_exclusive_access">Rajoitettu pääsy</string>
     <string name="export_playlist">Vie soittolista</string>
@@ -449,7 +429,6 @@
     <string name="sort_channel">Kanavan nimi</string>
     <string name="fullscreen_gestures">Siirry/poistu kokoruudun eleet</string>
     <string name="go_to_video">Siirry videoon</string>
-    <string name="show_stream_thumbnails">Näytä suoratoiston pienoiskuvakkeet</string>
     <string name="unlimited_search_history">Rajoittamaton hakuhistoria</string>
     <string name="shorts_notifications">Ilmoitukset Shorts-videoista</string>
     <string name="creation_date_reversed">Luomispäivämäärä (käännetty)</string>
@@ -459,7 +438,6 @@
     <string name="export_playlists_to">Vie soittolistat kohteeseen</string>
     <string name="home_tab_content">Koti-välilehden sisältö</string>
     <string name="mark_as_unwatched">Merkitse katsomattomaksi</string>
-    <string name="welcome">Tervetuloa LibreTubeen</string>
     <string name="change_playlist_description">Muuta soittolistan kuvausta</string>
     <string name="show_search_suggestions">Näytä hakuehdotukset</string>
     <string name="sb_custom_colors">Mukautetut osion värit</string>
@@ -471,7 +449,6 @@
     <string name="tooltip_scroll_to_top">Siirry ylös</string>
     <string name="contribute_to_sponsorblock">Tue SponsorBlockia</string>
     <string name="same_as_fullscreen">Sama kuin kokoruudun tila</string>
-    <string name="remember_playback_speed">Muista toistonopeus</string>
     <string name="vote_for_segment">Äänestä osiota</string>
     <string name="start_sleep_timer">Aloita uniajastin</string>
     <string name="disable_sleep_timer">Poista uniajastin käytöstä</string>
@@ -479,7 +456,6 @@
     <string name="add_to_group">Lisää ryhmään</string>
     <string name="grid_landscape">Ruudukon sarakkeet (vaaka)</string>
     <string name="rich_caption_rendering">Rikas otteen renderöinti</string>
-    <string name="behavior_when_minimized">Käyttäytyminen pienennettynä</string>
     <string name="show_updates">Tarkista päivitykset automaattisesti</string>
     <string name="import_temp_playlist">Tuodaanko väliaikainen soittolista?</string>
     <string name="contribute_to_dearrow">Tue DeArrow\'a</string>
@@ -506,10 +482,8 @@
     <string name="unsubscribe_snackbar_message">Poistettu tilaus kanavalta %1$s</string>
     <string name="backup_creation_failed">Varmuuskopion luonti epäonnistui</string>
     <string name="auto_fullscreen_shorts">Automaattinen kokoruudun tila Shorts-videoissa</string>
-    <string name="choose_instance">Valitse instanssi ensin!</string>
     <string name="player_channel_description">Näyttää ilmoituksen toistettaessa</string>
     <string name="sb_invalid_segment">Epäkelpo osion alku tai loppu</string>
-    <string name="playback_during_call">Jatka toistoa puhelun aikana</string>
     <string name="delete_all">Kaikki tallennukset poistetaan!</string>
     <string name="local_ryd">Paikallinen Return YouTube Dislike purkaja</string>
     <string name="delete_only_watched_videos">Poista ainoastaan jo katsotut videot</string>
@@ -538,19 +512,15 @@
     <string name="rich_caption_rendering_summary">Renderöi web-kaappaukset upeammaksi kokemukseksi</string>
     <string name="local_stream_extraction_summary">Nouda suoraan videon toiston tiedot YouTubesta ilman, että käytetään Piped-sovellusta.</string>
     <string name="show_updates_summary">Tarkista päivitykset automaattisesti joka kerta, kun sovellus käynnistetään.</string>
-    <string name="autoplay_playlists_summary">Toista automaattisesti seuraava video soittolistalla, riippumatta valitun automaattitoiston asetuksista</string>
     <string name="dialog_play_offline_body">Haluaisitko toistaa videon tallennuskansiosta?</string>
     <string name="local_feed_extraction_summary">Noudetaan syöte suoraan YouTubesta. Tämä voi olla merkittävästi hitaampaa.</string>
-    <string name="show_stream_thumbnails_summary">Näytä pienoiskuvat uusissa suoratoistoissa. Tämän salliminen käyttää enemmän dataa</string>
     <string name="dearrow_summary">Näytä enemmän tarkempia sekä vähemmän sensaatiomaisia otsikoita ja pienoiskuvakkeita. Tämä pidentää latausaikoja</string>
     <string name="enqueue_playlist_description">Näytä ilmoitus, kun lisätään videoita soittolistaan jonoon ladattavaksi.</string>
     <string name="download_playlist_note">Valitse korkein äänen/videon laatu tallennuksille. Tekstitykset tallennetaan vain jos mahdollista.</string>
-    <string name="playback_during_call_summary">Huomioi, että tämä vaikuttaa sovellukseen siten, että se ei käsittele jatkossa äänen fokusta</string>
     <string name="import_temp_playlist_summary">Haluatko luoda uuden soittolistan nimellä \'%1$s\'? Soittolista sisältää %2$d videota.</string>
     <string name="external_download_provider_summary">Syötä videotallennussovelluksen paketin nimi. Jätä tyhjäksi käyttääksesi LibreTuben sisäänrakennettua tallentajaa.</string>
     <string name="category_highlight_summary">Voi olla mainostettu otsikko, pienoiskuvake tai kaikkein mielenkiintoisin osa videosta. Voit ohittaa sen napauttamalla sitä kappaleosiossa</string>
     <string name="category_hook_summary">Narratiivisia koukkuja varten, jotka kaappaavat katsojan huomion (usein aivan videon alussa) kiusoittelemalla tai kuvailemalla tapahtumia, jotka tapahtuvat myöhemmin samalla videolla tai sarjan myöhemmissa jaksoissa</string>
-    <string name="choose_instance_long">Valitse Piped-instanssi alempaa. Piped-instanssi toimii välikätenä sinun ja YouTuben välillä. Nämä instanssin sijaitsevat fyysisesti eri sijainneissa - merkittynä maakohtaisin lipuin. Sinua lähempänä instanssit ovat todennäköisesti nopeampia kuin muut. Voit vaihtaa käyttämääsi instanssia asetuksista milloin tahansa.</string>
     <string name="donate">Lahjoita</string>
     <string name="music_artists">YT Music Artistit</string>
     <string name="category_highlight">Näytä videon kohokohta</string>

@@ -31,7 +31,6 @@
     <string name="app_theme">تھیم</string>
     <string name="unknown_error">نیٹ ورک کی خرابی۔</string>
     <string name="error">کچھ غلط ہو گیا.</string>
-    <string name="downloadfailed">ڈاؤن لوڈ ناکام ہو گیا۔</string>
     <string name="import_from_yt">سبسکرپشن درآمد کریں</string>
     <string name="server_error">سرور میں ایک مسئلہ ہے۔ دوسری انسٹنش آزمائیں؟</string>
     <string name="import_from_yt_summary">یوٹیوب یا نیو پائپ سے</string>
@@ -131,7 +130,6 @@
     <string name="time">وقت</string>
     <string name="start_time">وقت آغاز</string>
     <string name="end_time">آخر وقت</string>
-    <string name="navbar_order">ترتیب</string>
     <string name="audio_track">آڈیو ٹریک</string>
     <string name="trending">اب کیا ٹرینڈ ہو رہا ہے۔</string>
     <string name="bookmarks">بک مارکس</string>
@@ -174,7 +172,6 @@
     <string name="video">ویڈیو</string>
     <string name="downloading">ڈاؤن لوڈ ہو رہا ہے…</string>
     <string name="download_paused">ڈاؤن لوڈ موقوف ہے</string>
-    <string name="concurrent_downloads">زیادہ سے زیادہ ہم آہنگی ڈاؤن لوڈز</string>
     <string name="concurrent_downloads_limit_reached">زیادہ سے زیادہ ہم آہنگی ڈاؤن لوڈ کی حد تک پہنچ گئی۔</string>
     <string name="unknown">نامعلوم</string>
     <string name="reset_message">تمام سیٹنگز ری سیٹ کریں اور لاگ آؤٹ کریں؟</string>
@@ -215,9 +212,7 @@
     <string name="open">کھولیں…</string>
     <string name="chapters">ابواب</string>
     <string name="require_restart_message">نئی تبدیلیاں استعمال کرنے کے لیے ایپ کو دوبارہ شروع کریں۔</string>
-    <string name="navLabelVisibility">لیبل کی مرئیت</string>
     <string name="always">ہمیشہ</string>
-    <string name="selected">منتخب شدہ</string>
     <string name="never">کبھی نہیں</string>
     <string name="autoRotatePlayer">خودکار فل سکرین</string>
     <string name="autoRotatePlayer_summary">جب آلہ موڑ جاتا ہے تو پوری اسکرین پلے بیک</string>

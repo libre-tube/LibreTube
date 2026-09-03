@@ -136,9 +136,7 @@
     <string name="chapters">Поглавља</string>
     <string name="require_restart">Потребан је рестарт апликације</string>
     <string name="require_restart_message">Рестартујте апликацију да бисте користили нове промене.</string>
-    <string name="navLabelVisibility">Видљивост ознаке</string>
     <string name="always">Увек</string>
-    <string name="selected">Изабрано</string>
     <string name="never">Никада</string>
     <string name="autoRotatePlayer">Аутоматски преко целог екрана</string>
     <string name="autoRotatePlayer_summary">Репродукција преко целог екрана, када се уређај окрене</string>
@@ -156,7 +154,6 @@
     <string name="unsubscribe">Прекини праћење</string>
     <string name="download">Преузми</string>
     <string name="save">Сачувај</string>
-    <string name="downloadfailed">Преузимање није успело.</string>
     <string name="notgmail">Ово је за Piped налог</string>
     <string name="emptyPlaylistName">Назив плејлисте не може бити празан</string>
     <string name="playlistCreated">Плејлиста је направљена.</string>
@@ -218,9 +215,7 @@
     <string name="worst_quality">Најгори</string>
     <string name="share_with_time">Дели са временским кодом</string>
     <string name="export_subscriptions">Изези праћења</string>
-    <string name="history_size">Максимална величина историје</string>
     <string name="background_mode">Позадински режим</string>
-    <string name="unlimited">Неограничено</string>
     <string name="add_to_queue">Додај у редослед</string>
     <string name="misc">Остало</string>
     <string name="take_a_break">Време је за паузу</string>
@@ -230,12 +225,9 @@
     <string name="repeat_mode_none">Ниједно</string>
     <string name="repeat_mode_current">Тренутно</string>
     <string name="resize_mode_fit">Уклопљено</string>
-    <string name="no_subtitles_available">Нема доступних титлова</string>
     <string name="resize_mode_fill">Попуњено</string>
     <string name="backup_restore">Прављење резервних копија и враћање</string>
     <string name="backup">Резервна копија</string>
-    <string name="picture_in_picture">Слика у слици</string>
-    <string name="maximum_image_cache">Максимална величина кеша слике</string>
     <string name="player_resize_mode">Режим промене величине</string>
     <string name="copied_to_clipboard">Копирано у привремену меморију</string>
     <string name="open_copied">Отвори</string>
@@ -269,13 +261,11 @@
     <string name="end_time">Завршно време</string>
     <string name="notification_time">Ограничи време обавештења</string>
     <string name="notification_time_summary">Ограничите временски период у коме се приказују обавештења о стриму</string>
-    <string name="navbar_order">Редослед</string>
     <string name="layout">Изглед</string>
     <string name="audio_track">Аудио трака</string>
     <string name="livestreams">Стримови уживо</string>
     <string name="defaultIconLight">Подразумевано светло</string>
     <string name="auto_quality">Аутоматски</string>
-    <string name="limit_to_runtime">Ограничи на време рада</string>
     <string name="trends">Трендови</string>
     <string name="featured">Истакнуто</string>
     <string name="trending">Шта је сада у тренду</string>
@@ -288,13 +278,11 @@
     <string name="auto">Аутоматски</string>
     <string name="swipe_controls">Контроле превлачења</string>
     <string name="swipe_controls_summary">Превуците да бисте подесили осветљеност и јачину звука док сте у режиму целог екрана</string>
-    <string name="defaults">Подразумевано</string>
     <string name="captions_size">Величина титлова</string>
     <string name="pause">Паузирај</string>
     <string name="rewind">Премотај уназад</string>
     <string name="double_tap_seek">Додирни двапут за премотавање</string>
     <string name="double_tap_seek_summary">Додирните двапут лево или десно да премотате уназад или унапред позицију плејера</string>
-    <string name="failed_fetching_instances">Није могуће преузети доступне инстанце.</string>
     <string name="nothing_selected">Ништа није изабрано!</string>
     <string name="pinch_control">Контрола штипања</string>
     <string name="export_playlists">Извези плејлисте</string>
@@ -304,7 +292,6 @@
     <string name="no_subtitle">Нема титла</string>
     <string name="download_paused">Преузимање је паузирано</string>
     <string name="download_completed">Преузимање је завршено</string>
-    <string name="concurrent_downloads">Максималан број истовремених преузимања</string>
     <string name="no_comments_available">Овај видео снимак нема коментара.</string>
     <string name="theme_monochrome">Минималистички монохром</string>
     <string name="all_caught_up_summary">Видели сте све нове видео снимке</string>
@@ -326,7 +313,6 @@
     <string name="unknown">Непознато</string>
     <string name="resume">Настави</string>
     <string name="comments_disabled">Аутор је онемогућио коментаре.</string>
-    <string name="queue_insert_related_videos">Убацивање сродних видео снимака</string>
     <string name="clear_bookmarks">Очисти обележиваче</string>
     <string name="shuffle">Мешање</string>
     <string name="remove_bookmark">Уклони обележивач</string>
@@ -339,7 +325,6 @@
     <string name="replies">Одговори</string>
     <string name="unsupported_file_format">Неподржан формат фајла: %1$s</string>
     <string name="mark_as_watched">Означи као одгледано</string>
-    <string name="codecs">Видео кодеци</string>
     <string name="autoplay_countdown">Аутоматско одбројавање</string>
     <string name="stats_for_nerds">Статистика за зналце</string>
     <string name="video_id">ID видео снимка</string>
@@ -348,8 +333,6 @@
     <string name="autoplay_countdown_summary">Прикажите одбројавање 5с. пре аутоматског пуштања следећег видео снимка</string>
     <string name="uploaderAndVideoCount">%1$s • %2$d видео снимака</string>
     <string name="subscriberAndVideoCounts">%1$s пратилаца • %2$d видео снимака</string>
-    <string name="disable_proxy">Онемогући Piped прокси</string>
-    <string name="disable_proxy_summary">Учитавајте видео снимке и слике директно са YouTube сервера. Омогућите опцију само ако увек користите VPN!</string>
     <string name="auto_fullscreen_shorts">Аутоматски преко целог екрана за кратке видео снимке</string>
     <string name="new_group">Ново</string>
     <string name="group_name">Назив групе</string>
@@ -358,9 +341,7 @@
     <string name="play_automatically_summary">Почните да пуштате видео снимак аутоматски када изаберете</string>
     <string name="category_highlight">Прикажи истакнути део видео снимка</string>
     <string name="category_highlight_summary">Може бити рекламни наслов, сличица или најзанимљивији део видео снимка. Можете прескочити на њега тако што ћете га додирнути у сегменту за поглавља</string>
-    <string name="show_stream_thumbnails">Прикажи сличице стрима</string>
     <string name="stop">Заустави</string>
-    <string name="show_stream_thumbnails_summary">Прикажите сличице нових стримова. Ако ово омогућите, потрошиће се додатни подаци</string>
     <string name="donate">Донација</string>
     <string name="music_artists">YT Music извођачи</string>
     <string name="emptyPlaylistDescription">Опис плејлисте не може бити празан</string>
@@ -378,7 +359,6 @@
         <item quantity="few">%d нова стрима</item>
         <item quantity="other">%d нових стримова</item>
     </plurals>
-    <string name="welcome">Добро дошли у LibreTube</string>
     <string name="import_playlists_from">Увоз плејлиста из</string>
     <string name="tooltip_minimize">Минимизирај</string>
     <string name="sb_create_segment">Направи сегмент</string>
@@ -419,9 +399,7 @@
     <string name="go_to_video">Иди на видео снимак</string>
     <string name="tooltip_sponsorblock">Укључи SponsorBlock</string>
     <string name="automatic_once">Аутоматски једном</string>
-    <string name="choose_instance">Прво изаберите инстанцу!</string>
     <string name="manual">Ручно</string>
-    <string name="playback_during_call_summary">Имајте на уму да ово такође утиче на то да апликација више не управља било којом врстом фокуса аудио снимка</string>
     <string name="sb_custom_colors_summary">Укључује прилагођене боје сегмента за SponsorBlock сегменте</string>
     <string name="tooltip_reverse">Обрнуто</string>
     <string name="tooltip_create_playlist">Направи плејлисту</string>
@@ -432,13 +410,11 @@
     <string name="fullscreen_gestures">Покрети за улазак/излазак из целог екрана</string>
     <string name="creation_date">Датум прављења</string>
     <string name="unknown_audio_track_type">Непознати тип аудио снимка</string>
-    <string name="choose_instance_long">Изаберите Piped инстанцу коју ћете користити. Piped инстанца ће деловати као посредник између вас и YouTube-а. Ове инстанце се налазе на различитим физичким локацијама – означене су заставом те земље. Инстанце које су вам физичке ближе вероватно су брже од инстанца које нису. Инстанцу коју користите можете променити у подешавањима у било ком тренутку.</string>
     <string name="group_name_error_empty">Унесите назив</string>
     <string name="tooltip_edit_groups">Измени групе</string>
     <string name="chapters_videoHighlight">Истакнути део видео снимка</string>
     <string name="creation_date_reversed">Датум прављења (обрнуто)</string>
     <string name="shorts_notifications">Обавештења за Shorts</string>
-    <string name="playback_during_call">Настави пуштање током телефонског позива</string>
     <string name="screen_orientation">Оријентација екрана</string>
     <string name="export_playlists_to">Извоз плејлиста у</string>
     <string name="duration_span">Трајање: %1$s</string>
@@ -453,9 +429,6 @@
     <string name="color">Боја</string>
     <string name="show_search_suggestions">Прикажи предлоге за претрагу</string>
     <string name="duration_reversed">Трајање (обрнуто)</string>
-    <string name="autoplay_playlists_summary">Аутоматски пуштајте следећи видео снимак на плејлистама, без обзира на изабрано подешавање аутоматског пуштања</string>
-    <string name="autoplay_playlists">Аутоматски пусти плејлисте</string>
-    <string name="remember_playback_speed">Запамти брзину репродукције</string>
     <string name="vote_for_segment">Гласај за сегмент</string>
     <string name="upvote">Гласај за</string>
     <string name="segment">Сегмент</string>
@@ -464,7 +437,6 @@
     <string name="downvote">Гласај против</string>
     <string name="repeat_mode_all">Понављај све</string>
     <string name="successfully_removed_from_playlist">Успешно уклоњено са плејлисте: „%1$s“.</string>
-    <string name="watched">Одгледано</string>
     <string name="finished">Завршено</string>
     <string name="no_segments_found">Још увек нема сегмената за овај видео снимак.</string>
     <string name="time_in_minutes">Време у минутима</string>
@@ -488,7 +460,6 @@
     <string name="enqueueing_playlist_download">Стављање видео снимака у редослед за преузимање плејлисте %1$s</string>
     <string name="download_playlist_note">Изаберите максималан квалитет аудио/видео снимка за преузимање. Наслови ће се преузимати само ако су доступни.</string>
     <string name="also_clear_watch_positions">Такође очисти позиције гледања</string>
-    <string name="behavior_when_minimized">Понашање када је минимизирано</string>
     <string name="gestures">Покрети</string>
     <string name="comments_count">Коментари (%1$s)</string>
     <string name="external_player">Спољни плејер</string>
@@ -509,7 +480,6 @@
     <string name="local_ryd">Локални издвајач Return YouTube Dislike</string>
     <string name="local_ryd_summary">Директно прикупљање информација о несвиђањима с https://returnyoutubedislikeapi.com</string>
     <string name="import_watch_history">Увоз историје гледања</string>
-    <string name="audio_codecs">Аудио кодеци</string>
     <string name="view_count">%1$s прегледа</string>
     <string name="dialog_play_offline_title">Доступна је локална верзија овог видео снимка.</string>
     <string name="dialog_play_offline_body">Желите ли да пустите видео снимак из фолдера преузимања?</string>

@@ -15,7 +15,6 @@
     <string name="instances">Odaberite…</string>
     <string name="region">Regija</string>
     <string name="importsuccess">Pretplaćen</string>
-    <string name="downloadfailed">Preuzimanje nije uspjelo.</string>
     <string name="server_error">Čini se da postoji problem s odabranim poslužiteljem. Pokušajte s drugom instancom.</string>
     <string name="unknown_error">Pogreška mreže.</string>
     <string name="empty">Morate unijeti korisničko ime i zaporku.</string>
@@ -147,7 +146,6 @@
     <string name="downloading">Preuzimanje…</string>
     <string name="download_paused">Preuzimanje pauzirano</string>
     <string name="download_completed">Preuzimanje dovršeno</string>
-    <string name="concurrent_downloads">Maksimalan broj istovremenih preuzimanja</string>
     <string name="concurrent_downloads_limit_reached">Dosegnuto je ograničenje maksimalnog broja istovremenih preuzimanja.</string>
     <string name="unknown">Nepoznato</string>
     <string name="resume">Nastaviti</string>
@@ -178,9 +176,7 @@
     <string name="chapters">Poglavlja</string>
     <string name="require_restart">Potrebno je ponovno pokrenuti aplikaciju</string>
     <string name="require_restart_message">Ponovno pokrenite aplikaciju kako biste koristili nove promjene.</string>
-    <string name="navLabelVisibility">Vidljivost oznaka</string>
     <string name="always">Uvijek</string>
-    <string name="selected">Odabrano</string>
     <string name="never">Nikad</string>
     <string name="autoRotatePlayer">Automatski prikaz preko cijelog zaslona</string>
     <string name="autoRotatePlayer_summary">Reprodukcija preko cijelog zaslona pri zakretanju uređaja</string>

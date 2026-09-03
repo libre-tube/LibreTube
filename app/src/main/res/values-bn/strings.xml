@@ -150,7 +150,6 @@
     <string name="region">এলাকা</string>
     <string name="login_register">লগ ইন/নিবন্ধন</string>
     <string name="importsuccess">সাবস্ক্রাইব করা হয়েছে</string>
-    <string name="downloadfailed">ডাউনলোড ব্যর্থ হয়েছে।</string>
     <string name="subscriptions">সাবস্ক্রিপশনগুলো</string>
     <string name="login">লগ ইন</string>
     <string name="customInstance">কাস্টম</string>
@@ -170,7 +169,6 @@
     <string name="auth_instances">অথেনটিকেশনের জন্য ইন্সটেন্স বাছাই করুন</string>
     <string name="github">গিটহাব</string>
     <string name="audio_video">অডিও এবং ভিডিও</string>
-    <string name="selected">বাছাইকৃত</string>
     <string name="require_restart_message">এই পরিবর্তনটি কার্যকর করতে হলে রিস্টার্ট করুন।</string>
     <string name="chapters">চ্যাপ্টার</string>
     <string name="require_restart">অ্যাপের রিস্টার্ট প্রয়োজন</string>
@@ -201,7 +199,6 @@
     <string name="general_summary">ভাষা এবং এলাকা</string>
     <string name="required_network">নেটওয়ার্ক প্রয়োজন</string>
     <string name="take_a_break">বিরতি নেয়ার সময় চলে এসেছে</string>
-    <string name="no_subtitles_available">কোনো সাবটাইটেল পাওয়া যায় নি</string>
     <string name="resize_mode_fit">ফিট</string>
     <string name="resize_mode_fill">ফিল</string>
     <string name="repeat_mode_none">নাই</string>
@@ -213,13 +210,9 @@
     <string name="none">None</string>
     <string name="playerAudioQuality">অডিও কোয়ালিটি</string>
     <string name="export_subscriptions">সাবস্ক্রিপশনগুলো এক্সপোর্ট করুন</string>
-    <string name="history_size">ইতিহাসের সর্বোচ্চ আকার</string>
-    <string name="unlimited">অসীম</string>
     <string name="add_to_queue">কিউতে যোগ করুন</string>
     <string name="backup_restore">ব্যাকআপ এবং পুনরুদ্ধার</string>
     <string name="backup">ব্যাকআপ</string>
-    <string name="picture_in_picture">ছবির মধ্যে ছবি</string>
-    <string name="navLabelVisibility">লেবেল ভিজিবিলিটি</string>
     <string name="autoRotatePlayer_summary">ডিভাইস ঘোরালে ফুলস্ক্রিণ প্লেব্যাক</string>
     <string name="watch_history_summary">দেখা ভিডিওগুলোতে ডিভাইসে ট্র্যাক রাখুন</string>
     <string name="history_summary">দেখা এবং সার্চ হিস্ট্রি</string>
@@ -242,7 +235,6 @@
     <string name="skip_segment">অংশটি স্কিপ করুন</string>
     <string name="device_info">ডিভাইসের তথ্য</string>
     <string name="yt_shorts">শর্টস</string>
-    <string name="maximum_image_cache">সর্বোচ্চ ছবির ক্যাশ সাইজ</string>
     <string name="copied_to_clipboard">ক্লিপবোর্ডে কপি করা হয়েছে</string>
     <string name="open_copied">খুলুন</string>
     <string name="audio_video_summary">মান এবং ফর্ম্যাট</string>
@@ -274,21 +266,17 @@
     <string name="layout">লেয়াউট</string>
     <string name="audio_track">অডিও ট্র্যাক</string>
     <string name="auto_quality">স্বয়ংক্রিয়</string>
-    <string name="limit_to_runtime">রানটাইম লিমিট</string>
     <string name="trends">জনপ্রিয়গুলো</string>
     <string name="featured">বৈশিষ্ট্যযুক্ত</string>
     <string name="trending">এখন যা যা জনপ্রিয়</string>
     <string name="local_playlists">স্থানীয় প্লেলিস্ট</string>
-    <string name="navbar_order">ক্রম</string>
     <string name="username_email">ই-মেইল ঠিকানা প্রস্তাবিত নয়।</string>
     <string name="exportsuccess">রপ্তানি করা।</string>
-    <string name="queue_insert_related_videos">সম্পর্কিত ভিডিও ঢোকান</string>
     <string name="bookmarks">বুকমার্কগুলো</string>
     <string name="bookmark">বুকমার্ক</string>
     <string name="clear_bookmarks">বুকমার্ক মুছে দিন</string>
     <string name="replies">রিপ্লাইগুলা</string>
     <string name="download_completed">ডাউনলোড শেষ হয়েছে</string>
-    <string name="concurrent_downloads">সর্বোচ্চ সমান্তরাল ডাউনলোড</string>
     <string name="no_subtitle">সাবটাইটেল নেই</string>
     <string name="download_paused">ডাউনলোড থামানো আছে</string>
     <string name="unknown">অজানা</string>
@@ -299,7 +287,6 @@
     <string name="all_caught_up_summary">আপনি সকল নতুন ভিডিও দেখে ফেলেছেন</string>
     <string name="app_backup">অ্যাপ ব্যাক-আপ</string>
     <string name="pinch_control">পিচ কন্ট্রোল</string>
-    <string name="defaults">ডিফল্টস</string>
     <string name="comments_disabled">আপলোডারের দ্বারা মন্তব্য বন্ধ রাখা হয়েছে।</string>
     <string name="theme_monochrome">মিনিমালিস্টিক মনোক্রোম</string>
     <string name="captions_size">ক্যাপশনের আকার</string>
@@ -329,8 +316,6 @@
     <string name="uploaderAndVideoCount">%1$s • %2$dটি ভিডিও</string>
     <string name="subscriberAndVideoCounts">%1$s জন‌ সাবস্ক্রাইবার • %2$dটি ভিডিও</string>
     <string name="normal_views">%1$s বার দেখা হয়েছে %2$s</string>
-    <string name="show_stream_thumbnails">থাম্বনেইলগুলো দেখান</string>
-    <string name="show_stream_thumbnails_summary">নতুন স্ট্রিমগুলোর জন্য থাম্বনেইল প্রদর্শন করুন। এই অপশনটা চালু করা হলে অতিরিক্ত ডাটা খরচ হবে</string>
     <string name="best_quality">সেরা</string>
     <string name="donate">দান করুন</string>
     <string name="pip">PiP</string>
@@ -381,7 +366,6 @@
     <string name="tooltip_scroll_to_top">"উপরে  স্ক্রল  করুন"</string>
     <string name="also_clear_watch_positions">দেখার অবস্থান পরিষ্কার করুন</string>
     <string name="import_temp_playlist">অস্থায়ী প্লেলিস্ট আমদানি করবেন?</string>
-    <string name="autoplay_playlists_summary">নির্বাচিত অটোপ্লে সেটিং নির্বিশেষে প্লেলিস্টে পরবর্তী ভিডিও স্বয়ংক্রিয়ভাবে চালান</string>
     <string name="swipe_controls">সোয়াইপ নিয়ন্ত্রণ</string>
     <string name="swipe_controls_summary">ফুলস্ক্রিন মোডে থাকাকালীন উজ্জ্বলতা এবং ভলিউম সামঞ্জস্য করতে সোয়াইপ করুন</string>
     <plurals name="channel_new_streams">
