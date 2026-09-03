@@ -22,7 +22,6 @@
     <string name="already_logged_in">لقد سجلت دخولك بالفعل، يمكنك تسجيل الخروج من حسابك.</string>
     <string name="region">المنطقة</string>
     <string name="importsuccess">مشترك</string>
-    <string name="downloadfailed">فشل التنزيل.</string>
     <string name="import_from_yt">استيراد الاشتراكات</string>
     <string name="app_theme">سمة التطبيق</string>
     <string name="empty">لا يمكن أن يكون اسم المستخدم وكلمة المرور فارغين.</string>
@@ -174,9 +173,7 @@
     <string name="chapters">الفصول</string>
     <string name="require_restart_message">أعد تشغيل التطبيق لاستخدام التغييرات الجديدة.</string>
     <string name="require_restart">إعادة تشغيل التطبيق مطلوبة</string>
-    <string name="navLabelVisibility">رؤية الملصق</string>
     <string name="always">دائماً</string>
-    <string name="selected">المحدد</string>
     <string name="never">أبداً</string>
     <string name="autoRotatePlayer">ملء الشاشة تلقائيا</string>
     <string name="autoRotatePlayer_summary">التشغيل بملء الشاشة عند تدوير الجهاز</string>
@@ -218,8 +215,6 @@
     <string name="copied">نُسخ</string>
     <string name="share_with_time">شارك مع رمز الوقت</string>
     <string name="export_subscriptions">تصدير الاشتراكات</string>
-    <string name="history_size">الحد الأقصى لحجم السجل</string>
-    <string name="unlimited">غير محدود</string>
     <string name="background_mode">وضع الخلفية</string>
     <string name="add_to_queue">أضف إلى قائمة الانتظار</string>
     <string name="misc">متفرقات</string>
@@ -231,13 +226,10 @@
     <string name="repeat_mode_none">بلا</string>
     <string name="repeat_mode">وضع التكرار</string>
     <string name="resize_mode_fit">ملاءمة</string>
-    <string name="no_subtitles_available">لا ترجمة متوفرة</string>
     <string name="backup_restore">النسخ الاحتياطي والاستعادة</string>
     <string name="backup">نسخ احتياطي</string>
-    <string name="picture_in_picture">صورة داخل صورة</string>
     <string name="player_resize_mode">وضع تغيير الحجم</string>
     <string name="copied_to_clipboard">نُسخت إلى الحافظة</string>
-    <string name="maximum_image_cache">الحد الأقصى لحجم ذاكرة التخزين المؤقت للصور</string>
     <string name="open_copied">فتح</string>
     <string name="device_info">معلومات الجهاز</string>
     <string name="audio_video_summary">الجودة والشكل</string>
@@ -271,11 +263,9 @@
     <string name="end_time">وقت الانتهاء</string>
     <string name="start_time">وقت البدء</string>
     <string name="notification_time">تقييد وقت الإشعار</string>
-    <string name="navbar_order">ترتيب</string>
     <string name="layout">التَخطِيط</string>
     <string name="audio_track">مسار صوتي</string>
     <string name="auto_quality">تلقائي</string>
-    <string name="limit_to_runtime">الحد من وقت التشغيل</string>
     <string name="trends">المتصدرة</string>
     <string name="featured">مُختارة</string>
     <string name="trending">ما هو الشائع الآن</string>
@@ -283,12 +273,10 @@
     <string name="bookmark">الإشارة المرجعية</string>
     <string name="clear_bookmarks">امحُ الإشارات المرجعية</string>
     <string name="local_playlists">قوائم التشغيل المحلية</string>
-    <string name="queue_insert_related_videos">إدراج مقاطع فيديو ذات صلة</string>
     <string name="brightness">السطوع</string>
     <string name="volume">مستوى الصوت</string>
     <string name="auto">تلقائي</string>
     <string name="swipe_controls">عناصر التحكم في السحب</string>
-    <string name="defaults">الإفتراضي</string>
     <string name="swipe_controls_summary">اسحب لضبط السطوع ومستوى الصوت أثناء وجودك في وضع ملء الشاشة</string>
     <string name="no_comments_available">هذا الفيديو ليس له تعليقات.</string>
     <string name="comments_disabled">التعليقات معطلة من قبل القائم بالتحميل.</string>
@@ -311,7 +299,6 @@
     <string name="play_latest_videos">تشغيل أحدث مقاطع الفيديو</string>
     <string name="nothing_selected">لا شيء محدد!</string>
     <string name="color_violet">بنفسجي</string>
-    <string name="failed_fetching_instances">تعذر جلب النُسَخ المتاحة.</string>
     <string name="hide_watched_from_feed">أخفِ مقاطع الفيديو التي شاهدتها بالفعل</string>
     <string name="playlistUrl">عنوان URL لقائمة التشغيل</string>
     <string name="shuffle">خلط</string>
@@ -327,7 +314,6 @@
     <string name="no_subtitle">لا توجد ترجمة</string>
     <string name="download_paused">إيقاف التنزيل مؤقتًا</string>
     <string name="download_completed">اكتمل التنزيل</string>
-    <string name="concurrent_downloads">أقصى عدد من التنزيلات المتزامنة</string>
     <string name="concurrent_downloads_limit_reached">وصل إلى الحد الأقصى من التنزيلات المتزامنة.</string>
     <string name="unknown">غير معروف</string>
     <string name="resume">استئناف</string>
@@ -336,7 +322,6 @@
     <string name="help">التعليمات</string>
     <string name="faq">الأسئلة المتداولة</string>
     <string name="replies">الردود</string>
-    <string name="codecs">مرمازات الفيديو</string>
     <string name="unsupported_file_format">تنسيق الملف غير المدعوم: %1$s</string>
     <string name="mark_as_watched">علّم كفيديو شاهدته</string>
     <string name="category">الفئة</string>
@@ -348,8 +333,6 @@
     <string name="autoplay_countdown_summary">أظهر العد التنازلي 5 ثوانٍ قبل التشغيل التلقائي للفيديو التالي</string>
     <string name="subscriberAndVideoCounts">مشتركون %1$s • فيديوهات %2$d</string>
     <string name="uploaderAndVideoCount">%1$s • %2$d مقاطع فيديو</string>
-    <string name="disable_proxy">تعطيل وكيل Piped</string>
-    <string name="disable_proxy_summary">تجهيز الفيديو والصورة بشكل مباشر من خوادم يوتيوب فعِّل هذا الخيار فقط إذا كنت تستخدم الشبكات الافتراضية الخاصة (VPN) بشكل دائم</string>
     <string name="auto_fullscreen_shorts">ملء الشاشة لمقاطع القصيرة</string>
     <string name="new_group">جديد</string>
     <string name="group_name">أسم المجموعة</string>
@@ -366,8 +349,6 @@
         <item quantity="many">%d تدفقات جديدة</item>
         <item quantity="other">%d تدفقات جديدة</item>
     </plurals>
-    <string name="show_stream_thumbnails">إظهار الصور المصغرة للبث</string>
-    <string name="show_stream_thumbnails_summary">يعرض صورة مصغرة من تيار جديد. تفعيل هذه الميزة سوف تستهلك بيانات إضافية</string>
     <string name="unlimited_search_history">سجل بحث غير محدود</string>
     <string name="duration">المدة</string>
     <string name="duration_reversed">المدة (معكوسة)</string>
@@ -382,9 +363,6 @@
     <string name="export_playlists_to">تصدير قوائم التشغيل إلى</string>
     <string name="home_tab_content">محتوى تبويب \"الصفحة الرئيسية\"</string>
     <string name="mark_as_unwatched">علّم لم اشاهده</string>
-    <string name="welcome">مرحبا بك في ليبري تيوب</string>
-    <string name="choose_instance">يُرجى اختيار نُسْخَة أولاً!</string>
-    <string name="choose_instance_long">يُرجى اختيار خادم Piped للاستخدامه من القائمة أدناه سيعمل هذا الخادم كوسيط بينك وبين YouTube تقع هذه الخوادم في مواقع جغرافية مختلفة موضّحة بعلم الدولة/الدول الخاصة بها عادةً ما تكون الخوادم الأقرب إلى موقعك الفعلي أسرع من الخوادم البعيدة يمكنك تغيير الخادم الذي تستخدمه في أي وقت من خلال الإعدادات.</string>
     <string name="emptyPlaylistDescription">لا يمكن أن يكون وصف قائمة التشغيل فارغا</string>
     <string name="playlist_description">وصف قائمة التشغيل</string>
     <string name="change_playlist_description">تغيير وصف قائمة التشغيل</string>
@@ -454,11 +432,6 @@
     <string name="music_artists">YT الموسيقى: الفنانين</string>
     <string name="no_fullscreen_resolution">لا توجد دقة لملء الشاشة</string>
     <string name="same_as_fullscreen">مطابق لإعداد الشاشة الكاملة</string>
-    <string name="playback_during_call_summary">لاحظ أن هذا يؤثر أيضًا على التطبيق بحيث لا يتعامل مع أي نوع من التركيز الصوتي بعد الآن</string>
-    <string name="playback_during_call">متابعة التشغيل أثناء المكالمة</string>
-    <string name="autoplay_playlists_summary">شغِّل الفيديو التالي تلقائيًا في قوائم التشغيل بغض النظر عن إعداد التشغيل التلقائي المحدد</string>
-    <string name="autoplay_playlists">شغّل قوائم التشغيل تلقائيًا</string>
-    <string name="remember_playback_speed">تذكر سرعة التشغيل</string>
     <string name="vote_for_segment">التصويت للجزء</string>
     <string name="upvote">فوق</string>
     <string name="segment">الجزء</string>
@@ -467,7 +440,6 @@
     <string name="downvote">أسفل</string>
     <string name="repeat_mode_all">تكرار الكل</string>
     <string name="successfully_removed_from_playlist">أُزيل \"%1$s\" من قائمة التشغيل بنجاح.</string>
-    <string name="watched">شاهدت</string>
     <string name="finished">انتهى</string>
     <string name="no_segments_found">لا توجد أجزاء لهذا الفيديو بعد.</string>
     <string name="time_in_minutes">الوقت بالدقائق</string>
@@ -492,7 +464,6 @@
     <string name="delete_all">ستُحذف جميع التنزيلات!</string>
     <string name="also_clear_watch_positions">امسح أيضًا مواضع المشاهدة</string>
     <string name="gestures">الإيماءات</string>
-    <string name="behavior_when_minimized">السلوك عند التصغير</string>
     <string name="comments_count">التعليقات (%1$s)</string>
     <string name="external_player">مشغل خارجي</string>
     <string name="show_updates">التحقق من التحديثات تلقائيا</string>
@@ -512,7 +483,6 @@
     <string name="local_ryd">مستخرج بيانات عدم الإعجاب</string>
     <string name="local_ryd_summary">جلب معلومات عدم الإعجاب مباشرة من https://returnyoutubedislikeapi.com</string>
     <string name="import_watch_history">استيراد سجل المشاهدة</string>
-    <string name="audio_codecs">مرمازات الصوت</string>
     <string name="view_count">مشاهدات %1$s</string>
     <string name="dialog_play_offline_title">تتوفر نُسخة محلية من هذا الفيديو.</string>
     <string name="dialog_play_offline_body">هل ترغب في تشغيل الفيديو من مجلد التنزيل ؟</string>

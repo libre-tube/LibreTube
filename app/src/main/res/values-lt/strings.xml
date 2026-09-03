@@ -94,7 +94,6 @@
     <string name="chapters">Skirsniai</string>
     <string name="require_restart">Būtina iš naujo paleisti programėlę</string>
     <string name="require_restart_message">Iš naujo paleiskite programėlę, kad galėtumėte naudoti naujus pakeitimus.</string>
-    <string name="navLabelVisibility">Etiketės matomumas</string>
     <string name="open">Atidaryti…</string>
     <string name="never">Niekada</string>
     <string name="autoRotatePlayer">Automatinis viso ekrano režimas</string>
@@ -111,8 +110,6 @@
     <string name="notify_new_streams">Pranešimai apie naujas transliacijas</string>
     <string name="irreversible">Ar tikrai\? To nebus galima atšaukti!</string>
     <string name="export_subscriptions">Eksportuoti prenumeratas</string>
-    <string name="history_size">Didžiausias istorijos dydis</string>
-    <string name="unlimited">Neribotas</string>
     <string name="background_mode">Fono režimas</string>
     <string name="add_to_queue">Įtraukti į eilę</string>
     <string name="misc">Įvairūs</string>
@@ -123,7 +120,6 @@
     <string name="backup_restore">Atsarginė kopija ir atkūrimas</string>
     <string name="backup">Atsarginė kopija</string>
     <string name="player_resize_mode">Dydžio keitimo režimas</string>
-    <string name="maximum_image_cache">Didžiausias vaizdų talpyklos dydis</string>
     <string name="copied_to_clipboard">Nukopijuota į iškarpinę</string>
     <string name="open_copied">Atidaryti</string>
     <string name="wifi">Wi-Fi</string>
@@ -156,7 +152,6 @@
     <string name="error_occurred">Klaida</string>
     <string name="copied">Nukopijuota</string>
     <string name="least_views">Mažiausiai peržiūrų</string>
-    <string name="no_subtitles_available">Subtitrų nėra</string>
     <string name="renamePlaylist">Pervardyti grojaraštį</string>
     <string name="repeat_mode">Kartojimo režimas</string>
     <string name="resize_mode_fill">Užpildyti</string>
@@ -168,7 +163,6 @@
     <string name="import_from_yt_summary">Iš YouTube arba NewPipe</string>
     <string name="app_theme">Tema</string>
     <string name="importsuccess">Užprenumeruota</string>
-    <string name="downloadfailed">Atsisiųsti nepavyko.</string>
     <string name="import_from_yt">Importuoti prenumeratas</string>
     <string name="createPlaylist">Sukurti grojaraštį</string>
     <string name="about">Apie</string>
@@ -241,7 +235,6 @@
     <string name="player_summary">Numatyti nustatymai ir elgsena</string>
     <string name="seek_increment">Prasukimo žingsnio dydis</string>
     <string name="fullscreen_orientation">Viso ekrano padėtis</string>
-    <string name="selected">Pasirinktinis</string>
     <string name="pure_theme">Juodai balta tema</string>
     <string name="pure_theme_summary">Sodri juodai balta tema</string>
     <string name="watch_positions_title">Įsimintos paskutinės peržiūros vietos</string>
@@ -251,7 +244,6 @@
     <string name="network_metered">Apskaičiuojamų duomenų</string>
     <string name="required_network">Būtinas ryšys</string>
     <string name="network_all">Visi</string>
-    <string name="picture_in_picture">Vaizdas vaizde</string>
     <string name="backup_customInstances">Pasirinktiniai serveriai</string>
     <string name="play_next">Paleisti sekantį</string>
     <string name="push_channel_name">Pranešimų agentas</string>
@@ -271,25 +263,21 @@
     <string name="time">Laikas</string>
     <string name="end_time">Pabaigos laikas</string>
     <string name="notification_time">Pranešimo laikas</string>
-    <string name="navbar_order">Rikiavimas</string>
     <string name="layout">Išdėstymas</string>
     <string name="audio_track">Garso takelis</string>
     <string name="auto_quality">Automatinė</string>
-    <string name="limit_to_runtime">Veikimo laiko apribojimas</string>
     <string name="trends">Tendencijos</string>
     <string name="featured">Siūloma</string>
     <string name="trending">Dabartinės tendencijos</string>
     <string name="bookmarks">Žymos</string>
     <string name="bookmark">Pridėti prie žymų</string>
     <string name="clear_bookmarks">Išvalyti žymes</string>
-    <string name="queue_insert_related_videos">Įterpti susijusius vaizdo įrašus</string>
     <string name="local_playlists">Vietiniai grojaraščiai</string>
     <string name="auto">Automatinis</string>
     <string name="swipe_controls">Perbraukimo valdikliai</string>
     <string name="brightness">Ryškumas</string>
     <string name="volume">Garsas</string>
     <string name="swipe_controls_summary">Braukimo gestu sureguliuokite ryškumą ir garsumą</string>
-    <string name="defaults">Numatyti</string>
     <string name="no_comments_available">Šis vaizdo įrašas neturi prieinamų komentarų.</string>
     <string name="comments_disabled">Įkėlėjas išjungė komentarus.</string>
     <string name="double_tap_seek">Dukart bakstelėti, kad prasukti</string>
@@ -332,7 +320,6 @@
     <string name="no_subtitle">Subtitrų nėra</string>
     <string name="download_paused">Atsisiuntimas sustabdytas</string>
     <string name="download_completed">Atsisiuntimas baigtas</string>
-    <string name="concurrent_downloads">Maksimalus vienu metu vykdomų atsisiuntimų skaičius</string>
     <string name="concurrent_downloads_limit_reached">Pasiektas maksimalus vienu metu vykdomų atsisiuntimų skaičius.</string>
     <string name="unknown">Nežinomas</string>
     <string name="pause">Sustabdyti</string>
@@ -341,8 +328,6 @@
     <string name="rich_caption_rendering">Turiningas antraščių atvaizdavimas</string>
     <string name="rich_caption_rendering_summary">Atvaizduoti internetinius subtitrus detalesnei ir pritaikomai peržiūrai</string>
     <string name="best_quality">Geriausias</string>
-    <string name="show_stream_thumbnails">Rodyti srauto miniatiūras</string>
-    <string name="show_stream_thumbnails_summary">Rodyti naujų srautų miniatiūras. Įjungus šią funkciją bus sunaudojama papildomų duomenų.</string>
     <string name="checking_frequency_15_minutes">15 minučių</string>
     <string name="checking_frequency_30_minutes">30 minučių</string>
     <string name="checking_frequency_60_minutes">60 minučių</string>
@@ -366,12 +351,9 @@
     <string name="invalid_color">Įvesta neteisinga spalvos vertė!</string>
     <string name="unsubscribe_snackbar_message">Sėkmingai panaikinta %1$s prenumerata</string>
     <string name="unsupported_file_format">Nepalaikomas failo formatas: %1$s</string>
-    <string name="autoplay_playlists">Automatinio atkūrimo grojaraščiai</string>
-    <string name="autoplay_playlists_summary">Automatiškai leisti sekanti vaizdo irašą, nepaisant pasirinktų automatinio grojimo nustatymų</string>
     <string name="export_playlist">Eksportuoti grojaraštį</string>
     <string name="import_watch_history">Importuoti žiūrėjimo istorija</string>
     <string name="color_violet">Universali violetinė</string>
-    <string name="failed_fetching_instances">Nepavyko gauti galimų serverių.</string>
     <string name="hide_watched_from_feed">Slėpti peržiūrėtus vaizdo įrašus</string>
     <string name="playlistUrl">Grojaraščio naršyklės nuorodą</string>
     <string name="shuffle">Sumaišyti</string>
@@ -387,8 +369,6 @@
     <string name="skip_silence">Pereiti prie garso</string>
     <string name="help">Pagalba</string>
     <string name="faq">Klausimai atsakymai</string>
-    <string name="codecs">Vaizdo kodekai</string>
-    <string name="audio_codecs">Garso kodekai</string>
     <string name="mark_as_watched">Pažymėti kaip peržiūrėta</string>
     <string name="category">Kategorija</string>
     <string name="stats_for_nerds">Statistikos pažengusiems</string>
@@ -397,8 +377,6 @@
     <string name="autoplay_countdown">"Automatinio paleidimo  skaičiavimas"</string>
     <string name="autoplay_countdown_summary">Rodyti 5s laikmetį prieš paleidžiant kitą vaizdo irašą</string>
     <string name="playing_next">Kitas bus leidžiamas po %1$s</string>
-    <string name="disable_proxy">Išjungti „Piped“ tarpinį serverį</string>
-    <string name="disable_proxy_summary">Įkelkite vaizdo įrašus ir nuotraukas tiesiogiai iš „YouTube“ serverių. Šią parinktį įjunkite tik tuo atveju, jei visada naudojate VPN</string>
     <string name="auto_fullscreen_shorts">Automatiškai leisti trumpus vaizdo įrašus pilno ekrano režime</string>
     <string name="channel_groups">Kanalų grupės</string>
     <string name="new_group">Naujas</string>
@@ -416,9 +394,6 @@
     <string name="creation_date_reversed">Sukūrimo data(atvirkštinė)</string>
     <string name="alphabetic">Abėcėlės tvarka</string>
     <string name="alphabetic_reversed">Abėcėlės tvarka (atvirkštinė)</string>
-    <string name="welcome">Sveiki atvykę į \"LibreTube\"</string>
-    <string name="choose_instance">Pasirinkti serverį</string>
-    <string name="choose_instance_long">Pasirinkite prisijungimo serverį</string>
     <string name="mark_as_unwatched">Pažymėti kaip neperžiūrėtą</string>
     <string name="change_playlist_description">Pakeisti grojaraščio aprašymą</string>
     <string name="playlist_description">Grojaraščio aprašymas</string>
@@ -441,8 +416,6 @@
     <string name="remove_watched_videos">Pašalinti peržiūrėtus vaizdo įrašus</string>
     <string name="no_fullscreen_resolution">Nekeisti raiškos visame ekrane</string>
     <string name="same_as_fullscreen">Tokia pati, kaip visame ekrane</string>
-    <string name="playback_during_call">Atkūrimas pokalbio metu</string>
-    <string name="playback_during_call_summary">Tęsti atkūrimą, kai kalbate telefonu</string>
     <string name="segment_submitted">Segmentas pateiktas</string>
     <string name="vote_for_segment">Balsuoti už segmentą</string>
     <string name="upvote">Balsuoti už</string>
@@ -455,7 +428,6 @@
     <string name="enqueueing_playlist_download">Grojaraštis pridedamas į atsisiuntimų eilę...</string>
     <string name="audio_language">Garso takelio kalba</string>
     <string name="default_language">Numatytoji kalba</string>
-    <string name="behavior_when_minimized">Veiksmas sumažinus langą</string>
     <string name="external_player">Išorinis grotuvas</string>
     <string name="screenshot">Ekrano kopija</string>
     <string name="screenshot_saved">Ekrano kopija išsaugota</string>
@@ -489,9 +461,7 @@
     <string name="sb_invalid_segment">Neteisingas segmentas</string>
     <string name="contribute_to_sponsorblock">Prisidėti prie „SponsorBlock“</string>
     <string name="sponsorblock_user_id">„SponsorBlock“ vartotojo ID</string>
-    <string name="remember_playback_speed">Atsiminti atkūrimo greitį</string>
     <string name="successfully_removed_from_playlist">Sėkmingai pašalinta iš grojaraščio</string>
-    <string name="watched">Peržiūrėta</string>
     <string name="no_segments_found">Segmentų nerasta</string>
     <string name="start_sleep_timer">Paleisti miego laikmatį</string>
     <string name="disable_sleep_timer">Išjungti miego laikmatį</string>

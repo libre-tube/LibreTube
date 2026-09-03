@@ -16,7 +16,6 @@
     <string name="username">Nome utente</string>
     <string name="password">Password</string>
     <string name="subscribe">Iscriviti</string>
-    <string name="downloadfailed">Scaricamento fallito.</string>
     <string name="import_from_yt">Importa iscrizioni</string>
     <string name="app_theme">Tema dell\'app</string>
     <string name="error">Qualcosa è andato storto.</string>
@@ -178,10 +177,8 @@
     <string name="data_saver_mode">Modalità risparmio dati</string>
     <string name="autoRotatePlayer_summary">Riproduzione a schermo intero quando il dispositivo viene girato</string>
     <string name="always">Sempre</string>
-    <string name="selected">Selezionato</string>
     <string name="never">Mai</string>
     <string name="pure_theme">Tema puro</string>
-    <string name="navLabelVisibility">Visibilità etichetta</string>
     <string name="pure_theme_summary">Tema bianco/nero puro</string>
     <string name="search_history_summary">Ricorda le ricerche</string>
     <string name="watch_history_summary">Cronologia locale delle visualizzazioni</string>
@@ -213,7 +210,6 @@
     <string name="no_search_result">Nessun risultato.</string>
     <string name="share_with_time">Condividi con marca temporale</string>
     <string name="background_mode">Modalità di sottofondo</string>
-    <string name="no_subtitles_available">Nessun sottotitolo disponibile</string>
     <string name="repeat_mode">Modalità ripetizione</string>
     <string name="resize_mode_fit">Adatta</string>
     <string name="backup_restore">Backup e ripristino</string>
@@ -224,14 +220,10 @@
     <string name="irreversible">Sei sicuro\? Non può essere annullato!</string>
     <string name="most_recent">Più recenti</string>
     <string name="export_subscriptions">Esporta iscrizioni</string>
-    <string name="history_size">Dimensione massima della cronologia</string>
-    <string name="unlimited">Illimitata</string>
     <string name="resize_mode_fill">Riempi</string>
     <string name="resize_mode_zoom">Ingrandisci</string>
     <string name="repeat_mode_current">Attuale</string>
-    <string name="picture_in_picture">Picture-in-Picture</string>
     <string name="player_resize_mode">Modalità ridimensionamento</string>
-    <string name="maximum_image_cache">Dimensione massima cache immagini</string>
     <string name="open_copied">Apri</string>
     <string name="reset_watch_positions">Ripristina</string>
     <string name="system_caption_style">Stile dei sottotitoli di sistema</string>
@@ -276,17 +268,13 @@
     <string name="volume">Volume</string>
     <string name="auto">Automatico</string>
     <string name="swipe_controls_summary">Usa i gesti per regolare la luminosità e il volume quando a schermo intero</string>
-    <string name="defaults">Predefiniti</string>
     <string name="swipe_controls">Gesti</string>
-    <string name="navbar_order">Ordine</string>
     <string name="layout">Disposizione</string>
     <string name="audio_track">Traccia audio</string>
     <string name="auto_quality">Automatica</string>
-    <string name="limit_to_runtime">Limita al tempo di esecuzione</string>
     <string name="trends">Tendenze</string>
     <string name="featured">In evidenza</string>
     <string name="trending">Cos\'è di tendenza ora</string>
-    <string name="queue_insert_related_videos">Inserisci video correlati</string>
     <string name="bookmarks">Segnalibri</string>
     <string name="bookmark">Segnalibro</string>
     <string name="clear_bookmarks">Cancella segnalibri</string>
@@ -311,7 +299,6 @@
     <string name="play_latest_videos">Riproduci i video più recenti</string>
     <string name="nothing_selected">Niente di selezionato!</string>
     <string name="color_violet">Violetto versatile</string>
-    <string name="failed_fetching_instances">Impossibile recuperare le istanze disponibili.</string>
     <string name="hide_watched_from_feed">Nascondi i video già guardati</string>
     <string name="playlistUrl">URL della playlist</string>
     <string name="shuffle">Mischia</string>
@@ -325,7 +312,6 @@
     <string name="no_subtitle">Nessun sottotitolo</string>
     <string name="download_paused">Scaricamento in pausa</string>
     <string name="download_completed">Scaricamento completato</string>
-    <string name="concurrent_downloads">Max scaricamenti simultanei</string>
     <string name="concurrent_downloads_limit_reached">Limite massimo di scaricamenti simultanei raggiunto.</string>
     <string name="unknown">Sconosciuto</string>
     <string name="resume">Riprendi</string>
@@ -336,7 +322,6 @@
     <string name="help">Aiuto</string>
     <string name="faq">Domande frequenti</string>
     <string name="replies">Risposte</string>
-    <string name="codecs">Codec video</string>
     <string name="mark_as_watched">Segna come visto</string>
     <string name="unsupported_file_format">Formato di file non supportato: %1$s</string>
     <string name="normal_views">%1$s visualizzazioni%2$s</string>
@@ -348,8 +333,6 @@
     <string name="stats_for_nerds">Statistiche per nerd</string>
     <string name="uploaderAndVideoCount">%1$s • %2$d video</string>
     <string name="subscriberAndVideoCounts">%1$s iscritti • %2$d video</string>
-    <string name="disable_proxy">Disabilita proxy Piped</string>
-    <string name="disable_proxy_summary">Carica video e immagini direttamente dai server di YouTube. Attiva l\'opzione solo se usi sempre una VPN</string>
     <string name="auto_fullscreen_shorts">Schermo intero automatico su video brevi</string>
     <string name="channel_groups">Gruppi di canali</string>
     <string name="new_group">Nuovo</string>
@@ -358,8 +341,6 @@
     <string name="play_automatically_summary">Riproduci il video automaticamente quando si seleziona</string>
     <string name="fullscreen_gestures">Gesti di entrata/uscita a schermo intero</string>
     <string name="go_to_video">Vai al video</string>
-    <string name="show_stream_thumbnails">Mostra miniature dei video</string>
-    <string name="show_stream_thumbnails_summary">Mostra le miniature dei nuovi video. L\'attivazione consumerà dati aggiuntivi</string>
     <plurals name="channel_new_streams">
         <item quantity="one">%d nuovo video</item>
         <item quantity="many">%d nuovi video</item>
@@ -379,9 +360,6 @@
     <string name="export_playlists_to">Esporta playlist su</string>
     <string name="home_tab_content">Contenuto della scheda principale</string>
     <string name="mark_as_unwatched">Segna come non visto</string>
-    <string name="welcome">Benvenuti in LibreTube</string>
-    <string name="choose_instance">Per prima cosa scegli un\'istanza!</string>
-    <string name="choose_instance_long">Scegli un\'istanza di Piped da usare da qua sotto. L\'istanza di Piped fungerà da intermediaria tra te e YouTube. Queste istanze si trovano in luoghi fisici diversi, indicati dalla/e bandiera/e del Paese. Le istanze fisicamente più vicine a te sono probabilmente più veloci delle istanze che non lo sono. Puoi cambiare l\'istanza che usi nelle impostazioni in qualsiasi momento.</string>
     <string name="change_playlist_description">Modifica descrizione playlist</string>
     <string name="playlist_description">Descrizione playlist</string>
     <string name="emptyPlaylistDescription">La descrizione della playlist non può essere vuota</string>
@@ -451,11 +429,6 @@
     <string name="no_fullscreen_resolution">Nessuna risoluzione a schermo intero</string>
     <string name="music_artists">Artisti YT Music</string>
     <string name="same_as_fullscreen">Uguale allo schermo intero</string>
-    <string name="playback_during_call_summary">Nota che ciò provoca anche la perdita di gestione di qualsiasi tipo di focus audio dell\'app</string>
-    <string name="playback_during_call">Continua la riproduzione durante una telefonata</string>
-    <string name="autoplay_playlists_summary">Riproduci automaticamente il video seguente in playlist indipendentemente dall\'impostazione di autoriproduzione selezionata</string>
-    <string name="autoplay_playlists">Autoriproduci le playlist</string>
-    <string name="remember_playback_speed">Ricorda la velocità di riproduzione</string>
     <string name="vote_for_segment">Valuta il segmento</string>
     <string name="upvote">Positivo</string>
     <string name="segment">Segmento</string>
@@ -464,7 +437,6 @@
     <string name="downvote">Negativo</string>
     <string name="repeat_mode_all">Ripeti tutto</string>
     <string name="successfully_removed_from_playlist">\"%1$s\" rimosso correttamente dalla playlist.</string>
-    <string name="watched">Visto</string>
     <string name="finished">Finito</string>
     <string name="no_segments_found">Non ci sono ancora segmenti per questo video.</string>
     <string name="time_in_minutes">Tempo in minuti</string>
@@ -489,7 +461,6 @@
     <string name="default_language">Predefinita</string>
     <string name="also_clear_watch_positions">Cancella anche le posizioni di riproduzione</string>
     <string name="gestures">Gesti</string>
-    <string name="behavior_when_minimized">Comportamento quando minimizzato</string>
     <string name="comments_count">Commenti (%1$s)</string>
     <string name="external_player">Riproduttore esterno</string>
     <string name="show_updates">Cerca aggiornamenti automaticamente</string>
@@ -509,7 +480,6 @@
     <string name="local_ryd_summary">Recupera i \"non mi piace\" direttamente da https://returnyoutubedislikeapi.com</string>
     <string name="local_ryd">Estrattore Return Youtube Dislike in locale</string>
     <string name="import_watch_history">Importa cronologia di visualizzazione</string>
-    <string name="audio_codecs">Codec audio</string>
     <string name="view_count">%1$s visualizzazioni</string>
     <string name="dialog_play_offline_title">Una versione locale di questo video e` disponibile.</string>
     <string name="dialog_play_offline_body">Vuoi riprodurre il video dalla cartella di scaricamento?</string>

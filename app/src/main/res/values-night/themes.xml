@@ -18,13 +18,6 @@
         <item name="materialAlertDialogTheme">@style/AlertDialogTheme</item>
     </style>
 
-    <style name="StartupTheme" parent="Theme.SplashScreen">
-
-        <item name="windowSplashScreenAnimatedIcon">@drawable/splash_icon</item>
-        <item name="postSplashScreenTheme">@style/BaseTheme</item>
-
-    </style>
-
     <style name="Theme.Red" parent="BaseTheme">
 
         <item name="colorPrimary">@color/red_md_theme_dark_primary</item>

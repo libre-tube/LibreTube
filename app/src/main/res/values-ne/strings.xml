@@ -26,7 +26,6 @@
     <string name="region">क्षेत्र</string>
     <string name="login_register">लग इन / दर्ता गर्नुहोस्</string>
     <string name="importsuccess">सदस्यता लिइयो</string>
-    <string name="downloadfailed">डाउनलोड असफल भयो।</string>
     <string name="import_from_yt">सदस्यता आयात गर्नुहोस्</string>
     <string name="import_from_yt_summary">YouTube वा NewPipe बाट</string>
     <string name="app_theme">विषयवस्तु</string>

@@ -16,7 +16,6 @@
     <string name="customInstance">Personalizada</string>
     <string name="region">Região</string>
     <string name="importsuccess">Subscrito</string>
-    <string name="downloadfailed">Falha ao descarregar.</string>
     <string name="app_theme">Tema</string>
     <string name="server_error">Parece que existe um problema com o servidor selecionado. Tente outra instância.</string>
     <string name="unknown_error">Erro de rede.</string>
@@ -170,10 +169,8 @@
     <string name="never">Nunca</string>
     <string name="autoRotatePlayer">Ecrã completo automático</string>
     <string name="always">Sempre</string>
-    <string name="selected">Seleção</string>
     <string name="require_restart_message">Reinicie a aplicação para aplicar as alterações.</string>
     <string name="require_restart">Tem que reiniciar a aplicação</string>
-    <string name="navLabelVisibility">Visibilidade dos textos</string>
     <string name="autoRotatePlayer_summary">Ativar modo de ecrã completo ao ligar o ecrã</string>
     <string name="pure_theme">Tema</string>
     <string name="pure_theme_summary">Branco/preto puro</string>
@@ -213,15 +210,12 @@
     <string name="worst_quality">Pior</string>
     <string name="share_with_time">Partilhar com posição temporal</string>
     <string name="export_subscriptions">Exportar subscrições</string>
-    <string name="history_size">Tamanho do histórico</string>
     <string name="add_to_queue">Adicionar à fila</string>
     <string name="yt_shorts">Curtos</string>
     <string name="player_resize_mode">Redimensionamento</string>
-    <string name="unlimited">Sem limite</string>
     <string name="background_mode">Modo de segundo plano</string>
     <string name="misc">Outras</string>
     <string name="take_a_break">Está na hora de fazer uma pausa</string>
-    <string name="no_subtitles_available">Legendas não disponíveis</string>
     <string name="repeat_mode">Modo de repetição</string>
     <string name="resize_mode_fit">Ajustar</string>
     <string name="resize_mode_fill">Preencher</string>
@@ -230,8 +224,6 @@
     <string name="repeat_mode_current">Atual</string>
     <string name="backup_restore">Backup e restauro</string>
     <string name="backup">Backup</string>
-    <string name="picture_in_picture">Imagem em imagem</string>
-    <string name="maximum_image_cache">Máximo de imagens em cache</string>
     <string name="copied_to_clipboard">Copiado para a área de transferência</string>
     <string name="open_copied">Abrir</string>
     <string name="device_info">Informações do dispositivo</string>
@@ -272,15 +264,12 @@
     <string name="end_time">Fim</string>
     <string name="notification_time">Restringir tempo da notificação</string>
     <string name="notification_time_summary">Limitar o intervalo de tempo em que as notificações são mostradas</string>
-    <string name="navbar_order">Ordem</string>
     <string name="layout">Esquema</string>
     <string name="audio_track">Faixa de áudio</string>
     <string name="auto_quality">Automático</string>
-    <string name="limit_to_runtime">Limite de tempo para execução</string>
     <string name="trends">Tendências</string>
     <string name="featured">Destaques</string>
     <string name="trending">Tendências atuais</string>
-    <string name="queue_insert_related_videos">Colocar vídeos relacionados</string>
     <string name="bookmarks">Marcadores</string>
     <string name="bookmark">Marcador</string>
     <string name="clear_bookmarks">Limpar marcadores</string>
@@ -288,7 +277,6 @@
     <string name="volume">Volume</string>
     <string name="auto">Automático</string>
     <string name="swipe_controls">Controlo de deslize</string>
-    <string name="defaults">Padrão</string>
     <string name="double_tap_seek">Dois toques para procurar</string>
     <string name="all_caught_up_summary">Já viu todos os novos vídeos</string>
     <string name="pinch_control">Apertar</string>
@@ -311,7 +299,6 @@
     <string name="all_caught_up">É tudo por hoje</string>
     <string name="nothing_selected">Nada selecionado!</string>
     <string name="color_violet">Violeta versátil</string>
-    <string name="failed_fetching_instances">Não foi possível obter as instâncias disponíveis.</string>
     <string name="hide_watched_from_feed">Ocultar vídeos já vistos</string>
     <string name="playlistUrl">URL da lista de reprodução</string>
     <string name="shuffle">Baralhar</string>
@@ -326,7 +313,6 @@
     <string name="download_paused">Descarga em pausa</string>
     <string name="audio_only_mode">Apenas áudio</string>
     <string name="audio_only_mode_summary">Utilizar LibreTube como reprodutor de músicas</string>
-    <string name="concurrent_downloads">Número de descargas simultâneas</string>
     <string name="unknown">Desconhecido</string>
     <string name="resume">Retomar</string>
     <string name="download_completed">Descarga terminada</string>
@@ -336,7 +322,6 @@
     <string name="sleep_timer">Temporizador</string>
     <string name="skip_silence">Ignorar silêncio</string>
     <string name="replies">Respostas</string>
-    <string name="codecs">Codificadores de vídeo</string>
     <string name="mark_as_watched">Marcar como visto</string>
     <string name="unsupported_file_format">Formato não suportado: %1$s</string>
     <string name="normal_views">%1$s visualizações %2$s</string>
@@ -348,8 +333,6 @@
     <string name="autoplay_countdown_summary">Mostrar contagem decrescente de 5 segundos antes de reproduzir o vídeo seguinte</string>
     <string name="uploaderAndVideoCount">%1$s • %2$d vídeos</string>
     <string name="subscriberAndVideoCounts">%1$s subscritores • %2$d vídeos</string>
-    <string name="disable_proxy">Desativar proxy Piped</string>
-    <string name="disable_proxy_summary">Carregar vídeos e imagens diretamente dos servidores YouTube. Apenas deve ativar esta opção se utilizar uma VPN!</string>
     <string name="auto_fullscreen_shorts">Ecrã completo em vídeos curtos</string>
     <string name="channel_groups">Grupos de canais</string>
     <string name="new_group">Novo</string>
@@ -363,8 +346,6 @@
         <item quantity="many">%d novas emissões</item>
         <item quantity="other">%d novas emissões</item>
     </plurals>
-    <string name="show_stream_thumbnails">Mostrar miniaturas do vídeo</string>
-    <string name="show_stream_thumbnails_summary">Mostrar miniaturas dos novos vídeos. A ativação implica a utilização de dados</string>
     <string name="unlimited_search_history">Histórico de pesquisa ilimitado</string>
     <string name="duration">Duração</string>
     <string name="duration_reversed">Duração (invertida)</string>
@@ -379,9 +360,6 @@
     <string name="export_playlists_to">Exportar listas de reprodução para</string>
     <string name="home_tab_content">Conteúdo do separador inicial</string>
     <string name="mark_as_unwatched">Marcar como não visto</string>
-    <string name="welcome">Bem-vindo ao LibreTube</string>
-    <string name="choose_instance">Escolha uma instância!</string>
-    <string name="choose_instance_long">Escolha uma instância Piped das indicadas abaixo. A instância Piped atuará como intermediário entre si e o YouTube. Estas instâncias estão localizadas em locais físicos diferentes, indicados pelas bandeiras dos paises. As instâncias mais próximas de si serão, provavelmente, mais rápidas do que as instâncias que não estão. Pode alterar a instância nas definições, sempre que quiser.</string>
     <string name="show_search_suggestions">Mostrar sugestões de pesquisa</string>
     <string name="change_playlist_description">Alterar descrição da lista de reprodução</string>
     <string name="playlist_description">Descrição da lista de reprodução</string>
@@ -451,11 +429,6 @@
     <string name="no_fullscreen_resolution">Resolução sem ecrã completo</string>
     <string name="music_artists">Artistas do YT Music</string>
     <string name="same_as_fullscreen">Igual a ecrã completo</string>
-    <string name="playback_during_call_summary">Tenha em conta que isto implica que a aplicação não possa mais gerir o foco de áudio</string>
-    <string name="playback_during_call">Continuar reprodução durante uma chamada</string>
-    <string name="autoplay_playlists_summary">Reproduzir o vídeo seguinte da lista de reprodução, independentemente do modo de reprodução automática</string>
-    <string name="autoplay_playlists">Listas de reprodução automáticas</string>
-    <string name="remember_playback_speed">Memorizar velocidade de reprodução</string>
     <string name="vote_for_segment">Votar no segmento</string>
     <string name="upvote">Gosto</string>
     <string name="segment">Segmento</string>
@@ -467,7 +440,6 @@
     <string name="time_in_minutes">Tempo em minutos</string>
     <string name="invalid_input">Entrada inválida</string>
     <string name="disable_sleep_timer">Desativar temporizador</string>
-    <string name="watched">Visto</string>
     <string name="start_sleep_timer">Iniciar temporizador</string>
     <string name="finished">Terminado</string>
     <string name="no_segments_found">Ainda não existem segmentos para este vídeo.</string>
@@ -488,7 +460,6 @@
     <string name="enqueue_playlist_description">Mostrar notificação quando se colocam em fila de espera vídeos de uma lista de reprodução para serem descarregados.</string>
     <string name="delete_all">Todas as descargas serão eliminadas!</string>
     <string name="also_clear_watch_positions">Limpar também as posições de reprodução</string>
-    <string name="behavior_when_minimized">Comportamento quando minimizado</string>
     <string name="gestures">Gestos</string>
     <string name="comments_count">Comentários (%1$s)</string>
     <string name="external_player">Reprodutor externo</string>
@@ -510,7 +481,6 @@
     <string name="local_ryd_summary">Obter diretamente informações de desagrado em https://returnyoutubedislikeapi.com</string>
     <string name="import_watch_history">Importar histórico de visualizações</string>
     <string name="view_count">%1$s visualizações</string>
-    <string name="audio_codecs">Codificadores de áudio</string>
     <string name="dialog_play_offline_title">Está disponível uma versão local do vídeo.</string>
     <string name="dialog_play_offline_body">Gostaria de reproduzir o vídeo a partir da pasta de descargas?</string>
     <string name="upcoming">Seguintes</string>

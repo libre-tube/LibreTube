@@ -15,7 +15,6 @@
     <string name="region">Rehiyon</string>
     <string name="login_register">Maglog-in/reghistro</string>
     <string name="importsuccess">Naka-subscribe</string>
-    <string name="downloadfailed">Nabigo ang pagdownload.</string>
     <string name="import_from_yt">Mag-angkat ng mga subscription</string>
     <string name="import_from_yt_summary">Mula sa Youtube o NewPipe</string>
     <string name="server_error">Mukhang may problema sa napiling server. Sumubok ng ibang instance.</string>

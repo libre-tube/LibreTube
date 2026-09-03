@@ -95,7 +95,6 @@
     <string name="server_error">Il pare que il ha un problema con le servitor seligite. Essaya un altere instantia.</string>
     <string name="category_highlight_summary">Pote esser le titulo annunciate, le miniatura o le parte plus interessante del video. Tu pote saltar to ille al toccar in le section del capitulos</string>
     <string name="category_outro">Animationes de fin e creditos</string>
-    <string name="show_stream_thumbnails">Monstrar miniaturas de fluxo</string>
     <string name="channels">Canales</string>
     <string name="instance_frontend_url">URL al interfacie del instantia</string>
     <string name="advanced">Avantiate</string>
@@ -110,7 +109,6 @@
     <string name="watch_history">Chronologia de reproductiones</string>
     <string name="addToPlaylist">Adder al lista de reproduction</string>
     <string name="version">Version %1$s</string>
-    <string name="selected">Seligite</string>
     <string name="import_from_yt">Importar subscriptiones</string>
     <string name="stop">Stoppar</string>
     <string name="related_streams">Contento relate</string>
@@ -122,7 +120,6 @@
     <string name="notifications">Notificationes</string>
     <string name="customization">Personalisation</string>
     <string name="instance">Instantia</string>
-    <string name="show_stream_thumbnails_summary">Monstra le miniaturas de nove fluxos. Activar iste option consumera datos additional</string>
     <string name="areYouSure">Deler le lista de reproduction\?</string>
     <string name="network_all">Tote</string>
     <string name="download_paused">Discargamento in pausa</string>
@@ -150,7 +147,6 @@
     <string name="no_search_result">Nulle resultatos.</string>
     <string name="always">Sempre</string>
     <string name="category_intro_summary">Un intervallo sin contento actual. Pote esser un pausa, quadro static, animation in repetition. Non deberea esser usate in transitiones que contine information</string>
-    <string name="concurrent_downloads">Numero maxime de discargas simultanee</string>
     <string name="player_autoplay">Reproduction automatic</string>
     <string name="music_songs">Cantos de YT Music</string>
     <string name="empty_instance">Insere le nomine e le URL del API.</string>
@@ -180,7 +176,6 @@
     <string name="clonePlaylist">Clonar le lista de reproduction</string>
     <string name="fail">Falleva :(</string>
     <string name="instance_summary">Piped, apertura de session e conto</string>
-    <string name="downloadfailed">Falleva le discarga.</string>
     <string name="donate">Facer un donation</string>
     <string name="music_artists">Artistas de YT Music</string>
     <string name="update_summary">Verificar actualisationes</string>
@@ -224,10 +219,8 @@
     <string name="audio_video_summary">Qualitate e formato</string>
     <string name="auto_rotation">Rotation automatic</string>
     <string name="misc">Miscellanea</string>
-    <string name="navLabelVisibility">Visibilitate de etiquetta</string>
     <string name="github">GitHub</string>
     <string name="navigation_bar">Barra de navigation</string>
-    <string name="unlimited">SIn limite</string>
     <string name="wifi">Wi-Fi</string>
     <string name="open_copied">Aperir</string>
     <string name="preferences">Preferentias</string>
@@ -237,7 +230,6 @@
     <string name="backup_restore">Copia de securitate e restauration</string>
     <string name="device_info">Information del apparato</string>
     <string name="copied">Copiate</string>
-    <string name="maximum_image_cache">Dimension maxime del cache de imagines</string>
     <string name="export_subscriptions">Exportar subscriptiones</string>
     <string name="local_subscriptions">Subscriptiones local</string>
     <string name="add_to_queue">Adder al cauda</string>
@@ -245,16 +237,13 @@
     <string name="skip_segment">Saltar</string>
     <string name="share_with_time">Compartir con marca de tempore</string>
     <string name="background_mode">Modo secunde plano</string>
-    <string name="history_size">Dimension maxime del chronologia</string>
     <string name="repeat_mode_none">Necun</string>
     <string name="require_restart">Reinitio de application necessari</string>
     <string name="resize_mode_fill">Replenar</string>
     <string name="autoRotatePlayer_summary">Reproduction in schermo plen quando le apparato es girate</string>
     <string name="resize_mode_zoom">Zoom</string>
     <string name="backup_customInstances">Instantias personalisate</string>
-    <string name="picture_in_picture">Imagine-in-imagine</string>
     <string name="play_next">Reproducer le sequente</string>
-    <string name="no_subtitles_available">Necun subtitulos disponibile</string>
     <string name="new_videos_badge">Indicator de nove videos</string>
     <string name="yt_shorts">Shorts</string>
     <string name="resize_mode_fit">Adjustar</string>
@@ -262,7 +251,6 @@
     <string name="auto_fullscreen_shorts">Shorts in schermo plen</string>
     <string name="default_or_unknown_audio_track">Predefinite o incognite</string>
     <string name="export_subscriptions_to">Exportar subscriptiones a</string>
-    <string name="disable_proxy">Disactivar le proxy de Piped</string>
     <string name="resolution_limited">limitate</string>
     <string name="playlist_description">Description del lista de reproduction</string>
     <string name="trending">Le tendentias del momento</string>
@@ -273,7 +261,6 @@
         <item quantity="one">%d nove fluxo</item>
         <item quantity="other">%d nove fluxos</item>
     </plurals>
-    <string name="welcome">Benvenite in LibreTube</string>
     <string name="import_playlists_from">Importar listas ab</string>
     <string name="added_to_playlist">Addite al lista de reproduction %1$s</string>
     <string name="sb_create_segment">Crear segmento</string>
@@ -304,7 +291,6 @@
     <string name="uploader_name">Nomine del creator</string>
     <string name="clear_bookmarks">Rader le marcapaginas</string>
     <string name="off">Disactivate</string>
-    <string name="codecs">Codecs de video</string>
     <string name="tooltip_unlocked">Disblocar reproductor</string>
     <string name="help">Adjuta</string>
     <string name="double_tap_seek">Tocca duple pro recercar</string>
@@ -321,7 +307,6 @@
     <string name="color_violet">Violetta versatile</string>
     <string name="play_automatically_summary">Initiar le reproduction automatic del video quando es seligite</string>
     <string name="local_playlists">Listas de reproduction local</string>
-    <string name="queue_insert_related_videos">Inserer videos relative</string>
     <string name="faq">FAQ</string>
     <string name="sort_by">Ordinar per</string>
     <string name="queue">Cauda</string>
@@ -343,7 +328,6 @@
     <string name="bookmark">Marcapagina</string>
     <string name="automatic_once">Automatic un vice</string>
     <string name="unsupported_file_format">Formato de file non supportate: %1$s</string>
-    <string name="choose_instance">Primo selige un instantia!</string>
     <string name="manual">Manual</string>
     <string name="related_streams_summary">Monstrar fluxos similar al que tu reguarda</string>
     <string name="playlistCloned">Liste de reproduction clonate</string>
@@ -362,14 +346,12 @@
     <string name="notification_time">Limitar le tempore de notification</string>
     <string name="group_name_error_empty">Insere un nomine</string>
     <string name="add_to_bookmarks">Adder al marcapaginas</string>
-    <string name="navbar_order">Ordinar</string>
     <string name="audio_track">Tracia de audio</string>
     <string name="no_comments_available">Iste video non ha commentos.</string>
     <string name="playlistUrl">URL del lista de reproduction</string>
     <string name="time_code">Codice de tempore (secundas)</string>
     <string name="shorts_notifications">Notificationes del Shorts</string>
     <string name="all_caught_up_summary">Tu habeva reguardate tote le nove videos</string>
-    <string name="autoplay_playlists">Listas de reproduction automatic</string>
     <string name="export_playlists_to">Exportar listas a</string>
     <string name="duration_span">Duration: %1$s</string>
     <string name="category">Categoria</string>
@@ -380,8 +362,6 @@
     <string name="invalid_color">Valor de color invalide inserite!</string>
     <string name="layout">Disposition</string>
     <string name="stats_for_nerds">Statisticas pro nerds</string>
-    <string name="defaults">Predefinites</string>
-    <string name="remember_playback_speed">Rememorar le velocitate de reproduction</string>
     <string name="livestreams">Fluxos in directe</string>
     <string name="download_channel_name">Servicio de discargamento</string>
     <string name="tooltip_sort">Assortir</string>
@@ -399,7 +379,6 @@
     <string name="play_all">Reproducer toto</string>
     <string name="backup_restore_summary">Importar e exportar subscriptiones, listas, …</string>
     <string name="tooltip_close">Clauder</string>
-    <string name="watched">Reguardate</string>
     <string name="tooltip_clear_queue">Rader cauda</string>
     <string name="tooltip_fullscreen">Schermo plen</string>
     <string name="playback_pitch">Tono</string>
@@ -428,7 +407,6 @@
     <string name="group_name_error_exists">Selige un nomine que sia unic</string>
     <string name="upvote">Me place</string>
     <string name="tooltip_minimize">MInimisar</string>
-    <string name="limit_to_runtime">Limitar al execution</string>
     <string name="buffering_goal_summary">Quantitate maxime de secundas de video a cargar in buffer</string>
     <string name="notification_time_summary">Limitar le intervallo de tempore in le qual le notificationes de fluxo es monstrate</string>
     <string name="aspect_ratio">Proportion del video</string>
@@ -436,7 +414,6 @@
     <string name="autoplay_countdown_summary">Monstrar un computo a retro de 5 secundas ante le reproduction automatic del sequente video</string>
     <string name="category_preview">Previsualisation/Summario</string>
     <string name="grid_landscape">Columnas del grillia (horizontal)</string>
-    <string name="disable_proxy_summary">Cargar videos e imagines directemente ab le servitores de YouTube. Solmente activa iste option si tu usa sempre un VPN</string>
     <string name="tooltip_reverse">Inverter</string>
     <string name="fullscreen_gestures">Gestos de entrata/exito in schermo plen</string>
     <string name="auth_instance_summary">Usar un instantia differente pro appellos authenticate</string>
@@ -444,7 +421,6 @@
     <string name="autoplay_countdown">Computo a retro del reproduction automatic</string>
     <string name="username_email">Usar un adresse de e-mail como nomine de usator non es recommendate. Continuar in omne caso?</string>
     <string name="creation_date_reversed">Data de creation (invertite)</string>
-    <string name="playback_during_call">Continuar le reproduction durante un appello telephonic</string>
     <string name="alphabetic_reversed">Alphabetic (invertite)</string>
     <string name="downvote">Non me place</string>
     <string name="duration_reversed">Duration (invertite)</string>
@@ -461,9 +437,7 @@
     <string name="double_tap_seek_summary">Tocca duo vices al sinistra o dextra pro rebobinar o avantiar le position del reproductor</string>
     <string name="no_segments_found">Il non ha ancora segmentos pro iste video.</string>
     <string name="successfully_removed_from_playlist">Removite con successo \"%1$s\" ab le lista de reproduction.</string>
-    <string name="failed_fetching_instances">Non poteva recuperar le instantias disponibile.</string>
     <string name="new_videos_badge_summary">Monstrar un insignia con le quantitate de nove videos si il ha alicun</string>
-    <string name="autoplay_playlists_summary">Reproducer automaticamente le sequente video in le listas de reproduction independentemente del parametro de reproduction automatic seligite</string>
     <string name="push_channel_name">Worker de notificationes</string>
     <string name="sb_custom_colors_summary">Commuta colores personalisate del segmentos de SponsorBlock</string>
     <string name="copy_tooltip">Copiar</string>
@@ -471,8 +445,6 @@
     <string name="rich_caption_rendering">Rendition de subtitulos inricchite</string>
     <string name="category_preview_summary">Pro segmentos detaliante contentos futur sin information additional. SI illo include clips que solmente appare hic, isto es troppo probabile que sia un categoria erronee</string>
     <string name="rich_caption_rendering_summary">Render subtitulos web pro un experientia plus inricchite e personalisate</string>
-    <string name="playback_during_call_summary">Nota que isto tamben affecta al application que non poterea gerer plus necun foco de audio</string>
-    <string name="choose_instance_long">Selige un instantia de Piped a usar infra. Le instantia de Piped actuara como mediator inter tu e YouTube. Iste instantias es locate in locationes physic differente- indicate per le bandieras del paises. Instantias physicamente proxime a te es probabilemente plus veloce que instantias plus distante. Tu pote cambiar le instantia que tu usa in le parametros at any time.</string>
     <string name="uptime">%.2f%% tempore de activitate</string>
     <string name="gradientIcon">Gradiente volubile</string>
     <string name="all_caught_up">Tu videva toto</string>
@@ -487,7 +459,6 @@
     <string name="download_playlist">Discargar le lista de reproduction</string>
     <string name="download_playlist_note">Selige le qualitate maxime de audio/video a discargar. Le subtitulos solmente essera discargate si es disponibile.</string>
     <string name="also_clear_watch_positions">Tamben rader le positiones de reguardar</string>
-    <string name="behavior_when_minimized">Comportamento quando es minimisate</string>
     <string name="gestures">Gestos</string>
     <string name="comments_count">Commentos (%1$s)</string>
     <string name="external_player">Reproductor externe</string>
@@ -507,5 +478,4 @@
     <string name="local_stream_extraction">Extraction de fluxo local</string>
     <string name="local_ryd_summary">Obtener directemente le informationes del \"non me place\" ab https://returnyoutubedislikeapi.com</string>
     <string name="import_watch_history">Importar le chronologia de videos reguardate</string>
-    <string name="audio_codecs">Codecs de audio</string>
 </resources>

@@ -50,7 +50,6 @@
     <string name="logout">Log keluar</string>
     <string name="cancel">Batal</string>
     <string name="customInstance">Tersuai</string>
-    <string name="downloadfailed">Muat-turun gagal.</string>
     <string name="error">Ada sesuatu yang tidak kena.</string>
     <string name="empty">Anda perlu memasukkan nama pengguna dan kata laluan.</string>
     <string name="notgmail">Ini adalah untuk akaun Piped</string>
@@ -123,7 +122,6 @@
     <string name="github">github</string>
     <string name="open">Buka…</string>
     <string name="always">Selalu</string>
-    <string name="selected">Dipilih</string>
     <string name="best_quality">Terbaik</string>
     <string name="most_recent">Terbaru</string>
     <string name="network_all">Semua</string>

@@ -18,7 +18,6 @@
     <string name="customInstance">අභිරුචිය පරිදි</string>
     <string name="region">කලාපය</string>
     <string name="importsuccess">දායක විය</string>
-    <string name="downloadfailed">බාගත කිරීම අසමත් විය.</string>
     <string name="import_from_yt">දායකත්වයන් ආනයනය කරන්න</string>
     <string name="import_from_yt_summary">YouTube හෝ NewPipe වෙතින්</string>
     <string name="app_theme">පෙනුම</string>
@@ -108,7 +107,6 @@
     <string name="audio">ශ්‍රව්‍ය</string>
     <string name="downloading">බාගත වෙමින්…</string>
     <string name="download_paused">බාගත කිරීම නවතා ඇත</string>
-    <string name="concurrent_downloads">උපරිම සමකාලීන බාගත කිරීම්</string>
     <string name="concurrent_downloads_limit_reached">උපරිම සමකාලීන බාගත කිරීම් සීමාව ළඟා විය.</string>
     <string name="pause">නවත්වන්න</string>
     <string name="resume">අරඹන්න</string>
@@ -132,8 +130,6 @@
     <string name="open">විවෘත කරන්න…</string>
     <string name="chapters">පරිච්ඡේද</string>
     <string name="require_restart">යෙදුම නැවත පටන් ගැනීම අවශ්‍යයි</string>
-    <string name="navLabelVisibility">ලේබල් දෘශ්‍යතාව</string>
-    <string name="selected">තෝරා ගන්නා ලදී</string>
     <string name="never">කවදාවත් නැහැ</string>
     <string name="autoRotatePlayer">ස්වයං-පූර්ණ තිරය</string>
     <string name="pure_theme">තනි පෙනුම</string>
@@ -165,20 +161,16 @@
     <string name="copied">පිටපත් කර ඇත</string>
     <string name="share_with_time">කාල කේතය සමඟ බෙදා ගන්න</string>
     <string name="export_subscriptions">දායකත්වයන් අපනයනය කරන්න</string>
-    <string name="history_size">උපරිම ඉතිහාස ප්‍රමාණය</string>
     <string name="background_mode">පසුබිම් ප්‍රකාරය</string>
     <string name="misc">වෙනත්</string>
     <string name="take_a_break">විවේකයක් ගැනීමට කාලයයි</string>
     <string name="yt_shorts">කෙටි වීඩියෝ</string>
-    <string name="no_subtitles_available">උපසිරැසි නොමැත</string>
     <string name="repeat_mode">නැවත ධාවනය කිරීම් ප්‍රකාරය</string>
     <string name="resize_mode_fit">සුදුසු</string>
     <string name="resize_mode_fill">පුරවන්න</string>
     <string name="repeat_mode_current">දැන්</string>
     <string name="backup_restore">උපස්ථ සහ ප්‍රත‍්‍යර්පණ කිරීම</string>
     <string name="backup">උපස්ථ කිරීම</string>
-    <string name="picture_in_picture">පින්තූරයේ පින්තූරය</string>
-    <string name="maximum_image_cache">උපරිම පින්තූර නිහිත ප්‍රමාණය</string>
     <string name="open_copied">විවෘත කරන්න</string>
     <string name="device_info">උපාංග තොරතුරු</string>
     <string name="audio_video_summary">ගුණත්වය සහ ආකෘතිය</string>
@@ -200,11 +192,9 @@
     <string name="time">කාලය</string>
     <string name="notification_time">දැනුම්දීමේ කාලය සීමා කරන්න</string>
     <string name="notification_time_summary">ප්‍රවාහ දැනුම්දීම් පෙන්වන කාල පරාසය සීමා කරන්න</string>
-    <string name="navbar_order">පිළිවෙල</string>
     <string name="layout">පිරිසැලසුම</string>
     <string name="audio_track">ශ්‍රව්‍ය පථය</string>
     <string name="auto_quality">ස්වයං</string>
-    <string name="limit_to_runtime">ධාවන කාලයට සීමා කරන්න</string>
     <string name="trends">ප්‍රවණතා</string>
     <string name="featured">විශේෂාංගගත</string>
     <string name="trending">දැන් නැගී එන්නේ කුමක්ද</string>
@@ -217,7 +207,6 @@
     <string name="swipe_controls_summary">දීප්තිය සහ ශබ්ද හඩ සීරුමාරු කිරීමට ස්වයිප් අභිනය භාවිත කරන්න</string>
     <string name="pinch_control">කෙනිත්තීම අභිනය පාලනය</string>
     <string name="pinch_control_summary">විශාලනය කිරීමට/පිටතට කිරීමට කෙනිත්තීම අභිනය භාවිත කරන්න</string>
-    <string name="defaults">පෙරනිමි</string>
     <string name="theme_monochrome">අවම ඒකවර්ණ</string>
     <string name="captions_size">සිරස්තල ප්‍රමාණය</string>
     <string name="play_all">සියල්ල වාදනය කරන්න</string>
@@ -286,7 +275,6 @@
     <string name="auto_rotation">ස්වයංක්‍රීය භ්‍රමණය</string>
     <string name="portrait">සිරස්</string>
     <string name="always">සැමවිටම</string>
-    <string name="unlimited">අසීමිත</string>
     <string name="general">පොදු</string>
     <string name="search_history_summary">සෙවුම් මතක තබා ගන්න</string>
     <string name="captions">සිරස්තල</string>
@@ -311,14 +299,12 @@
     <string name="start_time">ආරම්භක කාලය</string>
     <string name="bookmark">පොත් සලකුණ</string>
     <string name="local_playlists">දේශීය වාදන ලැයිස්තු</string>
-    <string name="queue_insert_related_videos">අදාළ වීඩියෝ ඇතුළු කරන්න</string>
     <string name="no_comments_available">මෙම වීඩියෝවට අදහස් නොමැත.</string>
     <string name="comments_disabled">උඩුගත කරන්නා විසින් අදහස් අබල කර ඇත.</string>
     <string name="double_tap_seek">අන්වේෂණයට දෙවරක් තට්ටු කරන්න</string>
     <string name="double_tap_seek_summary">වාදකයේ ස්ථානය රිවයින්ඩ් කිරීමට හෝ ඉදිරියට යාමට වමේ හෝ දකුණේ දෙවරක් තට්ටු කරන්න</string>
     <string name="export_playlists">වාදන ලැයිස්තු අපනයනය කරන්න</string>
     <string name="backup_restore_summary">දායකත්වයන්, වාදන ලැයිස්තු,… ආනයනය සහ අපනයනය කරන්න</string>
-    <string name="failed_fetching_instances">පවතින සේවාදායකයන් ලබා ගැනීමට නොහැකි විය.</string>
     <string name="hide_watched_from_feed">නවතම කොටසෙහි නැරඹූ වීඩියෝ සඟවන්න</string>
     <string name="areYouSure">මෙම වාදන ලැයිස්තුව මකන්නද\?</string>
     <string name="emptyPlaylistName">වාදන ලැයිස්තුවේ නම හිස් විය නොහැක</string>
@@ -338,7 +324,6 @@
     <string name="sleep_timer">නින්ද ටයිමරය</string>
     <string name="mark_as_watched">නැරඹූ ලෙස ලකුණු කරන්න</string>
     <string name="unsupported_file_format">සහාය නොදක්වන ගොනු ආකෘතියකි: %1$s</string>
-    <string name="codecs">කෝඩෙක්ස්</string>
     <string name="normal_views">%1$s බැලීම්%2$s</string>
     <string name="autoplay_countdown_summary">මීළඟ වීඩියෝව ස්වයංක්‍රීයව වාදනය කිරීමට පෙර තත්පර 5 කවුන්ට් ඩවුන් එකක් පෙන්වන්න</string>
     <string name="video_id">වීඩියෝ ID</string>
@@ -348,8 +333,6 @@
     <string name="stats_for_nerds">නර්ඩ්ස් සඳහා සංඛ්‍යාලේඛන</string>
     <string name="uploaderAndVideoCount">%1$s • %2$d වීඩියෝ</string>
     <string name="subscriberAndVideoCounts">%1$s ග්‍රාහකයින් • %2$d වීඩියෝ</string>
-    <string name="disable_proxy">Piped proxy අක්‍රිය කරන්න</string>
-    <string name="disable_proxy_summary">YouTube හි සේවාදායකයන් වෙතින් සෘජුවම වීඩියෝ සහ පින්තූර ප‍්‍රවේශනය කරන්න. ඔබ කෙසේ හෝ VPN භාවිතා කරන්නේ නම් පමණක් විකල්පය සබල කරන්න! මෙය YT music සමඟ ක්‍රියා නොකරන බව සලකන්න</string>
     <string name="auto_fullscreen_shorts">කෙටි වීඩියෝ සඳහා ස්වයංක්‍රීය පූර්ණ තිරය</string>
     <string name="new_group">අලුත්</string>
     <string name="group_name">කණ්ඩායමේ නම</string>
@@ -361,8 +344,6 @@
     </plurals>
     <string name="play_automatically">ස්වයංක්‍රීයව වාදනය කරන්න</string>
     <string name="play_automatically_summary">තේරීමේදී වීඩියෝව ස්වයංක්‍රීයව වාදනය කරන්න</string>
-    <string name="show_stream_thumbnails">ප්‍රවාහ සිඟිති රූ පෙන්වන්න</string>
-    <string name="show_stream_thumbnails_summary">නව ප්‍රවාහවල සිඟිති රූ පෙන්වන්න. මෙය සබල කිරීමෙන් අමතර Data වැය වේ</string>
     <string name="fullscreen_gestures">පූර්ණ තිර ඇතුළු වන්න / පිටවන්න අභිනයන්</string>
     <string name="unlimited_search_history">අසීමිත සෙවුම් ඉතිහාසය</string>
     <string name="duration">කාල සීමාව</string>

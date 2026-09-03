@@ -71,7 +71,6 @@
     <string name="playback_speed">ഡിഫോൾട്ട് പ്ലേബാക്ക് വേഗത</string>
     <string name="advanced">ഉയര്‍ന്ന</string>
     <string name="appearance_summary">നിങ്ങളുടെ ഇഷ്ടത്തിനനുസരിച്ച് പ്രയോഗം ക്രമീകരിക്കുക</string>
-    <string name="downloadfailed">ഡൗൺലോഡ് പരാജയപ്പെട്ടു.</string>
     <string name="import_from_yt">സബ്സ്ക്രിപ്ഷനുകൾ ഇറക്കുമതി ചെയ്യുക</string>
     <string name="import_from_yt_summary">YouTube അല്ലെങ്കിൽ NewPipe-ൽ നിന്ന്</string>
     <string name="unknown_error">നെറ്റ്‌വർക്ക് പിശക്.</string>
@@ -154,7 +153,6 @@
     <string name="behavior">പെരുമാറ്റം</string>
     <string name="unknown">അജ്ഞാതം</string>
     <string name="open">തുറക്കുക…</string>
-    <string name="navbar_order">ക്രമപ്പെടുത്തുക</string>
     <string name="exportsuccess">കയറ്റുമതി ചെയ്തു.</string>
     <string name="help">സഹായം</string>
     <string name="faq">പതിവുചോദ്യങ്ങൾ</string>
@@ -175,8 +173,6 @@
     <string name="category">തരം</string>
     <string name="off">പ്രവർത്തനരഹിതമാക്കുക</string>
     <string name="mark_as_unwatched">കണ്ടിട്ടില്ലെന്ന് അടയാളപ്പെടുത്തുക</string>
-    <string name="choose_instance">ദയവായി ആദ്യം ഒരു ഉദാഹരണം തിരഞ്ഞെടുക്കുക!</string>
-    <string name="welcome">LibreTube-ലേക്ക് സ്വാഗതം</string>
     <string name="alphabetic">അക്ഷരമാലാക്രമം</string>
     <string name="creation_date">സൃഷ്ടിച്ച തീയതി</string>
     <string name="duration_reversed">ദൈർഘ്യം (വിപരീതമായി)</string>

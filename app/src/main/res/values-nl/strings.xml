@@ -19,7 +19,6 @@
     <string name="customInstance">Aangepast</string>
     <string name="region">Regio</string>
     <string name="login_register">Inloggen/registreren</string>
-    <string name="downloadfailed">Download mislukt.</string>
     <string name="import_from_yt">Abonnementen importeren</string>
     <string name="import_from_yt_summary">Van YouTube of NewPipe</string>
     <string name="app_theme">Thema</string>
@@ -158,7 +157,6 @@
     <string name="subscriberAndVideoCounts">%1$s abonnees • %2$d video\'s</string>
     <string name="replies">Reacties</string>
     <string name="normal_views">%1$s weergaven%2$s</string>
-    <string name="concurrent_downloads">Maximaal aantal gelijktijdige downloads</string>
     <string name="category_highlight">Videohoogtepunt laten zien</string>
     <string name="category_highlight_summary">Kan de geadverteerde titel zijn, de thumbnail of het meest interessante deel van de video. Je kan het overslaan door er op te tikken in het hoofdstuk deel</string>
     <string name="download_completed">Download voltooid</string>
@@ -179,7 +177,6 @@
     <string name="restore">Herstellen</string>
     <string name="portrait">Portret</string>
     <string name="open">Openen…</string>
-    <string name="unlimited">Ongelimiteerd</string>
     <string name="network_all">Alles</string>
     <string name="wifi">Wifi</string>
     <string name="auto">Automatisch</string>
@@ -203,11 +200,9 @@
     <string name="unknown">Onbekend</string>
     <string name="yt_shorts">Shorts</string>
     <string name="volume">Volume</string>
-    <string name="defaults">Standaard­instellingen</string>
     <string name="rewind">Terugspoelen</string>
     <string name="help">Hulp</string>
     <string name="faq">Veelgestelde vragen</string>
-    <string name="codecs">Video­codecs</string>
     <string name="watch_positions">Positie onthouden</string>
     <string name="resume">Hervatten</string>
     <string name="caption_settings">Ondertitels</string>
@@ -225,7 +220,6 @@
     <string name="preferences">Voorkeuren</string>
     <string name="queue">Wachtrij</string>
     <string name="time">Tijd</string>
-    <string name="navbar_order">Sorteren</string>
     <string name="color">Kleur</string>
     <string name="most_views">Meeste weergaven</string>
     <string name="least_views">Minste weergaven</string>
@@ -236,9 +230,7 @@
     <string name="auth_instance">Authenticatie-instantie</string>
     <string name="never">Nooit</string>
     <string name="pure_theme">Puur thema</string>
-    <string name="selected">Geselecteerd</string>
     <string name="fullscreen_orientation">Oriëntatie bij volledig scherm</string>
-    <string name="navLabelVisibility">Label­zichtbaarheid</string>
     <string name="data_saver_mode">Gegevens­besparings­modus</string>
     <string name="search_history_summary">Zoekopdrachten onthouden</string>
     <string name="playerAudioQuality">Audio­kwaliteit</string>
@@ -252,7 +244,6 @@
     <string name="automatic">Automatisch</string>
     <string name="resize_mode_fit">Passend</string>
     <string name="resize_mode_fill">Uitgerekt</string>
-    <string name="picture_in_picture">Picture-in-picture</string>
     <string name="resize_mode_zoom">Vullend</string>
     <string name="auto_quality">Automatisch</string>
     <string name="trends">Trends</string>
@@ -284,7 +275,6 @@
     <string name="no_search_result">Geen resultaten</string>
     <string name="repeat_mode">Herhalings­modus</string>
     <string name="network_wifi">Enkel via wifi</string>
-    <string name="no_subtitles_available">Geen ondertitels beschikbaar</string>
     <string name="backup_restore">Back-up en herstel</string>
     <string name="copied_to_clipboard">Gekopieerd naar klembord</string>
     <string name="play_all">Alles afspelen</string>
@@ -312,7 +302,6 @@
     <string name="mobile_data">Mobiele gegevens</string>
     <string name="skip_segment">Segment overslaan</string>
     <string name="local_subscriptions">Lokale abonnementen</string>
-    <string name="history_size">Maximale geschiedenis­grootte</string>
     <string name="delete">Verwijderen uit downloads</string>
     <string name="import_playlists">Afspeellijsten importeren</string>
     <string name="export_playlists">Afspeellijsten exporteren</string>
@@ -352,8 +341,6 @@
     <string name="uploader_name">Uploader­naam</string>
     <string name="channel_groups">Kanaal­groepen</string>
     <string name="download_channel_description">Toont een melding bij het downloaden van media.</string>
-    <string name="welcome">Welkom bij LibreTube</string>
-    <string name="choose_instance">Kies eerst een instantie!</string>
     <string name="mark_as_unwatched">Markeren als ongezien</string>
     <string name="import_playlists_from">Afspeellijsten importeren uit</string>
     <string name="export_playlists_to">Afspeellijsten exporteren naar</string>
@@ -363,9 +350,7 @@
     <string name="unknown_audio_language">Onbekende audiotaal</string>
     <string name="fullscreen_gestures">Gebaren voor volledig scherm</string>
     <string name="double_tap_seek">Dubbeltikken om te zoeken</string>
-    <string name="queue_insert_related_videos">Gerelateerde video\'s toevoegen</string>
     <string name="alternative_pip_controls">Alternatieve PiP-bediening</string>
-    <string name="disable_proxy">Piped-proxy uitschakelen</string>
     <string name="turnInternetOn">Schakel wifi of mobiele data in om verbinding te maken met het internet.</string>
     <string name="autoRotatePlayer_summary">Speel af in volledig scherm wanneer het apparaat wordt gedraaid</string>
     <string name="import_subscriptions_from">Abonnementen importeren uit</string>
@@ -392,17 +377,13 @@
     <string name="data_saver_mode_summary">Sla miniaturen en andere afbeeldingen over</string>
     <string name="notify_new_streams">Meldingen voor nieuwe streams</string>
     <string name="notify_new_streams_summary">Toon meldingen voor nieuwe streams van makers die u volgt</string>
-    <string name="limit_to_runtime">Limiteren tot runtime</string>
-    <string name="maximum_image_cache">Maximale grootte van afbeeldings­cache</string>
     <string name="new_videos_badge">Indicator voor nieuwe video\'s</string>
-    <string name="show_stream_thumbnails_summary">Toon de miniaturen van nieuwe streams. Inschakelen gebruikt extra gegevens</string>
     <string name="take_a_break">Tijd om een pauze te nemen</string>
     <string name="new_videos_badge_summary">Toon een badge met het aantal nieuwe videos als deze er zijn</string>
     <string name="sb_custom_colors_summary">Schakelt aangepaste kleuren voor SponsorBlock-segmenten in</string>
     <string name="all_caught_up_summary">U heeft alle nieuwe video\'s gezien</string>
     <string name="all_caught_up">Helemaal bĳ</string>
     <string name="play_latest_videos">Nieuwste video\'s afspelen</string>
-    <string name="failed_fetching_instances">Kon beschikbare instanties niet ophalen.</string>
     <string name="playing_next">Volgende afspelen over %1$s</string>
     <string name="audio_only_mode">Enkel geluid</string>
     <string name="stats_for_nerds">Statistieken voor nerds</string>
@@ -412,7 +393,6 @@
     <string name="unknown_or_no_audio">onbekend of geen audio</string>
     <string name="auth_instance_summary">Gebruik een andere instantie voor geauthenticeerde verzoeken</string>
     <string name="auth_instances">Kies een authenticatie­instantie</string>
-    <string name="show_stream_thumbnails">Stream-miniaturen</string>
     <string name="watch_history_summary">Houd bekeken video\'s lokaal bij</string>
     <string name="history_summary">Kijk- en zoek­geschiedenis</string>
     <string name="sb_custom_colors">Aangepaste segment­kleuren</string>
@@ -431,13 +411,11 @@
     <string name="dearrow_summary">Geef meer accurate en minder sensationele titels en miniaturen weer. Verhoogt de laadtijden</string>
     <string name="notification_time_summary">Beperk de tijdspanne waarin streammeldingen worden weergegeven</string>
     <string name="alternative_pip_controls_summary">Toon alleen audio en overslaan in PiP in plaats van vooruit- en terugspoelen</string>
-    <string name="disable_proxy_summary">Laad video\'s en afbeeldingen rechtstreeks van de servers van YouTube</string>
     <string name="play_automatically_summary">Start het afspelen automatisch bij het selecteren van een video</string>
     <string name="emptyPlaylistDescription">De afspeellijstbeschrijving kan niet leeg zijn</string>
     <string name="swipe_controls_summary">Veeg tijdens volledig scherm om de helderheid en het volume aan te passen</string>
     <string name="double_tap_seek_summary">Tik twee keer links of rechts om de speler terug of vooruit te spoelen</string>
     <string name="username_email">Het gebruik van een e-mail­adres als gebruikers­naam wordt afgeraden. Toch doorgaan?</string>
-    <string name="choose_instance_long">Kies hieronder een Piped-instantie die je wilt gebruiken. De Piped-instantie fungeert als tussenpersoon tussen jou en YouTube. Deze instanties bevinden zich op verschillende fysieke locaties - aangegeven door hun vlag(gen). Instanties die fysiek dichter bij jou in de buurt zijn, zijn waarschijnlijk sneller dan instanties die dat niet zijn. Je kunt de instantie die je gebruikt op elk moment wijzigen in de instellingen.</string>
     <string name="group_name_error_exists">Kies een naam die uniek is</string>
     <string name="push_channel_description">Toont een melding wanneer er nieuwe streams beschikbaar zijn.</string>
     <string name="automatic_once">Eén keer automatisch</string>
@@ -450,11 +428,6 @@
     <string name="no_fullscreen_resolution">Resolutie in kleine speler</string>
     <string name="music_artists">Youtube Music - Artiesten</string>
     <string name="same_as_fullscreen">Zelfde als in volledig scherm</string>
-    <string name="playback_during_call_summary">Dit zorgt er voor dat de app geen enkele audio-focus meer afhandelt</string>
-    <string name="playback_during_call">Blijven afspelen tijdens oproepen</string>
-    <string name="autoplay_playlists_summary">Volgende video in afspeellijsten automatisch afspelen onafhankelijk van de geselecteerde instelling voor automatisch afspelen</string>
-    <string name="autoplay_playlists">Afspeel­lijsten automatisch afspelen</string>
-    <string name="remember_playback_speed">Afspeel­snelheid onthouden</string>
     <string name="vote_for_segment">Stem voor segment</string>
     <string name="upvote">Omhoog</string>
     <string name="segment">Segment</string>
@@ -463,7 +436,6 @@
     <string name="segment_submitted">Segment verzonden</string>
     <string name="downvote">Omlaag</string>
     <string name="successfully_removed_from_playlist">‘%1$s’ succesvol uit afspeellijst verwijderd</string>
-    <string name="watched">Bekeken</string>
     <string name="finished">Klaar</string>
     <string name="no_segments_found">Er zijn nog geen segmenten voor deze video.</string>
     <string name="time_in_minutes">Tijd in minuten</string>
@@ -486,7 +458,6 @@
     <string name="also_clear_watch_positions">Kijk­posities ook wissen</string>
     <string name="enqueue_playlist_description">Toont een melding bij het in wachtrij plaatsen van te downloaden video\'s van een afspeellijst.</string>
     <string name="enqueueing_playlist_download">In wachtrij plaatsen van video\'s om te downloaden van afspeellijst %1$s</string>
-    <string name="behavior_when_minimized">Gedrag wanneer geminimaliseerd</string>
     <string name="gestures">Gebaren</string>
     <string name="download_playlist_note">Selecteer de maximale audio/videokwaliteit om te downloaden. Bijschriften worden alleen gedownload als ze beschikbaar zijn.</string>
     <string name="comments_count">Opmerkingen (%1$s)</string>
@@ -509,7 +480,6 @@
     <string name="category_exclusive_access">Exclusieve toegang</string>
     <string name="export_playlist">Afspeel­lĳst exporteren</string>
     <string name="import_watch_history">Kĳk­geschiedenis importeren</string>
-    <string name="audio_codecs">Audio­codecs</string>
     <string name="crashlog">Crash­logboek</string>
     <string name="view_count">%1$s weergaven</string>
     <string name="createNewPlaylist">Nieuwe afspeel­lĳst aan­maken</string>

@@ -13,7 +13,6 @@
     <string name="customInstance">सानुकूल इंस्टेंस जोडा</string>
     <string name="region">प्रदेश</string>
     <string name="importsuccess">यशस्वीरित्या सदस्यता घेतली</string>
-    <string name="downloadfailed">डाउनलोड अयशस्वी.</string>
     <string name="import_from_yt">YouTube वरून सदस्यता आयात करा</string>
     <string name="app_theme">अ‍ॅप थीम</string>
     <string name="error">काहीतरी चूक झाली.</string>
@@ -164,7 +163,6 @@
     <string name="no_video">व्हिडिओ नाही</string>
     <string name="downloading">डाउनलोड करत आहे…</string>
     <string name="download_completed">डाउनलोड पूर्ण झाले</string>
-    <string name="concurrent_downloads">कमाल समवर्ती डाउनलोड</string>
     <string name="unknown">अज्ञात</string>
     <string name="resume">पुन्हा सुरू करा</string>
     <string name="player_autoplay">ऑटोप्ले</string>
@@ -174,7 +172,6 @@
     <string name="portrait">पोर्ट्रेट</string>
     <string name="chapters">अध्याय</string>
     <string name="require_restart">ॲप रीस्टार्ट आवश्यक आहे</string>
-    <string name="navLabelVisibility">लेबल दृश्यमानता</string>
     <string name="always">नेहमी</string>
     <string name="never">कधीच नाही</string>
     <string name="autoRotatePlayer">ऑटो-फुलस्क्रीन</string>
@@ -196,7 +193,6 @@
     <string name="concurrent_downloads_limit_reached">कमाल समवर्ती डाउनलोड मर्यादा गाठली</string>
     <string name="pauseOnScreenOff_summary">स्क्रीन बंद केल्यावर प्लेबॅकला थांबवा.</string>
     <string name="auth_instance_summary">प्रमाणीकृत कॉलसाठी भिन्न instance वापरा</string>
-    <string name="selected">निवडले</string>
     <string name="flameIcon">उडणारी ज्योत</string>
     <string name="require_restart_message">नवीन बदल वापरण्यासाठी ॲप रीस्टार्ट करा.</string>
     <string name="watch_history_summary">स्थानिक पातळीवर पाहिलेल्या व्हिडिओंचा मागोवा ठेवा</string>
@@ -225,7 +221,6 @@
     <string name="color_violet">अष्टपैलू व्हायलेट</string>
     <string name="download_channel_description">मीडिया डाऊनलोड करताना नोटिफिकेशन दाखवते.</string>
     <string name="auto">ऑटो</string>
-    <string name="history_size">अधिकतम इतिहास आकार</string>
     <string name="add_to_queue">रांगेत जोडा</string>
     <string name="misc">विविध</string>
     <string name="take_a_break">विश्रांती घेण्याची वेळ आली आहे</string>
@@ -235,9 +230,6 @@
     <string name="alternative_pip_controls">वैकल्पिक PiP नियंत्रणे</string>
     <string name="queue">रांग</string>
     <string name="hide_watched_from_feed">फीडमधून पाहिलेले व्हिडिओ लपवा</string>
-    <string name="picture_in_picture">चित्रात चित्र</string>
-    <string name="disable_proxy">पाइप्ड प्रॉक्सी अक्षम करा</string>
-    <string name="disable_proxy_summary">YouTube च्या सर्व्हरवरून थेट व्हिडिओ आणि प्रतिमा लोड करा. तुम्ही VPN वापरत असाल तरच पर्याय सक्षम करा! लक्षात ठेवा की हे YT संगीतातील सामग्रीसह कार्य करू शकत नाही.</string>
     <string name="push_channel_description">नवीन प्रवाह उपलब्ध असताना सूचना दाखवते.</string>
     <string name="added_to_playlist">प्लेलिस्टमध्ये जोडले</string>
     <string name="app_backup">ॲप बॅकअप</string>
@@ -251,7 +243,6 @@
     <string name="privacy_alert">गोपनीयता सूचना</string>
     <string name="stats_for_nerds">गीक्ससाठी आकडेवारी</string>
     <string name="video_id">व्हिडिओ आयडी</string>
-    <string name="failed_fetching_instances">उपलब्ध इंस्तन्सेस आणू शकलो नाही.</string>
     <string name="resize_mode_zoom">झूम</string>
     <string name="repeat_mode_none">काहीही नाही</string>
     <string name="network_metered">मीटर केलेले नेटवर्क</string>
@@ -270,14 +261,12 @@
     <string name="least_views">किमान व्ह्यूज</string>
     <string name="required_network">आवश्यक कनेक्शन</string>
     <string name="network_all">सर्व</string>
-    <string name="unlimited">अमर्यादित</string>
     <string name="background_mode">बॅकग्राऊंड मोड</string>
     <string name="repeat_mode_current">चालू</string>
     <string name="backup_restore">बॅकअप आणि पुनर्संचयित करा</string>
     <string name="backup">बॅकअप</string>
     <string name="open_copied">उघडा</string>
     <string name="player_resize_mode">आकार बदला मोड</string>
-    <string name="maximum_image_cache">कमाल प्रतिमा कॅशे आकार</string>
     <string name="copied_to_clipboard">क्लिपबोर्डवर कॉपी केले</string>
     <string name="device_info">डिव्हाइस माहिती</string>
     <string name="delete">डाउनलोडमधून हटवा</string>
@@ -294,11 +283,8 @@
     <string name="start_time">सुरवातीची वेळ</string>
     <string name="notification_time">सूचना वेळ</string>
     <string name="notification_time_summary">कालावधी ज्यामध्ये सूचना दर्शविण्याची अनुमती आहे</string>
-    <string name="navbar_order">ऑर्डर</string>
     <string name="layout">मांडणी</string>
     <string name="audio_track">ऑडिओ ट्रॅक</string>
-    <string name="limit_to_runtime">रनटाइमची मर्यादा</string>
-    <string name="queue_insert_related_videos">संबंधित व्हिडिओ समाविष्ट करा</string>
     <string name="brightness">ब्राईटनेस</string>
     <string name="volume">आवाज</string>
     <string name="swipe_controls">स्वाइप नियंत्रणे</string>
@@ -332,21 +318,18 @@
     <string name="featured">वैशिष्ट्यपूर्ण</string>
     <string name="trending">सध्या काय ट्रेंडिंग आहे</string>
     <string name="renamePlaylist">प्लेलिस्टचे नाव बदला</string>
-    <string name="no_subtitles_available">कोणतीही उपशीर्षके उपलब्ध नाहीत</string>
     <string name="repeat_mode">रिपीट मोड</string>
     <string name="resize_mode_fit">फिट</string>
     <string name="resize_mode_fill">भरा</string>
     <string name="play_next">पुढील प्ले करा</string>
     <string name="playback_pitch">पिच</string>
     <string name="auto_quality">ऑटो</string>
-    <string name="defaults">डिफॉल्ट</string>
     <string name="no_comments_available">या व्हिडिओवर कोणत्याही टिप्पण्या नाहीत.</string>
     <string name="captions_size">मथळे आकार</string>
     <string name="category">प्रवर्ग</string>
     <string name="bookmarks">बुकमार्क</string>
     <string name="bookmark">बुकमार्क</string>
     <string name="clear_bookmarks">बुकमार्क साफ करा</string>
-    <string name="codecs">कोडेक्स</string>
     <string name="sleep_timer">स्लीप टाइमर</string>
     <string name="help">मदत</string>
     <string name="faq">वारंवार विचारले जाणारे प्रश्न</string>
@@ -360,11 +343,9 @@
     <string name="suggest_change_instance">लोडिंग नेहमीपेक्षा जास्त वेळ घेत आहे, इन्स्टन्स बदलून बघा</string>
     <string name="music_artists">YT संगीत कलाकार</string>
     <string name="category_highlight">व्हिडिओ हायलाइट दाखवा</string>
-    <string name="show_stream_thumbnails_summary">नवीन स्ट्रीम थंबनेल्स दाखवा. ह्याद्वारे अतिरिक्त डेटा वापरला जाईल</string>
     <string name="stop">थांबा</string>
     <string name="repeat_mode_all">सर्व पुन्हा करा</string>
     <string name="donate">दान</string>
-    <string name="show_stream_thumbnails">थंबनेल्स स्ट्रीम दाखवा</string>
     <string name="comments_count">कंमेन्ट्स %1$s</string>
     <string name="change_instance">इन्स्टन्स बदला</string>
 </resources>

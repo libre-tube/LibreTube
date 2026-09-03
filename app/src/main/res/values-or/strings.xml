@@ -25,7 +25,6 @@
     <string name="login_register">ସଂଶ୍ଳିଷ୍ଟ/ପଞ୍ଜିକରଣ</string>
     <string name="registered">ପଞ୍ଜୀକୃତ । ଏବେ ଆପଣ ନୂଆ ଧାରାବାହିକ କୁ ଅନୁସରଣ କରିପାରିବେ ।</string>
     <string name="importsuccess">ସଦସ୍ୟତା ଅଛି</string>
-    <string name="downloadfailed">ଡାଉନଲୋଡ୍ ବିଫଳ ହେଲା ।</string>
     <string name="import_from_yt_summary">ୟୁ ଟିଉବ କିମ୍ବା ନିଉପାଇପ ରୁ</string>
     <string name="app_theme">ଥିମ୍</string>
     <string name="unknown_error">ନେଟୱର୍କ ତ୍ରୁଟି ।</string>
@@ -155,7 +154,6 @@
     <string name="aspect_ratio">ଭିଡିଓ ଦିଗ ଅନୁପାତ</string>
     <string name="portrait">ଆନୁଲମ୍ବିକ</string>
     <string name="always">ସର୍ବଦା</string>
-    <string name="selected">ମନୋନୀତ</string>
     <string name="never">କେବେ ନୁହ</string>
     <string name="autoRotatePlayer_summary">ଡିଭାଇସ୍ ଟର୍ନ୍ ହୋଇଗଲେ ଫୁଲ୍ ସ୍କ୍ରିନ୍ ପ୍ଲେବେକ୍</string>
     <string name="pure_theme">ଶୁଦ୍ଧ ଥିମ୍</string>
@@ -172,10 +170,7 @@
     <string name="irreversible">ଆପଣ ନିଶ୍ଚିତ କି!</string>
     <string name="history_empty">ବର୍ତ୍ତମାନ ସୁଦ୍ଧା କୌଣସି ଇତିହାସ ନାହିଁ ।</string>
     <string name="copied">କପି ହୋଇଛି</string>
-    <string name="history_size">ସର୍ବାଧିକ ଇତିହାସ ଆକାର</string>
-    <string name="unlimited">ଅସଂଖ୍ୟ</string>
     <string name="yt_shorts">ସର୍ଟ ଗୁଡ଼ିକ</string>
-    <string name="no_subtitles_available">କୌଣସି ଉପ-ଟାଇଟଲ୍ ଉପଲବ୍ଧ ନାହିଁ</string>
     <string name="repeat_mode">ପୁନରାବୃତ୍ତି ମୋଡ</string>
     <string name="resize_mode_fit">ଫିଟ୍</string>
     <string name="resize_mode_fill">ପୂରଣ କରନ୍ତୁ</string>
@@ -194,7 +189,6 @@
     <string name="quality">ଗୁଣବତ୍ତା</string>
     <string name="wifi">ୱାଇଫାଇ</string>
     <string name="player_resize_mode">ମୋଡ୍ ଆକାର ପରିବର୍ତ୍ତନ କରନ୍ତୁ</string>
-    <string name="maximum_image_cache">ସର୍ବାଧିକ ପ୍ରତିଛବି କ୍ୟାଚ୍ ଆକାର</string>
     <string name="copied_to_clipboard">କ୍ଲିପବୋର୍ଡରେ କପି କରାଯାଇଛି</string>
     <string name="open_copied">ଖୋଲନ୍ତୁ</string>
     <string name="device_info">ଉପକରଣ ସୂଚନା</string>
@@ -225,7 +219,6 @@
     <string name="chapters">ଅଧ୍ୟାୟ ଗୁଡ଼ିକ</string>
     <string name="require_restart_message">ନୂତନ ପରିବର୍ତ୍ତନଗୁଡିକ ବ୍ୟବହାର କରିବାକୁ ଆପ୍ ପୁନଃଆରମ୍ଭ କରନ୍ତୁ ।</string>
     <string name="playerAudioQuality">ସ୍ୱର ଗୁଣବତ୍ତା</string>
-    <string name="navLabelVisibility">ଲେବଲ୍ ଦୃଶ୍ୟମାନତା</string>
     <string name="autoRotatePlayer">ସ୍ୱତଃ-ପୂର୍ଣ୍ଣସ୍କ୍ରୀନ୍</string>
     <string name="search_history_summary">ସନ୍ଧାନଗୁଡିକ ମନେରଖ</string>
     <string name="data_saver_mode">ଡାଟା-ସେଭର୍ ସ୍ଥିତି</string>
@@ -255,7 +248,6 @@
     <string name="backup">ନକଲ</string>
     <string name="take_a_break">ବିରତି ପାଇଁ ସମୟ</string>
     <string name="add_to_queue">ଧାଡିରେ ଯୋଡନ୍ତୁ</string>
-    <string name="picture_in_picture">ଛବି ରେ ଛବି</string>
     <string name="backup_restore">ନକଲ ଓ ସଂରକ୍ଷଣ</string>
     <string name="subscriptions">ସଦସ୍ୟତା ଗୁଡ଼ିକ</string>
     <string name="livestreams">ସିଧପ୍ରସାରଣ ଷ୍ଟ୍ରୀମ ଗୁଡ଼ିକ</string>
@@ -271,25 +263,21 @@
     <string name="time">ସମୟ</string>
     <string name="notification_time_summary">ଷ୍ଟ୍ରିମ୍ ବିଜ୍ଞପ୍ତିଗୁଡିକ ପ୍ରଦର୍ଶିତ ହେଉଥିବା ସମୟ ସୀମାକୁ ସୀମିତ କରନ୍ତୁ</string>
     <string name="start_time">ଆରମ୍ଭ ସମୟ</string>
-    <string name="navbar_order">ସଜାନ୍ତୁ</string>
     <string name="layout">ଲେଆଉଟ୍</string>
     <string name="audio_track">ଅଡିଓ ଟ୍ରାକ୍</string>
     <string name="auto_quality">ସ୍ଵତଃ</string>
-    <string name="limit_to_runtime">ଚାଲିବା ସମୟ ପର୍ଯ୍ୟନ୍ତ ସୀମିତ କରନ୍ତୁ</string>
     <string name="trends">ଧାରା</string>
     <string name="featured">ବିଶିଷ୍ଟ</string>
     <string name="trending">ବର୍ତ୍ତମାନ କ’ଣ ଟ୍ରେଣ୍ଡ୍ ହେଉଛି</string>
     <string name="bookmark">ବୁକ୍ ମାର୍କ୍</string>
     <string name="bookmarks">ବୁକ୍ ମାର୍କ୍ ଗୁଡ଼ିକ</string>
     <string name="clear_bookmarks">ବୁକ୍ ମାର୍କ୍ ଗୁଡ଼ିକୁ ଖାଲି କରନ୍ତୁ</string>
-    <string name="queue_insert_related_videos">ସମ୍ପର୍କୀୟ ଭିଡିଓ ଯୋଡ଼ନ୍ତୁ</string>
     <string name="local_playlists">ସ୍ଥାନୀୟ ପ୍ଲେଲିଷ୍ଟଗୁଡିକ</string>
     <string name="brightness">ଉଜ୍ଜଳତା</string>
     <string name="volume">ଶବ୍ଦ</string>
     <string name="auto">ସ୍ଵତଃ</string>
     <string name="swipe_controls">ସ୍ୱାଇପ୍ ନିୟନ୍ତ୍ରଣ</string>
     <string name="swipe_controls_summary">ଫୁଲ୍ ସ୍କ୍ରିନ୍ ମୋଡ୍ ରେ ଉଜ୍ଜ୍ୱଳତା ଏବଂ ଭଲ୍ୟୁମ୍ ଆଡଜଷ୍ଟ କରିବାକୁ ସ୍ୱାଇପ୍ କରନ୍ତୁ</string>
-    <string name="defaults">ଡିଫଲ୍ଟ ଗୁଡ଼ିକ</string>
     <string name="no_comments_available">ଏହି ଭିଡିଓରେ କୌଣସି ମନ୍ତବ୍ୟ ନାହିଁ ।</string>
     <string name="comments_disabled">ମନ୍ତବ୍ୟଗୁଡିକ ଅପଲୋଡର୍ ଙ୍କ ଦ୍ୱାରା ଅକ୍ଷମ ହୋଇଛି ।</string>
     <string name="captions_size">କ୍ୟାପସନ୍ ର ଆକାର</string>
@@ -311,7 +299,6 @@
     <string name="play_latest_videos">ସର୍ବଶେଷ ଭିଡିଓଗୁଡିକ ଚଲାନ୍ତୁ</string>
     <string name="nothing_selected">କିଛି ମନୋନୀତ ହୋଇନାହିଁ!</string>
     <string name="color_violet">ବହୁମୁଖୀ ବାଇଗଣୀ</string>
-    <string name="failed_fetching_instances">ଉପଲବ୍ଧ ଉଦାହରଣଗୁଡିକ ଆଣିପାରିଲା ନାହିଁ ।</string>
     <string name="hide_watched_from_feed">ପୂର୍ବରୁ ଦେଖାଯାଇଥିବା ଭିଡିଓଗୁଡିକ ଲୁଚାନ୍ତୁ</string>
     <string name="playlistUrl">ପ୍ଲେଲିଷ୍ଟ୍ URL</string>
     <string name="shuffle">ସଫଲ୍</string>
@@ -325,7 +312,6 @@
     <string name="no_subtitle">କୌଣସି ଉପ-ଆଖ୍ୟା ନାହିଁ</string>
     <string name="download_paused">ଡାଉନଲୋଡ୍ ବିରତ ହୋଇଛି</string>
     <string name="download_completed">ଡାଉନଲୋଡ୍ ସମାପ୍ତ ହୋଇଛି</string>
-    <string name="concurrent_downloads">ସର୍ବାଧିକ ଏକକାଳୀନ ଡାଉନଲୋଡ୍</string>
     <string name="concurrent_downloads_limit_reached">ସର୍ବାଧିକ ଏକକାଳୀନ ଡାଉନଲୋଡ୍ ସୀମା ପହଞ୍ଚିଲା ।</string>
     <string name="unknown">ଅଜ୍ଞାତ</string>
     <string name="resume">ପୁଣି ଆରମ୍ଭ କରନ୍ତୁ</string>
@@ -336,7 +322,6 @@
     <string name="help">ସାହାଯ୍ୟ</string>
     <string name="faq">FAQ</string>
     <string name="replies">ଉତ୍ତର ଗୁଡିକ</string>
-    <string name="codecs">କୋଡେକ୍ ଗୁଡିକ</string>
     <string name="mark_as_watched">ଦେଖାଯାଇଥିବା ପରି ଚିହ୍ନିତ କର</string>
     <string name="unsupported_file_format">ଅସମର୍ଥିତ ଫାଇଲ୍ ଫର୍ମାଟ୍: %1$s</string>
     <string name="category">ବର୍ଗ</string>
@@ -348,8 +333,6 @@
     <string name="autoplay_countdown_summary">ପରବର୍ତ୍ତୀ ଭିଡିଓକୁ ଅଟୋ-ଖେଳିବା ପୂର୍ବରୁ 5s କାଉଣ୍ଟଡାଉନ୍ ଦେଖାନ୍ତୁ</string>
     <string name="subscriberAndVideoCounts">%1$s ଗ୍ରାହକ • %2$d ଭିଡିଓ</string>
     <string name="uploaderAndVideoCount">%1$s • %2$d ଭିଡିଓ</string>
-    <string name="disable_proxy">ପାଇପ୍ ପ୍ରକ୍ସି ଅକ୍ଷମ କରନ୍ତୁ</string>
-    <string name="disable_proxy_summary">ୟୁଟ୍ୟୁବ ସର୍ଭରରୁ ସିଧାସଳଖ ଭିଡିଓ ଏବଂ ପ୍ରତିଛବିଗୁଡ଼ିକୁ ଧାରଣ କରନ୍ତୁ । ଯଦି ଆପଣ ସର୍ବଦା VPN ବ୍ୟବହାର କରନ୍ତି ତେବେ କେବଳ ବିକଳ୍ପକୁ ସକ୍ରିୟ କରନ୍ତୁ</string>
     <string name="auto_fullscreen_shorts">ଛୋଟ ଭିଡିଓଗୁଡ଼ିକରେ ଅଟୋ ଫୁଲ୍ ସ୍କ୍ରିନ୍</string>
     <string name="new_group">ନୂତନ</string>
     <string name="group_name">ଗୋଷ୍ଠୀ ନାମ</string>
@@ -362,8 +345,6 @@
         <item quantity="one">%d ନୂତନ ଷ୍ଟ୍ରିମ୍</item>
         <item quantity="other">%d ଟି ନୂତନ ଷ୍ଟ୍ରିମ୍</item>
     </plurals>
-    <string name="show_stream_thumbnails">ଷ୍ଟ୍ରିମ୍ ଥମ୍ବନେଲ ଦେଖାନ୍ତୁ</string>
-    <string name="show_stream_thumbnails_summary">ନୂତନ ଧାରଣାଗୁଡ଼ିକର ଥମ୍ବନେଲଗୁଡିକ ଦେଖାନ୍ତୁ । ଏହାକୁ ସକ୍ଷମ କରିବା ଅତିରିକ୍ତ ତଥ୍ୟ ଖର୍ଚ୍ଚ କରିବ</string>
     <string name="unlimited_search_history">ଅସୀମିତ ସନ୍ଧାନ ଇତିହାସ</string>
     <string name="duration">ଅବଧି</string>
     <string name="duration_reversed">ଅବଧି (ଓଲଟା)</string>
@@ -378,9 +359,6 @@
     <string name="export_playlists_to">ଏଥିକୁ ପ୍ଲେଲିଷ୍ଟଗୁଡିକ ରପ୍ତାନି କରନ୍ତୁ</string>
     <string name="home_tab_content">ହୋମ୍ ଟ୍ୟାବ୍ ବିଷୟବସ୍ତୁ</string>
     <string name="mark_as_unwatched">ଅଦୃଶ୍ୟ ଭାବରେ ଚିହ୍ନିତ କରନ୍ତୁ</string>
-    <string name="choose_instance_long">ନିମ୍ନରୁ ବ୍ୟବହାର କରିବାକୁ ଦୟାକରି ଏକ ପାଇପ୍ ଉଦାହରଣ ବାଛନ୍ତୁ। ପାଇପ୍ ଇନଷ୍ଟାଣ୍ଟ ତୁମ ଏବଂ ୟୁଟ୍ୟୁବ୍ ମଧ୍ୟରେ ମଧ୍ୟସ୍ଥି ଭାବରେ କାର୍ଯ୍ୟ କରିବ । ଏହି ଉଦାହରଣଗୁଡିକ ବିଭିନ୍ନ ଭୌତିକ ସ୍ଥାନରେ ଅବସ୍ଥିତ - ସେମାନଙ୍କ ଦେଶ ପତାକା (ଗୁଡିକ) ଦ୍ୱାରା ସୂଚିତ। ଶାରୀରିକ ଭାବରେ ତୁମର ନିକଟତର ଥିବା ଘଟଣାଗୁଡ଼ିକ ସମ୍ଭବତଃ ତୀବ୍ର ଅଟେ । ଆପଣ ଯେକୌଣସି ସମୟରେ ସେଟିଙ୍ଗରେ ବ୍ୟବହାର କରୁଥିବା ଉଦାହରଣକୁ ପରିବର୍ତ୍ତନ କରିପାରିବେ ।</string>
-    <string name="welcome">LibreTube କୁ ସ୍ୱାଗତ</string>
-    <string name="choose_instance">ଦୟାକରି ପ୍ରଥମେ ଏକ ଉଦାହରଣ ବାଛନ୍ତୁ!</string>
     <string name="emptyPlaylistDescription">ପ୍ଲେଲିଷ୍ଟ ବର୍ଣ୍ଣନା ଖାଲି ହୋଇପାରିବ ନାହିଁ</string>
     <string name="change_playlist_description">ପ୍ଲେଲିଷ୍ଟ ବର୍ଣ୍ଣନା ପରିବର୍ତ୍ତନ କରନ୍ତୁ</string>
     <string name="playlist_description">ପ୍ଲେଲିଷ୍ଟ ବର୍ଣ୍ଣନା</string>
@@ -450,11 +428,6 @@
     <string name="donate">ଦାନ କରନ୍ତୁ</string>
     <string name="music_artists">YT ସଂଗୀତ କଳାକାର</string>
     <string name="same_as_fullscreen">ସମ୍ପୂର୍ଣ୍ଣ ପରଦା ପରି ସମାନ</string>
-    <string name="playback_during_call_summary">ଧ୍ୟାନ ଦିଅନ୍ତୁ ଯେ ଏହା କୌଣସି ପ୍ରକାରର ଅଡିଓ ଫୋକସକୁ ଆଉ ପରିଚାଳନା ନକରିବା ପାଇଁ ଆପ୍ କୁ ମଧ୍ୟ ପ୍ରଭାବିତ କରିଥାଏ</string>
-    <string name="playback_during_call">ଫୋନ କଲ୍ ସମୟରେ ଚଲାବୁଲା ଜାରି ରଖନ୍ତୁ</string>
-    <string name="autoplay_playlists_summary">ମନୋନୀତ ଅଟୋ ପ୍ଲେ ସେଟିଂକୁ ଖାତିର ନକରି ପ୍ଲେଲିଷ୍ଟରେ ପରବର୍ତ୍ତୀ ଭିଡିଓକୁ ସ୍ୱୟଂଚାଳିତ ଭାବରେ ଚଲାନ୍ତୁ</string>
-    <string name="autoplay_playlists">ପ୍ଲେ ତାଲିକାଗୁଡ଼ିକୁ ସ୍ୱୟଂଚାଳିତ ଭାବରେ ଚଲାନ୍ତୁ</string>
-    <string name="remember_playback_speed">ପ୍ଲେବେକ୍ ବେଗ ମନେରଖ</string>
     <string name="vote_for_segment">ସେଗମେଣ୍ଟ ପାଇଁ ଭୋଟ୍ ଦିଅନ୍ତୁ</string>
     <string name="upvote">ଉପରକୁ</string>
     <string name="segment">ସେଗମେଣ୍ଟ୍</string>
@@ -466,7 +439,6 @@
     <string name="time_in_minutes">ମିନିଟରେ ସମୟ</string>
     <string name="invalid_input">ଅବୈଧ ନିବେଶ</string>
     <string name="disable_sleep_timer">ଶୋଇବା ସମୟକୁ ଅକ୍ଷମ କରନ୍ତୁ</string>
-    <string name="watched">ପୂର୍ବରୁ ଦେଖାଯାଇଛି</string>
     <string name="start_sleep_timer">ଶୋଇବା ସମୟ ଆରମ୍ଭ କରନ୍ତୁ</string>
     <string name="finished">ସମାପ୍ତ</string>
     <string name="no_segments_found">ଏହି ଭିଡିଓ ପାଇଁ ଏପର୍ଯ୍ୟନ୍ତ କୌଣସି ବିଭାଗ ନାହିଁ ।</string>
@@ -480,7 +452,6 @@
     <string name="default_language">ଡିଫଲ୍ଟ</string>
     <string name="external_player">ବାହ୍ୟ ଖେଳାଳୀ</string>
     <string name="change">ପରିବର୍ତ୍ତନ କରନ୍ତୁ</string>
-    <string name="behavior_when_minimized">ସର୍ବନିମ୍ନ ହେଲେ ଆଚରଣ</string>
     <string name="external_download_provider_summary">ଭିଡିଓ ଡାଉନଲୋଡ୍ କରିବା ପାଇଁ ଆପଣ ବ୍ୟବହାର କରିବାକୁ ଚାହୁଁଥିବା ଆପର ପ୍ୟାକେଜ୍ ନାମ ପ୍ରବେଶ କରନ୍ତୁ । LibreTube ର ଇନବିଲ୍ଟ ଡାଉନଲୋଡର୍ ବ୍ୟବହାର କରିବାକୁ ଖାଲି ଛାଡିଦିଅ ।</string>
     <string name="external_download_provider">ବାହ୍ୟ ଡାଉନଲୋଡ୍ ପ୍ରଦାନକାରୀ</string>
     <string name="import_temp_playlist_summary">ଆପଣ \'%1$s\' ନାମକ ଏକ ନୂତନ ପ୍ଲେଲିଷ୍ଟ ସୃଷ୍ଟି କରିବାକୁ ଚାହୁଁଛନ୍ତି କି? ପ୍ଲେ ଲିଷ୍ଟରେ%2$d ଭିଡିଓ ରହିବ ।</string>
