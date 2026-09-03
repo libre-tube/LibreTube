@@ -245,7 +245,7 @@ abstract class AbstractPlayerService : MediaLibraryService(), MediaLibrarySessio
 
         val nextVideo = videoId ?: PlayingQueue.getNext()
         ?: relatedStreams?.firstOrNull { !it.isLive }?.url?.toID()
-            ?.takeIf { PlayerHelper.autoPlayEnabled }
+            ?.takeIf { PlayerHelper.autoPlayEnabled && PlayerHelper.relatedStreamsEnabled }
         ?: return
 
         navigateVideo(nextVideo)
