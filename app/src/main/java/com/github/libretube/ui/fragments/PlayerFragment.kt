@@ -196,11 +196,11 @@ class PlayerFragment : Fragment(R.layout.fragment_player), CustomPlayerCallback 
 
             when (event) {
                 PlayerEvent.Next -> {
-                    PlayingQueue.getNext()?.let { playNextVideo(it) }
+                    PlayingQueue.getNext()?.let { playVideo(it) }
                 }
 
                 PlayerEvent.Prev -> {
-                    PlayingQueue.getPrev()?.let { playNextVideo(it) }
+                    PlayingQueue.getPrev()?.let { playVideo(it) }
                 }
 
                 PlayerEvent.Background -> {
@@ -567,7 +567,7 @@ class PlayerFragment : Fragment(R.layout.fragment_player), CustomPlayerCallback 
 
                 // reload the streams data and playback, metadata apparently no longer exists
                 if (streams == null) {
-                    playNextVideo(videoId)
+                    playVideo(videoId)
                     return@startMediaService
                 }
 
@@ -732,11 +732,11 @@ class PlayerFragment : Fragment(R.layout.fragment_player), CustomPlayerCallback 
         }
 
         playerControlsBinding.skipPrev.setOnClickListener {
-            PlayingQueue.getPrev()?.let { prev -> playNextVideo(prev) }
+            PlayingQueue.getPrev()?.let { prev -> playVideo(prev) }
         }
 
         playerControlsBinding.skipNext.setOnClickListener {
-            PlayingQueue.getNext()?.let { next -> playNextVideo(next) }
+            PlayingQueue.getNext()?.let { next -> playVideo(next) }
         }
 
         binding.relPlayerDownload.setOnClickListener {
@@ -1079,10 +1079,20 @@ class PlayerFragment : Fragment(R.layout.fragment_player), CustomPlayerCallback 
      * You many only call this if the video is of the same type as the type of the currently running
      * video, i.e. either both are online or both are offline.
      */
-    fun playNextVideo(nextId: String) {
+    fun playVideo(videoId: String) {
         playerController.sendCustomCommand(
             AbstractPlayerService.runPlayerActionCommand,
-            bundleOf(PlayerCommand.PLAY_VIDEO_BY_ID.name to nextId)
+            bundleOf(PlayerCommand.PLAY_VIDEO_BY_ID.name to videoId)
+        )
+    }
+
+    /**
+     * Play the next video.
+     */
+    fun playNextVideo() {
+        playerController.sendCustomCommand(
+            AbstractPlayerService.runPlayerActionCommand,
+            bundleOf(PlayerCommand.PLAY_NEXT_VIDEO.name to null)
         )
     }
 
@@ -1232,11 +1242,7 @@ class PlayerFragment : Fragment(R.layout.fragment_player), CustomPlayerCallback 
             }
         }
         playerBackgroundBinding.autoplayCountdown.startCountdown {
-            val nextVideo = PlayingQueue.getNext()
-                ?: streams.relatedStreams.firstOrNull { !it.isLive }?.url?.toID()
-                    ?.takeIf { PlayerHelper.autoPlayEnabled }
-                ?: return@startCountdown
-            playNextVideo(nextVideo)
+            playNextVideo()
         }
     }
 
@@ -1267,7 +1273,7 @@ class PlayerFragment : Fragment(R.layout.fragment_player), CustomPlayerCallback 
             }
         } else {
             // YouTube video link without time or not the current video, thus load in player
-            playNextVideo(videoId)
+            playVideo(videoId)
         }
     }
 

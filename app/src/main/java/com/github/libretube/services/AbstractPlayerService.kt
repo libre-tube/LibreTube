@@ -202,6 +202,10 @@ abstract class AbstractPlayerService : MediaLibraryService(), MediaLibrarySessio
                 navigateVideo(args.getString(PlayerCommand.PLAY_VIDEO_BY_ID.name) ?: return)
             }
 
+            args.containsKey(PlayerCommand.PLAY_NEXT_VIDEO.name) -> {
+                playNextVideo()
+            }
+
             args.containsKey(PlayerCommand.TOGGLE_AUDIO_ONLY_MODE.name) -> {
                 isAudioOnlyPlayer = args.getBoolean(PlayerCommand.TOGGLE_AUDIO_ONLY_MODE.name)
                 trackSelector?.updateParameters {
