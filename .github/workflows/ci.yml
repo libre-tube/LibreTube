@@ -17,15 +17,8 @@ on:
 
 jobs:
   debug-builds:
-    permissions:
-      contents: write
     runs-on: ubuntu-latest
     steps:
-      - name: Get Date and Time
-        run: |
-          echo "TIME=$(date -u +'%T')" >> $GITHUB_ENV
-          echo "DATE=$(date -u +'%d-%m-%Y')" >> $GITHUB_ENV
-
       - uses: actions/checkout@v6
       - uses: gradle/actions/wrapper-validation@v5
       - uses: actions/setup-python@v6
@@ -59,10 +52,29 @@ jobs:
         uses: actions/upload-artifact@v6
         with:
           name: app
-          path: app/build/outputs/apk/debug/*.apk
+          path: app/build/outputs/apk/debug/app-debug-signed.apk
+
+  release-nightly:
+    if: github.ref_name == 'master'
+    permissions:
+      contents: write
+    runs-on: ubuntu-latest
+    needs: debug-builds
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Download Debug APK
+        uses: actions/download-artifact@v5
+        with:
+          name: app
+          path: .
+
+      - name: Get Date and Time
+        run: |
+          echo "TIME=$(date -u +'%T')" >> $GITHUB_ENV
+          echo "DATE=$(date -u +'%d-%m-%Y')" >> $GITHUB_ENV
 
       - name: Create Nightly Tag
-        if: github.ref == 'refs/heads/master'
         run: git tag -f nightly && git push -f origin nightly
 
       - name: Create Nightly Release
@@ -75,7 +87,7 @@ jobs:
           prerelease: true
           allowUpdates: true
           updateOnlyUnreleased: true
-          artifacts: app/build/outputs/apk/debug/app-debug-signed.apk
+          artifacts: app-debug-signed.apk
           name: LibreTube Nightly ${{ env.DATE }}
           body: |
             LibreTube Nightly build from ${{ env.DATE }} ${{ env.TIME }}
