@@ -75,7 +75,7 @@ jobs:
           prerelease: true
           allowUpdates: true
           updateOnlyUnreleased: true
-          artifacts: app/build/outputs/apk/debug/*.apk
+          artifacts: app/build/outputs/apk/debug/app-debug-signed.apk
           name: LibreTube Nightly ${{ env.DATE }}
           body: |
             LibreTube Nightly build from ${{ env.DATE }} ${{ env.TIME }}
