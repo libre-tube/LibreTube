@@ -1394,9 +1394,9 @@ class PlayerFragment : Fragment(R.layout.fragment_player), CustomPlayerCallback 
     /**
      * Detect whether PiP is supported and enabled
      */
-    private fun isPipAvailable(): Boolean {
-        return PictureInPictureCompat.isPictureInPictureAvailable(requireContext())
-    }
+    private fun isPipAvailable() =
+        PictureInPictureCompat.isPictureInPictureAvailable(requireContext())
+                && PictureInPictureCompat.isPictureInPictureEnabled(requireContext())
 
     private fun shouldStartPiP(): Boolean {
         return isPipAvailable() && ::playerController.isInitialized && playerController.isPlaying
