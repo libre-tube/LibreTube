@@ -8,7 +8,6 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.ListAdapter
 import com.github.libretube.constants.IntentData
 import com.github.libretube.databinding.VideoRowBinding
-import com.github.libretube.db.DatabaseHolder
 import com.github.libretube.db.obj.WatchHistoryItem
 import com.github.libretube.helpers.ImageHelper
 import com.github.libretube.helpers.NavigationHelper
@@ -20,12 +19,12 @@ import com.github.libretube.ui.extensions.setWatchProgressLength
 import com.github.libretube.ui.sheets.VideoOptionsBottomSheet
 import com.github.libretube.ui.viewholders.WatchHistoryViewHolder
 import com.github.libretube.util.TextUtils
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
-class WatchHistoryAdapter :
+class WatchHistoryAdapter(
+    private val isVideoDownloaded: (String) -> Boolean,
+    private val getWatchPosition: (String) -> Long?,
+    private val onWatchStatusChanged: (WatchHistoryItem, Boolean) -> Unit
+) :
     ListAdapter<WatchHistoryItem, WatchHistoryViewHolder>(DiffUtilItemCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WatchHistoryViewHolder {
@@ -35,7 +34,7 @@ class WatchHistoryAdapter :
     }
 
     override fun onBindViewHolder(holder: WatchHistoryViewHolder, position: Int) {
-        val video = getItem(holder.bindingAdapterPosition)
+        val video = getItem(position)
         holder.binding.apply {
             videoTitle.text = video.title
             channelName.text = video.uploader
@@ -46,12 +45,14 @@ class WatchHistoryAdapter :
             if (video.duration != null) {
                 // we pass in 0 for the uploadDate, as a future video cannot be watched already
                 thumbnailDuration.setFormattedDuration(video.duration, null, 0)
+                thumbnailDurationCard.isVisible = true
             } else {
                 thumbnailDurationCard.isGone = true
             }
 
             if (video.uploaderAvatar != null) {
                 ImageHelper.loadImage(video.uploaderAvatar, channelImage, true)
+                channelImageContainer.isVisible = true
             } else {
                 channelImageContainer.isGone = true
             }
@@ -70,8 +71,10 @@ class WatchHistoryAdapter :
                 fragmentManager.setFragmentResultListener(
                     VideoOptionsBottomSheet.VIDEO_OPTIONS_SHEET_REQUEST_KEY,
                     activity
-                ) { _, _ ->
-                    notifyItemChanged(position)
+                ) { _, result ->
+                    val isVideoWatched = result.getBoolean(VideoOptionsBottomSheet.IS_VIDEO_WATCHED)
+                    onWatchStatusChanged(video, isVideoWatched)
+                    currentList.indexOf(video).takeIf { it >= 0 }?.let(::notifyItemChanged)
                 }
                 val sheet = VideoOptionsBottomSheet()
                 sheet.arguments = bundleOf(IntentData.streamItem to video.toStreamItem())
@@ -80,18 +83,10 @@ class WatchHistoryAdapter :
             }
 
             if (video.duration != null) watchProgress.setWatchProgressLength(
-                video.videoId,
+                getWatchPosition(video.videoId),
                 video.duration
-            )
-
-            CoroutineScope(Dispatchers.IO).launch {
-                val isDownloaded =
-                    DatabaseHolder.Database.downloadDao().exists(video.videoId)
-
-                withContext(Dispatchers.Main) {
-                    downloadBadge.isVisible = isDownloaded
-                }
-            }
+            ) else watchProgress.isGone = true
+            downloadBadge.isVisible = isVideoDownloaded(video.videoId)
         }
     }
 }
