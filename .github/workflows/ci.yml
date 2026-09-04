@@ -25,7 +25,7 @@ jobs:
         run: |
           echo "TIME=$(date -u +'%T')" >> $GITHUB_ENV
           echo "DATE=$(date -u +'%d-%m-%Y')" >> $GITHUB_ENV
-  
+
       - uses: actions/checkout@v6
       - uses: gradle/actions/wrapper-validation@v5
       - uses: actions/setup-python@v6
@@ -54,7 +54,7 @@ jobs:
           keyAlias: ${{ secrets.ANDROID_KEY_ALIAS }}
           keyStorePassword: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
           keyPassword: ${{ secrets.ANDROID_KEY_PASSWORD }}
-      
+
       - name: Upload APK
         uses: actions/upload-artifact@v6
         with:
@@ -64,7 +64,7 @@ jobs:
       - name: Create Nightly Tag
         if: github.ref == 'refs/heads/master'
         run: git tag -f nightly && git push -f origin nightly
-          
+
       - name: Create Nightly Release
         if: github.ref == 'refs/heads/master'
         uses: ncipollo/release-action@v1
@@ -79,6 +79,6 @@ jobs:
           name: LibreTube Nightly ${{ env.DATE }}
           body: |
             LibreTube Nightly build from ${{ env.DATE }} ${{ env.TIME }}
-            
+
             > [!NOTE]
             > Nightly builds include features/fixes before the official release. Therefore, they are generally less stable than normal releases. Use nightly builds at your own risk.
