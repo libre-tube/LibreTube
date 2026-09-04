@@ -16,6 +16,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.suspendCancellableCoroutine
 import kotlinx.coroutines.withContext
+import okhttp3.OkHttpClient
+import okhttp3.Request
 import java.time.Instant
 import kotlin.coroutines.Continuation
 import kotlin.coroutines.resume
@@ -31,6 +33,17 @@ class PoTokenWebView private constructor(
         onInitializationError(exception)
     }
     private lateinit var expirationInstant: Instant
+
+    private val client: OkHttpClient = OkHttpClient.Builder()
+        .addInterceptor { chain ->
+            val request = chain.request().newBuilder()
+                .addHeader("User-Agent", USER_AGENT)
+                .addHeader("Accept-Language", "en-US,en;q=0.9")
+                .addHeader("Accept", "*/*")
+                .build()
+            chain.proceed(request)
+        }
+        .build()
 
     //region Initialization
     init {
@@ -89,15 +102,20 @@ class PoTokenWebView private constructor(
         }
 
         CoroutineScope(Dispatchers.IO).launch(exceptionHandler) {
-            val responseBody = makeBotguardServiceRequest(
-                "https://www.youtube.com/api/jnn/v1/Create",
-                listOf(REQUEST_KEY)
-            )
-            val parsedChallengeData = parseChallengeData(responseBody)
+            val pageHtml = makeRequest("https://youtube.com/")
+            val (eventId, challengeData) = parseYoutubePageAttestation(pageHtml)
+
+            if (challengeData.interpreterJavascript == null) {
+                challengeData.interpreterJavascript =
+                    makeRequest(challengeData.interpreterScriptUrl!!)
+            }
+
             withContext(Dispatchers.Main) {
                 webView.evaluateJavascript(
                     """try {
-                             data = $parsedChallengeData
+                             data = ${challengeData.encode()}
+                             window.yt = window.yt || { config_: {} };
+                             window.yt.config_.EVENT_ID = "$eventId";
                              runBotGuard(data).then(function (result) {
                                  this.webPoSignalOutput = result.webPoSignalOutput
                                  $JS_INTERFACE.onRunBotguardResult(result.botguardResponse)
@@ -224,6 +242,15 @@ class PoTokenWebView private constructor(
     //endregion
 
     //region Utils
+    /**
+     * Makes a GET request to [url], returning to body of the response.
+     */
+    private suspend fun makeRequest(url: String): String = withContext(Dispatchers.IO) {
+        val request = Request.Builder().url(url).get().build()
+        val response = client.newCall(request).execute()
+        response.body.string()
+    }
+
     /**
      * Makes a POST request to [url] with the given [data] by setting the correct headers.
      * This is supposed to be used only during initialization. Returns the  response body
