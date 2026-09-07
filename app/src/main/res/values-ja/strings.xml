@@ -513,4 +513,12 @@
     <string name="checking_frequency_6_hours">6時間</string>
     <string name="checking_frequency_12_hours">12時間</string>
     <string name="checking_frequency_1_day">1日</string>
+    <string name="show_updates_summary">アプリを起動するたびに自動的に更新を確認します。</string>
+    <string name="sort_channel">チャンネル名</string>
+    <string name="sort_size">サイズ</string>
+    <string name="backup_creation_success">バックアップが正常に完了しました</string>
+    <string name="backup_creation_failed">バックアップの作成に失敗しました</string>
+    <string name="courses">コース</string>
+    <string name="ungrouped_channels">グループ化解除</string>
+    <string name="delete_playlist_include_vidoes">プレイリストからすべての動画も削除しますか？</string>
 </resources>
