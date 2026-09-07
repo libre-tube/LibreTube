@@ -4,6 +4,9 @@ import android.app.Activity
 import android.app.AppOpsManager
 import android.content.Context
 import android.content.pm.PackageManager
+import android.util.Log
+import com.github.libretube.extensions.TAG
+import com.github.libretube.extensions.toastFromMainThread
 
 object PictureInPictureCompat {
     /**
@@ -25,7 +28,14 @@ object PictureInPictureCompat {
 
     fun setPictureInPictureParams(activity: Activity, params: PictureInPictureParamsCompat) {
         if (isPictureInPictureAvailable(activity)) {
-            activity.setPictureInPictureParams(params.toPictureInPictureParams())
+            try {
+                activity.setPictureInPictureParams(params.toPictureInPictureParams())
+            } catch (e: IllegalStateException) {
+                // some devices claim to support PiP, but produce an exception when using PiP
+                // https://github.com/libre-tube/LibreTube/issues/8163
+                Log.e(TAG(), e.stackTraceToString())
+                activity.toastFromMainThread(e.localizedMessage.orEmpty())
+            }
         }
     }
 
