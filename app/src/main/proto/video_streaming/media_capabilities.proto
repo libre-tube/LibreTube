@@ -7,7 +7,22 @@ message MediaCapabilities {
   optional int32 hdr_mode_bitmask = 5;
 
   message VideoFormatCapability {
+    enum VideoCodec {
+      UNKNOWN_CODEC = 0;
+      H263 = 1;
+      H264 = 2;
+      VP8 = 3;
+      VP9 = 4;
+      H262 = 5;
+      VP6 = 6;
+      MPEG4 = 7;
+      AV1 = 8;
+      H265 = 9;
+      FLV1 = 10;
+    }
+
     optional int32 video_codec = 1;
+    optional bool efficient = 2;
     optional int32 max_height = 3;
     optional int32 max_width = 4;
     optional int32 max_framerate = 11;

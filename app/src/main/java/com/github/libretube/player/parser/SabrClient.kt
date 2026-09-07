@@ -7,6 +7,7 @@ import androidx.media3.common.util.UnstableApi
 import androidx.media3.exoplayer.upstream.DefaultBandwidthMeter
 import com.github.libretube.LibreTubeApp
 import com.github.libretube.api.poToken.PoTokenGenerator
+import com.github.libretube.helpers.DisplayHelper
 import com.github.libretube.player.manifest.Representation
 import com.github.libretube.player.manifest.SabrManifest
 import com.github.libretube.ui.dialogs.ShareDialog
@@ -24,6 +25,8 @@ import org.schabi.newpipe.extractor.services.youtube.YoutubeParsingHelper
 import video_streaming.BufferedRangeOuterClass.BufferedRange
 import video_streaming.ClientAbrStateOuterClass.ClientAbrState
 import video_streaming.FormatInitializationMetadataOuterClass.FormatInitializationMetadata
+import video_streaming.MediaCapabilitiesOuterClass.MediaCapabilities
+import video_streaming.MediaCapabilitiesOuterClass.MediaCapabilities.VideoFormatCapability
 import video_streaming.MediaHeaderOuterClass.MediaHeader
 import video_streaming.NextRequestPolicyOuterClass.NextRequestPolicy
 import video_streaming.PlaybackCookieOuterClass.PlaybackCookie
@@ -365,7 +368,21 @@ class SabrClient private constructor(
         val playerTimeMs = playbackRequest.segmentStartTimeMs
         val clientState = ClientAbrState.newBuilder()
             .setPlayerTimeMs(playerTimeMs)
-            //TODO: setMediaCapabilities for Android client: https://github.com/coletdjnz/yt-dlp-dev/blob/effe62991b1b87aafcc8f77a374d7ead9d461803/yt_dlp/extractor/youtube/_streaming/sabr/processor.py#L239
+            // only set for mobile clients
+            .setMediaCapabilities(
+                MediaCapabilities.newBuilder()
+                    .setHdrModeBitmask(if (DisplayHelper.supportsHdr(LibreTubeApp.instance)) 3 else 0)
+                    .addAllVideoFormatCapabilities(
+                        VideoFormatCapability.VideoCodec.entries.map {
+                            VideoFormatCapability.newBuilder()
+                                .setVideoCodec(it.ordinal)
+                                .setIs10BitSupported(true)
+                                .setEfficient(true)
+                                .build()
+                        }
+                    )
+                    .build()
+            )
             .setEnabledTrackTypesBitfield(if (videoFormat == null) 1 else 0)
             .setPlaybackRate(playbackRequest.playbackSpeed)
             .setElapsedWallTimeMs(lastRequestMs?.let { now -  it } ?: 0 )
