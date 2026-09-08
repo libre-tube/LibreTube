@@ -23,7 +23,7 @@ import com.github.libretube.ui.sheets.VideoOptionsBottomSheet
 import com.github.libretube.ui.viewholders.VideosViewHolder
 import com.github.libretube.util.DeArrowUtil
 import com.github.libretube.util.TextUtils
-import kotlinx.coroutines.CoroutineScope
+import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -60,7 +60,9 @@ class VideosAdapter(
             videoInfo.text = TextUtils.formatViewsString(root.context, video.views ?: -1, video.uploaded)
 
             video.duration?.let { thumbnailDuration.setFormattedDuration(it, video.isShort, video.uploaded) }
-            watchProgress.setWatchProgressLength(videoId, video.duration ?: 0L)
+            activity.lifecycleScope.launch {
+                watchProgress.setWatchProgressLength(videoId, video.duration ?: 0L)
+            }
             ImageHelper.loadImage(video.thumbnail, thumbnail)
 
             if (showChannelInfo) {
@@ -91,7 +93,7 @@ class VideosAdapter(
                 true
             }
 
-            CoroutineScope(Dispatchers.IO).launch {
+            activity.lifecycleScope.launch(Dispatchers.IO) {
                 val isDownloaded =
                     DatabaseHolder.Database.downloadDao().exists(videoId)
 
@@ -100,7 +102,7 @@ class VideosAdapter(
                 }
             }
 
-            CoroutineScope(Dispatchers.IO).launch {
+            activity.lifecycleScope.launch(Dispatchers.IO) {
                 DeArrowUtil.deArrowVideoId(videoId)?.let { (title, thumbnail) ->
                     withContext(Dispatchers.Main) {
                         if (title != null) holder.binding.videoTitle.text = title

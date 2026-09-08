@@ -29,10 +29,9 @@ import com.github.libretube.ui.sheets.DownloadOptionsBottomSheet.Companion.DELET
 import com.github.libretube.ui.viewholders.DownloadsViewHolder
 import com.github.libretube.util.TextUtils
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import kotlinx.coroutines.CoroutineScope
+import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
 import kotlin.io.path.exists
 import kotlin.io.path.fileSize
@@ -44,6 +43,8 @@ class DownloadsAdapter(
     private val currentSortOrder: () -> DownloadSortingOrder,
     private val toggleDownload: (DownloadWithItems) -> Boolean
 ) : ListAdapter<DownloadWithItems, DownloadsViewHolder>(DiffUtilItemCallback()) {
+    private var lifecycleActivity: BaseActivity? = null
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DownloadsViewHolder {
         val binding = VideoRowBinding.inflate(
             LayoutInflater.from(parent.context),
@@ -58,6 +59,9 @@ class DownloadsAdapter(
         val downloadWithItems = getItem(holder.bindingAdapterPosition)
         val (download, items, _) = downloadWithItems
 
+        val activity = holder.itemView.context as BaseActivity
+        lifecycleActivity = activity
+
         holder.binding.apply {
             fileSize.isVisible = true
 
@@ -65,7 +69,9 @@ class DownloadsAdapter(
             videoTitle.text = download.title
             channelName.text = download.uploader
             videoInfo.text = download.uploadDate?.let { TextUtils.localizeDate(it) }
-            watchProgress.setWatchProgressLength(download.videoId, download.duration ?: 0)
+            activity.lifecycleScope.launch {
+                watchProgress.setWatchProgressLength(download.videoId, download.duration ?: 0)
+            }
 
             val downloadSize = items.sumOf { it.downloadSize }
             val currentSize = items.filter { it.path.exists() }.sumOf { it.path.fileSize() }
@@ -173,7 +179,7 @@ class DownloadsAdapter(
     }
 
     private fun deleteDownload(position: Int) {
-        CoroutineScope(Dispatchers.IO).launch {
+        lifecycleActivity?.lifecycleScope?.launch(Dispatchers.IO) {
             DownloadHelper.deleteDownloadIncludingFiles(getItem(position))
 
             withContext(Dispatchers.Main) {
@@ -185,13 +191,14 @@ class DownloadsAdapter(
     }
 
     fun deleteAllDownloads(onlyDeleteWatched: Boolean) {
-        val (toDelete, toKeep) = currentList.partition {
-            !onlyDeleteWatched || runBlocking(Dispatchers.IO) {
-                DatabaseHelper.isVideoWatched(it.download.videoId, it.download.duration ?: 0)
+        lifecycleActivity?.lifecycleScope?.launch(Dispatchers.IO) {
+            val (toDelete, toKeep) = currentList.partition {
+                !onlyDeleteWatched || DatabaseHelper.isVideoWatched(
+                    it.download.videoId,
+                    it.download.duration ?: 0
+                )
             }
-        }
 
-        CoroutineScope(Dispatchers.IO).launch {
             for (item in toDelete) {
                 DownloadHelper.deleteDownloadIncludingFiles(item)
             }

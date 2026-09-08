@@ -53,7 +53,6 @@ import com.github.libretube.util.TextUtils
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
 import org.schabi.newpipe.extractor.timeago.patterns.it
 
@@ -101,10 +100,12 @@ class PlaylistFragment : DynamicLayoutManagerFragment(R.layout.fragment_playlist
 
         binding.playlistProgress.isVisible = true
 
-        isBookmarked = runBlocking(Dispatchers.IO) {
-            DatabaseHolder.Database.playlistBookmarkDao().includes(playlistId)
+        lifecycleScope.launch(Dispatchers.IO) {
+            isBookmarked = DatabaseHolder.Database.playlistBookmarkDao().includes(playlistId)
+            withContext(Dispatchers.Main) {
+                if (isAdded) updateBookmarkRes()
+            }
         }
-        updateBookmarkRes()
 
         commonPlayerViewModel.isMiniPlayerVisible.observe(viewLifecycleOwner) {
             binding.playlistRecView.updatePadding(bottom = if (it) 64f.dpToPx() else 0)

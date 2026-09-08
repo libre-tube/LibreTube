@@ -20,7 +20,7 @@ import com.github.libretube.ui.extensions.setWatchProgressLength
 import com.github.libretube.ui.sheets.VideoOptionsBottomSheet
 import com.github.libretube.ui.viewholders.WatchHistoryViewHolder
 import com.github.libretube.util.TextUtils
-import kotlinx.coroutines.CoroutineScope
+import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -79,12 +79,14 @@ class WatchHistoryAdapter :
                 true
             }
 
-            if (video.duration != null) watchProgress.setWatchProgressLength(
-                video.videoId,
-                video.duration
-            )
+            if (video.duration != null) activity.lifecycleScope.launch {
+                watchProgress.setWatchProgressLength(
+                    video.videoId,
+                    video.duration
+                )
+            }
 
-            CoroutineScope(Dispatchers.IO).launch {
+            activity.lifecycleScope.launch(Dispatchers.IO) {
                 val isDownloaded =
                     DatabaseHolder.Database.downloadDao().exists(video.videoId)
 

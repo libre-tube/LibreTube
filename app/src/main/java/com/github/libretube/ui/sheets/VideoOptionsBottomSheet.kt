@@ -152,11 +152,11 @@ class VideoOptionsBottomSheet : BaseBottomSheet() {
 
         // show the mark as watched or unwatched option if watch positions are enabled
         if (PlayerHelper.watchPositionsAny || PlayerHelper.watchHistoryEnabled) {
-            val watchHistoryEntry = runBlocking(Dispatchers.IO) {
-                DatabaseHolder.Database.watchHistoryDao().findById(videoId)
+            val (watchHistoryEntry, positionRaw) = runBlocking(Dispatchers.IO) {
+                DatabaseHolder.Database.watchHistoryDao().findById(videoId) to
+                    DatabaseHelper.getWatchPosition(videoId)
             }
-
-            val position = DatabaseHelper.getWatchPositionBlocking(videoId) ?: 0
+            val position = positionRaw ?: 0
             val isCompleted = DatabaseHelper.isVideoWatched(position, streamItem.duration ?: 0)
             if (position != 0L || watchHistoryEntry != null) {
                 optionsList += R.string.mark_as_unwatched

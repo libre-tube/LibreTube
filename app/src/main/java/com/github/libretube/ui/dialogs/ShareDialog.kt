@@ -8,6 +8,7 @@ import android.widget.RadioButton
 import androidx.core.view.isVisible
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.DialogFragment
+import androidx.lifecycle.lifecycleScope
 import com.github.libretube.R
 import com.github.libretube.constants.IntentData
 import com.github.libretube.constants.PreferenceKeys
@@ -24,12 +25,14 @@ import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.obj.ShareData
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class ShareDialog : DialogFragment() {
     private lateinit var id: String
     private lateinit var shareObjectType: ShareObjectType
     private lateinit var shareData: ShareData
+    private var customInstances: List<CustomInstance> = emptyList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,43 +44,49 @@ class ShareDialog : DialogFragment() {
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        // get the api urls of the other custom instances
-        val customInstances = runBlocking(Dispatchers.IO) {
-            Database.customInstanceDao().getAll().filter { it.frontendUrl.isNotEmpty() }
-        }
-
         val shareableTitle = shareData.currentChannel
             ?: shareData.currentVideo
             ?: shareData.currentPlaylist.orEmpty()
 
         val binding = DialogShareBinding.inflate(layoutInflater)
 
-        // add one radio button per custom instance
-        for (customInstance in customInstances) {
-            val radioButton = RadioButton(context).apply {
-                text = customInstance.name
-                // the view ids are the hash code of the name
-                // this guarantees that the right instance is selected
-                // even if the order of the custom instances changed
-                id = customInstance.name.hashCode()
-                layoutParams = LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.WRAP_CONTENT,
-                    LinearLayout.LayoutParams.WRAP_CONTENT
-                )
-            }
-            binding.shareHostGroup.addView(radioButton)
-        }
+        lifecycleScope.launch(Dispatchers.IO) {
+            // get the api urls of the other custom instances
+            customInstances = Database.customInstanceDao().getAll().filter { it.frontendUrl.isNotEmpty() }
 
-        binding.shareHostGroup.check(
-            when (val previousSelection =
-                PreferenceHelper.getInt(PreferenceKeys.SELECTED_SHARE_HOST, 0)) {
-                0 -> binding.youtube.id
-                1 -> binding.piped.id
-                else -> customInstances.firstOrNull {
-                    it.name.hashCode() == previousSelection
-                }?.name?.hashCode() ?: 0
+            withContext(Dispatchers.Main) {
+                if (!isAdded) return@withContext
+
+                // add one radio button per custom instance
+                for (customInstance in customInstances) {
+                    val radioButton = RadioButton(context).apply {
+                        text = customInstance.name
+                        // the view ids are the hash code of the name
+                        // this guarantees that the right instance is selected
+                        // even if the order of the custom instances changed
+                        id = customInstance.name.hashCode()
+                        layoutParams = LinearLayout.LayoutParams(
+                            LinearLayout.LayoutParams.WRAP_CONTENT,
+                            LinearLayout.LayoutParams.WRAP_CONTENT
+                        )
+                    }
+                    binding.shareHostGroup.addView(radioButton)
+                }
+
+                binding.shareHostGroup.check(
+                    when (val previousSelection =
+                        PreferenceHelper.getInt(PreferenceKeys.SELECTED_SHARE_HOST, 0)) {
+                        0 -> binding.youtube.id
+                        1 -> binding.piped.id
+                        else -> customInstances.firstOrNull {
+                            it.name.hashCode() == previousSelection
+                        }?.name?.hashCode() ?: 0
+                    }
+                )
+
+                binding.linkPreview.text = generateLinkText(binding, customInstances)
             }
-        )
+        }
 
         binding.shareHostGroup.setOnCheckedChangeListener { _, checkedId ->
             binding.linkPreview.text = generateLinkText(binding, customInstances)
@@ -104,9 +113,14 @@ class ShareDialog : DialogFragment() {
             binding.timeStamp.addTextChangedListener {
                 binding.linkPreview.text = generateLinkText(binding, customInstances)
             }
-            val timeStamp =
-                shareData.currentPosition ?: DatabaseHelper.getWatchPositionBlocking(id)?.div(1000)
-            binding.timeStamp.setText((timeStamp ?: 0L).toString())
+            lifecycleScope.launch(Dispatchers.IO) {
+                val timeStamp = shareData.currentPosition
+                    ?: DatabaseHelper.getWatchPosition(id)?.div(1000)
+                withContext(Dispatchers.Main) {
+                    if (!isAdded) return@withContext
+                    binding.timeStamp.setText((timeStamp ?: 0L).toString())
+                }
+            }
             if (binding.timeCodeSwitch.isChecked) {
                 binding.timeStampInputLayout.isVisible = true
             }
@@ -115,8 +129,6 @@ class ShareDialog : DialogFragment() {
         binding.copyLink.setOnClickListener {
             ClipboardHelper.save(requireContext(), text = binding.linkPreview.text.toString())
         }
-
-        binding.linkPreview.text = generateLinkText(binding, customInstances)
 
         return MaterialAlertDialogBuilder(requireContext())
             .setTitle(getString(R.string.share))

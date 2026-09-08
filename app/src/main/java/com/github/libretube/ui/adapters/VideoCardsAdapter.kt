@@ -27,7 +27,7 @@ import com.github.libretube.ui.sheets.VideoOptionsBottomSheet
 import com.github.libretube.ui.viewholders.VideoCardsViewHolder
 import com.github.libretube.util.DeArrowUtil
 import com.github.libretube.util.TextUtils
-import kotlinx.coroutines.CoroutineScope
+import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -79,7 +79,9 @@ class VideoCardsAdapter(private val columnWidthDp: Float? = null) :
                     width = columnWidthDp.dpToPx()
                 }
             }
-            watchProgress.setWatchProgressLength(videoId, video.duration ?: 0L)
+            activity.lifecycleScope.launch {
+                watchProgress.setWatchProgressLength(videoId, video.duration ?: 0L)
+            }
 
             textViewTitle.text = video.title
             textViewChannel.text = TextUtils.formatViewsString(
@@ -129,7 +131,7 @@ class VideoCardsAdapter(private val columnWidthDp: Float? = null) :
 
             // always hide the icon, to avoid issues where the icon is recycled and shown until the web requests succeeds
             sponsorBadgeCard.isVisible = false
-            CoroutineScope(Dispatchers.IO).launch {
+            activity.lifecycleScope.launch(Dispatchers.IO) {
                 if (PlayerHelper.sponsorBlockEnabled) {
                     val sponsor = SponsorBlockLabelHelper.getVideoLabels(videoId)
                     withContext(Dispatchers.Main) {

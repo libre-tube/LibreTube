@@ -11,14 +11,18 @@ import androidx.core.view.isVisible
 import androidx.core.view.updateLayoutParams
 import com.github.libretube.db.DatabaseHelper
 import com.github.libretube.helpers.ThemeHelper
+import kotlinx.coroutines.withContext
+import kotlinx.coroutines.Dispatchers
 
 /**
  * Shows the already watched time under the video
  * @param videoId The id of the video to inspect
  * @param duration The duration of the video in seconds
  */
-fun View.setWatchProgressLength(videoId: String, duration: Long) {
-    val progress = DatabaseHelper.getWatchPositionBlocking(videoId)?.div(1000)
+suspend fun View.setWatchProgressLength(videoId: String, duration: Long) {
+    val progress = withContext(Dispatchers.IO) {
+        DatabaseHelper.getWatchPosition(videoId)?.div(1000)
+    }
     if (progress == null || progress == 0L) {
         isGone = true
         return

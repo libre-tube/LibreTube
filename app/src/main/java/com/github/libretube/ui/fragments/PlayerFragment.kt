@@ -112,7 +112,6 @@ import com.github.libretube.util.TextUtils.toTimeInSeconds
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
 import kotlin.io.path.exists
 import kotlin.math.absoluteValue
@@ -479,39 +478,43 @@ class PlayerFragment : Fragment(R.layout.fragment_player), CustomPlayerCallback 
             }
         }
 
-        val localDownloadVersion = runBlocking(Dispatchers.IO) {
-            DatabaseHolder.Database.downloadDao().findById(videoId)
-        }
+        lifecycleScope.launch(Dispatchers.IO) {
+            val localDownloadVersion = DatabaseHolder.Database.downloadDao().findById(videoId)
 
-        if (!isOffline && localDownloadVersion != null && createNewSession) {
-            // the dialog must also be visible when in fullscreen, thus we need to use the activity's
-            // fragment manager and not the one from [PlayerFragment]
-            val fragmentManager = requireActivity().supportFragmentManager
+            if (!isOffline && localDownloadVersion != null && createNewSession) {
+                // the dialog must also be visible when in fullscreen, thus we need to use the activity's
+                // fragment manager and not the one from [PlayerFragment]
+                val fragmentManager = requireActivity().supportFragmentManager
 
-            fragmentManager.setFragmentResultListener(
-                PlayOfflineDialog.PLAY_OFFLINE_DIALOG_REQUEST_KEY, viewLifecycleOwner
-            ) { _, bundle ->
-                isOffline = bundle.getBoolean(IntentData.isPlayingOffline)
+                fragmentManager.setFragmentResultListener(
+                    PlayOfflineDialog.PLAY_OFFLINE_DIALOG_REQUEST_KEY, viewLifecycleOwner
+                ) { _, bundle ->
+                    isOffline = bundle.getBoolean(IntentData.isPlayingOffline)
 
-                // start a new playback session - the method will read `isOffline` and decide whether
-                // to play the downloaded video based on it, so it's enough to set `isOffline` here
-                attachToPlayerService(playerData, true)
+                    // start a new playback session - the method will read `isOffline` and decide whether
+                    // to play the downloaded video based on it, so it's enough to set `isOffline` here
+                    attachToPlayerService(playerData, true)
+                }
+
+                val downloadInfo = DownloadHelper.extractDownloadInfoText(
+                    requireContext(),
+                    localDownloadVersion
+                ).toTypedArray()
+
+                withContext(Dispatchers.Main) {
+                    PlayOfflineDialog().apply {
+                        arguments = bundleOf(
+                            IntentData.videoId to videoId,
+                            IntentData.videoTitle to localDownloadVersion.download.title,
+                            IntentData.downloadInfo to downloadInfo
+                        )
+                    }.show(fragmentManager, null)
+                }
+            } else {
+                withContext(Dispatchers.Main) {
+                    attachToPlayerService(playerData, createNewSession)
+                }
             }
-
-            val downloadInfo = DownloadHelper.extractDownloadInfoText(
-                requireContext(),
-                localDownloadVersion
-            ).toTypedArray()
-
-            PlayOfflineDialog().apply {
-                arguments = bundleOf(
-                    IntentData.videoId to videoId,
-                    IntentData.videoTitle to localDownloadVersion.download.title,
-                    IntentData.downloadInfo to downloadInfo
-                )
-            }.show(fragmentManager, null)
-        } else {
-            attachToPlayerService(playerData, createNewSession)
         }
 
         val onBackPressedCallback = object : OnBackPressedCallback(true) {

@@ -32,7 +32,7 @@ import com.github.libretube.ui.sheets.VideoOptionsBottomSheet
 import com.github.libretube.ui.viewholders.SearchViewHolder
 import com.github.libretube.util.DeArrowUtil
 import com.github.libretube.util.TextUtils
-import kotlinx.coroutines.CoroutineScope
+import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -129,9 +129,11 @@ class SearchResultsAdapter(
             channelContainer.setOnClickListener {
                 NavigationHelper.navigateChannel(root.context, item.uploaderUrl)
             }
-            watchProgress.setWatchProgressLength(videoId, item.duration)
+            activity.lifecycleScope.launch {
+                watchProgress.setWatchProgressLength(videoId, item.duration)
+            }
 
-            CoroutineScope(Dispatchers.IO).launch {
+            activity.lifecycleScope.launch(Dispatchers.IO) {
                 val isDownloaded =
                     DatabaseHolder.Database.downloadDao().exists(videoId)
 
@@ -140,7 +142,7 @@ class SearchResultsAdapter(
                 }
             }
 
-            CoroutineScope(Dispatchers.IO).launch {
+            activity.lifecycleScope.launch(Dispatchers.IO) {
                 DeArrowUtil.deArrowVideoId(videoId)?.let { (title, thumbnail) ->
                     withContext(Dispatchers.Main) {
                         if (title != null) binding.videoTitle.text = title

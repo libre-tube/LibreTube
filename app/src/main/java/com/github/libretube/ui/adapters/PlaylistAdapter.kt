@@ -21,7 +21,7 @@ import com.github.libretube.ui.sheets.VideoOptionsBottomSheet
 import com.github.libretube.ui.sheets.VideoOptionsBottomSheet.Companion.VIDEO_OPTIONS_SHEET_REQUEST_KEY
 import com.github.libretube.ui.viewholders.PlaylistViewHolder
 import com.github.libretube.util.TextUtils
-import kotlinx.coroutines.CoroutineScope
+import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -94,9 +94,13 @@ class PlaylistAdapter(
                 }
             }
 
-            streamItem.duration?.let { watchProgress.setWatchProgressLength(videoId, it) }
+            streamItem.duration?.let {
+                activity.lifecycleScope.launch {
+                    watchProgress.setWatchProgressLength(videoId, it)
+                }
+            }
 
-            CoroutineScope(Dispatchers.IO).launch {
+            activity.lifecycleScope.launch(Dispatchers.IO) {
                 val isDownloaded =
                     DatabaseHolder.Database.downloadDao().exists(videoId)
 
