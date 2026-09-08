@@ -7,6 +7,7 @@ import com.github.libretube.api.obj.Message
 import com.github.libretube.api.obj.Playlist
 import com.github.libretube.api.obj.Playlists
 import com.github.libretube.api.obj.StreamItem
+import com.github.libretube.db.obj.LocalPlaylistItem
 import com.github.libretube.extensions.toID
 import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.obj.PipedImportPlaylist
@@ -77,5 +78,9 @@ class PipedPlaylistRepository: PlaylistRepository {
                 EditPlaylistBody(playlistId)
             ).isOk()
         }.getOrDefault(false)
+    }
+
+    override suspend fun getVideoFromPlaylist(videoId: String): LocalPlaylistItem? {
+        return null
     }
 }
