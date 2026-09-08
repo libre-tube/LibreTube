@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<data-extraction-rules>
+    <!-- Exclude the Piped authentication prefs file from both cloud and
+         device-to-device backups. It contains the session token and username
+         in plaintext, so it must never leave the device.  -->
+    <cloud-backup>
+        <exclude
+            domain="sharedpref"
+            path="auth.xml" />
+        <exclude
+            domain="sharedpref"
+            path="auth.xml.bak" />
+        <exclude
+            domain="sharedpref"
+            path="auth.xml.bak.isbj" />
+    </cloud-backup>
+    <device-transfer>
+        <exclude
+            domain="sharedpref"
+            path="auth.xml" />
+        <exclude
+            domain="sharedpref"
+            path="auth.xml.bak" />
+        <exclude
+            domain="sharedpref"
+            path="auth.xml.bak.isbj" />
+    </device-transfer>
+</data-extraction-rules>

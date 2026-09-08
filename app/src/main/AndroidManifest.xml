@@ -22,6 +22,8 @@
     <application
         android:name=".LibreTubeApp"
         android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/data_extraction_rules"
         android:banner="@mipmap/ic_launcher"
         android:enableOnBackInvokedCallback="true"
         android:hardwareAccelerated="true"
@@ -128,15 +130,12 @@
 
         <activity-alias
             android:name=".Default"
-            android:configChanges="keyboard|keyboardHidden|screenSize|smallestScreenSize|screenLayout|orientation|uiMode"
             android:enabled="true"
             android:exported="true"
             android:icon="@mipmap/ic_launcher"
             android:roundIcon="@mipmap/ic_launcher_round"
-            android:supportsPictureInPicture="true"
             android:targetActivity=".ui.activities.MainActivity"
-            android:theme="@style/SplashScreenTheme"
-            android:windowSoftInputMode="adjustPan">
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -147,15 +146,12 @@
 
         <activity-alias
             android:name=".IconGradient"
-            android:configChanges="keyboard|keyboardHidden|screenSize|smallestScreenSize|screenLayout|orientation|uiMode"
             android:enabled="false"
             android:exported="true"
             android:icon="@mipmap/ic_gradient"
             android:roundIcon="@mipmap/ic_gradient_round"
-            android:supportsPictureInPicture="true"
             android:targetActivity=".ui.activities.MainActivity"
-            android:theme="@style/SplashScreenTheme"
-            android:windowSoftInputMode="adjustPan">
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -167,15 +163,12 @@
 
         <activity-alias
             android:name=".DefaultLight"
-            android:configChanges="keyboard|keyboardHidden|screenSize|smallestScreenSize|screenLayout|orientation|uiMode"
             android:enabled="false"
             android:exported="true"
             android:icon="@mipmap/ic_launcher_light"
             android:roundIcon="@mipmap/ic_launcher_light_round"
-            android:supportsPictureInPicture="true"
             android:targetActivity=".ui.activities.MainActivity"
-            android:theme="@style/SplashScreenTheme"
-            android:windowSoftInputMode="adjustPan">
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -187,15 +180,12 @@
 
         <activity-alias
             android:name=".IconFire"
-            android:configChanges="keyboard|keyboardHidden|screenSize|smallestScreenSize|screenLayout|orientation|uiMode"
             android:enabled="false"
             android:exported="true"
             android:icon="@mipmap/ic_fire"
             android:roundIcon="@mipmap/ic_fire_round"
-            android:supportsPictureInPicture="true"
             android:targetActivity=".ui.activities.MainActivity"
-            android:theme="@style/SplashScreenTheme"
-            android:windowSoftInputMode="adjustPan">
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -207,15 +197,12 @@
 
         <activity-alias
             android:name=".IconFlame"
-            android:configChanges="keyboard|keyboardHidden|screenSize|smallestScreenSize|screenLayout|orientation|uiMode"
             android:enabled="false"
             android:exported="true"
             android:icon="@mipmap/ic_flame"
             android:roundIcon="@mipmap/ic_flame_round"
-            android:supportsPictureInPicture="true"
             android:targetActivity=".ui.activities.MainActivity"
-            android:theme="@style/SplashScreenTheme"
-            android:windowSoftInputMode="adjustPan">
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -227,15 +214,12 @@
 
         <activity-alias
             android:name=".IconShaped"
-            android:configChanges="keyboard|keyboardHidden|screenSize|smallestScreenSize|screenLayout|orientation|uiMode"
             android:enabled="false"
             android:exported="true"
             android:icon="@mipmap/ic_shaped"
             android:roundIcon="@mipmap/ic_shaped_round"
-            android:supportsPictureInPicture="true"
             android:targetActivity=".ui.activities.MainActivity"
-            android:theme="@style/SplashScreenTheme"
-            android:windowSoftInputMode="adjustPan">
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -245,15 +229,12 @@
 
         <activity-alias
             android:name=".IconTorch"
-            android:configChanges="keyboard|keyboardHidden|screenSize|smallestScreenSize|screenLayout|orientation|uiMode"
             android:enabled="false"
             android:exported="true"
             android:icon="@mipmap/ic_torch"
             android:roundIcon="@mipmap/ic_torch_round"
-            android:supportsPictureInPicture="true"
             android:targetActivity=".ui.activities.MainActivity"
-            android:theme="@style/SplashScreenTheme"
-            android:windowSoftInputMode="adjustPan">
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -265,15 +246,12 @@
 
         <activity-alias
             android:name=".IconLegacy"
-            android:configChanges="keyboard|keyboardHidden|screenSize|smallestScreenSize|screenLayout|orientation|uiMode"
             android:enabled="false"
             android:exported="true"
             android:icon="@mipmap/ic_legacy"
             android:roundIcon="@mipmap/ic_legacy_round"
-            android:supportsPictureInPicture="true"
             android:targetActivity=".ui.activities.MainActivity"
-            android:theme="@style/SplashScreenTheme"
-            android:windowSoftInputMode="adjustPan">
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -285,15 +263,12 @@
 
         <activity-alias
             android:name=".IconBird"
-            android:configChanges="keyboard|keyboardHidden|screenSize|smallestScreenSize|screenLayout|orientation|uiMode"
             android:enabled="false"
             android:exported="true"
             android:icon="@mipmap/ic_bird"
             android:roundIcon="@mipmap/ic_bird_round"
-            android:supportsPictureInPicture="true"
             android:targetActivity=".ui.activities.MainActivity"
-            android:theme="@style/SplashScreenTheme"
-            android:windowSoftInputMode="adjustPan">
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -280,7 +280,7 @@
     <color name="monochrome_theme_light_onPrimaryContainer">#272727</color>
     <color name="monochrome_theme_light_secondary">#797979</color>
     // Headline Text
-    <color name="monochrome_theme_light_onSecondary">#B39494</color>
+    <color name="monochrome_theme_light_onSecondary">#FFFFFF</color>
     // SponsorBlock marker
     <color name="monochrome_theme_light_secondaryContainer">#DCDCDC</color>
     // NavBar Icon Container (selected)
@@ -319,7 +319,7 @@
     <color name="monochrome_theme_dark_onPrimaryContainer">#A3A3A3</color>
     <color name="monochrome_theme_dark_secondary">#A3A3A3</color>
     // Headline Text
-    <color name="monochrome_theme_dark_onSecondary">#886A6A</color>
+    <color name="monochrome_theme_dark_onSecondary">#161616</color>
     // SponsorBlock marker
     <color name="monochrome_theme_dark_secondaryContainer">#4D4D4D</color>
     // NavBar Icon Container (selected)
