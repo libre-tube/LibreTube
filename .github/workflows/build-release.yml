@@ -33,7 +33,7 @@ jobs:
           keyAlias: ${{ secrets.ANDROID_RELEASE_KEY_ALIAS }}
           keyStorePassword: ${{ secrets.ANDROID_RELEASE_KEYSTORE_PASSWORD }}
           keyPassword: ${{ secrets.ANDROID_RELEASE_KEY_PASSWORD }}
-          buildToolsVersion: 35.0.0
+          buildToolsVersion: 36.0.0
 
       - name: Create changelog
         id: changelog
@@ -56,7 +56,7 @@ jobs:
         run: mv "${{ steps.sign.outputs.signedFile }}" "app-release.apk"
 
       - name: Create release
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@v3
         with:
           body:
             ${{ steps.changelog-summary.outputs.summary }}

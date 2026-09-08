@@ -31,11 +31,15 @@ jobs:
       - name: Build Release APK
         run: ./gradlew assembleRelease --no-daemon
 
+      - name: Get app version
+        run: |
+          echo "APP_VERSION=$(grep -oP 'versionName\s*=\s*\"\K[^\"]+' app/build.gradle.kts)" >> $GITHUB_ENV
+
       - name: Create Release
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@v3
         with:
           tag_name: release-${{ github.run_number }}
-          name: "LibreTube v31.4 - Build #${{ github.run_number }}"
-          body: "APK assinado com todas as melhorias de error handling, instance fallback e SABR."
+          name: "LibreTube v${{ env.APP_VERSION }} - Build #${{ github.run_number }}"
+          body: "APK assinado com todas as melhorias (error handling, instance fallback e SABR)."
           files: app/build/outputs/apk/release/*.apk
           make_latest: true
