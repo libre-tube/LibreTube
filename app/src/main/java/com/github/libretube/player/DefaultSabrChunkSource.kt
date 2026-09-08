@@ -94,6 +94,10 @@ class DefaultSabrChunkSource(
     private var fatalError: Exception? = null
     private var missingLastSegment = false
 
+    companion object {
+        private const val MAX_INIT_CHUNK_ATTEMPTS = 5
+    }
+
     /**
      * @param chunkExtractorFactory Creates [ChunkExtractor] instances to use for extracting
      * chunks.
@@ -128,6 +132,10 @@ class DefaultSabrChunkSource(
     override fun getAdjustedSeekPositionUs(positionUs: Long, seekParameters: SeekParameters): Long {
         // inform the server when we last sought to a new position
         sabrClient.lastSeekMs = Instant.now().toEpochMilli()
+
+        // a previous transient 404 must not permanently truncate playback: after a seek the
+        // last segment may legitimately exist again
+        missingLastSegment = false
 
         // Segments are aligned across representations, so any segment index will do.
         for (representationHolder in representationHolders) {
@@ -237,6 +245,17 @@ class DefaultSabrChunkSource(
                     )
                     .build()
 
+                // guard against an infinite init loop: if the init segment repeatedly fails to
+                // materialize a ChunkIndex, surface an error instead of looping forever
+                representationHolder.initChunkCount++
+                if (representationHolder.initChunkCount > MAX_INIT_CHUNK_ATTEMPTS) {
+                    fatalError = java.io.IOException(
+                        "Failed to initialize SABR format ${representationHolder.representation.formatId().itag} " +
+                            "after $MAX_INIT_CHUNK_ATTEMPTS attempts"
+                    )
+                    return
+                }
+
                 out.chunk = InitializationChunk(
                     dataSource,
                     dataSpec,
@@ -323,6 +342,7 @@ class DefaultSabrChunkSource(
             if (representationHolder.chunkIndex == null) {
                 representationHolder.chunkExtractor?.chunkIndex?.let {
                     representationHolders[trackIndex].chunkIndex = it
+                    representationHolders[trackIndex].initChunkCount = 0
                 }
             }
         }
@@ -334,6 +354,12 @@ class DefaultSabrChunkSource(
         loadErrorInfo: LoadErrorInfo,
         loadErrorHandlingPolicy: LoadErrorHandlingPolicy,
     ): Boolean {
+        if (loadErrorInfo.exception is com.github.libretube.player.parser.SabrFatalException) {
+            // fatal, non-retryable: remember it (maybeThrowError will surface it and stop the
+            // player) and consume the error so the loader policy does not re-issue the request
+            fatalError = loadErrorInfo.exception
+            return true
+        }
         if (!cancelable) {
             return false
         }
@@ -440,6 +466,7 @@ class DefaultSabrChunkSource(
         val chunkExtractor: ChunkExtractor?,
     ) {
         var chunkIndex: ChunkIndex? = null
+        var initChunkCount: Int = 0
 
         val segmentCount: Long
             get() = chunkIndex?.length?.toLong() ?: 0

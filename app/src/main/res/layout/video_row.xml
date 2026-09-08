@@ -29,6 +29,7 @@
             android:layout_height="match_parent">
 
             <ImageView
+                android:contentDescription="@null"
                 android:id="@+id/thumbnail"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -87,6 +88,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
+                android:contentDescription="@string/resume"
                 android:id="@+id/resumePauseBtn"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
@@ -146,6 +148,7 @@
     </LinearLayout>
 
     <ImageView
+        android:contentDescription="@null"
         android:id="@+id/download_badge"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -177,6 +180,7 @@
             android:layout_marginEnd="10dp">
 
             <ImageView
+                android:contentDescription="@null"
                 android:id="@+id/channel_image"
                 android:layout_width="27dp"
                 android:layout_height="27dp" />

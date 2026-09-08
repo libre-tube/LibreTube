@@ -110,7 +110,7 @@ class DownloadService : LifecycleService() {
         super.onCreate()
         IS_DOWNLOAD_RUNNING = true
         notifyForeground()
-        sendBroadcast(Intent(ACTION_SERVICE_STARTED))
+        sendBroadcast(Intent(ACTION_SERVICE_STARTED).setPackage(packageName))
     }
 
     /**
@@ -505,7 +505,7 @@ class DownloadService : LifecycleService() {
     private fun stopServiceIfDone() {
         if (downloadQueue.valueIterator().asSequence().none { it }) {
             ServiceCompat.stopForeground(this@DownloadService, ServiceCompat.STOP_FOREGROUND_DETACH)
-            sendBroadcast(Intent(ACTION_SERVICE_STOPPED))
+            sendBroadcast(Intent(ACTION_SERVICE_STOPPED).setPackage(packageName))
             stopSelf()
         }
     }
@@ -654,7 +654,7 @@ class DownloadService : LifecycleService() {
     override fun onDestroy() {
         downloadQueue.clear()
         IS_DOWNLOAD_RUNNING = false
-        sendBroadcast(Intent(ACTION_SERVICE_STOPPED))
+        sendBroadcast(Intent(ACTION_SERVICE_STOPPED).setPackage(packageName))
         super.onDestroy()
     }
 

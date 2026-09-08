@@ -2,6 +2,7 @@ package com.github.libretube.ui.sheets
 
 import android.os.Bundle
 import androidx.core.os.bundleOf
+import androidx.lifecycle.lifecycleScope
 import com.github.libretube.R
 import com.github.libretube.api.MediaServiceRepository
 import com.github.libretube.api.PlaylistsHelper
@@ -27,7 +28,7 @@ import com.github.libretube.ui.dialogs.ShareDialog
 import com.github.libretube.ui.preferences.BackupRestoreSettings
 import com.github.libretube.util.PlayingQueue
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class PlaylistOptionsBottomSheet : BaseBottomSheet() {
@@ -48,14 +49,21 @@ class PlaylistOptionsBottomSheet : BaseBottomSheet() {
 
         setTitle(playlistName)
 
+        // load the bookmark state async (it used to block the main thread with runBlocking)
+        // before rendering the options, so the bookmark label is correct
+        lifecycleScope.launch {
+            val isBookmarked = withContext(Dispatchers.IO) {
+                DatabaseHolder.Database.playlistBookmarkDao().includes(playlistId)
+            }
+            buildOptions(isBookmarked)
+        }
+    }
+
+    private fun buildOptions(isBookmarked: Boolean) {
         // options for the dialog
         val optionsList = mutableListOf(R.string.playOnBackground, R.string.download)
 
         if (PlayingQueue.isNotEmpty()) optionsList.add(R.string.add_to_queue)
-
-        val isBookmarked = runBlocking(Dispatchers.IO) {
-            DatabaseHolder.Database.playlistBookmarkDao().includes(playlistId)
-        }
 
         if (playlistType == PlaylistType.PUBLIC) {
             optionsList.add(R.string.share)

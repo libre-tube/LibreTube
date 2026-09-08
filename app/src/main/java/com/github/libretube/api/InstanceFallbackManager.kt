@@ -52,15 +52,43 @@ object InstanceFallbackManager {
     }
 
     private fun markInstanceFailed(apiUrl: String) {
-        val health = instanceHealthMap.getOrPut(apiUrl) { InstanceHealth(apiUrl) }
-        health.lastFailureTime = System.currentTimeMillis()
-        health.failureCount++
-        Log.w(TAG, "Instance $apiUrl marked as failed (failures: ${health.failureCount})")
+        // atomic read-modify-write: concurrent failure notifications must not lose an update
+        instanceHealthMap.compute(apiUrl) { _, existing ->
+            val health = existing ?: InstanceHealth(apiUrl)
+            health.lastFailureTime = System.currentTimeMillis()
+            health.failureCount++
+            health
+        }?.let { Log.w(TAG, "Instance $apiUrl marked as failed (failures: ${it.failureCount})") }
     }
 
-    private fun isInstanceInCooldown(health: InstanceHealth): Boolean {
-        return System.currentTimeMillis() - health.lastFailureTime < INSTANCE_COOLDOWN_MS
+    /**
+     * Pure candidate-selection logic: an instance in cooldown (one that failed less than
+     * [INSTANCE_COOLDOWN_MS] ago) is not eligible as a fallback.
+     */
+    internal fun isInstanceInCooldown(
+        lastFailureTime: Long,
+        nowMs: Long,
+        cooldownMs: Long = INSTANCE_COOLDOWN_MS,
+    ): Boolean {
+        if (lastFailureTime == 0L) return false
+        return nowMs - lastFailureTime < cooldownMs
     }
+
+    /**
+     * Pure fallback-candidate selection, preserving the user-configured order:
+     * excludes the failed instance, excludes instances still in cooldown and caps the number of
+     * candidates to health-check. Kept side-effect free so it can be unit-tested.
+     */
+    internal fun selectFallbackCandidates(
+        apiUrls: List<String>,
+        excludeApiUrl: String,
+        lastFailureTimes: Map<String, Long>,
+        nowMs: Long,
+        maxCandidates: Int = MAX_FALLBACK_ATTEMPTS,
+    ): List<String> = apiUrls
+        .filter { it != excludeApiUrl }
+        .filter { !isInstanceInCooldown(lastFailureTimes[it] ?: 0L, nowMs) }
+        .take(maxCandidates)
 
     /**
      * Find a working instance from the list of custom instances,
@@ -70,14 +98,13 @@ object InstanceFallbackManager {
         val customInstances = DatabaseHolder.Database.customInstanceDao().getAll()
 
         // Filter out the failed instance and instances in cooldown
-        val candidates = customInstances
-            .map { it.apiUrl }
-            .filter { it != excludeApiUrl }
-            .filter { apiUrl ->
-                val health = instanceHealthMap[apiUrl]
-                health == null || !isInstanceInCooldown(health)
-            }
-            .take(MAX_FALLBACK_ATTEMPTS)
+        val nowMs = System.currentTimeMillis()
+        val candidates = selectFallbackCandidates(
+            apiUrls = customInstances.map { it.apiUrl },
+            excludeApiUrl = excludeApiUrl,
+            lastFailureTimes = instanceHealthMap.mapValues { it.value.lastFailureTime },
+            nowMs = nowMs,
+        )
 
         if (candidates.isEmpty()) {
             Log.e(TAG, "No fallback candidates available")
@@ -119,6 +146,9 @@ object InstanceFallbackManager {
             response.close()
             Log.d(TAG, "Health check for $apiUrl: ${if (isReachable) "OK" else "FAIL ($responseCode)"}")
             isReachable
+        } catch (e: kotlinx.coroutines.CancellationException) {
+            // propagate cancellation instead of swallowing it as a failed health check
+            throw e
         } catch (e: Exception) {
             Log.d(TAG, "Health check failed for $apiUrl: ${e.message}")
             false

@@ -29,3 +29,11 @@ class SABRException(
         private const val serialVersionUID = 1L
     }
 }
+
+/**
+ * A fatal, non-retryable SABR error (e.g. the server asked the player to reload).
+ *
+ * It carries no useful retry semantics - re-issuing the same request would return the same
+ * response - so the player must surface the error instead of looping through load retries.
+ */
+class SabrFatalException(message: String) : IOException(message)

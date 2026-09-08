@@ -217,6 +217,7 @@
         app:surface_type="surface_view" />
 
     <ImageView
+        android:contentDescription="@string/close"
         android:id="@+id/close_imageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -231,6 +232,7 @@
         app:layout_constraintTop_toTopOf="@id/main_container" />
 
     <ImageView
+        android:contentDescription="@string/play"
         android:id="@+id/play_imageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

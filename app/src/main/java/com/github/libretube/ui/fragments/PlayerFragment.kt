@@ -169,11 +169,6 @@ class PlayerFragment : Fragment(R.layout.fragment_player), CustomPlayerCallback 
 
     private val fullscreenDialog by lazy {
         object : Dialog(requireContext(), android.R.style.Theme_Black_NoTitleBar_Fullscreen) {
-            @Deprecated("Deprecated in Java", ReplaceWith("onbackpressedispatcher and callback"))
-            override fun onBackPressed() {
-                unsetFullscreen()
-            }
-
             override fun onKeyUp(keyCode: Int, event: KeyEvent): Boolean {
                 if (_binding?.player?.onKeyUp(keyCode, event) == true) {
                     return true

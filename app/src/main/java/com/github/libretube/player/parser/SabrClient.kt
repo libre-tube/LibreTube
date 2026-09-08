@@ -82,7 +82,7 @@ data class Segment(
     /**
      * Length of the media data.
      */
-    fun length(): Int = data.sumOf { it.size }
+    fun length(): Long = data.sumOf { it.size.toLong() }
 }
 
 /**
@@ -161,6 +161,12 @@ class SabrClient private constructor(
     private var poToken: ByteString? = null
 
     private var fatalError: SabrError? = null
+    /** Set when the server requested a player reload, to make the error surface instead of retrying. */
+    @Volatile
+    private var playerReloadRequested = false
+    /** The OkHttp [Call] currently in flight, so [release] can cancel it while a request is pending. */
+    @Volatile
+    private var currentCall: okhttp3.Call? = null
     private val dispatcher = Dispatchers.IO.limitedParallelism(1)
 
     /** Audio format video format */
@@ -305,12 +311,12 @@ class SabrClient private constructor(
             "getNextSegment: loading media data for $itag at position ${playbackRequest.playerPosition}"
         )
 
-        // synchronize buffered segments with the actually buffered segments from the player
-        initializedFormats[itag]?.bufferedSegments?.keys?.retainAll(playbackRequest.bufferedSegments)
-
         return runBlocking {
             // ensure that the data is only ever accessed by a single thread
             withContext(dispatcher) {
+                // synchronize buffered segments with the actually buffered segments from the player
+                initializedFormats[itag]?.bufferedSegments?.keys?.retainAll(playbackRequest.bufferedSegments)
+
                 var format = initializedFormats[itag]
                 if (format == null || !format.hasSegment(playbackRequest.segment)) {
                     // remove segments that where downloaded, but never requested by the player
@@ -346,7 +352,15 @@ class SabrClient private constructor(
             val part = parser.readPart() ?: break
             processPart(part)
         }
-        assert(parser.data().isEmpty()) { "Parser has left-over data" }
+
+        // UMP responses are self-contained: every medium header sent in this response has its
+        // MEDIA_END in the same response. Any header left in `partialSegments` afterwards is the
+        // remainder of a truncated/interrupted response and will never be completed - discard it
+        // so that interrupted streams don't accumulate stale entries for the whole session.
+        if (partialSegments.isNotEmpty()) {
+            Log.w(TAG, "media: discarding ${partialSegments.size} orphaned partial segment(s) from an interrupted response")
+            partialSegments.clear()
+        }
     }
 
     /**
@@ -426,29 +440,45 @@ class SabrClient private constructor(
             .build()
 
         lastRequestMs = Instant.now().toEpochMilli()
-        val response = client.newCall(request).execute()
-        if (!response.isSuccessful) {
-            val errorBody = response.body?.string()?.take(200)
-            Log.e(TAG, "fetchStreamData: Failed to fetch data (${response.code}): $errorBody")
-            response.close()
+        val call = client.newCall(request)
+        currentCall = call
+        try {
+            val response = call.execute()
+            if (!response.isSuccessful) {
+                val errorBody = response.body?.string()?.take(200)
+                Log.e(TAG, "fetchStreamData: Failed to fetch data (${response.code}): $errorBody")
+                response.close()
 
-            // Retry on server errors (5xx) or rate limiting (429)
-            if (response.code in 500..599 || response.code == 429) {
-                Log.w(TAG, "fetchStreamData: Retrying after ${SABR_RETRY_DELAY_MS}ms (HTTP ${response.code})")
-                delay(SABR_RETRY_DELAY_MS)
-                val retryResponse = client.newCall(request).execute()
-                if (!retryResponse.isSuccessful) {
-                    Log.e(TAG, "fetchStreamData: Retry failed (${retryResponse.code})")
-                    retryResponse.close()
-                    throw Exception("HTTP request failed: ${response.code} (retry also failed: ${retryResponse.code})")
+                // Retry on server errors (5xx) or rate limiting (429)
+                if (response.code in 500..599 || response.code == 429) {
+                    Log.w(TAG, "fetchStreamData: Retrying after ${SABR_RETRY_DELAY_MS}ms (HTTP ${response.code})")
+                    delay(SABR_RETRY_DELAY_MS)
+                    // request a new sequence number so the retry isn't seen as out-of-order by the UMP server
+                    val retryRequest = Request.Builder()
+                        .url("$url&rn=${requestNumber++}")
+                        .post(
+                            playbackRequest.toByteArray()
+                                .toRequestBody(CONTENT_TYPE.toMediaType())
+                        )
+                        .build()
+                    val retryCall = client.newCall(retryRequest)
+                    currentCall = retryCall
+                    val retryResponse = retryCall.execute()
+                    if (!retryResponse.isSuccessful) {
+                        Log.e(TAG, "fetchStreamData: Retry failed (${retryResponse.code})")
+                        retryResponse.close()
+                        throw Exception("HTTP request failed: ${response.code} (retry also failed: ${retryResponse.code})")
+                    }
+                    return retryResponse.body.bytes()
                 }
-                return retryResponse.body.bytes()
+
+                throw Exception("HTTP request failed: ${response.code}")
             }
 
-            throw Exception("HTTP request failed: ${response.code}")
+            return response.body.bytes()
+        } finally {
+            currentCall = null
         }
-
-        return response.body.bytes()
     }
 
     /**
@@ -506,7 +536,7 @@ class SabrClient private constructor(
                 Log.v(TAG, "processPart: Dequeuing partial segment $headerId")
 
                 val segmentLength = segment.length()
-                if (segmentLength != segment.header.contentLength.toInt()) {
+                if (segmentLength != segment.header.contentLength) {
                     Log.w(
                         TAG,
                         "processPart: Content length mismatch for segment $headerId: expected ${segment.header.contentLength}, got $segmentLength"
@@ -600,7 +630,10 @@ class SabrClient private constructor(
                 // this is called if the streams are expired or a new configuration feature needs to be set
                 // in either case, we purposefully crash the player here, as the first one is a rare edge-case
                 // and the second one cannot be handled
-                throw Exception("Server requested player reload")
+                // The exception is non-retryable (see SabrFatalException) so the player surfaces the error
+                // instead of re-issuing identical requests in a retry loop.
+                playerReloadRequested = true
+                throw SabrFatalException("Server requested player reload")
             }
 
             UMPPartId.STREAM_PROTECTION_STATUS -> {
@@ -631,6 +664,21 @@ class SabrClient private constructor(
                 Log.w(TAG, "processPart: Unhandled UMP part ${part.type}")
             }
         }
+    }
+
+    /**
+     * Releases all resources held by this client: cancels any in-flight request, shuts down the
+     * underlying OkHttp client and releases the PoToken WebView.
+     *
+     * This is invoked by [com.github.libretube.player.SabrMediaSource] when the media source is
+     * released, which otherwise left one OkHttp dispatcher + connection pool and one WebView alive
+     * per played stream for the whole app session.
+     */
+    fun release() {
+        runCatching { currentCall?.cancel() }
+        runCatching { client.dispatcher.executorService.shutdown() }
+        runCatching { client.connectionPool.evictAll() }
+        runCatching { poTokenGenerator.close() }
     }
 
     /**

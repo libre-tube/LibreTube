@@ -22,6 +22,7 @@
         android:visibility="gone">
 
         <ImageView
+            android:contentDescription="@null"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_gravity="center"

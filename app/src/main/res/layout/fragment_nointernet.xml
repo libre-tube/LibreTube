@@ -12,6 +12,7 @@
         android:orientation="vertical">
 
         <ImageView
+            android:contentDescription="@null"
             android:id="@+id/noInternet_imageView"
             android:layout_width="200dp"
             android:layout_height="200dp"

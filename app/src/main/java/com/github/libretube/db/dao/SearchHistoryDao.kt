@@ -30,4 +30,15 @@ interface SearchHistoryDao {
 
     @Query("DELETE FROM searchHistoryItem")
     suspend fun deleteAll()
+
+    /**
+     * Deletes the oldest rows, keeping the [keep] newest entries, in a single SQL statement.
+     * Replaces the previous load-everything-then-delete-loop so history trimming does not read all
+     * rows into memory on startup.
+     */
+    @Query(
+        "DELETE FROM searchHistoryItem WHERE rowid IN (" +
+            "SELECT rowid FROM searchHistoryItem ORDER BY rowid DESC LIMIT -1 OFFSET :keep)"
+    )
+    suspend fun deleteOldest(keep: Int)
 }

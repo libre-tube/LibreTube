@@ -112,5 +112,19 @@ class PoTokenGenerator : PoTokenProvider {
     override fun getAndroidClientPoToken(videoId: String?): PoTokenResult? = null
 
     override fun getIosClientPoToken(videoId: String?): PoTokenResult? = null
+
+    /**
+     * Releases the inner WebView-backed generator, if any.
+     *
+     * Called by [com.github.libretube.player.parser.SabrClient.release] when a stream ends so the
+     * WebView (and the Context it retains) does not stay alive until GC per played stream.
+     */
+    fun close() {
+        synchronized(WebPoTokenGenLock) {
+            webPoTokenGenerator?.let { it.close() }
+            webPoTokenGenerator = null
+            webPoTokenVisitorData = null
+        }
+    }
 }
 

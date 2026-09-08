@@ -52,8 +52,11 @@ workers/          -> NotificationWorker (verificação de inscrições em segund
 
 A cadeia de recuperação é em camadas, porém limitada:
 
-1. `RetryInterceptor` (OkHttp): até **2** repetições na mesma instância para
-   `IOException`, HTTP 5xx (exceto 501) e 429, com backoff exponencial + jitter.
+1. `RetryInterceptor` (OkHttp): repetições na mesma instância para `IOException`
+   (qualquer método); para HTTP 5xx/429 **somente métodos idempotentes**
+   (GET/HEAD/OPTIONS/PUT/DELETE/TRACE — POST não é repetido). O `Retry-After` é
+   respeitado até o teto de `maxDelayMs`, não há sleep desperdida no último
+   attempt e o último status HTTP real é devolvido quando o limite é atingido.
 2. `PipedMediaServiceRepository.apiCallWithFallback`: exceções de rede/5xx/429
    invocam `InstanceFallbackManager.onInstanceFailed`, que marca a instância como
    falha (cooldown de 60 s) e procura alternativas entre as instâncias customizadas
@@ -65,7 +68,9 @@ A cadeia de recuperação é em camadas, porém limitada:
 
 Resultado: no pior caso há no máximo **1 troca de instância + as repetições internas**;
 não há loop infinito. A saúde por instância é mantida em `InstanceFallbackManager`
-(tabela em memória com contagem de falhas + cooldown).
+(tabela em memória com contagem de falhas + cooldown); a falha é marcada de forma
+atômica (`instanceHealthMap.compute`) e a seleção de candidatas (exclui a falida,
+preserva ordem, respeita cooldown, máximo 3) é feita por funções puras testadas.
 
 ## Player SABR
 
@@ -148,15 +153,119 @@ Auditoria aplicou neste fork:
 ## Verificação final
 
 - `./gradlew assembleDebug lintDebug testDebugUnitTest` — **BUILD SUCCESSFUL**
-  (APK em `app/build/outputs/apk/debug/app-debug.apk`; 9 testes unitários passando).
+  (APK em `app/build/outputs/apk/debug/app-debug.apk`; 29 testes unitários passando).
 - Lint: removidos 36 avisos `InvalidManifestAttribute` (atributos ignorados nos
   `activity-alias` dos ícones do launcher). Resíduos restantes são majoritariamente
-  `MissingTranslation` (572, herança de estados parciais das 6 traduções), mais
+  `MissingTranslation` (578, herança de estados parciais das 77 traduções), mais
   `ContentDescription`/`UnusedResources`/avisos de versão — sem regressões introduzidas
   por esta tarefa; `lint { abortOnError = false }` mantido por esse estado legado.
 - Código morto removido: `PlayerPiPHelper` (130 linhas, nunca instanciado),
   `File.formatSize()` (sem chamadores), `ExternalApi.USER_AGENT` (substituído por
   `ApiConstants.USER_AGENT`) e `getWatchPositionBlocking`.
+
+## Fase 2 — segunda auditoria (validação independente)
+
+Levada a cabo em iterações de 5–7 tarefas ("waves"); a lista oficial de resultados
+(fase 1 + fase 2) é publicada no relatório final (matriz de 17 linhas PASS/FAIL/BLOCKED).
+
+### Waves 1–2: motor de repetição e failover — testes
+
+- `app/src/test/.../api/interceptor/RetryInterceptorTest.kt` (13 testes): sucesso sem
+  repetição, 500 transitório repetido, múltiplos erros transitórios, exaustão devolve
+  o 500 real (3 chamadas), 404/501 não repetidos, 429 repetido, `Retry-After` tetado
+  (assert temporal <2 s), POST 500/429 **não** repetido, `IOException` repetido mesmo em
+  POST, `IOException` relançado após exaustão. `FakeChain` implementa `Interceptor.Chain`.
+- `app/src/test/.../api/InstanceFallbackManagerTest.kt` (7 testes): exclui a falida,
+  preserva ordem, cooldown ativo/vencido, limite de 3, instância sem falha fora do
+  cooldown.
+
+### Wave 3: endurecimento do player SABR
+
+- `SabrClient.currentCall` agora é `@Volatile` e a limpeza `retainAll` ocorre dentro de
+  `withContext(dispatcher)` (fora da thread do OkHttp).
+- `Segment.length()` para `Long` (soma dos pacotes), comparado como `Long` ao
+  `contentLength` (evita overflow em arquivos >2 GiB).
+- `partialSegments` é limpo após parse bem-sucedido (com log de aviso).
+- `RELOAD_PLAYER_RESPONSE` não desce mais como carga útil — seta
+  `playerReloadRequested = true` e lança `SabrFatalException` (nova classe de erro).
+- Retry de `fetchStreamData` re-cria o request com `&rn=${requestNumber++}` (novo
+  request por tentativa). `SabrDataSource` propaga `SabrFatalException` sem embrulhar;
+  `DefaultSabrChunkSource.onChunkLoadError` a consome (marca `fatalError`, retorna
+  verdadeiro) — sem loop de repeats de loader.
+- Guarda anti-livelock de inicialização: `MAX_INIT_CHUNK_ATTEMPTS = 5` por
+  `RepresentationHolder`, reiniciada a cada sucesso.
+- `SabrMediaSource.releaseSourceInternal` chama `SabrClient.release()` (cancela call,
+  `dispatcher.executorService.shutdown()`, `connectionPool.evictAll()`,
+  `poTokenGenerator.close()`); `PoTokenGenerator.close()` sincronizado no lock global.
+
+### Wave 5: remoção de `runBlocking` nas sheets
+
+- `EditChannelGroupSheet`: validação de nome por corrotina `lifecycleScope` cancelável
+  (job por toque), com DAO em `Dispatchers.IO`.
+- `PlaylistOptionsBottomSheet`: bookmark checado em `withContext(IO)` antes de montar
+  as opções. `VideoOptionsBottomSheet`: opções base síncronas + opções de watch-status
+  carregadas em corrotina, inseridas antes de "add to playlist".
+- Restam apenas `runBlocking` de ponte Verde (loader do ExoPlayer) e Amarelo
+  (interop NewPipe — `PoTokenGenerator`), ambos documentados.
+
+### Wave 6: banco rápido
+
+- `SearchHistoryDao.deleteOldest(keep)`: `DELETE ... rowid IN (SELECT rowid ORDER BY
+  rowid DESC LIMIT -1 OFFSET :keep)` — trim em uma única instrução (tablea não tem
+  coluna `id`). `DatabaseHelper.trimSearchHistoryIfNeeded` passou a usá-la.
+- `SabrDownloadProvider`: persistência de progresso limitada a cada 25 segmentos
+  (ou no último) — menos escritas de DB por streaming.
+
+### Wave 6b: testes de migração Room (CI-ready, runtime BLOCKED)
+
+- `app/src/androidTest/.../db/MigrationInstrumentedTest.kt`: 4 testes com
+  `MigrationTestHelper` (construtor por classe) validando 23→24 (drop de
+  `downloadItem.url`, preservando linhas), 24→25 (coluna nullable
+  `currentDownloadPositionMillis`), 25→26 e a cadeia completa 23→26.
+- Esquemas em `app/schemas/.../AppDatabase/*.json`; `assembleDebugAndroidTest`
+  **BUILD SUCCESSFUL**. Execução exige device/emulador — **BLOCKED** nesta máquina.
+  O caminho de rebuild para API < 31 da migração 23→24 só é exercitável em emulador
+  antigo.
+
+### Wave 7–8: lint e traduções
+
+- `ContentDescription`: 43 → 0. Imagens decorativas recebem `contentDescription="@null"`;
+  controles reais recebem strings novas (`play`, `close`, `minimize`, `decrease`,
+  `increase`, `delete_history`) — 6 strings-base adicionadas.
+- Corrigidas as 4 classes reais sinalizadas como erro: formato inválido
+  `bn videoCount` (`%1$টি` → `%1$dটি`, crash para usuários bengali), 3 broadcasts
+  internos do `DownloadService` agora com `setPackage(packageName)`, `history_empty`
+  sem constraints verticais em `fragment_watch_history`, e o
+  `Dialog.onBackPressed` deprecado removido (o `OnBackPressedDispatcher` do fragmento
+  já trata o fullscreen).
+- Auditoria de traduções: 77 arquivos de locale, 583 strings-base, soma de
+  traduções faltantes = 10 961 — dívida de comunidade (crowdin), classificada como
+  UPSTREAM, sem inventar traduções. Gap real corrigido: o formato inválido de `bn`.
+- Lint final: **899 → 855** (após esta fase). Classes restantes
+  (MissingQuantity/ImpliedQuantity em cs/sk/lt, UnsafeOptInUsageError do Media3,
+  StringFormatCount, Overdraw, UnusedResources, versões) são dívida legada/eff-i.
+
+### Wave 10–11: release e CI
+
+- `./gradlew assembleRelease bundleRelease lintRelease testDebugUnitTest` com R8:
+  **BUILD SUCCESSFUL** (APK-release-unsigned e AAB gerados).
+- Workflows GHA: `ci.yml` (assembleDebug + assinatura via secrets + upload),
+  `build-release.yml`, `build-debug-apk.yml`, `codeql-analysis.yml`. Localmente só é
+  possível simular a parte de compile/teste/lint (executada). Assinatura/publicação
+  exigem secrets — **BLOCKED** aqui.
+- Dependências: 39 diretas, todas de geração atual (OkHttp 5.3.2, Retrofit 3.0.0,
+  Room 2.8.4, Media3 1.9.2, Coil 3.4.0, protobuf 4.33.5); sem segredos hardcoded;
+  `exported=true` restrito a launcher, share-receivers, router de deep links e
+  aliases de ícone (verificado no manifesto).
+
+### Decisões mantidas
+
+- Sem testes artificiais; bloqueios documentados com precisão (device/emulador,
+  keystore, secrets do GHA).
+- `BaseUrlExclusionList`, rede em cleartext e token do Piped na query são contratos
+  intencionais do upstream (documentados em "Segurança aplicada").
+- Dívida aceita e anotada: aviso de schema KSP sobre o índice de jurisdição
+  `DownloadPlaylistVideosCrossRef.videoId`, e `lint { abortOnError = false }`.
 
 ## Próxima leitura
 

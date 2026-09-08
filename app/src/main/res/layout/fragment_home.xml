@@ -201,6 +201,7 @@
         android:visibility="gone">
 
         <ImageView
+            android:contentDescription="@null"
             android:id="@+id/listIV"
             android:layout_width="100dp"
             android:layout_height="100dp"

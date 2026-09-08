@@ -20,6 +20,7 @@
         android:orientation="horizontal">
 
         <ImageView
+            android:contentDescription="@string/decrease"
             android:id="@+id/minus"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -39,6 +40,7 @@
             android:valueTo="5" />
 
         <ImageView
+            android:contentDescription="@string/increase"
             android:id="@+id/plus"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

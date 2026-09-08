@@ -113,7 +113,7 @@
     <string name="import_from_yt">সাবস্ক্রিপশনগুলো ইমপোর্ট করুন</string>
     <string name="history">ইতিহাস</string>
     <string name="emptyPlaylistName">প্লেলিস্টটির নাম খালি থাকতে পারে না</string>
-    <string name="videoCount">%1$টি ভিডিও</string>
+    <string name="videoCount">%1$dটি ভিডিও</string>
     <string name="retry">পুনরায় চেষ্টা করুন</string>
     <string name="music_playlists">ইউটিউব মিউজিক প্লেলিস্টগুলো</string>
     <string name="segment_skipped">ভিডিও অংশ অতিক্রম করা হয়েছে</string>

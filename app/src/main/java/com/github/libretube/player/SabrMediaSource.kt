@@ -161,6 +161,9 @@ class SabrMediaSource(
     override fun releaseSourceInternal() {
         elapsedRealtimeOffsetMs = C.TIME_UNSET
         drmSessionManager.release()
+        // release the per-stream resources: in-flight OkHttp call, the stream's OkHttp client and
+        // the PoToken WebView (previously left alive per stream for the whole app session)
+        sabrClient.release()
     }
 
     private fun processManifest() {

@@ -12,6 +12,7 @@ import com.github.libretube.player.parser.CompositeBuffer
 import com.github.libretube.player.parser.PlaybackRequest
 import com.github.libretube.player.parser.SABRException
 import com.github.libretube.player.parser.SabrClient
+import com.github.libretube.player.parser.SabrFatalException
 import java.io.IOException
 
 @UnstableApi
@@ -37,6 +38,11 @@ class SabrDataSource(
         val segment = try {
             sabrClient.getNextSegment(playbackRequest)
                 ?: throw IOException("SabrDataSource: getNextSegment returned null")
+        } catch (e: SabrFatalException) {
+            // fatal and non-retryable: surface it as-is so the chunk source can consume the load
+            // error and stop playback instead of re-issuing identical requests in a retry loop
+            Log.e(TAG, "SABR fatal streaming error: ${e.message}", e)
+            throw e
         } catch (e: SABRException) {
             Log.e(TAG, "SABR streaming error: ${e.userFacingMessage}", e)
             throw IOException(e.userFacingMessage, e)

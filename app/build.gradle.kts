@@ -119,6 +119,15 @@ android {
         generateLocaleConfig = true
     }
 
+    testOptions {
+        // Return default values for android.util.Log etc. so JVM tests can exercise classes that log
+        unitTests.isReturnDefaultValues = true
+    }
+
+    // expose the exported Room schemas to the instrumented test APK so MigrationTestHelper can
+    // validate 23->24, 24->25, 25->26 and the full 23->26 chain on a device/emulator (CI)
+    sourceSets["androidTest"].assets.srcDir("$projectDir/schemas")
+
     namespace = "com.github.libretube"
 }
 
@@ -186,6 +195,10 @@ dependencies {
 
     /* Testing */
     testImplementation(libs.junit)
+
+    androidTestImplementation(libs.androidx.test.runner)
+    androidTestImplementation(libs.androidx.test.junit)
+    androidTestImplementation(libs.room.testing)
 }
 
 //TODO: exclude from release protobuf

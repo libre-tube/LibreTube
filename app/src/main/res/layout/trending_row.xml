@@ -25,6 +25,7 @@
             android:layout_height="match_parent">
 
             <ImageView
+                android:contentDescription="@null"
                 android:id="@+id/thumbnail"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
@@ -44,6 +45,7 @@
                 tools:visibility="visible">
 
                 <ImageView
+                    android:contentDescription="@null"
                     android:id="@+id/sponsor_badge_icon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -131,6 +133,7 @@
         app:layout_constraintTop_toBottomOf="@+id/thumbnailcard">
 
         <ImageView
+            android:contentDescription="@null"
             android:id="@+id/channel_image"
             android:layout_width="40dp"
             android:layout_height="40dp"

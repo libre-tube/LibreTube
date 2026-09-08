@@ -7,6 +7,7 @@
     android:layout_gravity="center">
 
     <ImageView
+        android:contentDescription="@null"
         android:id="@+id/rewindIV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

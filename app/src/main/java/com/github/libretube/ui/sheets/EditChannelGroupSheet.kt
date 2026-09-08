@@ -21,7 +21,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.withContext
 
 class EditChannelGroupSheet : ExpandedBottomSheet(R.layout.dialog_edit_channel_group) {
     private var _binding: DialogEditChannelGroupBinding? = null
@@ -31,6 +31,7 @@ class EditChannelGroupSheet : ExpandedBottomSheet(R.layout.dialog_edit_channel_g
     private var channels = listOf<Subscription>()
 
     private lateinit var channelsAdapter: SubscriptionGroupChannelsAdapter
+    private var groupNameValidationJob: kotlinx.coroutines.Job? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         _binding = DialogEditChannelGroupBinding.bind(view)
@@ -49,7 +50,15 @@ class EditChannelGroupSheet : ExpandedBottomSheet(R.layout.dialog_edit_channel_g
         binding.channelsRV.layoutManager = LinearLayoutManager(context)
 
         binding.groupName.addTextChangedListener {
-            updateConfirmStatus()
+            // validate async: each keystroke cancels the previous lookup so the last valid DB
+            // query wins and no blocking call runs on the main thread
+            groupNameValidationJob?.cancel()
+            groupNameValidationJob = lifecycleScope.launch {
+                val name = binding.groupName.text.toString()
+                binding.groupName.error = getGroupNameError(name)
+                binding.confirm.isEnabled =
+                    binding.groupName.error == null && !viewModel.groupToEdit?.channels.isNullOrEmpty()
+            }
         }
 
         binding.searchInput.addTextChangedListener {
@@ -118,18 +127,23 @@ class EditChannelGroupSheet : ExpandedBottomSheet(R.layout.dialog_edit_channel_g
     private fun updateConfirmStatus() {
         with(binding) {
             val name = groupName.text.toString()
-            groupName.error = getGroupNameError(name)
+            // synchronous empty/blank check; the DB exists() lookup happens async in
+            // groupNameValidationJob to keep the main thread free while typing
+            groupName.error = when {
+                name.isBlank() -> getString(R.string.group_name_error_empty)
+                else -> null
+            }
 
             confirm.isEnabled = groupName.error == null && !viewModel.groupToEdit?.channels.isNullOrEmpty()
         }
     }
 
-    private fun getGroupNameError(name: String): String? {
+    private suspend fun getGroupNameError(name: String): String? {
         if (name.isBlank()) {
             return getString(R.string.group_name_error_empty)
         }
 
-        val groupExists = runBlocking(Dispatchers.IO) {
+        val groupExists = withContext(Dispatchers.IO) {
             DatabaseHolder.Database.subscriptionGroupsDao().exists(name)
         }
         if (groupExists && viewModel.groupToEdit?.name != name) {

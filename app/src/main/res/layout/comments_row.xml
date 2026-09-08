@@ -117,6 +117,7 @@
                     tools:text="1.2k" />
 
                 <ImageView
+                    android:contentDescription="@null"
                     android:id="@+id/hearted_imageView"
                     android:layout_width="14dp"
                     android:layout_height="14dp"

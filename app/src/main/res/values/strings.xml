@@ -181,6 +181,13 @@
     <string name="unknown">Unknown</string>
     <string name="pause">Pause</string>
     <string name="resume">Resume</string>
+    <!-- used as accessibility content descriptions for player controls -->
+    <string name="play">Play</string>
+    <string name="close">Close</string>
+    <string name="minimize">Minimize</string>
+    <string name="decrease">Decrease</string>
+    <string name="increase">Increase</string>
+    <string name="delete_history">Delete search history item</string>
     <string name="stop">Stop</string>
     <string name="player_autoplay">Autoplay</string>
     <string name="instance_frontend_url">URL to instance frontend (optional)</string>

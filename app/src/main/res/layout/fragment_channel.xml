@@ -32,6 +32,7 @@
                     app:layout_collapseMode="pin">
 
                     <ImageView
+                        android:contentDescription="@null"
                         android:id="@+id/channel_banner"
                         android:layout_width="match_parent"
                         android:layout_height="80dp" />

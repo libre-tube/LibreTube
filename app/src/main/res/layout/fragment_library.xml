@@ -111,6 +111,7 @@
                         android:visibility="gone">
 
                         <ImageView
+                            android:contentDescription="@null"
                             android:layout_width="100dp"
                             android:layout_height="100dp"
                             android:layout_gravity="center"
@@ -163,6 +164,7 @@
     </com.github.libretube.ui.views.CustomSwipeToRefresh>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:contentDescription="@string/createPlaylist"
         android:id="@+id/create_playlist"
         android:tooltipText="@string/tooltip_create_playlist"
         android:layout_width="wrap_content"

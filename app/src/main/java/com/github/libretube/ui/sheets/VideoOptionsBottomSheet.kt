@@ -3,6 +3,7 @@ package com.github.libretube.ui.sheets
 import android.os.Bundle
 import androidx.core.os.bundleOf
 import androidx.fragment.app.setFragmentResult
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.NavHostFragment
 import com.github.libretube.R
 import com.github.libretube.api.obj.StreamItem
@@ -27,7 +28,7 @@ import com.github.libretube.ui.fragments.SubscriptionsFragment
 import com.github.libretube.util.PlayingQueue
 import com.github.libretube.util.PlayingQueueMode
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 /**
@@ -38,6 +39,9 @@ import kotlinx.coroutines.withContext
 class VideoOptionsBottomSheet : BaseBottomSheet() {
     private lateinit var streamItem: StreamItem
 
+    /** the currently rendered options; the click listener always resolves against this field */
+    private var optionsList: List<Int> = emptyList()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         streamItem = arguments?.parcelable(IntentData.streamItem)!!
         val playlistId = arguments?.getString(IntentData.playlistId)
@@ -46,17 +50,39 @@ class VideoOptionsBottomSheet : BaseBottomSheet() {
 
         setTitle(streamItem.title)
 
-        val optionsList = mutableListOf<Int>()
+        val isActivePlayback = PlayingQueue.getCurrent()?.url?.toID() == videoId
+
+        // synchronous, DB-free base options
+        val baseOptions = mutableListOf<Int>()
         // these options are only available for other videos than the currently playing one
-        if (PlayingQueue.getCurrent()?.url?.toID() != videoId) {
-            optionsList += getOptionsForNotActivePlayback(videoId)
+        if (!isActivePlayback) {
+            baseOptions += getPlaybackQueueOptions()
         }
 
-        optionsList += listOf(R.string.addToPlaylist, R.string.download, R.string.share)
-        if (streamItem.isLive) optionsList.remove(R.string.download)
+        baseOptions += listOf(R.string.addToPlaylist, R.string.download, R.string.share)
+        if (streamItem.isLive) baseOptions.remove(R.string.download)
 
-        setSimpleItems(optionsList.map { getString(it) }) { which ->
-            when (optionsList[which]) {
+        if (!isActivePlayback && (PlayerHelper.watchPositionsAny || PlayerHelper.watchHistoryEnabled)) {
+            // the mark as watched/unwatched options depend on watch-history / position state which
+            // lives in the DB; fetch it async (it used to block the main thread with runBlocking)
+            lifecycleScope.launch {
+                val watchOptions = getWatchStatusOptions(videoId)
+                val insertIndex = baseOptions.indexOf(R.string.addToPlaylist)
+                optionsList = baseOptions.take(insertIndex) + watchOptions + baseOptions.drop(insertIndex)
+                renderOptions(videoId, playlistId)
+            }
+        } else {
+            optionsList = baseOptions
+            renderOptions(videoId, playlistId)
+        }
+
+        super.onCreate(savedInstanceState)
+    }
+
+    private fun renderOptions(videoId: String, playlistId: String?) {
+        val visibleOptions = optionsList
+        setSimpleItems(visibleOptions.map { getString(it) }) { which ->
+            when (visibleOptions[which]) {
                 // Start the background mode
                 R.string.playOnBackground -> {
                     NavigationHelper.navigateVideo(
@@ -136,11 +162,9 @@ class VideoOptionsBottomSheet : BaseBottomSheet() {
                 }
             }
         }
-
-        super.onCreate(savedInstanceState)
     }
 
-    private fun getOptionsForNotActivePlayback(videoId: String): List<Int> {
+    private fun getPlaybackQueueOptions(): List<Int> {
         // List that stores the different menu options. In the future could be add more options here.
         val optionsList = mutableListOf(R.string.playOnBackground)
 
@@ -150,21 +174,28 @@ class VideoOptionsBottomSheet : BaseBottomSheet() {
             optionsList += R.string.add_to_queue
         }
 
-        // show the mark as watched or unwatched option if watch positions are enabled
-        if (PlayerHelper.watchPositionsAny || PlayerHelper.watchHistoryEnabled) {
-            val (watchHistoryEntry, positionRaw) = runBlocking(Dispatchers.IO) {
-                DatabaseHolder.Database.watchHistoryDao().findById(videoId) to
-                    DatabaseHelper.getWatchPosition(videoId)
-            }
-            val position = positionRaw ?: 0
-            val isCompleted = DatabaseHelper.isVideoWatched(position, streamItem.duration ?: 0)
-            if (position != 0L || watchHistoryEntry != null) {
-                optionsList += R.string.mark_as_unwatched
-            }
+        return optionsList
+    }
 
-            if (!isCompleted || watchHistoryEntry == null) {
-                optionsList += R.string.mark_as_watched
-            }
+    /**
+     * Computes the mark as watched / unwatched options from the local watch-history and
+     * watch-position databases. DB-only, so it runs off the main thread.
+     */
+    private suspend fun getWatchStatusOptions(videoId: String): List<Int> {
+        val optionsList = mutableListOf<Int>()
+
+        val (watchHistoryEntry, positionRaw) = withContext(Dispatchers.IO) {
+            DatabaseHolder.Database.watchHistoryDao().findById(videoId) to
+                DatabaseHelper.getWatchPosition(videoId)
+        }
+        val position = positionRaw ?: 0
+        val isCompleted = DatabaseHelper.isVideoWatched(position, streamItem.duration ?: 0)
+        if (position != 0L || watchHistoryEntry != null) {
+            optionsList += R.string.mark_as_unwatched
+        }
+
+        if (!isCompleted || watchHistoryEntry == null) {
+            optionsList += R.string.mark_as_watched
         }
 
         return optionsList

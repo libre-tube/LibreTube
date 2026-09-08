@@ -12,6 +12,7 @@
         android:layout_height="match_parent">
 
         <ImageView
+            android:contentDescription="@null"
             android:id="@+id/thumbnail"
             android:layout_width="250dp"
             android:layout_height="0dp"

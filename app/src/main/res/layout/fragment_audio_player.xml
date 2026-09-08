@@ -32,6 +32,7 @@
             android:padding="20dp">
 
             <ImageView
+                android:contentDescription="@string/minimize"
                 android:id="@+id/minimize_player"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -314,6 +315,7 @@
         app:layout_constraintTop_toTopOf="@id/audio_player_container">
 
         <ImageView
+            android:contentDescription="@null"
             android:id="@+id/miniPlayerThumbnail"
             android:layout_width="96dp"
             android:layout_height="match_parent"
@@ -332,6 +334,7 @@
             android:paddingVertical="15dp" />
 
         <ImageView
+            android:contentDescription="@string/pause"
             android:id="@+id/miniPlayerPause"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -341,6 +344,7 @@
             android:src="@drawable/ic_pause" />
 
         <ImageView
+            android:contentDescription="@string/close"
             android:id="@+id/miniPlayerClose"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

@@ -19,7 +19,8 @@ data class SabrDownloaderHandle(
     @SuppressLint("UnsafeOptInUsageError")
     val streamRepresentation: Representation,
     var initSegment: Segment? = null,
-    var nextSegmentNumber: Long = 0L
+    var nextSegmentNumber: Long = 0L,
+    var segmentsSinceDbWrite: Int = 0
 )
 
 @OptIn(UnstableApi::class)
@@ -80,19 +81,30 @@ class SabrDownloadProvider(
         downloadHandle.nextSegmentNumber = segment.sequenceNumber + 1
         currentPositionMillis += segment.duration
 
-        // persist current download position in millis in the database
-        // this is used to restore the download position when pausing and resuming the download
-        item.currentDownloadPositionMillis = currentPositionMillis
-        DatabaseHolder.Database.downloadDao().updateDownloadItem(item)
-
         val endSegmentNumber = downloadHandle.sabrClient.getEndSegmentNumber(
             downloadHandle.streamRepresentation.formatId()
         )
-        return if (endSegmentNumber != null && downloadHandle.nextSegmentNumber < endSegmentNumber) {
+        val isLastSegment = endSegmentNumber != null && downloadHandle.nextSegmentNumber >= endSegmentNumber
+
+        // persist download position in the database, throttled (every N segments) so a long
+        // download does not pay a transaction per segment; the final segment is always persisted
+        // so resume-with-reload can restore the position after completion
+        downloadHandle.segmentsSinceDbWrite++
+        if (isLastSegment || downloadHandle.segmentsSinceDbWrite >= PERSIST_EVERY_N_SEGMENTS) {
+            item.currentDownloadPositionMillis = currentPositionMillis
+            DatabaseHolder.Database.downloadDao().updateDownloadItem(item)
+            downloadHandle.segmentsSinceDbWrite = 0
+        }
+
+        return if (!isLastSegment) {
             val downloadedBytesLength = segment.data.sumOf { it.size }
             DownloadProgressResult.Progressed(downloadedBytesLength.toLong())
         } else {
             DownloadProgressResult.DownloadComplete
         }
+    }
+
+    companion object {
+        private const val PERSIST_EVERY_N_SEGMENTS = 25
     }
 }

@@ -20,6 +20,8 @@ retrofit = "3.0.0"
 desugaring = "2.1.5"
 coil = "3.4.0"
 room = "2.8.4"
+androidxTestCore = "1.6.1"
+androidxTestRunner = "1.7.0"
 kotlinxSerialization = "1.11.0"
 kotlinxDatetime = "0.8.0"
 media = "1.8.0"
@@ -52,6 +54,8 @@ androidx-navigation-fragment = { group = "androidx.navigation", name = "navigati
 androidx-navigation-ui = { group = "androidx.navigation", name = "navigation-ui-ktx", version.ref = "navigation" }
 androidx-preference = { group = "androidx.preference", name = "preference-ktx", version.ref = "preference" }
 androidx-test-junit = { group = "androidx.test.ext", name = "junit", version.ref = "extJunit" }
+androidx-test-runner = { group = "androidx.test", name = "runner", version.ref = "androidxTestRunner" }
+room-testing = { group = "androidx.room", name = "room-testing", version.ref = "room" }
 androidx-test-espressoCore = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espresso" }
 androidx-work-runtime = { group = "androidx.work", name="work-runtime-ktx", version.ref="workRuntime" }
 androidx-media = { group = "androidx.media", name = "media", version.ref = "media" }

@@ -12,9 +12,14 @@
         android:layout_height="match_parent"
         android:gravity="center"
         android:orientation="vertical"
-        android:visibility="visible">
+        android:visibility="visible"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
 
         <ImageView
+            android:contentDescription="@null"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_marginBottom="16dp"

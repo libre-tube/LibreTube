@@ -52,10 +52,8 @@ object DatabaseHelper {
     private suspend fun trimSearchHistoryIfNeeded() {
         if (PreferenceHelper.getBoolean(PreferenceKeys.UNLIMITED_SEARCH_HISTORY, false)) return
 
-        val history = Database.searchHistoryDao().getAll().toMutableList()
-        while (history.size > MAX_SEARCH_HISTORY_SIZE) {
-            Database.searchHistoryDao().delete(history.removeFirst())
-        }
+        // single-statement trim in the DB instead of load-all + delete-loop
+        Database.searchHistoryDao().deleteOldest(MAX_SEARCH_HISTORY_SIZE)
     }
 
     // endregion
