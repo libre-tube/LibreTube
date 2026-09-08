@@ -18,7 +18,7 @@ interface WatchHistoryDao {
     @Query("SELECT COUNT(videoId) FROM watchHistoryItem")
     suspend fun getSize(): Int
 
-    @Query("SELECT * FROM watchHistoryItem WHERE videoId LIKE :videoId LIMIT 1")
+    @Query("SELECT * FROM watchHistoryItem WHERE videoId = :videoId LIMIT 1")
     suspend fun findById(videoId: String): WatchHistoryItem?
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

@@ -1,5 +1,6 @@
 package com.github.libretube.db
 
+import android.os.Build
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
 
@@ -86,7 +87,42 @@ object DatabaseMigrations {
 
     val MIGRATION_23_24 = object : Migration(23, 24) {
         override fun migrate(db: SupportSQLiteDatabase) {
-            db.execSQL("ALTER TABLE 'downloadItem' DROP COLUMN 'url'")
+            // `ALTER TABLE ... DROP COLUMN` requires SQLite >= 3.35 (Android 12+).
+            // On older devices the table must be rebuilt to drop the `url` column.
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                db.execSQL("ALTER TABLE 'downloadItem' DROP COLUMN 'url'")
+            } else {
+                val rebuildSql = """
+                    CREATE TABLE IF NOT EXISTS downloadItem_new (
+                        id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+                        type TEXT NOT NULL,
+                        videoId TEXT NOT NULL,
+                        fileName TEXT NOT NULL,
+                        path TEXT NOT NULL,
+                        format TEXT ,
+                        quality TEXT ,
+                        language TEXT ,
+                        downloadSize INTEGER NOT NULL,
+                        FOREIGN KEY(videoId) REFERENCES download(videoId) ON DELETE CASCADE
+                    )
+                """.trimIndent()
+                db.execSQL(rebuildSql)
+                db.execSQL(
+                    """
+                    INSERT INTO downloadItem_new (
+                        id, type, videoId, fileName, path, format, quality, language, downloadSize
+                    )
+                    SELECT
+                        id, type, videoId, fileName, path, format, quality, language, downloadSize
+                    FROM downloadItem
+                    """.trimIndent()
+                )
+                db.execSQL("DROP TABLE downloadItem")
+                db.execSQL("ALTER TABLE downloadItem_new RENAME TO downloadItem")
+                db.execSQL(
+                    "CREATE UNIQUE INDEX IF NOT EXISTS index_downloadItem_path ON downloadItem(path)"
+                )
+            }
         }
     }
 

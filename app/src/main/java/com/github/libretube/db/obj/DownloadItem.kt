@@ -10,7 +10,10 @@ import kotlin.io.path.fileSize
 
 @Entity(
     tableName = "downloadItem",
-    indices = [Index(value = ["path"], unique = true)],
+    indices = [
+        Index(value = ["path"], unique = true),
+        Index(value = ["videoId"])
+    ],
     foreignKeys = [
         ForeignKey(
             entity = Download::class,

@@ -1,11 +1,12 @@
 package com.github.libretube.db.obj
 
 import androidx.room.Entity
+import androidx.room.Index
 import androidx.room.PrimaryKey
 import com.github.libretube.api.obj.StreamItem
 import com.github.libretube.extensions.toLocalDate
 
-@Entity(tableName = "feedItem")
+@Entity(tableName = "feedItem", indices = [Index(value = ["uploaded"])])
 data class SubscriptionsFeedItem(
     @PrimaryKey
     val videoId: String,

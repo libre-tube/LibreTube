@@ -11,7 +11,6 @@ import com.github.libretube.helpers.PreferenceHelper
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOn
-import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
 
 object DatabaseHelper {
@@ -67,11 +66,6 @@ object DatabaseHelper {
         withContext(Dispatchers.IO) {
             Database.watchPositionDao().findById(videoId)?.position
         }
-
-    @Deprecated("Use suspend getWatchPosition() instead. Blocking call risks ANR.", ReplaceWith("getWatchPosition(videoId)"))
-    fun getWatchPositionBlocking(videoId: String): Long? = runBlocking(Dispatchers.IO) {
-        Database.watchPositionDao().findById(videoId)?.position
-    }
 
     // endregion
 

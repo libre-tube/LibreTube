@@ -2,12 +2,13 @@ package com.github.libretube.db.obj
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
+import androidx.room.Index
 import androidx.room.PrimaryKey
 import com.github.libretube.api.obj.StreamItem
 import kotlinx.serialization.Serializable
 
 @Serializable
-@Entity
+@Entity(indices = [Index(value = ["playlistId"])])
 data class LocalPlaylistItem(
     @PrimaryKey(autoGenerate = true) var id: Int = 0,
     @ColumnInfo var playlistId: Int = 0,
