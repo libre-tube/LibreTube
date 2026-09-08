@@ -31,10 +31,8 @@ import com.github.libretube.ui.activities.NoInternetActivity
 import com.github.libretube.enums.DownloadTab
 import com.github.libretube.ui.fragments.DownloadsFragmentPage.Companion.sortDownloadList
 import com.github.libretube.util.PlayingQueue
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
 import kotlin.io.path.exists
 
@@ -49,7 +47,7 @@ open class OfflinePlayerService : AbstractPlayerService() {
     private var downloadWithItems: DownloadWithItems? = null
     private lateinit var playerData: PlayerData
 
-    private val scope = CoroutineScope(Dispatchers.Main)
+    private val scope get() = serviceScope
 
     private val playerListener = object : Player.Listener {
         override fun onPlaybackStateChanged(playbackState: Int) {
@@ -80,14 +78,12 @@ open class OfflinePlayerService : AbstractPlayerService() {
         PlayingQueue.clear()
 
         this.videoId = if (playerData.shuffle) {
-            runBlocking(Dispatchers.IO) {
-                if (playerData.downloadTab == DownloadTab.PLAYLIST) {
-                    Database.downloadDao()
-                        .getDownloadPlaylistById(playerData.playlistId!!).downloadVideos.randomOrNull()
-                } else {
-                    Database.downloadDao().getAll().filterByTab(playerData.downloadTab!!)
-                        .randomOrNull()?.download
-                }
+            if (playerData.downloadTab == DownloadTab.PLAYLIST) {
+                Database.downloadDao()
+                    .getDownloadPlaylistById(playerData.playlistId!!).downloadVideos.randomOrNull()
+            } else {
+                Database.downloadDao().getAll().filterByTab(playerData.downloadTab!!)
+                    .randomOrNull()?.download
             }?.videoId
         } else {
             playerData.videoId

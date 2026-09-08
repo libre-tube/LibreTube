@@ -5,6 +5,9 @@ import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.db.DatabaseHolder
 import com.github.libretube.helpers.PreferenceHelper
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
+import kotlinx.coroutines.awaitAll
+import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.withContext
 import okhttp3.OkHttpClient
 import okhttp3.Request
@@ -40,49 +43,12 @@ object InstanceFallbackManager {
         .build()
 
     /**
-     * Get the current fetch instance, checking if it's healthy first.
-     * If the current instance is unhealthy, fall back to a working one.
-     */
-    suspend fun getHealthyInstance(): String = withContext(Dispatchers.IO) {
-        val currentInstance = PreferenceHelper.getString(PreferenceKeys.FETCH_INSTANCE, RetrofitInstance.PIPED_API_URL)
-
-        // Check if current instance is healthy or in cooldown
-        val currentHealth = instanceHealthMap[currentInstance]
-        if (currentHealth != null && isInstanceInCooldown(currentHealth)) {
-            Log.w(TAG, "Current instance $currentInstance is in cooldown, searching for fallback")
-            val fallback = findWorkingInstance(currentInstance)
-            if (fallback != null) {
-                return@withContext fallback
-            }
-        }
-
-        // Try to health-check the current instance
-        if (!isInstanceReachable(currentInstance)) {
-            markInstanceFailed(currentInstance)
-            Log.w(TAG, "Current instance $currentInstance is unreachable, searching for fallback")
-            val fallback = findWorkingInstance(currentInstance)
-            if (fallback != null) {
-                return@withContext fallback
-            }
-        }
-
-        currentInstance
-    }
-
-    /**
      * Mark the current instance as failed and switch to a fallback if available.
      * Returns the new instance URL, or null if no fallback was found.
      */
     suspend fun onInstanceFailed(failedApiUrl: String): String? = withContext(Dispatchers.IO) {
         markInstanceFailed(failedApiUrl)
         findWorkingInstance(failedApiUrl)
-    }
-
-    /**
-     * Reset health status for an instance (e.g. when the user manually selects it).
-     */
-    fun resetInstanceHealth(apiUrl: String) {
-        instanceHealthMap.remove(apiUrl)
     }
 
     private fun markInstanceFailed(apiUrl: String) {
@@ -113,20 +79,28 @@ object InstanceFallbackManager {
             }
             .take(MAX_FALLBACK_ATTEMPTS)
 
-        for (apiUrl in candidates) {
-            if (isInstanceReachable(apiUrl)) {
-                Log.i(TAG, "Found working fallback instance: $apiUrl")
-                // Update the preference to use this instance
-                PreferenceHelper.putString(PreferenceKeys.FETCH_INSTANCE, apiUrl)
-                RetrofitInstance.apiLazyMgr.reset()
-                return apiUrl
-            } else {
-                markInstanceFailed(apiUrl)
-            }
+        if (candidates.isEmpty()) {
+            Log.e(TAG, "No fallback candidates available")
+            return null
         }
 
-        Log.e(TAG, "No working fallback instance found")
-        return null
+        // health-check all candidates concurrently to keep the instance-switch latency bounded
+        return coroutineScope {
+            val reachable = candidates.map { apiUrl ->
+                async(Dispatchers.IO) { apiUrl to isInstanceReachable(apiUrl) }
+            }.awaitAll()
+
+            reachable.firstOrNull { it.second }?.first?.also { workingApiUrl ->
+                Log.i(TAG, "Found working fallback instance: $workingApiUrl")
+                // Update the preference to use this instance
+                PreferenceHelper.putString(PreferenceKeys.FETCH_INSTANCE, workingApiUrl)
+                RetrofitInstance.apiLazyMgr.reset()
+            } ?: run {
+                candidates.forEach { markInstanceFailed(it) }
+                Log.e(TAG, "No working fallback instance found")
+                null
+            }
+        }
     }
 
     /**

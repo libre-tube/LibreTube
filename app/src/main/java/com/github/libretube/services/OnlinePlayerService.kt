@@ -41,7 +41,6 @@ import com.github.libretube.player.manifest.SabrManifest
 import com.github.libretube.util.DeArrowUtil
 import com.github.libretube.util.PlayingQueue
 import com.github.libretube.util.YoutubeHlsPlaylistParser
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.cancelAndJoin
@@ -65,7 +64,7 @@ open class OnlinePlayerService : AbstractPlayerService() {
      */
     private var streams: Streams? = null
 
-    private val scope = CoroutineScope(Dispatchers.IO)
+    private val scope get() = serviceScope
 
     /*
     Current job that's loading a new video (the value is null if no video is loading at the moment).
@@ -184,9 +183,15 @@ open class OnlinePlayerService : AbstractPlayerService() {
                 withContext(Dispatchers.Main) { setSponsorBlockSegments(segments) }
             }
 
+            // pre-fetch the saved watch position on the IO thread to avoid blocking the main thread
+            val savedWatchPosition = if (timestampMs != 0L || !watchPositionsEnabled) 0L
+            else withContext(Dispatchers.IO) {
+                DatabaseHelper.getWatchPosition(videoId) ?: 0L
+            }
+
             withContext(Dispatchers.Main) {
                 setStreamSource()
-                configurePlayer(timestampMs)
+                configurePlayer(timestampMs, savedWatchPosition)
             }
         }
 
@@ -194,13 +199,13 @@ open class OnlinePlayerService : AbstractPlayerService() {
         fetchVideoInfoJob = null
     }
 
-    private fun configurePlayer(seekToPositionMs: Long) {
+    private fun configurePlayer(seekToPositionMs: Long, savedWatchPositionMs: Long) {
         // seek to the previous position if available
         if (seekToPositionMs != 0L) {
             exoPlayer?.seekTo(seekToPositionMs)
-        } else if (watchPositionsEnabled) {
-            DatabaseHelper.getWatchPositionBlocking(videoId)?.let {
-                if (!DatabaseHelper.isVideoWatched(it, streams?.duration)) exoPlayer?.seekTo(it)
+        } else if (watchPositionsEnabled && savedWatchPositionMs != 0L) {
+            if (!DatabaseHelper.isVideoWatched(savedWatchPositionMs, streams?.duration)) {
+                exoPlayer?.seekTo(savedWatchPositionMs)
             }
         }
 

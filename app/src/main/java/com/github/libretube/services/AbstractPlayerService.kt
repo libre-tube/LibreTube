@@ -47,6 +47,8 @@ import com.github.libretube.util.PlayingQueueMode
 import com.google.common.util.concurrent.ListenableFuture
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
@@ -64,6 +66,9 @@ abstract class AbstractPlayerService : MediaLibraryService(), MediaLibrarySessio
         private set
 
     val handler = Handler(Looper.getMainLooper())
+
+    // scope for all player service coroutines, canceled once the service is destroyed
+    protected val serviceScope = CoroutineScope(SupervisorJob() + Dispatchers.IO)
 
     private val watchPositionTimer = PauseableTimer(
         onTick = ::saveWatchPosition,
@@ -172,7 +177,7 @@ abstract class AbstractPlayerService : MediaLibraryService(), MediaLibrarySessio
                 PlayingQueue.queueMode =
                     if (isOfflinePlayer) PlayingQueueMode.OFFLINE else PlayingQueueMode.ONLINE
 
-                CoroutineScope(Dispatchers.IO).launch {
+                serviceScope.launch {
                     onServiceCreated(args)
                     withContext(Dispatchers.Main) {
                         updateNotification()
@@ -284,7 +289,7 @@ abstract class AbstractPlayerService : MediaLibraryService(), MediaLibrarySessio
 
         this.videoId = videoId
 
-        CoroutineScope(Dispatchers.IO).launch {
+        serviceScope.launch {
             startPlayback()
         }
     }
@@ -497,6 +502,8 @@ abstract class AbstractPlayerService : MediaLibraryService(), MediaLibrarySessio
     }
 
     override fun onDestroy() {
+        serviceScope.cancel()
+
         // wait for a short time before killing the mediaSession
         // as the playerController must be released before we finish the session
         // otherwise there would be a
