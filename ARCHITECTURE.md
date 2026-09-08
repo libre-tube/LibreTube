@@ -94,7 +94,7 @@ Auditoria aplicou neste fork:
   para `lifecycleScope` / corrotinas.
 
 `DatabaseHelper` centraliza acesso e conversão. As funções **suspend** já usam
-`withContext(Dispatchers.IO)`; `getWatchPositionBlocking` está deprecated.
+`withContext(Dispatchers.IO)`; o `getWatchPositionBlocking` obsoleto foi removido.
 
 ## Segurança aplicada
 
@@ -144,6 +144,19 @@ Auditoria aplicou neste fork:
   `subprocess.run` com argumentos).
 - `gradle.properties`: propriedade de configuration-cache renomeada para o novo nome
   (`configuration-cache.problems=warn`).
+
+## Verificação final
+
+- `./gradlew assembleDebug lintDebug testDebugUnitTest` — **BUILD SUCCESSFUL**
+  (APK em `app/build/outputs/apk/debug/app-debug.apk`; 9 testes unitários passando).
+- Lint: removidos 36 avisos `InvalidManifestAttribute` (atributos ignorados nos
+  `activity-alias` dos ícones do launcher). Resíduos restantes são majoritariamente
+  `MissingTranslation` (572, herança de estados parciais das 6 traduções), mais
+  `ContentDescription`/`UnusedResources`/avisos de versão — sem regressões introduzidas
+  por esta tarefa; `lint { abortOnError = false }` mantido por esse estado legado.
+- Código morto removido: `PlayerPiPHelper` (130 linhas, nunca instanciado),
+  `File.formatSize()` (sem chamadores), `ExternalApi.USER_AGENT` (substituído por
+  `ApiConstants.USER_AGENT`) e `getWatchPositionBlocking`.
 
 ## Próxima leitura
 
