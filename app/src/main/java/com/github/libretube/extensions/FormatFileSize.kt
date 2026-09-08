@@ -1,12 +1,7 @@
 package com.github.libretube.extensions
 
-import java.io.File
 import kotlin.math.log2
 import kotlin.math.pow
-
-fun File.formatSize(): String {
-    return length().formatAsFileSize()
-}
 
 fun Int.formatAsFileSize(): String {
     return toLong().formatAsFileSize()

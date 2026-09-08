@@ -18,9 +18,6 @@ import retrofit2.http.Path
 import retrofit2.http.Query
 import retrofit2.http.Url
 
-@Deprecated("Use ApiConstants.USER_AGENT instead", ReplaceWith("ApiConstants.USER_AGENT", "com.github.libretube.constants.ApiConstants"))
-const val USER_AGENT = ApiConstants.USER_AGENT
-
 interface ExternalApi {
     @GET("config")
     suspend fun getInstanceConfig(@Url url: String): PipedConfig
