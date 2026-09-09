@@ -1,0 +1,4 @@
+Fixed livestreams not playing (blank screen) caused by an empty DASH manifest being selected as a file source.
+Improved playback source selection: SABR, DASH and HLS are now chosen through a tested selector, with livestreams falling back to HLS when DASH is unavailable.
+Added 10 unit tests covering source-selection edge cases.
+Several maintenance, quality and documentation improvements.

@@ -17,7 +17,25 @@
 
 [<img src="assets/badges/fdrload.png" alt="Get it on F-Droid" width="30%">](https://f-droid.org/en/packages/com.github.libretube/)
 [<img src="assets/badges/izzyload.png" alt="Get it on IzzyOnDroid" width="30%">](https://apt.izzysoft.de/fdroid/index/apk/com.github.libretube)<br/>
-[<img src="assets/badges/ghload.png" alt="Get it on GitHub" width="30%">](https://github.com/libre-tube/LibreTube/releases/latest)
+[<img src="assets/badges/ghload.png" alt="Get it on GitHub" width="30%">](https://github.com/brunlx/LibreTube----New-Version/releases/latest)
+
+</div>
+
+<div align="center">
+
+[![CI](https://img.shields.io/github/actions/workflow/status/brunlx/LibreTube----New-Version/ci.yml?branch=master&label=CI&logo=github)](.github/workflows/ci.yml)
+[![Release build](https://img.shields.io/github/actions/workflow/status/brunlx/LibreTube----New-Version/build-release.yml?label=Release%20build&logo=github)](.github/workflows/build-release.yml)
+[![CodeQL](https://img.shields.io/github/actions/workflow/status/brunlx/LibreTube----New-Version/codeql-analysis.yml?label=CodeQL&logo=github)](.github/workflows/codeql-analysis.yml)
+[![Tests](https://img.shields.io/badge/tests-39%20passing-brightgreen?logo=checkmarx&logoColor=white)](ARCHITECTURE.md#fase-3--corre%C3%A7%C3%A3o-de-livestream-valida%C3%A7%C3%A3o-em-hardware)
+[![Version](https://img.shields.io/github/v/release/brunlx/LibreTube----New-Version?logo=github)](https://github.com/brunlx/LibreTube----New-Version/releases/latest)
+[![License: GPL-3.0](https://img.shields.io/github/license/brunlx/LibreTube----New-Version?label=License)](LICENSE)
+[![Language: Kotlin](https://img.shields.io/github/languages/top/brunlx/LibreTube----New-Version?logo=kotlin&logoColor=white)]()
+[![Repo size](https://img.shields.io/github/repo-size/brunlx/LibreTube----New-Version?logo=github)]()
+[![Last commit](https://img.shields.io/github/last-commit/brunlx/LibreTube----New-Version?logo=git&logoColor=white)]()
+[![Stars](https://img.shields.io/github/stars/brunlx/LibreTube----New-Version?logo=github)]()
+[![Contributors](https://img.shields.io/github/contributors/brunlx/LibreTube----New-Version?logo=github)](CONTRIBUTORS.md)
+
+**Docs:** [Wiki](https://github.com/brunlx/LibreTube----New-Version/wiki) · [Architecture](ARCHITECTURE.md) · [Security](SECURITY.md) · [Release process](RELEASE.md)
 
 </div>
 
@@ -102,7 +120,9 @@ Features
 Contributing
 </h2>
 
-Whether you have ideas, translations, design changes, code cleaning or really heavy code changes, help is always welcome. The more is done, the better it gets! Please respect our [Code of Conduct](https://github.com/libre-tube/LibreTube/blob/master/CODE_OF_CONDUCT.md) in order to keep all interactions and discussions healthy.
+Whether you have ideas, translations, design changes, code cleaning or really heavy code changes, help is always welcome. The more is done, the better it gets! Please respect our [Code of Conduct](https://github.com/brunlx/LibreTube----New-Version/blob/master/CODE_OF_CONDUCT.md) in order to keep all interactions and discussions healthy.
+
+This fork is developed and maintained by [@brunlx](https://github.com/brunlx) — see [CONTRIBUTORS.md](CONTRIBUTORS.md) for credits and [RELEASE.md](RELEASE.md) for the release process.
 
 You can open and build the project like any other normal Android project by using Android Studio.
 
