@@ -45,7 +45,8 @@ workers/          -> NotificationWorker (verificação de inscrições em segund
    `startPlayback` dentro de `serviceScope` (corrotina scoped à vida do serviço).
 3. `OnlinePlayerService.startPlayback` busca `Streams` (`MediaServiceRepository.instance.getStreams`)
    com fallback automático de instância (ver "Failover de instância").
-4. `setStreamSource()` escolhe entre HLS, progressive e SABR (`SabrMediaSource`).
+4. `setStreamSource()` despacha pelo resultado de `selectStreamSource()` (função pura
+   testada) entre SABR (`SabrMediaSource`), DASH, HLS e NONE.
 5. `configurePlayer()` aplica posição salva e `prepare()`.
 
 ### Failover de instância
@@ -266,6 +267,67 @@ Levada a cabo em iterações de 5–7 tarefas ("waves"); a lista oficial de resu
   intencionais do upstream (documentados em "Segurança aplicada").
 - Dívida aceita e anotada: aviso de schema KSP sobre o índice de jurisdição
   `DownloadPlaylistVideosCrossRef.videoId`, e `lint { abortOnError = false }`.
+
+## Fase 3 — correção de livestream (validação em hardware)
+
+### Bug (relato real em dispositivo)
+
+- Livestreams reproduziam tela preta e falhavam com
+  `FileNotFoundException: : open failed: ENOENT`, lançada a partir do
+  `FileDataSource` do Media3. Confirmado no dispositivo: `dash=[]`, `hls=[URL
+  .m3u8 válida]`, e o player tentava abrir `uri=[] scheme=[null]`
+  (`mimeType=application/dash+xml`, `DataSpec.open uri=[] isEmptyUri=true`).
+
+### Causa raiz
+
+- Para livestreams o Piped devolve `Streams.dash` como string **vazia** (`""`),
+  e não `null`. O branch DASH usava `streams.isLive && streams.dash != null`, que
+  é verdadeiro para `""` → `Uri.EMPTY` → `Util.isLocalFileUri` (scheme
+  null/vazio) roteia para `FileDataSource.openLocalFile` →
+  `new RandomAccessFile("", "r")` → ENOENT. O HLS válido nunca era alcançado.
+
+### Correção
+
+- `setStreamSource()` agora despacha pelo resultado de `selectStreamSource(...)`,
+  função pura `internal` em `OnlinePlayerService.kt` (unit-testada):
+  - `SABR` — somente não-live (`!isLive && sabrAvailable`), inalterado;
+  - `DASH` — somente se `hasVideoStreams && (!isLive || !dashUrl.isNullOrBlank())`
+    → DASH vazio/blank/`null` em live **não** seleciona mais DASH;
+  - `HLS` — se `!hlsUrl.isNullOrBlank()` (HLS vazio também não gera `Uri.EMPTY`);
+  - `NONE` — `no_streams_found`.
+- Live com DASH ausente/vazio cai no HLS; VOD (não-live) preserva o comportamento
+  anterior (DASH gerado de `videoStreams`) e o caminho SABR permanece intacto.
+
+### Testes
+
+- `app/src/test/.../services/StreamSourceSelectorTest.kt` (10 testes): `dash=""`→HLS,
+  `dash="   "`→HLS, `dash=null`→HLS, `dash` válida→DASH, live sem manifestos→NONE,
+  VOD com streams→DASH, VOD sem streams→HLS, VOD sem fontes→NONE,
+  SABR preferido no VOD, SABR ignorado em live.
+
+### Validação em hardware (dispositivo `IVS45HHIINHIZPSK`, Android 16)
+
+- **Live #1** `mWwayBhXmu8`: `state=PLAYING`, posição=-1 (live), `error=null`,
+  codecs H.264 (`c2.mtk.avc.decoder`) + AAC (`c2.android.aac.decoder`),
+  **0 erros** ENOENT/Uri.EMPTY/PlayerError, contínuo >60 s e no histórico
+  (duration 0).
+- **Live #2** `1On8XErWJtU` (CNN Brasil — diferente da #1, obtida do feed Live do
+  próprio app): idem, PLAYING sem erros e no histórico.
+- **VOD** `dQw4w9WgXcQ` (regressão): PLAYING com posição avançando (speed=1.0),
+  codecs VP9 + Opus, sem erros e no histórico (duration 213).
+- Sem tela preta, sem crash; watch history (Room `watchHistoryItem`) registra as 3
+  reproduções.
+
+### Build e artefato
+
+- `./gradlew clean testDebugUnitTest assembleDebug lintDebug` — **BUILD SUCCESSFUL**
+  (39 testes unitários no total = 29 das fases anteriores + 10 novos; 0 falhas;
+  lint idêntico ao baseline do HEAD — nenhum issue novo).
+- Instrumentação temporária `LIVE_DEBUG_SOURCE` removida **antes** da validação:
+  o APK validado em hardware já é o artefato final.
+- Commit: `ea0b4c1e5` — `fix(player): fall back from empty live DASH to HLS`
+  (diff restrito: `OnlinePlayerService.kt` + o teste; nada mais).
+- Status: **FIX VERIFIED**.
 
 ## Próxima leitura
 
