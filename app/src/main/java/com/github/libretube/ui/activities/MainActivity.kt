@@ -27,6 +27,7 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.onNavDestinationSelected
 import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.RecyclerView
+import androidx.work.WorkManager
 import com.github.libretube.BuildConfig
 import com.github.libretube.NavDirections
 import com.github.libretube.R
@@ -64,8 +65,12 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
 
+
+
 class MainActivity : AbstractPlayerHostActivity() {
-    private lateinit var binding: ActivityMainBinding
+    lateinit var binding: ActivityMainBinding
+
+    private lateinit var importHelper: ImportHelper
 
     lateinit var navController: NavController
     private var startFragmentId = R.id.homeFragment

@@ -164,6 +164,9 @@ dependencies {
     implementation(libs.google.protobuf.javalite)
     implementation(libs.google.protobuf.kotlin.lite)
 
+    implementation(libs.androidx.work.runtime)
+
+
     /* NewPipe Extractor */
     implementation(libs.newpipeextractor)
 
