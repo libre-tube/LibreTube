@@ -25,6 +25,8 @@ open class BaseBottomSheet(@LayoutRes layoutResId: Int = R.layout.bottom_sheet) 
 
     private lateinit var adapter: BottomSheetAdapter
 
+    protected var autoDismiss: Boolean = true
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val binding = BottomSheetBinding.bind(view)
 
@@ -68,7 +70,7 @@ open class BaseBottomSheet(@LayoutRes layoutResId: Int = R.layout.bottom_sheet) 
                 dialog?.hide()
                 listener?.invoke(index)
                 runCatching {
-                    dismiss()
+                    if (autoDismiss) dismiss()
                 }
             }
         }
