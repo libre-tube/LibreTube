@@ -72,6 +72,11 @@ object PlaylistsHelper {
             playlistsRepository.addToPlaylist(playlistId, *videos)
         }
 
+    suspend fun getVideoFromPlaylist(videoId: String) =
+        withContext(Dispatchers.IO) {
+            playlistsRepository.getVideoFromPlaylist(videoId)
+        }
+
     suspend fun renamePlaylist(playlistId: String, newName: String) =
         playlistsRepository.renamePlaylist(playlistId, newName)
 

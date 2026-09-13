@@ -3,6 +3,7 @@ package com.github.libretube.repo
 import com.github.libretube.api.obj.Playlist
 import com.github.libretube.api.obj.Playlists
 import com.github.libretube.api.obj.StreamItem
+import com.github.libretube.db.obj.LocalPlaylistItem
 import com.github.libretube.obj.PipedImportPlaylist
 
 interface PlaylistRepository {
@@ -16,4 +17,5 @@ interface PlaylistRepository {
     suspend fun importPlaylists(playlists: List<PipedImportPlaylist>)
     suspend fun createPlaylist(playlistName: String): String?
     suspend fun deletePlaylist(playlistId: String): Boolean
+    suspend fun getVideoFromPlaylist(videoId: String): LocalPlaylistItem?
 }

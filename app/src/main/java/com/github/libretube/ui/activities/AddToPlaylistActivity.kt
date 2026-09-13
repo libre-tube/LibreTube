@@ -2,13 +2,16 @@ package com.github.libretube.ui.activities
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.core.net.toUri
 import androidx.core.os.bundleOf
 import androidx.lifecycle.lifecycleScope
 import com.github.libretube.R
 import com.github.libretube.api.MediaServiceRepository
+import com.github.libretube.api.PlaylistsHelper
 import com.github.libretube.api.obj.StreamItem
 import com.github.libretube.constants.IntentData
+import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.toastFromMainDispatcher
 import com.github.libretube.helpers.IntentHelper
 import com.github.libretube.helpers.PreferenceHelper
@@ -39,18 +42,27 @@ class AddToPlaylistActivity : BaseActivity() {
         ) { _, _ -> finish() }
 
         lifecycleScope.launch(Dispatchers.IO) {
-            val videoInfo = if (PreferenceHelper.getToken().isEmpty()) {
-                try {
-                    MediaServiceRepository.instance.getStreams(videoId).toStreamItem(videoId)
-                } catch (e: Exception) {
-                    toastFromMainDispatcher(R.string.unknown_error)
-                    withContext(Dispatchers.Main) {
-                        finish()
+
+            var videoInfo = try {
+                PlaylistsHelper.getVideoFromPlaylist(videoId)?.toStreamItem()
+            } catch (e: Exception) {
+                Log.e(TAG(), e.toString())
+            }
+            if (videoInfo == null) {
+
+                videoInfo = if (PreferenceHelper.getToken().isEmpty()) {
+                    try {
+                        MediaServiceRepository.instance.getStreams(videoId).toStreamItem(videoId)
+                    } catch (e: Exception) {
+                        toastFromMainDispatcher(R.string.unknown_error)
+                        withContext(Dispatchers.Main) {
+                            finish()
+                        }
+                        return@launch
                     }
-                    return@launch
+                } else {
+                    StreamItem(videoId)
                 }
-            } else {
-                StreamItem(videoId)
             }
 
             withContext(Dispatchers.Main) {

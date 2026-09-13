@@ -8,6 +8,7 @@ import com.github.libretube.api.obj.Playlists
 import com.github.libretube.api.obj.StreamItem
 import com.github.libretube.db.DatabaseHolder
 import com.github.libretube.db.obj.LocalPlaylist
+import com.github.libretube.db.obj.LocalPlaylistItem
 import com.github.libretube.extensions.parallelMap
 import com.github.libretube.obj.PipedImportPlaylist
 
@@ -150,5 +151,9 @@ class LocalPlaylistsRepository: PlaylistRepository {
         DatabaseHolder.Database.localPlaylistsDao().deletePlaylistItemsByPlaylistId(playlistId)
 
         return true
+    }
+
+    override suspend fun getVideoFromPlaylist(videoId: String): LocalPlaylistItem? {
+        return DatabaseHolder.Database.localPlaylistsDao().getVideoFromPlaylist(videoId)
     }
 }
