@@ -274,7 +274,7 @@
     <string name="mobile_data">Dades mòbils</string>
     <string name="push_channel_name">Treballador de notificacions</string>
     <string name="tooltip_filter">Filtra</string>
-    <string name="delete_all">Se suprimiran totes les descàrregues.</string>
+    <string name="delete_all">Se suprimiran totes les descàrregues</string>
     <string name="new_videos_badge_summary">Mostra una insígnia amb la quantitat de vídeos nous si n\'hi ha</string>
     <string name="color">Color</string>
     <string name="notification_time_summary">Limita el lapse de temps en què es mostren les notificacions de transmissió</string>
@@ -298,12 +298,12 @@
     <string name="start_time">Hora d\'inici</string>
     <string name="layout">Disseny</string>
     <string name="unsupported_file_format">Format de fitxer no compatible: %1$s</string>
-    <string name="auto_quality">Automàtic</string>
+    <string name="auto_quality">Automàtica</string>
     <string name="trends">Tendències</string>
     <string name="privacy_alert">Alerta de confidencialitat</string>
     <string name="rewind">Retrocedeix</string>
     <string name="time">Temps</string>
-    <string name="comments_disabled">Els comentaris han estat desactivats pel pujador</string>
+    <string name="comments_disabled">Els comentaris han estat desactivats pel pujador.</string>
     <string name="visibility_unlisted">Sense llistar</string>
     <string name="local_playlists">Llistes de reproducció locals</string>
     <string name="pure_theme_summary">Tema Pure White/Black theme</string>
@@ -322,7 +322,7 @@
     <string name="backup_restore_summary">Importa i exporta subscripcions, llistes de reproducció…</string>
     <string name="proceed">Continua</string>
     <string name="play_latest_videos">Reprodueix els vídeos més recents</string>
-    <string name="nothing_selected">No hi ha res seleccionat.</string>
+    <string name="nothing_selected">No hi ha res seleccionat</string>
     <string name="color_violet">Violeta versàtil</string>
     <string name="playlistUrl">URL de la llista de reproducció</string>
     <string name="audio_only_mode_summary">Converteix LibreTube en un reproductor de música</string>
@@ -364,7 +364,7 @@
     <string name="remove_bookmark">Elimina el marcador</string>
     <string name="playlist_description">Descripció de la llista de reproducció</string>
     <string name="comments_count">Comentaris (%1$s)</string>
-    <string name="category_highlight_summary">Podria ser el títol anunciat, la miniatura o la part més interessant del vídeo. Pots saltar-hi fent clic sobre ell a la secció de capítols.</string>
+    <string name="category_highlight_summary">Podria ser el títol anunciat, la miniatura o la part més interessant del vídeo. Pots saltar-hi fent clic sobre ell a la secció de capítols</string>
     <string name="pure_theme">Tema Pur</string>
     <string name="audio_video_summary">Qualitat i format</string>
     <string name="delete">Suprimeix de les descàrregues</string>
@@ -422,7 +422,7 @@
     <plurals name="channel_new_streams">
         <item quantity="one">%d transmissió nova</item>
         <item quantity="many">%d transmissions noves</item>
-        <item quantity="other"/>
+        <item quantity="other">%d transmissions noves</item>
     </plurals>
     <string name="change">Canvia</string>
     <string name="gestures">Gestos</string>
@@ -454,10 +454,10 @@
     <string name="playback_pitch">To</string>
     <string name="pinch_control">Controls del pinçament</string>
     <string name="automatic">Automàtic</string>
-    <string name="invalid_color">El color introduït no és vàlid.</string>
+    <string name="invalid_color">El color introduït no és vàlid</string>
     <string name="manual">Manual</string>
     <string name="wifi">Wi-Fi</string>
-    <string name="exportsuccess">Exportat</string>
+    <string name="exportsuccess">Exportat.</string>
     <string name="tooltip_reverse">Inverteix</string>
     <string name="descriptive_audio_track">descriptiu</string>
     <string name="import_playlists_from">Importa llistes de reproducció des de</string>
@@ -523,6 +523,8 @@
     <string name="ungrouped_channels_with_count">Desagrupat (%1$d)</string>
     <string name="screenshot_saved">S\'ha desat la captura</string>
     <plurals name="sleep_timer_chip_minutes">
+        <item quantity="one">%d min</item>
+        <item quantity="many">%d min</item>
         <item quantity="other">%d min</item>
     </plurals>
     <string name="did_you_mean">Volíeu dir:</string>
@@ -535,6 +537,7 @@
     <string name="delete_playlist_include_vidoes">Voleu suprimir també tots els vídeos de la llista de reproducció?</string>
     <plurals name="minutes_left">
         <item quantity="one">%d min romanent</item>
+        <item quantity="many">%d min romanents</item>
         <item quantity="other">%d min romanents</item>
     </plurals>
     <string name="showing_results_for">Es mostren els resultats de:</string>
