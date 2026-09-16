@@ -14,6 +14,7 @@ import androidx.media3.exoplayer.source.MediaSource
 import androidx.media3.exoplayer.source.MergingMediaSource
 import androidx.media3.exoplayer.source.ProgressiveMediaSource
 import androidx.media3.exoplayer.source.SingleSampleMediaSource
+import com.github.libretube.R
 import com.github.libretube.constants.IntentData
 import com.github.libretube.db.DatabaseHelper
 import com.github.libretube.db.DatabaseHolder.Database
@@ -23,7 +24,10 @@ import com.github.libretube.enums.FileType
 import com.github.libretube.extensions.parcelable
 import com.github.libretube.extensions.setMetadata
 import com.github.libretube.extensions.toAndroidUri
+import com.github.libretube.extensions.toastFromMainThread
 import com.github.libretube.extensions.updateParameters
+import com.github.libretube.helpers.IsoBmffBoxScanner
+import com.github.libretube.helpers.IsoBmffScanResult
 import com.github.libretube.helpers.PlayerHelper
 import com.github.libretube.parcelable.PlayerData
 import com.github.libretube.ui.activities.MainActivity
@@ -37,6 +41,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
 import kotlin.io.path.exists
+import kotlin.io.path.fileSize
 
 /**
  * A service to play downloaded audio in the background
@@ -115,6 +120,20 @@ open class OfflinePlayerService : AbstractPlayerService() {
             Database.downloadDao().findById(videoId)
         } ?: return
         this.downloadWithItems = downloadWithItems
+
+        val truncated = withContext(Dispatchers.IO) {
+            downloadWithItems.downloadItems.any {
+                it.type != FileType.SUBTITLE && it.path.exists() && (
+                    // a file larger than recorded was appended to by two download loops at once
+                    (it.downloadSize > 0L && it.path.fileSize() != it.downloadSize) ||
+                        IsoBmffBoxScanner.scan(it.path) == IsoBmffScanResult.Truncated
+                    )
+            }
+        }
+        if (truncated) {
+            toastFromMainThread(R.string.download_corrupt)
+            return
+        }
 
         PlayingQueue.updateCurrent(downloadWithItems.download.toStreamItem())
 

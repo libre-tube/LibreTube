@@ -62,7 +62,6 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import kotlin.io.path.fileSize
 
 enum class DownloadTab {
     VIDEO,
@@ -297,7 +296,7 @@ class DownloadsFragmentPage : DynamicLayoutManagerFragment(R.layout.fragment_dow
 
     private fun toggleDownload(download: DownloadWithItems): Boolean {
         val ids = download.downloadItems
-            .filter { item -> item.path.fileSize() < item.downloadSize }
+            .filter { item -> !item.isFinished }
             .map { item -> item.id }
 
         if (!serviceConnection.isBound) {

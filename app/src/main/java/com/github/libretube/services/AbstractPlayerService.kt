@@ -97,7 +97,9 @@ abstract class AbstractPlayerService : MediaLibraryService(), MediaLibrarySessio
 
         override fun onPlayerError(error: PlaybackException) {
             // show a toast on errors
-            toastFromMainThread(error.localizedMessage.orEmpty())
+            // the media3 message is just "Source error"; the actual reason is in the cause chain
+            val cause = generateSequence(error.cause) { it.cause }.lastOrNull()?.message
+            toastFromMainThread(listOfNotNull(error.localizedMessage, cause).joinToString(": "))
         }
 
         override fun onPlaybackStateChanged(playbackState: Int) {

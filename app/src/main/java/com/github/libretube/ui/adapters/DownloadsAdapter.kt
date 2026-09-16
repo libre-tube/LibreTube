@@ -69,11 +69,12 @@ class DownloadsAdapter(
 
             val downloadSize = items.sumOf { it.downloadSize }
             val currentSize = items.filter { it.path.exists() }.sumOf { it.path.fileSize() }
+            val finished = items.isNotEmpty() && items.all { it.isFinished }
 
-            if (downloadSize == -1L) {
+            if (!finished && items.any { it.downloadSize <= 0L }) {
                 progressBar.isIndeterminate = true
             } else {
-                progressBar.max = downloadSize.toInt()
+                progressBar.max = downloadSize.coerceAtLeast(0L).toInt()
                 progressBar.progress = currentSize.toInt()
             }
 
@@ -82,7 +83,7 @@ class DownloadsAdapter(
             } else {
                 context.getString(R.string.unknown)
             }
-            if (downloadSize > currentSize) {
+            if (!finished) {
                 downloadOverlay.isVisible = true
                 resumePauseBtn.setImageResource(R.drawable.ic_download)
                 fileSize.text = "${currentSize.formatAsFileSize()} / $totalSizeInfo"

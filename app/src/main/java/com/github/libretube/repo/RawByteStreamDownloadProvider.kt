@@ -55,10 +55,18 @@ class RawByteStreamDownloadProvider(val url: HttpUrl) : DownloadProvider {
             source.close()
         }
 
-        return if (startByteOffset + totalRead < item.downloadSize) {
-            DownloadProgressResult.Progressed(totalRead)
-        } else {
+        val newSize = startByteOffset + totalRead
+        return if (item.downloadSize > 0L) {
+            if (newSize < item.downloadSize) {
+                DownloadProgressResult.Progressed(totalRead)
+            } else {
+                DownloadProgressResult.DownloadComplete
+            }
+        } else if (totalRead < BYTES_PER_REQUEST) {
+            // Unknown content length: a short read means the server has no more data.
             DownloadProgressResult.DownloadComplete
+        } else {
+            DownloadProgressResult.Progressed(totalRead)
         }
     }
 

@@ -44,7 +44,9 @@ import com.github.libretube.extensions.toastFromMainDispatcher
 import com.github.libretube.extensions.toastFromMainThread
 import com.github.libretube.helpers.DownloadHelper
 import com.github.libretube.helpers.DownloadHelper.getNotificationId
+import com.github.libretube.helpers.DownloadedMediaVerifier
 import com.github.libretube.helpers.ImageHelper
+import com.github.libretube.helpers.MediaVerifyResult
 import com.github.libretube.helpers.NetworkHelper
 import com.github.libretube.helpers.PlayerHelper
 import com.github.libretube.helpers.ProxyHelper
@@ -61,6 +63,7 @@ import com.github.libretube.repo.SabrDownloadProvider
 import com.github.libretube.ui.activities.MainActivity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.NonCancellable
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.asCoroutineDispatcher
 import kotlinx.coroutines.coroutineScope
@@ -81,6 +84,7 @@ import kotlin.io.path.createFile
 import kotlin.io.path.deleteIfExists
 import kotlin.io.path.div
 import kotlin.io.path.fileSize
+import kotlin.math.min
 
 /**
  * Download service with custom implementation of downloading using [HttpURLConnection].
@@ -105,31 +109,35 @@ class DownloadService : LifecycleService() {
      */
     private val cachedStreamsInfo: MutableMap<String, Streams> = mutableMapOf()
 
+    /**
+     * Pauses all downloads when the connection switches to a metered one.
+     * The first invocation reports the network at registration time and is ignored,
+     * otherwise starting on a metered network would immediately pause the new download.
+     */
+    private val networkCallback = object : ConnectivityManager.NetworkCallback() {
+        private var initial = true
+
+        override fun onAvailable(network: Network) {
+            super.onAvailable(network)
+            if (initial) {
+                initial = false
+                return
+            }
+
+            if (NetworkHelper.isNetworkMetered(this@DownloadService)) {
+                for (download in downloadQueue.keyIterator()) {
+                    pause(download)
+                }
+            }
+        }
+    }
+
     override fun onCreate() {
         super.onCreate()
         IS_DOWNLOAD_RUNNING = true
         notifyForeground()
         sendBroadcast(Intent(ACTION_SERVICE_STARTED))
-    }
-
-    /**
-     * Listen for network changes and pause the download if the network connection becomes metered
-     */
-    fun registerNetworkChangedCallback() {
-        val connectivityManager = getSystemService<ConnectivityManager>()
-        connectivityManager?.registerDefaultNetworkCallback(object :
-            ConnectivityManager.NetworkCallback() {
-            override fun onAvailable(network: Network) {
-                super.onAvailable(network)
-
-                // pause all downloads when switching to an unmetered connection
-                if (NetworkHelper.isNetworkMetered(this@DownloadService)) {
-                    for (download in downloadQueue.keyIterator()) {
-                        pause(download)
-                    }
-                }
-            }
-        })
+        getSystemService<ConnectivityManager>()?.registerDefaultNetworkCallback(networkCallback)
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
@@ -142,14 +150,18 @@ class DownloadService : LifecycleService() {
             ACTION_RESUME_ALL -> resumeAll()
         }
 
-        registerNetworkChangedCallback()
-
         val downloadData = intent?.parcelableExtra<DownloadData>(IntentData.downloadData)
             ?: return START_NOT_STICKY
         val videoId = downloadData.videoId
 
         lifecycleScope.launch(coroutineContext) {
-            val streams = loadStreamsInfo(videoId) ?: return@launch
+            val streams = try {
+                loadStreamsInfo(videoId)
+            } catch (e: Exception) {
+                Log.e(TAG(), e.stackTraceToString())
+                toastFromMainDispatcher(e.localizedMessage.orEmpty())
+                return@launch
+            }
 
             storeVideoMetadata(videoId, streams)
 
@@ -162,22 +174,12 @@ class DownloadService : LifecycleService() {
         return START_NOT_STICKY
     }
 
-    private suspend fun loadStreamsInfo(videoId: String): Streams? {
-        if (cachedStreamsInfo.contains(videoId))
-            return cachedStreamsInfo[videoId]
-
-        val streams = try {
+    private suspend fun loadStreamsInfo(videoId: String): Streams {
+        return cachedStreamsInfo.getOrPut(videoId) {
             withContext(Dispatchers.IO) {
                 MediaServiceRepository.instance.getStreams(videoId)
             }
-        } catch (e: Exception) {
-            Log.e(TAG(), e.stackTraceToString())
-            toastFromMainDispatcher(e.localizedMessage.orEmpty())
-            return null
         }
-
-        cachedStreamsInfo[videoId] = streams
-        return streams
     }
 
     private suspend fun storeVideoMetadata(videoId: String, streams: Streams) {
@@ -259,60 +261,121 @@ class DownloadService : LifecycleService() {
 
     /**
      * Download file and emit [DownloadStatus] to the collectors of [downloadFlow]
-     * and notification.
+     * and notification. Retries with backoff (rebuilding the provider, so stale stream
+     * urls / dead SABR sessions are replaced) until the item is finished, paused or
+     * [MAX_DOWNLOAD_ATTEMPTS] is exhausted.
      */
-    @SuppressLint("UnsafeOptInUsageError")
     private suspend fun selectFormatAndDownloadFile(item: DownloadItem) {
-        val streams = loadStreamsInfo(item.videoId) ?: return
-        if (item.type == FileType.SUBTITLE) {
-            // subtitles are always plain files and don't use SABR
-            val subtitle = streams.subtitles.firstOrNull { it.code == item.language } ?: return
-            downloadFile(item, RawByteStreamDownloadProvider(subtitle.url!!.toHttpUrl()))
-        } else {
-            val selectedStream = selectMatchingStream(streams, item) ?: return
-            if (selectedStream.url?.startsWith("http") == true) {
-                downloadFile(item, RawByteStreamDownloadProvider(selectedStream.url!!.toHttpUrl()))
-            } else {
-                val sabrDownloader = SabrDownloadProvider(item, streams, selectedStream)
-                downloadFile(item, sabrDownloader)
-            }
-        }
-    }
-
-    /**
-     * Starts and progresses until the download is canceled or finished.
-     *
-     * You should probably not call this directly, call [selectFormatAndDownloadFile].
-     */
-    private suspend fun downloadFile(
-        item: DownloadItem,
-        downloadProvider: DownloadProvider,
-    ) {
+        // Callers (resume / resumeAll) suspend on DB queries before reaching here, so two of them
+        // can race and both launch this for the same item, which then appends to the same file
+        // from two sinks and corrupts it. All coroutines run on the single-thread dispatcher,
+        // hence this check-and-set is atomic.
+        if (downloadQueue[item.id]) return
         downloadQueue[item.id] = true
         val notificationBuilder = getNotificationBuilder(item)
         setResumeNotification(notificationBuilder, item)
 
+        var attempt = 0
+        var failure: String? = null
+        while (downloadQueue[item.id]) {
+            failure = try {
+                runDownloadAttempt(item, notificationBuilder)
+            } catch (_: CancellationException) {
+                break
+            } catch (e: Exception) {
+                Log.e(TAG(), e.stackTraceToString())
+                e.message.toString()
+            }
+            if (failure == null || attempt >= MAX_DOWNLOAD_ATTEMPTS) break
+
+            // drop the cached streams so the retry fetches fresh urls / a fresh SABR session
+            cachedStreamsInfo.remove(item.videoId)
+            val backoff = min(MAX_RETRY_DELAY_MS, RETRY_DELAY_MS shl attempt++)
+            Log.w(TAG(), "download ${item.fileName} failed ($failure), retry $attempt in ${backoff}ms")
+            delay(backoff)
+        }
+
+        if (item.isFinished) {
+            setPauseNotification(notificationBuilder, item, true)
+            _downloadFlow.emit(item.id to DownloadStatus.Completed)
+        } else {
+            setPauseNotification(notificationBuilder, item, false)
+            if (failure != null) {
+                toastFromMainThread("${getString(R.string.download)}: $failure")
+                _downloadFlow.emit(item.id to DownloadStatus.Error(failure))
+            }
+            pause(item.id)
+        }
+        downloadQueue[item.id] = false
+
+        // start the next download if there are any remaining ones enqueued
+        startNextEnqueueDownload()
+
+        // if no new download was enqueued (i.e. there's no paused/stopped download left),
+        // look if any downloads are still running, and if not, stop the service
+        stopServiceIfDone()
+    }
+
+    /**
+     * Runs a single download attempt until the item is finished or paused.
+     *
+     * @return null on success or user pause, otherwise the failure reason (retryable).
+     */
+    @SuppressLint("UnsafeOptInUsageError")
+    private suspend fun runDownloadAttempt(item: DownloadItem, notificationBuilder: Builder): String? {
+        val streams = loadStreamsInfo(item.videoId)
+        val downloadProvider = if (item.type == FileType.SUBTITLE) {
+            // subtitles are always plain files and don't use SABR
+            val subtitle = streams.subtitles.firstOrNull { it.code == item.language }
+                ?: return "subtitle not found"
+            RawByteStreamDownloadProvider(subtitle.url!!.toHttpUrl())
+        } else {
+            val selectedStream = selectMatchingStream(streams, item) ?: return "stream not found"
+            if (selectedStream.url?.startsWith("http") == true) {
+                RawByteStreamDownloadProvider(selectedStream.url!!.toHttpUrl())
+            } else {
+                if (item.currentSegmentNumber == null && item.path.fileSize() > 0L) {
+                    // A new SABR session cannot append to an existing file without the segment
+                    // index; rewriting the init segment would corrupt the container.
+                    resetCorruptDownload(item)
+                }
+                SabrDownloadProvider(item, streams, selectedStream)
+            }
+        }
+
         val sink = item.path.sink(StandardOpenOption.APPEND).buffer()
         var totalRead = item.path.fileSize()
         var numberOfTries = 0
-        while (downloadQueue[item.id] && !item.isFinished) {
-            try {
+        try {
+            while (downloadQueue[item.id]) {
                 when (val result = downloadProvider.downloadNextChunk(item, sink)) {
                     DownloadProgressResult.DownloadComplete -> {
-                        setPauseNotification(notificationBuilder, item, true)
-                        _downloadFlow.emit(item.id to DownloadStatus.Completed)
-                        downloadQueue[item.id] = false
-                        break
+                        sink.flush()
+                        val expectedDurationSeconds =
+                            Database.downloadDao().findById(item.videoId)?.download?.duration
+                        val verify = withContext(Dispatchers.IO) {
+                            DownloadedMediaVerifier.verify(item, expectedDurationSeconds)
+                        }
+                        return when (verify) {
+                            MediaVerifyResult.Ok -> {
+                                item.downloadSize = item.path.fileSize()
+                                item.currentSegmentNumber = null
+                                Database.downloadDao().updateDownloadItem(item)
+                                null
+                            }
+                            is MediaVerifyResult.Corrupt -> {
+                                Log.e(TAG(), "download verify failed for ${item.fileName}: ${verify.reason}")
+                                resetCorruptDownload(item)
+                                getString(R.string.download_corrupt)
+                            }
+                        }
                     }
                     DownloadProgressResult.Failed -> {
-                        if (numberOfTries < MAX_SEGMENT_RETRIES) {
+                        if (numberOfTries++ < MAX_SEGMENT_RETRIES) {
                             // try to download segment again after a short delay
                             delay(200)
-                            numberOfTries++
                         } else {
-                            setPauseNotification(notificationBuilder, item, false)
-                            pause(item.id)
-                            break
+                            return "segment download failed"
                         }
                     }
                     is DownloadProgressResult.Progressed -> {
@@ -328,30 +391,14 @@ class DownloadService : LifecycleService() {
                         updateNotification(notificationBuilder, item, totalRead.toInt())
                     }
                 }
-            } catch (_: CancellationException) {
-                break
-            } catch (e: Exception) {
-                toastFromMainThread("${getString(R.string.download)}: ${e.message}")
-                Log.e(this@DownloadService::class.java.name, e.stackTraceToString())
-                _downloadFlow.emit(item.id to DownloadStatus.Error(e.message.toString(), e))
-                break
+            }
+            return null
+        } finally {
+            withContext(Dispatchers.IO + NonCancellable) {
+                sink.flush()
+                sink.close()
             }
         }
-
-        withContext(Dispatchers.IO) {
-            sink.flush()
-            sink.close()
-        }
-
-        // start the next download if there are any remaining ones enqueued
-        startNextEnqueueDownload()
-
-        // explicitly send a pause event if the user paused the download, although it's not yet finished
-        if (!item.isFinished) pause(item.id)
-
-        // if no new download was enqueued (i.e. there's no paused/stopped download left),
-        // look if any downloads are still running, and if not, stop the service
-        stopServiceIfDone()
     }
 
     private suspend fun startNextEnqueueDownload() {
@@ -359,7 +406,7 @@ class DownloadService : LifecycleService() {
             if (downloadQueue[id]) continue
 
             val dbItem = Database.downloadDao().findDownloadItemById(id)
-            if (dbItem != null && (dbItem.downloadSize <= 0L || dbItem.path.fileSize() < dbItem.downloadSize)) {
+            if (dbItem != null && !dbItem.isFinished) {
                 resume(id)
                 return
             }
@@ -394,6 +441,14 @@ class DownloadService : LifecycleService() {
     private fun mayStartNewDownload(): Boolean {
         val downloadCount = downloadQueue.valueIterator().asSequence().count { it }
         return downloadCount < DownloadHelper.MAX_CONCURRENT_DOWNLOADS
+    }
+
+    private suspend fun resetCorruptDownload(item: DownloadItem) {
+        item.path.deleteIfExists()
+        item.path.createFile()
+        item.currentDownloadPositionMillis = null
+        item.currentSegmentNumber = null
+        Database.downloadDao().updateDownloadItem(item)
     }
 
     /**
@@ -651,6 +706,7 @@ class DownloadService : LifecycleService() {
     }
 
     override fun onDestroy() {
+        getSystemService<ConnectivityManager>()?.unregisterNetworkCallback(networkCallback)
         downloadQueue.clear()
         IS_DOWNLOAD_RUNNING = false
         sendBroadcast(Intent(ACTION_SERVICE_STOPPED))
@@ -677,6 +733,9 @@ class DownloadService : LifecycleService() {
             "com.github.libretube.services.DownloadService.ACTION_RESUME_ALL"
 
         private const val MAX_SEGMENT_RETRIES = 3
+        private const val MAX_DOWNLOAD_ATTEMPTS = 10
+        private const val RETRY_DELAY_MS = 2_000L
+        private const val MAX_RETRY_DELAY_MS = 60_000L
         var IS_DOWNLOAD_RUNNING = false
     }
 }

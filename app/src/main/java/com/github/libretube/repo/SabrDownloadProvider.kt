@@ -13,6 +13,7 @@ import com.github.libretube.player.parser.PlaybackRequest
 import com.github.libretube.player.parser.SabrClient
 import com.github.libretube.player.parser.Segment
 import okio.BufferedSink
+import kotlin.io.path.fileSize
 
 data class SabrDownloaderHandle(
     val sabrClient: SabrClient,
@@ -54,12 +55,19 @@ class SabrDownloadProvider(
             )
             val initSegment = downloadHandle.sabrClient
                 .getNextSegment(initRequest) ?: return DownloadProgressResult.Failed
-            for (chunk in initSegment.data) {
-                sink.write(chunk)
-            }
             downloadHandle.initSegment = initSegment
 
-            downloadHandle.nextSegmentNumber = initSegment.sequenceNumber + 1
+            val resumeSegment = item.currentSegmentNumber
+            if (item.path.fileSize() > 0L && resumeSegment != null) {
+                // Existing file already contains the init segment; keep fetching from the stored index.
+                downloadHandle.nextSegmentNumber = resumeSegment
+            } else {
+                for (chunk in initSegment.data) {
+                    sink.write(chunk)
+                }
+                sink.emit()
+                downloadHandle.nextSegmentNumber = initSegment.sequenceNumber + 1
+            }
         }
 
         val request = PlaybackRequest(
@@ -76,6 +84,7 @@ class SabrDownloadProvider(
         for (chunk in segment.data) {
             sink.write(chunk)
         }
+        sink.emit()
 
         downloadHandle.nextSegmentNumber = segment.sequenceNumber + 1
         currentPositionMillis += segment.duration
@@ -83,14 +92,17 @@ class SabrDownloadProvider(
         // persist current download position in millis in the database
         // this is used to restore the download position when pausing and resuming the download
         item.currentDownloadPositionMillis = currentPositionMillis
+        item.currentSegmentNumber = downloadHandle.nextSegmentNumber
         DatabaseHolder.Database.downloadDao().updateDownloadItem(item)
 
+        val downloadedBytesLength = segment.data.sumOf { it.size }.toLong()
         val endSegmentNumber = downloadHandle.sabrClient.getEndSegmentNumber(
             downloadHandle.streamRepresentation.formatId()
         )
-        return if (endSegmentNumber != null && downloadHandle.nextSegmentNumber < endSegmentNumber) {
-            val downloadedBytesLength = segment.data.sumOf { it.size }
-            DownloadProgressResult.Progressed(downloadedBytesLength.toLong())
+        // end_segment_number is the last media segment index (inclusive). Do not complete
+        // just because the server has not sent initialization metadata yet.
+        return if (endSegmentNumber == null || downloadHandle.nextSegmentNumber <= endSegmentNumber) {
+            DownloadProgressResult.Progressed(downloadedBytesLength)
         } else {
             DownloadProgressResult.DownloadComplete
         }

@@ -1,5 +1,6 @@
 package com.github.libretube.db.obj
 
+import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.Index
@@ -37,7 +38,17 @@ data class DownloadItem(
     /**
      * Current download progress of the video in milliseconds. Only used for SABR downloads.
      */
-    var currentDownloadPositionMillis: Long? = null
+    var currentDownloadPositionMillis: Long? = null,
+    /**
+     * Next SABR media segment to request. Used to resume without rewriting the init segment.
+     * Non-null while a SABR download is in progress; cleared once the file is verified.
+     */
+    @ColumnInfo(defaultValue = "NULL")
+    var currentSegmentNumber: Long? = null
 ) {
-    val isFinished get() = downloadSize > 0L && runCatching { path.fileSize() }.getOrDefault(0L) >= downloadSize
+    // currentSegmentNumber doubles as the in-progress marker, since the SABR byte count
+    // (contentLength from the manifest) is not guaranteed to match what the SABR server serves.
+    val isFinished
+        get() = currentSegmentNumber == null && downloadSize > 0L &&
+            runCatching { path.fileSize() }.getOrDefault(0L) >= downloadSize
 }
