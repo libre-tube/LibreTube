@@ -127,7 +127,7 @@
     <string name="appearance">Aparença</string>
     <string name="downloads">Descàrregues</string>
     <string name="shareTo">Comparteix l\'URL a</string>
-    <string name="defaultIcon">Predeterminat</string>
+    <string name="defaultIcon">Predefinit</string>
     <string name="legacyIcon">Antic</string>
     <string name="gradientIcon">Difuminat</string>
     <string name="fireIcon">Foc modern</string>
@@ -364,7 +364,7 @@
     <string name="remove_bookmark">Elimina el marcador</string>
     <string name="playlist_description">Descripció de la llista de reproducció</string>
     <string name="comments_count">Comentaris (%1$s)</string>
-    <string name="category_highlight_summary">Podria ser el títol anunciat, la miniatura o la part més interessant del vídeo. Pots saltar-hi fent clic sobre ell a la secció de capítols</string>
+    <string name="category_highlight_summary">Podria ser el títol anunciat, la miniatura o la part més interessant del vídeo. Podeu saltar-hi fent clic sobre ell a la secció de capítols</string>
     <string name="pure_theme">Tema Pur</string>
     <string name="audio_video_summary">Qualitat i format</string>
     <string name="delete">Suprimeix de les descàrregues</string>
@@ -381,7 +381,7 @@
     <string name="pinch_control_summary">Utilitzeu el gest de pinçament per a apropar/allunyar</string>
     <string name="no_comments_available">Aquest vídeo no té comentaris.</string>
     <string name="captions_size">Mida dels subtítols</string>
-    <string name="double_tap_seek">Toc doble per desplaçar-vos</string>
+    <string name="double_tap_seek">Toc doble per a desplaçar</string>
     <string name="double_tap_seek_summary">Toqueu dues vegades a l\'esquerra o a la dreta per a retrocedir o avançar la posició del reproductor</string>
     <string name="username_email">No es recomana utilitzar una adreça electrònica com a nom d\'usuari. Continuar igualment?</string>
     <string name="forward">Avança</string>
