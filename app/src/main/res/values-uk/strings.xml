@@ -108,7 +108,7 @@
     <string name="playback_speed">Швидкість відтворення</string>
     <string name="player">Програвач</string>
     <string name="appearance_summary">Змініть застосунок, так, як вам до вподоби</string>
-    <string name="live">Наживо</string>
+    <string name="live">Трансляція</string>
     <string name="advanced">Розширені</string>
     <string name="defaultIcon">За замовчуванням</string>
     <string name="legacyIcon">Втрачений спадок</string>
@@ -254,7 +254,7 @@
     <string name="time_code">Часовий код (секунд)</string>
     <string name="added_to_playlist">Додано в добірку %1$s</string>
     <string name="queue">Черга</string>
-    <string name="livestreams">Трансляції наживо</string>
+    <string name="livestreams">Прямі трансляції</string>
     <string name="defaultIconLight">Звичайна світла</string>
     <string name="playlistCloned">Добірку клоновано</string>
     <string name="play_all">Відтворити все</string>
