@@ -62,4 +62,5 @@ object IntentData {
     const val customInstance = "customInstance"
     const val audioOnly = "audioOnly"
     const val category = "category"
+    const val outputUri = "outputUri"
 }

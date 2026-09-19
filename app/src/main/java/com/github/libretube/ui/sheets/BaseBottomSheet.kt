@@ -1,7 +1,6 @@
 package com.github.libretube.ui.sheets
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.view.ViewGroup.MarginLayoutParams
 import androidx.annotation.LayoutRes
@@ -14,8 +13,8 @@ import com.github.libretube.databinding.BottomSheetBinding
 import com.github.libretube.extensions.dpToPx
 import com.github.libretube.obj.BottomSheetItem
 import com.github.libretube.ui.adapters.BottomSheetAdapter
-import kotlinx.coroutines.launch
 import com.github.libretube.ui.extensions.onSystemInsets
+import kotlinx.coroutines.launch
 
 
 open class BaseBottomSheet(@LayoutRes layoutResId: Int = R.layout.bottom_sheet) : ExpandedBottomSheet(layoutResId) {
@@ -23,6 +22,8 @@ open class BaseBottomSheet(@LayoutRes layoutResId: Int = R.layout.bottom_sheet) 
     private var title: String? = null
     private lateinit var items: List<BottomSheetItem>
     private lateinit var listener: (index: Int) -> Unit
+
+    protected var autoDismiss: Boolean = true
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val binding = BottomSheetBinding.bind(view)
@@ -60,7 +61,7 @@ open class BaseBottomSheet(@LayoutRes layoutResId: Int = R.layout.bottom_sheet) 
                 dialog?.hide()
                 listener?.invoke(index)
                 runCatching {
-                    dismiss()
+                    if (autoDismiss) dismiss()
                 }
             }
         }
