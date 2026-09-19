@@ -35,11 +35,11 @@ object DatabaseHelper {
     suspend fun getWatchHistoryPage(
         pageSize: Int,
         statusFilter: WatchHistoryStatus = WatchHistoryStatus.ALL,
-        cursor: Long = Long.MAX_VALUE
+        cursor: Long? = null,
     ): WatchHistoryPage {
         val rows = Database.watchHistoryDao().getPage(
             limit = pageSize,
-            cursor = cursor,
+            cursor = cursor ?: Long.MAX_VALUE,
             watched = statusFilter.isWatched,
             absoluteWatchedThresholdSeconds = ABSOLUTE_WATCHED_THRESHOLD,
             relativeWatchedThreshold = RELATIVE_WATCHED_THRESHOLD

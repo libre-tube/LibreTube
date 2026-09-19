@@ -12,7 +12,6 @@ import com.github.libretube.enums.WatchHistoryStatus
 import com.github.libretube.helpers.PreferenceHelper
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 class WatchHistoryModel : ViewModel() {
@@ -61,10 +60,13 @@ class WatchHistoryModel : ViewModel() {
             val downloaded = DatabaseHolder.Database.downloadDao()
                 .areVideosDownloaded(page.items.map(WatchHistoryItem::videoId))
 
-            page.rows.forEachIndexed { index, row ->
-                val item = row.item
-                if (downloaded[index]) downloadedVideoIds += item.videoId else downloadedVideoIds -= item.videoId
-                watchPositions[item.videoId] = row.watchPosition
+            page.rows.forEachIndexed { index, (item: WatchHistoryItem, _, watchPosition: Long?) ->
+                if (downloaded[index]) {
+                    downloadedVideoIds += item.videoId
+                } else {
+                    downloadedVideoIds -= item.videoId
+                }
+                watchPositions[item.videoId] = watchPosition
             }
             cursor = page.nextCursor
             watchHistory.value = watchHistory.value.orEmpty() + page.items
