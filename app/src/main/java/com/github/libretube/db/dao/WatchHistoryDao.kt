@@ -6,13 +6,28 @@ import androidx.room.Embedded
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import com.github.libretube.api.obj.WatchHistoryEntry
+import com.github.libretube.api.obj.WatchHistoryEntryMetadata
+import com.github.libretube.db.DatabaseHelper
 import com.github.libretube.db.obj.WatchHistoryItem
 
 data class WatchHistoryRow(
     @Embedded val item: WatchHistoryItem,
     val rowId: Long,
     val watchPosition: Long?
-)
+) {
+    fun toWatchHistoryEntry(): WatchHistoryEntry {
+        return WatchHistoryEntry(
+            metadata = WatchHistoryEntryMetadata(
+                videoId = item.videoId,
+                finished = watchPosition?.let { DatabaseHelper.isVideoWatched(it, item.duration) } ?: false,
+                addedDate = -1,
+                positionMillis = watchPosition,
+            ),
+            video = item.toStreamItem()
+        )
+    }
+}
 
 @Dao
 interface WatchHistoryDao {
