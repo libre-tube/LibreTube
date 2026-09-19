@@ -34,6 +34,12 @@ interface DownloadDao {
     @Query("SELECT EXISTS (SELECT * FROM download WHERE videoId = :videoId)")
     suspend fun exists(videoId: String): Boolean
 
+    @Query("SELECT videoId FROM download WHERE videoId IN (:videoIds)")
+    suspend fun getDownloadedVideoIds(videoIds: List<String>): List<String>
+
+    suspend fun areVideosDownloaded(videoIds: List<String>): List<Boolean> =
+        getDownloadedVideoIds(videoIds).toHashSet().let { ids -> videoIds.map(ids::contains) }
+
     @Query("SELECT * FROM downloaditem WHERE id = :id")
     suspend fun findDownloadItemById(id: Int): DownloadItem?
 

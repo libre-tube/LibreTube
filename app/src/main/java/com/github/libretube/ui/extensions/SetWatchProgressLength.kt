@@ -18,8 +18,12 @@ import com.github.libretube.helpers.ThemeHelper
  * @param duration The duration of the video in seconds
  */
 fun View.setWatchProgressLength(videoId: String, duration: Long) {
-    val progress = DatabaseHelper.getWatchPositionBlocking(videoId)?.div(1000)
-    if (progress == null || progress == 0L) {
+    setWatchProgressLength(DatabaseHelper.getWatchPositionBlocking(videoId), duration)
+}
+
+fun View.setWatchProgressLength(positionMillis: Long?, duration: Long) {
+    val progress = positionMillis?.div(1000)
+    if (progress == null || progress == 0L || duration <= 0L) {
         isGone = true
         return
     }
