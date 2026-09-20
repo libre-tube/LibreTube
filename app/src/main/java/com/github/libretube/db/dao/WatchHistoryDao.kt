@@ -20,7 +20,8 @@ data class WatchHistoryRow(
         return WatchHistoryEntry(
             metadata = WatchHistoryEntryMetadata(
                 videoId = item.videoId,
-                finished = watchPosition?.let { DatabaseHelper.isVideoWatched(it, item.duration) } ?: false,
+                finished = watchPosition?.let { DatabaseHelper.isVideoWatched(it, item.duration) }
+                    ?: false,
                 addedDate = -1,
                 positionMillis = watchPosition,
             ),
@@ -62,8 +63,16 @@ interface WatchHistoryDao {
     @Query("SELECT COUNT(videoId) FROM watchHistoryItem")
     suspend fun getSize(): Int
 
-    @Query("SELECT * FROM watchHistoryItem WHERE videoId LIKE :videoId LIMIT 1")
-    suspend fun findById(videoId: String): WatchHistoryItem?
+    @Query(
+        """
+        SELECT h.*, h.rowid AS rowId, p.position AS watchPosition
+        FROM watchHistoryItem AS h
+        LEFT JOIN watchPosition AS p ON p.videoId = h.videoId
+        WHERE h.videoId = :videoId
+        LIMIT 1
+        """
+    )
+    suspend fun findById(videoId: String): WatchHistoryRow?
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(watchHistoryItem: WatchHistoryItem)
