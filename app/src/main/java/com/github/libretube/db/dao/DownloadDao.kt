@@ -46,10 +46,10 @@ interface DownloadDao {
     @Query("DELETE FROM downloaditem WHERE id = :id")
     suspend fun deleteDownloadItemById(id: Int)
 
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertDownload(download: Download)
 
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertDownloadChapter(downloadChapter: DownloadChapter)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
@@ -100,6 +100,6 @@ interface DownloadDao {
     @Query("SELECT * FROM downloadplaylistvideoscrossref WHERE playlistId = :playlistId")
     suspend fun getVideoIdsFromPlaylist(playlistId: String): List<DownloadPlaylistVideosCrossRef>
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertSponsorBlockSegments(segments: List<DownloadSponsorBlockSegment>)
 }
