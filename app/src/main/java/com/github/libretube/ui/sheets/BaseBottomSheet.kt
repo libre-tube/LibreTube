@@ -41,7 +41,7 @@ open class BaseBottomSheet(@LayoutRes layoutResId: Int = R.layout.bottom_sheet) 
 
         binding.optionsRecycler.layoutManager = LinearLayoutManager(requireContext())
 
-        val adapter = BottomSheetAdapter(listener)
+        adapter = BottomSheetAdapter(listener)
         adapter.submitList(items)
         binding.optionsRecycler.adapter = adapter
 
