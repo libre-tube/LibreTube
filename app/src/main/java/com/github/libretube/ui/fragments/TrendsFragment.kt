@@ -50,6 +50,16 @@ class TrendsFragment : Fragment(R.layout.fragment_trends) {
             tab.text = getString(category.titleRes)
         }.attach()
 
+        val initialCategory = PreferenceHelper.getString(
+            PreferenceKeys.TRENDING_CATEGORY,
+            TrendingCategory.GAMING.name
+        ).let { TrendingCategory.valueOf(it) }
+
+        val initialTabIndex = categories.indexOf(initialCategory)
+        val initialTab = binding.tabLayout.getTabAt(initialTabIndex)
+        binding.tabLayout.selectTab(initialTab)
+        binding.pager.setCurrentItem(initialTabIndex, false)
+
         binding.trendingRegion.setOnClickListener {
             showChangeRegionDialog(requireContext()) {
                 adapter.getFragmentAt(binding.pager.currentItem)?.also {
@@ -131,8 +141,7 @@ class TrendsContentFragment : DynamicLayoutManagerFragment(R.layout.fragment_tre
         binding.recview.layoutManager?.onRestoreInstanceState(viewModel.recyclerViewState)
 
         viewModel.trendingVideos.observe(viewLifecycleOwner) { categoryMap ->
-            val videos = categoryMap[category]
-            if (videos == null) return@observe
+            val videos = categoryMap[category] ?: return@observe
 
             toggleLoadingIndicator(false)
 
