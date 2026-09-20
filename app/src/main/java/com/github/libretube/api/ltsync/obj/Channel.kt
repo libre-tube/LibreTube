@@ -7,7 +7,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class Channel(
     @SerialName(value = "avatar")
-    val avatar: String,
+    val avatar: String? = null,
 
     @SerialName(value = "id")
     val id: String,
