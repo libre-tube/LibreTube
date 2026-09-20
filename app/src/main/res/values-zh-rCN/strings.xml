@@ -118,7 +118,7 @@
     <string name="gradientIcon">渐变</string>
     <string name="torchIcon">时尚火炬</string>
     <string name="fireIcon">简约火焰</string>
-    <string name="instance_summary">Piped、登录和账户</string>
+    <string name="instance_summary">Piped、数据同步和账号</string>
     <string name="instance_api_url">实例 API 的 URL</string>
     <string name="addInstance">添加实例</string>
     <string name="empty_instance">需要填写名称与实例URL或链接才能保存。</string>
@@ -537,4 +537,21 @@
     <string name="comment_verified">已认证</string>
     <string name="comment_pinned">已置顶</string>
     <string name="courses">课程</string>
+    <string name="welcome">欢迎来到 LibreTube！要开始，请在下方选择同步模式来确定是否在不同设备间同步你的用户数据。</string>
+    <string name="choose_instance">请先选择实例！</string>
+    <string name="choose_instance_long">请从下面选择一个要使用的 Piped 实例。 Piped 实例起到你和 YouTube 间中间人的作用。这些实例位于不同的物理位置——由不同的旗帜所表示。物理距离较近的实例可能比较远的实例速度要快。你可以随时在设置中更改使用的实例。</string>
+    <string name="load_data_from">YouTube 数据加载源</string>
+    <string name="load_data_from_local">直接从 YouTube 加载</string>
+    <string name="load_data_from_piped">通过 Piped（已废弃）</string>
+    <string name="libretube_sync_server">LibreTube 同步服务器</string>
+    <string name="data_synchronization">数据同步</string>
+    <string name="sync_server_type">用户数据同步（订阅、播放列表）服务器类型</string>
+    <string name="sync_server_url">LibreTube 同步服务器 URL</string>
+    <string name="missing_auth_falling_back">未登录。数据同步关闭。</string>
+    <string name="sync_type_summary_none">在应用内离线存储所有用户数据。这表示你无法在设备间同步数据，但假如你只用一台设备或者不在意跨设备同步这也许是正确的选择。</string>
+    <string name="sync_type_summary_libretube">在 LibreTube 的同步服务器（%1$s）上存储播放列表和订阅。这允许你在任何其他设备上登录来访问订阅和播放列表。隐私声明：服务器端对用户数据进行假名化处理，但不是端到端加密。你也可以选择托管自己的服务器版本，但通常官方服务器应该就行了。</string>
+    <string name="sync_type_summary_piped">仅专家，已废弃：\n在 Piped 上存储播放列表和订阅数据 (%1$s)。因为 Piped 不再有任何公共实例，你必须托管自己的 Piped 实例。</string>
+    <string name="switch_sync_type_warning">如果之前使用了不同的同步类型，请先备份订阅和播放列表。之后你可以在实例设置中切换同步类型并从备份重新导入数据。</string>
+    <string name="oidc_login">继续使用 OIDC 登录</string>
+    <string name="already_downloaded">已经下载了这个视频！</string>
 </resources>
