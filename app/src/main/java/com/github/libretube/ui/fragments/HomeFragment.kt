@@ -122,7 +122,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         binding.trendingCategory.setOnClickListener {
             val currentTrendingCategoryPref = PreferenceHelper.getString(
                 PreferenceKeys.TRENDING_CATEGORY,
-                TrendingCategory.LIVE.name
+                TrendingCategory.GAMING.name
             ).let { categoryName -> trendingCategories.first { it.name == categoryName } }
 
             val categories = trendingCategories.map { category ->

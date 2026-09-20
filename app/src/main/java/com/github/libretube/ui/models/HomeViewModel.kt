@@ -87,7 +87,7 @@ class HomeViewModel : ViewModel() {
         val region = PreferenceHelper.getTrendingRegion(context)
         val category = PreferenceHelper.getString(
             PreferenceKeys.TRENDING_CATEGORY,
-            TrendingCategory.LIVE.name
+            TrendingCategory.GAMING.name
         ).let { TrendingCategory.valueOf(it) }
 
         runSafely(
