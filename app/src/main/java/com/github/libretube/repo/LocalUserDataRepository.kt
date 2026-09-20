@@ -7,7 +7,6 @@ import com.github.libretube.api.obj.Subscription
 import com.github.libretube.api.obj.WatchHistoryEntry
 import com.github.libretube.api.obj.WatchHistoryEntryMetadata
 import com.github.libretube.db.DatabaseHolder.Database
-import com.github.libretube.db.dao.WatchHistoryRow
 import com.github.libretube.db.obj.LocalPlaylist
 import com.github.libretube.db.obj.LocalSubscription
 import com.github.libretube.db.obj.PlaylistBookmark
@@ -267,9 +266,8 @@ class LocalUserDataRepository : UserDataRepository {
     }
 
     override suspend fun getFromWatchHistory(videoId: String): WatchHistoryEntry? {
-        val historyItem = Database.watchHistoryDao().findById(videoId) ?: return null
-        val watchPosition = Database.watchPositionDao().findById(videoId)
-        return WatchHistoryRow(historyItem, 0, watchPosition?.position).toWatchHistoryEntry()
+        val historyRow = Database.watchHistoryDao().findById(videoId) ?: return null
+        return historyRow.toWatchHistoryEntry()
     }
 
     override suspend fun clearWatchHistory() {
