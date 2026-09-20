@@ -217,7 +217,7 @@
     <string name="update_summary">Frissítések ellenőrzése</string>
     <string name="translate">Fordítás</string>
     <string name="network_all">Összes</string>
-    <string name="instance_summary">Piped, bejelentkezés, és fiók</string>
+    <string name="instance_summary">Piped, adatszinkronizáció és fiók</string>
     <string name="no_audio">Nincs hang</string>
     <string name="audio">Hang</string>
     <string name="downloading">Letöltés…</string>
@@ -540,4 +540,21 @@
     <string name="comment_verified">Ellenőrzött</string>
     <string name="comment_pinned">Kitűzött</string>
     <string name="courses">Kurzusok</string>
+    <string name="welcome">Üdvözlünk a LibreTube-ban! A kezdéshez válasszon az alábbi szinkronizálási módok közül annak eldöntéséhez, hogy szeretné-e szinkronizálni a felhasználói adataidat az eszközei között.</string>
+    <string name="choose_instance">Először válasszon ki egy példányt!</string>
+    <string name="choose_instance_long">Válasszon az alábbiak közül egy használni kívánt Piped példányt. A Piped példány közvetítőként fog működni Ön és a YouTube között. Ezek a példányok különböző földrajzi helyeken találhatók – ezt az országzászlók jelzik. A Önhöz fizikailag közelebb lévő példányok várhatóan gyorsabbak, mint a távolabb találhatók. A használt példányt a beállításokban bármikor megváltoztathatja.</string>
+    <string name="load_data_from">YouTube-adatok betöltése innen</string>
+    <string name="load_data_from_local">Közvetlenül a YouTube-ról</string>
+    <string name="load_data_from_piped">a Piped-en keresztül (elavult)</string>
+    <string name="libretube_sync_server">LibreTube szinkronizálókiszolgáló</string>
+    <string name="data_synchronization">Adatszinkronizálás</string>
+    <string name="sync_server_type">Felhasználói adatok (feliratkozások, lejátszási listák) szinkronizálása a következőn keresztül:</string>
+    <string name="sync_server_url">A LibreTube szinkronizálókiszolgáló webcíme</string>
+    <string name="missing_auth_falling_back">Nincs bejelentkezve. Az adatszinkronizálás ki van kapcsolva.</string>
+    <string name="sync_type_summary_none">Az összes felhasználói adat offline módon lesz tárolva az alkalmazáson belül. Ez azt jelenti, hogy nem tudja szinkronizálni az adatokat az eszközei között, de ez lehet a megfelelő választás, ha csak egy eszközt használ, vagy nem érdekli az eszközök közötti szinkronizálás.</string>
+    <string name="sync_type_summary_libretube">A lejátszási listákat és a feliratkozások adatait a LibreTube szinkronizálókiszolgálóján (%1$s) tárolja. Ez lehetővé teszi, hogy bármely más eszközről bejelentkezzen a fiókjába, és hozzáférjen a feliratkozásaihoz és lejátszási listáihoz. Adatvédelmi nyilatkozat: A felhasználói adatokat kiszolgálói oldalon álnevesítik, de nem végpontok közötti titkosítás alatt állnak. Ha úgy dönt, saját kiszolgálót is üzemeltethet, de általában a hivatalos kiszolgáló is teljesen megfelelő.</string>
+    <string name="sync_type_summary_piped">Csak szakértőknek, elavult:\nA lejátszási listák és a feliratkozások adatait tárolja a Piped-en (%1$s). Mivel a Piped-nek már nincsenek nyilvános példányai, saját Piped példányt kell üzemeltetnie.</string>
+    <string name="switch_sync_type_warning">Ha korábban más szinkronizálási típust használt, akkor először készítsen biztonsági másolatot a feliratkozásairól és a lejátszási listáiról. Ezután az alkalmazás beállításaiban megváltoztathatja a szinkronizálási típust, majd a biztonsági másolatból újraimportálhatja az adatait.</string>
+    <string name="oidc_login">Folytatás az OIDC-vel</string>
+    <string name="already_downloaded">Ez a videó már le lett töltve!</string>
 </resources>
