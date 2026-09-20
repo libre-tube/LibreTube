@@ -86,7 +86,7 @@ class LibreTubeSyncServerUserDataRepository : UserDataRepository {
                 Channel(
                     id = channelId,
                     name = name,
-                    avatar = uploaderAvatar.orEmpty(),
+                    avatar = uploaderAvatar,
                     verified = verified
                 )
             )
@@ -142,7 +142,7 @@ class LibreTubeSyncServerUserDataRepository : UserDataRepository {
         uploader = Channel(
             id = uploaderUrl!!.toID(),
             name = uploaderName.orEmpty(),
-            avatar = uploaderAvatar.orEmpty(),
+            avatar = uploaderAvatar,
             verified = uploaderVerified == true
         )
     )
@@ -395,8 +395,8 @@ class LibreTubeSyncServerUserDataRepository : UserDataRepository {
                 videoCount = videos.toLong()
             ),
             uploader = Channel(
-                id = uploaderUrl.orEmpty(),
-                avatar = uploaderAvatar.orEmpty(),
+                id = uploaderUrl?.toID().orEmpty(),
+                avatar = uploaderAvatar,
                 name = uploader.orEmpty(),
                 verified = false
             )
