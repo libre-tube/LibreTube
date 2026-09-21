@@ -369,7 +369,7 @@
     <string name="autoplay_countdown">Автоматично отброяване</string>
     <string name="take_a_break">Време е за почивка</string>
     <string name="notification_time">Ограничи времето за известия</string>
-    <string name="instance_summary">Piped, вход, и профил</string>
+    <string name="instance_summary">Piped, синхронизация на данни и акаунт</string>
     <string name="autoRotatePlayer_summary">Възпроизвеждане на цял екран при завъртане на устройството</string>
     <string name="double_tap_seek_summary">Докосни два пъти отляво или отдясно, за да превъртите назад или напред позицията на плейъра</string>
     <string name="group_name_error_empty">Моля, въведете име</string>
@@ -540,4 +540,23 @@
     <string name="comment_verified">Потвърдено</string>
     <string name="comment_pinned">Закачено</string>
     <string name="courses">Курсове</string>
+    <string name="welcome">Добре дошли в LibreTube! За да започнете, моля, изберете режим на синхронизация по-долу, за да решите дали да синхронизирате потребителските си данни между устройствата.</string>
+    <string name="choose_instance">Моля, първо изберете екземпляр!</string>
+    <string name="choose_instance_long">Моля, изберете отдолу инстанция на Piped, която да използвате. Инстанцията на Piped ще действа като посредник между вас и YouTube. Тези инстанции се намират на различни физически местоположения - обозначени със знамето(ата) на съответната държава. Инстанциите, които са физически по-близо до вас, вероятно са по-бързи от тези, които не са. Можете да промените инстанцията, която използвате, в настройките по всяко време.</string>
+    <string name="load_data_from">Зареждане на YouTube данни от</string>
+    <string name="load_data_from_local">Директно от YouTube</string>
+    <string name="load_data_from_piped">чрез Piped (отхвърлено)</string>
+    <string name="libretube_sync_server">Синхронизиращ сървър на LibreTube</string>
+    <string name="data_synchronization">Синхронизиране на данни</string>
+    <string name="sync_server_type">Синхронизиране на потребителски данни (абонаменти, плейлисти) чрез</string>
+    <string name="sync_server_url">URL адрес към сървъра за синхронизиране на LibreTube</string>
+    <string name="export">Изнасяне</string>
+    <string name="exporting">Изнасянето е в ход…</string>
+    <string name="missing_auth_falling_back">Не сте влезли в системата. Синхронизирането на данни е изключено.</string>
+    <string name="sync_type_summary_none">Съхранявайте всички потребителски данни офлайн в приложението. Това означава, че не можете да синхронизирате данни между устройствата си, но може да е правилният избор, ако използвате само едно устройство или не ви е грижа за синхронизирането между устройства.</string>
+    <string name="sync_type_summary_libretube">Съхранявайте данни за плейлисти и абонаменти на синхронизиращия сървър на LibreTube (%1$s). Това ви позволява да влезете в акаунта си от всяко друго устройство, за да имате достъп до вашите абонаменти и плейлисти. Отказ от отговорност за поверителност: Потребителските данни са псевдонимизирани от страна на сървъра, но не са криптирани от край до край. По избор можете също да хоствате своя собствена версия на сървъра, но обикновено официалният сървър би трябвало да е достатъчно добър.</string>
+    <string name="sync_type_summary_piped">Само за експерти, остаряло:\nСъхранявайте данни за плейлисти и абонаменти в Piped (%1$s). Тъй като Piped вече няма публични екземпляри, трябва да хоствате свой собствен Piped екземпляр.</string>
+    <string name="switch_sync_type_warning">Ако преди това сте използвали различен тип синхронизация, първо направете резервно копие на вашите абонаменти и плейлисти. След това можете да превключите типа синхронизация в настройките на екземпляра и да импортирате отново данните си от резервното копие.</string>
+    <string name="oidc_login">Продължете с OIDC</string>
+    <string name="already_downloaded">Вече сте изтеглили това видео!</string>
 </resources>
