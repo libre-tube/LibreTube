@@ -43,6 +43,7 @@ import com.github.libretube.extensions.setOnDismissListener
 import com.github.libretube.helpers.DownloadHelper
 import com.github.libretube.helpers.NavigationHelper
 import com.github.libretube.helpers.PreferenceHelper
+import com.github.libretube.helpers.initialDownloadTab
 import com.github.libretube.obj.DownloadStatus
 import com.github.libretube.parcelable.PlayerData
 import com.github.libretube.receivers.DownloadReceiver
@@ -56,6 +57,7 @@ import com.github.libretube.ui.models.DownloadsViewModel
 import com.github.libretube.ui.sheets.BaseBottomSheet
 import com.github.libretube.ui.viewholders.DownloadsViewHolder
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -80,6 +82,7 @@ enum class DownloadSortingOrder(@StringRes val stringId: Int) {
 }
 
 class DownloadsFragment : Fragment(R.layout.fragment_downloads) {
+    private var tabSelected = false
     private var _binding: FragmentDownloadsBinding? = null
     private val binding get() = _binding!!
 
@@ -87,6 +90,7 @@ class DownloadsFragment : Fragment(R.layout.fragment_downloads) {
         _binding = FragmentDownloadsBinding.bind(view)
         super.onViewCreated(view, savedInstanceState)
 
+        tabSelected = false
         binding.downloadsPager.adapter = DownloadsFragmentAdapter(this)
 
         TabLayoutMediator(binding.tabLayout, binding.downloadsPager) { tab, position ->
@@ -97,6 +101,34 @@ class DownloadsFragment : Fragment(R.layout.fragment_downloads) {
                 else -> throw IllegalArgumentException()
             }
         }.attach()
+
+        binding.tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+            override fun onTabSelected(tab: TabLayout.Tab) {
+                tabSelected = true
+            }
+
+            override fun onTabReselected(tab: TabLayout.Tab) {
+                tabSelected = true
+            }
+
+            override fun onTabUnselected(tab: TabLayout.Tab) = Unit
+        })
+    }
+
+    override fun onViewStateRestored(savedInstanceState: Bundle?) {
+        super.onViewStateRestored(savedInstanceState)
+        if (savedInstanceState != null) return
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            val initialTab = withContext(Dispatchers.IO) {
+                val downloads = Database.downloadDao().getAll()
+                val hasPlaylists = Database.downloadDao().getDownloadPlaylists().isNotEmpty()
+                downloads.initialDownloadTab(hasPlaylists)
+            }
+            if (!tabSelected) {
+                binding.downloadsPager.setCurrentItem(initialTab.ordinal, false)
+            }
+        }
     }
 
     fun bindDownloadService() {
