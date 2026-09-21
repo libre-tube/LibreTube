@@ -108,7 +108,7 @@ class ChannelFragment : Fragment(R.layout.fragment_channel) {
         isLoading = true
         _binding?.channelRefresh?.isRefreshing = true
 
-        val response = try {
+        val channel = try {
             withContext(Dispatchers.IO) {
                 if (channelId != null) {
                     MediaServiceRepository.instance.getChannel(channelId!!)
@@ -127,17 +127,17 @@ class ChannelFragment : Fragment(R.layout.fragment_channel) {
         val binding = _binding ?: return@launch
 
         // needed if the channel gets loaded by the ID
-        channelId = response.id
-        channelName = response.name
+        channelId = channel.id
+        channelName = channel.name
 
         val channelId = channelId ?: return@launch
 
         var isSubscribed = false
         binding.channelSubscribe.setupSubscriptionButton(
             channelId,
-            response.name.orEmpty(),
-            response.avatarUrl,
-            response.verified,
+            channel.name.orEmpty(),
+            channel.avatarUrl,
+            channel.verified,
             binding.notificationBell
         ) {
             isSubscribed = it
@@ -155,8 +155,8 @@ class ChannelFragment : Fragment(R.layout.fragment_channel) {
                 .show(childFragmentManager)
         }
 
-        viewModel.relatedStreams = response.relatedStreams
-        viewModel.nextPage = response.nextpage
+        viewModel.relatedStreams = channel.relatedStreams
+        viewModel.nextPage = channel.nextpage
         isLoading = false
         binding.channelRefresh.isRefreshing = false
 
@@ -164,38 +164,38 @@ class ChannelFragment : Fragment(R.layout.fragment_channel) {
 
         binding.channelName.text = channelName
         binding.channelName.setOnLongClickListener {
-            ClipboardHelper.save(requireContext(), text = response.name.orEmpty())
+            ClipboardHelper.save(requireContext(), text = channel.name.orEmpty())
             true
         }
 
-        if (response.verified) {
+        if (channel.verified) {
             binding.channelName
                 .setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_verified, 0)
         }
         binding.channelSubs.text = resources.getString(
             R.string.subscribers,
-            response.subscriberCount.formatShort()
+            channel.subscriberCount.formatShort()
         )
-        if (response.description.orEmpty().isBlank()) {
+        if (channel.description.orEmpty().isBlank()) {
             binding.channelDescription.isGone = true
         } else {
-            binding.channelDescription.text = response.description.orEmpty().trim()
+            binding.channelDescription.text = channel.description.orEmpty().trim()
         }
 
-        ImageHelper.loadImage(response.bannerUrl, binding.channelBanner)
-        ImageHelper.loadImage(response.avatarUrl, binding.channelImage, true)
+        ImageHelper.loadImage(channel.bannerUrl, binding.channelBanner)
+        ImageHelper.loadImage(channel.avatarUrl, binding.channelImage, true)
 
         binding.channelImage.setOnClickListener {
             NavigationHelper.openImagePreview(
                 requireContext(),
-                response.avatarUrl ?: return@setOnClickListener
+                channel.avatarUrl ?: return@setOnClickListener
             )
         }
 
         binding.channelBanner.setOnClickListener {
             NavigationHelper.openImagePreview(
                 requireContext(),
-                response.bannerUrl ?: return@setOnClickListener
+                channel.bannerUrl ?: return@setOnClickListener
             )
         }
 
@@ -210,13 +210,12 @@ class ChannelFragment : Fragment(R.layout.fragment_channel) {
         }.attach()
 
         tabList.clear()
-
-
-        for (channelTab in response.tabs) {
-            val tabName = tabNamesMap[channelTab.name]?.let { getString(it) }
-                ?: channelTab.name.replaceFirstChar(Char::titlecase)
-            tabList.add(ChannelTab(tabName, channelTab.data))
-        }
+        tabList.addAll(
+            channel.tabs.map {
+                val tabName = tabNamesMap[it.name]?.let { getString(it) }
+                    ?: it.name.replaceFirstChar(Char::titlecase)
+                ChannelTab(tabName, it.data)
+            })
         channelContentAdapter.notifyItemRangeChanged(0, tabList.size - 1)
     }
 
