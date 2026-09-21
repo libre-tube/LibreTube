@@ -199,7 +199,7 @@ class ChannelFragment : Fragment(R.layout.fragment_channel) {
             )
         }
 
-        val tabList = channel.tabs.map {
+        val tabList = channel.tabs.filter { it.data.isNotEmpty() }.map {
             val tabName = tabNamesMap[it.name]?.let { getString(it) }
                 ?: it.name.replaceFirstChar(Char::titlecase)
             ChannelTab(tabName, it.data)
@@ -208,7 +208,6 @@ class ChannelFragment : Fragment(R.layout.fragment_channel) {
         val selectedTab = binding.pager.currentItem
         channelContentAdapter = ChannelContentAdapter(
             tabList,
-            channelId,
             this@ChannelFragment
         )
         binding.pager.adapter = channelContentAdapter
@@ -226,7 +225,6 @@ class ChannelFragment : Fragment(R.layout.fragment_channel) {
 
 class ChannelContentAdapter(
     private val list: List<ChannelTab>,
-    private val channelId: String?,
     fragment: Fragment
 ) : FragmentStateAdapter(fragment) {
     override fun getItemCount() = list.size
@@ -234,7 +232,6 @@ class ChannelContentAdapter(
     override fun createFragment(position: Int) = ChannelContentFragment().apply {
         arguments = bundleOf(
             IntentData.tabData to list[position],
-            IntentData.channelId to channelId
         )
     }
 }
