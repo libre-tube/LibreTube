@@ -557,4 +557,6 @@
     <string name="switch_sync_type_warning">Ha korábban más szinkronizálási típust használt, akkor először készítsen biztonsági másolatot a feliratkozásairól és a lejátszási listáiról. Ezután az alkalmazás beállításaiban megváltoztathatja a szinkronizálási típust, majd a biztonsági másolatból újraimportálhatja az adatait.</string>
     <string name="oidc_login">Folytatás az OIDC-vel</string>
     <string name="already_downloaded">Ez a videó már le lett töltve!</string>
+    <string name="export">Exportálás</string>
+    <string name="exporting">Exportálás folyamatban…</string>
 </resources>
