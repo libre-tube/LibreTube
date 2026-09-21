@@ -554,4 +554,6 @@
     <string name="switch_sync_type_warning">如果之前使用了不同的同步类型，请先备份订阅和播放列表。之后你可以在实例设置中切换同步类型并从备份重新导入数据。</string>
     <string name="oidc_login">继续使用 OIDC 登录</string>
     <string name="already_downloaded">已经下载了这个视频！</string>
+    <string name="export">导出</string>
+    <string name="exporting">导出中…</string>
 </resources>
