@@ -353,8 +353,8 @@
     <string name="alphabetic">Alphabetisch A→Z</string>
     <string name="creation_date">Erstellungsdatum (älteste zuerst)</string>
     <string name="creation_date_reversed">Erstellungsdatum (neuste zuerst)</string>
-    <string name="export_subscriptions_to">Abos exportieren im Format von</string>
-    <string name="import_subscriptions_from">Abos importieren im Format von</string>
+    <string name="export_subscriptions_to">Abos exportieren nach</string>
+    <string name="import_subscriptions_from">Abos importieren von</string>
     <string name="export_playlists_to">Playlists exportieren nach</string>
     <string name="import_playlists_from">Playlists importieren aus</string>
     <string name="home_tab_content">Inhalt der Startseite</string>
@@ -540,4 +540,14 @@
     <string name="comment_verified">Verifiziert</string>
     <string name="comment_pinned">Angepinnt</string>
     <string name="courses">Kurse</string>
+    <string name="exporting">Export läuft …</string>
+    <string name="load_data_from">YouTube-Daten laden von</string>
+    <string name="load_data_from_local">Direkt von YouTube</string>
+    <string name="load_data_from_piped">über Piped (veraltet)</string>
+    <string name="libretube_sync_server">LibreTube-Synchronisationsserver</string>
+    <string name="data_synchronization">Datensynchronisation</string>
+    <string name="sync_server_url">URL zum LibreTube-Synchronisationsserver</string>
+    <string name="export">Exportieren</string>
+    <string name="missing_auth_falling_back">Nicht angemeldet. Datensynchronisation ausgeschaltet.</string>
+    <string name="oidc_login">Mit OIDC fortfahren</string>
 </resources>
