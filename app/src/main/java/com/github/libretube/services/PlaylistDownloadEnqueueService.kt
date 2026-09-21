@@ -14,7 +14,6 @@ import com.github.libretube.LibreTubeApp.Companion.PLAYLIST_DOWNLOAD_ENQUEUE_CHA
 import com.github.libretube.R
 import com.github.libretube.api.MediaServiceRepository
 import com.github.libretube.api.PlaylistsHelper
-import com.github.libretube.api.obj.PipedStream
 import com.github.libretube.api.obj.StreamItem
 import com.github.libretube.constants.IntentData
 import com.github.libretube.db.DatabaseHolder
@@ -22,13 +21,12 @@ import com.github.libretube.db.obj.DownloadPlaylist
 import com.github.libretube.db.obj.DownloadPlaylistVideosCrossRef
 import com.github.libretube.enums.NotificationId
 import com.github.libretube.enums.PlaylistType
-import com.github.libretube.extensions.getWhileDigit
 import com.github.libretube.extensions.serializableExtra
 import com.github.libretube.extensions.toID
 import com.github.libretube.extensions.toastFromMainDispatcher
 import com.github.libretube.helpers.DownloadHelper
 import com.github.libretube.helpers.ImageHelper
-import com.github.libretube.parcelable.DownloadData
+import com.github.libretube.helpers.PlaylistDownloadSelection
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -188,21 +186,9 @@ class PlaylistDownloadEnqueueService : LifecycleService() {
                 }.getOrNull()
 
                 if (videoInfo != null) {
-                    val videoStream = getStream(videoInfo.videoStreams, maxVideoQuality)
-                    val audioStream = getStream(videoInfo.audioStreams, maxAudioQuality)
-
-                    val downloadData = DownloadData(
-                        videoId = videoId,
-                        videoFormat = videoStream?.format,
-                        videoQuality = videoStream?.quality,
-                        audioFormat = audioStream?.format,
-                        audioQuality = audioStream?.quality,
-                        audioLanguage = audioLanguage.takeIf {
-                            videoInfo.audioStreams.any { it.audioTrackLocale == audioLanguage }
-                        },
-                        subtitleCode = captionLanguage.takeIf {
-                            videoInfo.subtitles.any { it.code == captionLanguage }
-                        }
+                    val downloadData = PlaylistDownloadSelection.createDownloadData(
+                        videoId, videoInfo, maxVideoQuality, maxAudioQuality,
+                        audioLanguage, captionLanguage
                     )
                     DownloadHelper.startDownloadService(this, downloadData)
                 }
@@ -214,20 +200,6 @@ class PlaylistDownloadEnqueueService : LifecycleService() {
         }
 
         if (amountOfVideos == amountOfVideosDone) stopSelf()
-    }
-
-    private fun getStream(streams: List<PipedStream>, maxQuality: Int?): PipedStream? {
-        val maxStreamQuality = maxQuality ?: return null
-
-        // sort streams by their quality/bitrate
-        val sortedStreams = streams
-            .sortedBy { it.quality.getWhileDigit() }
-
-        // return the last item below the maximum quality - or if there's none - the stream with
-        // the lowest quality available
-        return sortedStreams
-            .lastOrNull { it.quality.getWhileDigit()!! <= maxStreamQuality }
-            ?: sortedStreams.firstOrNull()
     }
 
     @Suppress("SameParameterValue")
