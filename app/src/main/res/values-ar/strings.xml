@@ -154,7 +154,7 @@
     <string name="reset_message">إعادة تعيين جميع الإعدادات وتسجيل الخروج؟</string>
     <string name="clonePlaylist">استنسخ قائمة التشغيل</string>
     <string name="deleteAccount">احذف الحساب</string>
-    <string name="restore">استعِد</string>
+    <string name="restore">استعادة</string>
     <string name="deleteAccount_summary">احذف حساب Piped الخاص بك</string>
     <string name="watch_history">سجل المشاهدة</string>
     <string name="watch_positions">تذكر مكان التوقف</string>
@@ -503,7 +503,7 @@
     <string name="full_local_mode_desc">جلب كل شيء مباشرة من YouTube دون استخدام Piped.</string>
     <string name="updating_feed">تحديث التغذية …</string>
     <string name="playback_pitch_semitone_error_input">يجب أن تتراوح القيمة بين -%1$.1f (الحد الأدنى) و%1$.1f (الحد الأقصى)</string>
-    <string name="gaming">لعب</string>
+    <string name="gaming">ألعاب فيديو</string>
     <string name="podcasts">بودكاست</string>
     <string name="trailers">الرائجة</string>
     <string name="music">الموسيقى</string>
