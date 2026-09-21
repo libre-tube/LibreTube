@@ -104,7 +104,7 @@
     <string name="shapedIcon">不規則裁切</string>
     <string name="flameIcon">飛馳烈焰</string>
     <string name="birdIcon">加速鳥兒</string>
-    <string name="instance_summary">Piped，登入和帳戶</string>
+    <string name="instance_summary">Piped，資料同步與帳號</string>
     <string name="customInstance_summary">新增…</string>
     <string name="instance_name">執行個體名稱</string>
     <string name="instance_api_url">執行個體API網址</string>
@@ -537,4 +537,23 @@
     <string name="comment_verified">已驗證</string>
     <string name="comment_pinned">已釘選</string>
     <string name="courses">課程</string>
+    <string name="welcome">歡迎來到 LibreTube！開始使用前，請從下方選擇一種同步模式，以決定是否要在各裝置間同步您的使用者資料。</string>
+    <string name="choose_instance">請先選擇站台！</string>
+    <string name="choose_instance_long">請從下方選擇一個 Piped 站台來使用。該 Piped 站台將作為您與 YouTube 之間的中介。這些站台位於不同的實體位置，由其國旗標示。物理位置離您越近的站台，速度通常會比距離較遠的站台更快。您隨時可以在設定中變更所使用的站台。</string>
+    <string name="load_data_from">載入 YouTube 資料從</string>
+    <string name="load_data_from_local">直接從 YouTube</string>
+    <string name="load_data_from_piped">透過 Piped（已棄用）</string>
+    <string name="libretube_sync_server">LibreTube 同步伺服器</string>
+    <string name="data_synchronization">資料同步</string>
+    <string name="sync_server_type">同步使用者資料（訂閱、播放清單）透過</string>
+    <string name="sync_server_url">LibreTube 同步伺服器的 URL</string>
+    <string name="export">匯出</string>
+    <string name="exporting">正在匯出⋯⋯</string>
+    <string name="missing_auth_falling_back">未登入。已關閉資料同步。</string>
+    <string name="sync_type_summary_none">請將所有使用者資料離線儲存於應用程式內。這表示您無法在裝置之間同步資料，但若您僅使用單一裝置，或不在意裝置間的同步功能，這可能是合適的選擇。</string>
+    <string name="sync_type_summary_libretube">將播放清單與訂閱資料儲存於 LibreTube 的同步伺服器 (%1$s) 上。這樣一來，您便可在任何其他裝置上登入您的帳號，以存取您的訂閱內容和播放清單。隱私權聲明：使用者資料在伺服器端經過假名化處理，但未進行端對端加密。您亦可選擇自行架設伺服器，但通常使用官方伺服器便已足夠。</string>
+    <string name="sync_type_summary_piped">僅供專家使用，已棄用：\n將播放清單與訂閱資料儲存於 Piped (%1$s) 上。由於 Piped 已不再提供任何公開站台，您必須自行架設 Piped 站台。</string>
+    <string name="switch_sync_type_warning">如果您先前使用的是其他同步類型，請先備份您的訂閱內容與播放清單。接著，您可以在站台設定中切換同步類型，並從備份中重新匯入資料。</string>
+    <string name="oidc_login">使用 OIDC 繼續</string>
+    <string name="already_downloaded">您已經下載過這段影片了！</string>
 </resources>
