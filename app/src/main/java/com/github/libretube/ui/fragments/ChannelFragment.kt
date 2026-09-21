@@ -45,7 +45,6 @@ class ChannelFragment : Fragment(R.layout.fragment_channel) {
     private lateinit var channelContentAdapter: ChannelContentAdapter
 
     private var isAppBarFullyExpanded: Boolean = true
-    private val tabList = mutableListOf<ChannelTab>()
 
     private val tabNamesMap = mapOf(
         VIDEOS_TAB_KEY to R.string.videos,
@@ -200,6 +199,12 @@ class ChannelFragment : Fragment(R.layout.fragment_channel) {
             )
         }
 
+        val tabList = channel.tabs.map {
+            val tabName = tabNamesMap[it.name]?.let { getString(it) }
+                ?: it.name.replaceFirstChar(Char::titlecase)
+            ChannelTab(tabName, it.data)
+        }
+
         channelContentAdapter = ChannelContentAdapter(
             tabList,
             channelId,
@@ -209,15 +214,6 @@ class ChannelFragment : Fragment(R.layout.fragment_channel) {
         TabLayoutMediator(binding.tabParent, binding.pager) { tab, position ->
             tab.text = tabList[position].name
         }.attach()
-
-        tabList.clear()
-        tabList.addAll(
-            channel.tabs.map {
-                val tabName = tabNamesMap[it.name]?.let { getString(it) }
-                    ?: it.name.replaceFirstChar(Char::titlecase)
-                ChannelTab(tabName, it.data)
-            })
-        channelContentAdapter.notifyItemRangeChanged(0, tabList.size - 1)
     }
 
     companion object {
