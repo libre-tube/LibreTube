@@ -47,7 +47,7 @@ class ChannelFragment : Fragment(R.layout.fragment_channel) {
     private var isAppBarFullyExpanded: Boolean = true
 
     private val tabNamesMap = mapOf(
-        VIDEOS_TAB_KEY to R.string.videos,
+        "videos" to R.string.videos,
         "shorts" to R.string.yt_shorts,
         "livestreams" to R.string.livestreams,
         "playlists" to R.string.playlists,
@@ -153,9 +153,6 @@ class ChannelFragment : Fragment(R.layout.fragment_channel) {
                 }
                 .show(childFragmentManager)
         }
-
-        viewModel.relatedStreams = channel.relatedStreams
-        viewModel.nextPage = channel.nextpage
         isLoading = false
         binding.channelRefresh.isRefreshing = false
 
@@ -215,10 +212,6 @@ class ChannelFragment : Fragment(R.layout.fragment_channel) {
         }.attach()
 
         binding.pager.setCurrentItem(selectedTab, false)
-    }
-
-    companion object {
-        private const val VIDEOS_TAB_KEY = "videos"
     }
 }
 
