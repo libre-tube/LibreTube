@@ -543,4 +543,21 @@
     <string name="showing_results_for">Es mostren els resultats de:</string>
     <string name="long_press_fast_forward">Avança ràpidament en prémer llarg</string>
     <string name="long_press_fast_forward_summary">Reprodueix vídeo a doble velocitat mentre toqueu i manteniu premuda la pantalla.</string>
+    <string name="welcome">Benvingut al LibreTube! Per començar, seleccioneu un mode de sincronització a continuació per a decidir si sincronitzar les dades de l\'usuari entre dispositius.</string>
+    <string name="load_data_from">Carrega les dades de YouTube de:</string>
+    <string name="load_data_from_local">Directament des de YouTube</string>
+    <string name="load_data_from_piped">via Piped (obsolet)</string>
+    <string name="libretube_sync_server">Servidor de sincronització del LibreTube</string>
+    <string name="data_synchronization">Sincronització de dades</string>
+    <string name="sync_server_type">Sincronitza les dades d\'usuari (subscripcions, llistes de reproducció) via</string>
+    <string name="sync_server_url">URL al servidor de sincronització del LibreTube</string>
+    <string name="export">Exporta</string>
+    <string name="exporting">Exportació en curs…</string>
+    <string name="missing_auth_falling_back">No heu iniciat sessió. Sincronització de dades desactivada.</string>
+    <string name="sync_type_summary_none">Emmagatzema totes les dades d\'usuari fora de línia dins de l\'aplicació. Això vol dir que no podeu sincronitzar dades entre els vostres dispositius, però pot ser l\'opció correcta si només utilitzeu un únic dispositiu o no us importa la sincronització entre dispositius.</string>
+    <string name="sync_type_summary_libretube">Emmagatzema les dades de llistes de reproducció i subscripcions al servidor de sincronització del LibreTube (%1$s). Això us permet iniciar sessió al vostre compte en qualsevol altre dispositiu per a tenir accés a les vostres subscripcions i llistes de reproducció. Descàrrec de privacitat: les dades de l\'usuari són pseudònims al costat del servidor, però no estan xifrades d\'extrem a extrem. Per elecció, també podeu allotjar la vostra pròpia versió del servidor, però normalment el servidor oficial hauria d\'estar bé.</string>
+    <string name="sync_type_summary_piped">Només experts, obsolets:\nEmmagatzema les dades de llistes de reproducció i subscripcions al Piped (%1$s). Com que Piped ja no té instàncies públiques, cal que allotgeu la vostra pròpia instància Piped.</string>
+    <string name="switch_sync_type_warning">Si prèviament heu usat un tipus de sincronització diferent, primer feu una còpia de seguretat de les vostres subscripcions i llistes de reproducció. A continuació, podeu canviar el tipus de sincronització a la configuració de la instància i tornar a importar les vostres dades des de la còpia de seguretat.</string>
+    <string name="oidc_login">Continua amb OIDC</string>
+    <string name="already_downloaded">Ja heu baixat aquest vídeo!</string>
 </resources>
