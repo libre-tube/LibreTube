@@ -557,4 +557,6 @@
     <string name="oidc_login">OIDC ilə davam et</string>
     <string name="already_downloaded">Bu videonu artıq yükləmisiniz!</string>
     <string name="switch_sync_type_warning">Əgər əvvəllər fərqli sinxronizasiya növün istifadə etmisinizsə, xahiş olunur, əvvəlcə abunəliklərinizin və pleylistlərinizin nüsxəsini çıxarın. Daha sonra instansiya tənzimləmələrində sinxronizasiya növünü dəyişə və məlumatlarınızı nüsxədən yenidən idxal edə bilərsiniz.</string>
+    <string name="export">Köçür</string>
+    <string name="exporting">İxrac davam edir…</string>
 </resources>
