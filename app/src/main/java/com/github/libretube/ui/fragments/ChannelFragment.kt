@@ -204,6 +204,7 @@ class ChannelFragment : Fragment(R.layout.fragment_channel) {
             ChannelTab(tabName, it.data)
         }
 
+        val selectedTab = binding.pager.currentItem
         channelContentAdapter = ChannelContentAdapter(
             tabList,
             channelId,
@@ -213,6 +214,8 @@ class ChannelFragment : Fragment(R.layout.fragment_channel) {
         TabLayoutMediator(binding.tabParent, binding.pager) { tab, position ->
             tab.text = tabList[position].name
         }.attach()
+
+        binding.pager.setCurrentItem(selectedTab, false)
     }
 
     companion object {
