@@ -16,7 +16,6 @@ import androidx.viewpager2.widget.ViewPager2
 import com.github.libretube.R
 import com.github.libretube.api.MediaServiceRepository
 import com.github.libretube.api.obj.ChannelTab
-import com.github.libretube.api.obj.StreamItem
 import com.github.libretube.constants.IntentData
 import com.github.libretube.databinding.FragmentChannelBinding
 import com.github.libretube.extensions.TAG
@@ -163,7 +162,7 @@ class ChannelFragment : Fragment(R.layout.fragment_channel) {
 
         binding.channelCoordinator.isVisible = true
 
-        binding.channelName.text = response.name
+        binding.channelName.text = channelName
         binding.channelName.setOnLongClickListener {
             ClipboardHelper.save(requireContext(), text = response.name.orEmpty())
             true
@@ -212,8 +211,8 @@ class ChannelFragment : Fragment(R.layout.fragment_channel) {
 
         tabList.clear()
 
-        val tabs = listOf(ChannelTab(VIDEOS_TAB_KEY, "")) + response.tabs
-        for (channelTab in tabs) {
+
+        for (channelTab in response.tabs) {
             val tabName = tabNamesMap[channelTab.name]?.let { getString(it) }
                 ?: channelTab.name.replaceFirstChar(Char::titlecase)
             tabList.add(ChannelTab(tabName, channelTab.data))
