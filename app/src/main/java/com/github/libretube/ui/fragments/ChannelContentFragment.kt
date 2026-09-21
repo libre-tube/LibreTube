@@ -13,21 +13,16 @@ import androidx.paging.PagingConfig
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.R
-import com.github.libretube.api.MediaServiceRepository
 import com.github.libretube.api.obj.ChannelTab
 import com.github.libretube.constants.IntentData
 import com.github.libretube.databinding.FragmentChannelContentBinding
 import com.github.libretube.extensions.ceilHalf
 import com.github.libretube.extensions.parcelable
 import com.github.libretube.ui.adapters.SearchResultsAdapter
-import com.github.libretube.ui.adapters.VideosAdapter
 import com.github.libretube.ui.base.DynamicLayoutManagerFragment
-import com.github.libretube.ui.extensions.addOnBottomReachedListener
 import com.github.libretube.ui.models.ChannelViewModel
 import com.github.libretube.ui.models.sources.ChannelTabPagingSource
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class ChannelContentFragment : DynamicLayoutManagerFragment(R.layout.fragment_channel_content) {
     private var _binding: FragmentChannelContentBinding? = null
@@ -54,61 +49,27 @@ class ChannelContentFragment : DynamicLayoutManagerFragment(R.layout.fragment_ch
         super.onViewCreated(view, savedInstanceState)
 
         val arguments = requireArguments()
-        val channelId = arguments.getString(IntentData.channelId)!!
+        val tabData = arguments.parcelable<ChannelTab>(IntentData.tabData)!!
 
-        val tabData = arguments.parcelable<ChannelTab>(IntentData.tabData)
+        val searchChannelAdapter = SearchResultsAdapter()
+        binding.channelRecView.adapter = searchChannelAdapter
 
-        if (tabData?.data.isNullOrEmpty()) {
-            var nextPage = viewModel.nextPage
-            var isLoading = false
+        val pagingFlow = Pager(
+            PagingConfig(pageSize = 20, enablePlaceholders = false),
+            pagingSourceFactory = { ChannelTabPagingSource(tabData) }
+        ).flow
 
-            val channelAdapter = VideosAdapter(showChannelInfo = false).also {
-                it.submitList(viewModel.relatedStreams.orEmpty())
-            }
-            binding.channelRecView.adapter = channelAdapter
-            binding.progressBar.isGone = true
-
-            binding.channelRecView.addOnBottomReachedListener {
-                if (isLoading || nextPage == null) return@addOnBottomReachedListener
-
-                isLoading = true
-
-                lifecycleScope.launch(Dispatchers.IO) {
-                    val resp = try {
-                       MediaServiceRepository.instance.getChannelNextPage(channelId, nextPage!!)
-                    } catch (e: Exception) {
-                        return@launch
-                    } finally {
-                        isLoading = false
-                    }
-
-                    nextPage = resp.nextpage
-                    withContext(Dispatchers.Main) {
-                        channelAdapter.insertItems(resp.relatedStreams)
-                    }
+        viewLifecycleOwner.lifecycleScope.launch {
+            launch {
+                pagingFlow.collect {
+                    searchChannelAdapter.submitData(it)
                 }
             }
-        } else {
-            val searchChannelAdapter = SearchResultsAdapter()
-            binding.channelRecView.adapter = searchChannelAdapter
 
-            val pagingFlow = Pager(
-                PagingConfig(pageSize = 20, enablePlaceholders = false),
-                pagingSourceFactory = { ChannelTabPagingSource(tabData) }
-            ).flow
-
-            viewLifecycleOwner.lifecycleScope.launch {
-                launch {
-                    pagingFlow.collect {
-                        searchChannelAdapter.submitData(it)
-                    }
-                }
-
-                launch {
-                    searchChannelAdapter.loadStateFlow.collect {
-                        if (it.refresh is LoadState.NotLoading) {
-                            binding.progressBar.isGone = true
-                        }
+            launch {
+                searchChannelAdapter.loadStateFlow.collect {
+                    if (it.refresh is LoadState.NotLoading) {
+                        binding.progressBar.isGone = true
                     }
                 }
             }
