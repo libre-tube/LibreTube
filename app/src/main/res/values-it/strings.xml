@@ -122,7 +122,7 @@
     <string name="instance_name">Nome istanza</string>
     <string name="addInstance">Aggiungi istanza</string>
     <string name="empty_instance">Compila il nome e l\'URL dell\'API.</string>
-    <string name="instance_summary">Piped, accesso e account</string>
+    <string name="instance_summary">Piped, sincronizzazione dati e account</string>
     <string name="customInstance_summary">Aggiungi…</string>
     <string name="instance_api_url">URL API dell\'istanza</string>
     <string name="invalid_url">Si prega di inserire un URL che funzioni</string>
@@ -543,4 +543,23 @@
     <string name="comment_verified">Verificato</string>
     <string name="comment_pinned">Fissato</string>
     <string name="courses">Corsi</string>
+    <string name="welcome">Benvenuto su LibreTube! Per iniziare, seleziona qui sotto una modalità di sincronizzazione per decidere se sincronizzare i tuoi dati utente tra i dispositivi.</string>
+    <string name="choose_instance">Scegli prima un\'istanza!</string>
+    <string name="choose_instance_long">Scegli qui sotto un\'istanza Piped da usare. L\'istanza Piped farà da intermediario tra te e YouTube. Queste istanze si trovano in diverse posizioni fisiche, indicate dalla bandiera del rispettivo paese. Le istanze fisicamente più vicine a te sono probabilmente più veloci di quelle lontane. Puoi cambiare l\'istanza usata nelle impostazioni in qualsiasi momento.</string>
+    <string name="load_data_from">Carica i dati di YouTube da</string>
+    <string name="load_data_from_local">Direttamente da YouTube</string>
+    <string name="load_data_from_piped">tramite Piped (deprecato)</string>
+    <string name="libretube_sync_server">Server di sincronizzazione LibreTube</string>
+    <string name="data_synchronization">Sincronizzazione dati</string>
+    <string name="sync_server_type">Sincronizza i dati utente (iscrizioni, playlist) tramite</string>
+    <string name="sync_server_url">URL del server di sincronizzazione LibreTube</string>
+    <string name="export">Esporta</string>
+    <string name="exporting">Esportazione in corso…</string>
+    <string name="missing_auth_falling_back">Accesso non effettuato. Sincronizzazione dati disattivata.</string>
+    <string name="sync_type_summary_none">Memorizza tutti i dati utente offline all\'interno dell\'app. Questo significa che non potrai sincronizzare i dati tra i tuoi dispositivi, ma potrebbe essere la scelta giusta se usi un solo dispositivo o non ti interessa la sincronizzazione tra dispositivi.</string>
+    <string name="sync_type_summary_libretube">Memorizza i dati di playlist e iscrizioni sul server di sincronizzazione di LibreTube (%1$s). Questo ti permette di accedere al tuo account da qualsiasi altro dispositivo per avere accesso alle tue iscrizioni e playlist. Avviso sulla privacy: i dati utente sono pseudonimizzati lato server, ma non sono cifrati end-to-end. Se preferisci, puoi anche ospitare una tua versione del server, ma di solito il server ufficiale va benissimo.</string>
+    <string name="sync_type_summary_piped">Solo per esperti, deprecato:\nMemorizza i dati di playlist e iscrizioni su Piped (%1$s). Dato che Piped non ha più istanze pubbliche, devi ospitare una tua istanza Piped.</string>
+    <string name="switch_sync_type_warning">Se in precedenza hai usato un tipo di sincronizzazione diverso, esegui prima un backup delle tue iscrizioni e playlist. Potrai poi cambiare il tipo di sincronizzazione nelle impostazioni dell\'istanza e reimportare i tuoi dati dal backup.</string>
+    <string name="oidc_login">Continua con OIDC</string>
+    <string name="already_downloaded">Hai già scaricato questo video!</string>
 </resources>
