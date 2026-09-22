@@ -191,7 +191,7 @@ class VideoOptionsBottomSheet : BaseBottomSheet() {
                     optionsList += R.string.mark_as_unwatched
                 }
 
-                if (watchHistoryEntry == null) {
+                if (watchHistoryEntry?.metadata?.finished != true) {
                     optionsList += R.string.mark_as_watched
                 }
 
