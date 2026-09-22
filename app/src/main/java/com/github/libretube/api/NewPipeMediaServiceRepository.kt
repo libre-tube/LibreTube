@@ -36,7 +36,6 @@ import org.schabi.newpipe.extractor.Page
 import org.schabi.newpipe.extractor.channel.ChannelInfo
 import org.schabi.newpipe.extractor.channel.ChannelInfoItem
 import org.schabi.newpipe.extractor.channel.tabs.ChannelTabInfo
-import org.schabi.newpipe.extractor.channel.tabs.ChannelTabs
 import org.schabi.newpipe.extractor.comments.CommentsInfo
 import org.schabi.newpipe.extractor.comments.CommentsInfoItem
 import org.schabi.newpipe.extractor.kiosk.KioskInfo
@@ -439,21 +438,22 @@ class NewPipeMediaServiceRepository : MediaServiceRepository {
     override suspend fun getChannelTab(data: String, nextPage: String?): ChannelTabResponse {
         val linkListHandler = data.toListLinkHandler()
 
-        val (items, newNextPage) = if (nextPage == null) {
+        val (items, newNextPage, sort) = if (nextPage == null) {
             val resp = ChannelTabInfo.getInfo(NewPipeExtractorInstance.extractor, linkListHandler)
-            resp.relatedItems to resp.nextPage
+            Triple(resp.relatedItems, resp.nextPage, resp.sortOptionPages)
         } else {
             val resp = ChannelTabInfo.getMoreItems(
                 NewPipeExtractorInstance.extractor,
                 linkListHandler,
                 nextPage.toPage()
             )
-            resp.items to resp.nextPage
+            Triple(resp.items, resp.nextPage, null)
         }
 
         return ChannelTabResponse(
             content = items.mapNotNull { it.toContentItem() },
-            nextpage = newNextPage?.toNextPageString()
+            nextpage = newNextPage?.toNextPageString(),
+            sortingOptions = sort?.mapValues { it.value.toNextPageString() }
         )
     }
 
