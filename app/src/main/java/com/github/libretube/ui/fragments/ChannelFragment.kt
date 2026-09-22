@@ -106,6 +106,7 @@ class ChannelFragment : Fragment(R.layout.fragment_channel) {
     private fun fetchChannel() = lifecycleScope.launch {
         isLoading = true
         _binding?.channelRefresh?.isRefreshing = true
+        activity?.viewModelStore?.clear()
 
         val channel = try {
             withContext(Dispatchers.IO) {
