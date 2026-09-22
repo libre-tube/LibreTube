@@ -125,7 +125,7 @@
     <string name="category_music_offtopic_summary">Тільки для використання у музичних кліпах. Він повинен охоплювати частини відео, а не частину офіційних міксів. Зрештою, відео має максимально нагадувати Spotify або будь-яку іншу версію або зменшувати розмови чи інші відволікання</string>
     <string name="category_preview_summary">Для сегментів із детальним описом майбутнього вмісту без додаткової інформації. Якщо вона включає кліпи, які з’являються лише тут, це, швидше за все, неправильна категорія</string>
     <string name="appearance">Зовнішній вигляд</string>
-    <string name="instance_summary">Piped, автентифікація та обліковий запис</string>
+    <string name="instance_summary">Piped, синхронізація даних та обліковий запис</string>
     <string name="quality">Якість</string>
     <string name="behavior">Поведінка</string>
     <string name="version">Версія %1$s</string>
@@ -547,4 +547,12 @@
     <string name="comment_verified">Перевірено</string>
     <string name="comment_pinned">Закріплено</string>
     <string name="courses">Курси</string>
+    <string name="welcome">Ласкаво просимо до LibreTube! Щоб розпочати, виберіть режим синхронізації нижче, щоб вирішити, чи синхронізувати дані користувача на різних пристроях.</string>
+    <string name="choose_instance">Будь ласка, спочатку виберіть екземпляр!</string>
+    <string name="choose_instance_long">Будь ласка, виберіть екземпляр Piped для використання з наведених нижче. Екземпляр Piped виступатиме посередником між вами та YouTube. Ці екземпляри розташовані в різних фізичних місцях – позначених прапором(ами) їхніх країн. Екземпляри, фізично розташовані ближче до вас, ймовірно, працюють швидше, ніж ті, що не розташовані ближче. Ви можете будь-коли змінити екземпляр, який використовуєте, в налаштуваннях.</string>
+    <string name="load_data_from">Завантажити дані YouTube з</string>
+    <string name="load_data_from_local">Безпосередньо з YouTube</string>
+    <string name="load_data_from_piped">через Piped (застаріло)</string>
+    <string name="libretube_sync_server">Сервер синхронізації LibreTube</string>
+    <string name="data_synchronization">Синхронізація даних</string>
 </resources>
