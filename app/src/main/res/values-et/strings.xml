@@ -145,7 +145,7 @@
     <string name="download_paused">Allalaadimine on peatatud</string>
     <string name="download_completed">Allalaadimine on lõppenud</string>
     <string name="show_updates">Kontrolli uuendusi automaatselt</string>
-    <string name="instance_summary">Piped, sisseligimine ja kasutajakonto</string>
+    <string name="instance_summary">Piped, andmete sünkroonimine ja kasutajakonto</string>
     <string name="customInstance_summary">Lisa…</string>
     <string name="instance_name">Vaheserveri nimi</string>
     <string name="instance_api_url">Vaheserveri API aadress</string>
@@ -540,4 +540,16 @@
     <string name="comment_verified">Kontrollitud</string>
     <string name="comment_pinned">Esiplaanile tõstetud</string>
     <string name="courses">Kursused</string>
+    <string name="welcome">Tere tulemast, see on LibreTube! Alustamiseks palun vali alljärgnevast sünkroonimisviis, millega määrad kas ja kuidas sünkroonid oma andmeid eri seadmete vahel.</string>
+    <string name="choose_instance">Palun vali esmalt server!</string>
+    <string name="load_data_from">Laadi YouTube\'i andmed</string>
+    <string name="load_data_from_local">Otse YouTube\'ist</string>
+    <string name="load_data_from_piped">Pipedi kaudu (aegunud lahendus)</string>
+    <string name="libretube_sync_server">LibreTube\'i sünkroonimisserveri abil</string>
+    <string name="data_synchronization">Andmete sünkroonimine</string>
+    <string name="sync_server_type">Sünkrooni kasutajaandmed (tellimused, esitusloendid)</string>
+    <string name="sync_server_url">LibreTube\'i sünkroonimisserveri võrguaadress</string>
+    <string name="export">Eksport</string>
+    <string name="exporting">Eksportimine on pooleli…</string>
+    <string name="missing_auth_falling_back">Pole logitud sisse. Andmete sünkroonimine on lülitatud välja.</string>
 </resources>
