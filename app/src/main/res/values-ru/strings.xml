@@ -110,7 +110,7 @@
     <string name="fireIcon">Огненный огонь</string>
     <string name="torchIcon">Модный факел</string>
     <string name="flameIcon">Порхающее пламя</string>
-    <string name="instance_summary">Piped, вход и аккаунт</string>
+    <string name="instance_summary">Piped, синхронизация данных и учетная запись</string>
     <string name="version">Версия %1$s</string>
     <string name="category_filler">Заполнители/шутки</string>
     <string name="category_music_offtopic">Музыка: Немузыкальный раздел</string>
@@ -546,4 +546,12 @@
     <string name="comment_verified">Проверено</string>
     <string name="comment_pinned">Закреплено</string>
     <string name="courses">Курсы</string>
+    <string name="welcome">Добро пожаловать в LibreTube! Чтобы начать, выберите режим синхронизации ниже, чтобы определить, синхронизировать ли данные пользователя на разных устройствах.</string>
+    <string name="choose_instance">Пожалуйста, сначала выберите экземпляр!</string>
+    <string name="choose_instance_long">Пожалуйста, выберите экземпляр Piped для использования из перечисленных ниже. Экземпляр Piped будет выступать в качестве посредника между вами и YouTube. Эти экземпляры расположены в разных физических местах – обозначенных флагом(ами) их стран. Экземпляры, физически расположенные ближе к вам, вероятно, работают быстрее, чем те, которые не расположены ближе. Вы можете в любое время изменить используемый экземпляр в настройках.</string>
+    <string name="load_data_from">Загрузить данные YouTube с</string>
+    <string name="load_data_from_local">Прямо с YouTube</string>
+    <string name="load_data_from_piped">через Piped (устарело)</string>
+    <string name="libretube_sync_server">Сервер синхронизации LibreTube</string>
+    <string name="data_synchronization">Синхронизация данных</string>
 </resources>
