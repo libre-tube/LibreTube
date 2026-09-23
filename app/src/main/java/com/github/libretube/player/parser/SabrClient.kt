@@ -453,7 +453,7 @@ class SabrClient private constructor(
      *
      * @throws Exception if parsing fails or the part is invalid
      */
-    private fun processPart(part: Part) {
+    private fun processPart(part: UmpParser.Part) {
         when (part.type) {
             UMPPartId.MEDIA_HEADER -> {
                 val header = MediaHeader.parseFrom(part.data)

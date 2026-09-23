@@ -66,9 +66,7 @@ class UmpParser(private var buf: ByteArray) {
 
         // decode the size from the first 5 bits
         // [0...4] bits corresponds to a size of 1...5 bytes
-        //val varintSize = minOf(prefix.countLeadingZeroBits(), 4) + 1
         val varintSize = minOf(prefix.inv().countLeadingZeroBits(), 4) + 1
-
 
         var shift = 0
         var result = 0u
@@ -129,25 +127,26 @@ class UmpParser(private var buf: ByteArray) {
 
         return Part(umpType, data)
     }
+
+
+    /**
+     * A single segment (part) of a UMP stream.
+     *
+     * Each part has an identifying type and may have associated data.
+     */
+    data class Part(
+        /**
+         * Type of the part.
+         *
+         * Set to [UMPPartId.UNKNOWN] if the type could not be identified.
+         */
+        val type: UMPPartId,
+
+        /**
+         * Associated data of the part.
+         *
+         * May be empty.
+         */
+        val data: ByteArray
+    )
 }
-
-/**
- * A single segment (part) of a UMP stream.
- *
- * Each part has an identifying type and may have associated data.
- */
-data class Part(
-    /**
-     * Type of the part.
-     *
-     * Set to [UMPPartId.UNKNOWN] if the type could not be identified.
-     */
-    val type: UMPPartId,
-
-    /**
-     * Associated data of the part.
-     *
-     * May be empty.
-     */
-    val data: ByteArray
-)
