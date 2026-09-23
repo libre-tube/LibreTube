@@ -38,13 +38,7 @@ class PlayingQueueAdapter(
                 DateUtils.formatElapsedTime(streamItem.duration ?: 0)
 
             val currentIndex = PlayingQueue.currentIndex()
-            root.setBackgroundColor(
-                if (currentIndex == position) {
-                    ThemeHelper.getThemeColor(root.context, android.R.attr.colorControlHighlight)
-                } else {
-                    Color.TRANSPARENT
-                }
-            )
+            root.isSelected =  currentIndex == position
 
             root.setOnClickListener {
                 val newVideoId = streamItem.url?.toID() ?: return@setOnClickListener

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/rounded_ripple"
+    android:background="@drawable/selectable_item_row_background"
     android:orientation="horizontal"
     android:padding="10dp">
 
