@@ -561,4 +561,5 @@
     <string name="comment_verified">Verificado</string>
     <string name="comment_pinned">Fijado</string>
     <string name="switch_sync_type_warning">Si previamente has usado un tipo de sincronización diferente, por favor realiza una copia de seguridad de tus suscripciones y listas de reproducción primero. Después puedes cambiar el tipo de sincronización en la configuración de la instancia y re-importar tus datos desde la copia de seguridad.</string>
+    <string name="courses">Cursos</string>
 </resources>
