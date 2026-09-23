@@ -115,7 +115,7 @@ class ShareDialog : DialogFragment() {
             .setPositiveButton(R.string.share) { _, _ ->
                 val intent = Intent(Intent.ACTION_SEND)
                     .putExtra(Intent.EXTRA_TEXT, binding.linkPreview.text.toString())
-                    .putExtra(Intent.EXTRA_SUBJECT, shareableTitle)
+                    .putExtra(Intent.EXTRA_TITLE, shareableTitle)
                     .setType("text/plain")
                 val shareIntent = Intent.createChooser(intent, getString(R.string.shareTo))
                 requireContext().startActivity(shareIntent)
