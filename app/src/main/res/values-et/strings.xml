@@ -552,4 +552,11 @@
     <string name="export">Eksport</string>
     <string name="exporting">Eksportimine on pooleli…</string>
     <string name="missing_auth_falling_back">Pole logitud sisse. Andmete sünkroonimine on lülitatud välja.</string>
+    <string name="choose_instance_long">Palun vali järgnevast mõni Piped\'i vaheserver, mis vahendab liiklust sinu nutiseadme ja YouTube\'i vahel. Vaheserverid paiknevad eri riikides ning seda märgivad riikide lipud. Serverid, mis on sinu asukohale lähema ilmselt toimivad kiiremini ning neid võid alati seadistustest vahetada vastavalt vajadusele.</string>
+    <string name="oidc_login">Jätka OIDC abil</string>
+    <string name="already_downloaded">Sa oled selle video juba alla laadinud!</string>
+    <string name="sync_type_summary_none">Kõik kasutajaandmed on salvestatud rakenduses ilma võrguühendust kasutamata. See tähendab, et sa ei saa andmeid seadmete vahel sünkroonida, kuid see võib olla õige valik, kui kasutad ainult ühte seadet või kui seadmete vaheline sünkroonimine pole sulle oluline.</string>
+    <string name="sync_type_summary_libretube">Esitusloendid ja tellimused on salvestatud LibreTube\'i sünkroonimisserveris (%1$s). See võimaldab sul ükspuha, mis oma seadmest sisse logida ja sul on ligipääs oma esitusloenditele ja tellimustele. Privaatsusteade: andmed on serveris seotud pseudonüümiga, kuid läbivalt krüptimata. Kui tahad, siis saad ka oma serveri kasutusele võtta, kuid tavaliselt piisab ametlikust serverist.</string>
+    <string name="sync_type_summary_piped">Vana lahendus, mis sobib vaid oskuskasutajatele:\nEsitusloendid ja tellimused on salvestatud Pipedi serveris (%1$s). Kuna Pipedil pole enam avalikke serverid, siis pead paigaldama oma serveri.</string>
+    <string name="switch_sync_type_warning">Kui oled varem kasutanud teistsugust sünkroonimise tüüpi, palun tee esmalt oma tellimustest ja esitusloenditest varukoopia. Seejärel võid seadistustest muuta sünkroonimistüüpi ja importida andmed varukoopiast tagasi.</string>
 </resources>
