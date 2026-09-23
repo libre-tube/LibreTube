@@ -554,4 +554,12 @@
     <string name="load_data_from_piped">через Piped (устарело)</string>
     <string name="libretube_sync_server">Сервер синхронизации LibreTube</string>
     <string name="data_synchronization">Синхронизация данных</string>
+    <string name="sync_server_type">Синхронизировать пользовательские данные (подписки, плейлисты) с помощью</string>
+    <string name="sync_server_url">Ссылка чтобы LibreTube синхронизировал сервер</string>
+    <string name="export">Экспорт</string>
+    <string name="exporting">Экспортирование</string>
+    <string name="missing_auth_falling_back">Пользователь не авторизован. Синхронизация отключена</string>
+    <string name="sync_type_summary_none">Сохранить все пользовательские данные оффлайн в приложении. Это означает что вы не можете синхронизировать данные между вашими устройствами, но может быть верным решением если вы используете только одно устройство или не беспокоетесь о синхронизации между устройствами</string>
+    <string name="oidc_login">Продолжить с OIDC</string>
+    <string name="already_downloaded">Вы уже загрузили это видео!</string>
 </resources>
