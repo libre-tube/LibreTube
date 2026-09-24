@@ -2,7 +2,6 @@ package com.github.libretube.api
 
 import com.github.libretube.api.obj.DeArrowBody
 import com.github.libretube.api.obj.DeArrowContent
-import com.github.libretube.api.obj.PipedConfig
 import com.github.libretube.api.obj.SegmentData
 import com.github.libretube.api.obj.SubmitSegmentResponse
 import com.github.libretube.api.obj.VideoLabelData
@@ -24,9 +23,6 @@ private const val GOOGLE_API_KEY = "AIzaSyDyT5W0Jh49F30Pqqtyfdf7pDLFKLJoAnw"
 const val USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.3"
 
 interface ExternalApi {
-    @GET("config")
-    suspend fun getInstanceConfig(@Url url: String): PipedConfig
-
     // fetch latest version info
     @GET(GITHUB_API_URL)
     suspend fun getLatestRelease(): UpdateInfo

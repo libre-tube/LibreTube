@@ -33,10 +33,8 @@ object PreferenceKeys {
     const val SEARCH_SUGGESTIONS = "search_suggestions"
 
     // Instance
-    const val YOUTUBE_DATA_SOURCE = "youtube_data_source"
     const val SYNC_SERVER_TYPE = "sync_server"
     const val LIBRETUBE_SYNC_SERVER_URL = "libretube_sync_server_url"
-    const val FETCH_INSTANCE = "selectInstance"
     const val AUTH_INSTANCE = "selectAuthInstance"
     const val LOGIN_REGISTER = "login_register"
     const val LOGOUT = "logout"
