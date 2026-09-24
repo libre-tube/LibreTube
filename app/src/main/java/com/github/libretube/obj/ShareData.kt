@@ -5,8 +5,6 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class ShareData(
-    val currentChannel: String? = null,
-    val currentVideo: String? = null,
-    val currentPlaylist: String? = null,
+    val title: String?,
     var currentPosition: Long? = null
 ) : Parcelable
