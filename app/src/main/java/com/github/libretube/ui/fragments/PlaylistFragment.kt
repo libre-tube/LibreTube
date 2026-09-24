@@ -219,7 +219,8 @@ class PlaylistFragment : DynamicLayoutManagerFragment(R.layout.fragment_playlist
                 sheet.arguments = bundleOf(
                     IntentData.playlistId to playlistId,
                     IntentData.playlistName to playlistName.orEmpty(),
-                    IntentData.playlistType to playlistType
+                    IntentData.playlistType to playlistType,
+                    IntentData.playlistThumbnail to response.thumbnailUrl,
                 )
 
                 val fragmentManager = (context as BaseActivity).supportFragmentManager

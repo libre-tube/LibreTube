@@ -82,7 +82,8 @@ class PlaylistsAdapter(
                 playlistOptionsDialog.arguments = bundleOf(
                     IntentData.playlistId to playlist.id!!,
                     IntentData.playlistName to playlist.name!!,
-                    IntentData.playlistType to playlistType
+                    IntentData.playlistType to playlistType,
+                    IntentData.playlistThumbnail to playlist.thumbnail,
                 )
                 playlistOptionsDialog.show(
                     fragmentManager,
