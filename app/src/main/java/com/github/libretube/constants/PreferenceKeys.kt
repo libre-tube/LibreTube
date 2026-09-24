@@ -118,7 +118,6 @@ object PreferenceKeys {
     // Internally saved data / not a preference
     const val ERROR_LOG = "error_log"
     const val AUTH_PREF_FILE = "auth"
-    const val IMAGE_PROXY_URL = "image_proxy_url"
     const val SELECTED_CHANNEL_GROUP = "selected_channel_group"
     const val SELECTED_DOWNLOAD_SORT_TYPE = "selected_download_sort_type"
     const val SELECTED_DOWNLOAD_PLAYLIST_SORT_TYPE = "selected_download_playlist_sort_type"
