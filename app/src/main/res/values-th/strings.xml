@@ -436,7 +436,7 @@
     <string name="segment">เซกเมนต์</string>
     <string name="download_playlist">ดาวน์โหลดเพลย์ลิสต์</string>
     <string name="enqueue_playlist_description">แสดงการแจ้งเตือนในขณะวิดีโอที่อยู่ในคิวของเพลย์ลิสต์กำลังจะดาวน์โหลด</string>
-    <string name="enqueueing_playlist_download">กำลังจัดคิววิดีโอเพื่อจะดาวน์โหลดจากเพลย์ลิสต์ %1$s</string>
+    <string name="enqueueing_playlist_download">กำลังจัดคิววิดีโอเพื่อดาวน์โหลดจากเพลย์ลิสต์ %1$s</string>
     <string name="general_summary">ดาวน์โหลดและประหยัดข้อมูล</string>
     <string name="notify_new_streams">แสดงการแจ้งเตือนสำหรับวิดีโอใหม่</string>
     <string name="notify_new_streams_summary">แสดงการแจ้งเตือนสำหรับวิดีโอใหม่จากช่องที่คุณกำลังติดตามอยู่</string>
@@ -528,4 +528,14 @@
     <string name="resume_all">ดาวน์โหลดต่อ</string>
     <string name="comment_verified">ผ่านการอนุมัติแล้ว</string>
     <string name="comment_pinned">ปักหมุด</string>
+    <string name="load_data_from">โหลดข้อมูล YouTube จาก</string>
+    <string name="load_data_from_local">ผ่าน YouTube โดยตรง</string>
+    <string name="load_data_from_piped">Piped (เลิกใช้แล้ว)</string>
+    <string name="libretube_sync_server">ซิงค์เซิฟเวอร์ของ LibreTube</string>
+    <string name="data_synchronization">ซิงค์ข้อมูล</string>
+    <string name="sync_server_type">ซิงค์ข้อมูลผู้ใช้ (การติดตาม, เพลย์ลิสต์) ด้วย</string>
+    <string name="sync_server_url">URL ซิงค์เซิฟเวอร์ของ LibreTube</string>
+    <string name="export">ส่งออก</string>
+    <string name="exporting">กำลังส่งออก…</string>
+    <string name="oidc_login">ดำเนินการต่อด้วย OIDC</string>
 </resources>
