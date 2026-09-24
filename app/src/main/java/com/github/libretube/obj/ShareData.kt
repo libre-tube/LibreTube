@@ -6,5 +6,6 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 data class ShareData(
     val title: String?,
-    var currentPosition: Long? = null
+    val currentPosition: Long? = null,
+    val previewImageUrl: String? = null
 ) : Parcelable
