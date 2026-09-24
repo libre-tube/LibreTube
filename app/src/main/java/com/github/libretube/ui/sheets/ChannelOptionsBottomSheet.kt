@@ -50,7 +50,7 @@ class ChannelOptionsBottomSheet : BaseBottomSheet() {
                     val bundle = bundleOf(
                         IntentData.id to channelId,
                         IntentData.shareObjectType to ShareObjectType.CHANNEL,
-                        IntentData.shareData to ShareData(currentChannel = channelName)
+                        IntentData.shareData to ShareData(title = channelName)
                     )
                     val newShareDialog = ShareDialog()
                     newShareDialog.arguments = bundle

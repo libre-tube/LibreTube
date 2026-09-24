@@ -13,7 +13,6 @@ import com.github.libretube.R
 import com.github.libretube.constants.IntentData
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.databinding.DialogShareBinding
-import com.github.libretube.db.DatabaseHelper
 import com.github.libretube.db.DatabaseHolder.Database
 import com.github.libretube.enums.ShareObjectType
 import com.github.libretube.extensions.parcelable
@@ -47,10 +46,6 @@ class ShareDialog : DialogFragment() {
         val customInstances = runBlocking(Dispatchers.IO) {
             Database.customInstanceDao().getAll().filter { it.frontendUrl.isNotEmpty() }
         }
-
-        val shareableTitle = shareData.currentChannel
-            ?: shareData.currentVideo
-            ?: shareData.currentPlaylist.orEmpty()
 
         val binding = DialogShareBinding.inflate(layoutInflater)
 
@@ -115,7 +110,7 @@ class ShareDialog : DialogFragment() {
             .setPositiveButton(R.string.share) { _, _ ->
                 val intent = Intent(Intent.ACTION_SEND)
                     .putExtra(Intent.EXTRA_TEXT, binding.linkPreview.text.toString())
-                    .putExtra(Intent.EXTRA_TITLE, shareableTitle)
+                    .putExtra(Intent.EXTRA_TITLE, shareData.title)
                     .setType("text/plain")
                 val shareIntent = Intent.createChooser(intent, getString(R.string.shareTo))
                 requireContext().startActivity(shareIntent)

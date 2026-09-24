@@ -108,7 +108,7 @@ class PlaylistOptionsBottomSheet : BaseBottomSheet() {
                 newShareDialog.arguments = bundleOf(
                     IntentData.id to playlistId,
                     IntentData.shareObjectType to ShareObjectType.PLAYLIST,
-                    IntentData.shareData to ShareData(currentPlaylist = playlistName)
+                    IntentData.shareData to ShareData(title = playlistName)
                 )
                 // using parentFragmentManager, childFragmentManager doesn't work here
                 newShareDialog.show(parentFragmentManager, ShareDialog::class.java.name)

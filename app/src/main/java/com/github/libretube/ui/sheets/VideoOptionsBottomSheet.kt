@@ -79,7 +79,7 @@ class VideoOptionsBottomSheet : BaseBottomSheet() {
                 val bundle = bundleOf(
                     IntentData.id to videoId,
                     IntentData.shareObjectType to ShareObjectType.VIDEO,
-                    IntentData.shareData to ShareData(currentVideo = streamItem.title)
+                    IntentData.shareData to ShareData(title = streamItem.title)
                 )
                 val newShareDialog = ShareDialog()
                 newShareDialog.arguments = bundle
