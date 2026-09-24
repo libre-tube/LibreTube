@@ -2,6 +2,7 @@ package com.github.libretube.ui.dialogs
 
 import android.app.Dialog
 import android.content.Context
+import android.content.ClipData
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -118,6 +119,14 @@ class ShareDialog : DialogFragment() {
                     .putExtra(Intent.EXTRA_TEXT, binding.linkPreview.text.toString())
                     .putExtra(Intent.EXTRA_TITLE, shareData.title)
                     .setType("text/plain")
+                    .apply {
+                        shareData.previewImageUrl?.let {
+                            val uri = runBlocking { generatePreviewUri(requireContext(), it) }
+                            clipData = ClipData.newRawUri(null, uri)
+                            data = uri
+                            addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+                        }
+                    }
                 val shareIntent = Intent.createChooser(intent, getString(R.string.shareTo))
                 requireContext().startActivity(shareIntent)
             }
@@ -146,6 +155,19 @@ class ShareDialog : DialogFragment() {
         }
 
         return url
+    }
+
+    private suspend fun generatePreviewUri(context: Context, imageUrl: String): Uri? {
+        val file = withContext(Dispatchers.IO) {
+            val shareImageCacheDir = File(context.cacheDir, "share_image").also {
+                it.mkdirs()
+            }
+            val file = File(shareImageCacheDir, "share_preview.png")
+            val downloadSuccess = ImageHelper.downloadImage(context, imageUrl, file.toPath())
+            file.takeIf { downloadSuccess }
+        } ?: return null
+
+        return FileProvider.getUriForFile(context, "${BuildConfig.APPLICATION_ID}.fileprovider", file)
     }
 
     companion object {
