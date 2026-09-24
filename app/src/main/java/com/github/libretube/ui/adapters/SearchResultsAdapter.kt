@@ -210,7 +210,8 @@ class SearchResultsAdapter(
                 sheet.arguments = bundleOf(
                     IntentData.playlistId to item.url.toID(),
                     IntentData.playlistName to item.name.orEmpty(),
-                    IntentData.playlistType to PlaylistType.PUBLIC
+                    IntentData.playlistType to PlaylistType.PUBLIC,
+                    IntentData.playlistThumbnail to item.thumbnail,
                 )
                 sheet.show(
                     (root.context as BaseActivity).supportFragmentManager,

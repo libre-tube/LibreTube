@@ -151,7 +151,7 @@ class ChannelFragment : Fragment(R.layout.fragment_channel) {
                         IntentData.channelId to channelId,
                         IntentData.channelName to channelName,
                         IntentData.isSubscribed to isSubscribed,
-                        IntentData.channelAvatar to channel.avatarUrl,
+                        IntentData.channelAvatar to response.avatarUrl,
                     )
                 }
                 .show(childFragmentManager)
