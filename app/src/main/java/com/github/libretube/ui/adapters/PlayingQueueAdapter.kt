@@ -38,7 +38,7 @@ class PlayingQueueAdapter(
                 DateUtils.formatElapsedTime(streamItem.duration ?: 0)
 
             val currentIndex = PlayingQueue.currentIndex()
-            root.isSelected =  currentIndex == position
+            root.isSelected = currentIndex == position
 
             root.setOnClickListener {
                 val newVideoId = streamItem.url?.toID() ?: return@setOnClickListener
