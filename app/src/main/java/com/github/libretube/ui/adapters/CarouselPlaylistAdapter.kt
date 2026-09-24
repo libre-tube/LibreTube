@@ -50,7 +50,8 @@ class CarouselPlaylistAdapter(private val playlistType: PlaylistType) : ListAdap
                 playlistOptionsDialog.arguments = bundleOf(
                     IntentData.playlistId to item.id,
                     IntentData.playlistName to item.title,
-                    IntentData.playlistType to playlistType
+                    IntentData.playlistType to playlistType,
+                    IntentData.playlistThumbnail to item.thumbnail,
                 )
                 playlistOptionsDialog.show((root.context as BaseActivity).supportFragmentManager)
 

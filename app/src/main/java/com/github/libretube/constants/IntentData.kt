@@ -22,6 +22,7 @@ object IntentData {
     const val query = "query"
     const val playlistDescription = "playlistDescription"
     const val playlistName = "playlistName"
+    const val playlistThumbnail = "playlistThumbnail"
     const val shareObjectType = "shareObjectType"
     const val shareData = "shareData"
     const val currentPosition = "currentPosition"
