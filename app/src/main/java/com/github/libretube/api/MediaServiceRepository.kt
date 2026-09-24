@@ -44,10 +44,7 @@ interface MediaServiceRepository {
 
     companion object {
         val instance: MediaServiceRepository
-            get() = when {
-                PlayerHelper.fullLocalMode -> NewPipeMediaServiceRepository()
-                else -> PipedMediaServiceRepository()
-            }
+            get() =  NewPipeMediaServiceRepository()
     }
 }
 

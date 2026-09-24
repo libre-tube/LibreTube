@@ -335,12 +335,6 @@ object PlayerHelper {
             true
         )
 
-    val fullLocalMode: Boolean
-        get() = PreferenceHelper.getString(
-            PreferenceKeys.YOUTUBE_DATA_SOURCE,
-            "local"
-        ) == "local"
-
     val localRYD: Boolean
         get() = PreferenceHelper.getBoolean(
             PreferenceKeys.LOCAL_RYD,

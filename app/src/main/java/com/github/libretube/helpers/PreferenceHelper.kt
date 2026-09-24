@@ -148,9 +148,6 @@ object PreferenceHelper {
         },
         PreferenceMigration(7, 8) {
             remove("local_stream_extraction")
-
-            val usesFullLocalMode = getBoolean("full_local_mode", true)
-            putString(PreferenceKeys.YOUTUBE_DATA_SOURCE, if (usesFullLocalMode) "local" else "piped")
             remove("full_local_mode")
 
             val usesPipedAuth = getBoolean("auth_instance_toggle", false)
@@ -176,6 +173,10 @@ object PreferenceHelper {
         },
         PreferenceMigration(10, 11) {
             remove("skip_buttons")
+        },
+        PreferenceMigration(11, 12) {
+            remove("youtube_data_source")
+            remove("selectInstance")
         }
     )
 
