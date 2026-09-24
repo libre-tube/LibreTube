@@ -2,7 +2,6 @@ package com.github.libretube.ui.models
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.github.libretube.api.PipedMediaServiceRepository
 import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.api.obj.PipedInstance
 import com.github.libretube.db.DatabaseHolder.Database
@@ -24,11 +23,10 @@ class InstancesModel : ViewModel() {
 
         // add the currently used instances to the list if they're currently down / not part
         // of the public instances list
-        for (apiUrl in listOf(PipedMediaServiceRepository.apiUrl, RetrofitInstance.pipedAuthUrl)) {
-            if (instances.none { it.apiUrl == apiUrl }) {
-                val origin = apiUrl.toHttpUrl().host
-                instances.add(PipedInstance(origin, apiUrl, isCurrentlyDown = true))
-            }
+        val apiUrl = RetrofitInstance.pipedAuthUrl
+        if (instances.none { it.apiUrl == apiUrl }) {
+            val origin = apiUrl.toHttpUrl().host
+            instances.add(PipedInstance(origin, apiUrl, isCurrentlyDown = true))
         }
         instances.sortBy { it.name }
 

@@ -48,12 +48,6 @@ class WelcomeViewModel(
     fun restoreAdvancedBackup(context: Context, uri: Uri) {
         viewModelScope.launch {
             BackupHelper.restoreAdvancedBackup(context, uri)
-
-            // only skip the welcome activity if the restored backup contains an instance
-            val instancePref = PreferenceHelper.getString(PreferenceKeys.FETCH_INSTANCE, "")
-            if (instancePref.isNotEmpty()) {
-                refreshAndNavigate()
-            }
         }
     }
 
