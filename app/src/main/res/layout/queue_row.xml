@@ -6,7 +6,8 @@
     android:layout_height="wrap_content"
     android:background="@drawable/selectable_item_row_background"
     android:orientation="horizontal"
-    android:padding="10dp">
+    android:layout_marginHorizontal="4dp"
+    android:padding="6dp">
 
     <androidx.cardview.widget.CardView
         android:layout_width="80dp"
