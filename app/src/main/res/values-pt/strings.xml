@@ -543,4 +543,17 @@
     <string name="courses">Cursos</string>
     <string name="comment_verified">Verificado</string>
     <string name="comment_pinned">Afixado</string>
+    <string name="choose_instance">Por favor, escolha uma instância!</string>
+    <string name="load_data_from">Carregar dados YouTube de</string>
+    <string name="load_data_from_local">Diretamente de YouTube</string>
+    <string name="load_data_from_piped">via Piped (descontinuado)</string>
+    <string name="libretube_sync_server">Servidor de sincronização Libretube</string>
+    <string name="data_synchronization">Sincronização de dados</string>
+    <string name="sync_server_type">Sincronizar dados do utilizador (subscrições e listas de reprodução) via</string>
+    <string name="sync_server_url">URL do servidor LibreTube</string>
+    <string name="export">Exportar</string>
+    <string name="exporting">Exportação em curso…</string>
+    <string name="missing_auth_falling_back">Sessão não iniciada. A sincronização está desativada.</string>
+    <string name="oidc_login">Continuar com OIDC</string>
+    <string name="already_downloaded">Este vídeo já foi descarregado!</string>
 </resources>
