@@ -150,7 +150,8 @@ class ChannelFragment : Fragment(R.layout.fragment_channel) {
                     arguments = bundleOf(
                         IntentData.channelId to channelId,
                         IntentData.channelName to channelName,
-                        IntentData.isSubscribed to isSubscribed
+                        IntentData.isSubscribed to isSubscribed,
+                        IntentData.channelAvatar to channel.avatarUrl,
                     )
                 }
                 .show(childFragmentManager)
