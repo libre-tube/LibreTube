@@ -16,7 +16,6 @@ import androidx.viewpager2.widget.ViewPager2
 import com.github.libretube.R
 import com.github.libretube.api.MediaServiceRepository
 import com.github.libretube.api.obj.ChannelTab
-import com.github.libretube.api.obj.StreamItem
 import com.github.libretube.constants.IntentData
 import com.github.libretube.databinding.FragmentChannelBinding
 import com.github.libretube.extensions.TAG
@@ -46,10 +45,9 @@ class ChannelFragment : Fragment(R.layout.fragment_channel) {
     private lateinit var channelContentAdapter: ChannelContentAdapter
 
     private var isAppBarFullyExpanded: Boolean = true
-    private val tabList = mutableListOf<ChannelTab>()
 
     private val tabNamesMap = mapOf(
-        VIDEOS_TAB_KEY to R.string.videos,
+        "videos" to R.string.videos,
         "shorts" to R.string.yt_shorts,
         "livestreams" to R.string.livestreams,
         "playlists" to R.string.playlists,
@@ -108,8 +106,9 @@ class ChannelFragment : Fragment(R.layout.fragment_channel) {
     private fun fetchChannel() = lifecycleScope.launch {
         isLoading = true
         _binding?.channelRefresh?.isRefreshing = true
+        activity?.viewModelStore?.clear()
 
-        val response = try {
+        val channel = try {
             withContext(Dispatchers.IO) {
                 if (channelId != null) {
                     MediaServiceRepository.instance.getChannel(channelId!!)
@@ -128,17 +127,17 @@ class ChannelFragment : Fragment(R.layout.fragment_channel) {
         val binding = _binding ?: return@launch
 
         // needed if the channel gets loaded by the ID
-        channelId = response.id
-        channelName = response.name
+        channelId = channel.id
+        channelName = channel.name
 
         val channelId = channelId ?: return@launch
 
         var isSubscribed = false
         binding.channelSubscribe.setupSubscriptionButton(
             channelId,
-            response.name.orEmpty(),
-            response.avatarUrl,
-            response.verified,
+            channel.name.orEmpty(),
+            channel.avatarUrl,
+            channel.verified,
             binding.notificationBell
         ) {
             isSubscribed = it
@@ -155,54 +154,57 @@ class ChannelFragment : Fragment(R.layout.fragment_channel) {
                 }
                 .show(childFragmentManager)
         }
-
-        viewModel.relatedStreams = response.relatedStreams
-        viewModel.nextPage = response.nextpage
         isLoading = false
         binding.channelRefresh.isRefreshing = false
 
         binding.channelCoordinator.isVisible = true
 
-        binding.channelName.text = response.name
+        binding.channelName.text = channelName
         binding.channelName.setOnLongClickListener {
-            ClipboardHelper.save(requireContext(), text = response.name.orEmpty())
+            ClipboardHelper.save(requireContext(), text = channel.name.orEmpty())
             true
         }
 
-        if (response.verified) {
+        if (channel.verified) {
             binding.channelName
                 .setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_verified, 0)
         }
         binding.channelSubs.text = resources.getString(
             R.string.subscribers,
-            response.subscriberCount.formatShort()
+            channel.subscriberCount.formatShort()
         )
-        if (response.description.orEmpty().isBlank()) {
+        if (channel.description.orEmpty().isBlank()) {
             binding.channelDescription.isGone = true
         } else {
-            binding.channelDescription.text = response.description.orEmpty().trim()
+            binding.channelDescription.text = channel.description.orEmpty().trim()
         }
 
-        ImageHelper.loadImage(response.bannerUrl, binding.channelBanner)
-        ImageHelper.loadImage(response.avatarUrl, binding.channelImage, true)
+        ImageHelper.loadImage(channel.bannerUrl, binding.channelBanner)
+        ImageHelper.loadImage(channel.avatarUrl, binding.channelImage, true)
 
         binding.channelImage.setOnClickListener {
             NavigationHelper.openImagePreview(
                 requireContext(),
-                response.avatarUrl ?: return@setOnClickListener
+                channel.avatarUrl ?: return@setOnClickListener
             )
         }
 
         binding.channelBanner.setOnClickListener {
             NavigationHelper.openImagePreview(
                 requireContext(),
-                response.bannerUrl ?: return@setOnClickListener
+                channel.bannerUrl ?: return@setOnClickListener
             )
         }
 
+        val tabList = channel.tabs.filter { it.data.isNotEmpty() }.map {
+            val tabName = tabNamesMap[it.name]?.let { getString(it) }
+                ?: it.name.replaceFirstChar(Char::titlecase)
+            ChannelTab(tabName, it.data)
+        }
+
+        val selectedTab = binding.pager.currentItem
         channelContentAdapter = ChannelContentAdapter(
             tabList,
-            channelId,
             this@ChannelFragment
         )
         binding.pager.adapter = channelContentAdapter
@@ -210,25 +212,12 @@ class ChannelFragment : Fragment(R.layout.fragment_channel) {
             tab.text = tabList[position].name
         }.attach()
 
-        tabList.clear()
-
-        val tabs = listOf(ChannelTab(VIDEOS_TAB_KEY, "")) + response.tabs
-        for (channelTab in tabs) {
-            val tabName = tabNamesMap[channelTab.name]?.let { getString(it) }
-                ?: channelTab.name.replaceFirstChar(Char::titlecase)
-            tabList.add(ChannelTab(tabName, channelTab.data))
-        }
-        channelContentAdapter.notifyItemRangeChanged(0, tabList.size - 1)
-    }
-
-    companion object {
-        private const val VIDEOS_TAB_KEY = "videos"
+        binding.pager.setCurrentItem(selectedTab, false)
     }
 }
 
 class ChannelContentAdapter(
     private val list: List<ChannelTab>,
-    private val channelId: String?,
     fragment: Fragment
 ) : FragmentStateAdapter(fragment) {
     override fun getItemCount() = list.size
@@ -236,7 +225,6 @@ class ChannelContentAdapter(
     override fun createFragment(position: Int) = ChannelContentFragment().apply {
         arguments = bundleOf(
             IntentData.tabData to list[position],
-            IntentData.channelId to channelId
         )
     }
 }
