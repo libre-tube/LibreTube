@@ -147,21 +147,24 @@ class VideoOptionsBottomSheet : BaseBottomSheet() {
 
         setTitle(streamItem.title)
 
-        val optionsList = mutableListOf(R.string.addToPlaylist, R.string.download, R.string.share)
-        if (streamItem.isLive) optionsList.remove(R.string.download)
+        var optionsList = buildList {
+            add(R.string.addToPlaylist)
+            if (!streamItem.isLive) add(R.string.download)
+            add(R.string.share)
+        }
+
+        setSimpleItems(optionsList.map { getString(it) }) { which ->
+            onOptionSelect(optionsList[which], videoId, playlistId)
+        }
 
         // these options are only available for other videos than the currently playing one
         if (PlayingQueue.getCurrent()?.url?.toID() != videoId) {
             getOptionsForNotActivePlayback(videoId) { addedOptions ->
-                val optionsList = optionsList + addedOptions
+                optionsList = addedOptions + optionsList
 
                 setSimpleItems(optionsList.map { getString(it) }) { which ->
                     onOptionSelect(optionsList[which], videoId, playlistId)
                 }
-            }
-        } else {
-            setSimpleItems(optionsList.map { getString(it) }) { which ->
-                onOptionSelect(optionsList[which], videoId, playlistId)
             }
         }
 
@@ -181,27 +184,28 @@ class VideoOptionsBottomSheet : BaseBottomSheet() {
             optionsList += R.string.add_to_queue
         }
 
-        // show the mark as watched or unwatched option if watch positions are enabled
-        if (PlayerHelper.watchPositionsAny || PlayerHelper.watchHistoryEnabled) {
-            lifecycleScope.launch(Dispatchers.IO) {
-                val watchHistoryEntry =
-                    UserDataRepositoryHelper.userDataRepository.getFromWatchHistory(videoId)
-
-                if (watchHistoryEntry != null) {
-                    optionsList += R.string.mark_as_unwatched
-                }
-
-                if (watchHistoryEntry == null) {
-                    optionsList += R.string.mark_as_watched
-                }
-
-                withContext(Dispatchers.Main) {
-                    onOptionsList(optionsList)
-                }
-            }
+        if (!PlayerHelper.watchPositionsAny && !PlayerHelper.watchHistoryEnabled) {
+            onOptionsList(optionsList)
+            return
         }
 
-        onOptionsList(optionsList)
+        // show the mark as watched or unwatched option if watch positions are enabled
+        lifecycleScope.launch(Dispatchers.IO) {
+            val watchHistoryEntry =
+                UserDataRepositoryHelper.userDataRepository.getFromWatchHistory(videoId)
+
+            if (watchHistoryEntry != null) {
+                optionsList += R.string.mark_as_unwatched
+            }
+
+            if (watchHistoryEntry?.metadata?.finished != true) {
+                optionsList += R.string.mark_as_watched
+            }
+
+            withContext(Dispatchers.Main) {
+                onOptionsList(optionsList)
+            }
+        }
     }
 
     companion object {
