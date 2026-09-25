@@ -33,10 +33,8 @@ object PreferenceKeys {
     const val SEARCH_SUGGESTIONS = "search_suggestions"
 
     // Instance
-    const val YOUTUBE_DATA_SOURCE = "youtube_data_source"
     const val SYNC_SERVER_TYPE = "sync_server"
     const val LIBRETUBE_SYNC_SERVER_URL = "libretube_sync_server_url"
-    const val FETCH_INSTANCE = "selectInstance"
     const val AUTH_INSTANCE = "selectAuthInstance"
     const val LOGIN_REGISTER = "login_register"
     const val LOGOUT = "logout"
@@ -120,7 +118,6 @@ object PreferenceKeys {
     // Internally saved data / not a preference
     const val ERROR_LOG = "error_log"
     const val AUTH_PREF_FILE = "auth"
-    const val IMAGE_PROXY_URL = "image_proxy_url"
     const val SELECTED_CHANNEL_GROUP = "selected_channel_group"
     const val SELECTED_DOWNLOAD_SORT_TYPE = "selected_download_sort_type"
     const val SELECTED_DOWNLOAD_PLAYLIST_SORT_TYPE = "selected_download_playlist_sort_type"

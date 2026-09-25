@@ -8,7 +8,6 @@ import com.github.libretube.helpers.ImageHelper
 import com.github.libretube.helpers.NewPipeExtractorInstance
 import com.github.libretube.helpers.NotificationHelper
 import com.github.libretube.helpers.PreferenceHelper
-import com.github.libretube.helpers.ProxyHelper
 import com.github.libretube.helpers.ShortcutHelper
 import com.github.libretube.util.ExceptionHandler
 
@@ -40,11 +39,6 @@ class LibreTubeApp : Application() {
             context = this,
             existingPeriodicWorkPolicy = ExistingPeriodicWorkPolicy.KEEP
         )
-
-        /**
-         * Fetch the image proxy URL for local playlists and the watch history
-         */
-        ProxyHelper.fetchProxyUrl()
 
         /**
          * Handler for uncaught exceptions

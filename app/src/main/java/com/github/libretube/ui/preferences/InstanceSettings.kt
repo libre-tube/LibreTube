@@ -8,8 +8,6 @@ import androidx.fragment.app.activityViewModels
 import androidx.preference.EditTextPreference
 import androidx.preference.ListPreference
 import androidx.preference.Preference
-import androidx.preference.PreferenceCategory
-import androidx.preference.SwitchPreferenceCompat
 import com.github.libretube.R
 import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.constants.IntentData
@@ -24,24 +22,17 @@ import com.github.libretube.ui.dialogs.DeleteAccountDialog
 import com.github.libretube.ui.dialogs.LoginDialog
 import com.github.libretube.ui.dialogs.LogoutDialog
 import com.github.libretube.ui.dialogs.SelectInstanceDialog
-import com.github.libretube.ui.models.InstancesModel
 import com.github.libretube.ui.views.ButtonGroupPreference
 import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
 
 class InstanceSettings : BasePreferenceFragment() {
-    private val customInstancesModel: InstancesModel by activityViewModels()
-
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         setPreferencesFromResource(R.xml.instance_settings, rootKey)
 
-        val instancePref = findPreference<ListPreference>(PreferenceKeys.FETCH_INSTANCE)!!
         val authInstance = findPreference<ListPreference>(PreferenceKeys.AUTH_INSTANCE)!!
 
-        for (instancePref in arrayOf(instancePref, authInstance)) {
-            instancePref.summaryProvider =
-                Preference.SummaryProvider<ListPreference> { preference ->
-                    preference.value
-                }
+        authInstance.summaryProvider = Preference.SummaryProvider<ListPreference> { preference ->
+            preference.value
         }
 
         authInstance.setOnPreferenceChangeListener { _, _ ->
@@ -83,19 +74,6 @@ class InstanceSettings : BasePreferenceFragment() {
             true
         }
 
-        val youTubeDataSource = findPreference<ButtonGroupPreference>(PreferenceKeys.YOUTUBE_DATA_SOURCE)!!
-        val localReturnYouTubeDislike = findPreference<SwitchPreferenceCompat>(PreferenceKeys.LOCAL_RYD)!!
-        val instanceCategory = findPreference<PreferenceCategory>("instance_category")!!
-
-        localReturnYouTubeDislike.isVisible = youTubeDataSource.value != "piped"
-        instanceCategory.isVisible = youTubeDataSource.value == "piped"
-        youTubeDataSource.setOnPreferenceChangeListener { _, newValue ->
-            localReturnYouTubeDislike.isVisible = newValue != "piped"
-            instanceCategory.isVisible = newValue == "piped"
-
-            true
-        }
-
         val syncServerType = findPreference<ButtonGroupPreference>(PreferenceKeys.SYNC_SERVER_TYPE)!!
         val libretubeSyncServerInstance = findPreference<EditTextPreference>(PreferenceKeys.LIBRETUBE_SYNC_SERVER_URL)!!
 
@@ -124,11 +102,7 @@ class InstanceSettings : BasePreferenceFragment() {
     }
 
     override fun onDisplayPreferenceDialog(preference: Preference) {
-        if (preference.key in arrayOf(
-                PreferenceKeys.FETCH_INSTANCE,
-                PreferenceKeys.AUTH_INSTANCE
-            )
-        ) {
+        if (preference.key == PreferenceKeys.AUTH_INSTANCE) {
             showInstanceSelectionDialog(preference as ListPreference)
         } else {
             super.onDisplayPreferenceDialog(preference)

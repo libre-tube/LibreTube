@@ -94,14 +94,12 @@ object ImageHelper {
         // clear image to avoid loading issues at fast scrolling
         target.setImageBitmap(null)
 
-        val urlToLoad = ProxyHelper.rewriteUrlUsingProxyPreference(url)
-
         // only load online images if the data saver mode is disabled
         if (DataSaverMode.isEnabled(target.context)) {
-            if (urlToLoad.startsWith(HTTP_SCHEME) && !isCached(urlToLoad)) return
+            if (url.startsWith(HTTP_SCHEME) && !isCached(url)) return
         }
 
-        target.load(urlToLoad) {
+        target.load(url) {
             listener(
                 onSuccess = { _, _ ->
                     // set the background to white for transparent images
