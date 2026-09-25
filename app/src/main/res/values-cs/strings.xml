@@ -117,7 +117,7 @@
     <string name="fireIcon">Módní oheň</string>
     <string name="flameIcon">Létající plamen</string>
     <string name="birdIcon">Posílený pták</string>
-    <string name="instance_summary">Piped, přihlášení a účet</string>
+    <string name="instance_summary">Piped, synchronizace dat a účet</string>
     <string name="customInstance_summary">Přidat…</string>
     <string name="version">Verze %1$s</string>
     <string name="category_filler">Výplň / vtipy</string>
