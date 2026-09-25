@@ -41,6 +41,7 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.commit
+import androidx.fragment.app.commitNow
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -159,6 +160,12 @@ class PlayerFragment : Fragment(R.layout.fragment_player), CustomPlayerCallback 
      */
     private var playerLayoutOrientation = Int.MIN_VALUE
 
+    /**
+     * Whether auto fullscreen must not enter fullscreen for the current landscape orientation
+     * This is the case if the user left fullscreen without rotating the device.
+     */
+    private var isAutoFullscreenSuppressed = false
+
     // Activity that's active during PiP, can be used for controlling its lifecycle.
     private var pipActivity: Activity? = null
 
@@ -174,7 +181,7 @@ class PlayerFragment : Fragment(R.layout.fragment_player), CustomPlayerCallback 
         object : Dialog(requireContext(), android.R.style.Theme_Black_NoTitleBar_Fullscreen) {
             @Deprecated("Deprecated in Java", ReplaceWith("onbackpressedispatcher and callback"))
             override fun onBackPressed() {
-                unsetFullscreen()
+                exitFullscreen()
             }
 
             override fun onKeyUp(keyCode: Int, event: KeyEvent): Boolean {
@@ -435,7 +442,9 @@ class PlayerFragment : Fragment(R.layout.fragment_player), CustomPlayerCallback 
         initializeTransitionLayout()
         initializeOnClickActions()
 
-        if (PlayerHelper.autoFullscreenEnabled && resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+        if (PlayerHelper.autoFullscreenEnabled && !isAutoFullscreenSuppressed &&
+            resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE
+        ) {
             setFullscreen()
         }
 
@@ -497,7 +506,7 @@ class PlayerFragment : Fragment(R.layout.fragment_player), CustomPlayerCallback 
 
         val onBackPressedCallback = object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
-                if (commonPlayerViewModel.isFullscreen.value == true) unsetFullscreen()
+                if (commonPlayerViewModel.isFullscreen.value == true) exitFullscreen()
                 else {
                     binding.playerMotionLayout.setTransitionDuration(250)
                     binding.playerMotionLayout.transitionToEnd()
@@ -818,6 +827,8 @@ class PlayerFragment : Fragment(R.layout.fragment_player), CustomPlayerCallback 
     }
 
     private fun setFullscreen() {
+        isAutoFullscreenSuppressed = false
+
         // set status bar icon color to white
         windowInsetsControllerCompat.isAppearanceLightStatusBars = false
 
@@ -851,6 +862,46 @@ class PlayerFragment : Fragment(R.layout.fragment_player), CustomPlayerCallback 
     }
 
     /**
+     * Leave fullscreen due to a user interaction instead of a rotation to portrait
+     */
+    private fun exitFullscreen() {
+        if (activity == null || _binding == null) return
+
+        unsetFullscreen()
+
+        // without auto fullscreen, unsetFullscreen restores the orientation preference, hence the
+        // layout is already taken care of by the resulting configuration change
+        if (!PlayerHelper.autoFullscreenEnabled) return
+
+        val orientation = resources.configuration.orientation
+
+        // auto fullscreen would enter fullscreen again while the device is still in landscape
+        isAutoFullscreenSuppressed = orientation == Configuration.ORIENTATION_LANDSCAPE
+
+        // no configuration change is involved, so the layout of the orientation the view was
+        // created with can still be in use
+        if (orientation != playerLayoutOrientation) recreateViewForCurrentOrientation()
+    }
+
+    /**
+     * Re-create the view in order to use the layout of the current orientation
+     * Other than recreating the activity, this happens synchronously.
+     */
+    private fun recreateViewForCurrentOrientation() {
+        playerLayoutOrientation = resources.configuration.orientation
+
+        viewModel.isOrientationChangeInProgress = true
+
+        // detach player view from player to stop surface rendering
+        binding.player.detachPlayer()
+
+        if (::playerController.isInitialized) playerController.release()
+
+        parentFragmentManager.commitNow { detach(this@PlayerFragment) }
+        parentFragmentManager.commitNow { attach(this@PlayerFragment) }
+    }
+
+    /**
      * Enter/exit fullscreen or toggle it depending on the current state
      */
     override fun toggleFullscreen() {
@@ -862,7 +913,7 @@ class PlayerFragment : Fragment(R.layout.fragment_player), CustomPlayerCallback 
             setFullscreen()
         } else {
             // exit fullscreen mode
-            unsetFullscreen()
+            exitFullscreen()
         }
     }
 
@@ -1416,7 +1467,10 @@ class PlayerFragment : Fragment(R.layout.fragment_player), CustomPlayerCallback 
      * If true, the activity will be automatically restarted
      */
     private fun restartActivityIfNeeded() {
-        if (baseActivity.screenOrientationPref in lockedOrientations || viewModel.isOrientationChangeInProgress) return
+        if (viewModel.isOrientationChangeInProgress) return
+        // auto fullscreen overrides the orientation preference with sensor rotation, hence both
+        // layouts can be needed even if the preference is a locked orientation
+        if (!PlayerHelper.autoFullscreenEnabled && baseActivity.screenOrientationPref in lockedOrientations) return
 
         val orientation = resources.configuration.orientation
         if (commonPlayerViewModel.isFullscreen.value != true && orientation != playerLayoutOrientation) {
@@ -1447,9 +1501,12 @@ class PlayerFragment : Fragment(R.layout.fragment_player), CustomPlayerCallback 
         if (PlayerHelper.autoFullscreenEnabled) {
             when (newConfig.orientation) {
                 // go to fullscreen mode
-                Configuration.ORIENTATION_LANDSCAPE -> setFullscreen()
-                // exit fullscreen if not landscape
-                else -> unsetFullscreen()
+                Configuration.ORIENTATION_LANDSCAPE -> if (!isAutoFullscreenSuppressed) setFullscreen()
+                // exit fullscreen if not landscape and allow auto fullscreen again
+                else -> {
+                    isAutoFullscreenSuppressed = false
+                    unsetFullscreen()
+                }
             }
         }
 
