@@ -529,6 +529,8 @@
     <string name="long_press_fast_forward">Fast forward on long press</string>
     <string name="long_press_fast_forward_summary">Play video with double speed while tapping and holding the screen.</string>
     <string name="resume_all">Resume Downloads</string>
+    <string name="importing">Importing</string>
+    <string name="preparing">Preparing…</string>
     <string name="missing_auth_falling_back">Not logged in. Data synchronization turned off.</string>
     <string name="sync_type_summary_none">Store all user data offline within the app. That means that you can\'t synchronize data between your devices, but might be the right choice if you only use a single device or don\'t care about syncing between devices.</string>
     <string name="sync_type_summary_libretube">Store playlists and subscriptions data on LibreTube\'s sync server (%1$s). This allows you to log in to your account at any other device to have access to your subscriptions and playlists. Privacy Disclaimer: User data is pseudonymized on server side, but not end-to-end encrypted. By choice, you can also host your own version of the server, but usually the official server should be just fine.</string>
@@ -550,6 +552,10 @@
         <item quantity="one">%d new stream</item>
         <item quantity="other">%d new streams</item>
     </plurals>
+    <string name="percentage_completed">%d completed</string>
+    <string name="import_channel_name">Import Worker</string>
+    <string name="import_channel_description">Shows a notification when importing</string>
+    <string name="import_format_unsupported">Import format not supported</string>
     <!--Tooltips -->
     <string name="tooltip_repeat">Repeat</string>
     <string name="tooltip_reverse">Reverse</string>
@@ -571,7 +577,6 @@
     <string name="tooltip_scroll_to_top">Scroll to top</string>
     <string name="also_clear_watch_positions">Also clear watch positions</string>
     <string name="import_temp_playlist">Import temporary playlist?</string>
-    <string name="import_temp_playlist_summary">Do you want to create a new playlist named \'%1$s\'? The playlist will contain %2$d videos.</string>
-    <string name="comment_verified">Verified</string>
+    <string name="import_temp_playlist_summary">Do you want to create a new playlist named \'%1$s\'? The playlist will contain %2$d videos.</string>    <string name="comment_verified">Verified</string>
     <string name="comment_pinned">Pinned</string>
 </resources>
