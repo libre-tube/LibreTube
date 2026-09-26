@@ -84,7 +84,8 @@ class DownloadOptionsBottomSheet : BaseBottomSheet() {
                 }
 
                 R.string.share -> {
-                    val shareData = ShareData(currentVideo = videoId)
+                    val shareData =
+                        ShareData(title = streamItem.title, previewImageUrl = streamItem.thumbnail)
                     val bundle = bundleOf(
                         IntentData.id to videoId,
                         IntentData.shareObjectType to ShareObjectType.VIDEO,

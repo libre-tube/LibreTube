@@ -37,6 +37,7 @@ class PlaylistOptionsBottomSheet : BaseBottomSheet() {
     private lateinit var playlistName: String
     private lateinit var playlistId: String
     private lateinit var playlistType: PlaylistType
+    private var playlistThumbnail: String? = null
 
     private var exportFormat: ImportFormat = ImportFormat.NEWPIPE
 
@@ -108,7 +109,10 @@ class PlaylistOptionsBottomSheet : BaseBottomSheet() {
                 newShareDialog.arguments = bundleOf(
                     IntentData.id to playlistId,
                     IntentData.shareObjectType to ShareObjectType.PLAYLIST,
-                    IntentData.shareData to ShareData(currentPlaylist = playlistName)
+                    IntentData.shareData to ShareData(
+                        title = playlistName,
+                        previewImageUrl = playlistThumbnail
+                    )
                 )
                 // using parentFragmentManager, childFragmentManager doesn't work here
                 newShareDialog.show(parentFragmentManager, ShareDialog::class.java.name)
@@ -193,6 +197,7 @@ class PlaylistOptionsBottomSheet : BaseBottomSheet() {
             playlistName = it.getString(IntentData.playlistName)!!
             playlistId = it.getString(IntentData.playlistId)!!
             playlistType = it.serializable(IntentData.playlistType)!!
+            playlistThumbnail = it.getString(IntentData.playlistThumbnail)
         }
 
         setTitle(playlistName)

@@ -1,24 +1,29 @@
 package com.github.libretube.ui.dialogs
 
 import android.app.Dialog
+import android.content.ClipData
+import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.widget.LinearLayout
 import android.widget.RadioButton
+import androidx.core.content.FileProvider
 import androidx.core.view.isVisible
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.lifecycleScope
+import com.github.libretube.BuildConfig
 import com.github.libretube.R
 import com.github.libretube.constants.IntentData
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.databinding.DialogShareBinding
-import com.github.libretube.db.DatabaseHelper
 import com.github.libretube.db.DatabaseHolder.Database
 import com.github.libretube.enums.ShareObjectType
 import com.github.libretube.extensions.parcelable
 import com.github.libretube.extensions.serializable
 import com.github.libretube.helpers.ClipboardHelper
+import com.github.libretube.helpers.ImageHelper
 import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.obj.ShareData
 import com.github.libretube.repo.UserDataRepositoryHelper
@@ -27,6 +32,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
+import java.io.File
 
 class ShareDialog : DialogFragment() {
     private lateinit var id: String
@@ -47,10 +53,6 @@ class ShareDialog : DialogFragment() {
         val customInstances = runBlocking(Dispatchers.IO) {
             Database.customInstanceDao().getAll().filter { it.frontendUrl.isNotEmpty() }
         }
-
-        val shareableTitle = shareData.currentChannel
-            ?: shareData.currentVideo
-            ?: shareData.currentPlaylist.orEmpty()
 
         val binding = DialogShareBinding.inflate(layoutInflater)
 
@@ -115,8 +117,16 @@ class ShareDialog : DialogFragment() {
             .setPositiveButton(R.string.share) { _, _ ->
                 val intent = Intent(Intent.ACTION_SEND)
                     .putExtra(Intent.EXTRA_TEXT, binding.linkPreview.text.toString())
-                    .putExtra(Intent.EXTRA_SUBJECT, shareableTitle)
+                    .putExtra(Intent.EXTRA_TITLE, shareData.title)
                     .setType("text/plain")
+                    .apply {
+                        shareData.previewImageUrl?.let {
+                            val uri = runBlocking { generatePreviewUri(requireContext(), it) }
+                            clipData = ClipData.newRawUri(null, uri)
+                            data = uri
+                            addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+                        }
+                    }
                 val shareIntent = Intent.createChooser(intent, getString(R.string.shareTo))
                 requireContext().startActivity(shareIntent)
             }
@@ -145,6 +155,16 @@ class ShareDialog : DialogFragment() {
         }
 
         return url
+    }
+
+    private suspend fun generatePreviewUri(context: Context, imageUrl: String): Uri? {
+        val file = withContext(Dispatchers.IO) {
+            val file = File(context.cacheDir, "share_preview.png")
+            ImageHelper.downloadImage(context, imageUrl, file.toPath())
+            file
+        }
+
+        return FileProvider.getUriForFile(context, "${BuildConfig.APPLICATION_ID}.fileprovider", file)
     }
 
     companion object {

@@ -186,7 +186,8 @@ class SearchResultsAdapter(
                 channelOptionsSheet.arguments = bundleOf(
                     IntentData.channelId to item.url.toID(),
                     IntentData.channelName to item.name,
-                    IntentData.isSubscribed to subscribed
+                    IntentData.isSubscribed to subscribed,
+                    IntentData.channelAvatar to item.uploaderAvatar,
                 )
                 channelOptionsSheet.show((root.context as BaseActivity).supportFragmentManager)
                 true
@@ -209,7 +210,8 @@ class SearchResultsAdapter(
                 sheet.arguments = bundleOf(
                     IntentData.playlistId to item.url.toID(),
                     IntentData.playlistName to item.name.orEmpty(),
-                    IntentData.playlistType to PlaylistType.PUBLIC
+                    IntentData.playlistType to PlaylistType.PUBLIC,
+                    IntentData.playlistThumbnail to item.thumbnail,
                 )
                 sheet.show(
                     (root.context as BaseActivity).supportFragmentManager,

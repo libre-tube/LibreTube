@@ -39,7 +39,8 @@ class PlaylistBookmarkAdapter: ListAdapter<PlaylistBookmark, PlaylistBookmarkVie
         sheet.arguments = bundleOf(
             IntentData.playlistId to bookmark.playlistId,
             IntentData.playlistName to bookmark.playlistName,
-            IntentData.playlistType to PlaylistType.PUBLIC
+            IntentData.playlistType to PlaylistType.PUBLIC,
+            IntentData.playlistThumbnail to bookmark.thumbnailUrl,
         )
         sheet.show(
             (context as BaseActivity).supportFragmentManager
