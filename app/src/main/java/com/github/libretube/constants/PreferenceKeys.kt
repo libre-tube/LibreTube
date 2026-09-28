@@ -16,7 +16,6 @@ object PreferenceKeys {
     const val ORIENTATION = "orientation"
     const val NAVBAR_ITEMS = "navbar_items"
     const val START_FRAGMENT = "start_fragment"
-    const val UNLIMITED_SEARCH_HISTORY = "unlimited_search_history"
     const val AUDIO_ONLY_MODE = "audio_only_mode"
 
     // Appearance
