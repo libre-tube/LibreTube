@@ -1,14 +1,10 @@
 package com.github.libretube.db
 
 import com.github.libretube.api.obj.StreamItem
-import com.github.libretube.api.obj.WatchHistoryEntry
-import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.db.DatabaseHolder.Database
-import com.github.libretube.db.dao.WatchHistoryRow
 import com.github.libretube.db.obj.SearchHistoryItem
 import com.github.libretube.enums.ContentFilter
 import com.github.libretube.extensions.toID
-import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.repo.LocalUserDataRepository.Companion.ABSOLUTE_WATCHED_THRESHOLD
 import com.github.libretube.repo.LocalUserDataRepository.Companion.RELATIVE_WATCHED_THRESHOLD
 import com.github.libretube.repo.UserDataRepositoryHelper
@@ -22,12 +18,7 @@ object DatabaseHelper {
         Database.searchHistoryDao().insert(searchHistoryItem)
 
         // delete the first watch history entry if the limit is reached
-        val searchHistory = Database.searchHistoryDao().getAll().toMutableList()
-
-        while (searchHistory.size > MAX_SEARCH_HISTORY_SIZE) {
-            Database.searchHistoryDao().delete(searchHistory.first())
-            searchHistory.removeAt(0)
-        }
+        Database.searchHistoryDao().deleteAllExceptLatest(MAX_SEARCH_HISTORY_SIZE)
     }
 
     suspend fun getWatchPosition(videoId: String) = runCatching {
