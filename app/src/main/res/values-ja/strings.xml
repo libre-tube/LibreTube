@@ -374,8 +374,8 @@
     <string name="category_highlight_summary">その動画の宣伝的な題、サムネイル、または最も興味を引く部分です。チャプター欄からタップするとそこに飛びます</string>
     <string name="stop">停止</string>
     <string name="unknown_or_no_audio">不明または音声なし</string>
-    <string name="default_or_unknown_audio_track">標準または不明</string>
-    <string name="original_or_main_audio_track">そのまま、または主音声</string>
+    <string name="default_or_unknown_audio_track">デフォルト</string>
+    <string name="original_or_main_audio_track">オリジナル</string>
     <string name="unknown_audio_track_type">音声トラックの種類は不明</string>
     <string name="unknown_audio_language">音声の言語は不明</string>
     <string name="audio_track_format">%1$s - %2$s</string>
@@ -521,4 +521,21 @@
     <string name="courses">コース</string>
     <string name="ungrouped_channels">グループ化解除</string>
     <string name="delete_playlist_include_vidoes">プレイリストからすべての動画も削除しますか？</string>
+    <string name="comment_verified">認証済み</string>
+    <string name="comment_pinned">固定済み</string>
+    <string name="welcome">LibreTubeへようこそ！ ご利用を開始するには、以下の同期モードから選択し、デバイス間でユーザーデータを同期するかどうかを決めてください。</string>
+    <string name="load_data_from">YouTubeのデータを以下から読み込む</string>
+    <string name="load_data_from_local">YouTubeから直接</string>
+    <string name="libretube_sync_server">LibreTube 同期サーバー</string>
+    <string name="data_synchronization">データの同期</string>
+    <string name="ungrouped_channels_with_count">グループ化されていない (%1$d)</string>
+    <string name="choose_instance">まずインスタンスをお選びください！</string>
+    <string name="choose_instance_long">以下のリストから、使用するPipedインスタンスをお選びください。Pipedインスタンスは、ユーザーとYouTubeとの間の仲介役として機能します。これらのインスタンスは、国旗で示されているように、それぞれ異なる物理的な場所に設置されています。物理的に近いインスタンスほど、遠いインスタンスよりも高速に動作する傾向があります。設定画面から、いつでも使用するインスタンスを変更することができます。</string>
+    <string name="export">エクスポート</string>
+    <string name="exporting">エクスポート中…</string>
+    <string name="did_you_mean">もしかして:</string>
+    <string name="showing_results_for">検索結果：</string>
+    <string name="long_press_fast_forward">長押しで早送り</string>
+    <string name="long_press_fast_forward_summary">画面を長押しすると、動画を2倍速で再生できます。</string>
+    <string name="missing_auth_falling_back">ログインしていません。データの同期はオフになっています。</string>
 </resources>
