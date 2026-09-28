@@ -177,6 +177,10 @@ object PreferenceHelper {
         PreferenceMigration(11, 12) {
             remove("youtube_data_source")
             remove("selectInstance")
+        },
+        PreferenceMigration(12, 13) {
+            remove("selected_share_host")
+            remove("unlimited_search_history")
         }
     )
 

@@ -51,11 +51,6 @@
             app:key="search_history_toggle"
             app:title="@string/search_history" />
 
-        <Preference
-            android:icon="@drawable/ic_trash"
-            app:key="clear_search_history"
-            app:title="@string/clear_history" />
-
     </PreferenceCategory>
 
     <PreferenceCategory app:title="@string/watch_history">
