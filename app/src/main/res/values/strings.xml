@@ -145,7 +145,7 @@
     <string name="shapedIcon">Silly shaped</string>
     <string name="flameIcon">Flying flame</string>
     <string name="birdIcon">Boosted bird</string>
-    <string name="instance_summary">Piped, data synchronization, and account</string>
+    <string name="instance_summary">Data synchronization, account and history</string>
     <string name="customInstance_summary">Add…</string>
     <string name="instance_name">Instance name</string>
     <string name="instance_api_url">URL to instance API</string>
@@ -212,7 +212,7 @@
     <string name="data_saver_mode">Data-saver mode</string>
     <string name="data_saver_mode_summary">Skip thumbnails and other images</string>
     <string name="search_history_summary">Remember searches</string>
-    <string name="watch_history_summary">Keep track of watched videos locally</string>
+    <string name="watch_history_summary">Keep track of watched videos</string>
     <string name="history_summary">Watch and search history</string>
     <string name="watch_positions_title">Remembered playback positions</string>
     <string name="reset_watch_positions">Reset</string>
@@ -450,6 +450,7 @@
     <string name="sync_server_url">URL to LibreTube sync server</string>
     <string name="export">Export</string>
     <string name="exporting">Export in progress…</string>
+    <string name="account">Account</string>
 
     <!-- Backup & Restore Settings -->
     <string name="import_subscriptions_from">Import subscriptions from</string>

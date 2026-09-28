@@ -20,7 +20,7 @@ import com.github.libretube.ui.dialogs.LoginDialog
 import com.github.libretube.ui.dialogs.SelectInstanceDialog
 import com.github.libretube.ui.models.WelcomeViewModel
 import com.github.libretube.ui.preferences.BackupRestoreSettings
-import com.github.libretube.ui.preferences.InstanceSettings.Companion.INSTANCE_DIALOG_REQUEST_KEY
+import com.github.libretube.ui.preferences.DataManagementSettings.Companion.INSTANCE_DIALOG_REQUEST_KEY
 
 class WelcomeActivity : BaseActivity() {
     private val viewModel by viewModels<WelcomeViewModel> { WelcomeViewModel.Factory }

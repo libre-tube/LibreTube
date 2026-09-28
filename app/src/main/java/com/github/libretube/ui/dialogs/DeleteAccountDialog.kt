@@ -19,7 +19,7 @@ import com.github.libretube.databinding.DialogDeleteAccountBinding
 import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.toastFromMainDispatcher
 import com.github.libretube.repo.UserDataRepositoryHelper
-import com.github.libretube.ui.preferences.InstanceSettings
+import com.github.libretube.ui.preferences.DataManagementSettings
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -83,7 +83,7 @@ class DeleteAccountDialog : DialogFragment() {
         Toast.makeText(context, R.string.success, Toast.LENGTH_SHORT).show()
 
         setFragmentResult(
-            InstanceSettings.INSTANCE_DIALOG_REQUEST_KEY,
+            DataManagementSettings.INSTANCE_DIALOG_REQUEST_KEY,
             bundleOf(IntentData.logoutTask to true)
         )
     }

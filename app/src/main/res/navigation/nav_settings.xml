@@ -10,9 +10,9 @@
         android:label="@string/settings" />
 
     <fragment
-        android:id="@+id/instanceSettings"
-        android:name="com.github.libretube.ui.preferences.InstanceSettings"
-        android:label="@string/instance" />
+        android:id="@+id/dataManagementSettings"
+        android:name="com.github.libretube.ui.preferences.DataManagementSettings"
+        android:label="@string/account" />
 
     <fragment
         android:id="@+id/generalSettings"
@@ -31,10 +31,6 @@
         android:id="@+id/backupRestoreSettings"
         android:name="com.github.libretube.ui.preferences.BackupRestoreSettings"
         android:label="@string/backup_restore" />
-    <fragment
-        android:id="@+id/historySettings"
-        android:name="com.github.libretube.ui.preferences.HistorySettings"
-        android:label="@string/history" />
     <fragment
         android:id="@+id/notificationSettings"
         android:name="com.github.libretube.ui.preferences.NotificationSettings"
@@ -58,7 +54,7 @@
 
     <action
         android:id="@+id/action_global_instanceSettings"
-        app:destination="@id/instanceSettings"
+        app:destination="@id/dataManagementSettings"
         app:enterAnim="@animator/nav_default_enter_anim"
         app:exitAnim="@animator/nav_default_exit_anim"
         app:popEnterAnim="@animator/nav_default_pop_enter_anim"
@@ -83,14 +79,6 @@
     <action
         android:id="@+id/action_global_backupRestoreSettings"
         app:destination="@id/backupRestoreSettings"
-        app:enterAnim="@animator/nav_default_enter_anim"
-        app:exitAnim="@animator/nav_default_exit_anim"
-        app:popEnterAnim="@animator/nav_default_pop_enter_anim"
-        app:popExitAnim="@animator/nav_default_pop_exit_anim" />
-
-    <action
-        android:id="@+id/action_global_historySettings"
-        app:destination="@id/historySettings"
         app:enterAnim="@animator/nav_default_enter_anim"
         app:exitAnim="@animator/nav_default_exit_anim"
         app:popEnterAnim="@animator/nav_default_pop_enter_anim"
