@@ -10,9 +10,9 @@
 
     <Preference
         android:icon="@drawable/ic_server"
-        app:key="instance"
+        app:key="account"
         app:summary="@string/instance_summary"
-        app:title="@string/instance" />
+        app:title="@string/account" />
 
     <Preference
         android:icon="@drawable/ic_color"
@@ -37,12 +37,6 @@
         app:key="audio_video"
         app:summary="@string/audio_video_summary"
         app:title="@string/audio_video" />
-
-    <Preference
-        android:icon="@drawable/ic_history_filled"
-        android:summary="@string/history_summary"
-        app:key="history"
-        app:title="@string/history" />
 
     <Preference
         android:icon="@drawable/ic_notification"

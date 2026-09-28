@@ -40,12 +40,11 @@ class MainSettings : BasePreferenceFragment() {
         
         listOf(
             "general" to R.id.action_global_generalSettings,
-            "instance" to R.id.action_global_instanceSettings,
+            "account" to R.id.action_global_instanceSettings,
             "appearance" to R.id.action_global_appearanceSettings,
             "sponsorblock" to R.id.action_global_sponsorBlockSettings,
             "player" to R.id.action_global_playerSettings,
             "audio_video" to R.id.action_global_audioVideoSettings,
-            "history" to R.id.action_global_historySettings,
             "notifications" to R.id.action_global_notificationSettings,
             "backup_restore" to R.id.action_global_backupRestoreSettings
         ).forEach { (preferenceKey, actionId) ->

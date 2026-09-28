@@ -11,7 +11,7 @@ import com.github.libretube.R
 import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.constants.IntentData
 import com.github.libretube.constants.PreferenceKeys
-
+import com.github.libretube.db.DatabaseHolder.Database
 import com.github.libretube.enums.SyncServerType
 import com.github.libretube.extensions.toastFromMainThread
 import com.github.libretube.helpers.PreferenceHelper
@@ -22,11 +22,15 @@ import com.github.libretube.ui.dialogs.LoginDialog
 import com.github.libretube.ui.dialogs.LogoutDialog
 import com.github.libretube.ui.dialogs.SelectInstanceDialog
 import com.github.libretube.ui.views.ButtonGroupPreference
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
 
-class InstanceSettings : BasePreferenceFragment() {
+class DataManagementSettings : BasePreferenceFragment() {
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
-        setPreferencesFromResource(R.xml.instance_settings, rootKey)
+        setPreferencesFromResource(R.xml.account_settings, rootKey)
 
         val authInstance = findPreference<ListPreference>(PreferenceKeys.AUTH_INSTANCE)!!
 
@@ -98,6 +102,15 @@ class InstanceSettings : BasePreferenceFragment() {
             logoutAndUpdateUI(true)
             true
         }
+
+        // clear search history
+        val clearHistory = findPreference<Preference>(PreferenceKeys.CLEAR_SEARCH_HISTORY)
+        clearHistory?.setOnPreferenceClickListener {
+            showClearDialog(R.string.clear_history) {
+                Database.searchHistoryDao().deleteAll()
+            }
+            true
+        }
     }
 
     override fun onDisplayPreferenceDialog(preference: Preference) {
@@ -158,6 +171,20 @@ class InstanceSettings : BasePreferenceFragment() {
     private fun resetForNewInstance() {
         RetrofitInstance.apiLazyMgr.reset()
         ActivityCompat.recreate(requireActivity())
+    }
+
+    private fun showClearDialog(title: Int, actionOnConfirm: suspend () -> Unit) {
+        MaterialAlertDialogBuilder(requireContext())
+            .setTitle(title)
+            .setMessage(R.string.irreversible)
+            .setNegativeButton(R.string.cancel, null)
+            .setPositiveButton(R.string.okay) { _, _ ->
+                // clear the selected preference preferences
+                CoroutineScope(Dispatchers.IO).launch {
+                    actionOnConfirm.invoke()
+                }
+            }
+            .show()
     }
 
     companion object {

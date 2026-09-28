@@ -59,6 +59,13 @@
     <PreferenceCategory app:title="@string/advanced">
 
         <SwitchPreferenceCompat
+            android:defaultValue="true"
+            android:icon="@drawable/ic_dislike"
+            android:summary="@string/local_ryd_summary"
+            android:title="@string/local_ryd"
+            app:key="local_return_youtube_dislikes" />
+
+        <SwitchPreferenceCompat
             android:defaultValue="false"
             android:icon="@drawable/ic_download_filled"
             app:key="automatic_update_checks"

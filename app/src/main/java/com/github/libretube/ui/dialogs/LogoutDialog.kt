@@ -10,7 +10,7 @@ import androidx.fragment.app.setFragmentResult
 import com.github.libretube.R
 import com.github.libretube.constants.IntentData
 import com.github.libretube.helpers.PreferenceHelper
-import com.github.libretube.ui.preferences.InstanceSettings
+import com.github.libretube.ui.preferences.DataManagementSettings
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class LogoutDialog : DialogFragment() {
@@ -25,7 +25,7 @@ class LogoutDialog : DialogFragment() {
                 Toast.makeText(context, R.string.loggedout, Toast.LENGTH_SHORT).show()
 
                 setFragmentResult(
-                    InstanceSettings.INSTANCE_DIALOG_REQUEST_KEY,
+                    DataManagementSettings.INSTANCE_DIALOG_REQUEST_KEY,
                     bundleOf(IntentData.logoutTask to true)
                 )
             }

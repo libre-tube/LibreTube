@@ -19,7 +19,7 @@ import com.github.libretube.databinding.DialogLoginBinding
 import com.github.libretube.extensions.toastFromMainDispatcher
 import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.repo.UserDataRepositoryHelper
-import com.github.libretube.ui.preferences.InstanceSettings.Companion.INSTANCE_DIALOG_REQUEST_KEY
+import com.github.libretube.ui.preferences.DataManagementSettings.Companion.INSTANCE_DIALOG_REQUEST_KEY
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

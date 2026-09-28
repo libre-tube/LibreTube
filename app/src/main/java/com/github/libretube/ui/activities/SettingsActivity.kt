@@ -10,7 +10,7 @@ import com.github.libretube.databinding.ActivitySettingsBinding
 import com.github.libretube.extensions.toastFromMainThread
 import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.ui.base.BaseActivity
-import com.github.libretube.ui.preferences.InstanceSettings
+import com.github.libretube.ui.preferences.DataManagementSettings
 
 class SettingsActivity : BaseActivity() {
     private lateinit var binding: ActivitySettingsBinding
@@ -52,7 +52,7 @@ class SettingsActivity : BaseActivity() {
         }
 
         // update visible login/logout settings
-        binding.settings.getFragment<NavHostFragment>().childFragmentManager.fragments.filterIsInstance<InstanceSettings>()
+        binding.settings.getFragment<NavHostFragment>().childFragmentManager.fragments.filterIsInstance<DataManagementSettings>()
             .firstOrNull()?.toggleAuthAccountActionsUI(true)
     }
 
