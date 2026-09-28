@@ -42,7 +42,7 @@
 
     </PreferenceCategory>
 
-    <PreferenceCategory app:title="@string/search_history">
+    <PreferenceCategory app:title="@string/history">
 
         <SwitchPreferenceCompat
             android:defaultValue="true"
@@ -51,10 +51,6 @@
             app:key="search_history_toggle"
             app:title="@string/search_history" />
 
-    </PreferenceCategory>
-
-    <PreferenceCategory app:title="@string/watch_history">
-
         <SwitchPreferenceCompat
             android:defaultValue="true"
             android:icon="@drawable/ic_time_outlined"
@@ -62,17 +58,13 @@
             app:key="watch_history_toggle"
             app:title="@string/watch_history" />
 
-    </PreferenceCategory>
-
-    <PreferenceCategory app:title="@string/watch_positions_title">
-
         <ListPreference
             android:defaultValue="always"
             android:entries="@array/watchPosition"
             android:entryValues="@array/watchPositionValues"
             android:icon="@drawable/ic_play_filled"
             app:key="watch_positions"
-            app:title="@string/watch_positions"
+            app:title="@string/watch_positions_title"
             app:useSimpleSummaryProvider="true" />
 
     </PreferenceCategory>
