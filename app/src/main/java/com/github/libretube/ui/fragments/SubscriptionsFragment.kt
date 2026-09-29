@@ -19,6 +19,7 @@ import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.databinding.FragmentSubscriptionsBinding
 import com.github.libretube.db.DatabaseHelper
 import com.github.libretube.extensions.toID
+import com.github.libretube.extensions.toastFromMainDispatcher
 import com.github.libretube.helpers.NavigationHelper
 import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.obj.SelectableOption
@@ -186,7 +187,12 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment(R.layout.fragment_sub
         })
 
         lifecycleScope.launch(Dispatchers.IO) {
-            val groups = UserDataRepositoryHelper.userDataRepository.getSubscriptionGroups()
+            val groups = try {
+                UserDataRepositoryHelper.userDataRepository.getSubscriptionGroups()
+            } catch (e: Exception) {
+                context?.toastFromMainDispatcher(e.message.orEmpty())
+                return@launch
+            }
             viewModel.groups.postValue(groups)
         }
     }

@@ -8,6 +8,7 @@ import com.github.libretube.R
 import com.github.libretube.constants.IntentData
 import com.github.libretube.databinding.DialogAddChannelToGroupBinding
 import com.github.libretube.db.obj.SubscriptionGroup
+import com.github.libretube.extensions.toastFromMainDispatcher
 import com.github.libretube.repo.UserDataRepositoryHelper
 import com.github.libretube.ui.adapters.AddChannelToGroupAdapter
 import com.github.libretube.ui.models.SubscriptionsViewModel
@@ -41,8 +42,13 @@ class AddChannelToGroupSheet : ExpandedBottomSheet(R.layout.dialog_add_channel_t
         }
 
         lifecycleScope.launch(Dispatchers.IO) {
-            val initialSubscriptionGroups = UserDataRepositoryHelper.userDataRepository
-                .getSubscriptionGroups().sortedBy { it.index }
+            val initialSubscriptionGroups = try {
+                UserDataRepositoryHelper.userDataRepository
+                    .getSubscriptionGroups().sortedBy { it.index }
+            } catch (e: Exception) {
+                context?.toastFromMainDispatcher(e.message.orEmpty())
+                return@launch
+            }
 
             val modifiableGroups = initialSubscriptionGroups.toMutableList()
             withContext(Dispatchers.Main) {

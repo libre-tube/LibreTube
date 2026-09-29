@@ -62,12 +62,17 @@ class WatchHistoryModel : ViewModel() {
         if (nextHistoryPage == WatchHistoryPage.AllLoaded) return
         if (fetchJob?.isActive == true) return
 
-        fetchJob = viewModelScope.launch {
-            val (watchHistoryItems, nextCursor) = UserDataRepositoryHelper.userDataRepository.getWatchHistory(
-                pageSize = HISTORY_PAGE_SIZE,
-                watchedState = selectedStatus.value,
-                cursor = (nextHistoryPage as? WatchHistoryPage.HasNext)?.nextCursor
-            )
+        fetchJob = viewModelScope.launch(Dispatchers.IO) {
+            val (watchHistoryItems, nextCursor) = try {
+                UserDataRepositoryHelper.userDataRepository.getWatchHistory(
+                    pageSize = HISTORY_PAGE_SIZE,
+                    watchedState = selectedStatus.value,
+                    cursor = (nextHistoryPage as? WatchHistoryPage.HasNext)?.nextCursor
+                )
+            } catch (_: Exception) {
+                // TODO: display errors to user
+                return@launch
+            }
             val downloaded = DatabaseHolder.Database.downloadDao()
                 .areVideosDownloaded(watchHistoryItems.map { it.video.url!!.toID() })
 
