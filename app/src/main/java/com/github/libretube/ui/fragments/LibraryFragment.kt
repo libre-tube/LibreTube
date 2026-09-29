@@ -25,6 +25,7 @@ import com.github.libretube.enums.PlaylistType
 import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.ceilHalf
 import com.github.libretube.extensions.dpToPx
+import com.github.libretube.extensions.toastFromMainDispatcher
 import com.github.libretube.helpers.NavBarHelper
 import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.repo.UserDataRepositoryHelper
@@ -145,8 +146,13 @@ class LibraryFragment : DynamicLayoutManagerFragment(R.layout.fragment_library) 
 
     private fun initBookmarks() {
         lifecycleScope.launch {
-            val bookmarks = withContext(Dispatchers.IO) {
-                UserDataRepositoryHelper.userDataRepository.getPlaylistBookmarks()
+            val bookmarks = try {
+                withContext(Dispatchers.IO) {
+                    UserDataRepositoryHelper.userDataRepository.getPlaylistBookmarks()
+                }
+            } catch (e: Exception) {
+                context?.toastFromMainDispatcher(e.message.orEmpty())
+                return@launch
             }
 
             val binding = _binding ?: return@launch
