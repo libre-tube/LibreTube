@@ -125,7 +125,7 @@
     <string name="live">În direct</string>
     <string name="flameIcon">Flacără zburătoare</string>
     <string name="shapedIcon">În formă poznașă</string>
-    <string name="instance_summary">Piped, autentificare și cont</string>
+    <string name="instance_summary">Piped, sincronizarea datelor, cont</string>
     <string name="invalid_url">Introduceți o adresă URL care funcționează</string>
     <string name="version">Versiune %1$s</string>
     <string name="related_streams">Conținut asociat</string>
@@ -543,4 +543,23 @@
     <string name="resume_all">Continuă descărcările</string>
     <string name="comment_verified">Verificat</string>
     <string name="comment_pinned">Fixat</string>
+    <string name="welcome">Bun venit la LibreTube! Pentru a începe, selectează mai jos un mod de sincronizare pentru a decide dacă dorești să sincronizezi datele utilizatorului pe toate dispozitivele.</string>
+    <string name="choose_instance">Mai întâi alege o instanță!</string>
+    <string name="choose_instance_long">Alege de mai jos o instanță Piped pe care să o utilizezi. Instanța Piped va acționa ca intermediar între tine și YouTube. Aceste instanțe sunt situate în diferite locații fizice - indicate de drapelul țării. Instanțele mai apropiate de tine sunt probabil mai rapide decât cele mai îndepărtate. Poți schimba oricând instanța pe care o utilizezi în setări.</string>
+    <string name="load_data_from">Încarcă datele YouTube de la</string>
+    <string name="load_data_from_local">Direct de pe YouTube</string>
+    <string name="load_data_from_piped">prin Piped (învechit)</string>
+    <string name="libretube_sync_server">Server de sincronizare LibreTube</string>
+    <string name="data_synchronization">Sincronizarea datelor</string>
+    <string name="sync_server_type">Sincronizează datele de utilizator (abonamente, liste de redare) prin</string>
+    <string name="sync_server_url">Adresa URL a serverului de sincronizare LibreTube</string>
+    <string name="export">Exportă</string>
+    <string name="exporting">Export în curs…</string>
+    <string name="missing_auth_falling_back">Neconectat. Sincronizarea datelor este dezactivată.</string>
+    <string name="sync_type_summary_none">Stochează toate datele de utilizator off-line în aplicație. Asta înseamnă că nu poți sincroniza datele între dispozitive, dar ar putea fi alegerea potrivită dacă folosești un singur dispozitiv sau nu te interesează sincronizarea între dispozitive.</string>
+    <string name="sync_type_summary_libretube">Stochează datele despre listele de redare și abonamente pe serverul de sincronizare LibreTube (%1$s). Acest lucru permite conectarea la cont de pe orice alt dispozitiv pentru a avea acces la abonamentele și listele de redare. Declinare de responsabilitate privind confidențialitatea: Datele de utilizator sunt pseudonimizate pe server, dar nu sunt criptate end-to-end. La alegere, poți găzdui și propria versiune a serverului, dar, de obicei, serverul oficial ar trebui să fie suficient.</string>
+    <string name="sync_type_summary_piped">Numai pentru experți, învechit\nStochează datele despre listele de redare și abonamente pe Piped (%1$s). Deoarece Piped nu mai are instanțe publice, trebuie să găzduiești propria instanță Piped.</string>
+    <string name="switch_sync_type_warning">Dacă ai folosit anterior un alt tip de sincronizare, creează mai întâi o copie de rezervă a abonamentelor și a listelor de redare. Apoi, poți schimba tipul de sincronizare în setările instanței și poți reimporta datele din copia de rezervă.</string>
+    <string name="oidc_login">Continuă cu OIDC</string>
+    <string name="already_downloaded">Ai descărcat deja acest videoclip!</string>
 </resources>
