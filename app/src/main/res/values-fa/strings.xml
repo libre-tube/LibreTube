@@ -265,7 +265,7 @@
     <string name="category_outro_summary">اطلاعات پس از پایان نه برای نتیجه گیری با اطّلاعات</string>
     <string name="no_subtitle">بدون زیرنویس</string>
     <string name="aspect_ratio">نسبت تصویر</string>
-    <string name="watch_history_summary">ردیابی محلی ویدیوهای دیده شده</string>
+    <string name="watch_history_summary">ردیابی محلی ویدیوهای دیده شده</string>
     <string name="skip_segment">رد شدن از بخش</string>
     <string name="added_to_playlist">افزوده به سیاههٔ پخش %1$s</string>
     <string name="delete">حذف از دانلودها</string>
