@@ -119,7 +119,7 @@
     <string name="legacyIcon">Kayıp miras</string>
     <string name="shapedIcon">Aptal şekilli</string>
     <string name="flameIcon">Uçan alev</string>
-    <string name="instance_summary">Piped, giriş ve hesap</string>
+    <string name="instance_summary">Piped, veri eşzamanlama ve hesap</string>
     <string name="addInstance">Oluşum Ekle</string>
     <string name="instance_api_url">Oluşum API\'sinin URL\'si</string>
     <string name="customInstance_summary">Ekle…</string>
@@ -540,4 +540,23 @@
     <string name="comment_verified">Doğrulandı</string>
     <string name="comment_pinned">Sabitlendi</string>
     <string name="courses">Dersler</string>
+    <string name="welcome">LibreTube\'e hoş geldiniz! Başlamak için lütfen aşağıdan bir eşzamanlama modu seçin ve kullanıcı verilerinizi aygıtlar arasında eşzamanlayıp eşzamanlamayacağınıza karar verin.</string>
+    <string name="choose_instance">Lütfen önce bir sunucu seçin!</string>
+    <string name="choose_instance_long">Lütfen aşağıdan kullanmak istediğiniz bir Piped sunucusunu seçin. Piped sunucusu, siz ve YouTube arasında aracı görevi görecektir. Bu sunucular, ülke bayraklarıyla belirtildiği üzere farklı fiziksel konumlarda yer alır. Size fiziksel olarak daha yakın olan sunucular, daha uzaktaki sunuculara göre genellikle daha hızlıdır. Kullandığınız sunucuyu ayarlardan istediğiniz zaman değiştirebilirsiniz.</string>
+    <string name="load_data_from">YouTube verilerini şuradan yükle</string>
+    <string name="load_data_from_local">Doğrudan YouTube</string>
+    <string name="load_data_from_piped">Piped aracılığıyla (eski)</string>
+    <string name="libretube_sync_server">LibreTube eşzamanlama sunucusu</string>
+    <string name="data_synchronization">Veri eşzamanlaması</string>
+    <string name="sync_server_type">Kullanıcı verilerini (abonelikler, oynatma listeleri) eşzamanlama için</string>
+    <string name="sync_server_url">LibreTube eşzamanlama sunucusu URL\'si</string>
+    <string name="export">Dışa aktar</string>
+    <string name="exporting">Dışa aktarma devam ediyor…</string>
+    <string name="missing_auth_falling_back">Oturum açılmadı. Veri eşzamanlaması kapalı.</string>
+    <string name="sync_type_summary_none">Tüm kullanıcı verilerini uygulama içinde çevrim dışı olarak saklayın. Bu, aygıtlarınız arasında veri eşzamanlaması yapamayacağınız anlamına gelir; ancak yalnızca tek bir aygıt kullanıyorsanız veya aygıtlar arası eşzamanlamayı önemsemiyorsanız bu, sizin için doğru seçim olabilir.</string>
+    <string name="sync_type_summary_libretube">Oynatma listelerini ve abonelik verilerini LibreTube eşzamanlama sunucusunda (%1$s) saklayın. Bu sayede, başka herhangi bir aygıttan hesabınızda oturum açarak aboneliklerinize ve oynatma listelerinize erişebilirsiniz. Gizlilik Uyarısı: Kullanıcı verileri sunucu tarafında sözde anonimleştirilir, ancak uçtan uca şifrelenmez. İsterseniz kendi sunucu sürümünüzü de barındırabilirsiniz, ancak genellikle resmi sunucu yeterli olacaktır.</string>
+    <string name="sync_type_summary_piped">Yalnızca uzmanlar için, artık kullanımı önerilmez:\nOynatma listelerini ve abonelik verilerini Piped (%1$s) üzerinde saklayın. Piped\'in artık herkese açık sunucuları bulunmadığından, kendi Piped sunucunuzu barındırmanız gerekir.</string>
+    <string name="switch_sync_type_warning">Daha önce farklı bir eşzamanlama türü kullandıysanız, lütfen önce aboneliklerinizin ve oynatma listelerinizin yedeğini alın. Ardından, sunucu ayarlarından eşzamanlama türünü değiştirebilir ve verilerinizi yedekten yeniden içe aktarabilirsiniz.</string>
+    <string name="oidc_login">OIDC ile devam et</string>
+    <string name="already_downloaded">Bu videoyu zaten indirdiniz!</string>
 </resources>
