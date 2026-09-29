@@ -545,4 +545,6 @@
     <string name="comment_verified">Ověřený</string>
     <string name="comment_pinned">Připnutý</string>
     <string name="courses">Kurzy</string>
+    <string name="welcome">Vítejte v LibreTube! Začněte výběrem synchronizačního režimu níže a rozhodněte se, zda chcete synchronizovat vaše uživatelská data napříč zařízeními.</string>
+    <string name="choose_instance">Nejprve si prosím zvolte instanci!</string>
 </resources>
