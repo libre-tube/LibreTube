@@ -14,7 +14,7 @@ Please note that for the process to work, the following requirements must be met
 ## Release process
 1. Increment the `versionNumber` and `versionCode` in `build.gradle.kts`.
 2. Create a file `fastlane/metadata/android/en-US/changelogs/<versionCode>.txt` and write a short summary about the release into this file.
-3. Push the changes you made to the `master` branch.
+3. Create and merge a pull request with the changes to `master`.
 4. Create a new tag from the `master` branch, e.g. via `git tag v0.0 && git push --tags`.
 
 ## Post Release Process
