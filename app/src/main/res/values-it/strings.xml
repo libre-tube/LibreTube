@@ -122,7 +122,7 @@
     <string name="instance_name">Nome istanza</string>
     <string name="addInstance">Aggiungi istanza</string>
     <string name="empty_instance">Compila il nome e l\'URL dell\'API.</string>
-    <string name="instance_summary">Piped, sincronizzazione dati e account</string>
+    <string name="instance_summary">Sincronizzazione dati, account e cronologia</string>
     <string name="customInstance_summary">Aggiungi…</string>
     <string name="instance_api_url">URL API dell\'istanza</string>
     <string name="invalid_url">Si prega di inserire un URL che funzioni</string>
@@ -181,7 +181,7 @@
     <string name="pure_theme">Tema puro</string>
     <string name="pure_theme_summary">Tema bianco/nero puro</string>
     <string name="search_history_summary">Ricorda le ricerche</string>
-    <string name="watch_history_summary">Cronologia locale delle visualizzazioni</string>
+    <string name="watch_history_summary">Tieni traccia dei video guardati</string>
     <string name="data_saver_mode_summary">Salta miniature ed altre immagini</string>
     <string name="history_summary">Cronologia ricerche e visualizzazioni</string>
     <string name="general_summary">Scaricamenti e risparmio dati</string>
@@ -562,4 +562,5 @@
     <string name="switch_sync_type_warning">Se in precedenza hai usato un tipo di sincronizzazione diverso, esegui prima un backup delle tue iscrizioni e playlist. Potrai poi cambiare il tipo di sincronizzazione nelle impostazioni dell\'istanza e reimportare i tuoi dati dal backup.</string>
     <string name="oidc_login">Continua con OIDC</string>
     <string name="already_downloaded">Hai già scaricato questo video!</string>
+    <string name="account">Account</string>
 </resources>
