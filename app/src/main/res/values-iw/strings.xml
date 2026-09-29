@@ -118,7 +118,7 @@
     <string name="flameIcon">להבה מעופפת</string>
     <string name="birdIcon">ציפור מוגברת</string>
     <string name="torchIcon">לפיד בוער</string>
-    <string name="instance_summary">Piped, כניסה וחשבון</string>
+    <string name="instance_summary">סנכרון נתונים, חשבון והיסטוריה</string>
     <string name="customInstance_summary">הוספה…</string>
     <string name="instance_name">שם העותק</string>
     <string name="empty_instance">יש למלא את השם ואת כתובת ה־API.</string>
@@ -181,7 +181,7 @@
     <string name="pure_theme_summary">ערכת עיצוב טהורה לבנה/שחורה</string>
     <string name="data_saver_mode">מצב חיסכון בתעבורה</string>
     <string name="search_history_summary">שמירת החיפושים</string>
-    <string name="watch_history_summary">לעקוב אחר סרטונים בהם צפית באופן מקומי</string>
+    <string name="watch_history_summary">לעקוב אחר סרטונים בהם צפית</string>
     <string name="history_summary">לעקוב ולחפש בהיסטוריה</string>
     <string name="watch_positions_title">מיקומי נגינה שנשמרו</string>
     <string name="reset_watch_positions">איפוס</string>
@@ -378,10 +378,10 @@
     <string name="audio_track_format">%1$s - %2$s</string>
     <string name="unknown_audio_language">שפת השמע לא מוכרת</string>
     <string name="unknown_audio_track_type">סוג רצועת השמע לא ידוע</string>
-    <string name="default_or_unknown_audio_track">ברירת מחדל או לא ידוע</string>
-    <string name="original_or_main_audio_track">מקורי או ראשי</string>
+    <string name="default_or_unknown_audio_track">ברירת מחדל</string>
+    <string name="original_or_main_audio_track">מקורי</string>
     <string name="dubbed_audio_track">מדובב</string>
-    <string name="descriptive_audio_track">מפורט</string>
+    <string name="descriptive_audio_track">תיאור שמע</string>
     <string name="unknown_or_no_audio">לא ידוע או שאין שמע</string>
     <string name="continue_watching">להמשיך בצפייה</string>
     <string name="dearrow">הפעלת DeArrow</string>
@@ -535,4 +535,27 @@
         <item quantity="other">%d דק׳</item>
     </plurals>
     <string name="show_updates_summary">לבדוק עדכונים אוטומטית עם כל הפעלה של היישומון.</string>
+    <string name="courses">קורסים</string>
+    <string name="ungrouped_channels">לא מקובצים</string>
+    <string name="ungrouped_channels_with_count">לא מקובצים (%1$d)</string>
+    <string name="choose_instance">נא לבחור עותק קודם!</string>
+    <string name="load_data_from">טעינת נתוני YouTube מתוך</string>
+    <string name="load_data_from_local">ישירות מ־YouTube</string>
+    <string name="load_data_from_piped">דרך Piped (נזנח)</string>
+    <string name="libretube_sync_server">שרת סנכרון LibreTube</string>
+    <string name="data_synchronization">סנכרון נתונים</string>
+    <string name="sync_server_type">סנכרון נתוני משתמש (מינויים, רשימות נגינה) דרך</string>
+    <string name="sync_server_url">כתובת לשרת סנכרון LivreTube</string>
+    <string name="export">ייצוא</string>
+    <string name="exporting">מתבצע ייצוא…</string>
+    <string name="account">חשבון</string>
+    <string name="long_press_fast_forward">דילוג מהיר בלחיצה ארוכה</string>
+    <string name="resume_all">המשך הורדות</string>
+    <string name="welcome">ברוך בואך ל־LibreTube! בתור התחלה, נא לבחור מצב סנכרון להלן כדי להחליט האם לסנכרן את נתוני המשתמש שלך בין מכשירים.</string>
+    <string name="missing_auth_falling_back">לא נכנסת לחשבון. סנכרון נתונים כבוי.</string>
+    <string name="sync_type_summary_none">לאחסן את כל נתוני המשתמש במנותק בתוך היישומון. משמעות הבחירה הבית היא שאי אפשר לסנכרן נתונים בין המכשירים של, אך זאת עשויה להתברר כבחירה המכונה אם יש לך רק מכשיר אחד או שלא אכפת לך לסנכרן בין מכשירים.</string>
+    <string name="oidc_login">להמשיך עם OIDC</string>
+    <string name="already_downloaded">כבר הורדת את הסרטון הזה!</string>
+    <string name="comment_verified">מאומתת</string>
+    <string name="comment_pinned">נעוצה</string>
 </resources>
