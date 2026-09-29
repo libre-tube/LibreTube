@@ -3,6 +3,7 @@ package com.github.libretube.api
 import com.github.libretube.api.obj.Subscription
 import com.github.libretube.db.obj.SubscriptionsFeedItem
 import com.github.libretube.repo.FeedProgress
+import com.github.libretube.repo.FeedRefresh
 import com.github.libretube.repo.FeedRepository
 import com.github.libretube.repo.UserDataRepository
 import com.github.libretube.repo.UserDataRepositoryHelper
@@ -32,8 +33,8 @@ object SubscriptionHelper {
         userDataRepository.getSubscriptions().sortedBy { it.name.lowercase() }
 
     suspend fun getSubscriptionChannelIds() = userDataRepository.getSubscriptionChannelIds()
-    suspend fun getFeed(forceRefresh: Boolean, onProgressUpdate: (FeedProgress) -> Unit = {}) =
-        feedRepository.getFeed(forceRefresh, onProgressUpdate)
+    suspend fun getFeed(refresh: FeedRefresh, onProgressUpdate: (FeedProgress) -> Unit = {}) =
+        feedRepository.getFeed(refresh, onProgressUpdate)
 
     suspend fun submitFeedItemChange(feedItem: SubscriptionsFeedItem) =
         feedRepository.submitFeedItemChange(feedItem)

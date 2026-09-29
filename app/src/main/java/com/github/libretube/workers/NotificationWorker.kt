@@ -25,6 +25,7 @@ import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.toID
 import com.github.libretube.helpers.ImageHelper
 import com.github.libretube.helpers.PreferenceHelper
+import com.github.libretube.repo.FeedRefresh
 import com.github.libretube.ui.activities.MainActivity
 import com.github.libretube.ui.views.TimePickerPreference
 import kotlinx.coroutines.Dispatchers
@@ -82,7 +83,7 @@ class NotificationWorker(appContext: Context, parameters: WorkerParameters) :
         // fetch the users feed
         val videoFeed = try {
             withContext(Dispatchers.IO) {
-                SubscriptionHelper.getFeed(forceRefresh = true)
+                SubscriptionHelper.getFeed(FeedRefresh.All)
             }.filter { !it.isUpcoming }
         } catch (_: Exception) {
             return false
