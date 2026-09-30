@@ -9,6 +9,7 @@ import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.obj.PipedImportPlaylist
 import com.github.libretube.repo.UserDataRepository
 import com.github.libretube.repo.UserDataRepositoryHelper
+import com.github.libretube.db.obj.PlaylistBookmark
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
@@ -81,4 +82,8 @@ object PlaylistsHelper {
     // TODO: remove this and pass the type information down instead
     private fun isYouTubePlaylist(playlistId: String) = playlistId.startsWith("PL") && playlistId.length == 34
     fun getPlaylistType(playlistId: String) = if (isYouTubePlaylist(playlistId)) PlaylistType.PUBLIC else PlaylistType.PRIVATE
+
+    suspend fun getPlaylistBookmarks(): List<PlaylistBookmark> =
+        withContext(Dispatchers.IO) { userDataRepository.getPlaylistBookmarks() }
+
 }

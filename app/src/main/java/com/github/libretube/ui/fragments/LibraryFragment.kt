@@ -148,7 +148,7 @@ class LibraryFragment : DynamicLayoutManagerFragment(R.layout.fragment_library) 
         lifecycleScope.launch {
             val bookmarks = try {
                 withContext(Dispatchers.IO) {
-                    UserDataRepositoryHelper.userDataRepository.getPlaylistBookmarks()
+                  PlaylistsHelper.getPlaylistBookmarks()
                 }
             } catch (e: Exception) {
                 context?.toastFromMainDispatcher(e.message.orEmpty())
