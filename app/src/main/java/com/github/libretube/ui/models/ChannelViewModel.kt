@@ -58,4 +58,12 @@ class ChannelViewModel : ViewModel() {
     fun selectSort(tab: ChannelTab, sortKey: String) {
         tabs.update { current -> current + (tab to sortKey) }
     }
+
+    /**
+     * Removes the retrieved channel data.
+     */
+    fun clear() {
+        tabs.update { emptyMap() }
+        tabsSortingOptions.postValue(emptyMap())
+    }
 }
