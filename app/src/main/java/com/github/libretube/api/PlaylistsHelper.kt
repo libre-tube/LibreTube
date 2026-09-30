@@ -30,6 +30,7 @@ object PlaylistsHelper {
         return when (
             PreferenceHelper.getString(PreferenceKeys.PLAYLISTS_ORDER, "creation_date")
         ) {
+            "manual" -> playlists.sortedBy { it.order }
             "creation_date" -> playlists
             "creation_date_reversed" -> playlists.reversed()
             "alphabetic" -> playlists.sortedBy { it.name?.lowercase() }
@@ -85,5 +86,8 @@ object PlaylistsHelper {
 
     suspend fun getPlaylistBookmarks(): List<PlaylistBookmark> =
         withContext(Dispatchers.IO) { userDataRepository.getPlaylistBookmarks() }
+
+    suspend fun reorderPlaylists(orderedPlaylists: List<Playlists>) =
+        withContext(Dispatchers.IO) { userDataRepository.reorderPlaylists(orderedPlaylists) }
 
 }

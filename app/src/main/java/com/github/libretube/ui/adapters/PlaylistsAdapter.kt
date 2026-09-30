@@ -1,8 +1,10 @@
 package com.github.libretube.ui.adapters
 
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.ListAdapter
 import com.github.libretube.R
 import com.github.libretube.api.obj.Playlists
@@ -23,15 +25,25 @@ class PlaylistsAdapter(
     DiffUtilItemCallback(areItemsTheSame = { oldItem, newItem -> oldItem.id == newItem.id })
 ) {
 
+    var onStartDrag: ((PlaylistsViewHolder) -> Unit)? = null
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PlaylistsViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         val binding = PlaylistsRowBinding.inflate(layoutInflater, parent, false)
-        return PlaylistsViewHolder(binding)
+        val viewHolder = PlaylistsViewHolder(binding)
+        binding.dragHandle.setOnTouchListener { _, event ->
+            if (event.actionMasked == MotionEvent.ACTION_DOWN) {
+                onStartDrag?.invoke(viewHolder)
+            }
+            false
+        }
+        return viewHolder
     }
 
     override fun onBindViewHolder(holder: PlaylistsViewHolder, position: Int) {
         val playlist = getItem(holder.bindingAdapterPosition)
         holder.binding.apply {
+            dragHandle.isVisible = onStartDrag != null
             // set imageview drawable as empty playlist if imageview empty
             if (playlist.thumbnail.orEmpty().split("/").size <= 4) {
                 playlistThumbnail.setImageResource(R.drawable.ic_empty_playlist)

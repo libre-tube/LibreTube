@@ -18,10 +18,18 @@ fun RecyclerView.setOnDismissListener(onDismissedListener: (position: Int) -> Un
     )
 }
 
-fun RecyclerView.setOnDraggedListener(onDragListener: (from: Int, to: Int) -> Unit) {
-    setActionListener(
+fun RecyclerView.setOnDraggedListener(
+    isDragEnabled: () -> Boolean = { true },
+    isLongPressDragEnabled: Boolean = true,
+    onDragStateChanged: (isDragging: Boolean, viewHolder: RecyclerView.ViewHolder?) -> Unit = { _, _ -> },
+    onDragListener: (from: Int, to: Int) -> Unit
+): ItemTouchHelper {
+    return setActionListener(
         allowDrag = true,
-        onDragListener = onDragListener
+        onDragListener = onDragListener,
+        isDragEnabled = isDragEnabled,
+        isLongPressDragEnabled = isLongPressDragEnabled,
+        onDragStateChanged = onDragStateChanged
     )
 }
 
@@ -29,19 +37,33 @@ fun RecyclerView.setActionListener(
     allowSwipe: Boolean = false,
     allowDrag: Boolean = false,
     onDragListener: (from: Int, to: Int) -> Unit = { _, _ -> },
-    onDismissedListener: (position: Int) -> Unit = {}
-) {
+    onDismissedListener: (position: Int) -> Unit = {},
+    isDragEnabled: () -> Boolean = { true },
+    isLongPressDragEnabled: Boolean = true,
+    onDragStateChanged: (isDragging: Boolean, viewHolder: RecyclerView.ViewHolder?) -> Unit = { _, _ -> }
+): ItemTouchHelper {
     val itemTouchCallback =
         object : ItemTouchHelper.SimpleCallback(
-            if (allowDrag) ItemTouchHelper.UP or ItemTouchHelper.DOWN else 0,
+            if (allowDrag) ItemTouchHelper.UP or ItemTouchHelper.DOWN or ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT
+            else 0,
             if (allowSwipe) ItemTouchHelper.LEFT else 0
         ) {
+            override fun isLongPressDragEnabled() = isLongPressDragEnabled
+
+            override fun onSelectedChanged(viewHolder: RecyclerView.ViewHolder?, actionState: Int) {
+                super.onSelectedChanged(viewHolder, actionState)
+                if (actionState == ItemTouchHelper.ACTION_STATE_DRAG) {
+                    onDragStateChanged.invoke(true, viewHolder)
+                }
+            }
+
             override fun onMove(
                 recyclerView: RecyclerView,
                 viewHolder: RecyclerView.ViewHolder,
                 target: RecyclerView.ViewHolder
             ): Boolean {
                 if (!allowDrag) return false
+                if (!isDragEnabled()) return false
 
                 onDragListener.invoke(viewHolder.absoluteAdapterPosition, target.absoluteAdapterPosition)
                 return true
@@ -65,6 +87,11 @@ fun RecyclerView.setActionListener(
                 if (dX == 0f && !isCurrentlyActive) {
                     clearCanvas(c, itemView.right + dX, itemView.top.toFloat(), itemView.right.toFloat(), itemView.bottom.toFloat())
                     super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, false)
+                    return
+                }
+
+                if (actionState != ItemTouchHelper.ACTION_STATE_SWIPE) {
+                    super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
                     return
                 }
 
@@ -101,11 +128,18 @@ fun RecyclerView.setActionListener(
                 super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
             }
 
+            override fun clearView(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder) {
+                super.clearView(recyclerView, viewHolder)
+                onDragStateChanged.invoke(false, null)
+            }
+
             private fun clearCanvas(c: Canvas?, left: Float, top: Float, right: Float, bottom: Float) {
                 val clearPaint = Paint().apply { xfermode = PorterDuffXfermode(PorterDuff.Mode.CLEAR) }
                 c?.drawRect(left, top, right, bottom, clearPaint)
             }
         }
 
-    ItemTouchHelper(itemTouchCallback).attachToRecyclerView(this)
+    val itemTouchHelper = ItemTouchHelper(itemTouchCallback)
+    itemTouchHelper.attachToRecyclerView(this)
+    return itemTouchHelper
 }

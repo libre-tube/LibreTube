@@ -1,6 +1,8 @@
 package com.github.libretube.ui.fragments
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.view.View
 import android.view.ViewGroup.MarginLayoutParams
@@ -23,9 +25,10 @@ import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.databinding.FragmentLibraryBinding
 import com.github.libretube.enums.PlaylistType
 import com.github.libretube.extensions.TAG
-import com.github.libretube.extensions.ceilHalf
 import com.github.libretube.extensions.dpToPx
 import com.github.libretube.extensions.toastFromMainDispatcher
+import com.github.libretube.extensions.move
+import com.github.libretube.extensions.setOnDraggedListener
 import com.github.libretube.helpers.NavBarHelper
 import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.repo.UserDataRepositoryHelper
@@ -49,9 +52,13 @@ class LibraryFragment : DynamicLayoutManagerFragment(R.layout.fragment_library) 
     private val playlistsAdapter = PlaylistsAdapter(PlaylistType.PRIVATE)
     private val playlistBookmarkAdapter = PlaylistBookmarkAdapter()
 
+    private val dragScrollHandler = Handler(Looper.getMainLooper())
+    private var dragAutoScrollRunnable: Runnable? = null
+    private var draggedViewHolder: RecyclerView.ViewHolder? = null
+
     override fun setLayoutManagers(gridItems: Int) {
-        _binding?.bookmarksRecView?.layoutManager = GridLayoutManager(context, gridItems.ceilHalf())
-        _binding?.playlistRecView?.layoutManager = GridLayoutManager(context, gridItems.ceilHalf())
+        _binding?.bookmarksRecView?.layoutManager = GridLayoutManager(context, gridItems)
+        _binding?.playlistRecView?.layoutManager = GridLayoutManager(context, gridItems)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -121,8 +128,8 @@ class LibraryFragment : DynamicLayoutManagerFragment(R.layout.fragment_library) 
         val sortOptions = resources.getStringArray(R.array.playlistSortingOptions)
         val sortOptionValues = resources.getStringArray(R.array.playlistSortingOptionsValues)
         val order = PreferenceHelper.getString(
-            PreferenceKeys.PLAYLISTS_ORDER,
-            sortOptionValues.first()
+          PreferenceKeys.PLAYLISTS_ORDER,
+          sortOptionValues.first()
         )
         val orderIndex = sortOptionValues.indexOf(order)
         binding.sortTV.text = sortOptions.getOrNull(orderIndex)
@@ -134,14 +141,59 @@ class LibraryFragment : DynamicLayoutManagerFragment(R.layout.fragment_library) 
                     val value = sortOptionValues[index]
                     PreferenceHelper.putString(PreferenceKeys.PLAYLISTS_ORDER, value)
                     fetchPlaylists()
+                    setupManualSorting()
                 }
             }.show(childFragmentManager)
         }
+
+        setupManualSorting()
     }
 
     override fun onDestroyView() {
+        stopDragAutoScroll()
+        draggedViewHolder = null
         super.onDestroyView()
         _binding = null
+    }
+
+    // Scroll the playlist item being dragged
+    // if it is near the top or bottom of the scroll view
+    private fun startDragAutoScroll() {
+        dragAutoScrollRunnable?.let { dragScrollHandler.removeCallbacks(it) }
+        val runnable = object : Runnable {
+            override fun run() {
+                val binding = _binding ?: return
+                val viewHolder = draggedViewHolder ?: return
+                val scrollView = binding.playlistScrollView
+                val threshold = (64f).dpToPx()
+                val scrollSpeed = (18f).dpToPx()
+
+                val itemLocation = IntArray(2)
+                viewHolder.itemView.getLocationOnScreen(itemLocation)
+                val scrollLocation = IntArray(2)
+                scrollView.getLocationOnScreen(scrollLocation)
+
+                val itemTop = itemLocation[1]
+                val itemBottom = itemTop + viewHolder.itemView.height
+                val viewportTop = scrollLocation[1]
+                val viewportBottom = viewportTop + scrollView.height
+
+                when {
+                    itemTop < viewportTop + threshold ->
+                        scrollView.scrollBy(0, -scrollSpeed)
+                    itemBottom > viewportBottom - threshold ->
+                        scrollView.scrollBy(0, scrollSpeed)
+                }
+                dragScrollHandler.postDelayed(this, 16)
+            }
+        }
+        dragAutoScrollRunnable = runnable
+        dragScrollHandler.post(runnable)
+    }
+
+    private fun stopDragAutoScroll() {
+        dragAutoScrollRunnable?.let { dragScrollHandler.removeCallbacks(it) }
+        dragAutoScrollRunnable = null
     }
 
     private fun initBookmarks() {
@@ -169,6 +221,45 @@ class LibraryFragment : DynamicLayoutManagerFragment(R.layout.fragment_library) 
         binding.createPlaylist.updateLayoutParams<MarginLayoutParams> {
             bottomMargin = (if (isMiniPlayerVisible) 64f else 16f).dpToPx()
         }
+    }
+
+    private fun setupManualSorting() {
+        val defaultSortOrder = resources.getStringArray(R.array.playlistSortingOptionsValues).first()
+        val manualSortingEnabled = PreferenceHelper.getString( PreferenceKeys.PLAYLISTS_ORDER,
+            defaultSortOrder) == "manual"
+
+        val itemTouchHelper = binding.playlistRecView.setOnDraggedListener(
+            onDragListener = { from, to ->
+                val playlists = playlistsAdapter.currentList.toMutableList()
+                playlists.move(from, to)
+                playlistsAdapter.submitList(playlists)
+
+                lifecycleScope.launch {
+                    withContext(Dispatchers.IO) {
+                      PlaylistsHelper.reorderPlaylists(playlists)
+                    }
+                }
+            },
+            isDragEnabled = {
+                PreferenceHelper.getString(PreferenceKeys.PLAYLISTS_ORDER, defaultSortOrder) == "manual"
+            },
+            isLongPressDragEnabled = false,
+            onDragStateChanged = { isDragging, viewHolder ->
+                draggedViewHolder = if (isDragging) viewHolder else null
+                if (isDragging) {
+                    startDragAutoScroll()
+                } else {
+                    stopDragAutoScroll()
+                }
+            }
+        )
+
+        playlistsAdapter.onStartDrag = if (manualSortingEnabled) {
+            { itemTouchHelper.startDrag(it) }
+        } else {
+            null
+        }
+        playlistsAdapter.notifyDataSetChanged()
     }
 
     private fun fetchPlaylists() {
