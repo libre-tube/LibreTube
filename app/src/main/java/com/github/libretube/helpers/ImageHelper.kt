@@ -109,13 +109,18 @@ object ImageHelper {
         }
     }
 
-    suspend fun downloadImage(context: Context, url: String, path: Path) {
-        val bitmap = getImage(context, url) ?: return
-        withContext(Dispatchers.IO) {
+    /**
+     * Attempts to download and save the image located at the given url to the given path.
+     *
+     * @return whether the operation was successful
+     */
+    suspend fun downloadImage(context: Context, url: String, path: Path): Boolean {
+        val bitmap = getImage(context, url) ?: return false
+        return withContext(Dispatchers.IO) {
             context.contentResolver.openOutputStream(path.toAndroidUri())?.use {
                 bitmap.compress(Bitmap.CompressFormat.PNG, 25, it)
             }
-        }
+        } ?: false
     }
 
     suspend fun getImage(context: Context, url: String?): Bitmap? {
