@@ -1,14 +1,18 @@
 package com.github.libretube.ui.dialogs
 
 import android.app.Dialog
+import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.widget.LinearLayout
 import android.widget.RadioButton
+import androidx.core.content.FileProvider
 import androidx.core.view.isVisible
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.lifecycleScope
+import com.github.libretube.BuildConfig
 import com.github.libretube.R
 import com.github.libretube.constants.IntentData
 import com.github.libretube.constants.PreferenceKeys
@@ -19,6 +23,7 @@ import com.github.libretube.enums.ShareObjectType
 import com.github.libretube.extensions.parcelable
 import com.github.libretube.extensions.serializable
 import com.github.libretube.helpers.ClipboardHelper
+import com.github.libretube.helpers.ImageHelper
 import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.obj.ShareData
 import com.github.libretube.repo.UserDataRepositoryHelper
@@ -27,6 +32,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
+import java.io.File
 
 class ShareDialog : DialogFragment() {
     private lateinit var id: String
