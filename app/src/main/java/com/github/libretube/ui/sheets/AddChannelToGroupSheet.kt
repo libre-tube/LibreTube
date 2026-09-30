@@ -82,29 +82,29 @@ class AddChannelToGroupSheet : ExpandedBottomSheet(R.layout.dialog_add_channel_t
             for ((modifiedGroup, initialGroup) in modifiedChannelGroups.associateWith { mod ->
                 initialChannelGroups.find { mod.id == it.id }
             }) {
-                if (initialGroup?.channels != modifiedGroup.channels) {
-                    // search for channels that were remove from the group
-                    for (initialChannelId in initialGroup?.channels.orEmpty()) {
-                        if (initialChannelId !in modifiedGroup.channels) {
-                            UserDataRepositoryHelper.userDataRepository
-                                .removeFromSubscriptionGroup(
-                                    modifiedGroup.id,
-                                    initialChannelId
-                                )
-                        }
-                    }
+                applyChannelGroupsDiff(
+                    modifiedGroup.id,
+                    initialGroup?.channels.orEmpty(),
+                    modifiedGroup.channels
+                )
+            }
+        }
 
-                    // search for channels that were added to the group
-                    for (modifiedChannelId in modifiedGroup.channels) {
-                        if (modifiedChannelId !in initialGroup?.channels.orEmpty()) {
-                            UserDataRepositoryHelper.userDataRepository
-                                .addToSubscriptionGroup(
-                                    modifiedGroup.id,
-                                    modifiedChannelId
-                                )
-                        }
-                    }
-                }
+        suspend fun applyChannelGroupsDiff(
+            groupId: String,
+            oldChannelIds: List<String>,
+            newChannelIds: List<String>
+        ) {
+            val added = newChannelIds - oldChannelIds.toSet()
+            val removed = oldChannelIds - newChannelIds.toSet()
+
+            for (channelId in removed) {
+                UserDataRepositoryHelper.userDataRepository
+                    .removeFromSubscriptionGroup(groupId, channelId)
+            }
+            for (channelId in added) {
+                UserDataRepositoryHelper.userDataRepository
+                    .addToSubscriptionGroup(groupId, channelId)
             }
         }
     }

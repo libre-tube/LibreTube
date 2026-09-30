@@ -14,7 +14,7 @@ import com.github.libretube.ui.viewholders.SubscriptionGroupChannelRowViewHolder
 
 class SubscriptionGroupChannelsAdapter(
     private val group: SubscriptionGroup,
-    private val onGroupChanged: (SubscriptionGroup) -> Unit
+    private val onChannelsChanged: (List<String>) -> Unit
 ) : ListAdapter<Subscription, SubscriptionGroupChannelRowViewHolder>(DiffUtilItemCallback()) {
 
     override fun onCreateViewHolder(
@@ -40,7 +40,7 @@ class SubscriptionGroupChannelsAdapter(
             channelIncluded.isChecked = group.channels.contains(channelId)
             channelIncluded.setOnCheckedChangeListener { _, isChecked ->
                 if (isChecked) group.channels += channelId else group.channels -= channelId
-                onGroupChanged(group)
+                onChannelsChanged(group.channels)
             }
         }
     }
