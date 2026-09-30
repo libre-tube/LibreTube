@@ -90,7 +90,7 @@ class WatchHistoryModel : ViewModel() {
             } else {
                 WatchHistoryPage.HasNext(nextCursor)
             }
-            _filteredWatchHistory.value = _filteredWatchHistory.value.orEmpty() + watchHistoryItems
+            _filteredWatchHistory.postValue(_filteredWatchHistory.value.orEmpty() + watchHistoryItems)
         }
     }
 
