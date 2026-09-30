@@ -43,4 +43,6 @@ interface LocalPlaylistsDao {
     @Query("SELECT * FROM localPlaylistItem WHERE playlistId = :playlistId AND videoId = :videoId LIMIT 1")
     suspend fun getPlaylistVideo(playlistId: String, videoId: String): LocalPlaylistItem?
 
+    @Query("UPDATE localPlaylist SET `order` = :order WHERE id = :id")
+    suspend fun updatePlaylistOrder(id: Int, order: Long)
 }

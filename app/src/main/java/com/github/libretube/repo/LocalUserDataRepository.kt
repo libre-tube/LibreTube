@@ -40,7 +40,8 @@ class LocalUserDataRepository : UserDataRepository {
                     name = it.playlist.name,
                     shortDescription = it.playlist.description,
                     thumbnail = it.playlist.thumbnailUrl,
-                    videos = it.videos.size.toLong()
+                    videos = it.videos.size.toLong(),
+                    order = it.playlist.order
                 )
             }
     }
@@ -112,8 +113,20 @@ class LocalUserDataRepository : UserDataRepository {
     }
 
     override suspend fun createPlaylist(playlistName: String): String {
-        val playlist = LocalPlaylist(name = playlistName, thumbnailUrl = "")
+        val playlistSize = Database.localPlaylistsDao().getAll().size.toLong()
+        val playlist = LocalPlaylist(
+            name = playlistName,
+            thumbnailUrl = "",
+            order = playlistSize,
+        )
         return Database.localPlaylistsDao().createPlaylist(playlist).toString()
+    }
+
+    override suspend fun reorderPlaylists(orderedPlaylists: List<Playlists>) {
+        orderedPlaylists.forEachIndexed { index, playlist ->
+            Database.localPlaylistsDao()
+                .updatePlaylistOrder(playlist.id!!.toInt(), index.toLong())
+        }
     }
 
     override suspend fun deletePlaylist(playlistId: String): Boolean {

@@ -49,6 +49,7 @@ interface UserDataRepository {
     suspend fun removeFromPlaylist(playlistId: String, videoId: String, index: Int): Boolean
     suspend fun createPlaylist(playlistName: String): String?
     suspend fun deletePlaylist(playlistId: String): Boolean
+    suspend fun reorderPlaylists(orderedPlaylists: List<Playlists>) = Unit
 
     suspend fun createSubscriptionGroup(name: String): String
     suspend fun renameSubscriptionGroup(subscriptionGroupId: String, newName: String)
