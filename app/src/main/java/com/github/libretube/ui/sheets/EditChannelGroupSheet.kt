@@ -18,29 +18,30 @@ import com.github.libretube.extensions.toastFromMainDispatcher
 import com.github.libretube.repo.UserDataRepositoryHelper
 import com.github.libretube.ui.adapters.SubscriptionGroupChannelsAdapter
 import com.github.libretube.ui.models.SubscriptionsViewModel
-import com.github.libretube.ui.sheets.AddChannelToGroupSheet.Companion.applyGroupsDiff
+import com.github.libretube.ui.sheets.AddChannelToGroupSheet.Companion.applyChannelGroupsDiff
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class EditChannelGroupSheet : ExpandedBottomSheet(R.layout.dialog_edit_channel_group) {
     private var _binding: DialogEditChannelGroupBinding? = null
     private val binding get() = _binding!!
 
     private val viewModel: SubscriptionsViewModel by activityViewModels()
-    private var channels = listOf<Subscription>()
+    private var channels = emptyList<Subscription>()
+    private var channelsInGroup = emptyList<String>()
 
     private lateinit var channelsAdapter: SubscriptionGroupChannelsAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         _binding = DialogEditChannelGroupBinding.bind(view)
 
+        channelsInGroup = viewModel.groupToEdit?.channels.orEmpty()
         channelsAdapter = SubscriptionGroupChannelsAdapter(
-            viewModel.groupToEdit!!
+            viewModel.groupToEdit!!.copy()
         ) {
-            viewModel.groupToEdit = it
+            channelsInGroup = it
             updateConfirmStatus()
         }
 
@@ -90,21 +91,22 @@ class EditChannelGroupSheet : ExpandedBottomSheet(R.layout.dialog_edit_channel_g
     }
 
     private fun saveGroup(group: SubscriptionGroup, oldGroupName: String) {
-        val groupsBeforeChange = viewModel.groups.value.orEmpty()
+        val context = requireContext().applicationContext
 
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                group.id = UserDataRepositoryHelper.userDataRepository.createSubscriptionGroup(group.name)
-                withContext(Dispatchers.Main) {
-                    viewModel.groups.value = viewModel.groups.value
+                group.id =
+                    UserDataRepositoryHelper.userDataRepository.createSubscriptionGroup(group.name)
+                applyChannelGroupsDiff(group.id, group.channels, channelsInGroup)
+                group.channels = channelsInGroup
+
+                viewModel.groups.postValue(
+                    viewModel.groups.value
                         ?.filter { it.name != oldGroupName }
                         ?.plus(group)
-                }
-
-                val groupsAfterChange = viewModel.groups.value.orEmpty()
-                applyGroupsDiff(groupsBeforeChange, groupsAfterChange)
+                )
             } catch (e: Exception) {
-                context?.toastFromMainDispatcher(e.message.orEmpty())
+                context.toastFromMainDispatcher(e.message.orEmpty())
             }
         }
     }
@@ -128,7 +130,7 @@ class EditChannelGroupSheet : ExpandedBottomSheet(R.layout.dialog_edit_channel_g
             val name = groupName.text.toString()
             groupName.error = getGroupNameError(name)
 
-            confirm.isEnabled = groupName.error == null && !viewModel.groupToEdit?.channels.isNullOrEmpty()
+            confirm.isEnabled = groupName.error == null && !channelsInGroup.isEmpty()
         }
     }
 
@@ -138,12 +140,12 @@ class EditChannelGroupSheet : ExpandedBottomSheet(R.layout.dialog_edit_channel_g
         }
 
         // TODO: either remove this check or figure out how to support this for LibreTube sync server
-    //        val groupExists = runBlocking(Dispatchers.IO) {
-    //            DatabaseHolder.Database.subscriptionGroupsDao().exists(name)
-    //        }
-    //        if (groupExists && viewModel.groupToEdit?.name != name) {
-    //            return getString(R.string.group_name_error_exists)
-    //        }
+        //        val groupExists = runBlocking(Dispatchers.IO) {
+        //            DatabaseHolder.Database.subscriptionGroupsDao().exists(name)
+        //        }
+        //        if (groupExists && viewModel.groupToEdit?.name != name) {
+        //            return getString(R.string.group_name_error_exists)
+        //        }
 
         return null
     }
