@@ -124,7 +124,7 @@
     <string name="addInstance">İnstansiya əlavə et</string>
     <string name="invalid_url">Zəhmət olmasa, işləyən URL\'ni daxil et</string>
     <string name="customInstance_summary">Əlavə et…</string>
-    <string name="instance_summary">Piped, məlumatların sinxronizasiyası və hesab</string>
+    <string name="instance_summary">Məlumatların sinxronizasiyası, hesab və tarixçə</string>
     <string name="empty_instance">Adı və API URL-ni doldur.</string>
     <string name="version">Versiya %1$s</string>
     <string name="related_streams">Əlaqəli məzmun</string>
@@ -183,7 +183,7 @@
     <string name="data_saver_mode">Məlumat qənaətçisi rejimi</string>
     <string name="autoRotatePlayer_summary">Cihaz döndərildikdə tam ekran oynatma</string>
     <string name="search_history_summary">Axtarışları saxla</string>
-    <string name="watch_history_summary">Baxılan videoların yerli olaraq saxlanılması</string>
+    <string name="watch_history_summary">Baxılmış videoların qeydə alınması</string>
     <string name="reset_watch_positions">Sıfırla</string>
     <string name="system_caption_style">Sistem titr üslubu</string>
     <string name="captions">Titrlər</string>
@@ -559,4 +559,5 @@
     <string name="switch_sync_type_warning">Əgər əvvəllər fərqli sinxronizasiya növün istifadə etmisinizsə, xahiş olunur, əvvəlcə abunəliklərinizin və pleylistlərinizin nüsxəsini çıxarın. Daha sonra instansiya tənzimləmələrində sinxronizasiya növünü dəyişə və məlumatlarınızı nüsxədən yenidən idxal edə bilərsiniz.</string>
     <string name="export">Köçür</string>
     <string name="exporting">İxrac davam edir…</string>
+    <string name="account">Hesab</string>
 </resources>
