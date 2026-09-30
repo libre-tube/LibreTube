@@ -118,7 +118,7 @@
     <string name="gradientIcon">渐变</string>
     <string name="torchIcon">时尚火炬</string>
     <string name="fireIcon">简约火焰</string>
-    <string name="instance_summary">Piped、数据同步和账号</string>
+    <string name="instance_summary">数据同步、账户和历史记录</string>
     <string name="instance_api_url">实例 API 的 URL</string>
     <string name="addInstance">添加实例</string>
     <string name="empty_instance">需要填写名称与实例URL或链接才能保存。</string>
@@ -181,7 +181,7 @@
     <string name="pure_theme_summary">纯白/黑主题</string>
     <string name="data_saver_mode">省流量模式</string>
     <string name="search_history_summary">记住搜索词</string>
-    <string name="watch_history_summary">在本地追踪已观看的视频</string>
+    <string name="watch_history_summary">保留已观看视频的痕迹</string>
     <string name="history_summary">观看和搜索记录</string>
     <string name="watch_positions_title">记住观看位置</string>
     <string name="reset_watch_positions">重置</string>
@@ -556,4 +556,5 @@
     <string name="already_downloaded">已经下载了这个视频！</string>
     <string name="export">导出</string>
     <string name="exporting">导出中…</string>
+    <string name="account">账户</string>
 </resources>
