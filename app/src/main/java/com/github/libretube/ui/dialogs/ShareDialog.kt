@@ -121,7 +121,8 @@ class ShareDialog : DialogFragment() {
                     .setType("text/plain")
                     .apply {
                         shareData.previewImageUrl?.let {
-                            val uri = runBlocking { generatePreviewUri(requireContext(), it) }
+                            val uri =
+                                runBlocking { generatePreviewUri(requireContext(), it) } ?: return@let
                             clipData = ClipData.newRawUri(null, uri)
                             data = uri
                             addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
@@ -160,9 +161,10 @@ class ShareDialog : DialogFragment() {
     private suspend fun generatePreviewUri(context: Context, imageUrl: String): Uri? {
         val file = withContext(Dispatchers.IO) {
             val file = File(context.cacheDir, "share_preview.png")
-            ImageHelper.downloadImage(context, imageUrl, file.toPath())
+            val downloadSuccess = ImageHelper.downloadImage(context, imageUrl, file.toPath())
+            if (!downloadSuccess) return@withContext null
             file
-        }
+        } ?: return null
 
         return FileProvider.getUriForFile(context, "${BuildConfig.APPLICATION_ID}.fileprovider", file)
     }
