@@ -119,7 +119,7 @@
     <string name="legacyIcon">Kayıp miras</string>
     <string name="shapedIcon">Aptal şekilli</string>
     <string name="flameIcon">Uçan alev</string>
-    <string name="instance_summary">Piped, veri eşzamanlama ve hesap</string>
+    <string name="instance_summary">Veri eşzamanlama, hesap ve geçmiş</string>
     <string name="addInstance">Oluşum Ekle</string>
     <string name="instance_api_url">Oluşum API\'sinin URL\'si</string>
     <string name="customInstance_summary">Ekle…</string>
@@ -186,7 +186,7 @@
     <string name="pure_theme_summary">Saf beyaz/siyah tema</string>
     <string name="data_saver_mode">Veri tasarrufu modu</string>
     <string name="search_history_summary">Kaydedilen aramalar</string>
-    <string name="watch_history_summary">İzlenen videoları yerel olarak takip edin</string>
+    <string name="watch_history_summary">İzlenen videoları takip edin</string>
     <string name="history_summary">İzleme ve arama geçmişi</string>
     <string name="watch_positions_title">Kaydedilmiş oynatma konumları</string>
     <string name="general_summary">İndirmeler ve veri tasarrufu</string>
@@ -559,4 +559,5 @@
     <string name="switch_sync_type_warning">Daha önce farklı bir eşzamanlama türü kullandıysanız, lütfen önce aboneliklerinizin ve oynatma listelerinizin yedeğini alın. Ardından, sunucu ayarlarından eşzamanlama türünü değiştirebilir ve verilerinizi yedekten yeniden içe aktarabilirsiniz.</string>
     <string name="oidc_login">OIDC ile devam et</string>
     <string name="already_downloaded">Bu videoyu zaten indirdiniz!</string>
+    <string name="account">Hesap</string>
 </resources>
