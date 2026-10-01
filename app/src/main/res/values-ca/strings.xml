@@ -560,4 +560,5 @@
     <string name="switch_sync_type_warning">Si prèviament heu usat un tipus de sincronització diferent, primer feu una còpia de seguretat de les vostres subscripcions i llistes de reproducció. A continuació, podeu canviar el tipus de sincronització a la configuració de la instància i tornar a importar les vostres dades des de la còpia de seguretat.</string>
     <string name="oidc_login">Continua amb OIDC</string>
     <string name="already_downloaded">Ja heu baixat aquest vídeo!</string>
+    <string name="account">Compte</string>
 </resources>
