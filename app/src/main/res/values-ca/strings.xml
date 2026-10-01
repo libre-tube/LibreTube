@@ -70,7 +70,7 @@
     <string name="emptyList">Res per aquí.</string>
     <string name="deletePlaylist">Elimina la llista de reproducció</string>
     <string name="areYouSure">Voleu eliminar la llista de reproducció?</string>
-    <string name="playlistCreated">Playlist creada.</string>
+    <string name="playlistCreated">S\'ha creat la llista de reproducció.</string>
     <string name="playlistName">Nom de la llista de reproducció</string>
     <string name="addToPlaylist">Afegeix a la llista de reproducció</string>
     <string name="about">Sobre</string>
