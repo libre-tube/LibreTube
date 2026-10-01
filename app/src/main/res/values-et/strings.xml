@@ -145,7 +145,7 @@
     <string name="download_paused">Allalaadimine on peatatud</string>
     <string name="download_completed">Allalaadimine on lõppenud</string>
     <string name="show_updates">Kontrolli uuendusi automaatselt</string>
-    <string name="instance_summary">Piped, andmete sünkroonimine ja kasutajakonto</string>
+    <string name="instance_summary">Andmete sünkroonimine, kasutajakonto ja ajalugu</string>
     <string name="customInstance_summary">Lisa…</string>
     <string name="instance_name">Vaheserveri nimi</string>
     <string name="instance_api_url">Vaheserveri API aadress</string>
@@ -201,7 +201,7 @@
     <string name="always">Alati</string>
     <string name="never">Mitte kunagi</string>
     <string name="watch_positions_title">Meeldejäetud vaatamise järjed ajatemplina</string>
-    <string name="watch_history_summary">Jäta vaadatud videod meelde kohalikus andmekogus</string>
+    <string name="watch_history_summary">Pea arvet vaadatud videote osas</string>
     <string name="reset_watch_positions">Lähtesta</string>
     <string name="default_subtitle_language">Subtiitrite keel</string>
     <string name="notifications">Teavitused</string>
@@ -559,4 +559,5 @@
     <string name="sync_type_summary_libretube">Esitusloendid ja tellimused on salvestatud LibreTube\'i sünkroonimisserveris (%1$s). See võimaldab sul ükspuha, mis oma seadmest sisse logida ja sul on ligipääs oma esitusloenditele ja tellimustele. Privaatsusteade: andmed on serveris seotud pseudonüümiga, kuid läbivalt krüptimata. Kui tahad, siis saad ka oma serveri kasutusele võtta, kuid tavaliselt piisab ametlikust serverist.</string>
     <string name="sync_type_summary_piped">Vana lahendus, mis sobib vaid oskuskasutajatele:\nEsitusloendid ja tellimused on salvestatud Pipedi serveris (%1$s). Kuna Pipedil pole enam avalikke serverid, siis pead paigaldama oma serveri.</string>
     <string name="switch_sync_type_warning">Kui oled varem kasutanud teistsugust sünkroonimise tüüpi, palun tee esmalt oma tellimustest ja esitusloenditest varukoopia. Seejärel võid seadistustest muuta sünkroonimistüüpi ja importida andmed varukoopiast tagasi.</string>
+    <string name="account">Kasutajakonto</string>
 </resources>
