@@ -125,7 +125,7 @@
     <string name="category_music_offtopic_summary">Тільки для використання у музичних кліпах. Він повинен охоплювати частини відео, а не частину офіційних міксів. Зрештою, відео має максимально нагадувати Spotify або будь-яку іншу версію або зменшувати розмови чи інші відволікання</string>
     <string name="category_preview_summary">Для сегментів із детальним описом майбутнього вмісту без додаткової інформації. Якщо вона включає кліпи, які з’являються лише тут, це, швидше за все, неправильна категорія</string>
     <string name="appearance">Зовнішній вигляд</string>
-    <string name="instance_summary">Piped, синхронізація даних та обліковий запис</string>
+    <string name="instance_summary">Синхронізація даних, обліковий запис та історія</string>
     <string name="quality">Якість</string>
     <string name="behavior">Поведінка</string>
     <string name="version">Версія %1$s</string>
@@ -237,7 +237,7 @@
     <string name="player_resize_mode">Режим зміни розміру</string>
     <string name="copied_to_clipboard">Скопійовано в буфер обміну</string>
     <string name="open_copied">Відкрити</string>
-    <string name="watch_history_summary">Запам\'ятовувати локально переглянуті відео</string>
+    <string name="watch_history_summary">Слідкуйте за переглянутими відео</string>
     <string name="history_summary">Історія переглядів та пошуку</string>
     <string name="watch_positions_title">Запам\'ятовування позицій відтворення</string>
     <string name="reset_watch_positions">Скинути</string>
@@ -566,4 +566,5 @@
     <string name="switch_sync_type_warning">Якщо ви раніше використовували інший тип синхронізації, спочатку зробіть резервну копію ваших підписок і списків відтворення. Після цього ви зможете змінити тип синхронізації в налаштуваннях екземпляра та повторно імпортувати свої дані з резервної копії.</string>
     <string name="oidc_login">Продовжити за допомогою OIDC</string>
     <string name="already_downloaded">Ви вже завантажили це відео!</string>
+    <string name="account">Обліковий запис</string>
 </resources>
