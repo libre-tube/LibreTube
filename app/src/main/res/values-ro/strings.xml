@@ -125,7 +125,7 @@
     <string name="live">În direct</string>
     <string name="flameIcon">Flacără zburătoare</string>
     <string name="shapedIcon">În formă poznașă</string>
-    <string name="instance_summary">Piped, sincronizarea datelor, cont</string>
+    <string name="instance_summary">Sincronizarea datelor, contul și istoricul</string>
     <string name="invalid_url">Introduceți o adresă URL care funcționează</string>
     <string name="version">Versiune %1$s</string>
     <string name="related_streams">Conținut asociat</string>
@@ -133,7 +133,7 @@
     <string name="chapters">Capitole</string>
     <string name="system_caption_style">Stilul de subtitrare a sistemului</string>
     <string name="search_history_summary">Rețineți căutările</string>
-    <string name="watch_history_summary">Urmăriți videoclipurile vizionate la nivel local</string>
+    <string name="watch_history_summary">Urmărește videoclipurile vizionate</string>
     <string name="history_summary">Istoricul vizionărilor și căutărilor</string>
     <string name="watch_positions_title">Pozițiile de redare reținute</string>
     <string name="captions">Subtitrări</string>
@@ -562,4 +562,5 @@
     <string name="switch_sync_type_warning">Dacă ai folosit anterior un alt tip de sincronizare, creează mai întâi o copie de rezervă a abonamentelor și a listelor de redare. Apoi, poți schimba tipul de sincronizare în setările instanței și poți reimporta datele din copia de rezervă.</string>
     <string name="oidc_login">Continuă cu OIDC</string>
     <string name="already_downloaded">Ai descărcat deja acest videoclip!</string>
+    <string name="account">Cont</string>
 </resources>
