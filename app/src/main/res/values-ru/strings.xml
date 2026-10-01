@@ -110,7 +110,7 @@
     <string name="fireIcon">Огненный огонь</string>
     <string name="torchIcon">Модный факел</string>
     <string name="flameIcon">Порхающее пламя</string>
-    <string name="instance_summary">Piped, синхронизация данных и учетная запись</string>
+    <string name="instance_summary">Синхронизация данных, аккаунт и история</string>
     <string name="version">Версия %1$s</string>
     <string name="category_filler">Заполнители/шутки</string>
     <string name="category_music_offtopic">Музыка: Немузыкальный раздел</string>
@@ -190,7 +190,7 @@
     <string name="captions">Субтитры</string>
     <string name="general">Общие</string>
     <string name="general_summary">Скачивания и экономия данных</string>
-    <string name="watch_history_summary">Сохранять историю просмотра локально</string>
+    <string name="watch_history_summary">Следите за просмотренными видео</string>
     <string name="caption_settings">Субтитры</string>
     <string name="playerAudioQuality">Качество звука</string>
     <string name="notifications">Уведомления</string>
@@ -565,4 +565,5 @@
     <string name="sync_type_summary_libretube">Сохраняйте данные о плейлистах и подписках на сервере синхронизации LibreTube (%1$s). Это позволяет вам войти в свою учетную запись на любом другом устройстве, чтобы получить доступ к своим подпискам и плейлистам. Предупреждение о конфиденциальности: данные пользователей на стороне сервера псевдонимизируются, но не шифруются сквозным методом. При желании вы также можете развернуть собственную версию сервера, но, как правило, официального сервера вполне достаточно.</string>
     <string name="sync_type_summary_piped">Только для экспертов, устарело:\nСохраняйте данные плейлистов и подписок в Piped (%1$s). Поскольку общедоступных экземпляров Piped больше нет, у вас должен быть собственный экземпляр Piped.</string>
     <string name="switch_sync_type_warning">Если вы ранее использовали другой тип синхронизации, сначала создайте резервную копию ваших подписок и плейлистов. После этого вы сможете изменить тип синхронизации в настройках экземпляра и повторно импортировать свои данные из резервной копии.</string>
+    <string name="account">Учетная запись</string>
 </resources>
