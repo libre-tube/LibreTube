@@ -200,7 +200,7 @@
     <string name="search_history_summary">Keresések megjegyzése</string>
     <string name="reset_watch_positions">Alaphelyzet</string>
     <string name="none">Egyik sem</string>
-    <string name="watch_history_summary">A megtekintett videók nyomon követése helyben</string>
+    <string name="watch_history_summary">A megtekintett videók nyomon követése</string>
     <string name="watch_positions_title">Lejátszási pozíció megjegyzése</string>
     <string name="captions">Feliratok</string>
     <string name="general">Általános</string>
@@ -217,7 +217,7 @@
     <string name="update_summary">Frissítések ellenőrzése</string>
     <string name="translate">Fordítás</string>
     <string name="network_all">Összes</string>
-    <string name="instance_summary">Piped, adatszinkronizáció és fiók</string>
+    <string name="instance_summary">Adatszinkronizáció, fiók és előzmények</string>
     <string name="no_audio">Nincs hang</string>
     <string name="audio">Hang</string>
     <string name="downloading">Letöltés…</string>
@@ -559,4 +559,5 @@
     <string name="already_downloaded">Ez a videó már le lett töltve!</string>
     <string name="export">Exportálás</string>
     <string name="exporting">Exportálás folyamatban…</string>
+    <string name="account">Fiók</string>
 </resources>
