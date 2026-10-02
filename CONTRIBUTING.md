@@ -12,6 +12,10 @@ Translations are managed using [WebLate](https://hosted.weblate.org/projects/lib
 
 ## Code Contributions
 
+> [!NOTE]
+> Before implementing a new feature, we recommend to talk to a maintainer (e.g. by opening a discussion) to
+> see if the feature aligns with the vision of project.
+
 You can open and build the project like any other normal Android project by using Android Studio.
 
 Please make sure the title of your pull request and the commit messages follow the [conventional commit
