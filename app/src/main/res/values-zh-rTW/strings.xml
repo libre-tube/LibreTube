@@ -104,7 +104,7 @@
     <string name="shapedIcon">不規則裁切</string>
     <string name="flameIcon">飛馳烈焰</string>
     <string name="birdIcon">加速鳥兒</string>
-    <string name="instance_summary">Piped，資料同步與帳號</string>
+    <string name="instance_summary">同步資料、帳號和歷史記錄</string>
     <string name="customInstance_summary">新增…</string>
     <string name="instance_name">執行個體名稱</string>
     <string name="instance_api_url">執行個體API網址</string>
@@ -216,7 +216,7 @@
     <string name="data_saver_mode_summary">跳過縮圖和其他圖片</string>
     <string name="data_saver_mode">數據節省模式</string>
     <string name="search_history_summary">記住搜尋</string>
-    <string name="watch_history_summary">於本機儲存影片觀看歷史</string>
+    <string name="watch_history_summary">儲存影片觀看歷史</string>
     <string name="history_summary">觀看和搜尋歷史</string>
     <string name="playerAudioQuality">音訊品質</string>
     <string name="captions_size">字幕大小</string>
@@ -556,4 +556,5 @@
     <string name="switch_sync_type_warning">如果您先前使用的是其他同步類型，請先備份您的訂閱內容與播放清單。接著，您可以在站台設定中切換同步類型，並從備份中重新匯入資料。</string>
     <string name="oidc_login">使用 OIDC 繼續</string>
     <string name="already_downloaded">您已經下載過這段影片了！</string>
+    <string name="account">帳號</string>
 </resources>
