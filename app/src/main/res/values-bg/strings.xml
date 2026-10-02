@@ -206,7 +206,7 @@
     <string name="color_green">Зелен</string>
     <string name="featured">Представено</string>
     <string name="remove_watched_videos">Премахни гледани видеоклипове</string>
-    <string name="watch_history_summary">Проследяване на гледаните видеоклипове локално</string>
+    <string name="watch_history_summary">Проследяване на гледаните видеоклипове</string>
     <string name="unknown">Неизвестен</string>
     <string name="required_network">Необходима връзка</string>
     <string name="autoRotatePlayer">Автоматично цял екран</string>
@@ -369,7 +369,7 @@
     <string name="autoplay_countdown">Автоматично отброяване</string>
     <string name="take_a_break">Време е за почивка</string>
     <string name="notification_time">Ограничи времето за известия</string>
-    <string name="instance_summary">Piped, синхронизация на данни и акаунт</string>
+    <string name="instance_summary">Синхронизиране на данни, акаунт и история</string>
     <string name="autoRotatePlayer_summary">Възпроизвеждане на цял екран при завъртане на устройството</string>
     <string name="double_tap_seek_summary">Докосни два пъти отляво или отдясно, за да превъртите назад или напред позицията на плейъра</string>
     <string name="group_name_error_empty">Моля, въведете име</string>
@@ -559,4 +559,5 @@
     <string name="switch_sync_type_warning">Ако преди това сте използвали различен тип синхронизация, първо направете резервно копие на вашите абонаменти и плейлисти. След това можете да превключите типа синхронизация в настройките на екземпляра и да импортирате отново данните си от резервното копие.</string>
     <string name="oidc_login">Продължете с OIDC</string>
     <string name="already_downloaded">Вече сте изтеглили това видео!</string>
+    <string name="account">Профил</string>
 </resources>
