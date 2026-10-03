@@ -117,7 +117,7 @@
     <string name="fireIcon">Módní oheň</string>
     <string name="flameIcon">Létající plamen</string>
     <string name="birdIcon">Posílený pták</string>
-    <string name="instance_summary">Piped, synchronizace dat a účet</string>
+    <string name="instance_summary">Synchronizace dat, účet a historie</string>
     <string name="customInstance_summary">Přidat…</string>
     <string name="version">Verze %1$s</string>
     <string name="category_filler">Výplň / vtipy</string>
@@ -172,7 +172,7 @@
     <string name="instance_frontend_url">Adresa frontendu instance (volitelná)</string>
     <string name="no_video">Žádné video</string>
     <string name="video">Video</string>
-    <string name="watch_history_summary">Ponechat historii sledování lokálně</string>
+    <string name="watch_history_summary">Ukládat historii sledování</string>
     <string name="history_summary">Historie sledování a hledání</string>
     <string name="watch_positions_title">Zapamatované pozice přehrávání</string>
     <string name="reset_watch_positions">Obnovit</string>
@@ -547,4 +547,22 @@
     <string name="courses">Kurzy</string>
     <string name="welcome">Vítejte v LibreTube! Začněte výběrem synchronizačního režimu níže a rozhodněte se, zda chcete synchronizovat vaše uživatelská data napříč zařízeními.</string>
     <string name="choose_instance">Nejprve si prosím zvolte instanci!</string>
+    <string name="load_data_from">Načíst data YouTube z</string>
+    <string name="load_data_from_local">Přímo z YouTube</string>
+    <string name="load_data_from_piped">přes Piped (zastaralé)</string>
+    <string name="libretube_sync_server">Synchronizační server LibreTube</string>
+    <string name="data_synchronization">Synchronizace dat</string>
+    <string name="sync_server_type">Synchronizovat uživatelská data (odběry, playlisty) přes</string>
+    <string name="sync_server_url">Adresa synchronizačního serveru LibreTube</string>
+    <string name="export">Export</string>
+    <string name="exporting">Probíhá export…</string>
+    <string name="account">Účet</string>
+    <string name="missing_auth_falling_back">Nejste přihlášeni. Synchronizace dat je vypnutá.</string>
+    <string name="sync_type_summary_none">Ukládat všechna uživatelská data v aplikaci. To znamená, že nemůžete synchronizovat data mezi vašimi zařízeními, ale může to být správná volba, pokud používáte pouze jedno zařízení nebo vás nezajímá synchronizace mezi zařízeními.</string>
+    <string name="sync_type_summary_libretube">Ukládat playlisty a data odběrů na synchronizačním serveru LibreTube (%1$s). Toto vám umožňuje přihlásit se do vašeho účtu na jakémkoli jiném zařízení a mít tak přístup k odběrům a playlistům. Upozornění ohledně soukromí: uživatelská data jsou na straně serveru pseudonymizována, ale nejsou koncově šifrována. Můžete si hostovat vlastní verzi serveru, oficiální by ale měl být obvykle dostačující.</string>
+    <string name="sync_type_summary_piped">Pouze pro experty, zastaralé:\nUkládat data playlistů a odběrů na Piped (%1$s). Jelikož již Piped nemá žádné veřejné instance, musíte si hostovat vlastní instanci.</string>
+    <string name="switch_sync_type_warning">Pokud jste dříve použili jiný typ synchronizace, udělejte si prosím nejprve zálohu svých odběrů a playlistů. Poté můžete přepnout typ synchronizace v nastavení instance a znovu importovat vaše data ze zálohy.</string>
+    <string name="oidc_login">Pokračovat pomocí OIDC</string>
+    <string name="already_downloaded">Toto video již máte stažené!</string>
+    <string name="choose_instance_long">Vyberte si prosím instanci Piped níže. Tato instance bude fungovat jako prostředník mezi vámi a YouTube. Tyto instnace se nacházejí na různých fyzických umístěních, označených vlaječkou. Instance fyzicky blíže k vám budou obvykle rychlejší. Používanou instanci můžete kdykoli změnit.</string>
 </resources>
