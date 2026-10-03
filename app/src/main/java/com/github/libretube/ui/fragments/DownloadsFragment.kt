@@ -35,6 +35,7 @@ import com.github.libretube.db.obj.Download
 import com.github.libretube.db.obj.DownloadPlaylistWithDownload
 import com.github.libretube.db.obj.DownloadWithItems
 import com.github.libretube.db.obj.filterByTab
+import com.github.libretube.enums.menuoption.MenuOption
 import com.github.libretube.extensions.ceilHalf
 import com.github.libretube.extensions.dpToPx
 import com.github.libretube.extensions.formatAsFileSize
@@ -70,13 +71,16 @@ enum class DownloadTab {
     PLAYLIST
 }
 
-enum class DownloadSortingOrder(@StringRes val stringId: Int) {
-    OLDEST(R.string.least_recent),
-    NEWEST(R.string.most_recent),
-    ALPHABETIC(R.string.alphabetic),
-    DURATION(R.string.duration),
-    CHANNEL(R.string.sort_channel),
-    SIZE(R.string.sort_size)
+enum class DownloadSortingOrder(
+    @get:StringRes override val titleStringRes: Int,
+    override val drawableRes: Int
+) : MenuOption {
+    OLDEST(R.string.least_recent, R.drawable.ic_sort_by_oldest),
+    NEWEST(R.string.most_recent, R.drawable.ic_sort_by_newest),
+    ALPHABETIC(R.string.alphabetic, R.drawable.ic_sort_by_alpha),
+    DURATION(R.string.duration, R.drawable.ic_time_outlined),
+    CHANNEL(R.string.sort_channel, R.drawable.ic_channel),
+    SIZE(R.string.sort_size, R.drawable.ic_sort_by_file_size)
 }
 
 class DownloadsFragment : Fragment(R.layout.fragment_downloads) {
@@ -200,8 +204,10 @@ class DownloadsFragmentPage : DynamicLayoutManagerFragment(R.layout.fragment_dow
             ) { !toggleDownload(it) }
         binding.downloadsRecView.adapter = adapter
 
-        val filterOptions = DownloadSortingOrder.entries.map { getString(it.stringId) }
-        binding.sortType.text = filterOptions[selectedSortType]
+        val filterOptions = DownloadSortingOrder.entries.map { option ->
+            option.toBottomSheetItem(::getString)
+        }
+        binding.sortType.text = filterOptions[selectedSortType].title
 
         lifecycleScope.launch(Dispatchers.Main) {
             val playlistItems = downloadPlaylistId?.let { playlistId ->
@@ -225,11 +231,11 @@ class DownloadsFragmentPage : DynamicLayoutManagerFragment(R.layout.fragment_dow
             submitDownloadList(downloads)
 
             binding.sortType.setOnClickListener {
-                BaseBottomSheet().setSimpleItems(filterOptions.toList()) { index ->
-                    if (index == selectedSortType) return@setSimpleItems
+                BaseBottomSheet().setItems(filterOptions.toList()) { index ->
+                    if (index == selectedSortType) return@setItems
                     selectedSortType = index
 
-                    binding.sortType.text = filterOptions[index]
+                    binding.sortType.text = filterOptions[index].title
                     submitDownloadList(downloads)
                 }.show(childFragmentManager)
             }
@@ -542,8 +548,11 @@ class PlaylistDownloadsFragmentPage : Fragment(R.layout.fragment_download_conten
         }
         binding.downloadsRecView.adapter = adapter
 
-        val filterOptions = DownloadSortingOrder.entries.map { getString(it.stringId) }
-        binding.sortType.text = filterOptions[selectedSortType]
+        val filterOptions = DownloadSortingOrder.entries.map { option ->
+            option.toBottomSheetItem(::getString)
+        }
+        val optionTitle = filterOptions[selectedSortType].title
+        binding.sortType.text = optionTitle
 
         lifecycleScope.launch(Dispatchers.Main) {
             val downloadPlaylists = withContext(Dispatchers.IO) {
@@ -555,11 +564,11 @@ class PlaylistDownloadsFragmentPage : Fragment(R.layout.fragment_download_conten
                 submitPlaylists(adapter, downloadPlaylists)
 
                 binding.sortType.setOnClickListener {
-                    BaseBottomSheet().setSimpleItems(filterOptions.toList()) { index ->
-                        if (index == selectedSortType) return@setSimpleItems
+                    BaseBottomSheet().setItems(filterOptions.toList()) { index ->
+                        if (index == selectedSortType) return@setItems
                         selectedSortType = index
 
-                        binding.sortType.text = filterOptions[index]
+                        binding.sortType.text = optionTitle
                         submitPlaylists(adapter, downloadPlaylists)
                     }.show(childFragmentManager)
                 }

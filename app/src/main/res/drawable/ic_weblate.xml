@@ -2,7 +2,7 @@
     xmlns:aapt="http://schemas.android.com/aapt"
     android:width="24dp"
     android:height="24dp"
-    android:tint="?attr/colorControlNormal"
+    android:tint="?colorControlNormal"
     android:viewportWidth="300"
     android:viewportHeight="300">
     <path
