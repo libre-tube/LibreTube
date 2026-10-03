@@ -49,6 +49,7 @@ import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.db.DatabaseHelper
 import com.github.libretube.enums.PlayerEvent
 import com.github.libretube.enums.SbSkipOptions
+import com.github.libretube.enums.menuoption.RepeatModeMenuOption
 import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.seekBy
 import com.github.libretube.extensions.togglePlayPauseState
@@ -87,11 +88,7 @@ object PlayerHelper {
      */
     const val MAX_BUFFER_DELAY = 10 * 60 * 1000L
 
-    val repeatModes = listOf(
-        Player.REPEAT_MODE_OFF to R.string.repeat_mode_none,
-        Player.REPEAT_MODE_ONE to R.string.repeat_mode_current,
-        Player.REPEAT_MODE_ALL to R.string.repeat_mode_all
-    )
+    val repeatModes: List<RepeatModeMenuOption> = RepeatModeMenuOption.entries
 
     /**
      * A list of all categories that are not disabled by default
@@ -120,7 +117,7 @@ object PlayerHelper {
     /**
      * Get the system's default captions style
      */
-    @OptIn(androidx.media3.common.util.UnstableApi::class)
+    @OptIn(UnstableApi::class)
     fun getCaptionStyle(context: Context): CaptionStyleCompat {
         val captioningManager = context.getSystemService<CaptioningManager>()!!
         return if (!captioningManager.isEnabled) {
@@ -454,7 +451,7 @@ object PlayerHelper {
     /**
      * Create a basic player, that is used for all types of playback situations inside the app
      */
-    @OptIn(androidx.media3.common.util.UnstableApi::class)
+    @OptIn(UnstableApi::class)
     fun createPlayer(context: Context, trackSelector: DefaultTrackSelector): ExoPlayer {
         val dataSourceFactory = DefaultDataSource.Factory(context)
         val audioAttributes = AudioAttributes.Builder()
@@ -479,7 +476,7 @@ object PlayerHelper {
     /**
      * Get the load controls for the player (buffering, etc)
      */
-    @OptIn(androidx.media3.common.util.UnstableApi::class)
+    @OptIn(UnstableApi::class)
     fun getLoadControl(): LoadControl {
         return DefaultLoadControl.Builder()
             // cache the last three minutes
@@ -496,7 +493,7 @@ object PlayerHelper {
     /**
      * Load playback parameters such as speed and skip silence
      */
-    @OptIn(androidx.media3.common.util.UnstableApi::class)
+    @OptIn(UnstableApi::class)
     fun ExoPlayer.loadPlaybackParams(): ExoPlayer {
         skipSilenceEnabled = skipSilence
 

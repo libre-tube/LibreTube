@@ -5,10 +5,10 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.os.bundleOf
 import androidx.fragment.app.setFragmentResult
 import androidx.media3.common.util.UnstableApi
-import com.github.libretube.R
 import com.github.libretube.api.obj.StreamItem
 import com.github.libretube.constants.IntentData
 import com.github.libretube.enums.ShareObjectType
+import com.github.libretube.enums.menuoption.DownloadListMenuOption
 import com.github.libretube.extensions.parcelable
 import com.github.libretube.extensions.serializable
 import com.github.libretube.extensions.toID
@@ -49,24 +49,24 @@ class DownloadOptionsBottomSheet : BaseBottomSheet() {
         val playlistId = arguments?.getString(IntentData.playlistId)
 
         val options = mutableListOf(
-            R.string.playOnBackground,
-            R.string.share,
-            R.string.delete,
-            R.string.export,
+            DownloadListMenuOption.PLAY_ON_BACKGROUND,
+            DownloadListMenuOption.SHARE,
+            DownloadListMenuOption.DELETE,
+            DownloadListMenuOption.EXPORT,
         )
 
         // can't navigate to video while in offline activity
         if (ContextHelper.tryUnwrapActivity<NoInternetActivity>(requireContext()) == null) {
-            options += R.string.go_to_video
+            options += DownloadListMenuOption.GO_TO_VIDEO
         }
 
         val isSelectedVideoCurrentlyPlaying = PlayingQueue.getCurrent()?.url?.toID() == videoId
         if (!isSelectedVideoCurrentlyPlaying && PlayingQueue.isNotEmpty() && PlayingQueue.queueMode == PlayingQueueMode.OFFLINE) {
-            options += R.string.play_next
-            options += R.string.add_to_queue
+            options += DownloadListMenuOption.PLAY_NEXT
+            options += DownloadListMenuOption.ADD_TO_QUEUE
         }
 
-        setSimpleItems(options.map { getString(it) }) { which ->
+        setItems(options.map { it.toBottomSheetItem(::getString) }) { which ->
             val playerData = PlayerData(
                 videoId,
                 playlistId = playlistId,
@@ -75,15 +75,15 @@ class DownloadOptionsBottomSheet : BaseBottomSheet() {
             )
 
             when (options[which]) {
-                R.string.playOnBackground -> {
+                DownloadListMenuOption.PLAY_ON_BACKGROUND -> {
                     BackgroundHelper.playOnBackground(requireContext(), playerData)
                 }
 
-                R.string.go_to_video -> {
+                DownloadListMenuOption.GO_TO_VIDEO -> {
                     NavigationHelper.navigateVideo(requireContext(), playerData)
                 }
 
-                R.string.share -> {
+                DownloadListMenuOption.SHARE -> {
                     val shareData = ShareData(currentVideo = videoId)
                     val bundle = bundleOf(
                         IntentData.id to videoId,
@@ -95,19 +95,19 @@ class DownloadOptionsBottomSheet : BaseBottomSheet() {
                     newShareDialog.show(parentFragmentManager, null)
                 }
 
-                R.string.delete -> {
+                DownloadListMenuOption.DELETE -> {
                     setFragmentResult(DELETE_DOWNLOAD_REQUEST_KEY, bundleOf())
                 }
 
-                R.string.play_next -> {
+                DownloadListMenuOption.PLAY_NEXT -> {
                     PlayingQueue.addAsNext(streamItem)
                 }
 
-                R.string.add_to_queue -> {
+                DownloadListMenuOption.ADD_TO_QUEUE -> {
                     PlayingQueue.add(streamItem)
                 }
 
-                R.string.export -> {
+                DownloadListMenuOption.EXPORT -> {
                     exportFilePicker.launch(streamItem.title)
                     // dismissing now would cause the exportFilePicker to be dropped before
                     // the file is actually chosen by the user
