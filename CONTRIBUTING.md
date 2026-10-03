@@ -14,7 +14,7 @@ Translations are managed using [WebLate](https://hosted.weblate.org/projects/lib
 
 > [!NOTE]
 > Before implementing a new feature, we recommend to talk to a maintainer (e.g. by opening a discussion) to
-> see if the feature aligns with the vision of project.
+> see if the feature aligns with the vision of the project.
 
 You can open and build the project like any other normal Android project by using Android Studio.
 
