@@ -701,7 +701,8 @@ class PlayerFragment : Fragment(R.layout.fragment_player), CustomPlayerCallback 
                 IntentData.id to videoId,
                 IntentData.shareObjectType to ShareObjectType.VIDEO,
                 IntentData.shareData to ShareData(
-                    currentVideo = streams.title,
+                    title = streams.title,
+                    previewImageUrl = streams.thumbnailUrl,
                     currentPosition = playerController.currentPosition / 1000
                 )
             )

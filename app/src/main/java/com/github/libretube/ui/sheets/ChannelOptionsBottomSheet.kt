@@ -26,12 +26,14 @@ class ChannelOptionsBottomSheet : BaseBottomSheet() {
     private lateinit var channelId: String
     private var channelName: String? = null
     private var subscribed: Boolean = false
+    private var channelAvatar: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         channelId = arguments?.getString(IntentData.channelId)!!
         channelName = arguments?.getString(IntentData.channelName)
+        channelAvatar = arguments?.getString(IntentData.channelAvatar)
         subscribed = arguments?.getBoolean(IntentData.isSubscribed, false) ?: false
 
         setTitle(channelName)
@@ -50,7 +52,10 @@ class ChannelOptionsBottomSheet : BaseBottomSheet() {
                     val bundle = bundleOf(
                         IntentData.id to channelId,
                         IntentData.shareObjectType to ShareObjectType.CHANNEL,
-                        IntentData.shareData to ShareData(currentChannel = channelName)
+                        IntentData.shareData to ShareData(
+                            title = channelName,
+                            previewImageUrl = channelAvatar
+                        )
                     )
                     val newShareDialog = ShareDialog()
                     newShareDialog.arguments = bundle
