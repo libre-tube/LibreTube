@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="startpage">Trang chủ</string>
-    <string name="subscriptions">Đăng ký</string>
+    <string name="subscriptions">Danh sách đăng ký</string>
     <string name="library">Thư viện</string>
     <string name="yes">Có</string>
     <string name="search_hint">Tìm kiếm</string>
@@ -58,7 +58,7 @@
     <string name="music_songs">Bài hát trên YT Music</string>
     <string name="music_videos">Các đoạn phim âm nhạc trên YT Music</string>
     <string name="music_albums">Bộ sưu tập nhạc trên YT Music</string>
-    <string name="music_playlists">Danh sách nhạc trên YT Music</string>
+    <string name="music_playlists">Danh sách phát trên YT Music</string>
     <string name="sponsorblock">Chặn quảng cáo được tài trợ</string>
     <string name="segment_skipped">Đã bỏ qua phân đoạn quảng cáo</string>
     <string name="category_sponsor">Quảng cáo được tài trợ</string>
@@ -96,7 +96,7 @@
     <string name="color_purple">Màu tím dễ chịu</string>
     <string name="update_summary">Kiểm tra cập nhật mới</string>
     <string name="app_uptodate">Đang chạy phiên bản mới nhất.</string>
-    <string name="instance_summary">Piped, đăng nhập và tài khoản</string>
+    <string name="instance_summary">Đồng bộ dữ liệu, lịch sử và tài khoản</string>
     <string name="invalid_url">Hãy nhập một URL mà hoạt đông được</string>
     <string name="darkTheme">Tối</string>
     <string name="lightTheme">Sáng</string>
@@ -190,7 +190,7 @@
     <string name="data_saver_mode">Chế độ tiết kiệm dữ liệu</string>
     <string name="data_saver_mode_summary">Bỏ qua hình thu nhỏ và các hình ảnh khác</string>
     <string name="search_history_summary">Nhớ hoạt động tìm kiếm</string>
-    <string name="watch_history_summary">Theo dõi các đoạn phim đã xem cục bộ</string>
+    <string name="watch_history_summary">Theo dõi các đoạn phim đã xem</string>
     <string name="history_summary">Lịch sử xem và tìm kiếm</string>
     <string name="watch_positions_title">Nhớ vị trí phát lại</string>
     <string name="open_copied">Mở</string>
@@ -215,7 +215,7 @@
     <string name="download_channel_description">Hiển thị thông báo khi tải xuống phương tiện.</string>
     <string name="push_channel_description">Hiển thị thông báo khi có đoạn phim mới.</string>
     <string name="push_channel_name">Nguồn cấp thông báo</string>
-    <string name="local_subscriptions">Đăng ký cục bộ</string>
+    <string name="local_subscriptions">Danh sách đăng ký cục bộ</string>
     <string name="preferences">Sở thích</string>
     <string name="backup_customInstances">Máy chủ tùy chỉnh</string>
     <string name="download_channel_name">Dịch vụ tải về</string>
@@ -329,8 +329,8 @@
     <string name="duration">Thời lượng</string>
     <string name="duration_reversed">Thời lượng (đảo ngược)</string>
     <string name="unlimited_search_history">Lịch sử tìm kiếm không giới hạn</string>
-    <string name="import_subscriptions_from">Nhập đăng ký từ</string>
-    <string name="export_subscriptions_to">Xuất đăng ký sang</string>
+    <string name="import_subscriptions_from">Nhập danh sách đăng ký từ</string>
+    <string name="export_subscriptions_to">Xuất danh sách đăng ký sang</string>
     <string name="rewind">Tua lại</string>
     <string name="forward">Phía trước</string>
     <string name="playing_next">Phát kế tiếp trong %1$s</string>
@@ -537,4 +537,24 @@
     <string name="comment_verified">Đã xác thực</string>
     <string name="comment_pinned">Đã ghim</string>
     <string name="courses">Các khoá học</string>
+    <string name="welcome">Chào mừng đến với LibreTube! Để bắt đầu, vui lòng chọn một chế độ đồng bộ bên dưới để quyết định xem sẽ đồng bộ dữ liệu sử dụng của bạn trên khắp các thiết bị khác nhau như thế nào.</string>
+    <string name="choose_instance">Vui lòng chọn một máy chủ trước!</string>
+    <string name="choose_instance_long">Vui lòng chọn một máy chủ Piped bên dưới để sử dụng. Máy chủ Piped sẽ đóng vai trò như bên trung gian giữa bạn và YouTube. Những máy chủ này có vị trí vật lý ở nhiều nơi khác nhau - được biểu thị bởi cờ quốc gia của chúng. Máy chủ có vị trí gần với bạn sẽ có khả năng truyền tải nhanh hơn. Bạn cũng có thể thay đổi cài đặt này bất cứ khi nào bạn muốn.</string>
+    <string name="load_data_from">Tải dữ liệu YouTube từ</string>
+    <string name="load_data_from_local">Trực tiếp từ YouTube</string>
+    <string name="load_data_from_piped">Qua Piped (đã lỗi thời)</string>
+    <string name="libretube_sync_server">Máy chủ đồng bộ của LibreTube</string>
+    <string name="data_synchronization">Đồng bộ dữ liệu</string>
+    <string name="sync_server_type">Đồng bộ dữ liệu sử dụng (các danh sách đăng ký, danh sách phát) qua</string>
+    <string name="sync_server_url">Đường dẫn đến máy chủ đồng bộ của LibreTube</string>
+    <string name="export">Xuất</string>
+    <string name="exporting">Trong quá trình trích xuất…</string>
+    <string name="account">Tài khoản</string>
+    <string name="missing_auth_falling_back">Chưa đăng nhập. Đồng bộ dữ liệu đang tắt.</string>
+    <string name="sync_type_summary_none">Lưu ngoại tuyến tất cả dữ liệu sử dụng ngay trong ứng dụng. Nghĩa là bạn không thể đồng bộ dữ liệu giữa các thiếy bị của bạn, nhưng có thể là lựa chọn hợp lý nếu bạn không dùng nhiều thiết bị hoặc không quan tâm về việc đồng bộ giữa các thiết bị.</string>
+    <string name="sync_type_summary_libretube">Lưu dữ liệu các danh sách phát và danh sách đăng ký trên máy chủ đồng bộ của LibreTube (%1$s). Việc này cho phép bạn đăng nhập vào tài khoản của mình trên bất kỳ thiết bị nào để truy cập danh sách đăng ký và danh sách phát đã lưu. Khuyến cáo về vấn đề quyền riêng tư: Dữ liệu sử dụng tuy sẽ được bí danh hoá bên phía máy chủ, nhưng sẽ không được mã hoá đầu cuối. Nếu muốn, bạn vẫn có thể tự vận hành máy chủ của riêng mình, nhưng dùng các máy chủ chính thức không chắc cũng ổn.</string>
+    <string name="sync_type_summary_piped">Dành cho chuyên gia, đã lỗi thời:\nLưu dữ liệu danh sách phát và danh sách đăng ký trên Piped (%1$s). Vì Piped không có bất kỳ máy chủ công khai nào nữa, nên bạn phải tự vận hành máy chủ Piped của riêng mình.</string>
+    <string name="switch_sync_type_warning">Nếu bạn trước đó dùng một cách đồng bộ dữ liệu khác, vui lòng sao lưu lại danh sách đăng ký và danh sách phát trước. Sau đó bạn mới có thể đổi cách đồng bộ trong phần cài đặt và nhập lại dữ liệu từ bản sao lưu.</string>
+    <string name="oidc_login">Tiếp tục với OIDC</string>
+    <string name="already_downloaded">Bạn đã tải đoạn phim này rổi!</string>
 </resources>
