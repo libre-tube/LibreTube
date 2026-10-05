@@ -545,4 +545,5 @@
     <string name="comment_verified">Overený</string>
     <string name="comment_pinned">Pripnutý</string>
     <string name="courses">Kurzy</string>
+    <string name="account">Účet</string>
 </resources>
