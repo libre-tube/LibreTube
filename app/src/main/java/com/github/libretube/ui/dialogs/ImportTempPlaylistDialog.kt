@@ -40,7 +40,7 @@ class ImportTempPlaylistDialog : DialogFragment() {
                             videos = videoIds.toList()
                         )
 
-                        PlaylistsHelper.importPlaylists(listOf(playlist))
+                        PlaylistsHelper.importPlaylist(playlist)
                         context.toastFromMainDispatcher(R.string.playlistCreated)
                     } catch (e: Exception) {
                         Log.e(TAG(), e.toString())
