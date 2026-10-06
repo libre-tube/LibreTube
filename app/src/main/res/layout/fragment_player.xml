@@ -181,7 +181,7 @@
         app:layout_constraintStart_toStartOf="@id/main_container"
         app:layout_constraintTop_toTopOf="@id/main_container"
         app:show_buffering="when_playing"
-        app:surface_type="surface_view" />
+        app:surface_type="texture_view" />
 
     <ImageView
         android:id="@+id/close_imageView"
