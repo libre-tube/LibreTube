@@ -539,19 +539,9 @@ class MainActivity : AbstractPlayerHostActivity() {
      * @return Whether the method handled the event and triggered the navigation to a new fragment
      */
     fun navigateToMediaByIntent(intent: Intent, actionBefore: () -> Unit = {}): Boolean {
-        intent.getStringExtra(IntentData.channelId)?.let {
+        intent.getParcelableExtra<ChannelIdentifier>(IntentData.channelIdentifier)?.let {
             actionBefore()
-            navController.navigate(NavDirections.openChannel(ChannelIdentifier.Id(it)))
-            return true
-        }
-        intent.getStringExtra(IntentData.channelName)?.let {
-            actionBefore()
-            navController.navigate(NavDirections.openChannel(ChannelIdentifier.Name(it)))
-            return true
-        }
-        intent.getStringExtra(IntentData.channelHandle)?.let {
-            actionBefore()
-            navController.navigate(NavDirections.openChannel(ChannelIdentifier.Handle(it)))
+            navController.navigate(NavDirections.openChannel(it))
             return true
         }
         intent.getStringExtra(IntentData.playlistId)?.let {
