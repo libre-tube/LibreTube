@@ -15,6 +15,7 @@ import com.github.libretube.constants.IntentData
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.enums.PlaylistType
 import com.github.libretube.extensions.toID
+import com.github.libretube.obj.ChannelIdentifier
 import com.github.libretube.parcelable.PlayerData
 import com.github.libretube.ui.activities.AbstractPlayerHostActivity
 import com.github.libretube.ui.activities.MainActivity
@@ -30,7 +31,7 @@ object NavigationHelper {
 
         // navigating to channels is only supported in the main activity, not in the no internet activity
         val activity = ContextHelper.tryUnwrapActivity<MainActivity>(context) ?: return
-        activity.navController.navigate(NavDirections.openChannel(channelUrlOrId.toID()))
+        activity.navController.navigate(NavDirections.openChannel(ChannelIdentifier.Id(channelUrlOrId.toID())))
         try {
             // minimize player if currently expanded
             activity.runOnPlayerFragment {
