@@ -69,6 +69,9 @@ object IntentHelper {
             secondLastSegment == "c" || secondLastSegment == "user" -> {
                 putExtra(IntentData.channelName, lastSegment)
             }
+            lastSegment?.startsWith("@") == true -> {
+                putExtra(IntentData.channelHandle,  lastSegment.removePrefix("@"))
+            }
             lastSegment == "playlist" -> {
                 putExtra(IntentData.playlistId, uri.getQueryParameter("list"))
             }
