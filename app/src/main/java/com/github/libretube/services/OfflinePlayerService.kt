@@ -55,7 +55,7 @@ open class OfflinePlayerService : AbstractPlayerService() {
     private val playerListener = object : Player.Listener {
         override fun onPlaybackStateChanged(playbackState: Int) {
             if (playbackState == Player.STATE_ENDED) {
-                playNextVideo()
+                onVideoEnded()
             }
 
             // add video to watch history when playback starts

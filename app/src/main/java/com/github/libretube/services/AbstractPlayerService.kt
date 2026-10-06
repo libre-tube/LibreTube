@@ -218,6 +218,17 @@ abstract class AbstractPlayerService : MediaLibraryService(), MediaLibrarySessio
     }
 
     /**
+     * Called when the current video reached its end.
+     *
+     * Unless the current video is repeated, nothing is played after it if autoplay is turned off.
+     */
+    protected fun onVideoEnded(relatedStreams: List<StreamItem>? = null) {
+        if (!PlayerHelper.autoPlayEnabled && PlayingQueue.repeatMode != Player.REPEAT_MODE_ONE) return
+
+        playNextVideo(relatedStreams = relatedStreams)
+    }
+
+    /**
      * Plays the next video.
      *
      * If a video ID is explicitly given, it is played next,

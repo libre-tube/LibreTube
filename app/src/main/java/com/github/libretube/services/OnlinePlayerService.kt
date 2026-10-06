@@ -76,7 +76,7 @@ open class OnlinePlayerService : AbstractPlayerService() {
         override fun onPlaybackStateChanged(playbackState: Int) {
             when (playbackState) {
                 Player.STATE_ENDED -> {
-                    if (!isTransitioning) playNextVideo(relatedStreams = streams?.relatedStreams)
+                    if (!isTransitioning) onVideoEnded(streams?.relatedStreams)
                 }
 
                 Player.STATE_IDLE -> {

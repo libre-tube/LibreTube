@@ -261,7 +261,7 @@ class PlayerFragment : Fragment(R.layout.fragment_player), CustomPlayerCallback 
 
                 // if the current tracks are empty, the player is transitioning at the moment
                 val isTransitioning = playerController.currentTracks.isEmpty
-                if ((PlayingQueue.hasNext() || PlayerHelper.autoPlayEnabled) && autoPlayCountdownEnabled && !isTransitioning) {
+                if (PlayerHelper.autoPlayEnabled && autoPlayCountdownEnabled && !isTransitioning) {
                     showAutoPlayCountdown()
                 } else {
                     binding.player.showControllerPermanently()
