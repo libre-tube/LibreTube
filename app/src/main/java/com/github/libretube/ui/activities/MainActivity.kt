@@ -549,6 +549,11 @@ class MainActivity : AbstractPlayerHostActivity() {
             navController.navigate(NavDirections.openChannel(ChannelIdentifier.Name(it)))
             return true
         }
+        intent.getStringExtra(IntentData.channelHandle)?.let {
+            actionBefore()
+            navController.navigate(NavDirections.openChannel(ChannelIdentifier.Handle(it)))
+            return true
+        }
         intent.getStringExtra(IntentData.playlistId)?.let {
             actionBefore()
             navController.navigate(NavDirections.openPlaylist(playlistId = it))
