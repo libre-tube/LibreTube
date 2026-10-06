@@ -39,8 +39,7 @@ class ChannelFragment : Fragment(R.layout.fragment_channel) {
     private val args by navArgs<ChannelFragmentArgs>()
     private val viewModel: ChannelViewModel by viewModels()
 
-    private var channelId: String? = null
-    private var channelName: String? = null
+    private lateinit var channelIdentifier: ChannelIdentifier
     private var isLoading = true
 
     private lateinit var channelContentAdapter: ChannelContentAdapter
@@ -59,10 +58,7 @@ class ChannelFragment : Fragment(R.layout.fragment_channel) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        channelName = args.channelName
-            ?.replace("/c/", "")
-            ?.replace("/user/", "")
-        channelId = args.channelId
+        channelIdentifier = args.channelIdentifier
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -111,9 +107,7 @@ class ChannelFragment : Fragment(R.layout.fragment_channel) {
 
         val channel = try {
             withContext(Dispatchers.IO) {
-                val channel = channelId?.let { ChannelIdentifier.Id(it) }
-                    ?: ChannelIdentifier.Name(channelName!!)
-                MediaServiceRepository.instance.getChannel(channel)
+                MediaServiceRepository.instance.getChannel(channelIdentifier)
             }
         } catch (e: Exception) {
             Log.e(TAG(), e.stackTraceToString())
@@ -126,10 +120,8 @@ class ChannelFragment : Fragment(R.layout.fragment_channel) {
         val binding = _binding ?: return@launch
 
         // needed if the channel gets loaded by the ID
-        channelId = channel.id
-        channelName = channel.name
-
-        val channelId = channelId ?: return@launch
+        val channelId = channel.id ?: return@launch
+        val channelName = channel.name
 
         var isSubscribed = false
         binding.channelSubscribe.setupSubscriptionButton(

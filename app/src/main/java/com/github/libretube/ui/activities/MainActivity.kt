@@ -47,6 +47,7 @@ import com.github.libretube.helpers.NavigationHelper
 import com.github.libretube.helpers.NetworkHelper
 import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.helpers.ThemeHelper
+import com.github.libretube.obj.ChannelIdentifier
 import com.github.libretube.parcelable.PlayerData
 import com.github.libretube.ui.dialogs.ErrorDialog
 import com.github.libretube.ui.dialogs.ImportTempPlaylistDialog
@@ -540,12 +541,12 @@ class MainActivity : AbstractPlayerHostActivity() {
     fun navigateToMediaByIntent(intent: Intent, actionBefore: () -> Unit = {}): Boolean {
         intent.getStringExtra(IntentData.channelId)?.let {
             actionBefore()
-            navController.navigate(NavDirections.openChannel(channelId = it))
+            navController.navigate(NavDirections.openChannel(ChannelIdentifier.Id(it)))
             return true
         }
         intent.getStringExtra(IntentData.channelName)?.let {
             actionBefore()
-            navController.navigate(NavDirections.openChannel(channelName = it))
+            navController.navigate(NavDirections.openChannel(ChannelIdentifier.Name(it)))
             return true
         }
         intent.getStringExtra(IntentData.playlistId)?.let {
