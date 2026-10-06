@@ -24,6 +24,7 @@ import com.github.libretube.extensions.toastFromMainDispatcher
 import com.github.libretube.helpers.ClipboardHelper
 import com.github.libretube.helpers.ImageHelper
 import com.github.libretube.helpers.NavigationHelper
+import com.github.libretube.obj.ChannelIdentifier
 import com.github.libretube.ui.extensions.setupSubscriptionButton
 import com.github.libretube.ui.models.ChannelViewModel
 import com.github.libretube.ui.sheets.ChannelOptionsBottomSheet
@@ -110,11 +111,9 @@ class ChannelFragment : Fragment(R.layout.fragment_channel) {
 
         val channel = try {
             withContext(Dispatchers.IO) {
-                if (channelId != null) {
-                    MediaServiceRepository.instance.getChannel(channelId!!)
-                } else {
-                    MediaServiceRepository.instance.getChannelByName(channelName!!)
-                }
+                val channel = channelId?.let { ChannelIdentifier.Id(it) }
+                    ?: ChannelIdentifier.Name(channelName!!)
+                MediaServiceRepository.instance.getChannel(channel)
             }
         } catch (e: Exception) {
             Log.e(TAG(), e.stackTraceToString())
