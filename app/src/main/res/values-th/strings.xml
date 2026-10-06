@@ -10,7 +10,7 @@
     <string name="version">เวอร์ชั่น %1$s</string>
     <string name="subscriptions">การติดตาม</string>
     <string name="region">ภูมิภาค</string>
-    <string name="login_register">ลงชื่อเข้าใช้/สมัครสมาชิก</string>
+    <string name="login_register">เข้าสู่ระบบ/ลงทะเบียน</string>
     <string name="importsuccess">ติดตามแล้ว</string>
     <string name="search_hint">ค้นหา</string>
     <string name="subscribe">ติดตาม</string>
@@ -32,7 +32,7 @@
     <string name="lightTheme">สว่าง</string>
     <string name="darkTheme">มืด</string>
     <string name="defres">ความละเอียดวิดีโอ</string>
-    <string name="login">ล็อกอิน</string>
+    <string name="login">เข้าสู่ระบบ</string>
     <string name="registered">ลงทะเบียนแล้ว ตอนนี้คุณสามารถสมัครรับข้อมูลช่องต่างๆได้แล้ว</string>
     <string name="loggedIn">ล็อกอินเรียบร้อย</string>
     <string name="notgmail">นี่สำหรับบัญชี Piped</string>
@@ -362,7 +362,7 @@
     <string name="import_temp_playlist">นำเข้าเพลย์ลิสต์ชั่วคราว?</string>
     <string name="import_temp_playlist_summary">คุณต้องการสร้างเพลย์ลิสต์ใหม่ด้วยชื่อ \'%1$s\' หรือไม่? เพลย์ลิสต์นี้จะมี %2$d วิดีโอ</string>
     <string name="customInstance_summary">เพิ่ม…</string>
-    <string name="instance_summary">Piped ล็อกอินและบัญชี</string>
+    <string name="instance_summary">ซิงค์ข้อมูล บัญชีและประวัติ</string>
     <string name="instance_name">ชื่ออินสแตนซ์</string>
     <string name="instance_api_url">URL สำหรับ API ของอินสแตนซ์นี้</string>
     <string name="addInstance">เพิ่มอินสแตนซ์</string>
@@ -465,7 +465,7 @@
     <string name="preferences">การตั้งค่า</string>
     <string name="navigation_bar">แถบการนำทาง</string>
     <string name="change_region">เทรนมาแรงไม่สามารถใช้ได้ในภูมิภาคนี้ โปรดเลือกภูมิภาคอื่นจากการตั้งค่า</string>
-    <string name="unsubscribe_snackbar_message">ยกเลิกการติดตาม %1$s เรียบร้อยแล้ว</string>
+    <string name="unsubscribe_snackbar_message">เลิกติดตาม %1$s เรียบร้อยแล้ว</string>
     <string name="notification_time">จำกัดเวลาการแจ้งเตือน</string>
     <string name="notification_time_summary">จำกัดช่วงเวลาที่การแจ้งเตือนวิดีโอสามารถแจ้งเตือนได้</string>
     <string name="layout">รูปแบบ</string>
@@ -538,4 +538,12 @@
     <string name="export">ส่งออก</string>
     <string name="exporting">กำลังส่งออก…</string>
     <string name="oidc_login">ดำเนินการต่อด้วย OIDC</string>
+    <string name="welcome">ยินดีต้อนรับสู่ LibreTube! เริ่มด้วยการเลือกโหมดการซิงค์ข้อมูลด้านล่างเพื่อเลือกว่าจะเชื่อมต่อข้อมูลผู้ใช้ของคุณระหว่างอุปกรณ์ต่างๆ หรือไหม</string>
+    <string name="missing_auth_falling_back">ไม่เข้าสู่ระบบ ปิดการซิงค์ข้อมูล</string>
+    <string name="sync_type_summary_none">เก็บข้อมูลผู้ใช้ทั้งหมดไร้การเชื่อมต่อภายในแอป นั้นหมายถึงคุณจะไม่สามารถเชื่อมต่อข้อมูลระหว่างอุปกรณ์ได้ นี้อาจจะเป็นตัวเลือกที่ดีกว่าถ้าคุณจะใช้แค่อุปกรณ์ตัวนี้ตัวเดียวหรือไม่ต้องการที่จะเชื่อมต่อข้อมูลระหว่างอุปกรณ์</string>
+    <string name="sync_type_summary_libretube">เก็บข้อมูลเพลย์ลิสต์และการติดตามผ่านทางซิงค์เซิฟเวอร์ของ LibreTube (%1$s) คุณจะสามารถเข้าสู่ระบบบัญชีของคุณด้วยอุปกรณ์อื่นๆ ที่จะสามารถเข้าถึงข้อมูลเพลย์ลิสต์และการติดตามของคุณ ประกาศความเป็นส่วนตัว: ข้อมูลผู้ใช้จะเป็นข้อมูลแฝงบนเซิฟเวอร์ แต่ไม่มีการเข้ารหัสทั้งสองฝั่ง ด้วยตัวเลือกแล้วคุณสามารถตั้งเซิฟเวอร์ในเวอร์ชั่นของคุณได้ แต่โดยปกติ เซิฟเวอร์ทางการสามารถใช้ได้อย่างปกติ</string>
+    <string name="sync_type_summary_piped">ผู้ใช้ขั้นสูงเท่านั้น สิ้นสุดการรองรับแล้ว\nเก็บข้อมูลเพลย์ลิสต์และการติดตามผ่านทาง Piped (%1$s) เนื่องจาก Piped ไม่มีอินสแตนซ์สาธารณะแล้ว คุณจะต้องเปิดอินสแตนซ์ Piped ด้วยตัวของคุณเอง</string>
+    <string name="switch_sync_type_warning">ถ้าคุณเคยใช้การซิงค์ข้อมูลด้วยวิธีอื่น กรุณาสำรองข้อมูลการติดตามและเพลย์ลิสต์ก่อน คุณสามารถเปลี่ยนวิธีการซิงค์ข้อมูลในการตั้งค่าอินสแตนซ์และนำเข้าข้อมูลของคุณจากข้อมูลที่คุณสำรองเอาไว้</string>
+    <string name="already_downloaded">คุณดาวน์โหลดวิดีโอนี้ไปแล้ว!</string>
+    <string name="account">บัญชี</string>
 </resources>
