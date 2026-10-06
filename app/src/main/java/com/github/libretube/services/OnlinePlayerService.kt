@@ -9,6 +9,7 @@ import androidx.media3.common.Format
 import androidx.media3.common.MediaItem
 import androidx.media3.common.MediaItem.SubtitleConfiguration
 import androidx.media3.common.MimeTypes
+import androidx.media3.common.PlaybackException
 import androidx.media3.common.Player
 import androidx.media3.datasource.DefaultDataSource
 import androidx.media3.exoplayer.hls.HlsMediaSource
@@ -41,12 +42,15 @@ import com.github.libretube.repo.UserDataRepositoryHelper
 import com.github.libretube.util.DeArrowUtil
 import com.github.libretube.util.PlayingQueue
 import com.github.libretube.util.YoutubeHlsPlaylistParser
+import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.cancelAndJoin
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import org.schabi.newpipe.extractor.exceptions.ContentNotAvailableException
 
 /**
  * Loads the selected videos audio in background mode with a notification area.
@@ -72,6 +76,25 @@ open class OnlinePlayerService : AbstractPlayerService() {
      */
     private var fetchVideoInfoJob: Job? = null
 
+    /**
+     * The ways the current video can be played, ordered by preference.
+     * If the first one fails, playback falls back to the next one.
+     */
+    private enum class StreamSource { DASH, SABR, HLS }
+
+    private var streamSources = listOf<StreamSource>()
+    private var streamSourceIndex = 0
+
+    private var consecutiveFetchFailures = 0
+
+    private val hasFallbackSource get() = streamSourceIndex + 1 < streamSources.size
+
+    /**
+     * Whether the player has been switched to the next source, which did not become ready yet.
+     * The player can still report a stale idle state in this phase, which must not stop the service.
+     */
+    private var isSwitchingSource = false
+
     private val playerListener = object : Player.Listener {
         override fun onPlaybackStateChanged(playbackState: Int) {
             when (playbackState) {
@@ -80,11 +103,19 @@ open class OnlinePlayerService : AbstractPlayerService() {
                 }
 
                 Player.STATE_IDLE -> {
+                    if (exoPlayer?.playerError != null) {
+                        // an error moves the player to idle, in this case we try the next source instead
+                        if (hasFallbackSource) return
+                    } else if (isSwitchingSource) {
+                        return
+                    }
                     onDestroy()
                 }
 
                 Player.STATE_BUFFERING -> {}
+
                 Player.STATE_READY -> {
+                    isSwitchingSource = false
                     // save video to watch history when the video starts playing or is being resumed
                     // waiting for the player to be ready since the video can't be claimed to be watched
                     // while it did not yet start actually, but did buffer only so far
@@ -139,7 +170,7 @@ open class OnlinePlayerService : AbstractPlayerService() {
         fetchVideoInfoJob = scope.launch {
             streams = withContext(Dispatchers.IO) {
                 try {
-                    MediaServiceRepository.instance.getStreams(videoId).let {
+                    getStreamsWithRetry().let {
                         DeArrowUtil.deArrowStreams(it, videoId)
                     }
                 } catch (e: Exception) {
@@ -147,7 +178,11 @@ open class OnlinePlayerService : AbstractPlayerService() {
                     toastFromMainDispatcher(e.localizedMessage.orEmpty())
                     return@withContext null
                 }
-            } ?: return@launch
+            } ?: run {
+                skipToNextVideoAfterFailure()
+                return@launch
+            }
+            consecutiveFetchFailures = 0
 
             streams?.toStreamItem(videoId)?.let {
                 // save the current stream to the queue
@@ -167,6 +202,11 @@ open class OnlinePlayerService : AbstractPlayerService() {
             }
 
             withContext(Dispatchers.Main) {
+                streams?.let {
+                    streamSources = getStreamSources(it)
+                    streamSourceIndex = 0
+                    isSwitchingSource = false
+                }
                 setStreamSource()
                 configurePlayer(timestampMs)
             }
@@ -174,6 +214,42 @@ open class OnlinePlayerService : AbstractPlayerService() {
 
         fetchVideoInfoJob?.join()
         fetchVideoInfoJob = null
+    }
+
+    /**
+     * Fetches the streams, retrying on temporary failures (e.g. a flaky network connection),
+     * since a single failure would otherwise leave the player loading forever.
+     */
+    private suspend fun getStreamsWithRetry(): Streams {
+        repeat(STREAMS_FETCH_ATTEMPTS - 1) { attempt ->
+            try {
+                return MediaServiceRepository.instance.getStreams(videoId)
+            } catch (e: CancellationException) {
+                throw e
+            } catch (e: ContentNotAvailableException) {
+                // the video is permanently unavailable (private, removed, age restricted, ...)
+                throw e
+            } catch (e: Exception) {
+                Log.w(TAG(), "failed to fetch streams (attempt ${attempt + 1}): $e")
+                delay(STREAMS_FETCH_RETRY_DELAY_MS * (attempt + 1))
+            }
+        }
+        return MediaServiceRepository.instance.getStreams(videoId)
+    }
+
+    /**
+     * The video could not be loaded. Instead of leaving the player loading forever, try the next
+     * video of the queue (but only a few times in a row, e.g. if there is no network connection).
+     */
+    private fun skipToNextVideoAfterFailure() {
+        if (consecutiveFetchFailures >= MAX_CONSECUTIVE_FETCH_FAILURES) {
+            consecutiveFetchFailures = 0
+            return
+        }
+
+        val nextVideoId = PlayingQueue.getNext() ?: return
+        consecutiveFetchFailures++
+        navigateVideo(nextVideoId)
     }
 
     private fun configurePlayer(seekToPositionMs: Long) {
@@ -219,15 +295,17 @@ open class OnlinePlayerService : AbstractPlayerService() {
     private fun setStreamSource() {
         val streams = streams ?: return
 
+        val source = streamSources.getOrNull(streamSourceIndex)
+        Log.i(TAG(), "playing with source $source (available: $streamSources)")
+
         when {
             // SABR
-            // skip SABR for livestreams, as the player impl has no support for it
-            !streams.isLive && streams.serverAbrStreamingUrl != null && streams.videoPlaybackUstreamerConfig != null -> {
+            source == StreamSource.SABR -> {
                 val sabrMediaSourceFactory = SabrMediaSource.Factory(
                     SabrManifest(videoId, streams)
                 )
                 val mediaItem = createMediaItem(
-                    streams.serverAbrStreamingUrl.toUri(),
+                    streams.serverAbrStreamingUrl!!.toUri(),
                     "application/vnd.yt-ump",
                     streams
                 )
@@ -284,7 +362,7 @@ open class OnlinePlayerService : AbstractPlayerService() {
                 return
             }
             // DASH
-            streams.videoStreams.any { it.url?.startsWith("sabr://") != true } -> {
+            source == StreamSource.DASH -> {
                 // only use the dash manifest generated by YT if either it's a livestream or no other source is available
                 val dashUri =
                     if (streams.isLive && !streams.dash.isNullOrBlank()) {
@@ -299,7 +377,7 @@ open class OnlinePlayerService : AbstractPlayerService() {
                 exoPlayer?.setMediaItem(mediaItem)
             }
             // HLS as last fallback
-            streams.hls != null -> {
+            source == StreamSource.HLS && streams.hls != null -> {
                 val hlsMediaSourceFactory = HlsMediaSource.Factory(DefaultDataSource.Factory(this))
                     .setPlaylistParserFactory(YoutubeHlsPlaylistParser.Factory())
 
@@ -321,6 +399,40 @@ open class OnlinePlayerService : AbstractPlayerService() {
         }
     }
 
+    /**
+     * Returns the available ways to play the [streams], ordered by how reliable they are.
+     *
+     * Plain DASH is preferred, since every segment is a normal ranged HTTP request. SABR needs one
+     * blocking round trip per segment, which is too slow to keep the buffer filled on some networks.
+     */
+    private fun getStreamSources(streams: Streams) = buildList {
+        // livestreams can only be played through YouTube's own manifest, which is sometimes empty
+        val hasDashSource = if (streams.isLive) {
+            !streams.dash.isNullOrBlank()
+        } else {
+            streams.videoStreams.any { it.url?.startsWith("sabr://") != true }
+        }
+        if (hasDashSource) add(StreamSource.DASH)
+        // skip SABR for livestreams, as the player impl has no support for it
+        if (!streams.isLive && streams.serverAbrStreamingUrl != null && streams.videoPlaybackUstreamerConfig != null) {
+            add(StreamSource.SABR)
+        }
+        if (!streams.hls.isNullOrBlank()) add(StreamSource.HLS)
+    }
+
+    override fun onPlaybackError(error: PlaybackException): Boolean {
+        if (!hasFallbackSource) return false
+
+        Log.w(TAG(), "source ${streamSources[streamSourceIndex]} failed, trying the next one: $error")
+        streamSourceIndex++
+        isSwitchingSource = true
+
+        val positionMs = exoPlayer?.currentPosition ?: 0L
+        setStreamSource()
+        configurePlayer(positionMs)
+        return true
+    }
+
     private fun getSubtitleConfigs(): List<SubtitleConfiguration> = streams?.subtitles?.map {
         val roleFlags = getSubtitleRoleFlags(it)
         SubtitleConfiguration.Builder(it.url!!.toUri())
@@ -337,3 +449,7 @@ open class OnlinePlayerService : AbstractPlayerService() {
             .setMetadata(streams, videoId)
             .build()
 }
+
+private const val STREAMS_FETCH_ATTEMPTS = 3
+private const val MAX_CONSECUTIVE_FETCH_FAILURES = 3
+private const val STREAMS_FETCH_RETRY_DELAY_MS = 700L
