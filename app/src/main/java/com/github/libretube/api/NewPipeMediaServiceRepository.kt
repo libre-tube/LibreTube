@@ -36,7 +36,6 @@ import org.schabi.newpipe.extractor.Page
 import org.schabi.newpipe.extractor.channel.ChannelInfo
 import org.schabi.newpipe.extractor.channel.ChannelInfoItem
 import org.schabi.newpipe.extractor.channel.tabs.ChannelTabInfo
-import org.schabi.newpipe.extractor.channel.tabs.ChannelTabs
 import org.schabi.newpipe.extractor.comments.CommentsInfo
 import org.schabi.newpipe.extractor.comments.CommentsInfoItem
 import org.schabi.newpipe.extractor.kiosk.KioskInfo
@@ -181,8 +180,7 @@ fun ChannelInfo.toChannel() = Channel(
     verified = isVerified,
     avatarUrl = avatars.maxByOrNull { it.height }?.url,
     bannerUrl = banners.maxByOrNull { it.height }?.url,
-    tabs = tabs.filterNot { it.contentFilters.contains(ChannelTabs.VIDEOS) }
-        .map { ChannelTab(it.contentFilters.first().lowercase(), it.toTabDataString()) },
+    tabs = tabs.map { ChannelTab(it.contentFilters.first().lowercase(), it.toTabDataString()) },
     subscriberCount = subscriberCount
 )
 
@@ -430,45 +428,32 @@ class NewPipeMediaServiceRepository : MediaServiceRepository {
         return NewPipeExtractorInstance.extractor.suggestionExtractor.suggestionList(query)
     }
 
-    private suspend fun getLatestVideos(channelInfo: ChannelInfo): Pair<List<StreamItem>, String?> {
-        val relatedTab = channelInfo.tabs.find { it.contentFilters.contains(ChannelTabs.VIDEOS) }
-            ?: return emptyList<StreamItem>() to null
-
-        val relatedStreamsResp = getChannelTab(relatedTab.toTabDataString())
-        return relatedStreamsResp.content.map { it.toStreamItem() } to relatedStreamsResp.nextpage
-    }
-
     override suspend fun getChannel(channelId: String): Channel {
         val channelUrl = "$YOUTUBE_FRONTEND_URL/channel/${channelId}"
         val channelInfo = ChannelInfo.getInfo(NewPipeExtractorInstance.extractor, channelUrl)
 
-        val channel = channelInfo.toChannel()
-
-        val relatedVideos = getLatestVideos(channelInfo)
-        channel.relatedStreams = relatedVideos.first
-        channel.nextpage = relatedVideos.second
-
-        return channel
+        return channelInfo.toChannel()
     }
 
     override suspend fun getChannelTab(data: String, nextPage: String?): ChannelTabResponse {
         val linkListHandler = data.toListLinkHandler()
 
-        val (items, newNextPage) = if (nextPage == null) {
+        val (items, newNextPage, sort) = if (nextPage == null) {
             val resp = ChannelTabInfo.getInfo(NewPipeExtractorInstance.extractor, linkListHandler)
-            resp.relatedItems to resp.nextPage
+            Triple(resp.relatedItems, resp.nextPage, resp.sortOptionPages)
         } else {
             val resp = ChannelTabInfo.getMoreItems(
                 NewPipeExtractorInstance.extractor,
                 linkListHandler,
                 nextPage.toPage()
             )
-            resp.items to resp.nextPage
+            Triple(resp.items, resp.nextPage, null)
         }
 
         return ChannelTabResponse(
             content = items.mapNotNull { it.toContentItem() },
-            nextpage = newNextPage?.toNextPageString()
+            nextpage = newNextPage?.toNextPageString(),
+            sortingOptions = sort?.mapValues { it.value.toNextPageString() }
         )
     }
 
@@ -476,13 +461,7 @@ class NewPipeMediaServiceRepository : MediaServiceRepository {
         val channelUrl = "$YOUTUBE_FRONTEND_URL/c/${channelName}"
         val channelInfo = ChannelInfo.getInfo(NewPipeExtractorInstance.extractor, channelUrl)
 
-        val channel = channelInfo.toChannel()
-
-        val relatedVideos = getLatestVideos(channelInfo)
-        channel.relatedStreams = relatedVideos.first
-        channel.nextpage = relatedVideos.second
-
-        return channel
+        return channelInfo.toChannel()
     }
 
     override suspend fun getChannelNextPage(channelId: String, nextPage: String): Channel {
