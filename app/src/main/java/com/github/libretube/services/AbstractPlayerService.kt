@@ -49,6 +49,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import kotlin.math.abs
 
 @UnstableApi
 abstract class AbstractPlayerService : MediaLibraryService(), MediaLibrarySession.Callback {
@@ -69,6 +70,16 @@ abstract class AbstractPlayerService : MediaLibraryService(), MediaLibrarySessio
     private var sponsorBlockAutoSkip = true
     protected val sponsorBlockConfig = PlayerHelper.getSponsorBlockCategories()
     private var sponsorBlockSegments = listOf<Segment>()
+
+    /**
+     * The player position during the previous [checkForSegments] call, used to detect seeking.
+     */
+    private var previousSegmentCheckPositionMs = C.TIME_UNSET
+
+    /**
+     * The UUID of the segment the user has manually seeked into. It is not skipped automatically.
+     */
+    private var segmentSeekedInto: String? = null
 
     /**
      * Whether the service should automatically play the next video after the current video finished.
@@ -251,6 +262,8 @@ abstract class AbstractPlayerService : MediaLibraryService(), MediaLibrarySessio
     @CallSuper
     open fun navigateVideo(videoId: String) {
         sponsorBlockSegments = emptyList()
+        segmentSeekedInto = null
+        previousSegmentCheckPositionMs = C.TIME_UNSET
         exoPlayer?.clearMediaItems()
 
         this.videoId = videoId
@@ -280,13 +293,32 @@ abstract class AbstractPlayerService : MediaLibraryService(), MediaLibrarySessio
     private fun checkForSegments() {
         handler.postDelayed(this::checkForSegments, 100)
 
-        val (currentSegment, sbSkipOption) = exoPlayer?.getCurrentSegment(
+        val player = exoPlayer ?: return
+
+        // a jump of the position that is much larger than the time since the last check can only be
+        // caused by the user seeking (or by an automatic skip, which resets the position below)
+        val positionMs = player.currentPosition
+        val hasSeeked = previousSegmentCheckPositionMs != C.TIME_UNSET &&
+            abs(positionMs - previousSegmentCheckPositionMs) > SEEK_DETECTION_THRESHOLD_MS
+        previousSegmentCheckPositionMs = positionMs
+
+        val (currentSegment, sbSkipOption) = player.getCurrentSegment(
             sponsorBlockSegments,
             sponsorBlockConfig
-        ) ?: return
+        ) ?: run {
+            segmentSeekedInto = null
+            return
+        }
+
+        // If the user deliberately seeks into a segment, playing it is what they want. Skipping it
+        // automatically would e.g. jump to the end of the video if the segment reaches the end.
+        if (hasSeeked) segmentSeekedInto = currentSegment.uuid
+        if (currentSegment.uuid == segmentSeekedInto) return
 
         if (sbSkipOption in arrayOf(SbSkipOptions.AUTOMATIC, SbSkipOptions.AUTOMATIC_ONCE) && sponsorBlockAutoSkip) {
-            exoPlayer?.seekTo(currentSegment.segmentStartAndEnd.second.toLong() * 1000)
+            val segmentEndMs = currentSegment.segmentStartAndEnd.second.toLong() * 1000
+            player.seekTo(segmentEndMs)
+            previousSegmentCheckPositionMs = segmentEndMs
             currentSegment.skipped = true
 
             if (PlayerHelper.sponsorBlockNotifications) toastFromMainThread(R.string.segment_skipped)
@@ -549,6 +581,11 @@ abstract class AbstractPlayerService : MediaLibraryService(), MediaLibrarySessio
         private const val START_SERVICE_ACTION = "start_service_action"
         private const val STOP_SERVICE_ACTION = "stop_service_action"
         private const val RUN_PLAYER_COMMAND_ACTION = "run_player_command_action"
+
+        /**
+         * Position jumps larger than this between two segment checks (every 100ms) are seeks.
+         */
+        private const val SEEK_DETECTION_THRESHOLD_MS = 2500L
 
         val startServiceCommand = SessionCommand(START_SERVICE_ACTION, Bundle.EMPTY)
         val stopServiceCommand = SessionCommand(STOP_SERVICE_ACTION, Bundle.EMPTY)
