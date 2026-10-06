@@ -26,6 +26,7 @@ import com.github.libretube.extensions.sha256Sum
 import com.github.libretube.extensions.toID
 import com.github.libretube.helpers.NewPipeExtractorInstance
 import com.github.libretube.helpers.PlayerHelper
+import com.github.libretube.obj.ChannelIdentifier
 import com.github.libretube.ui.dialogs.ShareDialog.Companion.YOUTUBE_FRONTEND_URL
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
@@ -428,10 +429,8 @@ class NewPipeMediaServiceRepository : MediaServiceRepository {
         return NewPipeExtractorInstance.extractor.suggestionExtractor.suggestionList(query)
     }
 
-    override suspend fun getChannel(channelId: String): Channel {
-        val channelUrl = "$YOUTUBE_FRONTEND_URL/channel/${channelId}"
-        val channelInfo = ChannelInfo.getInfo(NewPipeExtractorInstance.extractor, channelUrl)
-
+    override suspend fun getChannel(channel: ChannelIdentifier): Channel {
+        val channelInfo = ChannelInfo.getInfo(NewPipeExtractorInstance.extractor, channel.url())
         return channelInfo.toChannel()
     }
 
@@ -455,13 +454,6 @@ class NewPipeMediaServiceRepository : MediaServiceRepository {
             nextpage = newNextPage?.toNextPageString(),
             sortingOptions = sort?.mapValues { it.value.toNextPageString() }
         )
-    }
-
-    override suspend fun getChannelByName(channelName: String): Channel {
-        val channelUrl = "$YOUTUBE_FRONTEND_URL/c/${channelName}"
-        val channelInfo = ChannelInfo.getInfo(NewPipeExtractorInstance.extractor, channelUrl)
-
-        return channelInfo.toChannel()
     }
 
     override suspend fun getChannelNextPage(channelId: String, nextPage: String): Channel {

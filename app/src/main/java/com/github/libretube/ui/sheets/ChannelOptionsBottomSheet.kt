@@ -11,6 +11,7 @@ import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.toID
 import com.github.libretube.helpers.BackgroundHelper
 import com.github.libretube.helpers.NavigationHelper
+import com.github.libretube.obj.ChannelIdentifier
 import com.github.libretube.obj.ShareData
 import com.github.libretube.parcelable.PlayerData
 import com.github.libretube.ui.dialogs.ShareDialog
@@ -72,7 +73,9 @@ class ChannelOptionsBottomSheet : BaseBottomSheet() {
                 ChannelBottomSheetItem.PlayLatestVideos -> {
                     try {
                         val channel = withContext(Dispatchers.IO) {
-                            MediaServiceRepository.instance.getChannel(channelId)
+                            MediaServiceRepository.instance.getChannel(
+                                ChannelIdentifier.Id(channelId)
+                            )
                         }
                         channel.relatedStreams.firstOrNull()?.url?.toID()?.let {
                             NavigationHelper.navigateVideo(
@@ -91,7 +94,9 @@ class ChannelOptionsBottomSheet : BaseBottomSheet() {
                 ChannelBottomSheetItem.PlayOnBackground -> {
                     try {
                         val channel = withContext(Dispatchers.IO) {
-                            MediaServiceRepository.instance.getChannel(channelId)
+                            MediaServiceRepository.instance.getChannel(
+                                ChannelIdentifier.Id(channelId)
+                            )
                         }
                         channel.relatedStreams.firstOrNull()?.url?.toID()?.let {
                             BackgroundHelper.playOnBackground(
