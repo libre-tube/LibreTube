@@ -9,7 +9,7 @@ object IntentData {
     const val videoTitle = "videoTitle"
     const val channelId = "channelId"
     const val channelName = "channelName"
-    const val channelHandle = "channelHandle"
+    const val channelIdentifier = "channelIdentifier"
     const val channelAvatar = "channelAvatar"
     const val playlistId = "playlistId"
     const val timeStamp = "timeStamp"

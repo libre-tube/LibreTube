@@ -63,14 +63,11 @@ object IntentHelper {
             lastSegment == "results" -> {
                 putExtra(IntentData.query, uri.getQueryParameter("search_query"))
             }
-            secondLastSegment == "channel" -> {
-                putExtra(IntentData.channelId, lastSegment)
-            }
-            secondLastSegment == "c" || secondLastSegment == "user" -> {
-                putExtra(IntentData.channelName, lastSegment)
-            }
-            lastSegment?.startsWith("@") == true -> {
-                putExtra(IntentData.channelHandle,  lastSegment.removePrefix("@"))
+            secondLastSegment == "channel"
+                    || secondLastSegment == "c"
+                    || secondLastSegment == "user"
+                    || lastSegment?.startsWith( "@" ) == true -> {
+                putExtra(IntentData.channelIdentifier,  lastSegment!!.removePrefix("@"))
             }
             lastSegment == "playlist" -> {
                 putExtra(IntentData.playlistId, uri.getQueryParameter("list"))
