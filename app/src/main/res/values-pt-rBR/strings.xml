@@ -123,7 +123,7 @@
     <string name="shareTo">Compartilhar URL</string>
     <string name="legacyIcon">Legado perdido</string>
     <string name="flameIcon">Chama voadora</string>
-    <string name="instance_summary">Piped, login e conta</string>
+    <string name="instance_summary">Sincronização de dados, conta e histórico</string>
     <string name="instance_name">Nome da instância</string>
     <string name="instance_api_url">URL para API da instância</string>
     <string name="addInstance">Adicionar instância</string>
@@ -153,7 +153,7 @@
     <string name="deleteAccount_summary">Exclua sua conta Piped</string>
     <string name="no_audio">Sem áudio</string>
     <string name="always">Sempre</string>
-    <string name="watch_history_summary">Mantenha o controle dos vídeos assistidos localmente</string>
+    <string name="watch_history_summary">Mantenha o controle dos vídeos assistidos</string>
     <string name="reset_watch_positions">Redefinir</string>
     <string name="autoRotatePlayer">Tela cheia automática</string>
     <string name="notify_new_streams">Receber notificações de novos vídeos</string>
@@ -543,4 +543,24 @@
     <string name="courses">Cursos</string>
     <string name="comment_verified">Verificado</string>
     <string name="comment_pinned">Fixado</string>
+    <string name="welcome">Bem-vindo ao LibreTube! Para começar, selecione um modo de sincronização abaixo para decidir se deseja sincronizar seus dados de usuário entre dispositivos.</string>
+    <string name="choose_instance">Por favor, escolha uma instância primeiro!</string>
+    <string name="choose_instance_long">Escolha uma instância do Piped na lista abaixo. A instância do Piped atuará como intermediária entre você e o YouTube. Essas instâncias estão localizadas em diferentes lugares físicos, indicados pelas respectivas bandeiras dos países. Instâncias fisicamente mais próximas de você provavelmente serão mais rápidas do que aquelas que estão mais distantes. Você pode alterar a instância utilizada nas configurações a qualquer momento.</string>
+    <string name="load_data_from">Carregar dados do YouTube de</string>
+    <string name="load_data_from_local">Diretamente do YouTube</string>
+    <string name="load_data_from_piped">via Piped (descontinuado)</string>
+    <string name="libretube_sync_server">Servidor de sincronização do LibreTube</string>
+    <string name="data_synchronization">Sincronização de dados</string>
+    <string name="sync_server_type">Sincronizar dados do usuário (assinaturas, playlists) via</string>
+    <string name="sync_server_url">URL do servidor de sincronização do LibreTube</string>
+    <string name="export">Exportar</string>
+    <string name="exporting">Exportação em andamento…</string>
+    <string name="account">Conta</string>
+    <string name="missing_auth_falling_back">Não conectado. Sincronização de dados desativada.</string>
+    <string name="sync_type_summary_none">Armazene todos os dados do usuário offline dentro do aplicativo. Isso significa que você não poderá sincronizar dados entre seus dispositivos, mas pode ser a escolha certa se você utiliza apenas um dispositivo ou não se importa com a sincronização entre eles.</string>
+    <string name="sync_type_summary_libretube">Armazene dados de playlists e inscrições no servidor de sincronização do LibreTube (%1$s). Isso permite que você faça login na sua conta em qualquer outro dispositivo para acessar suas inscrições e playlists. Aviso sobre privacidade: os dados do usuário são pseudonimizados no servidor, mas não possuem criptografia de ponta a ponta. Se preferir, você também pode hospedar sua própria versão do servidor, mas, geralmente, o servidor oficial é suficiente.</string>
+    <string name="sync_type_summary_piped">Apenas para usuários avançados (recurso obsoleto):\nArmazene dados de playlists e inscrições no Piped (%1$s). Como o Piped não possui mais instâncias públicas, você precisará hospedar sua própria instância do Piped.</string>
+    <string name="switch_sync_type_warning">Se você utilizava anteriormente um tipo de sincronização diferente, faça primeiro um backup de suas assinaturas e playlists. Em seguida, você pode alterar o tipo de sincronização nas configurações da instância e reimportar seus dados a partir do backup.</string>
+    <string name="oidc_login">Continuar com OIDC</string>
+    <string name="already_downloaded">Você já baixou este vídeo!</string>
 </resources>
