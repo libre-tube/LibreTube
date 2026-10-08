@@ -127,7 +127,7 @@
     <string name="downloads">التنزيلات</string>
     <string name="legacyIcon">الإرث الضائع</string>
     <string name="gradientIcon">التدرج اللوني</string>
-    <string name="instance_summary">مزامنة البيانات والحساب و Piped</string>
+    <string name="instance_summary">مزامنة البيانات والحساب و التأريخ</string>
     <string name="instance_name">اسم الخادم</string>
     <string name="live">مباشر</string>
     <string name="player_autoplay">التشغيل التلقائي</string>
@@ -181,7 +181,7 @@
     <string name="pure_theme_summary">أسود نقي</string>
     <string name="data_saver_mode">وضع توفير البيانات</string>
     <string name="search_history_summary">تذكر عمليات البحث</string>
-    <string name="watch_history_summary">تتبع مقاطع الفيديو التي شاهدتها محليًا</string>
+    <string name="watch_history_summary">تتبع مقاطع الفيديو التي شاهدتها</string>
     <string name="watch_positions_title">تذكر مواضع التشغيل</string>
     <string name="reset_watch_positions">اعادة تعيين</string>
     <string name="system_caption_style">عرض التسميات التوضيحية</string>
@@ -571,4 +571,5 @@
     <string name="switch_sync_type_warning">إذا كنت قد استخدمت نوع مزامنة مختلفًا سابقًا فيُرجى أخذ نسخة احتياطية من اشتراكاتك وقوائم التشغيل أولاً يمكنك بعد ذلك تبديل نوع المزامنة في إعدادات المثيل وإعادة استيراد بياناتك من النسخة الاحتياطية.</string>
     <string name="oidc_login">المتابعة مع OIDC</string>
     <string name="already_downloaded">لقد قمت بتنزيل هذا الفيديو بالفعل!</string>
+    <string name="account">الحساب</string>
 </resources>
