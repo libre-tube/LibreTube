@@ -410,7 +410,7 @@
     <string name="pure_theme_summary">ธีมขาว/ดำพรวนทั้งหมด</string>
     <string name="appearance_summary">ปรับแอปให้เข้ากับคุณ</string>
     <string name="update_available">มีอัปเดตใหม่</string>
-    <string name="watch_history_summary">จดจำวิดีโอที่ดูแล้วเอาไว้ในระบบ</string>
+    <string name="watch_history_summary">จดจำวิดีโอที่ดูไปแล้ว</string>
     <string name="tooltip_watch_position">ตำแหน่งที่ดู</string>
     <string name="nothing_selected">ไม่มีอะไรเลือกเอาไว้!</string>
     <string name="auth_instance">อินสแตนซ์ยืนยันผู้ใช้งาน</string>
