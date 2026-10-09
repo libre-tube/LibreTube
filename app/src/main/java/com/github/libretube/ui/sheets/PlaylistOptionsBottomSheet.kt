@@ -1,7 +1,6 @@
 package com.github.libretube.ui.sheets
 
 import android.os.Bundle
-import androidx.annotation.StringRes
 import androidx.core.os.bundleOf
 import androidx.lifecycle.lifecycleScope
 import com.github.libretube.R
@@ -11,6 +10,7 @@ import com.github.libretube.constants.IntentData
 import com.github.libretube.enums.ImportFormat
 import com.github.libretube.enums.PlaylistType
 import com.github.libretube.enums.ShareObjectType
+import com.github.libretube.enums.menuoption.PlayListMenuOption
 import com.github.libretube.extensions.serializable
 import com.github.libretube.extensions.toID
 import com.github.libretube.extensions.toastFromMainDispatcher
@@ -40,38 +40,38 @@ class PlaylistOptionsBottomSheet : BaseBottomSheet() {
 
     private var exportFormat: ImportFormat = ImportFormat.NEWPIPE
 
-    private fun buildOptionsList(isBookmarked: Boolean?): List<Int> {
+    private fun buildOptionsList(isBookmarked: Boolean?): List<PlayListMenuOption> {
         // options for the dialog
-        val optionsList = mutableListOf(R.string.playOnBackground, R.string.download)
+        val optionsList = mutableListOf(PlayListMenuOption.PLAY_ON_BACKGROUND, PlayListMenuOption.DOWNLOAD)
 
-        if (PlayingQueue.isNotEmpty()) optionsList.add(R.string.add_to_queue)
+        if (PlayingQueue.isNotEmpty()) optionsList.add(PlayListMenuOption.ADD_TO_QUEUE)
 
         if (playlistType == PlaylistType.PUBLIC) {
-            optionsList.add(R.string.share)
-            optionsList.add(R.string.clonePlaylist)
+            optionsList.add(PlayListMenuOption.SHARE)
+            optionsList.add(PlayListMenuOption.CLONE)
 
             // only add the bookmark option to the playlist if public
             if (isBookmarked != null) {
                 optionsList.add(
-                    if (isBookmarked) R.string.remove_bookmark else R.string.add_to_bookmarks
+                    if (isBookmarked) PlayListMenuOption.REMOVE_FROM_BOOKMARKS else PlayListMenuOption.ADD_TO_BOOKMARKS
                 )
             }
         } else {
-            optionsList.add(R.string.export_playlist)
-            optionsList.add(R.string.renamePlaylist)
-            optionsList.add(R.string.change_playlist_description)
-            optionsList.add(R.string.deletePlaylist)
+            optionsList.add(PlayListMenuOption.EXPORT)
+            optionsList.add(PlayListMenuOption.RENAME)
+            optionsList.add(PlayListMenuOption.CHANGE_DESCRIPTION)
+            optionsList.add(PlayListMenuOption.DELETE)
         }
 
         return optionsList
     }
 
-    private suspend fun onOptionSelected(@StringRes stringResId: Int, isBookmarked: Boolean) {
+    private suspend fun onOptionSelected(playListOption: PlayListMenuOption, isBookmarked: Boolean) {
         val mFragmentManager = (context as BaseActivity).supportFragmentManager
 
-        when (stringResId) {
+        when (playListOption) {
             // play the playlist in the background
-            R.string.playOnBackground -> {
+            PlayListMenuOption.PLAY_ON_BACKGROUND -> {
                 val playlist = withContext(Dispatchers.IO) {
                     runCatching { PlaylistsHelper.getPlaylist(playlistId, playlistType) }
                 }.getOrElse {
@@ -87,11 +87,11 @@ class PlaylistOptionsBottomSheet : BaseBottomSheet() {
                 }
             }
 
-            R.string.add_to_queue -> {
+            PlayListMenuOption.ADD_TO_QUEUE -> {
                 PlayingQueue.insertPlaylist(playlistId, playlistType, null)
             }
             // Clone the playlist to the users Piped account
-            R.string.clonePlaylist -> {
+            PlayListMenuOption.CLONE -> {
                 val context = requireContext()
                 val playlistId = withContext(Dispatchers.IO) {
                     runCatching {
@@ -103,7 +103,7 @@ class PlaylistOptionsBottomSheet : BaseBottomSheet() {
                 )
             }
             // share the playlist
-            R.string.share -> {
+            PlayListMenuOption.SHARE -> {
                 val newShareDialog = ShareDialog()
                 newShareDialog.arguments = bundleOf(
                     IntentData.id to playlistId,
@@ -114,7 +114,7 @@ class PlaylistOptionsBottomSheet : BaseBottomSheet() {
                 newShareDialog.show(parentFragmentManager, ShareDialog::class.java.name)
             }
 
-            R.string.deletePlaylist -> {
+            PlayListMenuOption.DELETE -> {
                 val newDeletePlaylistDialog = DeletePlaylistDialog()
                 newDeletePlaylistDialog.arguments = bundleOf(
                     IntentData.playlistId to playlistId
@@ -122,7 +122,7 @@ class PlaylistOptionsBottomSheet : BaseBottomSheet() {
                 newDeletePlaylistDialog.show(mFragmentManager, null)
             }
 
-            R.string.renamePlaylist -> {
+            PlayListMenuOption.RENAME -> {
                 val newRenamePlaylistDialog = RenamePlaylistDialog()
                 newRenamePlaylistDialog.arguments = bundleOf(
                     IntentData.playlistId to playlistId,
@@ -131,7 +131,7 @@ class PlaylistOptionsBottomSheet : BaseBottomSheet() {
                 newRenamePlaylistDialog.show(mFragmentManager, null)
             }
 
-            R.string.change_playlist_description -> {
+            PlayListMenuOption.CHANGE_DESCRIPTION -> {
                 val newPlaylistDescriptionDialog = PlaylistDescriptionDialog()
                 newPlaylistDescriptionDialog.arguments = bundleOf(
                     IntentData.playlistId to playlistId,
@@ -140,7 +140,7 @@ class PlaylistOptionsBottomSheet : BaseBottomSheet() {
                 newPlaylistDescriptionDialog.show(mFragmentManager, null)
             }
 
-            R.string.download -> {
+            PlayListMenuOption.DOWNLOAD -> {
                 DownloadHelper.startDownloadPlaylistDialog(
                     requireContext(),
                     mFragmentManager,
@@ -150,7 +150,7 @@ class PlaylistOptionsBottomSheet : BaseBottomSheet() {
                 )
             }
 
-            R.string.export_playlist -> {
+            PlayListMenuOption.EXPORT -> {
                 val context = requireContext()
 
                 BackupRestoreSettings.createImportFormatDialog(
@@ -198,7 +198,9 @@ class PlaylistOptionsBottomSheet : BaseBottomSheet() {
         setTitle(playlistName)
 
         var optionsList = buildOptionsList(null)
-        setSimpleItems(optionsList.map { getString(it) }) { which ->
+        setItems(optionsList.map { option ->
+            option.toBottomSheetItem(::getString)
+        }) { which ->
             onOptionSelected(optionsList[which], false)
         }
 
@@ -211,7 +213,9 @@ class PlaylistOptionsBottomSheet : BaseBottomSheet() {
             withContext(Dispatchers.Main) {
                 optionsList = buildOptionsList(isBookmarked)
 
-                setSimpleItems(optionsList.map { getString(it) }) { which ->
+                setItems(optionsList.map { option ->
+                    option.toBottomSheetItem(::getString)
+                }) { which ->
                     onOptionSelected(optionsList[which], isBookmarked)
                 }
             }
