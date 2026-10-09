@@ -910,7 +910,6 @@ class CustomExoPlayerView(
 
     override fun onResizeModeClicked() {
         // switching between original aspect ratio (black bars) and zoomed to fill device screen
-
         BaseBottomSheet().setItems(
             resizeModes.map { option ->
                 option.toBottomSheetItem(
