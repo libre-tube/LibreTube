@@ -26,7 +26,6 @@ import androidx.media3.common.Format
 import androidx.media3.common.PlaybackParameters
 import androidx.media3.common.Player
 import androidx.media3.common.Tracks
-import androidx.media3.common.util.UnstableApi
 import androidx.media3.datasource.DefaultDataSource
 import androidx.media3.exoplayer.DefaultLoadControl
 import androidx.media3.exoplayer.DefaultRenderersFactory
@@ -117,7 +116,7 @@ object PlayerHelper {
     /**
      * Get the system's default captions style
      */
-    @OptIn(UnstableApi::class)
+    @OptIn(androidx.media3.common.util.UnstableApi::class)
     fun getCaptionStyle(context: Context): CaptionStyleCompat {
         val captioningManager = context.getSystemService<CaptioningManager>()!!
         return if (!captioningManager.isEnabled) {
@@ -430,7 +429,7 @@ object PlayerHelper {
         }
     }
 
-    @OptIn(UnstableApi::class)
+    @OptIn(androidx.media3.common.util.UnstableApi::class)
     private fun createRendererFactory(context: Context): DefaultRenderersFactory {
         val renderersFactory = object : DefaultRenderersFactory(context) {
             override fun buildTextRenderers(
@@ -451,7 +450,7 @@ object PlayerHelper {
     /**
      * Create a basic player, that is used for all types of playback situations inside the app
      */
-    @OptIn(UnstableApi::class)
+    @OptIn(androidx.media3.common.util.UnstableApi::class)
     fun createPlayer(context: Context, trackSelector: DefaultTrackSelector): ExoPlayer {
         val dataSourceFactory = DefaultDataSource.Factory(context)
         val audioAttributes = AudioAttributes.Builder()
@@ -476,7 +475,7 @@ object PlayerHelper {
     /**
      * Get the load controls for the player (buffering, etc)
      */
-    @OptIn(UnstableApi::class)
+    @OptIn(androidx.media3.common.util.UnstableApi::class)
     fun getLoadControl(): LoadControl {
         return DefaultLoadControl.Builder()
             // cache the last three minutes
@@ -493,7 +492,7 @@ object PlayerHelper {
     /**
      * Load playback parameters such as speed and skip silence
      */
-    @OptIn(UnstableApi::class)
+    @OptIn(androidx.media3.common.util.UnstableApi::class)
     fun ExoPlayer.loadPlaybackParams(): ExoPlayer {
         skipSilenceEnabled = skipSilence
 
@@ -791,7 +790,7 @@ object PlayerHelper {
         return roleFlags or acontRoleFlags
     }
 
-    @OptIn(UnstableApi::class)
+    @OptIn(androidx.media3.common.util.UnstableApi::class)
     fun getVideoStats(tracks: Tracks, videoId: String): VideoStats {
         val videoStats = VideoStats(videoId, "", "", "")
 
