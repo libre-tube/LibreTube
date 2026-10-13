@@ -40,7 +40,7 @@ import com.github.libretube.enums.ImportFormat
 import com.github.libretube.enums.SearchType
 import com.github.libretube.enums.TopLevelDestination
 import com.github.libretube.extensions.anyChildFocused
-import com.github.libretube.helpers.ImportHelper
+import com.github.libretube.helpers.ExportHelper
 import com.github.libretube.helpers.IntentHelper
 import com.github.libretube.helpers.NavBarHelper
 import com.github.libretube.helpers.NavigationHelper
@@ -63,6 +63,7 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
+
 
 class MainActivity : AbstractPlayerHostActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -92,7 +93,7 @@ class MainActivity : AbstractPlayerHostActivity() {
         if (uri == null) return@registerForActivityResult
 
         lifecycleScope.launch(Dispatchers.IO) {
-            ImportHelper.exportPlaylists(
+            ExportHelper.exportPlaylists(
                 this@MainActivity,
                 uri,
                 playlistExportFormat,

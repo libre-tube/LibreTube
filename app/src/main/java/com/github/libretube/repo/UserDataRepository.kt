@@ -22,6 +22,7 @@ import com.github.libretube.ui.dialogs.ShareDialog.Companion.YOUTUBE_FRONTEND_UR
 import kotlinx.coroutines.delay
 import org.schabi.newpipe.extractor.channel.ChannelInfo
 import java.util.concurrent.atomic.AtomicInteger
+import kotlin.time.Duration.Companion.milliseconds
 
 interface UserDataRepository {
     var requiresLogin: Boolean
@@ -33,7 +34,12 @@ interface UserDataRepository {
     fun getOidcLoginUrl(redirectUrl: String): String? = null
     fun getOidcDeleteAccountUrl(redirectUrl: String): String? = null
 
-    suspend fun subscribe(channelId: String, name: String, uploaderAvatar: String?, verified: Boolean)
+    suspend fun subscribe(
+        channelId: String,
+        name: String,
+        uploaderAvatar: String?,
+        verified: Boolean
+    )
     suspend fun unsubscribe(channelId: String)
     // TODO: isSubscribed shouldn't be able to return null?
     suspend fun isSubscribed(channelId: String): Boolean?
@@ -61,7 +67,12 @@ interface UserDataRepository {
     suspend fun addToWatchHistory(watchHistoryEntry: WatchHistoryEntry)
     suspend fun updateWatchHistoryEntry(metadata: WatchHistoryEntryMetadata)
     suspend fun removeFromWatchHistory(videoId: String)
-    suspend fun getWatchHistory(pageSize: Int, cursor: Any?, watchedState: WatchHistoryStatus): Pair<List<WatchHistoryEntry>, Any?>
+    suspend fun getWatchHistory(
+        pageSize: Int,
+        cursor: Any?,
+        watchedState: WatchHistoryStatus
+    ): Pair<List<WatchHistoryEntry>, Any?>
+
     suspend fun getFromWatchHistory(videoId: String): WatchHistoryEntry?
     suspend fun clearWatchHistory()
 
@@ -73,23 +84,19 @@ interface UserDataRepository {
     // The following methods can be overriden to offload the work to the server, but in most cases
     // the default implementation should work out just fine.
 
-    suspend fun importSubscriptions(newChannels: List<String>) {
+    suspend fun importSubscriptions(
+        newChannels: List<String>,
+        onProgressUpdate: (Int) -> Unit = {}
+    ) {
         val subscribedChannels = getSubscriptionChannelIds()
 
         val newFiltered = newChannels.filter { !subscribedChannels.contains(it) }
 
         val failedChannels = mutableListOf<String>()
 
-        val channelExtractionCount = AtomicInteger()
+        val channelExtractionCountSinceDelay = AtomicInteger()
+        val totalChannelExtractionCount = AtomicInteger()
         for (chunk in newFiltered.chunked(CHANNEL_CHUNK_SIZE)) {
-            // avoid being rate-limited by adding random delays between requests
-            val count = channelExtractionCount.get()
-            if (count >= CHANNEL_BATCH_SIZE) {
-                // add a delay after each BATCH_SIZE amount of fully-fetched channels
-                delay(CHANNEL_BATCH_DELAY.random())
-                channelExtractionCount.set(0)
-            }
-
             chunk.parallelMap { channelId ->
                 try {
                     val channelUrl = "$YOUTUBE_FRONTEND_URL/channel/${channelId}"
@@ -102,6 +109,16 @@ interface UserDataRepository {
                     failedChannels.add(channelId)
                 }
             }
+
+            // avoid being rate-limited by adding random delays between requests
+            val count = channelExtractionCountSinceDelay.addAndGet(chunk.size)
+            if (count >= CHANNEL_BATCH_SIZE) {
+                // add a delay after each BATCH_SIZE amount of fully-fetched channels
+                delay(CHANNEL_BATCH_DELAY.random().milliseconds)
+                channelExtractionCountSinceDelay.set(0)
+            }
+
+            onProgressUpdate(totalChannelExtractionCount.addAndGet(chunk.size))
         }
 
         if (!failedChannels.isEmpty()) {
@@ -127,21 +144,20 @@ interface UserDataRepository {
         return playlistId
     }
 
-    suspend fun importPlaylists(playlists: List<PipedImportPlaylist>) {
-        for (playlist in playlists) {
-            val playlistId = createPlaylist(playlist.name!!) ?: throw Exception("failed to create playlist")
+    suspend fun importPlaylist(playlist: PipedImportPlaylist) {
+        val playlistId =
+            createPlaylist(playlist.name!!) ?: throw Exception("failed to create playlist")
 
-            // if not logged in, all video information needs to become fetched manually
-            // Only do so with `MAX_CONCURRENT_IMPORT_CALLS` videos at once to prevent performance issues
-            for (videoIdList in playlist.videos.chunked(MAX_CONCURRENT_IMPORT_CALLS)) {
-                val streams = videoIdList.parallelMap {
-                    runCatching { MediaServiceRepository.instance.getStreams(it) }
-                        .getOrNull()
-                        ?.toStreamItem(it)
-                }.filterNotNull()
+        // if not logged in, all video information needs to become fetched manually
+        // Only do so with `MAX_CONCURRENT_IMPORT_CALLS` videos at once to prevent performance issues
+        for (videoIdList in playlist.videos.chunked(MAX_CONCURRENT_IMPORT_CALLS)) {
+            val streams = videoIdList.parallelMap {
+                runCatching { MediaServiceRepository.instance.getStreams(it) }
+                    .getOrNull()
+                    ?.toStreamItem(it)
+            }.filterNotNull()
 
-                addToPlaylist(playlistId, *streams.toTypedArray())
-            }
+            addToPlaylist(playlistId, *streams.toTypedArray())
         }
     }
 }

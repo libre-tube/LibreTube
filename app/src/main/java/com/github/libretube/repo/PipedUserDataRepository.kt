@@ -98,12 +98,10 @@ class PipedUserDataRepository : UserDataRepository {
         ).isOk()
     }
 
-    override suspend fun importPlaylists(playlists: List<PipedImportPlaylist>) {
-        for (playlist in playlists) {
-            val playlistId = PlaylistsHelper.createPlaylist(playlist.name!!) ?: return
-            val streams = playlist.videos.map { StreamItem(url = it) }
-            PlaylistsHelper.addToPlaylist(playlistId, *streams.toTypedArray())
-        }
+    override suspend fun importPlaylist(playlist: PipedImportPlaylist) {
+        val playlistId = PlaylistsHelper.createPlaylist(playlist.name!!) ?: return
+        val streams = playlist.videos.map { StreamItem(url = it) }
+        PlaylistsHelper.addToPlaylist(playlistId, *streams.toTypedArray())
     }
 
     override suspend fun createPlaylist(playlistName: String): String? {
@@ -140,7 +138,10 @@ class PipedUserDataRepository : UserDataRepository {
         }.getOrNull()?.subscribed
     }
 
-    override suspend fun importSubscriptions(newChannels: List<String>) {
+    override suspend fun importSubscriptions(
+        newChannels: List<String>,
+        onProgressUpdate: (Int) -> Unit
+    ) {
         RetrofitInstance.pipedAuthApi.importSubscriptions(false, newChannels)
     }
 

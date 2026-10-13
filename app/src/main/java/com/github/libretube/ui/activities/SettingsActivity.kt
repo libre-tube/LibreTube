@@ -11,6 +11,7 @@ import com.github.libretube.extensions.toastFromMainThread
 import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.ui.base.BaseActivity
 import com.github.libretube.ui.preferences.DataManagementSettings
+import com.github.libretube.ui.preferences.MainSettings
 
 class SettingsActivity : BaseActivity() {
     private lateinit var binding: ActivitySettingsBinding

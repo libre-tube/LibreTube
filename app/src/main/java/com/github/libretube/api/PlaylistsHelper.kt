@@ -72,8 +72,8 @@ object PlaylistsHelper {
     suspend fun removeFromPlaylist(playlistId: String, videoId: String, index: Int) =
         userDataRepository.removeFromPlaylist(playlistId, videoId, index)
 
-    suspend fun importPlaylists(playlists: List<PipedImportPlaylist>) =
-        userDataRepository.importPlaylists(playlists)
+    suspend fun importPlaylist(playlist: PipedImportPlaylist) =
+        userDataRepository.importPlaylist(playlist)
 
     suspend fun clonePlaylist(playlistId: String) = userDataRepository.clonePlaylist(playlistId)
     suspend fun deletePlaylist(playlistId: String) = userDataRepository.deletePlaylist(playlistId)

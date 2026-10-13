@@ -3,7 +3,6 @@ package com.github.libretube.db
 import androidx.room.TypeConverter
 import com.github.libretube.api.JsonHelper
 import kotlinx.datetime.LocalDate
-import kotlinx.serialization.encodeToString
 import java.nio.file.Path
 import kotlin.io.path.Path
 

@@ -25,8 +25,8 @@ object SubscriptionHelper {
         feedRepository.removeChannel(channelId)
     }
     suspend fun isSubscribed(channelId: String) = userDataRepository.isSubscribed(channelId)
-    suspend fun importSubscriptions(newChannels: List<String>) =
-        userDataRepository.importSubscriptions(newChannels)
+    suspend fun importSubscriptions(newChannels: List<String>, onProgressUpdate: (Int) -> Unit) =
+        userDataRepository.importSubscriptions(newChannels, onProgressUpdate)
 
     suspend fun getSubscriptions() =
         userDataRepository.getSubscriptions().sortedBy { it.name.lowercase() }

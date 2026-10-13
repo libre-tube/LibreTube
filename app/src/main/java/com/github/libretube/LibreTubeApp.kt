@@ -11,6 +11,7 @@ import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.helpers.ShortcutHelper
 import com.github.libretube.util.ExceptionHandler
 
+
 class LibreTubeApp : Application() {
     override fun onCreate() {
         super.onCreate()
@@ -59,6 +60,7 @@ class LibreTubeApp : Application() {
      * Initializes the required notification channels for the app.
      */
     private fun initializeNotificationChannels() {
+
         val downloadChannel = NotificationChannelCompat.Builder(
             PLAYLIST_DOWNLOAD_ENQUEUE_CHANNEL_NAME,
             NotificationManagerCompat.IMPORTANCE_LOW
@@ -88,13 +90,21 @@ class LibreTubeApp : Application() {
             .setDescription(getString(R.string.push_channel_description))
             .build()
 
+        val importChannel = NotificationChannelCompat.Builder(
+            IMPORT_CHANNEL_NAME,
+            NotificationManagerCompat.IMPORTANCE_DEFAULT
+        ).setName(getString(R.string.import_channel_name))
+            .setDescription(getString(R.string.import_channel_description))
+            .build()
+
         val notificationManager = NotificationManagerCompat.from(this)
         notificationManager.createNotificationChannelsCompat(
             listOf(
                 downloadChannel,
                 playlistDownloadEnqueueChannel,
                 pushChannel,
-                playerChannel
+                playerChannel,
+                importChannel
             )
         )
     }
@@ -106,5 +116,6 @@ class LibreTubeApp : Application() {
         const val PLAYLIST_DOWNLOAD_ENQUEUE_CHANNEL_NAME = "playlist_download_enqueue"
         const val PLAYER_CHANNEL_NAME = "player_mode"
         const val PUSH_CHANNEL_NAME = "notification_worker"
+        const val IMPORT_CHANNEL_NAME = "import_channel_worker"
     }
 }

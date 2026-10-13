@@ -13,8 +13,9 @@ import com.github.libretube.constants.IntentData
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.databinding.DialogImportExportFormatChooserBinding
 import com.github.libretube.enums.ImportFormat
+import com.github.libretube.enums.ImportType
 import com.github.libretube.helpers.BackupHelper
-import com.github.libretube.helpers.ImportHelper
+import com.github.libretube.helpers.ExportHelper
 import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.obj.BackupFile
 import com.github.libretube.ui.base.BasePreferenceFragment
@@ -22,6 +23,7 @@ import com.github.libretube.ui.dialogs.BackupDialog
 import com.github.libretube.ui.dialogs.BackupDialog.Companion.BACKUP_DIALOG_REQUEST_KEY
 import com.github.libretube.ui.dialogs.RequireRestartDialog
 import com.github.libretube.util.TextUtils
+import com.github.libretube.workers.ImportCoroutineWorker
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -61,16 +63,21 @@ class BackupRestoreSettings : BasePreferenceFragment() {
         ActivityResultContracts.GetContent()
     ) { uri ->
         if (uri == null) return@registerForActivityResult
-        CoroutineScope(Dispatchers.IO).launch {
-            ImportHelper.importSubscriptions(requireContext().applicationContext, uri, importFormat)
-        }
+
+        ImportCoroutineWorker.startImportWorker(
+            requireContext(),
+            listOf(uri),
+            ImportType.IMPORT_SUBSCRIPTIONS,
+            importFormat
+        )
     }
 
     private val createSubscriptionsFile =
         registerForActivityResult(CreateDocument(FILETYPE_ANY)) { uri ->
             if (uri == null) return@registerForActivityResult
+
             lifecycleScope.launch(Dispatchers.IO) {
-                ImportHelper.exportSubscriptions(
+                ExportHelper.exportSubscriptions(
                     requireContext().applicationContext,
                     uri,
                     importFormat
@@ -82,40 +89,38 @@ class BackupRestoreSettings : BasePreferenceFragment() {
     // result listeners for importing and exporting playlists
     private val getPlaylistsFile =
         registerForActivityResult(ActivityResultContracts.OpenMultipleDocuments()) { files ->
-            for (file in files) {
-                CoroutineScope(Dispatchers.IO).launch {
-                    ImportHelper.importPlaylists(
-                        requireContext().applicationContext,
-                        file,
-                        importFormat
-                    )
-                }
-            }
+            if (files.isEmpty()) return@registerForActivityResult
+
+            ImportCoroutineWorker.startImportWorker(
+                requireContext(),
+                files,
+                ImportType.IMPORT_PLAYLISTS,
+                importFormat
+            )
         }
 
     private val getWatchHistoryFile =
         registerForActivityResult(ActivityResultContracts.OpenMultipleDocuments()) { files ->
-            for (file in files) {
-                CoroutineScope(Dispatchers.IO).launch {
-                    ImportHelper.importWatchHistory(
-                        requireContext().applicationContext,
-                        file,
-                        importFormat
-                    )
-                }
-            }
+            if (files.isEmpty()) return@registerForActivityResult
+
+            ImportCoroutineWorker.startImportWorker(
+                requireContext().applicationContext,
+                files,
+                ImportType.IMPORT_WATCH_HISTORY,
+                importFormat
+            )
         }
 
     private val createPlaylistsFile =
         registerForActivityResult(CreateDocument(FILETYPE_ANY)) { uri ->
-            uri?.let {
-                lifecycleScope.launch(Dispatchers.IO) {
-                    ImportHelper.exportPlaylists(
-                        requireContext().applicationContext,
-                        uri,
-                        importFormat
-                    )
-                }
+            if (uri == null) return@registerForActivityResult
+
+            lifecycleScope.launch(Dispatchers.IO) {
+                ExportHelper.exportPlaylists(
+                    requireContext().applicationContext,
+                    uri,
+                    importFormat
+                )
             }
         }
 
