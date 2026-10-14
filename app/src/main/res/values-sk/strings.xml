@@ -129,7 +129,7 @@
     <string name="buffering_goal_summary">Maximálny počet sekúnd videa vo vyrovnávacej pamäti</string>
     <string name="empty_instance">Vyplňte názov a adresu URL rozhrania API.</string>
     <string name="legacyIcon">Stratený odkaz</string>
-    <string name="instance_summary">Piped, prihlásenie a účet</string>
+    <string name="instance_summary">Synchronizácia údajov, účet a história</string>
     <string name="gradientIcon">Glib prechod</string>
     <string name="update_available">K dispozícii je aktualizácia</string>
     <string name="category_interaction_summary">Keď sa uprostred obsahu nachádza krátke pripomenutie, aby ste sa prihlásili k odberu alebo sledovaniu. Ak je dlhé alebo o niečom konkrétnom, bude to sebapropagácia</string>
@@ -204,7 +204,7 @@
     <string name="data_saver_mode">Režim šetrenia dát</string>
     <string name="data_saver_mode_summary">Vynechá miniatúry a iné obrázky</string>
     <string name="search_history_summary">Zapamätá si vyhľadávanie</string>
-    <string name="watch_history_summary">Zachová lokálne stopu sledovaných videí</string>
+    <string name="watch_history_summary">Zachová stopu sledovaných videí</string>
     <string name="history_summary">História sledovania a vyhľadávania</string>
     <string name="watch_positions_title">Zapamätané pozície prehrávania</string>
     <string name="reset_watch_positions">Resetovať</string>
@@ -546,4 +546,23 @@
     <string name="comment_pinned">Pripnutý</string>
     <string name="courses">Kurzy</string>
     <string name="account">Účet</string>
+    <string name="welcome">Vitajte v LibreTube! Pre začiatok si prosím vyberte režim synchronizácie nižšie, aby ste rozhodli, či sa majú vaše používateľské údaje synchronizovať medzi zariadeniami.</string>
+    <string name="choose_instance">Najprv si prosím vyberte inštanciu!</string>
+    <string name="choose_instance_long">Z nižšie uvedených si prosím vyberte inštanciu Piped, ktorú chcete používať. Inštancia Piped bude fungovať ako sprostredkovateľ medzi vami a YouTube. Tieto inštancie sa nachádzajú na rôznych fyzických miestach – čo je označené vlajkami príslušných krajín. Inštancie, ktoré sú fyzicky bližšie k vám, budú pravdepodobne rýchlejšie ako tie, ktoré sú ďalej. Inštanciu, ktorú používate, môžete kedykoľvek zmeniť v nastaveniach.</string>
+    <string name="load_data_from">Načítať údaje YouTube z</string>
+    <string name="load_data_from_local">Priamo z YouTube</string>
+    <string name="load_data_from_piped">cez Piped (zastarané)</string>
+    <string name="libretube_sync_server">Synchronizačný server LibreTube</string>
+    <string name="data_synchronization">Synchronizácia údajov</string>
+    <string name="sync_server_type">Synchronizovať používateľské údaje (odbery, zoznamy skladieb) cez</string>
+    <string name="sync_server_url">URL synchronizačného servera LibreTube</string>
+    <string name="export">Exportovať</string>
+    <string name="exporting">Prebieha export…</string>
+    <string name="missing_auth_falling_back">Nie ste prihlásení. Synchronizácia údajov je vypnutá.</string>
+    <string name="sync_type_summary_none">Ukladať všetky používateľské údaje offline v aplikácii. To znamená, že údaje nemôžete synchronizovať medzi zariadeniami, ale môže to byť správna voľba, ak používate len jedno zariadenie alebo vás synchronizácia medzi zariadeniami nezaujíma.</string>
+    <string name="sync_type_summary_libretube">Ukladajte údaje o zoznamoch skladieb a odberoch na synchronizačnom serveri LibreTube (%1$s). To vám umožní prihlásiť sa do vášho účtu na akomkoľvek inom zariadení a mať prístup k vašim odberom a zoznamom skladieb. Upozornenie týkajúce sa ochrany súkromia: Údaje používateľov sú na strane servera pseudonymizované, nie sú však šifrované end-to-end. Podľa výberu si môžete hosťovať aj vlastnú verziu servera, ale zvyčajne by mal oficiálny server stačiť.</string>
+    <string name="sync_type_summary_piped">Len pre expertov, zastarané:\nUkladajte zoznamy skladieb a odbery na Piped (%1$s). Keďže Piped už nemá žiadne verejné inštancie, musíte hosťovať vlastnú Piped inštanciu.</string>
+    <string name="switch_sync_type_warning">Ak ste predtým používali iný typ synchronizácie, najprv si prosím urobte zálohu svojich odberov a zoznamov skladieb. Potom môžete prepnúť typ synchronizácie v nastaveniach inštancie a znova importovať svoje údaje zo zálohy.</string>
+    <string name="oidc_login">Pokračovať s OIDC</string>
+    <string name="already_downloaded">Toto video ste už stiahli!</string>
 </resources>
