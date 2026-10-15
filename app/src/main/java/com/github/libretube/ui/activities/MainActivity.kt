@@ -1,5 +1,6 @@
 package com.github.libretube.ui.activities
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
@@ -7,6 +8,7 @@ import android.view.KeyEvent
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.view.ViewGroup
 import android.view.ViewTreeObserver
 import android.widget.ScrollView
 import androidx.activity.result.contract.ActivityResultContracts
@@ -19,7 +21,10 @@ import androidx.core.os.bundleOf
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.view.allViews
 import androidx.core.view.children
+import androidx.core.view.doOnPreDraw
+import androidx.core.view.get
 import androidx.core.view.isNotEmpty
+import androidx.core.view.size
 import androidx.core.widget.NestedScrollView
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
@@ -60,6 +65,7 @@ import com.github.libretube.ui.preferences.BackupRestoreSettings
 import com.github.libretube.ui.preferences.BackupRestoreSettings.Companion.FILETYPE_ANY
 import com.github.libretube.util.UpdateChecker
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.android.material.navigation.NavigationBarMenuView
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
@@ -81,7 +87,6 @@ class MainActivity : AbstractPlayerHostActivity() {
     private val searchViewModel: SearchViewModel by viewModels()
     private val downloadViewModel: DownloadsViewModel by viewModels()
     private val playlistViewModel: PlaylistViewModel by viewModels()
-
     // registering for activity results is only possible, this here should have been part of
     // PlaylistOptionsBottomSheet instead if Android allowed us to
     private var playlistExportFormat: ImportFormat = ImportFormat.NEWPIPE
@@ -213,6 +218,9 @@ class MainActivity : AbstractPlayerHostActivity() {
         }
 
         binding.bottomNav.setOnItemSelectedListener {
+            if (resources.configuration.smallestScreenWidthDp >= MINIMUM_SCREEN_SIZE_TABLET) {
+                fixBottomNavSelectionIndicatorWidth()
+            }
             navigateToBottomSelectedItem(it)
         }
 
@@ -231,6 +239,27 @@ class MainActivity : AbstractPlayerHostActivity() {
         loadIntentData()
 
         showUserInfoDialogIfNeeded()
+    }
+
+    /**
+     * Works around a bug in the material design library that causes the
+     * selection indicator to be too small on large-screen devices.
+     */
+    private fun fixBottomNavSelectionIndicatorWidth() {
+        val menuView =
+            binding.bottomNav.getChildAt(0) as? ViewGroup ?: return
+
+        val selectedId = binding.bottomNav.selectedItemId
+        val selectedIndex = (0 until binding.bottomNav.menu.size)
+            .firstOrNull { binding.bottomNav.menu[it].itemId == selectedId }
+            ?: return
+
+        val selectedChild = menuView.getChildAt(selectedIndex) ?: return
+        selectedChild.doOnPreDraw {
+            // trigger a re-draw of the highlight indicator
+            @SuppressLint("RestrictedApi")
+            (menuView as NavigationBarMenuView).itemActiveIndicatorEnabled = true
+        }
     }
 
     /**
@@ -700,5 +729,9 @@ class MainActivity : AbstractPlayerHostActivity() {
 
         searchView.clearFocus()
         return true
+    }
+
+    companion object {
+        const val MINIMUM_SCREEN_SIZE_TABLET = 600
     }
 }
