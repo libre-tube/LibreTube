@@ -12,6 +12,7 @@ import com.github.libretube.api.ltsync.obj.LoginUser
 import com.github.libretube.api.ltsync.obj.Playlist
 import com.github.libretube.api.ltsync.obj.PlaylistResponse
 import com.github.libretube.api.ltsync.obj.RegisterUser
+import com.github.libretube.api.ltsync.obj.ServerMetaInfo
 import com.github.libretube.api.ltsync.obj.SubscriptionGroup
 import com.github.libretube.api.ltsync.obj.WatchHistoryItem
 import retrofit2.http.Body
@@ -28,6 +29,9 @@ import retrofit2.http.Query
 // generate -i api-spec.yaml -g kotlin -o outdir --library jvm-retrofit2 --additional-properties=serializationLibrary=kotlinx_serialization
 
 interface LibreTubeSyncServerApi {
+    @GET("/meta")
+    suspend fun getMetaInfo(): ServerMetaInfo
+
     // workaround for https://stackoverflow.com/questions/37942474/delete-method-is-not-supportingnon-body-http-method-cannot-contain-body-or-t
     @HTTP(method = "DELETE",  path ="v1/account/delete", hasBody = true)
     suspend fun deleteAccount(@Body deleteUser: DeleteUser)

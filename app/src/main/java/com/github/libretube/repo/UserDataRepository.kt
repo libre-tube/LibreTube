@@ -30,8 +30,8 @@ interface UserDataRepository {
     suspend fun register(username: String, password: String): String = ""
     suspend fun deleteAccount(password: String) = Unit
 
-    fun getOidcLoginUrl(redirectUrl: String): String? = null
-    fun getOidcDeleteAccountUrl(redirectUrl: String): String? = null
+    suspend fun getOidcLoginUrl(redirectUrl: String): String? = null
+    suspend fun getOidcDeleteAccountUrl(redirectUrl: String): String? = null
 
     suspend fun subscribe(channelId: String, name: String, uploaderAvatar: String?, verified: Boolean)
     suspend fun unsubscribe(channelId: String)
