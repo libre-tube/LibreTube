@@ -136,4 +136,7 @@
     <string name="normal_views">%1$s rigardoj%2$s</string>
     <string name="defaultIcon">Normala</string>
     <string name="legacyIcon">Perdita heredaĵo</string>
+    <string name="instance_summary">Sinkronigo de datumoj, konto kaj historio</string>
+    <string name="customInstance_summary">Aldoni…</string>
+    <string name="instance_name">Nomo de la instanco</string>
 </resources>
