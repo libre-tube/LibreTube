@@ -110,7 +110,7 @@
     <string name="gradientIcon">Gradien glib</string>
     <string name="instance_api_url">URL ke API instansi</string>
     <string name="player_autoplay">Mainkan secara otomatis</string>
-    <string name="instance_summary">Piped, log masuk, dan akun</string>
+    <string name="instance_summary">Sinkronisasi data, akun dan riwayat</string>
     <string name="reset">Atur ulang ke bawaan</string>
     <string name="watch_history">Riwayat tontonan</string>
     <string name="audio">Audio</string>
@@ -203,7 +203,7 @@
     <string name="pure_theme">Tema murni</string>
     <string name="pure_theme_summary">Tema putih/hitam murni</string>
     <string name="data_saver_mode">Mode penghemat data</string>
-    <string name="watch_history_summary">Simpan riwayat video yang ditonton secara lokal</string>
+    <string name="watch_history_summary">Lacak video yang sudah ditonton</string>
     <string name="history_summary">Riwayat tontonan dan penelusuran</string>
     <string name="system_caption_style">Gaya takarir sistem</string>
     <string name="captions">Takarir</string>
@@ -537,4 +537,24 @@
     <string name="courses">Kursus</string>
     <string name="comment_pinned">Disematkan</string>
     <string name="comment_verified">Terverifikasi</string>
+    <string name="welcome">Selamat datang di LibreTube! Untuk memulai, silahkan pilih mode sinkronisasi di bawah ini untuk memutuskan apakah ingin menyinkronkan data pengguna Anda di seluruh perangkat.</string>
+    <string name="choose_instance">Silahkan pilih sebuah instansi terlebih dahulu!</string>
+    <string name="choose_instance_long">Silahkan pilih instansi Piped untuk digunakan dari bawah. Instansi Piped akan bertindak sebagai perantara antara Anda dan YouTube. Instansi ini berlokasi di tempat fisik yang berbeda - ditandai dengan bendera negaranya. Instansi yang secara fisik lebih dekat dengan Anda kemungkinan besar akan lebih cepat daripada instansi yang tidak dekat. Anda dapat mengganti instansi yang Anda gunakan di pengaturan kapan saja.</string>
+    <string name="load_data_from">Muat data YouTube dari</string>
+    <string name="load_data_from_local">Langsung dari YouTube</string>
+    <string name="load_data_from_piped">melalui Piped (tidak disarankan lagi)</string>
+    <string name="libretube_sync_server">Server sinkronisasi LibreTube</string>
+    <string name="data_synchronization">Sinkronisasi data</string>
+    <string name="sync_server_type">Sinkronkan data pengguna (langganan, daftar putar) melalui</string>
+    <string name="sync_server_url">URL ke server sinkronisasi LibreTube</string>
+    <string name="export">Ekspor</string>
+    <string name="exporting">Ekspor sedang berlangsung…</string>
+    <string name="account">Akun</string>
+    <string name="missing_auth_falling_back">Belum masuk. Sinkronisasi data dimatikan.</string>
+    <string name="sync_type_summary_none">Simpan semua data pengguna secara offline di dalam aplikasi. Artinya, Anda tidak dapat menyinkronkan data antar perangkat Anda, namun mungkin merupakan pilihan yang tepat jika Anda hanya menggunakan satu perangkat atau tidak peduli dengan sinkronisasi antar perangkat.</string>
+    <string name="sync_type_summary_libretube">Simpan data daftar putar dan langganan di server sinkronisasi LibreTube (%1$s). Ini memungkinkan Anda untuk masuk ke akun Anda di perangkat manapun untuk memiliki akses ke langganan dan daftar putar Anda. Penafian: Data pengguna disamarkan di sisi server, tetapi tidak dienkripsi ujung-ke-ujung. Sesuai pilihan, Anda juga dapat menghosting versi server Anda sendiri, tetapi biasanya server resmi sudah cukup memadai.</string>
+    <string name="sync_type_summary_piped">Hanya untuk ahli, tidak disarankan lagi:\nSimpan data daftar putar dan langganan di Piped (%1$s). Karena Piped tidak lagi memiliki instansi publik, Anda harus menghosting instansi Piped Anda sendiri.</string>
+    <string name="switch_sync_type_warning">Jika sebelumnya Anda menggunakan jenis sinkronisasi yang berbeda, silahkan buat cadangan langganan dan daftar putar Anda terlebih dahulu. Anda kemudian dapat mengganti jenis sinkronisasi di pengaturan instansi dan mengimpor ulang data Anda dari cadangan.</string>
+    <string name="oidc_login">Lanjutkan dengan OIDC</string>
+    <string name="already_downloaded">Anda sudah mengunduh video ini!</string>
 </resources>
