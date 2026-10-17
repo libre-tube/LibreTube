@@ -79,7 +79,7 @@ enum class DownloadSortingOrder(
     NEWEST(R.string.most_recent, R.drawable.ic_sort_by_newest),
     ALPHABETIC(R.string.alphabetic, R.drawable.ic_sort_by_alpha),
     DURATION(R.string.duration, R.drawable.ic_time_outlined),
-    CHANNEL(R.string.sort_channel, R.drawable.ic_channel),
+    CHANNEL(R.string.sort_channel, R.drawable.ic_person),
     SIZE(R.string.sort_size, R.drawable.ic_sort_by_file_size)
 }
 

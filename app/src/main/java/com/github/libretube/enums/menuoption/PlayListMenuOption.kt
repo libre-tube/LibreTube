@@ -15,7 +15,7 @@ enum class PlayListMenuOption(
     REMOVE_FROM_BOOKMARKS(R.string.remove_bookmark, R.drawable.ic_remove_from_bookmark),
     ADD_TO_BOOKMARKS(R.string.add_to_bookmarks, R.drawable.ic_add_to_bookmark),
     EXPORT(R.string.export_playlist, R.drawable.ic_export),
-    RENAME(R.string.renamePlaylist, R.drawable.ic_title),
+    RENAME(R.string.renamePlaylist, R.drawable.ic_edit),
     CHANGE_DESCRIPTION(R.string.change_playlist_description, R.drawable.ic_description),
     DELETE(R.string.deletePlaylist, R.drawable.ic_delete),
 }

@@ -14,6 +14,6 @@ interface MenuOption {
     ) = BottomSheetItem(
         title = getString(titleStringRes),
         drawable = drawableRes,
-        isSelected =  this == preselectedItem,
+        isSelected = this == preselectedItem,
     )
 }
