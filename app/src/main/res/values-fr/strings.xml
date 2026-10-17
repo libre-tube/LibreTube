@@ -543,7 +543,7 @@
     <string name="comment_verified">Vérifié</string>
     <string name="comment_pinned">Épinglé</string>
     <string name="courses">Cours</string>
-    <string name="choose_instance">Veuillez d’abord choisir une instance !</string>
+    <string name="choose_instance">Veuillez d’abord sélectionner une instance.</string>
     <string name="libretube_sync_server">Serveur de synchronisation LibreTube</string>
     <string name="export">Exporter</string>
     <string name="exporting">Exportation en cours…</string>
