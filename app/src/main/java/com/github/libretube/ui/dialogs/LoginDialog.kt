@@ -29,18 +29,23 @@ class LoginDialog : DialogFragment() {
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val binding = DialogLoginBinding.inflate(layoutInflater)
 
-        @Suppress("DEPRECATION")
-        val oidcAuthUrl =
-            UserDataRepositoryHelper.userDataRepository.getOidcLoginUrl("${BuildConfig.APPLICATION_ID}://login_callback")
-        binding.oidcLogin.isVisible = oidcAuthUrl != null
+        lifecycleScope.launch {
+            @Suppress("DEPRECATION")
+            val oidcAuthUrl = runCatching {
+                withContext(Dispatchers.IO) {
+                    UserDataRepositoryHelper.userDataRepository.getOidcDeleteAccountUrl("${BuildConfig.APPLICATION_ID}://delete_callback")
+                }
+            }.getOrNull() ?: return@launch
 
-        binding.oidcLogin.setOnClickListener {
-            val intent = Intent().apply {
-                action = Intent.ACTION_VIEW
-                data = oidcAuthUrl?.toUri()
+            binding.oidcLogin.isVisible = true
+            binding.oidcLogin.setOnClickListener {
+                val intent = Intent().apply {
+                    action = Intent.ACTION_VIEW
+                    data = oidcAuthUrl.toUri()
+                }
+                activity?.startActivity(intent)
+                dismiss()
             }
-            activity?.startActivity(intent)
-            dismiss()
         }
 
         return MaterialAlertDialogBuilder(requireContext())

@@ -11,6 +11,7 @@ import com.github.libretube.api.ltsync.obj.ExtendedSubscriptionGroup
 import com.github.libretube.api.ltsync.obj.ExtendedWatchHistoryItem
 import com.github.libretube.api.ltsync.obj.LoginUser
 import com.github.libretube.api.ltsync.obj.RegisterUser
+import com.github.libretube.api.ltsync.obj.ServerMetaInfo
 import com.github.libretube.api.ltsync.obj.WatchHistoryItem
 import com.github.libretube.api.ltsync.obj.WatchedState
 import com.github.libretube.api.obj.Playlist
@@ -70,10 +71,21 @@ class LibreTubeSyncServerUserDataRepository : UserDataRepository {
         }
     }
 
-    override fun getOidcLoginUrl(redirectUrl: String): String =
-        "$baseUrl/v1/account/oidc/authenticate?redirect_url=$redirectUrl"
-    override fun getOidcDeleteAccountUrl(redirectUrl: String): String =
-        "$baseUrl/v1/account/oidc/delete?redirect_url=$redirectUrl"
+    private suspend fun getServerMetaInfo(): ServerMetaInfo {
+        return tryHttpOrRaiseError { api.getMetaInfo() }
+    }
+
+    override suspend fun getOidcLoginUrl(redirectUrl: String): String? {
+        if (!getServerMetaInfo().capabilities.oidc) return null
+
+        return "$baseUrl/v1/account/oidc/authenticate?redirect_url=$redirectUrl"
+    }
+    override suspend fun getOidcDeleteAccountUrl(redirectUrl: String): String? {
+        if (!getServerMetaInfo().capabilities.oidc) return null
+
+        return "$baseUrl/v1/account/oidc/delete?redirect_url=$redirectUrl"
+    }
+
 
     override suspend fun subscribe(
         channelId: String,
