@@ -10,6 +10,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.libretube.R
 import com.github.libretube.databinding.BottomSheetBinding
+import com.github.libretube.enums.menuoption.MenuOption
 import com.github.libretube.extensions.dpToPx
 import com.github.libretube.obj.BottomSheetItem
 import com.github.libretube.ui.adapters.BottomSheetAdapter

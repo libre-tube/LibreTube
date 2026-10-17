@@ -26,7 +26,6 @@ import androidx.media3.common.Format
 import androidx.media3.common.PlaybackParameters
 import androidx.media3.common.Player
 import androidx.media3.common.Tracks
-import androidx.media3.common.util.UnstableApi
 import androidx.media3.datasource.DefaultDataSource
 import androidx.media3.exoplayer.DefaultLoadControl
 import androidx.media3.exoplayer.DefaultRenderersFactory
@@ -49,6 +48,7 @@ import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.db.DatabaseHelper
 import com.github.libretube.enums.PlayerEvent
 import com.github.libretube.enums.SbSkipOptions
+import com.github.libretube.enums.menuoption.RepeatModeMenuOption
 import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.seekBy
 import com.github.libretube.extensions.togglePlayPauseState
@@ -87,11 +87,7 @@ object PlayerHelper {
      */
     const val MAX_BUFFER_DELAY = 10 * 60 * 1000L
 
-    val repeatModes = listOf(
-        Player.REPEAT_MODE_OFF to R.string.repeat_mode_none,
-        Player.REPEAT_MODE_ONE to R.string.repeat_mode_current,
-        Player.REPEAT_MODE_ALL to R.string.repeat_mode_all
-    )
+    val repeatModes: List<RepeatModeMenuOption> = RepeatModeMenuOption.entries
 
     /**
      * A list of all categories that are not disabled by default
@@ -433,7 +429,7 @@ object PlayerHelper {
         }
     }
 
-    @OptIn(UnstableApi::class)
+    @OptIn(androidx.media3.common.util.UnstableApi::class)
     private fun createRendererFactory(context: Context): DefaultRenderersFactory {
         val renderersFactory = object : DefaultRenderersFactory(context) {
             override fun buildTextRenderers(
@@ -794,7 +790,7 @@ object PlayerHelper {
         return roleFlags or acontRoleFlags
     }
 
-    @OptIn(UnstableApi::class)
+    @OptIn(androidx.media3.common.util.UnstableApi::class)
     fun getVideoStats(tracks: Tracks, videoId: String): VideoStats {
         val videoStats = VideoStats(videoId, "", "", "")
 

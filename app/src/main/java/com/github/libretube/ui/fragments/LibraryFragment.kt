@@ -22,6 +22,7 @@ import com.github.libretube.constants.IntentData
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.databinding.FragmentLibraryBinding
 import com.github.libretube.enums.PlaylistType
+import com.github.libretube.enums.menuoption.PlayListSortModeMenuOption
 import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.ceilHalf
 import com.github.libretube.extensions.dpToPx
@@ -118,19 +119,25 @@ class LibraryFragment : DynamicLayoutManagerFragment(R.layout.fragment_library) 
                 .show(childFragmentManager, CreatePlaylistDialog::class.java.name)
         }
 
-        val sortOptions = resources.getStringArray(R.array.playlistSortingOptions)
+        val sortOptions = listOf(
+            PlayListSortModeMenuOption.MOST_RECENT,
+            PlayListSortModeMenuOption.MOST_RECENT,
+            PlayListSortModeMenuOption.ALPHABETIC,
+            PlayListSortModeMenuOption.ALPHABETIC_REVERSED
+        ).map { it.toBottomSheetItem(::getString) }
+
         val sortOptionValues = resources.getStringArray(R.array.playlistSortingOptionsValues)
         val order = PreferenceHelper.getString(
             PreferenceKeys.PLAYLISTS_ORDER,
             sortOptionValues.first()
         )
         val orderIndex = sortOptionValues.indexOf(order)
-        binding.sortTV.text = sortOptions.getOrNull(orderIndex)
+        binding.sortTV.text = sortOptions.getOrNull(orderIndex)?.title
 
         binding.sortTV.setOnClickListener {
             BaseBottomSheet().apply {
-                setSimpleItems(sortOptions.toList()) { index ->
-                    binding.sortTV.text = sortOptions[index]
+                setItems(sortOptions) { index ->
+                    binding.sortTV.text = sortOptions[index].title
                     val value = sortOptionValues[index]
                     PreferenceHelper.putString(PreferenceKeys.PLAYLISTS_ORDER, value)
                     fetchPlaylists()
