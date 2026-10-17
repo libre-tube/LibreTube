@@ -543,4 +543,12 @@
     <string name="comment_verified">Vérifié</string>
     <string name="comment_pinned">Épinglé</string>
     <string name="courses">Cours</string>
+    <string name="choose_instance">Veuillez d’abord choisir une instance !</string>
+    <string name="libretube_sync_server">Serveur de synchronisation LibreTube</string>
+    <string name="export">Exporter</string>
+    <string name="exporting">Exportation en cours…</string>
+    <string name="account">Compte</string>
+    <string name="missing_auth_falling_back">Vous n\'êtes pas connecté. La synchronisation des données est désactivée.</string>
+    <string name="oidc_login">Continuer avec OIDC</string>
+    <string name="already_downloaded">Vous avez déjà téléchargé cette vidéo !</string>
 </resources>
