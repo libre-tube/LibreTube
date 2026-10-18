@@ -116,7 +116,7 @@
     <string name="fireIcon">Feu à la mode</string>
     <string name="birdIcon">Oiseau boosté</string>
     <string name="torchIcon">Torche à tendances</string>
-    <string name="instance_summary">Piped, connexion et compte</string>
+    <string name="instance_summary">Synchronisation des données, compte et historique</string>
     <string name="invalid_url">Veuillez saisir une URL qui fonctionne</string>
     <string name="customInstance_summary">Ajouter…</string>
     <string name="instance_name">Nom de l’instance</string>
@@ -179,7 +179,7 @@
     <string name="pure_theme">Thème pur</string>
     <string name="data_saver_mode">Mode économie de données</string>
     <string name="search_history_summary">Mémoriser les recherches</string>
-    <string name="watch_history_summary">Garder la trace des vidéos regardées localement</string>
+    <string name="watch_history_summary">Mémoriser les vidéos regardées</string>
     <string name="history_summary">Historique des vidéos regardées et des recherches</string>
     <string name="watch_positions_title">Mémoriser la position courante des lectures</string>
     <string name="reset_watch_positions">Réinitialiser</string>
@@ -551,4 +551,6 @@
     <string name="missing_auth_falling_back">Vous n\'êtes pas connecté. La synchronisation des données est désactivée.</string>
     <string name="oidc_login">Continuer avec OIDC</string>
     <string name="already_downloaded">Vous avez déjà téléchargé cette vidéo !</string>
+    <string name="welcome">Bienvenue dans LibreTube ! Pour débuter, sélectionnez un mode de synchronisation ci-dessous et indiquez comment synchroniser vos données utilisateur entre appareils.</string>
+    <string name="data_synchronization">Synchronisation des données</string>
 </resources>
