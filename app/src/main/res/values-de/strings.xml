@@ -117,7 +117,7 @@
     <string name="addInstance">Instanz hinzufügen</string>
     <string name="empty_instance">Gib den Namen und die API-URL ein.</string>
     <string name="invalid_url">Bitte eine funktionierende URL angeben</string>
-    <string name="instance_summary">Piped, Datensynchronisation und Konto</string>
+    <string name="instance_summary">Datensynchronisation, Konto und Verlauf</string>
     <string name="customInstance_summary">Hinzufügen…</string>
     <string name="category_music_offtopic">Musik: Nicht-Musik-Abschnitt</string>
     <string name="category_preview">Vorschau/Rückblick</string>
@@ -186,7 +186,7 @@
     <string name="reset_watch_positions">Zurücksetzen</string>
     <string name="general">Allgemein</string>
     <string name="general_summary">Downloads und Datensparmodus</string>
-    <string name="watch_history_summary">Angesehene Videos lokal speichern</string>
+    <string name="watch_history_summary">Angesehene Videos speichern</string>
     <string name="history_summary">Wiedergabe- und Suchverlauf</string>
     <string name="captions">Untertitel-Systemeinstellungen</string>
     <string name="seek_increment">Vorspul-Länge</string>
@@ -559,4 +559,5 @@
     <string name="sync_type_summary_piped">Nur für Experten, veraltet:\nSpeichern Sie Daten zu Wiedergabelisten und Abonnements auf Piped (%1$s). Da es keine öffentlichen Piped-Instanzen mehr gibt, müssen Sie Ihre eigene Piped-Instanz betreiben.</string>
     <string name="switch_sync_type_warning">Falls Sie zuvor einen anderen Synchronisierungstyp verwendet haben, erstellen Sie bitte zunächst eine Sicherungskopie Ihrer Abonnements und Wiedergabelisten. Anschließend können Sie den Synchronisierungstyp in den Instanz-Einstellungen ändern und Ihre Daten aus der Sicherungskopie erneut importieren.</string>
     <string name="already_downloaded">Du hast dieses Video bereits heruntergeladen!</string>
+    <string name="account">Konto</string>
 </resources>
