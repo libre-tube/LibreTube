@@ -49,24 +49,24 @@ class DownloadOptionsBottomSheet : BaseBottomSheet() {
         val playlistId = arguments?.getString(IntentData.playlistId)
 
         val options = mutableListOf(
-            DownloadListMenuOption.PLAY_ON_BACKGROUND,
-            DownloadListMenuOption.SHARE,
-            DownloadListMenuOption.DELETE,
-            DownloadListMenuOption.EXPORT,
+            DownloadListMenuOption.PlayOnBackground,
+            DownloadListMenuOption.Share,
+            DownloadListMenuOption.Delete,
+            DownloadListMenuOption.Export,
         )
 
         // can't navigate to video while in offline activity
         if (ContextHelper.tryUnwrapActivity<NoInternetActivity>(requireContext()) == null) {
-            options += DownloadListMenuOption.GO_TO_VIDEO
+            options += DownloadListMenuOption.GoToVideo
         }
 
         val isSelectedVideoCurrentlyPlaying = PlayingQueue.getCurrent()?.url?.toID() == videoId
         if (!isSelectedVideoCurrentlyPlaying && PlayingQueue.isNotEmpty() && PlayingQueue.queueMode == PlayingQueueMode.OFFLINE) {
-            options += DownloadListMenuOption.PLAY_NEXT
-            options += DownloadListMenuOption.ADD_TO_QUEUE
+            options += DownloadListMenuOption.PlayNext
+            options += DownloadListMenuOption.AddToQueue
         }
 
-        setItems(options.map { it.toBottomSheetItem(::getString) }) { which ->
+        setItems(options) { which ->
             val playerData = PlayerData(
                 videoId,
                 playlistId = playlistId,
@@ -75,15 +75,15 @@ class DownloadOptionsBottomSheet : BaseBottomSheet() {
             )
 
             when (options[which]) {
-                DownloadListMenuOption.PLAY_ON_BACKGROUND -> {
+                DownloadListMenuOption.PlayOnBackground -> {
                     BackgroundHelper.playOnBackground(requireContext(), playerData)
                 }
 
-                DownloadListMenuOption.GO_TO_VIDEO -> {
+                DownloadListMenuOption.GoToVideo -> {
                     NavigationHelper.navigateVideo(requireContext(), playerData)
                 }
 
-                DownloadListMenuOption.SHARE -> {
+                DownloadListMenuOption.Share -> {
                     val shareData = ShareData(title = streamItem.title, previewImageUrl = streamItem.thumbnail)
                     val bundle = bundleOf(
                         IntentData.id to videoId,
@@ -95,19 +95,19 @@ class DownloadOptionsBottomSheet : BaseBottomSheet() {
                     newShareDialog.show(parentFragmentManager, null)
                 }
 
-                DownloadListMenuOption.DELETE -> {
+                DownloadListMenuOption.Delete -> {
                     setFragmentResult(DELETE_DOWNLOAD_REQUEST_KEY, bundleOf())
                 }
 
-                DownloadListMenuOption.PLAY_NEXT -> {
+                DownloadListMenuOption.PlayNext -> {
                     PlayingQueue.addAsNext(streamItem)
                 }
 
-                DownloadListMenuOption.ADD_TO_QUEUE -> {
+                DownloadListMenuOption.AddToQueue -> {
                     PlayingQueue.add(streamItem)
                 }
 
-                DownloadListMenuOption.EXPORT -> {
+                DownloadListMenuOption.Export -> {
                     exportFilePicker.launch(streamItem.title)
                     // dismissing now would cause the exportFilePicker to be dropped before
                     // the file is actually chosen by the user

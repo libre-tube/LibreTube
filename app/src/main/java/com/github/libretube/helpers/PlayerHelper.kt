@@ -48,7 +48,7 @@ import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.db.DatabaseHelper
 import com.github.libretube.enums.PlayerEvent
 import com.github.libretube.enums.SbSkipOptions
-import com.github.libretube.enums.menuoption.RepeatModeMenuOption
+import com.github.libretube.enums.menuoption.RepeatModeBottomSheetItem
 import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.seekBy
 import com.github.libretube.extensions.togglePlayPauseState
@@ -87,7 +87,7 @@ object PlayerHelper {
      */
     const val MAX_BUFFER_DELAY = 10 * 60 * 1000L
 
-    val repeatModes: List<RepeatModeMenuOption> = RepeatModeMenuOption.entries
+    val repeatModes: List<RepeatModeBottomSheetItem> = RepeatModeBottomSheetItem.entries
 
     /**
      * A list of all categories that are not disabled by default

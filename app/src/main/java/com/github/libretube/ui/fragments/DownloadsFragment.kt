@@ -8,6 +8,7 @@ import android.content.IntentFilter
 import android.content.ServiceConnection
 import android.os.Bundle
 import android.os.IBinder
+import android.os.Parcelable
 import android.view.View
 import android.view.ViewGroup.MarginLayoutParams
 import androidx.activity.OnBackPressedCallback
@@ -35,7 +36,6 @@ import com.github.libretube.db.obj.Download
 import com.github.libretube.db.obj.DownloadPlaylistWithDownload
 import com.github.libretube.db.obj.DownloadWithItems
 import com.github.libretube.db.obj.filterByTab
-import com.github.libretube.enums.menuoption.MenuOption
 import com.github.libretube.extensions.ceilHalf
 import com.github.libretube.extensions.dpToPx
 import com.github.libretube.extensions.formatAsFileSize
@@ -45,6 +45,8 @@ import com.github.libretube.helpers.DownloadHelper
 import com.github.libretube.helpers.NavigationHelper
 import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.obj.DownloadStatus
+import com.github.libretube.obj.bottomsheetitem.BottomSheetItem
+import com.github.libretube.obj.bottomsheetitem.BottomSheetItemTitle
 import com.github.libretube.parcelable.PlayerData
 import com.github.libretube.receivers.DownloadReceiver
 import com.github.libretube.services.DownloadService
@@ -63,6 +65,7 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import kotlinx.parcelize.Parcelize
 import kotlin.io.path.fileSize
 
 enum class DownloadTab {
@@ -71,16 +74,56 @@ enum class DownloadTab {
     PLAYLIST
 }
 
-enum class DownloadSortingOrder(
-    @get:StringRes override val titleStringRes: Int,
-    override val drawableRes: Int
-) : MenuOption {
-    OLDEST(R.string.least_recent, R.drawable.ic_sort_by_oldest),
-    NEWEST(R.string.most_recent, R.drawable.ic_sort_by_newest),
-    ALPHABETIC(R.string.alphabetic, R.drawable.ic_sort_by_alpha),
-    DURATION(R.string.duration, R.drawable.ic_time_outlined),
-    CHANNEL(R.string.sort_channel, R.drawable.ic_person),
-    SIZE(R.string.sort_size, R.drawable.ic_sort_by_file_size)
+@Parcelize
+sealed class DownloadSortingOrder(
+    @get:StringRes val titleStringRes: Int,
+    val drawableRes: Int,
+    val ordinal: Int,
+) : BottomSheetItem<BottomSheetItemTitle.StringResource>(
+    title = BottomSheetItemTitle.StringResource(titleStringRes),
+    drawable = drawableRes,
+), Parcelable {
+    companion object {
+        val entries = listOf(
+            Oldest, Newest, Alphabetic, Duration, Channel, Size
+        ).sortedBy(DownloadSortingOrder::ordinal)
+    }
+
+    data object Oldest : DownloadSortingOrder(
+        titleStringRes = R.string.least_recent,
+        drawableRes = R.drawable.ic_sort_by_oldest,
+        ordinal = 1,
+    )
+
+    data object Newest : DownloadSortingOrder(
+        titleStringRes = R.string.most_recent,
+        drawableRes = R.drawable.ic_sort_by_newest,
+        ordinal = 2,
+    )
+
+    data object Alphabetic : DownloadSortingOrder(
+        titleStringRes = R.string.alphabetic,
+        drawableRes = R.drawable.ic_sort_by_alpha,
+        ordinal = 3,
+    )
+
+    data object Duration : DownloadSortingOrder(
+        titleStringRes = R.string.duration,
+        drawableRes = R.drawable.ic_time_outlined,
+        ordinal = 4,
+    )
+
+    data object Channel : DownloadSortingOrder(
+        titleStringRes = R.string.sort_channel,
+        drawableRes = R.drawable.ic_person,
+        ordinal = 5,
+    )
+
+    data object Size : DownloadSortingOrder(
+        titleStringRes = R.string.sort_size,
+        drawableRes = R.drawable.ic_sort_by_file_size,
+        ordinal = 6,
+    )
 }
 
 class DownloadsFragment : Fragment(R.layout.fragment_downloads) {
@@ -149,8 +192,7 @@ class DownloadsFragmentPage : DynamicLayoutManagerFragment(R.layout.fragment_dow
 
     private var selectedSortType
         get() = PreferenceHelper.getInt(
-            PreferenceKeys.SELECTED_DOWNLOAD_SORT_TYPE,
-            DownloadSortingOrder.OLDEST.ordinal
+            PreferenceKeys.SELECTED_DOWNLOAD_SORT_TYPE, DownloadSortingOrder.Oldest.ordinal
         )
         set(value) {
             PreferenceHelper.putInt(PreferenceKeys.SELECTED_DOWNLOAD_SORT_TYPE, value)
@@ -204,10 +246,8 @@ class DownloadsFragmentPage : DynamicLayoutManagerFragment(R.layout.fragment_dow
             ) { !toggleDownload(it) }
         binding.downloadsRecView.adapter = adapter
 
-        val filterOptions = DownloadSortingOrder.entries.map { option ->
-            option.toBottomSheetItem(::getString)
-        }
-        binding.sortType.text = filterOptions[selectedSortType].title
+        val filterOptions = DownloadSortingOrder.entries
+        binding.sortType.text = filterOptions[selectedSortType].title.getText(requireContext())
 
         lifecycleScope.launch(Dispatchers.Main) {
             val playlistItems = downloadPlaylistId?.let { playlistId ->
@@ -235,7 +275,7 @@ class DownloadsFragmentPage : DynamicLayoutManagerFragment(R.layout.fragment_dow
                     if (index == selectedSortType) return@setItems
                     selectedSortType = index
 
-                    binding.sortType.text = filterOptions[index].title
+                    binding.sortType.text = filterOptions[index].title.getText(requireContext())
                     submitDownloadList(downloads)
                 }.show(childFragmentManager)
             }
@@ -480,12 +520,12 @@ class DownloadsFragmentPage : DynamicLayoutManagerFragment(R.layout.fragment_dow
             selectedSortType: DownloadSortingOrder
         ): List<DownloadWithItems> {
             return when (selectedSortType) {
-                DownloadSortingOrder.OLDEST -> items
-                DownloadSortingOrder.NEWEST -> items.reversed()
-                DownloadSortingOrder.ALPHABETIC -> items.sortedBy { it.download.title }
-                DownloadSortingOrder.DURATION -> items.sortedBy { it.download.duration }
-                DownloadSortingOrder.CHANNEL -> items.sortedBy { it.download.uploader }
-                DownloadSortingOrder.SIZE -> items.sortedBy { it.downloadItems.sumOf { o -> o.downloadSize } }
+                DownloadSortingOrder.Oldest -> items
+                DownloadSortingOrder.Newest -> items.reversed()
+                DownloadSortingOrder.Alphabetic -> items.sortedBy { it.download.title }
+                DownloadSortingOrder.Duration -> items.sortedBy { it.download.duration }
+                DownloadSortingOrder.Channel -> items.sortedBy { it.download.uploader }
+                DownloadSortingOrder.Size -> items.sortedBy { it.downloadItems.sumOf { o -> o.downloadSize } }
             }
         }
 
@@ -495,12 +535,12 @@ class DownloadsFragmentPage : DynamicLayoutManagerFragment(R.layout.fragment_dow
             selectedSortType: DownloadSortingOrder
         ): List<Download> {
             return when (selectedSortType) {
-                DownloadSortingOrder.OLDEST -> items
-                DownloadSortingOrder.NEWEST -> items.reversed()
-                DownloadSortingOrder.ALPHABETIC -> items.sortedBy { it.title }
-                DownloadSortingOrder.DURATION -> items.sortedBy { it.duration }
-                DownloadSortingOrder.CHANNEL -> items.sortedBy { it.uploader }
-                DownloadSortingOrder.SIZE -> items
+                DownloadSortingOrder.Oldest -> items
+                DownloadSortingOrder.Newest -> items.reversed()
+                DownloadSortingOrder.Alphabetic -> items.sortedBy { it.title }
+                DownloadSortingOrder.Duration -> items.sortedBy { it.duration }
+                DownloadSortingOrder.Channel -> items.sortedBy { it.uploader }
+                DownloadSortingOrder.Size -> items
             }
         }
     }
@@ -548,10 +588,8 @@ class PlaylistDownloadsFragmentPage : Fragment(R.layout.fragment_download_conten
         }
         binding.downloadsRecView.adapter = adapter
 
-        val filterOptions = DownloadSortingOrder.entries.map { option ->
-            option.toBottomSheetItem(::getString)
-        }
-        val optionTitle = filterOptions[selectedSortType].title
+        val filterOptions = DownloadSortingOrder.entries
+        val optionTitle = filterOptions[selectedSortType].title.getText(requireContext())
         binding.sortType.text = optionTitle
 
         lifecycleScope.launch(Dispatchers.Main) {

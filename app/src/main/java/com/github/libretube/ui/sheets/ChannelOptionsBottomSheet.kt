@@ -6,7 +6,7 @@ import androidx.core.os.bundleOf
 import com.github.libretube.api.MediaServiceRepository
 import com.github.libretube.constants.IntentData
 import com.github.libretube.enums.ShareObjectType
-import com.github.libretube.enums.menuoption.ChannelMenuOption
+import com.github.libretube.enums.menuoption.ChannelBottomSheetItem
 import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.toID
 import com.github.libretube.helpers.BackgroundHelper
@@ -40,15 +40,15 @@ class ChannelOptionsBottomSheet : BaseBottomSheet() {
 
         // List that stores the different menu options. In the future could be add more options here.
         val optionsList = mutableListOf(
-            ChannelMenuOption.SHARE,
-            ChannelMenuOption.PLAY_LATEST_VIDEOS,
-            ChannelMenuOption.PLAY_ON_BACKGROUND
+            ChannelBottomSheetItem.Share,
+            ChannelBottomSheetItem.PlayLatestVideos,
+            ChannelBottomSheetItem.PlayOnBackground
         )
-        if (subscribed) optionsList.add(ChannelMenuOption.ADD_TO_GROUP)
+        if (subscribed) optionsList.add(ChannelBottomSheetItem.AddToGroup)
 
-        setItems(optionsList.map { it.toBottomSheetItem(::getString) }) { which ->
+        setItems(optionsList) { which ->
             when (optionsList[which]) {
-                ChannelMenuOption.SHARE -> {
+                ChannelBottomSheetItem.Share -> {
                     val bundle = bundleOf(
                         IntentData.id to channelId,
                         IntentData.shareObjectType to ShareObjectType.CHANNEL,
@@ -62,14 +62,14 @@ class ChannelOptionsBottomSheet : BaseBottomSheet() {
                     newShareDialog.show(parentFragmentManager, null)
                 }
 
-                ChannelMenuOption.ADD_TO_GROUP -> {
+                ChannelBottomSheetItem.AddToGroup -> {
                     val sheet = AddChannelToGroupSheet().apply {
                         arguments = bundleOf(IntentData.channelId to channelId)
                     }
                     sheet.show(parentFragmentManager, null)
                 }
 
-                ChannelMenuOption.PLAY_LATEST_VIDEOS -> {
+                ChannelBottomSheetItem.PlayLatestVideos -> {
                     try {
                         val channel = withContext(Dispatchers.IO) {
                             MediaServiceRepository.instance.getChannel(channelId)
@@ -88,7 +88,7 @@ class ChannelOptionsBottomSheet : BaseBottomSheet() {
                     }
                 }
 
-                ChannelMenuOption.PLAY_ON_BACKGROUND -> {
+                ChannelBottomSheetItem.PlayOnBackground -> {
                     try {
                         val channel = withContext(Dispatchers.IO) {
                             MediaServiceRepository.instance.getChannel(channelId)

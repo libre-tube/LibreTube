@@ -11,7 +11,7 @@ import com.github.libretube.api.obj.WatchHistoryEntryMetadata
 import com.github.libretube.constants.IntentData
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.enums.ShareObjectType
-import com.github.libretube.enums.menuoption.VideoMenuOption
+import com.github.libretube.enums.menuoption.VideoBottomSheetItem
 import com.github.libretube.extensions.parcelable
 import com.github.libretube.extensions.toID
 import com.github.libretube.extensions.toastFromMainDispatcher
@@ -41,13 +41,13 @@ class VideoOptionsBottomSheet : BaseBottomSheet() {
     private lateinit var streamItem: StreamItem
 
     private suspend fun onOptionSelect(
-        option: VideoMenuOption,
+        option: VideoBottomSheetItem,
         videoId: String,
         playlistId: String?
     ) {
         when (option) {
             // Start the background mode
-            VideoMenuOption.PLAY_ON_BACKGROUND -> {
+            VideoBottomSheetItem.PlayOnBackground -> {
                 NavigationHelper.navigateVideo(
                     requireContext(),
                     playerData = PlayerData(
@@ -58,7 +58,7 @@ class VideoOptionsBottomSheet : BaseBottomSheet() {
                 )
             }
             // Add Video to Playlist Dialog
-            VideoMenuOption.ADD_TO_PLAYLIST -> {
+            VideoBottomSheetItem.AddToPlaylist -> {
                 AddToPlaylistDialog().apply {
                     arguments = bundleOf(IntentData.videoInfo to streamItem)
                 }.show(
@@ -67,7 +67,7 @@ class VideoOptionsBottomSheet : BaseBottomSheet() {
                 )
             }
 
-            VideoMenuOption.DOWNLOAD -> {
+            VideoBottomSheetItem.Download -> {
                 DownloadHelper.startDownloadDialog(
                     requireContext(),
                     parentFragmentManager,
@@ -75,7 +75,7 @@ class VideoOptionsBottomSheet : BaseBottomSheet() {
                 )
             }
 
-            VideoMenuOption.SHARE -> {
+            VideoBottomSheetItem.Share -> {
                 val bundle = bundleOf(
                     IntentData.id to videoId,
                     IntentData.shareObjectType to ShareObjectType.VIDEO,
@@ -90,15 +90,15 @@ class VideoOptionsBottomSheet : BaseBottomSheet() {
                 newShareDialog.show(parentFragmentManager, ShareDialog::class.java.name)
             }
 
-            VideoMenuOption.PLAY_NEXT -> {
+            VideoBottomSheetItem.PlayNext -> {
                 PlayingQueue.addAsNext(streamItem)
             }
 
-            VideoMenuOption.ADD_TO_QUEUE -> {
+            VideoBottomSheetItem.AddToQueue -> {
                 PlayingQueue.add(streamItem)
             }
 
-            VideoMenuOption.MARK_AS_WATCHED -> {
+            VideoBottomSheetItem.MarkAsWatched -> {
                 withContext(Dispatchers.IO) {
                     if (PlayerHelper.watchHistoryEnabled) {
                         runCatching {
@@ -134,7 +134,7 @@ class VideoOptionsBottomSheet : BaseBottomSheet() {
                 )
             }
 
-            VideoMenuOption.MARK_AS_UNWATCHED -> {
+            VideoBottomSheetItem.MarkAsUnwatched -> {
                 withContext(Dispatchers.IO) {
                     try {
                         UserDataRepositoryHelper.userDataRepository.removeFromWatchHistory(
@@ -161,14 +161,12 @@ class VideoOptionsBottomSheet : BaseBottomSheet() {
         setTitle(streamItem.title)
 
         var optionsList = buildList {
-            add(VideoMenuOption.ADD_TO_PLAYLIST)
-            if (!streamItem.isLive) add(VideoMenuOption.DOWNLOAD)
-            add(VideoMenuOption.SHARE)
+            add(VideoBottomSheetItem.AddToPlaylist)
+            if (!streamItem.isLive) add(VideoBottomSheetItem.Download)
+            add(VideoBottomSheetItem.Share)
         }
 
-        setItems(optionsList.map { option ->
-            option.toBottomSheetItem(::getString)
-        }) { which ->
+        setItems(optionsList) { which ->
             onOptionSelect(optionsList[which], videoId, playlistId)
         }
 
@@ -177,9 +175,7 @@ class VideoOptionsBottomSheet : BaseBottomSheet() {
             getOptionsForNotActivePlayback(videoId) { addedOptions ->
                 optionsList = addedOptions + optionsList
 
-                setItems(optionsList.map { option ->
-                    option.toBottomSheetItem(::getString)
-                }) { which ->
+                setItems(optionsList) { which ->
                     onOptionSelect(optionsList[which], videoId, playlistId)
                 }
             }
@@ -190,15 +186,16 @@ class VideoOptionsBottomSheet : BaseBottomSheet() {
 
     private fun getOptionsForNotActivePlayback(
         videoId: String,
-        onOptionsList: (List<VideoMenuOption>) -> Unit
+        onOptionsList: (List<VideoBottomSheetItem>) -> Unit
     ) {
         // List that stores the different menu options. In the future could be add more options here.
-        val optionsList = mutableListOf(VideoMenuOption.PLAY_ON_BACKGROUND)
+        val optionsList: MutableList<VideoBottomSheetItem> =
+            mutableListOf(VideoBottomSheetItem.PlayOnBackground)
 
         // Check whether the player is running and add queue options
         if (PlayingQueue.isNotEmpty() && PlayingQueue.queueMode == PlayingQueueMode.ONLINE) {
-            optionsList += VideoMenuOption.PLAY_NEXT
-            optionsList += VideoMenuOption.ADD_TO_QUEUE
+            optionsList += VideoBottomSheetItem.PlayNext
+            optionsList += VideoBottomSheetItem.AddToQueue
         }
 
         if (!PlayerHelper.watchPositionsAny && !PlayerHelper.watchHistoryEnabled) {
@@ -212,11 +209,11 @@ class VideoOptionsBottomSheet : BaseBottomSheet() {
                 UserDataRepositoryHelper.userDataRepository.getFromWatchHistory(videoId)
 
             if (watchHistoryEntry != null) {
-                optionsList += VideoMenuOption.MARK_AS_UNWATCHED
+                optionsList += VideoBottomSheetItem.MarkAsUnwatched
             }
 
             if (watchHistoryEntry?.metadata?.finished != true) {
-                optionsList += VideoMenuOption.MARK_AS_WATCHED
+                optionsList += VideoBottomSheetItem.MarkAsWatched
             }
 
             withContext(Dispatchers.Main) {

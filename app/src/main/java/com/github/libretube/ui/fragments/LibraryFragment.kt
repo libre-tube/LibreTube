@@ -22,7 +22,7 @@ import com.github.libretube.constants.IntentData
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.databinding.FragmentLibraryBinding
 import com.github.libretube.enums.PlaylistType
-import com.github.libretube.enums.menuoption.PlayListSortModeMenuOption
+import com.github.libretube.enums.menuoption.PlayListSortModeBottomSheetItem
 import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.ceilHalf
 import com.github.libretube.extensions.dpToPx
@@ -120,11 +120,11 @@ class LibraryFragment : DynamicLayoutManagerFragment(R.layout.fragment_library) 
         }
 
         val sortOptions = listOf(
-            PlayListSortModeMenuOption.MOST_RECENT,
-            PlayListSortModeMenuOption.MOST_RECENT,
-            PlayListSortModeMenuOption.ALPHABETIC,
-            PlayListSortModeMenuOption.ALPHABETIC_REVERSED
-        ).map { it.toBottomSheetItem(::getString) }
+            PlayListSortModeBottomSheetItem.MostRecent,
+            PlayListSortModeBottomSheetItem.MostRecent,
+            PlayListSortModeBottomSheetItem.Alphabetic,
+            PlayListSortModeBottomSheetItem.AlphabeticReversed
+        )
 
         val sortOptionValues = resources.getStringArray(R.array.playlistSortingOptionsValues)
         val order = PreferenceHelper.getString(
@@ -132,12 +132,12 @@ class LibraryFragment : DynamicLayoutManagerFragment(R.layout.fragment_library) 
             sortOptionValues.first()
         )
         val orderIndex = sortOptionValues.indexOf(order)
-        binding.sortTV.text = sortOptions.getOrNull(orderIndex)?.title
+        binding.sortTV.text = sortOptions.getOrNull(orderIndex)?.title?.getText(requireContext())
 
         binding.sortTV.setOnClickListener {
             BaseBottomSheet().apply {
                 setItems(sortOptions) { index ->
-                    binding.sortTV.text = sortOptions[index].title
+                    binding.sortTV.text = sortOptions[index].title.getText(requireContext())
                     val value = sortOptionValues[index]
                     PreferenceHelper.putString(PreferenceKeys.PLAYLISTS_ORDER, value)
                     fetchPlaylists()

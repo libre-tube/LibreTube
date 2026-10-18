@@ -46,7 +46,7 @@ import com.github.libretube.databinding.DoubleTapOverlayBinding
 import com.github.libretube.databinding.ExoStyledPlayerControlViewBinding
 import com.github.libretube.databinding.PlayerGestureControlsViewBinding
 import com.github.libretube.enums.PlayerCommand
-import com.github.libretube.enums.menuoption.ResizeMenuOption
+import com.github.libretube.enums.menuoption.ResizeBottomSheetItem
 import com.github.libretube.extensions.dpToPx
 import com.github.libretube.extensions.navigateVideo
 import com.github.libretube.extensions.normalize
@@ -60,8 +60,9 @@ import com.github.libretube.helpers.BrightnessHelper
 import com.github.libretube.helpers.PlayerHelper
 import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.helpers.WindowHelper
-import com.github.libretube.obj.BottomSheetItem
 import com.github.libretube.obj.VideoResolution
+import com.github.libretube.obj.bottomsheetitem.BottomSheetItem
+import com.github.libretube.obj.bottomsheetitem.BottomSheetItemTitle
 import com.github.libretube.services.AbstractPlayerService
 import com.github.libretube.ui.base.BaseActivity
 import com.github.libretube.ui.controllers.FullscreenGestureAnimationController
@@ -129,7 +130,7 @@ class CustomExoPlayerView(
             PreferenceKeys.PLAYER_RESIZE_MODE,
             AspectRatioFrameLayout.RESIZE_MODE_FIT
         )
-    private val resizeModes: List<ResizeMenuOption> = ResizeMenuOption.entries
+    private val resizeModes: List<ResizeBottomSheetItem> = ResizeBottomSheetItem.entries
 
     private val activity get() = context as BaseActivity
 
@@ -584,9 +585,9 @@ class CustomExoPlayerView(
         }
     }
 
-    fun getOptionsMenuItems(): List<BottomSheetItem> = listOf(
+    fun getOptionsMenuItems(): List<BottomSheetItem<BottomSheetItemTitle.Text>> = listOf(
         BottomSheetItem(
-            context.getString(R.string.repeat_mode),
+            BottomSheetItemTitle.Text(context.getString(R.string.repeat_mode)),
             R.drawable.ic_repeat,
             {
                 when (PlayingQueue.repeatMode) {
@@ -594,36 +595,36 @@ class CustomExoPlayerView(
                     Player.REPEAT_MODE_ONE -> context.getString(R.string.repeat_mode_current)
                     Player.REPEAT_MODE_ALL -> context.getString(R.string.repeat_mode_all)
                     else -> throw IllegalArgumentException()
-                }
+                }.let(BottomSheetItemTitle::Text)
             }
         ) {
             onRepeatModeClicked()
         },
         resizeModes.first { it.aspectRatioKey == resizeMode }.let { resizeMode ->
             BottomSheetItem(
-                context.getString(R.string.player_resize_mode),
-                resizeMode.drawableRes,
+                BottomSheetItemTitle.Text(context.getString(R.string.player_resize_mode)),
+                resizeMode.drawable,
                 {
-                    context.getString(resizeMode.titleStringRes)
+                    BottomSheetItemTitle.Text(resizeMode.title.getText(context))
                 }
             ) {
                 onResizeModeClicked()
             }
         },
         BottomSheetItem(
-            context.getString(R.string.playback_speed),
+            BottomSheetItemTitle.Text(context.getString(R.string.playback_speed)),
             R.drawable.ic_speed,
             {
-                "${player?.playbackParameters?.speed?.round(2)}x"
+                BottomSheetItemTitle.Text("${player?.playbackParameters?.speed?.round(2)}x")
             }
         ) {
             onPlaybackSpeedClicked()
         },
         BottomSheetItem(
-            context.getString(R.string.sleep_timer),
+            BottomSheetItemTitle.Text(context.getString(R.string.sleep_timer)),
             R.drawable.ic_sleep,
             {
-                if (SleepTimer.timeLeftMillis > 0) {
+                val text = if (SleepTimer.timeLeftMillis > 0) {
                     val minutesLeft =
                         ceil(SleepTimer.timeLeftMillis.toDouble() / DateUtils.MINUTE_IN_MILLIS).toInt()
                     context.resources.getQuantityString(
@@ -634,36 +635,38 @@ class CustomExoPlayerView(
                 } else {
                     context.getString(R.string.disabled)
                 }
+                BottomSheetItemTitle.Text(text)
             }
         ) {
             onSleepTimerClicked()
         },
         BottomSheetItem(
-            context.getString(R.string.quality),
+            BottomSheetItemTitle.Text(context.getString(R.string.quality)),
             R.drawable.ic_hd,
-            this::getCurrentResolutionSummary
+            { this.getCurrentResolutionSummary().let(BottomSheetItemTitle::Text) }
         ) {
             onQualityClicked()
         },
         BottomSheetItem(
-            context.getString(R.string.audio_track),
+            BottomSheetItemTitle.Text(context.getString(R.string.audio_track)),
             R.drawable.ic_audio,
-            this::getCurrentAudioTrackTitle
+            { this.getCurrentAudioTrackTitle().let(BottomSheetItemTitle::Text) }
         ) {
             onAudioStreamClicked()
         },
         BottomSheetItem(
-            context.getString(R.string.captions),
+            BottomSheetItemTitle.Text(context.getString(R.string.captions)),
             R.drawable.ic_caption,
             {
-                player?.let { PlayerHelper.getCurrentPlayedCaptionFormat(it)?.language }
+                val text = player?.let { PlayerHelper.getCurrentPlayedCaptionFormat(it)?.language }
                     ?: context.getString(R.string.none)
+                BottomSheetItemTitle.Text(text)
             }
         ) {
             onCaptionsClicked()
         },
         BottomSheetItem(
-            context.getString(R.string.stats_for_nerds),
+            BottomSheetItemTitle.Text(context.getString(R.string.stats_for_nerds)),
             R.drawable.ic_info
         ) {
             onStatsClicked()
@@ -910,14 +913,7 @@ class CustomExoPlayerView(
 
     override fun onResizeModeClicked() {
         // switching between original aspect ratio (black bars) and zoomed to fill device screen
-        BaseBottomSheet().setItems(
-            resizeModes.map { option ->
-                option.toBottomSheetItem(
-                    context::getString,
-                    preselectedItem = resizeModes.first { it.aspectRatioKey == resizeMode },
-                )
-            },
-        ) { index ->
+        BaseBottomSheet().setItems(resizeModes) { index ->
             resizeMode = resizeModes[index].aspectRatioKey
         }
             .show(supportFragmentManager)
@@ -930,16 +926,18 @@ class CustomExoPlayerView(
     }
 
     override fun onRepeatModeClicked() {
+        val currentlySelectedOption = PlayerHelper.repeatModes
+            .firstOrNull { it.playerModeKey == PlayingQueue.repeatMode }
         // repeat mode options dialog
         BaseBottomSheet()
             .setItems(
                 PlayerHelper.repeatModes.map { option ->
-                    option.toBottomSheetItem(
-                        context::getString,
-                        preselectedItem = PlayerHelper.repeatModes
-                            .firstOrNull { it.playerModeKey == PlayingQueue.repeatMode },
+                    BottomSheetItem(
+                        title = option.title,
+                        drawable = option.drawable,
+                        isSelected = currentlySelectedOption == option,
                     )
-                },
+                }
             ) { index ->
                 PlayingQueue.repeatMode = PlayerHelper.repeatModes[index].playerModeKey
             }
