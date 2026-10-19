@@ -543,7 +543,7 @@
     <string name="comment_verified">Vérifié</string>
     <string name="comment_pinned">Épinglé</string>
     <string name="courses">Cours</string>
-    <string name="choose_instance">Veuillez d’abord sélectionner une instance.</string>
+    <string name="choose_instance">Veuillez d\'abord choisir une instance !</string>
     <string name="libretube_sync_server">Serveur de synchronisation LibreTube</string>
     <string name="export">Exporter</string>
     <string name="exporting">Exportation en cours…</string>
@@ -553,4 +553,14 @@
     <string name="already_downloaded">Vous avez déjà téléchargé cette vidéo !</string>
     <string name="welcome">Bienvenue dans LibreTube ! Pour débuter, sélectionnez un mode de synchronisation ci-dessous et indiquez comment synchroniser vos données utilisateur entre appareils.</string>
     <string name="data_synchronization">Synchronisation des données</string>
+    <string name="choose_instance_long">Veuillez choisir ci-dessous l\'instance Piped que vous souhaitez utiliser. L\'instance Piped servira d\'intermédiaire entre vous et YouTube. Ces instances sont situées à différents emplacements physiques, indiqués par leur(s) drapeau(x) national(aux). Les instances physiquement plus proches de vous sont généralement plus rapides que celles qui le sont moins. Vous pouvez modifier l\'instance que vous utilisez à tout moment dans les paramètres.</string>
+    <string name="load_data_from">Charger les données YouTube depuis</string>
+    <string name="load_data_from_local">En provenance directe de YouTube</string>
+    <string name="load_data_from_piped">via Piped (obsolète)</string>
+    <string name="sync_server_type">Synchroniser les données utilisateur (abonnements, playlists) via</string>
+    <string name="sync_server_url">URL du serveur de synchronisation LibreTube</string>
+    <string name="sync_type_summary_none">Enregistrez toutes les données utilisateur hors ligne dans l\'application. Cela signifie que vous ne pouvez pas synchroniser les données entre vos appareils, mais cela peut être la solution idéale si vous n\'utilisez qu\'un seul appareil ou si la synchronisation entre appareils ne vous intéresse pas.</string>
+    <string name="sync_type_summary_libretube">Enregistrez vos playlists et vos abonnements sur le serveur de synchronisation de LibreTube (%1$s). Cela vous permet de vous connecter à votre compte depuis n\'importe quel autre appareil pour accéder à vos abonnements et à vos playlists. Avertissement relatif à la confidentialité : les données des utilisateurs sont pseudonymisées côté serveur, mais ne font pas l\'objet d\'un chiffrement de bout en bout. Si vous le souhaitez, vous pouvez également héberger votre propre instance du serveur, mais en général, le serveur officiel devrait suffire.</string>
+    <string name="sync_type_summary_piped">Réservé aux experts, obsolète :\nEnregistrez les données relatives aux playlists et aux abonnements sur Piped (%1$s). Piped ne disposant plus d\'instances publiques, vous devez héberger votre propre instance Piped.</string>
+    <string name="switch_sync_type_warning">Si vous utilisiez auparavant un autre type de synchronisation, veuillez d\'abord effectuer une sauvegarde de vos abonnements et de vos playlists. Vous pourrez ensuite modifier le type de synchronisation dans les paramètres de l\'instance et réimporter vos données à partir de la sauvegarde.</string>
 </resources>
