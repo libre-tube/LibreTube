@@ -139,4 +139,5 @@
     <string name="instance_summary">Sinkronigo de datumoj, konto kaj historio</string>
     <string name="customInstance_summary">Aldoni…</string>
     <string name="instance_name">Nomo de la instanco</string>
+    <string name="import_temp_playlist">Ĉu importi provizoran ludliston?</string>
 </resources>
