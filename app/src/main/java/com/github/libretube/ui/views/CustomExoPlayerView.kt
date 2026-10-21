@@ -585,7 +585,7 @@ class CustomExoPlayerView(
         }
     }
 
-    fun getOptionsMenuItems(): List<BottomSheetItem<BottomSheetItemTitle.Text>> = listOf(
+    fun getOptionsMenuItems(): List<BottomSheetItem> = listOf(
         BottomSheetItem(
             BottomSheetItemTitle.Text(context.getString(R.string.repeat_mode)),
             R.drawable.ic_repeat,

@@ -11,17 +11,11 @@ sealed class BottomSheetItemTitle {
     }
 
     data class StringResource(
-        @get:StringRes
-        private val stringRes: Int
+        @get:StringRes @field:StringRes
+        private val stringRes: Int,
+        val args: List<Any> = listOf(),
     ) : BottomSheetItemTitle() {
-        override fun getText(context: Context): String = with(context) { getString(stringRes) }
+        override fun getText(context: Context): String = context.getString(stringRes, *args.toTypedArray())
     }
 
-    data class StringResourceWithArgs(
-        @get:StringRes val formatStringRes: Int,
-        val args: List<Any>
-    ) : BottomSheetItemTitle() {
-        override fun getText(context: Context): String =
-            with(context) { getString(formatStringRes, *args.toTypedArray()) }
-    }
 }

@@ -1,9 +1,12 @@
 package com.github.libretube.obj.bottomsheetitem
 
-open class BottomSheetItem<T : BottomSheetItemTitle>(
-    val title: T,
+import androidx.annotation.DrawableRes
+
+open class BottomSheetItem(
+    val title: BottomSheetItemTitle,
+    @get:DrawableRes @field:DrawableRes
     val drawable: Int? = null,
-    val getCurrent: () -> T? = { null },
+    val getCurrent: () -> BottomSheetItemTitle? = { null },
     val isSelected: Boolean = false,
     val onClick: () -> Unit = {},
 )

@@ -1,14 +1,15 @@
 package com.github.libretube.enums.menuoption
 
+import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import com.github.libretube.R
 import com.github.libretube.obj.bottomsheetitem.BottomSheetItem
 import com.github.libretube.obj.bottomsheetitem.BottomSheetItemTitle
 
 sealed class PlayListSortModeBottomSheetItem(
-    @get:StringRes val titleStringRes: Int,
-    val drawableRes: Int?,
-) : BottomSheetItem<BottomSheetItemTitle.StringResource>(
+    @StringRes titleStringRes: Int,
+    @DrawableRes drawableRes: Int?,
+) : BottomSheetItem(
     title = BottomSheetItemTitle.StringResource(titleStringRes),
     drawable = drawableRes,
 ) {

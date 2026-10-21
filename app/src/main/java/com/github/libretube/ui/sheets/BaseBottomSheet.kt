@@ -21,7 +21,7 @@ import kotlinx.coroutines.launch
 open class BaseBottomSheet(@LayoutRes layoutResId: Int = R.layout.bottom_sheet) : ExpandedBottomSheet(layoutResId) {
 
     private var title: String? = null
-    private lateinit var items: List<BottomSheetItem<out BottomSheetItemTitle>>
+    private lateinit var items: List<BottomSheetItem>
     private lateinit var listener: (index: Int) -> Unit
 
     private lateinit var adapter: BottomSheetAdapter
@@ -61,7 +61,7 @@ open class BaseBottomSheet(@LayoutRes layoutResId: Int = R.layout.bottom_sheet) 
     }
 
     fun setItems(
-        items: List<BottomSheetItem<out BottomSheetItemTitle>>,
+        items: List<BottomSheetItem>,
         listener: (suspend (index: Int) -> Unit)?
     ) = apply {
         this.items = items

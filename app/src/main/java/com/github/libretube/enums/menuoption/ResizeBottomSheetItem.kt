@@ -1,5 +1,6 @@
 package com.github.libretube.enums.menuoption
 
+import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.media3.ui.AspectRatioFrameLayout
 import com.github.libretube.R
@@ -10,8 +11,8 @@ import com.github.libretube.obj.bottomsheetitem.BottomSheetItemTitle
 sealed class ResizeBottomSheetItem(
     val aspectRatioKey: Int,
     @StringRes titleStringRes: Int,
-    drawableRes: Int,
-) : BottomSheetItem<BottomSheetItemTitle.StringResource>(
+    @DrawableRes drawableRes: Int,
+) : BottomSheetItem(
     title = BottomSheetItemTitle.StringResource(titleStringRes),
     drawable = drawableRes,
 ) {

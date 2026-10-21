@@ -12,6 +12,7 @@ import android.os.Parcelable
 import android.view.View
 import android.view.ViewGroup.MarginLayoutParams
 import androidx.activity.OnBackPressedCallback
+import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
@@ -76,10 +77,12 @@ enum class DownloadTab {
 
 @Parcelize
 sealed class DownloadSortingOrder(
-    @get:StringRes val titleStringRes: Int,
+    @get:StringRes @field:StringRes
+    val titleStringRes: Int,
+    @get:DrawableRes @field:DrawableRes
     val drawableRes: Int,
     val ordinal: Int,
-) : BottomSheetItem<BottomSheetItemTitle.StringResource>(
+) : BottomSheetItem(
     title = BottomSheetItemTitle.StringResource(titleStringRes),
     drawable = drawableRes,
 ), Parcelable {
