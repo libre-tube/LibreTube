@@ -105,15 +105,9 @@
         android:label="channel"
         tools:layout="@layout/fragment_channel">
         <argument
-            android:name="channelId"
-            android:defaultValue="@null"
-            app:argType="string"
-            app:nullable="true" />
-        <argument
-            android:name="channelName"
-            android:defaultValue="@null"
-            app:argType="string"
-            app:nullable="true" />
+            android:name="channelIdentifier"
+            app:argType="com.github.libretube.obj.ChannelIdentifier"
+            app:nullable="false" />
     </fragment>
     <fragment
         android:id="@+id/playlistFragment"
