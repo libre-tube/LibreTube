@@ -203,7 +203,7 @@
     <string name="invalid_url">कृपया वह URL दर्ज करें जो काम करता हो</string>
     <string name="buffering_goal">प्रीलोडिंग</string>
     <string name="buffering_goal_summary">बफ़र करने के लिए वीडियो की सेकंडस में उच्चतम मात्रा</string>
-    <string name="instance_summary">पाइप्ड, लॉगिन और खाता</string>
+    <string name="instance_summary">डेटा सिंक्रनाइज़ेशन, खाता और इतिहास</string>
     <string name="version">वर्शन %1$s</string>
     <string name="customInstance_summary">जोड़ें…</string>
     <string name="instance_name">इंस्टेंस का नाम</string>
@@ -248,7 +248,7 @@
     <string name="data_saver_mode">डेटा-सेवर मोड</string>
     <string name="data_saver_mode_summary">थंमनेल और अन्य छवियों को छोड़ें</string>
     <string name="search_history_summary">खोजें याद रखें</string>
-    <string name="watch_history_summary">देखे गए वीडियो की स्थानीय रूप से सूची रखें</string>
+    <string name="watch_history_summary">देखे गए वीडियोज़ की सूची रखें</string>
     <string name="history_summary">खोज और देखा इतिहास</string>
     <string name="watch_positions_title">याद प्लेबैक स्थितियां</string>
     <string name="reset_watch_positions">रीसेट</string>
@@ -540,4 +540,5 @@
     <string name="resume_all">डाउनलोड फिर आरम्भ करें</string>
     <string name="comment_verified">प्रमाणित</string>
     <string name="comment_pinned">पिन की गई</string>
+    <string name="already_downloaded">आप पहले ही इस वीडियो को डाउनलोड कर चुके हैं!</string>
 </resources>
