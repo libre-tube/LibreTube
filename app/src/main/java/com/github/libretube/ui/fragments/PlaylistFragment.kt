@@ -27,8 +27,8 @@ import com.github.libretube.api.obj.StreamItem
 import com.github.libretube.constants.IntentData
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.databinding.FragmentPlaylistBinding
-import com.github.libretube.db.DatabaseHolder
 import com.github.libretube.enums.PlaylistType
+import com.github.libretube.enums.menuoption.PlayListSortModeBottomSheetItem
 import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.ceilHalf
 import com.github.libretube.extensions.dpToPx
@@ -39,7 +39,6 @@ import com.github.libretube.helpers.ImageHelper
 import com.github.libretube.helpers.NavigationHelper
 import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.parcelable.PlayerData
-
 import com.github.libretube.repo.UserDataRepositoryHelper
 import com.github.libretube.ui.adapters.PlaylistAdapter
 import com.github.libretube.ui.adapters.PlaylistItem
@@ -55,7 +54,6 @@ import com.github.libretube.util.TextUtils
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
 
 class PlaylistFragment : DynamicLayoutManagerFragment(R.layout.fragment_playlist) {
@@ -83,7 +81,8 @@ class PlaylistFragment : DynamicLayoutManagerFragment(R.layout.fragment_playlist
             PreferenceHelper.putInt(PreferenceKeys.PLAYLIST_SORT_ORDER, value)
             field = value
         }
-    private val sortOptions by lazy { resources.getStringArray(R.array.playlistSortOptions) }
+    private val sortOptions = PlayListSortModeBottomSheetItem.entries
+
     private var recyclerViewState: Parcelable? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -299,17 +298,18 @@ class PlaylistFragment : DynamicLayoutManagerFragment(R.layout.fragment_playlist
                     binding.sortBTN.isVisible = true
                     binding.sortBTN.setOnClickListener {
                         BaseBottomSheet().apply {
-                            setSimpleItems(sortOptions.toList()) { index ->
+                            setItems(sortOptions) { index ->
                                 selectedSortOrder = index
-                                binding.sortBTN.text = sortOptions[index]
+                                binding.sortBTN.text =
+                                    sortOptions[index].title.getText(requireContext())
                                 showPlaylistVideos()
                             }
                         }.show(childFragmentManager)
                     }
                 }
 
-                binding.sortBTN.text = sortOptions[selectedSortOrder]
-
+                binding.sortBTN.text =
+                    sortOptions[selectedSortOrder].title.getText(requireContext())
             }
 
             updatePlaylistBookmark(response)
