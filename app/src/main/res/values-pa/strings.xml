@@ -128,7 +128,7 @@
     <string name="fireIcon">ਫੈਸ਼ਨੇਬਲ ਅੱਗ-ਰੰਗਾ</string>
     <string name="torchIcon">ਟਰੈਡੀ ਟਾਰਚ</string>
     <string name="birdIcon">ਬੂਸਟਡ ਪੰਛੀ</string>
-    <string name="instance_summary">ਪਾਈਪਡ, ਲਾਗ-ਇਨ, ਅਤੇ ਖਾਤਾ</string>
+    <string name="instance_summary">ਡੇਟਾ ਸਿੰਕ੍ਰੋਨਾਈਜ਼ੇਸ਼ਨ, ਖਾਤਾ ਅਤੇ ਇਤਿਹਾਸ</string>
     <string name="customInstance_summary">ਸ਼ਾਮਲ ਕਰੋ…</string>
     <string name="instance_name">ਇੰਸਟੈਂਸ ਨਾਮ</string>
     <string name="instance_api_url">URL ਤੋਂ ਇੰਸਟੈਂਸ API</string>
@@ -183,7 +183,7 @@
     <string name="data_saver_mode">ਡਾਟਾ-ਸੇਵਰ ਮੋਡ</string>
     <string name="data_saver_mode_summary">ਥੰਮਨੇਲ ਅਤੇ ਹੋਰ ਚਿੱਤਰ ਸਕਿਪ ਕਰੋ</string>
     <string name="search_history_summary">ਖੋਜਾਂ ਯਾਦ ਰੱਖੋ</string>
-    <string name="watch_history_summary">ਵੇਖੇ ਗਏ ਵੀਡੀਓ ਦਾ ਸਥਾਨਕ ਤੌਰ \'ਤੇ ਟਰੈਕ ਰੱਖੋ</string>
+    <string name="watch_history_summary">ਵੇਖੇ ਗਏ ਵੀਡੀਓਜ਼ ਦੀ ਸੂਚੀ ਰੱਖੋ</string>
     <string name="history_summary">ਵੇਖਿਆ \'ਤੇ ਖੋਜਿਆ ਇਤਿਹਾਸ</string>
     <string name="reset_watch_positions">ਰੀਸੈਟ ਕਰੋ</string>
     <string name="watch_positions_title">ਯਾਦ ਰੱਖੀਆਂ ਪਲੇਬੈਕ ਸਥਿਤੀਆਂ</string>
@@ -540,4 +540,5 @@
     <string name="resume_all">ਡਾਊਨਲੋਡ ਰਜ਼ਿਊਮ ਕਰੋ</string>
     <string name="comment_verified">ਪ੍ਰਮਾਣਿਤ</string>
     <string name="courses">ਕੋਰਸ</string>
+    <string name="already_downloaded">ਤੁਸੀਂ ਪਹਿਲਾਂ ਹੀ ਇਸ ਵੀਡੀਓ ਨੂੰ ਡਾਊਨਲੋਡ ਕਰ ਲਿਆ ਹੈ!</string>
 </resources>
