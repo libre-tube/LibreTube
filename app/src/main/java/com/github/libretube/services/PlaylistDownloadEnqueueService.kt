@@ -171,7 +171,8 @@ class PlaylistDownloadEnqueueService : LifecycleService() {
         nManager.notify(NotificationId.ENQUEUE_PLAYLIST_DOWNLOAD.id, buildNotification())
 
         for (stream in streams) {
-            val videoId = stream.url!!.toID()
+            val videoId = (stream.url?.toID()).orEmpty()
+            if (videoId.isEmpty()) continue
 
             // link the playlist to the video, so that we can later query all videos contained in the playlist
             DatabaseHolder.Database.downloadDao().insertPlaylistVideoConnection(

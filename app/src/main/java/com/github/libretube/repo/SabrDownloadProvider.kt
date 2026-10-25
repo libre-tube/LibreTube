@@ -25,7 +25,7 @@ data class SabrDownloaderHandle(
 @OptIn(UnstableApi::class)
 class SabrDownloadProvider(
     downloadItem: DownloadItem,
-    streams: Streams,
+    private val streams: Streams,
     stream: PipedStream,
 ) : DownloadProvider {
     private val downloadHandle: SabrDownloaderHandle
@@ -88,11 +88,13 @@ class SabrDownloadProvider(
         val endSegmentNumber = downloadHandle.sabrClient.getEndSegmentNumber(
             downloadHandle.streamRepresentation.formatId()
         )
-        return if (endSegmentNumber != null && downloadHandle.nextSegmentNumber < endSegmentNumber) {
+        val isFinished = (endSegmentNumber != null && segment.sequenceNumber >= endSegmentNumber) ||
+            (streams.duration > 0 && currentPositionMillis >= streams.duration * 1000)
+        return if (isFinished) {
+            DownloadProgressResult.DownloadComplete
+        } else {
             val downloadedBytesLength = segment.data.sumOf { it.size }
             DownloadProgressResult.Progressed(downloadedBytesLength.toLong())
-        } else {
-            DownloadProgressResult.DownloadComplete
         }
     }
 }

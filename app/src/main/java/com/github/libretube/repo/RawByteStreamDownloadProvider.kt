@@ -67,8 +67,8 @@ class RawByteStreamDownloadProvider(val url: HttpUrl) : DownloadProvider {
         alreadyRead: Long,
         readLimit: Long?
     ): ResponseBody? {
-        val limit = readLimit?.let {
-            min(readLimit, alreadyRead + BYTES_PER_REQUEST)
+        val limit = readLimit?.takeIf { it > 0 }?.let {
+            min(it - 1, alreadyRead + BYTES_PER_REQUEST - 1)
         }?.toString().orEmpty()
 
         val request = Request.Builder()
@@ -84,8 +84,9 @@ class RawByteStreamDownloadProvider(val url: HttpUrl) : DownloadProvider {
                 val response = call.execute()
 
                 if (response.code == 403) {
+                    val errorMsg = runCatching { response.body.string() }.getOrDefault("")
                     response.close()
-                    Log.e(TAG(), "Got HTTP 403 while downloading: ${response.body.string()}")
+                    Log.e(TAG(), "Got HTTP 403 while downloading: $errorMsg")
                     return@withContext null
                 } else if (response.code !in 200..299) {
                     response.close()

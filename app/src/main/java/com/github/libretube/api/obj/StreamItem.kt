@@ -35,8 +35,8 @@ data class StreamItem(
 
     fun toLocalPlaylistItem(playlistId: String): LocalPlaylistItem {
         return LocalPlaylistItem(
-            playlistId = playlistId.toInt(),
-            videoId = url!!.toID(),
+            playlistId = playlistId.toIntOrNull() ?: 0,
+            videoId = (url?.toID()).orEmpty(),
             title = title,
             thumbnailUrl = thumbnail?.let { ProxyHelper.unwrapUrl(it) },
             uploader = uploaderName,
@@ -48,7 +48,7 @@ data class StreamItem(
     }
 
     fun toFeedItem() = SubscriptionsFeedItem(
-        videoId = url!!.toID(),
+        videoId = (url?.toID()).orEmpty(),
         title = title,
         thumbnail = thumbnail,
         uploaderName = uploaderName,
@@ -75,7 +75,7 @@ data class StreamItem(
 
     fun toWatchHistoryEntry(positionMillis: Long?) = WatchHistoryEntry(
         metadata = WatchHistoryEntryMetadata(
-            videoId = url!!.toID(),
+            videoId = (url?.toID()).orEmpty(),
             addedDate = Clock.System.now().toEpochMilliseconds(),
             finished = positionMillis?.let { DatabaseHelper.isVideoWatched(it, duration) } ?: false,
             positionMillis = positionMillis

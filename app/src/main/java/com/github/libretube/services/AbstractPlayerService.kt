@@ -250,6 +250,7 @@ abstract class AbstractPlayerService : MediaLibraryService(), MediaLibrarySessio
      */
     @CallSuper
     open fun navigateVideo(videoId: String) {
+        handler.removeCallbacks(this::checkForSegments)
         sponsorBlockSegments = emptyList()
         exoPlayer?.clearMediaItems()
 
@@ -278,6 +279,7 @@ abstract class AbstractPlayerService : MediaLibraryService(), MediaLibrarySessio
      * 100ms using [handler], so it's not needed to schedule it manually.
      */
     private fun checkForSegments() {
+        handler.removeCallbacks(this::checkForSegments)
         handler.postDelayed(this::checkForSegments, 100)
 
         val (currentSegment, sbSkipOption) = exoPlayer?.getCurrentSegment(

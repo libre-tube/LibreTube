@@ -104,12 +104,14 @@ class NotificationWorker(appContext: Context, parameters: WorkerParameters) :
             // don't show notifications for shorts videos if not enabled
             .filter { enableShortsNotification || !it.isShort }
             // hide for notifications unsubscribed channels
-            .filter { it.uploaderUrl!!.toID() !in channelsToIgnore }
+            .filter { (it.uploaderUrl?.toID()).orEmpty() !in channelsToIgnore }
             // group the new streams by the uploader
-            .groupBy { it.uploaderUrl!!.toID() }
+            .groupBy { (it.uploaderUrl?.toID()).orEmpty() }
+            .filterKeys { it.isNotEmpty() }
 
         // update the last feed check time in order to not show the same notification again
-        PreferenceHelper.updateLastFeedWatchedTime(videoFeed.first().uploaded, seenByUser = false)
+        val latestUpload = videoFeed.maxOfOrNull { it.uploaded } ?: videoFeed.first().uploaded
+        PreferenceHelper.updateLastFeedWatchedTime(latestUpload, seenByUser = false)
 
         // return if the previous video didn't get found or all the channels have notifications disabled
         if (channelGroups.isEmpty()) return true
@@ -179,7 +181,7 @@ class NotificationWorker(appContext: Context, parameters: WorkerParameters) :
         group: String,
         stream: StreamItem
     ): NotificationWithIdAndTag {
-        val videoId = stream.url!!.toID()
+        val videoId = (stream.url?.toID()).orEmpty()
         val intent = Intent(applicationContext, MainActivity::class.java)
             .setFlags(INTENT_FLAGS)
             .putExtra(IntentData.videoId, videoId)
@@ -209,7 +211,8 @@ class NotificationWorker(appContext: Context, parameters: WorkerParameters) :
     }
 
     private suspend fun downloadImage(url: String?): Bitmap? {
-        return if (PreferenceHelper.getBoolean(PreferenceKeys.DATA_SAVER_MODE, false)) {
+        if (url.isNullOrBlank()) return null
+        return if (!PreferenceHelper.getBoolean(PreferenceKeys.DATA_SAVER_MODE, false)) {
             ImageHelper.getImage(applicationContext, url)
         } else {
             null

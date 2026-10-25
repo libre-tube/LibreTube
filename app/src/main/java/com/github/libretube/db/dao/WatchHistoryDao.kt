@@ -84,7 +84,7 @@ interface WatchHistoryDao {
     suspend fun delete(watchHistoryItem: WatchHistoryItem)
 
     @Query("SELECT * FROM watchHistoryItem LIMIT 1 OFFSET 0")
-    suspend fun getOldest(): WatchHistoryItem
+    suspend fun getOldest(): WatchHistoryItem?
 
     @Query("DELETE FROM watchHistoryItem WHERE videoId = :id")
     suspend fun deleteByVideoId(id: String)

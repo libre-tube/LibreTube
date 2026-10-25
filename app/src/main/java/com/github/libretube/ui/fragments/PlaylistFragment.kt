@@ -320,7 +320,7 @@ class PlaylistFragment : DynamicLayoutManagerFragment(R.layout.fragment_playlist
         NavigationHelper.navigateVideo(
             requireContext(),
             playerData = PlayerData(
-                streamItem.url!!.toID(),
+                (streamItem.url?.toID()).orEmpty(),
                 playlistId = playlistId,
                 keepQueue = true
             )
@@ -414,7 +414,7 @@ class PlaylistFragment : DynamicLayoutManagerFragment(R.layout.fragment_playlist
             try {
                 PlaylistsHelper.removeFromPlaylist(
                     playlistId,
-                    video.url!!.toID(),
+                    (video.url?.toID()).orEmpty(),
                     originalPlaylistPosition
                 )
 

@@ -18,7 +18,7 @@ object PlayingQueue {
     private val queue = Collections.synchronizedList(mutableListOf<StreamItem>())
     private var currentStream: StreamItem? = null
 
-    private val queueJobs = mutableListOf<Job>()
+    private val queueJobs = Collections.synchronizedList(mutableListOf<Job>())
 
     /**
      * Current use case of the queue. Do NOT add any offline videos while the [queueMode] is online
@@ -33,7 +33,7 @@ object PlayingQueue {
             PlayerHelper.repeatMode = value
         }
 
-    private fun clearJobs() {
+    private fun clearJobs() = synchronized(queueJobs) {
         queueJobs.forEach {
             it.cancel()
         }
@@ -74,7 +74,8 @@ object PlayingQueue {
     fun addAsNext(streamItem: StreamItem) = synchronized(queue) {
         if (currentStream == streamItem) return
         if (queue.contains(streamItem)) queue.remove(streamItem)
-        queue.add(currentIndex() + 1, streamItem)
+        val insertIndex = minOf(currentIndex() + 1, queue.size)
+        queue.add(insertIndex, streamItem)
     }
 
     // return the next item, or if repeating enabled and no video left, the first one of the queue
@@ -135,7 +136,9 @@ object PlayingQueue {
     }
 
     fun remove(index: Int) = synchronized(queue) {
-        queue.removeAt(index)
+        if (index in 0 until queue.size) {
+            queue.removeAt(index)
+        }
         return@synchronized
     }
 

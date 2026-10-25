@@ -112,34 +112,42 @@ class DownloadService : LifecycleService() {
         sendBroadcast(Intent(ACTION_SERVICE_STARTED))
     }
 
+    private var networkCallback: ConnectivityManager.NetworkCallback? = null
+
     /**
      * Listen for network changes and pause the download if the network connection becomes metered
      */
     fun registerNetworkChangedCallback() {
-        val connectivityManager = getSystemService<ConnectivityManager>()
-        connectivityManager?.registerDefaultNetworkCallback(object :
-            ConnectivityManager.NetworkCallback() {
+        if (networkCallback != null) return
+        val connectivityManager = getSystemService<ConnectivityManager>() ?: return
+        val callback = object : ConnectivityManager.NetworkCallback() {
             override fun onAvailable(network: Network) {
                 super.onAvailable(network)
 
-                // pause all downloads when switching to an unmetered connection
+                // pause all downloads when switching to a metered connection
                 if (NetworkHelper.isNetworkMetered(this@DownloadService)) {
                     for (download in downloadQueue.keyIterator()) {
                         pause(download)
                     }
                 }
             }
-        })
+        }
+        connectivityManager.registerDefaultNetworkCallback(callback)
+        networkCallback = callback
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         super.onStartCommand(intent, flags, startId)
-        val downloadId = intent?.getIntExtra("id", -1)
-        when (intent?.action) {
-            ACTION_DOWNLOAD_RESUME -> resume(downloadId!!)
-            ACTION_DOWNLOAD_PAUSE -> pause(downloadId!!)
-            ACTION_DOWNLOAD_STOP -> stop(downloadId!!)
-            ACTION_RESUME_ALL -> resumeAll()
+        val downloadId = intent?.getIntExtra("id", -1) ?: -1
+        if (downloadId != -1) {
+            when (intent?.action) {
+                ACTION_DOWNLOAD_RESUME -> resume(downloadId)
+                ACTION_DOWNLOAD_PAUSE -> pause(downloadId)
+                ACTION_DOWNLOAD_STOP -> stop(downloadId)
+            }
+        }
+        if (intent?.action == ACTION_RESUME_ALL) {
+            resumeAll()
         }
 
         registerNetworkChangedCallback()
@@ -651,6 +659,11 @@ class DownloadService : LifecycleService() {
     }
 
     override fun onDestroy() {
+        networkCallback?.let {
+            val connectivityManager = getSystemService<ConnectivityManager>()
+            runCatching { connectivityManager?.unregisterNetworkCallback(it) }
+            networkCallback = null
+        }
         downloadQueue.clear()
         IS_DOWNLOAD_RUNNING = false
         sendBroadcast(Intent(ACTION_SERVICE_STOPPED))

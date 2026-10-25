@@ -219,7 +219,7 @@ class PoTokenWebView private constructor(
     }
 
     fun isExpired(): Boolean {
-        return Instant.now().isAfter(expirationInstant)
+        return !::expirationInstant.isInitialized || Instant.now().isAfter(expirationInstant)
     }
     //endregion
 

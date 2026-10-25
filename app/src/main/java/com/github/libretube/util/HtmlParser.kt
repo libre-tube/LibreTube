@@ -41,7 +41,8 @@ class HtmlParser(
     }
 
     override fun endElement(uri: String, localName: String, qName: String) {
-        if (!tagStatus.removeLast()) {
+        val isHandled = if (tagStatus.isNotEmpty()) tagStatus.removeLast() else false
+        if (!isHandled) {
             wrapped?.endElement(uri, localName, qName)
         }
         handler.handleTag(false, localName, text, null)

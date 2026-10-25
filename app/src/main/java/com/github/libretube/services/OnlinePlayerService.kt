@@ -232,11 +232,12 @@ open class OnlinePlayerService : AbstractPlayerService() {
                     streams
                 )
                 val mediaSource = sabrMediaSourceFactory.createMediaSource(mediaItem)
-                val mediaSources = listOf<MediaSource>(mediaSource) + streams.subtitles.map {
+                val mediaSources = listOf<MediaSource>(mediaSource) + streams.subtitles.mapNotNull { subtitle ->
+                    val subUrl = subtitle.url ?: return@mapNotNull null
                     val format = Format.Builder()
-                        .setSampleMimeType(it.mimeType)
-                        .setLanguage(it.code)
-                        .setRoleFlags(getSubtitleRoleFlags(it))
+                        .setSampleMimeType(subtitle.mimeType)
+                        .setLanguage(subtitle.code)
+                        .setRoleFlags(getSubtitleRoleFlags(subtitle))
                         .build()
                     val subtitleParserFactory = DefaultSubtitleParserFactory()
                     val extractorsFactory = ExtractorsFactory {
@@ -277,7 +278,7 @@ open class OnlinePlayerService : AbstractPlayerService() {
                             "failed to set subtitle lazy-loading: ${e.stackTrace}"
                         )
                     }
-                    progressiveMediaSourceFactory.createMediaSource(MediaItem.fromUri(it.url!!))
+                    progressiveMediaSourceFactory.createMediaSource(MediaItem.fromUri(subUrl))
                 }.toList()
 
                 exoPlayer?.setMediaSource(MergingMediaSource(*mediaSources.toTypedArray()))
@@ -321,9 +322,10 @@ open class OnlinePlayerService : AbstractPlayerService() {
         }
     }
 
-    private fun getSubtitleConfigs(): List<SubtitleConfiguration> = streams?.subtitles?.map {
+    private fun getSubtitleConfigs(): List<SubtitleConfiguration> = streams?.subtitles?.mapNotNull {
+        val url = it.url ?: return@mapNotNull null
         val roleFlags = getSubtitleRoleFlags(it)
-        SubtitleConfiguration.Builder(it.url!!.toUri())
+        SubtitleConfiguration.Builder(url.toUri())
             .setRoleFlags(roleFlags)
             .setLanguage(it.code)
             .setMimeType(it.mimeType).build()

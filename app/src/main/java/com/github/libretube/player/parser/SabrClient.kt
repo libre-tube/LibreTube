@@ -178,8 +178,8 @@ class SabrClient private constructor(
     )
 
     init {
-        poTokenGenerator.getCachedWebClientPoToken()?.let {
-            poToken = ByteString.copyFrom(it.streamingDataPoToken!!.toByteArray())
+        poTokenGenerator.getCachedWebClientPoToken()?.streamingDataPoToken?.let {
+            poToken = ByteString.copyFrom(it.toByteArray())
         }
     }
 
@@ -469,7 +469,7 @@ class SabrClient private constructor(
                     throw Exception("Header mismatch")
                 }
 
-                val format = initializedFormats[header.formatId.itag]!!
+                val format = initializedFormats[header.formatId.itag] ?: return
 
                 if (format.downloadedSegments.containsKey(sequenceNumber)) {
                     Log.w(TAG, "processPart: Segment $sequenceNumber is already downloaded. Ignoring.")
@@ -511,7 +511,7 @@ class SabrClient private constructor(
                     throw Exception("Content length mismatch")
                 }
 
-                val format = initializedFormats[segment.header.itag]!!
+                val format = initializedFormats[segment.header.itag] ?: return
                 format.downloadedSegments[segment.sequenceNumber] = segment
 
                 if (segment.header.isInitSeg) {
@@ -637,7 +637,8 @@ class SabrClient private constructor(
      */
     fun generatePoToken() : ByteString? {
         val poTokenResult = poTokenGenerator.getWebClientPoToken(videoId) ?: return null
-        return ByteString.copyFrom(poTokenResult.streamingDataPoToken!!.toByteArray())
+        val token = poTokenResult.streamingDataPoToken ?: return null
+        return ByteString.copyFrom(token.toByteArray())
     }
 
     companion object {

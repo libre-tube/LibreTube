@@ -99,10 +99,21 @@ object TextUtils {
     /**
      * Get video id if the link is a valid youtube video link
      */
-    fun getVideoIdFromUri(uri: Uri) = when (uri.host) {
-        "www.youtube.com", "m.youtube.com", "piped.video" -> uri.getQueryParameter("v")
-        "youtu.be" -> uri.lastPathSegment
-        else -> null
+    fun getVideoIdFromUri(uri: Uri): String? {
+        val host = uri.host?.lowercase().orEmpty()
+        val path = uri.path.orEmpty()
+        val isYouTubeHost = host == "youtube.com" || host.endsWith(".youtube.com") || host == "youtu.be" || host.contains("piped")
+        if (!isYouTubeHost) return null
+
+        val vParam = uri.getQueryParameter("v")
+        if (!vParam.isNullOrEmpty()) return vParam
+
+        if (host == "youtu.be") return uri.lastPathSegment
+
+        if (path.startsWith("/shorts/") || path.startsWith("/live/") || path.startsWith("/embed/")) {
+            return uri.lastPathSegment
+        }
+        return null
     }
 
     fun formatRelativeDate(unixTime: Long): CharSequence {

@@ -47,7 +47,7 @@ object DashHelper {
             }
 
             // ignore dual format and OTF streams
-            if (!stream.videoOnly!! || stream.indexEnd!! <= 0) {
+            if (stream.videoOnly != true || (stream.indexEnd ?: -1L) <= 0 || stream.mimeType.isNullOrEmpty() || stream.url.isNullOrEmpty() || stream.codec.isNullOrEmpty()) {
                 continue
             }
 
@@ -58,13 +58,17 @@ object DashHelper {
             }
             adapSetInfos.add(
                 AdapSetInfo(
-                    stream.mimeType!!,
+                    stream.mimeType,
                     mutableListOf(stream)
                 )
             )
         }
 
         for (stream in streams.audioStreams) {
+            if (stream.mimeType.isNullOrEmpty() || stream.url.isNullOrEmpty()) {
+                continue
+            }
+
             val adapSetInfo =
                 adapSetInfos.find {
                     it.mimeType == stream.mimeType && it.audioTrackId == stream.audioTrackId
@@ -76,7 +80,7 @@ object DashHelper {
 
             adapSetInfos.add(
                 AdapSetInfo(
-                    stream.mimeType!!,
+                    stream.mimeType,
                     mutableListOf(stream),
                     stream.audioTrackId,
                     stream.audioTrackType,
@@ -149,8 +153,8 @@ object DashHelper {
     ): Element {
         val representation = doc.createElement("Representation")
         representation.setAttribute("bandwidth", stream.bitrate.toString())
-        representation.setAttribute("codecs", stream.codec!!)
-        representation.setAttribute("mimeType", stream.mimeType!!)
+        representation.setAttribute("codecs", stream.codec.orEmpty())
+        representation.setAttribute("mimeType", stream.mimeType.orEmpty())
 
         val audioChannelConfiguration = doc.createElement("AudioChannelConfiguration")
         audioChannelConfiguration.setAttribute(
@@ -160,7 +164,7 @@ object DashHelper {
         audioChannelConfiguration.setAttribute("value", "2")
 
         val baseUrl = doc.createElement("BaseURL")
-        baseUrl.appendChild(doc.createTextNode(stream.url!!))
+        baseUrl.appendChild(doc.createTextNode(stream.url.orEmpty()))
 
         representation.appendChild(audioChannelConfiguration)
         representation.appendChild(baseUrl)
@@ -194,7 +198,7 @@ object DashHelper {
         stream: PipedStream
     ): Element {
         val representation = doc.createElement("Representation")
-        representation.setAttribute("codecs", stream.codec!!)
+        representation.setAttribute("codecs", stream.codec.orEmpty())
         representation.setAttribute("bandwidth", stream.bitrate.toString())
         representation.setAttribute("width", stream.width.toString())
         representation.setAttribute("height", stream.height.toString())
@@ -202,7 +206,7 @@ object DashHelper {
         representation.setAttribute("frameRate", stream.fps.toString())
 
         val baseUrl = doc.createElement("BaseURL")
-        baseUrl.appendChild(doc.createTextNode(stream.url!!))
+        baseUrl.appendChild(doc.createTextNode(stream.url.orEmpty()))
 
         val segmentBase = doc.createElement("SegmentBase")
         segmentBase.setAttribute("indexRange", "${stream.indexStart}-${stream.indexEnd}")

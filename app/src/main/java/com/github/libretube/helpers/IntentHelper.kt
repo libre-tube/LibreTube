@@ -77,6 +77,9 @@ object IntentHelper {
                 val videoIds = uri.getQueryParameter("video_ids")?.split(",")
                 putExtra(IntentData.videoIds, videoIds?.toTypedArray())
             }
+            lastSegment?.startsWith("@") == true -> {
+                putExtra(IntentData.channelName, lastSegment)
+            }
             else -> {
                 val id = if (lastSegment == "watch") uri.getQueryParameter("v") else lastSegment
                 putExtra(IntentData.videoId, id)

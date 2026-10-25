@@ -83,7 +83,7 @@ class PlaylistOptionsBottomSheet : BaseBottomSheet() {
                 playlist.relatedStreams.firstOrNull()?.let {
                     BackgroundHelper.playOnBackground(
                         requireContext(),
-                        PlayerData(it.url!!.toID(), playlistId = playlistId)
+                        PlayerData((it.url?.toID()).orEmpty(), playlistId = playlistId)
                     )
                 }
             }

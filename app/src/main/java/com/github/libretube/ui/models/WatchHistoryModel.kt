@@ -74,10 +74,10 @@ class WatchHistoryModel : ViewModel() {
                 return@launch
             }
             val downloaded = DatabaseHolder.Database.downloadDao()
-                .areVideosDownloaded(watchHistoryItems.map { it.video.url!!.toID() })
+                .areVideosDownloaded(watchHistoryItems.map { it.metadata.videoId.ifEmpty { (it.video.url?.toID()).orEmpty() } })
 
             watchHistoryItems.forEachIndexed { index, item ->
-                val videoId = item.video.url!!.toID()
+                val videoId = item.metadata.videoId.ifEmpty { (item.video.url?.toID()).orEmpty() }
                 if (downloaded[index]) {
                     downloadedVideoIds += videoId
                 } else {
@@ -99,7 +99,7 @@ class WatchHistoryModel : ViewModel() {
     fun getWatchPosition(videoId: String) = watchPositions[videoId]
 
     fun onWatchStatusChanged(item: WatchHistoryEntry, isVideoWatched: Boolean) {
-        val videoId = item.video.url!!.toID()
+        val videoId = item.metadata.videoId.ifEmpty { (item.video.url?.toID()).orEmpty() }
 
         if (isVideoWatched) {
             watchPositions[videoId] = Long.MAX_VALUE

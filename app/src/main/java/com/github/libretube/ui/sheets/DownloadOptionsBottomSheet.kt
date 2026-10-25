@@ -43,9 +43,10 @@ class DownloadOptionsBottomSheet : BaseBottomSheet() {
         }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        val streamItem = arguments?.parcelable<StreamItem>(IntentData.streamItem)!!
-        videoId = streamItem.url!!.toID()
-        val downloadTab = arguments?.serializable<DownloadTab>(IntentData.downloadTab)!!
+        super.onCreate(savedInstanceState)
+        val streamItem = arguments?.parcelable<StreamItem>(IntentData.streamItem) ?: return
+        videoId = (streamItem.url?.toID()).orEmpty()
+        val downloadTab = arguments?.serializable<DownloadTab>(IntentData.downloadTab) ?: return
         val playlistId = arguments?.getString(IntentData.playlistId)
 
         val options = mutableListOf(

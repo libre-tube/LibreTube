@@ -20,8 +20,9 @@ class LocalUserDataRepository : UserDataRepository {
     private val WATCH_HISTORY_PAGE_SIZE = 30
 
     override suspend fun getPlaylist(playlistId: String): Playlist {
-        val relation = Database.localPlaylistsDao().getAll()
-            .first { it.playlist.id.toString() == playlistId }
+        val relation = Database.localPlaylistsDao().getPlaylistById(playlistId)
+            ?: Database.localPlaylistsDao().getAll().firstOrNull { it.playlist.id.toString() == playlistId }
+            ?: return Playlist(name = "", videos = 0, relatedStreams = emptyList())
 
         return Playlist(
             name = relation.playlist.name,
@@ -46,8 +47,9 @@ class LocalUserDataRepository : UserDataRepository {
     }
 
     override suspend fun addToPlaylist(playlistId: String, vararg videos: StreamItem): Boolean {
-        val localPlaylist = Database.localPlaylistsDao().getAll()
-            .first { it.playlist.id.toString() == playlistId }
+        val localPlaylist = Database.localPlaylistsDao().getPlaylistById(playlistId)
+            ?: Database.localPlaylistsDao().getAll().firstOrNull { it.playlist.id.toString() == playlistId }
+            ?: return false
 
         for (video in videos) {
             val localPlaylistItem = video.toLocalPlaylistItem(playlistId)
@@ -78,8 +80,9 @@ class LocalUserDataRepository : UserDataRepository {
     }
 
     override suspend fun renamePlaylist(playlistId: String, newName: String): Boolean {
-        val playlist = Database.localPlaylistsDao().getAll()
-            .first { it.playlist.id.toString() == playlistId }.playlist
+        val playlist = Database.localPlaylistsDao().getPlaylistById(playlistId)?.playlist
+            ?: Database.localPlaylistsDao().getAll().firstOrNull { it.playlist.id.toString() == playlistId }?.playlist
+            ?: return false
         playlist.name = newName
         Database.localPlaylistsDao().updatePlaylist(playlist)
 
@@ -87,8 +90,9 @@ class LocalUserDataRepository : UserDataRepository {
     }
 
     override suspend fun changePlaylistDescription(playlistId: String, newDescription: String): Boolean {
-        val playlist = Database.localPlaylistsDao().getAll()
-            .first { it.playlist.id.toString() == playlistId }.playlist
+        val playlist = Database.localPlaylistsDao().getPlaylistById(playlistId)?.playlist
+            ?: Database.localPlaylistsDao().getAll().firstOrNull { it.playlist.id.toString() == playlistId }?.playlist
+            ?: return false
         playlist.description = newDescription
         Database.localPlaylistsDao().updatePlaylist(playlist)
 
@@ -96,17 +100,23 @@ class LocalUserDataRepository : UserDataRepository {
     }
 
     override suspend fun removeFromPlaylist(playlistId: String, videoId: String, index: Int): Boolean {
-        val transaction = Database.localPlaylistsDao().getAll()
-            .first { it.playlist.id.toString() == playlistId }
-        Database.localPlaylistsDao().removePlaylistVideo(
-            transaction.videos[index]
-        )
+        val transaction = Database.localPlaylistsDao().getPlaylistById(playlistId)
+            ?: Database.localPlaylistsDao().getAll().firstOrNull { it.playlist.id.toString() == playlistId }
+            ?: return false
+
+        val itemToRemove = transaction.videos.getOrNull(index)?.takeIf { it.videoId == videoId }
+            ?: transaction.videos.find { it.videoId == videoId }
+            ?: transaction.videos.getOrNull(index)
+            ?: return false
+
+        Database.localPlaylistsDao().removePlaylistVideo(itemToRemove)
+
         // set a new playlist thumbnail if the first video got removed
-        if (index == 0) {
-            transaction.playlist.thumbnailUrl =
-                transaction.videos.getOrNull(1)?.thumbnailUrl.orEmpty()
+        if (index == 0 || transaction.videos.firstOrNull()?.id == itemToRemove.id) {
+            val remaining = transaction.videos.filter { it.id != itemToRemove.id }
+            transaction.playlist.thumbnailUrl = remaining.firstOrNull()?.thumbnailUrl.orEmpty()
+            Database.localPlaylistsDao().updatePlaylist(transaction.playlist)
         }
-        Database.localPlaylistsDao().updatePlaylist(transaction.playlist)
 
         return true
     }

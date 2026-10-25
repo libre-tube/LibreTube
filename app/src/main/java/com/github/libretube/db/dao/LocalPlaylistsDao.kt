@@ -16,6 +16,10 @@ interface LocalPlaylistsDao {
     @Query("SELECT * FROM LocalPlaylist")
     suspend fun getAll(): List<LocalPlaylistWithVideos>
 
+    @Transaction
+    @Query("SELECT * FROM LocalPlaylist WHERE id = :playlistId LIMIT 1")
+    suspend fun getPlaylistById(playlistId: String): LocalPlaylistWithVideos?
+
     @Insert
     suspend fun createPlaylist(playlist: LocalPlaylist): Long
 
