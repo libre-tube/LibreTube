@@ -47,7 +47,7 @@ object DashHelper {
             }
 
             // ignore dual format and OTF streams
-            if (stream.videoOnly != true || (stream.indexEnd ?: -1L) <= 0 || stream.mimeType.isNullOrEmpty() || stream.url.isNullOrEmpty() || stream.codec.isNullOrEmpty()) {
+            if (stream.videoOnly != true || stream.indexEnd == null || stream.indexEnd <= 0 || stream.mimeType.isNullOrEmpty() || stream.url.isNullOrEmpty() || stream.codec.isNullOrEmpty()) {
                 continue
             }
 
