@@ -254,8 +254,8 @@
     <string name="repeat_mode_current">Actual</string>
     <string name="change_region">Tendințele par să fie indisponibile pentru regiunea actuală. Te rog să selectezi o altă regiune din setări.</string>
     <string name="playlistCloned">Lista de redare a fost clonată</string>
-    <string name="play_all">Redați toate</string>
-    <string name="notification_time_summary">Limitați intervalul de timp în care sunt afișate notificările de flux</string>
+    <string name="play_all">Redă tot</string>
+    <string name="notification_time_summary">Limitează intervalul de timp în care sunt afișate notificările din flux</string>
     <string name="brightness">Luminozitate</string>
     <string name="double_tap_seek_summary">Atingeți de două ori la stânga sau la dreapta pentru a derula înapoi sau înainte poziția player-ului</string>
     <string name="remove_bookmark">Eliminați marcajul</string>
@@ -487,7 +487,7 @@
     <string name="backup_creation_failed">Nu s-a putut crea copia de rezervă</string>
     <string name="pip">PiP</string>
     <string name="playback_pitch_semitone_error_input">Valoarea trebuie să fie între -%1$.1f (minimum) și %1$.1f (maximum)</string>
-    <string name="unsubscribe_snackbar_message">V-ați dezabonat cu succes de la %1$s</string>
+    <string name="unsubscribe_snackbar_message">Te-ai dezabonat cu succes de la %1$s</string>
     <string name="export_playlist">Exportează playlistul</string>
     <string name="import_watch_history">Importează istoricul de vizionare</string>
     <string name="screenshot_saved">Captură de ecran salvată</string>
