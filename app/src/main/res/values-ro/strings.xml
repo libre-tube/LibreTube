@@ -83,7 +83,7 @@
     <string name="password">Parolă</string>
     <string name="about">Despre</string>
     <string name="playlistCreated">Lista de redare a fost creată.</string>
-    <string name="systemLanguage">Sistem</string>
+    <string name="systemLanguage">Sistemului</string>
     <string name="emptyList">Nimic aici.</string>
     <string name="changeLanguage">Limba</string>
     <string name="systemDefault">Sistem</string>
@@ -163,7 +163,7 @@
     <string name="data_saver_mode">Modul de economisire a datelor</string>
     <string name="data_saver_mode_summary">Omite miniaturi și alte imagini</string>
     <string name="general">General</string>
-    <string name="notify_new_streams">Afișează notificări pentru videoclipurile noi</string>
+    <string name="notify_new_streams">Afișare notificări pentru videoclipuri noi</string>
     <string name="checking_frequency">Verificarea după fiecare …</string>
     <string name="most_recent">Cele mai noi</string>
     <string name="add_to_queue">Adaugă în coadă</string>
@@ -285,13 +285,13 @@
     <string name="added_to_playlist">Adăugat la lista de redare %1$s</string>
     <string name="start_time">Ora de începere</string>
     <string name="end_time">Ora de încheiere</string>
-    <string name="notification_time">Limitează intervalul pentru notificări</string>
+    <string name="notification_time">Limitare interval pentru notificări</string>
     <string name="unsupported_file_format">Format de fișier nesuportat: %1$s</string>
-    <string name="auto_quality">Auto</string>
+    <string name="auto_quality">Automată</string>
     <string name="trends">Tendințe</string>
     <string name="featured">Recomandate</string>
     <string name="captions_size">Dimensiunea subtitrărilor</string>
-    <string name="double_tap_seek">Atinge de două ori pentru a derula</string>
+    <string name="double_tap_seek">Atingere dublă pentru a derula</string>
     <string name="all_caught_up">Ești la curent</string>
     <string name="all_caught_up_summary">Ai vizionat toate videoclipurile noi</string>
     <string name="exportsuccess">Exportat.</string>
@@ -374,7 +374,7 @@
     <string name="emptyPlaylistDescription">Descrierea listei de redare nu poate fi goală</string>
     <string name="manual">Manual</string>
     <string name="playlist_description">Descrierea listei de redare</string>
-    <string name="show_search_suggestions">Afișează sugestii de căutare</string>
+    <string name="show_search_suggestions">Afișare sugestii de căutare</string>
     <string name="dearrow">Activează DeArrow</string>
     <string name="unknown_audio_language">Limbă audio necunoscută</string>
     <string name="unknown_audio_track_type">Tip de pistă audio necunoscut</string>
@@ -463,7 +463,7 @@
     <string name="gestures">Gesturi</string>
     <string name="comments_count">Comentarii (%1$s)</string>
     <string name="external_player">Player extern</string>
-    <string name="show_updates">Verifică automat actualizările</string>
+    <string name="show_updates">Verificare automată actualizări</string>
     <string name="albums">Albume</string>
     <string name="best_quality">Cea mai bună</string>
     <string name="title">Titlu</string>
