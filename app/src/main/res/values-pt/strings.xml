@@ -113,7 +113,7 @@
     <string name="update_summary">Procurar atualizações</string>
     <string name="app_uptodate">A sua versão está atualizada.</string>
     <string name="shapedIcon">Forma</string>
-    <string name="instance_summary">Piped, sessão e conta</string>
+    <string name="instance_summary">Sincronização de dados, conta e histórico</string>
     <string name="customInstance_summary">Adicionar…</string>
     <string name="instance_name">Nome da instância</string>
     <string name="update_available">Atualização disponível</string>
@@ -196,7 +196,7 @@
     <string name="data_saver_mode">Poupança de dados</string>
     <string name="data_saver_mode_summary">Ignorar miniaturas e outras imagens</string>
     <string name="search_history_summary">Memorizar pesquisas</string>
-    <string name="watch_history_summary">Guardar registo de vídeos localmente</string>
+    <string name="watch_history_summary">Guardar registo de vídeos visualizados</string>
     <string name="history_summary">Histórico de pesquisas e de visualizações</string>
     <string name="watch_positions_title">Memorizar posição de reprodução</string>
     <string name="reset_watch_positions">Repor</string>
@@ -556,4 +556,11 @@
     <string name="missing_auth_falling_back">Sessão não iniciada. A sincronização está desativada.</string>
     <string name="oidc_login">Continuar com OIDC</string>
     <string name="already_downloaded">Este vídeo já foi descarregado!</string>
+    <string name="welcome">Bem-vindo ao LibreTube! Para começar, selecione o modo de sincronização abaixo para decidir se deve sincronizar os seus dados em todos os seus dispositivos.</string>
+    <string name="choose_instance_long">Escolha uma das instâncias Piped indicadas abaixo. A instância Piped atuará como intermediário entre o dispositivo e o YouTube. Estas instâncias estão localizadas em locais físicos diferentes, indicados pelas bandeiras dos países. As instâncias mais próximas de si serão, provavelmente, mais rápidas do que as instâncias mais afastadas. Pode alterar a instância nas definições, sempre que quiser.</string>
+    <string name="account">Conta</string>
+    <string name="sync_type_summary_none">Guardar todos os dados apenas na aplicação. Isto significa que a sincronização entre dispositivos não será possível, mas pode ser a escolha acertada se apenas utiliza um dispositivo ou não tenha qualquer interesse em sincronizar dados.</string>
+    <string name="sync_type_summary_libretube">Guardar listas de reprodução e subscrições no servidor LibreTube (%1$s). Desta forma, pode iniciar sessão na sua conta em qualquer dispositivo e ter acesso aos seus dados online. Aviso sobre privacidade: os dados do utilizador serão mantidos anónimos no servidor, mas não possuem criptografia ponta a ponta. Se preferir, também pode utilizar o seu próprio servidor mas, geralmente, o servidor oficial é suficiente.</string>
+    <string name="sync_type_summary_piped">Apenas para utilizadores avançados (recurso descontinuado):\nGuardar listas de reprodução e subscrições em Piped (%1$s). Como Piped já não possui instâncias públicas, terá que criar a sua própria instância.</string>
+    <string name="switch_sync_type_warning">Se, anteriormente, utilizou um método de sincronização diferente, crie um backup das suas listas de reprodução e subscrições. Poderá, depois, alterar o tipo de sincronização nas definições da instância e importar o seu backup.</string>
 </resources>
