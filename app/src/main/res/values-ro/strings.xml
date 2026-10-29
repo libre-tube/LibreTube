@@ -107,7 +107,7 @@
     <string name="player">Player</string>
     <string name="appearance_summary">Ajustarea aplicației după bunul plac</string>
     <string name="shareTo">Distribuie URL-ul către</string>
-    <string name="defaultIcon">Implicit</string>
+    <string name="defaultIcon">Implicită</string>
     <string name="legacyIcon">Moștenire pierdută</string>
     <string name="gradientIcon">Gradient neted</string>
     <string name="fireIcon">Foc la modă</string>
@@ -187,7 +187,7 @@
     <string name="pauseOnScreenOff">Pauză automată</string>
     <string name="pauseOnScreenOff_summary">Întrerupe redarea când ecranul este oprit</string>
     <string name="clonePlaylist">Clonează lista de redare</string>
-    <string name="reset">Restaurare valorile implicite</string>
+    <string name="reset">Restaurare valori implicite</string>
     <string name="reset_message">Resetezi toate setările și te deconectezi?</string>
     <string name="deleteAccount">Șterge contul</string>
     <string name="deleteAccount_summary">Șterge-ți contul Piped</string>
@@ -197,7 +197,7 @@
     <string name="auth_instances">Alege o instanță de autentificare</string>
     <string name="github">GitHub</string>
     <string name="audio_video">Audio și video</string>
-    <string name="fullscreen_orientation">Orientare pe ecran complet</string>
+    <string name="fullscreen_orientation">Orientare pe modul ecran complet</string>
     <string name="auto_rotation">Rotire automată</string>
     <string name="portrait">Portret</string>
     <string name="turnInternetOn">Te rog să activezi Wi-Fi-ul sau datele mobile pentru a te conecta la internet.</string>
@@ -234,9 +234,9 @@
     <string name="audio">Audio</string>
     <string name="video">Video</string>
     <string name="unknown">Necunoscut</string>
-    <string name="autoRotatePlayer_summary">Redare pe ecran complet când dispozitivul este întors</string>
+    <string name="autoRotatePlayer_summary">Redare pe modul ecran complet când dispozitivul este întors</string>
     <string name="auth_instance_summary">Utilizează o instanță diferită pentru apelurile autentificate</string>
-    <string name="autoRotatePlayer">Ecran complet automat</string>
+    <string name="autoRotatePlayer">Modul ecran complet automat</string>
     <string name="aspect_ratio">Raportul de aspect video</string>
     <string name="open">Deschide…</string>
     <string name="mobile_data">Date mobile</string>
