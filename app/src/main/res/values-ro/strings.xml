@@ -105,7 +105,7 @@
     <string name="playback_speed">Viteza de redare</string>
     <string name="advanced">Avansat</string>
     <string name="player">Player</string>
-    <string name="appearance_summary">Ajustează aplicația după bunul tău plac</string>
+    <string name="appearance_summary">Ajustarea aplicației după bunul plac</string>
     <string name="shareTo">Distribuie URL-ul către</string>
     <string name="defaultIcon">Implicit</string>
     <string name="legacyIcon">Moștenire pierdută</string>
@@ -125,7 +125,7 @@
     <string name="live">În direct</string>
     <string name="flameIcon">Flacără zburătoare</string>
     <string name="shapedIcon">În formă poznașă</string>
-    <string name="instance_summary">Sincronizarea datelor, contul și istoricul</string>
+    <string name="instance_summary">Sincronizarea datelor, cont și istoric</string>
     <string name="invalid_url">Te rog să introduci un URL care funcționează</string>
     <string name="version">Versiune %1$s</string>
     <string name="related_streams">Conținut asociat</string>
@@ -137,7 +137,7 @@
     <string name="history_summary">Istoricul vizionărilor și căutărilor</string>
     <string name="watch_positions_title">Pozițiile de redare memorate</string>
     <string name="captions">Subtitrări</string>
-    <string name="none">Niciunul</string>
+    <string name="none">Niciuna</string>
     <string name="caption_settings">Subtitrări</string>
     <string name="playerAudioQuality">Calitate audio</string>
     <string name="general_summary">Descărcări și economisirea datelor</string>
@@ -187,7 +187,7 @@
     <string name="pauseOnScreenOff">Pauză automată</string>
     <string name="pauseOnScreenOff_summary">Întrerupe redarea când ecranul este oprit</string>
     <string name="clonePlaylist">Clonează lista de redare</string>
-    <string name="reset">Restaurează valorile implicite</string>
+    <string name="reset">Restaurare valorile implicite</string>
     <string name="reset_message">Resetezi toate setările și te deconectezi?</string>
     <string name="deleteAccount">Șterge contul</string>
     <string name="deleteAccount_summary">Șterge-ți contul Piped</string>
@@ -211,15 +211,15 @@
     <string name="irreversible">Eşti sigur\? Acest lucru nu poate fi anulat!</string>
     <string name="history_empty">Nu există încă istoric.</string>
     <string name="least_views">Cele mai puține vizualizări</string>
-    <string name="network_metered">Măsurată</string>
+    <string name="network_metered">Tarifate</string>
     <string name="error_occurred">Eroare</string>
     <string name="share_with_time">Distribuie cu codul de timp</string>
     <string name="export_subscriptions">Exportă abonamentele</string>
     <string name="yt_shorts">Shorts</string>
     <string name="repeat_mode">Mod repetare</string>
     <string name="resize_mode_fill">Umplere</string>
-    <string name="resize_mode_zoom">Zoom</string>
-    <string name="backup_restore">Copiere de rezervă și restaurare</string>
+    <string name="resize_mode_zoom">Mărire</string>
+    <string name="backup_restore">Copie de rezervă și restaurare</string>
     <string name="backup">Copie de rezervă</string>
     <string name="copied_to_clipboard">Copiat în clipboard</string>
     <string name="delete">Șterge din descărcări</string>
@@ -278,9 +278,9 @@
     <string name="livestreams">Videoclipuri în direct</string>
     <string name="time">Timp</string>
     <string name="layout">Aspect</string>
-    <string name="audio_track">Pistă audio</string>
+    <string name="audio_track">Canal audio</string>
     <string name="app_backup">Copie de rezervă aplicație</string>
-    <string name="backup_restore_summary">Importă și exportă abonamente, liste de redare, …</string>
+    <string name="backup_restore_summary">Importare și exportare abonamente, liste de redare, …</string>
     <string name="time_code">Cod de timp (secunde)</string>
     <string name="added_to_playlist">Adăugat la lista de redare %1$s</string>
     <string name="start_time">Ora de începere</string>
@@ -320,7 +320,7 @@
     <string name="category">Categoria</string>
     <string name="sleep_timer">Cronometru de somn</string>
     <string name="color_violet">Violet versatil</string>
-    <string name="auto">Automat</string>
+    <string name="auto">Automată</string>
     <string name="playback_pitch">Înălțime</string>
     <string name="autoplay_countdown">Numărătoarea inversă pentru redarea automată</string>
     <string name="video_id">ID video</string>
@@ -355,9 +355,9 @@
     <string name="creation_date_reversed">Data creării (inversată)</string>
     <string name="alphabetic_reversed">Alfabetic (inversat)</string>
     <string name="import_subscriptions_from">Importă abonamente din</string>
-    <string name="export_subscriptions_to">Exportă abonamente la</string>
+    <string name="export_subscriptions_to">Exportă abonamente în</string>
     <string name="import_playlists_from">Importă liste de redare din</string>
-    <string name="export_playlists_to">Exportă liste de redare la</string>
+    <string name="export_playlists_to">Exportă liste de redare în</string>
     <string name="mark_as_unwatched">Marchează ca nevizionat</string>
     <string name="home_tab_content">Conținutul filei Acasă</string>
     <string name="off">Oprit</string>
@@ -368,7 +368,7 @@
     <string name="chapters_videoHighlight">Momente importante din videoclip</string>
     <string name="category_highlight_summary">Poate fi fie titlul promovat, fie miniatura, fie cea mai interesantă parte a videoclipului. Poți sări direct la acel moment atingându-l în secțiunea capitolelor</string>
     <string name="category_highlight">Afișează momentele importante ale videoclipului</string>
-    <string name="sb_custom_colors_summary">Comută segmentele de culoare personalizate pentru segmentele SponsorBlock</string>
+    <string name="sb_custom_colors_summary">Activează personalizarea culorilor pentru segmentele SponsorBlock</string>
     <string name="invalid_color">A fost introdusă o valoare de culoare nevalidă!</string>
     <string name="color">Culoare</string>
     <string name="emptyPlaylistDescription">Descrierea listei de redare nu poate fi goală</string>
@@ -377,8 +377,8 @@
     <string name="show_search_suggestions">Afișare sugestii de căutare</string>
     <string name="dearrow">Activează DeArrow</string>
     <string name="unknown_audio_language">Limbă audio necunoscută</string>
-    <string name="unknown_audio_track_type">Tip de pistă audio necunoscut</string>
-    <string name="original_or_main_audio_track">Original sau principal</string>
+    <string name="unknown_audio_track_type">Tip de canal audio necunoscut</string>
+    <string name="original_or_main_audio_track">Original</string>
     <string name="dubbed_audio_track">Dublat</string>
     <string name="descriptive_audio_track">Descriere audio</string>
     <string name="continue_watching">Continuă să vizionezi</string>
@@ -400,7 +400,7 @@
     <string name="visibility_public">Public</string>
     <string name="group_name_error_empty">Te rog să introduci un nume</string>
     <string name="donate">Donează</string>
-    <string name="screen_orientation">Orientarea ecranului</string>
+    <string name="screen_orientation">Orientare ecran</string>
     <string name="duration_span">Durata: %1$s</string>
     <string name="tooltip_close">Închidere</string>
     <string name="tooltip_play">Redare</string>
@@ -456,7 +456,7 @@
     <string name="enqueue_playlist_description">Afișează o notificare atunci când se adaugă în coadă videoclipurile dintr-o listă de redare pentru a fi descărcate.</string>
     <string name="enqueueing_playlist_download">Adăugarea în coada de descărcare a videoclipurilor din lista de redare %1$s</string>
     <string name="audio_language">Limba audio</string>
-    <string name="also_clear_watch_positions">Și șterge și pozițiile de vizionare</string>
+    <string name="also_clear_watch_positions">Șterge și pozițiile de vizionare</string>
     <string name="delete_all">Toate descărcările vor fi șterse!</string>
     <string name="download_playlist_note">Te rog să selectezi calitatea maximă a fișierului audio/video pe care dorești să îl descarci. Subtitrările vor fi descărcate numai dacă sunt disponibile.</string>
     <string name="default_language">Implicit</string>
@@ -508,7 +508,7 @@
     <string name="category_hook">Captivare/Salutări</string>
     <string name="category_hook_summary">Pentru elemente narative care captează atenția spectatorului (adesea în prima scenă) prin dezvăluirea unor indicii sau descrierea unor evenimente care vor avea loc mai târziu în același videoclip sau în episoadele viitoare ale unei serii</string>
     <string name="update_information">Informații despre actualizare</string>
-    <string name="local_ryd_summary">Preia direct informațiile privind aprecierile negative de pe https://returnyoutubedislikeapi.com</string>
+    <string name="local_ryd_summary">Preia direct numărul de dislike-uri de pe https://returnyoutubedislikeapi.com</string>
     <string name="dialog_play_offline_title">O versiune locală a acestui videoclip este disponibilă.</string>
     <string name="dialog_play_offline_body">Dorești să redai videoclipul din folderul de descărcări?</string>
     <string name="view_count">%1$s vizualizări</string>
