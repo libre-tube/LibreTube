@@ -124,7 +124,7 @@
     <string name="downloads">Descărcări</string>
     <string name="live">În direct</string>
     <string name="flameIcon">Flacără zburătoare</string>
-    <string name="shapedIcon">În formă poznașă</string>
+    <string name="shapedIcon">Formă caraghioasă</string>
     <string name="instance_summary">Sincronizarea datelor, cont și istoric</string>
     <string name="invalid_url">Te rog să introduci un URL care funcționează</string>
     <string name="version">Versiune %1$s</string>
@@ -310,7 +310,7 @@
     <string name="faq">Întrebări frecvente</string>
     <string name="mark_as_watched">Marchează ca vizionat</string>
     <string name="download_channel_description">Afișează o notificare în timpul descărcării fișierelor media.</string>
-    <string name="defaultIconLight">Luminată implicită</string>
+    <string name="defaultIconLight">Lumina implicită</string>
     <string name="pinch_control_summary">Folosește gestul de ciupire pentru a mări/micșora</string>
     <string name="comments_disabled">Comentariile sunt dezactivate de către autor.</string>
     <string name="no_comments_available">Acest videoclip nu are comentarii.</string>
