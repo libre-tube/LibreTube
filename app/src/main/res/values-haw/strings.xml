@@ -46,4 +46,24 @@
     <string name="playlistName">Inoa papa mele</string>
     <string name="emptyPlaylistName">ʻAʻole hiki ke hakahaka ka inoa o ka papa mele</string>
     <string name="addToPlaylist">Hoʻohui i ka papa mele</string>
+    <string name="success">Ua pau.</string>
+    <string name="fail">Ua hāʻule :(</string>
+    <string name="about">E pili ana</string>
+    <string name="changeLanguage">ʻŌlelo</string>
+    <string name="systemLanguage">ʻŌnaehana</string>
+    <string name="systemDefault">ʻŌnaehana</string>
+    <string name="lightTheme">Māmā</string>
+    <string name="darkTheme">Pōʻeleʻele</string>
+    <string name="subscribers">%1$s poʻe kau inoa</string>
+    <string name="settings">Nā Hoʻonohonoho</string>
+    <string name="location">Wahi</string>
+    <string name="instance">Hihia</string>
+    <string name="customization">Nā Hoʻoponopono ʻana</string>
+    <string name="website">Kahua Pūnaewele</string>
+    <string name="donate">Hāʻawi</string>
+    <string name="uploaderAndVideoCount">%1$s • %2$d mau wikiō</string>
+    <string name="subscriberAndVideoCounts">%1$s mau mea kākau inoa • %2$d mau wikiō</string>
+    <string name="videoCount">%1$d wikiō</string>
+    <string name="noInternet">E hoʻohui mua i ka Pūnaewele.</string>
+    <string name="retry">E hoʻāʻo hou</string>
 </resources>
