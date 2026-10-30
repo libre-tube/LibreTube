@@ -11,7 +11,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.libretube.R
 import com.github.libretube.databinding.BottomSheetBinding
 import com.github.libretube.extensions.dpToPx
-import com.github.libretube.obj.BottomSheetItem
+import com.github.libretube.obj.bottomsheetitem.BottomSheetItem
+import com.github.libretube.obj.bottomsheetitem.BottomSheetItemTitle
 import com.github.libretube.ui.adapters.BottomSheetAdapter
 import com.github.libretube.ui.extensions.onSystemInsets
 import kotlinx.coroutines.launch
@@ -59,7 +60,10 @@ open class BaseBottomSheet(@LayoutRes layoutResId: Int = R.layout.bottom_sheet) 
 
     }
 
-    fun setItems(items: List<BottomSheetItem>, listener: (suspend (index: Int) -> Unit)?) = apply {
+    fun setItems(
+        items: List<BottomSheetItem>,
+        listener: (suspend (index: Int) -> Unit)?
+    ) = apply {
         this.items = items
 
         // if the caller calls `setItems` while the sheet is already visible, update the existing list
@@ -85,7 +89,12 @@ open class BaseBottomSheet(@LayoutRes layoutResId: Int = R.layout.bottom_sheet) 
         preselectedItem: String? = null,
         listener: (suspend (index: Int) -> Unit)?
     ) = apply {
-        setItems(titles.map { BottomSheetItem(it, isSelected = it == preselectedItem) }, listener)
+        setItems(titles.map {
+            BottomSheetItem(
+                BottomSheetItemTitle.Text(it),
+                isSelected = it == preselectedItem
+            )
+        }, listener = listener)
     }
 
     companion object {
