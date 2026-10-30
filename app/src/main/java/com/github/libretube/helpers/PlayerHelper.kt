@@ -314,7 +314,7 @@ object PlayerHelper {
     val longPressFastForward: Boolean
         get() = PreferenceHelper.getBoolean(
             PreferenceKeys.LONG_PRESS_FAST_FORWARD,
-            false
+            true
         )
 
     private val alternativePiPControls: Boolean
