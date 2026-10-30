@@ -1,0 +1,21 @@
+name: Mirror to Codeberg
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  mirror:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Mirror Code to Codeberg
+        uses: yesolutions/mirror-action@master
+        with:
+          REMOTE: 'ssh://git@codeberg.org/libre-tube/LibreTube.git'
+          GIT_SSH_PRIVATE_KEY: ${{ secrets.GIT_SSH_PRIVATE_KEY }}
+          GIT_SSH_KNOWN_HOSTS: ${{ secrets.GIT_SSH_KNOWN_HOSTS }}
