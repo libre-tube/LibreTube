@@ -3,12 +3,15 @@ package com.github.libretube.services
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
 import androidx.media3.common.C
 import androidx.media3.common.Format
 import androidx.media3.common.MediaItem
 import androidx.media3.common.MediaItem.SubtitleConfiguration
 import androidx.media3.common.MimeTypes
+import androidx.media3.common.PlaybackException
 import androidx.media3.common.Player
 import androidx.media3.datasource.DefaultDataSource
 import androidx.media3.exoplayer.hls.HlsMediaSource
@@ -28,12 +31,10 @@ import com.github.libretube.db.DatabaseHelper
 import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.parcelable
 import com.github.libretube.extensions.setMetadata
-import com.github.libretube.extensions.toastFromMainDispatcher
 import com.github.libretube.extensions.toastFromMainThread
 import com.github.libretube.extensions.updateParameters
 import com.github.libretube.helpers.PlayerHelper
 import com.github.libretube.helpers.PlayerHelper.getSubtitleRoleFlags
-import com.github.libretube.helpers.ProxyHelper
 import com.github.libretube.parcelable.PlayerData
 import com.github.libretube.player.SabrMediaSource
 import com.github.libretube.player.manifest.SabrManifest
@@ -77,10 +78,6 @@ open class OnlinePlayerService : AbstractPlayerService() {
             when (playbackState) {
                 Player.STATE_ENDED -> {
                     if (!isTransitioning) playNextVideo(relatedStreams = streams?.relatedStreams)
-                }
-
-                Player.STATE_IDLE -> {
-                    onDestroy()
                 }
 
                 Player.STATE_BUFFERING -> {}
@@ -144,7 +141,20 @@ open class OnlinePlayerService : AbstractPlayerService() {
                     }
                 } catch (e: Exception) {
                     Log.e(TAG(), e.stackTraceToString())
-                    toastFromMainDispatcher(e.localizedMessage.orEmpty())
+
+                    val message = e.localizedMessage.orEmpty()
+                    val exception = PlaybackException(
+                        message,
+                        null,
+                        PlaybackException.ERROR_CODE_IO_UNSPECIFIED,
+                        Bundle.EMPTY
+                    )
+
+                    withContext(Dispatchers.Main) {
+                        sessions.forEach { it.setPlaybackException(exception) }
+                        toastFromMainThread(message)
+                    }
+
                     return@withContext null
                 }
             } ?: return@launch
@@ -315,7 +325,15 @@ open class OnlinePlayerService : AbstractPlayerService() {
             }
             // NO STREAM FOUND
             else -> {
-                toastFromMainThread(R.string.unknown_error)
+                val message = ContextCompat.getString(this, R.string.unknown_error)
+                val exception = PlaybackException(
+                    message,
+                    null,
+                    PlaybackException.ERROR_CODE_UNSPECIFIED,
+                    Bundle.EMPTY
+                )
+                sessions.forEach { it.setPlaybackException(exception) }
+                toastFromMainThread(message)
                 return
             }
         }
