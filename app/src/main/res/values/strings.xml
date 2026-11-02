@@ -243,6 +243,9 @@
     <string name="history_empty">No history yet.</string>
     <string name="most_recent">Newest</string>
     <string name="least_recent">Oldest</string>
+    <string name="channel_sort_latest">Latest</string>
+    <string name="channel_sort_popular">Popular</string>
+    <string name="channel_sort_oldest">Oldest</string>
     <string name="most_views">Most views</string>
     <string name="sort_channel">Channel name</string>
     <string name="sort_size">Size</string>

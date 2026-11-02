@@ -9,7 +9,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
 class ChannelTabPagingSource(
-    private val tab: ChannelTab
+    private val tab: ChannelTab,
+    private val onSortingChips: (Map<String, String>) -> Unit,
 ): PagingSource<String, ContentItem>() {
     override fun getRefreshKey(state: PagingState<String, ContentItem>) = null
 
@@ -18,6 +19,13 @@ class ChannelTabPagingSource(
             val resp = withContext(Dispatchers.IO) {
                 MediaServiceRepository.instance.getChannelTab(tab.data, params.key)
             }
+
+            resp.sortingOptions?.let {
+                withContext(Dispatchers.Main) {
+                    onSortingChips(it)
+                }
+            }
+
             LoadResult.Page(resp.content, null, resp.nextpage)
         } catch (e: Exception) {
             LoadResult.Error(e)

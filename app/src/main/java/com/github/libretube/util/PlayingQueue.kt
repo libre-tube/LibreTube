@@ -9,6 +9,7 @@ import com.github.libretube.extensions.move
 import com.github.libretube.extensions.runCatchingIO
 import com.github.libretube.extensions.toID
 import com.github.libretube.helpers.PlayerHelper
+import com.github.libretube.obj.ChannelIdentifier
 import com.github.libretube.util.PlayingQueue.queueMode
 import kotlinx.coroutines.Job
 import java.util.Collections
@@ -208,7 +209,7 @@ object PlayingQueue {
     }
 
     private fun insertChannel(channelId: String, newCurrentStream: StreamItem) = runCatchingIO {
-        val channel = MediaServiceRepository.instance.getChannel(channelId)
+        val channel = MediaServiceRepository.instance.getChannel(ChannelIdentifier.Id(channelId))
         addToQueueAsync(channel.relatedStreams, newCurrentStream)
         if (channel.nextpage == null) return@runCatchingIO
         fetchMoreFromChannel(channelId, channel.nextpage)

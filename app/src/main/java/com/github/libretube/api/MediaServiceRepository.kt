@@ -11,7 +11,7 @@ import com.github.libretube.api.obj.SearchResult
 import com.github.libretube.api.obj.SegmentData
 import com.github.libretube.api.obj.StreamItem
 import com.github.libretube.api.obj.Streams
-import com.github.libretube.helpers.PlayerHelper
+import com.github.libretube.obj.ChannelIdentifier
 
 interface MediaServiceRepository {
     fun getTrendingCategories(): List<TrendingCategory>
@@ -35,9 +35,8 @@ interface MediaServiceRepository {
     ): SearchResult
 
     suspend fun getSuggestions(query: String): List<String>
-    suspend fun getChannel(channelId: String): Channel
+    suspend fun getChannel(channel: ChannelIdentifier): Channel
     suspend fun getChannelTab(data: String, nextPage: String? = null): ChannelTabResponse
-    suspend fun getChannelByName(channelName: String): Channel
     suspend fun getChannelNextPage(channelId: String, nextPage: String): Channel
     suspend fun getPlaylist(playlistId: String): Playlist
     suspend fun getPlaylistNextPage(playlistId: String, nextPage: String): Playlist
