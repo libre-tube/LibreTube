@@ -32,7 +32,7 @@
             app:title="@string/double_tap_seek" />
 
         <SwitchPreferenceCompat
-            android:defaultValue="false"
+            android:defaultValue="true"
             android:icon="@drawable/ic_time_outlined"
             android:summary="@string/long_press_fast_forward_summary"
             app:key="long_press_fast_forward"
