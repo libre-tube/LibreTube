@@ -61,7 +61,7 @@
     <string name="music_videos">Videoclipuri de pe YT Music</string>
     <string name="music_songs">Melodii de pe YT Music</string>
     <string name="music_playlists">Liste de redare de pe YT Music</string>
-    <string name="sponsorblock">SponsorBlock</string>
+    <string name="sponsorblock">Blocare sponsor</string>
     <string name="segment_skipped">Segment omis</string>
     <string name="category_segments">Segmente</string>
     <string name="category_sponsor">Sponsor</string>
@@ -104,14 +104,14 @@
     <string name="app_uptodate">Folosești cea mai recentă versiune.</string>
     <string name="playback_speed">Viteza de redare</string>
     <string name="advanced">Avansat</string>
-    <string name="player">Player</string>
+    <string name="player">Redare</string>
     <string name="appearance_summary">Ajustarea aplicației după bunul plac</string>
     <string name="shareTo">Distribuie URL-ul către</string>
     <string name="defaultIcon">Implicită</string>
     <string name="legacyIcon">Moștenire pierdută</string>
-    <string name="gradientIcon">Gradient neted</string>
+    <string name="gradientIcon">Gradient superficial</string>
     <string name="fireIcon">Foc la modă</string>
-    <string name="torchIcon">Lanternă la modă</string>
+    <string name="torchIcon">Torță la modă</string>
     <string name="birdIcon">Pasăre stimulată</string>
     <string name="customInstance_summary">Adaugă…</string>
     <string name="instance_name">Numele instanței</string>
@@ -120,7 +120,7 @@
     <string name="empty_instance">Completează numele și URL-ul API-ului.</string>
     <string name="related_streams_summary">Afișează videoclipuri similare alături de ceea ce vizionezi</string>
     <string name="sponsorblock_notifications">Notificări</string>
-    <string name="material_you">Culoare sistem</string>
+    <string name="material_you">Culoare dinamică</string>
     <string name="downloads">Descărcări</string>
     <string name="live">În direct</string>
     <string name="flameIcon">Flacără zburătoare</string>
@@ -164,7 +164,7 @@
     <string name="data_saver_mode_summary">Omite miniaturi și alte imagini</string>
     <string name="general">General</string>
     <string name="notify_new_streams">Afișare notificări pentru videoclipuri noi</string>
-    <string name="checking_frequency">Verificarea după fiecare …</string>
+    <string name="checking_frequency">Verificare după fiecare …</string>
     <string name="most_recent">Cele mai noi</string>
     <string name="add_to_queue">Adaugă în coadă</string>
     <string name="misc">Diverse</string>
@@ -182,7 +182,7 @@
     <string name="download_paused">Descărcare întreruptă</string>
     <string name="download_completed">Descărcare finalizată</string>
     <string name="concurrent_downloads_limit_reached">A fost atinsă limita maximă de descărcări simultane.</string>
-    <string name="resume">Redă</string>
+    <string name="resume">Reia</string>
     <string name="player_autoplay">Redare automată</string>
     <string name="pauseOnScreenOff">Pauză automată</string>
     <string name="pauseOnScreenOff_summary">Întrerupe redarea când ecranul este oprit</string>
@@ -259,7 +259,7 @@
     <string name="brightness">Luminozitate</string>
     <string name="double_tap_seek_summary">Atinge de două ori în partea stângă sau dreaptă pentru a derula înapoi sau înainte poziția playerului</string>
     <string name="remove_bookmark">Elimină marcajul</string>
-    <string name="alternative_pip_controls_summary">Afișează doar comenzile audio și omitere în suprapunere în loc de înainte și înapoi</string>
+    <string name="alternative_pip_controls_summary">Afișează doar comenzile pentru sunet și de omitere în modul Imagine-în-Imagine, în loc de derulare înainte și înapoi</string>
     <string name="stats_for_nerds">Statistici pentru pasionați</string>
     <string name="push_channel_name">Notificator</string>
     <string name="download_channel_name">Serviciu de descărcare</string>
@@ -305,7 +305,7 @@
     <string name="add_to_bookmarks">Adaugă la marcaje</string>
     <string name="forward">Înainte</string>
     <string name="audio_only_mode">Mod numai audio</string>
-    <string name="audio_only_mode_summary">Transformă LibreTube într-un player audio</string>
+    <string name="audio_only_mode_summary">Transformă LibreTube într-un player muzical</string>
     <string name="help">Ajutor</string>
     <string name="faq">Întrebări frecvente</string>
     <string name="mark_as_watched">Marchează ca vizionat</string>
@@ -403,7 +403,7 @@
     <string name="screen_orientation">Orientare ecran</string>
     <string name="duration_span">Durata: %1$s</string>
     <string name="tooltip_close">Închidere</string>
-    <string name="tooltip_play">Redare</string>
+    <string name="tooltip_play">Redă</string>
     <string name="tooltip_filter">Filtru</string>
     <string name="tooltip_scroll_to_top">Derulează până sus</string>
     <string name="tooltip_fullscreen">Ecran complet</string>
@@ -432,11 +432,11 @@
     <string name="rich_caption_rendering">Afișare avansată a subtitrărilor</string>
     <string name="rich_caption_rendering_summary">Afișează subtitrări web pentru o experiență mai bogată și mai personalizată</string>
     <string name="downvote">Jos</string>
-    <string name="tooltip_reverse">Invers</string>
+    <string name="tooltip_reverse">Inversare</string>
     <string name="copy_tooltip">Copiază</string>
     <string name="segment_submitted">Segmentul a fost trimis</string>
     <string name="undo">Anulează</string>
-    <string name="segment">Segment</string>
+    <string name="segment">Segmentul</string>
     <string name="sponsorblock_user_id">ID-ul utilizatorului SponsorBlock</string>
     <string name="successfully_removed_from_playlist">„%1$s” a fost eliminat cu succes din lista de redare.</string>
     <string name="uptime">%.2f%% timp de funcționare</string>
@@ -485,8 +485,8 @@
     <string name="checking_frequency_1_day">zi</string>
     <string name="backup_creation_success">Copia de rezervă s-a finalizat cu succes</string>
     <string name="backup_creation_failed">Nu s-a putut crea copia de rezervă</string>
-    <string name="pip">PiP</string>
-    <string name="playback_pitch_semitone_error_input">Valoarea trebuie să fie între -%1$.1f (minimum) și %1$.1f (maximum)</string>
+    <string name="pip">Imagine în Imagine</string>
+    <string name="playback_pitch_semitone_error_input">Valoarea trebuie să fie între -%1$.1f (minim) și %1$.1f (maxim)</string>
     <string name="unsubscribe_snackbar_message">Te-ai dezabonat cu succes de la %1$s</string>
     <string name="export_playlist">Exportă lista de redare</string>
     <string name="import_watch_history">Importă istoricul de vizionare</string>
@@ -520,7 +520,7 @@
     <string name="full_local_mode">Mod local complet</string>
     <string name="full_local_mode_desc">Preia totul direct de pe YouTube, fără a folosi Piped.</string>
     <string name="authentication">Autentificare</string>
-    <string name="gaming">Gaming</string>
+    <string name="gaming">Jocuri</string>
     <string name="podcasts">Podcasturi</string>
     <string name="trailers">Trailere</string>
     <string name="music">Muzică</string>
