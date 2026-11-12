@@ -37,7 +37,7 @@
     <string name="appearance_summary">Aðlagaðu forritið að smekk þínum</string>
     <string name="shapedIcon">Fáránlega formað</string>
     <string name="live">Í beinni</string>
-    <string name="instance_summary">Piped, innskráning og aðgangur</string>
+    <string name="instance_summary">Samstilling gagna, aðgangur og ferill</string>
     <string name="flameIcon">Fljúgandi eldur</string>
     <string name="birdIcon">Endurbirt tíst</string>
     <string name="addInstance">Bæta við tilviki</string>
@@ -349,7 +349,7 @@
     <string name="download_paused">Niðurhal í bið</string>
     <string name="reset">Endurheimta sjálfgefnar stillingar</string>
     <string name="pauseOnScreenOff">Sjálfvirkt í bið</string>
-    <string name="watch_history_summary">Geyma staðvært hvaða myndskeið er búið að horfa á</string>
+    <string name="watch_history_summary">Geyma hvaða myndskeið er búið að horfa á</string>
     <string name="least_views">Minnst áhorf</string>
     <string name="required_network">Nauðsynleg tenging</string>
     <string name="no_search_result">Engar niðurstöður.</string>
