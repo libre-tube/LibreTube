@@ -566,4 +566,7 @@
     <string name="sync_type_summary_piped">Только для экспертов, устарело:\nСохраняйте данные плейлистов и подписок в Piped (%1$s). Поскольку общедоступных экземпляров Piped больше нет, у вас должен быть собственный экземпляр Piped.</string>
     <string name="switch_sync_type_warning">Если вы ранее использовали другой тип синхронизации, сначала создайте резервную копию ваших подписок и плейлистов. После этого вы сможете изменить тип синхронизации в настройках экземпляра и повторно импортировать свои данные из резервной копии.</string>
     <string name="account">Учетная запись</string>
+    <string name="channel_sort_latest">Последний</string>
+    <string name="channel_sort_popular">Популярный</string>
+    <string name="channel_sort_oldest">Старейший</string>
 </resources>
