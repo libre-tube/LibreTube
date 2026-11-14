@@ -560,4 +560,7 @@
     <string name="sync_type_summary_piped">Vana lahendus, mis sobib vaid oskuskasutajatele:\nEsitusloendid ja tellimused on salvestatud Pipedi serveris (%1$s). Kuna Pipedil pole enam avalikke serverid, siis pead paigaldama oma serveri.</string>
     <string name="switch_sync_type_warning">Kui oled varem kasutanud teistsugust sünkroonimise tüüpi, palun tee esmalt oma tellimustest ja esitusloenditest varukoopia. Seejärel võid seadistustest muuta sünkroonimistüüpi ja importida andmed varukoopiast tagasi.</string>
     <string name="account">Kasutajakonto</string>
+    <string name="channel_sort_latest">Viimane</string>
+    <string name="channel_sort_popular">Populaarne</string>
+    <string name="channel_sort_oldest">Vanim</string>
 </resources>
