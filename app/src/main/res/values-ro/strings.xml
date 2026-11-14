@@ -563,4 +563,7 @@
     <string name="oidc_login">Continuă cu OIDC</string>
     <string name="already_downloaded">Ai descărcat deja acest videoclip!</string>
     <string name="account">Cont</string>
+    <string name="channel_sort_latest">Cele mai recente</string>
+    <string name="channel_sort_popular">Populare</string>
+    <string name="channel_sort_oldest">Cele mai vechi</string>
 </resources>
