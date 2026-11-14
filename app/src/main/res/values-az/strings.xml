@@ -560,4 +560,7 @@
     <string name="export">Köçür</string>
     <string name="exporting">İxrac davam edir…</string>
     <string name="account">Hesab</string>
+    <string name="channel_sort_latest">Ən son</string>
+    <string name="channel_sort_popular">Məşhur</string>
+    <string name="channel_sort_oldest">Ən köhnə</string>
 </resources>
