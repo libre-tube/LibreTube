@@ -567,4 +567,7 @@
     <string name="oidc_login">Продовжити за допомогою OIDC</string>
     <string name="already_downloaded">Ви вже завантажили це відео!</string>
     <string name="account">Обліковий запис</string>
+    <string name="channel_sort_latest">Останній</string>
+    <string name="channel_sort_popular">Популярний</string>
+    <string name="channel_sort_oldest">Найстаріший</string>
 </resources>
