@@ -77,7 +77,7 @@ object ImageHelper {
     /**
      * Checks if the corresponding image for the given key (e.g. a url) is cached.
      */
-    private fun isCached(key: String): Boolean {
+    internal fun isCached(key: String): Boolean {
         val cacheSnapshot = imageLoader.diskCache?.openSnapshot(key)
         val isCacheHit = cacheSnapshot?.data?.toFile()?.exists()
         cacheSnapshot?.close()

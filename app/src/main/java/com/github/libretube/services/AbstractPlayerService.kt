@@ -40,6 +40,7 @@ import com.github.libretube.extensions.updateParameters
 import com.github.libretube.helpers.PlayerHelper
 import com.github.libretube.helpers.PlayerHelper.getCurrentSegment
 import com.github.libretube.ui.activities.MainActivity
+import com.github.libretube.util.DataSaverAwareBitmapLoader
 import com.github.libretube.util.DefaultTrackSelectorWithAudioQualitySupport
 import com.github.libretube.util.NowPlayingNotification
 import com.github.libretube.util.PlayingQueue
@@ -410,6 +411,8 @@ abstract class AbstractPlayerService : MediaLibraryService(), MediaLibrarySessio
         try {
             mediaLibrarySession = MediaLibrarySession.Builder(this, forwardingPlayer, this)
                 .setId(this.javaClass.name)
+                // skip downloading the artwork for the media notification in data saver mode
+                .setBitmapLoader(DataSaverAwareBitmapLoader(this))
                 .build()
         } catch (e: Exception) {
             Log.e(TAG(), "failed to start media library session because it already exists")
