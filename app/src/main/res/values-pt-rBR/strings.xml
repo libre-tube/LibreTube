@@ -563,4 +563,7 @@
     <string name="switch_sync_type_warning">Se você utilizava anteriormente um tipo de sincronização diferente, faça primeiro um backup de suas assinaturas e playlists. Em seguida, você pode alterar o tipo de sincronização nas configurações da instância e reimportar seus dados a partir do backup.</string>
     <string name="oidc_login">Continuar com OIDC</string>
     <string name="already_downloaded">Você já baixou este vídeo!</string>
+    <string name="channel_sort_latest">Mais recente</string>
+    <string name="channel_sort_popular">Popular</string>
+    <string name="channel_sort_oldest">Mais antigo</string>
 </resources>
