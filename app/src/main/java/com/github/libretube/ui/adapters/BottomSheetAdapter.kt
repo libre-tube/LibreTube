@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import com.github.libretube.databinding.BottomSheetItemBinding
 import com.github.libretube.obj.bottomsheetitem.BottomSheetItem
+import com.github.libretube.obj.bottomsheetitem.BottomSheetItemTitle
 import com.github.libretube.ui.adapters.callbacks.DiffUtilItemCallback
 import com.github.libretube.ui.extensions.setDrawables
 import com.github.libretube.ui.viewholders.BottomSheetViewHolder
@@ -26,7 +27,7 @@ class BottomSheetAdapter(
     override fun onBindViewHolder(holder: BottomSheetViewHolder, position: Int) {
         val item = getItem(position)!!
         holder.binding.root.apply {
-            val current = item.getCurrent()
+            val current = item.getCurrent()?.getText(context)
             val title = item.title.getText(context)
             text = if (current != null) "$title ($current)" else title
             isSelected = item.isSelected
