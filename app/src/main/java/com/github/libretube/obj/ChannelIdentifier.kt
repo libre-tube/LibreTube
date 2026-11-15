@@ -11,12 +11,16 @@ import kotlinx.serialization.Serializable
 sealed interface ChannelIdentifier: Parcelable {
     val value: String
 
+    /** A channel identified by its channel ID. */
     data class Id(override val value: String) : ChannelIdentifier
 
+    /** A channel identified by its name. */
     data class Name(override val value: String) : ChannelIdentifier
 
+    /** A channel identified by its user handle. */
     data class Handle(override val value: String) : ChannelIdentifier
 
+    /** A channel identified by a `/user/name` URL. */
     data class User(override val value: String) : ChannelIdentifier
 
     /**
