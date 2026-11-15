@@ -101,6 +101,22 @@ class SeekbarPreviewListener(
         }
     }
 
+    /**
+     * Update the displayed chapter name to fit the current scrubber position,
+     * with haptic feedback if it changed.
+     */
+    private fun updateChapterName(position: Long) {
+        val chapterIndex = PlayerHelper.getCurrentChapterIndex(position, chapters)?.also {
+            playerBinding.seekbarPreviewChapterName.text = chapters[it].title
+        }
+        playerBinding.seekbarPreviewChapterNameContainer.isVisible = chapterIndex != null
+
+        if (chapterIndex != currentChapterIndex) {
+            currentChapterIndex = chapterIndex
+            playerBinding.seekbarPreviewChapterName.performHapticFeedback(HapticFeedbackConstants.CLOCK_TICK)
+        }
+    }
+
     companion object {
         /**
          * The minimum start and end padding for the seekbar preview
