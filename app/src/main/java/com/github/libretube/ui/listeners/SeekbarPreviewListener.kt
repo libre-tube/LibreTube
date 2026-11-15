@@ -1,6 +1,8 @@
 package com.github.libretube.ui.listeners
 
+import android.os.Build
 import android.text.format.DateUtils
+import android.view.HapticFeedbackConstants
 import android.view.View
 import android.view.ViewGroup.MarginLayoutParams
 import androidx.core.view.isGone
@@ -9,12 +11,13 @@ import androidx.core.view.isVisible
 import androidx.core.view.updateLayoutParams
 import androidx.media3.common.util.UnstableApi
 import androidx.media3.ui.TimeBar
+import com.github.libretube.api.obj.ChapterSegment
 import com.github.libretube.databinding.ExoStyledPlayerControlViewBinding
+import com.github.libretube.helpers.PlayerHelper
 import com.github.libretube.ui.interfaces.TimeFrameReceiver
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import kotlin.math.absoluteValue
@@ -23,8 +26,10 @@ import kotlin.math.absoluteValue
 class SeekbarPreviewListener(
     private val timeFrameReceiver: TimeFrameReceiver,
     private val playerBinding: ExoStyledPlayerControlViewBinding,
-    private val duration: Long
+    private val duration: Long,
+    private val chapters: List<ChapterSegment>
 ) : TimeBar.OnScrubListener {
+    private var currentChapterIndex: Int? = null
     private var lastPreviewPosition = Long.MAX_VALUE
     private var prevProcessPreviewJob : Job? = null
 
@@ -37,6 +42,7 @@ class SeekbarPreviewListener(
      */
     override fun onScrubMove(timeBar: TimeBar, position: Long) {
         playerBinding.seekbarPreviewPosition.text = DateUtils.formatElapsedTime(position / 1000)
+        updateChapterName(position)
 
         // minimum of five seconds of additional seeking in order to show a preview
         if ((lastPreviewPosition - position).absoluteValue < 5000) {

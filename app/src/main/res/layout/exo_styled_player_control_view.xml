@@ -187,13 +187,37 @@
             android:translationZ="1dp"
             android:visibility="gone">
 
-            <com.google.android.material.imageview.ShapeableImageView
-                android:id="@+id/seekbar_preview_image"
-                android:layout_width="140dp"
-                android:layout_height="wrap_content"
-                android:adjustViewBounds="true"
-                android:scaleType="fitCenter"
-                app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Small" />
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/seekbar_preview_image"
+                    android:layout_width="180dp"
+                    android:layout_height="wrap_content"
+                    android:adjustViewBounds="true"
+                    android:scaleType="fitCenter"
+                    android:gravity="center_vertical"
+                    app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Small" />
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center|bottom"
+                    android:layout_marginBottom="5dp"
+                    app:cardBackgroundColor="?colorPrimary"
+                    android:padding="5dp"
+                    app:strokeWidth="0dp">
+
+                    <TextView
+                        android:id="@+id/seekbar_preview_position"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="?colorOnPrimary"
+                        android:layout_marginHorizontal="5dp" />
+
+                </com.google.android.material.card.MaterialCardView>
+            </FrameLayout>
 
             <com.google.android.material.progressindicator.LinearProgressIndicator
                 android:id="@+id/previewProgressIndicator"
@@ -206,6 +230,7 @@
                 app:trackThickness="2.5dp" />
 
             <com.google.android.material.card.MaterialCardView
+                android:id="@+id/seekbar_preview_chapter_name_container"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -214,10 +239,13 @@
                 app:strokeWidth="0dp">
 
                 <TextView
-                    android:id="@+id/seekbar_preview_position"
+                    android:id="@+id/seekbar_preview_chapter_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="5dp" />
+                    android:layout_marginHorizontal="5dp"
+                    android:gravity="center_vertical"
+                    android:ellipsize="end"
+                    android:maxLines="1" />
 
             </com.google.android.material.card.MaterialCardView>
 
