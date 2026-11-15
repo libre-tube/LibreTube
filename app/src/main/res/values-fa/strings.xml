@@ -112,7 +112,7 @@
     <string name="defaultIcon">پیش‌گزیده</string>
     <string name="video">ویدیو</string>
     <string name="player_autoplay">پخش خودکار</string>
-    <string name="instance_summary">پایپد، ورود و حساب</string>
+    <string name="instance_summary">هم‌گام سازی حساداده‌ها، حساب و تاریخچه</string>
     <string name="subscriberAndVideoCounts">%1$s مشترک • %2$d ویدیو</string>
     <string name="version">نگارش %1$s</string>
     <string name="no_audio">بدون صدا</string>
@@ -265,7 +265,7 @@
     <string name="category_outro_summary">اطلاعات پس از پایان نه برای نتیجه گیری با اطّلاعات</string>
     <string name="no_subtitle">بدون زیرنویس</string>
     <string name="aspect_ratio">نسبت تصویر</string>
-    <string name="watch_history_summary">ردیابی محلی ویدیوهای دیده شده</string>
+    <string name="watch_history_summary">ردیابی ویدیوهای دیده شده</string>
     <string name="skip_segment">رد شدن از بخش</string>
     <string name="added_to_playlist">افزوده به سیاههٔ پخش %1$s</string>
     <string name="delete">حذف از دانلودها</string>
@@ -539,4 +539,8 @@
     <string name="resume_all">از سر گیری بارگیری‌ها</string>
     <string name="comment_pinned">سنجاق شده</string>
     <string name="comment_verified">تأیید شده</string>
+    <string name="channel_sort_oldest">قدیمی‌ترین</string>
+    <string name="already_downloaded">دارید این ویدیو را بار می‌گیرید!</string>
+    <string name="sync_server_type">هم‌گام سازی داده‌های کاربری (اشتراک‌ها، سیاهه‌های پخش) با</string>
+    <string name="missing_auth_falling_back">وارد نشده. هم‌گام سازی داده‌های خاموش شده.</string>
 </resources>
