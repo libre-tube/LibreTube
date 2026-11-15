@@ -565,4 +565,7 @@
     <string name="oidc_login">Pokračovat pomocí OIDC</string>
     <string name="already_downloaded">Toto video již máte stažené!</string>
     <string name="choose_instance_long">Vyberte si prosím instanci Piped níže. Tato instance bude fungovat jako prostředník mezi vámi a YouTube. Tyto instnace se nacházejí na různých fyzických umístěních, označených vlaječkou. Instance fyzicky blíže k vám budou obvykle rychlejší. Používanou instanci můžete kdykoli změnit.</string>
+    <string name="channel_sort_latest">Nejnovější</string>
+    <string name="channel_sort_popular">Oblíbené</string>
+    <string name="channel_sort_oldest">Nejstarší</string>
 </resources>
