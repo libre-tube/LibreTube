@@ -12,6 +12,7 @@ import androidx.fragment.app.FragmentManager
 import com.github.libretube.R
 import com.github.libretube.constants.IntentData
 import com.github.libretube.extensions.toastFromMainThread
+import com.github.libretube.obj.ChannelIdentifier
 import com.github.libretube.ui.sheets.IntentChooserSheet
 import com.github.libretube.util.TextUtils.toTimeInSeconds
 
@@ -58,16 +59,14 @@ object IntentHelper {
      */
     fun resolveType(intent: Intent, uri: Uri) = with(intent) {
         val lastSegment = uri.lastPathSegment
-        val secondLastSegment = uri.pathSegments.getOrNull(uri.pathSegments.size - 2)
+        val channelIdentifier = ChannelIdentifier.fromUrl(uri)
+
         when {
             lastSegment == "results" -> {
                 putExtra(IntentData.query, uri.getQueryParameter("search_query"))
             }
-            secondLastSegment == "channel"
-                    || secondLastSegment == "c"
-                    || secondLastSegment == "user"
-                    || lastSegment?.startsWith( "@" ) == true -> {
-                putExtra(IntentData.channelIdentifier,  lastSegment!!.removePrefix("@"))
+            channelIdentifier != null-> {
+                putExtra(IntentData.channelIdentifier, channelIdentifier)
             }
             lastSegment == "playlist" -> {
                 putExtra(IntentData.playlistId, uri.getQueryParameter("list"))
