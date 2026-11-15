@@ -230,7 +230,7 @@ class CustomExoPlayerView(
                 override fun onScrubMove(timeBar: TimeBar, position: Long) {
                     cancelHideControllerTask()
 
-                    setCurrentChapterName(forceUpdate = true, enqueueNew = false)
+                    setCurrentChapterName(forceUpdate = true, enqueueNew = false, position)
                     scrubbingTimeBar = true
                 }
 
@@ -458,7 +458,7 @@ class CustomExoPlayerView(
      * @param forceUpdate Update the current chapter name no matter if the seek bar is scrubbed
      * @param enqueueNew set a timeout to automatically repeat this function again in 100ms
      */
-    fun setCurrentChapterName(forceUpdate: Boolean = false, enqueueNew: Boolean = true) {
+    fun setCurrentChapterName(forceUpdate: Boolean = false, enqueueNew: Boolean = true, position: Long? = null) {
         val player = player ?: return
         val chapters = chaptersViewModel.chapters
 
@@ -473,7 +473,7 @@ class CustomExoPlayerView(
         // if the user is scrubbing the time bar, don't update
         if (scrubbingTimeBar && !forceUpdate) return
 
-        val currentIndex = PlayerHelper.getCurrentChapterIndex(player.currentPosition, chapters)
+        val currentIndex = PlayerHelper.getCurrentChapterIndex(position ?: player.currentPosition, chapters)
         val newChapterName = currentIndex?.let { chapters[it].title.trim() }.orEmpty()
 
         chaptersViewModel.currentChapterIndex.updateIfChanged(currentIndex ?: -1)
