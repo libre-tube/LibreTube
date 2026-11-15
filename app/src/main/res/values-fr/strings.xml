@@ -563,4 +563,7 @@
     <string name="sync_type_summary_libretube">Enregistrez vos playlists et vos abonnements sur le serveur de synchronisation de LibreTube (%1$s). Cela vous permet de vous connecter à votre compte depuis n\'importe quel autre appareil pour accéder à vos abonnements et à vos playlists. Avertissement relatif à la confidentialité : les données des utilisateurs sont pseudonymisées côté serveur, mais ne font pas l\'objet d\'un chiffrement de bout en bout. Si vous le souhaitez, vous pouvez également héberger votre propre instance du serveur, mais en général, le serveur officiel devrait suffire.</string>
     <string name="sync_type_summary_piped">Réservé aux experts, obsolète :\nEnregistrez les données relatives aux playlists et aux abonnements sur Piped (%1$s). Piped ne disposant plus d\'instances publiques, vous devez héberger votre propre instance Piped.</string>
     <string name="switch_sync_type_warning">Si vous utilisiez auparavant un autre type de synchronisation, veuillez d\'abord effectuer une sauvegarde de vos abonnements et de vos playlists. Vous pourrez ensuite modifier le type de synchronisation dans les paramètres de l\'instance et réimporter vos données à partir de la sauvegarde.</string>
+    <string name="channel_sort_popular">Populaire</string>
+    <string name="channel_sort_oldest">Les plus anciennes</string>
+    <string name="channel_sort_latest">Les plus récentes</string>
 </resources>
