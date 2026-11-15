@@ -6,12 +6,17 @@ import com.github.libretube.ui.dialogs.ShareDialog.Companion.YOUTUBE_FRONTEND_UR
 import kotlinx.android.parcel.Parcelize
 import kotlinx.serialization.Serializable
 
+/**
+ *  Represents a YouTube channel identifier, such as the channel ID.
+ *
+ * For more information see the [official YouTube documentation](https://support.google.com/youtube/answer/6180214).
+ */
 @Serializable
 @Parcelize
 sealed interface ChannelIdentifier: Parcelable {
     val value: String
 
-    /** A channel identified by its channel ID. */
+    /** A channel identified by its unique channel ID. */
     data class Id(override val value: String) : ChannelIdentifier
 
     /** A channel identified by its custom name. */
