@@ -17,12 +17,15 @@ sealed interface ChannelIdentifier: Parcelable {
 
     data class Handle(override val value: String) : ChannelIdentifier
 
+    data class User(override val value: String) : ChannelIdentifier
+
     /**
      * Returns the URL to the channel web page.
      */
     fun url() = when (this) {
         is Id -> "$YOUTUBE_FRONTEND_URL/channel/$value"
         is Name -> "$YOUTUBE_FRONTEND_URL/c/$value"
+        is User -> "$YOUTUBE_FRONTEND_URL/user/$value"
         is Handle -> "$YOUTUBE_FRONTEND_URL/@$value"
     }
 
@@ -38,6 +41,7 @@ sealed interface ChannelIdentifier: Parcelable {
             return when {
                 secondLastSegment == "channel" -> Id(lastSegment)
                 secondLastSegment == "c" -> Name(lastSegment)
+                secondLastSegment == "user" -> User(lastSegment)
                 lastSegment.startsWith( "@" ) -> Handle(lastSegment.removePrefix("@"))
                 else -> null
             }
