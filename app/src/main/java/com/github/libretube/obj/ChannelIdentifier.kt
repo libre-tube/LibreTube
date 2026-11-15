@@ -1,5 +1,6 @@
 package com.github.libretube.obj
 
+import android.net.Uri
 import android.os.Parcelable
 import com.github.libretube.ui.dialogs.ShareDialog.Companion.YOUTUBE_FRONTEND_URL
 import kotlinx.android.parcel.Parcelize
@@ -23,5 +24,23 @@ sealed interface ChannelIdentifier: Parcelable {
         is Id -> "$YOUTUBE_FRONTEND_URL/channel/$value"
         is Name -> "$YOUTUBE_FRONTEND_URL/c/$value"
         is Handle -> "$YOUTUBE_FRONTEND_URL/@$value"
+    }
+
+    companion object {
+        /**
+         * Creates a channel identifier from a channel URL.
+         *
+         * Returns null if the URL is not a supported channel URL.
+         */
+        fun fromUrl(url: Uri) : ChannelIdentifier? {
+            val lastSegment = url.lastPathSegment ?: return null
+            val secondLastSegment = url.pathSegments.getOrNull(url.pathSegments.size - 2)
+            return when {
+                secondLastSegment == "channel" -> Id(lastSegment)
+                secondLastSegment == "c" -> Name(lastSegment)
+                lastSegment.startsWith( "@" ) -> Handle(lastSegment.removePrefix("@"))
+                else -> null
+            }
+        }
     }
 }
