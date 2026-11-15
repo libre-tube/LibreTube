@@ -557,4 +557,7 @@
     <string name="export">导出</string>
     <string name="exporting">导出中…</string>
     <string name="account">账户</string>
+    <string name="channel_sort_latest">最新</string>
+    <string name="channel_sort_popular">受欢迎</string>
+    <string name="channel_sort_oldest">最旧</string>
 </resources>
