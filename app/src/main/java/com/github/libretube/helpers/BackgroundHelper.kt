@@ -77,6 +77,7 @@ object BackgroundHelper {
         context: Context,
         serviceClass: Class<*>,
         arguments: Bundle = Bundle.EMPTY,
+        controllerListener: MediaController.Listener? = null,
         onController: (MediaController) -> Unit = {}
     ) {
         val context = context.applicationContext
@@ -84,7 +85,11 @@ object BackgroundHelper {
             SessionToken(context, ComponentName(context, serviceClass))
 
         val controllerFuture =
-            MediaController.Builder(context, sessionToken).buildAsync()
+            MediaController.Builder(context, sessionToken).apply {
+                controllerListener?.also { setListener(it) }
+            }
+                .buildAsync()
+
         Futures.addCallback(controllerFuture, object : FutureCallback<MediaController> {
             override fun onSuccess(result: MediaController?) {
                 val controller = controllerFuture.get()
@@ -103,7 +108,13 @@ object BackgroundHelper {
             override fun onFailure(t: Throwable) {
                 Log.e(TAG(), t.toString())
                 handler.postDelayed(200) {
-                    startMediaService(context, serviceClass, arguments, onController)
+                    startMediaService(
+                        context,
+                        serviceClass,
+                        arguments,
+                        controllerListener,
+                        onController
+                    )
                 }
             }
         }, MoreExecutors.directExecutor())
@@ -129,7 +140,7 @@ object BackgroundHelper {
         arguments: Bundle = Bundle.EMPTY,
         onController: (MediaController) -> Unit = {}
     ) {
-        startMediaService(context, getCurrentPlayerServiceClass(), arguments, onController)
+        startMediaService(context, getCurrentPlayerServiceClass(), arguments, null, onController)
     }
 
 

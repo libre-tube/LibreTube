@@ -133,4 +133,10 @@
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"/>
 
+    <include
+        android:id="@+id/error_notice_layout"
+        layout="@layout/player_error_notice"
+        tools:visibility="gone"
+        />
+
 </merge>

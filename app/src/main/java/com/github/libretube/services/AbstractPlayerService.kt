@@ -135,6 +135,12 @@ abstract class AbstractPlayerService : MediaLibraryService(), MediaLibrarySessio
             RUN_PLAYER_COMMAND_ACTION -> {
                 runPlayerCommand(args)
             }
+
+            RELOAD_VIDEO_ACTION -> {
+                if (::videoId.isInitialized) {
+                    navigateVideo(videoId)
+                }
+            }
         }
 
         return super.onCustomCommand(session, controller, customCommand, args)
@@ -251,7 +257,19 @@ abstract class AbstractPlayerService : MediaLibraryService(), MediaLibrarySessio
     @CallSuper
     open fun navigateVideo(videoId: String) {
         sponsorBlockSegments = emptyList()
+        // Clear any exceptions we manually set
+        sessions.forEach { it.setPlaybackException(null) }
+        // Clearing media items and then calling prepare() will force the player into IDLE state and
+        // lift its internal error state (e.g "Source error") if there's any
         exoPlayer?.clearMediaItems()
+        exoPlayer?.prepare()
+
+        sessions.forEach {
+            it.broadcastCustomCommand(
+                onNavigateVideoActionCommand,
+                Bundle.EMPTY
+            )
+        }
 
         this.videoId = videoId
 
@@ -373,7 +391,8 @@ abstract class AbstractPlayerService : MediaLibraryService(), MediaLibrarySessio
                         listOf(
                             startServiceCommand,
                             runPlayerActionCommand,
-                            stopServiceCommand
+                            stopServiceCommand,
+                            reloadVideoActionCommand
                         )
                     )
                 }
@@ -549,9 +568,13 @@ abstract class AbstractPlayerService : MediaLibraryService(), MediaLibrarySessio
         private const val START_SERVICE_ACTION = "start_service_action"
         private const val STOP_SERVICE_ACTION = "stop_service_action"
         private const val RUN_PLAYER_COMMAND_ACTION = "run_player_command_action"
+        private const val RELOAD_VIDEO_ACTION = "reload_video_action"
+        const val ON_NAVIGATE_VIDEO_ACTION = "on_navigate_video_action"
 
         val startServiceCommand = SessionCommand(START_SERVICE_ACTION, Bundle.EMPTY)
         val stopServiceCommand = SessionCommand(STOP_SERVICE_ACTION, Bundle.EMPTY)
         val runPlayerActionCommand = SessionCommand(RUN_PLAYER_COMMAND_ACTION, Bundle.EMPTY)
+        val reloadVideoActionCommand = SessionCommand(RELOAD_VIDEO_ACTION, Bundle.EMPTY)
+        val onNavigateVideoActionCommand = SessionCommand(ON_NAVIGATE_VIDEO_ACTION, Bundle.EMPTY)
     }
 }
