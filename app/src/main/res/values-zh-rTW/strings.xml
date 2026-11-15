@@ -557,4 +557,7 @@
     <string name="oidc_login">使用 OIDC 繼續</string>
     <string name="already_downloaded">您已經下載過這段影片了！</string>
     <string name="account">帳號</string>
+    <string name="channel_sort_latest">最新</string>
+    <string name="channel_sort_popular">最熱門</string>
+    <string name="channel_sort_oldest">最舊</string>
 </resources>
