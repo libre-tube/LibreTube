@@ -208,7 +208,7 @@ class PlaylistOptionsBottomSheet : BaseBottomSheet() {
 
         setTitle(playlistName)
 
-        var optionsList = buildOptionsList(null)
+        val optionsList = buildOptionsList(null)
         setItems(optionsList) { which ->
             onOptionSelected(optionsList[which], false)
         }
@@ -220,8 +220,7 @@ class PlaylistOptionsBottomSheet : BaseBottomSheet() {
             }.getOrNull() != null
 
             withContext(Dispatchers.Main) {
-                optionsList = buildOptionsList(isBookmarked)
-
+                val optionsList = buildOptionsList(isBookmarked)
                 setItems(optionsList) { which ->
                     onOptionSelected(optionsList[which], isBookmarked)
                 }
