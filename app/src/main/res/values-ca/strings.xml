@@ -563,4 +563,5 @@
     <string name="account">Compte</string>
     <string name="channel_sort_popular">Popular</string>
     <string name="channel_sort_oldest">El més antic</string>
+    <string name="channel_sort_latest">El més nou</string>
 </resources>
