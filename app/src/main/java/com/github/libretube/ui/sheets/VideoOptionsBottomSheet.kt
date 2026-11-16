@@ -3,6 +3,7 @@ package com.github.libretube.ui.sheets
 import android.os.Bundle
 import androidx.core.os.bundleOf
 import androidx.fragment.app.setFragmentResult
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.NavHostFragment
 import com.github.libretube.R
@@ -160,7 +161,7 @@ class VideoOptionsBottomSheet : BaseBottomSheet() {
 
         setTitle(streamItem.title)
 
-        var optionsList = buildList {
+        val optionsList = buildList {
             add(VideoBottomSheetItem.AddToPlaylist)
             if (!streamItem.isLive) add(VideoBottomSheetItem.Download)
             add(VideoBottomSheetItem.Share)
@@ -172,9 +173,8 @@ class VideoOptionsBottomSheet : BaseBottomSheet() {
 
         // these options are only available for other videos than the currently playing one
         if (PlayingQueue.getCurrent()?.url?.toID() != videoId) {
-            getOptionsForNotActivePlayback(videoId) { addedOptions ->
-                optionsList = addedOptions + optionsList
-
+            lifecycleScope.launch {
+                val optionsList = getOptionsForNotActivePlayback(videoId) + optionsList
                 setItems(optionsList) { which ->
                     onOptionSelect(optionsList[which], videoId, playlistId)
                 }
@@ -184,11 +184,8 @@ class VideoOptionsBottomSheet : BaseBottomSheet() {
         super.onCreate(savedInstanceState)
     }
 
-    private fun getOptionsForNotActivePlayback(
-        videoId: String,
-        onOptionsList: (List<VideoBottomSheetItem>) -> Unit
-    ) {
-        // List that stores the different menu options. In the future could be add more options here.
+    private suspend fun getOptionsForNotActivePlayback(videoId: String ): List<VideoBottomSheetItem> {
+        // List that stores the different menu options. In the future more options could be added here.
         val optionsList: MutableList<VideoBottomSheetItem> =
             mutableListOf(VideoBottomSheetItem.PlayOnBackground)
 
@@ -199,25 +196,24 @@ class VideoOptionsBottomSheet : BaseBottomSheet() {
         }
 
         if (!PlayerHelper.watchPositionsAny && !PlayerHelper.watchHistoryEnabled) {
-            onOptionsList(optionsList)
-            return
+            return optionsList
         }
 
         // show the mark as watched or unwatched option if watch positions are enabled
         lifecycleScope.launch(Dispatchers.IO) {
-            val watchHistoryEntry =
-                UserDataRepositoryHelper.userDataRepository.getFromWatchHistory(videoId)
+        }
+        val watchHistoryEntry =
+            UserDataRepositoryHelper.userDataRepository.getFromWatchHistory(videoId)
+
+        return buildList {
+            addAll(optionsList)
 
             if (watchHistoryEntry != null) {
-                optionsList += VideoBottomSheetItem.MarkAsUnwatched
+                add(VideoBottomSheetItem.MarkAsUnwatched)
             }
 
             if (watchHistoryEntry?.metadata?.finished != true) {
-                optionsList += VideoBottomSheetItem.MarkAsWatched
-            }
-
-            withContext(Dispatchers.Main) {
-                onOptionsList(optionsList)
+                add(VideoBottomSheetItem.MarkAsWatched)
             }
         }
     }
