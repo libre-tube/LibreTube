@@ -560,4 +560,7 @@
     <string name="switch_sync_type_warning">Falls Sie zuvor einen anderen Synchronisierungstyp verwendet haben, erstellen Sie bitte zunächst eine Sicherungskopie Ihrer Abonnements und Wiedergabelisten. Anschließend können Sie den Synchronisierungstyp in den Instanz-Einstellungen ändern und Ihre Daten aus der Sicherungskopie erneut importieren.</string>
     <string name="already_downloaded">Du hast dieses Video bereits heruntergeladen!</string>
     <string name="account">Konto</string>
+    <string name="channel_sort_latest">Neuste</string>
+    <string name="channel_sort_popular">Beliebt</string>
+    <string name="channel_sort_oldest">Älteste</string>
 </resources>
