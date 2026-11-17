@@ -572,4 +572,7 @@
     <string name="oidc_login">المتابعة مع OIDC</string>
     <string name="already_downloaded">لقد قمت بتنزيل هذا الفيديو بالفعل!</string>
     <string name="account">الحساب</string>
+    <string name="channel_sort_latest">الاحدث</string>
+    <string name="channel_sort_popular">الاشهر</string>
+    <string name="channel_sort_oldest">الاقدم</string>
 </resources>
