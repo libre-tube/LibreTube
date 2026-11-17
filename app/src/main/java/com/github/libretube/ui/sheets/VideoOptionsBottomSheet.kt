@@ -31,6 +31,7 @@ import com.github.libretube.util.PlayingQueue
 import com.github.libretube.util.PlayingQueueMode
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
 
 /**
@@ -161,24 +162,21 @@ class VideoOptionsBottomSheet : BaseBottomSheet() {
 
         setTitle(streamItem.title)
 
-        val optionsList = buildList {
+        var optionsList = buildList {
             add(VideoBottomSheetItem.AddToPlaylist)
             if (!streamItem.isLive) add(VideoBottomSheetItem.Download)
             add(VideoBottomSheetItem.Share)
         }
 
-        setItems(optionsList) { which ->
-            onOptionSelect(optionsList[which], videoId, playlistId)
-        }
-
         // these options are only available for other videos than the currently playing one
         if (PlayingQueue.getCurrent()?.url?.toID() != videoId) {
-            lifecycleScope.launch {
-                val optionsList = getOptionsForNotActivePlayback(videoId) + optionsList
-                setItems(optionsList) { which ->
-                    onOptionSelect(optionsList[which], videoId, playlistId)
-                }
+            optionsList = runBlocking{
+                 getOptionsForNotActivePlayback(videoId) + optionsList
             }
+        }
+
+        setItems(optionsList) { which ->
+            onOptionSelect(optionsList[which], videoId, playlistId)
         }
 
         super.onCreate(savedInstanceState)

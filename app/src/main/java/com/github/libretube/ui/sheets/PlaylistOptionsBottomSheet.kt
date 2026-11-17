@@ -31,6 +31,7 @@ import com.github.libretube.ui.preferences.BackupRestoreSettings
 import com.github.libretube.util.PlayingQueue
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
 
 class PlaylistOptionsBottomSheet : BaseBottomSheet() {
@@ -208,21 +209,18 @@ class PlaylistOptionsBottomSheet : BaseBottomSheet() {
 
         setTitle(playlistName)
 
-        val optionsList = buildOptionsList(null)
-        setItems(optionsList) { which ->
-            onOptionSelected(optionsList[which], false)
-        }
-
         // we have to update the options list as soon as we know whether the playlist is bookmarked
-        lifecycleScope.launch(Dispatchers.IO) {
-            val isBookmarked = runCatching {
-                UserDataRepositoryHelper.userDataRepository.getPlaylistBookmark(playlistId)
-            }.getOrNull() != null
+        runBlocking {
+            lifecycleScope.launch(Dispatchers.IO) {
+                val isBookmarked = runCatching {
+                    UserDataRepositoryHelper.userDataRepository.getPlaylistBookmark(playlistId)
+                }.getOrNull() != null
 
-            withContext(Dispatchers.Main) {
-                val optionsList = buildOptionsList(isBookmarked)
-                setItems(optionsList) { which ->
-                    onOptionSelected(optionsList[which], isBookmarked)
+                withContext(Dispatchers.Main) {
+                    val optionsList = buildOptionsList(isBookmarked)
+                    setItems(optionsList) { which ->
+                        onOptionSelected(optionsList[which], isBookmarked)
+                    }
                 }
             }
         }
