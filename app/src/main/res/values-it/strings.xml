@@ -563,4 +563,7 @@
     <string name="oidc_login">Continua con OIDC</string>
     <string name="already_downloaded">Hai già scaricato questo video!</string>
     <string name="account">Account</string>
+    <string name="channel_sort_latest">Più recenti</string>
+    <string name="channel_sort_popular">Popolari</string>
+    <string name="channel_sort_oldest">Più vecchi</string>
 </resources>
