@@ -546,4 +546,10 @@
     <string name="switch_sync_type_warning">ถ้าคุณเคยใช้การซิงค์ข้อมูลด้วยวิธีอื่น กรุณาสำรองข้อมูลการติดตามและเพลย์ลิสต์ก่อน คุณสามารถเปลี่ยนวิธีการซิงค์ข้อมูลในการตั้งค่าอินสแตนซ์และนำเข้าข้อมูลของคุณจากข้อมูลที่คุณสำรองเอาไว้</string>
     <string name="already_downloaded">คุณดาวน์โหลดวิดีโอนี้ไปแล้ว!</string>
     <string name="account">บัญชี</string>
+    <string name="channel_sort_latest">ล่าสุด</string>
+    <string name="channel_sort_popular">ยอดนิยม</string>
+    <string name="channel_sort_oldest">เก่าสุด</string>
+    <string name="choose_instance_long">กรุณาเลือกอินสแตนซ์ Piped ที่จะใช้จากด้านล่าง อินสแตนซ์ Piped จะเปรียบเสมือนคนกลางระหว่างคุณกับ YouTube อินสแตนซ์เหล่านี้ตั้งอยู่บนตำแหน่งต่างๆ กันออกไป ระบุไว้ด้วยธงของประเทศนั้นๆ อินสแตนซ์ที่ตั้งอยู่ใกล้กับคุณจะสามารถเชื่อมต่อเร็วกว่าอินสแตนซ์อื่นๆ คุณสามารถเปลี่ยนอินสแตนซ์ที่คุณใช้ในการตั้งค่าได้ตลอดเวลา</string>
+    <string name="choose_instance">กรุณาเลือกอินสแตนซ์!</string>
+    <string name="material_you"></string>
 </resources>
