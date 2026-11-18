@@ -267,7 +267,7 @@
     <string name="defaultIconLight">Light mặc định</string>
     <string name="auto_quality">Tự động</string>
     <string name="trends">Xu hướng</string>
-    <string name="featured">Tính năng</string>
+    <string name="featured">Nội dung mới nhất</string>
     <string name="trending">Xu hướng hiện tại</string>
     <string name="bookmarks">Dấu trang</string>
     <string name="clear_bookmarks">Dọn dẹp dấu trang</string>
@@ -557,4 +557,7 @@
     <string name="switch_sync_type_warning">Nếu bạn trước đó dùng một cách đồng bộ dữ liệu khác, vui lòng sao lưu lại danh sách đăng ký và danh sách phát trước. Sau đó bạn mới có thể đổi cách đồng bộ trong phần cài đặt và nhập lại dữ liệu từ bản sao lưu.</string>
     <string name="oidc_login">Tiếp tục với OIDC</string>
     <string name="already_downloaded">Bạn đã tải đoạn phim này rổi!</string>
+    <string name="channel_sort_latest">Mới nhất</string>
+    <string name="channel_sort_popular">Nổi bật</string>
+    <string name="channel_sort_oldest">Cũ nhất</string>
 </resources>

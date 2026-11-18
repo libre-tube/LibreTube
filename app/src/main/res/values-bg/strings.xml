@@ -167,7 +167,7 @@
     <string name="vote_for_segment">Гласувай за сегмент</string>
     <string name="upvote">Горе</string>
     <string name="pure_theme">Чиста тема</string>
-    <string name="trending">Набиращи популярност</string>
+    <string name="trending">Какво е модерно сега</string>
     <string name="end_time">Крайно време</string>
     <string name="unknown_or_no_audio">неизвестен или без звук</string>
     <string name="network_metered">Измерена</string>
@@ -560,4 +560,7 @@
     <string name="oidc_login">Продължете с OIDC</string>
     <string name="already_downloaded">Вече сте изтеглили това видео!</string>
     <string name="account">Профил</string>
+    <string name="channel_sort_latest">Най-нови</string>
+    <string name="channel_sort_popular">Популярни</string>
+    <string name="channel_sort_oldest">Най-стари</string>
 </resources>
