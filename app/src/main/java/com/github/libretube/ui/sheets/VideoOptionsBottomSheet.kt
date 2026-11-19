@@ -173,7 +173,7 @@ class VideoOptionsBottomSheet : BaseBottomSheet() {
         // these options are only available for other videos than the currently playing one
         if (PlayingQueue.getCurrent()?.url?.toID() != videoId) {
             getOptionsForNotActivePlayback(videoId) { addedOptions ->
-                optionsList = addedOptions + optionsList
+                optionsList = optionsList + addedOptions
 
                 setItems(optionsList) { which ->
                     onOptionSelect(optionsList[which], videoId, playlistId)
