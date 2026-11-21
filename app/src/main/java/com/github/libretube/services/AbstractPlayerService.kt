@@ -264,6 +264,13 @@ abstract class AbstractPlayerService : MediaLibraryService(), MediaLibrarySessio
         exoPlayer?.clearMediaItems()
         exoPlayer?.prepare()
 
+        sessions.forEach {
+            it.broadcastCustomCommand(
+                onNavigateVideoActionCallbackCommand,
+                Bundle.EMPTY
+            )
+        }
+
         this.videoId = videoId
 
         CoroutineScope(Dispatchers.IO).launch {
@@ -562,10 +569,15 @@ abstract class AbstractPlayerService : MediaLibraryService(), MediaLibrarySessio
         private const val STOP_SERVICE_ACTION = "stop_service_action"
         private const val RUN_PLAYER_COMMAND_ACTION = "run_player_command_action"
         private const val RELOAD_VIDEO_ACTION = "reload_video_action"
+        const val ON_NAVIGATE_VIDEO_ACTION_CALLBACK = "on_navigate_video_action_callback"
 
         val startServiceCommand = SessionCommand(START_SERVICE_ACTION, Bundle.EMPTY)
         val stopServiceCommand = SessionCommand(STOP_SERVICE_ACTION, Bundle.EMPTY)
         val runPlayerActionCommand = SessionCommand(RUN_PLAYER_COMMAND_ACTION, Bundle.EMPTY)
         val reloadVideoActionCommand = SessionCommand(RELOAD_VIDEO_ACTION, Bundle.EMPTY)
+        val onNavigateVideoActionCallbackCommand = SessionCommand(
+            ON_NAVIGATE_VIDEO_ACTION_CALLBACK,
+            Bundle.EMPTY
+        )
     }
 }

@@ -45,11 +45,12 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.media3.common.C
-import androidx.media3.common.MediaItem
 import androidx.media3.common.MediaMetadata
 import androidx.media3.common.PlaybackException
 import androidx.media3.common.Player
 import androidx.media3.session.MediaController
+import androidx.media3.session.SessionCommand
+import androidx.media3.session.SessionResult
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.libretube.R
 import com.github.libretube.api.JsonHelper
@@ -110,6 +111,7 @@ import com.github.libretube.util.PlayingQueue
 import com.github.libretube.util.TextUtils
 import com.github.libretube.util.TextUtils.toTimeInSeconds
 import com.google.android.material.snackbar.Snackbar
+import com.google.common.util.concurrent.ListenableFuture
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -336,16 +338,24 @@ class PlayerFragment : Fragment(R.layout.fragment_player), CustomPlayerCallback 
                 playerBackgroundBinding.errorNoticeLayout.errorNoticeMessageText.text = it
             }
         }
+    }
 
-        override fun onMediaItemTransition(mediaItem: MediaItem?, reason: Int) {
-            super.onMediaItemTransition(mediaItem, reason)
-            if (mediaItem == null) {
-                playerBackgroundBinding.errorNoticeLayout.root.isGone = true
-                playerBackgroundBinding.errorNoticeLayout.errorNoticeMessageText.text = ""
-                toggleVideoInfoVisibility(false)
-                disableController()
-                binding.titleTextView.text = ""
+    private val mediaControllerListener = object: MediaController.Listener {
+        override fun onCustomCommand(
+            controller: MediaController,
+            command: SessionCommand,
+            args: Bundle
+        ): ListenableFuture<SessionResult> {
+            when (command.customAction) {
+                AbstractPlayerService.ON_NAVIGATE_VIDEO_ACTION_CALLBACK -> {
+                    playerBackgroundBinding.errorNoticeLayout.root.isGone = true
+                    playerBackgroundBinding.errorNoticeLayout.errorNoticeMessageText.text = ""
+                    toggleVideoInfoVisibility(false)
+                    disableController()
+                    binding.titleTextView.text = ""
+                }
             }
+            return super.onCustomCommand(controller, command, args)
         }
     }
 
@@ -549,6 +559,7 @@ class PlayerFragment : Fragment(R.layout.fragment_player), CustomPlayerCallback 
             requireContext(),
             serviceClass,
             if (startNewSession) args else Bundle.EMPTY,
+            mediaControllerListener
         ) {
             if (_binding == null) {
                 playerController.sendCustomCommand(
