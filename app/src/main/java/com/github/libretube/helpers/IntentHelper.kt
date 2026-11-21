@@ -13,6 +13,7 @@ import com.github.libretube.R
 import com.github.libretube.constants.IntentData
 import com.github.libretube.extensions.toastFromMainThread
 import com.github.libretube.obj.ChannelIdentifier
+import com.github.libretube.ui.dialogs.ShareDialog.Companion.YOUTUBE_SHORT_URL
 import com.github.libretube.ui.sheets.IntentChooserSheet
 import com.github.libretube.util.TextUtils.toTimeInSeconds
 
@@ -76,10 +77,13 @@ object IntentHelper {
                 val videoIds = uri.getQueryParameter("video_ids")?.split(",")
                 putExtra(IntentData.videoIds, videoIds?.toTypedArray())
             }
-            else -> {
+            lastSegment == "watch" || uri.host == YOUTUBE_SHORT_URL -> {
                 val id = if (lastSegment == "watch") uri.getQueryParameter("v") else lastSegment
                 putExtra(IntentData.videoId, id)
                 putExtra(IntentData.timeStamp, uri.getQueryParameter("t")?.toTimeInSeconds())
+            }
+            else -> {
+                intent
             }
         }
     }
