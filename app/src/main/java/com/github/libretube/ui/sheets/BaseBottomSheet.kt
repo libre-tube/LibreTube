@@ -22,7 +22,7 @@ open class BaseBottomSheet(@LayoutRes layoutResId: Int = R.layout.bottom_sheet) 
 
     private var title: String? = null
     private lateinit var items: List<BottomSheetItem>
-    private lateinit var listener: (index: Int) -> Unit
+    private var listener: (index: Int) -> Unit = {}
 
     private lateinit var adapter: BottomSheetAdapter
 
