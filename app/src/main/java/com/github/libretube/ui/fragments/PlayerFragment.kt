@@ -10,7 +10,6 @@ import android.content.IntentFilter
 import android.content.pm.ActivityInfo
 import android.content.res.Configuration
 import android.graphics.Bitmap
-import android.graphics.Rect
 import android.media.session.PlaybackState
 import android.os.Bundle
 import android.os.Handler
@@ -329,21 +328,20 @@ class PlayerFragment : Fragment(R.layout.fragment_player), CustomPlayerCallback 
             viewModel.segments.postValue(segments.orEmpty())
         }
 
-        /**
-         * Catch player errors to prevent the app from stopping
-         */
         override fun onPlayerError(error: PlaybackException) {
             super.onPlayerError(error)
-            try {
-                playerController.play()
-            } catch (e: Exception) {
-                e.printStackTrace()
+            disableController()
+            playerBackgroundBinding.errorNoticeLayout.root.isVisible = true
+            error.message?.also {
+                playerBackgroundBinding.errorNoticeLayout.errorNoticeMessageText.text = it
             }
         }
 
         override fun onMediaItemTransition(mediaItem: MediaItem?, reason: Int) {
             super.onMediaItemTransition(mediaItem, reason)
             if (mediaItem == null) {
+                playerBackgroundBinding.errorNoticeLayout.root.isGone = true
+                playerBackgroundBinding.errorNoticeLayout.errorNoticeMessageText.text = ""
                 toggleVideoInfoVisibility(false)
                 disableController()
                 binding.titleTextView.text = ""
@@ -565,6 +563,12 @@ class PlayerFragment : Fragment(R.layout.fragment_player), CustomPlayerCallback 
             playerController.addListener(playerListener)
             connectToPlayerView(playerController)
             updatePlayPauseButton()
+            playerBackgroundBinding.errorNoticeLayout.errorNoticeRetryButton.setOnClickListener {
+                playerController.sendCustomCommand(
+                    AbstractPlayerService.reloadVideoActionCommand,
+                    Bundle.EMPTY
+                )
+            }
 
             if (!startNewSession) {
                 // JSON-encode as work-around for https://github.com/androidx/media/issues/564
@@ -616,7 +620,13 @@ class PlayerFragment : Fragment(R.layout.fragment_player), CustomPlayerCallback 
                     commonPlayerViewModel.isMiniPlayerVisible.value = false
                     // re-enable captions
                     binding.player.updateCurrentSubtitle(viewModel.currentCaptionId)
-                    binding.player.useController = true
+                    if (!playerBackgroundBinding.errorNoticeLayout.root.isVisible) {
+                        binding.player.useController = true
+                    }
+                    playerBackgroundBinding.errorNoticeLayout.errorNoticeMessageText
+                        .isVisible = true
+                    playerBackgroundBinding.errorNoticeLayout.errorNoticeRetryButton
+                        .isVisible = true
                     commonPlayerViewModel.setSheetExpand(true)
                     baseActivity.setPlayerContainerProgress(0f)
                     changeOrientationMode()
@@ -630,6 +640,8 @@ class PlayerFragment : Fragment(R.layout.fragment_player), CustomPlayerCallback 
                     disableController()
                     commonPlayerViewModel.setSheetExpand(null)
                     playerBackgroundBinding.sbSkipBtn.isGone = true
+                    playerBackgroundBinding.errorNoticeLayout.errorNoticeMessageText.isGone = true
+                    playerBackgroundBinding.errorNoticeLayout.errorNoticeRetryButton.isGone = true
 
                     baseActivity.setPlayerContainerProgress(1f)
                     baseActivity.requestOrientationChange()
