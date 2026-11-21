@@ -6,8 +6,6 @@ import android.content.ClipData
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.widget.LinearLayout
-import android.widget.RadioButton
 import androidx.core.content.FileProvider
 import androidx.core.view.isVisible
 import androidx.core.widget.addTextChangedListener
@@ -18,7 +16,6 @@ import com.github.libretube.R
 import com.github.libretube.constants.IntentData
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.databinding.DialogShareBinding
-import com.github.libretube.db.DatabaseHolder.Database
 import com.github.libretube.enums.ShareObjectType
 import com.github.libretube.extensions.parcelable
 import com.github.libretube.extensions.serializable
@@ -49,28 +46,7 @@ class ShareDialog : DialogFragment() {
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        // get the api urls of the other custom instances
-        val customInstances = runBlocking(Dispatchers.IO) {
-            Database.customInstanceDao().getAll().filter { it.frontendUrl.isNotEmpty() }
-        }
-
         val binding = DialogShareBinding.inflate(layoutInflater)
-
-        // add one radio button per custom instance
-        for (customInstance in customInstances) {
-            val radioButton = RadioButton(context).apply {
-                text = customInstance.name
-                // the view ids are the hash code of the name
-                // this guarantees that the right instance is selected
-                // even if the order of the custom instances changed
-                id = customInstance.name.hashCode()
-                layoutParams = LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.WRAP_CONTENT,
-                    LinearLayout.LayoutParams.WRAP_CONTENT
-                )
-            }
-        }
-
 
         if (shareObjectType == ShareObjectType.VIDEO) {
             binding.timeStampSwitchLayout.isVisible = true
