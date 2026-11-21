@@ -39,13 +39,13 @@ class ChannelOptionsBottomSheet : BaseBottomSheet() {
 
         setTitle(channelName)
 
-        // List that stores the different menu options. In the future could be add more options here.
-        val optionsList = mutableListOf(
-            ChannelBottomSheetItem.Share,
-            ChannelBottomSheetItem.PlayLatestVideos,
-            ChannelBottomSheetItem.PlayOnBackground
-        )
-        if (subscribed) optionsList.add(ChannelBottomSheetItem.AddToGroup)
+        // List that stores the different menu options. In the future more options could be added here.
+        val optionsList =  buildList {
+            add(ChannelBottomSheetItem.PlayOnBackground)
+            add(ChannelBottomSheetItem.PlayLatestVideos)
+            if (subscribed) add(ChannelBottomSheetItem.AddToGroup)
+            add(ChannelBottomSheetItem.Share)
+        }
 
         setItems(optionsList) { which ->
             when (optionsList[which]) {
