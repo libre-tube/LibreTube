@@ -25,6 +25,7 @@ import com.github.libretube.api.MediaServiceRepository
 import com.github.libretube.api.SubscriptionHelper
 import com.github.libretube.api.obj.Segment
 import com.github.libretube.api.obj.Streams
+import com.github.libretube.constants.CustomPlaybackException
 import com.github.libretube.constants.IntentData
 import com.github.libretube.db.DatabaseHelper
 import com.github.libretube.extensions.TAG
@@ -47,6 +48,7 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.cancelAndJoin
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import org.schabi.newpipe.extractor.exceptions.ContentNotAvailableException
 
 /**
  * Loads the selected videos audio in background mode with a notification area.
@@ -141,10 +143,14 @@ open class OnlinePlayerService : AbstractPlayerService() {
                     Log.e(TAG(), e.stackTraceToString())
 
                     val message = e.localizedMessage.orEmpty()
+                    val errorCode = when (e) {
+                        is ContentNotAvailableException -> CustomPlaybackException.ERROR_CONTENT_NOT_AVAILABLE
+                        else -> PlaybackException.ERROR_CODE_IO_UNSPECIFIED
+                    }
                     val exception = PlaybackException(
                         message,
                         null,
-                        PlaybackException.ERROR_CODE_IO_UNSPECIFIED,
+                        errorCode,
                         Bundle.EMPTY
                     )
 

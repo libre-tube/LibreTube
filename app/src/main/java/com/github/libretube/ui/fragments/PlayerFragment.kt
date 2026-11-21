@@ -59,6 +59,7 @@ import com.github.libretube.api.obj.Segment
 import com.github.libretube.api.obj.Streams
 import com.github.libretube.compat.PictureInPictureCompat
 import com.github.libretube.compat.PictureInPictureParamsCompat
+import com.github.libretube.constants.CustomPlaybackException
 import com.github.libretube.constants.IntentData
 import com.github.libretube.databinding.FragmentPlayerBinding
 import com.github.libretube.db.DatabaseHolder
@@ -333,9 +334,13 @@ class PlayerFragment : Fragment(R.layout.fragment_player), CustomPlayerCallback 
         override fun onPlayerError(error: PlaybackException) {
             super.onPlayerError(error)
             disableController()
-            playerBackgroundBinding.errorNoticeLayout.root.isVisible = true
-            error.message?.also {
-                playerBackgroundBinding.errorNoticeLayout.errorNoticeMessageText.text = it
+            with (playerBackgroundBinding.errorNoticeLayout) {
+                root.isVisible = true
+                error.message?.also {
+                    errorNoticeMessageText.text = it
+                }
+                errorNoticeRetryButton.isVisible =
+                    error.errorCode != CustomPlaybackException.ERROR_CONTENT_NOT_AVAILABLE
             }
         }
     }
