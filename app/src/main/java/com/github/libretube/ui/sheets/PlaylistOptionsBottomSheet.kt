@@ -209,8 +209,9 @@ class PlaylistOptionsBottomSheet : BaseBottomSheet() {
         setTitle(playlistName)
 
         var optionsList = buildOptionsList(null)
-        setItems(optionsList) { which ->
-            onOptionSelected(optionsList[which], false)
+        setItems(optionsList) { id ->
+            // TODO(DitherDude): as this callback is not overridden, `isBookmarked` is always `false`
+            onOptionSelected(optionsList.first { it.id == id }, false)
         }
 
         // we have to update the options list as soon as we know whether the playlist is bookmarked
@@ -222,8 +223,9 @@ class PlaylistOptionsBottomSheet : BaseBottomSheet() {
             withContext(Dispatchers.Main) {
                 optionsList = buildOptionsList(isBookmarked)
 
-                setItems(optionsList) { which ->
-                    onOptionSelected(optionsList[which], isBookmarked)
+                setItems(optionsList) { id ->
+                    // this actually never runs!
+                    onOptionSelected(optionsList.first { it.id == id }, isBookmarked)
                 }
             }
         }

@@ -66,7 +66,7 @@ class DownloadOptionsBottomSheet : BaseBottomSheet() {
             options += DownloadListMenuOption.AddToQueue
         }
 
-        setItems(options) { which ->
+        setItems(options) { id ->
             val playerData = PlayerData(
                 videoId,
                 playlistId = playlistId,
@@ -74,7 +74,7 @@ class DownloadOptionsBottomSheet : BaseBottomSheet() {
                 isOffline = true
             )
 
-            when (options[which]) {
+            when (options.first { it.id == id }) {
                 DownloadListMenuOption.PlayOnBackground -> {
                     BackgroundHelper.playOnBackground(requireContext(), playerData)
                 }

@@ -166,8 +166,8 @@ class VideoOptionsBottomSheet : BaseBottomSheet() {
             add(VideoBottomSheetItem.Share)
         }
 
-        setItems(optionsList) { which ->
-            onOptionSelect(optionsList[which], videoId, playlistId)
+        setItems(optionsList) { id ->
+            onOptionSelect(optionsList.first { it.id == id }, videoId, playlistId)
         }
 
         // these options are only available for other videos than the currently playing one
@@ -175,8 +175,9 @@ class VideoOptionsBottomSheet : BaseBottomSheet() {
             getOptionsForNotActivePlayback(videoId) { addedOptions ->
                 optionsList = addedOptions + optionsList
 
-                setItems(optionsList) { which ->
-                    onOptionSelect(optionsList[which], videoId, playlistId)
+                setItems(optionsList) { id ->
+                    // this actually never runs!
+                    onOptionSelect(optionsList.first { it.id == id }, videoId, playlistId)
                 }
             }
         }

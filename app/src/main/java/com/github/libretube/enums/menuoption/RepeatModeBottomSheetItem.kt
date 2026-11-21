@@ -10,9 +10,11 @@ import com.github.libretube.obj.bottomsheetitem.BottomSheetItemTitle
 sealed class RepeatModeBottomSheetItem(
     val playerModeKey: Int,
     @StringRes titleStringRes: Int,
+    id: Id,
     @DrawableRes drawableRes: Int
 ) : BottomSheetItem(
     title = BottomSheetItemTitle.StringResource(titleStringRes),
+    id = id,
     drawable = drawableRes,
 ) {
 
@@ -27,18 +29,21 @@ sealed class RepeatModeBottomSheetItem(
     data object RepeatModeOff : RepeatModeBottomSheetItem(
         Player.REPEAT_MODE_OFF,
         R.string.repeat_mode_none,
+        id = Id.RepeatOff,
         R.drawable.ic_playlist,
     )
 
     data object RepeatModeOne : RepeatModeBottomSheetItem(
         Player.REPEAT_MODE_ONE,
         R.string.repeat_mode_current,
+        id = Id.RepeatOne,
         R.drawable.ic_repeat_one,
     )
 
     data object RepeatModeAll : RepeatModeBottomSheetItem(
         Player.REPEAT_MODE_ALL,
         R.string.repeat_mode_all,
+        id = Id.RepeatAll,
         R.drawable.ic_repeat,
     )
 }
