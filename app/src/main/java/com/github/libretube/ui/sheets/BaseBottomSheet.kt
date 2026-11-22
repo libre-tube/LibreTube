@@ -81,6 +81,17 @@ open class BaseBottomSheet(@LayoutRes layoutResId: Int = R.layout.bottom_sheet) 
         }
     }
 
+    fun updateItems(
+        items: List<BottomSheetItem>
+    ) {
+        // https://stackoverflow.com/a/57848424
+        val newList = this.items.toMutableList()
+        newList.addAll(items)
+        this.items = newList
+        if (::adapter.isInitialized) adapter.submitList(newList)
+
+    }
+
     fun setTitle(title: String?) {
         this.title = title
     }
