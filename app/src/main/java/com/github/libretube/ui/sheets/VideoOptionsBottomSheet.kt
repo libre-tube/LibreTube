@@ -3,6 +3,7 @@ package com.github.libretube.ui.sheets
 import android.os.Bundle
 import androidx.core.os.bundleOf
 import androidx.fragment.app.setFragmentResult
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.NavHostFragment
 import com.github.libretube.R
@@ -30,6 +31,7 @@ import com.github.libretube.util.PlayingQueue
 import com.github.libretube.util.PlayingQueueMode
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
 
 /**
@@ -166,29 +168,22 @@ class VideoOptionsBottomSheet : BaseBottomSheet() {
             add(VideoBottomSheetItem.Share)
         }
 
-        setItems(optionsList) { which ->
-            onOptionSelect(optionsList[which], videoId, playlistId)
-        }
-
         // these options are only available for other videos than the currently playing one
         if (PlayingQueue.getCurrent()?.url?.toID() != videoId) {
-            getOptionsForNotActivePlayback(videoId) { addedOptions ->
-                optionsList = addedOptions + optionsList
-
-                setItems(optionsList) { which ->
-                    onOptionSelect(optionsList[which], videoId, playlistId)
-                }
+            optionsList = runBlocking{
+                 getOptionsForNotActivePlayback(videoId) + optionsList
             }
+        }
+
+        setItems(optionsList) { which ->
+            onOptionSelect(optionsList[which], videoId, playlistId)
         }
 
         super.onCreate(savedInstanceState)
     }
 
-    private fun getOptionsForNotActivePlayback(
-        videoId: String,
-        onOptionsList: (List<VideoBottomSheetItem>) -> Unit
-    ) {
-        // List that stores the different menu options. In the future could be add more options here.
+    private suspend fun getOptionsForNotActivePlayback(videoId: String ): List<VideoBottomSheetItem> {
+        // List that stores the different menu options. In the future more options could be added here.
         val optionsList: MutableList<VideoBottomSheetItem> =
             mutableListOf(VideoBottomSheetItem.PlayOnBackground)
 
@@ -199,25 +194,24 @@ class VideoOptionsBottomSheet : BaseBottomSheet() {
         }
 
         if (!PlayerHelper.watchPositionsAny && !PlayerHelper.watchHistoryEnabled) {
-            onOptionsList(optionsList)
-            return
+            return optionsList
         }
 
         // show the mark as watched or unwatched option if watch positions are enabled
         lifecycleScope.launch(Dispatchers.IO) {
-            val watchHistoryEntry =
-                UserDataRepositoryHelper.userDataRepository.getFromWatchHistory(videoId)
+        }
+        val watchHistoryEntry =
+            UserDataRepositoryHelper.userDataRepository.getFromWatchHistory(videoId)
+
+        return buildList {
+            addAll(optionsList)
 
             if (watchHistoryEntry != null) {
-                optionsList += VideoBottomSheetItem.MarkAsUnwatched
+                add(VideoBottomSheetItem.MarkAsUnwatched)
             }
 
             if (watchHistoryEntry?.metadata?.finished != true) {
-                optionsList += VideoBottomSheetItem.MarkAsWatched
-            }
-
-            withContext(Dispatchers.Main) {
-                onOptionsList(optionsList)
+                add(VideoBottomSheetItem.MarkAsWatched)
             }
         }
     }

@@ -11,7 +11,7 @@ import com.github.libretube.ui.extensions.setDrawables
 import com.github.libretube.ui.viewholders.BottomSheetViewHolder
 
 class BottomSheetAdapter(
-    private val listener: (index: Int) -> Unit
+    private var listener: (index: Int) -> Unit
 ) : ListAdapter<BottomSheetItem, BottomSheetViewHolder>(
     DiffUtilItemCallback()
 ) {
@@ -39,4 +39,6 @@ class BottomSheetAdapter(
             }
         }
     }
+
+    fun setListener(listener: (index: Int) -> Unit) = this.apply { this.listener = listener }
 }
