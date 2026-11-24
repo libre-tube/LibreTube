@@ -1229,7 +1229,8 @@ class PlayerFragment : Fragment(R.layout.fragment_player), CustomPlayerCallback 
             val listener = SeekbarPreviewListener(
                 timeFrameReceiver,
                 playerControlsBinding,
-                streams.duration * 1000
+                streams.duration * 1000,
+                streams.chapters,
             )
 
             seekBarPreviewListener = listener
