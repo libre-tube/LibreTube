@@ -74,7 +74,7 @@ class PlaylistsAdapter(
 
                     if (isPlaylistToBeDeleted) {
                         // try to refresh the playlists in the library on deletion success
-                        onDelete(playlist.id)
+                        onDelete(playlist.id!!)
                     }
                 }
 
@@ -94,7 +94,7 @@ class PlaylistsAdapter(
         }
     }
 
-    private fun onDelete(playlistId: String?) {
+    private fun onDelete(playlistId: String) {
         val newList = currentList.toMutableList().also {
             val position = it.indexOfFirst { first -> first.id == playlistId }
             it.removeAt(position)
