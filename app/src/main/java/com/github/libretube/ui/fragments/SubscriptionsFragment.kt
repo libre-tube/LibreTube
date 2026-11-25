@@ -13,6 +13,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.R
+import com.github.libretube.api.SubscriptionHelper
 import com.github.libretube.api.obj.StreamItem
 import com.github.libretube.constants.IntentData
 import com.github.libretube.constants.PreferenceKeys
@@ -80,6 +81,12 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment(R.layout.fragment_sub
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         _binding = FragmentSubscriptionsBinding.bind(view)
         super.onViewCreated(view, savedInstanceState)
+
+        updateGroups()
+
+        view.viewTreeObserver.addOnWindowFocusChangeListener { hasFocus ->
+            if (hasFocus) updateGroups()
+        }
 
         setupSortAndFilter()
 
@@ -205,6 +212,21 @@ class SubscriptionsFragment : DynamicLayoutManagerFragment(R.layout.fragment_sub
                 return@launch
             }
             viewModel.groups.postValue(groups)
+        }
+    }
+
+    private fun updateGroups() {
+        SubscriptionHelper.takeRemoved().forEach { goneChannel ->
+            viewModel.groups.value?.filter {
+                it.channels.contains(goneChannel)
+            }?.forEach { group ->
+                val copied = group.copy(channels = group.channels.filter { it != goneChannel })
+                viewModel.groups.postValue(
+                    viewModel.groups.value
+                        ?.filter { it.name != copied.name }
+                        ?.plus(copied)
+                )
+            }
         }
     }
 
