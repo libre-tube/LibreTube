@@ -95,8 +95,6 @@ class EditChannelGroupSheet : ExpandedBottomSheet(R.layout.dialog_edit_channel_g
 
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                group.id =
-                    UserDataRepositoryHelper.userDataRepository.createSubscriptionGroup(group.name)
                 applyChannelGroupsDiff(group.id, group.channels, channelsInGroup)
                 group.channels = channelsInGroup
 
