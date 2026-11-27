@@ -35,7 +35,6 @@ import com.github.libretube.util.PlayingQueue
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
 import kotlin.io.path.exists
 
@@ -82,7 +81,7 @@ open class OfflinePlayerService : AbstractPlayerService() {
         PlayingQueue.clear()
 
         this.videoId = if (playerData.shuffle) {
-            runBlocking(Dispatchers.IO) {
+            withContext(Dispatchers.IO) {
                 if (playerData.downloadTab == DownloadTab.PLAYLIST) {
                     Database.downloadDao()
                         .getDownloadPlaylistById(playerData.playlistId!!).downloadVideos.randomOrNull()
