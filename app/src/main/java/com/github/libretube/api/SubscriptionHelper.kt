@@ -7,6 +7,7 @@ import com.github.libretube.repo.FeedRefresh
 import com.github.libretube.repo.FeedRepository
 import com.github.libretube.repo.UserDataRepository
 import com.github.libretube.repo.UserDataRepositoryHelper
+import com.github.libretube.ui.sheets.AddChannelToGroupSheet.Companion.applyChannelGroupsDiff
 
 object SubscriptionHelper {
     @Suppress("DEPRECATION")
@@ -16,12 +17,26 @@ object SubscriptionHelper {
     private val feedRepository: FeedRepository
         get() = UserDataRepositoryHelper.feedRepository
 
+    private var removedChannels: List<String> = listOf()
+    fun takeRemoved(): List<String> {
+        val taken = removedChannels.distinct()
+        removedChannels = listOf()
+        return taken
+    }
+
     suspend fun subscribe(
         channelId: String, name: String, uploaderAvatar: String?, verified: Boolean
     ) = userDataRepository.subscribe(channelId, name, uploaderAvatar, verified)
 
     suspend fun unsubscribe(channelId: String) {
         userDataRepository.unsubscribe(channelId)
+        userDataRepository.getSubscriptionGroups()
+            .filter { it.channels.contains(channelId) }
+            .forEach {
+                val newChannels = it.channels.filter { it != channelId }
+                applyChannelGroupsDiff(it.id, it.channels, newChannels)
+            }
+        removedChannels += channelId
         // remove videos from (local) feed
         feedRepository.removeChannel(channelId)
     }
