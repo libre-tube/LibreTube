@@ -47,8 +47,8 @@ class ChannelOptionsBottomSheet : BaseBottomSheet() {
         )
         if (subscribed) optionsList.add(ChannelBottomSheetItem.AddToGroup)
 
-        setItems(optionsList) { which ->
-            when (optionsList[which]) {
+        setItems(optionsList) { id ->
+            when (optionsList.first { it.id == id }) {
                 ChannelBottomSheetItem.Share -> {
                     val bundle = bundleOf(
                         IntentData.id to channelId,

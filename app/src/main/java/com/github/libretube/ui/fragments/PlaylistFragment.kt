@@ -298,10 +298,10 @@ class PlaylistFragment : DynamicLayoutManagerFragment(R.layout.fragment_playlist
                     binding.sortBTN.isVisible = true
                     binding.sortBTN.setOnClickListener {
                         BaseBottomSheet().apply {
-                            setItems(sortOptions) { index ->
-                                selectedSortOrder = index
+                            setItems(sortOptions) { id ->
+                                selectedSortOrder = sortOptions.indexOfFirst { it.id == id }
                                 binding.sortBTN.text =
-                                    sortOptions[index].title.getText(requireContext())
+                                    sortOptions.first { it.id == id }.title.getText(requireContext())
                                 showPlaylistVideos()
                             }
                         }.show(childFragmentManager)

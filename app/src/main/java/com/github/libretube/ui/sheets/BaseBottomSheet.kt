@@ -12,6 +12,7 @@ import com.github.libretube.R
 import com.github.libretube.databinding.BottomSheetBinding
 import com.github.libretube.extensions.dpToPx
 import com.github.libretube.obj.bottomsheetitem.BottomSheetItem
+import com.github.libretube.obj.bottomsheetitem.BottomSheetItem.Id
 import com.github.libretube.obj.bottomsheetitem.BottomSheetItemTitle
 import com.github.libretube.ui.adapters.BottomSheetAdapter
 import com.github.libretube.ui.extensions.onSystemInsets
@@ -22,7 +23,7 @@ open class BaseBottomSheet(@LayoutRes layoutResId: Int = R.layout.bottom_sheet) 
 
     private var title: String? = null
     private lateinit var items: List<BottomSheetItem>
-    private lateinit var listener: (index: Int) -> Unit
+    private lateinit var listener: (id: Id) -> Unit
 
     private lateinit var adapter: BottomSheetAdapter
 
@@ -62,17 +63,17 @@ open class BaseBottomSheet(@LayoutRes layoutResId: Int = R.layout.bottom_sheet) 
 
     fun setItems(
         items: List<BottomSheetItem>,
-        listener: (suspend (index: Int) -> Unit)?
+        listener: (suspend (id: Id) -> Unit)?
     ) = apply {
         this.items = items
 
         // if the caller calls `setItems` while the sheet is already visible, update the existing list
         if (::adapter.isInitialized) adapter.submitList(items)
 
-        this.listener = { index ->
+        this.listener = { id ->
             lifecycleScope.launch {
                 dialog?.hide()
-                listener?.invoke(index)
+                listener?.invoke(id)
                 runCatching {
                     if (autoDismiss) dismiss()
                 }
@@ -89,12 +90,15 @@ open class BaseBottomSheet(@LayoutRes layoutResId: Int = R.layout.bottom_sheet) 
         preselectedItem: String? = null,
         listener: (suspend (index: Int) -> Unit)?
     ) = apply {
-        setItems(titles.map {
+        setItems(titles.mapIndexed { idx, it ->
             BottomSheetItem(
                 BottomSheetItemTitle.Text(it),
+                id = Id.SimpleItem(idx),
                 isSelected = it == preselectedItem
             )
-        }, listener = listener)
+        }, listener = { id ->
+            listener?.invoke((id as Id.SimpleItem).index)}
+        )
     }
 
     companion object {
