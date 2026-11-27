@@ -41,7 +41,7 @@ class PlaylistOptionsBottomSheet : BaseBottomSheet() {
 
     private var exportFormat: ImportFormat = ImportFormat.NEWPIPE
 
-    private fun buildOptionsList(isBookmarked: Boolean?): List<PlayListBottomSheetItem> {
+    private fun buildOptionsList(): List<PlayListBottomSheetItem> {
         // options for the dialog
         val optionsList = mutableListOf(
             PlayListBottomSheetItem.PlayOnBackground,
@@ -49,17 +49,10 @@ class PlaylistOptionsBottomSheet : BaseBottomSheet() {
         )
 
         if (PlayingQueue.isNotEmpty()) optionsList.add(PlayListBottomSheetItem.AddToQueue)
-
         if (playlistType == PlaylistType.PUBLIC) {
             optionsList.add(PlayListBottomSheetItem.Share)
             optionsList.add(PlayListBottomSheetItem.Clone)
 
-            // only add the bookmark option to the playlist if public
-            if (isBookmarked != null) {
-                optionsList.add(
-                    if (isBookmarked) PlayListBottomSheetItem.RemoveFromBookmarks else PlayListBottomSheetItem.AddToBookmarks
-                )
-            }
         } else {
             optionsList.add(PlayListBottomSheetItem.Export)
             optionsList.add(PlayListBottomSheetItem.Rename)
@@ -69,6 +62,10 @@ class PlaylistOptionsBottomSheet : BaseBottomSheet() {
 
         return optionsList
     }
+
+    private fun buildBookmarkOption(isBookmarked: Boolean): PlayListBottomSheetItem =
+            // only add the bookmark option to the playlist if public
+        if (isBookmarked) PlayListBottomSheetItem.RemoveFromBookmarks else PlayListBottomSheetItem.AddToBookmarks
 
     private suspend fun onOptionSelected(
         playListOption: PlayListBottomSheetItem,
@@ -208,23 +205,22 @@ class PlaylistOptionsBottomSheet : BaseBottomSheet() {
 
         setTitle(playlistName)
 
-        var optionsList = buildOptionsList(null)
-        setItems(optionsList) { which ->
-            onOptionSelected(optionsList[which], false)
+        var optionsList = buildOptionsList()
+        var isBookmarked = false
+        setItems(optionsList) { id ->
+            onOptionSelected(optionsList.first { it.id == id }, isBookmarked)
         }
 
         // we have to update the options list as soon as we know whether the playlist is bookmarked
         lifecycleScope.launch(Dispatchers.IO) {
-            val isBookmarked = runCatching {
+            isBookmarked = runCatching {
                 UserDataRepositoryHelper.userDataRepository.getPlaylistBookmark(playlistId)
             }.getOrNull() != null
 
             withContext(Dispatchers.Main) {
-                optionsList = buildOptionsList(isBookmarked)
-
-                setItems(optionsList) { which ->
-                    onOptionSelected(optionsList[which], isBookmarked)
-                }
+                val bookMarkItem = listOf(buildBookmarkOption(isBookmarked))
+                optionsList += bookMarkItem
+                updateItems(bookMarkItem)
             }
         }
     }

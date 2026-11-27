@@ -84,6 +84,7 @@ sealed class DownloadSortingOrder(
     val ordinal: Int,
 ) : BottomSheetItem(
     title = BottomSheetItemTitle.StringResource(titleStringRes),
+    id = Id.DSortOrdinal(ordinal),
     drawable = drawableRes,
 ), Parcelable {
     companion object {
@@ -274,7 +275,8 @@ class DownloadsFragmentPage : DynamicLayoutManagerFragment(R.layout.fragment_dow
             submitDownloadList(downloads)
 
             binding.sortType.setOnClickListener {
-                BaseBottomSheet().setItems(filterOptions.toList()) { index ->
+                BaseBottomSheet().setItems(filterOptions.toList()) { id ->
+                    val index = filterOptions.indexOfFirst { it.id == id }
                     if (index == selectedSortType) return@setItems
                     selectedSortType = index
 
@@ -605,10 +607,11 @@ class PlaylistDownloadsFragmentPage : Fragment(R.layout.fragment_download_conten
                 submitPlaylists(adapter, downloadPlaylists)
 
                 binding.sortType.setOnClickListener {
-                    BaseBottomSheet().setItems(filterOptions.toList()) { index ->
+                    BaseBottomSheet().setItems(filterOptions.toList()) { id ->
+                        val index = filterOptions.indexOfFirst { it.id == id }
                         if (index == selectedSortType) return@setItems
                         selectedSortType = index
-
+                        // TODO(DitherDude): fix code: `binding.sortType.text = filterOptions.first { it.id == id }.title.getText(requireContext())`
                         binding.sortType.text = optionTitle
                         submitPlaylists(adapter, downloadPlaylists)
                     }.show(childFragmentManager)

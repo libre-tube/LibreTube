@@ -136,9 +136,10 @@ class LibraryFragment : DynamicLayoutManagerFragment(R.layout.fragment_library) 
 
         binding.sortTV.setOnClickListener {
             BaseBottomSheet().apply {
-                setItems(sortOptions) { index ->
-                    binding.sortTV.text = sortOptions[index].title.getText(requireContext())
-                    val value = sortOptionValues[index]
+                setItems(sortOptions) { id ->
+                    binding.sortTV.text = sortOptions.first { it.id == id }.title.getText(requireContext())
+                    val idx = sortOptions.indexOfFirst { it.id == id }
+                    val value = sortOptionValues[sortOptions.indexOfFirst { it.id == id }]
                     PreferenceHelper.putString(PreferenceKeys.PLAYLISTS_ORDER, value)
                     fetchPlaylists()
                 }

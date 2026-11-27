@@ -11,9 +11,11 @@ import com.github.libretube.obj.bottomsheetitem.BottomSheetItemTitle
 sealed class ResizeBottomSheetItem(
     val aspectRatioKey: Int,
     @StringRes titleStringRes: Int,
+    id: Id,
     @DrawableRes drawableRes: Int,
 ) : BottomSheetItem(
     title = BottomSheetItemTitle.StringResource(titleStringRes),
+    id = id,
     drawable = drawableRes,
 ) {
     companion object {
@@ -27,18 +29,21 @@ sealed class ResizeBottomSheetItem(
     data object ResizeModeFit : ResizeBottomSheetItem(
         AspectRatioFrameLayout.RESIZE_MODE_FIT,
         R.string.resize_mode_fit,
+        id = Id.ResizeFit,
         R.drawable.ic_resize_mode_fit,
     )
 
     data object ResizeModeZoom : ResizeBottomSheetItem(
         AspectRatioFrameLayout.RESIZE_MODE_ZOOM,
         R.string.resize_mode_zoom,
+        id = Id.ResizeZoom,
         R.drawable.ic_resize_mode_zoom,
     )
 
     data object ResizeModeFill : ResizeBottomSheetItem(
         AspectRatioFrameLayout.RESIZE_MODE_FILL,
         R.string.resize_mode_fill,
+        id = Id.ResizeFill,
         R.drawable.ic_resize_mode_fill,
     )
 }
