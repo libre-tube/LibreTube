@@ -226,7 +226,7 @@
     <string name="download_paused">Sťahovanie je pozastavené</string>
     <string name="no_subtitle">Bez titulkov</string>
     <string name="donate">Prispieť</string>
-    <string name="music_artists">Umelci YT Music</string>
+    <string name="music_artists">Interpreti YT Music</string>
     <string name="uploaderAndVideoCount">%1$s • %2$d videí</string>
     <string name="mobile_data">Mobilné dáta</string>
     <string name="username_email">Používanie e-mailovej adresy ako používateľského mena sa neodporúča. Pokračovať aj tak?</string>
@@ -565,4 +565,7 @@
     <string name="switch_sync_type_warning">Ak ste predtým používali iný typ synchronizácie, najprv si prosím urobte zálohu svojich odberov a zoznamov skladieb. Potom môžete prepnúť typ synchronizácie v nastaveniach inštancie a znova importovať svoje údaje zo zálohy.</string>
     <string name="oidc_login">Pokračovať s OIDC</string>
     <string name="already_downloaded">Toto video ste už stiahli!</string>
+    <string name="channel_sort_latest">Najnovšie</string>
+    <string name="channel_sort_popular">Obľúbené</string>
+    <string name="channel_sort_oldest">Najstaršie</string>
 </resources>

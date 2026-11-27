@@ -560,4 +560,7 @@
     <string name="export">Exportálás</string>
     <string name="exporting">Exportálás folyamatban…</string>
     <string name="account">Fiók</string>
+    <string name="channel_sort_latest">Legutóbbi</string>
+    <string name="channel_sort_popular">Népszerű</string>
+    <string name="channel_sort_oldest">Legrégebbi</string>
 </resources>
