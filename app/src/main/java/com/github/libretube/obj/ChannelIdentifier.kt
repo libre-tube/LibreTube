@@ -51,7 +51,7 @@ sealed interface ChannelIdentifier: Parcelable {
                 secondLastSegment == "channel" -> Id(lastSegment)
                 secondLastSegment == "c" -> Custom(lastSegment)
                 secondLastSegment == "user" -> User(lastSegment)
-                lastSegment.startsWith( "@" ) -> Handle(lastSegment.removePrefix("@"))
+                lastSegment.startsWith("@") -> Handle(lastSegment.removePrefix("@"))
                 else -> null
             }
         }

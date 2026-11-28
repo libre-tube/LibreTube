@@ -20,7 +20,6 @@ private const val GITHUB_API_URL = "https://api.github.com/repos/libre-tube/Libr
 private const val SB_API_URL = "https://sponsor.ajay.app"
 private const val RYD_API_URL = "https://ryd-proxy.kavin.rocks"
 private const val GOOGLE_API_KEY = "AIzaSyDyT5W0Jh49F30Pqqtyfdf7pDLFKLJoAnw"
-private const val INNERTUBE_API_URL = "https://www.youtube.com/youtubei"
 const val USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.3"
 
 interface ExternalApi {
@@ -82,14 +81,5 @@ interface ExternalApi {
     suspend fun botguardRequest(
         @Url url: String,
         @Body jsonPayload: List<String>
-    ): JsonElement
-
-    @Headers(
-        "User-Agent: $USER_AGENT",
-        "Accept: application/json",
-    )
-    @POST("$INNERTUBE_API_URL/v1/navigation/resolve_url?prettyPrint=false")
-    suspend fun resolveYouTubeUrl(
-        @Body jsonPayload: JsonElement
     ): JsonElement
 }

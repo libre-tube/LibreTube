@@ -10,20 +10,15 @@ import androidx.core.net.toUri
 import androidx.core.os.bundleOf
 import androidx.fragment.app.FragmentManager
 import com.github.libretube.R
-import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.constants.IntentData
 import com.github.libretube.extensions.toastFromMainThread
 import com.github.libretube.obj.ChannelIdentifier
 import com.github.libretube.ui.dialogs.ShareDialog.Companion.YOUTUBE_SHORT_URL
 import com.github.libretube.ui.sheets.IntentChooserSheet
 import com.github.libretube.util.TextUtils.toTimeInSeconds
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
-import kotlinx.serialization.json.buildJsonObject
-import kotlinx.serialization.json.jsonObject
-import kotlinx.serialization.json.jsonPrimitive
-import kotlinx.serialization.json.put
-import kotlinx.serialization.json.putJsonObject
-import org.schabi.newpipe.extractor.services.youtube.YoutubeParsingHelper
+import org.schabi.newpipe.extractor.services.youtube.YoutubeChannelHelper
 
 object IntentHelper {
     private fun getResolveIntent(link: String) = Intent(Intent.ACTION_VIEW)
@@ -90,33 +85,14 @@ object IntentHelper {
                 putExtra(IntentData.videoId, id)
                 putExtra(IntentData.timeStamp, uri.getQueryParameter("t")?.toTimeInSeconds())
             }
-            else -> {
-                val channelId = runBlocking { resolveUrl(uri) } ?: return@with null
+            // resolve vanity channel URLs (e.g. "youtube.com/youtube")
+            uri.pathSegments.size == 1 -> runBlocking(Dispatchers.IO) {
+                val channelId =
+                    runCatching { YoutubeChannelHelper.resolveChannelId(lastSegment!!) }.getOrNull()
+                        ?: return@runBlocking null
                 putExtra(IntentData.channelIdentifier, ChannelIdentifier.Id(channelId))
             }
+            else -> null
         }
-    }
-
-    /**
-     * Tries to resolve an unknown URI to a known YouTube URL.
-     *
-     * Currently, URLs resolving to a channel are handled.
-     */
-    private suspend fun resolveUrl(uri: Uri): String? {
-        val response = runCatching {  RetrofitInstance.externalApi.resolveYouTubeUrl(
-            buildJsonObject {
-                putJsonObject("context", {
-                    putJsonObject("client", {
-                        put("clientName", "WEB")
-                        put("clientVersion", YoutubeParsingHelper.getClientVersion())
-                    })
-                })
-                put("url", uri.toString())
-            }
-        )}.getOrNull() ?: return null
-
-        val endpoint = response.jsonObject["endpoint"]?.jsonObject
-        val channelId = endpoint?.get("browseEndpoint")?.jsonObject["browseId"]?.jsonPrimitive?.content
-        return channelId
     }
 }
