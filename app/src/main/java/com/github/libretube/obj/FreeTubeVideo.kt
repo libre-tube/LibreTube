@@ -9,5 +9,6 @@ data class FreeTubeVideo(
     val author: String,
     val authorId: String,
     val lengthSeconds: Long,
-    val type: String = "video"
+    val type: String = "video",
+    val timeAdded: Long,
 )

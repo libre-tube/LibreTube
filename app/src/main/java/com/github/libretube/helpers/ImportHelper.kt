@@ -299,7 +299,9 @@ object ImportHelper {
                             title = videoInfo.title.orEmpty(),
                             author = videoInfo.uploaderName.orEmpty(),
                             authorId = videoInfo.uploaderUrl.orEmpty().toID(),
-                            lengthSeconds = videoInfo.duration ?: 0L
+                            lengthSeconds = videoInfo.duration ?: 0L,
+                            // FreeTube requires the time the video was added to the playlist, which we don't store
+                            timeAdded = videoInfo.uploaded
                         )
                     }
                     FreeTubeImportPlaylist(playlist.name.orEmpty(), videos)
