@@ -13,8 +13,12 @@ import com.github.libretube.R
 import com.github.libretube.constants.IntentData
 import com.github.libretube.extensions.toastFromMainThread
 import com.github.libretube.obj.ChannelIdentifier
+import com.github.libretube.ui.dialogs.ShareDialog.Companion.YOUTUBE_SHORT_URL
 import com.github.libretube.ui.sheets.IntentChooserSheet
 import com.github.libretube.util.TextUtils.toTimeInSeconds
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.runBlocking
+import org.schabi.newpipe.extractor.services.youtube.YoutubeChannelHelper
 
 object IntentHelper {
     private fun getResolveIntent(link: String) = Intent(Intent.ACTION_VIEW)
@@ -76,11 +80,19 @@ object IntentHelper {
                 val videoIds = uri.getQueryParameter("video_ids")?.split(",")
                 putExtra(IntentData.videoIds, videoIds?.toTypedArray())
             }
-            else -> {
+            lastSegment == "watch" || uri.host == YOUTUBE_SHORT_URL -> {
                 val id = if (lastSegment == "watch") uri.getQueryParameter("v") else lastSegment
                 putExtra(IntentData.videoId, id)
                 putExtra(IntentData.timeStamp, uri.getQueryParameter("t")?.toTimeInSeconds())
             }
+            // resolve vanity channel URLs (e.g. "youtube.com/youtube")
+            uri.pathSegments.size == 1 -> runBlocking(Dispatchers.IO) {
+                val channelId =
+                    runCatching { YoutubeChannelHelper.resolveChannelId(lastSegment!!) }.getOrNull()
+                        ?: return@runBlocking null
+                putExtra(IntentData.channelIdentifier, ChannelIdentifier.Id(channelId))
+            }
+            else -> null
         }
     }
 }

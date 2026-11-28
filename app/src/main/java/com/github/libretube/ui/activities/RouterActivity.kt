@@ -29,7 +29,7 @@ class RouterActivity : BaseActivity() {
 
         val intent = packageManager.getLaunchIntentForPackage(packageName)!!.let { intent ->
             IntentHelper.resolveType(intent, uri)
-        }
+        } ?: return
         intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK
         startActivity(intent)
         finishAndRemoveTask()

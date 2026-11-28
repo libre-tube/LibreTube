@@ -397,10 +397,12 @@ class MainActivity : AbstractPlayerHostActivity() {
                 if (query.toHttpUrlOrNull() != null) {
                     val queryIntent = IntentHelper.resolveType(query.toUri())
 
-                    val didNavigate = navigateToMediaByIntent(queryIntent) {
-                        navController.popBackStack(R.id.searchFragment, true)
-                        searchItem.collapseActionView()
-                    }
+                    val didNavigate = queryIntent?.let {
+                        navigateToMediaByIntent(it) {
+                            navController.popBackStack(R.id.searchFragment, true)
+                            searchItem.collapseActionView()
+                        }
+                    } ?: false
                     if (didNavigate) return true
                 }
 
