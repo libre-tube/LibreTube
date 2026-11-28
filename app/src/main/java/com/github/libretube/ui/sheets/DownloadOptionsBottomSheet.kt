@@ -15,11 +15,11 @@ import com.github.libretube.extensions.toID
 import com.github.libretube.helpers.BackgroundHelper
 import com.github.libretube.helpers.ContextHelper
 import com.github.libretube.helpers.NavigationHelper
+import com.github.libretube.helpers.ShareHelper
 import com.github.libretube.obj.ShareData
 import com.github.libretube.parcelable.PlayerData
 import com.github.libretube.ui.activities.NoInternetActivity
 import com.github.libretube.ui.dialogs.DownloadExportDialog
-import com.github.libretube.ui.dialogs.ShareDialog
 import com.github.libretube.ui.fragments.DownloadTab
 import com.github.libretube.util.PlayingQueue
 import com.github.libretube.util.PlayingQueueMode
@@ -84,15 +84,16 @@ class DownloadOptionsBottomSheet : BaseBottomSheet() {
                 }
 
                 DownloadListMenuOption.Share -> {
-                    val shareData = ShareData(title = streamItem.title, previewImageUrl = streamItem.thumbnail)
-                    val bundle = bundleOf(
-                        IntentData.id to videoId,
-                        IntentData.shareObjectType to ShareObjectType.VIDEO,
-                        IntentData.shareData to shareData
+                    ShareHelper.shareLink(
+                        parentFragmentManager,
+                        requireContext(),
+                        videoId,
+                        ShareObjectType.VIDEO,
+                        ShareData(
+                            title = streamItem.title,
+                            previewImageUrl = streamItem.thumbnail
+                        )
                     )
-                    val newShareDialog = ShareDialog()
-                    newShareDialog.arguments = bundle
-                    newShareDialog.show(parentFragmentManager, null)
                 }
 
                 DownloadListMenuOption.Delete -> {

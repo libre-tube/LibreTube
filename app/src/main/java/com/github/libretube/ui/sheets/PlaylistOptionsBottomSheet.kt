@@ -17,6 +17,7 @@ import com.github.libretube.extensions.toastFromMainDispatcher
 import com.github.libretube.helpers.BackgroundHelper
 import com.github.libretube.helpers.ContextHelper
 import com.github.libretube.helpers.DownloadHelper
+import com.github.libretube.helpers.ShareHelper
 import com.github.libretube.obj.ShareData
 import com.github.libretube.parcelable.PlayerData
 
@@ -26,7 +27,6 @@ import com.github.libretube.ui.base.BaseActivity
 import com.github.libretube.ui.dialogs.DeletePlaylistDialog
 import com.github.libretube.ui.dialogs.PlaylistDescriptionDialog
 import com.github.libretube.ui.dialogs.RenamePlaylistDialog
-import com.github.libretube.ui.dialogs.ShareDialog
 import com.github.libretube.ui.preferences.BackupRestoreSettings
 import com.github.libretube.util.PlayingQueue
 import kotlinx.coroutines.Dispatchers
@@ -110,19 +110,17 @@ class PlaylistOptionsBottomSheet : BaseBottomSheet() {
                 )
             }
             // share the playlist
-            PlayListBottomSheetItem.Share -> {
-                val newShareDialog = ShareDialog()
-                newShareDialog.arguments = bundleOf(
-                    IntentData.id to playlistId,
-                    IntentData.shareObjectType to ShareObjectType.PLAYLIST,
-                    IntentData.shareData to ShareData(
-                        title = playlistName,
-                        previewImageUrl = playlistThumbnail
-                    )
-                )
+            PlayListBottomSheetItem.Share -> ShareHelper.shareLink(
                 // using parentFragmentManager, childFragmentManager doesn't work here
-                newShareDialog.show(parentFragmentManager, ShareDialog::class.java.name)
-            }
+                parentFragmentManager,
+                requireContext(),
+                playlistId,
+                ShareObjectType.PLAYLIST,
+                ShareData(
+                    title = playlistName,
+                    previewImageUrl = playlistThumbnail
+                )
+            )
 
             PlayListBottomSheetItem.Delete -> {
                 val newDeletePlaylistDialog = DeletePlaylistDialog()

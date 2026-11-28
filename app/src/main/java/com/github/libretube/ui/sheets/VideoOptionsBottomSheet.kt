@@ -19,12 +19,12 @@ import com.github.libretube.helpers.DownloadHelper
 import com.github.libretube.helpers.NavigationHelper
 import com.github.libretube.helpers.PlayerHelper
 import com.github.libretube.helpers.PreferenceHelper
+import com.github.libretube.helpers.ShareHelper
 import com.github.libretube.obj.ShareData
 import com.github.libretube.parcelable.PlayerData
 import com.github.libretube.repo.UserDataRepositoryHelper
 import com.github.libretube.ui.activities.MainActivity
 import com.github.libretube.ui.dialogs.AddToPlaylistDialog
-import com.github.libretube.ui.dialogs.ShareDialog
 import com.github.libretube.ui.fragments.SubscriptionsFragment
 import com.github.libretube.util.PlayingQueue
 import com.github.libretube.util.PlayingQueueMode
@@ -76,18 +76,17 @@ class VideoOptionsBottomSheet : BaseBottomSheet() {
             }
 
             VideoBottomSheetItem.Share -> {
-                val bundle = bundleOf(
-                    IntentData.id to videoId,
-                    IntentData.shareObjectType to ShareObjectType.VIDEO,
-                    IntentData.shareData to ShareData(
+                ShareHelper.shareLink(
+                    // using parentFragmentManager is important here
+                    parentFragmentManager,
+                    requireContext(),
+                    videoId,
+                    ShareObjectType.VIDEO,
+                    ShareData(
                         title = streamItem.title,
                         previewImageUrl = streamItem.thumbnail
                     )
                 )
-                val newShareDialog = ShareDialog()
-                newShareDialog.arguments = bundle
-                // using parentFragmentManager is important here
-                newShareDialog.show(parentFragmentManager, ShareDialog::class.java.name)
             }
 
             VideoBottomSheetItem.PlayNext -> {
