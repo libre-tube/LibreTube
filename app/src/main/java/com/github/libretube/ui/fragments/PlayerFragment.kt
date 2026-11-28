@@ -10,7 +10,6 @@ import android.content.IntentFilter
 import android.content.pm.ActivityInfo
 import android.content.res.Configuration
 import android.graphics.Bitmap
-import android.graphics.Rect
 import android.media.session.PlaybackState
 import android.os.Bundle
 import android.os.Handler
@@ -79,6 +78,7 @@ import com.github.libretube.helpers.ImageHelper
 import com.github.libretube.helpers.NavigationHelper
 import com.github.libretube.helpers.PlayerHelper
 import com.github.libretube.helpers.PlayerHelper.getCurrentSegment
+import com.github.libretube.helpers.ShareHelper
 import com.github.libretube.helpers.ThemeHelper
 import com.github.libretube.helpers.WindowHelper
 import com.github.libretube.obj.ShareData
@@ -92,7 +92,6 @@ import com.github.libretube.ui.adapters.VideoCardsAdapter
 import com.github.libretube.ui.base.BaseActivity
 import com.github.libretube.ui.dialogs.AddToPlaylistDialog
 import com.github.libretube.ui.dialogs.PlayOfflineDialog
-import com.github.libretube.ui.dialogs.ShareDialog
 import com.github.libretube.ui.extensions.animateDown
 import com.github.libretube.ui.extensions.getSystemInsets
 import com.github.libretube.ui.extensions.setOnBackPressed
@@ -598,7 +597,7 @@ class PlayerFragment : Fragment(R.layout.fragment_player), CustomPlayerCallback 
                 motionLayout: MotionLayout?,
                 startId: Int,
                 endId: Int,
-                progress: Float
+                progress: Float,
             ) {
                 if (_binding == null) return
 
@@ -697,18 +696,17 @@ class PlayerFragment : Fragment(R.layout.fragment_player), CustomPlayerCallback 
         // share button
         binding.relPlayerShare.setOnClickListener {
             if (!this::streams.isInitialized) return@setOnClickListener
-            val bundle = bundleOf(
-                IntentData.id to videoId,
-                IntentData.shareObjectType to ShareObjectType.VIDEO,
-                IntentData.shareData to ShareData(
+            ShareHelper.shareLink(
+                childFragmentManager,
+                requireContext(),
+                videoId,
+                ShareObjectType.VIDEO,
+                ShareData(
                     title = streams.title,
                     previewImageUrl = streams.thumbnailUrl,
                     currentPosition = playerController.currentPosition / 1000
                 )
             )
-            val newShareDialog = ShareDialog()
-            newShareDialog.arguments = bundle
-            newShareDialog.show(childFragmentManager, ShareDialog::class.java.name)
         }
 
         binding.relPlayerBackground.setOnClickListener {

@@ -11,10 +11,10 @@ import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.toID
 import com.github.libretube.helpers.BackgroundHelper
 import com.github.libretube.helpers.NavigationHelper
+import com.github.libretube.helpers.ShareHelper
 import com.github.libretube.obj.ChannelIdentifier
 import com.github.libretube.obj.ShareData
 import com.github.libretube.parcelable.PlayerData
-import com.github.libretube.ui.dialogs.ShareDialog
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
@@ -50,17 +50,14 @@ class ChannelOptionsBottomSheet : BaseBottomSheet() {
         setItems(optionsList) { which ->
             when (optionsList[which]) {
                 ChannelBottomSheetItem.Share -> {
-                    val bundle = bundleOf(
-                        IntentData.id to channelId,
-                        IntentData.shareObjectType to ShareObjectType.CHANNEL,
-                        IntentData.shareData to ShareData(
+                    ShareHelper.shareLink(
+                        parentFragmentManager, requireContext(), channelId,
+                        ShareObjectType.CHANNEL,
+                        ShareData(
                             title = channelName,
                             previewImageUrl = channelAvatar
                         )
                     )
-                    val newShareDialog = ShareDialog()
-                    newShareDialog.arguments = bundle
-                    newShareDialog.show(parentFragmentManager, null)
                 }
 
                 ChannelBottomSheetItem.AddToGroup -> {
